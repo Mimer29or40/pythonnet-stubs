@@ -2,26 +2,23 @@ import logging
 from logging.config import dictConfig
 from pathlib import Path
 
-
 log_dir = Path('logs')
 log_dir.mkdir(exist_ok=True)
 
 log_file = log_dir / 'log.log'
 
-LOG_LEVEL = 'INFO'
-
 LOGGER_CONFIG = {
     'version':                  1,
     'disable_existing_loggers': True,
     'handlers':                 {
-        'console': {
+        'console':      {
             'class':     'logging.StreamHandler',
             'formatter': 'simple',
         },
         'file_handler': {
             'class':     'logging.FileHandler',
             'formatter': 'simple',
-            'filename':  log_file
+            'filename':  log_file,
         },
     },
     'formatters':               {
@@ -30,11 +27,10 @@ LOGGER_CONFIG = {
             'datefmt': '%Y-%m-%d %I:%M:%S'  # yyyy-MM-dd HH:mm:ss,SSS
         }
     },
-    
     'loggers':                  {
         "": {
             'handlers': ['console', 'file_handler'],
-            'level':    LOG_LEVEL
+            'level':    'INFO'
         }
     }
 }
