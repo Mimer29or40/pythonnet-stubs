@@ -147,7 +147,7 @@ class ModuleRedeclarator(object):
             # In some rare cases submodules of a binary might have been generated earlier than the module
             # for the binary itself. For instance, it happens for "pyexpat" built-in module which
             # submodules "pyexpat.errors" and "pyexpat.model" are processed together with "_elementtree"
-            # and "pickle" before "pyexpat" and thus empty pyexpat/__init__.py for them should be replaced
+            # and "pickle" before "pyexpat" and thus empty pyexpat/__init__.pyi for them should be replaced
             # with the skeleton for the main module itself later on.
             existing_pkg_init = os.path.join(last_pkg_dir, qname_parts[-1], '__init__.py')
             if os.path.exists(existing_pkg_init):

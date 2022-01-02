@@ -650,7 +650,7 @@ def generate_skeleton(name, mod_file_name, mod_cache_dir, output_dir):
 
 def redo_module(module_name, module_file_name, cache_dir, output_dir):
     # type: (str, str, str, str) -> None
-    # gobject does 'del _gobject' in its __init__.py, so the chained attribute lookup code
+    # gobject does 'del _gobject' in its __init__.pyi, so the chained attribute lookup code
     # fails to find 'gobject._gobject'. thus we need to pull the module directly out of
     # sys.modules
     mod = sys.modules.get(module_name)

@@ -4,7 +4,7 @@ PATHS: List[str] = [
 
 ]
 
-ASSEMBLIES: List[str] = [
+PACKAGES: List[str] = [
     # | System
     'System',
     'System.Collections',
@@ -29,5 +29,5 @@ BUILT_INS: List[str] = [
     'clr',
 ]
 
-ASSEMBLIES.extend(BUILT_INS)
-ASSEMBLIES.sort()
+PACKAGES.extend(BUILT_INS)
+PACKAGES.sort()

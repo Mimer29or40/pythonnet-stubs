@@ -3,7 +3,7 @@ from pathlib import Path
 
 from docopt import docopt
 
-from .defaults import ASSEMBLIES, PATHS
+from .defaults import PACKAGES, PATHS
 from .logger import logger
 from .make_stubs import make
 from .options import Options
@@ -35,12 +35,12 @@ sys.path.extend(options.path_dirs)
 
 logger.debug(sys.path)
 logger.debug(arguments)
-logger.debug(ASSEMBLIES)
+logger.debug(PACKAGES)
 
 if arguments['make']:
     with time_it('main', log_func=logger.info):
         if not options.all:
-            ASSEMBLIES = [options.assembly_name]
+            PACKAGES = [options.assembly_name]
         
-        for assembly_name in ASSEMBLIES:
+        for assembly_name in PACKAGES:
             make(assembly_name, options)
