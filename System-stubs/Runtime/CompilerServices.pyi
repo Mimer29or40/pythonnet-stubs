@@ -128,7 +128,10 @@ __all__ = [
     'RuntimeHelpers',
 ]
 
-from typing import TypeVar, Generic
+from typing import TypeVar, Generic, Protocol
+
+from .. import IntType, ObjectType
+from ..util import Item
 
 T = TypeVar('T')
 TKey = TypeVar('TKey')
@@ -627,8 +630,21 @@ class IStrongBox:
     """Defines a property for accessing the value that an object references."""
 
 
-class ITuple:
-    """Defines a general-purpose Tuple implementation that allows access to Tuple instance members without knowing the underlying Tuple type."""
+class ITuple(Protocol):
+    """Defines a general-purpose Tuple implementation that allows access to
+    Tuple instance members without knowing the underlying Tuple type."""
+    
+    @property
+    def Item(self) -> Item[IntType, ObjectType]:
+        """Returns the value of the specified Tuple element."""
+    
+    def __getitem__(self, key: IntType) -> ObjectType: ...
+
+    def __setitem__(self, key: IntType, value: ObjectType) -> None: ...
+    
+    @property
+    def Length(self) -> IntType:
+        """Gets the number of elements in this Tuple instance."""
 
 
 # ---------- ENUMS ---------- #

@@ -215,3 +215,4 @@ cython_debug/
 /logs/
 /cache/
 /stubs/
+/pythonnet-master/

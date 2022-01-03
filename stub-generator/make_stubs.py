@@ -1,5 +1,3 @@
-import importlib
-import inspect
 import json
 import sys
 from collections import defaultdict
@@ -7,9 +5,8 @@ from pathlib import Path
 from typing import Dict, Any, List
 
 import clr
-from System import Object
-from System.Reflection import Assembly
 
+from System.Reflection import Assembly
 from generator3.core import SkeletonGenerator, generate_skeleton
 from .logger import logger
 from .options import Options
@@ -49,10 +46,7 @@ def make(package: str, options: Options):
     # # stack(), trace() - get info about frames on the stack or in a traceback
     # #
     # # signature() - get a Signature object for the callable
-
-    obj = Object()
-    obj.Finalize()
-
+    
     # for type in assembly.GetTypes():
     for type in assembly.ExportedTypes:
         print('type', type, type.BaseType)

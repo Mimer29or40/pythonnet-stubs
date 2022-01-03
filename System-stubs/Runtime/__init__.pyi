@@ -252,7 +252,7 @@ TValue = TypeVar('TValue')
 #     def CopyTo(self, destination: Span[T]) -> None:
 #         """Copies the contents of this Span[T] into a destination Span[T]."""
 #
-#     def Equals(self, obj: Object) -> NoReturn:
+#     def Equals(self, obj: Object) -> Obsolete:
 #         """Obsolete. Calls to this method are not supported."""
 #
 #     def Fill(self, value: T) -> None:
@@ -261,7 +261,7 @@ TValue = TypeVar('TValue')
 #     def GetEnumerator(self) -> Span[T].Enumerator:
 #         """Returns an enumerator for this Span[T]."""
 #
-#     def GetHashCode(self) -> NoReturn:
+#     def GetHashCode(self) -> Obsolete:
 #         """Obsolete. Throws a NotSupportedException."""
 #
 #     def GetPinnableReference(self) -> T:

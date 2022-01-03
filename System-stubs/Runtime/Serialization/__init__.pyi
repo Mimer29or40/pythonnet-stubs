@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 __all__ = [
     'CollectionDataContractAttribute',
     'ContractNamespaceAttribute',
@@ -53,7 +51,6 @@ __all__ = [
     'StreamingContextStates',
 ]
 
-
 # TODO
 
 # class StreamingContext(ValueType):
@@ -95,6 +92,8 @@ __all__ = [
 #         """Populates a SerializationInfo with the data needed to serialize the target object."""
 
 # ---------- CLASSES ---------- #
+from System import ObjectType, NullableType, VoidType
+
 
 class CollectionDataContractAttribute:
     """When applied to a collection type, enables custom specification of the collection item elements. This attribute can be applied only to types that are recognized by the DataContractSerializer as valid, serializable collections."""
@@ -253,7 +252,13 @@ class StreamingContext:
 # ---------- INTERFACES ---------- #
 
 class IDeserializationCallback:
-    """Indicates that a class is to be notified when deserialization of the entire object graph has been completed. Note that this interface is not called when deserializing with the XmlSerializer (System.Xml.Serialization.XmlSerializer)."""
+    """Indicates that a class is to be notified when deserialization of the
+    entire object graph has been completed. Note that this interface is not
+    called when deserializing with the XmlSerializer
+    (System.Xml.Serialization.XmlSerializer)."""
+    
+    def OnDeserialization(self, sender: NullableType[ObjectType]) -> VoidType:
+        """Runs when the entire object graph has been deserialized."""
 
 
 class IExtensibleDataObject:
@@ -278,6 +283,10 @@ class ISafeSerializationData:
 
 class ISerializable:
     """Allows an object to control its own serialization and deserialization."""
+    
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType:
+        """Populates a SerializationInfo with the data needed to serialize the
+        target object."""
 
 
 class ISerializationSurrogate:
