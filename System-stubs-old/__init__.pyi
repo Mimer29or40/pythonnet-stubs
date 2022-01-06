@@ -4863,7 +4863,7 @@ class Func(Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14
     """Encapsulates a method that has 15 parameters and returns a value of the type specified by the TResult parameter."""
 
 @overload
-class Func(Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16], TResult], Generic[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult]):
+class Func(Generic[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult], Callable[[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16], TResult]):
     """Encapsulates a method that has 16 parameters and returns a value of the type specified by the TResult parameter."""
 
 Predicate = Callable[[T], BooleanType]

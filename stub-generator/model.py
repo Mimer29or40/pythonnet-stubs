@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from collections import defaultdict
 from dataclasses import dataclass, field
+from functools import partial
 from typing import Optional, Tuple, List, Dict, Union, Set
-
-
-# TODO - Methods - Handle out
 
 
 class Member(ABC):
@@ -44,28 +43,28 @@ class Namespace(Member):
     
     DELEGATES
     
-    
     __all__ = [
         ', '.join(MEMBERS)
     ]
     """
+    
     name: str
     py_imports: Set[str] = field(default_factory=set, repr=False)
     net_imports: Set[str] = field(default_factory=set, repr=False)
     var_types: Dict[str, VarType] = field(default_factory=dict, repr=False)
     sys_types: Dict[str, SystemType] = field(default_factory=dict, repr=False)
     special_types: Dict[str, SpecialType] = field(default_factory=dict, repr=False)
-    classes: Dict[str, List[str]] = field(default_factory=dict, repr=False)
-    structs: Dict[str, List[str]] = field(default_factory=dict, repr=False)
-    interfaces: Dict[str, Interface] = field(default_factory=dict, repr=False)
-    enums: Dict[str, List[str]] = field(default_factory=dict, repr=False)
-    delegates: Dict[str, List[str]] = field(default_factory=dict, repr=False)
+    classes: Dict[str, List[Class]] = field(default_factory=partial(defaultdict, list), repr=False)
+    structs: Dict[str, List[Class]] = field(default_factory=partial(defaultdict, list), repr=False)
+    interfaces: Dict[str, List[Interface]] = field(default_factory=partial(defaultdict, list), repr=False)
+    enums: Dict[str, List[Enum]] = field(default_factory=partial(defaultdict, list), repr=False)
+    delegates: Dict[str, List[Delegate]] = field(default_factory=partial(defaultdict, list), repr=False)
     doc_string: str = ''
     
     def print(self, indent: int = 0) -> str:
         py_imports = ''
         if len(self.py_imports) > 0:
-            bases = sorted(set(i.split('.')[0] for i in self.py_imports))
+            bases = sorted(set('.'.join(i.split('.')[:-1]) for i in self.py_imports))
             import_str_list = []
             for base in bases:
                 prefix = f'{base}.'
@@ -86,70 +85,80 @@ class Namespace(Member):
                 import_str_list.append(f'from {base} import {", ".join(classes)}')
             net_imports = '\n'.join(import_str_list)
             net_imports = f'\n\n{net_imports}'
-
+        
         var_types = ''
         if len(self.var_types) > 0:
             var_types_list = sorted(self.var_types.values(), key=lambda t: t.name)
             var_types = '\n'.join(t.print() for t in var_types_list)
             var_types = f'\n\n{var_types}'
-
+        
         sys_types = ''
         if len(self.sys_types) > 0:
             sys_types_list = sorted(self.sys_types.values(), key=lambda t: t.name)
             sys_types = '\n'.join(t.print() for t in sys_types_list)
             sys_types = f'\n\n{sys_types}'
-
+        
         special_types = ''
         if len(self.special_types) > 0:
             special_types_list = sorted(self.special_types.values(), key=lambda t: t.name)
             special_types = '\n\n'.join(t.print() for t in special_types_list)
             special_types = f'\n\n\n{special_types}\n'
         
-        classes = ''
-        classes_sorted = sorted(self.classes.values(), key=lambda c: c.name)
+        classes = '# No Classes'
+        classes_sorted = sorted(self.classes.keys())
+        if len(classes_sorted) > 0:
+            classes = '\n\n\n'.join(i.print() for class_name in classes_sorted for i in self.classes[class_name])
+            classes = f'# ---------- Classes ---------- #\n\n{classes}\n'
         
-        structs = ''
-        structs_sorted = sorted(self.structs.values(), key=lambda s: s.name)
-
-        interfaces = ''
-        interfaces_sorted = sorted(self.interfaces.values(), key=lambda i: i.name)
+        structs = '# No Structs'
+        structs_sorted = sorted(self.structs.keys())
+        if len(structs_sorted) > 0:
+            structs = '\n\n\n'.join(i.print() for struct_name in structs_sorted for i in self.structs[struct_name])
+            structs = f'# ---------- Structs ---------- #\n\n{structs}\n'
+        
+        interfaces = '# No Interfaces'
+        interfaces_sorted = sorted(self.interfaces.keys())
         if len(interfaces_sorted) > 0:
-            interfaces = '\n\n\n'.join(i.print() for i in interfaces_sorted)
-            interfaces = f'\n\n{interfaces}\n'
-
-        enums = ''
-        enums_sorted = sorted(self.enums.values(), key=lambda e: e.name)
-
-        delegates = ''
-        delegates_sorted = sorted(self.delegates.values(), key=lambda d: d.name)
+            interfaces = '\n\n\n'.join(i.print() for interface_name in interfaces_sorted for i in self.interfaces[interface_name])
+            interfaces = f'# ---------- Interfaces ---------- #\n\n{interfaces}\n'
+        
+        enums = '# No Enums'
+        enums_sorted = sorted(self.enums.keys())
+        if len(enums_sorted) > 0:
+            enums = '\n\n\n'.join(i.print() for enum_name in enums_sorted for i in self.enums[enum_name])
+            enums = f'# ---------- Enums ---------- #\n\n{enums}\n'
+        
+        delegates = '# No Enums'
+        delegates_sorted = sorted(self.delegates.keys())
+        if len(self.delegates) > 0:
+            delegates = '\n\n'.join(i.print() for delegate_name in delegates_sorted for i in self.delegates[delegate_name])
+            delegates = f'# ---------- Delegates ---------- #\n\n{delegates}\n'
         
         all_list = []
-        all_list += [c.name for c in classes_sorted]
-        all_list += [s.name for s in structs_sorted]
-        all_list += [i.name for i in interfaces_sorted]
-        all_list += [e.name for e in enums_sorted]
-        all_list += [d.name for d in delegates_sorted]
+        all_list.extend(classes_sorted)
+        all_list.extend(structs_sorted)
+        all_list.extend(interfaces_sorted)
+        all_list.extend(enums_sorted)
+        all_list.extend(delegates_sorted)
         all_str = ''
         if len(all_list) > 0:
             all_str = '\n'.join(f'    {a},' for a in all_list)
             all_str = f'\n{all_str}\n'
-
+        
         return '\n'.join([
-            f'from __future__ import annotations',
-            f'',
-            f'# ---------- Python Imports ---------- #{py_imports}{net_imports}',
+            f'from __future__ import annotations{py_imports}{net_imports}',
             f'',
             f'# ---------- Types ---------- #{var_types}{sys_types}{special_types}',
             f'',
-            f'# ---------- Classes ---------- #{classes}',
+            f'{classes}',
             f'',
-            f'# ---------- Structs ---------- #{structs}',
+            f'{structs}',
             f'',
-            f'# ---------- Interfaces ---------- #{interfaces}',
+            f'{interfaces}',
             f'',
-            f'# ---------- Enums ---------- #{enums}',
+            f'{enums}',
             f'',
-            f'# ---------- Delegates ---------- #{delegates}',
+            f'{delegates}',
             f'',
             f'__all__ = [{all_str}]',
             f'',
@@ -179,17 +188,128 @@ class Class(Member):
         
         METHODS
         
+        # ---------- Events ---------- #
+        
+        EVENTS
+        
         # ---------- Sub Classes ---------- #
         
         SUB_CLASSES
     """
     
     name: str
-    super_type: Optional[Type]
+    abstract: bool
+    type_args: Tuple[VarType, ...]
+    super_type: Optional[TypeBase]
+    interfaces: Tuple[TypeBase, ...]
+    fields: Tuple[Property, ...]
+    constructors: Tuple[Constructor, ...]
+    properties: Tuple[Property, ...]
+    methods: Tuple[Method, ...]
+    events: Tuple[Event, ...]
+    sub_classes: Tuple[Class, ...]
+    sub_structs: Tuple[Class, ...]
+    sub_interfaces: Tuple[Interface, ...]
+    sub_enums: Tuple[Enum, ...]
     doc_string: str = ''
     
     def print(self, indent: int = 0) -> str:
-        pass
+        _indent = ' ' * indent
+        
+        imports = []
+        if len(self.type_args) > 0:
+            args = ', '.join(str(a) for a in self.type_args)
+            if self.abstract:
+                imports.append(f'Prototype[{args}]')
+            else:
+                imports.append(f'Generic[{args}]')
+        elif self.abstract:
+            imports.append('ABC')
+        
+        if self.super_type is not None:
+            imports.append(str(self.super_type))
+        
+        imports.extend(str(i) for i in self.interfaces)
+        
+        doc_string = ''
+        if self.doc_string != '' or (
+                len(self.fields) == 0 and
+                len(self.constructors) == 0 and
+                len(self.properties) == 0 and
+                len(self.methods) == 0 and
+                len(self.events) == 0 and
+                len(self.sub_classes) == 0 and
+                len(self.sub_structs) == 0 and
+                len(self.sub_interfaces) == 0 and
+                len(self.sub_enums) == 0
+        ):
+            doc_string = f'\n{_indent}    """{self.doc_string}"""\n{_indent}    '
+        
+        fields = '# No Fields'
+        if len(self.fields) > 0:
+            fields = f'\n{_indent}    \n'.join(i.print(indent + 4) for i in self.fields)
+            fields = f'# ---------- Fields ---------- #\n{_indent}    \n{fields}'
+        
+        constructors = '# No Constructors'
+        if len(self.constructors) > 0:
+            constructors = f'\n{_indent}    \n'.join(i.print(indent + 4) for i in self.constructors)
+            constructors = f'# ---------- Constructors ---------- #\n{_indent}    \n{constructors}'
+        
+        properties = '# No Properties'
+        if len(self.properties) > 0:
+            properties = f'\n{_indent}    \n'.join(i.print(indent + 4) for i in self.properties)
+            properties = f'# ---------- Properties ---------- #\n{_indent}    \n{properties}'
+        
+        methods = '# No Methods'
+        if len(self.methods) > 0:
+            methods = f'\n{_indent}    \n'.join(i.print(indent + 4) for i in self.methods)
+            methods = f'# ---------- Methods ---------- #\n{_indent}    \n{methods}'
+        
+        events = '# No Events'
+        if len(self.events) > 0:
+            events = f'\n{_indent}    \n'.join(i.print(indent + 4) for i in self.events)
+            events = f'# ---------- Events ---------- #\n{_indent}    \n{events}'
+        
+        sub_classes = '# No Classes'
+        if len(self.sub_classes) > 0:
+            sub_classes = f'\n{_indent}    \n'.join(i.print(indent + 4) for i in self.sub_classes)
+            sub_classes = f'# ---------- Sub Classes ---------- #\n{_indent}    \n{sub_classes}'
+        
+        sub_structs = '# No Structs'
+        if len(self.sub_structs) > 0:
+            sub_structs = f'\n{_indent}    \n'.join(i.print(indent + 4) for i in self.sub_structs)
+            sub_structs = f'# ---------- Sub Structs ---------- #\n{_indent}    \n{sub_structs}'
+        
+        sub_interfaces = '# No Interfaces'
+        if len(self.sub_interfaces) > 0:
+            sub_interfaces = f'\n{_indent}    \n'.join(i.print(indent + 4) for i in self.sub_interfaces)
+            sub_interfaces = f'# ---------- Sub Interfaces ---------- #\n{_indent}    \n{sub_interfaces}'
+        
+        sub_enums = '# No Enums'
+        if len(self.sub_enums) > 0:
+            sub_enums = f'\n{_indent}    \n'.join(i.print(indent + 4) for i in self.sub_enums)
+            sub_enums = f'# ---------- No Enums ---------- #\n{_indent}    \n{sub_enums}'
+        
+        return '\n'.join([
+            f'{_indent}class {self.name}({", ".join(imports)}):{doc_string}',
+            f'{_indent}    {fields}',
+            f'{_indent}    ',
+            f'{_indent}    {constructors}',
+            f'{_indent}    ',
+            f'{_indent}    {properties}',
+            f'{_indent}    ',
+            f'{_indent}    {methods}',
+            f'{_indent}    ',
+            f'{_indent}    {events}',
+            f'{_indent}    ',
+            f'{_indent}    {sub_classes}',
+            f'{_indent}    ',
+            f'{_indent}    {sub_structs}',
+            f'{_indent}    ',
+            f'{_indent}    {sub_interfaces}',
+            f'{_indent}    ',
+            f'{_indent}    {sub_enums}',
+        ])
 
 
 @dataclass
@@ -211,11 +331,11 @@ class Interface(Member):
         EVENTS
     """
     name: str
-    type_args: Tuple[VarType, ...] = field(default_factory=tuple, repr=False)
-    bases: Tuple[TypeBase, ...] = field(default_factory=tuple, repr=False)
-    properties: Tuple[Property, ...] = field(default_factory=tuple, repr=False)
-    methods: Tuple[Method, ...] = field(default_factory=tuple, repr=False)
-    events: Tuple[Event, ...] = field(default_factory=tuple, repr=False)
+    type_args: Tuple[VarType, ...]
+    bases: Tuple[TypeBase, ...]
+    properties: Tuple[Property, ...]
+    methods: Tuple[Method, ...]
+    events: Tuple[Event, ...]
     doc_string: str = ''
     
     def print(self, indent: int = 0) -> str:
@@ -223,57 +343,165 @@ class Interface(Member):
         
         type_args = ''
         if len(self.type_args) > 0:
-            type_args = f'[{", ".join(t.resolve() for t in self.type_args)}]'
+            type_args = f'[{", ".join(str(t) for t in self.type_args)}]'
         
-        bases = ''
+        super_types = ''
         if len(self.bases) > 0:
-            bases = f', '.join(b.resolve() for b in self.bases)
-            bases = f', {bases}'
+            super_types = f', '.join(str(b) for b in self.bases)
+            super_types = f', {super_types}'
         
-        properties = ''
+        doc_string = ''
+        if self.doc_string != '':
+            doc_string = f'\n{_indent}    """{self.doc_string}"""\n{_indent}    '
+        
+        properties = f'# No Properties'
         if len(self.properties) > 0:
-            properties = f'\n{_indent}    \n{_indent}'.join(p.print(indent + 4) for p in self.properties)
-            properties = f'\n{_indent}    \n{_indent}{properties}'
+            properties = f'\n{_indent}    \n'.join(p.print(indent + 4) for p in self.properties)
+            properties = f'# ---------- Properties ---------- #\n{_indent}    \n{properties}'
         
-        methods = ''
+        methods = f'# No Methods'
         if len(self.methods) > 0:
-            methods = f'\n{_indent}    \n{_indent}'.join(m.print(indent + 4) for m in self.methods)
-            methods = f'\n{_indent}    \n{_indent}{methods}'
+            methods = f'\n{_indent}    \n'.join(m.print(indent + 4) for m in self.methods)
+            methods = f'# ---------- Methods ---------- #\n{_indent}    \n{methods}'
         
-        events = ''
+        events = f'# No Events'
         if len(self.events) > 0:
-            events = f'\n{_indent}    \n{_indent}'.join(e.print(indent + 4) for e in self.events)
-            events = f'\n{_indent}    \n{_indent}{events}'
+            events = f'\n{_indent}    \n'.join(e.print(indent + 4) for e in self.events)
+            events = f'# ---------- Events ---------- #\n{_indent}    \n{events}'
         
         return '\n'.join([
-            f'{_indent}class {self.name}(Protocol{type_args}{bases}):',
-            f'{_indent}    """{self.doc_string}"""',
+            f'{_indent}class {self.name}(Protocol{type_args}{super_types}):{doc_string}',
+            f'{_indent}    {properties}',
             f'{_indent}    ',
-            f'{_indent}    # ---------- Properties ---------- #{properties}',
+            f'{_indent}    {methods}',
             f'{_indent}    ',
-            f'{_indent}    # ---------- Methods ---------- #{methods}',
-            f'{_indent}    ',
-            f'{_indent}    # ---------- Events ---------- #{events}',
+            f'{_indent}    {events}',
+        ])
+
+
+@dataclass
+class Enum(Member):
+    """
+    class NAME(Enum):
+        DOC_STRING
+        
+        FIELDS
+    """
+    name: str
+    fields: Tuple[EnumField, ...]
+    doc_string: str = ''
+    
+    def print(self, indent: int = 0) -> str:
+        _indent = ' ' * indent
+        
+        doc_str = ''
+        if self.doc_string != '':
+            doc_str = f'\n{_indent}    """{self.doc_string}"""\n{_indent}    '
+        
+        fields = ''
+        if len(self.fields) > 0:
+            previous_doc = False
+            for field in self.fields:
+                if previous_doc:
+                    fields += f'\n{_indent}    '
+                fields += f'\n{field.print(indent + 4)}'
+                previous_doc = field.doc_string != ''
+        
+        return '\n'.join([
+            f'{_indent}class {self.name}(Enum):{doc_str}{fields}',
+        ])
+
+
+@dataclass
+class Delegate(Member):
+    """
+    NAME = Callable[[TYPES], RETURN_TYPE]
+    DOC_STRING
+    """
+    
+    name: str
+    input_types: Tuple[TypeBase, ...]
+    return_type: Optional[TypeBase] = None
+    doc_string: str = ''
+    
+    def print(self, indent: int = 0) -> str:
+        _indent = ' ' * indent
+
+        input_types = ', '.join(str(t) for t in self.input_types)
+        
+        return_type = 'None'
+        if self.doc_string is not None:
+            return_type = str(self.return_type)
+        
+        doc_string = ''
+        if self.doc_string != '':
+            doc_string = f'\n{_indent}"""{doc_string}"""'
+        
+        return '\n'.join([
+            f'{self.name} = Callable[[{input_types}], {return_type}]{doc_string}',
         ])
 
 
 @dataclass
 class Field(Member):
     """
-    [#]FIELD_NAME: FIELD_TYPE = ...
+    [#]FIELD_NAME: Final[FIELD_TYPE] = ...
     FIELD_DOC_STRING
     """
     
     name: str
     type: TypeBase
+    final: bool = False
     doc_string: str = ''
     
     def print(self, indent: int = 0) -> str:
         _indent = ' ' * indent
+        
+        type = str(self.type)
+        if self.final:
+            type = f'Final[{type}]'
+        
+        doc_str = ''
+        if self.doc_string != '':
+            doc_str = f'\n{_indent}"""{self.doc_string}"""'
+        
         return '\n'.join([
-            f'{_indent}{self.name}: {self.type.resolve()} = ...',
-            f'{_indent}"""{self.doc_string}"""',
+            f'{_indent}{self.name}: {type} = ...{doc_str}',
         ])
+
+
+@dataclass
+class EnumField(Member):
+    """
+    [#]NAME: TYPE = VALUE
+    DOC_STRING
+    """
+    
+    name: str
+    type: TypeBase
+    value: str
+    doc_string: str = ''
+    
+    def print(self, indent: int = 0) -> str:
+        _indent = ' ' * indent
+        
+        name = self.name
+        if self._is_name_invalid(name):
+            name = f'#{name}'
+        
+        doc_str = ''
+        if self.doc_string != '':
+            doc_str = f'\n{_indent}"""{self.doc_string}"""'
+        
+        return '\n'.join([
+            f'{_indent}{name}: {self.type} = {self.value}{doc_str}',
+        ])
+    
+    @staticmethod
+    def _is_name_invalid(name: str) -> bool:
+        return name in [
+            'None'
+        ]
 
 
 @dataclass
@@ -283,7 +511,7 @@ class Constructor(Member):
     def __init__(self[, ', '.join((PARAMETERS)])[ -> NoReturn]:
         DOC_STRING
     """
-    parameters: Tuple[Parameter, ...] = field(default_factory=tuple)
+    parameters: Tuple[Parameter, ...]
     overload: bool = False
     no_return: bool = False
     doc_string: str = ''
@@ -298,18 +526,18 @@ class Constructor(Member):
         
         return_str = ' -> NoReturn' if self.no_return else ''
         
-        doc_str = ''
+        doc_str = ' ...'
         if self.doc_string != '':
             doc_str = self.doc_string
-        if len(self.parameters) > 0:
-            arg_doc = f'\n{_indent}    '.join(f":param {arg.name}: {arg.doc_string}" for arg in self.parameters)
-            if self.doc_string != '':
-                doc_str += f'\n{_indent}    '
-            doc_str += f'\n{_indent}    {arg_doc}\n{_indent}    '
+            if len(self.parameters) > 0:
+                arg_doc = f'\n{_indent}    '.join(f":param {arg.name}: {arg.doc_string}" for arg in self.parameters)
+                if self.doc_string != '':
+                    doc_str += f'\n{_indent}    '
+                doc_str += f'\n{_indent}    {arg_doc}\n{_indent}    '
+            doc_str = f'\n{_indent}    """{doc_str}"""'
         
         return '\n'.join([
-            f'{overload}{_indent}def __init__(self{args}){return_str}:',
-            f'{_indent}    """{doc_str}"""',
+            f'{overload}{_indent}def __init__(self{args}){return_str}:{doc_str}',
         ])
 
 
@@ -337,18 +565,17 @@ class Property(Member):
         if self.setter:
             if not self.static:
                 args += ', '
-            args += f'value: {self.type.resolve()}'
+            args += f'value: {self.type}'
         
-        _return = 'None' if self.setter else self.type.resolve()
+        _return = 'None' if self.setter else str(self.type)
         
-        doc_str = ''
+        doc_str = ' ...'
         if self.doc_string != '':
-            doc_str = self.doc_string
+            doc_str = f'\n{_indent}    """{self.doc_string}"""'
         
         return '\n'.join([
             f'{static}{_indent}{property}',
-            f'{_indent}def {self.name}({args}) -> {_return}:',
-            f'{_indent}    """{doc_str}"""',
+            f'{_indent}def {self.name}({args}) -> {_return}:{doc_str}',
         ])
 
 
@@ -361,11 +588,11 @@ class Method(Member):
         METHOD_DOC_STRING
     """
     name: str
-    parameters: Tuple[Parameter, ...] = field(default_factory=tuple)
-    return_types: Tuple[TypeBase, ...] = field(default_factory=tuple)
+    parameters: Tuple[Parameter, ...]
+    return_types: Tuple[TypeBase, ...]
     static: bool = False
     overload: bool = False
-    self_type: Type = None
+    self_type: Optional[RegularType] = None
     doc_string: str = ''
     
     def print(self, indent: int = 0) -> str:
@@ -378,22 +605,22 @@ class Method(Member):
         return_str = ''
         if len(self.return_types) > 0:
             if len(self.return_types) == 1:
-                return_str = f' -> {self.return_types[0].resolve()}'
+                return_str = f' -> {self.return_types[0]}'
             else:
-                return_str = f' -> Tuple[{", ".join(t.resolve() for t in self.return_types)}]'
+                return_str = f' -> Tuple[{", ".join(str(t) for t in self.return_types)}]'
         
-        doc_str = ''
+        doc_str = ' ...'
         if self.doc_string != '':
             doc_str = self.doc_string
-        if len(self.parameters) > 0:
-            arg_doc = f'\n{_indent}    '.join(f":param {arg.name}: {arg.doc_string}" for arg in self.parameters)
-            if self.doc_string != '':
-                doc_str += f'\n{_indent}    '
-            doc_str += f'\n{_indent}    {arg_doc}\n{_indent}    '
+            if len(self.parameters) > 0:
+                arg_doc = f'\n{_indent}    '.join(f":param {arg.name}: {arg.doc_string}" for arg in self.parameters)
+                if self.doc_string != '':
+                    doc_str += f'\n{_indent}    '
+                doc_str += f'\n{_indent}    {arg_doc}\n{_indent}    '
+            doc_str = f'\n{_indent}    """{doc_str}"""'
         
         return '\n'.join([
-            f'{static}{overload}{_indent}def {self.name}({params}){return_str}:',
-            f'{_indent}    """{doc_str}"""',
+            f'{static}{overload}{_indent}def {self.name}({params}){return_str}:{doc_str}',
         ])
 
 
@@ -411,41 +638,43 @@ class Event(Member):
     def print(self, indent: int = 0) -> str:
         _indent = ' ' * indent
         
+        doc_str = ''
+        if self.doc_string != '':
+            doc_str = f'\n{_indent}"""{self.doc_string}"""'
+        
         return '\n'.join([
-            f'{_indent}{self.name}: EventType[{self.type.resolve()}] = ...',
-            f'{_indent}"""{self.doc_string}"""',
+            f'{_indent}{self.name}: EventType[{self.type}] = ...{doc_str}',
         ])
 
 
 @dataclass
 class Parameter(Member):
-    """[in/out ]ARGUMENT_NAME: ARGUMENT_TYPE[ = DEFAULT_VALUE]"""
+    """ARGUMENT_NAME: ARGUMENT_TYPE[ = DEFAULT_VALUE]"""
     
     name: str
     type: TypeBase
-    default: str = None
+    default: Optional[str] = None
     is_in: bool = False
     is_out: bool = False
     doc_string: str = ''
     
     def print(self, indent: int = 0) -> str:
-        return f'{self.name}: {self.type.resolve()}{f" = {self.default}" if self.default else ""}'
+        return f'{self.name}: {self.type}{f" = {self.default}" if self.default else ""}'
 
 
 @dataclass
-class TypeBase(Member):
-    @abstractmethod
-    def resolve(self) -> str: ...
+class TypeBase(Member, ABC):
+    pass
 
 
 @dataclass
-class Type(TypeBase):
+class RegularType(TypeBase):
     """TYPE_NAME[[INNER]]"""
     
     base: Union[str, SystemType]
     inner: Tuple[TypeBase, ...] = field(default_factory=tuple)
     
-    def resolve(self) -> str:
+    def __str__(self) -> str:
         return self.print()
     
     def print(self, indent: int = 0) -> str:
@@ -456,9 +685,9 @@ class Type(TypeBase):
         inner = ''
         if len(self.inner) > 0:
             if len(self.inner) == 1:
-                inner = f'[{self.inner[0].resolve()}]'
+                inner = f'[{self.inner[0]}]'
             else:
-                inner = f'[{", ".join(i.resolve() for i in self.inner)}]'
+                inner = f'[{", ".join(str(i) for i in self.inner)}]'
         return name + inner
 
 
@@ -493,7 +722,7 @@ class SystemType(TypeBase):
     name: str
     value: str
     
-    def resolve(self) -> str:
+    def __str__(self) -> str:
         return self.name
     
     def print(self, indent: int = 0) -> str:
@@ -503,8 +732,8 @@ class SystemType(TypeBase):
 @dataclass
 class SpecialType(TypeBase, ABC):
     name: str
-
-    def resolve(self) -> str:
+    
+    def __str__(self) -> str:
         return self.name
 
 
@@ -530,16 +759,16 @@ class VarType(TypeBase):
     name: str
     bounds: Tuple[TypeBase, ...] = field(default_factory=tuple)
     
-    def resolve(self) -> str:
+    def __str__(self) -> str:
         return self.name
     
     def print(self, indent: int = 0) -> str:
         bound = ''
         if len(self.bounds) > 0:
             if len(self.bounds) == 1:
-                bound = f', bound={self.bounds[0].resolve()}'
+                bound = f', bound={self.bounds[0]}'
             else:
-                bound = f', bound=Union[{", ".join(b.resolve() for b in self.bounds)}]'
+                bound = f', bound=Union[{", ".join(str(b) for b in self.bounds)}]'
         return f'{self.name} = TypeVar(\'{self.name}\'{bound})'
 
 
@@ -567,28 +796,64 @@ if __name__ == '__main__':
     array_type = SystemType('ArrayType', 'Union[list, Array]')
     obsolete_type = SystemType('Obsolete', 'NoReturn')
     
-    print(boolean_type.print(0))
-    null_int_type = Type(nullable_type, (int_type,))
-    array_null_int_type = Type(array_type, (null_int_type,))
-    print('null_int_type', null_int_type.print())
-    print('array_null_int_type', array_null_int_type.print())
+    # print(boolean_type.print(0))
+    null_int_type = RegularType(nullable_type, (int_type,))
+    array_null_int_type = RegularType(array_type, (null_int_type,))
+    # print('null_int_type', null_int_type.print())
+    # print('array_null_int_type', array_null_int_type.print())
     
     index1 = Parameter('index1', int_type)
     index2 = Parameter('index2', array_null_int_type)
-    print(index1.print(0))
-    print(index2.print(0))
+    # print(index1.print(0))
+    # print(index2.print(0))
     
     f = Field('MaxValue', array_null_int_type, doc_string='Test Field')
-    print(f.print(0))
+    # print(f.print(4))
     
     c = Constructor((index1, index2), doc_string="Test Constructor", overload=True, no_return=False)
-    print(c.print(0))
-    
-    p = Property('Count', array_null_int_type, doc_string="Test Property", static=True)
-    print(p.print(0))
+    # print(c.print(4))
     
     p = Property('Count', array_null_int_type, doc_string="Test Property", static=True, setter=True)
-    print(p.print(0))
+    # print(p.print(4))
     
     m = Method('do_things', (index1, index2), (void_type,), doc_string='Test Method', overload=True)
-    print(m.print(0))
+    # print(m.print(4))
+    
+    d = Delegate(name='Name',
+                 input_types=tuple([double_type]),
+                 return_type=void_type,
+                 doc_string='')
+    
+    inner_class = Class(name='Inner',
+                        abstract=False,
+                        type_args=tuple(),
+                        super_type=None,
+                        interfaces=tuple(),
+                        fields=tuple(),
+                        constructors=tuple([c]),
+                        properties=tuple([p]),
+                        methods=tuple([m]),
+                        events=tuple(),
+                        sub_classes=tuple(),
+                        sub_structs=tuple(),
+                        sub_interfaces=tuple(),
+                        sub_enums=tuple(),
+                        doc_string='')
+    
+    clazz = Class(name='Class',
+                  abstract=False,
+                  type_args=tuple(),
+                  super_type=None,
+                  interfaces=tuple(),
+                  fields=tuple(),
+                  constructors=tuple([c]),
+                  properties=tuple([p]),
+                  methods=tuple([m]),
+                  events=tuple(),
+                  sub_classes=tuple([inner_class]),
+                  sub_structs=tuple(),
+                  sub_interfaces=tuple(),
+                  sub_enums=tuple(),
+                  doc_string='')
+    
+    print(clazz.print(0))

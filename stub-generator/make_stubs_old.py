@@ -6,12 +6,11 @@ from typing import Dict, Any, List
 
 import clr
 
-from System import Type
 from System.Reflection import Assembly, ConstructorInfo, ParameterInfo
-from generator3.core import SkeletonGenerator, generate_skeleton
+from reference.generator3 import SkeletonGenerator, generate_skeleton
 from .logger import logger
 from .options import Options
-from .model import Parameter, Type, Constructor
+from .model import Parameter, RegularType, Constructor
 
 
 def make(package: str, options: Options):
@@ -97,7 +96,7 @@ def make(package: str, options: Options):
     print()
 
 
-def process_type(type: Type):
+def process_type(type: RegularType):
     if not type.Namespace.startswith('System.Collections'):
         return
     print(f'type={type} abstract={type.IsAbstract} BaseType={type.BaseType} Namespace={type.Namespace}')
@@ -146,9 +145,8 @@ def process_parameter(parameter_info: ParameterInfo) -> Parameter:
     return Parameter(parameter_info.Name, parameter_type, default=default, doc_string='')
 
 
-def process_parameter_type(type: Type) -> Type:
-    # TODO - Here is where to convert to python type. ie Int32 -> IntType, add IntType types list, and add Int32 to import list
-    return Type(str(type))
+def process_parameter_type(type: RegularType) -> RegularType:
+    return RegularType(str(type))
 
 
 def crawl_loaded_references(target_assembly_name: str) -> Dict[str, Any]:
