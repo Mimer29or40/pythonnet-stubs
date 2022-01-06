@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Any, Dict
 
 __default_path__ = 'stubs'
 __version__ = '0.0.1'
@@ -10,17 +12,18 @@ __doc__ = f"""
     Python.NET Stub Generator
     
     Usage:
-      stub-generator make (<assembly-name>|--all) [options]
+      stub-generator make (<assembly-name>|--all|--built_in) [options]
       stub-generator minify <folder> [options]
       stub-generator (-h | --help)
       stub-generator (-V | --version)
     
     Examples:
-      ipy -m stub-generator System.Reflection --overwrite
+      ipy -m stub-generator make System.Reflection --overwrite
     
     Options:
-        <assembly-name>         Name of Dll Assembly to load
-        --all                   Process all Assemblies in defaults.py
+        <assembly-name>         Name of Dll Assembly to Process
+        --all                   Process All Assemblies in defaults.py
+        --built_in              Process All Built-In Assemblies in defaults.py
 
         --output=<dir>          Name of Output Directory [default: {__default_path__}]
         --paths=<dir>...        Additional Directory to add to Path [default:]
@@ -36,10 +39,12 @@ __doc__ = f"""
 
 @dataclass
 class Options:
+    make: bool
     assembly_name: Optional[str]
     all: bool
+    built_in: bool
     output_dir: Path
-    path_dirs: Tuple[str]
+    path_dirs: Tuple[str, ...]
     json: bool
     overwrite: bool
     debug: bool
@@ -51,3 +56,17 @@ class Options:
     @classmethod
     def doc_str(cls) -> str:
         return __doc__
+    
+    @classmethod
+    def get(cls, arguments: Dict[str, Any]) -> Options:
+        return cls(
+            arguments['make'],
+            arguments['<assembly-name>'],
+            arguments['--all'],
+            arguments['--built_in'],
+            Path(arguments['--output']),
+            tuple() if arguments['--paths'] is None else tuple(arguments['--paths']),
+            not arguments['--no-json'],
+            arguments['--overwrite'],
+            arguments['--debug'],
+        )

@@ -1,9 +1,8 @@
 import sys
-from pathlib import Path
 
 from docopt import docopt
 
-from .defaults import PACKAGES, PATHS
+from .defaults import ASSEMBLIES, PATHS, BUILT_INS
 from .logger import logger
 from .make_stubs import make
 from .options import Options
@@ -14,15 +13,7 @@ __doc__ = Options.doc_str()
 
 arguments = docopt(__doc__, version=__version__)
 
-options: Options = Options(
-    arguments['<assembly-name>'],
-    arguments['--all'],
-    Path(arguments['--output']),
-    tuple() if arguments['--paths'] is None else tuple(arguments['--paths']),
-    not arguments['--no-json'],
-    arguments['--overwrite'],
-    arguments['--debug'],
-)
+options: Options = Options.get(arguments)
 
 if options.debug:
     logger.enable_debug()
@@ -33,14 +24,20 @@ sys.path.extend(PATHS)
 # Additional Paths from Options
 sys.path.extend(options.path_dirs)
 
+assemblies = []
+if options.all:
+    assemblies.extend(ASSEMBLIES)
+    assemblies.extend(BUILT_INS)
+elif options.built_in:
+    assemblies.extend(BUILT_INS)
+else:
+    assemblies.append(options.assembly_name)
+
 logger.debug(sys.path)
 logger.debug(arguments)
-logger.debug(PACKAGES)
+logger.debug(assemblies)
 
-if arguments['make']:
+if options.make:
     with time_it('main', log_func=logger.info):
-        if not options.all:
-            PACKAGES = [options.assembly_name]
-        
-        for assembly_name in PACKAGES:
+        for assembly_name in assemblies:
             make(assembly_name, options)
