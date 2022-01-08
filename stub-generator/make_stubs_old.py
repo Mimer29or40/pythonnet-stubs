@@ -8,7 +8,7 @@ import clr
 
 from System.Reflection import Assembly, ConstructorInfo, ParameterInfo
 from reference.generator3 import SkeletonGenerator, generate_skeleton
-from .logger import logger
+from .logging import logger
 from .options import Options
 from .model import Parameter, RegularType, Constructor
 

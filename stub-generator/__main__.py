@@ -3,7 +3,7 @@ import sys
 from docopt import docopt
 
 from .defaults import ASSEMBLIES, PATHS, BUILT_INS
-from .logger import logger
+from .logging import logger
 from .make_stubs import make
 from .options import Options
 from .util import time_it
@@ -33,9 +33,12 @@ elif options.built_in:
 else:
     assemblies.append(options.assembly_name)
 
-logger.debug(sys.path)
-logger.debug(arguments)
-logger.debug(assemblies)
+for p in sys.path:
+    logger.debug(f'Path Variable: \'{p}\'')
+for k, v in arguments.items():
+    logger.debug(f'Argument: {k}=\'{v}\'')
+for a in assemblies:
+    logger.debug(f'Assembly: \'{a}\'')
 
 if options.make:
     with time_it('main', log_func=logger.info):

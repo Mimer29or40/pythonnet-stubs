@@ -3,7 +3,7 @@ import time
 from contextlib import contextmanager
 from typing import Callable
 
-from .logger import logger
+from .logging import logger
 
 
 @contextmanager

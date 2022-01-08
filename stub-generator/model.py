@@ -198,20 +198,20 @@ class Class(Member):
     """
     
     name: str
-    abstract: bool
-    type_args: Tuple[VarType, ...]
-    super_type: Optional[TypeBase]
-    interfaces: Tuple[TypeBase, ...]
-    fields: Tuple[Property, ...]
-    constructors: Tuple[Constructor, ...]
-    properties: Tuple[Property, ...]
-    methods: Tuple[Method, ...]
-    events: Tuple[Event, ...]
-    sub_classes: Tuple[Class, ...]
-    sub_structs: Tuple[Class, ...]
-    sub_interfaces: Tuple[Interface, ...]
-    sub_enums: Tuple[Enum, ...]
-    doc_string: str = ''
+    abstract: bool = field(default=False, repr=False)
+    type_args: List[VarType] = field(default_factory=list, repr=False)
+    super_type: Optional[TypeBase] = field(default=None, repr=False)
+    interfaces: List[TypeBase] = field(default_factory=list, repr=False)
+    fields: List[Property] = field(default_factory=list, repr=False)
+    constructors: List[Constructor] = field(default_factory=list, repr=False)
+    properties: List[Property] = field(default_factory=list, repr=False)
+    methods: List[Method] = field(default_factory=list, repr=False)
+    events: List[Event] = field(default_factory=list, repr=False)
+    sub_classes: List[Class] = field(default_factory=list, repr=False)
+    sub_structs: List[Class] = field(default_factory=list, repr=False)
+    sub_interfaces: List[Interface] = field(default_factory=list, repr=False)
+    sub_enums: List[Enum] = field(default_factory=list, repr=False)
+    doc_string: str = field(default='', repr=False)
     
     def print(self, indent: int = 0) -> str:
         _indent = ' ' * indent
@@ -331,12 +331,12 @@ class Interface(Member):
         EVENTS
     """
     name: str
-    type_args: Tuple[VarType, ...]
-    bases: Tuple[TypeBase, ...]
-    properties: Tuple[Property, ...]
-    methods: Tuple[Method, ...]
-    events: Tuple[Event, ...]
-    doc_string: str = ''
+    type_args: List[VarType] = field(default_factory=list, repr=False)
+    bases: List[TypeBase] = field(default_factory=list, repr=False)
+    properties: List[Property] = field(default_factory=list, repr=False)
+    methods: List[Method] = field(default_factory=list, repr=False)
+    events: List[Event] = field(default_factory=list, repr=False)
+    doc_string: str = field(default='', repr=False)
     
     def print(self, indent: int = 0) -> str:
         _indent = ' ' * indent
@@ -388,8 +388,8 @@ class Enum(Member):
         FIELDS
     """
     name: str
-    fields: Tuple[EnumField, ...]
-    doc_string: str = ''
+    fields: List[EnumField] = field(default_factory=list, repr=False)
+    doc_string: str = field(default='', repr=False)
     
     def print(self, indent: int = 0) -> str:
         _indent = ' ' * indent
@@ -480,7 +480,7 @@ class EnumField(Member):
     name: str
     type: TypeBase
     value: str
-    doc_string: str = ''
+    doc_string: str
     
     def print(self, indent: int = 0) -> str:
         _indent = ' ' * indent
@@ -508,12 +508,11 @@ class EnumField(Member):
 class Constructor(Member):
     """
     [@overload]
-    def __init__(self[, ', '.join((PARAMETERS)])[ -> NoReturn]:
+    def __init__(self[, ', '.join((PARAMETERS)]):
         DOC_STRING
     """
-    parameters: Tuple[Parameter, ...]
-    overload: bool = False
-    no_return: bool = False
+    parameters: List[Parameter] = field(default_factory=list)
+    overload: bool = field(default=False, repr=True)
     doc_string: str = ''
     
     def print(self, indent: int = 0) -> str:
@@ -523,8 +522,6 @@ class Constructor(Member):
         args = ''
         if len(self.parameters) > 0:
             args = ', ' + ', '.join(map(lambda p: p.print(), self.parameters))
-        
-        return_str = ' -> NoReturn' if self.no_return else ''
         
         doc_str = ' ...'
         if self.doc_string != '':
@@ -536,9 +533,7 @@ class Constructor(Member):
                 doc_str += f'\n{_indent}    {arg_doc}\n{_indent}    '
             doc_str = f'\n{_indent}    """{doc_str}"""'
         
-        return '\n'.join([
-            f'{overload}{_indent}def __init__(self{args}){return_str}:{doc_str}',
-        ])
+        return f'{overload}{_indent}def __init__(self{args}):{doc_str}'
 
 
 @dataclass
@@ -826,34 +821,34 @@ if __name__ == '__main__':
     
     inner_class = Class(name='Inner',
                         abstract=False,
-                        type_args=tuple(),
+                        type_args=[],
                         super_type=None,
-                        interfaces=tuple(),
-                        fields=tuple(),
-                        constructors=tuple([c]),
-                        properties=tuple([p]),
-                        methods=tuple([m]),
-                        events=tuple(),
-                        sub_classes=tuple(),
-                        sub_structs=tuple(),
-                        sub_interfaces=tuple(),
-                        sub_enums=tuple(),
+                        interfaces=[],
+                        fields=[],
+                        constructors=[c],
+                        properties=[p],
+                        methods=[m],
+                        events=[],
+                        sub_classes=[],
+                        sub_structs=[],
+                        sub_interfaces=[],
+                        sub_enums=[],
                         doc_string='')
     
     clazz = Class(name='Class',
                   abstract=False,
-                  type_args=tuple(),
+                  type_args=[],
                   super_type=None,
-                  interfaces=tuple(),
-                  fields=tuple(),
-                  constructors=tuple([c]),
-                  properties=tuple([p]),
-                  methods=tuple([m]),
-                  events=tuple(),
-                  sub_classes=tuple([inner_class]),
-                  sub_structs=tuple(),
-                  sub_interfaces=tuple(),
-                  sub_enums=tuple(),
+                  interfaces=[],
+                  fields=[],
+                  constructors=[c],
+                  properties=[p],
+                  methods=[m],
+                  events=[],
+                  sub_classes=[inner_class],
+                  sub_structs=[],
+                  sub_interfaces=[],
+                  sub_enums=[],
                   doc_string='')
     
     print(clazz.print(0))

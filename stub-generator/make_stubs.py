@@ -1,54 +1,65 @@
+import json
+import logging
 import re
 from collections import defaultdict
 from functools import partial
 from pathlib import Path
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple, Optional, Any
 
 import clr
 
-from System import Type, Nullable, Delegate as _Delegate, MulticastDelegate
+from System import Type, Nullable, Delegate as _Delegate, AppDomain
 from System.Reflection import Assembly, ConstructorInfo, ParameterInfo, PropertyInfo, MethodInfo, EventInfo, FieldInfo
-from .logger import logger
+from .logging import logger
 from .model import Parameter, RegularType, Constructor, Namespace, Interface, SystemType, Property, Method, TypeBase, VarType, EventType, Event, EnumField, Enum, Class, Delegate
 from .options import Options
 
 
-def make(assembly_name: str, options: Options):
+def make(target_assembly_name: str, options: Options):
     """Main Processing Function"""
     logger.info('=' * 80)
-    logger.info('Making [{}]'.format(assembly_name))
+    logger.info(f'Making [{target_assembly_name}]')
     
-    assembly: Assembly = clr.AddReference(assembly_name)
+    target_assembly: Assembly = clr.AddReference(target_assembly_name)
     
     namespace_dict = defaultdict(list)
-    for type in assembly.GetTypes():
-        if type.Namespace is None or type.IsNested:
+    
+    assembly: Assembly
+    for assembly in AppDomain.CurrentDomain.GetAssemblies():
+        if assembly.IsDynamic:
             continue
-        namespace_dict[type.Namespace].append(type.FullName)
-    # pprint(namespace_dict)
+        assembly_name: str = assembly.GetName().Name
+        if assembly_name == target_assembly_name:  # TODO - Get types from all loaded assemblies
+            logger.info(f'Parsing Assembly: {assembly_name}')
+            for type in target_assembly.GetTypes():
+                if type.Namespace is None or type.IsNested:
+                    continue
+                logger.debug(f'Found Type \'{type.FullName}\' in Namespace \'{type.Namespace}\'')
+                namespace_dict[type.Namespace].append(type.FullName)
+        else:
+            logger.debug(f'Assembly Skipped. Does not match Target: {assembly_name}')
     
     namespaces: Dict[str, Namespace] = {}
     
     for name, type_names in namespace_dict.items():
-        namespace: Namespace
-        if name in namespaces:
-            namespace = namespaces[name]
-        else:
-            namespace = Namespace(name)
-            namespaces[name] = namespace
+        if name not in namespaces:
+            namespaces[name] = Namespace(name)
+        namespace: Namespace = namespaces[name]
         
         for type_name in type_names:
-            process_declared_type(namespace, assembly.GetType(type_name))
+            process_declared_type(namespace, target_assembly.GetType(type_name))
     
-    stub_dir = options.output_dir / f'{assembly_name}-stubs'
+    stub_dir = options.output_dir / f'{target_assembly_name}-stubs'
     
     if options.overwrite and stub_dir.exists():
+        logger.info(r'Deleteing Existing Stubs')
         _rm_tree(stub_dir)
     
     if not stub_dir.exists():
+        logger.info(f'Writing to Directory: {stub_dir}')
         stub_dir.mkdir(parents=True, exist_ok=True)
         
-        assembly_name_type = assembly.GetName()
+        assembly_name_type = target_assembly.GetName()
         version = assembly_name_type.Version
         culture = 'neutral'
         if (culture_info := assembly_name_type.CultureInfo) is not None and (culture_name := culture_info.Name) != '':
@@ -56,13 +67,14 @@ def make(assembly_name: str, options: Options):
         public_key_token = ''.join(hex(b).lstrip('0x') for b in assembly_name_type.GetPublicKeyToken())
         
         setup_file = stub_dir / 'setup.cfg'
+        logger.info(f'Writing: setup.cfg')
         setup_file.write_text('\n'.join([
             f'[metadata]',
-            f'name = {assembly_name}-stubs',
+            f'name = {target_assembly_name}-stubs',
             f'version = {version}',
-            f'description = Stubs Package for {assembly_name}',
+            f'description = Stubs Package for {target_assembly_name}',
             f'long_description = file: README.md, LICENSE',
-            f'keywords = pythonnet, stubs, {assembly_name}',
+            f'keywords = pythonnet, stubs, {target_assembly_name}',
             f'license = MIT License',
             f'culture = {culture}',
             f'public_key_token = {public_key_token}',
@@ -85,13 +97,15 @@ def make(assembly_name: str, options: Options):
         ]))
         
         readme_file = stub_dir / 'README.md'
+        logger.info(f'Writing: README.md')
         readme_file.write_text('\n'.join([
-            f'# {assembly_name}-stubs',
-            f'Stubs Package for {assembly_name}',
+            f'# {target_assembly_name}-stubs',
+            f'Stubs Package for {target_assembly_name}',
             f'',
         ]))
         
         license_file = stub_dir / 'LICENSE'
+        logger.info(f'Writing: LICENSE')
         license_file.write_text('\n'.join([
             f'MIT License',
             f'',
@@ -118,24 +132,35 @@ def make(assembly_name: str, options: Options):
         ]))
         
         manifest_file = stub_dir / 'MANIFEST.in'
-        manifest_file.write_text('\n'.join([f'include {n.split(".")[0]}-stubs/*.pyi' for n in namespaces] + [f'']))
+        logger.info(f'Writing: MANIFEST.in')
+        manifest_file.write_text('\n'.join(set(f'include {n.split(".")[0]}-stubs/*.pyi' for n in namespaces)) + '\n')
         
+        logger.info(f'Writing: Stub Files')
         for name, namespace in namespaces.items():
             parent_dir: Path = stub_dir
-            namespace_dir: Path
             init_file: Path = parent_dir / '__init__.pyi'
             for n in name.split('.'):
-                if parent_dir == stub_dir:
-                    namespace_dir = parent_dir / f'{n}-stubs'
-                else:
-                    namespace_dir = parent_dir / n
-                namespace_dir.mkdir(exist_ok=True)
+                namespace_dir: Path = parent_dir / (f'{n}-stubs' if parent_dir == stub_dir else n)
+                namespace_dir.mkdir(parents=True, exist_ok=True)
                 
                 init_file = namespace_dir / '__init__.pyi'
                 init_file.touch(exist_ok=True)
                 
                 parent_dir = namespace_dir
+            logger.debug(f'Writing Stub File: \'{init_file}\'')
             init_file.write_text(namespace.print())
+    else:
+        logger.info('No Files Written')
+    
+    if options.json:
+        json_dir: Path = Path('logs') / target_assembly_name
+        logger.info(f'Exporting Json Files to \'{json_dir}\'')
+        json_dir.mkdir(parents=True, exist_ok=True)
+        for name, type_names in namespace_dict.items():
+            json_file = json_dir / f'{name}.json'
+            with json_file.open('w') as file:
+                logger.debug(f'Writing: {json_file.name}')
+                json.dump(type_names, file, indent=2)
 
 
 def process_declared_type(namespace: Namespace, type: Type):
@@ -161,51 +186,48 @@ def process_declared_type(namespace: Namespace, type: Type):
 
 
 def process_class(namespace: Namespace, class_type: Type) -> Class:
-    name = _strip_str(class_type.Name)
+    logger.debug(f'Processing Class: \'{class_type}\'')
     
-    abstract = class_type.IsAbstract
+    clazz = Class(_strip_str(class_type.Name))
     
-    type_args = [process_var_type(namespace, type_arg.Name, type_arg) for type_arg in class_type.GetGenericArguments()]
+    clazz.abstract = class_type.IsAbstract
     
-    if abstract and len(type_args) > 0:
+    clazz.type_args = [process_var_type(namespace, type_arg.Name, type_arg) for type_arg in class_type.GetGenericArguments()]
+    
+    if clazz.abstract and len(clazz.type_args) > 0:
         namespace.py_imports.add('typing.Prototype')
-    elif len(type_args) > 0:
+    elif len(clazz.type_args) > 0:
         namespace.py_imports.add('typing.Generic')
-    elif abstract:
+    elif clazz.abstract:
         namespace.py_imports.add('abc.ABC')
     
-    super_type = process_type(namespace, class_type.BaseType) if class_type.BaseType is not None else None
-    interfaces = []
+    clazz.super_type = process_type(namespace, class_type.BaseType) if class_type.BaseType is not None else None
     for interface_type in class_type.GetInterfaces():
-        interfaces.append(process_type(namespace, interface_type))
+        clazz.interfaces.append(process_type(namespace, interface_type))
     
-    fields = []
     for field_info in class_type.GetFields():
         if field_info.DeclaringType == class_type:
             getter, setter = process_field(namespace, field_info)
-            fields.append(getter)
+            clazz.fields.append(getter)
             if setter is not None:
-                fields.append(setter)
-    fields.sort(key=lambda p: p.name)
+                clazz.fields.append(setter)
+    clazz.fields.sort(key=lambda p: p.name)
     
     constructor_list = [c for c in class_type.GetConstructors()]
     overload = len(constructor_list) > 1
-    constructors = []
     for constructor_info in constructor_list:
         if constructor_info.DeclaringType == class_type:
-            constructors.append(process_constructor(namespace, constructor_info, overload))
+            clazz.constructors.append(process_constructor(namespace, constructor_info, overload))
     
-    properties = []
     for property_info in class_type.GetProperties():
         if property_info.DeclaringType == class_type:
             getter, setter = process_property(namespace, property_info)
             if getter is not None:
-                properties.append(getter)
+                clazz.properties.append(getter)
             if setter is not None:
-                properties.append(setter)
-    properties.sort(key=lambda p: p.name)
+                clazz.properties.append(setter)
+    clazz.properties.sort(key=lambda p: p.name)
     
-    methods = []
     method_dict = defaultdict(list)
     for method_info in class_type.GetMethods():
         method_dict[method_info.Name].append(method_info)
@@ -213,73 +235,53 @@ def process_class(namespace: Namespace, class_type: Type) -> Class:
         overload = len(method_list) > 1
         for method_info in method_list:
             if method_info.DeclaringType == class_type:
-                methods.append(process_method(namespace, method_info, overload))
-    methods.sort(key=lambda m: m.name)
+                clazz.methods.append(process_method(namespace, method_info, overload))
+    clazz.methods.sort(key=lambda m: m.name)
     
-    events = []
     for event_info in class_type.GetEvents():
         if event_info.DeclaringType == class_type:
-            events.append(process_event(namespace, event_info))
-    events.sort(key=lambda e: e.name)
+            clazz.events.append(process_event(namespace, event_info))
+    clazz.events.sort(key=lambda e: e.name)
     
-    sub_classes = []
-    sub_structs = []
-    sub_interfaces = []
-    sub_enums = []
     for nested_type in class_type.GetNestedTypes():
         if nested_type.IsValueType:
             if nested_type.IsEnum:
-                sub_enums.append(process_enum(namespace, nested_type))
+                clazz.sub_enums.append(process_enum(namespace, nested_type))
                 continue
-            sub_structs.append(process_class(namespace, nested_type))
+            clazz.sub_structs.append(process_class(namespace, nested_type))
             continue
         if nested_type.IsInterface:
-            sub_interfaces.append(process_interface(namespace, nested_type))
+            clazz.sub_interfaces.append(process_interface(namespace, nested_type))
             continue
         if nested_type.IsClass:
-            sub_classes.append(process_class(namespace, nested_type))
+            clazz.sub_classes.append(process_class(namespace, nested_type))
             continue
     
-    return Class(name=name,
-                 abstract=abstract,
-                 type_args=tuple(type_args),
-                 super_type=super_type,
-                 interfaces=tuple(interfaces),
-                 fields=tuple(fields),
-                 constructors=tuple(constructors),
-                 properties=tuple(properties),
-                 methods=tuple(methods),
-                 events=tuple(events),
-                 sub_classes=tuple(sub_classes),
-                 sub_structs=tuple(sub_structs),
-                 sub_interfaces=tuple(sub_interfaces),
-                 sub_enums=tuple(sub_enums),
-                 doc_string='')
+    return clazz
 
 
 def process_interface(namespace: Namespace, interface_type: Type) -> Interface:
+    logger.debug(f'Processing Interface: {interface_type}')
+    
     namespace.py_imports.add('typing.Protocol')
-    name = _strip_str(interface_type.Name)
-    # if name in namespace.interfaces:
-    #     return  # Redeclared Interface Type. This should only happen for generic types. ie: Type -> Type<T>
     
-    type_args = [process_var_type(namespace, type_arg.Name, type_arg) for type_arg in interface_type.GetGenericArguments()]
+    interface = Interface(_strip_str(interface_type.Name))
     
-    bases = [process_type(namespace, base) for base in interface_type.GetInterfaces()]
+    interface.type_args = [process_var_type(namespace, type_arg.Name, type_arg) for type_arg in interface_type.GetGenericArguments()]
+    
+    interface.bases = [process_type(namespace, base) for base in interface_type.GetInterfaces()]
     
     property_info: PropertyInfo
-    properties = []
     for property_info in interface_type.GetProperties():
         if property_info.DeclaringType == interface_type:
             getter, setter = process_property(namespace, property_info)
             if getter is not None:
-                properties.append(getter)
+                interface.properties.append(getter)
             if setter is not None:
-                properties.append(setter)
-    properties.sort(key=lambda p: p.name)
+                interface.properties.append(setter)
+    interface.properties.sort(key=lambda p: p.name)
     
     method_info: MethodInfo
-    methods = []
     method_dict = defaultdict(list)
     for method_info in interface_type.GetMethods():
         method_dict[method_info.Name].append(method_info)
@@ -287,43 +289,38 @@ def process_interface(namespace: Namespace, interface_type: Type) -> Interface:
         overload = len(method_list) > 1
         for method_info in method_list:
             if method_info.DeclaringType == interface_type:
-                methods.append(process_method(namespace, method_info, overload))
-    methods.sort(key=lambda m: m.name)
+                interface.methods.append(process_method(namespace, method_info, overload))
+    interface.methods.sort(key=lambda m: m.name)
     
     event_info: EventInfo
-    events = []
     for event_info in interface_type.GetEvents():
         if event_info.DeclaringType == interface_type:
-            events.append(process_event(namespace, event_info))
-    events.sort(key=lambda e: e.name)
+            interface.events.append(process_event(namespace, event_info))
+    interface.events.sort(key=lambda e: e.name)
     
-    return Interface(name=name,
-                     type_args=tuple(type_args),
-                     bases=tuple(bases),
-                     properties=tuple(properties),
-                     methods=tuple(methods),
-                     events=tuple(events),
-                     doc_string='')
+    return interface
 
 
 def process_enum(namespace: Namespace, enum_type: Type) -> Enum:
+    logger.debug(f'Processing Enum: \'{enum_type}\'')
+    
     namespace.net_imports.add('System.Enum')
     
-    value_type = process_type(namespace, enum_type.GetEnumUnderlyingType())
+    enum = Enum(_strip_str(enum_type.Name))
     
-    enum_fields = []
+    type = process_type(namespace, enum_type.GetEnumUnderlyingType())
+    
     for name, value in zip(enum_type.GetEnumNames(), enum_type.GetEnumValues()):
-        enum_fields.append(EnumField(name=name,
-                                     type=value_type,
-                                     value=str(value),
-                                     doc_string=''))
+        logger.debug(f'Found Processing Field: {name}: {type} = {value}')
+        enum_field = EnumField(name=name, type=type, value=str(value), doc_string='')
+        enum.fields.append(enum_field)
     
-    return Enum(name=enum_type.Name,
-                fields=tuple(enum_fields),
-                doc_string='')
+    return enum
 
 
 def process_delegate(namespace: Namespace, delegate_type: Type) -> Delegate:
+    logger.debug(f'Processing Delegate: \'{delegate_type}\'')
+    
     namespace.py_imports.add('typing.Callable')
     
     name = _strip_str(delegate_type.Name)
@@ -358,11 +355,12 @@ def process_field(namespace: Namespace, field_info: FieldInfo) -> Tuple[Property
 
 
 def process_constructor(namespace: Namespace, constructor_info: ConstructorInfo, overload: bool) -> Constructor:
+    logger.debug(f'Processing Constructor: \'{constructor_info}\'')
+    
     parameters = [process_parameter(namespace, parameter_info) for parameter_info in constructor_info.GetParameters()]
     
-    return Constructor(parameters=tuple(parameters),
+    return Constructor(parameters=parameters,
                        overload=overload,
-                       no_return=False,
                        doc_string='')
 
 
@@ -451,36 +449,28 @@ def process_parameter(namespace: Namespace, parameter_info: ParameterInfo) -> Pa
 
 
 def process_type(namespace: Namespace, type: Type, parent_var_type: Type = None) -> TypeBase:
-    name = _strip_str(type.ToString())
-    name = name.replace('*', '')  # TODO - Handle Pointers Better
+    name = _strip_str(type.ToString()).replace('*', '')  # TODO - Handle Pointers Better
+    import_name = name[:name.index('+')] if '+' in name else name
+    name = name.replace('+', '.').split('.')[-1]
     
     # if type.IsByRef:
     # if type.IsPointer:
-    
-    if name in namespace.sys_types:
-        new_type = namespace.sys_types[name]
-    # elif name in namespace.net_imports:
-    #     new_type = Type(base=type.Name)
+
+    if name in _system_type_dict:
+        new_type = _system_type_dict[name](namespace)
     elif type.IsGenericType:
-        if '+' in name:
-            namespace.net_imports.add(name[:name.index('+')])
-        else:
-            namespace.net_imports.add(name)
+        logging.debug(f'Processing Generic Type: {import_name}')
+        namespace.net_imports.add(import_name)
         types = tuple(process_type(namespace, p, parent_var_type=parent_var_type) for p in type.GetGenericArguments())
-        # new_type = Type(base=type.Name, inner=types)
-        new_type = RegularType(base=name.replace('+', '.').split('.')[-1], inner=types)
+        new_type = RegularType(base=name, inner=types)
     elif type.IsGenericParameter or type.ContainsGenericParameters:
         new_type = process_var_type(namespace, name, type, parent_var_type == parent_var_type)
-    elif name in _system_type_dict:
-        new_type = _system_type_dict[name](namespace)
-    # obsolete_type = SystemType('Obsolete', 'NoReturn')
     else:
-        if '+' in name:
-            namespace.net_imports.add(name[:name.index('+')])
-        else:
-            namespace.net_imports.add(name)
-        new_type = RegularType(base=name.replace('+', '.').split('.')[-1])
-        # new_type = Type(base=type.Name)
+        logging.debug(f'Processing Regular Type: {import_name}')
+        namespace.net_imports.add(import_name)
+        new_type = RegularType(base=name)
+    
+    # If the type should be wrapped
     if Nullable.GetUnderlyingType(type) is not None:
         namespace.py_imports.add('typing.Optional')
         nullable_type = process_system_type('NullableType', 'System.Nullable', 'Union[Optional, Nullable]', namespace)
@@ -494,42 +484,53 @@ def process_type(namespace: Namespace, type: Type, parent_var_type: Type = None)
 
 def process_system_type(name: str, system_name: str, value: str, namespace: Namespace) -> SystemType:
     if system_name not in namespace.sys_types:
+        logger.debug(f'Processing System Type: {system_name}')
         namespace.net_imports.add(system_name)
         namespace.py_imports.add('typing.Union')
         namespace.sys_types[system_name] = SystemType(name=name, value=value)
     return namespace.sys_types[system_name]
 
 
-def process_var_type(namespace: Namespace, name: str, type: Type, force_unbounded: bool = False) -> VarType:
+def process_var_type(namespace: Namespace, name: str, type_var: Type, force_unbounded: bool = False) -> VarType:
     if name not in namespace.var_types:
+        logger.debug(f'Processing Var Type: {type_var}')
         namespace.py_imports.add('typing.TypeVar')
         # Handle Recursive Case by defaulting to unbounded VarType
-        bounds = tuple() if force_unbounded else tuple(process_type(namespace, p, parent_var_type=type) for p in type.GetGenericParameterConstraints())
+        bounds = tuple() if force_unbounded else tuple(process_type(namespace, p, parent_var_type=type_var) for p in type_var.GetGenericParameterConstraints())
         namespace.var_types[name] = VarType(name=name, bounds=bounds)  # TODO - Handle duplicate names better, Handle Multiple Bounds Better
     return namespace.var_types[name]
 
 
 _system_type_dict = {
-    'System.Boolean': partial(process_system_type, 'BooleanType', 'System.Boolean', 'Union[bool, Boolean]'),
-    'System.SByte':   partial(process_system_type, 'SByteType', 'System.SByte', 'Union[int, SByte]'),
-    'System.Int16':   partial(process_system_type, 'ShortType', 'System.Int16', 'Union[int, Int16]'),
-    'System.Int32':   partial(process_system_type, 'IntType', 'System.Int32', 'Union[int, Int32]'),
-    'System.Int64':   partial(process_system_type, 'LongType', 'System.Int64', 'Union[int, Int64]'),
-    'System.Byte':    partial(process_system_type, 'ByteType', 'System.Byte', 'Union[int, Byte]'),
-    'System.UInt16':  partial(process_system_type, 'UShortType', 'System.UInt16', 'Union[int, UInt16]'),
-    'System.UInt32':  partial(process_system_type, 'UIntType', 'System.UInt32', 'Union[int, UInt32]'),
-    'System.UInt64':  partial(process_system_type, 'ULongType', 'System.UInt64', 'Union[int, UInt64]'),
-    'System.IntPtr':  partial(process_system_type, 'NIntType', 'System.IntPtr', 'Union[int, IntPtr]'),
-    'System.UIntPtr': partial(process_system_type, 'NUIntType', 'System.UIntPtr', 'Union[int, UIntPtr]'),
-    'System.Single':  partial(process_system_type, 'FloatType', 'System.Single', 'Union[float, Single]'),
-    'System.Double':  partial(process_system_type, 'DoubleType', 'System.Double', 'Union[float, Double]'),
-    'System.Decimal': partial(process_system_type, 'DecimalType', 'System.Decimal', 'Union[float, Decimal]'),
-    'System.Char':    partial(process_system_type, 'CharType', 'System.Char', 'Union[str, Char]'),
-    'System.String':  partial(process_system_type, 'StringType', 'System.String', 'Union[str, String]'),
-    'System.Object':  partial(process_system_type, 'ObjectType', 'System.Object', 'Union[object, Object]'),
-    'System.Type':    partial(process_system_type, 'TypeType', 'System.Type', 'Union[type, Type]'),
-    'System.Void':    partial(process_system_type, 'VoidType', 'System.Void', 'Union[None, Void]'),
+    'Boolean': partial(process_system_type, 'BooleanType', 'System.Boolean', 'Union[bool, Boolean]'),
+    'SByte':   partial(process_system_type, 'SByteType', 'System.SByte', 'Union[int, SByte]'),
+    'Int16':   partial(process_system_type, 'ShortType', 'System.Int16', 'Union[int, Int16]'),
+    'Int32':   partial(process_system_type, 'IntType', 'System.Int32', 'Union[int, Int32]'),
+    'Int64':   partial(process_system_type, 'LongType', 'System.Int64', 'Union[int, Int64]'),
+    'Byte':    partial(process_system_type, 'ByteType', 'System.Byte', 'Union[int, Byte]'),
+    'UInt16':  partial(process_system_type, 'UShortType', 'System.UInt16', 'Union[int, UInt16]'),
+    'UInt32':  partial(process_system_type, 'UIntType', 'System.UInt32', 'Union[int, UInt32]'),
+    'UInt64':  partial(process_system_type, 'ULongType', 'System.UInt64', 'Union[int, UInt64]'),
+    'IntPtr':  partial(process_system_type, 'NIntType', 'System.IntPtr', 'Union[int, IntPtr]'),
+    'UIntPtr': partial(process_system_type, 'NUIntType', 'System.UIntPtr', 'Union[int, UIntPtr]'),
+    'Single':  partial(process_system_type, 'FloatType', 'System.Single', 'Union[float, Single]'),
+    'Double':  partial(process_system_type, 'DoubleType', 'System.Double', 'Union[float, Double]'),
+    'Decimal': partial(process_system_type, 'DecimalType', 'System.Decimal', 'Union[float, Decimal]'),
+    'Char':    partial(process_system_type, 'CharType', 'System.Char', 'Union[str, Char]'),
+    'String':  partial(process_system_type, 'StringType', 'System.String', 'Union[str, String]'),
+    'Object':  partial(process_system_type, 'ObjectType', 'System.Object', 'Union[object, Object]'),
+    'Type':    partial(process_system_type, 'TypeType', 'System.Type', 'Union[type, Type]'),
+    'Void':    partial(process_system_type, 'VoidType', 'System.Void', 'Union[None, Void]'),
 }
+
+
+def _dump_json_log(namespaces_dict: Dict[str, Any]):
+    json_dir: Path = Path('logs')
+    json_dir.mkdir(exist_ok=True)
+    name = '-'.join(namespaces_dict.keys())
+    filepath = json_dir / f'{name}.json'
+    with filepath.open('w') as fp:
+        json.dump(namespaces_dict, fp, indent=2)
 
 
 def _strip_str(string: str) -> str:
