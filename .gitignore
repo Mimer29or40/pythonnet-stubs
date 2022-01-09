@@ -211,8 +211,4 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-/reference/
-/logs/
-/cache/
-/stubs/
-/pythonnet-master/
+logs/

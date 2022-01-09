@@ -1,0 +1,2 @@
+include System-stubs/*.pyi
+include Microsoft-stubs/*.pyi
