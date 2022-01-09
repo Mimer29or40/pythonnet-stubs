@@ -10,7 +10,7 @@ from System.Reflection import Assembly, ConstructorInfo, ParameterInfo
 from reference.generator3 import SkeletonGenerator, generate_skeleton
 from .logging import logger
 from .options import Options
-from .model import Parameter, RegularType, Constructor
+from .model import Parameter, WrappedType, Constructor
 
 
 def make(package: str, options: Options):
@@ -51,10 +51,10 @@ def make(package: str, options: Options):
     # for type in assembly.GetTypes():
     # for type in assembly.ExportedTypes:
     # for type in assembly.GetExportedTypes():
-    #     process_type(type)
-    # process_type(assembly.GetType('System.Collections.CollectionBase'))
-    # process_type(assembly.GetType('System.Collections.Comparer'))
-    # process_type(assembly.GetType('System.Collections.Hashtable'))
+    #     _process_type(type)
+    # _process_type(assembly.GetType('System.Collections.CollectionBase'))
+    # _process_type(assembly.GetType('System.Collections.Comparer'))
+    # _process_type(assembly.GetType('System.Collections.Hashtable'))
     process_type(assembly.GetType('System.Collections.Queue'))
     
     # assembly_dict: Dict[str, Any]
@@ -96,7 +96,7 @@ def make(package: str, options: Options):
     print()
 
 
-def process_type(type: RegularType):
+def process_type(type: WrappedType):
     if not type.Namespace.startswith('System.Collections'):
         return
     print(f'type={type} abstract={type.IsAbstract} BaseType={type.BaseType} Namespace={type.Namespace}')
@@ -145,8 +145,8 @@ def process_parameter(parameter_info: ParameterInfo) -> Parameter:
     return Parameter(parameter_info.Name, parameter_type, default=default, doc_string='')
 
 
-def process_parameter_type(type: RegularType) -> RegularType:
-    return RegularType(str(type))
+def process_parameter_type(type: WrappedType) -> WrappedType:
+    return WrappedType(str(type))
 
 
 def crawl_loaded_references(target_assembly_name: str) -> Dict[str, Any]:

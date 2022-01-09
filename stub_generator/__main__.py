@@ -2,7 +2,7 @@ import sys
 
 from docopt import docopt
 
-from .defaults import ASSEMBLIES, PATHS, BUILT_INS
+from .defaults import ASSEMBLIES, BUILT_INS
 from .logging import logger
 from .make_stubs import make
 from .options import Options
@@ -18,10 +18,7 @@ options: Options = Options.get(arguments)
 if options.debug:
     logger.enable_debug()
 
-# Add Paths
-sys.path.extend(PATHS)
-
-# Additional Paths from Options
+# Add Paths from Options
 sys.path.extend(options.path_dirs)
 
 assemblies = []
@@ -43,4 +40,6 @@ for a in assemblies:
 if options.make:
     with time_it('main', log_func=logger.info):
         for assembly_name in assemblies:
+            logger.info('=' * 80)
+            logger.info(f'Making [{assembly_name}]')
             make(assembly_name, options)

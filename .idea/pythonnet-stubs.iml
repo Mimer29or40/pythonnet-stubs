@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/stubs/System-stubs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/stubs/mscorlib-stubs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/stubs/System.Core-stubs" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/dist" />
       <excludeFolder url="file://$MODULE_DIR$/stub_generator.egg-info" />
