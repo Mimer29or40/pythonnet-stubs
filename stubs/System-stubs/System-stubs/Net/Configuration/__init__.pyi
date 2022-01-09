@@ -1038,20 +1038,20 @@ class ProxyElement(ConfigurationElement):
     
     class BypassOnLocalValues(Enum):
         Unspecified: IntType = -1
-        False: IntType = 0
-        True: IntType = 1
+        #False: IntType = 0
+        #True: IntType = 1
     
     
     class UseSystemDefaultValues(Enum):
         Unspecified: IntType = -1
-        False: IntType = 0
-        True: IntType = 1
+        #False: IntType = 0
+        #True: IntType = 1
     
     
     class AutoDetectValues(Enum):
         Unspecified: IntType = -1
-        False: IntType = 0
-        True: IntType = 1
+        #False: IntType = 0
+        #True: IntType = 1
     
 
 

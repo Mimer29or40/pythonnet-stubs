@@ -1544,7 +1544,7 @@ class PhysicalAddress(ObjectType):
     
     @staticmethod
     @property
-    def None() -> PhysicalAddress: ...
+    def _None() -> PhysicalAddress: ...
     
     # ---------- Constructors ---------- #
     

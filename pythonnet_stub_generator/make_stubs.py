@@ -1,5 +1,4 @@
 import json
-import re
 from collections import defaultdict
 from functools import partial
 from pathlib import Path
@@ -12,7 +11,7 @@ from System.Reflection import Assembly, ConstructorInfo, ParameterInfo, Property
 from .logging import logger
 from .model import Parameter, WrappedType, Constructor, Namespace, Interface, SystemType, Property, Method, BaseType, VarType, EventType, Event, EnumField, Enum, Class, Delegate
 from .options import Options
-from .util import time_function, time_it
+from .util import time_function, time_it, make_python_name, strip_path_str
 
 
 @time_function(log_func=logger.info)
@@ -136,7 +135,7 @@ def make(target_assembly_name: str, options: Options):
                 parent_dir: Path = stub_dir
                 init_file: Path = parent_dir / '__init__.pyi'
                 for n in name.split('.'):
-                    namespace_dir: Path = parent_dir / _strip_path_str(f'{n}-stubs' if parent_dir == stub_dir else n)
+                    namespace_dir: Path = parent_dir / strip_path_str(f'{n}-stubs' if parent_dir == stub_dir else n)
                     namespace_dir.mkdir(parents=True, exist_ok=True)
                     
                     init_file = namespace_dir / '__init__.pyi'
@@ -187,7 +186,7 @@ def _process_system_type_obj(namespace: Namespace, system_type_obj: System.Type)
 def _process_class(namespace: Namespace, class_type_obj: System.Type) -> Class:
     logger.debug(f'Processing Class: {class_type_obj}')
     
-    clazz = Class(_strip_str(class_type_obj.Name))
+    clazz = Class(make_python_name(class_type_obj.Name))
     
     clazz.abstract = class_type_obj.IsAbstract
     
@@ -275,7 +274,7 @@ def _process_interface(namespace: Namespace, interface_type_obj: System.Type) ->
     
     namespace.py_imports.add('typing.Protocol')
     
-    interface = Interface(_strip_str(interface_type_obj.Name))
+    interface = Interface(make_python_name(interface_type_obj.Name))
     
     generic_arg_type: System.Type
     for generic_arg_type in interface_type_obj.GetGenericArguments():
@@ -320,7 +319,7 @@ def _process_enum(namespace: Namespace, enum_type_obj: System.Type) -> Enum:
     
     namespace.net_imports.add('System.Enum')
     
-    enum = Enum(_strip_str(enum_type_obj.Name))
+    enum = Enum(make_python_name(enum_type_obj.Name))
     
     enum_type = _get_type(namespace, enum_type_obj.GetEnumUnderlyingType())
     
@@ -342,7 +341,7 @@ def _process_delegate(namespace: Namespace, delegate_type_obj: System.Type) -> D
     
     namespace.py_imports.add('typing.Callable')
     
-    delegate = Delegate(_strip_str(delegate_type_obj.Name))
+    delegate = Delegate(make_python_name(delegate_type_obj.Name))
     
     invoke_method = delegate_type_obj.GetMethod('Invoke')
     
@@ -359,7 +358,7 @@ def _process_delegate(namespace: Namespace, delegate_type_obj: System.Type) -> D
 def _process_field(namespace: Namespace, field_info: FieldInfo) -> Tuple[Property, Optional[Property]]:
     logger.debug(f'Processing Field: {field_info}')
     
-    field_name = _strip_str(field_info.Name)
+    field_name = make_python_name(field_info.Name)
     field_type = _get_type(namespace, field_info.FieldType)
     field_static = field_info.IsStatic
     
@@ -399,7 +398,7 @@ def _process_property(namespace: Namespace, property_info: PropertyInfo) -> Tupl
     
     getter = None
     if (get_method := property_info.GetGetMethod()) is not None:
-        getter = Property(name=_strip_str(property_info.Name),
+        getter = Property(name=make_python_name(property_info.Name),
                           type=property_type,
                           setter=False,
                           static=get_method.IsStatic,
@@ -407,7 +406,7 @@ def _process_property(namespace: Namespace, property_info: PropertyInfo) -> Tupl
     
     setter = None
     if (set_method := property_info.GetSetMethod()) is not None:
-        setter = Property(name=_strip_str(property_info.Name),
+        setter = Property(name=make_python_name(property_info.Name),
                           type=property_type,
                           setter=True,
                           static=set_method.IsStatic,
@@ -423,7 +422,7 @@ def _process_method(namespace: Namespace, method_info: MethodInfo, overload: boo
     
     # TODO - IsAbstract, IsVirtual, IsGenericMethod, IsGenericMethodDefinition
     
-    name = _strip_str(method_info.Name)
+    name = make_python_name(method_info.Name)
     return_types = [_get_type(namespace, method_info.ReturnType)]
     static = method_info.IsStatic
     
@@ -452,14 +451,14 @@ def _process_event(namespace: Namespace, event_info: EventInfo) -> Event:
         namespace.py_imports.add('typing.Generic')
         namespace.special_types['EventType'] = EventType()
     
-    name = _strip_str(event_info.Name)
+    name = make_python_name(event_info.Name)
     type = _get_type(namespace, event_info.EventHandlerType)
     
     return Event(name=name, type=type, doc_string='')
 
 
 def _get_parameter(namespace: Namespace, parameter_info: ParameterInfo) -> Parameter:
-    name = _strip_str(parameter_info.Name)
+    name = make_python_name(parameter_info.Name)
     type = _get_type(namespace, parameter_info.ParameterType)
     default = parameter_info.RawDefaultValue if parameter_info.IsOptional else None
     is_out = parameter_info.IsOut or type.is_ref
@@ -468,7 +467,7 @@ def _get_parameter(namespace: Namespace, parameter_info: ParameterInfo) -> Param
 
 
 def _get_type(namespace: Namespace, type_obj: System.Type, parent_type: System.Type = None) -> BaseType:
-    name = _strip_str(type_obj.ToString())
+    name = make_python_name(type_obj.ToString())
     import_name = name[:name.index('+')] if '+' in name else name
     name = name.replace('+', '.').split('.')[-1]
     
@@ -507,7 +506,7 @@ def _get_system_type(name: str, system_name: str, value: str, namespace: Namespa
 
 
 def _get_var_type(namespace: Namespace, type_var: System.Type, force_unbounded: bool = False) -> VarType:
-    name: str = _strip_str(type_var.Name)
+    name: str = make_python_name(type_var.Name)
     if name not in namespace.var_types:  # TODO - This will miss TypeVars that have bound if the name is the same as a previous TypeVar
         namespace.py_imports.add('typing.TypeVar')
         bounds = tuple() if force_unbounded else tuple(_get_type(namespace, p, parent_type=type_var) for p in type_var.GetGenericParameterConstraints())
@@ -536,17 +535,3 @@ _system_type_dict = {
     'Type':    partial(_get_system_type, 'TypeType', 'System.Type', 'Union[type, Type]'),
     'Void':    partial(_get_system_type, 'VoidType', 'System.Void', 'Union[None, Void]'),
 }
-
-
-def _strip_str(string: str) -> str:
-    if not hasattr(_strip_str, 'pattern'):
-        _strip_str.pattern = re.compile(r'`\d+|&|\[|]|\*')
-    if '[' in string:
-        string = string[:string.index('[')]
-    return _strip_str.pattern.sub('', string)
-
-
-def _strip_path_str(string: str) -> str:
-    if not hasattr(_strip_path_str, 'pattern'):
-        _strip_path_str.pattern = re.compile(r'[<>:"/\\|?*]')
-    return _strip_path_str.pattern.sub('', string)

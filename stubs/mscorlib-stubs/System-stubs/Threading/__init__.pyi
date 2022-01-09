@@ -3548,12 +3548,12 @@ class CancellationToken(ValueType):
     @property
     def IsCancellationRequested(self) -> BooleanType: ...
     
-    @staticmethod
-    @property
-    def None() -> CancellationToken: ...
-    
     @property
     def WaitHandle(self) -> WaitHandle: ...
+    
+    @staticmethod
+    @property
+    def _None() -> CancellationToken: ...
     
     # ---------- Methods ---------- #
     

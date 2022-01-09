@@ -247,11 +247,11 @@ class VersioningHelper(ABC, ObjectType):
     
     @staticmethod
     @overload
-    def MakeVersionSafeName(name: StringType, from: ResourceScope, to: ResourceScope, type: TypeType) -> StringType: ...
+    def MakeVersionSafeName(name: StringType, _from: ResourceScope, to: ResourceScope, type: TypeType) -> StringType: ...
     
     @staticmethod
     @overload
-    def MakeVersionSafeName(name: StringType, from: ResourceScope, to: ResourceScope) -> StringType: ...
+    def MakeVersionSafeName(name: StringType, _from: ResourceScope, to: ResourceScope) -> StringType: ...
     
     # No Events
     

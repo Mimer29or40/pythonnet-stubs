@@ -5781,7 +5781,7 @@ class ToolboxItemAttribute(Attribute, _Attribute):
     
     @staticmethod
     @property
-    def None() -> ToolboxItemAttribute: ...
+    def _None() -> ToolboxItemAttribute: ...
     
     # ---------- Constructors ---------- #
     

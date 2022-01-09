@@ -4,6 +4,8 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import Optional, Tuple, List, Dict, Set, Any
 
+from .util import reserved_python_names
+
 
 class Namespace:
     def __init__(self, name: str):
@@ -393,7 +395,7 @@ class EnumField:
         lines: List[str] = []
         
         name = self.name
-        if name in ['None']:
+        if name in reserved_python_names:
             name = f'#{self.name}'
         
         lines.append(f'{name}: {self.type} = {self.value}')

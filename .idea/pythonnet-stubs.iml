@@ -7,8 +7,11 @@
       <sourceFolder url="file://$MODULE_DIR$/stubs/System.Core-stubs" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/stub_generator.egg-info" />
       <excludeFolder url="file://$MODULE_DIR$/logs" />
+      <excludeFolder url="file://$MODULE_DIR$/pythonnet_stub_generator.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/stubs/mscorlib-stubs/mscorlib_stubs.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/stubs/System-stubs/System_stubs.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/stubs/System.Core-stubs/System.Core_stubs.egg-info" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (pythonnet-stubs)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
