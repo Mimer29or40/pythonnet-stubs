@@ -66,7 +66,7 @@ class Options:
             arguments['--built_in'],
             arguments['--core'],
             Path(arguments['--output']),
-            tuple() if arguments['--paths'] is None else tuple(arguments['--paths']),
+            tuple() if arguments['--paths'] is None else tuple(arguments['--paths'].split(sep=',')),
             not arguments['--no-json'],
             arguments['--overwrite'],
         )
