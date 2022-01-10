@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-from typing import Generic, Protocol, Union
+from typing import Generic, Protocol, TypeVar, Union
 
 from System import Boolean, EventHandler, Object, String, Void
 
 # ---------- Types ---------- #
+
+T = TypeVar('T')
 
 BooleanType = Union[bool, Boolean]
 ObjectType = Object

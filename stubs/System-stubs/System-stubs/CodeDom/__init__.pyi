@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Generic, List, Union, overload
+from typing import Generic, List, TypeVar, Union, overload
 
 from System import Array, Boolean, Byte, Enum, EventHandler, Guid, Int32, Object, String, Type, Void
 from System.Collections import CollectionBase, ICollection, IDictionary, IEnumerable, IEnumerator, IList
@@ -8,6 +8,8 @@ from System.Collections.Specialized import StringCollection
 from System.Reflection import TypeAttributes
 
 # ---------- Types ---------- #
+
+T = TypeVar('T')
 
 ArrayType = Union[List, Array]
 BooleanType = Union[bool, Boolean]

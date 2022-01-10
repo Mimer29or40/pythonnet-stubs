@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Generic, Union, overload
+from typing import Callable, Generic, TypeVar, Union, overload
 
 from System import AsyncCallback, Boolean, DateTime, Double, EventArgs, IAsyncResult, ICloneable, IDisposable, IntPtr, MulticastDelegate, Object, String, Void
 from System.ComponentModel import Component, DescriptionAttribute, IComponent, ISite, ISupportInitialize, ISynchronizeInvoke
@@ -8,6 +8,8 @@ from System.Runtime.InteropServices import _Attribute
 from System.Runtime.Serialization import ISerializable
 
 # ---------- Types ---------- #
+
+T = TypeVar('T')
 
 BooleanType = Union[bool, Boolean]
 DoubleType = Union[float, Double]

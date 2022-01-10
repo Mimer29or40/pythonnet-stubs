@@ -1,14 +1,14 @@
 from __future__ import annotations
 
+from abc import ABC
 from typing import List, Union, overload
 
-from Microsoft.Win32.SafeHandles import SafeX509ChainHandle
+from Microsoft.Win32.SafeHandles import SafeHandleZeroOrMinusOneIsInvalid, SafeX509ChainHandle
 from System import Array, Boolean, Byte, DateTime, Enum, IDisposable, Int32, IntPtr, Object, String, TimeSpan, ValueType, Void
 from System.Collections import CollectionBase, ICollection, IEnumerable, IEnumerator, IList
-from System.Runtime.Serialization import IDeserializationCallback, ISerializable
+from System.Runtime.Serialization import IDeserializationCallback, ISerializable, SerializationInfo, StreamingContext
 from System.Security import SecureString
-from System.Security.Cryptography import AsnEncodedData, AsymmetricAlgorithm, Oid, OidCollection
-from System.Security.Cryptography.X509Certificates import X509Certificate, X509ContentType, X509KeyStorageFlags
+from System.Security.Cryptography import AsnEncodedData, AsymmetricAlgorithm, HashAlgorithmName, Oid, OidCollection
 
 # ---------- Types ---------- #
 
@@ -53,6 +53,50 @@ class PublicKey(ObjectType):
     def get_Key(self) -> AsymmetricAlgorithm: ...
     
     def get_Oid(self) -> Oid: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeCertContextHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeCertStoreHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
     
     # No Events
     
@@ -143,6 +187,174 @@ class X509BasicConstraintsExtension(X509Extension):
     def get_HasPathLengthConstraint(self) -> BooleanType: ...
     
     def get_PathLengthConstraint(self) -> IntType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class X509Certificate(ObjectType, IDisposable, IDeserializationCallback, ISerializable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self): ...
+    
+    @overload
+    def __init__(self, data: ArrayType[ByteType]): ...
+    
+    @overload
+    def __init__(self, rawData: ArrayType[ByteType], password: StringType): ...
+    
+    @overload
+    def __init__(self, rawData: ArrayType[ByteType], password: SecureString): ...
+    
+    @overload
+    def __init__(self, rawData: ArrayType[ByteType], password: StringType, keyStorageFlags: X509KeyStorageFlags): ...
+    
+    @overload
+    def __init__(self, rawData: ArrayType[ByteType], password: SecureString, keyStorageFlags: X509KeyStorageFlags): ...
+    
+    @overload
+    def __init__(self, fileName: StringType): ...
+    
+    @overload
+    def __init__(self, fileName: StringType, password: StringType): ...
+    
+    @overload
+    def __init__(self, fileName: StringType, password: SecureString): ...
+    
+    @overload
+    def __init__(self, fileName: StringType, password: StringType, keyStorageFlags: X509KeyStorageFlags): ...
+    
+    @overload
+    def __init__(self, fileName: StringType, password: SecureString, keyStorageFlags: X509KeyStorageFlags): ...
+    
+    @overload
+    def __init__(self, handle: NIntType): ...
+    
+    @overload
+    def __init__(self, cert: X509Certificate): ...
+    
+    @overload
+    def __init__(self, info: SerializationInfo, context: StreamingContext): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Handle(self) -> NIntType: ...
+    
+    @property
+    def Issuer(self) -> StringType: ...
+    
+    @property
+    def Subject(self) -> StringType: ...
+    
+    # ---------- Methods ---------- #
+    
+    @staticmethod
+    def CreateFromCertFile(filename: StringType) -> X509Certificate: ...
+    
+    @staticmethod
+    def CreateFromSignedFile(filename: StringType) -> X509Certificate: ...
+    
+    def Dispose(self) -> VoidType: ...
+    
+    @overload
+    def Equals(self, obj: ObjectType) -> BooleanType: ...
+    
+    @overload
+    def Equals(self, other: X509Certificate) -> BooleanType: ...
+    
+    @overload
+    def Export(self, contentType: X509ContentType) -> ArrayType[ByteType]: ...
+    
+    @overload
+    def Export(self, contentType: X509ContentType, password: StringType) -> ArrayType[ByteType]: ...
+    
+    @overload
+    def Export(self, contentType: X509ContentType, password: SecureString) -> ArrayType[ByteType]: ...
+    
+    @overload
+    def GetCertHash(self) -> ArrayType[ByteType]: ...
+    
+    @overload
+    def GetCertHash(self, hashAlgorithm: HashAlgorithmName) -> ArrayType[ByteType]: ...
+    
+    @overload
+    def GetCertHashString(self) -> StringType: ...
+    
+    @overload
+    def GetCertHashString(self, hashAlgorithm: HashAlgorithmName) -> StringType: ...
+    
+    def GetEffectiveDateString(self) -> StringType: ...
+    
+    def GetExpirationDateString(self) -> StringType: ...
+    
+    def GetFormat(self) -> StringType: ...
+    
+    def GetHashCode(self) -> IntType: ...
+    
+    def GetIssuerName(self) -> StringType: ...
+    
+    def GetKeyAlgorithm(self) -> StringType: ...
+    
+    def GetKeyAlgorithmParameters(self) -> ArrayType[ByteType]: ...
+    
+    def GetKeyAlgorithmParametersString(self) -> StringType: ...
+    
+    def GetName(self) -> StringType: ...
+    
+    def GetPublicKey(self) -> ArrayType[ByteType]: ...
+    
+    def GetPublicKeyString(self) -> StringType: ...
+    
+    def GetRawCertData(self) -> ArrayType[ByteType]: ...
+    
+    def GetRawCertDataString(self) -> StringType: ...
+    
+    def GetSerialNumber(self) -> ArrayType[ByteType]: ...
+    
+    def GetSerialNumberString(self) -> StringType: ...
+    
+    @overload
+    def Import(self, rawData: ArrayType[ByteType]) -> VoidType: ...
+    
+    @overload
+    def Import(self, rawData: ArrayType[ByteType], password: StringType, keyStorageFlags: X509KeyStorageFlags) -> VoidType: ...
+    
+    @overload
+    def Import(self, rawData: ArrayType[ByteType], password: SecureString, keyStorageFlags: X509KeyStorageFlags) -> VoidType: ...
+    
+    @overload
+    def Import(self, fileName: StringType) -> VoidType: ...
+    
+    @overload
+    def Import(self, fileName: StringType, password: StringType, keyStorageFlags: X509KeyStorageFlags) -> VoidType: ...
+    
+    @overload
+    def Import(self, fileName: StringType, password: SecureString, keyStorageFlags: X509KeyStorageFlags) -> VoidType: ...
+    
+    def Reset(self) -> VoidType: ...
+    
+    @overload
+    def ToString(self) -> StringType: ...
+    
+    @overload
+    def ToString(self, fVerbose: BooleanType) -> StringType: ...
+    
+    def get_Handle(self) -> NIntType: ...
+    
+    def get_Issuer(self) -> StringType: ...
+    
+    def get_Subject(self) -> StringType: ...
     
     # No Events
     
@@ -821,6 +1033,28 @@ class X509ChainPolicy(ObjectType):
     # No Sub Enums
 
 
+class X509Constants(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class X509EnhancedKeyUsageExtension(X509Extension):
     # No Fields
     
@@ -1160,7 +1394,51 @@ class X509Utils(ObjectType):
     # No Sub Enums
 
 
+class X509Utils(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 # ---------- Structs ---------- #
+
+class CRYPT_OID_INFO(ValueType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
 
 class X509ChainStatus(ValueType):
     # No Fields
@@ -1205,6 +1483,30 @@ class X509ChainStatus(ValueType):
 # No Interfaces
 
 # ---------- Enums ---------- #
+
+class OidGroup(Enum):
+    DisableSearchDS: IntType = -2147483648
+    AllGroups: IntType = 0
+    HashAlgorithm: IntType = 1
+    EncryptionAlgorithm: IntType = 2
+    PublicKeyAlgorithm: IntType = 3
+    SignatureAlgorithm: IntType = 4
+    Attribute: IntType = 5
+    ExtensionOrAttribute: IntType = 6
+    EnhancedKeyUsage: IntType = 7
+    Policy: IntType = 8
+    Template: IntType = 9
+    KeyDerivationFunction: IntType = 10
+
+
+class OidKeyType(Enum):
+    Oid: IntType = 1
+    Name: IntType = 2
+    AlgorithmID: IntType = 3
+    SignatureID: IntType = 4
+    CngAlgorithmID: IntType = 5
+    CngSignatureID: IntType = 6
+
 
 class OpenFlags(Enum):
     ReadOnly: IntType = 0
@@ -1272,6 +1574,17 @@ class X509ChainStatusFlags(Enum):
     HasNotSupportedCriticalExtension: IntType = 134217728
 
 
+class X509ContentType(Enum):
+    Unknown: IntType = 0
+    Cert: IntType = 1
+    SerializedCert: IntType = 2
+    Pfx: IntType = 3
+    Pkcs12: IntType = 3
+    SerializedStore: IntType = 4
+    Pkcs7: IntType = 5
+    Authenticode: IntType = 6
+
+
 class X509FindType(Enum):
     FindByThumbprint: IntType = 0
     FindBySubjectName: IntType = 1
@@ -1295,6 +1608,16 @@ class X509IncludeOption(Enum):
     ExcludeRoot: IntType = 1
     EndCertOnly: IntType = 2
     WholeChain: IntType = 3
+
+
+class X509KeyStorageFlags(Enum):
+    DefaultKeySet: IntType = 0
+    UserKeySet: IntType = 1
+    MachineKeySet: IntType = 2
+    Exportable: IntType = 4
+    UserProtected: IntType = 8
+    PersistKeySet: IntType = 16
+    EphemeralKeySet: IntType = 32
 
 
 class X509KeyUsageFlags(Enum):
@@ -1358,8 +1681,11 @@ class X509VerificationFlags(Enum):
 
 __all__ = [
     PublicKey,
+    SafeCertContextHandle,
+    SafeCertStoreHandle,
     X500DistinguishedName,
     X509BasicConstraintsExtension,
+    X509Certificate,
     X509Certificate2,
     X509Certificate2Collection,
     X509Certificate2Enumerator,
@@ -1369,6 +1695,7 @@ __all__ = [
     X509ChainElementCollection,
     X509ChainElementEnumerator,
     X509ChainPolicy,
+    X509Constants,
     X509EnhancedKeyUsageExtension,
     X509Extension,
     X509ExtensionCollection,
@@ -1377,14 +1704,19 @@ __all__ = [
     X509Store,
     X509SubjectKeyIdentifierExtension,
     X509Utils,
+    CRYPT_OID_INFO,
     X509ChainStatus,
+    OidGroup,
+    OidKeyType,
     OpenFlags,
     StoreLocation,
     StoreName,
     X500DistinguishedNameFlags,
     X509ChainStatusFlags,
+    X509ContentType,
     X509FindType,
     X509IncludeOption,
+    X509KeyStorageFlags,
     X509KeyUsageFlags,
     X509NameType,
     X509RevocationFlag,

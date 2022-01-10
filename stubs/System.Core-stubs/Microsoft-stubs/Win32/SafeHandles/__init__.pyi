@@ -3,9 +3,8 @@ from __future__ import annotations
 from abc import ABC
 from typing import Union, overload
 
-from Microsoft.Win32.SafeHandles import SafeHandleZeroOrMinusOneIsInvalid
 from System import Boolean, IDisposable, IntPtr
-from System.Runtime.InteropServices import SafeBuffer, SafeHandle
+from System.Runtime.InteropServices import CriticalHandle, SafeBuffer, SafeHandle
 
 # ---------- Types ---------- #
 
@@ -14,7 +13,135 @@ NIntType = Union[int, IntPtr]
 
 # ---------- Classes ---------- #
 
+class CriticalHandleMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def IsInvalid(self) -> BooleanType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_IsInvalid(self) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class CriticalHandleZeroOrMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def IsInvalid(self) -> BooleanType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_IsInvalid(self) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeAccessTokenHandle(SafeHandle, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, handle: NIntType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @staticmethod
+    @property
+    def InvalidHandle() -> SafeAccessTokenHandle: ...
+    
+    @property
+    def IsInvalid(self) -> BooleanType: ...
+    
+    # ---------- Methods ---------- #
+    
+    @staticmethod
+    def get_InvalidHandle() -> SafeAccessTokenHandle: ...
+    
+    def get_IsInvalid(self) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class SafeAxlBufferHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeAxlBufferHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeBCryptAlgorithmHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     
     # No Fields
@@ -80,7 +207,73 @@ class SafeBCryptHashHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     # No Sub Enums
 
 
+class SafeBCryptHashHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class SafeBCryptKeyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeBCryptKeyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeCapiHandleBase(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     
     # No Fields
@@ -151,6 +344,55 @@ class SafeCapiHashHandle(SafeCapiHandleBase, IDisposable):
     # No Sub Enums
 
 
+class SafeCapiHashHandle(SafeCapiHandleBase, IDisposable):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @staticmethod
+    @property
+    def InvalidHandle() -> SafeCapiHashHandle: ...
+    
+    # ---------- Methods ---------- #
+    
+    @staticmethod
+    def get_InvalidHandle() -> SafeCapiHashHandle: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeCapiKeyHandle(SafeCapiHandleBase, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class SafeCapiKeyHandle(SafeCapiHandleBase, IDisposable):
     """"""
     
@@ -195,6 +437,276 @@ class SafeCspHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     # No Sub Enums
 
 
+class SafeCspHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def Duplicate(self) -> SafeCspHandle: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, preexistingHandle: NIntType, ownsHandle: BooleanType): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeFileMappingHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeFindHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeHandleMinusOneIsInvalid(ABC, SafeHandle, IDisposable):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def IsInvalid(self) -> BooleanType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_IsInvalid(self) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeHandleZeroOrMinusOneIsInvalid(ABC, SafeHandle, IDisposable):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def IsInvalid(self) -> BooleanType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_IsInvalid(self) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeLocalAllocHandle(SafeBuffer, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeLsaLogonProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeLsaMemoryHandle(SafeBuffer, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeLsaPolicyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeLsaReturnBufferHandle(SafeBuffer, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeMemoryMappedFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class SafeMemoryMappedFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     
@@ -218,6 +730,50 @@ class SafeMemoryMappedFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable)
 
 
 class SafeMemoryMappedViewHandle(SafeBuffer, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeMemoryMappedViewHandle(SafeBuffer, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeNCryptHandle(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
     
     # No Fields
@@ -287,6 +843,54 @@ class SafeNCryptKeyHandle(SafeNCryptHandle, IDisposable):
     # No Sub Enums
 
 
+class SafeNCryptKeyHandle(SafeNCryptHandle, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self): ...
+    
+    @overload
+    def __init__(self, handle: NIntType, parentHandle: SafeHandle): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeNCryptProviderHandle(SafeNCryptHandle, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class SafeNCryptProviderHandle(SafeNCryptHandle, IDisposable):
     # No Fields
     
@@ -315,6 +919,72 @@ class SafeNCryptSecretHandle(SafeNCryptHandle, IDisposable):
     # ---------- Constructors ---------- #
     
     def __init__(self): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeNCryptSecretHandle(SafeNCryptHandle, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafePEFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafePerfProviderHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
     
     # No Properties
     
@@ -375,6 +1045,138 @@ class SafePipeHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     # No Sub Enums
 
 
+class SafePipeHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, preexistingHandle: NIntType, ownsHandle: BooleanType): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeRegistryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, preexistingHandle: NIntType, ownsHandle: BooleanType): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeThreadHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeViewOfFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeWaitHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, existingHandle: NIntType, ownsHandle: BooleanType): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 # No Structs
 
 # No Interfaces
@@ -384,6 +1186,9 @@ class SafePipeHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
 # No Delegates
 
 __all__ = [
+    CriticalHandleMinusOneIsInvalid,
+    CriticalHandleZeroOrMinusOneIsInvalid,
+    SafeAccessTokenHandle,
     SafeAxlBufferHandle,
     SafeBCryptAlgorithmHandle,
     SafeBCryptHashHandle,
@@ -392,12 +1197,28 @@ __all__ = [
     SafeCapiHashHandle,
     SafeCapiKeyHandle,
     SafeCspHandle,
+    SafeFileHandle,
+    SafeFileMappingHandle,
+    SafeFindHandle,
+    SafeHandleMinusOneIsInvalid,
+    SafeHandleZeroOrMinusOneIsInvalid,
+    SafeLocalAllocHandle,
+    SafeLsaLogonProcessHandle,
+    SafeLsaMemoryHandle,
+    SafeLsaPolicyHandle,
+    SafeLsaReturnBufferHandle,
     SafeMemoryMappedFileHandle,
     SafeMemoryMappedViewHandle,
     SafeNCryptHandle,
     SafeNCryptKeyHandle,
     SafeNCryptProviderHandle,
     SafeNCryptSecretHandle,
+    SafePEFileHandle,
     SafePerfProviderHandle,
     SafePipeHandle,
+    SafeProcessHandle,
+    SafeRegistryHandle,
+    SafeThreadHandle,
+    SafeViewOfFileHandle,
+    SafeWaitHandle,
 ]

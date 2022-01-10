@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Callable, Generic, List, Union, overload
+from typing import Callable, Generic, List, TypeVar, Union, overload
 
 from Microsoft.Win32.SafeHandles import SafeHandleZeroOrMinusOneIsInvalid
 from System import Action, Array, AsyncCallback, Boolean, Byte, Enum, EventArgs, Exception, IAsyncResult, ICloneable, IDisposable, Int32, Int64, IntPtr, InvalidOperationException, MulticastDelegate, Object, String, ValueType, Void
@@ -16,6 +16,8 @@ from System.Security.Permissions import CodeAccessSecurityAttribute, IUnrestrict
 from System.Threading.Tasks import Task
 
 # ---------- Types ---------- #
+
+T = TypeVar('T')
 
 ArrayType = Union[List, Array]
 BooleanType = Union[bool, Boolean]

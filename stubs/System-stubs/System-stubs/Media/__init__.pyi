@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Generic, Union, overload
+from typing import Generic, TypeVar, Union, overload
 
 from System import Boolean, EventHandler, IDisposable, Int32, Object, String, Void
 from System.ComponentModel import AsyncCompletedEventHandler, Component, IComponent
@@ -8,6 +8,8 @@ from System.IO import Stream
 from System.Runtime.Serialization import ISerializable
 
 # ---------- Types ---------- #
+
+T = TypeVar('T')
 
 BooleanType = Union[bool, Boolean]
 IntType = Union[int, Int32]

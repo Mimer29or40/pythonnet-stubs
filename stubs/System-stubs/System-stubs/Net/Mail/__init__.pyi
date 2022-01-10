@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Callable, Generic, List, Protocol, Tuple, Union, overload
+from typing import Callable, Generic, List, Protocol, Tuple, TypeVar, Union, overload
 
 from System import Array, AsyncCallback, Boolean, Byte, Char, Enum, Exception, IAsyncResult, ICloneable, IDisposable, Int32, IntPtr, MulticastDelegate, Object, String, UInt32, Uri, ValueType, Void, __ComObject
 from System.Collections import ICollection, IEnumerable, IList
@@ -23,6 +23,8 @@ from System.Text import Encoding, StringBuilder
 from System.Threading.Tasks import Task
 
 # ---------- Types ---------- #
+
+T = TypeVar('T')
 
 ArrayType = Union[List, Array]
 BooleanType = Union[bool, Boolean]

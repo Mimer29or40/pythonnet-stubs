@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Callable, Generic, Protocol, Union, overload
+from typing import Callable, Generic, Protocol, TypeVar, Union, overload
 
 from System import AsyncCallback, Attribute, Boolean, EventArgs, EventHandler, IAsyncResult, ICloneable, IDisposable, IServiceProvider, Int32, IntPtr, MulticastDelegate, Object, String, Type, ValueType, Void
 from System.Collections import ICollection
@@ -13,6 +13,8 @@ from System.Runtime.InteropServices import _Attribute
 from System.Runtime.Serialization import ISerializable
 
 # ---------- Types ---------- #
+
+T = TypeVar('T')
 
 BooleanType = Union[bool, Boolean]
 IntType = Union[int, Int32]

@@ -1,44 +1,56 @@
 import sys
-
-from docopt import docopt
+from dataclasses import asdict
 
 from .defaults import ASSEMBLIES, BUILT_INS, CORE
 from .logging import logger
-from .make_stubs import make
-from .options import Options
+from .make_stubs import make, group
+from .options import options
 from .util import time_it
 
-__version__ = Options.version()
-__doc__ = Options.doc_str()
-
-arguments = docopt(__doc__, version=__version__)
-
-options: Options = Options.get(arguments)
+for k, v in asdict(options).items():
+    logger.debug(f'Argument: {k}=\'{v}\'')
 
 # Add Paths from Options
 sys.path.extend(options.path_dirs)
 
-assemblies = []
-if options.all:
-    assemblies.extend(BUILT_INS)
-    assemblies.extend(ASSEMBLIES)
-elif options.built_in:
-    assemblies.extend(BUILT_INS)
-elif options.core:
-    assemblies.extend(CORE)
-else:
-    assemblies.append(options.assembly_name)
-
 for p in sys.path:
     logger.debug(f'Path Variable: \'{p}\'')
-for k, v in arguments.items():
-    logger.debug(f'Argument: {k}=\'{v}\'')
-for a in assemblies:
-    logger.debug(f'Assembly: \'{a}\'')
 
 if options.make:
+    assemblies = []
+    if options.all:
+        assemblies.extend(BUILT_INS)
+        assemblies.extend(ASSEMBLIES)
+    elif options.built_in:
+        assemblies.extend(BUILT_INS)
+    elif options.core:
+        assemblies.extend(CORE)
+    else:
+        assemblies.append(options.assembly_name)
+    
+    for a in assemblies:
+        logger.debug(f'Assembly: \'{a}\'')
+    
     with time_it('main', log_func=logger.info):
         for assembly_name in assemblies:
             logger.info('=' * 80)
             logger.info(f'Making [{assembly_name}]')
-            make(assembly_name, options)
+            make(assembly_name)
+
+if options.group:
+    assemblies = []
+    if options.all:
+        assemblies.extend(BUILT_INS)
+        assemblies.extend(ASSEMBLIES)
+    else:
+        if options.built_in:
+            assemblies.extend(BUILT_INS)
+        elif options.core:
+            assemblies.extend(CORE)
+    
+    assemblies.extend(options.assembly_names)
+    
+    for a in assemblies:
+        logger.debug(f'Assembly: \'{a}\'')
+    
+    group(assemblies)

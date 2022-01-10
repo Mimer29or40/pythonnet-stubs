@@ -17,7 +17,7 @@ from System.Security.Policy import Evidence
 # ---------- Types ---------- #
 
 K = TypeVar('K')
-T = TypeVar('T', bound=Attribute)
+T = TypeVar('T')
 V = TypeVar('V')
 
 ArrayType = Union[List, Array]

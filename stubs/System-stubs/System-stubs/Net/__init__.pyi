@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Callable, Generic, List, Protocol, Tuple, Union, overload
+from typing import Callable, Generic, List, Protocol, Tuple, TypeVar, Union, overload
 
 from Microsoft.Win32.SafeHandles import CriticalHandleMinusOneIsInvalid, CriticalHandleZeroOrMinusOneIsInvalid, SafeHandleMinusOneIsInvalid, SafeHandleZeroOrMinusOneIsInvalid
 from System import Array, ArraySegment, AsyncCallback, Boolean, Byte, DateTime, Enum, EventArgs, Exception, FormatException, Guid, IAsyncResult, ICloneable, IDisposable, Int16, Int32, Int64, IntPtr, InvalidOperationException, MarshalByRefObject, MulticastDelegate, Object, String, SystemException, TimeSpan, Type, UInt16, UInt32, Uri, ValueType, Version, Void
@@ -32,6 +32,8 @@ from System.Threading import CancellationToken, ExecutionContext, WaitHandle
 from System.Threading.Tasks import Task
 
 # ---------- Types ---------- #
+
+T = TypeVar('T')
 
 ArrayType = Union[List, Array]
 BooleanType = Union[bool, Boolean]

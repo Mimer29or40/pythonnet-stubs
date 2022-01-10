@@ -2,6 +2,7 @@ import functools
 import re
 import time
 from contextlib import contextmanager
+from pathlib import Path
 from typing import Callable
 
 from .logging import logger
@@ -45,6 +46,15 @@ def make_python_name(string: str) -> str:
 
 def strip_path_str(string: str) -> str:
     return strip_path_str.pattern.sub('', string)
+
+
+def rm_tree(path: Path):
+    for child in path.glob('*'):
+        if child.is_file():
+            child.unlink()
+        else:
+            rm_tree(child)
+    path.rmdir()
 
 
 make_python_name.pattern = re.compile(r'`\d+|&|\[|]|\*')

@@ -1,13 +1,15 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Callable, Generic, List, Protocol, Union, overload
+from typing import Callable, Generic, List, Protocol, TypeVar, Union, overload
 
 from System import Array, AsyncCallback, Boolean, Enum, EventArgs, IAsyncResult, ICloneable, Int16, Int32, IntPtr, MulticastDelegate, Object, String, ValueType, Void
 from System.Collections import Hashtable, ICollection, IComparer, IDictionary, IDictionaryEnumerator, IEnumerable, IEnumerator, IEqualityComparer, IHashCodeProvider, IList, SortedList
 from System.Runtime.Serialization import IDeserializationCallback, ISerializable, SerializationInfo, StreamingContext
 
 # ---------- Types ---------- #
+
+T = TypeVar('T')
 
 ArrayType = Union[List, Array]
 BooleanType = Union[bool, Boolean]

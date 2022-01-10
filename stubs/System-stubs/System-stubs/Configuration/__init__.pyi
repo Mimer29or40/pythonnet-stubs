@@ -1,25 +1,36 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Callable, Generic, Optional, Protocol, Union, overload
+from typing import Callable, Generic, List, Optional, Protocol, Tuple, TypeVar, Union, overload
 
-from System import Array, AsyncCallback, Attribute, Boolean, Enum, EventArgs, Exception, GenericUriParserOptions, IAsyncResult, ICloneable, Int32, IntPtr, MulticastDelegate, Nullable, Object, String, SystemException, Type, UriIdnScope, ValueType, Void
-from System.Collections import Hashtable, ICollection, IDictionary, IEnumerable, IEnumerator
-from System.Collections.Generic import Dictionary
-from System.Collections.Specialized import NameValueCollection
-from System.ComponentModel import CancelEventArgs, INotifyPropertyChanged, PropertyChangedEventHandler
-from System.Configuration import ConfigurationElement, ConfigurationElementCollection, ConfigurationElementCollectionType, ConfigurationSection, ConfigurationSectionGroup
-from System.Configuration.Internal import IConfigErrorInfo
+from System import Array, AsyncCallback, Attribute, Boolean, Enum, EventArgs, Exception, Func, GenericUriParserOptions, IAsyncResult, ICloneable, IDisposable, Int32, Int64, IntPtr, MulticastDelegate, Nullable, Object, String, SystemException, TimeSpan, Type, UriIdnScope, ValueType, Void
+from System.Collections import Hashtable, ICollection, IDictionary, IEnumerable, IEnumerator, IList, ReadOnlyCollectionBase
+from System.Collections.Generic import Dictionary, List
+from System.Collections.Specialized import NameObjectCollectionBase, NameValueCollection, StringCollection
+from System.ComponentModel import CancelEventArgs, CategoryAttribute, DescriptionAttribute, INotifyPropertyChanged, ITypeDescriptorContext, PropertyChangedEventHandler, TypeConverter
+from System.Configuration.Internal import DelegatingConfigHost, IConfigErrorInfo, IInternalConfigClientHost, IInternalConfigHost, IInternalConfigRecord, IInternalConfigRoot, IInternalConfigSystem, IInternalConfigurationBuilderHost
 from System.Configuration.Provider import ProviderBase, ProviderCollection
+from System.Globalization import CultureInfo
+from System.IO import Stream
+from System.Resources import ResourceManager
 from System.Runtime.InteropServices import _Attribute, _Exception
 from System.Runtime.Serialization import IDeserializationCallback, ISerializable, SerializationInfo, StreamingContext
-from System.Xml import XmlAttribute, XmlCDataSection, XmlComment, XmlDocument, XmlElement, XmlNode, XmlSignificantWhitespace, XmlText, XmlTextReader, XmlWhitespace
+from System.Runtime.Versioning import FrameworkName
+from System.Security import CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, PermissionSet, SecurityElement
+from System.Security.Cryptography import RSAParameters, SymmetricAlgorithm
+from System.Security.Cryptography.Xml import EncryptedData, EncryptedXml
+from System.Security.Permissions import CodeAccessSecurityAttribute, IUnrestrictedPermission, PermissionState, SecurityAction
+from System.Xml import IXmlLineInfo, IXmlNamespaceResolver, XmlAttribute, XmlCDataSection, XmlComment, XmlDocument, XmlElement, XmlNode, XmlReader, XmlSignificantWhitespace, XmlText, XmlTextReader, XmlWhitespace
 from System.Xml.XPath import IXPathNavigable
 
 # ---------- Types ---------- #
 
+T = TypeVar('T')
+
+ArrayType = Union[List, Array]
 BooleanType = Union[bool, Boolean]
 IntType = Union[int, Int32]
+LongType = Union[int, Int64]
 NIntType = Union[int, IntPtr]
 NullableType = Union[Optional, Nullable]
 ObjectType = Object
@@ -48,6 +59,43 @@ class AppSettingsReader(ObjectType):
     # ---------- Methods ---------- #
     
     def GetValue(self, key: StringType, type: TypeType) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class AppSettingsSection(ConfigurationSection):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def File(self) -> StringType: ...
+    
+    @File.setter
+    def File(self, value: StringType) -> None: ...
+    
+    @property
+    def Settings(self) -> KeyValueConfigurationCollection: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_File(self) -> StringType: ...
+    
+    def get_Settings(self) -> KeyValueConfigurationCollection: ...
+    
+    def set_File(self, value: StringType) -> VoidType: ...
     
     # No Events
     
@@ -198,6 +246,245 @@ class ApplicationSettingsGroup(ConfigurationSectionGroup):
     # No Sub Enums
 
 
+class BaseConfigurationRecord(ABC, ObjectType, IInternalConfigRecord):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def ConfigPath(self) -> StringType: ...
+    
+    @property
+    def HasInitErrors(self) -> BooleanType: ...
+    
+    @property
+    def StreamName(self) -> StringType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def GetLkgSection(self, configKey: StringType) -> ObjectType: ...
+    
+    def GetSection(self, configKey: StringType) -> ObjectType: ...
+    
+    def RefreshSection(self, configKey: StringType) -> VoidType: ...
+    
+    def Remove(self) -> VoidType: ...
+    
+    def ThrowIfInitErrors(self) -> VoidType: ...
+    
+    def get_ConfigPath(self) -> StringType: ...
+    
+    def get_HasInitErrors(self) -> BooleanType: ...
+    
+    def get_StreamName(self) -> StringType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class CallbackValidator(ConfigurationValidatorBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, type: TypeType, callback: ValidatorCallback): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanValidate(self, type: TypeType) -> BooleanType: ...
+    
+    def Validate(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class CallbackValidatorAttribute(ConfigurationValidatorAttribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def CallbackMethodName(self) -> StringType: ...
+    
+    @CallbackMethodName.setter
+    def CallbackMethodName(self, value: StringType) -> None: ...
+    
+    @property
+    def Type(self) -> TypeType: ...
+    
+    @Type.setter
+    def Type(self, value: TypeType) -> None: ...
+    
+    @property
+    def ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_CallbackMethodName(self) -> StringType: ...
+    
+    def get_Type(self) -> TypeType: ...
+    
+    def get_ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    def set_CallbackMethodName(self, value: StringType) -> VoidType: ...
+    
+    def set_Type(self, value: TypeType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ClientConfigPaths(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ClientConfigurationHost(DelegatingConfigHost, IInternalConfigHost, IInternalConfigurationBuilderHost, IInternalConfigClientHost):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def SupportsLocation(self) -> BooleanType: ...
+    
+    @property
+    def SupportsPath(self) -> BooleanType: ...
+    
+    @property
+    def SupportsRefresh(self) -> BooleanType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def CreateConfigurationContext(self, configPath: StringType, locationSubPath: StringType) -> ObjectType: ...
+    
+    def CreateDeprecatedConfigContext(self, configPath: StringType) -> ObjectType: ...
+    
+    def DeleteStream(self, streamName: StringType) -> VoidType: ...
+    
+    def GetRestrictedPermissions(self, configRecord: IInternalConfigRecord, permissionSet: PermissionSet, isHostReady: BooleanType) -> Tuple[VoidType, PermissionSet, BooleanType]: ...
+    
+    def GetStreamName(self, configPath: StringType) -> StringType: ...
+    
+    def GetStreamNameForConfigSource(self, streamName: StringType, configSource: StringType) -> StringType: ...
+    
+    def GetStreamVersion(self, streamName: StringType) -> ObjectType: ...
+    
+    def Impersonate(self) -> IDisposable: ...
+    
+    def Init(self, configRoot: IInternalConfigRoot, hostInitParams: ArrayType[ObjectType]) -> VoidType: ...
+    
+    def InitForConfiguration(self, locationSubPath: StringType, configPath: StringType, locationConfigPath: StringType, configRoot: IInternalConfigRoot, hostInitConfigurationParams: ArrayType[ObjectType]) -> Tuple[VoidType, StringType, StringType, StringType]: ...
+    
+    def IsConfigRecordRequired(self, configPath: StringType) -> BooleanType: ...
+    
+    def IsDefinitionAllowed(self, configPath: StringType, allowDefinition: ConfigurationAllowDefinition, allowExeDefinition: ConfigurationAllowExeDefinition) -> BooleanType: ...
+    
+    def IsInitDelayed(self, configRecord: IInternalConfigRecord) -> BooleanType: ...
+    
+    def IsTrustedConfigPath(self, configPath: StringType) -> BooleanType: ...
+    
+    @overload
+    def OpenStreamForRead(self, streamName: StringType) -> Stream: ...
+    
+    @overload
+    def OpenStreamForWrite(self, streamName: StringType, templateStreamName: StringType, writeContext: ObjectType) -> Tuple[Stream, ObjectType]: ...
+    
+    def PrefetchAll(self, configPath: StringType, streamName: StringType) -> BooleanType: ...
+    
+    def PrefetchSection(self, sectionGroupName: StringType, sectionName: StringType) -> BooleanType: ...
+    
+    def RequireCompleteInit(self, record: IInternalConfigRecord) -> VoidType: ...
+    
+    def VerifyDefinitionAllowed(self, configPath: StringType, allowDefinition: ConfigurationAllowDefinition, allowExeDefinition: ConfigurationAllowExeDefinition, errorInfo: IConfigErrorInfo) -> VoidType: ...
+    
+    def get_SupportsLocation(self) -> BooleanType: ...
+    
+    def get_SupportsPath(self) -> BooleanType: ...
+    
+    def get_SupportsRefresh(self) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ClientConfigurationSystem(ObjectType, IInternalConfigSystem):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class ClientSettingsSection(ConfigurationSection):
     # No Fields
     
@@ -247,7 +534,145 @@ class ClientSettingsStore(ObjectType):
     # No Sub Enums
 
 
+class CommaDelimitedStringCollection(StringCollection, IList, ICollection, IEnumerable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def IsModified(self) -> BooleanType: ...
+    
+    @property
+    def IsReadOnly(self) -> BooleanType: ...
+    
+    @property
+    def Item(self) -> StringType: ...
+    
+    @Item.setter
+    def Item(self, value: StringType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def Add(self, value: StringType) -> VoidType: ...
+    
+    @overload
+    def AddRange(self, range: ArrayType[StringType]) -> VoidType: ...
+    
+    @overload
+    def Clear(self) -> VoidType: ...
+    
+    def Clone(self) -> CommaDelimitedStringCollection: ...
+    
+    @overload
+    def Insert(self, index: IntType, value: StringType) -> VoidType: ...
+    
+    @overload
+    def Remove(self, value: StringType) -> VoidType: ...
+    
+    def SetReadOnly(self) -> VoidType: ...
+    
+    def ToString(self) -> StringType: ...
+    
+    def get_IsModified(self) -> BooleanType: ...
+    
+    @overload
+    def get_IsReadOnly(self) -> BooleanType: ...
+    
+    @overload
+    def get_Item(self, index: IntType) -> StringType: ...
+    
+    @overload
+    def set_Item(self, index: IntType, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class CommaDelimitedStringCollectionConverter(ConfigurationConverterBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ConvertFrom(self, ctx: ITypeDescriptorContext, ci: CultureInfo, data: ObjectType) -> ObjectType: ...
+    
+    @overload
+    def ConvertTo(self, ctx: ITypeDescriptorContext, ci: CultureInfo, value: ObjectType, type: TypeType) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class CommonConfigurationStrings(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigDefinitionUpdates(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigPathUtility(ABC, ObjectType):
     """"""
     
     # No Fields
@@ -293,12 +718,84 @@ class ConfigXmlAttribute(XmlAttribute, ICloneable, IEnumerable, IXPathNavigable,
     # No Sub Enums
 
 
+class ConfigXmlAttribute(XmlAttribute, ICloneable, IEnumerable, IXPathNavigable, IConfigErrorInfo):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, filename: StringType, line: IntType, prefix: StringType, localName: StringType, namespaceUri: StringType, doc: XmlDocument): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CloneNode(self, deep: BooleanType) -> XmlNode: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class ConfigXmlCDataSection(XmlCDataSection, ICloneable, IEnumerable, IXPathNavigable, IConfigErrorInfo):
     # No Fields
     
     # ---------- Constructors ---------- #
     
     def __init__(self, filename: StringType, line: IntType, data: StringType, doc: XmlDocument): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CloneNode(self, deep: BooleanType) -> XmlNode: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigXmlCDataSection(XmlCDataSection, ICloneable, IEnumerable, IXPathNavigable, IConfigErrorInfo):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, filename: StringType, line: IntType, data: StringType, doc: XmlDocument): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CloneNode(self, deep: BooleanType) -> XmlNode: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigXmlComment(XmlComment, ICloneable, IEnumerable, IXPathNavigable, IConfigErrorInfo):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, filename: StringType, line: IntType, comment: StringType, doc: XmlDocument): ...
     
     # No Properties
     
@@ -418,7 +915,101 @@ class ConfigXmlElement(XmlElement, ICloneable, IEnumerable, IXPathNavigable, ICo
     # No Sub Enums
 
 
+class ConfigXmlElement(XmlElement, ICloneable, IEnumerable, IXPathNavigable, IConfigErrorInfo):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, filename: StringType, line: IntType, prefix: StringType, localName: StringType, namespaceUri: StringType, doc: XmlDocument): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CloneNode(self, deep: BooleanType) -> XmlNode: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigXmlReader(XmlTextReader, IDisposable, IXmlLineInfo, IXmlNamespaceResolver, IConfigErrorInfo):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class ConfigXmlSignificantWhitespace(XmlSignificantWhitespace, ICloneable, IEnumerable, IXPathNavigable, IConfigErrorInfo):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, filename: StringType, line: IntType, strData: StringType, doc: XmlDocument): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CloneNode(self, deep: BooleanType) -> XmlNode: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigXmlSignificantWhitespace(XmlSignificantWhitespace, ICloneable, IEnumerable, IXPathNavigable, IConfigErrorInfo):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, filename: StringType, line: IntType, strData: StringType, doc: XmlDocument): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CloneNode(self, deep: BooleanType) -> XmlNode: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigXmlText(XmlText, ICloneable, IEnumerable, IXPathNavigable, IConfigErrorInfo):
     # No Fields
     
     # ---------- Constructors ---------- #
@@ -478,6 +1069,636 @@ class ConfigXmlWhitespace(XmlWhitespace, ICloneable, IEnumerable, IXPathNavigabl
     # ---------- Methods ---------- #
     
     def CloneNode(self, deep: BooleanType) -> XmlNode: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigXmlWhitespace(XmlWhitespace, ICloneable, IEnumerable, IXPathNavigable, IConfigErrorInfo):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, filename: StringType, line: IntType, comment: StringType, doc: XmlDocument): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CloneNode(self, deep: BooleanType) -> XmlNode: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class Configuration(ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def AppSettings(self) -> AppSettingsSection: ...
+    
+    @property
+    def AssemblyStringTransformer(self) -> Func[StringType, StringType]: ...
+    
+    @AssemblyStringTransformer.setter
+    def AssemblyStringTransformer(self, value: Func[StringType, StringType]) -> None: ...
+    
+    @property
+    def ConnectionStrings(self) -> ConnectionStringsSection: ...
+    
+    @property
+    def EvaluationContext(self) -> ContextInformation: ...
+    
+    @property
+    def FilePath(self) -> StringType: ...
+    
+    @property
+    def HasFile(self) -> BooleanType: ...
+    
+    @property
+    def Locations(self) -> ConfigurationLocationCollection: ...
+    
+    @property
+    def NamespaceDeclared(self) -> BooleanType: ...
+    
+    @NamespaceDeclared.setter
+    def NamespaceDeclared(self, value: BooleanType) -> None: ...
+    
+    @property
+    def RootSectionGroup(self) -> ConfigurationSectionGroup: ...
+    
+    @property
+    def SectionGroups(self) -> ConfigurationSectionGroupCollection: ...
+    
+    @property
+    def Sections(self) -> ConfigurationSectionCollection: ...
+    
+    @property
+    def TargetFramework(self) -> FrameworkName: ...
+    
+    @TargetFramework.setter
+    def TargetFramework(self, value: FrameworkName) -> None: ...
+    
+    @property
+    def TypeStringTransformer(self) -> Func[StringType, StringType]: ...
+    
+    @TypeStringTransformer.setter
+    def TypeStringTransformer(self, value: Func[StringType, StringType]) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def GetSection(self, sectionName: StringType) -> ConfigurationSection: ...
+    
+    def GetSectionGroup(self, sectionGroupName: StringType) -> ConfigurationSectionGroup: ...
+    
+    @overload
+    def Save(self) -> VoidType: ...
+    
+    @overload
+    def Save(self, saveMode: ConfigurationSaveMode) -> VoidType: ...
+    
+    @overload
+    def Save(self, saveMode: ConfigurationSaveMode, forceSaveAll: BooleanType) -> VoidType: ...
+    
+    @overload
+    def SaveAs(self, filename: StringType) -> VoidType: ...
+    
+    @overload
+    def SaveAs(self, filename: StringType, saveMode: ConfigurationSaveMode) -> VoidType: ...
+    
+    @overload
+    def SaveAs(self, filename: StringType, saveMode: ConfigurationSaveMode, forceSaveAll: BooleanType) -> VoidType: ...
+    
+    def get_AppSettings(self) -> AppSettingsSection: ...
+    
+    def get_AssemblyStringTransformer(self) -> Func[StringType, StringType]: ...
+    
+    def get_ConnectionStrings(self) -> ConnectionStringsSection: ...
+    
+    def get_EvaluationContext(self) -> ContextInformation: ...
+    
+    def get_FilePath(self) -> StringType: ...
+    
+    def get_HasFile(self) -> BooleanType: ...
+    
+    def get_Locations(self) -> ConfigurationLocationCollection: ...
+    
+    def get_NamespaceDeclared(self) -> BooleanType: ...
+    
+    def get_RootSectionGroup(self) -> ConfigurationSectionGroup: ...
+    
+    def get_SectionGroups(self) -> ConfigurationSectionGroupCollection: ...
+    
+    def get_Sections(self) -> ConfigurationSectionCollection: ...
+    
+    def get_TargetFramework(self) -> FrameworkName: ...
+    
+    def get_TypeStringTransformer(self) -> Func[StringType, StringType]: ...
+    
+    def set_AssemblyStringTransformer(self, value: Func[StringType, StringType]) -> VoidType: ...
+    
+    def set_NamespaceDeclared(self, value: BooleanType) -> VoidType: ...
+    
+    def set_TargetFramework(self, value: FrameworkName) -> VoidType: ...
+    
+    def set_TypeStringTransformer(self, value: Func[StringType, StringType]) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationBuilder(ABC, ProviderBase):
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def ProcessConfigurationSection(self, configSection: ConfigurationSection) -> ConfigurationSection: ...
+    
+    def ProcessRawXml(self, rawXml: XmlNode) -> XmlNode: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationBuilderChain(ConfigurationBuilder):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Builders(self) -> List[ConfigurationBuilder]: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Initialize(self, name: StringType, config: NameValueCollection) -> VoidType: ...
+    
+    def ProcessConfigurationSection(self, configSection: ConfigurationSection) -> ConfigurationSection: ...
+    
+    def ProcessRawXml(self, rawXml: XmlNode) -> XmlNode: ...
+    
+    def get_Builders(self) -> List[ConfigurationBuilder]: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationBuilderCollection(ProviderCollection, IEnumerable, ICollection):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Item(self) -> ConfigurationBuilder: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self, builder: ProviderBase) -> VoidType: ...
+    
+    @overload
+    def get_Item(self, name: StringType) -> ConfigurationBuilder: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationBuilderSettings(ConfigurationElement):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Builders(self) -> ProviderSettingsCollection: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Builders(self) -> ProviderSettingsCollection: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationBuildersSection(ConfigurationSection):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Builders(self) -> ProviderSettingsCollection: ...
+    
+    # ---------- Methods ---------- #
+    
+    def GetBuilderFromName(self, builderName: StringType) -> ConfigurationBuilder: ...
+    
+    def get_Builders(self) -> ProviderSettingsCollection: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationCollectionAttribute(Attribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, itemType: TypeType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def AddItemName(self) -> StringType: ...
+    
+    @AddItemName.setter
+    def AddItemName(self, value: StringType) -> None: ...
+    
+    @property
+    def ClearItemsName(self) -> StringType: ...
+    
+    @ClearItemsName.setter
+    def ClearItemsName(self, value: StringType) -> None: ...
+    
+    @property
+    def CollectionType(self) -> ConfigurationElementCollectionType: ...
+    
+    @CollectionType.setter
+    def CollectionType(self, value: ConfigurationElementCollectionType) -> None: ...
+    
+    @property
+    def ItemType(self) -> TypeType: ...
+    
+    @property
+    def RemoveItemName(self) -> StringType: ...
+    
+    @RemoveItemName.setter
+    def RemoveItemName(self, value: StringType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_AddItemName(self) -> StringType: ...
+    
+    def get_ClearItemsName(self) -> StringType: ...
+    
+    def get_CollectionType(self) -> ConfigurationElementCollectionType: ...
+    
+    def get_ItemType(self) -> TypeType: ...
+    
+    def get_RemoveItemName(self) -> StringType: ...
+    
+    def set_AddItemName(self, value: StringType) -> VoidType: ...
+    
+    def set_ClearItemsName(self, value: StringType) -> VoidType: ...
+    
+    def set_CollectionType(self, value: ConfigurationElementCollectionType) -> VoidType: ...
+    
+    def set_RemoveItemName(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationConverterBase(ABC, TypeConverter):
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def CanConvertFrom(self, ctx: ITypeDescriptorContext, type: TypeType) -> BooleanType: ...
+    
+    @overload
+    def CanConvertTo(self, ctx: ITypeDescriptorContext, type: TypeType) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationElement(ABC, ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def CurrentConfiguration(self) -> Configuration: ...
+    
+    @property
+    def ElementInformation(self) -> ElementInformation: ...
+    
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection: ...
+    
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection: ...
+    
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection: ...
+    
+    @property
+    def LockElements(self) -> ConfigurationLockCollection: ...
+    
+    @property
+    def LockItem(self) -> BooleanType: ...
+    
+    @LockItem.setter
+    def LockItem(self, value: BooleanType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Equals(self, compareTo: ObjectType) -> BooleanType: ...
+    
+    def GetHashCode(self) -> IntType: ...
+    
+    def IsReadOnly(self) -> BooleanType: ...
+    
+    def get_CurrentConfiguration(self) -> Configuration: ...
+    
+    def get_ElementInformation(self) -> ElementInformation: ...
+    
+    def get_LockAllAttributesExcept(self) -> ConfigurationLockCollection: ...
+    
+    def get_LockAllElementsExcept(self) -> ConfigurationLockCollection: ...
+    
+    def get_LockAttributes(self) -> ConfigurationLockCollection: ...
+    
+    def get_LockElements(self) -> ConfigurationLockCollection: ...
+    
+    def get_LockItem(self) -> BooleanType: ...
+    
+    def set_LockItem(self, value: BooleanType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationElementCollection(ABC, ConfigurationElement, ICollection, IEnumerable):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def CollectionType(self) -> ConfigurationElementCollectionType: ...
+    
+    @property
+    def Count(self) -> IntType: ...
+    
+    @property
+    def EmitClear(self) -> BooleanType: ...
+    
+    @EmitClear.setter
+    def EmitClear(self, value: BooleanType) -> None: ...
+    
+    @property
+    def IsSynchronized(self) -> BooleanType: ...
+    
+    @property
+    def SyncRoot(self) -> ObjectType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def CopyTo(self, array: ArrayType[ConfigurationElement], index: IntType) -> VoidType: ...
+    
+    def Equals(self, compareTo: ObjectType) -> BooleanType: ...
+    
+    def GetEnumerator(self) -> IEnumerator: ...
+    
+    def GetHashCode(self) -> IntType: ...
+    
+    def IsReadOnly(self) -> BooleanType: ...
+    
+    def get_CollectionType(self) -> ConfigurationElementCollectionType: ...
+    
+    def get_Count(self) -> IntType: ...
+    
+    def get_EmitClear(self) -> BooleanType: ...
+    
+    def get_IsSynchronized(self) -> BooleanType: ...
+    
+    def get_SyncRoot(self) -> ObjectType: ...
+    
+    def set_EmitClear(self, value: BooleanType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationElementProperty(ObjectType):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, validator: ConfigurationValidatorBase): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Validator(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Validator(self) -> ConfigurationValidatorBase: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationErrorsException(ConfigurationException, ISerializable, _Exception):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, message: StringType, inner: Exception, filename: StringType, line: IntType): ...
+    
+    @overload
+    def __init__(self): ...
+    
+    @overload
+    def __init__(self, message: StringType): ...
+    
+    @overload
+    def __init__(self, message: StringType, inner: Exception): ...
+    
+    @overload
+    def __init__(self, message: StringType, filename: StringType, line: IntType): ...
+    
+    @overload
+    def __init__(self, message: StringType, node: XmlNode): ...
+    
+    @overload
+    def __init__(self, message: StringType, inner: Exception, node: XmlNode): ...
+    
+    @overload
+    def __init__(self, message: StringType, reader: XmlReader): ...
+    
+    @overload
+    def __init__(self, message: StringType, inner: Exception, reader: XmlReader): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def BareMessage(self) -> StringType: ...
+    
+    @property
+    def Errors(self) -> ICollection: ...
+    
+    @property
+    def Filename(self) -> StringType: ...
+    
+    @property
+    def Line(self) -> IntType: ...
+    
+    @property
+    def Message(self) -> StringType: ...
+    
+    # ---------- Methods ---------- #
+    
+    @staticmethod
+    @overload
+    def GetFilename(node: XmlNode) -> StringType: ...
+    
+    @staticmethod
+    @overload
+    def GetFilename(reader: XmlReader) -> StringType: ...
+    
+    @staticmethod
+    @overload
+    def GetLineNumber(node: XmlNode) -> IntType: ...
+    
+    @staticmethod
+    @overload
+    def GetLineNumber(reader: XmlReader) -> IntType: ...
+    
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
+    
+    def get_BareMessage(self) -> StringType: ...
+    
+    def get_Errors(self) -> ICollection: ...
+    
+    def get_Filename(self) -> StringType: ...
+    
+    def get_Line(self) -> IntType: ...
+    
+    def get_Message(self) -> StringType: ...
     
     # No Events
     
@@ -559,6 +1780,246 @@ class ConfigurationException(SystemException, ISerializable, _Exception):
     # No Sub Enums
 
 
+class ConfigurationFileMap(ObjectType, ICloneable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self): ...
+    
+    @overload
+    def __init__(self, machineConfigFilename: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def MachineConfigFilename(self) -> StringType: ...
+    
+    @MachineConfigFilename.setter
+    def MachineConfigFilename(self, value: StringType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Clone(self) -> ObjectType: ...
+    
+    def get_MachineConfigFilename(self) -> StringType: ...
+    
+    def set_MachineConfigFilename(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationLocation(ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Path(self) -> StringType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def OpenConfiguration(self) -> Configuration: ...
+    
+    def get_Path(self) -> StringType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationLocationCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Item(self) -> ConfigurationLocation: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Item(self, index: IntType) -> ConfigurationLocation: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationLockCollection(ObjectType, IEnumerable, ICollection):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def AttributeList(self) -> StringType: ...
+    
+    @property
+    def Count(self) -> IntType: ...
+    
+    @property
+    def HasParentElements(self) -> BooleanType: ...
+    
+    @property
+    def IsModified(self) -> BooleanType: ...
+    
+    @property
+    def IsSynchronized(self) -> BooleanType: ...
+    
+    @property
+    def SyncRoot(self) -> ObjectType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self, name: StringType) -> VoidType: ...
+    
+    def Clear(self) -> VoidType: ...
+    
+    def Contains(self, name: StringType) -> BooleanType: ...
+    
+    def CopyTo(self, array: ArrayType[StringType], index: IntType) -> VoidType: ...
+    
+    def GetEnumerator(self) -> IEnumerator: ...
+    
+    def IsReadOnly(self, name: StringType) -> BooleanType: ...
+    
+    def Remove(self, name: StringType) -> VoidType: ...
+    
+    def SetFromList(self, attributeList: StringType) -> VoidType: ...
+    
+    def get_AttributeList(self) -> StringType: ...
+    
+    def get_Count(self) -> IntType: ...
+    
+    def get_HasParentElements(self) -> BooleanType: ...
+    
+    def get_IsModified(self) -> BooleanType: ...
+    
+    def get_IsSynchronized(self) -> BooleanType: ...
+    
+    def get_SyncRoot(self) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationManager(ABC, ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @staticmethod
+    @property
+    def AppSettings() -> NameValueCollection: ...
+    
+    @staticmethod
+    @property
+    def ConnectionStrings() -> ConnectionStringSettingsCollection: ...
+    
+    # ---------- Methods ---------- #
+    
+    @staticmethod
+    def GetSection(sectionName: StringType) -> ObjectType: ...
+    
+    @staticmethod
+    @overload
+    def OpenExeConfiguration(userLevel: ConfigurationUserLevel) -> Configuration: ...
+    
+    @staticmethod
+    @overload
+    def OpenExeConfiguration(exePath: StringType) -> Configuration: ...
+    
+    @staticmethod
+    def OpenMachineConfiguration() -> Configuration: ...
+    
+    @staticmethod
+    @overload
+    def OpenMappedExeConfiguration(fileMap: ExeConfigurationFileMap, userLevel: ConfigurationUserLevel) -> Configuration: ...
+    
+    @staticmethod
+    @overload
+    def OpenMappedExeConfiguration(fileMap: ExeConfigurationFileMap, userLevel: ConfigurationUserLevel, preLoad: BooleanType) -> Configuration: ...
+    
+    @staticmethod
+    def OpenMappedMachineConfiguration(fileMap: ConfigurationFileMap) -> Configuration: ...
+    
+    @staticmethod
+    def RefreshSection(sectionName: StringType) -> VoidType: ...
+    
+    @staticmethod
+    def get_AppSettings() -> NameValueCollection: ...
+    
+    @staticmethod
+    def get_ConnectionStrings() -> ConnectionStringSettingsCollection: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationManagerHelperFactory(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class ConfigurationManagerInternalFactory(ABC, ObjectType):
     """"""
     
@@ -569,6 +2030,535 @@ class ConfigurationManagerInternalFactory(ABC, ObjectType):
     # No Properties
     
     # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationPermission(CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IUnrestrictedPermission):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, state: PermissionState): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def Copy(self) -> IPermission: ...
+    
+    def FromXml(self, securityElement: SecurityElement) -> VoidType: ...
+    
+    def Intersect(self, target: IPermission) -> IPermission: ...
+    
+    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
+    
+    def IsUnrestricted(self) -> BooleanType: ...
+    
+    def ToXml(self) -> SecurityElement: ...
+    
+    def Union(self, target: IPermission) -> IPermission: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, action: SecurityAction): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CreatePermission(self) -> IPermission: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationProperty(ObjectType):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, name: StringType, type: TypeType): ...
+    
+    @overload
+    def __init__(self, name: StringType, type: TypeType, defaultValue: ObjectType): ...
+    
+    @overload
+    def __init__(self, name: StringType, type: TypeType, defaultValue: ObjectType, options: ConfigurationPropertyOptions): ...
+    
+    @overload
+    def __init__(self, name: StringType, type: TypeType, defaultValue: ObjectType, typeConverter: TypeConverter, validator: ConfigurationValidatorBase, options: ConfigurationPropertyOptions): ...
+    
+    @overload
+    def __init__(self, name: StringType, type: TypeType, defaultValue: ObjectType, typeConverter: TypeConverter, validator: ConfigurationValidatorBase, options: ConfigurationPropertyOptions, description: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Converter(self) -> TypeConverter: ...
+    
+    @property
+    def DefaultValue(self) -> ObjectType: ...
+    
+    @property
+    def Description(self) -> StringType: ...
+    
+    @property
+    def IsAssemblyStringTransformationRequired(self) -> BooleanType: ...
+    
+    @property
+    def IsDefaultCollection(self) -> BooleanType: ...
+    
+    @property
+    def IsKey(self) -> BooleanType: ...
+    
+    @property
+    def IsRequired(self) -> BooleanType: ...
+    
+    @property
+    def IsTypeStringTransformationRequired(self) -> BooleanType: ...
+    
+    @property
+    def IsVersionCheckRequired(self) -> BooleanType: ...
+    
+    @property
+    def Name(self) -> StringType: ...
+    
+    @property
+    def Type(self) -> TypeType: ...
+    
+    @property
+    def Validator(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Converter(self) -> TypeConverter: ...
+    
+    def get_DefaultValue(self) -> ObjectType: ...
+    
+    def get_Description(self) -> StringType: ...
+    
+    def get_IsAssemblyStringTransformationRequired(self) -> BooleanType: ...
+    
+    def get_IsDefaultCollection(self) -> BooleanType: ...
+    
+    def get_IsKey(self) -> BooleanType: ...
+    
+    def get_IsRequired(self) -> BooleanType: ...
+    
+    def get_IsTypeStringTransformationRequired(self) -> BooleanType: ...
+    
+    def get_IsVersionCheckRequired(self) -> BooleanType: ...
+    
+    def get_Name(self) -> StringType: ...
+    
+    def get_Type(self) -> TypeType: ...
+    
+    def get_Validator(self) -> ConfigurationValidatorBase: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationPropertyAttribute(Attribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, name: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def DefaultValue(self) -> ObjectType: ...
+    
+    @DefaultValue.setter
+    def DefaultValue(self, value: ObjectType) -> None: ...
+    
+    @property
+    def IsDefaultCollection(self) -> BooleanType: ...
+    
+    @IsDefaultCollection.setter
+    def IsDefaultCollection(self, value: BooleanType) -> None: ...
+    
+    @property
+    def IsKey(self) -> BooleanType: ...
+    
+    @IsKey.setter
+    def IsKey(self, value: BooleanType) -> None: ...
+    
+    @property
+    def IsRequired(self) -> BooleanType: ...
+    
+    @IsRequired.setter
+    def IsRequired(self, value: BooleanType) -> None: ...
+    
+    @property
+    def Name(self) -> StringType: ...
+    
+    @property
+    def Options(self) -> ConfigurationPropertyOptions: ...
+    
+    @Options.setter
+    def Options(self, value: ConfigurationPropertyOptions) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_DefaultValue(self) -> ObjectType: ...
+    
+    def get_IsDefaultCollection(self) -> BooleanType: ...
+    
+    def get_IsKey(self) -> BooleanType: ...
+    
+    def get_IsRequired(self) -> BooleanType: ...
+    
+    def get_Name(self) -> StringType: ...
+    
+    def get_Options(self) -> ConfigurationPropertyOptions: ...
+    
+    def set_DefaultValue(self, value: ObjectType) -> VoidType: ...
+    
+    def set_IsDefaultCollection(self, value: BooleanType) -> VoidType: ...
+    
+    def set_IsKey(self, value: BooleanType) -> VoidType: ...
+    
+    def set_IsRequired(self, value: BooleanType) -> VoidType: ...
+    
+    def set_Options(self, value: ConfigurationPropertyOptions) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationPropertyCollection(ObjectType, ICollection, IEnumerable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Count(self) -> IntType: ...
+    
+    @property
+    def IsSynchronized(self) -> BooleanType: ...
+    
+    @property
+    def Item(self) -> ConfigurationProperty: ...
+    
+    @property
+    def SyncRoot(self) -> ObjectType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self, property: ConfigurationProperty) -> VoidType: ...
+    
+    def Clear(self) -> VoidType: ...
+    
+    def Contains(self, name: StringType) -> BooleanType: ...
+    
+    def CopyTo(self, array: ArrayType[ConfigurationProperty], index: IntType) -> VoidType: ...
+    
+    def GetEnumerator(self) -> IEnumerator: ...
+    
+    def Remove(self, name: StringType) -> BooleanType: ...
+    
+    def get_Count(self) -> IntType: ...
+    
+    def get_IsSynchronized(self) -> BooleanType: ...
+    
+    def get_Item(self, name: StringType) -> ConfigurationProperty: ...
+    
+    def get_SyncRoot(self) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationSchemaErrors(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationSection(ABC, ConfigurationElement):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def SectionInformation(self) -> SectionInformation: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_SectionInformation(self) -> SectionInformation: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationSectionCollection(NameObjectCollectionBase, ICollection, IEnumerable, ISerializable, IDeserializationCallback):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Count(self) -> IntType: ...
+    
+    @property
+    def Item(self) -> ConfigurationSection: ...
+    
+    @property
+    def Item(self) -> ConfigurationSection: ...
+    
+    @property
+    def Keys(self) -> KeysCollection: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self, name: StringType, section: ConfigurationSection) -> VoidType: ...
+    
+    def Clear(self) -> VoidType: ...
+    
+    def CopyTo(self, array: ArrayType[ConfigurationSection], index: IntType) -> VoidType: ...
+    
+    @overload
+    def Get(self, index: IntType) -> ConfigurationSection: ...
+    
+    @overload
+    def Get(self, name: StringType) -> ConfigurationSection: ...
+    
+    def GetEnumerator(self) -> IEnumerator: ...
+    
+    def GetKey(self, index: IntType) -> StringType: ...
+    
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
+    
+    def Remove(self, name: StringType) -> VoidType: ...
+    
+    def RemoveAt(self, index: IntType) -> VoidType: ...
+    
+    def get_Count(self) -> IntType: ...
+    
+    @overload
+    def get_Item(self, name: StringType) -> ConfigurationSection: ...
+    
+    @overload
+    def get_Item(self, index: IntType) -> ConfigurationSection: ...
+    
+    def get_Keys(self) -> KeysCollection: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationSectionGroup(ObjectType):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def IsDeclarationRequired(self) -> BooleanType: ...
+    
+    @property
+    def IsDeclared(self) -> BooleanType: ...
+    
+    @property
+    def Name(self) -> StringType: ...
+    
+    @property
+    def SectionGroupName(self) -> StringType: ...
+    
+    @property
+    def SectionGroups(self) -> ConfigurationSectionGroupCollection: ...
+    
+    @property
+    def Sections(self) -> ConfigurationSectionCollection: ...
+    
+    @property
+    def Type(self) -> StringType: ...
+    
+    @Type.setter
+    def Type(self, value: StringType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ForceDeclaration(self) -> VoidType: ...
+    
+    @overload
+    def ForceDeclaration(self, force: BooleanType) -> VoidType: ...
+    
+    def get_IsDeclarationRequired(self) -> BooleanType: ...
+    
+    def get_IsDeclared(self) -> BooleanType: ...
+    
+    def get_Name(self) -> StringType: ...
+    
+    def get_SectionGroupName(self) -> StringType: ...
+    
+    def get_SectionGroups(self) -> ConfigurationSectionGroupCollection: ...
+    
+    def get_Sections(self) -> ConfigurationSectionCollection: ...
+    
+    def get_Type(self) -> StringType: ...
+    
+    def set_Type(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationSectionGroupCollection(NameObjectCollectionBase, ICollection, IEnumerable, ISerializable, IDeserializationCallback):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Count(self) -> IntType: ...
+    
+    @property
+    def Item(self) -> ConfigurationSectionGroup: ...
+    
+    @property
+    def Item(self) -> ConfigurationSectionGroup: ...
+    
+    @property
+    def Keys(self) -> KeysCollection: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self, name: StringType, sectionGroup: ConfigurationSectionGroup) -> VoidType: ...
+    
+    def Clear(self) -> VoidType: ...
+    
+    def CopyTo(self, array: ArrayType[ConfigurationSectionGroup], index: IntType) -> VoidType: ...
+    
+    @overload
+    def Get(self, index: IntType) -> ConfigurationSectionGroup: ...
+    
+    @overload
+    def Get(self, name: StringType) -> ConfigurationSectionGroup: ...
+    
+    def GetEnumerator(self) -> IEnumerator: ...
+    
+    def GetKey(self, index: IntType) -> StringType: ...
+    
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
+    
+    def Remove(self, name: StringType) -> VoidType: ...
+    
+    def RemoveAt(self, index: IntType) -> VoidType: ...
+    
+    def get_Count(self) -> IntType: ...
+    
+    @overload
+    def get_Item(self, name: StringType) -> ConfigurationSectionGroup: ...
+    
+    @overload
+    def get_Item(self, index: IntType) -> ConfigurationSectionGroup: ...
+    
+    def get_Keys(self) -> KeysCollection: ...
     
     # No Events
     
@@ -611,6 +2601,367 @@ class ConfigurationSettings(ObjectType):
     # No Sub Enums
 
 
+class ConfigurationStringConstants(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationValidatorAttribute(Attribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, validator: TypeType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    @property
+    def ValidatorType(self) -> TypeType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    def get_ValidatorType(self) -> TypeType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationValidatorBase(ABC, ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanValidate(self, type: TypeType) -> BooleanType: ...
+    
+    def Validate(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationValue(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationValues(NameObjectCollectionBase, ICollection, IEnumerable, ISerializable, IDeserializationCallback):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConnectionStringSettings(ConfigurationElement):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self): ...
+    
+    @overload
+    def __init__(self, name: StringType, connectionString: StringType): ...
+    
+    @overload
+    def __init__(self, name: StringType, connectionString: StringType, providerName: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def ConnectionString(self) -> StringType: ...
+    
+    @ConnectionString.setter
+    def ConnectionString(self, value: StringType) -> None: ...
+    
+    @property
+    def Name(self) -> StringType: ...
+    
+    @Name.setter
+    def Name(self, value: StringType) -> None: ...
+    
+    @property
+    def ProviderName(self) -> StringType: ...
+    
+    @ProviderName.setter
+    def ProviderName(self, value: StringType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def ToString(self) -> StringType: ...
+    
+    def get_ConnectionString(self) -> StringType: ...
+    
+    def get_Name(self) -> StringType: ...
+    
+    def get_ProviderName(self) -> StringType: ...
+    
+    def set_ConnectionString(self, value: StringType) -> VoidType: ...
+    
+    def set_Name(self, value: StringType) -> VoidType: ...
+    
+    def set_ProviderName(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConnectionStringSettingsCollection(ConfigurationElementCollection, ICollection, IEnumerable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Item(self) -> ConnectionStringSettings: ...
+    
+    @Item.setter
+    def Item(self, value: ConnectionStringSettings) -> None: ...
+    
+    @property
+    def Item(self) -> ConnectionStringSettings: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self, settings: ConnectionStringSettings) -> VoidType: ...
+    
+    def Clear(self) -> VoidType: ...
+    
+    def IndexOf(self, settings: ConnectionStringSettings) -> IntType: ...
+    
+    @overload
+    def Remove(self, settings: ConnectionStringSettings) -> VoidType: ...
+    
+    @overload
+    def Remove(self, name: StringType) -> VoidType: ...
+    
+    def RemoveAt(self, index: IntType) -> VoidType: ...
+    
+    @overload
+    def get_Item(self, index: IntType) -> ConnectionStringSettings: ...
+    
+    @overload
+    def get_Item(self, name: StringType) -> ConnectionStringSettings: ...
+    
+    def set_Item(self, index: IntType, value: ConnectionStringSettings) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConnectionStringsSection(ConfigurationSection):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def ConnectionStrings(self) -> ConnectionStringSettingsCollection: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_ConnectionStrings(self) -> ConnectionStringSettingsCollection: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ContextInformation(ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def HostingContext(self) -> ObjectType: ...
+    
+    @property
+    def IsMachineLevel(self) -> BooleanType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def GetSection(self, sectionName: StringType) -> ObjectType: ...
+    
+    def get_HostingContext(self) -> ObjectType: ...
+    
+    def get_IsMachineLevel(self) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class Debug(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class DeclarationUpdate(Update):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class DefaultSection(ConfigurationSection):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class DefaultSettingValueAttribute(Attribute, _Attribute):
     # No Fields
     
@@ -638,6 +2989,54 @@ class DefaultSettingValueAttribute(Attribute, _Attribute):
     # No Sub Enums
 
 
+class DefaultValidator(ConfigurationValidatorBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanValidate(self, type: TypeType) -> BooleanType: ...
+    
+    def Validate(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class DefinitionUpdate(Update):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class DictionarySectionHandler(ObjectType, IConfigurationSectionHandler):
     # No Fields
     
@@ -650,6 +3049,437 @@ class DictionarySectionHandler(ObjectType, IConfigurationSectionHandler):
     # ---------- Methods ---------- #
     
     def Create(self, parent: ObjectType, context: ObjectType, section: XmlNode) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class DpapiProtectedConfigurationProvider(ProtectedConfigurationProvider):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def UseMachineProtection(self) -> BooleanType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Decrypt(self, encryptedNode: XmlNode) -> XmlNode: ...
+    
+    def Encrypt(self, node: XmlNode) -> XmlNode: ...
+    
+    def Initialize(self, name: StringType, configurationValues: NameValueCollection) -> VoidType: ...
+    
+    def get_UseMachineProtection(self) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ElementInformation(ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Errors(self) -> ICollection: ...
+    
+    @property
+    def IsCollection(self) -> BooleanType: ...
+    
+    @property
+    def IsLocked(self) -> BooleanType: ...
+    
+    @property
+    def IsPresent(self) -> BooleanType: ...
+    
+    @property
+    def LineNumber(self) -> IntType: ...
+    
+    @property
+    def Properties(self) -> PropertyInformationCollection: ...
+    
+    @property
+    def Source(self) -> StringType: ...
+    
+    @property
+    def Type(self) -> TypeType: ...
+    
+    @property
+    def Validator(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Errors(self) -> ICollection: ...
+    
+    def get_IsCollection(self) -> BooleanType: ...
+    
+    def get_IsLocked(self) -> BooleanType: ...
+    
+    def get_IsPresent(self) -> BooleanType: ...
+    
+    def get_LineNumber(self) -> IntType: ...
+    
+    def get_Properties(self) -> PropertyInformationCollection: ...
+    
+    def get_Source(self) -> StringType: ...
+    
+    def get_Type(self) -> TypeType: ...
+    
+    def get_Validator(self) -> ConfigurationValidatorBase: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class EmptyImpersonationContext(ObjectType, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def Dispose(self) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ErrorInfoXmlDocument(XmlDocument, ICloneable, IEnumerable, IXPathNavigable, IConfigErrorInfo):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def CreateAttribute(self, prefix: StringType, localName: StringType, namespaceUri: StringType) -> XmlAttribute: ...
+    
+    def CreateCDataSection(self, data: StringType) -> XmlCDataSection: ...
+    
+    def CreateComment(self, data: StringType) -> XmlComment: ...
+    
+    @overload
+    def CreateElement(self, prefix: StringType, localName: StringType, namespaceUri: StringType) -> XmlElement: ...
+    
+    def CreateSignificantWhitespace(self, data: StringType) -> XmlSignificantWhitespace: ...
+    
+    def CreateTextNode(self, text: StringType) -> XmlText: ...
+    
+    def CreateWhitespace(self, data: StringType) -> XmlWhitespace: ...
+    
+    @overload
+    def Load(self, filename: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ErrorsHelper(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ExceptionUtil(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ExeConfigurationFileMap(ConfigurationFileMap, ICloneable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self): ...
+    
+    @overload
+    def __init__(self, machineConfigFileName: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def ExeConfigFilename(self) -> StringType: ...
+    
+    @ExeConfigFilename.setter
+    def ExeConfigFilename(self, value: StringType) -> None: ...
+    
+    @property
+    def LocalUserConfigFilename(self) -> StringType: ...
+    
+    @LocalUserConfigFilename.setter
+    def LocalUserConfigFilename(self, value: StringType) -> None: ...
+    
+    @property
+    def RoamingUserConfigFilename(self) -> StringType: ...
+    
+    @RoamingUserConfigFilename.setter
+    def RoamingUserConfigFilename(self, value: StringType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Clone(self) -> ObjectType: ...
+    
+    def get_ExeConfigFilename(self) -> StringType: ...
+    
+    def get_LocalUserConfigFilename(self) -> StringType: ...
+    
+    def get_RoamingUserConfigFilename(self) -> StringType: ...
+    
+    def set_ExeConfigFilename(self, value: StringType) -> VoidType: ...
+    
+    def set_LocalUserConfigFilename(self, value: StringType) -> VoidType: ...
+    
+    def set_RoamingUserConfigFilename(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ExeContext(ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def ExePath(self) -> StringType: ...
+    
+    @property
+    def UserLevel(self) -> ConfigurationUserLevel: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_ExePath(self) -> StringType: ...
+    
+    def get_UserLevel(self) -> ConfigurationUserLevel: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class FactoryId(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class FactoryRecord(ObjectType, IConfigErrorInfo):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Filename(self) -> StringType: ...
+    
+    @Filename.setter
+    def Filename(self, value: StringType) -> None: ...
+    
+    @property
+    def LineNumber(self) -> IntType: ...
+    
+    @LineNumber.setter
+    def LineNumber(self, value: IntType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Filename(self) -> StringType: ...
+    
+    def get_LineNumber(self) -> IntType: ...
+    
+    def set_Filename(self, value: StringType) -> VoidType: ...
+    
+    def set_LineNumber(self, value: IntType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class FileUtil(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class FipsAwareEncryptedXml(EncryptedXml):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, doc: XmlDocument): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def GetDecryptionKey(self, encryptedData: EncryptedData, symmetricAlgorithmUri: StringType) -> SymmetricAlgorithm: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class GenericEnumConverter(ConfigurationConverterBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, typeEnum: TypeType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ConvertFrom(self, ctx: ITypeDescriptorContext, ci: CultureInfo, data: ObjectType) -> ObjectType: ...
+    
+    @overload
+    def ConvertTo(self, ctx: ITypeDescriptorContext, ci: CultureInfo, value: ObjectType, type: TypeType) -> ObjectType: ...
     
     # No Events
     
@@ -716,6 +3546,28 @@ class IdnElement(ConfigurationElement):
     # No Sub Enums
 
 
+class IgnoreSection(ConfigurationSection):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class IgnoreSectionHandler(ObjectType, IConfigurationSectionHandler):
     # No Fields
     
@@ -728,6 +3580,174 @@ class IgnoreSectionHandler(ObjectType, IConfigurationSectionHandler):
     # ---------- Methods ---------- #
     
     def Create(self, parent: ObjectType, configContext: ObjectType, section: XmlNode) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class InfiniteIntConverter(ConfigurationConverterBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ConvertFrom(self, ctx: ITypeDescriptorContext, ci: CultureInfo, data: ObjectType) -> ObjectType: ...
+    
+    @overload
+    def ConvertTo(self, ctx: ITypeDescriptorContext, ci: CultureInfo, value: ObjectType, type: TypeType) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class InfiniteTimeSpanConverter(ConfigurationConverterBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ConvertFrom(self, ctx: ITypeDescriptorContext, ci: CultureInfo, data: ObjectType) -> ObjectType: ...
+    
+    @overload
+    def ConvertTo(self, ctx: ITypeDescriptorContext, ci: CultureInfo, value: ObjectType, type: TypeType) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class IntegerValidator(ConfigurationValidatorBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, minValue: IntType, maxValue: IntType): ...
+    
+    @overload
+    def __init__(self, minValue: IntType, maxValue: IntType, rangeIsExclusive: BooleanType): ...
+    
+    @overload
+    def __init__(self, minValue: IntType, maxValue: IntType, rangeIsExclusive: BooleanType, resolution: IntType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanValidate(self, type: TypeType) -> BooleanType: ...
+    
+    def Validate(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class IntegerValidatorAttribute(ConfigurationValidatorAttribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def ExcludeRange(self) -> BooleanType: ...
+    
+    @ExcludeRange.setter
+    def ExcludeRange(self, value: BooleanType) -> None: ...
+    
+    @property
+    def MaxValue(self) -> IntType: ...
+    
+    @MaxValue.setter
+    def MaxValue(self, value: IntType) -> None: ...
+    
+    @property
+    def MinValue(self) -> IntType: ...
+    
+    @MinValue.setter
+    def MinValue(self, value: IntType) -> None: ...
+    
+    @property
+    def ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_ExcludeRange(self) -> BooleanType: ...
+    
+    def get_MaxValue(self) -> IntType: ...
+    
+    def get_MinValue(self) -> IntType: ...
+    
+    def get_ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    def set_ExcludeRange(self, value: BooleanType) -> VoidType: ...
+    
+    def set_MaxValue(self, value: IntType) -> VoidType: ...
+    
+    def set_MinValue(self, value: IntType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class InvalidPropValue(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
     
     # No Events
     
@@ -772,6 +3792,114 @@ class IriParsingElement(ConfigurationElement):
     # No Sub Enums
 
 
+class KeyValueConfigurationCollection(ConfigurationElementCollection, ICollection, IEnumerable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def AllKeys(self) -> ArrayType[StringType]: ...
+    
+    @property
+    def Item(self) -> KeyValueConfigurationElement: ...
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def Add(self, key: StringType, value: StringType) -> VoidType: ...
+    
+    @overload
+    def Add(self, keyValue: KeyValueConfigurationElement) -> VoidType: ...
+    
+    def Clear(self) -> VoidType: ...
+    
+    def Remove(self, key: StringType) -> VoidType: ...
+    
+    def get_AllKeys(self) -> ArrayType[StringType]: ...
+    
+    def get_Item(self, key: StringType) -> KeyValueConfigurationElement: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class KeyValueConfigurationElement(ConfigurationElement):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, key: StringType, value: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Key(self) -> StringType: ...
+    
+    @property
+    def Value(self) -> StringType: ...
+    
+    @Value.setter
+    def Value(self, value: StringType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Key(self) -> StringType: ...
+    
+    def get_Value(self) -> StringType: ...
+    
+    def set_Value(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class KeyValueInternalCollection(NameValueCollection, ICollection, IEnumerable, ISerializable, IDeserializationCallback):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, root: AppSettingsSection): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def Add(self, key: StringType, value: StringType) -> VoidType: ...
+    
+    def Clear(self) -> VoidType: ...
+    
+    def Remove(self, key: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class LocalFileSettingsProvider(SettingsProvider, IApplicationSettingsProvider):
     # No Fields
     
@@ -804,6 +3932,246 @@ class LocalFileSettingsProvider(SettingsProvider, IApplicationSettingsProvider):
     def get_ApplicationName(self) -> StringType: ...
     
     def set_ApplicationName(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class LocationSectionRecord(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class LocationUpdates(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class LongValidator(ConfigurationValidatorBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, minValue: LongType, maxValue: LongType): ...
+    
+    @overload
+    def __init__(self, minValue: LongType, maxValue: LongType, rangeIsExclusive: BooleanType): ...
+    
+    @overload
+    def __init__(self, minValue: LongType, maxValue: LongType, rangeIsExclusive: BooleanType, resolution: LongType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanValidate(self, type: TypeType) -> BooleanType: ...
+    
+    def Validate(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class LongValidatorAttribute(ConfigurationValidatorAttribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def ExcludeRange(self) -> BooleanType: ...
+    
+    @ExcludeRange.setter
+    def ExcludeRange(self, value: BooleanType) -> None: ...
+    
+    @property
+    def MaxValue(self) -> LongType: ...
+    
+    @MaxValue.setter
+    def MaxValue(self, value: LongType) -> None: ...
+    
+    @property
+    def MinValue(self) -> LongType: ...
+    
+    @MinValue.setter
+    def MinValue(self, value: LongType) -> None: ...
+    
+    @property
+    def ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_ExcludeRange(self) -> BooleanType: ...
+    
+    def get_MaxValue(self) -> LongType: ...
+    
+    def get_MinValue(self) -> LongType: ...
+    
+    def get_ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    def set_ExcludeRange(self, value: BooleanType) -> VoidType: ...
+    
+    def set_MaxValue(self, value: LongType) -> VoidType: ...
+    
+    def set_MinValue(self, value: LongType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class MgmtConfigurationRecord(BaseConfigurationRecord, IInternalConfigRecord):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class NameValueConfigurationCollection(ConfigurationElementCollection, ICollection, IEnumerable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def AllKeys(self) -> ArrayType[StringType]: ...
+    
+    @property
+    def Item(self) -> NameValueConfigurationElement: ...
+    
+    @Item.setter
+    def Item(self, value: NameValueConfigurationElement) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self, nameValue: NameValueConfigurationElement) -> VoidType: ...
+    
+    def Clear(self) -> VoidType: ...
+    
+    @overload
+    def Remove(self, nameValue: NameValueConfigurationElement) -> VoidType: ...
+    
+    @overload
+    def Remove(self, name: StringType) -> VoidType: ...
+    
+    def get_AllKeys(self) -> ArrayType[StringType]: ...
+    
+    def get_Item(self, name: StringType) -> NameValueConfigurationElement: ...
+    
+    def set_Item(self, name: StringType, value: NameValueConfigurationElement) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class NameValueConfigurationElement(ConfigurationElement):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, name: StringType, value: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Name(self) -> StringType: ...
+    
+    @property
+    def Value(self) -> StringType: ...
+    
+    @Value.setter
+    def Value(self, value: StringType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Name(self) -> StringType: ...
+    
+    def get_Value(self) -> StringType: ...
+    
+    def set_Value(self, value: StringType) -> VoidType: ...
     
     # No Events
     
@@ -886,6 +4254,59 @@ class NoSettingsVersionUpgradeAttribute(Attribute, _Attribute):
     # No Sub Enums
 
 
+class PositiveTimeSpanValidator(ConfigurationValidatorBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanValidate(self, type: TypeType) -> BooleanType: ...
+    
+    def Validate(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class PositiveTimeSpanValidatorAttribute(ConfigurationValidatorAttribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class PrivilegedConfigurationManager(ABC, ObjectType):
     """"""
     
@@ -908,6 +4329,458 @@ class PrivilegedConfigurationManager(ABC, ObjectType):
     # No Sub Enums
 
 
+class PrivilegedConfigurationManager(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class PrivilegedConfigurationManager(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class PropertyInformation(ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Converter(self) -> TypeConverter: ...
+    
+    @property
+    def DefaultValue(self) -> ObjectType: ...
+    
+    @property
+    def Description(self) -> StringType: ...
+    
+    @property
+    def IsKey(self) -> BooleanType: ...
+    
+    @property
+    def IsLocked(self) -> BooleanType: ...
+    
+    @property
+    def IsModified(self) -> BooleanType: ...
+    
+    @property
+    def IsRequired(self) -> BooleanType: ...
+    
+    @property
+    def LineNumber(self) -> IntType: ...
+    
+    @property
+    def Name(self) -> StringType: ...
+    
+    @property
+    def Source(self) -> StringType: ...
+    
+    @property
+    def Type(self) -> TypeType: ...
+    
+    @property
+    def Validator(self) -> ConfigurationValidatorBase: ...
+    
+    @property
+    def Value(self) -> ObjectType: ...
+    
+    @Value.setter
+    def Value(self, value: ObjectType) -> None: ...
+    
+    @property
+    def ValueOrigin(self) -> PropertyValueOrigin: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Converter(self) -> TypeConverter: ...
+    
+    def get_DefaultValue(self) -> ObjectType: ...
+    
+    def get_Description(self) -> StringType: ...
+    
+    def get_IsKey(self) -> BooleanType: ...
+    
+    def get_IsLocked(self) -> BooleanType: ...
+    
+    def get_IsModified(self) -> BooleanType: ...
+    
+    def get_IsRequired(self) -> BooleanType: ...
+    
+    def get_LineNumber(self) -> IntType: ...
+    
+    def get_Name(self) -> StringType: ...
+    
+    def get_Source(self) -> StringType: ...
+    
+    def get_Type(self) -> TypeType: ...
+    
+    def get_Validator(self) -> ConfigurationValidatorBase: ...
+    
+    def get_Value(self) -> ObjectType: ...
+    
+    def get_ValueOrigin(self) -> PropertyValueOrigin: ...
+    
+    def set_Value(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class PropertyInformationCollection(NameObjectCollectionBase, ICollection, IEnumerable, ISerializable, IDeserializationCallback):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Item(self) -> PropertyInformation: ...
+    
+    # ---------- Methods ---------- #
+    
+    def CopyTo(self, array: ArrayType[PropertyInformation], index: IntType) -> VoidType: ...
+    
+    def GetEnumerator(self) -> IEnumerator: ...
+    
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
+    
+    def get_Item(self, propertyName: StringType) -> PropertyInformation: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class PropertySourceInfo(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ProtectedConfiguration(ABC, ObjectType):
+    # ---------- Fields ---------- #
+    
+    @staticmethod
+    @property
+    def DataProtectionProviderName() -> StringType: ...
+    
+    @staticmethod
+    @property
+    def ProtectedDataSectionName() -> StringType: ...
+    
+    @staticmethod
+    @property
+    def RsaProviderName() -> StringType: ...
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @staticmethod
+    @property
+    def DefaultProvider() -> StringType: ...
+    
+    @staticmethod
+    @property
+    def Providers() -> ProtectedConfigurationProviderCollection: ...
+    
+    # ---------- Methods ---------- #
+    
+    @staticmethod
+    def get_DefaultProvider() -> StringType: ...
+    
+    @staticmethod
+    def get_Providers() -> ProtectedConfigurationProviderCollection: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ProtectedConfigurationProvider(ABC, ProviderBase):
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def Decrypt(self, encryptedNode: XmlNode) -> XmlNode: ...
+    
+    def Encrypt(self, node: XmlNode) -> XmlNode: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ProtectedConfigurationProviderCollection(ProviderCollection, IEnumerable, ICollection):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Item(self) -> ProtectedConfigurationProvider: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self, provider: ProviderBase) -> VoidType: ...
+    
+    @overload
+    def get_Item(self, name: StringType) -> ProtectedConfigurationProvider: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ProtectedConfigurationSection(ConfigurationSection):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def DefaultProvider(self) -> StringType: ...
+    
+    @DefaultProvider.setter
+    def DefaultProvider(self, value: StringType) -> None: ...
+    
+    @property
+    def Providers(self) -> ProviderSettingsCollection: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_DefaultProvider(self) -> StringType: ...
+    
+    def get_Providers(self) -> ProviderSettingsCollection: ...
+    
+    def set_DefaultProvider(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ProtectedProviderSettings(ConfigurationElement):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Providers(self) -> ProviderSettingsCollection: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Providers(self) -> ProviderSettingsCollection: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ProviderSettings(ConfigurationElement):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self): ...
+    
+    @overload
+    def __init__(self, name: StringType, type: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Name(self) -> StringType: ...
+    
+    @Name.setter
+    def Name(self, value: StringType) -> None: ...
+    
+    @property
+    def Parameters(self) -> NameValueCollection: ...
+    
+    @property
+    def Type(self) -> StringType: ...
+    
+    @Type.setter
+    def Type(self, value: StringType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Name(self) -> StringType: ...
+    
+    def get_Parameters(self) -> NameValueCollection: ...
+    
+    def get_Type(self) -> StringType: ...
+    
+    def set_Name(self, value: StringType) -> VoidType: ...
+    
+    def set_Type(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ProviderSettingsCollection(ConfigurationElementCollection, ICollection, IEnumerable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Item(self) -> ProviderSettings: ...
+    
+    @property
+    def Item(self) -> ProviderSettings: ...
+    
+    @Item.setter
+    def Item(self, value: ProviderSettings) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self, provider: ProviderSettings) -> VoidType: ...
+    
+    def Clear(self) -> VoidType: ...
+    
+    def Remove(self, name: StringType) -> VoidType: ...
+    
+    @overload
+    def get_Item(self, key: StringType) -> ProviderSettings: ...
+    
+    @overload
+    def get_Item(self, index: IntType) -> ProviderSettings: ...
+    
+    def set_Item(self, index: IntType, value: ProviderSettings) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class ReadOnlyNameValueCollection(NameValueCollection, ICollection, IEnumerable, ISerializable, IDeserializationCallback):
     """"""
     
@@ -918,6 +4791,243 @@ class ReadOnlyNameValueCollection(NameValueCollection, ICollection, IEnumerable,
     # No Properties
     
     # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class RegexStringValidator(ConfigurationValidatorBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, regex: StringType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanValidate(self, type: TypeType) -> BooleanType: ...
+    
+    def Validate(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class RegexStringValidatorAttribute(ConfigurationValidatorAttribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, regex: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Regex(self) -> StringType: ...
+    
+    @property
+    def ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Regex(self) -> StringType: ...
+    
+    def get_ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class RsaProtectedConfigurationProvider(ProtectedConfigurationProvider):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def CspProviderName(self) -> StringType: ...
+    
+    @property
+    def KeyContainerName(self) -> StringType: ...
+    
+    @property
+    def RsaPublicKey(self) -> RSAParameters: ...
+    
+    @property
+    def UseFIPS(self) -> BooleanType: ...
+    
+    @property
+    def UseMachineContainer(self) -> BooleanType: ...
+    
+    @property
+    def UseOAEP(self) -> BooleanType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def AddKey(self, keySize: IntType, exportable: BooleanType) -> VoidType: ...
+    
+    def Decrypt(self, encryptedNode: XmlNode) -> XmlNode: ...
+    
+    def DeleteKey(self) -> VoidType: ...
+    
+    def Encrypt(self, node: XmlNode) -> XmlNode: ...
+    
+    def ExportKey(self, xmlFileName: StringType, includePrivateParameters: BooleanType) -> VoidType: ...
+    
+    def ImportKey(self, xmlFileName: StringType, exportable: BooleanType) -> VoidType: ...
+    
+    def Initialize(self, name: StringType, configurationValues: NameValueCollection) -> VoidType: ...
+    
+    def get_CspProviderName(self) -> StringType: ...
+    
+    def get_KeyContainerName(self) -> StringType: ...
+    
+    def get_RsaPublicKey(self) -> RSAParameters: ...
+    
+    def get_UseFIPS(self) -> BooleanType: ...
+    
+    def get_UseMachineContainer(self) -> BooleanType: ...
+    
+    def get_UseOAEP(self) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class RuntimeConfigurationRecord(BaseConfigurationRecord, IInternalConfigRecord):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SR(ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @staticmethod
+    @property
+    def Resources() -> ResourceManager: ...
+    
+    # ---------- Methods ---------- #
+    
+    @staticmethod
+    def GetObject(name: StringType) -> ObjectType: ...
+    
+    @staticmethod
+    @overload
+    def GetString(name: StringType) -> StringType: ...
+    
+    @staticmethod
+    @overload
+    def GetString(name: StringType, usedFallback: BooleanType) -> Tuple[StringType, BooleanType]: ...
+    
+    @staticmethod
+    @overload
+    def GetString(name: StringType, args: ArrayType[ObjectType]) -> StringType: ...
+    
+    @staticmethod
+    def get_Resources() -> ResourceManager: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SRCategoryAttribute(CategoryAttribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, category: StringType): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SRDescriptionAttribute(DescriptionAttribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, description: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Description(self) -> StringType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Description(self) -> StringType: ...
     
     # No Events
     
@@ -1023,6 +5133,310 @@ class SchemeSettingInternal(ObjectType):
     def get_Name(self) -> StringType: ...
     
     def get_Options(self) -> GenericUriParserOptions: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SectionInformation(ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def AllowDefinition(self) -> ConfigurationAllowDefinition: ...
+    
+    @AllowDefinition.setter
+    def AllowDefinition(self, value: ConfigurationAllowDefinition) -> None: ...
+    
+    @property
+    def AllowExeDefinition(self) -> ConfigurationAllowExeDefinition: ...
+    
+    @AllowExeDefinition.setter
+    def AllowExeDefinition(self, value: ConfigurationAllowExeDefinition) -> None: ...
+    
+    @property
+    def AllowLocation(self) -> BooleanType: ...
+    
+    @AllowLocation.setter
+    def AllowLocation(self, value: BooleanType) -> None: ...
+    
+    @property
+    def AllowOverride(self) -> BooleanType: ...
+    
+    @AllowOverride.setter
+    def AllowOverride(self, value: BooleanType) -> None: ...
+    
+    @property
+    def ConfigSource(self) -> StringType: ...
+    
+    @ConfigSource.setter
+    def ConfigSource(self, value: StringType) -> None: ...
+    
+    @property
+    def ConfigurationBuilder(self) -> ConfigurationBuilder: ...
+    
+    @property
+    def ForceSave(self) -> BooleanType: ...
+    
+    @ForceSave.setter
+    def ForceSave(self, value: BooleanType) -> None: ...
+    
+    @property
+    def InheritInChildApplications(self) -> BooleanType: ...
+    
+    @InheritInChildApplications.setter
+    def InheritInChildApplications(self, value: BooleanType) -> None: ...
+    
+    @property
+    def IsDeclarationRequired(self) -> BooleanType: ...
+    
+    @property
+    def IsDeclared(self) -> BooleanType: ...
+    
+    @property
+    def IsLocked(self) -> BooleanType: ...
+    
+    @property
+    def IsProtected(self) -> BooleanType: ...
+    
+    @property
+    def Name(self) -> StringType: ...
+    
+    @property
+    def OverrideMode(self) -> OverrideMode: ...
+    
+    @OverrideMode.setter
+    def OverrideMode(self, value: OverrideMode) -> None: ...
+    
+    @property
+    def OverrideModeDefault(self) -> OverrideMode: ...
+    
+    @OverrideModeDefault.setter
+    def OverrideModeDefault(self, value: OverrideMode) -> None: ...
+    
+    @property
+    def OverrideModeEffective(self) -> OverrideMode: ...
+    
+    @property
+    def ProtectionProvider(self) -> ProtectedConfigurationProvider: ...
+    
+    @property
+    def RequirePermission(self) -> BooleanType: ...
+    
+    @RequirePermission.setter
+    def RequirePermission(self, value: BooleanType) -> None: ...
+    
+    @property
+    def RestartOnExternalChanges(self) -> BooleanType: ...
+    
+    @RestartOnExternalChanges.setter
+    def RestartOnExternalChanges(self, value: BooleanType) -> None: ...
+    
+    @property
+    def SectionName(self) -> StringType: ...
+    
+    @property
+    def Type(self) -> StringType: ...
+    
+    @Type.setter
+    def Type(self, value: StringType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ForceDeclaration(self) -> VoidType: ...
+    
+    @overload
+    def ForceDeclaration(self, force: BooleanType) -> VoidType: ...
+    
+    def GetParentSection(self) -> ConfigurationSection: ...
+    
+    def GetRawXml(self) -> StringType: ...
+    
+    def ProtectSection(self, protectionProvider: StringType) -> VoidType: ...
+    
+    def RevertToParent(self) -> VoidType: ...
+    
+    def SetRawXml(self, rawXml: StringType) -> VoidType: ...
+    
+    def UnprotectSection(self) -> VoidType: ...
+    
+    def get_AllowDefinition(self) -> ConfigurationAllowDefinition: ...
+    
+    def get_AllowExeDefinition(self) -> ConfigurationAllowExeDefinition: ...
+    
+    def get_AllowLocation(self) -> BooleanType: ...
+    
+    def get_AllowOverride(self) -> BooleanType: ...
+    
+    def get_ConfigSource(self) -> StringType: ...
+    
+    def get_ConfigurationBuilder(self) -> ConfigurationBuilder: ...
+    
+    def get_ForceSave(self) -> BooleanType: ...
+    
+    def get_InheritInChildApplications(self) -> BooleanType: ...
+    
+    def get_IsDeclarationRequired(self) -> BooleanType: ...
+    
+    def get_IsDeclared(self) -> BooleanType: ...
+    
+    def get_IsLocked(self) -> BooleanType: ...
+    
+    def get_IsProtected(self) -> BooleanType: ...
+    
+    def get_Name(self) -> StringType: ...
+    
+    def get_OverrideMode(self) -> OverrideMode: ...
+    
+    def get_OverrideModeDefault(self) -> OverrideMode: ...
+    
+    def get_OverrideModeEffective(self) -> OverrideMode: ...
+    
+    def get_ProtectionProvider(self) -> ProtectedConfigurationProvider: ...
+    
+    def get_RequirePermission(self) -> BooleanType: ...
+    
+    def get_RestartOnExternalChanges(self) -> BooleanType: ...
+    
+    def get_SectionName(self) -> StringType: ...
+    
+    def get_Type(self) -> StringType: ...
+    
+    def set_AllowDefinition(self, value: ConfigurationAllowDefinition) -> VoidType: ...
+    
+    def set_AllowExeDefinition(self, value: ConfigurationAllowExeDefinition) -> VoidType: ...
+    
+    def set_AllowLocation(self, value: BooleanType) -> VoidType: ...
+    
+    def set_AllowOverride(self, value: BooleanType) -> VoidType: ...
+    
+    def set_ConfigSource(self, value: StringType) -> VoidType: ...
+    
+    def set_ForceSave(self, value: BooleanType) -> VoidType: ...
+    
+    def set_InheritInChildApplications(self, value: BooleanType) -> VoidType: ...
+    
+    def set_OverrideMode(self, value: OverrideMode) -> VoidType: ...
+    
+    def set_OverrideModeDefault(self, value: OverrideMode) -> VoidType: ...
+    
+    def set_RequirePermission(self, value: BooleanType) -> VoidType: ...
+    
+    def set_RestartOnExternalChanges(self, value: BooleanType) -> VoidType: ...
+    
+    def set_Type(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SectionInput(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SectionRecord(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SectionUpdates(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SectionXmlInfo(ObjectType, IConfigErrorInfo):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Filename(self) -> StringType: ...
+    
+    @property
+    def LineNumber(self) -> IntType: ...
+    
+    @LineNumber.setter
+    def LineNumber(self, value: IntType) -> None: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Filename(self) -> StringType: ...
+    
+    def get_LineNumber(self) -> IntType: ...
+    
+    def set_LineNumber(self, value: IntType) -> VoidType: ...
     
     # No Events
     
@@ -2122,6 +6536,468 @@ class SpecialSettingAttribute(Attribute, _Attribute):
     # No Sub Enums
 
 
+class StreamInfo(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class StreamUpdate(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class StringUtil(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class StringValidator(ConfigurationValidatorBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, minLength: IntType): ...
+    
+    @overload
+    def __init__(self, minLength: IntType, maxLength: IntType): ...
+    
+    @overload
+    def __init__(self, minLength: IntType, maxLength: IntType, invalidCharacters: StringType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanValidate(self, type: TypeType) -> BooleanType: ...
+    
+    def Validate(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class StringValidatorAttribute(ConfigurationValidatorAttribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def InvalidCharacters(self) -> StringType: ...
+    
+    @InvalidCharacters.setter
+    def InvalidCharacters(self, value: StringType) -> None: ...
+    
+    @property
+    def MaxLength(self) -> IntType: ...
+    
+    @MaxLength.setter
+    def MaxLength(self, value: IntType) -> None: ...
+    
+    @property
+    def MinLength(self) -> IntType: ...
+    
+    @MinLength.setter
+    def MinLength(self, value: IntType) -> None: ...
+    
+    @property
+    def ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_InvalidCharacters(self) -> StringType: ...
+    
+    def get_MaxLength(self) -> IntType: ...
+    
+    def get_MinLength(self) -> IntType: ...
+    
+    def get_ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    def set_InvalidCharacters(self, value: StringType) -> VoidType: ...
+    
+    def set_MaxLength(self, value: IntType) -> VoidType: ...
+    
+    def set_MinLength(self, value: IntType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SubclassTypeValidator(ConfigurationValidatorBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, baseClass: TypeType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanValidate(self, type: TypeType) -> BooleanType: ...
+    
+    def Validate(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SubclassTypeValidatorAttribute(ConfigurationValidatorAttribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, baseClass: TypeType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def BaseClass(self) -> TypeType: ...
+    
+    @property
+    def ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_BaseClass(self) -> TypeType: ...
+    
+    def get_ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class TimeSpanMinutesConverter(ConfigurationConverterBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ConvertFrom(self, ctx: ITypeDescriptorContext, ci: CultureInfo, data: ObjectType) -> ObjectType: ...
+    
+    @overload
+    def ConvertTo(self, ctx: ITypeDescriptorContext, ci: CultureInfo, value: ObjectType, type: TypeType) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class TimeSpanMinutesOrInfiniteConverter(TimeSpanMinutesConverter):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ConvertFrom(self, ctx: ITypeDescriptorContext, ci: CultureInfo, data: ObjectType) -> ObjectType: ...
+    
+    @overload
+    def ConvertTo(self, ctx: ITypeDescriptorContext, ci: CultureInfo, value: ObjectType, type: TypeType) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class TimeSpanSecondsConverter(ConfigurationConverterBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ConvertFrom(self, ctx: ITypeDescriptorContext, ci: CultureInfo, data: ObjectType) -> ObjectType: ...
+    
+    @overload
+    def ConvertTo(self, ctx: ITypeDescriptorContext, ci: CultureInfo, value: ObjectType, type: TypeType) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class TimeSpanSecondsOrInfiniteConverter(TimeSpanSecondsConverter):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ConvertFrom(self, ctx: ITypeDescriptorContext, ci: CultureInfo, data: ObjectType) -> ObjectType: ...
+    
+    @overload
+    def ConvertTo(self, ctx: ITypeDescriptorContext, ci: CultureInfo, value: ObjectType, type: TypeType) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class TimeSpanValidator(ConfigurationValidatorBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, minValue: TimeSpan, maxValue: TimeSpan): ...
+    
+    @overload
+    def __init__(self, minValue: TimeSpan, maxValue: TimeSpan, rangeIsExclusive: BooleanType): ...
+    
+    @overload
+    def __init__(self, minValue: TimeSpan, maxValue: TimeSpan, rangeIsExclusive: BooleanType, resolutionInSeconds: LongType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanValidate(self, type: TypeType) -> BooleanType: ...
+    
+    def Validate(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class TimeSpanValidatorAttribute(ConfigurationValidatorAttribute, _Attribute):
+    # ---------- Fields ---------- #
+    
+    @staticmethod
+    @property
+    def TimeSpanMaxValue() -> StringType: ...
+    
+    @staticmethod
+    @property
+    def TimeSpanMinValue() -> StringType: ...
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def ExcludeRange(self) -> BooleanType: ...
+    
+    @ExcludeRange.setter
+    def ExcludeRange(self, value: BooleanType) -> None: ...
+    
+    @property
+    def MaxValue(self) -> TimeSpan: ...
+    
+    @property
+    def MaxValueString(self) -> StringType: ...
+    
+    @MaxValueString.setter
+    def MaxValueString(self, value: StringType) -> None: ...
+    
+    @property
+    def MinValue(self) -> TimeSpan: ...
+    
+    @property
+    def MinValueString(self) -> StringType: ...
+    
+    @MinValueString.setter
+    def MinValueString(self, value: StringType) -> None: ...
+    
+    @property
+    def ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_ExcludeRange(self) -> BooleanType: ...
+    
+    def get_MaxValue(self) -> TimeSpan: ...
+    
+    def get_MaxValueString(self) -> StringType: ...
+    
+    def get_MinValue(self) -> TimeSpan: ...
+    
+    def get_MinValueString(self) -> StringType: ...
+    
+    def get_ValidatorInstance(self) -> ConfigurationValidatorBase: ...
+    
+    def set_ExcludeRange(self, value: BooleanType) -> VoidType: ...
+    
+    def set_MaxValueString(self, value: StringType) -> VoidType: ...
+    
+    def set_MinValueString(self, value: StringType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class TypeNameConverter(ConfigurationConverterBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ConvertFrom(self, ctx: ITypeDescriptorContext, ci: CultureInfo, data: ObjectType) -> ObjectType: ...
+    
+    @overload
+    def ConvertTo(self, ctx: ITypeDescriptorContext, ci: CultureInfo, value: ObjectType, type: TypeType) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class TypeUtil(ABC, ObjectType):
     """"""
     
@@ -2132,6 +7008,87 @@ class TypeUtil(ABC, ObjectType):
     # No Properties
     
     # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class TypeUtil(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class Update(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class UpdateConfigHost(DelegatingConfigHost, IInternalConfigHost, IInternalConfigurationBuilderHost):
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def DeleteStream(self, streamName: StringType) -> VoidType: ...
+    
+    def GetStreamVersion(self, streamName: StringType) -> ObjectType: ...
+    
+    def IsConfigRecordRequired(self, configPath: StringType) -> BooleanType: ...
+    
+    def IsFile(self, streamName: StringType) -> BooleanType: ...
+    
+    @overload
+    def OpenStreamForRead(self, streamName: StringType) -> Stream: ...
+    
+    @overload
+    def OpenStreamForWrite(self, streamName: StringType, templateStreamName: StringType, writeContext: ObjectType) -> Tuple[Stream, ObjectType]: ...
+    
+    @overload
+    def WriteCompleted(self, streamName: StringType, success: BooleanType, writeContext: ObjectType) -> VoidType: ...
     
     # No Events
     
@@ -2278,6 +7235,28 @@ class UriSectionReader(ObjectType):
     # No Sub Enums
 
 
+class UrlPath(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class UserScopedSettingAttribute(SettingAttribute, _Attribute):
     # No Fields
     
@@ -2322,7 +7301,290 @@ class UserSettingsGroup(ConfigurationSectionGroup):
     # No Sub Enums
 
 
+class ValidatorCallback(MulticastDelegate, ICloneable, ISerializable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, object: ObjectType, method: NIntType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def BeginInvoke(self, value: ObjectType, callback: AsyncCallback, object: ObjectType) -> IAsyncResult: ...
+    
+    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
+    
+    def Invoke(self, value: ObjectType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ValidatorUtils(ABC, ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @staticmethod
+    def HelperParamValidation(value: ObjectType, allowedType: TypeType) -> VoidType: ...
+    
+    @staticmethod
+    @overload
+    def ValidateScalar(value: TimeSpan, min: TimeSpan, max: TimeSpan, resolutionInSeconds: LongType, exclusiveRange: BooleanType) -> VoidType: ...
+    
+    @staticmethod
+    @overload
+    def ValidateScalar(value: T, min: T, max: T, resolution: T, exclusiveRange: BooleanType) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class WhiteSpaceTrimStringConverter(ConfigurationConverterBase):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def ConvertFrom(self, ctx: ITypeDescriptorContext, ci: CultureInfo, data: ObjectType) -> ObjectType: ...
+    
+    @overload
+    def ConvertTo(self, ctx: ITypeDescriptorContext, ci: CultureInfo, value: ObjectType, type: TypeType) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class XmlUtil(ObjectType, IDisposable, IConfigErrorInfo):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Filename(self) -> StringType: ...
+    
+    @property
+    def LineNumber(self) -> IntType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Dispose(self) -> VoidType: ...
+    
+    def get_Filename(self) -> StringType: ...
+    
+    def get_LineNumber(self) -> IntType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class XmlUtilWriter(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 # ---------- Structs ---------- #
+
+class CRYPTPROTECT_PROMPTSTRUCT(ValueType, IDisposable):
+    # ---------- Fields ---------- #
+    
+    @property
+    def cbSize(self) -> IntType: ...
+    
+    @cbSize.setter
+    def cbSize(self, value: IntType) -> None: ...
+    
+    @property
+    def dwPromptFlags(self) -> IntType: ...
+    
+    @dwPromptFlags.setter
+    def dwPromptFlags(self, value: IntType) -> None: ...
+    
+    @property
+    def hwndApp(self) -> NIntType: ...
+    
+    @hwndApp.setter
+    def hwndApp(self, value: NIntType) -> None: ...
+    
+    @property
+    def szPrompt(self) -> StringType: ...
+    
+    @szPrompt.setter
+    def szPrompt(self, value: StringType) -> None: ...
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class DATA_BLOB(ValueType, IDisposable):
+    # ---------- Fields ---------- #
+    
+    @property
+    def cbData(self) -> IntType: ...
+    
+    @cbData.setter
+    def cbData(self, value: IntType) -> None: ...
+    
+    @property
+    def pbData(self) -> NIntType: ...
+    
+    @pbData.setter
+    def pbData(self, value: NIntType) -> None: ...
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class OverrideModeSetting(ValueType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SafeBitVector32(ValueType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SimpleBitVector32(ValueType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
 
 class StoredSetting(ValueType):
     """"""
@@ -2430,6 +7692,88 @@ class ISettingsProviderService(Protocol):
 
 # ---------- Enums ---------- #
 
+class ConfigurationAllowDefinition(Enum):
+    MachineOnly: IntType = 0
+    MachineToWebRoot: IntType = 100
+    MachineToApplication: IntType = 200
+    Everywhere: IntType = 300
+
+
+class ConfigurationAllowExeDefinition(Enum):
+    MachineOnly: IntType = 0
+    MachineToApplication: IntType = 100
+    MachineToRoamingUser: IntType = 200
+    MachineToLocalUser: IntType = 300
+
+
+class ConfigurationElementCollectionType(Enum):
+    BasicMap: IntType = 0
+    AddRemoveClearMap: IntType = 1
+    BasicMapAlternate: IntType = 2
+    AddRemoveClearMapAlternate: IntType = 3
+
+
+class ConfigurationLockCollectionType(Enum):
+    LockedAttributes: IntType = 1
+    LockedExceptionList: IntType = 2
+    LockedElements: IntType = 3
+    LockedElementsExceptionList: IntType = 4
+
+
+class ConfigurationPropertyOptions(Enum):
+    #None: IntType = 0
+    IsDefaultCollection: IntType = 1
+    IsRequired: IntType = 2
+    IsKey: IntType = 4
+    IsTypeStringTransformationRequired: IntType = 8
+    IsAssemblyStringTransformationRequired: IntType = 16
+    IsVersionCheckRequired: IntType = 32
+
+
+class ConfigurationSaveMode(Enum):
+    Modified: IntType = 0
+    Minimal: IntType = 1
+    Full: IntType = 2
+
+
+class ConfigurationUserLevel(Enum):
+    #None: IntType = 0
+    PerUserRoaming: IntType = 10
+    PerUserRoamingAndLocal: IntType = 20
+
+
+class ConfigurationValueFlags(Enum):
+    Default: IntType = 0
+    Inherited: IntType = 1
+    Modified: IntType = 2
+    Locked: IntType = 4
+    XMLParentInherited: IntType = 8
+
+
+class ExceptionAction(Enum):
+    NonSpecific: IntType = 0
+    Local: IntType = 1
+    Global: IntType = 2
+
+
+class NamespaceChange(Enum):
+    #None: IntType = 0
+    Add: IntType = 1
+    Remove: IntType = 2
+
+
+class OverrideMode(Enum):
+    Inherit: IntType = 0
+    Allow: IntType = 1
+    Deny: IntType = 2
+
+
+class PropertyValueOrigin(Enum):
+    Default: IntType = 0
+    Inherited: IntType = 1
+    SetHere: IntType = 2
+
+
 class SettingsManageability(Enum):
     Roaming: IntType = 0
 
@@ -2454,40 +7798,149 @@ SettingsLoadedEventHandler = Callable[[ObjectType, SettingsLoadedEventArgs], Voi
 
 SettingsSavingEventHandler = Callable[[ObjectType, CancelEventArgs], VoidType]
 
+ValidatorCallback = Callable[[ObjectType], VoidType]
+
 __all__ = [
     AppSettingsReader,
+    AppSettingsSection,
     ApplicationScopedSettingAttribute,
     ApplicationSettingsBase,
     ApplicationSettingsGroup,
+    BaseConfigurationRecord,
+    CallbackValidator,
+    CallbackValidatorAttribute,
+    ClientConfigPaths,
+    ClientConfigurationHost,
+    ClientConfigurationSystem,
     ClientSettingsSection,
     ClientSettingsStore,
+    CommaDelimitedStringCollection,
+    CommaDelimitedStringCollectionConverter,
     CommonConfigurationStrings,
+    ConfigDefinitionUpdates,
+    ConfigPathUtility,
     ConfigXmlAttribute,
     ConfigXmlCDataSection,
     ConfigXmlComment,
     ConfigXmlDocument,
     ConfigXmlElement,
+    ConfigXmlReader,
     ConfigXmlSignificantWhitespace,
     ConfigXmlText,
     ConfigXmlWhitespace,
+    Configuration,
+    ConfigurationBuilder,
+    ConfigurationBuilderChain,
+    ConfigurationBuilderCollection,
+    ConfigurationBuilderSettings,
+    ConfigurationBuildersSection,
+    ConfigurationCollectionAttribute,
+    ConfigurationConverterBase,
+    ConfigurationElement,
+    ConfigurationElementCollection,
+    ConfigurationElementProperty,
+    ConfigurationErrorsException,
     ConfigurationException,
+    ConfigurationFileMap,
+    ConfigurationLocation,
+    ConfigurationLocationCollection,
+    ConfigurationLockCollection,
+    ConfigurationManager,
+    ConfigurationManagerHelperFactory,
     ConfigurationManagerInternalFactory,
+    ConfigurationPermission,
+    ConfigurationPermissionAttribute,
+    ConfigurationProperty,
+    ConfigurationPropertyAttribute,
+    ConfigurationPropertyCollection,
+    ConfigurationSchemaErrors,
+    ConfigurationSection,
+    ConfigurationSectionCollection,
+    ConfigurationSectionGroup,
+    ConfigurationSectionGroupCollection,
     ConfigurationSettings,
+    ConfigurationStringConstants,
+    ConfigurationValidatorAttribute,
+    ConfigurationValidatorBase,
+    ConfigurationValue,
+    ConfigurationValues,
+    ConnectionStringSettings,
+    ConnectionStringSettingsCollection,
+    ConnectionStringsSection,
+    ContextInformation,
+    Debug,
+    DeclarationUpdate,
+    DefaultSection,
     DefaultSettingValueAttribute,
+    DefaultValidator,
+    DefinitionUpdate,
     DictionarySectionHandler,
+    DpapiProtectedConfigurationProvider,
+    ElementInformation,
+    EmptyImpersonationContext,
+    ErrorInfoXmlDocument,
+    ErrorsHelper,
+    ExceptionUtil,
+    ExeConfigurationFileMap,
+    ExeContext,
+    FactoryId,
+    FactoryRecord,
+    FileUtil,
+    FipsAwareEncryptedXml,
+    GenericEnumConverter,
     HandlerBase,
     IdnElement,
+    IgnoreSection,
     IgnoreSectionHandler,
+    InfiniteIntConverter,
+    InfiniteTimeSpanConverter,
+    IntegerValidator,
+    IntegerValidatorAttribute,
+    InvalidPropValue,
     IriParsingElement,
+    KeyValueConfigurationCollection,
+    KeyValueConfigurationElement,
+    KeyValueInternalCollection,
     LocalFileSettingsProvider,
+    LocationSectionRecord,
+    LocationUpdates,
+    LongValidator,
+    LongValidatorAttribute,
+    MgmtConfigurationRecord,
+    NameValueConfigurationCollection,
+    NameValueConfigurationElement,
     NameValueFileSectionHandler,
     NameValueSectionHandler,
     NoSettingsVersionUpgradeAttribute,
+    PositiveTimeSpanValidator,
+    PositiveTimeSpanValidatorAttribute,
     PrivilegedConfigurationManager,
+    PropertyInformation,
+    PropertyInformationCollection,
+    PropertySourceInfo,
+    ProtectedConfiguration,
+    ProtectedConfigurationProvider,
+    ProtectedConfigurationProviderCollection,
+    ProtectedConfigurationSection,
+    ProtectedProviderSettings,
+    ProviderSettings,
+    ProviderSettingsCollection,
     ReadOnlyNameValueCollection,
+    RegexStringValidator,
+    RegexStringValidatorAttribute,
+    RsaProtectedConfigurationProvider,
+    RuntimeConfigurationRecord,
+    SR,
+    SRCategoryAttribute,
+    SRDescriptionAttribute,
     SchemeSettingElement,
     SchemeSettingElementCollection,
     SchemeSettingInternal,
+    SectionInformation,
+    SectionInput,
+    SectionRecord,
+    SectionUpdates,
+    SectionXmlInfo,
     SettingAttribute,
     SettingChangingEventArgs,
     SettingChangingEventHandler,
@@ -2517,23 +7970,63 @@ __all__ = [
     SettingsSerializeAsAttribute,
     SingleTagSectionHandler,
     SpecialSettingAttribute,
+    StreamInfo,
+    StreamUpdate,
+    StringUtil,
+    StringValidator,
+    StringValidatorAttribute,
+    SubclassTypeValidator,
+    SubclassTypeValidatorAttribute,
+    TimeSpanMinutesConverter,
+    TimeSpanMinutesOrInfiniteConverter,
+    TimeSpanSecondsConverter,
+    TimeSpanSecondsOrInfiniteConverter,
+    TimeSpanValidator,
+    TimeSpanValidatorAttribute,
+    TypeNameConverter,
     TypeUtil,
+    Update,
+    UpdateConfigHost,
     UriSection,
     UriSectionData,
     UriSectionInternal,
     UriSectionReader,
+    UrlPath,
     UserScopedSettingAttribute,
     UserSettingsGroup,
+    ValidatorCallback,
+    ValidatorUtils,
+    WhiteSpaceTrimStringConverter,
+    XmlUtil,
+    XmlUtilWriter,
+    CRYPTPROTECT_PROMPTSTRUCT,
+    DATA_BLOB,
+    OverrideModeSetting,
+    SafeBitVector32,
+    SimpleBitVector32,
     StoredSetting,
     IApplicationSettingsProvider,
     IConfigurationSectionHandler,
     IConfigurationSystem,
     IPersistComponentSettings,
     ISettingsProviderService,
+    ConfigurationAllowDefinition,
+    ConfigurationAllowExeDefinition,
+    ConfigurationElementCollectionType,
+    ConfigurationLockCollectionType,
+    ConfigurationPropertyOptions,
+    ConfigurationSaveMode,
+    ConfigurationUserLevel,
+    ConfigurationValueFlags,
+    ExceptionAction,
+    NamespaceChange,
+    OverrideMode,
+    PropertyValueOrigin,
     SettingsManageability,
     SettingsSerializeAs,
     SpecialSetting,
     SettingChangingEventHandler,
     SettingsLoadedEventHandler,
     SettingsSavingEventHandler,
+    ValidatorCallback,
 ]

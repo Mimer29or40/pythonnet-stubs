@@ -2,7 +2,7 @@ import json
 from collections import defaultdict
 from functools import partial
 from pathlib import Path
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple, Optional, List
 
 import clr
 
@@ -10,34 +10,39 @@ import System
 from System.Reflection import Assembly, ConstructorInfo, ParameterInfo, PropertyInfo, MethodInfo, EventInfo, FieldInfo
 from .logging import logger
 from .model import Parameter, WrappedType, Constructor, Namespace, Interface, SystemType, Property, Method, BaseType, VarType, EventType, Event, EnumField, Enum, Class, Delegate
-from .options import Options
-from .util import time_function, time_it, make_python_name, strip_path_str
+from .options import options
+from .util import time_function, time_it, make_python_name, strip_path_str, rm_tree
 
 
 @time_function(log_func=logger.info)
-def make(target_assembly_name: str, options: Options):
-    target_assembly: Assembly = clr.AddReference(target_assembly_name)
+def make(target_assembly_name: str):
+    target_assembly_obj: Assembly = clr.AddReference(target_assembly_name)
     
-    namespace_dict = defaultdict(list)
+    namespace_dict: Dict[str, List[System.Type]] = defaultdict(list)
     namespaces: Dict[str, Namespace] = {}
     
-    with time_it('Parsing Assembly', log_func=logger.info):
+    with time_it('Parsing Assemblies', log_func=logger.info):
+        assemblies: List[Assembly] = [target_assembly_obj]
+        for parent_name_obj in target_assembly_obj.GetReferencedAssemblies():
+            assemblies.append(Assembly.Load(parent_name_obj.Name))
+        
         types_found = 0
-        for type in target_assembly.GetTypes():
-            if type.Namespace is None or type.IsNested:
-                continue
-            logger.debug(f'Found Type \'{type.FullName}\' in Namespace \'{type.Namespace}\'')
-            namespace_dict[type.Namespace].append(type.FullName)
-            types_found += 1
+        for assembly_obj in assemblies:
+            for type in assembly_obj.GetTypes():
+                if type.Namespace is None or type.IsNested:
+                    continue
+                logger.debug(f'Found Type \'{type.FullName}\' in Namespace \'{type.Namespace}\'')
+                namespace_dict[type.Namespace].append(type)
+                types_found += 1
         
         logger.info(f'Processing {types_found} Types in {len(namespace_dict)} Namespaces')
-        for name, type_names in namespace_dict.items():
-            if name not in namespaces:
-                namespaces[name] = Namespace(name)
-            namespace: Namespace = namespaces[name]
+        for namespace_name, assembly_types in namespace_dict.items():
+            if namespace_name not in namespaces:
+                namespaces[namespace_name] = Namespace(namespace_name)
+            namespace: Namespace = namespaces[namespace_name]
             
-            for type_name in type_names:
-                _process_system_type_obj(namespace, target_assembly.GetType(type_name))
+            for type_obj in assembly_types:
+                _process_system_type_obj(namespace, type_obj)
     
     with time_it('Writing Stub Package', log_func=logger.info):
         stub_dir = options.output_dir / f'{target_assembly_name}-stubs'
@@ -46,7 +51,7 @@ def make(target_assembly_name: str, options: Options):
             logger.info(f'Writing to Directory: {stub_dir}')
             stub_dir.mkdir(parents=True, exist_ok=True)
             
-            assembly_name_type = target_assembly.GetName()
+            assembly_name_type = target_assembly_obj.GetName()
             version = assembly_name_type.Version
             culture = 'neutral'
             if (culture_info := assembly_name_type.CultureInfo) is not None and (culture_name := culture_info.Name) != '':
@@ -131,10 +136,10 @@ def make(target_assembly_name: str, options: Options):
             manifest_file.write_text('\n'.join(set(f'include {n.split(".")[0]}-stubs/*.pyi' for n in namespaces)) + '\n')
             
             logger.info(f'Writing: Stub Files')
-            for name, namespace in namespaces.items():
+            for namespace_name, namespace in namespaces.items():
                 parent_dir: Path = stub_dir
                 init_file: Path = parent_dir / '__init__.pyi'
-                for n in name.split('.'):
+                for n in namespace_name.split('.'):
                     namespace_dir: Path = parent_dir / strip_path_str(f'{n}-stubs' if parent_dir == stub_dir else n)
                     namespace_dir.mkdir(parents=True, exist_ok=True)
                     
@@ -142,23 +147,75 @@ def make(target_assembly_name: str, options: Options):
                     init_file.touch(exist_ok=True)
                     
                     parent_dir = namespace_dir
-                logger.debug(f'Writing Stub File: {init_file}')
+                logger.debug(f'Writing: Stub File \'{init_file}\'')
                 init_file.write_text('\n'.join(namespace.to_lines()))
         else:
             logger.info('No Files Written')
         
-        if options.json:
+        if options.json:  # TODO - Make this generate less files
             json_dir: Path = Path('logs') / target_assembly_name
             logger.info(f'Exporting Json Files: {json_dir}')
             json_dir.mkdir(parents=True, exist_ok=True)
-            for name, type_names in namespace_dict.items():
-                json_file = json_dir / f'{name}.json'
+            for namespace_name, assembly_types in namespace_dict.items():
+                json_file = json_dir / f'{namespace_name}.json'
                 try:
                     with json_file.open('w') as file:
                         logger.debug(f'Writing: {json_file.name}')
-                        json.dump(type_names, file, indent=2)
+                        json.dump(list(map(lambda t: t.FullName, assembly_types)), file, indent=2)
                 except OSError as e:
                     logger.warning(e)
+
+
+@time_function(log_func=logger.info)
+def group(assembly_names: List[str]):
+    namespace_dict: Dict[str, List[Tuple[Assembly, str]]] = defaultdict(list)
+    namespaces: Dict[str, Namespace] = {}
+    
+    with time_it('Parsing Assemblies', log_func=logger.info):
+        types_found = 0
+        for assembly_name in assembly_names:
+            logger.info(f'Adding Assembly \'{assembly_name}\' to Namespaces')
+            assembly: Assembly = clr.AddReference(assembly_name)
+            
+            for type in assembly.GetTypes():
+                if type.Namespace is None or type.IsNested:
+                    continue
+                logger.debug(f'Found Type \'{type.FullName}\' in Namespace \'{type.Namespace}\'')
+                namespace_dict[type.Namespace].append((assembly, type.FullName))
+                types_found += 1
+        
+        logger.info(f'Processing {types_found} Types in {len(namespace_dict)} Namespaces')
+        for name, type_names in namespace_dict.items():
+            if name not in namespaces:
+                namespaces[name] = Namespace(name)
+            namespace: Namespace = namespaces[name]
+            
+            for assembly, type_name in type_names:
+                _process_system_type_obj(namespace, assembly.GetType(type_name))
+    
+    with time_it('Writing Grouped Stubs', log_func=logger.info):
+        stub_dir = options.output_dir / 'Grouped Stubs'
+        
+        if stub_dir.exists():
+            rm_tree(stub_dir)
+        
+        logger.info(f'Writing to Directory: {stub_dir}')
+        stub_dir.mkdir(parents=True, exist_ok=True)
+        
+        logger.info(f'Writing: Stub Files')
+        for name, namespace in namespaces.items():
+            parent_dir: Path = stub_dir
+            init_file: Path = parent_dir / '__init__.pyi'
+            for n in name.split('.'):
+                namespace_dir: Path = parent_dir / strip_path_str(f'{n}-stubs' if parent_dir == stub_dir else n)
+                namespace_dir.mkdir(parents=True, exist_ok=True)
+                
+                init_file = namespace_dir / '__init__.pyi'
+                init_file.touch(exist_ok=True)
+                
+                parent_dir = namespace_dir
+            logger.debug(f'Writing: Stub File \'{init_file}\'')
+            init_file.write_text('\n'.join(namespace.to_lines()))
 
 
 def _process_system_type_obj(namespace: Namespace, system_type_obj: System.Type):
@@ -174,7 +231,7 @@ def _process_system_type_obj(namespace: Namespace, system_type_obj: System.Type)
         interface = _process_interface(namespace, system_type_obj)
         namespace.interfaces[interface.name].append(interface)
         return
-    if system_type_obj.IsSubclassOf(System.Delegate) and system_type_obj not in [System.Type.GetType('System.Delegate') and System.Type.GetType('System.MulticastDelegate')]:
+    if (system_type_obj.IsSubclassOf(System.Delegate) or system_type_obj.IsSubclassOf(System.MulticastDelegate)) and system_type_obj not in [System.Type.GetType('System.Delegate'), System.Type.GetType('System.MulticastDelegate')]:
         delegate = _process_delegate(namespace, system_type_obj)
         namespace.delegates[delegate.name].append(delegate)
     if system_type_obj.IsClass:
@@ -450,6 +507,9 @@ def _process_event(namespace: Namespace, event_info: EventInfo) -> Event:
     if 'EventType' not in namespace.sys_types:
         namespace.py_imports.add('typing.Generic')
         namespace.special_types['EventType'] = EventType()
+        if 'T' not in namespace.var_types:
+            namespace.py_imports.add('typing.TypeVar')
+            namespace.var_types['T'] = VarType(name='T')
     
     name = make_python_name(event_info.Name)
     type = _get_type(namespace, event_info.EventHandlerType)
