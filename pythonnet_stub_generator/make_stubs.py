@@ -7,6 +7,7 @@ from typing import Dict, Tuple, Optional, List
 import clr
 
 import System
+from System.IO import FileNotFoundException
 from System.Reflection import Assembly, ConstructorInfo, ParameterInfo, PropertyInfo, MethodInfo, EventInfo, FieldInfo
 from .logging import logger
 from .model import Parameter, WrappedType, Constructor, Namespace, Interface, SystemType, Property, Method, BaseType, VarType, EventType, Event, EnumField, Enum, Class, Delegate
@@ -178,7 +179,11 @@ def group(assembly_names: List[str]):
             assembly_obj: Assembly = clr.AddReference(assembly_name)
             assemblies: List[Assembly] = [assembly_obj]
             for parent_name_obj in assembly_obj.GetReferencedAssemblies():
-                assemblies.append(Assembly.Load(parent_name_obj.Name))
+                try:
+                    # assemblies.append(Assembly.Load(parent_name_obj.Name))
+                    assemblies.append(clr.AddReference(parent_name_obj.Name))
+                except FileNotFoundException:
+                    logger.warning(f'Could not find Dependency: {parent_name_obj.Name}')
             
             for assembly_obj in assemblies:
                 for type in assembly_obj.GetTypes():
