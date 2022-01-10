@@ -36,12 +36,12 @@ def make(target_assembly_name: str):
                 types_found += 1
         
         logger.info(f'Processing {types_found} Types in {len(namespace_dict)} Namespaces')
-        for namespace_name, assembly_types in namespace_dict.items():
+        for namespace_name, type_objs in namespace_dict.items():
             if namespace_name not in namespaces:
                 namespaces[namespace_name] = Namespace(namespace_name)
             namespace: Namespace = namespaces[namespace_name]
             
-            for type_obj in assembly_types:
+            for type_obj in type_objs:
                 _process_system_type_obj(namespace, type_obj)
     
     with time_it('Writing Stub Package', log_func=logger.info):
@@ -156,42 +156,46 @@ def make(target_assembly_name: str):
             json_dir: Path = Path('logs') / target_assembly_name
             logger.info(f'Exporting Json Files: {json_dir}')
             json_dir.mkdir(parents=True, exist_ok=True)
-            for namespace_name, assembly_types in namespace_dict.items():
+            for namespace_name, type_objs in namespace_dict.items():
                 json_file = json_dir / f'{namespace_name}.json'
                 try:
                     with json_file.open('w') as file:
                         logger.debug(f'Writing: {json_file.name}')
-                        json.dump(list(map(lambda t: t.FullName, assembly_types)), file, indent=2)
+                        json.dump(list(map(lambda t: t.FullName, type_objs)), file, indent=2)
                 except OSError as e:
                     logger.warning(e)
 
 
 @time_function(log_func=logger.info)
 def group(assembly_names: List[str]):
-    namespace_dict: Dict[str, List[Tuple[Assembly, str]]] = defaultdict(list)
+    namespace_dict: Dict[str, List[System.Type]] = defaultdict(list)
     namespaces: Dict[str, Namespace] = {}
     
     with time_it('Parsing Assemblies', log_func=logger.info):
         types_found = 0
         for assembly_name in assembly_names:
             logger.info(f'Adding Assembly \'{assembly_name}\' to Namespaces')
-            assembly: Assembly = clr.AddReference(assembly_name)
+            assembly_obj: Assembly = clr.AddReference(assembly_name)
+            assemblies: List[Assembly] = [assembly_obj]
+            for parent_name_obj in assembly_obj.GetReferencedAssemblies():
+                assemblies.append(Assembly.Load(parent_name_obj.Name))
             
-            for type in assembly.GetTypes():
-                if type.Namespace is None or type.IsNested:
-                    continue
-                logger.debug(f'Found Type \'{type.FullName}\' in Namespace \'{type.Namespace}\'')
-                namespace_dict[type.Namespace].append((assembly, type.FullName))
-                types_found += 1
+            for assembly_obj in assemblies:
+                for type in assembly_obj.GetTypes():
+                    if type.Namespace is None or type.IsNested:
+                        continue
+                    logger.debug(f'Found Type \'{type.FullName}\' in Namespace \'{type.Namespace}\'')
+                    namespace_dict[type.Namespace].append(type)
+                    types_found += 1
         
         logger.info(f'Processing {types_found} Types in {len(namespace_dict)} Namespaces')
-        for name, type_names in namespace_dict.items():
-            if name not in namespaces:
-                namespaces[name] = Namespace(name)
-            namespace: Namespace = namespaces[name]
+        for namespace_name, type_objs in namespace_dict.items():
+            if namespace_name not in namespaces:
+                namespaces[namespace_name] = Namespace(namespace_name)
+            namespace: Namespace = namespaces[namespace_name]
             
-            for assembly, type_name in type_names:
-                _process_system_type_obj(namespace, assembly.GetType(type_name))
+            for type_obj in type_objs:
+                _process_system_type_obj(namespace, type_obj)
     
     with time_it('Writing Grouped Stubs', log_func=logger.info):
         stub_dir = options.output_dir / 'Grouped Stubs'
@@ -203,10 +207,10 @@ def group(assembly_names: List[str]):
         stub_dir.mkdir(parents=True, exist_ok=True)
         
         logger.info(f'Writing: Stub Files')
-        for name, namespace in namespaces.items():
+        for namespace_name, namespace in namespaces.items():
             parent_dir: Path = stub_dir
             init_file: Path = parent_dir / '__init__.pyi'
-            for n in name.split('.'):
+            for n in namespace_name.split('.'):
                 namespace_dir: Path = parent_dir / strip_path_str(f'{n}-stubs' if parent_dir == stub_dir else n)
                 namespace_dir.mkdir(parents=True, exist_ok=True)
                 

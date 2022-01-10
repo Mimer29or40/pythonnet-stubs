@@ -1,5 +1,0 @@
-include System-stubs/*.pyi
-include Internal-stubs/*.pyi
-include Windows-stubs/*.pyi
-include Microsoft-stubs/*.pyi
-include MS-stubs/*.pyi

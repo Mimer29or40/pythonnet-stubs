@@ -1,3 +1,0 @@
-include Windows-stubs/*.pyi
-include System-stubs/*.pyi
-include Microsoft-stubs/*.pyi
