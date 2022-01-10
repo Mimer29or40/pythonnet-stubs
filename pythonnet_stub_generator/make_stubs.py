@@ -2,42 +2,28 @@ import json
 from collections import defaultdict
 from functools import partial
 from pathlib import Path
-from typing import Dict, Tuple, Optional, List
+from typing import DefaultDict, Dict, List, Optional, Tuple
 
 import clr
 
 import System
 from System.IO import FileNotFoundException
-from System.Reflection import Assembly, ConstructorInfo, ParameterInfo, PropertyInfo, MethodInfo, EventInfo, FieldInfo
+from System.Reflection import Assembly, ConstructorInfo, EventInfo, FieldInfo, MethodInfo, ParameterInfo, PropertyInfo
 from .logging import logger
-from .model import Parameter, WrappedType, Constructor, Namespace, Interface, SystemType, Property, Method, BaseType, VarType, EventType, Event, EnumField, Enum, Class, Delegate
+from .model import BaseType, Class, Constructor, Delegate, Enum, EnumField, Event, EventType, Interface, Method, Namespace, Parameter, Property, SystemType, VarType, WrappedType
 from .options import options
-from .util import time_function, time_it, make_python_name, strip_path_str, rm_tree
+from .util import make_python_name, rm_tree, strip_path_str, time_function, time_it
 
 
 @time_function(log_func=logger.info)
 def make(target_assembly_name: str):
     target_assembly_obj: Assembly = clr.AddReference(target_assembly_name)
     
-    namespace_dict: Dict[str, List[System.Type]] = defaultdict(list)
+    namespace_dict: DefaultDict[str, List[System.Type]] = defaultdict(list)
     namespaces: Dict[str, Namespace] = {}
     
     with time_it('Parsing Assemblies', log_func=logger.info):
-        assemblies: List[Assembly] = [target_assembly_obj]
-        for parent_name_obj in target_assembly_obj.GetReferencedAssemblies():
-            try:
-                assemblies.append(clr.AddReference(parent_name_obj.Name))
-            except FileNotFoundException:
-                logger.warning(f'Could not find Dependency: {parent_name_obj.Name}')
-        
-        types_found = 0
-        for assembly_obj in assemblies:
-            for type in assembly_obj.GetTypes():
-                if type.Namespace is None or type.IsNested:
-                    continue
-                logger.debug(f'Found Type \'{type.FullName}\' in Namespace \'{type.Namespace}\'')
-                namespace_dict[type.Namespace].append(type)
-                types_found += 1
+        types_found = _create_namespace_dict(target_assembly_obj, namespace_dict)
         
         logger.info(f'Processing {types_found} Types in {len(namespace_dict)} Namespaces')
         for namespace_name, type_objs in namespace_dict.items():
@@ -127,7 +113,7 @@ def make(target_assembly_name: str):
                 f'',
                 f'THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR',
                 f'IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,',
-                f'FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE',
+                f'FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE',
                 f'AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER',
                 f'LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,',
                 f'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE',
@@ -172,7 +158,7 @@ def make(target_assembly_name: str):
 
 @time_function(log_func=logger.info)
 def group(assembly_names: List[str]):
-    namespace_dict: Dict[str, List[System.Type]] = defaultdict(list)
+    namespace_dict: DefaultDict[str, List[System.Type]] = defaultdict(list)
     namespaces: Dict[str, Namespace] = {}
     
     with time_it('Parsing Assemblies', log_func=logger.info):
@@ -180,20 +166,8 @@ def group(assembly_names: List[str]):
         for assembly_name in assembly_names:
             logger.info(f'Adding Assembly \'{assembly_name}\' to Namespaces')
             assembly_obj: Assembly = clr.AddReference(assembly_name)
-            assemblies: List[Assembly] = [assembly_obj]
-            for parent_name_obj in assembly_obj.GetReferencedAssemblies():
-                try:
-                    assemblies.append(clr.AddReference(parent_name_obj.Name))
-                except FileNotFoundException:
-                    logger.warning(f'Could not find Dependency: {parent_name_obj.Name}')
             
-            for assembly_obj in assemblies:
-                for type in assembly_obj.GetTypes():
-                    if type.Namespace is None or type.IsNested:
-                        continue
-                    logger.debug(f'Found Type \'{type.FullName}\' in Namespace \'{type.Namespace}\'')
-                    namespace_dict[type.Namespace].append(type)
-                    types_found += 1
+            types_found += _create_namespace_dict(assembly_obj, namespace_dict)
         
         logger.info(f'Processing {types_found} Types in {len(namespace_dict)} Namespaces')
         for namespace_name, type_objs in namespace_dict.items():
@@ -227,6 +201,26 @@ def group(assembly_names: List[str]):
                 parent_dir = namespace_dir
             logger.debug(f'Writing: Stub File \'{init_file}\'')
             init_file.write_text('\n'.join(namespace.to_lines()))
+
+
+def _create_namespace_dict(assembly_obj: Assembly, namespace_dict: DefaultDict[str, List[System.Type]]) -> int:
+    assemblies: List[Assembly] = [assembly_obj]
+    for parent_name_obj in assembly_obj.GetReferencedAssemblies():
+        try:
+            assemblies.append(Assembly.Load(parent_name_obj))
+        except FileNotFoundException:
+            logger.warning(f'Could not find Dependency: {parent_name_obj.Name}')
+    
+    types_found = 0
+    for assembly_obj in assemblies:
+        for type in assembly_obj.GetTypes():
+            if type.Namespace is None or type.IsNested:
+                continue
+            logger.debug(f'Found Type \'{type.FullName}\' in Namespace \'{type.Namespace}\'')
+            namespace_dict[type.Namespace].append(type)
+            types_found += 1
+    
+    return types_found
 
 
 def _process_system_type_obj(namespace: Namespace, system_type_obj: System.Type):
@@ -531,7 +525,10 @@ def _process_event(namespace: Namespace, event_info: EventInfo) -> Event:
 def _get_parameter(namespace: Namespace, parameter_info: ParameterInfo) -> Parameter:
     name = make_python_name(parameter_info.Name)
     type = _get_type(namespace, parameter_info.ParameterType)
-    default = parameter_info.RawDefaultValue if parameter_info.IsOptional else None
+    try:
+        default = parameter_info.RawDefaultValue if parameter_info.HasDefaultValue else None
+    except System.FormatException:
+        default = None
     is_out = parameter_info.IsOut or type.is_ref
     
     return Parameter(name=name, type=type, default=default, is_out=is_out, doc_string='')
