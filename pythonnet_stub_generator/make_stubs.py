@@ -25,7 +25,10 @@ def make(target_assembly_name: str):
     with time_it('Parsing Assemblies', log_func=logger.info):
         assemblies: List[Assembly] = [target_assembly_obj]
         for parent_name_obj in target_assembly_obj.GetReferencedAssemblies():
-            assemblies.append(Assembly.Load(parent_name_obj.Name))
+            try:
+                assemblies.append(clr.AddReference(parent_name_obj.Name))
+            except FileNotFoundException:
+                logger.warning(f'Could not find Dependency: {parent_name_obj.Name}')
         
         types_found = 0
         for assembly_obj in assemblies:
@@ -180,7 +183,6 @@ def group(assembly_names: List[str]):
             assemblies: List[Assembly] = [assembly_obj]
             for parent_name_obj in assembly_obj.GetReferencedAssemblies():
                 try:
-                    # assemblies.append(Assembly.Load(parent_name_obj.Name))
                     assemblies.append(clr.AddReference(parent_name_obj.Name))
                 except FileNotFoundException:
                     logger.warning(f'Could not find Dependency: {parent_name_obj.Name}')
