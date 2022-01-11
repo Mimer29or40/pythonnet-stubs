@@ -13,6 +13,7 @@ StringType = Union[str, String]
 ULongType = Union[int, UInt64]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class TracingStatusChangedEventArgs(RuntimeClass, ITracingStatusChangedEventArgs):

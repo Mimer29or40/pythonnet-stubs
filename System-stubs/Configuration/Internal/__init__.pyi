@@ -29,6 +29,7 @@ class EventType(Generic[T]):
     def __isub__(self, other: T): ...
 
 
+
 # ---------- Classes ---------- #
 
 class ConfigSystem(ObjectType, IConfigSystem):
@@ -37,6 +38,28 @@ class ConfigSystem(ObjectType, IConfigSystem):
     # ---------- Constructors ---------- #
     
     def __init__(self): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ConfigurationManagerHelper(ObjectType, IConfigurationManagerHelper):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
     
     # No Properties
     

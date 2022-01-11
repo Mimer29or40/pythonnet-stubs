@@ -21,6 +21,7 @@ ObjectType = Object
 StringType = Union[str, String]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class AbsoluteQuery(ContextQuery, ICloneable, IEnumerable):
@@ -3824,11 +3825,9 @@ class SortKey(ObjectType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> ObjectType: ...
+    def __getitem__(self, key: IntType) -> ObjectType: ...
     
-    @Item.setter
-    def Item(self, value: ObjectType) -> None: ...
+    def __setitem__(self, key: IntType, value: ObjectType) -> None: ...
     
     @property
     def Node(self) -> XPathNavigator: ...
@@ -3871,11 +3870,9 @@ class SortKey(ObjectType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> ObjectType: ...
+    def __getitem__(self, key: IntType) -> ObjectType: ...
     
-    @Item.setter
-    def Item(self, value: ObjectType) -> None: ...
+    def __setitem__(self, key: IntType, value: ObjectType) -> None: ...
     
     @property
     def Node(self) -> XPathNavigator: ...

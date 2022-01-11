@@ -38,6 +38,7 @@ ULongType = Union[int, UInt64]
 UShortType = Union[int, UInt16]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class AbandonedMutexException(SystemException, ISerializable, _Exception):
@@ -514,6 +515,107 @@ class Barrier(ObjectType, IDisposable):
     def get_ParticipantCount(self) -> IntType: ...
     
     def get_ParticipantsRemaining(self) -> IntType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class Barrier(ObjectType, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, participantCount: IntType): ...
+    
+    @overload
+    def __init__(self, participantCount: IntType, postPhaseAction: Action[Barrier]): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def CurrentPhaseNumber(self) -> LongType: ...
+    
+    @property
+    def ParticipantCount(self) -> IntType: ...
+    
+    @property
+    def ParticipantsRemaining(self) -> IntType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def AddParticipant(self) -> LongType: ...
+    
+    def AddParticipants(self, participantCount: IntType) -> LongType: ...
+    
+    def Dispose(self) -> VoidType: ...
+    
+    def RemoveParticipant(self) -> VoidType: ...
+    
+    def RemoveParticipants(self, participantCount: IntType) -> VoidType: ...
+    
+    @overload
+    def SignalAndWait(self) -> VoidType: ...
+    
+    @overload
+    def SignalAndWait(self, cancellationToken: CancellationToken) -> VoidType: ...
+    
+    @overload
+    def SignalAndWait(self, timeout: TimeSpan) -> BooleanType: ...
+    
+    @overload
+    def SignalAndWait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> BooleanType: ...
+    
+    @overload
+    def SignalAndWait(self, millisecondsTimeout: IntType) -> BooleanType: ...
+    
+    @overload
+    def SignalAndWait(self, millisecondsTimeout: IntType, cancellationToken: CancellationToken) -> BooleanType: ...
+    
+    def get_CurrentPhaseNumber(self) -> LongType: ...
+    
+    def get_ParticipantCount(self) -> IntType: ...
+    
+    def get_ParticipantsRemaining(self) -> IntType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class BarrierPostPhaseException(Exception, ISerializable, _Exception):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self): ...
+    
+    @overload
+    def __init__(self, innerException: Exception): ...
+    
+    @overload
+    def __init__(self, message: StringType): ...
+    
+    @overload
+    def __init__(self, message: StringType, innerException: Exception): ...
+    
+    # No Properties
+    
+    # No Methods
     
     # No Events
     
@@ -4546,58 +4648,6 @@ class ReaderWriterCount(ObjectType):
     # No Sub Enums
 
 
-class ReaderWriterCount(ObjectType):
-    # ---------- Fields ---------- #
-    
-    @property
-    def lockID(self) -> LongType: ...
-    
-    @lockID.setter
-    def lockID(self, value: LongType) -> None: ...
-    
-    @property
-    def next(self) -> ReaderWriterCount: ...
-    
-    @next.setter
-    def next(self, value: ReaderWriterCount) -> None: ...
-    
-    @property
-    def readercount(self) -> IntType: ...
-    
-    @readercount.setter
-    def readercount(self, value: IntType) -> None: ...
-    
-    @property
-    def upgradecount(self) -> IntType: ...
-    
-    @upgradecount.setter
-    def upgradecount(self, value: IntType) -> None: ...
-    
-    @property
-    def writercount(self) -> IntType: ...
-    
-    @writercount.setter
-    def writercount(self, value: IntType) -> None: ...
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class ReaderWriterLock(CriticalFinalizerObject):
     # No Fields
     
@@ -4912,119 +4962,6 @@ class ReaderWriterLockSlim(ObjectType, IDisposable):
     # No Sub Enums
 
 
-class ReaderWriterLockSlim(ObjectType, IDisposable):
-    # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    @overload
-    def __init__(self): ...
-    
-    @overload
-    def __init__(self, recursionPolicy: LockRecursionPolicy): ...
-    
-    # ---------- Properties ---------- #
-    
-    @property
-    def CurrentReadCount(self) -> IntType: ...
-    
-    @property
-    def IsReadLockHeld(self) -> BooleanType: ...
-    
-    @property
-    def IsUpgradeableReadLockHeld(self) -> BooleanType: ...
-    
-    @property
-    def IsWriteLockHeld(self) -> BooleanType: ...
-    
-    @property
-    def RecursionPolicy(self) -> LockRecursionPolicy: ...
-    
-    @property
-    def RecursiveReadCount(self) -> IntType: ...
-    
-    @property
-    def RecursiveUpgradeCount(self) -> IntType: ...
-    
-    @property
-    def RecursiveWriteCount(self) -> IntType: ...
-    
-    @property
-    def WaitingReadCount(self) -> IntType: ...
-    
-    @property
-    def WaitingUpgradeCount(self) -> IntType: ...
-    
-    @property
-    def WaitingWriteCount(self) -> IntType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def Dispose(self) -> VoidType: ...
-    
-    def EnterReadLock(self) -> VoidType: ...
-    
-    def EnterUpgradeableReadLock(self) -> VoidType: ...
-    
-    def EnterWriteLock(self) -> VoidType: ...
-    
-    def ExitReadLock(self) -> VoidType: ...
-    
-    def ExitUpgradeableReadLock(self) -> VoidType: ...
-    
-    def ExitWriteLock(self) -> VoidType: ...
-    
-    @overload
-    def TryEnterReadLock(self, timeout: TimeSpan) -> BooleanType: ...
-    
-    @overload
-    def TryEnterReadLock(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    
-    @overload
-    def TryEnterUpgradeableReadLock(self, timeout: TimeSpan) -> BooleanType: ...
-    
-    @overload
-    def TryEnterUpgradeableReadLock(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    
-    @overload
-    def TryEnterWriteLock(self, timeout: TimeSpan) -> BooleanType: ...
-    
-    @overload
-    def TryEnterWriteLock(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    
-    def get_CurrentReadCount(self) -> IntType: ...
-    
-    def get_IsReadLockHeld(self) -> BooleanType: ...
-    
-    def get_IsUpgradeableReadLockHeld(self) -> BooleanType: ...
-    
-    def get_IsWriteLockHeld(self) -> BooleanType: ...
-    
-    def get_RecursionPolicy(self) -> LockRecursionPolicy: ...
-    
-    def get_RecursiveReadCount(self) -> IntType: ...
-    
-    def get_RecursiveUpgradeCount(self) -> IntType: ...
-    
-    def get_RecursiveWriteCount(self) -> IntType: ...
-    
-    def get_WaitingReadCount(self) -> IntType: ...
-    
-    def get_WaitingUpgradeCount(self) -> IntType: ...
-    
-    def get_WaitingWriteCount(self) -> IntType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class RegisteredWaitHandle(MarshalByRefObject):
     # No Fields
     
@@ -5226,6 +5163,64 @@ class SafeCompressedStackHandle(SafeHandle, IDisposable):
     # ---------- Methods ---------- #
     
     def get_IsInvalid(self) -> BooleanType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class Semaphore(WaitHandle, IDisposable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, initialCount: IntType, maximumCount: IntType): ...
+    
+    @overload
+    def __init__(self, initialCount: IntType, maximumCount: IntType, name: StringType): ...
+    
+    @overload
+    def __init__(self, initialCount: IntType, maximumCount: IntType, name: StringType, createdNew: BooleanType): ...
+    
+    @overload
+    def __init__(self, initialCount: IntType, maximumCount: IntType, name: StringType, createdNew: BooleanType, semaphoreSecurity: SemaphoreSecurity): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def GetAccessControl(self) -> SemaphoreSecurity: ...
+    
+    @staticmethod
+    @overload
+    def OpenExisting(name: StringType) -> Semaphore: ...
+    
+    @staticmethod
+    @overload
+    def OpenExisting(name: StringType, rights: SemaphoreRights) -> Semaphore: ...
+    
+    @overload
+    def Release(self) -> IntType: ...
+    
+    @overload
+    def Release(self, releaseCount: IntType) -> IntType: ...
+    
+    def SetAccessControl(self, semaphoreSecurity: SemaphoreSecurity) -> VoidType: ...
+    
+    @staticmethod
+    @overload
+    def TryOpenExisting(name: StringType, result: Semaphore) -> Tuple[BooleanType, Semaphore]: ...
+    
+    @staticmethod
+    @overload
+    def TryOpenExisting(name: StringType, rights: SemaphoreRights, result: Semaphore) -> Tuple[BooleanType, Semaphore]: ...
     
     # No Events
     
@@ -7303,6 +7298,61 @@ class ThreadExceptionEventArgs(EventArgs):
     # ---------- Methods ---------- #
     
     def get_Exception(self) -> Exception: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ThreadExceptionEventArgs(EventArgs):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, t: Exception): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Exception(self) -> Exception: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Exception(self) -> Exception: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ThreadExceptionEventHandler(MulticastDelegate, ICloneable, ISerializable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, object: ObjectType, method: NIntType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def BeginInvoke(self, sender: ObjectType, e: ThreadExceptionEventArgs, callback: AsyncCallback, object: ObjectType) -> IAsyncResult: ...
+    
+    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
+    
+    def Invoke(self, sender: ObjectType, e: ThreadExceptionEventArgs) -> VoidType: ...
     
     # No Events
     
@@ -12505,11 +12555,6 @@ class LockRecursionPolicy(Enum):
     SupportsRecursion: IntType = 1
 
 
-class LockRecursionPolicy(Enum):
-    NoRecursion: IntType = 0
-    SupportsRecursion: IntType = 1
-
-
 class StackCrawlMark(Enum):
     LookForMe: IntType = 0
     LookForMyCaller: IntType = 1
@@ -12640,6 +12685,8 @@ SendOrPostCallback = Callable[[ObjectType], VoidType]
 SendOrPostCallback = Callable[[ObjectType], VoidType]
 
 SendOrPostCallback = Callable[[ObjectType], VoidType]
+
+ThreadExceptionEventHandler = Callable[[ObjectType, ThreadExceptionEventArgs], VoidType]
 
 ThreadExceptionEventHandler = Callable[[ObjectType, ThreadExceptionEventArgs], VoidType]
 

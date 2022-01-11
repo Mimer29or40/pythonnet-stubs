@@ -12,6 +12,7 @@ BooleanType = Union[bool, Boolean]
 ObjectType = Object
 TypeType = Union[type, Type]
 
+
 # ---------- Classes ---------- #
 
 class ReflectionExtensions(ABC, ObjectType):

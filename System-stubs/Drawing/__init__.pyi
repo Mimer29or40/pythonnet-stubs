@@ -3,7 +3,30 @@ from __future__ import annotations
 from System import Attribute
 from System.Runtime.InteropServices import _Attribute
 
+
 # ---------- Classes ---------- #
+
+class BitmapSuffixInSatelliteAssemblyAttribute(Attribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
 
 class BitmapSuffixInSatelliteAssemblyAttribute(Attribute, _Attribute):
     # No Fields

@@ -11,6 +11,7 @@ from System.Runtime.InteropServices import _Attribute
 IntType = Union[int, Int32]
 ObjectType = Object
 
+
 # ---------- Classes ---------- #
 
 class CriticalFinalizerObject(ABC, ObjectType):

@@ -22,6 +22,7 @@ StringType = Union[str, String]
 TypeType = Union[type, Type]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class AccessRule(Generic[T], AccessRule):
@@ -612,8 +613,7 @@ class AuthorizationRuleCollection(ReadOnlyCollectionBase, ICollection, IEnumerab
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> AuthorizationRule: ...
+    def __getitem__(self, key: IntType) -> AuthorizationRule: ...
     
     # ---------- Methods ---------- #
     
@@ -643,8 +643,7 @@ class AuthorizationRuleCollection(ReadOnlyCollectionBase, ICollection, IEnumerab
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> AuthorizationRule: ...
+    def __getitem__(self, key: IntType) -> AuthorizationRule: ...
     
     # ---------- Methods ---------- #
     
@@ -674,8 +673,7 @@ class AuthorizationRuleCollection(ReadOnlyCollectionBase, ICollection, IEnumerab
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> AuthorizationRule: ...
+    def __getitem__(self, key: IntType) -> AuthorizationRule: ...
     
     # ---------- Methods ---------- #
     
@@ -814,11 +812,9 @@ class CommonAcl(ABC, GenericAcl, ICollection, IEnumerable):
     @property
     def IsDS(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> GenericAce: ...
+    def __getitem__(self, key: IntType) -> GenericAce: ...
     
-    @Item.setter
-    def Item(self, value: GenericAce) -> None: ...
+    def __setitem__(self, key: IntType, value: GenericAce) -> None: ...
     
     @property
     def Revision(self) -> ByteType: ...
@@ -880,11 +876,9 @@ class CommonAcl(ABC, GenericAcl, ICollection, IEnumerable):
     @property
     def IsDS(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> GenericAce: ...
+    def __getitem__(self, key: IntType) -> GenericAce: ...
     
-    @Item.setter
-    def Item(self, value: GenericAce) -> None: ...
+    def __setitem__(self, key: IntType, value: GenericAce) -> None: ...
     
     @property
     def Revision(self) -> ByteType: ...
@@ -946,11 +940,9 @@ class CommonAcl(ABC, GenericAcl, ICollection, IEnumerable):
     @property
     def IsDS(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> GenericAce: ...
+    def __getitem__(self, key: IntType) -> GenericAce: ...
     
-    @Item.setter
-    def Item(self, value: GenericAce) -> None: ...
+    def __setitem__(self, key: IntType, value: GenericAce) -> None: ...
     
     @property
     def Revision(self) -> ByteType: ...
@@ -3487,11 +3479,9 @@ class GenericAcl(ABC, ObjectType, ICollection, IEnumerable):
     @property
     def IsSynchronized(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> GenericAce: ...
+    def __getitem__(self, key: IntType) -> GenericAce: ...
     
-    @Item.setter
-    def Item(self, value: GenericAce) -> None: ...
+    def __setitem__(self, key: IntType, value: GenericAce) -> None: ...
     
     @property
     def Revision(self) -> ByteType: ...
@@ -3560,11 +3550,9 @@ class GenericAcl(ABC, ObjectType, ICollection, IEnumerable):
     @property
     def IsSynchronized(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> GenericAce: ...
+    def __getitem__(self, key: IntType) -> GenericAce: ...
     
-    @Item.setter
-    def Item(self, value: GenericAce) -> None: ...
+    def __setitem__(self, key: IntType, value: GenericAce) -> None: ...
     
     @property
     def Revision(self) -> ByteType: ...
@@ -3633,11 +3621,9 @@ class GenericAcl(ABC, ObjectType, ICollection, IEnumerable):
     @property
     def IsSynchronized(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> GenericAce: ...
+    def __getitem__(self, key: IntType) -> GenericAce: ...
     
-    @Item.setter
-    def Item(self, value: GenericAce) -> None: ...
+    def __setitem__(self, key: IntType, value: GenericAce) -> None: ...
     
     @property
     def Revision(self) -> ByteType: ...
@@ -6025,11 +6011,9 @@ class RawAcl(GenericAcl, ICollection, IEnumerable):
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> GenericAce: ...
+    def __getitem__(self, key: IntType) -> GenericAce: ...
     
-    @Item.setter
-    def Item(self, value: GenericAce) -> None: ...
+    def __setitem__(self, key: IntType, value: GenericAce) -> None: ...
     
     @property
     def Revision(self) -> ByteType: ...
@@ -6082,11 +6066,9 @@ class RawAcl(GenericAcl, ICollection, IEnumerable):
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> GenericAce: ...
+    def __getitem__(self, key: IntType) -> GenericAce: ...
     
-    @Item.setter
-    def Item(self, value: GenericAce) -> None: ...
+    def __setitem__(self, key: IntType, value: GenericAce) -> None: ...
     
     @property
     def Revision(self) -> ByteType: ...
@@ -6139,11 +6121,9 @@ class RawAcl(GenericAcl, ICollection, IEnumerable):
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> GenericAce: ...
+    def __getitem__(self, key: IntType) -> GenericAce: ...
     
-    @Item.setter
-    def Item(self, value: GenericAce) -> None: ...
+    def __setitem__(self, key: IntType, value: GenericAce) -> None: ...
     
     @property
     def Revision(self) -> ByteType: ...
@@ -6859,6 +6839,37 @@ class SemaphoreAccessRule(AccessRule):
     # No Sub Enums
 
 
+class SemaphoreAccessRule(AccessRule):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, identity: IdentityReference, eventRights: SemaphoreRights, type: AccessControlType): ...
+    
+    @overload
+    def __init__(self, identity: StringType, eventRights: SemaphoreRights, type: AccessControlType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def SemaphoreRights(self) -> SemaphoreRights: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_SemaphoreRights(self) -> SemaphoreRights: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class SemaphoreAuditRule(AuditRule):
     # No Fields
     
@@ -6874,6 +6885,100 @@ class SemaphoreAuditRule(AuditRule):
     # ---------- Methods ---------- #
     
     def get_SemaphoreRights(self) -> SemaphoreRights: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SemaphoreAuditRule(AuditRule):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, identity: IdentityReference, eventRights: SemaphoreRights, flags: AuditFlags): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def SemaphoreRights(self) -> SemaphoreRights: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_SemaphoreRights(self) -> SemaphoreRights: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SemaphoreSecurity(NativeObjectSecurity):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self): ...
+    
+    @overload
+    def __init__(self, name: StringType, includeSections: AccessControlSections): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def AccessRightType(self) -> TypeType: ...
+    
+    @property
+    def AccessRuleType(self) -> TypeType: ...
+    
+    @property
+    def AuditRuleType(self) -> TypeType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def AccessRuleFactory(self, identityReference: IdentityReference, accessMask: IntType, isInherited: BooleanType, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, type: AccessControlType) -> AccessRule: ...
+    
+    def AddAccessRule(self, rule: SemaphoreAccessRule) -> VoidType: ...
+    
+    def AddAuditRule(self, rule: SemaphoreAuditRule) -> VoidType: ...
+    
+    def AuditRuleFactory(self, identityReference: IdentityReference, accessMask: IntType, isInherited: BooleanType, inheritanceFlags: InheritanceFlags, propagationFlags: PropagationFlags, flags: AuditFlags) -> AuditRule: ...
+    
+    def RemoveAccessRule(self, rule: SemaphoreAccessRule) -> BooleanType: ...
+    
+    def RemoveAccessRuleAll(self, rule: SemaphoreAccessRule) -> VoidType: ...
+    
+    def RemoveAccessRuleSpecific(self, rule: SemaphoreAccessRule) -> VoidType: ...
+    
+    def RemoveAuditRule(self, rule: SemaphoreAuditRule) -> BooleanType: ...
+    
+    def RemoveAuditRuleAll(self, rule: SemaphoreAuditRule) -> VoidType: ...
+    
+    def RemoveAuditRuleSpecific(self, rule: SemaphoreAuditRule) -> VoidType: ...
+    
+    def ResetAccessRule(self, rule: SemaphoreAccessRule) -> VoidType: ...
+    
+    def SetAccessRule(self, rule: SemaphoreAccessRule) -> VoidType: ...
+    
+    def SetAuditRule(self, rule: SemaphoreAuditRule) -> VoidType: ...
+    
+    def get_AccessRightType(self) -> TypeType: ...
+    
+    def get_AccessRuleType(self) -> TypeType: ...
+    
+    def get_AuditRuleType(self) -> TypeType: ...
     
     # No Events
     
@@ -7887,6 +7992,16 @@ class SecurityInfos(Enum):
     Group: IntType = 2
     DiscretionaryAcl: IntType = 4
     SystemAcl: IntType = 8
+
+
+class SemaphoreRights(Enum):
+    Modify: IntType = 2
+    Delete: IntType = 65536
+    ReadPermissions: IntType = 131072
+    ChangePermissions: IntType = 262144
+    TakeOwnership: IntType = 524288
+    Synchronize: IntType = 1048576
+    FullControl: IntType = 2031619
 
 
 class SemaphoreRights(Enum):

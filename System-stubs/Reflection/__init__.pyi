@@ -40,6 +40,7 @@ class EventType(Generic[T]):
     def __isub__(self, other: T): ...
 
 
+
 # ---------- Classes ---------- #
 
 class AmbiguousMatchException(SystemException, ISerializable, _Exception):
@@ -3450,36 +3451,6 @@ class BlobUtilities(ABC, ObjectType):
     # No Sub Enums
 
 
-class BlobUtilities(ABC, ObjectType):
-    # ---------- Fields ---------- #
-    
-    @staticmethod
-    @property
-    def SizeOfGuid() -> IntType: ...
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    @staticmethod
-    def ReadBytes(buffer: ByteType, byteCount: IntType) -> ArrayType[ByteType]: ...
-    
-    @staticmethod
-    def ReadImmutableBytes(buffer: ByteType, byteCount: IntType) -> ImmutableArray[ByteType]: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class ConstructorInfo(ABC, MethodBase, ICustomAttributeProvider, _MemberInfo, _MethodBase, _ConstructorInfo):
     # ---------- Fields ---------- #
     
@@ -12734,28 +12705,6 @@ class TargetParameterCountException(ApplicationException, ISerializable, _Except
     
     @overload
     def __init__(self, message: StringType, inner: Exception): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class Throw(ABC, ObjectType):
-    """"""
-    
-    # No Fields
-    
-    # No Constructors
     
     # No Properties
     
@@ -13703,8 +13652,7 @@ class ConstArray(ValueType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> ByteType: ...
+    def __getitem__(self, key: IntType) -> ByteType: ...
     
     @property
     def Length(self) -> IntType: ...
@@ -13738,8 +13686,7 @@ class ConstArray(ValueType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> ByteType: ...
+    def __getitem__(self, key: IntType) -> ByteType: ...
     
     @property
     def Length(self) -> IntType: ...
@@ -13773,8 +13720,7 @@ class ConstArray(ValueType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> ByteType: ...
+    def __getitem__(self, key: IntType) -> ByteType: ...
     
     @property
     def Length(self) -> IntType: ...
@@ -14732,8 +14678,7 @@ class MetadataEnumResult(ValueType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> IntType: ...
+    def __getitem__(self, key: IntType) -> IntType: ...
     
     @property
     def Length(self) -> IntType: ...
@@ -14788,8 +14733,7 @@ class MetadataEnumResult(ValueType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> IntType: ...
+    def __getitem__(self, key: IntType) -> IntType: ...
     
     @property
     def Length(self) -> IntType: ...
@@ -14844,8 +14788,7 @@ class MetadataEnumResult(ValueType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> IntType: ...
+    def __getitem__(self, key: IntType) -> IntType: ...
     
     @property
     def Length(self) -> IntType: ...
@@ -15535,11 +15478,9 @@ class ParameterModifier(ValueType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> BooleanType: ...
+    def __getitem__(self, key: IntType) -> BooleanType: ...
     
-    @Item.setter
-    def Item(self, value: BooleanType) -> None: ...
+    def __setitem__(self, key: IntType, value: BooleanType) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -15567,11 +15508,9 @@ class ParameterModifier(ValueType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> BooleanType: ...
+    def __getitem__(self, key: IntType) -> BooleanType: ...
     
-    @Item.setter
-    def Item(self, value: BooleanType) -> None: ...
+    def __setitem__(self, key: IntType, value: BooleanType) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -15599,11 +15538,9 @@ class ParameterModifier(ValueType):
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> BooleanType: ...
+    def __getitem__(self, key: IntType) -> BooleanType: ...
     
-    @Item.setter
-    def Item(self, value: BooleanType) -> None: ...
+    def __setitem__(self, key: IntType, value: BooleanType) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -15740,6 +15677,16 @@ class ICustomAttributeProvider(Protocol):
     def GetCustomAttributes(self, inherit: BooleanType) -> ArrayType[ObjectType]: ...
     
     def IsDefined(self, attributeType: TypeType, inherit: BooleanType) -> BooleanType: ...
+    
+    # No Events
+
+
+class ICustomTypeProvider(Protocol):
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def GetCustomType(self) -> TypeType: ...
     
     # No Events
 

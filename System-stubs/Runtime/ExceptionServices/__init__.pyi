@@ -10,6 +10,7 @@ from System.Runtime.InteropServices import _Attribute
 ObjectType = Object
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class ExceptionDispatchInfo(ObjectType):

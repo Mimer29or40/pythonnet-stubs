@@ -27,6 +27,7 @@ StringType = Union[str, String]
 TypeType = Union[type, Type]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class AllMembershipCondition(ObjectType, IMembershipCondition, ISecurityEncodable, ISecurityPolicyEncodable, IConstantMembershipCondition, IReportMatchMembershipCondition):
@@ -1071,86 +1072,9 @@ class ApplicationTrustCollection(ObjectType, ICollection, IEnumerable):
     @property
     def IsSynchronized(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> ApplicationTrust: ...
+    def __getitem__(self, key: IntType) -> ApplicationTrust: ...
     
-    @property
-    def Item(self) -> ApplicationTrust: ...
-    
-    @property
-    def SyncRoot(self) -> ObjectType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def Add(self, trust: ApplicationTrust) -> IntType: ...
-    
-    @overload
-    def AddRange(self, trusts: ArrayType[ApplicationTrust]) -> VoidType: ...
-    
-    @overload
-    def AddRange(self, trusts: ApplicationTrustCollection) -> VoidType: ...
-    
-    def Clear(self) -> VoidType: ...
-    
-    def CopyTo(self, array: ArrayType[ApplicationTrust], index: IntType) -> VoidType: ...
-    
-    def Find(self, applicationIdentity: ApplicationIdentity, versionMatch: ApplicationVersionMatch) -> ApplicationTrustCollection: ...
-    
-    def GetEnumerator(self) -> ApplicationTrustEnumerator: ...
-    
-    @overload
-    def Remove(self, applicationIdentity: ApplicationIdentity, versionMatch: ApplicationVersionMatch) -> VoidType: ...
-    
-    @overload
-    def Remove(self, trust: ApplicationTrust) -> VoidType: ...
-    
-    @overload
-    def RemoveRange(self, trusts: ArrayType[ApplicationTrust]) -> VoidType: ...
-    
-    @overload
-    def RemoveRange(self, trusts: ApplicationTrustCollection) -> VoidType: ...
-    
-    def get_Count(self) -> IntType: ...
-    
-    def get_IsSynchronized(self) -> BooleanType: ...
-    
-    @overload
-    def get_Item(self, index: IntType) -> ApplicationTrust: ...
-    
-    @overload
-    def get_Item(self, appFullName: StringType) -> ApplicationTrust: ...
-    
-    def get_SyncRoot(self) -> ObjectType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class ApplicationTrustCollection(ObjectType, ICollection, IEnumerable):
-    # No Fields
-    
-    # No Constructors
-    
-    # ---------- Properties ---------- #
-    
-    @property
-    def Count(self) -> IntType: ...
-    
-    @property
-    def IsSynchronized(self) -> BooleanType: ...
-    
-    @property
-    def Item(self) -> ApplicationTrust: ...
-    
-    @property
-    def Item(self) -> ApplicationTrust: ...
+    def __getitem__(self, key: StringType) -> ApplicationTrust: ...
     
     @property
     def SyncRoot(self) -> ObjectType: ...
@@ -1221,11 +1145,82 @@ class ApplicationTrustCollection(ObjectType, ICollection, IEnumerable):
     @property
     def IsSynchronized(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> ApplicationTrust: ...
+    def __getitem__(self, key: IntType) -> ApplicationTrust: ...
+    
+    def __getitem__(self, key: StringType) -> ApplicationTrust: ...
     
     @property
-    def Item(self) -> ApplicationTrust: ...
+    def SyncRoot(self) -> ObjectType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self, trust: ApplicationTrust) -> IntType: ...
+    
+    @overload
+    def AddRange(self, trusts: ArrayType[ApplicationTrust]) -> VoidType: ...
+    
+    @overload
+    def AddRange(self, trusts: ApplicationTrustCollection) -> VoidType: ...
+    
+    def Clear(self) -> VoidType: ...
+    
+    def CopyTo(self, array: ArrayType[ApplicationTrust], index: IntType) -> VoidType: ...
+    
+    def Find(self, applicationIdentity: ApplicationIdentity, versionMatch: ApplicationVersionMatch) -> ApplicationTrustCollection: ...
+    
+    def GetEnumerator(self) -> ApplicationTrustEnumerator: ...
+    
+    @overload
+    def Remove(self, applicationIdentity: ApplicationIdentity, versionMatch: ApplicationVersionMatch) -> VoidType: ...
+    
+    @overload
+    def Remove(self, trust: ApplicationTrust) -> VoidType: ...
+    
+    @overload
+    def RemoveRange(self, trusts: ArrayType[ApplicationTrust]) -> VoidType: ...
+    
+    @overload
+    def RemoveRange(self, trusts: ApplicationTrustCollection) -> VoidType: ...
+    
+    def get_Count(self) -> IntType: ...
+    
+    def get_IsSynchronized(self) -> BooleanType: ...
+    
+    @overload
+    def get_Item(self, index: IntType) -> ApplicationTrust: ...
+    
+    @overload
+    def get_Item(self, appFullName: StringType) -> ApplicationTrust: ...
+    
+    def get_SyncRoot(self) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ApplicationTrustCollection(ObjectType, ICollection, IEnumerable):
+    # No Fields
+    
+    # No Constructors
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Count(self) -> IntType: ...
+    
+    @property
+    def IsSynchronized(self) -> BooleanType: ...
+    
+    def __getitem__(self, key: IntType) -> ApplicationTrust: ...
+    
+    def __getitem__(self, key: StringType) -> ApplicationTrust: ...
     
     @property
     def SyncRoot(self) -> ObjectType: ...

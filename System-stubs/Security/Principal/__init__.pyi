@@ -26,6 +26,7 @@ StringType = Union[str, String]
 TypeType = Union[type, Type]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class GenericIdentity(ClaimsIdentity, IIdentity):
@@ -509,11 +510,9 @@ class IdentityReferenceCollection(ObjectType, ICollection[IdentityReference], IE
     @property
     def IsReadOnly(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> IdentityReference: ...
+    def __getitem__(self, key: IntType) -> IdentityReference: ...
     
-    @Item.setter
-    def Item(self, value: IdentityReference) -> None: ...
+    def __setitem__(self, key: IntType, value: IdentityReference) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -573,11 +572,9 @@ class IdentityReferenceCollection(ObjectType, ICollection[IdentityReference], IE
     @property
     def IsReadOnly(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> IdentityReference: ...
+    def __getitem__(self, key: IntType) -> IdentityReference: ...
     
-    @Item.setter
-    def Item(self, value: IdentityReference) -> None: ...
+    def __setitem__(self, key: IntType, value: IdentityReference) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -637,11 +634,9 @@ class IdentityReferenceCollection(ObjectType, ICollection[IdentityReference], IE
     @property
     def IsReadOnly(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> IdentityReference: ...
+    def __getitem__(self, key: IntType) -> IdentityReference: ...
     
-    @Item.setter
-    def Item(self, value: IdentityReference) -> None: ...
+    def __setitem__(self, key: IntType, value: IdentityReference) -> None: ...
     
     # ---------- Methods ---------- #
     

@@ -25,6 +25,7 @@ UIntType = Union[int, UInt32]
 UShortType = Union[int, UInt16]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class AppDomainSortingSetupInfo(ObjectType):

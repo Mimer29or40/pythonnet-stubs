@@ -20,6 +20,7 @@ StringType = Union[str, String]
 TypeType = Union[type, Type]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class MappedTypeDesc(ObjectType):
@@ -135,11 +136,9 @@ class SchemaImporterExtensionCollection(CollectionBase, IList, ICollection, IEnu
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> SchemaImporterExtension: ...
+    def __getitem__(self, key: IntType) -> SchemaImporterExtension: ...
     
-    @Item.setter
-    def Item(self, value: SchemaImporterExtension) -> None: ...
+    def __setitem__(self, key: IntType, value: SchemaImporterExtension) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -190,11 +189,9 @@ class SchemaImporterExtensionCollection(CollectionBase, IList, ICollection, IEnu
     
     # ---------- Properties ---------- #
     
-    @property
-    def Item(self) -> SchemaImporterExtension: ...
+    def __getitem__(self, key: IntType) -> SchemaImporterExtension: ...
     
-    @Item.setter
-    def Item(self, value: SchemaImporterExtension) -> None: ...
+    def __setitem__(self, key: IntType, value: SchemaImporterExtension) -> None: ...
     
     # ---------- Methods ---------- #
     

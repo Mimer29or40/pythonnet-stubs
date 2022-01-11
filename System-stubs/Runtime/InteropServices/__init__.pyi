@@ -51,6 +51,7 @@ class EventType(Generic[T]):
     def __isub__(self, other: T): ...
 
 
+
 # ---------- Classes ---------- #
 
 class AllowReversePInvokeCallsAttribute(Attribute, _Attribute):
@@ -737,69 +738,6 @@ class ComAliasNameAttribute(Attribute, _Attribute):
     # ---------- Methods ---------- #
     
     def get_Value(self) -> StringType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class ComAwareEventInfo(EventInfo, ICustomAttributeProvider, _MemberInfo, _EventInfo):
-    # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self, type: TypeType, eventName: StringType): ...
-    
-    # ---------- Properties ---------- #
-    
-    @property
-    def Attributes(self) -> EventAttributes: ...
-    
-    @property
-    def DeclaringType(self) -> TypeType: ...
-    
-    @property
-    def Name(self) -> StringType: ...
-    
-    @property
-    def ReflectedType(self) -> TypeType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def AddEventHandler(self, target: ObjectType, handler: Delegate) -> VoidType: ...
-    
-    @overload
-    def GetAddMethod(self, nonPublic: BooleanType) -> MethodInfo: ...
-    
-    @overload
-    def GetCustomAttributes(self, attributeType: TypeType, inherit: BooleanType) -> ArrayType[ObjectType]: ...
-    
-    @overload
-    def GetCustomAttributes(self, inherit: BooleanType) -> ArrayType[ObjectType]: ...
-    
-    @overload
-    def GetRaiseMethod(self, nonPublic: BooleanType) -> MethodInfo: ...
-    
-    @overload
-    def GetRemoveMethod(self, nonPublic: BooleanType) -> MethodInfo: ...
-    
-    def IsDefined(self, attributeType: TypeType, inherit: BooleanType) -> BooleanType: ...
-    
-    def RemoveEventHandler(self, target: ObjectType, handler: Delegate) -> VoidType: ...
-    
-    def get_Attributes(self) -> EventAttributes: ...
-    
-    def get_DeclaringType(self) -> TypeType: ...
-    
-    def get_Name(self) -> StringType: ...
-    
-    def get_ReflectedType(self) -> TypeType: ...
     
     # No Events
     
@@ -2321,6 +2259,33 @@ class DefaultParameterValueAttribute(Attribute, _Attribute):
     # No Sub Enums
 
 
+class DefaultParameterValueAttribute(Attribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, value: ObjectType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Value(self) -> ObjectType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Value(self) -> ObjectType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class DispIdAttribute(Attribute, _Attribute):
     # No Fields
     
@@ -3212,6 +3177,56 @@ class GuidAttribute(Attribute, _Attribute):
     # ---------- Methods ---------- #
     
     def get_Value(self) -> StringType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class HandleCollector(ObjectType):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, name: StringType, initialThreshold: IntType): ...
+    
+    @overload
+    def __init__(self, name: StringType, initialThreshold: IntType, maximumThreshold: IntType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Count(self) -> IntType: ...
+    
+    @property
+    def InitialThreshold(self) -> IntType: ...
+    
+    @property
+    def MaximumThreshold(self) -> IntType: ...
+    
+    @property
+    def Name(self) -> StringType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def Add(self) -> VoidType: ...
+    
+    def Remove(self) -> VoidType: ...
+    
+    def get_Count(self) -> IntType: ...
+    
+    def get_InitialThreshold(self) -> IntType: ...
+    
+    def get_MaximumThreshold(self) -> IntType: ...
+    
+    def get_Name(self) -> StringType: ...
     
     # No Events
     
@@ -6328,11 +6343,9 @@ class NativeBuffer(ObjectType, IDisposable):
     @property
     def ByteCapacity(self) -> ULongType: ...
     
-    @property
-    def Item(self) -> ByteType: ...
+    def __getitem__(self, key: ULongType) -> ByteType: ...
     
-    @Item.setter
-    def Item(self, value: ByteType) -> None: ...
+    def __setitem__(self, key: ULongType, value: ByteType) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -6373,11 +6386,9 @@ class NativeBuffer(ObjectType, IDisposable):
     @property
     def ByteCapacity(self) -> ULongType: ...
     
-    @property
-    def Item(self) -> ByteType: ...
+    def __getitem__(self, key: ULongType) -> ByteType: ...
     
-    @Item.setter
-    def Item(self, value: ByteType) -> None: ...
+    def __setitem__(self, key: ULongType, value: ByteType) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -6418,11 +6429,9 @@ class NativeBuffer(ObjectType, IDisposable):
     @property
     def ByteCapacity(self) -> ULongType: ...
     
-    @property
-    def Item(self) -> ByteType: ...
+    def __getitem__(self, key: ULongType) -> ByteType: ...
     
-    @Item.setter
-    def Item(self, value: ByteType) -> None: ...
+    def __setitem__(self, key: ULongType, value: ByteType) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -8183,6 +8192,28 @@ class StandardOleMarshalObject(MarshalByRefObject, IMarshal):
     # No Sub Enums
 
 
+class StandardOleMarshalObject(MarshalByRefObject, IMarshal):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class StringBuffer(NativeBuffer, IDisposable):
     # No Fields
     
@@ -8202,11 +8233,9 @@ class StringBuffer(NativeBuffer, IDisposable):
     @property
     def CharCapacity(self) -> UIntType: ...
     
-    @property
-    def Item(self) -> CharType: ...
+    def __getitem__(self, key: UIntType) -> CharType: ...
     
-    @Item.setter
-    def Item(self, value: CharType) -> None: ...
+    def __setitem__(self, key: UIntType, value: CharType) -> None: ...
     
     @property
     def Length(self) -> UIntType: ...
@@ -8289,11 +8318,9 @@ class StringBuffer(NativeBuffer, IDisposable):
     @property
     def CharCapacity(self) -> UIntType: ...
     
-    @property
-    def Item(self) -> CharType: ...
+    def __getitem__(self, key: UIntType) -> CharType: ...
     
-    @Item.setter
-    def Item(self, value: CharType) -> None: ...
+    def __setitem__(self, key: UIntType, value: CharType) -> None: ...
     
     @property
     def Length(self) -> UIntType: ...
@@ -8376,11 +8403,9 @@ class StringBuffer(NativeBuffer, IDisposable):
     @property
     def CharCapacity(self) -> UIntType: ...
     
-    @property
-    def Item(self) -> CharType: ...
+    def __getitem__(self, key: UIntType) -> CharType: ...
     
-    @Item.setter
-    def Item(self, value: CharType) -> None: ...
+    def __setitem__(self, key: UIntType, value: CharType) -> None: ...
     
     @property
     def Length(self) -> UIntType: ...

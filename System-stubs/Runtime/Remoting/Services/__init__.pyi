@@ -14,6 +14,7 @@ NIntType = Union[int, IntPtr]
 ObjectType = Object
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class EnterpriseServicesHelper(ObjectType):

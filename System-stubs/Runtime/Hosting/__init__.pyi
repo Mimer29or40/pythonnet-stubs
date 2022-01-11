@@ -12,6 +12,7 @@ ArrayType = Union[List, Array]
 ObjectType = Object
 StringType = Union[str, String]
 
+
 # ---------- Classes ---------- #
 
 class ActivationArguments(EvidenceBase):

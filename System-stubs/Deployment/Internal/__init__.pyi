@@ -13,6 +13,7 @@ ByteType = Union[int, Byte]
 ObjectType = Object
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class InternalActivationContextHelper(ABC, ObjectType):

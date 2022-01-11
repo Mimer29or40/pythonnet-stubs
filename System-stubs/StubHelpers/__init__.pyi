@@ -14,6 +14,7 @@ LongType = Union[int, Int64]
 ObjectType = Object
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class AnsiBSTRMarshaler(ABC, ObjectType):

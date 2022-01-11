@@ -28,6 +28,7 @@ StringType = Union[str, String]
 TypeType = Union[type, Type]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class AncestralNamespaceContextManager(ABC, ObjectType):
@@ -1904,32 +1905,6 @@ class ManifestSignedXml(SignedXml):
     # No Sub Enums
 
 
-class ManifestSignedXml(SignedXml):
-    # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self, manifestXml: XmlDocument, manifest: ManifestKinds): ...
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def GetIdElement(self, document: XmlDocument, idValue: StringType) -> XmlElement: ...
-    
-    def VerifySignature(self, revocationFlag: X509RevocationFlag, revocationMode: X509RevocationMode) -> ManifestSignatureInformation: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class MyXmlDocument(XmlDocument, ICloneable, IEnumerable, IXPathNavigable):
     # No Fields
     
@@ -2748,8 +2723,7 @@ class TransformChain(ObjectType):
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> Transform: ...
+    def __getitem__(self, key: IntType) -> Transform: ...
     
     # ---------- Methods ---------- #
     

@@ -16,6 +16,7 @@ ObjectType = Object
 StringType = Union[str, String]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class Claim(ObjectType):
@@ -2151,6 +2152,29 @@ class ClaimsPrincipal(ObjectType, IPrincipal):
     
     @staticmethod
     def set_PrimaryIdentitySelector(value: Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class DynamicRoleClaimProvider(ABC, ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @staticmethod
+    def AddDynamicRoleClaims(claimsIdentity: ClaimsIdentity, claims: IEnumerable[Claim]) -> VoidType: ...
     
     # No Events
     

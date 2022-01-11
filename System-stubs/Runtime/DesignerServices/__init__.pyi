@@ -13,6 +13,7 @@ StringType = Union[str, String]
 TypeType = Union[type, Type]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class WindowsRuntimeDesignerContext(ObjectType):

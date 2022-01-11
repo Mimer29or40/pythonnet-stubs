@@ -10,7 +10,7 @@ import System
 from System.IO import FileNotFoundException
 from System.Reflection import Assembly, ConstructorInfo, EventInfo, FieldInfo, MethodInfo, ParameterInfo, PropertyInfo
 from .logging import logger
-from .model import BaseType, Class, Constructor, Delegate, Enum, EnumField, Event, EventType, Interface, Method, Namespace, Parameter, Property, SystemType, VarType, WrappedType
+from .model import BaseType, Class, Constructor, Delegate, Enum, EnumField, Event, EventType, Interface, Method, Namespace, Parameter, Property, SystemType, VarType, WrappedType, ItemProperty
 from .options import options
 from .util import make_python_name, rm_tree, strip_path_str, time_function, time_it
 
@@ -454,25 +454,32 @@ def _process_constructor(namespace: Namespace, constructor_info: ConstructorInfo
 
 def _process_property(namespace: Namespace, property_info: PropertyInfo) -> Tuple[Optional[Property], Optional[Property]]:
     logger.debug(f'Processing Property: {property_info}')
-    # TODO - Special Case - Item
     
+    name = make_python_name(property_info.Name)
     property_type = _get_type(namespace, property_info.PropertyType)
     
-    getter = None
-    if (get_method := property_info.GetGetMethod()) is not None:
-        getter = Property(name=make_python_name(property_info.Name),
-                          type=property_type,
-                          setter=False,
-                          static=get_method.IsStatic,
-                          doc_string='')
+    getter, setter = None, None
     
-    setter = None
-    if (set_method := property_info.GetSetMethod()) is not None:
-        setter = Property(name=make_python_name(property_info.Name),
-                          type=property_type,
-                          setter=True,
-                          static=set_method.IsStatic,
-                          doc_string='')
+    if name == 'Item':
+        if (get_method := property_info.GetGetMethod()) is not None:
+            if len(parameters := list(get_method.GetParameters())) != 0:
+                parameter = _get_parameter(namespace, parameters[0])
+                getter = ItemProperty(key_type=parameter.type, value_type=property_type, setter=False, doc_string='')
+            else:
+                getter = Property(name=name, type=property_type, setter=False, static=get_method.IsStatic, doc_string='')
+        
+        if (set_method := property_info.GetSetMethod()) is not None:
+            if len(parameters := list(set_method.GetParameters())) != 0:
+                parameter = _get_parameter(namespace, parameters[0])
+                setter = ItemProperty(key_type=parameter.type, value_type=property_type, setter=True, doc_string='')
+            else:
+                setter = Property(name=name, type=property_type, setter=True, static=set_method.IsStatic, doc_string='')
+    else:
+        if (get_method := property_info.GetGetMethod()) is not None:
+            getter = Property(name=name, type=property_type, setter=False, static=get_method.IsStatic, doc_string='')
+        
+        if (set_method := property_info.GetSetMethod()) is not None:
+            setter = Property(name=name, type=property_type, setter=True, static=set_method.IsStatic, doc_string='')
     return getter, setter
 
 

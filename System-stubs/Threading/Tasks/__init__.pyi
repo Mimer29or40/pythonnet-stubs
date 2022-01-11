@@ -41,6 +41,7 @@ class EventType(Generic[T]):
     def __isub__(self, other: T): ...
 
 
+
 # ---------- Classes ---------- #
 
 class AsyncCausalityTracer(ABC, ObjectType):
@@ -4849,34 +4850,6 @@ class TaskExceptionHolder(ObjectType):
     # No Properties
     
     # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class TaskExtensions(ABC, ObjectType):
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    @staticmethod
-    @overload
-    def Unwrap(task: Task[Task]) -> Task: ...
-    
-    @staticmethod
-    @overload
-    def Unwrap(task: Task[Task[TResult]]) -> Task[TResult]: ...
     
     # No Events
     

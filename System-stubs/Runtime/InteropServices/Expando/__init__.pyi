@@ -10,6 +10,7 @@ from System.Reflection import FieldInfo, IReflect, MemberInfo, MethodInfo, Prope
 StringType = Union[str, String]
 VoidType = Union[None, Void]
 
+
 # No Classes
 
 # No Structs

@@ -12,6 +12,7 @@ IntType = Union[int, Int32]
 ObjectType = Object
 StringType = Union[str, String]
 
+
 # ---------- Classes ---------- #
 
 class Environment(ABC, ObjectType):

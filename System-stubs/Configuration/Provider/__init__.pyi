@@ -18,6 +18,7 @@ ObjectType = Object
 StringType = Union[str, String]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class ProviderBase(ABC, ObjectType):
@@ -67,8 +68,7 @@ class ProviderCollection(ObjectType, IEnumerable, ICollection):
     @property
     def IsSynchronized(self) -> BooleanType: ...
     
-    @property
-    def Item(self) -> ProviderBase: ...
+    def __getitem__(self, key: StringType) -> ProviderBase: ...
     
     @property
     def SyncRoot(self) -> ObjectType: ...

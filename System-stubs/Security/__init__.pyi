@@ -26,6 +26,7 @@ StringType = Union[str, String]
 TypeType = Union[type, Type]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class AllowPartiallyTrustedCallersAttribute(Attribute, _Attribute):
@@ -2386,6 +2387,38 @@ class SecureString(ObjectType, IDisposable):
     def SetAt(self, index: IntType, c: CharType) -> VoidType: ...
     
     def get_Length(self) -> IntType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SecureStringMarshal(ABC, ObjectType):
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @staticmethod
+    def SecureStringToCoTaskMemAnsi(s: SecureString) -> NIntType: ...
+    
+    @staticmethod
+    def SecureStringToCoTaskMemUnicode(s: SecureString) -> NIntType: ...
+    
+    @staticmethod
+    def SecureStringToGlobalAllocAnsi(s: SecureString) -> NIntType: ...
+    
+    @staticmethod
+    def SecureStringToGlobalAllocUnicode(s: SecureString) -> NIntType: ...
     
     # No Events
     
@@ -5255,13 +5288,6 @@ class HostSecurityManagerOptions(Enum):
     HostDetermineApplicationTrust: IntType = 8
     HostResolvePolicy: IntType = 16
     AllFlags: IntType = 31
-
-
-class ManifestKinds(Enum):
-    #None: IntType = 0
-    Deployment: IntType = 1
-    Application: IntType = 2
-    ApplicationAndDeployment: IntType = 3
 
 
 class ManifestKinds(Enum):

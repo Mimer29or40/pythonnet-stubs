@@ -13,6 +13,7 @@ ObjectType = Object
 UIntType = Union[int, UInt32]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class TimerQueue(ObjectType):

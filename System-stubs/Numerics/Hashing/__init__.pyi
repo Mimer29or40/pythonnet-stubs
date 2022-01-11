@@ -10,6 +10,7 @@ from System import Int32, Object
 IntType = Union[int, Int32]
 ObjectType = Object
 
+
 # ---------- Classes ---------- #
 
 class HashHelpers(ABC, ObjectType):

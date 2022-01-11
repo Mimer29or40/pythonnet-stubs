@@ -85,6 +85,7 @@ class Namespace:
                     lines.extend(['', *t.to_lines(), ''])
         
         lines.append('')
+        lines.append('')
         
         if len(classes_sorted) > 0:
             lines.extend(['# ---------- Classes ---------- #'])
@@ -439,9 +440,9 @@ class Constructor:
 class Property:
     name: str
     type: BaseType
-    setter: bool = False
-    static: bool = False
-    doc_string: str = ''
+    setter: bool
+    static: bool
+    doc_string: str
     
     def to_lines(self) -> List[str]:
         lines: List[str] = []
@@ -454,6 +455,26 @@ class Property:
         args = ', '.join(([] if self.static else ['self']) + ([f'value: {self.type}'] if self.setter else []))
         
         lines.append(f'def {self.name}({args}) -> {"None" if self.setter else self.type}:{" ..." if self.doc_string == "" else ""}')
+        
+        if self.doc_string != '':
+            lines.append(f'    """{self.doc_string}"""')
+        
+        return lines
+
+
+@dataclass
+class ItemProperty(Property):
+    def __init__(self, key_type: BaseType, value_type: BaseType, setter: bool, doc_string: str = ''):
+        super().__init__('Item', value_type, setter, False, doc_string)
+        self.key_type: BaseType = key_type
+    
+    def to_lines(self) -> List[str]:
+        lines: List[str] = []
+        
+        if self.setter:
+            lines.append(f'def __setitem__(self, key: {self.key_type}, value: {self.type}) -> None:{" ..." if self.doc_string == "" else ""}')
+        else:
+            lines.append(f'def __getitem__(self, key: {self.key_type}) -> {self.type}:{" ..." if self.doc_string == "" else ""}')
         
         if self.doc_string != '':
             lines.append(f'    """{self.doc_string}"""')
@@ -536,6 +557,9 @@ class BaseType:
         self.is_pointer = False
     
     def __str__(self) -> str:
+        return self.name
+    
+    def __repr__(self) -> str:
         return self.name
 
 

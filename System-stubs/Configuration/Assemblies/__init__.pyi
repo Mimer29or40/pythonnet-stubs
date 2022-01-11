@@ -12,6 +12,7 @@ IntType = Union[int, Int32]
 ObjectType = Object
 VoidType = Union[None, Void]
 
+
 # No Classes
 
 # ---------- Structs ---------- #

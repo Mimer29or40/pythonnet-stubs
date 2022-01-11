@@ -15,6 +15,7 @@ StringType = Union[str, String]
 TypeType = Union[type, Type]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class BinaryCompatibility(ABC, ObjectType):
@@ -230,6 +231,71 @@ class ComponentGuaranteesAttribute(Attribute, _Attribute):
     # ---------- Methods ---------- #
     
     def get_Guarantees(self) -> ComponentGuaranteesOptions: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class FrameworkName(ObjectType, IEquatable[FrameworkName]):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self, identifier: StringType, version: Version): ...
+    
+    @overload
+    def __init__(self, identifier: StringType, version: Version, profile: StringType): ...
+    
+    @overload
+    def __init__(self, frameworkName: StringType): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def FullName(self) -> StringType: ...
+    
+    @property
+    def Identifier(self) -> StringType: ...
+    
+    @property
+    def Profile(self) -> StringType: ...
+    
+    @property
+    def Version(self) -> Version: ...
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def Equals(self, obj: ObjectType) -> BooleanType: ...
+    
+    @overload
+    def Equals(self, other: FrameworkName) -> BooleanType: ...
+    
+    def GetHashCode(self) -> IntType: ...
+    
+    def ToString(self) -> StringType: ...
+    
+    def get_FullName(self) -> StringType: ...
+    
+    def get_Identifier(self) -> StringType: ...
+    
+    def get_Profile(self) -> StringType: ...
+    
+    def get_Version(self) -> Version: ...
+    
+    @staticmethod
+    def op_Equality(left: FrameworkName, right: FrameworkName) -> BooleanType: ...
+    
+    @staticmethod
+    def op_Inequality(left: FrameworkName, right: FrameworkName) -> BooleanType: ...
     
     # No Events
     

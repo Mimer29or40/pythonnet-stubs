@@ -24,6 +24,7 @@ StringType = Union[str, String]
 TypeType = Union[type, Type]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class FastResourceComparer(ObjectType, IComparer, IEqualityComparer, IComparer[StringType], IEqualityComparer[StringType]):

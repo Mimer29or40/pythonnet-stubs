@@ -27,6 +27,7 @@ ULongType = Union[int, UInt64]
 UShortType = Union[int, UInt16]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class ASCIIEncoding(Encoding, ICloneable):

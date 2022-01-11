@@ -36,6 +36,7 @@ class EventType(Generic[T]):
     def __isub__(self, other: T): ...
 
 
+
 # ---------- Classes ---------- #
 
 class XslCompiledTransform(ObjectType):

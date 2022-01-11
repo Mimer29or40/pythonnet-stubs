@@ -20,7 +20,38 @@ class EventType(Generic[T]):
     def __isub__(self, other: T): ...
 
 
+
 # ---------- Classes ---------- #
+
+class BuildInfo(ObjectType):
+    # ---------- Fields ---------- #
+    
+    @staticmethod
+    @property
+    def WCP_PUBLIC_KEY_TOKEN() -> StringType: ...
+    
+    @staticmethod
+    @property
+    def WCP_VERSION() -> StringType: ...
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
 
 class BuildInfo(ObjectType):
     # ---------- Fields ---------- #
@@ -55,6 +86,24 @@ class BuildInfo(ObjectType):
 # No Structs
 
 # ---------- Interfaces ---------- #
+
+class ICommand(Protocol):
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanExecute(self, parameter: ObjectType) -> BooleanType: ...
+    
+    def Execute(self, parameter: ObjectType) -> VoidType: ...
+    
+    def add_CanExecuteChanged(self, value: EventHandler) -> VoidType: ...
+    
+    def remove_CanExecuteChanged(self, value: EventHandler) -> VoidType: ...
+    
+    # ---------- Events ---------- #
+    
+    CanExecuteChanged: EventType[EventHandler] = ...
+
 
 class ICommand(Protocol):
     # No Properties

@@ -29,6 +29,7 @@ class EventType(Generic[T]):
     def __isub__(self, other: T): ...
 
 
+
 # ---------- Classes ---------- #
 
 class Collection(Generic[T], ObjectType, IList[T], ICollection[T], IEnumerable[T], IEnumerable, IList, ICollection, IReadOnlyList[T], IReadOnlyCollection[T]):
@@ -47,11 +48,9 @@ class Collection(Generic[T], ObjectType, IList[T], ICollection[T], IEnumerable[T
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> T: ...
+    def __getitem__(self, key: IntType) -> T: ...
     
-    @Item.setter
-    def Item(self, value: T) -> None: ...
+    def __setitem__(self, key: IntType, value: T) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -106,11 +105,9 @@ class Collection(Generic[T], ObjectType, IList[T], ICollection[T], IEnumerable[T
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> T: ...
+    def __getitem__(self, key: IntType) -> T: ...
     
-    @Item.setter
-    def Item(self, value: T) -> None: ...
+    def __setitem__(self, key: IntType, value: T) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -165,11 +162,9 @@ class Collection(Generic[T], ObjectType, IList[T], ICollection[T], IEnumerable[T
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> T: ...
+    def __getitem__(self, key: IntType) -> T: ...
     
-    @Item.setter
-    def Item(self, value: T) -> None: ...
+    def __setitem__(self, key: IntType, value: T) -> None: ...
     
     # ---------- Methods ---------- #
     
@@ -218,8 +213,7 @@ class KeyedCollection(Protocol[TKey, TItem], Collection[TItem], IList[TItem], IC
     @property
     def Comparer(self) -> IEqualityComparer[TKey]: ...
     
-    @property
-    def Item(self) -> TItem: ...
+    def __getitem__(self, key: TKey) -> TItem: ...
     
     # ---------- Methods ---------- #
     
@@ -255,8 +249,7 @@ class KeyedCollection(Protocol[TKey, TItem], Collection[TItem], IList[TItem], IC
     @property
     def Comparer(self) -> IEqualityComparer[TKey]: ...
     
-    @property
-    def Item(self) -> TItem: ...
+    def __getitem__(self, key: TKey) -> TItem: ...
     
     # ---------- Methods ---------- #
     
@@ -292,8 +285,7 @@ class KeyedCollection(Protocol[TKey, TItem], Collection[TItem], IList[TItem], IC
     @property
     def Comparer(self) -> IEqualityComparer[TKey]: ...
     
-    @property
-    def Item(self) -> TItem: ...
+    def __getitem__(self, key: TKey) -> TItem: ...
     
     # ---------- Methods ---------- #
     
@@ -356,6 +348,43 @@ class ObservableCollection(Generic[T], Collection[T], IList[T], ICollection[T], 
     # No Sub Enums
 
 
+class ObservableCollection(Generic[T], Collection[T], IList[T], ICollection[T], IEnumerable[T], IEnumerable, IList, ICollection, IReadOnlyList[T], IReadOnlyCollection[T], INotifyCollectionChanged, INotifyPropertyChanged):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    @overload
+    def __init__(self): ...
+    
+    @overload
+    def __init__(self, list: List[T]): ...
+    
+    @overload
+    def __init__(self, collection: IEnumerable[T]): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def Move(self, oldIndex: IntType, newIndex: IntType) -> VoidType: ...
+    
+    def add_CollectionChanged(self, value: NotifyCollectionChangedEventHandler) -> VoidType: ...
+    
+    def remove_CollectionChanged(self, value: NotifyCollectionChangedEventHandler) -> VoidType: ...
+    
+    # ---------- Events ---------- #
+    
+    CollectionChanged: EventType[NotifyCollectionChangedEventHandler] = ...
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class ReadOnlyCollection(Generic[T], ObjectType, IList[T], ICollection[T], IEnumerable[T], IEnumerable, IList, ICollection, IReadOnlyList[T], IReadOnlyCollection[T]):
     # No Fields
     
@@ -368,8 +397,7 @@ class ReadOnlyCollection(Generic[T], ObjectType, IList[T], ICollection[T], IEnum
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> T: ...
+    def __getitem__(self, key: IntType) -> T: ...
     
     # ---------- Methods ---------- #
     
@@ -408,8 +436,7 @@ class ReadOnlyCollection(Generic[T], ObjectType, IList[T], ICollection[T], IEnum
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> T: ...
+    def __getitem__(self, key: IntType) -> T: ...
     
     # ---------- Methods ---------- #
     
@@ -448,8 +475,7 @@ class ReadOnlyCollection(Generic[T], ObjectType, IList[T], ICollection[T], IEnum
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> T: ...
+    def __getitem__(self, key: IntType) -> T: ...
     
     # ---------- Methods ---------- #
     
@@ -488,8 +514,7 @@ class ReadOnlyDictionary(Generic[TKey, TValue], ObjectType, IDictionary[TKey, TV
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> TValue: ...
+    def __getitem__(self, key: TKey) -> TValue: ...
     
     @property
     def Keys(self) -> KeyCollection[TKey, TValue]: ...
@@ -595,8 +620,7 @@ class ReadOnlyDictionary(Generic[TKey, TValue], ObjectType, IDictionary[TKey, TV
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> TValue: ...
+    def __getitem__(self, key: TKey) -> TValue: ...
     
     @property
     def Keys(self) -> KeyCollection[TKey, TValue]: ...
@@ -702,8 +726,7 @@ class ReadOnlyDictionary(Generic[TKey, TValue], ObjectType, IDictionary[TKey, TV
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> TValue: ...
+    def __getitem__(self, key: TKey) -> TValue: ...
     
     @property
     def Keys(self) -> KeyCollection[TKey, TValue]: ...
@@ -847,6 +870,28 @@ class ReadOnlyDictionaryHelpers(ABC, ObjectType):
     # No Fields
     
     # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ReadOnlyObservableCollection(Generic[T], ReadOnlyCollection[T], IList[T], ICollection[T], IEnumerable[T], IEnumerable, IList, ICollection, IReadOnlyList[T], IReadOnlyCollection[T], INotifyCollectionChanged, INotifyPropertyChanged):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, list: ObservableCollection[T]): ...
     
     # No Properties
     

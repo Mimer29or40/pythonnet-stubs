@@ -48,6 +48,7 @@ class EventType(Generic[T]):
     def __isub__(self, other: T): ...
 
 
+
 # ---------- Classes ---------- #
 
 class BindableIterableToEnumerableAdapter(ObjectType):
@@ -858,8 +859,7 @@ class ConstantSplittableMap(Generic[TKey, TValue], ObjectType, IMapView[TKey, TV
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> TValue: ...
+    def __getitem__(self, key: TKey) -> TValue: ...
     
     @property
     def Keys(self) -> IEnumerable[TKey]: ...
@@ -917,8 +917,7 @@ class ConstantSplittableMap(Generic[TKey, TValue], ObjectType, IMapView[TKey, TV
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> TValue: ...
+    def __getitem__(self, key: TKey) -> TValue: ...
     
     @property
     def Keys(self) -> IEnumerable[TKey]: ...
@@ -976,8 +975,7 @@ class ConstantSplittableMap(Generic[TKey, TValue], ObjectType, IMapView[TKey, TV
     @property
     def Count(self) -> IntType: ...
     
-    @property
-    def Item(self) -> TValue: ...
+    def __getitem__(self, key: TKey) -> TValue: ...
     
     @property
     def Keys(self) -> IEnumerable[TKey]: ...
@@ -2349,7 +2347,73 @@ class ICommandAdapterHelpers(ABC, ObjectType):
     # No Sub Enums
 
 
+class ICommandAdapterHelpers(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class ICommandToManagedAdapter(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ICommandToManagedAdapter(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class ICommandToWinRTAdapter(ObjectType):
     """"""
     
     # No Fields
@@ -4005,6 +4069,56 @@ class NotifyCollectionChangedEventArgsMarshaler(ABC, ObjectType):
     # No Sub Enums
 
 
+class NotifyCollectionChangedEventArgsMarshaler(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class NotifyCollectionChangedEventHandler_WinRT(MulticastDelegate, ICloneable, ISerializable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, object: ObjectType, method: NIntType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def BeginInvoke(self, sender: ObjectType, e: NotifyCollectionChangedEventArgs, callback: AsyncCallback, object: ObjectType) -> IAsyncResult: ...
+    
+    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
+    
+    def Invoke(self, sender: ObjectType, e: NotifyCollectionChangedEventArgs) -> VoidType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class NotifyCollectionChangedEventHandler_WinRT(MulticastDelegate, ICloneable, ISerializable):
     # No Fields
     
@@ -4034,6 +4148,50 @@ class NotifyCollectionChangedEventHandler_WinRT(MulticastDelegate, ICloneable, I
 
 
 class NotifyCollectionChangedToManagedAdapter(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class NotifyCollectionChangedToManagedAdapter(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class NotifyCollectionChangedToWinRTAdapter(ObjectType):
     """"""
     
     # No Fields
@@ -4099,6 +4257,50 @@ class NotifyPropertyChangedToManagedAdapter(ObjectType):
     # No Sub Enums
 
 
+class NotifyPropertyChangedToManagedAdapter(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class NotifyPropertyChangedToWinRTAdapter(ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class NotifyPropertyChangedToWinRTAdapter(ObjectType):
     """"""
     
@@ -4131,6 +4333,56 @@ class PropertyChangedEventArgsMarshaler(ABC, ObjectType):
     # No Properties
     
     # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class PropertyChangedEventArgsMarshaler(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class PropertyChangedEventHandler_WinRT(MulticastDelegate, ICloneable, ISerializable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, object: ObjectType, method: NIntType): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def BeginInvoke(self, sender: ObjectType, e: PropertyChangedEventArgs, callback: AsyncCallback, object: ObjectType) -> IAsyncResult: ...
+    
+    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
+    
+    def Invoke(self, sender: ObjectType, e: PropertyChangedEventArgs) -> VoidType: ...
     
     # No Events
     
@@ -6273,6 +6525,22 @@ class ICommand_WinRT(Protocol):
     # No Events
 
 
+class ICommand_WinRT(Protocol):
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def CanExecute(self, parameter: ObjectType) -> BooleanType: ...
+    
+    def Execute(self, parameter: ObjectType) -> VoidType: ...
+    
+    def add_CanExecuteChanged(self, value: EventHandler[ObjectType]) -> EventRegistrationToken: ...
+    
+    def remove_CanExecuteChanged(self, token: EventRegistrationToken) -> VoidType: ...
+    
+    # No Events
+
+
 class ICustomProperty(Protocol):
     # ---------- Properties ---------- #
     
@@ -6825,6 +7093,51 @@ class INotifyCollectionChangedEventArgs(Protocol):
     # No Events
 
 
+class INotifyCollectionChangedEventArgs(Protocol):
+    # ---------- Properties ---------- #
+    
+    @property
+    def Action(self) -> NotifyCollectionChangedAction: ...
+    
+    @property
+    def NewItems(self) -> IList: ...
+    
+    @property
+    def NewStartingIndex(self) -> IntType: ...
+    
+    @property
+    def OldItems(self) -> IList: ...
+    
+    @property
+    def OldStartingIndex(self) -> IntType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Action(self) -> NotifyCollectionChangedAction: ...
+    
+    def get_NewItems(self) -> IList: ...
+    
+    def get_NewStartingIndex(self) -> IntType: ...
+    
+    def get_OldItems(self) -> IList: ...
+    
+    def get_OldStartingIndex(self) -> IntType: ...
+    
+    # No Events
+
+
+class INotifyCollectionChanged_WinRT(Protocol):
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def add_CollectionChanged(self, value: NotifyCollectionChangedEventHandler) -> EventRegistrationToken: ...
+    
+    def remove_CollectionChanged(self, token: EventRegistrationToken) -> VoidType: ...
+    
+    # No Events
+
+
 class INotifyCollectionChanged_WinRT(Protocol):
     # No Properties
     
@@ -6845,6 +7158,31 @@ class INotifyPropertyChanged_WinRT(Protocol):
     def add_PropertyChanged(self, value: PropertyChangedEventHandler) -> EventRegistrationToken: ...
     
     def remove_PropertyChanged(self, token: EventRegistrationToken) -> VoidType: ...
+    
+    # No Events
+
+
+class INotifyPropertyChanged_WinRT(Protocol):
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def add_PropertyChanged(self, value: PropertyChangedEventHandler) -> EventRegistrationToken: ...
+    
+    def remove_PropertyChanged(self, token: EventRegistrationToken) -> VoidType: ...
+    
+    # No Events
+
+
+class IPropertyChangedEventArgs(Protocol):
+    # ---------- Properties ---------- #
+    
+    @property
+    def PropertyName(self) -> StringType: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_PropertyName(self) -> StringType: ...
     
     # No Events
 
@@ -7761,6 +8099,10 @@ Indexer_Get_Delegate = Callable[[IntType], T]
 Indexer_Get_Delegate = Callable[[IntType], T]
 
 NotifyCollectionChangedEventHandler_WinRT = Callable[[ObjectType, NotifyCollectionChangedEventArgs], VoidType]
+
+NotifyCollectionChangedEventHandler_WinRT = Callable[[ObjectType, NotifyCollectionChangedEventArgs], VoidType]
+
+PropertyChangedEventHandler_WinRT = Callable[[ObjectType, PropertyChangedEventArgs], VoidType]
 
 PropertyChangedEventHandler_WinRT = Callable[[ObjectType, PropertyChangedEventArgs], VoidType]
 

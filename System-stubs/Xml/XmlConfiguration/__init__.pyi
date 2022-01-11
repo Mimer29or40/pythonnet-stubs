@@ -12,6 +12,7 @@ ObjectType = Object
 StringType = Union[str, String]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class XmlConfigurationString(ABC, ObjectType):

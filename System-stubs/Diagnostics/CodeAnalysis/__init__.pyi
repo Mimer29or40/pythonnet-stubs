@@ -10,7 +10,30 @@ from System.Runtime.InteropServices import _Attribute
 StringType = Union[str, String]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
+
+class ExcludeFromCodeCoverageAttribute(Attribute, _Attribute):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self): ...
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
 
 class ExcludeFromCodeCoverageAttribute(Attribute, _Attribute):
     # No Fields

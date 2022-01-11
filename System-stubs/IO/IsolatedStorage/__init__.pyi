@@ -26,6 +26,7 @@ TypeType = Union[type, Type]
 ULongType = Union[int, UInt64]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class IsolatedStorage(ABC, MarshalByRefObject):

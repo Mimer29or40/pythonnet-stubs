@@ -15,6 +15,7 @@ ObjectType = Object
 StringType = Union[str, String]
 VoidType = Union[None, Void]
 
+
 # ---------- Classes ---------- #
 
 class AssemblyTargetedPatchBandAttribute(Attribute, _Attribute):
