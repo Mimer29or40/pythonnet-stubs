@@ -603,17 +603,17 @@ class INormalizeForIsolatedStorage(Protocol):
 # ---------- Enums ---------- #
 
 class IsolatedStorageScope(Enum):
-    #None: IntType = 0
-    User: IntType = 1
-    Domain: IntType = 2
-    Assembly: IntType = 4
-    Roaming: IntType = 8
-    Machine: IntType = 16
-    Application: IntType = 32
+    #None = 0
+    User = 1
+    Domain = 2
+    Assembly = 4
+    Roaming = 8
+    Machine = 16
+    Application = 32
 
 
 class IsolatedStorageSecurityOptions(Enum):
-    IncreaseQuotaForApplication: IntType = 4
+    IncreaseQuotaForApplication = 4
 
 
 # No Delegates

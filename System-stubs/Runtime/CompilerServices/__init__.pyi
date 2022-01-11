@@ -3059,32 +3059,32 @@ class ITuple(Protocol):
 # ---------- Enums ---------- #
 
 class CompilationRelaxations(Enum):
-    NoStringInterning: IntType = 8
+    NoStringInterning = 8
 
 
 class LoadHint(Enum):
-    Default: IntType = 0
-    Always: IntType = 1
-    Sometimes: IntType = 2
+    Default = 0
+    Always = 1
+    Sometimes = 2
 
 
 class MethodCodeType(Enum):
-    IL: IntType = 0
-    Native: IntType = 1
-    OPTIL: IntType = 2
-    Runtime: IntType = 3
+    IL = 0
+    Native = 1
+    OPTIL = 2
+    Runtime = 3
 
 
 class MethodImplOptions(Enum):
-    Unmanaged: IntType = 4
-    NoInlining: IntType = 8
-    ForwardRef: IntType = 16
-    Synchronized: IntType = 32
-    NoOptimization: IntType = 64
-    PreserveSig: IntType = 128
-    AggressiveInlining: IntType = 256
-    SecurityMitigations: IntType = 1024
-    InternalCall: IntType = 4096
+    Unmanaged = 4
+    NoInlining = 8
+    ForwardRef = 16
+    Synchronized = 32
+    NoOptimization = 64
+    PreserveSig = 128
+    AggressiveInlining = 256
+    SecurityMitigations = 1024
+    InternalCall = 4096
 
 
 # No Delegates

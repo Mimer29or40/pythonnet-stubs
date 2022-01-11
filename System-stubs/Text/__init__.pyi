@@ -2282,23 +2282,23 @@ class UnicodeEncoding(Encoding, ICloneable):
 # ---------- Enums ---------- #
 
 class ExtendedNormalizationForms(Enum):
-    FormC: IntType = 1
-    FormD: IntType = 2
-    FormKC: IntType = 5
-    FormKD: IntType = 6
-    FormIdna: IntType = 13
-    FormCDisallowUnassigned: IntType = 257
-    FormDDisallowUnassigned: IntType = 258
-    FormKCDisallowUnassigned: IntType = 261
-    FormKDDisallowUnassigned: IntType = 262
-    FormIdnaDisallowUnassigned: IntType = 269
+    FormC = 1
+    FormD = 2
+    FormKC = 5
+    FormKD = 6
+    FormIdna = 13
+    FormCDisallowUnassigned = 257
+    FormDDisallowUnassigned = 258
+    FormKCDisallowUnassigned = 261
+    FormKDDisallowUnassigned = 262
+    FormIdnaDisallowUnassigned = 269
 
 
 class NormalizationForm(Enum):
-    FormC: IntType = 1
-    FormD: IntType = 2
-    FormKC: IntType = 5
-    FormKD: IntType = 6
+    FormC = 1
+    FormD = 2
+    FormKC = 5
+    FormKD = 6
 
 
 # No Delegates

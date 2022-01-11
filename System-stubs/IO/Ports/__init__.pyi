@@ -645,46 +645,46 @@ class SerialStream(Stream, IDisposable):
 # ---------- Enums ---------- #
 
 class Handshake(Enum):
-    #None: IntType = 0
-    XOnXOff: IntType = 1
-    RequestToSend: IntType = 2
-    RequestToSendXOnXOff: IntType = 3
+    #None = 0
+    XOnXOff = 1
+    RequestToSend = 2
+    RequestToSendXOnXOff = 3
 
 
 class Parity(Enum):
-    #None: IntType = 0
-    Odd: IntType = 1
-    Even: IntType = 2
-    Mark: IntType = 3
-    Space: IntType = 4
+    #None = 0
+    Odd = 1
+    Even = 2
+    Mark = 3
+    Space = 4
 
 
 class SerialData(Enum):
-    Chars: IntType = 1
-    Eof: IntType = 2
+    Chars = 1
+    Eof = 2
 
 
 class SerialError(Enum):
-    RXOver: IntType = 1
-    Overrun: IntType = 2
-    RXParity: IntType = 4
-    Frame: IntType = 8
-    TXFull: IntType = 256
+    RXOver = 1
+    Overrun = 2
+    RXParity = 4
+    Frame = 8
+    TXFull = 256
 
 
 class SerialPinChange(Enum):
-    CtsChanged: IntType = 8
-    DsrChanged: IntType = 16
-    CDChanged: IntType = 32
-    Break: IntType = 64
-    Ring: IntType = 256
+    CtsChanged = 8
+    DsrChanged = 16
+    CDChanged = 32
+    Break = 64
+    Ring = 256
 
 
 class StopBits(Enum):
-    #None: IntType = 0
-    One: IntType = 1
-    Two: IntType = 2
-    OnePointFive: IntType = 3
+    #None = 0
+    One = 1
+    Two = 2
+    OnePointFive = 3
 
 
 # ---------- Delegates ---------- #

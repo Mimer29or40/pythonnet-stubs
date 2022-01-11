@@ -7240,12 +7240,12 @@ class ECCurve(ValueType):
     # ---------- Sub Enums ---------- #
     
     class ECCurveType(Enum):
-        Implicit: IntType = 0
-        PrimeShortWeierstrass: IntType = 1
-        PrimeTwistedEdwards: IntType = 2
-        PrimeMontgomery: IntType = 3
-        Characteristic2: IntType = 4
-        Named: IntType = 5
+        Implicit = 0
+        PrimeShortWeierstrass = 1
+        PrimeTwistedEdwards = 2
+        PrimeMontgomery = 3
+        Characteristic2 = 4
+        Named = 5
     
 
 
@@ -7521,219 +7521,219 @@ class ICspAsymmetricAlgorithm(Protocol):
 # ---------- Enums ---------- #
 
 class AsymmetricPaddingMode(Enum):
-    #None: IntType = 1
-    Pkcs1: IntType = 2
-    Oaep: IntType = 4
-    Pss: IntType = 8
+    #None = 1
+    Pkcs1 = 2
+    Oaep = 4
+    Pss = 8
 
 
 class CipherMode(Enum):
-    CBC: IntType = 1
-    ECB: IntType = 2
-    OFB: IntType = 3
-    CFB: IntType = 4
-    CTS: IntType = 5
+    CBC = 1
+    ECB = 2
+    OFB = 3
+    CFB = 4
+    CTS = 5
 
 
 class CngExportPolicies(Enum):
-    #None: IntType = 0
-    AllowExport: IntType = 1
-    AllowPlaintextExport: IntType = 2
-    AllowArchiving: IntType = 4
-    AllowPlaintextArchiving: IntType = 8
+    #None = 0
+    AllowExport = 1
+    AllowPlaintextExport = 2
+    AllowArchiving = 4
+    AllowPlaintextArchiving = 8
 
 
 class CngKeyCreationOptions(Enum):
-    #None: IntType = 0
-    MachineKey: IntType = 32
-    OverwriteExistingKey: IntType = 128
+    #None = 0
+    MachineKey = 32
+    OverwriteExistingKey = 128
 
 
 class CngKeyHandleOpenOptions(Enum):
-    #None: IntType = 0
-    EphemeralKey: IntType = 1
+    #None = 0
+    EphemeralKey = 1
 
 
 class CngKeyOpenOptions(Enum):
-    #None: IntType = 0
-    UserKey: IntType = 0
-    MachineKey: IntType = 32
-    Silent: IntType = 64
+    #None = 0
+    UserKey = 0
+    MachineKey = 32
+    Silent = 64
 
 
 class CngKeyTypes(Enum):
-    #None: IntType = 0
-    MachineKey: IntType = 32
+    #None = 0
+    MachineKey = 32
 
 
 class CngKeyUsages(Enum):
-    #None: IntType = 0
-    Decryption: IntType = 1
-    Signing: IntType = 2
-    KeyAgreement: IntType = 4
-    AllUsages: IntType = 16777215
+    #None = 0
+    Decryption = 1
+    Signing = 2
+    KeyAgreement = 4
+    AllUsages = 16777215
 
 
 class CngPropertyOptions(Enum):
-    Persist: IntType = -2147483648
-    #None: IntType = 0
-    CustomProperty: IntType = 1073741824
+    Persist = -2147483648
+    #None = 0
+    CustomProperty = 1073741824
 
 
 class CngUIProtectionLevels(Enum):
-    #None: IntType = 0
-    ProtectKey: IntType = 1
-    ForceHighProtection: IntType = 2
+    #None = 0
+    ProtectKey = 1
+    ForceHighProtection = 2
 
 
 class CryptoAPITransformMode(Enum):
-    Encrypt: IntType = 0
-    Decrypt: IntType = 1
+    Encrypt = 0
+    Decrypt = 1
 
 
 class CryptoStreamMode(Enum):
-    Read: IntType = 0
-    Write: IntType = 1
+    Read = 0
+    Write = 1
 
 
 class CspAlgorithmType(Enum):
-    Rsa: IntType = 0
-    Dss: IntType = 1
+    Rsa = 0
+    Dss = 1
 
 
 class CspProviderFlags(Enum):
-    NoFlags: IntType = 0
-    UseMachineKeyStore: IntType = 1
-    UseDefaultKeyContainer: IntType = 2
-    UseNonExportableKey: IntType = 4
-    UseExistingKey: IntType = 8
-    UseArchivableKey: IntType = 16
-    UseUserProtectedKey: IntType = 32
-    NoPrompt: IntType = 64
-    CreateEphemeralKey: IntType = 128
+    NoFlags = 0
+    UseMachineKeyStore = 1
+    UseDefaultKeyContainer = 2
+    UseNonExportableKey = 4
+    UseExistingKey = 8
+    UseArchivableKey = 16
+    UseUserProtectedKey = 32
+    NoPrompt = 64
+    CreateEphemeralKey = 128
 
 
 class DSAFIPSVERSION_ENUM(Enum):
-    DSA_FIPS186_2: IntType = 0
-    DSA_FIPS186_3: IntType = 1
+    DSA_FIPS186_2 = 0
+    DSA_FIPS186_3 = 1
 
 
 class DataProtectionScope(Enum):
-    CurrentUser: IntType = 0
-    LocalMachine: IntType = 1
+    CurrentUser = 0
+    LocalMachine = 1
 
 
 class ECDiffieHellmanKeyDerivationFunction(Enum):
-    Hash: IntType = 0
-    Hmac: IntType = 1
-    Tls: IntType = 2
+    Hash = 0
+    Hmac = 1
+    Tls = 2
 
 
 class ECKeyXmlFormat(Enum):
-    Rfc4050: IntType = 0
+    Rfc4050 = 0
 
 
 class EncryptionMode(Enum):
-    Encrypt: IntType = 0
-    Decrypt: IntType = 1
+    Encrypt = 0
+    Decrypt = 1
 
 
 class FromBase64TransformMode(Enum):
-    IgnoreWhiteSpaces: IntType = 0
-    DoNotIgnoreWhiteSpaces: IntType = 1
+    IgnoreWhiteSpaces = 0
+    DoNotIgnoreWhiteSpaces = 1
 
 
 class HASHALGORITHM_ENUM(Enum):
-    DSA_HASH_ALGORITHM_SHA1: IntType = 0
-    DSA_HASH_ALGORITHM_SHA256: IntType = 1
-    DSA_HASH_ALGORITHM_SHA512: IntType = 2
+    DSA_HASH_ALGORITHM_SHA1 = 0
+    DSA_HASH_ALGORITHM_SHA256 = 1
+    DSA_HASH_ALGORITHM_SHA512 = 2
 
 
 class KeyNumber(Enum):
-    Exchange: IntType = 1
-    Signature: IntType = 2
+    Exchange = 1
+    Signature = 2
 
 
 class MemoryProtectionScope(Enum):
-    SameProcess: IntType = 0
-    CrossProcess: IntType = 1
-    SameLogon: IntType = 2
+    SameProcess = 0
+    CrossProcess = 1
+    SameLogon = 2
 
 
 class OidGroup(Enum):
-    All: IntType = 0
-    HashAlgorithm: IntType = 1
-    EncryptionAlgorithm: IntType = 2
-    PublicKeyAlgorithm: IntType = 3
-    SignatureAlgorithm: IntType = 4
-    Attribute: IntType = 5
-    ExtensionOrAttribute: IntType = 6
-    EnhancedKeyUsage: IntType = 7
-    Policy: IntType = 8
-    Template: IntType = 9
-    KeyDerivationFunction: IntType = 10
+    All = 0
+    HashAlgorithm = 1
+    EncryptionAlgorithm = 2
+    PublicKeyAlgorithm = 3
+    SignatureAlgorithm = 4
+    Attribute = 5
+    ExtensionOrAttribute = 6
+    EnhancedKeyUsage = 7
+    Policy = 8
+    Template = 9
+    KeyDerivationFunction = 10
 
 
 class PaddingMode(Enum):
-    #None: IntType = 1
-    PKCS7: IntType = 2
-    Zeros: IntType = 3
-    ANSIX923: IntType = 4
-    ISO10126: IntType = 5
+    #None = 1
+    PKCS7 = 2
+    Zeros = 3
+    ANSIX923 = 4
+    ISO10126 = 5
 
 
 class RSAEncryptionPaddingMode(Enum):
-    Pkcs1: IntType = 0
-    Oaep: IntType = 1
+    Pkcs1 = 0
+    Oaep = 1
 
 
 class RSASignaturePaddingMode(Enum):
-    Pkcs1: IntType = 0
-    Pss: IntType = 1
+    Pkcs1 = 0
+    Pss = 1
 
 
 class RijndaelManagedTransformMode(Enum):
-    Encrypt: IntType = 0
-    Decrypt: IntType = 1
+    Encrypt = 0
+    Decrypt = 1
 
 
 class SignatureVerificationResult(Enum):
-    SystemError: IntType = -2146869247
-    InvalidSignerCertificate: IntType = -2146869246
-    InvalidCountersignature: IntType = -2146869245
-    InvalidCertificateSignature: IntType = -2146869244
-    InvalidTimestamp: IntType = -2146869243
-    BadDigest: IntType = -2146869232
-    BasicConstraintsNotObserved: IntType = -2146869223
-    UnknownTrustProvider: IntType = -2146762751
-    UnknownVerificationAction: IntType = -2146762750
-    BadSignatureFormat: IntType = -2146762749
-    CertificateNotExplicitlyTrusted: IntType = -2146762748
-    MissingSignature: IntType = -2146762496
-    CertificateExpired: IntType = -2146762495
-    InvalidTimePeriodNesting: IntType = -2146762494
-    InvalidCertificateRole: IntType = -2146762493
-    PathLengthConstraintViolated: IntType = -2146762492
-    UnknownCriticalExtension: IntType = -2146762491
-    CertificateUsageNotAllowed: IntType = -2146762490
-    IssuerChainingError: IntType = -2146762489
-    CertificateMalformed: IntType = -2146762488
-    UntrustedRootCertificate: IntType = -2146762487
-    CouldNotBuildChain: IntType = -2146762486
-    GenericTrustFailure: IntType = -2146762485
-    CertificateRevoked: IntType = -2146762484
-    UntrustedTestRootCertificate: IntType = -2146762483
-    RevocationCheckFailure: IntType = -2146762482
-    InvalidCertificateUsage: IntType = -2146762480
-    CertificateExplicitlyDistrusted: IntType = -2146762479
-    UntrustedCertificationAuthority: IntType = -2146762478
-    InvalidCertificatePolicy: IntType = -2146762477
-    InvalidCertificateName: IntType = -2146762476
-    Valid: IntType = 0
-    AssemblyIdentityMismatch: IntType = 1
-    ContainingSignatureInvalid: IntType = 2
-    PublicKeyTokenMismatch: IntType = 3
-    PublisherMismatch: IntType = 4
+    SystemError = -2146869247
+    InvalidSignerCertificate = -2146869246
+    InvalidCountersignature = -2146869245
+    InvalidCertificateSignature = -2146869244
+    InvalidTimestamp = -2146869243
+    BadDigest = -2146869232
+    BasicConstraintsNotObserved = -2146869223
+    UnknownTrustProvider = -2146762751
+    UnknownVerificationAction = -2146762750
+    BadSignatureFormat = -2146762749
+    CertificateNotExplicitlyTrusted = -2146762748
+    MissingSignature = -2146762496
+    CertificateExpired = -2146762495
+    InvalidTimePeriodNesting = -2146762494
+    InvalidCertificateRole = -2146762493
+    PathLengthConstraintViolated = -2146762492
+    UnknownCriticalExtension = -2146762491
+    CertificateUsageNotAllowed = -2146762490
+    IssuerChainingError = -2146762489
+    CertificateMalformed = -2146762488
+    UntrustedRootCertificate = -2146762487
+    CouldNotBuildChain = -2146762486
+    GenericTrustFailure = -2146762485
+    CertificateRevoked = -2146762484
+    UntrustedTestRootCertificate = -2146762483
+    RevocationCheckFailure = -2146762482
+    InvalidCertificateUsage = -2146762480
+    CertificateExplicitlyDistrusted = -2146762479
+    UntrustedCertificationAuthority = -2146762478
+    InvalidCertificatePolicy = -2146762477
+    InvalidCertificateName = -2146762476
+    Valid = 0
+    AssemblyIdentityMismatch = 1
+    ContainingSignatureInvalid = 2
+    PublicKeyTokenMismatch = 3
+    PublisherMismatch = 4
 
 
 # No Delegates

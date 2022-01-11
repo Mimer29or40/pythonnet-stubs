@@ -2344,40 +2344,40 @@ class IUnionSemanticCodeGroup(Protocol):
 # ---------- Enums ---------- #
 
 class ApplicationVersionMatch(Enum):
-    MatchExactVersion: IntType = 0
-    MatchAllVersions: IntType = 1
+    MatchExactVersion = 0
+    MatchAllVersions = 1
 
 
 class ConfigId(Enum):
-    #None: IntType = 0
-    MachinePolicyLevel: IntType = 1
-    UserPolicyLevel: IntType = 2
-    EnterprisePolicyLevel: IntType = 3
+    #None = 0
+    MachinePolicyLevel = 1
+    UserPolicyLevel = 2
+    EnterprisePolicyLevel = 3
 
 
 class EvidenceTypeGenerated(Enum):
-    AssemblySupplied: IntType = 0
-    Gac: IntType = 1
-    Hash: IntType = 2
-    PermissionRequest: IntType = 3
-    Publisher: IntType = 4
-    Site: IntType = 5
-    StrongName: IntType = 6
-    Url: IntType = 7
-    Zone: IntType = 8
+    AssemblySupplied = 0
+    Gac = 1
+    Hash = 2
+    PermissionRequest = 3
+    Publisher = 4
+    Site = 5
+    StrongName = 6
+    Url = 7
+    Zone = 8
 
 
 class PolicyStatementAttribute(Enum):
-    Nothing: IntType = 0
-    Exclusive: IntType = 1
-    LevelFinal: IntType = 2
-    All: IntType = 3
+    Nothing = 0
+    Exclusive = 1
+    LevelFinal = 2
+    All = 3
 
 
 class TrustManagerUIContext(Enum):
-    Install: IntType = 0
-    Upgrade: IntType = 1
-    Run: IntType = 2
+    Install = 0
+    Upgrade = 1
+    Run = 2
 
 
 # No Delegates

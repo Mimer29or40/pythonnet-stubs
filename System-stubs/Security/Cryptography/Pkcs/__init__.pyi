@@ -1213,37 +1213,37 @@ class SubjectIdentifierOrKey(ObjectType):
 # ---------- Enums ---------- #
 
 class KeyAgreeKeyChoice(Enum):
-    Unknown: IntType = 0
-    EphemeralKey: IntType = 1
-    StaticKey: IntType = 2
+    Unknown = 0
+    EphemeralKey = 1
+    StaticKey = 2
 
 
 class RecipientInfoType(Enum):
-    Unknown: IntType = 0
-    KeyTransport: IntType = 1
-    KeyAgreement: IntType = 2
+    Unknown = 0
+    KeyTransport = 1
+    KeyAgreement = 2
 
 
 class RecipientSubType(Enum):
-    Unknown: IntType = 0
-    Pkcs7KeyTransport: IntType = 1
-    CmsKeyTransport: IntType = 2
-    CertIdKeyAgreement: IntType = 3
-    PublicKeyAgreement: IntType = 4
+    Unknown = 0
+    Pkcs7KeyTransport = 1
+    CmsKeyTransport = 2
+    CertIdKeyAgreement = 3
+    PublicKeyAgreement = 4
 
 
 class SubjectIdentifierOrKeyType(Enum):
-    Unknown: IntType = 0
-    IssuerAndSerialNumber: IntType = 1
-    SubjectKeyIdentifier: IntType = 2
-    PublicKeyInfo: IntType = 3
+    Unknown = 0
+    IssuerAndSerialNumber = 1
+    SubjectKeyIdentifier = 2
+    PublicKeyInfo = 3
 
 
 class SubjectIdentifierType(Enum):
-    Unknown: IntType = 0
-    IssuerAndSerialNumber: IntType = 1
-    SubjectKeyIdentifier: IntType = 2
-    NoSignature: IntType = 3
+    Unknown = 0
+    IssuerAndSerialNumber = 1
+    SubjectKeyIdentifier = 2
+    NoSignature = 3
 
 
 # No Delegates

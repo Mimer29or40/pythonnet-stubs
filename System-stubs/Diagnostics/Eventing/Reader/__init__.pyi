@@ -1898,74 +1898,74 @@ class ProviderMetadataCachedInformation(ObjectType):
 # ---------- Enums ---------- #
 
 class EventLogIsolation(Enum):
-    Application: IntType = 0
-    System: IntType = 1
-    Custom: IntType = 2
+    Application = 0
+    System = 1
+    Custom = 2
 
 
 class EventLogMode(Enum):
-    Circular: IntType = 0
-    AutoBackup: IntType = 1
-    Retain: IntType = 2
+    Circular = 0
+    AutoBackup = 1
+    Retain = 2
 
 
 class EventLogType(Enum):
-    Administrative: IntType = 0
-    Operational: IntType = 1
-    Analytical: IntType = 2
-    Debug: IntType = 3
+    Administrative = 0
+    Operational = 1
+    Analytical = 2
+    Debug = 3
 
 
 class PathType(Enum):
-    LogName: IntType = 1
-    FilePath: IntType = 2
+    LogName = 1
+    FilePath = 2
 
 
 class SessionAuthentication(Enum):
-    Default: IntType = 0
-    Negotiate: IntType = 1
-    Kerberos: IntType = 2
-    Ntlm: IntType = 3
+    Default = 0
+    Negotiate = 1
+    Kerberos = 2
+    Ntlm = 3
 
 
 class StandardEventKeywords(Enum):
-    #None: LongType = 0
-    ResponseTime: LongType = 281474976710656
-    WdiContext: LongType = 562949953421312
-    WdiDiagnostic: LongType = 1125899906842624
-    Sqm: LongType = 2251799813685248
-    CorrelationHint: LongType = 4503599627370496
-    AuditFailure: LongType = 4503599627370496
-    AuditSuccess: LongType = 9007199254740992
-    CorrelationHint2: LongType = 18014398509481984
-    EventLogClassic: LongType = 36028797018963968
+    #None = 0
+    ResponseTime = 281474976710656
+    WdiContext = 562949953421312
+    WdiDiagnostic = 1125899906842624
+    Sqm = 2251799813685248
+    CorrelationHint = 4503599627370496
+    AuditFailure = 4503599627370496
+    AuditSuccess = 9007199254740992
+    CorrelationHint2 = 18014398509481984
+    EventLogClassic = 36028797018963968
 
 
 class StandardEventLevel(Enum):
-    LogAlways: IntType = 0
-    Critical: IntType = 1
-    Error: IntType = 2
-    Warning: IntType = 3
-    Informational: IntType = 4
-    Verbose: IntType = 5
+    LogAlways = 0
+    Critical = 1
+    Error = 2
+    Warning = 3
+    Informational = 4
+    Verbose = 5
 
 
 class StandardEventOpcode(Enum):
-    Info: IntType = 0
-    Start: IntType = 1
-    Stop: IntType = 2
-    DataCollectionStart: IntType = 3
-    DataCollectionStop: IntType = 4
-    Extension: IntType = 5
-    Reply: IntType = 6
-    Resume: IntType = 7
-    Suspend: IntType = 8
-    Send: IntType = 9
-    Receive: IntType = 240
+    Info = 0
+    Start = 1
+    Stop = 2
+    DataCollectionStart = 3
+    DataCollectionStop = 4
+    Extension = 5
+    Reply = 6
+    Resume = 7
+    Suspend = 8
+    Send = 9
+    Receive = 240
 
 
 class StandardEventTask(Enum):
-    #None: IntType = 0
+    #None = 0
 
 
 # No Delegates

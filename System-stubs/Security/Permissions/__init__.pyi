@@ -3151,179 +3151,179 @@ class IUnrestrictedPermission(Protocol):
 # ---------- Enums ---------- #
 
 class BuiltInPermissionFlag(Enum):
-    EnvironmentPermission: IntType = 1
-    FileDialogPermission: IntType = 2
-    FileIOPermission: IntType = 4
-    IsolatedStorageFilePermission: IntType = 8
-    ReflectionPermission: IntType = 16
-    RegistryPermission: IntType = 32
-    SecurityPermission: IntType = 64
-    UIPermission: IntType = 128
-    PrincipalPermission: IntType = 256
-    PublisherIdentityPermission: IntType = 512
-    SiteIdentityPermission: IntType = 1024
-    StrongNameIdentityPermission: IntType = 2048
-    UrlIdentityPermission: IntType = 4096
-    ZoneIdentityPermission: IntType = 8192
-    KeyContainerPermission: IntType = 16384
+    EnvironmentPermission = 1
+    FileDialogPermission = 2
+    FileIOPermission = 4
+    IsolatedStorageFilePermission = 8
+    ReflectionPermission = 16
+    RegistryPermission = 32
+    SecurityPermission = 64
+    UIPermission = 128
+    PrincipalPermission = 256
+    PublisherIdentityPermission = 512
+    SiteIdentityPermission = 1024
+    StrongNameIdentityPermission = 2048
+    UrlIdentityPermission = 4096
+    ZoneIdentityPermission = 8192
+    KeyContainerPermission = 16384
 
 
 class DataProtectionPermissionFlags(Enum):
-    NoFlags: IntType = 0
-    ProtectData: IntType = 1
-    UnprotectData: IntType = 2
-    ProtectMemory: IntType = 4
-    UnprotectMemory: IntType = 8
-    AllFlags: IntType = 15
+    NoFlags = 0
+    ProtectData = 1
+    UnprotectData = 2
+    ProtectMemory = 4
+    UnprotectMemory = 8
+    AllFlags = 15
 
 
 class EnvironmentPermissionAccess(Enum):
-    NoAccess: IntType = 0
-    Read: IntType = 1
-    Write: IntType = 2
-    AllAccess: IntType = 3
+    NoAccess = 0
+    Read = 1
+    Write = 2
+    AllAccess = 3
 
 
 class FileDialogPermissionAccess(Enum):
-    #None: IntType = 0
-    Open: IntType = 1
-    Save: IntType = 2
-    OpenSave: IntType = 3
+    #None = 0
+    Open = 1
+    Save = 2
+    OpenSave = 3
 
 
 class FileIOPermissionAccess(Enum):
-    NoAccess: IntType = 0
-    Read: IntType = 1
-    Write: IntType = 2
-    Append: IntType = 4
-    PathDiscovery: IntType = 8
-    AllAccess: IntType = 15
+    NoAccess = 0
+    Read = 1
+    Write = 2
+    Append = 4
+    PathDiscovery = 8
+    AllAccess = 15
 
 
 class HostProtectionResource(Enum):
-    #None: IntType = 0
-    Synchronization: IntType = 1
-    SharedState: IntType = 2
-    ExternalProcessMgmt: IntType = 4
-    SelfAffectingProcessMgmt: IntType = 8
-    ExternalThreading: IntType = 16
-    SelfAffectingThreading: IntType = 32
-    SecurityInfrastructure: IntType = 64
-    UI: IntType = 128
-    MayLeakOnAbort: IntType = 256
-    All: IntType = 511
+    #None = 0
+    Synchronization = 1
+    SharedState = 2
+    ExternalProcessMgmt = 4
+    SelfAffectingProcessMgmt = 8
+    ExternalThreading = 16
+    SelfAffectingThreading = 32
+    SecurityInfrastructure = 64
+    UI = 128
+    MayLeakOnAbort = 256
+    All = 511
 
 
 class IsolatedStorageContainment(Enum):
-    #None: IntType = 0
-    DomainIsolationByUser: IntType = 16
-    ApplicationIsolationByUser: IntType = 21
-    AssemblyIsolationByUser: IntType = 32
-    DomainIsolationByMachine: IntType = 48
-    AssemblyIsolationByMachine: IntType = 64
-    ApplicationIsolationByMachine: IntType = 69
-    DomainIsolationByRoamingUser: IntType = 80
-    AssemblyIsolationByRoamingUser: IntType = 96
-    ApplicationIsolationByRoamingUser: IntType = 101
-    AdministerIsolatedStorageByUser: IntType = 112
-    UnrestrictedIsolatedStorage: IntType = 240
+    #None = 0
+    DomainIsolationByUser = 16
+    ApplicationIsolationByUser = 21
+    AssemblyIsolationByUser = 32
+    DomainIsolationByMachine = 48
+    AssemblyIsolationByMachine = 64
+    ApplicationIsolationByMachine = 69
+    DomainIsolationByRoamingUser = 80
+    AssemblyIsolationByRoamingUser = 96
+    ApplicationIsolationByRoamingUser = 101
+    AdministerIsolatedStorageByUser = 112
+    UnrestrictedIsolatedStorage = 240
 
 
 class KeyContainerPermissionFlags(Enum):
-    NoFlags: IntType = 0
-    Create: IntType = 1
-    Open: IntType = 2
-    Delete: IntType = 4
-    Import: IntType = 16
-    Export: IntType = 32
-    Sign: IntType = 256
-    Decrypt: IntType = 512
-    ViewAcl: IntType = 4096
-    ChangeAcl: IntType = 8192
-    AllFlags: IntType = 13111
+    NoFlags = 0
+    Create = 1
+    Open = 2
+    Delete = 4
+    Import = 16
+    Export = 32
+    Sign = 256
+    Decrypt = 512
+    ViewAcl = 4096
+    ChangeAcl = 8192
+    AllFlags = 13111
 
 
 class PermissionState(Enum):
-    #None: IntType = 0
-    Unrestricted: IntType = 1
+    #None = 0
+    Unrestricted = 1
 
 
 class ReflectionPermissionFlag(Enum):
-    NoFlags: IntType = 0
-    TypeInformation: IntType = 1
-    MemberAccess: IntType = 2
-    ReflectionEmit: IntType = 4
-    AllFlags: IntType = 7
-    RestrictedMemberAccess: IntType = 8
+    NoFlags = 0
+    TypeInformation = 1
+    MemberAccess = 2
+    ReflectionEmit = 4
+    AllFlags = 7
+    RestrictedMemberAccess = 8
 
 
 class RegistryPermissionAccess(Enum):
-    NoAccess: IntType = 0
-    Read: IntType = 1
-    Write: IntType = 2
-    Create: IntType = 4
-    AllAccess: IntType = 7
+    NoAccess = 0
+    Read = 1
+    Write = 2
+    Create = 4
+    AllAccess = 7
 
 
 class SecurityAction(Enum):
-    Demand: IntType = 2
-    Assert: IntType = 3
-    Deny: IntType = 4
-    PermitOnly: IntType = 5
-    LinkDemand: IntType = 6
-    InheritanceDemand: IntType = 7
-    RequestMinimum: IntType = 8
-    RequestOptional: IntType = 9
-    RequestRefuse: IntType = 10
+    Demand = 2
+    Assert = 3
+    Deny = 4
+    PermitOnly = 5
+    LinkDemand = 6
+    InheritanceDemand = 7
+    RequestMinimum = 8
+    RequestOptional = 9
+    RequestRefuse = 10
 
 
 class SecurityPermissionFlag(Enum):
-    NoFlags: IntType = 0
-    Assertion: IntType = 1
-    UnmanagedCode: IntType = 2
-    SkipVerification: IntType = 4
-    Execution: IntType = 8
-    ControlThread: IntType = 16
-    ControlEvidence: IntType = 32
-    ControlPolicy: IntType = 64
-    SerializationFormatter: IntType = 128
-    ControlDomainPolicy: IntType = 256
-    ControlPrincipal: IntType = 512
-    ControlAppDomain: IntType = 1024
-    RemotingConfiguration: IntType = 2048
-    Infrastructure: IntType = 4096
-    BindingRedirects: IntType = 8192
-    AllFlags: IntType = 16383
+    NoFlags = 0
+    Assertion = 1
+    UnmanagedCode = 2
+    SkipVerification = 4
+    Execution = 8
+    ControlThread = 16
+    ControlEvidence = 32
+    ControlPolicy = 64
+    SerializationFormatter = 128
+    ControlDomainPolicy = 256
+    ControlPrincipal = 512
+    ControlAppDomain = 1024
+    RemotingConfiguration = 2048
+    Infrastructure = 4096
+    BindingRedirects = 8192
+    AllFlags = 16383
 
 
 class StorePermissionFlags(Enum):
-    NoFlags: IntType = 0
-    CreateStore: IntType = 1
-    DeleteStore: IntType = 2
-    EnumerateStores: IntType = 4
-    OpenStore: IntType = 16
-    AddToStore: IntType = 32
-    RemoveFromStore: IntType = 64
-    EnumerateCertificates: IntType = 128
-    AllFlags: IntType = 247
+    NoFlags = 0
+    CreateStore = 1
+    DeleteStore = 2
+    EnumerateStores = 4
+    OpenStore = 16
+    AddToStore = 32
+    RemoveFromStore = 64
+    EnumerateCertificates = 128
+    AllFlags = 247
 
 
 class TypeDescriptorPermissionFlags(Enum):
-    NoFlags: IntType = 0
-    RestrictedRegistrationAccess: IntType = 1
+    NoFlags = 0
+    RestrictedRegistrationAccess = 1
 
 
 class UIPermissionClipboard(Enum):
-    NoClipboard: IntType = 0
-    OwnClipboard: IntType = 1
-    AllClipboard: IntType = 2
+    NoClipboard = 0
+    OwnClipboard = 1
+    AllClipboard = 2
 
 
 class UIPermissionWindow(Enum):
-    NoWindows: IntType = 0
-    SafeSubWindows: IntType = 1
-    SafeTopLevelWindows: IntType = 2
-    AllWindows: IntType = 3
+    NoWindows = 0
+    SafeSubWindows = 1
+    SafeTopLevelWindows = 2
+    AllWindows = 3
 
 
 # No Delegates

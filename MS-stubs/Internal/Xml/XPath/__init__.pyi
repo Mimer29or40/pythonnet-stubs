@@ -82,15 +82,15 @@ class AstNode(ABC, ObjectType):
     # ---------- Sub Enums ---------- #
     
     class AstType(Enum):
-        Axis: IntType = 0
-        Operator: IntType = 1
-        Filter: IntType = 2
-        ConstantOperand: IntType = 3
-        Function: IntType = 4
-        Group: IntType = 5
-        Root: IntType = 6
-        Variable: IntType = 7
-        Error: IntType = 8
+        Axis = 0
+        Operator = 1
+        Filter = 2
+        ConstantOperand = 3
+        Function = 4
+        Group = 5
+        Root = 6
+        Variable = 7
+        Error = 8
     
 
 
@@ -205,20 +205,20 @@ class Axis(AstNode):
     # ---------- Sub Enums ---------- #
     
     class AxisType(Enum):
-        Ancestor: IntType = 0
-        AncestorOrSelf: IntType = 1
-        Attribute: IntType = 2
-        Child: IntType = 3
-        Descendant: IntType = 4
-        DescendantOrSelf: IntType = 5
-        Following: IntType = 6
-        FollowingSibling: IntType = 7
-        Namespace: IntType = 8
-        Parent: IntType = 9
-        Preceding: IntType = 10
-        PrecedingSibling: IntType = 11
-        Self: IntType = 12
-        #None: IntType = 13
+        Ancestor = 0
+        AncestorOrSelf = 1
+        Attribute = 2
+        Child = 3
+        Descendant = 4
+        DescendantOrSelf = 5
+        Following = 6
+        FollowingSibling = 7
+        Namespace = 8
+        Parent = 9
+        Preceding = 10
+        PrecedingSibling = 11
+        Self = 12
+        #None = 13
     
 
 
@@ -1089,34 +1089,34 @@ class Function(AstNode):
     # ---------- Sub Enums ---------- #
     
     class FunctionType(Enum):
-        FuncLast: IntType = 0
-        FuncPosition: IntType = 1
-        FuncCount: IntType = 2
-        FuncID: IntType = 3
-        FuncLocalName: IntType = 4
-        FuncNameSpaceUri: IntType = 5
-        FuncName: IntType = 6
-        FuncString: IntType = 7
-        FuncBoolean: IntType = 8
-        FuncNumber: IntType = 9
-        FuncTrue: IntType = 10
-        FuncFalse: IntType = 11
-        FuncNot: IntType = 12
-        FuncConcat: IntType = 13
-        FuncStartsWith: IntType = 14
-        FuncContains: IntType = 15
-        FuncSubstringBefore: IntType = 16
-        FuncSubstringAfter: IntType = 17
-        FuncSubstring: IntType = 18
-        FuncStringLength: IntType = 19
-        FuncNormalize: IntType = 20
-        FuncTranslate: IntType = 21
-        FuncLang: IntType = 22
-        FuncSum: IntType = 23
-        FuncFloor: IntType = 24
-        FuncCeiling: IntType = 25
-        FuncRound: IntType = 26
-        FuncUserDefined: IntType = 27
+        FuncLast = 0
+        FuncPosition = 1
+        FuncCount = 2
+        FuncID = 3
+        FuncLocalName = 4
+        FuncNameSpaceUri = 5
+        FuncName = 6
+        FuncString = 7
+        FuncBoolean = 8
+        FuncNumber = 9
+        FuncTrue = 10
+        FuncFalse = 11
+        FuncNot = 12
+        FuncConcat = 13
+        FuncStartsWith = 14
+        FuncContains = 15
+        FuncSubstringBefore = 16
+        FuncSubstringAfter = 17
+        FuncSubstring = 18
+        FuncStringLength = 19
+        FuncNormalize = 20
+        FuncTranslate = 21
+        FuncLang = 22
+        FuncSum = 23
+        FuncFloor = 24
+        FuncCeiling = 25
+        FuncRound = 26
+        FuncUserDefined = 27
     
 
 
@@ -1623,21 +1623,21 @@ class Operator(AstNode):
     # ---------- Sub Enums ---------- #
     
     class Op(Enum):
-        INVALID: IntType = 0
-        OR: IntType = 1
-        AND: IntType = 2
-        EQ: IntType = 3
-        NE: IntType = 4
-        LT: IntType = 5
-        LE: IntType = 6
-        GT: IntType = 7
-        GE: IntType = 8
-        PLUS: IntType = 9
-        MINUS: IntType = 10
-        MUL: IntType = 11
-        DIV: IntType = 12
-        MOD: IntType = 13
-        UNION: IntType = 14
+        INVALID = 0
+        OR = 1
+        AND = 2
+        EQ = 3
+        NE = 4
+        LT = 5
+        LE = 6
+        GT = 7
+        GE = 8
+        PLUS = 9
+        MINUS = 10
+        MUL = 11
+        DIV = 12
+        MOD = 13
+        UNION = 14
     
 
 
@@ -2664,37 +2664,37 @@ class XPathScanner(ObjectType):
     # ---------- Sub Enums ---------- #
     
     class LexKind(Enum):
-        Bang: IntType = 33
-        Quote: IntType = 34
-        Dollar: IntType = 36
-        Apos: IntType = 39
-        LParens: IntType = 40
-        RParens: IntType = 41
-        Star: IntType = 42
-        Plus: IntType = 43
-        Comma: IntType = 44
-        Minus: IntType = 45
-        Dot: IntType = 46
-        Slash: IntType = 47
-        Lt: IntType = 60
-        Eq: IntType = 61
-        Gt: IntType = 62
-        At: IntType = 64
-        And: IntType = 65
-        DotDot: IntType = 68
-        Eof: IntType = 69
-        Ge: IntType = 71
-        Le: IntType = 76
-        Ne: IntType = 78
-        Or: IntType = 79
-        SlashSlash: IntType = 83
-        LBracket: IntType = 91
-        RBracket: IntType = 93
-        Axe: IntType = 97
-        Number: IntType = 100
-        Name: IntType = 110
-        String: IntType = 115
-        Union: IntType = 124
+        Bang = 33
+        Quote = 34
+        Dollar = 36
+        Apos = 39
+        LParens = 40
+        RParens = 41
+        Star = 42
+        Plus = 43
+        Comma = 44
+        Minus = 45
+        Dot = 46
+        Slash = 47
+        Lt = 60
+        Eq = 61
+        Gt = 62
+        At = 64
+        And = 65
+        DotDot = 68
+        Eof = 69
+        Ge = 71
+        Le = 76
+        Ne = 78
+        Or = 79
+        SlashSlash = 83
+        LBracket = 91
+        RBracket = 93
+        Axe = 97
+        Number = 100
+        Name = 110
+        String = 115
+        Union = 124
     
 
 
@@ -2857,12 +2857,12 @@ class XPathSortComparer(ObjectType, IComparer[SortKey]):
 # ---------- Enums ---------- #
 
 class QueryProps(Enum):
-    #None: IntType = 0
-    Position: IntType = 1
-    Count: IntType = 2
-    Cached: IntType = 4
-    Reverse: IntType = 8
-    Merge: IntType = 16
+    #None = 0
+    Position = 1
+    Count = 2
+    Cached = 4
+    Reverse = 8
+    Merge = 16
 
 
 # No Delegates

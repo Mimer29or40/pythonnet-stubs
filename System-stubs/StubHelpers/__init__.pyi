@@ -748,9 +748,9 @@ class TypeNameNative(ValueType):
 # ---------- Enums ---------- #
 
 class TypeKind(Enum):
-    Primitive: IntType = 0
-    Metadata: IntType = 1
-    Projection: IntType = 2
+    Primitive = 0
+    Metadata = 1
+    Projection = 2
 
 
 # No Delegates

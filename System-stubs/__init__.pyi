@@ -647,8 +647,8 @@ class ActivationContext(ObjectType, IDisposable, ISerializable):
     # ---------- Sub Enums ---------- #
     
     class ContextForm(Enum):
-        Loose: IntType = 0
-        StoreBounded: IntType = 1
+        Loose = 0
+        StoreBounded = 1
     
 
 
@@ -6398,59 +6398,59 @@ class Environment(ABC, ObjectType):
     # ---------- Sub Enums ---------- #
     
     class SpecialFolderOption(Enum):
-        #None: IntType = 0
-        DoNotVerify: IntType = 16384
-        Create: IntType = 32768
+        #None = 0
+        DoNotVerify = 16384
+        Create = 32768
     
     
     class SpecialFolder(Enum):
-        Desktop: IntType = 0
-        Programs: IntType = 2
-        MyDocuments: IntType = 5
-        Personal: IntType = 5
-        Favorites: IntType = 6
-        Startup: IntType = 7
-        Recent: IntType = 8
-        SendTo: IntType = 9
-        StartMenu: IntType = 11
-        MyMusic: IntType = 13
-        MyVideos: IntType = 14
-        DesktopDirectory: IntType = 16
-        MyComputer: IntType = 17
-        NetworkShortcuts: IntType = 19
-        Fonts: IntType = 20
-        Templates: IntType = 21
-        CommonStartMenu: IntType = 22
-        CommonPrograms: IntType = 23
-        CommonStartup: IntType = 24
-        CommonDesktopDirectory: IntType = 25
-        ApplicationData: IntType = 26
-        PrinterShortcuts: IntType = 27
-        LocalApplicationData: IntType = 28
-        InternetCache: IntType = 32
-        Cookies: IntType = 33
-        History: IntType = 34
-        CommonApplicationData: IntType = 35
-        Windows: IntType = 36
-        System: IntType = 37
-        ProgramFiles: IntType = 38
-        MyPictures: IntType = 39
-        UserProfile: IntType = 40
-        SystemX86: IntType = 41
-        ProgramFilesX86: IntType = 42
-        CommonProgramFiles: IntType = 43
-        CommonProgramFilesX86: IntType = 44
-        CommonTemplates: IntType = 45
-        CommonDocuments: IntType = 46
-        CommonAdminTools: IntType = 47
-        AdminTools: IntType = 48
-        CommonMusic: IntType = 53
-        CommonPictures: IntType = 54
-        CommonVideos: IntType = 55
-        Resources: IntType = 56
-        LocalizedResources: IntType = 57
-        CommonOemLinks: IntType = 58
-        CDBurning: IntType = 59
+        Desktop = 0
+        Programs = 2
+        MyDocuments = 5
+        Personal = 5
+        Favorites = 6
+        Startup = 7
+        Recent = 8
+        SendTo = 9
+        StartMenu = 11
+        MyMusic = 13
+        MyVideos = 14
+        DesktopDirectory = 16
+        MyComputer = 17
+        NetworkShortcuts = 19
+        Fonts = 20
+        Templates = 21
+        CommonStartMenu = 22
+        CommonPrograms = 23
+        CommonStartup = 24
+        CommonDesktopDirectory = 25
+        ApplicationData = 26
+        PrinterShortcuts = 27
+        LocalApplicationData = 28
+        InternetCache = 32
+        Cookies = 33
+        History = 34
+        CommonApplicationData = 35
+        Windows = 36
+        System = 37
+        ProgramFiles = 38
+        MyPictures = 39
+        UserProfile = 40
+        SystemX86 = 41
+        ProgramFilesX86 = 42
+        CommonProgramFiles = 43
+        CommonProgramFilesX86 = 44
+        CommonTemplates = 45
+        CommonDocuments = 46
+        CommonAdminTools = 47
+        AdminTools = 48
+        CommonMusic = 53
+        CommonPictures = 54
+        CommonVideos = 55
+        Resources = 56
+        LocalizedResources = 57
+        CommonOemLinks = 58
+        CDBurning = 59
     
 
 
@@ -19133,716 +19133,716 @@ class _AppDomain(Protocol):
 # ---------- Enums ---------- #
 
 class AppDomainManagerInitializationOptions(Enum):
-    #None: IntType = 0
-    RegisterWithHost: IntType = 1
+    #None = 0
+    RegisterWithHost = 1
 
 
 class AttributeTargets(Enum):
-    Assembly: IntType = 1
-    Module: IntType = 2
-    Class: IntType = 4
-    Struct: IntType = 8
-    Enum: IntType = 16
-    Constructor: IntType = 32
-    Method: IntType = 64
-    Property: IntType = 128
-    Field: IntType = 256
-    Event: IntType = 512
-    Interface: IntType = 1024
-    Parameter: IntType = 2048
-    Delegate: IntType = 4096
-    ReturnValue: IntType = 8192
-    GenericParameter: IntType = 16384
-    All: IntType = 32767
+    Assembly = 1
+    Module = 2
+    Class = 4
+    Struct = 8
+    Enum = 16
+    Constructor = 32
+    Method = 64
+    Property = 128
+    Field = 256
+    Event = 512
+    Interface = 1024
+    Parameter = 2048
+    Delegate = 4096
+    ReturnValue = 8192
+    GenericParameter = 16384
+    All = 32767
 
 
 class Base64FormattingOptions(Enum):
-    #None: IntType = 0
-    InsertLineBreaks: IntType = 1
+    #None = 0
+    InsertLineBreaks = 1
 
 
 class CompatibilityFlag(Enum):
-    SwallowUnhandledExceptions: IntType = 0
-    NullReferenceExceptionOnAV: IntType = 1
-    EagerlyGenerateRandomAsymmKeys: IntType = 2
-    FullTrustListAssembliesInGac: IntType = 3
-    DateTimeParseIgnorePunctuation: IntType = 4
-    OnlyGACDomainNeutral: IntType = 5
-    DisableReplacementCustomCulture: IntType = 6
+    SwallowUnhandledExceptions = 0
+    NullReferenceExceptionOnAV = 1
+    EagerlyGenerateRandomAsymmKeys = 2
+    FullTrustListAssembliesInGac = 3
+    DateTimeParseIgnorePunctuation = 4
+    OnlyGACDomainNeutral = 5
+    DisableReplacementCustomCulture = 6
 
 
 class ConfigEvents(Enum):
-    StartDocument: IntType = 0
-    StartDTD: IntType = 1
-    EndDTD: IntType = 2
-    StartDTDSubset: IntType = 3
-    EndDTDSubset: IntType = 4
-    EndProlog: IntType = 5
-    StartEntity: IntType = 6
-    EndEntity: IntType = 7
-    EndDocument: IntType = 8
-    DataAvailable: IntType = 9
-    LastEvent: IntType = 9
+    StartDocument = 0
+    StartDTD = 1
+    EndDTD = 2
+    StartDTDSubset = 3
+    EndDTDSubset = 4
+    EndProlog = 5
+    StartEntity = 6
+    EndEntity = 7
+    EndDocument = 8
+    DataAvailable = 9
+    LastEvent = 9
 
 
 class ConfigNodeSubType(Enum):
-    Version: IntType = 28
-    Encoding: IntType = 29
-    Standalone: IntType = 30
-    NS: IntType = 31
-    XMLSpace: IntType = 32
-    XMLLang: IntType = 33
-    System: IntType = 34
-    Public: IntType = 35
-    NData: IntType = 36
-    AtCData: IntType = 37
-    AtId: IntType = 38
-    AtIdref: IntType = 39
-    AtIdrefs: IntType = 40
-    AtEntity: IntType = 41
-    AtEntities: IntType = 42
-    AtNmToken: IntType = 43
-    AtNmTokens: IntType = 44
-    AtNotation: IntType = 45
-    AtRequired: IntType = 46
-    AtImplied: IntType = 47
-    AtFixed: IntType = 48
-    PentityDecl: IntType = 49
-    Empty: IntType = 50
-    Any: IntType = 51
-    Mixed: IntType = 52
-    Sequence: IntType = 53
-    Choice: IntType = 54
-    Star: IntType = 55
-    Plus: IntType = 56
-    Questionmark: IntType = 57
-    LastSubNodeType: IntType = 58
+    Version = 28
+    Encoding = 29
+    Standalone = 30
+    NS = 31
+    XMLSpace = 32
+    XMLLang = 33
+    System = 34
+    Public = 35
+    NData = 36
+    AtCData = 37
+    AtId = 38
+    AtIdref = 39
+    AtIdrefs = 40
+    AtEntity = 41
+    AtEntities = 42
+    AtNmToken = 43
+    AtNmTokens = 44
+    AtNotation = 45
+    AtRequired = 46
+    AtImplied = 47
+    AtFixed = 48
+    PentityDecl = 49
+    Empty = 50
+    Any = 51
+    Mixed = 52
+    Sequence = 53
+    Choice = 54
+    Star = 55
+    Plus = 56
+    Questionmark = 57
+    LastSubNodeType = 58
 
 
 class ConfigNodeType(Enum):
-    Element: IntType = 1
-    Attribute: IntType = 2
-    Pi: IntType = 3
-    XmlDecl: IntType = 4
-    DocType: IntType = 5
-    DTDAttribute: IntType = 6
-    EntityDecl: IntType = 7
-    ElementDecl: IntType = 8
-    AttlistDecl: IntType = 9
-    Notation: IntType = 10
-    Group: IntType = 11
-    IncludeSect: IntType = 12
-    PCData: IntType = 13
-    CData: IntType = 14
-    IgnoreSect: IntType = 15
-    Comment: IntType = 16
-    EntityRef: IntType = 17
-    Whitespace: IntType = 18
-    Name: IntType = 19
-    NMToken: IntType = 20
-    String: IntType = 21
-    Peref: IntType = 22
-    Model: IntType = 23
-    ATTDef: IntType = 24
-    ATTType: IntType = 25
-    ATTPresence: IntType = 26
-    DTDSubset: IntType = 27
-    LastNodeType: IntType = 28
+    Element = 1
+    Attribute = 2
+    Pi = 3
+    XmlDecl = 4
+    DocType = 5
+    DTDAttribute = 6
+    EntityDecl = 7
+    ElementDecl = 8
+    AttlistDecl = 9
+    Notation = 10
+    Group = 11
+    IncludeSect = 12
+    PCData = 13
+    CData = 14
+    IgnoreSect = 15
+    Comment = 16
+    EntityRef = 17
+    Whitespace = 18
+    Name = 19
+    NMToken = 20
+    String = 21
+    Peref = 22
+    Model = 23
+    ATTDef = 24
+    ATTType = 25
+    ATTPresence = 26
+    DTDSubset = 27
+    LastNodeType = 28
 
 
 class ConsoleColor(Enum):
-    Black: IntType = 0
-    DarkBlue: IntType = 1
-    DarkGreen: IntType = 2
-    DarkCyan: IntType = 3
-    DarkRed: IntType = 4
-    DarkMagenta: IntType = 5
-    DarkYellow: IntType = 6
-    Gray: IntType = 7
-    DarkGray: IntType = 8
-    Blue: IntType = 9
-    Green: IntType = 10
-    Cyan: IntType = 11
-    Red: IntType = 12
-    Magenta: IntType = 13
-    Yellow: IntType = 14
-    White: IntType = 15
+    Black = 0
+    DarkBlue = 1
+    DarkGreen = 2
+    DarkCyan = 3
+    DarkRed = 4
+    DarkMagenta = 5
+    DarkYellow = 6
+    Gray = 7
+    DarkGray = 8
+    Blue = 9
+    Green = 10
+    Cyan = 11
+    Red = 12
+    Magenta = 13
+    Yellow = 14
+    White = 15
 
 
 class ConsoleKey(Enum):
-    Backspace: IntType = 8
-    Tab: IntType = 9
-    Clear: IntType = 12
-    Enter: IntType = 13
-    Pause: IntType = 19
-    Escape: IntType = 27
-    Spacebar: IntType = 32
-    PageUp: IntType = 33
-    PageDown: IntType = 34
-    End: IntType = 35
-    Home: IntType = 36
-    LeftArrow: IntType = 37
-    UpArrow: IntType = 38
-    RightArrow: IntType = 39
-    DownArrow: IntType = 40
-    Select: IntType = 41
-    Print: IntType = 42
-    Execute: IntType = 43
-    PrintScreen: IntType = 44
-    Insert: IntType = 45
-    Delete: IntType = 46
-    Help: IntType = 47
-    D0: IntType = 48
-    D1: IntType = 49
-    D2: IntType = 50
-    D3: IntType = 51
-    D4: IntType = 52
-    D5: IntType = 53
-    D6: IntType = 54
-    D7: IntType = 55
-    D8: IntType = 56
-    D9: IntType = 57
-    A: IntType = 65
-    B: IntType = 66
-    C: IntType = 67
-    D: IntType = 68
-    E: IntType = 69
-    F: IntType = 70
-    G: IntType = 71
-    H: IntType = 72
-    I: IntType = 73
-    J: IntType = 74
-    K: IntType = 75
-    L: IntType = 76
-    M: IntType = 77
-    N: IntType = 78
-    O: IntType = 79
-    P: IntType = 80
-    Q: IntType = 81
-    R: IntType = 82
-    S: IntType = 83
-    T: IntType = 84
-    U: IntType = 85
-    V: IntType = 86
-    W: IntType = 87
-    X: IntType = 88
-    Y: IntType = 89
-    Z: IntType = 90
-    LeftWindows: IntType = 91
-    RightWindows: IntType = 92
-    Applications: IntType = 93
-    Sleep: IntType = 95
-    NumPad0: IntType = 96
-    NumPad1: IntType = 97
-    NumPad2: IntType = 98
-    NumPad3: IntType = 99
-    NumPad4: IntType = 100
-    NumPad5: IntType = 101
-    NumPad6: IntType = 102
-    NumPad7: IntType = 103
-    NumPad8: IntType = 104
-    NumPad9: IntType = 105
-    Multiply: IntType = 106
-    Add: IntType = 107
-    Separator: IntType = 108
-    Subtract: IntType = 109
-    Decimal: IntType = 110
-    Divide: IntType = 111
-    F1: IntType = 112
-    F2: IntType = 113
-    F3: IntType = 114
-    F4: IntType = 115
-    F5: IntType = 116
-    F6: IntType = 117
-    F7: IntType = 118
-    F8: IntType = 119
-    F9: IntType = 120
-    F10: IntType = 121
-    F11: IntType = 122
-    F12: IntType = 123
-    F13: IntType = 124
-    F14: IntType = 125
-    F15: IntType = 126
-    F16: IntType = 127
-    F17: IntType = 128
-    F18: IntType = 129
-    F19: IntType = 130
-    F20: IntType = 131
-    F21: IntType = 132
-    F22: IntType = 133
-    F23: IntType = 134
-    F24: IntType = 135
-    BrowserBack: IntType = 166
-    BrowserForward: IntType = 167
-    BrowserRefresh: IntType = 168
-    BrowserStop: IntType = 169
-    BrowserSearch: IntType = 170
-    BrowserFavorites: IntType = 171
-    BrowserHome: IntType = 172
-    VolumeMute: IntType = 173
-    VolumeDown: IntType = 174
-    VolumeUp: IntType = 175
-    MediaNext: IntType = 176
-    MediaPrevious: IntType = 177
-    MediaStop: IntType = 178
-    MediaPlay: IntType = 179
-    LaunchMail: IntType = 180
-    LaunchMediaSelect: IntType = 181
-    LaunchApp1: IntType = 182
-    LaunchApp2: IntType = 183
-    Oem1: IntType = 186
-    OemPlus: IntType = 187
-    OemComma: IntType = 188
-    OemMinus: IntType = 189
-    OemPeriod: IntType = 190
-    Oem2: IntType = 191
-    Oem3: IntType = 192
-    Oem4: IntType = 219
-    Oem5: IntType = 220
-    Oem6: IntType = 221
-    Oem7: IntType = 222
-    Oem8: IntType = 223
-    Oem102: IntType = 226
-    Process: IntType = 229
-    Packet: IntType = 231
-    Attention: IntType = 246
-    CrSel: IntType = 247
-    ExSel: IntType = 248
-    EraseEndOfFile: IntType = 249
-    Play: IntType = 250
-    Zoom: IntType = 251
-    NoName: IntType = 252
-    Pa1: IntType = 253
-    OemClear: IntType = 254
+    Backspace = 8
+    Tab = 9
+    Clear = 12
+    Enter = 13
+    Pause = 19
+    Escape = 27
+    Spacebar = 32
+    PageUp = 33
+    PageDown = 34
+    End = 35
+    Home = 36
+    LeftArrow = 37
+    UpArrow = 38
+    RightArrow = 39
+    DownArrow = 40
+    Select = 41
+    Print = 42
+    Execute = 43
+    PrintScreen = 44
+    Insert = 45
+    Delete = 46
+    Help = 47
+    D0 = 48
+    D1 = 49
+    D2 = 50
+    D3 = 51
+    D4 = 52
+    D5 = 53
+    D6 = 54
+    D7 = 55
+    D8 = 56
+    D9 = 57
+    A = 65
+    B = 66
+    C = 67
+    D = 68
+    E = 69
+    F = 70
+    G = 71
+    H = 72
+    I = 73
+    J = 74
+    K = 75
+    L = 76
+    M = 77
+    N = 78
+    O = 79
+    P = 80
+    Q = 81
+    R = 82
+    S = 83
+    T = 84
+    U = 85
+    V = 86
+    W = 87
+    X = 88
+    Y = 89
+    Z = 90
+    LeftWindows = 91
+    RightWindows = 92
+    Applications = 93
+    Sleep = 95
+    NumPad0 = 96
+    NumPad1 = 97
+    NumPad2 = 98
+    NumPad3 = 99
+    NumPad4 = 100
+    NumPad5 = 101
+    NumPad6 = 102
+    NumPad7 = 103
+    NumPad8 = 104
+    NumPad9 = 105
+    Multiply = 106
+    Add = 107
+    Separator = 108
+    Subtract = 109
+    Decimal = 110
+    Divide = 111
+    F1 = 112
+    F2 = 113
+    F3 = 114
+    F4 = 115
+    F5 = 116
+    F6 = 117
+    F7 = 118
+    F8 = 119
+    F9 = 120
+    F10 = 121
+    F11 = 122
+    F12 = 123
+    F13 = 124
+    F14 = 125
+    F15 = 126
+    F16 = 127
+    F17 = 128
+    F18 = 129
+    F19 = 130
+    F20 = 131
+    F21 = 132
+    F22 = 133
+    F23 = 134
+    F24 = 135
+    BrowserBack = 166
+    BrowserForward = 167
+    BrowserRefresh = 168
+    BrowserStop = 169
+    BrowserSearch = 170
+    BrowserFavorites = 171
+    BrowserHome = 172
+    VolumeMute = 173
+    VolumeDown = 174
+    VolumeUp = 175
+    MediaNext = 176
+    MediaPrevious = 177
+    MediaStop = 178
+    MediaPlay = 179
+    LaunchMail = 180
+    LaunchMediaSelect = 181
+    LaunchApp1 = 182
+    LaunchApp2 = 183
+    Oem1 = 186
+    OemPlus = 187
+    OemComma = 188
+    OemMinus = 189
+    OemPeriod = 190
+    Oem2 = 191
+    Oem3 = 192
+    Oem4 = 219
+    Oem5 = 220
+    Oem6 = 221
+    Oem7 = 222
+    Oem8 = 223
+    Oem102 = 226
+    Process = 229
+    Packet = 231
+    Attention = 246
+    CrSel = 247
+    ExSel = 248
+    EraseEndOfFile = 249
+    Play = 250
+    Zoom = 251
+    NoName = 252
+    Pa1 = 253
+    OemClear = 254
 
 
 class ConsoleModifiers(Enum):
-    Alt: IntType = 1
-    Shift: IntType = 2
-    Control: IntType = 4
+    Alt = 1
+    Shift = 2
+    Control = 4
 
 
 class ConsoleSpecialKey(Enum):
-    ControlC: IntType = 0
-    ControlBreak: IntType = 1
+    ControlC = 0
+    ControlBreak = 1
 
 
 class DTSubStringType(Enum):
-    Unknown: IntType = 0
-    Invalid: IntType = 1
-    Number: IntType = 2
-    End: IntType = 3
-    Other: IntType = 4
+    Unknown = 0
+    Invalid = 1
+    Number = 2
+    End = 3
+    Other = 4
 
 
 class DateTimeKind(Enum):
-    Unspecified: IntType = 0
-    Utc: IntType = 1
-    Local: IntType = 2
+    Unspecified = 0
+    Utc = 1
+    Local = 2
 
 
 class DayOfWeek(Enum):
-    Sunday: IntType = 0
-    Monday: IntType = 1
-    Tuesday: IntType = 2
-    Wednesday: IntType = 3
-    Thursday: IntType = 4
-    Friday: IntType = 5
-    Saturday: IntType = 6
+    Sunday = 0
+    Monday = 1
+    Tuesday = 2
+    Wednesday = 3
+    Thursday = 4
+    Friday = 5
+    Saturday = 6
 
 
 class DelegateBindingFlags(Enum):
-    StaticMethodOnly: IntType = 1
-    InstanceMethodOnly: IntType = 2
-    OpenDelegateOnly: IntType = 4
-    ClosedDelegateOnly: IntType = 8
-    NeverCloseOverNull: IntType = 16
-    CaselessMatching: IntType = 32
-    SkipSecurityChecks: IntType = 64
-    RelaxedSignature: IntType = 128
+    StaticMethodOnly = 1
+    InstanceMethodOnly = 2
+    OpenDelegateOnly = 4
+    ClosedDelegateOnly = 8
+    NeverCloseOverNull = 16
+    CaselessMatching = 32
+    SkipSecurityChecks = 64
+    RelaxedSignature = 128
 
 
 class EnvironmentVariableTarget(Enum):
-    Process: IntType = 0
-    User: IntType = 1
-    Machine: IntType = 2
+    Process = 0
+    User = 1
+    Machine = 2
 
 
 class ExceptionArgument(Enum):
-    obj: IntType = 0
-    dictionary: IntType = 1
-    dictionaryCreationThreshold: IntType = 2
-    array: IntType = 3
-    info: IntType = 4
-    key: IntType = 5
-    collection: IntType = 6
-    list: IntType = 7
-    match: IntType = 8
-    converter: IntType = 9
-    queue: IntType = 10
-    stack: IntType = 11
-    capacity: IntType = 12
-    index: IntType = 13
-    startIndex: IntType = 14
-    value: IntType = 15
-    count: IntType = 16
-    arrayIndex: IntType = 17
-    name: IntType = 18
-    mode: IntType = 19
-    item: IntType = 20
-    options: IntType = 21
-    view: IntType = 22
-    sourceBytesToCopy: IntType = 23
+    obj = 0
+    dictionary = 1
+    dictionaryCreationThreshold = 2
+    array = 3
+    info = 4
+    key = 5
+    collection = 6
+    list = 7
+    match = 8
+    converter = 9
+    queue = 10
+    stack = 11
+    capacity = 12
+    index = 13
+    startIndex = 14
+    value = 15
+    count = 16
+    arrayIndex = 17
+    name = 18
+    mode = 19
+    item = 20
+    options = 21
+    view = 22
+    sourceBytesToCopy = 23
 
 
 class ExceptionResource(Enum):
-    Argument_ImplementIComparable: IntType = 0
-    Argument_InvalidType: IntType = 1
-    Argument_InvalidArgumentForComparison: IntType = 2
-    Argument_InvalidRegistryKeyPermissionCheck: IntType = 3
-    ArgumentOutOfRange_NeedNonNegNum: IntType = 4
-    Arg_ArrayPlusOffTooSmall: IntType = 5
-    Arg_NonZeroLowerBound: IntType = 6
-    Arg_RankMultiDimNotSupported: IntType = 7
-    Arg_RegKeyDelHive: IntType = 8
-    Arg_RegKeyStrLenBug: IntType = 9
-    Arg_RegSetStrArrNull: IntType = 10
-    Arg_RegSetMismatchedKind: IntType = 11
-    Arg_RegSubKeyAbsent: IntType = 12
-    Arg_RegSubKeyValueAbsent: IntType = 13
-    Argument_AddingDuplicate: IntType = 14
-    Serialization_InvalidOnDeser: IntType = 15
-    Serialization_MissingKeys: IntType = 16
-    Serialization_NullKey: IntType = 17
-    Argument_InvalidArrayType: IntType = 18
-    NotSupported_KeyCollectionSet: IntType = 19
-    NotSupported_ValueCollectionSet: IntType = 20
-    ArgumentOutOfRange_SmallCapacity: IntType = 21
-    ArgumentOutOfRange_Index: IntType = 22
-    Argument_InvalidOffLen: IntType = 23
-    Argument_ItemNotExist: IntType = 24
-    ArgumentOutOfRange_Count: IntType = 25
-    ArgumentOutOfRange_InvalidThreshold: IntType = 26
-    ArgumentOutOfRange_ListInsert: IntType = 27
-    NotSupported_ReadOnlyCollection: IntType = 28
-    InvalidOperation_CannotRemoveFromStackOrQueue: IntType = 29
-    InvalidOperation_EmptyQueue: IntType = 30
-    InvalidOperation_EnumOpCantHappen: IntType = 31
-    InvalidOperation_EnumFailedVersion: IntType = 32
-    InvalidOperation_EmptyStack: IntType = 33
-    ArgumentOutOfRange_BiggerThanCollection: IntType = 34
-    InvalidOperation_EnumNotStarted: IntType = 35
-    InvalidOperation_EnumEnded: IntType = 36
-    NotSupported_SortedListNestedWrite: IntType = 37
-    InvalidOperation_NoValue: IntType = 38
-    InvalidOperation_RegRemoveSubKey: IntType = 39
-    Security_RegistryPermission: IntType = 40
-    UnauthorizedAccess_RegistryNoWrite: IntType = 41
-    ObjectDisposed_RegKeyClosed: IntType = 42
-    NotSupported_InComparableType: IntType = 43
-    Argument_InvalidRegistryOptionsCheck: IntType = 44
-    Argument_InvalidRegistryViewCheck: IntType = 45
+    Argument_ImplementIComparable = 0
+    Argument_InvalidType = 1
+    Argument_InvalidArgumentForComparison = 2
+    Argument_InvalidRegistryKeyPermissionCheck = 3
+    ArgumentOutOfRange_NeedNonNegNum = 4
+    Arg_ArrayPlusOffTooSmall = 5
+    Arg_NonZeroLowerBound = 6
+    Arg_RankMultiDimNotSupported = 7
+    Arg_RegKeyDelHive = 8
+    Arg_RegKeyStrLenBug = 9
+    Arg_RegSetStrArrNull = 10
+    Arg_RegSetMismatchedKind = 11
+    Arg_RegSubKeyAbsent = 12
+    Arg_RegSubKeyValueAbsent = 13
+    Argument_AddingDuplicate = 14
+    Serialization_InvalidOnDeser = 15
+    Serialization_MissingKeys = 16
+    Serialization_NullKey = 17
+    Argument_InvalidArrayType = 18
+    NotSupported_KeyCollectionSet = 19
+    NotSupported_ValueCollectionSet = 20
+    ArgumentOutOfRange_SmallCapacity = 21
+    ArgumentOutOfRange_Index = 22
+    Argument_InvalidOffLen = 23
+    Argument_ItemNotExist = 24
+    ArgumentOutOfRange_Count = 25
+    ArgumentOutOfRange_InvalidThreshold = 26
+    ArgumentOutOfRange_ListInsert = 27
+    NotSupported_ReadOnlyCollection = 28
+    InvalidOperation_CannotRemoveFromStackOrQueue = 29
+    InvalidOperation_EmptyQueue = 30
+    InvalidOperation_EnumOpCantHappen = 31
+    InvalidOperation_EnumFailedVersion = 32
+    InvalidOperation_EmptyStack = 33
+    ArgumentOutOfRange_BiggerThanCollection = 34
+    InvalidOperation_EnumNotStarted = 35
+    InvalidOperation_EnumEnded = 36
+    NotSupported_SortedListNestedWrite = 37
+    InvalidOperation_NoValue = 38
+    InvalidOperation_RegRemoveSubKey = 39
+    Security_RegistryPermission = 40
+    UnauthorizedAccess_RegistryNoWrite = 41
+    ObjectDisposed_RegKeyClosed = 42
+    NotSupported_InComparableType = 43
+    Argument_InvalidRegistryOptionsCheck = 44
+    Argument_InvalidRegistryViewCheck = 45
 
 
 class GCCollectionMode(Enum):
-    Default: IntType = 0
-    Forced: IntType = 1
-    Optimized: IntType = 2
+    Default = 0
+    Forced = 1
+    Optimized = 2
 
 
 class GCNotificationStatus(Enum):
-    Succeeded: IntType = 0
-    Failed: IntType = 1
-    Canceled: IntType = 2
-    Timeout: IntType = 3
-    NotApplicable: IntType = 4
+    Succeeded = 0
+    Failed = 1
+    Canceled = 2
+    Timeout = 3
+    NotApplicable = 4
 
 
 class GenericUriParserOptions(Enum):
-    Default: IntType = 0
-    GenericAuthority: IntType = 1
-    AllowEmptyAuthority: IntType = 2
-    NoUserInfo: IntType = 4
-    NoPort: IntType = 8
-    NoQuery: IntType = 16
-    NoFragment: IntType = 32
-    DontConvertPathBackslashes: IntType = 64
-    DontCompressPath: IntType = 128
-    DontUnescapePathDotsAndSlashes: IntType = 256
-    Idn: IntType = 512
-    IriParsing: IntType = 1024
+    Default = 0
+    GenericAuthority = 1
+    AllowEmptyAuthority = 2
+    NoUserInfo = 4
+    NoPort = 8
+    NoQuery = 16
+    NoFragment = 32
+    DontConvertPathBackslashes = 64
+    DontCompressPath = 128
+    DontUnescapePathDotsAndSlashes = 256
+    Idn = 512
+    IriParsing = 1024
 
 
 class InternalGCCollectionMode(Enum):
-    NonBlocking: IntType = 1
-    Blocking: IntType = 2
-    Optimized: IntType = 4
-    Compacting: IntType = 8
+    NonBlocking = 1
+    Blocking = 2
+    Optimized = 4
+    Compacting = 8
 
 
 class LoaderOptimization(Enum):
-    NotSpecified: IntType = 0
-    SingleDomain: IntType = 1
-    MultiDomain: IntType = 2
-    MultiDomainHost: IntType = 3
-    DomainMask: IntType = 3
-    DisallowBindings: IntType = 4
+    NotSpecified = 0
+    SingleDomain = 1
+    MultiDomain = 2
+    MultiDomainHost = 3
+    DomainMask = 3
+    DisallowBindings = 4
 
 
 class LogLevel(Enum):
-    Trace: IntType = 0
-    Status: IntType = 20
-    Warning: IntType = 40
-    Error: IntType = 50
-    Panic: IntType = 100
+    Trace = 0
+    Status = 20
+    Warning = 40
+    Error = 50
+    Panic = 100
 
 
 class MidpointRounding(Enum):
-    ToEven: IntType = 0
-    AwayFromZero: IntType = 1
+    ToEven = 0
+    AwayFromZero = 1
 
 
 class ParseFailureKind(Enum):
-    #None: IntType = 0
-    ArgumentNull: IntType = 1
-    Format: IntType = 2
-    FormatWithParameter: IntType = 3
-    FormatBadDateTimeCalendar: IntType = 4
+    #None = 0
+    ArgumentNull = 1
+    Format = 2
+    FormatWithParameter = 3
+    FormatBadDateTimeCalendar = 4
 
 
 class ParseFlags(Enum):
-    HaveYear: IntType = 1
-    HaveMonth: IntType = 2
-    HaveDay: IntType = 4
-    HaveHour: IntType = 8
-    HaveMinute: IntType = 16
-    HaveSecond: IntType = 32
-    HaveTime: IntType = 64
-    HaveDate: IntType = 128
-    TimeZoneUsed: IntType = 256
-    TimeZoneUtc: IntType = 512
-    ParsedMonthName: IntType = 1024
-    CaptureOffset: IntType = 2048
-    YearDefault: IntType = 4096
-    Rfc1123Pattern: IntType = 8192
-    UtcSortPattern: IntType = 16384
+    HaveYear = 1
+    HaveMonth = 2
+    HaveDay = 4
+    HaveHour = 8
+    HaveMinute = 16
+    HaveSecond = 32
+    HaveTime = 64
+    HaveDate = 128
+    TimeZoneUsed = 256
+    TimeZoneUtc = 512
+    ParsedMonthName = 1024
+    CaptureOffset = 2048
+    YearDefault = 4096
+    Rfc1123Pattern = 8192
+    UtcSortPattern = 16384
 
 
 class ParsingError(Enum):
-    #None: IntType = 0
-    BadFormat: IntType = 1
-    BadScheme: IntType = 2
-    BadAuthority: IntType = 3
-    EmptyUriString: IntType = 4
-    LastRelativeUriOkErrIndex: IntType = 4
-    SchemeLimit: IntType = 5
-    SizeLimit: IntType = 6
-    MustRootedPath: IntType = 7
-    BadHostName: IntType = 8
-    NonEmptyHost: IntType = 9
-    BadPort: IntType = 10
-    BadAuthorityTerminator: IntType = 11
-    CannotCreateRelative: IntType = 12
+    #None = 0
+    BadFormat = 1
+    BadScheme = 2
+    BadAuthority = 3
+    EmptyUriString = 4
+    LastRelativeUriOkErrIndex = 4
+    SchemeLimit = 5
+    SizeLimit = 6
+    MustRootedPath = 7
+    BadHostName = 8
+    NonEmptyHost = 9
+    BadPort = 10
+    BadAuthorityTerminator = 11
+    CannotCreateRelative = 12
 
 
 class PlatformID(Enum):
-    Win32S: IntType = 0
-    Win32Windows: IntType = 1
-    Win32NT: IntType = 2
-    WinCE: IntType = 3
-    Unix: IntType = 4
-    Xbox: IntType = 5
-    MacOSX: IntType = 6
+    Win32S = 0
+    Win32Windows = 1
+    Win32NT = 2
+    WinCE = 3
+    Unix = 4
+    Xbox = 5
+    MacOSX = 6
 
 
 class StringComparison(Enum):
-    CurrentCulture: IntType = 0
-    CurrentCultureIgnoreCase: IntType = 1
-    InvariantCulture: IntType = 2
-    InvariantCultureIgnoreCase: IntType = 3
-    Ordinal: IntType = 4
-    OrdinalIgnoreCase: IntType = 5
+    CurrentCulture = 0
+    CurrentCultureIgnoreCase = 1
+    InvariantCulture = 2
+    InvariantCultureIgnoreCase = 3
+    Ordinal = 4
+    OrdinalIgnoreCase = 5
 
 
 class StringSplitOptions(Enum):
-    #None: IntType = 0
-    RemoveEmptyEntries: IntType = 1
+    #None = 0
+    RemoveEmptyEntries = 1
 
 
 class TimeZoneInfoOptions(Enum):
-    #None: IntType = 1
-    NoThrowOnInvalidTime: IntType = 2
+    #None = 1
+    NoThrowOnInvalidTime = 2
 
 
 class TokenType(Enum):
-    NumberToken: IntType = 1
-    YearNumberToken: IntType = 2
-    Am: IntType = 3
-    Pm: IntType = 4
-    MonthToken: IntType = 5
-    EndOfString: IntType = 6
-    DayOfWeekToken: IntType = 7
-    TimeZoneToken: IntType = 8
-    EraToken: IntType = 9
-    DateWordToken: IntType = 10
-    UnknownToken: IntType = 11
-    HebrewNumber: IntType = 12
-    JapaneseEraToken: IntType = 13
-    TEraToken: IntType = 14
-    IgnorableSymbol: IntType = 15
-    RegularTokenMask: IntType = 255
-    SEP_Unk: IntType = 256
-    SEP_End: IntType = 512
-    SEP_Space: IntType = 768
-    SEP_Am: IntType = 1024
-    SEP_Pm: IntType = 1280
-    SEP_Date: IntType = 1536
-    SEP_Time: IntType = 1792
-    SEP_YearSuff: IntType = 2048
-    SEP_MonthSuff: IntType = 2304
-    SEP_DaySuff: IntType = 2560
-    SEP_HourSuff: IntType = 2816
-    SEP_MinuteSuff: IntType = 3072
-    SEP_SecondSuff: IntType = 3328
-    SEP_LocalTimeMark: IntType = 3584
-    SEP_DateOrOffset: IntType = 3840
-    SeparatorTokenMask: IntType = 65280
+    NumberToken = 1
+    YearNumberToken = 2
+    Am = 3
+    Pm = 4
+    MonthToken = 5
+    EndOfString = 6
+    DayOfWeekToken = 7
+    TimeZoneToken = 8
+    EraToken = 9
+    DateWordToken = 10
+    UnknownToken = 11
+    HebrewNumber = 12
+    JapaneseEraToken = 13
+    TEraToken = 14
+    IgnorableSymbol = 15
+    RegularTokenMask = 255
+    SEP_Unk = 256
+    SEP_End = 512
+    SEP_Space = 768
+    SEP_Am = 1024
+    SEP_Pm = 1280
+    SEP_Date = 1536
+    SEP_Time = 1792
+    SEP_YearSuff = 2048
+    SEP_MonthSuff = 2304
+    SEP_DaySuff = 2560
+    SEP_HourSuff = 2816
+    SEP_MinuteSuff = 3072
+    SEP_SecondSuff = 3328
+    SEP_LocalTimeMark = 3584
+    SEP_DateOrOffset = 3840
+    SeparatorTokenMask = 65280
 
 
 class TypeCode(Enum):
-    Empty: IntType = 0
-    Object: IntType = 1
-    DBNull: IntType = 2
-    Boolean: IntType = 3
-    Char: IntType = 4
-    SByte: IntType = 5
-    Byte: IntType = 6
-    Int16: IntType = 7
-    UInt16: IntType = 8
-    Int32: IntType = 9
-    UInt32: IntType = 10
-    Int64: IntType = 11
-    UInt64: IntType = 12
-    Single: IntType = 13
-    Double: IntType = 14
-    Decimal: IntType = 15
-    DateTime: IntType = 16
-    String: IntType = 18
+    Empty = 0
+    Object = 1
+    DBNull = 2
+    Boolean = 3
+    Char = 4
+    SByte = 5
+    Byte = 6
+    Int16 = 7
+    UInt16 = 8
+    Int32 = 9
+    UInt32 = 10
+    Int64 = 11
+    UInt64 = 12
+    Single = 13
+    Double = 14
+    Decimal = 15
+    DateTime = 16
+    String = 18
 
 
 class TypeNameFormatFlags(Enum):
-    FormatBasic: IntType = 0
-    FormatNamespace: IntType = 1
-    FormatFullInst: IntType = 2
-    FormatAssembly: IntType = 4
-    FormatSignature: IntType = 8
-    FormatNoVersion: IntType = 16
-    FormatAngleBrackets: IntType = 64
-    FormatStubInfo: IntType = 128
-    FormatGenericParam: IntType = 256
-    FormatSerialization: IntType = 259
+    FormatBasic = 0
+    FormatNamespace = 1
+    FormatFullInst = 2
+    FormatAssembly = 4
+    FormatSignature = 8
+    FormatNoVersion = 16
+    FormatAngleBrackets = 64
+    FormatStubInfo = 128
+    FormatGenericParam = 256
+    FormatSerialization = 259
 
 
 class TypeNameKind(Enum):
-    Name: IntType = 0
-    ToString: IntType = 1
-    SerializationName: IntType = 2
-    FullName: IntType = 3
+    Name = 0
+    ToString = 1
+    SerializationName = 2
+    FullName = 3
 
 
 class UnescapeMode(Enum):
-    CopyOnly: IntType = 0
-    Escape: IntType = 1
-    Unescape: IntType = 2
-    EscapeUnescape: IntType = 3
-    V1ToStringFlag: IntType = 4
-    UnescapeAll: IntType = 8
-    UnescapeAllOrThrow: IntType = 24
+    CopyOnly = 0
+    Escape = 1
+    Unescape = 2
+    EscapeUnescape = 3
+    V1ToStringFlag = 4
+    UnescapeAll = 8
+    UnescapeAllOrThrow = 24
 
 
 class UriComponents(Enum):
-    SerializationInfoString: IntType = -2147483648
-    Scheme: IntType = 1
-    UserInfo: IntType = 2
-    Host: IntType = 4
-    Port: IntType = 8
-    SchemeAndServer: IntType = 13
-    Path: IntType = 16
-    Query: IntType = 32
-    PathAndQuery: IntType = 48
-    HttpRequestUrl: IntType = 61
-    Fragment: IntType = 64
-    AbsoluteUri: IntType = 127
-    StrongPort: IntType = 128
-    HostAndPort: IntType = 132
-    StrongAuthority: IntType = 134
-    NormalizedHost: IntType = 256
-    KeepDelimiter: IntType = 1073741824
+    SerializationInfoString = -2147483648
+    Scheme = 1
+    UserInfo = 2
+    Host = 4
+    Port = 8
+    SchemeAndServer = 13
+    Path = 16
+    Query = 32
+    PathAndQuery = 48
+    HttpRequestUrl = 61
+    Fragment = 64
+    AbsoluteUri = 127
+    StrongPort = 128
+    HostAndPort = 132
+    StrongAuthority = 134
+    NormalizedHost = 256
+    KeepDelimiter = 1073741824
 
 
 class UriFormat(Enum):
-    UriEscaped: IntType = 1
-    Unescaped: IntType = 2
-    SafeUnescaped: IntType = 3
+    UriEscaped = 1
+    Unescaped = 2
+    SafeUnescaped = 3
 
 
 class UriHostNameType(Enum):
-    Unknown: IntType = 0
-    Basic: IntType = 1
-    Dns: IntType = 2
-    IPv4: IntType = 3
-    IPv6: IntType = 4
+    Unknown = 0
+    Basic = 1
+    Dns = 2
+    IPv4 = 3
+    IPv6 = 4
 
 
 class UriIdnScope(Enum):
-    #None: IntType = 0
-    AllExceptIntranet: IntType = 1
-    All: IntType = 2
+    #None = 0
+    AllExceptIntranet = 1
+    All = 2
 
 
 class UriKind(Enum):
-    RelativeOrAbsolute: IntType = 0
-    Absolute: IntType = 1
-    Relative: IntType = 2
+    RelativeOrAbsolute = 0
+    Absolute = 1
+    Relative = 2
 
 
 class UriPartial(Enum):
-    Scheme: IntType = 0
-    Authority: IntType = 1
-    Path: IntType = 2
-    Query: IntType = 3
+    Scheme = 0
+    Authority = 1
+    Path = 2
+    Query = 3
 
 
 class UriSyntaxFlags(Enum):
-    #None: IntType = 0
-    MustHaveAuthority: IntType = 1
-    OptionalAuthority: IntType = 2
-    MayHaveUserInfo: IntType = 4
-    MayHavePort: IntType = 8
-    MayHavePath: IntType = 16
-    MayHaveQuery: IntType = 32
-    MayHaveFragment: IntType = 64
-    AllowEmptyHost: IntType = 128
-    AllowUncHost: IntType = 256
-    AllowDnsHost: IntType = 512
-    AllowIPv4Host: IntType = 1024
-    AllowIPv6Host: IntType = 2048
-    AllowAnInternetHost: IntType = 3584
-    AllowAnyOtherHost: IntType = 4096
-    FileLikeUri: IntType = 8192
-    MailToLikeUri: IntType = 16384
-    V1_UnknownUri: IntType = 65536
-    SimpleUserSyntax: IntType = 131072
-    BuiltInSyntax: IntType = 262144
-    ParserSchemeOnly: IntType = 524288
-    AllowDOSPath: IntType = 1048576
-    PathIsRooted: IntType = 2097152
-    ConvertPathSlashes: IntType = 4194304
-    CompressPath: IntType = 8388608
-    CanonicalizeAsFilePath: IntType = 16777216
-    UnEscapeDotsAndSlashes: IntType = 33554432
-    AllowIdn: IntType = 67108864
-    AllowIriParsing: IntType = 268435456
+    #None = 0
+    MustHaveAuthority = 1
+    OptionalAuthority = 2
+    MayHaveUserInfo = 4
+    MayHavePort = 8
+    MayHavePath = 16
+    MayHaveQuery = 32
+    MayHaveFragment = 64
+    AllowEmptyHost = 128
+    AllowUncHost = 256
+    AllowDnsHost = 512
+    AllowIPv4Host = 1024
+    AllowIPv6Host = 2048
+    AllowAnInternetHost = 3584
+    AllowAnyOtherHost = 4096
+    FileLikeUri = 8192
+    MailToLikeUri = 16384
+    V1_UnknownUri = 65536
+    SimpleUserSyntax = 131072
+    BuiltInSyntax = 262144
+    ParserSchemeOnly = 524288
+    AllowDOSPath = 1048576
+    PathIsRooted = 2097152
+    ConvertPathSlashes = 4194304
+    CompressPath = 8388608
+    CanonicalizeAsFilePath = 16777216
+    UnEscapeDotsAndSlashes = 33554432
+    AllowIdn = 67108864
+    AllowIriParsing = 268435456
 
 
 # ---------- Delegates ---------- #

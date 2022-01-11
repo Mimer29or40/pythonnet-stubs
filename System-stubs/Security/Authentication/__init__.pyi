@@ -79,43 +79,43 @@ class InvalidCredentialException(AuthenticationException, ISerializable, _Except
 # ---------- Enums ---------- #
 
 class CipherAlgorithmType(Enum):
-    #None: IntType = 0
-    Null: IntType = 24576
-    Des: IntType = 26113
-    Rc2: IntType = 26114
-    TripleDes: IntType = 26115
-    Aes128: IntType = 26126
-    Aes192: IntType = 26127
-    Aes256: IntType = 26128
-    Aes: IntType = 26129
-    Rc4: IntType = 26625
+    #None = 0
+    Null = 24576
+    Des = 26113
+    Rc2 = 26114
+    TripleDes = 26115
+    Aes128 = 26126
+    Aes192 = 26127
+    Aes256 = 26128
+    Aes = 26129
+    Rc4 = 26625
 
 
 class ExchangeAlgorithmType(Enum):
-    #None: IntType = 0
-    RsaSign: IntType = 9216
-    RsaKeyX: IntType = 41984
-    DiffieHellman: IntType = 43522
+    #None = 0
+    RsaSign = 9216
+    RsaKeyX = 41984
+    DiffieHellman = 43522
 
 
 class HashAlgorithmType(Enum):
-    #None: IntType = 0
-    Md5: IntType = 32771
-    Sha1: IntType = 32772
-    Sha256: IntType = 32780
-    Sha384: IntType = 32781
-    Sha512: IntType = 32782
+    #None = 0
+    Md5 = 32771
+    Sha1 = 32772
+    Sha256 = 32780
+    Sha384 = 32781
+    Sha512 = 32782
 
 
 class SslProtocols(Enum):
-    #None: IntType = 0
-    Ssl2: IntType = 12
-    Ssl3: IntType = 48
-    Tls: IntType = 192
-    Default: IntType = 240
-    Tls11: IntType = 768
-    Tls12: IntType = 3072
-    Tls13: IntType = 12288
+    #None = 0
+    Ssl2 = 12
+    Ssl3 = 48
+    Tls = 192
+    Default = 240
+    Tls11 = 768
+    Tls12 = 3072
+    Tls13 = 12288
 
 
 # No Delegates

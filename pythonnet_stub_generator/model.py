@@ -475,7 +475,8 @@ class EnumField:
         if name in reserved_python_names:
             name = f'#{self.name}'
         
-        lines.append(f'{name}: {self.type} = {self.value}')
+        # lines.append(f'{name}: {self.type} = {self.value}')
+        lines.append(f'{name} = {self.value}')
         
         if self.doc_string != '':
             lines.append(f'"""{self.doc_string}"""')

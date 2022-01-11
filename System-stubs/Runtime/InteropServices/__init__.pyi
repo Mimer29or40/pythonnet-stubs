@@ -6970,456 +6970,456 @@ class _TypeBuilder(Protocol):
 # ---------- Enums ---------- #
 
 class Architecture(Enum):
-    X86: IntType = 0
-    X64: IntType = 1
-    Arm: IntType = 2
-    Arm64: IntType = 3
+    X86 = 0
+    X64 = 1
+    Arm = 2
+    Arm64 = 3
 
 
 class AssemblyRegistrationFlags(Enum):
-    #None: IntType = 0
-    SetCodeBase: IntType = 1
+    #None = 0
+    SetCodeBase = 1
 
 
 class CALLCONV(Enum):
-    CC_CDECL: IntType = 1
-    CC_MSCPASCAL: IntType = 2
-    CC_PASCAL: IntType = 2
-    CC_MACPASCAL: IntType = 3
-    CC_STDCALL: IntType = 4
-    CC_RESERVED: IntType = 5
-    CC_SYSCALL: IntType = 6
-    CC_MPWCDECL: IntType = 7
-    CC_MPWPASCAL: IntType = 8
-    CC_MAX: IntType = 9
+    CC_CDECL = 1
+    CC_MSCPASCAL = 2
+    CC_PASCAL = 2
+    CC_MACPASCAL = 3
+    CC_STDCALL = 4
+    CC_RESERVED = 5
+    CC_SYSCALL = 6
+    CC_MPWCDECL = 7
+    CC_MPWPASCAL = 8
+    CC_MAX = 9
 
 
 class CallingConvention(Enum):
-    Winapi: IntType = 1
-    Cdecl: IntType = 2
-    StdCall: IntType = 3
-    ThisCall: IntType = 4
-    FastCall: IntType = 5
+    Winapi = 1
+    Cdecl = 2
+    StdCall = 3
+    ThisCall = 4
+    FastCall = 5
 
 
 class CharSet(Enum):
-    #None: IntType = 1
-    Ansi: IntType = 2
-    Unicode: IntType = 3
-    Auto: IntType = 4
+    #None = 1
+    Ansi = 2
+    Unicode = 3
+    Auto = 4
 
 
 class ClassInterfaceType(Enum):
-    #None: IntType = 0
-    AutoDispatch: IntType = 1
-    AutoDual: IntType = 2
+    #None = 0
+    AutoDispatch = 1
+    AutoDual = 2
 
 
 class ComInterfaceType(Enum):
-    InterfaceIsDual: IntType = 0
-    InterfaceIsIUnknown: IntType = 1
-    InterfaceIsIDispatch: IntType = 2
-    InterfaceIsIInspectable: IntType = 3
+    InterfaceIsDual = 0
+    InterfaceIsIUnknown = 1
+    InterfaceIsIDispatch = 2
+    InterfaceIsIInspectable = 3
 
 
 class ComMemberType(Enum):
-    Method: IntType = 0
-    PropGet: IntType = 1
-    PropSet: IntType = 2
+    Method = 0
+    PropGet = 1
+    PropSet = 2
 
 
 class CustomQueryInterfaceMode(Enum):
-    Ignore: IntType = 0
-    Allow: IntType = 1
+    Ignore = 0
+    Allow = 1
 
 
 class CustomQueryInterfaceResult(Enum):
-    Handled: IntType = 0
-    NotHandled: IntType = 1
-    Failed: IntType = 2
+    Handled = 0
+    NotHandled = 1
+    Failed = 2
 
 
 class DESCKIND(Enum):
-    DESCKIND_NONE: IntType = 0
-    DESCKIND_FUNCDESC: IntType = 1
-    DESCKIND_VARDESC: IntType = 2
-    DESCKIND_TYPECOMP: IntType = 3
-    DESCKIND_IMPLICITAPPOBJ: IntType = 4
-    DESCKIND_MAX: IntType = 5
+    DESCKIND_NONE = 0
+    DESCKIND_FUNCDESC = 1
+    DESCKIND_VARDESC = 2
+    DESCKIND_TYPECOMP = 3
+    DESCKIND_IMPLICITAPPOBJ = 4
+    DESCKIND_MAX = 5
 
 
 class DllImportSearchPath(Enum):
-    LegacyBehavior: IntType = 0
-    AssemblyDirectory: IntType = 2
-    UseDllDirectoryForDependencies: IntType = 256
-    ApplicationDirectory: IntType = 512
-    UserDirectories: IntType = 1024
-    System32: IntType = 2048
-    SafeDirectories: IntType = 4096
+    LegacyBehavior = 0
+    AssemblyDirectory = 2
+    UseDllDirectoryForDependencies = 256
+    ApplicationDirectory = 512
+    UserDirectories = 1024
+    System32 = 2048
+    SafeDirectories = 4096
 
 
 class ExporterEventKind(Enum):
-    NOTIF_TYPECONVERTED: IntType = 0
-    NOTIF_CONVERTWARNING: IntType = 1
-    ERROR_REFTOINVALIDASSEMBLY: IntType = 2
+    NOTIF_TYPECONVERTED = 0
+    NOTIF_CONVERTWARNING = 1
+    ERROR_REFTOINVALIDASSEMBLY = 2
 
 
 class FUNCFLAGS(Enum):
-    FUNCFLAG_FRESTRICTED: ShortType = 1
-    FUNCFLAG_FSOURCE: ShortType = 2
-    FUNCFLAG_FBINDABLE: ShortType = 4
-    FUNCFLAG_FREQUESTEDIT: ShortType = 8
-    FUNCFLAG_FDISPLAYBIND: ShortType = 16
-    FUNCFLAG_FDEFAULTBIND: ShortType = 32
-    FUNCFLAG_FHIDDEN: ShortType = 64
-    FUNCFLAG_FUSESGETLASTERROR: ShortType = 128
-    FUNCFLAG_FDEFAULTCOLLELEM: ShortType = 256
-    FUNCFLAG_FUIDEFAULT: ShortType = 512
-    FUNCFLAG_FNONBROWSABLE: ShortType = 1024
-    FUNCFLAG_FREPLACEABLE: ShortType = 2048
-    FUNCFLAG_FIMMEDIATEBIND: ShortType = 4096
+    FUNCFLAG_FRESTRICTED = 1
+    FUNCFLAG_FSOURCE = 2
+    FUNCFLAG_FBINDABLE = 4
+    FUNCFLAG_FREQUESTEDIT = 8
+    FUNCFLAG_FDISPLAYBIND = 16
+    FUNCFLAG_FDEFAULTBIND = 32
+    FUNCFLAG_FHIDDEN = 64
+    FUNCFLAG_FUSESGETLASTERROR = 128
+    FUNCFLAG_FDEFAULTCOLLELEM = 256
+    FUNCFLAG_FUIDEFAULT = 512
+    FUNCFLAG_FNONBROWSABLE = 1024
+    FUNCFLAG_FREPLACEABLE = 2048
+    FUNCFLAG_FIMMEDIATEBIND = 4096
 
 
 class FUNCKIND(Enum):
-    FUNC_VIRTUAL: IntType = 0
-    FUNC_PUREVIRTUAL: IntType = 1
-    FUNC_NONVIRTUAL: IntType = 2
-    FUNC_STATIC: IntType = 3
-    FUNC_DISPATCH: IntType = 4
+    FUNC_VIRTUAL = 0
+    FUNC_PUREVIRTUAL = 1
+    FUNC_NONVIRTUAL = 2
+    FUNC_STATIC = 3
+    FUNC_DISPATCH = 4
 
 
 class GCHandleType(Enum):
-    Weak: IntType = 0
-    WeakTrackResurrection: IntType = 1
-    Normal: IntType = 2
-    Pinned: IntType = 3
+    Weak = 0
+    WeakTrackResurrection = 1
+    Normal = 2
+    Pinned = 3
 
 
 class IDLFLAG(Enum):
-    IDLFLAG_NONE: ShortType = 0
-    IDLFLAG_FIN: ShortType = 1
-    IDLFLAG_FOUT: ShortType = 2
-    IDLFLAG_FLCID: ShortType = 4
-    IDLFLAG_FRETVAL: ShortType = 8
+    IDLFLAG_NONE = 0
+    IDLFLAG_FIN = 1
+    IDLFLAG_FOUT = 2
+    IDLFLAG_FLCID = 4
+    IDLFLAG_FRETVAL = 8
 
 
 class IDispatchImplType(Enum):
-    SystemDefinedImpl: IntType = 0
-    InternalImpl: IntType = 1
-    CompatibleImpl: IntType = 2
+    SystemDefinedImpl = 0
+    InternalImpl = 1
+    CompatibleImpl = 2
 
 
 class IMPLTYPEFLAGS(Enum):
-    IMPLTYPEFLAG_FDEFAULT: IntType = 1
-    IMPLTYPEFLAG_FSOURCE: IntType = 2
-    IMPLTYPEFLAG_FRESTRICTED: IntType = 4
-    IMPLTYPEFLAG_FDEFAULTVTABLE: IntType = 8
+    IMPLTYPEFLAG_FDEFAULT = 1
+    IMPLTYPEFLAG_FSOURCE = 2
+    IMPLTYPEFLAG_FRESTRICTED = 4
+    IMPLTYPEFLAG_FDEFAULTVTABLE = 8
 
 
 class INVOKEKIND(Enum):
-    INVOKE_FUNC: IntType = 1
-    INVOKE_PROPERTYGET: IntType = 2
-    INVOKE_PROPERTYPUT: IntType = 4
-    INVOKE_PROPERTYPUTREF: IntType = 8
+    INVOKE_FUNC = 1
+    INVOKE_PROPERTYGET = 2
+    INVOKE_PROPERTYPUT = 4
+    INVOKE_PROPERTYPUTREF = 8
 
 
 class ImporterEventKind(Enum):
-    NOTIF_TYPECONVERTED: IntType = 0
-    NOTIF_CONVERTWARNING: IntType = 1
-    ERROR_REFTOINVALIDTYPELIB: IntType = 2
+    NOTIF_TYPECONVERTED = 0
+    NOTIF_CONVERTWARNING = 1
+    ERROR_REFTOINVALIDTYPELIB = 2
 
 
 class LIBFLAGS(Enum):
-    LIBFLAG_FRESTRICTED: ShortType = 1
-    LIBFLAG_FCONTROL: ShortType = 2
-    LIBFLAG_FHIDDEN: ShortType = 4
-    LIBFLAG_FHASDISKIMAGE: ShortType = 8
+    LIBFLAG_FRESTRICTED = 1
+    LIBFLAG_FCONTROL = 2
+    LIBFLAG_FHIDDEN = 4
+    LIBFLAG_FHASDISKIMAGE = 8
 
 
 class LayoutKind(Enum):
-    Sequential: IntType = 0
-    Explicit: IntType = 2
-    Auto: IntType = 3
+    Sequential = 0
+    Explicit = 2
+    Auto = 3
 
 
 class PARAMFLAG(Enum):
-    PARAMFLAG_NONE: ShortType = 0
-    PARAMFLAG_FIN: ShortType = 1
-    PARAMFLAG_FOUT: ShortType = 2
-    PARAMFLAG_FLCID: ShortType = 4
-    PARAMFLAG_FRETVAL: ShortType = 8
-    PARAMFLAG_FOPT: ShortType = 16
-    PARAMFLAG_FHASDEFAULT: ShortType = 32
-    PARAMFLAG_FHASCUSTDATA: ShortType = 64
+    PARAMFLAG_NONE = 0
+    PARAMFLAG_FIN = 1
+    PARAMFLAG_FOUT = 2
+    PARAMFLAG_FLCID = 4
+    PARAMFLAG_FRETVAL = 8
+    PARAMFLAG_FOPT = 16
+    PARAMFLAG_FHASDEFAULT = 32
+    PARAMFLAG_FHASCUSTDATA = 64
 
 
 class PInvokeMap(Enum):
-    CharSetNotSpec: IntType = 0
-    NoMangle: IntType = 1
-    CharSetAnsi: IntType = 2
-    CharSetUnicode: IntType = 4
-    CharSetAuto: IntType = 6
-    CharSetMask: IntType = 6
-    BestFitEnabled: IntType = 16
-    BestFitDisabled: IntType = 32
-    PinvokeOLE: IntType = 32
-    BestFitMask: IntType = 48
-    BestFitUseAsm: IntType = 48
-    SupportsLastError: IntType = 64
-    CallConvWinapi: IntType = 256
-    CallConvCdecl: IntType = 512
-    CallConvStdcall: IntType = 768
-    CallConvThiscall: IntType = 1024
-    CallConvFastcall: IntType = 1280
-    CallConvMask: IntType = 1792
-    ThrowOnUnmappableCharEnabled: IntType = 4096
-    ThrowOnUnmappableCharDisabled: IntType = 8192
-    ThrowOnUnmappableCharMask: IntType = 12288
-    ThrowOnUnmappableCharUseAsm: IntType = 12288
+    CharSetNotSpec = 0
+    NoMangle = 1
+    CharSetAnsi = 2
+    CharSetUnicode = 4
+    CharSetAuto = 6
+    CharSetMask = 6
+    BestFitEnabled = 16
+    BestFitDisabled = 32
+    PinvokeOLE = 32
+    BestFitMask = 48
+    BestFitUseAsm = 48
+    SupportsLastError = 64
+    CallConvWinapi = 256
+    CallConvCdecl = 512
+    CallConvStdcall = 768
+    CallConvThiscall = 1024
+    CallConvFastcall = 1280
+    CallConvMask = 1792
+    ThrowOnUnmappableCharEnabled = 4096
+    ThrowOnUnmappableCharDisabled = 8192
+    ThrowOnUnmappableCharMask = 12288
+    ThrowOnUnmappableCharUseAsm = 12288
 
 
 class RegistrationClassContext(Enum):
-    InProcessServer: IntType = 1
-    InProcessHandler: IntType = 2
-    LocalServer: IntType = 4
-    InProcessServer16: IntType = 8
-    RemoteServer: IntType = 16
-    InProcessHandler16: IntType = 32
-    Reserved1: IntType = 64
-    Reserved2: IntType = 128
-    Reserved3: IntType = 256
-    Reserved4: IntType = 512
-    NoCodeDownload: IntType = 1024
-    Reserved5: IntType = 2048
-    NoCustomMarshal: IntType = 4096
-    EnableCodeDownload: IntType = 8192
-    NoFailureLog: IntType = 16384
-    DisableActivateAsActivator: IntType = 32768
-    EnableActivateAsActivator: IntType = 65536
-    FromDefaultContext: IntType = 131072
+    InProcessServer = 1
+    InProcessHandler = 2
+    LocalServer = 4
+    InProcessServer16 = 8
+    RemoteServer = 16
+    InProcessHandler16 = 32
+    Reserved1 = 64
+    Reserved2 = 128
+    Reserved3 = 256
+    Reserved4 = 512
+    NoCodeDownload = 1024
+    Reserved5 = 2048
+    NoCustomMarshal = 4096
+    EnableCodeDownload = 8192
+    NoFailureLog = 16384
+    DisableActivateAsActivator = 32768
+    EnableActivateAsActivator = 65536
+    FromDefaultContext = 131072
 
 
 class RegistrationConnectionType(Enum):
-    SingleUse: IntType = 0
-    MultipleUse: IntType = 1
-    MultiSeparate: IntType = 2
-    Suspended: IntType = 4
-    Surrogate: IntType = 8
+    SingleUse = 0
+    MultipleUse = 1
+    MultiSeparate = 2
+    Suspended = 4
+    Surrogate = 8
 
 
 class SYSKIND(Enum):
-    SYS_WIN16: IntType = 0
-    SYS_WIN32: IntType = 1
-    SYS_MAC: IntType = 2
+    SYS_WIN16 = 0
+    SYS_WIN32 = 1
+    SYS_MAC = 2
 
 
 class TYPEFLAGS(Enum):
-    TYPEFLAG_FAPPOBJECT: ShortType = 1
-    TYPEFLAG_FCANCREATE: ShortType = 2
-    TYPEFLAG_FLICENSED: ShortType = 4
-    TYPEFLAG_FPREDECLID: ShortType = 8
-    TYPEFLAG_FHIDDEN: ShortType = 16
-    TYPEFLAG_FCONTROL: ShortType = 32
-    TYPEFLAG_FDUAL: ShortType = 64
-    TYPEFLAG_FNONEXTENSIBLE: ShortType = 128
-    TYPEFLAG_FOLEAUTOMATION: ShortType = 256
-    TYPEFLAG_FRESTRICTED: ShortType = 512
-    TYPEFLAG_FAGGREGATABLE: ShortType = 1024
-    TYPEFLAG_FREPLACEABLE: ShortType = 2048
-    TYPEFLAG_FDISPATCHABLE: ShortType = 4096
-    TYPEFLAG_FREVERSEBIND: ShortType = 8192
-    TYPEFLAG_FPROXY: ShortType = 16384
+    TYPEFLAG_FAPPOBJECT = 1
+    TYPEFLAG_FCANCREATE = 2
+    TYPEFLAG_FLICENSED = 4
+    TYPEFLAG_FPREDECLID = 8
+    TYPEFLAG_FHIDDEN = 16
+    TYPEFLAG_FCONTROL = 32
+    TYPEFLAG_FDUAL = 64
+    TYPEFLAG_FNONEXTENSIBLE = 128
+    TYPEFLAG_FOLEAUTOMATION = 256
+    TYPEFLAG_FRESTRICTED = 512
+    TYPEFLAG_FAGGREGATABLE = 1024
+    TYPEFLAG_FREPLACEABLE = 2048
+    TYPEFLAG_FDISPATCHABLE = 4096
+    TYPEFLAG_FREVERSEBIND = 8192
+    TYPEFLAG_FPROXY = 16384
 
 
 class TYPEKIND(Enum):
-    TKIND_ENUM: IntType = 0
-    TKIND_RECORD: IntType = 1
-    TKIND_MODULE: IntType = 2
-    TKIND_INTERFACE: IntType = 3
-    TKIND_DISPATCH: IntType = 4
-    TKIND_COCLASS: IntType = 5
-    TKIND_ALIAS: IntType = 6
-    TKIND_UNION: IntType = 7
-    TKIND_MAX: IntType = 8
+    TKIND_ENUM = 0
+    TKIND_RECORD = 1
+    TKIND_MODULE = 2
+    TKIND_INTERFACE = 3
+    TKIND_DISPATCH = 4
+    TKIND_COCLASS = 5
+    TKIND_ALIAS = 6
+    TKIND_UNION = 7
+    TKIND_MAX = 8
 
 
 class TypeLibExporterFlags(Enum):
-    #None: IntType = 0
-    OnlyReferenceRegistered: IntType = 1
-    CallerResolvedReferences: IntType = 2
-    OldNames: IntType = 4
-    ExportAs32Bit: IntType = 16
-    ExportAs64Bit: IntType = 32
+    #None = 0
+    OnlyReferenceRegistered = 1
+    CallerResolvedReferences = 2
+    OldNames = 4
+    ExportAs32Bit = 16
+    ExportAs64Bit = 32
 
 
 class TypeLibFuncFlags(Enum):
-    FRestricted: IntType = 1
-    FSource: IntType = 2
-    FBindable: IntType = 4
-    FRequestEdit: IntType = 8
-    FDisplayBind: IntType = 16
-    FDefaultBind: IntType = 32
-    FHidden: IntType = 64
-    FUsesGetLastError: IntType = 128
-    FDefaultCollelem: IntType = 256
-    FUiDefault: IntType = 512
-    FNonBrowsable: IntType = 1024
-    FReplaceable: IntType = 2048
-    FImmediateBind: IntType = 4096
+    FRestricted = 1
+    FSource = 2
+    FBindable = 4
+    FRequestEdit = 8
+    FDisplayBind = 16
+    FDefaultBind = 32
+    FHidden = 64
+    FUsesGetLastError = 128
+    FDefaultCollelem = 256
+    FUiDefault = 512
+    FNonBrowsable = 1024
+    FReplaceable = 2048
+    FImmediateBind = 4096
 
 
 class TypeLibImporterFlags(Enum):
-    #None: IntType = 0
-    PrimaryInteropAssembly: IntType = 1
-    UnsafeInterfaces: IntType = 2
-    SafeArrayAsSystemArray: IntType = 4
-    TransformDispRetVals: IntType = 8
-    PreventClassMembers: IntType = 16
-    SerializableValueClasses: IntType = 32
-    ImportAsX86: IntType = 256
-    ImportAsX64: IntType = 512
-    ImportAsItanium: IntType = 1024
-    ImportAsAgnostic: IntType = 2048
-    ReflectionOnlyLoading: IntType = 4096
-    NoDefineVersionResource: IntType = 8192
-    ImportAsArm: IntType = 16384
+    #None = 0
+    PrimaryInteropAssembly = 1
+    UnsafeInterfaces = 2
+    SafeArrayAsSystemArray = 4
+    TransformDispRetVals = 8
+    PreventClassMembers = 16
+    SerializableValueClasses = 32
+    ImportAsX86 = 256
+    ImportAsX64 = 512
+    ImportAsItanium = 1024
+    ImportAsAgnostic = 2048
+    ReflectionOnlyLoading = 4096
+    NoDefineVersionResource = 8192
+    ImportAsArm = 16384
 
 
 class TypeLibTypeFlags(Enum):
-    FAppObject: IntType = 1
-    FCanCreate: IntType = 2
-    FLicensed: IntType = 4
-    FPreDeclId: IntType = 8
-    FHidden: IntType = 16
-    FControl: IntType = 32
-    FDual: IntType = 64
-    FNonExtensible: IntType = 128
-    FOleAutomation: IntType = 256
-    FRestricted: IntType = 512
-    FAggregatable: IntType = 1024
-    FReplaceable: IntType = 2048
-    FDispatchable: IntType = 4096
-    FReverseBind: IntType = 8192
+    FAppObject = 1
+    FCanCreate = 2
+    FLicensed = 4
+    FPreDeclId = 8
+    FHidden = 16
+    FControl = 32
+    FDual = 64
+    FNonExtensible = 128
+    FOleAutomation = 256
+    FRestricted = 512
+    FAggregatable = 1024
+    FReplaceable = 2048
+    FDispatchable = 4096
+    FReverseBind = 8192
 
 
 class TypeLibVarFlags(Enum):
-    FReadOnly: IntType = 1
-    FSource: IntType = 2
-    FBindable: IntType = 4
-    FRequestEdit: IntType = 8
-    FDisplayBind: IntType = 16
-    FDefaultBind: IntType = 32
-    FHidden: IntType = 64
-    FRestricted: IntType = 128
-    FDefaultCollelem: IntType = 256
-    FUiDefault: IntType = 512
-    FNonBrowsable: IntType = 1024
-    FReplaceable: IntType = 2048
-    FImmediateBind: IntType = 4096
+    FReadOnly = 1
+    FSource = 2
+    FBindable = 4
+    FRequestEdit = 8
+    FDisplayBind = 16
+    FDefaultBind = 32
+    FHidden = 64
+    FRestricted = 128
+    FDefaultCollelem = 256
+    FUiDefault = 512
+    FNonBrowsable = 1024
+    FReplaceable = 2048
+    FImmediateBind = 4096
 
 
 class UnmanagedType(Enum):
-    Bool: IntType = 2
-    I1: IntType = 3
-    U1: IntType = 4
-    I2: IntType = 5
-    U2: IntType = 6
-    I4: IntType = 7
-    U4: IntType = 8
-    I8: IntType = 9
-    U8: IntType = 10
-    R4: IntType = 11
-    R8: IntType = 12
-    Currency: IntType = 15
-    BStr: IntType = 19
-    LPStr: IntType = 20
-    LPWStr: IntType = 21
-    LPTStr: IntType = 22
-    ByValTStr: IntType = 23
-    IUnknown: IntType = 25
-    IDispatch: IntType = 26
-    Struct: IntType = 27
-    Interface: IntType = 28
-    SafeArray: IntType = 29
-    ByValArray: IntType = 30
-    SysInt: IntType = 31
-    SysUInt: IntType = 32
-    VBByRefStr: IntType = 34
-    AnsiBStr: IntType = 35
-    TBStr: IntType = 36
-    VariantBool: IntType = 37
-    FunctionPtr: IntType = 38
-    AsAny: IntType = 40
-    LPArray: IntType = 42
-    LPStruct: IntType = 43
-    CustomMarshaler: IntType = 44
-    Error: IntType = 45
-    IInspectable: IntType = 46
-    HString: IntType = 47
-    LPUTF8Str: IntType = 48
+    Bool = 2
+    I1 = 3
+    U1 = 4
+    I2 = 5
+    U2 = 6
+    I4 = 7
+    U4 = 8
+    I8 = 9
+    U8 = 10
+    R4 = 11
+    R8 = 12
+    Currency = 15
+    BStr = 19
+    LPStr = 20
+    LPWStr = 21
+    LPTStr = 22
+    ByValTStr = 23
+    IUnknown = 25
+    IDispatch = 26
+    Struct = 27
+    Interface = 28
+    SafeArray = 29
+    ByValArray = 30
+    SysInt = 31
+    SysUInt = 32
+    VBByRefStr = 34
+    AnsiBStr = 35
+    TBStr = 36
+    VariantBool = 37
+    FunctionPtr = 38
+    AsAny = 40
+    LPArray = 42
+    LPStruct = 43
+    CustomMarshaler = 44
+    Error = 45
+    IInspectable = 46
+    HString = 47
+    LPUTF8Str = 48
 
 
 class VARFLAGS(Enum):
-    VARFLAG_FREADONLY: ShortType = 1
-    VARFLAG_FSOURCE: ShortType = 2
-    VARFLAG_FBINDABLE: ShortType = 4
-    VARFLAG_FREQUESTEDIT: ShortType = 8
-    VARFLAG_FDISPLAYBIND: ShortType = 16
-    VARFLAG_FDEFAULTBIND: ShortType = 32
-    VARFLAG_FHIDDEN: ShortType = 64
-    VARFLAG_FRESTRICTED: ShortType = 128
-    VARFLAG_FDEFAULTCOLLELEM: ShortType = 256
-    VARFLAG_FUIDEFAULT: ShortType = 512
-    VARFLAG_FNONBROWSABLE: ShortType = 1024
-    VARFLAG_FREPLACEABLE: ShortType = 2048
-    VARFLAG_FIMMEDIATEBIND: ShortType = 4096
+    VARFLAG_FREADONLY = 1
+    VARFLAG_FSOURCE = 2
+    VARFLAG_FBINDABLE = 4
+    VARFLAG_FREQUESTEDIT = 8
+    VARFLAG_FDISPLAYBIND = 16
+    VARFLAG_FDEFAULTBIND = 32
+    VARFLAG_FHIDDEN = 64
+    VARFLAG_FRESTRICTED = 128
+    VARFLAG_FDEFAULTCOLLELEM = 256
+    VARFLAG_FUIDEFAULT = 512
+    VARFLAG_FNONBROWSABLE = 1024
+    VARFLAG_FREPLACEABLE = 2048
+    VARFLAG_FIMMEDIATEBIND = 4096
 
 
 class VarEnum(Enum):
-    VT_EMPTY: IntType = 0
-    VT_NULL: IntType = 1
-    VT_I2: IntType = 2
-    VT_I4: IntType = 3
-    VT_R4: IntType = 4
-    VT_R8: IntType = 5
-    VT_CY: IntType = 6
-    VT_DATE: IntType = 7
-    VT_BSTR: IntType = 8
-    VT_DISPATCH: IntType = 9
-    VT_ERROR: IntType = 10
-    VT_BOOL: IntType = 11
-    VT_VARIANT: IntType = 12
-    VT_UNKNOWN: IntType = 13
-    VT_DECIMAL: IntType = 14
-    VT_I1: IntType = 16
-    VT_UI1: IntType = 17
-    VT_UI2: IntType = 18
-    VT_UI4: IntType = 19
-    VT_I8: IntType = 20
-    VT_UI8: IntType = 21
-    VT_INT: IntType = 22
-    VT_UINT: IntType = 23
-    VT_VOID: IntType = 24
-    VT_HRESULT: IntType = 25
-    VT_PTR: IntType = 26
-    VT_SAFEARRAY: IntType = 27
-    VT_CARRAY: IntType = 28
-    VT_USERDEFINED: IntType = 29
-    VT_LPSTR: IntType = 30
-    VT_LPWSTR: IntType = 31
-    VT_RECORD: IntType = 36
-    VT_FILETIME: IntType = 64
-    VT_BLOB: IntType = 65
-    VT_STREAM: IntType = 66
-    VT_STORAGE: IntType = 67
-    VT_STREAMED_OBJECT: IntType = 68
-    VT_STORED_OBJECT: IntType = 69
-    VT_BLOB_OBJECT: IntType = 70
-    VT_CF: IntType = 71
-    VT_CLSID: IntType = 72
-    VT_VECTOR: IntType = 4096
-    VT_ARRAY: IntType = 8192
-    VT_BYREF: IntType = 16384
+    VT_EMPTY = 0
+    VT_NULL = 1
+    VT_I2 = 2
+    VT_I4 = 3
+    VT_R4 = 4
+    VT_R8 = 5
+    VT_CY = 6
+    VT_DATE = 7
+    VT_BSTR = 8
+    VT_DISPATCH = 9
+    VT_ERROR = 10
+    VT_BOOL = 11
+    VT_VARIANT = 12
+    VT_UNKNOWN = 13
+    VT_DECIMAL = 14
+    VT_I1 = 16
+    VT_UI1 = 17
+    VT_UI2 = 18
+    VT_UI4 = 19
+    VT_I8 = 20
+    VT_UI8 = 21
+    VT_INT = 22
+    VT_UINT = 23
+    VT_VOID = 24
+    VT_HRESULT = 25
+    VT_PTR = 26
+    VT_SAFEARRAY = 27
+    VT_CARRAY = 28
+    VT_USERDEFINED = 29
+    VT_LPSTR = 30
+    VT_LPWSTR = 31
+    VT_RECORD = 36
+    VT_FILETIME = 64
+    VT_BLOB = 65
+    VT_STREAM = 66
+    VT_STORAGE = 67
+    VT_STREAMED_OBJECT = 68
+    VT_STORED_OBJECT = 69
+    VT_BLOB_OBJECT = 70
+    VT_CF = 71
+    VT_CLSID = 72
+    VT_VECTOR = 4096
+    VT_ARRAY = 8192
+    VT_BYREF = 16384
 
 
 # ---------- Delegates ---------- #

@@ -1315,19 +1315,19 @@ class IRemotingTypeInfo(Protocol):
 # ---------- Enums ---------- #
 
 class CustomErrorsModes(Enum):
-    On: IntType = 0
-    Off: IntType = 1
-    RemoteOnly: IntType = 2
+    On = 0
+    Off = 1
+    RemoteOnly = 2
 
 
 class DuplicateIdentityOption(Enum):
-    Unique: IntType = 0
-    UseExisting: IntType = 1
+    Unique = 0
+    UseExisting = 1
 
 
 class WellKnownObjectMode(Enum):
-    Singleton: IntType = 1
-    SingleCall: IntType = 2
+    Singleton = 1
+    SingleCall = 2
 
 
 # No Delegates

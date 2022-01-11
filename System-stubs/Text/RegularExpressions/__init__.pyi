@@ -1355,16 +1355,16 @@ class SharedReference(ObjectType):
 # ---------- Enums ---------- #
 
 class RegexOptions(Enum):
-    #None: IntType = 0
-    IgnoreCase: IntType = 1
-    Multiline: IntType = 2
-    ExplicitCapture: IntType = 4
-    Compiled: IntType = 8
-    Singleline: IntType = 16
-    IgnorePatternWhitespace: IntType = 32
-    RightToLeft: IntType = 64
-    ECMAScript: IntType = 256
-    CultureInvariant: IntType = 512
+    #None = 0
+    IgnoreCase = 1
+    Multiline = 2
+    ExplicitCapture = 4
+    Compiled = 8
+    Singleline = 16
+    IgnorePatternWhitespace = 32
+    RightToLeft = 64
+    ECMAScript = 256
+    CultureInvariant = 512
 
 
 # ---------- Delegates ---------- #

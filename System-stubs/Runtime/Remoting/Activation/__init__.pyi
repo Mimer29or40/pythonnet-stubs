@@ -446,11 +446,11 @@ class IConstructionReturnMessage(Protocol, IMethodReturnMessage, IMethodMessage,
 # ---------- Enums ---------- #
 
 class ActivatorLevel(Enum):
-    Construction: IntType = 4
-    Context: IntType = 8
-    AppDomain: IntType = 12
-    Process: IntType = 16
-    Machine: IntType = 20
+    Construction = 4
+    Context = 8
+    AppDomain = 12
+    Process = 16
+    Machine = 20
 
 
 # No Delegates

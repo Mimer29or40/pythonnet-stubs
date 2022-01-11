@@ -773,30 +773,30 @@ class IEncodableStream(Protocol):
 # ---------- Enums ---------- #
 
 class ContentTransferEncoding(Enum):
-    SevenBit: IntType = 0
-    EightBit: IntType = 1
-    Binary: IntType = 2
-    Base64: IntType = 3
-    QuotedPrintable: IntType = 4
-    QEncoded: IntType = 5
-    Other: IntType = 6
-    Unspecified: IntType = 7
+    SevenBit = 0
+    EightBit = 1
+    Binary = 2
+    Base64 = 3
+    QuotedPrintable = 4
+    QEncoded = 5
+    Other = 6
+    Unspecified = 7
 
 
 class MimeMultiPartType(Enum):
-    Unknown: IntType = -1
-    Mixed: IntType = 0
-    Alternative: IntType = 1
-    Parallel: IntType = 2
-    Related: IntType = 3
+    Unknown = -1
+    Mixed = 0
+    Alternative = 1
+    Parallel = 2
+    Related = 3
 
 
 class TransferEncoding(Enum):
-    Unknown: IntType = -1
-    QuotedPrintable: IntType = 0
-    Base64: IntType = 1
-    SevenBit: IntType = 2
-    EightBit: IntType = 3
+    Unknown = -1
+    QuotedPrintable = 0
+    Base64 = 1
+    SevenBit = 2
+    EightBit = 3
 
 
 # No Delegates

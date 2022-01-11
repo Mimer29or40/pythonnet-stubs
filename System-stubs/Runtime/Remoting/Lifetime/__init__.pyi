@@ -374,11 +374,11 @@ class ISponsor(Protocol):
 # ---------- Enums ---------- #
 
 class LeaseState(Enum):
-    Null: IntType = 0
-    Initial: IntType = 1
-    Active: IntType = 2
-    Renewing: IntType = 3
-    Expired: IntType = 4
+    Null = 0
+    Initial = 1
+    Active = 2
+    Renewing = 3
+    Expired = 4
 
 
 # No Delegates

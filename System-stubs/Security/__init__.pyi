@@ -1803,110 +1803,110 @@ class IStackWalk(Protocol):
 # ---------- Enums ---------- #
 
 class HostSecurityManagerOptions(Enum):
-    #None: IntType = 0
-    HostAppDomainEvidence: IntType = 1
-    HostPolicyLevel: IntType = 2
-    HostAssemblyEvidence: IntType = 4
-    HostDetermineApplicationTrust: IntType = 8
-    HostResolvePolicy: IntType = 16
-    AllFlags: IntType = 31
+    #None = 0
+    HostAppDomainEvidence = 1
+    HostPolicyLevel = 2
+    HostAssemblyEvidence = 4
+    HostDetermineApplicationTrust = 8
+    HostResolvePolicy = 16
+    AllFlags = 31
 
 
 class ManifestKinds(Enum):
-    #None: IntType = 0
-    Deployment: IntType = 1
-    Application: IntType = 2
-    ApplicationAndDeployment: IntType = 3
+    #None = 0
+    Deployment = 1
+    Application = 2
+    ApplicationAndDeployment = 3
 
 
 class PartialTrustVisibilityLevel(Enum):
-    VisibleToAllHosts: IntType = 0
-    NotVisibleByDefault: IntType = 1
+    VisibleToAllHosts = 0
+    NotVisibleByDefault = 1
 
 
 class PermissionTokenType(Enum):
-    Normal: IntType = 1
-    IUnrestricted: IntType = 2
-    DontKnow: IntType = 4
-    BuiltIn: IntType = 8
+    Normal = 1
+    IUnrestricted = 2
+    DontKnow = 4
+    BuiltIn = 8
 
 
 class PermissionType(Enum):
-    SecurityUnmngdCodeAccess: IntType = 0
-    SecuritySkipVerification: IntType = 1
-    ReflectionTypeInfo: IntType = 2
-    SecurityAssert: IntType = 3
-    ReflectionMemberAccess: IntType = 4
-    SecuritySerialization: IntType = 5
-    ReflectionRestrictedMemberAccess: IntType = 6
-    FullTrust: IntType = 7
-    SecurityBindingRedirects: IntType = 8
-    UIPermission: IntType = 9
-    EnvironmentPermission: IntType = 10
-    FileDialogPermission: IntType = 11
-    FileIOPermission: IntType = 12
-    ReflectionPermission: IntType = 13
-    SecurityPermission: IntType = 14
-    SecurityControlEvidence: IntType = 16
-    SecurityControlPrincipal: IntType = 17
+    SecurityUnmngdCodeAccess = 0
+    SecuritySkipVerification = 1
+    ReflectionTypeInfo = 2
+    SecurityAssert = 3
+    ReflectionMemberAccess = 4
+    SecuritySerialization = 5
+    ReflectionRestrictedMemberAccess = 6
+    FullTrust = 7
+    SecurityBindingRedirects = 8
+    UIPermission = 9
+    EnvironmentPermission = 10
+    FileDialogPermission = 11
+    FileIOPermission = 12
+    ReflectionPermission = 13
+    SecurityPermission = 14
+    SecurityControlEvidence = 16
+    SecurityControlPrincipal = 17
 
 
 class PolicyLevelType(Enum):
-    User: IntType = 0
-    Machine: IntType = 1
-    Enterprise: IntType = 2
-    AppDomain: IntType = 3
+    User = 0
+    Machine = 1
+    Enterprise = 2
+    AppDomain = 3
 
 
 class SecurityContextDisableFlow(Enum):
-    Nothing: IntType = 0
-    WI: IntType = 1
-    All: IntType = 16383
+    Nothing = 0
+    WI = 1
+    All = 16383
 
 
 class SecurityContextSource(Enum):
-    CurrentAppDomain: IntType = 0
-    CurrentAssembly: IntType = 1
+    CurrentAppDomain = 0
+    CurrentAssembly = 1
 
 
 class SecurityCriticalScope(Enum):
-    Explicit: IntType = 0
-    Everything: IntType = 1
+    Explicit = 0
+    Everything = 1
 
 
 class SecurityElementType(Enum):
-    Regular: IntType = 0
-    Format: IntType = 1
-    Comment: IntType = 2
+    Regular = 0
+    Format = 1
+    Comment = 2
 
 
 class SecurityRuleSet(Enum):
-    #None: ByteType = 0
-    Level1: ByteType = 1
-    Level2: ByteType = 2
+    #None = 0
+    Level1 = 1
+    Level2 = 2
 
 
 class SecurityZone(Enum):
-    NoZone: IntType = -1
-    MyComputer: IntType = 0
-    Intranet: IntType = 1
-    Trusted: IntType = 2
-    Internet: IntType = 3
-    Untrusted: IntType = 4
+    NoZone = -1
+    MyComputer = 0
+    Intranet = 1
+    Trusted = 2
+    Internet = 3
+    Untrusted = 4
 
 
 class SpecialPermissionSetFlag(Enum):
-    Regular: IntType = 0
-    NoSet: IntType = 1
-    EmptySet: IntType = 2
-    SkipVerification: IntType = 3
+    Regular = 0
+    NoSet = 1
+    EmptySet = 2
+    SkipVerification = 3
 
 
 class WindowsImpersonationFlowMode(Enum):
-    IMP_DEFAULT: IntType = 0
-    IMP_FASTFLOW: IntType = 0
-    IMP_NOFLOW: IntType = 1
-    IMP_ALWAYSFLOW: IntType = 2
+    IMP_DEFAULT = 0
+    IMP_FASTFLOW = 0
+    IMP_NOFLOW = 1
+    IMP_ALWAYSFLOW = 2
 
 
 # No Delegates

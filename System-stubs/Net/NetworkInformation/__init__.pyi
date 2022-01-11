@@ -4159,275 +4159,275 @@ class MibUdpTable(ValueType):
 # ---------- Enums ---------- #
 
 class AdapterAddressFlags(Enum):
-    DnsEligible: IntType = 1
-    Transient: IntType = 2
+    DnsEligible = 1
+    Transient = 2
 
 
 class AdapterFlags(Enum):
-    DnsEnabled: IntType = 1
-    RegisterAdapterSuffix: IntType = 2
-    DhcpEnabled: IntType = 4
-    ReceiveOnly: IntType = 8
-    NoMulticast: IntType = 16
-    Ipv6OtherStatefulConfig: IntType = 32
-    NetBiosOverTcp: IntType = 64
-    IPv4Enabled: IntType = 128
-    IPv6Enabled: IntType = 256
-    IPv6ManagedAddressConfigurationSupported: IntType = 512
+    DnsEnabled = 1
+    RegisterAdapterSuffix = 2
+    DhcpEnabled = 4
+    ReceiveOnly = 8
+    NoMulticast = 16
+    Ipv6OtherStatefulConfig = 32
+    NetBiosOverTcp = 64
+    IPv4Enabled = 128
+    IPv6Enabled = 256
+    IPv6ManagedAddressConfigurationSupported = 512
 
 
 class DuplicateAddressDetectionState(Enum):
-    Invalid: IntType = 0
-    Tentative: IntType = 1
-    Duplicate: IntType = 2
-    Deprecated: IntType = 3
-    Preferred: IntType = 4
+    Invalid = 0
+    Tentative = 1
+    Duplicate = 2
+    Deprecated = 3
+    Preferred = 4
 
 
 class GetAdaptersAddressesFlags(Enum):
-    SkipUnicast: IntType = 1
-    SkipAnycast: IntType = 2
-    SkipMulticast: IntType = 4
-    SkipDnsServer: IntType = 8
-    IncludePrefix: IntType = 16
-    SkipFriendlyName: IntType = 32
-    IncludeWins: IntType = 64
-    IncludeGateways: IntType = 128
-    IncludeAllInterfaces: IntType = 256
-    IncludeAllCompartments: IntType = 512
-    IncludeTunnelBindingOrder: IntType = 1024
+    SkipUnicast = 1
+    SkipAnycast = 2
+    SkipMulticast = 4
+    SkipDnsServer = 8
+    IncludePrefix = 16
+    SkipFriendlyName = 32
+    IncludeWins = 64
+    IncludeGateways = 128
+    IncludeAllInterfaces = 256
+    IncludeAllCompartments = 512
+    IncludeTunnelBindingOrder = 1024
 
 
 class IPStatus(Enum):
-    Unknown: IntType = -1
-    Success: IntType = 0
-    DestinationNetworkUnreachable: IntType = 11002
-    DestinationHostUnreachable: IntType = 11003
-    DestinationProhibited: IntType = 11004
-    DestinationProtocolUnreachable: IntType = 11004
-    DestinationPortUnreachable: IntType = 11005
-    NoResources: IntType = 11006
-    BadOption: IntType = 11007
-    HardwareError: IntType = 11008
-    PacketTooBig: IntType = 11009
-    TimedOut: IntType = 11010
-    BadRoute: IntType = 11012
-    TtlExpired: IntType = 11013
-    TtlReassemblyTimeExceeded: IntType = 11014
-    ParameterProblem: IntType = 11015
-    SourceQuench: IntType = 11016
-    BadDestination: IntType = 11018
-    DestinationUnreachable: IntType = 11040
-    TimeExceeded: IntType = 11041
-    BadHeader: IntType = 11042
-    UnrecognizedNextHeader: IntType = 11043
-    IcmpError: IntType = 11044
-    DestinationScopeMismatch: IntType = 11045
+    Unknown = -1
+    Success = 0
+    DestinationNetworkUnreachable = 11002
+    DestinationHostUnreachable = 11003
+    DestinationProhibited = 11004
+    DestinationProtocolUnreachable = 11004
+    DestinationPortUnreachable = 11005
+    NoResources = 11006
+    BadOption = 11007
+    HardwareError = 11008
+    PacketTooBig = 11009
+    TimedOut = 11010
+    BadRoute = 11012
+    TtlExpired = 11013
+    TtlReassemblyTimeExceeded = 11014
+    ParameterProblem = 11015
+    SourceQuench = 11016
+    BadDestination = 11018
+    DestinationUnreachable = 11040
+    TimeExceeded = 11041
+    BadHeader = 11042
+    UnrecognizedNextHeader = 11043
+    IcmpError = 11044
+    DestinationScopeMismatch = 11045
 
 
 class IcmpV4Code(Enum):
-    ICMP4_UNREACH_NET: IntType = 0
-    ICMP4_UNREACH_HOST: IntType = 1
-    ICMP4_UNREACH_PROTOCOL: IntType = 2
-    ICMP4_UNREACH_PORT: IntType = 3
-    ICMP4_UNREACH_FRAG_NEEDED: IntType = 4
-    ICMP4_UNREACH_SOURCEROUTE_FAILED: IntType = 5
-    ICMP4_UNREACH_NET_UNKNOWN: IntType = 6
-    ICMP4_UNREACH_HOST_UNKNOWN: IntType = 7
-    ICMP4_UNREACH_ISOLATED: IntType = 8
-    ICMP4_UNREACH_NET_ADMIN: IntType = 9
-    ICMP4_UNREACH_HOST_ADMIN: IntType = 10
-    ICMP4_UNREACH_NET_TOS: IntType = 11
-    ICMP4_UNREACH_HOST_TOS: IntType = 12
-    ICMP4_UNREACH_ADMIN: IntType = 13
+    ICMP4_UNREACH_NET = 0
+    ICMP4_UNREACH_HOST = 1
+    ICMP4_UNREACH_PROTOCOL = 2
+    ICMP4_UNREACH_PORT = 3
+    ICMP4_UNREACH_FRAG_NEEDED = 4
+    ICMP4_UNREACH_SOURCEROUTE_FAILED = 5
+    ICMP4_UNREACH_NET_UNKNOWN = 6
+    ICMP4_UNREACH_HOST_UNKNOWN = 7
+    ICMP4_UNREACH_ISOLATED = 8
+    ICMP4_UNREACH_NET_ADMIN = 9
+    ICMP4_UNREACH_HOST_ADMIN = 10
+    ICMP4_UNREACH_NET_TOS = 11
+    ICMP4_UNREACH_HOST_TOS = 12
+    ICMP4_UNREACH_ADMIN = 13
 
 
 class IcmpV4Type(Enum):
-    ICMP4_ECHO_REPLY: IntType = 0
-    ICMP4_DST_UNREACH: IntType = 3
-    ICMP4_SOURCE_QUENCH: IntType = 4
-    ICMP4_REDIRECT: IntType = 5
-    ICMP4_ECHO_REQUEST: IntType = 8
-    ICMP4_ROUTER_ADVERT: IntType = 9
-    ICMP4_ROUTER_SOLICIT: IntType = 10
-    ICMP4_TIME_EXCEEDED: IntType = 11
-    ICMP4_PARAM_PROB: IntType = 12
-    ICMP4_TIMESTAMP_REQUEST: IntType = 13
-    ICMP4_TIMESTAMP_REPLY: IntType = 14
-    ICMP4_MASK_REQUEST: IntType = 17
-    ICMP4_MASK_REPLY: IntType = 18
+    ICMP4_ECHO_REPLY = 0
+    ICMP4_DST_UNREACH = 3
+    ICMP4_SOURCE_QUENCH = 4
+    ICMP4_REDIRECT = 5
+    ICMP4_ECHO_REQUEST = 8
+    ICMP4_ROUTER_ADVERT = 9
+    ICMP4_ROUTER_SOLICIT = 10
+    ICMP4_TIME_EXCEEDED = 11
+    ICMP4_PARAM_PROB = 12
+    ICMP4_TIMESTAMP_REQUEST = 13
+    ICMP4_TIMESTAMP_REPLY = 14
+    ICMP4_MASK_REQUEST = 17
+    ICMP4_MASK_REPLY = 18
 
 
 class IcmpV6StatType(Enum):
-    DestinationUnreachable: IntType = 1
-    PacketTooBig: IntType = 2
-    TimeExceeded: IntType = 3
-    ParameterProblem: IntType = 4
-    EchoRequest: IntType = 128
-    EchoReply: IntType = 129
-    MembershipQuery: IntType = 130
-    MembershipReport: IntType = 131
-    MembershipReduction: IntType = 132
-    RouterSolicit: IntType = 133
-    RouterAdvertisement: IntType = 134
-    NeighborSolict: IntType = 135
-    NeighborAdvertisement: IntType = 136
-    Redirect: IntType = 137
+    DestinationUnreachable = 1
+    PacketTooBig = 2
+    TimeExceeded = 3
+    ParameterProblem = 4
+    EchoRequest = 128
+    EchoReply = 129
+    MembershipQuery = 130
+    MembershipReport = 131
+    MembershipReduction = 132
+    RouterSolicit = 133
+    RouterAdvertisement = 134
+    NeighborSolict = 135
+    NeighborAdvertisement = 136
+    Redirect = 137
 
 
 class InterfaceConnectionType(Enum):
-    Dedicated: IntType = 1
-    Passive: IntType = 2
-    Demand: IntType = 3
-    Maximum: IntType = 4
+    Dedicated = 1
+    Passive = 2
+    Demand = 3
+    Maximum = 4
 
 
 class InterfaceTunnelType(Enum):
-    #None: IntType = 0
-    Other: IntType = 1
-    Direct: IntType = 2
-    SixToFour: IntType = 11
-    Isatap: IntType = 13
-    Teredo: IntType = 14
-    IpHttps: IntType = 15
+    #None = 0
+    Other = 1
+    Direct = 2
+    SixToFour = 11
+    Isatap = 13
+    Teredo = 14
+    IpHttps = 15
 
 
 class NetBiosNodeType(Enum):
-    Unknown: IntType = 0
-    Broadcast: IntType = 1
-    Peer2Peer: IntType = 2
-    Mixed: IntType = 4
-    Hybrid: IntType = 8
+    Unknown = 0
+    Broadcast = 1
+    Peer2Peer = 2
+    Mixed = 4
+    Hybrid = 8
 
 
 class NetworkInformationAccess(Enum):
-    #None: IntType = 0
-    Read: IntType = 1
-    Ping: IntType = 4
+    #None = 0
+    Read = 1
+    Ping = 4
 
 
 class NetworkInterfaceComponent(Enum):
-    IPv4: IntType = 0
-    IPv6: IntType = 1
+    IPv4 = 0
+    IPv6 = 1
 
 
 class NetworkInterfaceType(Enum):
-    Unknown: IntType = 1
-    Ethernet: IntType = 6
-    TokenRing: IntType = 9
-    Fddi: IntType = 15
-    BasicIsdn: IntType = 20
-    PrimaryIsdn: IntType = 21
-    Ppp: IntType = 23
-    Loopback: IntType = 24
-    Ethernet3Megabit: IntType = 26
-    Slip: IntType = 28
-    Atm: IntType = 37
-    GenericModem: IntType = 48
-    FastEthernetT: IntType = 62
-    Isdn: IntType = 63
-    FastEthernetFx: IntType = 69
-    Wireless80211: IntType = 71
-    AsymmetricDsl: IntType = 94
-    RateAdaptDsl: IntType = 95
-    SymmetricDsl: IntType = 96
-    VeryHighSpeedDsl: IntType = 97
-    IPOverAtm: IntType = 114
-    GigabitEthernet: IntType = 117
-    Tunnel: IntType = 131
-    MultiRateSymmetricDsl: IntType = 143
-    HighPerformanceSerialBus: IntType = 144
-    Wman: IntType = 237
-    Wwanpp: IntType = 243
-    Wwanpp2: IntType = 244
+    Unknown = 1
+    Ethernet = 6
+    TokenRing = 9
+    Fddi = 15
+    BasicIsdn = 20
+    PrimaryIsdn = 21
+    Ppp = 23
+    Loopback = 24
+    Ethernet3Megabit = 26
+    Slip = 28
+    Atm = 37
+    GenericModem = 48
+    FastEthernetT = 62
+    Isdn = 63
+    FastEthernetFx = 69
+    Wireless80211 = 71
+    AsymmetricDsl = 94
+    RateAdaptDsl = 95
+    SymmetricDsl = 96
+    VeryHighSpeedDsl = 97
+    IPOverAtm = 114
+    GigabitEthernet = 117
+    Tunnel = 131
+    MultiRateSymmetricDsl = 143
+    HighPerformanceSerialBus = 144
+    Wman = 237
+    Wwanpp = 243
+    Wwanpp2 = 244
 
 
 class OldOperationalStatus(Enum):
-    NonOperational: IntType = 0
-    Unreachable: IntType = 1
-    Disconnected: IntType = 2
-    Connecting: IntType = 3
-    Connected: IntType = 4
-    Operational: IntType = 5
+    NonOperational = 0
+    Unreachable = 1
+    Disconnected = 2
+    Connecting = 3
+    Connected = 4
+    Operational = 5
 
 
 class OperationalStatus(Enum):
-    Up: IntType = 1
-    Down: IntType = 2
-    Testing: IntType = 3
-    Unknown: IntType = 4
-    Dormant: IntType = 5
-    NotPresent: IntType = 6
-    LowerLayerDown: IntType = 7
+    Up = 1
+    Down = 2
+    Testing = 3
+    Unknown = 4
+    Dormant = 5
+    NotPresent = 6
+    LowerLayerDown = 7
 
 
 class PrefixOrigin(Enum):
-    Other: IntType = 0
-    Manual: IntType = 1
-    WellKnown: IntType = 2
-    Dhcp: IntType = 3
-    RouterAdvertisement: IntType = 4
+    Other = 0
+    Manual = 1
+    WellKnown = 2
+    Dhcp = 3
+    RouterAdvertisement = 4
 
 
 class ScopeLevel(Enum):
-    #None: IntType = 0
-    Interface: IntType = 1
-    Link: IntType = 2
-    Subnet: IntType = 3
-    Admin: IntType = 4
-    Site: IntType = 5
-    Organization: IntType = 8
-    Global: IntType = 14
+    #None = 0
+    Interface = 1
+    Link = 2
+    Subnet = 3
+    Admin = 4
+    Site = 5
+    Organization = 8
+    Global = 14
 
 
 class StartIPOptions(Enum):
-    #None: IntType = 0
-    StartIPv4: IntType = 1
-    StartIPv6: IntType = 2
-    Both: IntType = 3
+    #None = 0
+    StartIPv4 = 1
+    StartIPv6 = 2
+    Both = 3
 
 
 class SuffixOrigin(Enum):
-    Other: IntType = 0
-    Manual: IntType = 1
-    WellKnown: IntType = 2
-    OriginDhcp: IntType = 3
-    LinkLayerAddress: IntType = 4
-    Random: IntType = 5
+    Other = 0
+    Manual = 1
+    WellKnown = 2
+    OriginDhcp = 3
+    LinkLayerAddress = 4
+    Random = 5
 
 
 class TcpState(Enum):
-    Unknown: IntType = 0
-    Closed: IntType = 1
-    Listen: IntType = 2
-    SynSent: IntType = 3
-    SynReceived: IntType = 4
-    Established: IntType = 5
-    FinWait1: IntType = 6
-    FinWait2: IntType = 7
-    CloseWait: IntType = 8
-    Closing: IntType = 9
-    LastAck: IntType = 10
-    TimeWait: IntType = 11
-    DeleteTcb: IntType = 12
+    Unknown = 0
+    Closed = 1
+    Listen = 2
+    SynSent = 3
+    SynReceived = 4
+    Established = 5
+    FinWait1 = 6
+    FinWait2 = 7
+    CloseWait = 8
+    Closing = 9
+    LastAck = 10
+    TimeWait = 11
+    DeleteTcb = 12
 
 
 class TcpTableClass(Enum):
-    TcpTableBasicListener: IntType = 0
-    TcpTableBasicConnections: IntType = 1
-    TcpTableBasicAll: IntType = 2
-    TcpTableOwnerPidListener: IntType = 3
-    TcpTableOwnerPidConnections: IntType = 4
-    TcpTableOwnerPidAll: IntType = 5
-    TcpTableOwnerModuleListener: IntType = 6
-    TcpTableOwnerModuleConnections: IntType = 7
-    TcpTableOwnerModuleAll: IntType = 8
+    TcpTableBasicListener = 0
+    TcpTableBasicConnections = 1
+    TcpTableBasicAll = 2
+    TcpTableOwnerPidListener = 3
+    TcpTableOwnerPidConnections = 4
+    TcpTableOwnerPidAll = 5
+    TcpTableOwnerModuleListener = 6
+    TcpTableOwnerModuleConnections = 7
+    TcpTableOwnerModuleAll = 8
 
 
 class UdpTableClass(Enum):
-    UdpTableBasic: IntType = 0
-    UdpTableOwnerPid: IntType = 1
-    UdpTableOwnerModule: IntType = 2
+    UdpTableBasic = 0
+    UdpTableOwnerPid = 1
+    UdpTableOwnerModule = 2
 
 
 # ---------- Delegates ---------- #

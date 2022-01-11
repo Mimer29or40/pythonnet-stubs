@@ -97,16 +97,16 @@ class ReliabilityContractAttribute(Attribute, _Attribute):
 # ---------- Enums ---------- #
 
 class Cer(Enum):
-    #None: IntType = 0
-    MayFail: IntType = 1
-    Success: IntType = 2
+    #None = 0
+    MayFail = 1
+    Success = 2
 
 
 class Consistency(Enum):
-    MayCorruptProcess: IntType = 0
-    MayCorruptAppDomain: IntType = 1
-    MayCorruptInstance: IntType = 2
-    WillNotCorruptState: IntType = 3
+    MayCorruptProcess = 0
+    MayCorruptAppDomain = 1
+    MayCorruptInstance = 2
+    WillNotCorruptState = 3
 
 
 # No Delegates

@@ -3420,17 +3420,17 @@ class IPartitionedStreamRecipient(Protocol[TElement]):
 # ---------- Enums ---------- #
 
 class OrdinalIndexState(Enum):
-    Indexible: ByteType = 0
-    Correct: ByteType = 1
-    Increasing: ByteType = 2
-    Shuffled: ByteType = 3
+    Indexible = 0
+    Correct = 1
+    Increasing = 2
+    Shuffled = 3
 
 
 class QueryAggregationOptions(Enum):
-    #None: IntType = 0
-    Associative: IntType = 1
-    Commutative: IntType = 2
-    AssociativeCommutative: IntType = 3
+    #None = 0
+    Associative = 1
+    Commutative = 2
+    AssociativeCommutative = 3
 
 
 # No Delegates

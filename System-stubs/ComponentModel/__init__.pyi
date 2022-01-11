@@ -7219,105 +7219,105 @@ class ITypedList(Protocol):
 # ---------- Enums ---------- #
 
 class BindableSupport(Enum):
-    No: IntType = 0
-    Yes: IntType = 1
-    Default: IntType = 2
+    No = 0
+    Yes = 1
+    Default = 2
 
 
 class BindingDirection(Enum):
-    OneWay: IntType = 0
-    TwoWay: IntType = 1
+    OneWay = 0
+    TwoWay = 1
 
 
 class CollectionChangeAction(Enum):
-    Add: IntType = 1
-    Remove: IntType = 2
-    Refresh: IntType = 3
+    Add = 1
+    Remove = 2
+    Refresh = 3
 
 
 class DataObjectMethodType(Enum):
-    Fill: IntType = 0
-    Select: IntType = 1
-    Update: IntType = 2
-    Insert: IntType = 3
-    Delete: IntType = 4
+    Fill = 0
+    Select = 1
+    Update = 2
+    Insert = 3
+    Delete = 4
 
 
 class DesignerSerializationVisibility(Enum):
-    Hidden: IntType = 0
-    Visible: IntType = 1
-    Content: IntType = 2
+    Hidden = 0
+    Visible = 1
+    Content = 2
 
 
 class EditorBrowsableState(Enum):
-    Always: IntType = 0
-    Never: IntType = 1
-    Advanced: IntType = 2
+    Always = 0
+    Never = 1
+    Advanced = 2
 
 
 class InheritanceLevel(Enum):
-    Inherited: IntType = 1
-    InheritedReadOnly: IntType = 2
-    NotInherited: IntType = 3
+    Inherited = 1
+    InheritedReadOnly = 2
+    NotInherited = 3
 
 
 class LicenseUsageMode(Enum):
-    Runtime: IntType = 0
-    Designtime: IntType = 1
+    Runtime = 0
+    Designtime = 1
 
 
 class ListChangedType(Enum):
-    Reset: IntType = 0
-    ItemAdded: IntType = 1
-    ItemDeleted: IntType = 2
-    ItemMoved: IntType = 3
-    ItemChanged: IntType = 4
-    PropertyDescriptorAdded: IntType = 5
-    PropertyDescriptorDeleted: IntType = 6
-    PropertyDescriptorChanged: IntType = 7
+    Reset = 0
+    ItemAdded = 1
+    ItemDeleted = 2
+    ItemMoved = 3
+    ItemChanged = 4
+    PropertyDescriptorAdded = 5
+    PropertyDescriptorDeleted = 6
+    PropertyDescriptorChanged = 7
 
 
 class ListSortDirection(Enum):
-    Ascending: IntType = 0
-    Descending: IntType = 1
+    Ascending = 0
+    Descending = 1
 
 
 class MaskedTextResultHint(Enum):
-    PositionOutOfRange: IntType = -55
-    NonEditPosition: IntType = -54
-    UnavailableEditPosition: IntType = -53
-    PromptCharNotAllowed: IntType = -52
-    InvalidInput: IntType = -51
-    SignedDigitExpected: IntType = -5
-    LetterExpected: IntType = -4
-    DigitExpected: IntType = -3
-    AlphanumericCharacterExpected: IntType = -2
-    AsciiCharacterExpected: IntType = -1
-    Unknown: IntType = 0
-    CharacterEscaped: IntType = 1
-    NoEffect: IntType = 2
-    SideEffect: IntType = 3
-    Success: IntType = 4
+    PositionOutOfRange = -55
+    NonEditPosition = -54
+    UnavailableEditPosition = -53
+    PromptCharNotAllowed = -52
+    InvalidInput = -51
+    SignedDigitExpected = -5
+    LetterExpected = -4
+    DigitExpected = -3
+    AlphanumericCharacterExpected = -2
+    AsciiCharacterExpected = -1
+    Unknown = 0
+    CharacterEscaped = 1
+    NoEffect = 2
+    SideEffect = 3
+    Success = 4
 
 
 class PropertyTabScope(Enum):
-    Static: IntType = 0
-    Global: IntType = 1
-    Document: IntType = 2
-    Component: IntType = 3
+    Static = 0
+    Global = 1
+    Document = 2
+    Component = 3
 
 
 class RefreshProperties(Enum):
-    #None: IntType = 0
-    All: IntType = 1
-    Repaint: IntType = 2
+    #None = 0
+    All = 1
+    Repaint = 2
 
 
 class ToolboxItemFilterType(Enum):
-    Allow: IntType = 0
-    Custom: IntType = 1
-    Prevent: IntType = 2
-    Require: IntType = 3
+    Allow = 0
+    Custom = 1
+    Prevent = 2
+    Require = 3
 
 
 # ---------- Delegates ---------- #

@@ -703,32 +703,32 @@ class IResourceWriter(Protocol, IDisposable):
 # ---------- Enums ---------- #
 
 class ResourceTypeCode(Enum):
-    Null: IntType = 0
-    String: IntType = 1
-    Boolean: IntType = 2
-    Char: IntType = 3
-    Byte: IntType = 4
-    SByte: IntType = 5
-    Int16: IntType = 6
-    UInt16: IntType = 7
-    Int32: IntType = 8
-    UInt32: IntType = 9
-    Int64: IntType = 10
-    UInt64: IntType = 11
-    Single: IntType = 12
-    Double: IntType = 13
-    Decimal: IntType = 14
-    DateTime: IntType = 15
-    TimeSpan: IntType = 16
-    LastPrimitive: IntType = 16
-    ByteArray: IntType = 32
-    Stream: IntType = 33
-    StartOfUserTypes: IntType = 64
+    Null = 0
+    String = 1
+    Boolean = 2
+    Char = 3
+    Byte = 4
+    SByte = 5
+    Int16 = 6
+    UInt16 = 7
+    Int32 = 8
+    UInt32 = 9
+    Int64 = 10
+    UInt64 = 11
+    Single = 12
+    Double = 13
+    Decimal = 14
+    DateTime = 15
+    TimeSpan = 16
+    LastPrimitive = 16
+    ByteArray = 32
+    Stream = 33
+    StartOfUserTypes = 64
 
 
 class UltimateResourceFallbackLocation(Enum):
-    MainAssembly: IntType = 0
-    Satellite: IntType = 1
+    MainAssembly = 0
+    Satellite = 1
 
 
 # No Delegates

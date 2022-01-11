@@ -623,15 +623,15 @@ class WmiConfigurationAttribute(Attribute, _Attribute):
 # ---------- Enums ---------- #
 
 class ManagementConfigurationType(Enum):
-    Apply: IntType = 0
-    OnCommit: IntType = 1
+    Apply = 0
+    OnCommit = 1
 
 
 class ManagementHostingModel(Enum):
-    Decoupled: IntType = 0
-    NetworkService: IntType = 1
-    LocalService: IntType = 2
-    LocalSystem: IntType = 3
+    Decoupled = 0
+    NetworkService = 1
+    LocalService = 2
+    LocalSystem = 3
 
 
 # No Delegates

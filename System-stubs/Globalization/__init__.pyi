@@ -3623,212 +3623,212 @@ class InternalEncodingDataItem(ValueType):
 # ---------- Enums ---------- #
 
 class BidiCategory(Enum):
-    LeftToRight: IntType = 0
-    LeftToRightEmbedding: IntType = 1
-    LeftToRightOverride: IntType = 2
-    RightToLeft: IntType = 3
-    RightToLeftArabic: IntType = 4
-    RightToLeftEmbedding: IntType = 5
-    RightToLeftOverride: IntType = 6
-    PopDirectionalFormat: IntType = 7
-    EuropeanNumber: IntType = 8
-    EuropeanNumberSeparator: IntType = 9
-    EuropeanNumberTerminator: IntType = 10
-    ArabicNumber: IntType = 11
-    CommonNumberSeparator: IntType = 12
-    NonSpacingMark: IntType = 13
-    BoundaryNeutral: IntType = 14
-    ParagraphSeparator: IntType = 15
-    SegmentSeparator: IntType = 16
-    Whitespace: IntType = 17
-    OtherNeutrals: IntType = 18
-    LeftToRightIsolate: IntType = 19
-    RightToLeftIsolate: IntType = 20
-    FirstStrongIsolate: IntType = 21
-    PopDirectionIsolate: IntType = 22
+    LeftToRight = 0
+    LeftToRightEmbedding = 1
+    LeftToRightOverride = 2
+    RightToLeft = 3
+    RightToLeftArabic = 4
+    RightToLeftEmbedding = 5
+    RightToLeftOverride = 6
+    PopDirectionalFormat = 7
+    EuropeanNumber = 8
+    EuropeanNumberSeparator = 9
+    EuropeanNumberTerminator = 10
+    ArabicNumber = 11
+    CommonNumberSeparator = 12
+    NonSpacingMark = 13
+    BoundaryNeutral = 14
+    ParagraphSeparator = 15
+    SegmentSeparator = 16
+    Whitespace = 17
+    OtherNeutrals = 18
+    LeftToRightIsolate = 19
+    RightToLeftIsolate = 20
+    FirstStrongIsolate = 21
+    PopDirectionIsolate = 22
 
 
 class CalendarAlgorithmType(Enum):
-    Unknown: IntType = 0
-    SolarCalendar: IntType = 1
-    LunarCalendar: IntType = 2
-    LunisolarCalendar: IntType = 3
+    Unknown = 0
+    SolarCalendar = 1
+    LunarCalendar = 2
+    LunisolarCalendar = 3
 
 
 class CalendarId(Enum):
-    GREGORIAN: UShortType = 1
-    GREGORIAN_US: UShortType = 2
-    JAPAN: UShortType = 3
-    TAIWAN: UShortType = 4
-    KOREA: UShortType = 5
-    HIJRI: UShortType = 6
-    THAI: UShortType = 7
-    HEBREW: UShortType = 8
-    GREGORIAN_ME_FRENCH: UShortType = 9
-    GREGORIAN_ARABIC: UShortType = 10
-    GREGORIAN_XLIT_ENGLISH: UShortType = 11
-    GREGORIAN_XLIT_FRENCH: UShortType = 12
-    JULIAN: UShortType = 13
-    JAPANESELUNISOLAR: UShortType = 14
-    CHINESELUNISOLAR: UShortType = 15
-    SAKA: UShortType = 16
-    LUNAR_ETO_CHN: UShortType = 17
-    LUNAR_ETO_KOR: UShortType = 18
-    LUNAR_ETO_ROKUYOU: UShortType = 19
-    KOREANLUNISOLAR: UShortType = 20
-    TAIWANLUNISOLAR: UShortType = 21
-    PERSIAN: UShortType = 22
-    UMALQURA: UShortType = 23
-    LAST_CALENDAR: UShortType = 23
+    GREGORIAN = 1
+    GREGORIAN_US = 2
+    JAPAN = 3
+    TAIWAN = 4
+    KOREA = 5
+    HIJRI = 6
+    THAI = 7
+    HEBREW = 8
+    GREGORIAN_ME_FRENCH = 9
+    GREGORIAN_ARABIC = 10
+    GREGORIAN_XLIT_ENGLISH = 11
+    GREGORIAN_XLIT_FRENCH = 12
+    JULIAN = 13
+    JAPANESELUNISOLAR = 14
+    CHINESELUNISOLAR = 15
+    SAKA = 16
+    LUNAR_ETO_CHN = 17
+    LUNAR_ETO_KOR = 18
+    LUNAR_ETO_ROKUYOU = 19
+    KOREANLUNISOLAR = 20
+    TAIWANLUNISOLAR = 21
+    PERSIAN = 22
+    UMALQURA = 23
+    LAST_CALENDAR = 23
 
 
 class CalendarWeekRule(Enum):
-    FirstDay: IntType = 0
-    FirstFullWeek: IntType = 1
-    FirstFourDayWeek: IntType = 2
+    FirstDay = 0
+    FirstFullWeek = 1
+    FirstFourDayWeek = 2
 
 
 class CompareOptions(Enum):
-    #None: IntType = 0
-    IgnoreCase: IntType = 1
-    IgnoreNonSpace: IntType = 2
-    IgnoreSymbols: IntType = 4
-    IgnoreKanaType: IntType = 8
-    IgnoreWidth: IntType = 16
-    OrdinalIgnoreCase: IntType = 268435456
-    StringSort: IntType = 536870912
-    Ordinal: IntType = 1073741824
+    #None = 0
+    IgnoreCase = 1
+    IgnoreNonSpace = 2
+    IgnoreSymbols = 4
+    IgnoreKanaType = 8
+    IgnoreWidth = 16
+    OrdinalIgnoreCase = 268435456
+    StringSort = 536870912
+    Ordinal = 1073741824
 
 
 class CultureTypes(Enum):
-    NeutralCultures: IntType = 1
-    SpecificCultures: IntType = 2
-    InstalledWin32Cultures: IntType = 4
-    AllCultures: IntType = 7
-    UserCustomCulture: IntType = 8
-    ReplacementCultures: IntType = 16
-    WindowsOnlyCultures: IntType = 32
-    FrameworkCultures: IntType = 64
+    NeutralCultures = 1
+    SpecificCultures = 2
+    InstalledWin32Cultures = 4
+    AllCultures = 7
+    UserCustomCulture = 8
+    ReplacementCultures = 16
+    WindowsOnlyCultures = 32
+    FrameworkCultures = 64
 
 
 class DateTimeFormatFlags(Enum):
-    NotInitialized: IntType = -1
-    #None: IntType = 0
-    UseGenitiveMonth: IntType = 1
-    UseLeapYearMonth: IntType = 2
-    UseSpacesInMonthNames: IntType = 4
-    UseHebrewRule: IntType = 8
-    UseSpacesInDayNames: IntType = 16
-    UseDigitPrefixInTokens: IntType = 32
+    NotInitialized = -1
+    #None = 0
+    UseGenitiveMonth = 1
+    UseLeapYearMonth = 2
+    UseSpacesInMonthNames = 4
+    UseHebrewRule = 8
+    UseSpacesInDayNames = 16
+    UseDigitPrefixInTokens = 32
 
 
 class DateTimeStyles(Enum):
-    #None: IntType = 0
-    AllowLeadingWhite: IntType = 1
-    AllowTrailingWhite: IntType = 2
-    AllowInnerWhite: IntType = 4
-    AllowWhiteSpaces: IntType = 7
-    NoCurrentDateDefault: IntType = 8
-    AdjustToUniversal: IntType = 16
-    AssumeLocal: IntType = 32
-    AssumeUniversal: IntType = 64
-    RoundtripKind: IntType = 128
+    #None = 0
+    AllowLeadingWhite = 1
+    AllowTrailingWhite = 2
+    AllowInnerWhite = 4
+    AllowWhiteSpaces = 7
+    NoCurrentDateDefault = 8
+    AdjustToUniversal = 16
+    AssumeLocal = 32
+    AssumeUniversal = 64
+    RoundtripKind = 128
 
 
 class DigitShapes(Enum):
-    Context: IntType = 0
-    #None: IntType = 1
-    NativeNational: IntType = 2
+    Context = 0
+    #None = 1
+    NativeNational = 2
 
 
 class FORMATFLAGS(Enum):
-    #None: IntType = 0
-    UseGenitiveMonth: IntType = 1
-    UseLeapYearMonth: IntType = 2
-    UseSpacesInMonthNames: IntType = 4
-    UseHebrewParsing: IntType = 8
-    UseSpacesInDayNames: IntType = 16
-    UseDigitPrefixInTokens: IntType = 32
+    #None = 0
+    UseGenitiveMonth = 1
+    UseLeapYearMonth = 2
+    UseSpacesInMonthNames = 4
+    UseHebrewParsing = 8
+    UseSpacesInDayNames = 16
+    UseDigitPrefixInTokens = 32
 
 
 class GregorianCalendarTypes(Enum):
-    Localized: IntType = 1
-    USEnglish: IntType = 2
-    MiddleEastFrench: IntType = 9
-    Arabic: IntType = 10
-    TransliteratedEnglish: IntType = 11
-    TransliteratedFrench: IntType = 12
+    Localized = 1
+    USEnglish = 2
+    MiddleEastFrench = 9
+    Arabic = 10
+    TransliteratedEnglish = 11
+    TransliteratedFrench = 12
 
 
 class HebrewNumberParsingState(Enum):
-    InvalidHebrewNumber: IntType = 0
-    NotHebrewDigit: IntType = 1
-    FoundEndOfHebrewNumber: IntType = 2
-    ContinueParsing: IntType = 3
+    InvalidHebrewNumber = 0
+    NotHebrewDigit = 1
+    FoundEndOfHebrewNumber = 2
+    ContinueParsing = 3
 
 
 class MonthNameStyles(Enum):
-    Regular: IntType = 0
-    Genitive: IntType = 1
-    LeapYear: IntType = 2
+    Regular = 0
+    Genitive = 1
+    LeapYear = 2
 
 
 class NumberStyles(Enum):
-    #None: IntType = 0
-    AllowLeadingWhite: IntType = 1
-    AllowTrailingWhite: IntType = 2
-    AllowLeadingSign: IntType = 4
-    Integer: IntType = 7
-    AllowTrailingSign: IntType = 8
-    AllowParentheses: IntType = 16
-    AllowDecimalPoint: IntType = 32
-    AllowThousands: IntType = 64
-    Number: IntType = 111
-    AllowExponent: IntType = 128
-    Float: IntType = 167
-    AllowCurrencySymbol: IntType = 256
-    Currency: IntType = 383
-    Any: IntType = 511
-    AllowHexSpecifier: IntType = 512
-    HexNumber: IntType = 515
+    #None = 0
+    AllowLeadingWhite = 1
+    AllowTrailingWhite = 2
+    AllowLeadingSign = 4
+    Integer = 7
+    AllowTrailingSign = 8
+    AllowParentheses = 16
+    AllowDecimalPoint = 32
+    AllowThousands = 64
+    Number = 111
+    AllowExponent = 128
+    Float = 167
+    AllowCurrencySymbol = 256
+    Currency = 383
+    Any = 511
+    AllowHexSpecifier = 512
+    HexNumber = 515
 
 
 class TimeSpanStyles(Enum):
-    #None: IntType = 0
-    AssumeNegative: IntType = 1
+    #None = 0
+    AssumeNegative = 1
 
 
 class UnicodeCategory(Enum):
-    UppercaseLetter: IntType = 0
-    LowercaseLetter: IntType = 1
-    TitlecaseLetter: IntType = 2
-    ModifierLetter: IntType = 3
-    OtherLetter: IntType = 4
-    NonSpacingMark: IntType = 5
-    SpacingCombiningMark: IntType = 6
-    EnclosingMark: IntType = 7
-    DecimalDigitNumber: IntType = 8
-    LetterNumber: IntType = 9
-    OtherNumber: IntType = 10
-    SpaceSeparator: IntType = 11
-    LineSeparator: IntType = 12
-    ParagraphSeparator: IntType = 13
-    Control: IntType = 14
-    Format: IntType = 15
-    Surrogate: IntType = 16
-    PrivateUse: IntType = 17
-    ConnectorPunctuation: IntType = 18
-    DashPunctuation: IntType = 19
-    OpenPunctuation: IntType = 20
-    ClosePunctuation: IntType = 21
-    InitialQuotePunctuation: IntType = 22
-    FinalQuotePunctuation: IntType = 23
-    OtherPunctuation: IntType = 24
-    MathSymbol: IntType = 25
-    CurrencySymbol: IntType = 26
-    ModifierSymbol: IntType = 27
-    OtherSymbol: IntType = 28
-    OtherNotAssigned: IntType = 29
+    UppercaseLetter = 0
+    LowercaseLetter = 1
+    TitlecaseLetter = 2
+    ModifierLetter = 3
+    OtherLetter = 4
+    NonSpacingMark = 5
+    SpacingCombiningMark = 6
+    EnclosingMark = 7
+    DecimalDigitNumber = 8
+    LetterNumber = 9
+    OtherNumber = 10
+    SpaceSeparator = 11
+    LineSeparator = 12
+    ParagraphSeparator = 13
+    Control = 14
+    Format = 15
+    Surrogate = 16
+    PrivateUse = 17
+    ConnectorPunctuation = 18
+    DashPunctuation = 19
+    OpenPunctuation = 20
+    ClosePunctuation = 21
+    InitialQuotePunctuation = 22
+    FinalQuotePunctuation = 23
+    OtherPunctuation = 24
+    MathSymbol = 25
+    CurrencySymbol = 26
+    ModifierSymbol = 27
+    OtherSymbol = 28
+    OtherNotAssigned = 29
 
 
 # No Delegates

@@ -426,18 +426,18 @@ class SoapTypeAttribute(SoapAttribute, _Attribute):
 # ---------- Enums ---------- #
 
 class SoapOption(Enum):
-    #None: IntType = 0
-    AlwaysIncludeTypes: IntType = 1
-    XsdString: IntType = 2
-    EmbedAll: IntType = 4
-    Option1: IntType = 8
-    Option2: IntType = 16
+    #None = 0
+    AlwaysIncludeTypes = 1
+    XsdString = 2
+    EmbedAll = 4
+    Option1 = 8
+    Option2 = 16
 
 
 class XmlFieldOrderOption(Enum):
-    All: IntType = 0
-    Sequence: IntType = 1
-    Choice: IntType = 2
+    All = 0
+    Sequence = 1
+    Choice = 2
 
 
 # No Delegates

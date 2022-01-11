@@ -74,9 +74,9 @@ class EventProvider(ObjectType, IDisposable):
     # ---------- Sub Enums ---------- #
     
     class WriteEventErrorCode(Enum):
-        NoError: IntType = 0
-        NoFreeBuffers: IntType = 1
-        EventTooBig: IntType = 2
+        NoError = 0
+        NoFreeBuffers = 1
+        EventTooBig = 2
     
 
 

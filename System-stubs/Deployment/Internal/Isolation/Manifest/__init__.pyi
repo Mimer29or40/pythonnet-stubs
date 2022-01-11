@@ -2428,305 +2428,305 @@ class IWindowClassEntry(Protocol):
 # ---------- Enums ---------- #
 
 class AssemblyReferenceDependentAssemblyEntryFieldId(Enum):
-    AssemblyReferenceDependentAssembly_Group: IntType = 0
-    AssemblyReferenceDependentAssembly_Codebase: IntType = 1
-    AssemblyReferenceDependentAssembly_Size: IntType = 2
-    AssemblyReferenceDependentAssembly_HashValue: IntType = 3
-    AssemblyReferenceDependentAssembly_HashValueSize: IntType = 4
-    AssemblyReferenceDependentAssembly_HashAlgorithm: IntType = 5
-    AssemblyReferenceDependentAssembly_Flags: IntType = 6
-    AssemblyReferenceDependentAssembly_ResourceFallbackCulture: IntType = 7
-    AssemblyReferenceDependentAssembly_Description: IntType = 8
-    AssemblyReferenceDependentAssembly_SupportUrl: IntType = 9
-    AssemblyReferenceDependentAssembly_HashElements: IntType = 10
+    AssemblyReferenceDependentAssembly_Group = 0
+    AssemblyReferenceDependentAssembly_Codebase = 1
+    AssemblyReferenceDependentAssembly_Size = 2
+    AssemblyReferenceDependentAssembly_HashValue = 3
+    AssemblyReferenceDependentAssembly_HashValueSize = 4
+    AssemblyReferenceDependentAssembly_HashAlgorithm = 5
+    AssemblyReferenceDependentAssembly_Flags = 6
+    AssemblyReferenceDependentAssembly_ResourceFallbackCulture = 7
+    AssemblyReferenceDependentAssembly_Description = 8
+    AssemblyReferenceDependentAssembly_SupportUrl = 9
+    AssemblyReferenceDependentAssembly_HashElements = 10
 
 
 class AssemblyReferenceEntryFieldId(Enum):
-    AssemblyReference_Flags: IntType = 0
-    AssemblyReference_DependentAssembly: IntType = 1
+    AssemblyReference_Flags = 0
+    AssemblyReference_DependentAssembly = 1
 
 
 class AssemblyRequestEntryFieldId(Enum):
-    AssemblyRequest_permissionSetID: IntType = 0
+    AssemblyRequest_permissionSetID = 0
 
 
 class CLRSurrogateEntryFieldId(Enum):
-    CLRSurrogate_RuntimeVersion: IntType = 0
-    CLRSurrogate_ClassName: IntType = 1
+    CLRSurrogate_RuntimeVersion = 0
+    CLRSurrogate_ClassName = 1
 
 
 class CMSSECTIONID(Enum):
-    CMSSECTIONID_FILE_SECTION: IntType = 1
-    CMSSECTIONID_CATEGORY_INSTANCE_SECTION: IntType = 2
-    CMSSECTIONID_COM_REDIRECTION_SECTION: IntType = 3
-    CMSSECTIONID_PROGID_REDIRECTION_SECTION: IntType = 4
-    CMSSECTIONID_CLR_SURROGATE_SECTION: IntType = 5
-    CMSSECTIONID_ASSEMBLY_REFERENCE_SECTION: IntType = 6
-    CMSSECTIONID_WINDOW_CLASS_SECTION: IntType = 8
-    CMSSECTIONID_STRING_SECTION: IntType = 9
-    CMSSECTIONID_ENTRYPOINT_SECTION: IntType = 10
-    CMSSECTIONID_PERMISSION_SET_SECTION: IntType = 11
-    CMSSECTIONENTRYID_METADATA: IntType = 12
-    CMSSECTIONID_ASSEMBLY_REQUEST_SECTION: IntType = 13
-    CMSSECTIONID_REGISTRY_KEY_SECTION: IntType = 16
-    CMSSECTIONID_DIRECTORY_SECTION: IntType = 17
-    CMSSECTIONID_FILE_ASSOCIATION_SECTION: IntType = 18
-    CMSSECTIONID_COMPATIBLE_FRAMEWORKS_SECTION: IntType = 19
-    CMSSECTIONID_EVENT_SECTION: IntType = 101
-    CMSSECTIONID_EVENT_MAP_SECTION: IntType = 102
-    CMSSECTIONID_EVENT_TAG_SECTION: IntType = 103
-    CMSSECTIONID_COUNTERSET_SECTION: IntType = 110
-    CMSSECTIONID_COUNTER_SECTION: IntType = 111
+    CMSSECTIONID_FILE_SECTION = 1
+    CMSSECTIONID_CATEGORY_INSTANCE_SECTION = 2
+    CMSSECTIONID_COM_REDIRECTION_SECTION = 3
+    CMSSECTIONID_PROGID_REDIRECTION_SECTION = 4
+    CMSSECTIONID_CLR_SURROGATE_SECTION = 5
+    CMSSECTIONID_ASSEMBLY_REFERENCE_SECTION = 6
+    CMSSECTIONID_WINDOW_CLASS_SECTION = 8
+    CMSSECTIONID_STRING_SECTION = 9
+    CMSSECTIONID_ENTRYPOINT_SECTION = 10
+    CMSSECTIONID_PERMISSION_SET_SECTION = 11
+    CMSSECTIONENTRYID_METADATA = 12
+    CMSSECTIONID_ASSEMBLY_REQUEST_SECTION = 13
+    CMSSECTIONID_REGISTRY_KEY_SECTION = 16
+    CMSSECTIONID_DIRECTORY_SECTION = 17
+    CMSSECTIONID_FILE_ASSOCIATION_SECTION = 18
+    CMSSECTIONID_COMPATIBLE_FRAMEWORKS_SECTION = 19
+    CMSSECTIONID_EVENT_SECTION = 101
+    CMSSECTIONID_EVENT_MAP_SECTION = 102
+    CMSSECTIONID_EVENT_TAG_SECTION = 103
+    CMSSECTIONID_COUNTERSET_SECTION = 110
+    CMSSECTIONID_COUNTER_SECTION = 111
 
 
 class CMS_ASSEMBLY_DEPLOYMENT_FLAG(Enum):
-    CMS_ASSEMBLY_DEPLOYMENT_FLAG_BEFORE_APPLICATION_STARTUP: IntType = 4
-    CMS_ASSEMBLY_DEPLOYMENT_FLAG_RUN_AFTER_INSTALL: IntType = 16
-    CMS_ASSEMBLY_DEPLOYMENT_FLAG_INSTALL: IntType = 32
-    CMS_ASSEMBLY_DEPLOYMENT_FLAG_TRUST_URL_PARAMETERS: IntType = 64
-    CMS_ASSEMBLY_DEPLOYMENT_FLAG_DISALLOW_URL_ACTIVATION: IntType = 128
-    CMS_ASSEMBLY_DEPLOYMENT_FLAG_MAP_FILE_EXTENSIONS: IntType = 256
-    CMS_ASSEMBLY_DEPLOYMENT_FLAG_CREATE_DESKTOP_SHORTCUT: IntType = 512
+    CMS_ASSEMBLY_DEPLOYMENT_FLAG_BEFORE_APPLICATION_STARTUP = 4
+    CMS_ASSEMBLY_DEPLOYMENT_FLAG_RUN_AFTER_INSTALL = 16
+    CMS_ASSEMBLY_DEPLOYMENT_FLAG_INSTALL = 32
+    CMS_ASSEMBLY_DEPLOYMENT_FLAG_TRUST_URL_PARAMETERS = 64
+    CMS_ASSEMBLY_DEPLOYMENT_FLAG_DISALLOW_URL_ACTIVATION = 128
+    CMS_ASSEMBLY_DEPLOYMENT_FLAG_MAP_FILE_EXTENSIONS = 256
+    CMS_ASSEMBLY_DEPLOYMENT_FLAG_CREATE_DESKTOP_SHORTCUT = 512
 
 
 class CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG(Enum):
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_OPTIONAL: IntType = 1
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_VISIBLE: IntType = 2
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_PREREQUISITE: IntType = 4
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_RESOURCE_FALLBACK_CULTURE_INTERNAL: IntType = 8
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_INSTALL: IntType = 16
-    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_ALLOW_DELAYED_BINDING: IntType = 32
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_OPTIONAL = 1
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_VISIBLE = 2
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_PREREQUISITE = 4
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_RESOURCE_FALLBACK_CULTURE_INTERNAL = 8
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_INSTALL = 16
+    CMS_ASSEMBLY_REFERENCE_DEPENDENT_ASSEMBLY_FLAG_ALLOW_DELAYED_BINDING = 32
 
 
 class CMS_ASSEMBLY_REFERENCE_FLAG(Enum):
-    CMS_ASSEMBLY_REFERENCE_FLAG_OPTIONAL: IntType = 1
-    CMS_ASSEMBLY_REFERENCE_FLAG_VISIBLE: IntType = 2
-    CMS_ASSEMBLY_REFERENCE_FLAG_FOLLOW: IntType = 4
-    CMS_ASSEMBLY_REFERENCE_FLAG_IS_PLATFORM: IntType = 8
-    CMS_ASSEMBLY_REFERENCE_FLAG_CULTURE_WILDCARDED: IntType = 16
-    CMS_ASSEMBLY_REFERENCE_FLAG_PROCESSOR_ARCHITECTURE_WILDCARDED: IntType = 32
-    CMS_ASSEMBLY_REFERENCE_FLAG_PREREQUISITE: IntType = 128
+    CMS_ASSEMBLY_REFERENCE_FLAG_OPTIONAL = 1
+    CMS_ASSEMBLY_REFERENCE_FLAG_VISIBLE = 2
+    CMS_ASSEMBLY_REFERENCE_FLAG_FOLLOW = 4
+    CMS_ASSEMBLY_REFERENCE_FLAG_IS_PLATFORM = 8
+    CMS_ASSEMBLY_REFERENCE_FLAG_CULTURE_WILDCARDED = 16
+    CMS_ASSEMBLY_REFERENCE_FLAG_PROCESSOR_ARCHITECTURE_WILDCARDED = 32
+    CMS_ASSEMBLY_REFERENCE_FLAG_PREREQUISITE = 128
 
 
 class CMS_COM_SERVER_FLAG(Enum):
-    CMS_COM_SERVER_FLAG_IS_CLR_CLASS: IntType = 1
+    CMS_COM_SERVER_FLAG_IS_CLR_CLASS = 1
 
 
 class CMS_ENTRY_POINT_FLAG(Enum):
-    CMS_ENTRY_POINT_FLAG_HOST_IN_BROWSER: IntType = 1
-    CMS_ENTRY_POINT_FLAG_CUSTOMHOSTSPECIFIED: IntType = 2
-    CMS_ENTRY_POINT_FLAG_CUSTOMUX: IntType = 4
+    CMS_ENTRY_POINT_FLAG_HOST_IN_BROWSER = 1
+    CMS_ENTRY_POINT_FLAG_CUSTOMHOSTSPECIFIED = 2
+    CMS_ENTRY_POINT_FLAG_CUSTOMUX = 4
 
 
 class CMS_FILE_FLAG(Enum):
-    CMS_FILE_FLAG_OPTIONAL: IntType = 1
+    CMS_FILE_FLAG_OPTIONAL = 1
 
 
 class CMS_FILE_HASH_ALGORITHM(Enum):
-    CMS_FILE_HASH_ALGORITHM_SHA1: IntType = 1
-    CMS_FILE_HASH_ALGORITHM_SHA256: IntType = 2
-    CMS_FILE_HASH_ALGORITHM_SHA384: IntType = 3
-    CMS_FILE_HASH_ALGORITHM_SHA512: IntType = 4
-    CMS_FILE_HASH_ALGORITHM_MD5: IntType = 5
-    CMS_FILE_HASH_ALGORITHM_MD4: IntType = 6
-    CMS_FILE_HASH_ALGORITHM_MD2: IntType = 7
+    CMS_FILE_HASH_ALGORITHM_SHA1 = 1
+    CMS_FILE_HASH_ALGORITHM_SHA256 = 2
+    CMS_FILE_HASH_ALGORITHM_SHA384 = 3
+    CMS_FILE_HASH_ALGORITHM_SHA512 = 4
+    CMS_FILE_HASH_ALGORITHM_MD5 = 5
+    CMS_FILE_HASH_ALGORITHM_MD4 = 6
+    CMS_FILE_HASH_ALGORITHM_MD2 = 7
 
 
 class CMS_FILE_WRITABLE_TYPE(Enum):
-    CMS_FILE_WRITABLE_TYPE_NOT_WRITABLE: IntType = 1
-    CMS_FILE_WRITABLE_TYPE_APPLICATION_DATA: IntType = 2
+    CMS_FILE_WRITABLE_TYPE_NOT_WRITABLE = 1
+    CMS_FILE_WRITABLE_TYPE_APPLICATION_DATA = 2
 
 
 class CMS_HASH_DIGESTMETHOD(Enum):
-    CMS_HASH_DIGESTMETHOD_SHA1: IntType = 1
-    CMS_HASH_DIGESTMETHOD_SHA256: IntType = 2
-    CMS_HASH_DIGESTMETHOD_SHA384: IntType = 3
-    CMS_HASH_DIGESTMETHOD_SHA512: IntType = 4
+    CMS_HASH_DIGESTMETHOD_SHA1 = 1
+    CMS_HASH_DIGESTMETHOD_SHA256 = 2
+    CMS_HASH_DIGESTMETHOD_SHA384 = 3
+    CMS_HASH_DIGESTMETHOD_SHA512 = 4
 
 
 class CMS_HASH_TRANSFORM(Enum):
-    CMS_HASH_TRANSFORM_IDENTITY: IntType = 1
-    CMS_HASH_TRANSFORM_MANIFESTINVARIANT: IntType = 2
+    CMS_HASH_TRANSFORM_IDENTITY = 1
+    CMS_HASH_TRANSFORM_MANIFESTINVARIANT = 2
 
 
 class CMS_SCHEMA_VERSION(Enum):
-    CMS_SCHEMA_VERSION_V1: IntType = 1
+    CMS_SCHEMA_VERSION_V1 = 1
 
 
 class CMS_TIME_UNIT_TYPE(Enum):
-    CMS_TIME_UNIT_TYPE_HOURS: IntType = 1
-    CMS_TIME_UNIT_TYPE_DAYS: IntType = 2
-    CMS_TIME_UNIT_TYPE_WEEKS: IntType = 3
-    CMS_TIME_UNIT_TYPE_MONTHS: IntType = 4
+    CMS_TIME_UNIT_TYPE_HOURS = 1
+    CMS_TIME_UNIT_TYPE_DAYS = 2
+    CMS_TIME_UNIT_TYPE_WEEKS = 3
+    CMS_TIME_UNIT_TYPE_MONTHS = 4
 
 
 class CMS_USAGE_PATTERN(Enum):
-    CMS_USAGE_PATTERN_SCOPE_APPLICATION: IntType = 1
-    CMS_USAGE_PATTERN_SCOPE_PROCESS: IntType = 2
-    CMS_USAGE_PATTERN_SCOPE_MACHINE: IntType = 3
-    CMS_USAGE_PATTERN_SCOPE_MASK: IntType = 7
+    CMS_USAGE_PATTERN_SCOPE_APPLICATION = 1
+    CMS_USAGE_PATTERN_SCOPE_PROCESS = 2
+    CMS_USAGE_PATTERN_SCOPE_MACHINE = 3
+    CMS_USAGE_PATTERN_SCOPE_MASK = 7
 
 
 class COMServerEntryFieldId(Enum):
-    COMServer_Flags: IntType = 0
-    COMServer_ConfiguredGuid: IntType = 1
-    COMServer_ImplementedClsid: IntType = 2
-    COMServer_TypeLibrary: IntType = 3
-    COMServer_ThreadingModel: IntType = 4
-    COMServer_RuntimeVersion: IntType = 5
-    COMServer_HostFile: IntType = 6
+    COMServer_Flags = 0
+    COMServer_ConfiguredGuid = 1
+    COMServer_ImplementedClsid = 2
+    COMServer_TypeLibrary = 3
+    COMServer_ThreadingModel = 4
+    COMServer_RuntimeVersion = 5
+    COMServer_HostFile = 6
 
 
 class CategoryMembershipDataEntryFieldId(Enum):
-    CategoryMembershipData_Xml: IntType = 0
-    CategoryMembershipData_Description: IntType = 1
+    CategoryMembershipData_Xml = 0
+    CategoryMembershipData_Description = 1
 
 
 class CategoryMembershipEntryFieldId(Enum):
-    CategoryMembership_SubcategoryMembership: IntType = 0
+    CategoryMembership_SubcategoryMembership = 0
 
 
 class CompatibleFrameworksMetadataEntryFieldId(Enum):
-    CompatibleFrameworksMetadata_SupportUrl: IntType = 0
+    CompatibleFrameworksMetadata_SupportUrl = 0
 
 
 class DependentOSMetadataEntryFieldId(Enum):
-    DependentOSMetadata_SupportUrl: IntType = 0
-    DependentOSMetadata_Description: IntType = 1
-    DependentOSMetadata_MajorVersion: IntType = 2
-    DependentOSMetadata_MinorVersion: IntType = 3
-    DependentOSMetadata_BuildNumber: IntType = 4
-    DependentOSMetadata_ServicePackMajor: IntType = 5
-    DependentOSMetadata_ServicePackMinor: IntType = 6
+    DependentOSMetadata_SupportUrl = 0
+    DependentOSMetadata_Description = 1
+    DependentOSMetadata_MajorVersion = 2
+    DependentOSMetadata_MinorVersion = 3
+    DependentOSMetadata_BuildNumber = 4
+    DependentOSMetadata_ServicePackMajor = 5
+    DependentOSMetadata_ServicePackMinor = 6
 
 
 class DeploymentMetadataEntryFieldId(Enum):
-    DeploymentMetadata_DeploymentProviderCodebase: IntType = 0
-    DeploymentMetadata_MinimumRequiredVersion: IntType = 1
-    DeploymentMetadata_MaximumAge: IntType = 2
-    DeploymentMetadata_MaximumAge_Unit: IntType = 3
-    DeploymentMetadata_DeploymentFlags: IntType = 4
+    DeploymentMetadata_DeploymentProviderCodebase = 0
+    DeploymentMetadata_MinimumRequiredVersion = 1
+    DeploymentMetadata_MaximumAge = 2
+    DeploymentMetadata_MaximumAge_Unit = 3
+    DeploymentMetadata_DeploymentFlags = 4
 
 
 class DescriptionMetadataEntryFieldId(Enum):
-    DescriptionMetadata_Publisher: IntType = 0
-    DescriptionMetadata_Product: IntType = 1
-    DescriptionMetadata_SupportUrl: IntType = 2
-    DescriptionMetadata_IconFile: IntType = 3
-    DescriptionMetadata_ErrorReportUrl: IntType = 4
-    DescriptionMetadata_SuiteName: IntType = 5
+    DescriptionMetadata_Publisher = 0
+    DescriptionMetadata_Product = 1
+    DescriptionMetadata_SupportUrl = 2
+    DescriptionMetadata_IconFile = 3
+    DescriptionMetadata_ErrorReportUrl = 4
+    DescriptionMetadata_SuiteName = 5
 
 
 class EntryPointEntryFieldId(Enum):
-    EntryPoint_CommandLine_File: IntType = 0
-    EntryPoint_CommandLine_Parameters: IntType = 1
-    EntryPoint_Identity: IntType = 2
-    EntryPoint_Flags: IntType = 3
+    EntryPoint_CommandLine_File = 0
+    EntryPoint_CommandLine_Parameters = 1
+    EntryPoint_Identity = 2
+    EntryPoint_Flags = 3
 
 
 class FileAssociationEntryFieldId(Enum):
-    FileAssociation_Description: IntType = 0
-    FileAssociation_ProgID: IntType = 1
-    FileAssociation_DefaultIcon: IntType = 2
-    FileAssociation_Parameter: IntType = 3
+    FileAssociation_Description = 0
+    FileAssociation_ProgID = 1
+    FileAssociation_DefaultIcon = 2
+    FileAssociation_Parameter = 3
 
 
 class FileEntryFieldId(Enum):
-    File_HashAlgorithm: IntType = 0
-    File_LoadFrom: IntType = 1
-    File_SourcePath: IntType = 2
-    File_ImportPath: IntType = 3
-    File_SourceName: IntType = 4
-    File_Location: IntType = 5
-    File_HashValue: IntType = 6
-    File_HashValueSize: IntType = 7
-    File_Size: IntType = 8
-    File_Group: IntType = 9
-    File_Flags: IntType = 10
-    File_MuiMapping: IntType = 11
-    File_WritableType: IntType = 12
-    File_HashElements: IntType = 13
+    File_HashAlgorithm = 0
+    File_LoadFrom = 1
+    File_SourcePath = 2
+    File_ImportPath = 3
+    File_SourceName = 4
+    File_Location = 5
+    File_HashValue = 6
+    File_HashValueSize = 7
+    File_Size = 8
+    File_Group = 9
+    File_Flags = 10
+    File_MuiMapping = 11
+    File_WritableType = 12
+    File_HashElements = 13
 
 
 class HashElementEntryFieldId(Enum):
-    HashElement_Transform: IntType = 0
-    HashElement_TransformMetadata: IntType = 1
-    HashElement_TransformMetadataSize: IntType = 2
-    HashElement_DigestMethod: IntType = 3
-    HashElement_DigestValue: IntType = 4
-    HashElement_DigestValueSize: IntType = 5
-    HashElement_Xml: IntType = 6
+    HashElement_Transform = 0
+    HashElement_TransformMetadata = 1
+    HashElement_TransformMetadataSize = 2
+    HashElement_DigestMethod = 3
+    HashElement_DigestValue = 4
+    HashElement_DigestValueSize = 5
+    HashElement_Xml = 6
 
 
 class MetadataSectionEntryFieldId(Enum):
-    MetadataSection_SchemaVersion: IntType = 0
-    MetadataSection_ManifestFlags: IntType = 1
-    MetadataSection_UsagePatterns: IntType = 2
-    MetadataSection_CdfIdentity: IntType = 3
-    MetadataSection_LocalPath: IntType = 4
-    MetadataSection_HashAlgorithm: IntType = 5
-    MetadataSection_ManifestHash: IntType = 6
-    MetadataSection_ManifestHashSize: IntType = 7
-    MetadataSection_ContentType: IntType = 8
-    MetadataSection_RuntimeImageVersion: IntType = 9
-    MetadataSection_MvidValue: IntType = 10
-    MetadataSection_MvidValueSize: IntType = 11
-    MetadataSection_DescriptionData: IntType = 12
-    MetadataSection_DeploymentData: IntType = 13
-    MetadataSection_DependentOSData: IntType = 14
-    MetadataSection_defaultPermissionSetID: IntType = 15
-    MetadataSection_RequestedExecutionLevel: IntType = 16
-    MetadataSection_RequestedExecutionLevelUIAccess: IntType = 17
-    MetadataSection_ResourceTypeResourcesDependency: IntType = 18
-    MetadataSection_ResourceTypeManifestResourcesDependency: IntType = 19
-    MetadataSection_KeyInfoElement: IntType = 20
-    MetadataSection_CompatibleFrameworksData: IntType = 21
+    MetadataSection_SchemaVersion = 0
+    MetadataSection_ManifestFlags = 1
+    MetadataSection_UsagePatterns = 2
+    MetadataSection_CdfIdentity = 3
+    MetadataSection_LocalPath = 4
+    MetadataSection_HashAlgorithm = 5
+    MetadataSection_ManifestHash = 6
+    MetadataSection_ManifestHashSize = 7
+    MetadataSection_ContentType = 8
+    MetadataSection_RuntimeImageVersion = 9
+    MetadataSection_MvidValue = 10
+    MetadataSection_MvidValueSize = 11
+    MetadataSection_DescriptionData = 12
+    MetadataSection_DeploymentData = 13
+    MetadataSection_DependentOSData = 14
+    MetadataSection_defaultPermissionSetID = 15
+    MetadataSection_RequestedExecutionLevel = 16
+    MetadataSection_RequestedExecutionLevelUIAccess = 17
+    MetadataSection_ResourceTypeResourcesDependency = 18
+    MetadataSection_ResourceTypeManifestResourcesDependency = 19
+    MetadataSection_KeyInfoElement = 20
+    MetadataSection_CompatibleFrameworksData = 21
 
 
 class MuiResourceIdLookupMapEntryFieldId(Enum):
-    MuiResourceIdLookupMap_Count: IntType = 0
+    MuiResourceIdLookupMap_Count = 0
 
 
 class MuiResourceMapEntryFieldId(Enum):
-    MuiResourceMap_ResourceTypeIdInt: IntType = 0
-    MuiResourceMap_ResourceTypeIdIntSize: IntType = 1
-    MuiResourceMap_ResourceTypeIdString: IntType = 2
-    MuiResourceMap_ResourceTypeIdStringSize: IntType = 3
+    MuiResourceMap_ResourceTypeIdInt = 0
+    MuiResourceMap_ResourceTypeIdIntSize = 1
+    MuiResourceMap_ResourceTypeIdString = 2
+    MuiResourceMap_ResourceTypeIdStringSize = 3
 
 
 class MuiResourceTypeIdIntEntryFieldId(Enum):
-    MuiResourceTypeIdInt_StringIds: IntType = 0
-    MuiResourceTypeIdInt_StringIdsSize: IntType = 1
-    MuiResourceTypeIdInt_IntegerIds: IntType = 2
-    MuiResourceTypeIdInt_IntegerIdsSize: IntType = 3
+    MuiResourceTypeIdInt_StringIds = 0
+    MuiResourceTypeIdInt_StringIdsSize = 1
+    MuiResourceTypeIdInt_IntegerIds = 2
+    MuiResourceTypeIdInt_IntegerIdsSize = 3
 
 
 class MuiResourceTypeIdStringEntryFieldId(Enum):
-    MuiResourceTypeIdString_StringIds: IntType = 0
-    MuiResourceTypeIdString_StringIdsSize: IntType = 1
-    MuiResourceTypeIdString_IntegerIds: IntType = 2
-    MuiResourceTypeIdString_IntegerIdsSize: IntType = 3
+    MuiResourceTypeIdString_StringIds = 0
+    MuiResourceTypeIdString_StringIdsSize = 1
+    MuiResourceTypeIdString_IntegerIds = 2
+    MuiResourceTypeIdString_IntegerIdsSize = 3
 
 
 class PermissionSetEntryFieldId(Enum):
-    PermissionSet_XmlSegment: IntType = 0
+    PermissionSet_XmlSegment = 0
 
 
 class ProgIdRedirectionEntryFieldId(Enum):
-    ProgIdRedirection_RedirectedGuid: IntType = 0
+    ProgIdRedirection_RedirectedGuid = 0
 
 
 class ResourceTableMappingEntryFieldId(Enum):
-    ResourceTableMapping_FinalStringMapped: IntType = 0
+    ResourceTableMapping_FinalStringMapped = 0
 
 
 class SubcategoryMembershipEntryFieldId(Enum):
-    SubcategoryMembership_CategoryMembershipData: IntType = 0
+    SubcategoryMembership_CategoryMembershipData = 0
 
 
 class WindowClassEntryFieldId(Enum):
-    WindowClass_HostDll: IntType = 0
-    WindowClass_fVersioned: IntType = 1
+    WindowClass_HostDll = 0
+    WindowClass_fVersioned = 1
 
 
 # No Delegates

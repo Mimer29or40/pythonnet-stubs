@@ -1245,14 +1245,14 @@ class ITransportHeaders(Protocol):
 # ---------- Enums ---------- #
 
 class RemotingProfilerEvent(Enum):
-    ClientSend: IntType = 0
-    ClientReceive: IntType = 1
+    ClientSend = 0
+    ClientReceive = 1
 
 
 class ServerProcessing(Enum):
-    Complete: IntType = 0
-    OneWay: IntType = 1
-    Async: IntType = 2
+    Complete = 0
+    OneWay = 1
+    Async = 2
 
 
 # No Delegates

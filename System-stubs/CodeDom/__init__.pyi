@@ -3992,59 +3992,59 @@ class CodeVariableReferenceExpression(CodeExpression):
 # ---------- Enums ---------- #
 
 class CodeBinaryOperatorType(Enum):
-    Add: IntType = 0
-    Subtract: IntType = 1
-    Multiply: IntType = 2
-    Divide: IntType = 3
-    Modulus: IntType = 4
-    Assign: IntType = 5
-    IdentityInequality: IntType = 6
-    IdentityEquality: IntType = 7
-    ValueEquality: IntType = 8
-    BitwiseOr: IntType = 9
-    BitwiseAnd: IntType = 10
-    BooleanOr: IntType = 11
-    BooleanAnd: IntType = 12
-    LessThan: IntType = 13
-    LessThanOrEqual: IntType = 14
-    GreaterThan: IntType = 15
-    GreaterThanOrEqual: IntType = 16
+    Add = 0
+    Subtract = 1
+    Multiply = 2
+    Divide = 3
+    Modulus = 4
+    Assign = 5
+    IdentityInequality = 6
+    IdentityEquality = 7
+    ValueEquality = 8
+    BitwiseOr = 9
+    BitwiseAnd = 10
+    BooleanOr = 11
+    BooleanAnd = 12
+    LessThan = 13
+    LessThanOrEqual = 14
+    GreaterThan = 15
+    GreaterThanOrEqual = 16
 
 
 class CodeRegionMode(Enum):
-    #None: IntType = 0
-    Start: IntType = 1
-    End: IntType = 2
+    #None = 0
+    Start = 1
+    End = 2
 
 
 class CodeTypeReferenceOptions(Enum):
-    GlobalReference: IntType = 1
-    GenericTypeParameter: IntType = 2
+    GlobalReference = 1
+    GenericTypeParameter = 2
 
 
 class FieldDirection(Enum):
-    In: IntType = 0
-    Out: IntType = 1
-    Ref: IntType = 2
+    In = 0
+    Out = 1
+    Ref = 2
 
 
 class MemberAttributes(Enum):
-    Abstract: IntType = 1
-    Final: IntType = 2
-    Static: IntType = 3
-    Override: IntType = 4
-    Const: IntType = 5
-    ScopeMask: IntType = 15
-    New: IntType = 16
-    VTableMask: IntType = 240
-    Overloaded: IntType = 256
-    Assembly: IntType = 4096
-    FamilyAndAssembly: IntType = 8192
-    Family: IntType = 12288
-    FamilyOrAssembly: IntType = 16384
-    Private: IntType = 20480
-    Public: IntType = 24576
-    AccessMask: IntType = 61440
+    Abstract = 1
+    Final = 2
+    Static = 3
+    Override = 4
+    Const = 5
+    ScopeMask = 15
+    New = 16
+    VTableMask = 240
+    Overloaded = 256
+    Assembly = 4096
+    FamilyAndAssembly = 8192
+    Family = 12288
+    FamilyOrAssembly = 16384
+    Private = 20480
+    Public = 24576
+    AccessMask = 61440
 
 
 # No Delegates

@@ -2794,56 +2794,56 @@ class IWinRTClassActivator(Protocol):
 # ---------- Enums ---------- #
 
 class InterfaceForwardingSupport(Enum):
-    #None: IntType = 0
-    IBindableVector: IntType = 1
-    IVector: IntType = 2
-    IBindableVectorView: IntType = 4
-    IVectorView: IntType = 8
-    IBindableIterableOrIIterable: IntType = 16
+    #None = 0
+    IBindableVector = 1
+    IVector = 2
+    IBindableVectorView = 4
+    IVectorView = 8
+    IBindableIterableOrIIterable = 16
 
 
 class PropertyType(Enum):
-    Empty: IntType = 0
-    UInt8: IntType = 1
-    Int16: IntType = 2
-    UInt16: IntType = 3
-    Int32: IntType = 4
-    UInt32: IntType = 5
-    Int64: IntType = 6
-    UInt64: IntType = 7
-    Single: IntType = 8
-    Double: IntType = 9
-    Char16: IntType = 10
-    Boolean: IntType = 11
-    String: IntType = 12
-    Inspectable: IntType = 13
-    DateTime: IntType = 14
-    TimeSpan: IntType = 15
-    Guid: IntType = 16
-    Point: IntType = 17
-    Size: IntType = 18
-    Rect: IntType = 19
-    Other: IntType = 20
-    UInt8Array: IntType = 1025
-    Int16Array: IntType = 1026
-    UInt16Array: IntType = 1027
-    Int32Array: IntType = 1028
-    UInt32Array: IntType = 1029
-    Int64Array: IntType = 1030
-    UInt64Array: IntType = 1031
-    SingleArray: IntType = 1032
-    DoubleArray: IntType = 1033
-    Char16Array: IntType = 1034
-    BooleanArray: IntType = 1035
-    StringArray: IntType = 1036
-    InspectableArray: IntType = 1037
-    DateTimeArray: IntType = 1038
-    TimeSpanArray: IntType = 1039
-    GuidArray: IntType = 1040
-    PointArray: IntType = 1041
-    SizeArray: IntType = 1042
-    RectArray: IntType = 1043
-    OtherArray: IntType = 1044
+    Empty = 0
+    UInt8 = 1
+    Int16 = 2
+    UInt16 = 3
+    Int32 = 4
+    UInt32 = 5
+    Int64 = 6
+    UInt64 = 7
+    Single = 8
+    Double = 9
+    Char16 = 10
+    Boolean = 11
+    String = 12
+    Inspectable = 13
+    DateTime = 14
+    TimeSpan = 15
+    Guid = 16
+    Point = 17
+    Size = 18
+    Rect = 19
+    Other = 20
+    UInt8Array = 1025
+    Int16Array = 1026
+    UInt16Array = 1027
+    Int32Array = 1028
+    UInt32Array = 1029
+    Int64Array = 1030
+    UInt64Array = 1031
+    SingleArray = 1032
+    DoubleArray = 1033
+    Char16Array = 1034
+    BooleanArray = 1035
+    StringArray = 1036
+    InspectableArray = 1037
+    DateTimeArray = 1038
+    TimeSpanArray = 1039
+    GuidArray = 1040
+    PointArray = 1041
+    SizeArray = 1042
+    RectArray = 1043
+    OtherArray = 1044
 
 
 # ---------- Delegates ---------- #

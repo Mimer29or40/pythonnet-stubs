@@ -201,25 +201,25 @@ class TokenBinding(ObjectType):
 # ---------- Enums ---------- #
 
 class ChannelBindingKind(Enum):
-    Unknown: IntType = 0
-    Unique: IntType = 25
-    Endpoint: IntType = 26
+    Unknown = 0
+    Unique = 25
+    Endpoint = 26
 
 
 class PolicyEnforcement(Enum):
-    Never: IntType = 0
-    WhenSupported: IntType = 1
-    Always: IntType = 2
+    Never = 0
+    WhenSupported = 1
+    Always = 2
 
 
 class ProtectionScenario(Enum):
-    TransportSelected: IntType = 0
-    TrustedProxy: IntType = 1
+    TransportSelected = 0
+    TrustedProxy = 1
 
 
 class TokenBindingType(Enum):
-    Provided: IntType = 0
-    Referred: IntType = 1
+    Provided = 0
+    Referred = 1
 
 
 # No Delegates

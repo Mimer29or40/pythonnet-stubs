@@ -5602,93 +5602,93 @@ class IXmlTextParser(Protocol):
 # ---------- Enums ---------- #
 
 class Cmp(Enum):
-    LessThan: IntType = 0
-    EqualTo: IntType = 1
-    LessThanOrEqualTo: IntType = 2
-    GreaterThan: IntType = 3
-    NotEqualTo: IntType = 4
-    GreaterThanOrEqualTo: IntType = 5
+    LessThan = 0
+    EqualTo = 1
+    LessThanOrEqualTo = 2
+    GreaterThan = 3
+    NotEqualTo = 4
+    GreaterThanOrEqualTo = 5
 
 
 class CodeGenerationOptions(Enum):
-    #None: IntType = 0
-    GenerateProperties: IntType = 1
-    GenerateNewAsync: IntType = 2
-    GenerateOldAsync: IntType = 4
-    GenerateOrder: IntType = 8
-    EnableDataBinding: IntType = 16
+    #None = 0
+    GenerateProperties = 1
+    GenerateNewAsync = 2
+    GenerateOldAsync = 4
+    GenerateOrder = 8
+    EnableDataBinding = 16
 
 
 class SoapAttributeFlags(Enum):
-    Enum: IntType = 1
-    Type: IntType = 2
-    Element: IntType = 4
-    Attribute: IntType = 8
+    Enum = 1
+    Type = 2
+    Element = 4
+    Attribute = 8
 
 
 class SpecifiedAccessor(Enum):
-    #None: IntType = 0
-    ReadOnly: IntType = 1
-    ReadWrite: IntType = 2
+    #None = 0
+    ReadOnly = 1
+    ReadWrite = 2
 
 
 class TypeFlags(Enum):
-    #None: IntType = 0
-    Abstract: IntType = 1
-    Reference: IntType = 2
-    Special: IntType = 4
-    CanBeAttributeValue: IntType = 8
-    CanBeTextValue: IntType = 16
-    CanBeElementValue: IntType = 32
-    HasCustomFormatter: IntType = 64
-    AmbiguousDataType: IntType = 128
-    IgnoreDefault: IntType = 512
-    HasIsEmpty: IntType = 1024
-    HasDefaultConstructor: IntType = 2048
-    XmlEncodingNotRequired: IntType = 4096
-    UseReflection: IntType = 16384
-    CollapseWhitespace: IntType = 32768
-    OptionalValue: IntType = 65536
-    CtorInaccessible: IntType = 131072
-    UsePrivateImplementation: IntType = 262144
-    GenericInterface: IntType = 524288
-    Unsupported: IntType = 1048576
+    #None = 0
+    Abstract = 1
+    Reference = 2
+    Special = 4
+    CanBeAttributeValue = 8
+    CanBeTextValue = 16
+    CanBeElementValue = 32
+    HasCustomFormatter = 64
+    AmbiguousDataType = 128
+    IgnoreDefault = 512
+    HasIsEmpty = 1024
+    HasDefaultConstructor = 2048
+    XmlEncodingNotRequired = 4096
+    UseReflection = 16384
+    CollapseWhitespace = 32768
+    OptionalValue = 65536
+    CtorInaccessible = 131072
+    UsePrivateImplementation = 262144
+    GenericInterface = 524288
+    Unsupported = 1048576
 
 
 class TypeKind(Enum):
-    Root: IntType = 0
-    Primitive: IntType = 1
-    Enum: IntType = 2
-    Struct: IntType = 3
-    Class: IntType = 4
-    Array: IntType = 5
-    Collection: IntType = 6
-    Enumerable: IntType = 7
-    Void: IntType = 8
-    Node: IntType = 9
-    Attribute: IntType = 10
-    Serializable: IntType = 11
+    Root = 0
+    Primitive = 1
+    Enum = 2
+    Struct = 3
+    Class = 4
+    Array = 5
+    Collection = 6
+    Enumerable = 7
+    Void = 8
+    Node = 9
+    Attribute = 10
+    Serializable = 11
 
 
 class XmlAttributeFlags(Enum):
-    Enum: IntType = 1
-    Array: IntType = 2
-    Text: IntType = 4
-    ArrayItems: IntType = 8
-    Elements: IntType = 16
-    Attribute: IntType = 32
-    Root: IntType = 64
-    Type: IntType = 128
-    AnyElements: IntType = 256
-    AnyAttribute: IntType = 512
-    ChoiceIdentifier: IntType = 1024
-    XmlnsDeclarations: IntType = 2048
+    Enum = 1
+    Array = 2
+    Text = 4
+    ArrayItems = 8
+    Elements = 16
+    Attribute = 32
+    Root = 64
+    Type = 128
+    AnyElements = 256
+    AnyAttribute = 512
+    ChoiceIdentifier = 1024
+    XmlnsDeclarations = 2048
 
 
 class XmlMappingAccess(Enum):
-    #None: IntType = 0
-    Read: IntType = 1
-    Write: IntType = 2
+    #None = 0
+    Read = 1
+    Write = 2
 
 
 # ---------- Delegates ---------- #

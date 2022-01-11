@@ -356,20 +356,20 @@ class VariableBinder(ExpressionVisitor):
 # ---------- Enums ---------- #
 
 class LabelScopeKind(Enum):
-    Statement: IntType = 0
-    Block: IntType = 1
-    Switch: IntType = 2
-    Lambda: IntType = 3
-    Try: IntType = 4
-    Catch: IntType = 5
-    Finally: IntType = 6
-    Filter: IntType = 7
-    Expression: IntType = 8
+    Statement = 0
+    Block = 1
+    Switch = 2
+    Lambda = 3
+    Try = 4
+    Catch = 5
+    Finally = 6
+    Filter = 7
+    Expression = 8
 
 
 class VariableStorageKind(Enum):
-    Local: IntType = 0
-    Hoisted: IntType = 1
+    Local = 0
+    Hoisted = 1
 
 
 # No Delegates

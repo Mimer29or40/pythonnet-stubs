@@ -824,60 +824,60 @@ class _SslStream(ObjectType):
 # ---------- Enums ---------- #
 
 class AuthenticationLevel(Enum):
-    #None: IntType = 0
-    MutualAuthRequested: IntType = 1
-    MutualAuthRequired: IntType = 2
+    #None = 0
+    MutualAuthRequested = 1
+    MutualAuthRequired = 2
 
 
 class EncryptionPolicy(Enum):
-    RequireEncryption: IntType = 0
-    AllowNoEncryption: IntType = 1
-    NoEncryption: IntType = 2
+    RequireEncryption = 0
+    AllowNoEncryption = 1
+    NoEncryption = 2
 
 
 class ProtectionLevel(Enum):
-    #None: IntType = 0
-    Sign: IntType = 1
-    EncryptAndSign: IntType = 2
+    #None = 0
+    Sign = 1
+    EncryptAndSign = 2
 
 
 class SslPolicyErrors(Enum):
-    #None: IntType = 0
-    RemoteCertificateNotAvailable: IntType = 1
-    RemoteCertificateNameMismatch: IntType = 2
-    RemoteCertificateChainErrors: IntType = 4
+    #None = 0
+    RemoteCertificateNotAvailable = 1
+    RemoteCertificateNameMismatch = 2
+    RemoteCertificateChainErrors = 4
 
 
 class TlsAlertMessage(Enum):
-    CloseNotify: IntType = 0
-    UnexpectedMessage: IntType = 10
-    BadRecordMac: IntType = 20
-    DecryptionFailed: IntType = 21
-    RecordOverflow: IntType = 22
-    DecompressionFail: IntType = 30
-    HandshakeFailure: IntType = 40
-    BadCertificate: IntType = 42
-    UnsupportedCert: IntType = 43
-    CertificateRevoked: IntType = 44
-    CertificateExpired: IntType = 45
-    CertificateUnknown: IntType = 46
-    IllegalParameter: IntType = 47
-    UnknownCA: IntType = 48
-    AccessDenied: IntType = 49
-    DecodeError: IntType = 50
-    DecryptError: IntType = 51
-    ExportRestriction: IntType = 60
-    ProtocolVersion: IntType = 70
-    InsuffientSecurity: IntType = 71
-    InternalError: IntType = 80
-    UserCanceled: IntType = 90
-    NoRenegotiation: IntType = 100
-    UnsupportedExt: IntType = 110
+    CloseNotify = 0
+    UnexpectedMessage = 10
+    BadRecordMac = 20
+    DecryptionFailed = 21
+    RecordOverflow = 22
+    DecompressionFail = 30
+    HandshakeFailure = 40
+    BadCertificate = 42
+    UnsupportedCert = 43
+    CertificateRevoked = 44
+    CertificateExpired = 45
+    CertificateUnknown = 46
+    IllegalParameter = 47
+    UnknownCA = 48
+    AccessDenied = 49
+    DecodeError = 50
+    DecryptError = 51
+    ExportRestriction = 60
+    ProtocolVersion = 70
+    InsuffientSecurity = 71
+    InternalError = 80
+    UserCanceled = 90
+    NoRenegotiation = 100
+    UnsupportedExt = 110
 
 
 class TlsAlertType(Enum):
-    Warning: IntType = 1
-    Fatal: IntType = 2
+    Warning = 1
+    Fatal = 2
 
 
 # ---------- Delegates ---------- #

@@ -3968,118 +3968,118 @@ class WaitForChangedResult(ValueType):
 # ---------- Enums ---------- #
 
 class DriveType(Enum):
-    Unknown: IntType = 0
-    NoRootDirectory: IntType = 1
-    Removable: IntType = 2
-    Fixed: IntType = 3
-    Network: IntType = 4
-    CDRom: IntType = 5
-    Ram: IntType = 6
+    Unknown = 0
+    NoRootDirectory = 1
+    Removable = 2
+    Fixed = 3
+    Network = 4
+    CDRom = 5
+    Ram = 6
 
 
 class FileAccess(Enum):
-    Read: IntType = 1
-    Write: IntType = 2
-    ReadWrite: IntType = 3
+    Read = 1
+    Write = 2
+    ReadWrite = 3
 
 
 class FileAttributes(Enum):
-    ReadOnly: IntType = 1
-    Hidden: IntType = 2
-    System: IntType = 4
-    Directory: IntType = 16
-    Archive: IntType = 32
-    Device: IntType = 64
-    Normal: IntType = 128
-    Temporary: IntType = 256
-    SparseFile: IntType = 512
-    ReparsePoint: IntType = 1024
-    Compressed: IntType = 2048
-    Offline: IntType = 4096
-    NotContentIndexed: IntType = 8192
-    Encrypted: IntType = 16384
-    IntegrityStream: IntType = 32768
-    NoScrubData: IntType = 131072
+    ReadOnly = 1
+    Hidden = 2
+    System = 4
+    Directory = 16
+    Archive = 32
+    Device = 64
+    Normal = 128
+    Temporary = 256
+    SparseFile = 512
+    ReparsePoint = 1024
+    Compressed = 2048
+    Offline = 4096
+    NotContentIndexed = 8192
+    Encrypted = 16384
+    IntegrityStream = 32768
+    NoScrubData = 131072
 
 
 class FileMode(Enum):
-    CreateNew: IntType = 1
-    Create: IntType = 2
-    Open: IntType = 3
-    OpenOrCreate: IntType = 4
-    Truncate: IntType = 5
-    Append: IntType = 6
+    CreateNew = 1
+    Create = 2
+    Open = 3
+    OpenOrCreate = 4
+    Truncate = 5
+    Append = 6
 
 
 class FileOptions(Enum):
-    WriteThrough: IntType = -2147483648
-    #None: IntType = 0
-    Encrypted: IntType = 16384
-    DeleteOnClose: IntType = 67108864
-    SequentialScan: IntType = 134217728
-    RandomAccess: IntType = 268435456
-    Asynchronous: IntType = 1073741824
+    WriteThrough = -2147483648
+    #None = 0
+    Encrypted = 16384
+    DeleteOnClose = 67108864
+    SequentialScan = 134217728
+    RandomAccess = 268435456
+    Asynchronous = 1073741824
 
 
 class FileSecurityStateAccess(Enum):
-    NoAccess: IntType = 0
-    Read: IntType = 1
-    Write: IntType = 2
-    Append: IntType = 4
-    PathDiscovery: IntType = 8
-    AllAccess: IntType = 15
+    NoAccess = 0
+    Read = 1
+    Write = 2
+    Append = 4
+    PathDiscovery = 8
+    AllAccess = 15
 
 
 class FileShare(Enum):
-    #None: IntType = 0
-    Read: IntType = 1
-    Write: IntType = 2
-    ReadWrite: IntType = 3
-    Delete: IntType = 4
-    Inheritable: IntType = 16
+    #None = 0
+    Read = 1
+    Write = 2
+    ReadWrite = 3
+    Delete = 4
+    Inheritable = 16
 
 
 class HandleInheritability(Enum):
-    #None: IntType = 0
-    Inheritable: IntType = 1
+    #None = 0
+    Inheritable = 1
 
 
 class LogRetentionOption(Enum):
-    UnlimitedSequentialFiles: IntType = 0
-    LimitedCircularFiles: IntType = 1
-    SingleFileUnboundedSize: IntType = 2
-    LimitedSequentialFiles: IntType = 3
-    SingleFileBoundedSize: IntType = 4
+    UnlimitedSequentialFiles = 0
+    LimitedCircularFiles = 1
+    SingleFileUnboundedSize = 2
+    LimitedSequentialFiles = 3
+    SingleFileBoundedSize = 4
 
 
 class NotifyFilters(Enum):
-    FileName: IntType = 1
-    DirectoryName: IntType = 2
-    Attributes: IntType = 4
-    Size: IntType = 8
-    LastWrite: IntType = 16
-    LastAccess: IntType = 32
-    CreationTime: IntType = 64
-    Security: IntType = 256
+    FileName = 1
+    DirectoryName = 2
+    Attributes = 4
+    Size = 8
+    LastWrite = 16
+    LastAccess = 32
+    CreationTime = 64
+    Security = 256
 
 
 class SearchOption(Enum):
-    TopDirectoryOnly: IntType = 0
-    AllDirectories: IntType = 1
+    TopDirectoryOnly = 0
+    AllDirectories = 1
 
 
 class SeekOrigin(Enum):
-    Begin: IntType = 0
-    Current: IntType = 1
-    End: IntType = 2
+    Begin = 0
+    Current = 1
+    End = 2
 
 
 class WatcherChangeTypes(Enum):
-    Created: IntType = 1
-    Deleted: IntType = 2
-    Changed: IntType = 4
-    Renamed: IntType = 8
-    All: IntType = 15
+    Created = 1
+    Deleted = 2
+    Changed = 4
+    Renamed = 8
+    All = 15
 
 
 # ---------- Delegates ---------- #

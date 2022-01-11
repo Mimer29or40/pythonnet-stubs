@@ -237,42 +237,42 @@ class Store(ObjectType):
     # ---------- Sub Enums ---------- #
     
     class EnumAssembliesFlags(Enum):
-        Nothing: IntType = 0
-        VisibleOnly: IntType = 1
-        MatchServicing: IntType = 2
-        ForceLibrarySemantics: IntType = 4
+        Nothing = 0
+        VisibleOnly = 1
+        MatchServicing = 2
+        ForceLibrarySemantics = 4
     
     
     class EnumAssemblyFilesFlags(Enum):
-        Nothing: IntType = 0
-        IncludeInstalled: IntType = 1
-        IncludeMissing: IntType = 2
+        Nothing = 0
+        IncludeInstalled = 1
+        IncludeMissing = 2
     
     
     class EnumApplicationPrivateFiles(Enum):
-        Nothing: IntType = 0
-        IncludeInstalled: IntType = 1
-        IncludeMissing: IntType = 2
+        Nothing = 0
+        IncludeInstalled = 1
+        IncludeMissing = 2
     
     
     class EnumAssemblyInstallReferenceFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
     
     class EnumCategoriesFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
     
     class EnumSubcategoriesFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
     
     class EnumCategoryInstancesFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
     
     class GetPackagePropertyFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
 
 
@@ -1048,7 +1048,7 @@ class StoreApplicationReference(ValueType):
     # ---------- Sub Enums ---------- #
     
     class RefFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
 
 
@@ -1104,14 +1104,14 @@ class StoreOperationInstallDeployment(ValueType):
     # ---------- Sub Enums ---------- #
     
     class OpFlags(Enum):
-        Nothing: IntType = 0
-        UninstallOthers: IntType = 1
+        Nothing = 0
+        UninstallOthers = 1
     
     
     class Disposition(Enum):
-        Failed: IntType = 0
-        AlreadyInstalled: IntType = 1
-        Installed: IntType = 2
+        Failed = 0
+        AlreadyInstalled = 1
+        Installed = 2
     
 
 
@@ -1223,13 +1223,13 @@ class StoreOperationPinDeployment(ValueType):
     # ---------- Sub Enums ---------- #
     
     class OpFlags(Enum):
-        Nothing: IntType = 0
-        NeverExpires: IntType = 1
+        Nothing = 0
+        NeverExpires = 1
     
     
     class Disposition(Enum):
-        Failed: IntType = 0
-        Pinned: IntType = 1
+        Failed = 0
+        Pinned = 1
     
 
 
@@ -1291,11 +1291,11 @@ class StoreOperationScavenge(ValueType):
     # ---------- Sub Enums ---------- #
     
     class OpFlags(Enum):
-        Nothing: IntType = 0
-        Light: IntType = 1
-        LimitSize: IntType = 2
-        LimitTime: IntType = 4
-        LimitCount: IntType = 8
+        Nothing = 0
+        Light = 1
+        LimitSize = 2
+        LimitTime = 4
+        LimitCount = 8
     
 
 
@@ -1347,7 +1347,7 @@ class StoreOperationSetCanonicalizationContext(ValueType):
     # ---------- Sub Enums ---------- #
     
     class OpFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
 
 
@@ -1427,12 +1427,12 @@ class StoreOperationSetDeploymentMetadata(ValueType):
     # ---------- Sub Enums ---------- #
     
     class OpFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
     
     class Disposition(Enum):
-        Failed: IntType = 0
-        Set: IntType = 2
+        Failed = 0
+        Set = 2
     
 
 
@@ -1494,14 +1494,14 @@ class StoreOperationStageComponent(ValueType):
     # ---------- Sub Enums ---------- #
     
     class OpFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
     
     class Disposition(Enum):
-        Failed: IntType = 0
-        Installed: IntType = 1
-        Refreshed: IntType = 2
-        AlreadyInstalled: IntType = 3
+        Failed = 0
+        Installed = 1
+        Refreshed = 2
+        AlreadyInstalled = 3
     
 
 
@@ -1569,14 +1569,14 @@ class StoreOperationStageComponentFile(ValueType):
     # ---------- Sub Enums ---------- #
     
     class OpFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
     
     class Disposition(Enum):
-        Failed: IntType = 0
-        Installed: IntType = 1
-        Refreshed: IntType = 2
-        AlreadyInstalled: IntType = 3
+        Failed = 0
+        Installed = 1
+        Refreshed = 2
+        AlreadyInstalled = 3
     
 
 
@@ -1628,13 +1628,13 @@ class StoreOperationUninstallDeployment(ValueType):
     # ---------- Sub Enums ---------- #
     
     class OpFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
     
     class Disposition(Enum):
-        Failed: IntType = 0
-        DidNotExist: IntType = 1
-        Uninstalled: IntType = 2
+        Failed = 0
+        DidNotExist = 1
+        Uninstalled = 2
     
 
 
@@ -1686,12 +1686,12 @@ class StoreOperationUnpinDeployment(ValueType):
     # ---------- Sub Enums ---------- #
     
     class OpFlags(Enum):
-        Nothing: IntType = 0
+        Nothing = 0
     
     
     class Disposition(Enum):
-        Failed: IntType = 0
-        Unpinned: IntType = 1
+        Failed = 0
+        Unpinned = 1
     
 
 
@@ -2323,67 +2323,67 @@ class IStore(Protocol):
 # ---------- Enums ---------- #
 
 class IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAGS(Enum):
-    IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAG_IGNORE_VERSION: IntType = 1
+    IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAG_IGNORE_VERSION = 1
 
 
 class IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS(Enum):
-    IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAG_IGNORE_VERSION: IntType = 1
+    IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAG_IGNORE_VERSION = 1
 
 
 class IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAGS(Enum):
-    IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAG_CANONICAL: IntType = 1
+    IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAG_CANONICAL = 1
 
 
 class IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAGS(Enum):
-    IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAG_EXACT_MATCH_REQUIRED: IntType = 1
+    IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAG_EXACT_MATCH_REQUIRED = 1
 
 
 class IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS(Enum):
-    IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAG_CANONICAL: IntType = 1
+    IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAG_CANONICAL = 1
 
 
 class ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAGS(Enum):
-    ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAG_FORCE_LIBRARY_SEMANTICS: IntType = 1
+    ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAG_FORCE_LIBRARY_SEMANTICS = 1
 
 
 class ISTORE_ENUM_ASSEMBLIES_FLAGS(Enum):
-    ISTORE_ENUM_ASSEMBLIES_FLAG_LIMIT_TO_VISIBLE_ONLY: IntType = 1
-    ISTORE_ENUM_ASSEMBLIES_FLAG_MATCH_SERVICING: IntType = 2
-    ISTORE_ENUM_ASSEMBLIES_FLAG_FORCE_LIBRARY_SEMANTICS: IntType = 4
+    ISTORE_ENUM_ASSEMBLIES_FLAG_LIMIT_TO_VISIBLE_ONLY = 1
+    ISTORE_ENUM_ASSEMBLIES_FLAG_MATCH_SERVICING = 2
+    ISTORE_ENUM_ASSEMBLIES_FLAG_FORCE_LIBRARY_SEMANTICS = 4
 
 
 class ISTORE_ENUM_FILES_FLAGS(Enum):
-    ISTORE_ENUM_FILES_FLAG_INCLUDE_INSTALLED_FILES: IntType = 1
-    ISTORE_ENUM_FILES_FLAG_INCLUDE_MISSING_FILES: IntType = 2
+    ISTORE_ENUM_FILES_FLAG_INCLUDE_INSTALLED_FILES = 1
+    ISTORE_ENUM_FILES_FLAG_INCLUDE_MISSING_FILES = 2
 
 
 class STORE_ASSEMBLY_FILE_STATUS_FLAGS(Enum):
-    STORE_ASSEMBLY_FILE_STATUS_FLAG_PRESENT: IntType = 1
+    STORE_ASSEMBLY_FILE_STATUS_FLAG_PRESENT = 1
 
 
 class STORE_ASSEMBLY_STATUS_FLAGS(Enum):
-    STORE_ASSEMBLY_STATUS_MANIFEST_ONLY: IntType = 1
-    STORE_ASSEMBLY_STATUS_PAYLOAD_RESIDENT: IntType = 2
-    STORE_ASSEMBLY_STATUS_PARTIAL_INSTALL: IntType = 4
+    STORE_ASSEMBLY_STATUS_MANIFEST_ONLY = 1
+    STORE_ASSEMBLY_STATUS_PAYLOAD_RESIDENT = 2
+    STORE_ASSEMBLY_STATUS_PARTIAL_INSTALL = 4
 
 
 class StateManager_RunningState(Enum):
-    Undefined: IntType = 0
-    Starting: IntType = 1
-    Running: IntType = 2
+    Undefined = 0
+    Starting = 1
+    Running = 2
 
 
 class StoreTransactionOperationType(Enum):
-    Invalid: IntType = 0
-    SetCanonicalizationContext: IntType = 14
-    StageComponent: IntType = 20
-    PinDeployment: IntType = 21
-    UnpinDeployment: IntType = 22
-    StageComponentFile: IntType = 23
-    InstallDeployment: IntType = 24
-    UninstallDeployment: IntType = 25
-    SetDeploymentMetadata: IntType = 26
-    Scavenge: IntType = 27
+    Invalid = 0
+    SetCanonicalizationContext = 14
+    StageComponent = 20
+    PinDeployment = 21
+    UnpinDeployment = 22
+    StageComponentFile = 23
+    InstallDeployment = 24
+    UninstallDeployment = 25
+    SetDeploymentMetadata = 26
+    Scavenge = 27
 
 
 # No Delegates

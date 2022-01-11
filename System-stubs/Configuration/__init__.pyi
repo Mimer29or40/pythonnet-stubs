@@ -7431,101 +7431,101 @@ class ISettingsProviderService(Protocol):
 # ---------- Enums ---------- #
 
 class ConfigurationAllowDefinition(Enum):
-    MachineOnly: IntType = 0
-    MachineToWebRoot: IntType = 100
-    MachineToApplication: IntType = 200
-    Everywhere: IntType = 300
+    MachineOnly = 0
+    MachineToWebRoot = 100
+    MachineToApplication = 200
+    Everywhere = 300
 
 
 class ConfigurationAllowExeDefinition(Enum):
-    MachineOnly: IntType = 0
-    MachineToApplication: IntType = 100
-    MachineToRoamingUser: IntType = 200
-    MachineToLocalUser: IntType = 300
+    MachineOnly = 0
+    MachineToApplication = 100
+    MachineToRoamingUser = 200
+    MachineToLocalUser = 300
 
 
 class ConfigurationElementCollectionType(Enum):
-    BasicMap: IntType = 0
-    AddRemoveClearMap: IntType = 1
-    BasicMapAlternate: IntType = 2
-    AddRemoveClearMapAlternate: IntType = 3
+    BasicMap = 0
+    AddRemoveClearMap = 1
+    BasicMapAlternate = 2
+    AddRemoveClearMapAlternate = 3
 
 
 class ConfigurationLockCollectionType(Enum):
-    LockedAttributes: IntType = 1
-    LockedExceptionList: IntType = 2
-    LockedElements: IntType = 3
-    LockedElementsExceptionList: IntType = 4
+    LockedAttributes = 1
+    LockedExceptionList = 2
+    LockedElements = 3
+    LockedElementsExceptionList = 4
 
 
 class ConfigurationPropertyOptions(Enum):
-    #None: IntType = 0
-    IsDefaultCollection: IntType = 1
-    IsRequired: IntType = 2
-    IsKey: IntType = 4
-    IsTypeStringTransformationRequired: IntType = 8
-    IsAssemblyStringTransformationRequired: IntType = 16
-    IsVersionCheckRequired: IntType = 32
+    #None = 0
+    IsDefaultCollection = 1
+    IsRequired = 2
+    IsKey = 4
+    IsTypeStringTransformationRequired = 8
+    IsAssemblyStringTransformationRequired = 16
+    IsVersionCheckRequired = 32
 
 
 class ConfigurationSaveMode(Enum):
-    Modified: IntType = 0
-    Minimal: IntType = 1
-    Full: IntType = 2
+    Modified = 0
+    Minimal = 1
+    Full = 2
 
 
 class ConfigurationUserLevel(Enum):
-    #None: IntType = 0
-    PerUserRoaming: IntType = 10
-    PerUserRoamingAndLocal: IntType = 20
+    #None = 0
+    PerUserRoaming = 10
+    PerUserRoamingAndLocal = 20
 
 
 class ConfigurationValueFlags(Enum):
-    Default: IntType = 0
-    Inherited: IntType = 1
-    Modified: IntType = 2
-    Locked: IntType = 4
-    XMLParentInherited: IntType = 8
+    Default = 0
+    Inherited = 1
+    Modified = 2
+    Locked = 4
+    XMLParentInherited = 8
 
 
 class ExceptionAction(Enum):
-    NonSpecific: IntType = 0
-    Local: IntType = 1
-    Global: IntType = 2
+    NonSpecific = 0
+    Local = 1
+    Global = 2
 
 
 class NamespaceChange(Enum):
-    #None: IntType = 0
-    Add: IntType = 1
-    Remove: IntType = 2
+    #None = 0
+    Add = 1
+    Remove = 2
 
 
 class OverrideMode(Enum):
-    Inherit: IntType = 0
-    Allow: IntType = 1
-    Deny: IntType = 2
+    Inherit = 0
+    Allow = 1
+    Deny = 2
 
 
 class PropertyValueOrigin(Enum):
-    Default: IntType = 0
-    Inherited: IntType = 1
-    SetHere: IntType = 2
+    Default = 0
+    Inherited = 1
+    SetHere = 2
 
 
 class SettingsManageability(Enum):
-    Roaming: IntType = 0
+    Roaming = 0
 
 
 class SettingsSerializeAs(Enum):
-    String: IntType = 0
-    Xml: IntType = 1
-    Binary: IntType = 2
-    ProviderSpecific: IntType = 3
+    String = 0
+    Xml = 1
+    Binary = 2
+    ProviderSpecific = 3
 
 
 class SpecialSetting(Enum):
-    ConnectionString: IntType = 0
-    WebServiceUrl: IntType = 1
+    ConnectionString = 0
+    WebServiceUrl = 1
 
 
 # ---------- Delegates ---------- #

@@ -2340,13 +2340,13 @@ class X509Native(ABC, ObjectType):
     # ---------- Sub Enums ---------- #
     
     class AxlVerificationFlags(Enum):
-        #None: IntType = 0
-        NoRevocationCheck: IntType = 1
-        RevocationCheckEndCertOnly: IntType = 2
-        RevocationCheckEntireChain: IntType = 4
-        UrlOnlyCacheRetrieval: IntType = 8
-        LifetimeSigning: IntType = 16
-        TrustMicrosoftRootOnly: IntType = 32
+        #None = 0
+        NoRevocationCheck = 1
+        RevocationCheckEndCertOnly = 2
+        RevocationCheckEntireChain = 4
+        UrlOnlyCacheRetrieval = 8
+        LifetimeSigning = 16
+        TrustMicrosoftRootOnly = 32
     
 
 
@@ -2640,208 +2640,208 @@ class X509ChainStatus(ValueType):
 # ---------- Enums ---------- #
 
 class OidGroup(Enum):
-    DisableSearchDS: IntType = -2147483648
-    AllGroups: IntType = 0
-    HashAlgorithm: IntType = 1
-    EncryptionAlgorithm: IntType = 2
-    PublicKeyAlgorithm: IntType = 3
-    SignatureAlgorithm: IntType = 4
-    Attribute: IntType = 5
-    ExtensionOrAttribute: IntType = 6
-    EnhancedKeyUsage: IntType = 7
-    Policy: IntType = 8
-    Template: IntType = 9
-    KeyDerivationFunction: IntType = 10
+    DisableSearchDS = -2147483648
+    AllGroups = 0
+    HashAlgorithm = 1
+    EncryptionAlgorithm = 2
+    PublicKeyAlgorithm = 3
+    SignatureAlgorithm = 4
+    Attribute = 5
+    ExtensionOrAttribute = 6
+    EnhancedKeyUsage = 7
+    Policy = 8
+    Template = 9
+    KeyDerivationFunction = 10
 
 
 class OidKeyType(Enum):
-    Oid: IntType = 1
-    Name: IntType = 2
-    AlgorithmID: IntType = 3
-    SignatureID: IntType = 4
-    CngAlgorithmID: IntType = 5
-    CngSignatureID: IntType = 6
+    Oid = 1
+    Name = 2
+    AlgorithmID = 3
+    SignatureID = 4
+    CngAlgorithmID = 5
+    CngSignatureID = 6
 
 
 class OpenFlags(Enum):
-    ReadOnly: IntType = 0
-    ReadWrite: IntType = 1
-    MaxAllowed: IntType = 2
-    OpenExistingOnly: IntType = 4
-    IncludeArchived: IntType = 8
+    ReadOnly = 0
+    ReadWrite = 1
+    MaxAllowed = 2
+    OpenExistingOnly = 4
+    IncludeArchived = 8
 
 
 class StoreLocation(Enum):
-    CurrentUser: IntType = 1
-    LocalMachine: IntType = 2
+    CurrentUser = 1
+    LocalMachine = 2
 
 
 class StoreName(Enum):
-    AddressBook: IntType = 1
-    AuthRoot: IntType = 2
-    CertificateAuthority: IntType = 3
-    Disallowed: IntType = 4
-    My: IntType = 5
-    Root: IntType = 6
-    TrustedPeople: IntType = 7
-    TrustedPublisher: IntType = 8
+    AddressBook = 1
+    AuthRoot = 2
+    CertificateAuthority = 3
+    Disallowed = 4
+    My = 5
+    Root = 6
+    TrustedPeople = 7
+    TrustedPublisher = 8
 
 
 class TrustStatus(Enum):
-    Untrusted: IntType = 0
-    UnknownIdentity: IntType = 1
-    KnownIdentity: IntType = 2
-    Trusted: IntType = 3
+    Untrusted = 0
+    UnknownIdentity = 1
+    KnownIdentity = 2
+    Trusted = 3
 
 
 class X500DistinguishedNameFlags(Enum):
-    #None: IntType = 0
-    Reversed: IntType = 1
-    UseSemicolons: IntType = 16
-    DoNotUsePlusSign: IntType = 32
-    DoNotUseQuotes: IntType = 64
-    UseCommas: IntType = 128
-    UseNewLines: IntType = 256
-    UseUTF8Encoding: IntType = 4096
-    UseT61Encoding: IntType = 8192
-    ForceUTF8Encoding: IntType = 16384
+    #None = 0
+    Reversed = 1
+    UseSemicolons = 16
+    DoNotUsePlusSign = 32
+    DoNotUseQuotes = 64
+    UseCommas = 128
+    UseNewLines = 256
+    UseUTF8Encoding = 4096
+    UseT61Encoding = 8192
+    ForceUTF8Encoding = 16384
 
 
 class X509ChainStatusFlags(Enum):
-    NoError: IntType = 0
-    NotTimeValid: IntType = 1
-    NotTimeNested: IntType = 2
-    Revoked: IntType = 4
-    NotSignatureValid: IntType = 8
-    NotValidForUsage: IntType = 16
-    UntrustedRoot: IntType = 32
-    RevocationStatusUnknown: IntType = 64
-    Cyclic: IntType = 128
-    InvalidExtension: IntType = 256
-    InvalidPolicyConstraints: IntType = 512
-    InvalidBasicConstraints: IntType = 1024
-    InvalidNameConstraints: IntType = 2048
-    HasNotSupportedNameConstraint: IntType = 4096
-    HasNotDefinedNameConstraint: IntType = 8192
-    HasNotPermittedNameConstraint: IntType = 16384
-    HasExcludedNameConstraint: IntType = 32768
-    PartialChain: IntType = 65536
-    CtlNotTimeValid: IntType = 131072
-    CtlNotSignatureValid: IntType = 262144
-    CtlNotValidForUsage: IntType = 524288
-    HasWeakSignature: IntType = 1048576
-    OfflineRevocation: IntType = 16777216
-    NoIssuanceChainPolicy: IntType = 33554432
-    ExplicitDistrust: IntType = 67108864
-    HasNotSupportedCriticalExtension: IntType = 134217728
+    NoError = 0
+    NotTimeValid = 1
+    NotTimeNested = 2
+    Revoked = 4
+    NotSignatureValid = 8
+    NotValidForUsage = 16
+    UntrustedRoot = 32
+    RevocationStatusUnknown = 64
+    Cyclic = 128
+    InvalidExtension = 256
+    InvalidPolicyConstraints = 512
+    InvalidBasicConstraints = 1024
+    InvalidNameConstraints = 2048
+    HasNotSupportedNameConstraint = 4096
+    HasNotDefinedNameConstraint = 8192
+    HasNotPermittedNameConstraint = 16384
+    HasExcludedNameConstraint = 32768
+    PartialChain = 65536
+    CtlNotTimeValid = 131072
+    CtlNotSignatureValid = 262144
+    CtlNotValidForUsage = 524288
+    HasWeakSignature = 1048576
+    OfflineRevocation = 16777216
+    NoIssuanceChainPolicy = 33554432
+    ExplicitDistrust = 67108864
+    HasNotSupportedCriticalExtension = 134217728
 
 
 class X509ContentType(Enum):
-    Unknown: IntType = 0
-    Cert: IntType = 1
-    SerializedCert: IntType = 2
-    Pfx: IntType = 3
-    Pkcs12: IntType = 3
-    SerializedStore: IntType = 4
-    Pkcs7: IntType = 5
-    Authenticode: IntType = 6
+    Unknown = 0
+    Cert = 1
+    SerializedCert = 2
+    Pfx = 3
+    Pkcs12 = 3
+    SerializedStore = 4
+    Pkcs7 = 5
+    Authenticode = 6
 
 
 class X509FindType(Enum):
-    FindByThumbprint: IntType = 0
-    FindBySubjectName: IntType = 1
-    FindBySubjectDistinguishedName: IntType = 2
-    FindByIssuerName: IntType = 3
-    FindByIssuerDistinguishedName: IntType = 4
-    FindBySerialNumber: IntType = 5
-    FindByTimeValid: IntType = 6
-    FindByTimeNotYetValid: IntType = 7
-    FindByTimeExpired: IntType = 8
-    FindByTemplateName: IntType = 9
-    FindByApplicationPolicy: IntType = 10
-    FindByCertificatePolicy: IntType = 11
-    FindByExtension: IntType = 12
-    FindByKeyUsage: IntType = 13
-    FindBySubjectKeyIdentifier: IntType = 14
+    FindByThumbprint = 0
+    FindBySubjectName = 1
+    FindBySubjectDistinguishedName = 2
+    FindByIssuerName = 3
+    FindByIssuerDistinguishedName = 4
+    FindBySerialNumber = 5
+    FindByTimeValid = 6
+    FindByTimeNotYetValid = 7
+    FindByTimeExpired = 8
+    FindByTemplateName = 9
+    FindByApplicationPolicy = 10
+    FindByCertificatePolicy = 11
+    FindByExtension = 12
+    FindByKeyUsage = 13
+    FindBySubjectKeyIdentifier = 14
 
 
 class X509IncludeOption(Enum):
-    #None: IntType = 0
-    ExcludeRoot: IntType = 1
-    EndCertOnly: IntType = 2
-    WholeChain: IntType = 3
+    #None = 0
+    ExcludeRoot = 1
+    EndCertOnly = 2
+    WholeChain = 3
 
 
 class X509KeyStorageFlags(Enum):
-    DefaultKeySet: IntType = 0
-    UserKeySet: IntType = 1
-    MachineKeySet: IntType = 2
-    Exportable: IntType = 4
-    UserProtected: IntType = 8
-    PersistKeySet: IntType = 16
-    EphemeralKeySet: IntType = 32
+    DefaultKeySet = 0
+    UserKeySet = 1
+    MachineKeySet = 2
+    Exportable = 4
+    UserProtected = 8
+    PersistKeySet = 16
+    EphemeralKeySet = 32
 
 
 class X509KeyUsageFlags(Enum):
-    #None: IntType = 0
-    EncipherOnly: IntType = 1
-    CrlSign: IntType = 2
-    KeyCertSign: IntType = 4
-    KeyAgreement: IntType = 8
-    DataEncipherment: IntType = 16
-    KeyEncipherment: IntType = 32
-    NonRepudiation: IntType = 64
-    DigitalSignature: IntType = 128
-    DecipherOnly: IntType = 32768
+    #None = 0
+    EncipherOnly = 1
+    CrlSign = 2
+    KeyCertSign = 4
+    KeyAgreement = 8
+    DataEncipherment = 16
+    KeyEncipherment = 32
+    NonRepudiation = 64
+    DigitalSignature = 128
+    DecipherOnly = 32768
 
 
 class X509NameType(Enum):
-    SimpleName: IntType = 0
-    EmailName: IntType = 1
-    UpnName: IntType = 2
-    DnsName: IntType = 3
-    DnsFromAlternativeName: IntType = 4
-    UrlName: IntType = 5
+    SimpleName = 0
+    EmailName = 1
+    UpnName = 2
+    DnsName = 3
+    DnsFromAlternativeName = 4
+    UrlName = 5
 
 
 class X509RevocationFlag(Enum):
-    EndCertificateOnly: IntType = 0
-    EntireChain: IntType = 1
-    ExcludeRoot: IntType = 2
+    EndCertificateOnly = 0
+    EntireChain = 1
+    ExcludeRoot = 2
 
 
 class X509RevocationMode(Enum):
-    NoCheck: IntType = 0
-    Online: IntType = 1
-    Offline: IntType = 2
+    NoCheck = 0
+    Online = 1
+    Offline = 2
 
 
 class X509SelectionFlag(Enum):
-    SingleSelection: IntType = 0
-    MultiSelection: IntType = 1
+    SingleSelection = 0
+    MultiSelection = 1
 
 
 class X509SubjectKeyIdentifierHashAlgorithm(Enum):
-    Sha1: IntType = 0
-    ShortSha1: IntType = 1
-    CapiSha1: IntType = 2
+    Sha1 = 0
+    ShortSha1 = 1
+    CapiSha1 = 2
 
 
 class X509VerificationFlags(Enum):
-    NoFlag: IntType = 0
-    IgnoreNotTimeValid: IntType = 1
-    IgnoreCtlNotTimeValid: IntType = 2
-    IgnoreNotTimeNested: IntType = 4
-    IgnoreInvalidBasicConstraints: IntType = 8
-    AllowUnknownCertificateAuthority: IntType = 16
-    IgnoreWrongUsage: IntType = 32
-    IgnoreInvalidName: IntType = 64
-    IgnoreInvalidPolicy: IntType = 128
-    IgnoreEndRevocationUnknown: IntType = 256
-    IgnoreCtlSignerRevocationUnknown: IntType = 512
-    IgnoreCertificateAuthorityRevocationUnknown: IntType = 1024
-    IgnoreRootRevocationUnknown: IntType = 2048
-    AllFlags: IntType = 4095
+    NoFlag = 0
+    IgnoreNotTimeValid = 1
+    IgnoreCtlNotTimeValid = 2
+    IgnoreNotTimeNested = 4
+    IgnoreInvalidBasicConstraints = 8
+    AllowUnknownCertificateAuthority = 16
+    IgnoreWrongUsage = 32
+    IgnoreInvalidName = 64
+    IgnoreInvalidPolicy = 128
+    IgnoreEndRevocationUnknown = 256
+    IgnoreCtlSignerRevocationUnknown = 512
+    IgnoreCertificateAuthorityRevocationUnknown = 1024
+    IgnoreRootRevocationUnknown = 2048
+    AllFlags = 4095
 
 
 # No Delegates

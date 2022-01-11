@@ -107,12 +107,12 @@ class AspNetHostingPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
 # ---------- Enums ---------- #
 
 class AspNetHostingPermissionLevel(Enum):
-    #None: IntType = 100
-    Minimal: IntType = 200
-    Low: IntType = 300
-    Medium: IntType = 400
-    High: IntType = 500
-    Unrestricted: IntType = 600
+    #None = 100
+    Minimal = 200
+    Low = 300
+    Medium = 400
+    High = 500
+    Unrestricted = 600
 
 
 # No Delegates

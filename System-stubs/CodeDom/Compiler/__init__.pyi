@@ -1267,37 +1267,37 @@ class ICodeParser(Protocol):
 # ---------- Enums ---------- #
 
 class GeneratorSupport(Enum):
-    ArraysOfArrays: IntType = 1
-    EntryPointMethod: IntType = 2
-    GotoStatements: IntType = 4
-    MultidimensionalArrays: IntType = 8
-    StaticConstructors: IntType = 16
-    TryCatchStatements: IntType = 32
-    ReturnTypeAttributes: IntType = 64
-    DeclareValueTypes: IntType = 128
-    DeclareEnums: IntType = 256
-    DeclareDelegates: IntType = 512
-    DeclareInterfaces: IntType = 1024
-    DeclareEvents: IntType = 2048
-    AssemblyAttributes: IntType = 4096
-    ParameterAttributes: IntType = 8192
-    ReferenceParameters: IntType = 16384
-    ChainedConstructorArguments: IntType = 32768
-    NestedTypes: IntType = 65536
-    MultipleInterfaceMembers: IntType = 131072
-    PublicStaticMembers: IntType = 262144
-    ComplexExpressions: IntType = 524288
-    Win32Resources: IntType = 1048576
-    Resources: IntType = 2097152
-    PartialTypes: IntType = 4194304
-    GenericTypeReference: IntType = 8388608
-    GenericTypeDeclaration: IntType = 16777216
-    DeclareIndexerProperties: IntType = 33554432
+    ArraysOfArrays = 1
+    EntryPointMethod = 2
+    GotoStatements = 4
+    MultidimensionalArrays = 8
+    StaticConstructors = 16
+    TryCatchStatements = 32
+    ReturnTypeAttributes = 64
+    DeclareValueTypes = 128
+    DeclareEnums = 256
+    DeclareDelegates = 512
+    DeclareInterfaces = 1024
+    DeclareEvents = 2048
+    AssemblyAttributes = 4096
+    ParameterAttributes = 8192
+    ReferenceParameters = 16384
+    ChainedConstructorArguments = 32768
+    NestedTypes = 65536
+    MultipleInterfaceMembers = 131072
+    PublicStaticMembers = 262144
+    ComplexExpressions = 524288
+    Win32Resources = 1048576
+    Resources = 2097152
+    PartialTypes = 4194304
+    GenericTypeReference = 8388608
+    GenericTypeDeclaration = 16777216
+    DeclareIndexerProperties = 33554432
 
 
 class LanguageOptions(Enum):
-    #None: IntType = 0
-    CaseInsensitive: IntType = 1
+    #None = 0
+    CaseInsensitive = 1
 
 
 # No Delegates

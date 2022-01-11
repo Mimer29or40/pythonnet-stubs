@@ -204,51 +204,51 @@ class PerfProviderCollection(ABC, ObjectType):
 # ---------- Enums ---------- #
 
 class CounterSetInstanceType(Enum):
-    Single: IntType = 0
-    Multiple: IntType = 2
-    GlobalAggregate: IntType = 4
-    MultipleAggregate: IntType = 6
-    GlobalAggregateWithHistory: IntType = 11
-    InstanceAggregate: IntType = 22
+    Single = 0
+    Multiple = 2
+    GlobalAggregate = 4
+    MultipleAggregate = 6
+    GlobalAggregateWithHistory = 11
+    InstanceAggregate = 22
 
 
 class CounterType(Enum):
-    RawDataHex32: IntType = 0
-    RawDataHex64: IntType = 256
-    RawData32: IntType = 65536
-    RawData64: IntType = 65792
-    Delta32: IntType = 4195328
-    Delta64: IntType = 4195584
-    SampleCounter: IntType = 4260864
-    QueueLength: IntType = 4523008
-    LargeQueueLength: IntType = 4523264
-    QueueLength100Ns: IntType = 5571840
-    QueueLengthObjectTime: IntType = 6620416
-    RateOfCountPerSecond32: IntType = 272696320
-    RateOfCountPerSecond64: IntType = 272696576
-    RawFraction32: IntType = 537003008
-    RawFraction64: IntType = 537003264
-    PercentageActive: IntType = 541132032
-    PrecisionSystemTimer: IntType = 541525248
-    PercentageActive100Ns: IntType = 542180608
-    PrecisionTimer100Ns: IntType = 542573824
-    ObjectSpecificTimer: IntType = 543229184
-    PrecisionObjectSpecificTimer: IntType = 543622400
-    SampleFraction: IntType = 549585920
-    PercentageNotActive: IntType = 557909248
-    PercentageNotActive100Ns: IntType = 558957824
-    MultiTimerPercentageActive: IntType = 574686464
-    MultiTimerPercentageActive100Ns: IntType = 575735040
-    MultiTimerPercentageNotActive: IntType = 591463680
-    MultiTimerPercentageNotActive100Ns: IntType = 592512256
-    AverageTimer32: IntType = 805438464
-    ElapsedTime: IntType = 807666944
-    AverageCount64: IntType = 1073874176
-    SampleBase: IntType = 1073939457
-    AverageBase: IntType = 1073939458
-    RawBase32: IntType = 1073939459
-    RawBase64: IntType = 1073939712
-    MultiTimerBase: IntType = 1107494144
+    RawDataHex32 = 0
+    RawDataHex64 = 256
+    RawData32 = 65536
+    RawData64 = 65792
+    Delta32 = 4195328
+    Delta64 = 4195584
+    SampleCounter = 4260864
+    QueueLength = 4523008
+    LargeQueueLength = 4523264
+    QueueLength100Ns = 5571840
+    QueueLengthObjectTime = 6620416
+    RateOfCountPerSecond32 = 272696320
+    RateOfCountPerSecond64 = 272696576
+    RawFraction32 = 537003008
+    RawFraction64 = 537003264
+    PercentageActive = 541132032
+    PrecisionSystemTimer = 541525248
+    PercentageActive100Ns = 542180608
+    PrecisionTimer100Ns = 542573824
+    ObjectSpecificTimer = 543229184
+    PrecisionObjectSpecificTimer = 543622400
+    SampleFraction = 549585920
+    PercentageNotActive = 557909248
+    PercentageNotActive100Ns = 558957824
+    MultiTimerPercentageActive = 574686464
+    MultiTimerPercentageActive100Ns = 575735040
+    MultiTimerPercentageNotActive = 591463680
+    MultiTimerPercentageNotActive100Ns = 592512256
+    AverageTimer32 = 805438464
+    ElapsedTime = 807666944
+    AverageCount64 = 1073874176
+    SampleBase = 1073939457
+    AverageBase = 1073939458
+    RawBase32 = 1073939459
+    RawBase64 = 1073939712
+    MultiTimerBase = 1107494144
 
 
 # No Delegates

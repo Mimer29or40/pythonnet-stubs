@@ -184,16 +184,16 @@ class TargetedPatchingOptOutAttribute(Attribute, _Attribute):
 # ---------- Enums ---------- #
 
 class GCLargeObjectHeapCompactionMode(Enum):
-    Default: IntType = 1
-    CompactOnce: IntType = 2
+    Default = 1
+    CompactOnce = 2
 
 
 class GCLatencyMode(Enum):
-    Batch: IntType = 0
-    Interactive: IntType = 1
-    LowLatency: IntType = 2
-    SustainedLowLatency: IntType = 3
-    NoGCRegion: IntType = 4
+    Batch = 0
+    Interactive = 1
+    LowLatency = 2
+    SustainedLowLatency = 3
+    NoGCRegion = 4
 
 
 # No Delegates

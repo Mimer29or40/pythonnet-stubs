@@ -884,45 +884,45 @@ class WebSocketReceiveResult(ObjectType):
 # ---------- Enums ---------- #
 
 class WebSocketCloseStatus(Enum):
-    NormalClosure: IntType = 1000
-    EndpointUnavailable: IntType = 1001
-    ProtocolError: IntType = 1002
-    InvalidMessageType: IntType = 1003
-    Empty: IntType = 1005
-    InvalidPayloadData: IntType = 1007
-    PolicyViolation: IntType = 1008
-    MessageTooBig: IntType = 1009
-    MandatoryExtension: IntType = 1010
-    InternalServerError: IntType = 1011
+    NormalClosure = 1000
+    EndpointUnavailable = 1001
+    ProtocolError = 1002
+    InvalidMessageType = 1003
+    Empty = 1005
+    InvalidPayloadData = 1007
+    PolicyViolation = 1008
+    MessageTooBig = 1009
+    MandatoryExtension = 1010
+    InternalServerError = 1011
 
 
 class WebSocketError(Enum):
-    Success: IntType = 0
-    InvalidMessageType: IntType = 1
-    Faulted: IntType = 2
-    NativeError: IntType = 3
-    NotAWebSocket: IntType = 4
-    UnsupportedVersion: IntType = 5
-    UnsupportedProtocol: IntType = 6
-    HeaderError: IntType = 7
-    ConnectionClosedPrematurely: IntType = 8
-    InvalidState: IntType = 9
+    Success = 0
+    InvalidMessageType = 1
+    Faulted = 2
+    NativeError = 3
+    NotAWebSocket = 4
+    UnsupportedVersion = 5
+    UnsupportedProtocol = 6
+    HeaderError = 7
+    ConnectionClosedPrematurely = 8
+    InvalidState = 9
 
 
 class WebSocketMessageType(Enum):
-    Text: IntType = 0
-    Binary: IntType = 1
-    Close: IntType = 2
+    Text = 0
+    Binary = 1
+    Close = 2
 
 
 class WebSocketState(Enum):
-    #None: IntType = 0
-    Connecting: IntType = 1
-    Open: IntType = 2
-    CloseSent: IntType = 3
-    CloseReceived: IntType = 4
-    Closed: IntType = 5
-    Aborted: IntType = 6
+    #None = 0
+    Connecting = 1
+    Open = 2
+    CloseSent = 3
+    CloseReceived = 4
+    Closed = 5
+    Aborted = 6
 
 
 # No Delegates

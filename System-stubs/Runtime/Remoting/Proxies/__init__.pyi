@@ -194,15 +194,15 @@ class MessageData(ValueType):
 # ---------- Enums ---------- #
 
 class CallType(Enum):
-    InvalidCall: IntType = 0
-    MethodCall: IntType = 1
-    ConstructorCall: IntType = 2
+    InvalidCall = 0
+    MethodCall = 1
+    ConstructorCall = 2
 
 
 class RealProxyFlags(Enum):
-    #None: IntType = 0
-    RemotingProxy: IntType = 1
-    Initialized: IntType = 2
+    #None = 0
+    RemotingProxy = 1
+    Initialized = 2
 
 
 # No Delegates

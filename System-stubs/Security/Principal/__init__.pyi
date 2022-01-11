@@ -702,237 +702,237 @@ class IPrincipal(Protocol):
 # ---------- Enums ---------- #
 
 class IdentifierAuthority(Enum):
-    NullAuthority: LongType = 0
-    WorldAuthority: LongType = 1
-    LocalAuthority: LongType = 2
-    CreatorAuthority: LongType = 3
-    NonUniqueAuthority: LongType = 4
-    NTAuthority: LongType = 5
-    SiteServerAuthority: LongType = 6
-    InternetSiteAuthority: LongType = 7
-    ExchangeAuthority: LongType = 8
-    ResourceManagerAuthority: LongType = 9
+    NullAuthority = 0
+    WorldAuthority = 1
+    LocalAuthority = 2
+    CreatorAuthority = 3
+    NonUniqueAuthority = 4
+    NTAuthority = 5
+    SiteServerAuthority = 6
+    InternetSiteAuthority = 7
+    ExchangeAuthority = 8
+    ResourceManagerAuthority = 9
 
 
 class ImpersonationQueryResult(Enum):
-    Impersonated: IntType = 0
-    NotImpersonated: IntType = 1
-    Failed: IntType = 2
+    Impersonated = 0
+    NotImpersonated = 1
+    Failed = 2
 
 
 class KerbLogonSubmitType(Enum):
-    KerbInteractiveLogon: IntType = 2
-    KerbSmartCardLogon: IntType = 6
-    KerbWorkstationUnlockLogon: IntType = 7
-    KerbSmartCardUnlockLogon: IntType = 8
-    KerbProxyLogon: IntType = 9
-    KerbTicketLogon: IntType = 10
-    KerbTicketUnlockLogon: IntType = 11
-    KerbS4ULogon: IntType = 12
+    KerbInteractiveLogon = 2
+    KerbSmartCardLogon = 6
+    KerbWorkstationUnlockLogon = 7
+    KerbSmartCardUnlockLogon = 8
+    KerbProxyLogon = 9
+    KerbTicketLogon = 10
+    KerbTicketUnlockLogon = 11
+    KerbS4ULogon = 12
 
 
 class PolicyRights(Enum):
-    POLICY_VIEW_LOCAL_INFORMATION: IntType = 1
-    POLICY_VIEW_AUDIT_INFORMATION: IntType = 2
-    POLICY_GET_PRIVATE_INFORMATION: IntType = 4
-    POLICY_TRUST_ADMIN: IntType = 8
-    POLICY_CREATE_ACCOUNT: IntType = 16
-    POLICY_CREATE_SECRET: IntType = 32
-    POLICY_CREATE_PRIVILEGE: IntType = 64
-    POLICY_SET_DEFAULT_QUOTA_LIMITS: IntType = 128
-    POLICY_SET_AUDIT_REQUIREMENTS: IntType = 256
-    POLICY_AUDIT_LOG_ADMIN: IntType = 512
-    POLICY_SERVER_ADMIN: IntType = 1024
-    POLICY_LOOKUP_NAMES: IntType = 2048
-    POLICY_NOTIFICATION: IntType = 4096
+    POLICY_VIEW_LOCAL_INFORMATION = 1
+    POLICY_VIEW_AUDIT_INFORMATION = 2
+    POLICY_GET_PRIVATE_INFORMATION = 4
+    POLICY_TRUST_ADMIN = 8
+    POLICY_CREATE_ACCOUNT = 16
+    POLICY_CREATE_SECRET = 32
+    POLICY_CREATE_PRIVILEGE = 64
+    POLICY_SET_DEFAULT_QUOTA_LIMITS = 128
+    POLICY_SET_AUDIT_REQUIREMENTS = 256
+    POLICY_AUDIT_LOG_ADMIN = 512
+    POLICY_SERVER_ADMIN = 1024
+    POLICY_LOOKUP_NAMES = 2048
+    POLICY_NOTIFICATION = 4096
 
 
 class PrincipalPolicy(Enum):
-    UnauthenticatedPrincipal: IntType = 0
-    NoPrincipal: IntType = 1
-    WindowsPrincipal: IntType = 2
+    UnauthenticatedPrincipal = 0
+    NoPrincipal = 1
+    WindowsPrincipal = 2
 
 
 class SecurityLogonType(Enum):
-    Interactive: IntType = 2
-    Network: IntType = 3
-    Batch: IntType = 4
-    Service: IntType = 5
-    Proxy: IntType = 6
-    Unlock: IntType = 7
+    Interactive = 2
+    Network = 3
+    Batch = 4
+    Service = 5
+    Proxy = 6
+    Unlock = 7
 
 
 class SidNameUse(Enum):
-    User: IntType = 1
-    Group: IntType = 2
-    Domain: IntType = 3
-    Alias: IntType = 4
-    WellKnownGroup: IntType = 5
-    DeletedAccount: IntType = 6
-    Invalid: IntType = 7
-    Unknown: IntType = 8
-    Computer: IntType = 9
+    User = 1
+    Group = 2
+    Domain = 3
+    Alias = 4
+    WellKnownGroup = 5
+    DeletedAccount = 6
+    Invalid = 7
+    Unknown = 8
+    Computer = 9
 
 
 class TokenAccessLevels(Enum):
-    AssignPrimary: IntType = 1
-    Duplicate: IntType = 2
-    Impersonate: IntType = 4
-    Query: IntType = 8
-    QuerySource: IntType = 16
-    AdjustPrivileges: IntType = 32
-    AdjustGroups: IntType = 64
-    AdjustDefault: IntType = 128
-    AdjustSessionId: IntType = 256
-    Read: IntType = 131080
-    Write: IntType = 131296
-    AllAccess: IntType = 983551
-    MaximumAllowed: IntType = 33554432
+    AssignPrimary = 1
+    Duplicate = 2
+    Impersonate = 4
+    Query = 8
+    QuerySource = 16
+    AdjustPrivileges = 32
+    AdjustGroups = 64
+    AdjustDefault = 128
+    AdjustSessionId = 256
+    Read = 131080
+    Write = 131296
+    AllAccess = 983551
+    MaximumAllowed = 33554432
 
 
 class TokenImpersonationLevel(Enum):
-    #None: IntType = 0
-    Anonymous: IntType = 1
-    Identification: IntType = 2
-    Impersonation: IntType = 3
-    Delegation: IntType = 4
+    #None = 0
+    Anonymous = 1
+    Identification = 2
+    Impersonation = 3
+    Delegation = 4
 
 
 class TokenInformationClass(Enum):
-    TokenUser: IntType = 1
-    TokenGroups: IntType = 2
-    TokenPrivileges: IntType = 3
-    TokenOwner: IntType = 4
-    TokenPrimaryGroup: IntType = 5
-    TokenDefaultDacl: IntType = 6
-    TokenSource: IntType = 7
-    TokenType: IntType = 8
-    TokenImpersonationLevel: IntType = 9
-    TokenStatistics: IntType = 10
-    TokenRestrictedSids: IntType = 11
-    TokenSessionId: IntType = 12
-    TokenGroupsAndPrivileges: IntType = 13
-    TokenSessionReference: IntType = 14
-    TokenSandBoxInert: IntType = 15
-    TokenAuditPolicy: IntType = 16
-    TokenOrigin: IntType = 17
-    TokenElevationType: IntType = 18
-    TokenLinkedToken: IntType = 19
-    TokenElevation: IntType = 20
-    TokenHasRestrictions: IntType = 21
-    TokenAccessInformation: IntType = 22
-    TokenVirtualizationAllowed: IntType = 23
-    TokenVirtualizationEnabled: IntType = 24
-    TokenIntegrityLevel: IntType = 25
-    TokenUIAccess: IntType = 26
-    TokenMandatoryPolicy: IntType = 27
-    TokenLogonSid: IntType = 28
-    TokenIsAppContainer: IntType = 29
-    TokenCapabilities: IntType = 30
-    TokenAppContainerSid: IntType = 31
-    TokenAppContainerNumber: IntType = 32
-    TokenUserClaimAttributes: IntType = 33
-    TokenDeviceClaimAttributes: IntType = 34
-    TokenRestrictedUserClaimAttributes: IntType = 35
-    TokenRestrictedDeviceClaimAttributes: IntType = 36
-    TokenDeviceGroups: IntType = 37
-    TokenRestrictedDeviceGroups: IntType = 38
-    MaxTokenInfoClass: IntType = 39
+    TokenUser = 1
+    TokenGroups = 2
+    TokenPrivileges = 3
+    TokenOwner = 4
+    TokenPrimaryGroup = 5
+    TokenDefaultDacl = 6
+    TokenSource = 7
+    TokenType = 8
+    TokenImpersonationLevel = 9
+    TokenStatistics = 10
+    TokenRestrictedSids = 11
+    TokenSessionId = 12
+    TokenGroupsAndPrivileges = 13
+    TokenSessionReference = 14
+    TokenSandBoxInert = 15
+    TokenAuditPolicy = 16
+    TokenOrigin = 17
+    TokenElevationType = 18
+    TokenLinkedToken = 19
+    TokenElevation = 20
+    TokenHasRestrictions = 21
+    TokenAccessInformation = 22
+    TokenVirtualizationAllowed = 23
+    TokenVirtualizationEnabled = 24
+    TokenIntegrityLevel = 25
+    TokenUIAccess = 26
+    TokenMandatoryPolicy = 27
+    TokenLogonSid = 28
+    TokenIsAppContainer = 29
+    TokenCapabilities = 30
+    TokenAppContainerSid = 31
+    TokenAppContainerNumber = 32
+    TokenUserClaimAttributes = 33
+    TokenDeviceClaimAttributes = 34
+    TokenRestrictedUserClaimAttributes = 35
+    TokenRestrictedDeviceClaimAttributes = 36
+    TokenDeviceGroups = 37
+    TokenRestrictedDeviceGroups = 38
+    MaxTokenInfoClass = 39
 
 
 class TokenType(Enum):
-    TokenPrimary: IntType = 1
-    TokenImpersonation: IntType = 2
+    TokenPrimary = 1
+    TokenImpersonation = 2
 
 
 class WellKnownSidType(Enum):
-    NullSid: IntType = 0
-    WorldSid: IntType = 1
-    LocalSid: IntType = 2
-    CreatorOwnerSid: IntType = 3
-    CreatorGroupSid: IntType = 4
-    CreatorOwnerServerSid: IntType = 5
-    CreatorGroupServerSid: IntType = 6
-    NTAuthoritySid: IntType = 7
-    DialupSid: IntType = 8
-    NetworkSid: IntType = 9
-    BatchSid: IntType = 10
-    InteractiveSid: IntType = 11
-    ServiceSid: IntType = 12
-    AnonymousSid: IntType = 13
-    ProxySid: IntType = 14
-    EnterpriseControllersSid: IntType = 15
-    SelfSid: IntType = 16
-    AuthenticatedUserSid: IntType = 17
-    RestrictedCodeSid: IntType = 18
-    TerminalServerSid: IntType = 19
-    RemoteLogonIdSid: IntType = 20
-    LogonIdsSid: IntType = 21
-    LocalSystemSid: IntType = 22
-    LocalServiceSid: IntType = 23
-    NetworkServiceSid: IntType = 24
-    BuiltinDomainSid: IntType = 25
-    BuiltinAdministratorsSid: IntType = 26
-    BuiltinUsersSid: IntType = 27
-    BuiltinGuestsSid: IntType = 28
-    BuiltinPowerUsersSid: IntType = 29
-    BuiltinAccountOperatorsSid: IntType = 30
-    BuiltinSystemOperatorsSid: IntType = 31
-    BuiltinPrintOperatorsSid: IntType = 32
-    BuiltinBackupOperatorsSid: IntType = 33
-    BuiltinReplicatorSid: IntType = 34
-    BuiltinPreWindows2000CompatibleAccessSid: IntType = 35
-    BuiltinRemoteDesktopUsersSid: IntType = 36
-    BuiltinNetworkConfigurationOperatorsSid: IntType = 37
-    AccountAdministratorSid: IntType = 38
-    AccountGuestSid: IntType = 39
-    AccountKrbtgtSid: IntType = 40
-    AccountDomainAdminsSid: IntType = 41
-    AccountDomainUsersSid: IntType = 42
-    AccountDomainGuestsSid: IntType = 43
-    AccountComputersSid: IntType = 44
-    AccountControllersSid: IntType = 45
-    AccountCertAdminsSid: IntType = 46
-    AccountSchemaAdminsSid: IntType = 47
-    AccountEnterpriseAdminsSid: IntType = 48
-    AccountPolicyAdminsSid: IntType = 49
-    AccountRasAndIasServersSid: IntType = 50
-    NtlmAuthenticationSid: IntType = 51
-    DigestAuthenticationSid: IntType = 52
-    SChannelAuthenticationSid: IntType = 53
-    ThisOrganizationSid: IntType = 54
-    OtherOrganizationSid: IntType = 55
-    BuiltinIncomingForestTrustBuildersSid: IntType = 56
-    BuiltinPerformanceMonitoringUsersSid: IntType = 57
-    BuiltinPerformanceLoggingUsersSid: IntType = 58
-    BuiltinAuthorizationAccessSid: IntType = 59
-    WinBuiltinTerminalServerLicenseServersSid: IntType = 60
-    MaxDefined: IntType = 60
+    NullSid = 0
+    WorldSid = 1
+    LocalSid = 2
+    CreatorOwnerSid = 3
+    CreatorGroupSid = 4
+    CreatorOwnerServerSid = 5
+    CreatorGroupServerSid = 6
+    NTAuthoritySid = 7
+    DialupSid = 8
+    NetworkSid = 9
+    BatchSid = 10
+    InteractiveSid = 11
+    ServiceSid = 12
+    AnonymousSid = 13
+    ProxySid = 14
+    EnterpriseControllersSid = 15
+    SelfSid = 16
+    AuthenticatedUserSid = 17
+    RestrictedCodeSid = 18
+    TerminalServerSid = 19
+    RemoteLogonIdSid = 20
+    LogonIdsSid = 21
+    LocalSystemSid = 22
+    LocalServiceSid = 23
+    NetworkServiceSid = 24
+    BuiltinDomainSid = 25
+    BuiltinAdministratorsSid = 26
+    BuiltinUsersSid = 27
+    BuiltinGuestsSid = 28
+    BuiltinPowerUsersSid = 29
+    BuiltinAccountOperatorsSid = 30
+    BuiltinSystemOperatorsSid = 31
+    BuiltinPrintOperatorsSid = 32
+    BuiltinBackupOperatorsSid = 33
+    BuiltinReplicatorSid = 34
+    BuiltinPreWindows2000CompatibleAccessSid = 35
+    BuiltinRemoteDesktopUsersSid = 36
+    BuiltinNetworkConfigurationOperatorsSid = 37
+    AccountAdministratorSid = 38
+    AccountGuestSid = 39
+    AccountKrbtgtSid = 40
+    AccountDomainAdminsSid = 41
+    AccountDomainUsersSid = 42
+    AccountDomainGuestsSid = 43
+    AccountComputersSid = 44
+    AccountControllersSid = 45
+    AccountCertAdminsSid = 46
+    AccountSchemaAdminsSid = 47
+    AccountEnterpriseAdminsSid = 48
+    AccountPolicyAdminsSid = 49
+    AccountRasAndIasServersSid = 50
+    NtlmAuthenticationSid = 51
+    DigestAuthenticationSid = 52
+    SChannelAuthenticationSid = 53
+    ThisOrganizationSid = 54
+    OtherOrganizationSid = 55
+    BuiltinIncomingForestTrustBuildersSid = 56
+    BuiltinPerformanceMonitoringUsersSid = 57
+    BuiltinPerformanceLoggingUsersSid = 58
+    BuiltinAuthorizationAccessSid = 59
+    WinBuiltinTerminalServerLicenseServersSid = 60
+    MaxDefined = 60
 
 
 class WinSecurityContext(Enum):
-    Thread: IntType = 1
-    Process: IntType = 2
-    Both: IntType = 3
+    Thread = 1
+    Process = 2
+    Both = 3
 
 
 class WindowsAccountType(Enum):
-    Normal: IntType = 0
-    Guest: IntType = 1
-    System: IntType = 2
-    Anonymous: IntType = 3
+    Normal = 0
+    Guest = 1
+    System = 2
+    Anonymous = 3
 
 
 class WindowsBuiltInRole(Enum):
-    Administrator: IntType = 544
-    User: IntType = 545
-    Guest: IntType = 546
-    PowerUser: IntType = 547
-    AccountOperator: IntType = 548
-    SystemOperator: IntType = 549
-    PrintOperator: IntType = 550
-    BackupOperator: IntType = 551
-    Replicator: IntType = 552
+    Administrator = 544
+    User = 545
+    Guest = 546
+    PowerUser = 547
+    AccountOperator = 548
+    SystemOperator = 549
+    PrintOperator = 550
+    BackupOperator = 551
+    Replicator = 552
 
 
 # No Delegates

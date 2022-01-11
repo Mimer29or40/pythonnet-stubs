@@ -12635,14 +12635,14 @@ class SecureCredential(ValueType):
     # ---------- Sub Enums ---------- #
     
     class Flags(Enum):
-        Zero: IntType = 0
-        NoSystemMapper: IntType = 2
-        NoNameCheck: IntType = 4
-        ValidateManual: IntType = 8
-        NoDefaultCred: IntType = 16
-        ValidateAuto: IntType = 32
-        SendAuxRecord: IntType = 2097152
-        UseStrongCrypto: IntType = 4194304
+        Zero = 0
+        NoSystemMapper = 2
+        NoNameCheck = 4
+        ValidateManual = 8
+        NoDefaultCred = 16
+        ValidateAuto = 32
+        SendAuxRecord = 2097152
+        UseStrongCrypto = 4194304
     
 
 
@@ -12726,16 +12726,16 @@ class SecureCredential2(ValueType):
     # ---------- Sub Enums ---------- #
     
     class Flags(Enum):
-        Zero: IntType = 0
-        NoSystemMapper: IntType = 2
-        NoNameCheck: IntType = 4
-        ValidateManual: IntType = 8
-        NoDefaultCred: IntType = 16
-        ValidateAuto: IntType = 32
-        SendAuxRecord: IntType = 2097152
-        UseStrongCrypto: IntType = 4194304
-        UsePresharedKeyOnly: IntType = 8388608
-        AllowNullEencryption: IntType = 33554432
+        Zero = 0
+        NoSystemMapper = 2
+        NoNameCheck = 4
+        ValidateManual = 8
+        NoDefaultCred = 16
+        ValidateAuto = 32
+        SendAuxRecord = 2097152
+        UseStrongCrypto = 4194304
+        UsePresharedKeyOnly = 8388608
+        AllowNullEencryption = 33554432
     
 
 
@@ -12883,8 +12883,8 @@ class TlsParamaters(ValueType):
     # ---------- Sub Enums ---------- #
     
     class Flags(Enum):
-        Zero: IntType = 0
-        TLS_PARAMS_OPTIONAL: IntType = 1
+        Zero = 0
+        TLS_PARAMS_OPTIONAL = 1
     
 
 
@@ -13394,761 +13394,761 @@ class SSPIInterface(Protocol):
 # ---------- Enums ---------- #
 
 class AddressInfoHints(Enum):
-    AI_PASSIVE: IntType = 1
-    AI_CANONNAME: IntType = 2
-    AI_NUMERICHOST: IntType = 4
-    AI_FQDN: IntType = 131072
+    AI_PASSIVE = 1
+    AI_CANONNAME = 2
+    AI_NUMERICHOST = 4
+    AI_FQDN = 131072
 
 
 class Alg(Enum):
-    Any: IntType = 0
-    NameDES: IntType = 1
-    NameRC4: IntType = 1
-    NameRC2: IntType = 2
-    NameDH_Ephem: IntType = 2
-    Name3DES: IntType = 3
-    NameMD5: IntType = 3
-    NameSHA: IntType = 4
-    NameSHA256: IntType = 12
-    NameSHA384: IntType = 13
-    NameSHA512: IntType = 14
-    NameAES_128: IntType = 14
-    NameAES_192: IntType = 15
-    NameAES_256: IntType = 16
-    NameAES: IntType = 17
-    TypeRSA: IntType = 1024
-    TypeBlock: IntType = 1536
-    TypeStream: IntType = 2048
-    TypeDH: IntType = 2560
-    ClassSignture: IntType = 8192
-    ClassEncrypt: IntType = 24576
-    ClassHash: IntType = 32768
-    ClassKeyXch: IntType = 40960
+    Any = 0
+    NameDES = 1
+    NameRC4 = 1
+    NameRC2 = 2
+    NameDH_Ephem = 2
+    Name3DES = 3
+    NameMD5 = 3
+    NameSHA = 4
+    NameSHA256 = 12
+    NameSHA384 = 13
+    NameSHA512 = 14
+    NameAES_128 = 14
+    NameAES_192 = 15
+    NameAES_256 = 16
+    NameAES = 17
+    TypeRSA = 1024
+    TypeBlock = 1536
+    TypeStream = 2048
+    TypeDH = 2560
+    ClassSignture = 8192
+    ClassEncrypt = 24576
+    ClassHash = 32768
+    ClassKeyXch = 40960
 
 
 class AuthenticationSchemes(Enum):
-    #None: IntType = 0
-    Digest: IntType = 1
-    Negotiate: IntType = 2
-    Ntlm: IntType = 4
-    IntegratedWindowsAuthentication: IntType = 6
-    Basic: IntType = 8
-    Anonymous: IntType = 32768
+    #None = 0
+    Digest = 1
+    Negotiate = 2
+    Ntlm = 4
+    IntegratedWindowsAuthentication = 6
+    Basic = 8
+    Anonymous = 32768
 
 
 class BoundaryType(Enum):
-    ContentLength: IntType = 0
-    Chunked: IntType = 1
-    Multipart: IntType = 3
-    #None: IntType = 4
-    Invalid: IntType = 5
+    ContentLength = 0
+    Chunked = 1
+    Multipart = 3
+    #None = 4
+    Invalid = 5
 
 
 class BufferType(Enum):
-    ReadOnlyFlag: IntType = -2147483648
-    Empty: IntType = 0
-    Data: IntType = 1
-    Token: IntType = 2
-    Parameters: IntType = 3
-    Missing: IntType = 4
-    Extra: IntType = 5
-    Trailer: IntType = 6
-    Header: IntType = 7
-    Padding: IntType = 9
-    Stream: IntType = 10
-    ChannelBindings: IntType = 14
-    TargetHost: IntType = 16
-    ReadOnlyWithChecksum: IntType = 268435456
+    ReadOnlyFlag = -2147483648
+    Empty = 0
+    Data = 1
+    Token = 2
+    Parameters = 3
+    Missing = 4
+    Extra = 5
+    Trailer = 6
+    Header = 7
+    Padding = 9
+    Stream = 10
+    ChannelBindings = 14
+    TargetHost = 16
+    ReadOnlyWithChecksum = 268435456
 
 
 class CertUsage(Enum):
-    MatchTypeAnd: IntType = 0
-    MatchTypeOr: IntType = 1
+    MatchTypeAnd = 0
+    MatchTypeOr = 1
 
 
 class CertificateEncoding(Enum):
-    Zero: IntType = 0
-    X509AsnEncoding: IntType = 1
-    X509NdrEncoding: IntType = 2
-    Pkcs7AsnEncoding: IntType = 65536
-    AnyAsnEncoding: IntType = 65537
-    Pkcs7NdrEncoding: IntType = 131072
+    Zero = 0
+    X509AsnEncoding = 1
+    X509NdrEncoding = 2
+    Pkcs7AsnEncoding = 65536
+    AnyAsnEncoding = 65537
+    Pkcs7NdrEncoding = 131072
 
 
 class CertificateProblem(Enum):
-    CryptNOREVOCATIONCHECK: IntType = -2146885614
-    CryptREVOCATIONOFFLINE: IntType = -2146885613
-    TrustSYSTEMERROR: IntType = -2146869247
-    TrustNOSIGNERCERT: IntType = -2146869246
-    TrustCOUNTERSIGNER: IntType = -2146869245
-    TrustCERTSIGNATURE: IntType = -2146869244
-    TrustTIMESTAMP: IntType = -2146869243
-    TrustBADDIGEST: IntType = -2146869232
-    TrustBASICCONSTRAINTS: IntType = -2146869223
-    TrustFINANCIALCRITERIA: IntType = -2146869218
-    TrustNOSIGNATURE: IntType = -2146762496
-    CertEXPIRED: IntType = -2146762495
-    CertVALIDITYPERIODNESTING: IntType = -2146762494
-    CertROLE: IntType = -2146762493
-    CertPATHLENCONST: IntType = -2146762492
-    CertCRITICAL: IntType = -2146762491
-    CertPURPOSE: IntType = -2146762490
-    CertISSUERCHAINING: IntType = -2146762489
-    CertMALFORMED: IntType = -2146762488
-    CertUNTRUSTEDROOT: IntType = -2146762487
-    CertCHAINING: IntType = -2146762486
-    CertREVOKED: IntType = -2146762484
-    CertUNTRUSTEDTESTROOT: IntType = -2146762483
-    CertREVOCATION_FAILURE: IntType = -2146762482
-    CertCN_NO_MATCH: IntType = -2146762481
-    CertWRONG_USAGE: IntType = -2146762480
-    TrustEXPLICITDISTRUST: IntType = -2146762479
-    CertUNTRUSTEDCA: IntType = -2146762478
-    CertINVALIDPOLICY: IntType = -2146762477
-    CertINVALIDNAME: IntType = -2146762476
-    OK: IntType = 0
+    CryptNOREVOCATIONCHECK = -2146885614
+    CryptREVOCATIONOFFLINE = -2146885613
+    TrustSYSTEMERROR = -2146869247
+    TrustNOSIGNERCERT = -2146869246
+    TrustCOUNTERSIGNER = -2146869245
+    TrustCERTSIGNATURE = -2146869244
+    TrustTIMESTAMP = -2146869243
+    TrustBADDIGEST = -2146869232
+    TrustBASICCONSTRAINTS = -2146869223
+    TrustFINANCIALCRITERIA = -2146869218
+    TrustNOSIGNATURE = -2146762496
+    CertEXPIRED = -2146762495
+    CertVALIDITYPERIODNESTING = -2146762494
+    CertROLE = -2146762493
+    CertPATHLENCONST = -2146762492
+    CertCRITICAL = -2146762491
+    CertPURPOSE = -2146762490
+    CertISSUERCHAINING = -2146762489
+    CertMALFORMED = -2146762488
+    CertUNTRUSTEDROOT = -2146762487
+    CertCHAINING = -2146762486
+    CertREVOKED = -2146762484
+    CertUNTRUSTEDTESTROOT = -2146762483
+    CertREVOCATION_FAILURE = -2146762482
+    CertCN_NO_MATCH = -2146762481
+    CertWRONG_USAGE = -2146762480
+    TrustEXPLICITDISTRUST = -2146762479
+    CertUNTRUSTEDCA = -2146762478
+    CertINVALIDPOLICY = -2146762477
+    CertINVALIDNAME = -2146762476
+    OK = 0
 
 
 class ChainPolicyType(Enum):
-    Base: IntType = 1
-    Authenticode: IntType = 2
-    Authenticode_TS: IntType = 3
-    SSL: IntType = 4
-    BasicConstraints: IntType = 5
-    NtAuth: IntType = 6
+    Base = 1
+    Authenticode = 2
+    Authenticode_TS = 3
+    SSL = 4
+    BasicConstraints = 5
+    NtAuth = 6
 
 
 class CloseExState(Enum):
-    Normal: IntType = 0
-    Abort: IntType = 1
-    Silent: IntType = 2
+    Normal = 0
+    Abort = 1
+    Silent = 2
 
 
 class ConnectionModes(Enum):
-    Single: IntType = 0
-    Persistent: IntType = 1
-    Pipeline: IntType = 2
-    Mux: IntType = 3
+    Single = 0
+    Persistent = 1
+    Pipeline = 2
+    Mux = 3
 
 
 class ContentTypeValues(Enum):
-    ChangeCipherSpec: IntType = 20
-    Alert: IntType = 21
-    HandShake: IntType = 22
-    AppData: IntType = 23
-    Unrecognized: IntType = 255
+    ChangeCipherSpec = 20
+    Alert = 21
+    HandShake = 22
+    AppData = 23
+    Unrecognized = 255
 
 
 class ContextAttribute(Enum):
-    Sizes: IntType = 0
-    Names: IntType = 1
-    Lifespan: IntType = 2
-    DceInfo: IntType = 3
-    StreamSizes: IntType = 4
-    Authority: IntType = 6
-    PackageInfo: IntType = 10
-    NegotiationInfo: IntType = 12
-    UniqueBindings: IntType = 25
-    EndpointBindings: IntType = 26
-    ClientSpecifiedSpn: IntType = 27
-    RemoteCertificate: IntType = 83
-    LocalCertificate: IntType = 84
-    RootStore: IntType = 85
-    IssuerListInfoEx: IntType = 89
-    ConnectionInfo: IntType = 90
-    UiInfo: IntType = 104
+    Sizes = 0
+    Names = 1
+    Lifespan = 2
+    DceInfo = 3
+    StreamSizes = 4
+    Authority = 6
+    PackageInfo = 10
+    NegotiationInfo = 12
+    UniqueBindings = 25
+    EndpointBindings = 26
+    ClientSpecifiedSpn = 27
+    RemoteCertificate = 83
+    LocalCertificate = 84
+    RootStore = 85
+    IssuerListInfoEx = 89
+    ConnectionInfo = 90
+    UiInfo = 104
 
 
 class ContextFlags(Enum):
-    Zero: IntType = 0
-    Delegate: IntType = 1
-    MutualAuth: IntType = 2
-    ReplayDetect: IntType = 4
-    SequenceDetect: IntType = 8
-    Confidentiality: IntType = 16
-    UseSessionKey: IntType = 32
-    InitUseSuppliedCreds: IntType = 128
-    AllocateMemory: IntType = 256
-    Connection: IntType = 2048
-    InitExtendedError: IntType = 16384
-    AcceptExtendedError: IntType = 32768
-    InitStream: IntType = 32768
-    InitIntegrity: IntType = 65536
-    AcceptStream: IntType = 65536
-    InitIdentify: IntType = 131072
-    AcceptIntegrity: IntType = 131072
-    AcceptIdentify: IntType = 524288
-    InitManualCredValidation: IntType = 524288
-    ProxyBindings: IntType = 67108864
-    AllowMissingBindings: IntType = 268435456
-    UnverifiedTargetName: IntType = 536870912
+    Zero = 0
+    Delegate = 1
+    MutualAuth = 2
+    ReplayDetect = 4
+    SequenceDetect = 8
+    Confidentiality = 16
+    UseSessionKey = 32
+    InitUseSuppliedCreds = 128
+    AllocateMemory = 256
+    Connection = 2048
+    InitExtendedError = 16384
+    AcceptExtendedError = 32768
+    InitStream = 32768
+    InitIntegrity = 65536
+    AcceptStream = 65536
+    InitIdentify = 131072
+    AcceptIntegrity = 131072
+    AcceptIdentify = 524288
+    InitManualCredValidation = 524288
+    ProxyBindings = 67108864
+    AllowMissingBindings = 268435456
+    UnverifiedTargetName = 536870912
 
 
 class CookieToken(Enum):
-    Nothing: IntType = 0
-    NameValuePair: IntType = 1
-    Attribute: IntType = 2
-    EndToken: IntType = 3
-    EndCookie: IntType = 4
-    End: IntType = 5
-    Equals: IntType = 6
-    Comment: IntType = 7
-    CommentUrl: IntType = 8
-    CookieName: IntType = 9
-    Discard: IntType = 10
-    Domain: IntType = 11
-    Expires: IntType = 12
-    MaxAge: IntType = 13
-    Path: IntType = 14
-    Port: IntType = 15
-    Secure: IntType = 16
-    HttpOnly: IntType = 17
-    Unknown: IntType = 18
-    Version: IntType = 19
+    Nothing = 0
+    NameValuePair = 1
+    Attribute = 2
+    EndToken = 3
+    EndCookie = 4
+    End = 5
+    Equals = 6
+    Comment = 7
+    CommentUrl = 8
+    CookieName = 9
+    Discard = 10
+    Domain = 11
+    Expires = 12
+    MaxAge = 13
+    Path = 14
+    Port = 15
+    Secure = 16
+    HttpOnly = 17
+    Unknown = 18
+    Version = 19
 
 
 class CookieVariant(Enum):
-    Unknown: IntType = 0
-    Plain: IntType = 1
-    Rfc2109: IntType = 2
-    Default: IntType = 2
-    Rfc2965: IntType = 3
+    Unknown = 0
+    Plain = 1
+    Rfc2109 = 2
+    Default = 2
+    Rfc2965 = 3
 
 
 class CredentialUse(Enum):
-    Inbound: IntType = 1
-    Outbound: IntType = 2
-    Both: IntType = 3
+    Inbound = 1
+    Outbound = 2
+    Both = 3
 
 
 class DataParseStatus(Enum):
-    NeedMoreData: IntType = 0
-    ContinueParsing: IntType = 1
-    Done: IntType = 2
-    Invalid: IntType = 3
-    DataTooBig: IntType = 4
+    NeedMoreData = 0
+    ContinueParsing = 1
+    Done = 2
+    Invalid = 3
+    DataTooBig = 4
 
 
 class DecompressionMethods(Enum):
-    #None: IntType = 0
-    GZip: IntType = 1
-    Deflate: IntType = 2
+    #None = 0
+    GZip = 1
+    Deflate = 2
 
 
 class DefaultPorts(Enum):
-    DEFAULT_FTP_PORT: IntType = 21
-    DEFAULT_TELNET_PORT: IntType = 23
-    DEFAULT_SMTP_PORT: IntType = 25
-    DEFAULT_GOPHER_PORT: IntType = 70
-    DEFAULT_HTTP_PORT: IntType = 80
-    DEFAULT_NNTP_PORT: IntType = 119
-    DEFAULT_HTTPS_PORT: IntType = 443
+    DEFAULT_FTP_PORT = 21
+    DEFAULT_TELNET_PORT = 23
+    DEFAULT_SMTP_PORT = 25
+    DEFAULT_GOPHER_PORT = 70
+    DEFAULT_HTTP_PORT = 80
+    DEFAULT_NNTP_PORT = 119
+    DEFAULT_HTTPS_PORT = 443
 
 
 class Endianness(Enum):
-    Network: IntType = 0
-    Native: IntType = 16
+    Network = 0
+    Native = 16
 
 
 class EntitySendFormat(Enum):
-    ContentLength: IntType = 0
-    Chunked: IntType = 1
+    ContentLength = 0
+    Chunked = 1
 
 
 class FtpLoginState(Enum):
-    NotLoggedIn: ByteType = 0
-    LoggedIn: ByteType = 1
-    LoggedInButNeedsRelogin: ByteType = 2
-    ReloginFailed: ByteType = 3
+    NotLoggedIn = 0
+    LoggedIn = 1
+    LoggedInButNeedsRelogin = 2
+    ReloginFailed = 3
 
 
 class FtpMethodFlags(Enum):
-    #None: IntType = 0
-    IsDownload: IntType = 1
-    IsUpload: IntType = 2
-    TakesParameter: IntType = 4
-    MayTakeParameter: IntType = 8
-    DoesNotTakeParameter: IntType = 16
-    ParameterIsDirectory: IntType = 32
-    ShouldParseForResponseUri: IntType = 64
-    HasHttpCommand: IntType = 128
-    MustChangeWorkingDirectoryToPath: IntType = 256
+    #None = 0
+    IsDownload = 1
+    IsUpload = 2
+    TakesParameter = 4
+    MayTakeParameter = 8
+    DoesNotTakeParameter = 16
+    ParameterIsDirectory = 32
+    ShouldParseForResponseUri = 64
+    HasHttpCommand = 128
+    MustChangeWorkingDirectoryToPath = 256
 
 
 class FtpOperation(Enum):
-    DownloadFile: IntType = 0
-    ListDirectory: IntType = 1
-    ListDirectoryDetails: IntType = 2
-    UploadFile: IntType = 3
-    UploadFileUnique: IntType = 4
-    AppendFile: IntType = 5
-    DeleteFile: IntType = 6
-    GetDateTimestamp: IntType = 7
-    GetFileSize: IntType = 8
-    Rename: IntType = 9
-    MakeDirectory: IntType = 10
-    RemoveDirectory: IntType = 11
-    PrintWorkingDirectory: IntType = 12
-    Other: IntType = 13
+    DownloadFile = 0
+    ListDirectory = 1
+    ListDirectoryDetails = 2
+    UploadFile = 3
+    UploadFileUnique = 4
+    AppendFile = 5
+    DeleteFile = 6
+    GetDateTimestamp = 7
+    GetFileSize = 8
+    Rename = 9
+    MakeDirectory = 10
+    RemoveDirectory = 11
+    PrintWorkingDirectory = 12
+    Other = 13
 
 
 class FtpPrimitive(Enum):
-    Upload: IntType = 0
-    Download: IntType = 1
-    CommandOnly: IntType = 2
+    Upload = 0
+    Download = 1
+    CommandOnly = 2
 
 
 class FtpStatusCode(Enum):
-    Undefined: IntType = 0
-    RestartMarker: IntType = 110
-    ServiceTemporarilyNotAvailable: IntType = 120
-    DataAlreadyOpen: IntType = 125
-    OpeningData: IntType = 150
-    CommandOK: IntType = 200
-    CommandExtraneous: IntType = 202
-    DirectoryStatus: IntType = 212
-    FileStatus: IntType = 213
-    SystemType: IntType = 215
-    SendUserCommand: IntType = 220
-    ClosingControl: IntType = 221
-    ClosingData: IntType = 226
-    EnteringPassive: IntType = 227
-    LoggedInProceed: IntType = 230
-    ServerWantsSecureSession: IntType = 234
-    FileActionOK: IntType = 250
-    PathnameCreated: IntType = 257
-    SendPasswordCommand: IntType = 331
-    NeedLoginAccount: IntType = 332
-    FileCommandPending: IntType = 350
-    ServiceNotAvailable: IntType = 421
-    CantOpenData: IntType = 425
-    ConnectionClosed: IntType = 426
-    ActionNotTakenFileUnavailableOrBusy: IntType = 450
-    ActionAbortedLocalProcessingError: IntType = 451
-    ActionNotTakenInsufficientSpace: IntType = 452
-    CommandSyntaxError: IntType = 500
-    ArgumentSyntaxError: IntType = 501
-    CommandNotImplemented: IntType = 502
-    BadCommandSequence: IntType = 503
-    NotLoggedIn: IntType = 530
-    AccountNeeded: IntType = 532
-    ActionNotTakenFileUnavailable: IntType = 550
-    ActionAbortedUnknownPageType: IntType = 551
-    FileActionAborted: IntType = 552
-    ActionNotTakenFilenameNotAllowed: IntType = 553
+    Undefined = 0
+    RestartMarker = 110
+    ServiceTemporarilyNotAvailable = 120
+    DataAlreadyOpen = 125
+    OpeningData = 150
+    CommandOK = 200
+    CommandExtraneous = 202
+    DirectoryStatus = 212
+    FileStatus = 213
+    SystemType = 215
+    SendUserCommand = 220
+    ClosingControl = 221
+    ClosingData = 226
+    EnteringPassive = 227
+    LoggedInProceed = 230
+    ServerWantsSecureSession = 234
+    FileActionOK = 250
+    PathnameCreated = 257
+    SendPasswordCommand = 331
+    NeedLoginAccount = 332
+    FileCommandPending = 350
+    ServiceNotAvailable = 421
+    CantOpenData = 425
+    ConnectionClosed = 426
+    ActionNotTakenFileUnavailableOrBusy = 450
+    ActionAbortedLocalProcessingError = 451
+    ActionNotTakenInsufficientSpace = 452
+    CommandSyntaxError = 500
+    ArgumentSyntaxError = 501
+    CommandNotImplemented = 502
+    BadCommandSequence = 503
+    NotLoggedIn = 530
+    AccountNeeded = 532
+    ActionNotTakenFileUnavailable = 550
+    ActionAbortedUnknownPageType = 551
+    FileActionAborted = 552
+    ActionNotTakenFilenameNotAllowed = 553
 
 
 class HttpBehaviour(Enum):
-    Unknown: ByteType = 0
-    HTTP10: ByteType = 1
-    HTTP11PartiallyCompliant: ByteType = 2
-    HTTP11: ByteType = 3
+    Unknown = 0
+    HTTP10 = 1
+    HTTP11PartiallyCompliant = 2
+    HTTP11 = 3
 
 
 class HttpProcessingResult(Enum):
-    Continue: IntType = 0
-    ReadWait: IntType = 1
-    WriteWait: IntType = 2
+    Continue = 0
+    ReadWait = 1
+    WriteWait = 2
 
 
 class HttpRequestHeader(Enum):
-    CacheControl: IntType = 0
-    Connection: IntType = 1
-    Date: IntType = 2
-    KeepAlive: IntType = 3
-    Pragma: IntType = 4
-    Trailer: IntType = 5
-    TransferEncoding: IntType = 6
-    Upgrade: IntType = 7
-    Via: IntType = 8
-    Warning: IntType = 9
-    Allow: IntType = 10
-    ContentLength: IntType = 11
-    ContentType: IntType = 12
-    ContentEncoding: IntType = 13
-    ContentLanguage: IntType = 14
-    ContentLocation: IntType = 15
-    ContentMd5: IntType = 16
-    ContentRange: IntType = 17
-    Expires: IntType = 18
-    LastModified: IntType = 19
-    Accept: IntType = 20
-    AcceptCharset: IntType = 21
-    AcceptEncoding: IntType = 22
-    AcceptLanguage: IntType = 23
-    Authorization: IntType = 24
-    Cookie: IntType = 25
-    Expect: IntType = 26
-    From: IntType = 27
-    Host: IntType = 28
-    IfMatch: IntType = 29
-    IfModifiedSince: IntType = 30
-    IfNoneMatch: IntType = 31
-    IfRange: IntType = 32
-    IfUnmodifiedSince: IntType = 33
-    MaxForwards: IntType = 34
-    ProxyAuthorization: IntType = 35
-    Referer: IntType = 36
-    Range: IntType = 37
-    Te: IntType = 38
-    Translate: IntType = 39
-    UserAgent: IntType = 40
+    CacheControl = 0
+    Connection = 1
+    Date = 2
+    KeepAlive = 3
+    Pragma = 4
+    Trailer = 5
+    TransferEncoding = 6
+    Upgrade = 7
+    Via = 8
+    Warning = 9
+    Allow = 10
+    ContentLength = 11
+    ContentType = 12
+    ContentEncoding = 13
+    ContentLanguage = 14
+    ContentLocation = 15
+    ContentMd5 = 16
+    ContentRange = 17
+    Expires = 18
+    LastModified = 19
+    Accept = 20
+    AcceptCharset = 21
+    AcceptEncoding = 22
+    AcceptLanguage = 23
+    Authorization = 24
+    Cookie = 25
+    Expect = 26
+    From = 27
+    Host = 28
+    IfMatch = 29
+    IfModifiedSince = 30
+    IfNoneMatch = 31
+    IfRange = 32
+    IfUnmodifiedSince = 33
+    MaxForwards = 34
+    ProxyAuthorization = 35
+    Referer = 36
+    Range = 37
+    Te = 38
+    Translate = 39
+    UserAgent = 40
 
 
 class HttpResponseHeader(Enum):
-    CacheControl: IntType = 0
-    Connection: IntType = 1
-    Date: IntType = 2
-    KeepAlive: IntType = 3
-    Pragma: IntType = 4
-    Trailer: IntType = 5
-    TransferEncoding: IntType = 6
-    Upgrade: IntType = 7
-    Via: IntType = 8
-    Warning: IntType = 9
-    Allow: IntType = 10
-    ContentLength: IntType = 11
-    ContentType: IntType = 12
-    ContentEncoding: IntType = 13
-    ContentLanguage: IntType = 14
-    ContentLocation: IntType = 15
-    ContentMd5: IntType = 16
-    ContentRange: IntType = 17
-    Expires: IntType = 18
-    LastModified: IntType = 19
-    AcceptRanges: IntType = 20
-    Age: IntType = 21
-    ETag: IntType = 22
-    Location: IntType = 23
-    ProxyAuthenticate: IntType = 24
-    RetryAfter: IntType = 25
-    Server: IntType = 26
-    SetCookie: IntType = 27
-    Vary: IntType = 28
-    WwwAuthenticate: IntType = 29
+    CacheControl = 0
+    Connection = 1
+    Date = 2
+    KeepAlive = 3
+    Pragma = 4
+    Trailer = 5
+    TransferEncoding = 6
+    Upgrade = 7
+    Via = 8
+    Warning = 9
+    Allow = 10
+    ContentLength = 11
+    ContentType = 12
+    ContentEncoding = 13
+    ContentLanguage = 14
+    ContentLocation = 15
+    ContentMd5 = 16
+    ContentRange = 17
+    Expires = 18
+    LastModified = 19
+    AcceptRanges = 20
+    Age = 21
+    ETag = 22
+    Location = 23
+    ProxyAuthenticate = 24
+    RetryAfter = 25
+    Server = 26
+    SetCookie = 27
+    Vary = 28
+    WwwAuthenticate = 29
 
 
 class HttpStatusCode(Enum):
-    Continue: IntType = 100
-    SwitchingProtocols: IntType = 101
-    OK: IntType = 200
-    Created: IntType = 201
-    Accepted: IntType = 202
-    NonAuthoritativeInformation: IntType = 203
-    NoContent: IntType = 204
-    ResetContent: IntType = 205
-    PartialContent: IntType = 206
-    MultipleChoices: IntType = 300
-    Ambiguous: IntType = 300
-    MovedPermanently: IntType = 301
-    Moved: IntType = 301
-    Found: IntType = 302
-    Redirect: IntType = 302
-    SeeOther: IntType = 303
-    RedirectMethod: IntType = 303
-    NotModified: IntType = 304
-    UseProxy: IntType = 305
-    Unused: IntType = 306
-    TemporaryRedirect: IntType = 307
-    RedirectKeepVerb: IntType = 307
-    BadRequest: IntType = 400
-    Unauthorized: IntType = 401
-    PaymentRequired: IntType = 402
-    Forbidden: IntType = 403
-    NotFound: IntType = 404
-    MethodNotAllowed: IntType = 405
-    NotAcceptable: IntType = 406
-    ProxyAuthenticationRequired: IntType = 407
-    RequestTimeout: IntType = 408
-    Conflict: IntType = 409
-    Gone: IntType = 410
-    LengthRequired: IntType = 411
-    PreconditionFailed: IntType = 412
-    RequestEntityTooLarge: IntType = 413
-    RequestUriTooLong: IntType = 414
-    UnsupportedMediaType: IntType = 415
-    RequestedRangeNotSatisfiable: IntType = 416
-    ExpectationFailed: IntType = 417
-    UpgradeRequired: IntType = 426
-    InternalServerError: IntType = 500
-    NotImplemented: IntType = 501
-    BadGateway: IntType = 502
-    ServiceUnavailable: IntType = 503
-    GatewayTimeout: IntType = 504
-    HttpVersionNotSupported: IntType = 505
+    Continue = 100
+    SwitchingProtocols = 101
+    OK = 200
+    Created = 201
+    Accepted = 202
+    NonAuthoritativeInformation = 203
+    NoContent = 204
+    ResetContent = 205
+    PartialContent = 206
+    MultipleChoices = 300
+    Ambiguous = 300
+    MovedPermanently = 301
+    Moved = 301
+    Found = 302
+    Redirect = 302
+    SeeOther = 303
+    RedirectMethod = 303
+    NotModified = 304
+    UseProxy = 305
+    Unused = 306
+    TemporaryRedirect = 307
+    RedirectKeepVerb = 307
+    BadRequest = 400
+    Unauthorized = 401
+    PaymentRequired = 402
+    Forbidden = 403
+    NotFound = 404
+    MethodNotAllowed = 405
+    NotAcceptable = 406
+    ProxyAuthenticationRequired = 407
+    RequestTimeout = 408
+    Conflict = 409
+    Gone = 410
+    LengthRequired = 411
+    PreconditionFailed = 412
+    RequestEntityTooLarge = 413
+    RequestUriTooLong = 414
+    UnsupportedMediaType = 415
+    RequestedRangeNotSatisfiable = 416
+    ExpectationFailed = 417
+    UpgradeRequired = 426
+    InternalServerError = 500
+    NotImplemented = 501
+    BadGateway = 502
+    ServiceUnavailable = 503
+    GatewayTimeout = 504
+    HttpVersionNotSupported = 505
 
 
 class HttpWriteMode(Enum):
-    Unknown: IntType = 0
-    ContentLength: IntType = 1
-    Chunked: IntType = 2
-    Buffer: IntType = 3
-    #None: IntType = 4
+    Unknown = 0
+    ContentLength = 1
+    Chunked = 2
+    Buffer = 3
+    #None = 4
 
 
 class IgnoreCertProblem(Enum):
-    not_time_valid: IntType = 1
-    ctl_not_time_valid: IntType = 2
-    not_time_nested: IntType = 4
-    all_not_time_valid: IntType = 7
-    invalid_basic_constraints: IntType = 8
-    allow_unknown_ca: IntType = 16
-    wrong_usage: IntType = 32
-    invalid_name: IntType = 64
-    invalid_policy: IntType = 128
-    end_rev_unknown: IntType = 256
-    ctl_signer_rev_unknown: IntType = 512
-    ca_rev_unknown: IntType = 1024
-    root_rev_unknown: IntType = 2048
-    all_rev_unknown: IntType = 3840
-    none: IntType = 4095
+    not_time_valid = 1
+    ctl_not_time_valid = 2
+    not_time_nested = 4
+    all_not_time_valid = 7
+    invalid_basic_constraints = 8
+    allow_unknown_ca = 16
+    wrong_usage = 32
+    invalid_name = 64
+    invalid_policy = 128
+    end_rev_unknown = 256
+    ctl_signer_rev_unknown = 512
+    ca_rev_unknown = 1024
+    root_rev_unknown = 2048
+    all_rev_unknown = 3840
+    none = 4095
 
 
 class ListenerClientCertState(Enum):
-    NotInitialized: IntType = 0
-    InProgress: IntType = 1
-    Completed: IntType = 2
+    NotInitialized = 0
+    InProgress = 1
+    Completed = 2
 
 
 class NameInfoFlags(Enum):
-    NI_NOFQDN: IntType = 1
-    NI_NUMERICHOST: IntType = 2
-    NI_NAMEREQD: IntType = 4
-    NI_NUMERICSERV: IntType = 8
-    NI_DGRAM: IntType = 16
+    NI_NOFQDN = 1
+    NI_NUMERICHOST = 2
+    NI_NAMEREQD = 4
+    NI_NUMERICSERV = 8
+    NI_DGRAM = 16
 
 
 class NetworkAccess(Enum):
-    Connect: IntType = 64
-    Accept: IntType = 128
+    Connect = 64
+    Accept = 128
 
 
 class NetworkingPerfCounterName(Enum):
-    SocketConnectionsEstablished: IntType = 0
-    SocketBytesReceived: IntType = 1
-    SocketBytesSent: IntType = 2
-    SocketDatagramsReceived: IntType = 3
-    SocketDatagramsSent: IntType = 4
-    HttpWebRequestCreated: IntType = 5
-    HttpWebRequestAvgLifeTime: IntType = 6
-    HttpWebRequestAvgLifeTimeBase: IntType = 7
-    HttpWebRequestQueued: IntType = 8
-    HttpWebRequestAvgQueueTime: IntType = 9
-    HttpWebRequestAvgQueueTimeBase: IntType = 10
-    HttpWebRequestAborted: IntType = 11
-    HttpWebRequestFailed: IntType = 12
+    SocketConnectionsEstablished = 0
+    SocketBytesReceived = 1
+    SocketBytesSent = 2
+    SocketDatagramsReceived = 3
+    SocketDatagramsSent = 4
+    HttpWebRequestCreated = 5
+    HttpWebRequestAvgLifeTime = 6
+    HttpWebRequestAvgLifeTimeBase = 7
+    HttpWebRequestQueued = 8
+    HttpWebRequestAvgQueueTime = 9
+    HttpWebRequestAvgQueueTimeBase = 10
+    HttpWebRequestAborted = 11
+    HttpWebRequestFailed = 12
 
 
 class ReadState(Enum):
-    Start: IntType = 0
-    StatusLine: IntType = 1
-    Headers: IntType = 2
-    Data: IntType = 3
+    Start = 0
+    StatusLine = 1
+    Headers = 2
+    Data = 3
 
 
 class SchProtocols(Enum):
-    UniClient: IntType = -2147483648
-    ClientMask: IntType = -2147472726
-    Unified: IntType = -1073741824
-    Zero: IntType = 0
-    PctServer: IntType = 1
-    PctClient: IntType = 2
-    Pct: IntType = 3
-    Ssl2Server: IntType = 4
-    Ssl2Client: IntType = 8
-    Ssl2: IntType = 12
-    Ssl3Server: IntType = 16
-    Ssl3Client: IntType = 32
-    Ssl3: IntType = 48
-    Tls10Server: IntType = 64
-    Tls10Client: IntType = 128
-    Tls10: IntType = 192
-    Ssl3Tls: IntType = 240
-    Tls11Server: IntType = 256
-    Tls11Client: IntType = 512
-    Tls11: IntType = 768
-    Tls12Server: IntType = 1024
-    Tls12Client: IntType = 2048
-    Tls12: IntType = 3072
-    Tls13Server: IntType = 4096
-    Tls13Client: IntType = 8192
-    Tls13: IntType = 12288
-    UniServer: IntType = 1073741824
-    ServerMask: IntType = 1073747285
+    UniClient = -2147483648
+    ClientMask = -2147472726
+    Unified = -1073741824
+    Zero = 0
+    PctServer = 1
+    PctClient = 2
+    Pct = 3
+    Ssl2Server = 4
+    Ssl2Client = 8
+    Ssl2 = 12
+    Ssl3Server = 16
+    Ssl3Client = 32
+    Ssl3 = 48
+    Tls10Server = 64
+    Tls10Client = 128
+    Tls10 = 192
+    Ssl3Tls = 240
+    Tls11Server = 256
+    Tls11Client = 512
+    Tls11 = 768
+    Tls12Server = 1024
+    Tls12Client = 2048
+    Tls12 = 3072
+    Tls13Server = 4096
+    Tls13Client = 8192
+    Tls13 = 12288
+    UniServer = 1073741824
+    ServerMask = 1073747285
 
 
 class SecurDll(Enum):
-    SECURITY: IntType = 0
-    SECUR32: IntType = 1
-    SCHANNEL: IntType = 2
+    SECURITY = 0
+    SECUR32 = 1
+    SCHANNEL = 2
 
 
 class SecurityProtocolType(Enum):
-    SystemDefault: IntType = 0
-    Ssl3: IntType = 48
-    Tls: IntType = 192
-    Tls11: IntType = 768
-    Tls12: IntType = 3072
-    Tls13: IntType = 12288
+    SystemDefault = 0
+    Ssl3 = 48
+    Tls = 192
+    Tls11 = 768
+    Tls12 = 3072
+    Tls13 = 12288
 
 
 class SecurityStatus(Enum):
-    OutOfMemory: IntType = -2146893056
-    InvalidHandle: IntType = -2146893055
-    Unsupported: IntType = -2146893054
-    TargetUnknown: IntType = -2146893053
-    InternalError: IntType = -2146893052
-    PackageNotFound: IntType = -2146893051
-    NotOwner: IntType = -2146893050
-    CannotInstall: IntType = -2146893049
-    InvalidToken: IntType = -2146893048
-    CannotPack: IntType = -2146893047
-    QopNotSupported: IntType = -2146893046
-    NoImpersonation: IntType = -2146893045
-    LogonDenied: IntType = -2146893044
-    UnknownCredentials: IntType = -2146893043
-    NoCredentials: IntType = -2146893042
-    MessageAltered: IntType = -2146893041
-    OutOfSequence: IntType = -2146893040
-    NoAuthenticatingAuthority: IntType = -2146893039
-    IncompleteMessage: IntType = -2146893032
-    IncompleteCredentials: IntType = -2146893024
-    BufferNotEnough: IntType = -2146893023
-    WrongPrincipal: IntType = -2146893022
-    TimeSkew: IntType = -2146893020
-    UntrustedRoot: IntType = -2146893019
-    IllegalMessage: IntType = -2146893018
-    CertUnknown: IntType = -2146893017
-    CertExpired: IntType = -2146893016
-    AlgorithmMismatch: IntType = -2146893007
-    SecurityQosFailed: IntType = -2146893006
-    SmartcardLogonRequired: IntType = -2146892994
-    UnsupportedPreauth: IntType = -2146892989
-    BadBinding: IntType = -2146892986
-    OK: IntType = 0
-    ContinueNeeded: IntType = 590610
-    CompleteNeeded: IntType = 590611
-    CompAndContinue: IntType = 590612
-    ContextExpired: IntType = 590615
-    CredentialsNeeded: IntType = 590624
-    Renegotiate: IntType = 590625
+    OutOfMemory = -2146893056
+    InvalidHandle = -2146893055
+    Unsupported = -2146893054
+    TargetUnknown = -2146893053
+    InternalError = -2146893052
+    PackageNotFound = -2146893051
+    NotOwner = -2146893050
+    CannotInstall = -2146893049
+    InvalidToken = -2146893048
+    CannotPack = -2146893047
+    QopNotSupported = -2146893046
+    NoImpersonation = -2146893045
+    LogonDenied = -2146893044
+    UnknownCredentials = -2146893043
+    NoCredentials = -2146893042
+    MessageAltered = -2146893041
+    OutOfSequence = -2146893040
+    NoAuthenticatingAuthority = -2146893039
+    IncompleteMessage = -2146893032
+    IncompleteCredentials = -2146893024
+    BufferNotEnough = -2146893023
+    WrongPrincipal = -2146893022
+    TimeSkew = -2146893020
+    UntrustedRoot = -2146893019
+    IllegalMessage = -2146893018
+    CertUnknown = -2146893017
+    CertExpired = -2146893016
+    AlgorithmMismatch = -2146893007
+    SecurityQosFailed = -2146893006
+    SmartcardLogonRequired = -2146892994
+    UnsupportedPreauth = -2146892989
+    BadBinding = -2146892986
+    OK = 0
+    ContinueNeeded = 590610
+    CompleteNeeded = 590611
+    CompAndContinue = 590612
+    ContextExpired = 590615
+    CredentialsNeeded = 590624
+    Renegotiate = 590625
 
 
 class SocketConstructorFlags(Enum):
-    WSA_FLAG_OVERLAPPED: IntType = 1
-    WSA_FLAG_MULTIPOINT_C_ROOT: IntType = 2
-    WSA_FLAG_MULTIPOINT_C_LEAF: IntType = 4
-    WSA_FLAG_MULTIPOINT_D_ROOT: IntType = 8
-    WSA_FLAG_MULTIPOINT_D_LEAF: IntType = 16
+    WSA_FLAG_OVERLAPPED = 1
+    WSA_FLAG_MULTIPOINT_C_ROOT = 2
+    WSA_FLAG_MULTIPOINT_C_LEAF = 4
+    WSA_FLAG_MULTIPOINT_D_ROOT = 8
+    WSA_FLAG_MULTIPOINT_D_LEAF = 16
 
 
 class ThreadKinds(Enum):
-    Unknown: IntType = 0
-    User: IntType = 1
-    System: IntType = 2
-    OwnerMask: IntType = 3
-    Sync: IntType = 4
-    Async: IntType = 8
-    SyncMask: IntType = 12
-    Timer: IntType = 16
-    CompletionPort: IntType = 32
-    Worker: IntType = 64
-    ThreadPool: IntType = 96
-    Finalization: IntType = 128
-    Other: IntType = 256
-    SafeSources: IntType = 352
-    SourceMask: IntType = 496
+    Unknown = 0
+    User = 1
+    System = 2
+    OwnerMask = 3
+    Sync = 4
+    Async = 8
+    SyncMask = 12
+    Timer = 16
+    CompletionPort = 32
+    Worker = 64
+    ThreadPool = 96
+    Finalization = 128
+    Other = 256
+    SafeSources = 352
+    SourceMask = 496
 
 
 class TransportType(Enum):
-    Udp: IntType = 1
-    Connectionless: IntType = 1
-    Tcp: IntType = 2
-    ConnectionOriented: IntType = 2
-    All: IntType = 3
+    Udp = 1
+    Connectionless = 1
+    Tcp = 2
+    ConnectionOriented = 2
+    All = 3
 
 
 class TriState(Enum):
-    Unspecified: IntType = -1
-    #False: IntType = 0
-    #True: IntType = 1
+    Unspecified = -1
+    #False = 0
+    #True = 1
 
 
 class WebExceptionInternalStatus(Enum):
-    RequestFatal: IntType = 0
-    ServicePointFatal: IntType = 1
-    Recoverable: IntType = 2
-    Isolated: IntType = 3
+    RequestFatal = 0
+    ServicePointFatal = 1
+    Recoverable = 2
+    Isolated = 3
 
 
 class WebExceptionStatus(Enum):
-    Success: IntType = 0
-    NameResolutionFailure: IntType = 1
-    ConnectFailure: IntType = 2
-    ReceiveFailure: IntType = 3
-    SendFailure: IntType = 4
-    PipelineFailure: IntType = 5
-    RequestCanceled: IntType = 6
-    ProtocolError: IntType = 7
-    ConnectionClosed: IntType = 8
-    TrustFailure: IntType = 9
-    SecureChannelFailure: IntType = 10
-    ServerProtocolViolation: IntType = 11
-    KeepAliveFailure: IntType = 12
-    Pending: IntType = 13
-    Timeout: IntType = 14
-    ProxyNameResolutionFailure: IntType = 15
-    UnknownError: IntType = 16
-    MessageLengthLimitExceeded: IntType = 17
-    CacheEntryNotFound: IntType = 18
-    RequestProhibitedByCachePolicy: IntType = 19
-    RequestProhibitedByProxy: IntType = 20
+    Success = 0
+    NameResolutionFailure = 1
+    ConnectFailure = 2
+    ReceiveFailure = 3
+    SendFailure = 4
+    PipelineFailure = 5
+    RequestCanceled = 6
+    ProtocolError = 7
+    ConnectionClosed = 8
+    TrustFailure = 9
+    SecureChannelFailure = 10
+    ServerProtocolViolation = 11
+    KeepAliveFailure = 12
+    Pending = 13
+    Timeout = 14
+    ProxyNameResolutionFailure = 15
+    UnknownError = 16
+    MessageLengthLimitExceeded = 17
+    CacheEntryNotFound = 18
+    RequestProhibitedByCachePolicy = 19
+    RequestProhibitedByProxy = 20
 
 
 class WebHeaderCollectionType(Enum):
-    Unknown: UShortType = 0
-    WebRequest: UShortType = 1
-    WebResponse: UShortType = 2
-    HttpWebRequest: UShortType = 3
-    HttpWebResponse: UShortType = 4
-    HttpListenerRequest: UShortType = 5
-    HttpListenerResponse: UShortType = 6
-    FtpWebRequest: UShortType = 7
-    FtpWebResponse: UShortType = 8
-    FileWebRequest: UShortType = 9
-    FileWebResponse: UShortType = 10
+    Unknown = 0
+    WebRequest = 1
+    WebResponse = 2
+    HttpWebRequest = 3
+    HttpWebResponse = 4
+    HttpListenerRequest = 5
+    HttpListenerResponse = 6
+    FtpWebRequest = 7
+    FtpWebResponse = 8
+    FileWebRequest = 9
+    FileWebResponse = 10
 
 
 class WebParseErrorCode(Enum):
-    Generic: IntType = 0
-    InvalidHeaderName: IntType = 1
-    InvalidContentLength: IntType = 2
-    IncompleteHeaderLine: IntType = 3
-    CrLfError: IntType = 4
-    InvalidChunkFormat: IntType = 5
-    UnexpectedServerResponse: IntType = 6
+    Generic = 0
+    InvalidHeaderName = 1
+    InvalidContentLength = 2
+    IncompleteHeaderLine = 3
+    CrLfError = 4
+    InvalidChunkFormat = 5
+    UnexpectedServerResponse = 6
 
 
 class WebParseErrorSection(Enum):
-    Generic: IntType = 0
-    ResponseHeader: IntType = 1
-    ResponseStatusLine: IntType = 2
-    ResponseBody: IntType = 3
+    Generic = 0
+    ResponseHeader = 1
+    ResponseStatusLine = 2
+    ResponseBody = 3
 
 
 class WindowsInstallationType(Enum):
-    Unknown: IntType = 0
-    Client: IntType = 1
-    Server: IntType = 2
-    ServerCore: IntType = 3
-    Embedded: IntType = 4
+    Unknown = 0
+    Client = 1
+    Server = 2
+    ServerCore = 3
+    Embedded = 4
 
 
 class WriteBufferState(Enum):
-    Disabled: IntType = 0
-    Headers: IntType = 1
-    Buffer: IntType = 2
-    Playback: IntType = 3
+    Disabled = 0
+    Headers = 1
+    Buffer = 2
+    Playback = 3
 
 
 # ---------- Delegates ---------- #

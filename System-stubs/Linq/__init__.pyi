@@ -2975,15 +2975,15 @@ class IQueryable(Protocol, IEnumerable):
 # ---------- Enums ---------- #
 
 class ParallelExecutionMode(Enum):
-    Default: IntType = 0
-    ForceParallelism: IntType = 1
+    Default = 0
+    ForceParallelism = 1
 
 
 class ParallelMergeOptions(Enum):
-    Default: IntType = 0
-    NotBuffered: IntType = 1
-    AutoBuffered: IntType = 2
-    FullyBuffered: IntType = 3
+    Default = 0
+    NotBuffered = 1
+    AutoBuffered = 2
+    FullyBuffered = 3
 
 
 # No Delegates

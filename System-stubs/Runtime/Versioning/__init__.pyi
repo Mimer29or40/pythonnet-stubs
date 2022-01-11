@@ -337,40 +337,40 @@ class VersioningHelper(ABC, ObjectType):
 # ---------- Enums ---------- #
 
 class ComponentGuaranteesOptions(Enum):
-    #None: IntType = 0
-    Exchange: IntType = 1
-    Stable: IntType = 2
-    SideBySide: IntType = 4
+    #None = 0
+    Exchange = 1
+    Stable = 2
+    SideBySide = 4
 
 
 class ResourceScope(Enum):
-    #None: IntType = 0
-    Machine: IntType = 1
-    Process: IntType = 2
-    AppDomain: IntType = 4
-    Library: IntType = 8
-    Private: IntType = 16
-    Assembly: IntType = 32
+    #None = 0
+    Machine = 1
+    Process = 2
+    AppDomain = 4
+    Library = 8
+    Private = 16
+    Assembly = 32
 
 
 class SxSRequirements(Enum):
-    #None: IntType = 0
-    AppDomainID: IntType = 1
-    ProcessID: IntType = 2
-    CLRInstanceID: IntType = 4
-    AssemblyName: IntType = 8
-    TypeName: IntType = 16
+    #None = 0
+    AppDomainID = 1
+    ProcessID = 2
+    CLRInstanceID = 4
+    AssemblyName = 8
+    TypeName = 16
 
 
 class TargetFrameworkId(Enum):
-    NotYetChecked: IntType = 0
-    Unrecognized: IntType = 1
-    Unspecified: IntType = 2
-    NetFramework: IntType = 3
-    Portable: IntType = 4
-    NetCore: IntType = 5
-    Silverlight: IntType = 6
-    Phone: IntType = 7
+    NotYetChecked = 0
+    Unrecognized = 1
+    Unspecified = 2
+    NetFramework = 3
+    Portable = 4
+    NetCore = 5
+    Silverlight = 6
+    Phone = 7
 
 
 # No Delegates

@@ -935,10 +935,10 @@ class XPathNodeRef(ValueType):
 # ---------- Enums ---------- #
 
 class TextBlockType(Enum):
-    #None: IntType = 0
-    Text: IntType = 4
-    SignificantWhitespace: IntType = 5
-    Whitespace: IntType = 6
+    #None = 0
+    Text = 4
+    SignificantWhitespace = 5
+    Whitespace = 6
 
 
 # No Delegates

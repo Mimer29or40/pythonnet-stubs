@@ -260,33 +260,33 @@ class MemoryMappedViewStream(UnmanagedMemoryStream, IDisposable):
 # ---------- Enums ---------- #
 
 class MemoryMappedFileAccess(Enum):
-    ReadWrite: IntType = 0
-    Read: IntType = 1
-    Write: IntType = 2
-    CopyOnWrite: IntType = 3
-    ReadExecute: IntType = 4
-    ReadWriteExecute: IntType = 5
+    ReadWrite = 0
+    Read = 1
+    Write = 2
+    CopyOnWrite = 3
+    ReadExecute = 4
+    ReadWriteExecute = 5
 
 
 class MemoryMappedFileOptions(Enum):
-    #None: IntType = 0
-    DelayAllocatePages: IntType = 67108864
+    #None = 0
+    DelayAllocatePages = 67108864
 
 
 class MemoryMappedFileRights(Enum):
-    CopyOnWrite: IntType = 1
-    Write: IntType = 2
-    Read: IntType = 4
-    ReadWrite: IntType = 6
-    Execute: IntType = 8
-    ReadExecute: IntType = 12
-    ReadWriteExecute: IntType = 14
-    Delete: IntType = 65536
-    ReadPermissions: IntType = 131072
-    ChangePermissions: IntType = 262144
-    TakeOwnership: IntType = 524288
-    FullControl: IntType = 983055
-    AccessSystemSecurity: IntType = 16777216
+    CopyOnWrite = 1
+    Write = 2
+    Read = 4
+    ReadWrite = 6
+    Execute = 8
+    ReadExecute = 12
+    ReadWriteExecute = 14
+    Delete = 65536
+    ReadPermissions = 131072
+    ChangePermissions = 262144
+    TakeOwnership = 524288
+    FullControl = 983055
+    AccessSystemSecurity = 16777216
 
 
 # No Delegates

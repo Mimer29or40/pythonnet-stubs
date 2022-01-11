@@ -4380,58 +4380,58 @@ class IThreadPoolWorkItem(Protocol):
 # ---------- Enums ---------- #
 
 class ApartmentState(Enum):
-    STA: IntType = 0
-    MTA: IntType = 1
-    Unknown: IntType = 2
+    STA = 0
+    MTA = 1
+    Unknown = 2
 
 
 class EventResetMode(Enum):
-    AutoReset: IntType = 0
-    ManualReset: IntType = 1
+    AutoReset = 0
+    ManualReset = 1
 
 
 class LazyThreadSafetyMode(Enum):
-    #None: IntType = 0
-    PublicationOnly: IntType = 1
-    ExecutionAndPublication: IntType = 2
+    #None = 0
+    PublicationOnly = 1
+    ExecutionAndPublication = 2
 
 
 class LockRecursionPolicy(Enum):
-    NoRecursion: IntType = 0
-    SupportsRecursion: IntType = 1
+    NoRecursion = 0
+    SupportsRecursion = 1
 
 
 class StackCrawlMark(Enum):
-    LookForMe: IntType = 0
-    LookForMyCaller: IntType = 1
-    LookForMyCallersCaller: IntType = 2
-    LookForThread: IntType = 3
+    LookForMe = 0
+    LookForMyCaller = 1
+    LookForMyCallersCaller = 2
+    LookForThread = 3
 
 
 class SynchronizationContextProperties(Enum):
-    #None: IntType = 0
-    RequireWaitNotification: IntType = 1
+    #None = 0
+    RequireWaitNotification = 1
 
 
 class ThreadPriority(Enum):
-    Lowest: IntType = 0
-    BelowNormal: IntType = 1
-    Normal: IntType = 2
-    AboveNormal: IntType = 3
-    Highest: IntType = 4
+    Lowest = 0
+    BelowNormal = 1
+    Normal = 2
+    AboveNormal = 3
+    Highest = 4
 
 
 class ThreadState(Enum):
-    Running: IntType = 0
-    StopRequested: IntType = 1
-    SuspendRequested: IntType = 2
-    Background: IntType = 4
-    Unstarted: IntType = 8
-    Stopped: IntType = 16
-    WaitSleepJoin: IntType = 32
-    Suspended: IntType = 64
-    AbortRequested: IntType = 128
-    Aborted: IntType = 256
+    Running = 0
+    StopRequested = 1
+    SuspendRequested = 2
+    Background = 4
+    Unstarted = 8
+    Stopped = 16
+    WaitSleepJoin = 32
+    Suspended = 64
+    AbortRequested = 128
+    Aborted = 256
 
 
 # ---------- Delegates ---------- #

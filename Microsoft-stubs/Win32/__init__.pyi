@@ -2987,15 +2987,15 @@ class NativeMethods(ABC, ObjectType):
     # ---------- Sub Enums ---------- #
     
     class StructFormatEnum(Enum):
-        Ansi: IntType = 1
-        Unicode: IntType = 2
-        Auto: IntType = 3
+        Ansi = 1
+        Unicode = 2
+        Auto = 3
     
     
     class StructFormat(Enum):
-        Ansi: IntType = 1
-        Unicode: IntType = 2
-        Auto: IntType = 3
+        Ansi = 1
+        Unicode = 2
+        Auto = 3
     
 
 
@@ -4120,86 +4120,86 @@ class IInternetSecurityManager(Protocol):
 # ---------- Enums ---------- #
 
 class PowerModes(Enum):
-    Resume: IntType = 1
-    StatusChange: IntType = 2
-    Suspend: IntType = 3
+    Resume = 1
+    StatusChange = 2
+    Suspend = 3
 
 
 class RegistryHive(Enum):
-    ClassesRoot: IntType = -2147483648
-    CurrentUser: IntType = -2147483647
-    LocalMachine: IntType = -2147483646
-    Users: IntType = -2147483645
-    PerformanceData: IntType = -2147483644
-    CurrentConfig: IntType = -2147483643
-    DynData: IntType = -2147483642
+    ClassesRoot = -2147483648
+    CurrentUser = -2147483647
+    LocalMachine = -2147483646
+    Users = -2147483645
+    PerformanceData = -2147483644
+    CurrentConfig = -2147483643
+    DynData = -2147483642
 
 
 class RegistryKeyPermissionCheck(Enum):
-    Default: IntType = 0
-    ReadSubTree: IntType = 1
-    ReadWriteSubTree: IntType = 2
+    Default = 0
+    ReadSubTree = 1
+    ReadWriteSubTree = 2
 
 
 class RegistryOptions(Enum):
-    #None: IntType = 0
-    Volatile: IntType = 1
+    #None = 0
+    Volatile = 1
 
 
 class RegistryValueKind(Enum):
-    #None: IntType = -1
-    Unknown: IntType = 0
-    String: IntType = 1
-    ExpandString: IntType = 2
-    Binary: IntType = 3
-    DWord: IntType = 4
-    MultiString: IntType = 7
-    QWord: IntType = 11
+    #None = -1
+    Unknown = 0
+    String = 1
+    ExpandString = 2
+    Binary = 3
+    DWord = 4
+    MultiString = 7
+    QWord = 11
 
 
 class RegistryValueOptions(Enum):
-    #None: IntType = 0
-    DoNotExpandEnvironmentNames: IntType = 1
+    #None = 0
+    DoNotExpandEnvironmentNames = 1
 
 
 class RegistryView(Enum):
-    Default: IntType = 0
-    Registry64: IntType = 256
-    Registry32: IntType = 512
+    Default = 0
+    Registry64 = 256
+    Registry32 = 512
 
 
 class SessionEndReasons(Enum):
-    Logoff: IntType = 1
-    SystemShutdown: IntType = 2
+    Logoff = 1
+    SystemShutdown = 2
 
 
 class SessionSwitchReason(Enum):
-    ConsoleConnect: IntType = 1
-    ConsoleDisconnect: IntType = 2
-    RemoteConnect: IntType = 3
-    RemoteDisconnect: IntType = 4
-    SessionLogon: IntType = 5
-    SessionLogoff: IntType = 6
-    SessionLock: IntType = 7
-    SessionUnlock: IntType = 8
-    SessionRemoteControl: IntType = 9
+    ConsoleConnect = 1
+    ConsoleDisconnect = 2
+    RemoteConnect = 3
+    RemoteDisconnect = 4
+    SessionLogon = 5
+    SessionLogoff = 6
+    SessionLock = 7
+    SessionUnlock = 8
+    SessionRemoteControl = 9
 
 
 class UserPreferenceCategory(Enum):
-    Accessibility: IntType = 1
-    Color: IntType = 2
-    Desktop: IntType = 3
-    General: IntType = 4
-    Icon: IntType = 5
-    Keyboard: IntType = 6
-    Menu: IntType = 7
-    Mouse: IntType = 8
-    Policy: IntType = 9
-    Power: IntType = 10
-    Screensaver: IntType = 11
-    Window: IntType = 12
-    Locale: IntType = 13
-    VisualStyle: IntType = 14
+    Accessibility = 1
+    Color = 2
+    Desktop = 3
+    General = 4
+    Icon = 5
+    Keyboard = 6
+    Menu = 7
+    Mouse = 8
+    Policy = 9
+    Power = 10
+    Screensaver = 11
+    Window = 12
+    Locale = 13
+    VisualStyle = 14
 
 
 # ---------- Delegates ---------- #

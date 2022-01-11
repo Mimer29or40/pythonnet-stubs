@@ -2474,14 +2474,14 @@ class TplEtwProvider(EventSource, IDisposable):
     # ---------- Sub Enums ---------- #
     
     class ForkJoinOperationType(Enum):
-        ParallelInvoke: IntType = 1
-        ParallelFor: IntType = 2
-        ParallelForEach: IntType = 3
+        ParallelInvoke = 1
+        ParallelFor = 2
+        ParallelForEach = 3
     
     
     class TaskWaitBehavior(Enum):
-        Synchronous: IntType = 1
-        Asynchronous: IntType = 2
+        Synchronous = 1
+        Asynchronous = 2
     
 
 
@@ -2702,81 +2702,81 @@ class ITaskCompletionAction(Protocol):
 # ---------- Enums ---------- #
 
 class AsyncCausalityStatus(Enum):
-    Started: IntType = 0
-    Completed: IntType = 1
-    Canceled: IntType = 2
-    Error: IntType = 3
+    Started = 0
+    Completed = 1
+    Canceled = 2
+    Error = 3
 
 
 class CausalityRelation(Enum):
-    AssignDelegate: IntType = 0
-    Join: IntType = 1
-    Choice: IntType = 2
-    Cancel: IntType = 3
-    Error: IntType = 4
+    AssignDelegate = 0
+    Join = 1
+    Choice = 2
+    Cancel = 3
+    Error = 4
 
 
 class CausalitySynchronousWork(Enum):
-    CompletionNotification: IntType = 0
-    ProgressNotification: IntType = 1
-    Execution: IntType = 2
+    CompletionNotification = 0
+    ProgressNotification = 1
+    Execution = 2
 
 
 class CausalityTraceLevel(Enum):
-    Required: IntType = 0
-    Important: IntType = 1
-    Verbose: IntType = 2
+    Required = 0
+    Important = 1
+    Verbose = 2
 
 
 class InternalTaskOptions(Enum):
-    #None: IntType = 0
-    ChildReplica: IntType = 256
-    ContinuationTask: IntType = 512
-    PromiseTask: IntType = 1024
-    SelfReplicating: IntType = 2048
-    LazyCancellation: IntType = 4096
-    QueuedByRuntime: IntType = 8192
-    DoNotDispose: IntType = 16384
-    InternalOptionsMask: IntType = 65280
+    #None = 0
+    ChildReplica = 256
+    ContinuationTask = 512
+    PromiseTask = 1024
+    SelfReplicating = 2048
+    LazyCancellation = 4096
+    QueuedByRuntime = 8192
+    DoNotDispose = 16384
+    InternalOptionsMask = 65280
 
 
 class TaskContinuationOptions(Enum):
-    #None: IntType = 0
-    PreferFairness: IntType = 1
-    LongRunning: IntType = 2
-    AttachedToParent: IntType = 4
-    DenyChildAttach: IntType = 8
-    HideScheduler: IntType = 16
-    LazyCancellation: IntType = 32
-    RunContinuationsAsynchronously: IntType = 64
-    NotOnRanToCompletion: IntType = 65536
-    NotOnFaulted: IntType = 131072
-    OnlyOnCanceled: IntType = 196608
-    NotOnCanceled: IntType = 262144
-    OnlyOnFaulted: IntType = 327680
-    OnlyOnRanToCompletion: IntType = 393216
-    ExecuteSynchronously: IntType = 524288
+    #None = 0
+    PreferFairness = 1
+    LongRunning = 2
+    AttachedToParent = 4
+    DenyChildAttach = 8
+    HideScheduler = 16
+    LazyCancellation = 32
+    RunContinuationsAsynchronously = 64
+    NotOnRanToCompletion = 65536
+    NotOnFaulted = 131072
+    OnlyOnCanceled = 196608
+    NotOnCanceled = 262144
+    OnlyOnFaulted = 327680
+    OnlyOnRanToCompletion = 393216
+    ExecuteSynchronously = 524288
 
 
 class TaskCreationOptions(Enum):
-    #None: IntType = 0
-    PreferFairness: IntType = 1
-    LongRunning: IntType = 2
-    AttachedToParent: IntType = 4
-    DenyChildAttach: IntType = 8
-    HideScheduler: IntType = 16
-    RunContinuationsAsynchronously: IntType = 64
+    #None = 0
+    PreferFairness = 1
+    LongRunning = 2
+    AttachedToParent = 4
+    DenyChildAttach = 8
+    HideScheduler = 16
+    RunContinuationsAsynchronously = 64
 
 
 class TaskStatus(Enum):
-    Created: IntType = 0
-    WaitingForActivation: IntType = 1
-    WaitingToRun: IntType = 2
-    Running: IntType = 3
-    WaitingForChildrenToComplete: IntType = 4
-    RanToCompletion: IntType = 5
-    Canceled: IntType = 6
-    Faulted: IntType = 7
+    Created = 0
+    WaitingForActivation = 1
+    WaitingToRun = 2
+    Running = 3
+    WaitingForChildrenToComplete = 4
+    RanToCompletion = 5
+    Canceled = 6
+    Faulted = 7
 
 
 # No Delegates

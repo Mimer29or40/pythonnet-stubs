@@ -534,12 +534,12 @@ class PureAttribute(Attribute, _Attribute):
 # ---------- Enums ---------- #
 
 class ContractFailureKind(Enum):
-    Precondition: IntType = 0
-    Postcondition: IntType = 1
-    PostconditionOnException: IntType = 2
-    Invariant: IntType = 3
-    Assert: IntType = 4
-    Assume: IntType = 5
+    Precondition = 0
+    Postcondition = 1
+    PostconditionOnException = 2
+    Invariant = 3
+    Assert = 4
+    Assume = 5
 
 
 # No Delegates

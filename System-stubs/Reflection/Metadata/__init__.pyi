@@ -812,61 +812,61 @@ class SequencePointCollection(ValueType, IEnumerable[SequencePoint], IEnumerable
 # ---------- Enums ---------- #
 
 class HandleKind(Enum):
-    ModuleDefinition: ByteType = 0
-    TypeReference: ByteType = 1
-    TypeDefinition: ByteType = 2
-    FieldDefinition: ByteType = 4
-    MethodDefinition: ByteType = 6
-    Parameter: ByteType = 8
-    InterfaceImplementation: ByteType = 9
-    MemberReference: ByteType = 10
-    Constant: ByteType = 11
-    CustomAttribute: ByteType = 12
-    DeclarativeSecurityAttribute: ByteType = 14
-    StandaloneSignature: ByteType = 17
-    EventDefinition: ByteType = 20
-    PropertyDefinition: ByteType = 23
-    MethodImplementation: ByteType = 25
-    ModuleReference: ByteType = 26
-    TypeSpecification: ByteType = 27
-    AssemblyDefinition: ByteType = 32
-    AssemblyReference: ByteType = 35
-    AssemblyFile: ByteType = 38
-    ExportedType: ByteType = 39
-    ManifestResource: ByteType = 40
-    GenericParameter: ByteType = 42
-    MethodSpecification: ByteType = 43
-    GenericParameterConstraint: ByteType = 44
-    Document: ByteType = 48
-    MethodDebugInformation: ByteType = 49
-    LocalScope: ByteType = 50
-    LocalVariable: ByteType = 51
-    LocalConstant: ByteType = 52
-    ImportScope: ByteType = 53
-    CustomDebugInformation: ByteType = 55
-    UserString: ByteType = 112
-    Blob: ByteType = 113
-    Guid: ByteType = 114
-    String: ByteType = 120
-    NamespaceDefinition: ByteType = 124
+    ModuleDefinition = 0
+    TypeReference = 1
+    TypeDefinition = 2
+    FieldDefinition = 4
+    MethodDefinition = 6
+    Parameter = 8
+    InterfaceImplementation = 9
+    MemberReference = 10
+    Constant = 11
+    CustomAttribute = 12
+    DeclarativeSecurityAttribute = 14
+    StandaloneSignature = 17
+    EventDefinition = 20
+    PropertyDefinition = 23
+    MethodImplementation = 25
+    ModuleReference = 26
+    TypeSpecification = 27
+    AssemblyDefinition = 32
+    AssemblyReference = 35
+    AssemblyFile = 38
+    ExportedType = 39
+    ManifestResource = 40
+    GenericParameter = 42
+    MethodSpecification = 43
+    GenericParameterConstraint = 44
+    Document = 48
+    MethodDebugInformation = 49
+    LocalScope = 50
+    LocalVariable = 51
+    LocalConstant = 52
+    ImportScope = 53
+    CustomDebugInformation = 55
+    UserString = 112
+    Blob = 113
+    Guid = 114
+    String = 120
+    NamespaceDefinition = 124
 
 
 class MetadataKind(Enum):
-    Ecma335: IntType = 0
-    WindowsMetadata: IntType = 1
-    ManagedWindowsMetadata: IntType = 2
+    Ecma335 = 0
+    WindowsMetadata = 1
+    ManagedWindowsMetadata = 2
 
 
 class MetadataReaderOptions(Enum):
-    #None: IntType = 0
-    Default: IntType = 1
-    ApplyWindowsRuntimeProjections: IntType = 1
+    #None = 0
+    Default = 1
+    ApplyWindowsRuntimeProjections = 1
 
 
 class MetadataStreamOptions(Enum):
-    Default: IntType = 0
-    LeaveOpen: IntType = 1
-    PrefetchMetadata: IntType = 2
+    Default = 0
+    LeaveOpen = 1
+    PrefetchMetadata = 2
 
 
 # No Delegates

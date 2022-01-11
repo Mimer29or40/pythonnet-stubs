@@ -533,9 +533,9 @@ class CompiledIdentityConstraint(ObjectType):
     # ---------- Sub Enums ---------- #
     
     class ConstraintRole(Enum):
-        Unique: IntType = 0
-        Key: IntType = 1
-        Keyref: IntType = 2
+        Unique = 0
+        Key = 1
+        Keyref = 2
     
 
 
@@ -3051,9 +3051,9 @@ class NamespaceList(ObjectType):
     # ---------- Sub Enums ---------- #
     
     class ListType(Enum):
-        Any: IntType = 0
-        Other: IntType = 1
-        Set: IntType = 2
+        Any = 0
+        Other = 1
+        Set = 2
     
 
 
@@ -4579,129 +4579,129 @@ class SchemaNames(ObjectType):
     # ---------- Sub Enums ---------- #
     
     class Token(Enum):
-        Empty: IntType = 0
-        SchemaName: IntType = 1
-        SchemaType: IntType = 2
-        SchemaMaxOccurs: IntType = 3
-        SchemaMinOccurs: IntType = 4
-        SchemaInfinite: IntType = 5
-        SchemaModel: IntType = 6
-        SchemaOpen: IntType = 7
-        SchemaClosed: IntType = 8
-        SchemaContent: IntType = 9
-        SchemaMixed: IntType = 10
-        SchemaEmpty: IntType = 11
-        SchemaElementOnly: IntType = 12
-        SchemaTextOnly: IntType = 13
-        SchemaOrder: IntType = 14
-        SchemaSeq: IntType = 15
-        SchemaOne: IntType = 16
-        SchemaMany: IntType = 17
-        SchemaRequired: IntType = 18
-        SchemaYes: IntType = 19
-        SchemaNo: IntType = 20
-        SchemaString: IntType = 21
-        SchemaId: IntType = 22
-        SchemaIdref: IntType = 23
-        SchemaIdrefs: IntType = 24
-        SchemaEntity: IntType = 25
-        SchemaEntities: IntType = 26
-        SchemaNmtoken: IntType = 27
-        SchemaNmtokens: IntType = 28
-        SchemaEnumeration: IntType = 29
-        SchemaDefault: IntType = 30
-        XdrRoot: IntType = 31
-        XdrElementType: IntType = 32
-        XdrElement: IntType = 33
-        XdrGroup: IntType = 34
-        XdrAttributeType: IntType = 35
-        XdrAttribute: IntType = 36
-        XdrDatatype: IntType = 37
-        XdrDescription: IntType = 38
-        XdrExtends: IntType = 39
-        SchemaXdrRootAlias: IntType = 40
-        SchemaDtType: IntType = 41
-        SchemaDtValues: IntType = 42
-        SchemaDtMaxLength: IntType = 43
-        SchemaDtMinLength: IntType = 44
-        SchemaDtMax: IntType = 45
-        SchemaDtMin: IntType = 46
-        SchemaDtMinExclusive: IntType = 47
-        SchemaDtMaxExclusive: IntType = 48
-        SchemaTargetNamespace: IntType = 49
-        SchemaVersion: IntType = 50
-        SchemaFinalDefault: IntType = 51
-        SchemaBlockDefault: IntType = 52
-        SchemaFixed: IntType = 53
-        SchemaAbstract: IntType = 54
-        SchemaBlock: IntType = 55
-        SchemaSubstitutionGroup: IntType = 56
-        SchemaFinal: IntType = 57
-        SchemaNillable: IntType = 58
-        SchemaRef: IntType = 59
-        SchemaBase: IntType = 60
-        SchemaDerivedBy: IntType = 61
-        SchemaNamespace: IntType = 62
-        SchemaProcessContents: IntType = 63
-        SchemaRefer: IntType = 64
-        SchemaPublic: IntType = 65
-        SchemaSystem: IntType = 66
-        SchemaSchemaLocation: IntType = 67
-        SchemaValue: IntType = 68
-        SchemaSource: IntType = 69
-        SchemaAttributeFormDefault: IntType = 70
-        SchemaElementFormDefault: IntType = 71
-        SchemaUse: IntType = 72
-        SchemaForm: IntType = 73
-        XsdSchema: IntType = 74
-        XsdAnnotation: IntType = 75
-        XsdInclude: IntType = 76
-        XsdImport: IntType = 77
-        XsdElement: IntType = 78
-        XsdAttribute: IntType = 79
-        xsdAttributeGroup: IntType = 80
-        XsdAnyAttribute: IntType = 81
-        XsdGroup: IntType = 82
-        XsdAll: IntType = 83
-        XsdChoice: IntType = 84
-        XsdSequence: IntType = 85
-        XsdAny: IntType = 86
-        XsdNotation: IntType = 87
-        XsdSimpleType: IntType = 88
-        XsdComplexType: IntType = 89
-        XsdUnique: IntType = 90
-        XsdKey: IntType = 91
-        XsdKeyref: IntType = 92
-        XsdSelector: IntType = 93
-        XsdField: IntType = 94
-        XsdMinExclusive: IntType = 95
-        XsdMinInclusive: IntType = 96
-        XsdMaxExclusive: IntType = 97
-        XsdMaxInclusive: IntType = 98
-        XsdTotalDigits: IntType = 99
-        XsdFractionDigits: IntType = 100
-        XsdLength: IntType = 101
-        XsdMinLength: IntType = 102
-        XsdMaxLength: IntType = 103
-        XsdEnumeration: IntType = 104
-        XsdPattern: IntType = 105
-        XsdDocumentation: IntType = 106
-        XsdAppInfo: IntType = 107
-        XsdComplexContent: IntType = 108
-        XsdComplexContentExtension: IntType = 109
-        XsdComplexContentRestriction: IntType = 110
-        XsdSimpleContent: IntType = 111
-        XsdSimpleContentExtension: IntType = 112
-        XsdSimpleContentRestriction: IntType = 113
-        XsdSimpleTypeList: IntType = 114
-        XsdSimpleTypeRestriction: IntType = 115
-        XsdSimpleTypeUnion: IntType = 116
-        XsdWhitespace: IntType = 117
-        XsdRedefine: IntType = 118
-        SchemaItemType: IntType = 119
-        SchemaMemberTypes: IntType = 120
-        SchemaXPath: IntType = 121
-        XmlLang: IntType = 122
+        Empty = 0
+        SchemaName = 1
+        SchemaType = 2
+        SchemaMaxOccurs = 3
+        SchemaMinOccurs = 4
+        SchemaInfinite = 5
+        SchemaModel = 6
+        SchemaOpen = 7
+        SchemaClosed = 8
+        SchemaContent = 9
+        SchemaMixed = 10
+        SchemaEmpty = 11
+        SchemaElementOnly = 12
+        SchemaTextOnly = 13
+        SchemaOrder = 14
+        SchemaSeq = 15
+        SchemaOne = 16
+        SchemaMany = 17
+        SchemaRequired = 18
+        SchemaYes = 19
+        SchemaNo = 20
+        SchemaString = 21
+        SchemaId = 22
+        SchemaIdref = 23
+        SchemaIdrefs = 24
+        SchemaEntity = 25
+        SchemaEntities = 26
+        SchemaNmtoken = 27
+        SchemaNmtokens = 28
+        SchemaEnumeration = 29
+        SchemaDefault = 30
+        XdrRoot = 31
+        XdrElementType = 32
+        XdrElement = 33
+        XdrGroup = 34
+        XdrAttributeType = 35
+        XdrAttribute = 36
+        XdrDatatype = 37
+        XdrDescription = 38
+        XdrExtends = 39
+        SchemaXdrRootAlias = 40
+        SchemaDtType = 41
+        SchemaDtValues = 42
+        SchemaDtMaxLength = 43
+        SchemaDtMinLength = 44
+        SchemaDtMax = 45
+        SchemaDtMin = 46
+        SchemaDtMinExclusive = 47
+        SchemaDtMaxExclusive = 48
+        SchemaTargetNamespace = 49
+        SchemaVersion = 50
+        SchemaFinalDefault = 51
+        SchemaBlockDefault = 52
+        SchemaFixed = 53
+        SchemaAbstract = 54
+        SchemaBlock = 55
+        SchemaSubstitutionGroup = 56
+        SchemaFinal = 57
+        SchemaNillable = 58
+        SchemaRef = 59
+        SchemaBase = 60
+        SchemaDerivedBy = 61
+        SchemaNamespace = 62
+        SchemaProcessContents = 63
+        SchemaRefer = 64
+        SchemaPublic = 65
+        SchemaSystem = 66
+        SchemaSchemaLocation = 67
+        SchemaValue = 68
+        SchemaSource = 69
+        SchemaAttributeFormDefault = 70
+        SchemaElementFormDefault = 71
+        SchemaUse = 72
+        SchemaForm = 73
+        XsdSchema = 74
+        XsdAnnotation = 75
+        XsdInclude = 76
+        XsdImport = 77
+        XsdElement = 78
+        XsdAttribute = 79
+        xsdAttributeGroup = 80
+        XsdAnyAttribute = 81
+        XsdGroup = 82
+        XsdAll = 83
+        XsdChoice = 84
+        XsdSequence = 85
+        XsdAny = 86
+        XsdNotation = 87
+        XsdSimpleType = 88
+        XsdComplexType = 89
+        XsdUnique = 90
+        XsdKey = 91
+        XsdKeyref = 92
+        XsdSelector = 93
+        XsdField = 94
+        XsdMinExclusive = 95
+        XsdMinInclusive = 96
+        XsdMaxExclusive = 97
+        XsdMaxInclusive = 98
+        XsdTotalDigits = 99
+        XsdFractionDigits = 100
+        XsdLength = 101
+        XsdMinLength = 102
+        XsdMaxLength = 103
+        XsdEnumeration = 104
+        XsdPattern = 105
+        XsdDocumentation = 106
+        XsdAppInfo = 107
+        XsdComplexContent = 108
+        XsdComplexContentExtension = 109
+        XsdComplexContentRestriction = 110
+        XsdSimpleContent = 111
+        XsdSimpleContentExtension = 112
+        XsdSimpleContentRestriction = 113
+        XsdSimpleTypeList = 114
+        XsdSimpleTypeRestriction = 115
+        XsdSimpleTypeUnion = 116
+        XsdWhitespace = 117
+        XsdRedefine = 118
+        SchemaItemType = 119
+        SchemaMemberTypes = 120
+        SchemaXPath = 121
+        XmlLang = 122
     
 
 
@@ -8153,8 +8153,8 @@ class XmlSchemaInference(ObjectType):
     # ---------- Sub Enums ---------- #
     
     class InferenceOption(Enum):
-        Restricted: IntType = 0
-        Relaxed: IntType = 1
+        Restricted = 0
+        Relaxed = 1
     
 
 
@@ -10735,9 +10735,9 @@ class XsdDuration(ValueType):
     # ---------- Sub Enums ---------- #
     
     class DurationType(Enum):
-        Duration: IntType = 0
-        YearMonthDuration: IntType = 1
-        DayTimeDuration: IntType = 2
+        Duration = 0
+        YearMonthDuration = 1
+        DayTimeDuration = 2
     
 
 
@@ -10789,219 +10789,219 @@ class IXmlSchemaInfo(Protocol):
 # ---------- Enums ---------- #
 
 class AttributeMatchState(Enum):
-    AttributeFound: IntType = 0
-    AnyIdAttributeFound: IntType = 1
-    UndeclaredElementAndAttribute: IntType = 2
-    UndeclaredAttribute: IntType = 3
-    AnyAttributeLax: IntType = 4
-    AnyAttributeSkip: IntType = 5
-    ProhibitedAnyAttribute: IntType = 6
-    ProhibitedAttribute: IntType = 7
-    AttributeNameMismatch: IntType = 8
-    ValidateAttributeInvalidCall: IntType = 9
+    AttributeFound = 0
+    AnyIdAttributeFound = 1
+    UndeclaredElementAndAttribute = 2
+    UndeclaredAttribute = 3
+    AnyAttributeLax = 4
+    AnyAttributeSkip = 5
+    ProhibitedAnyAttribute = 6
+    ProhibitedAttribute = 7
+    AttributeNameMismatch = 8
+    ValidateAttributeInvalidCall = 9
 
 
 class Compositor(Enum):
-    Root: IntType = 0
-    Include: IntType = 1
-    Import: IntType = 2
-    Redefine: IntType = 3
+    Root = 0
+    Include = 1
+    Import = 2
+    Redefine = 3
 
 
 class FacetType(Enum):
-    #None: IntType = 0
-    Length: IntType = 1
-    MinLength: IntType = 2
-    MaxLength: IntType = 3
-    Pattern: IntType = 4
-    Whitespace: IntType = 5
-    Enumeration: IntType = 6
-    MinExclusive: IntType = 7
-    MinInclusive: IntType = 8
-    MaxExclusive: IntType = 9
-    MaxInclusive: IntType = 10
-    TotalDigits: IntType = 11
-    FractionDigits: IntType = 12
+    #None = 0
+    Length = 1
+    MinLength = 2
+    MaxLength = 3
+    Pattern = 4
+    Whitespace = 5
+    Enumeration = 6
+    MinExclusive = 7
+    MinInclusive = 8
+    MaxExclusive = 9
+    MaxInclusive = 10
+    TotalDigits = 11
+    FractionDigits = 12
 
 
 class RestrictionFlags(Enum):
-    Length: IntType = 1
-    MinLength: IntType = 2
-    MaxLength: IntType = 4
-    Pattern: IntType = 8
-    Enumeration: IntType = 16
-    WhiteSpace: IntType = 32
-    MaxInclusive: IntType = 64
-    MaxExclusive: IntType = 128
-    MinInclusive: IntType = 256
-    MinExclusive: IntType = 512
-    TotalDigits: IntType = 1024
-    FractionDigits: IntType = 2048
+    Length = 1
+    MinLength = 2
+    MaxLength = 4
+    Pattern = 8
+    Enumeration = 16
+    WhiteSpace = 32
+    MaxInclusive = 64
+    MaxExclusive = 128
+    MinInclusive = 256
+    MinExclusive = 512
+    TotalDigits = 1024
+    FractionDigits = 2048
 
 
 class SchemaType(Enum):
-    #None: IntType = 0
-    DTD: IntType = 1
-    XDR: IntType = 2
-    XSD: IntType = 3
+    #None = 0
+    DTD = 1
+    XDR = 2
+    XSD = 3
 
 
 class ValidatorState(Enum):
-    #None: IntType = 0
-    Start: IntType = 1
-    TopLevelAttribute: IntType = 2
-    TopLevelTextOrWS: IntType = 3
-    Element: IntType = 4
-    Attribute: IntType = 5
-    EndOfAttributes: IntType = 6
-    Text: IntType = 7
-    Whitespace: IntType = 8
-    EndElement: IntType = 9
-    SkipToEndElement: IntType = 10
-    Finish: IntType = 11
+    #None = 0
+    Start = 1
+    TopLevelAttribute = 2
+    TopLevelTextOrWS = 3
+    Element = 4
+    Attribute = 5
+    EndOfAttributes = 6
+    Text = 7
+    Whitespace = 8
+    EndElement = 9
+    SkipToEndElement = 10
+    Finish = 11
 
 
 class XmlSchemaContentProcessing(Enum):
-    #None: IntType = 0
-    Skip: IntType = 1
-    Lax: IntType = 2
-    Strict: IntType = 3
+    #None = 0
+    Skip = 1
+    Lax = 2
+    Strict = 3
 
 
 class XmlSchemaContentType(Enum):
-    TextOnly: IntType = 0
-    Empty: IntType = 1
-    ElementOnly: IntType = 2
-    Mixed: IntType = 3
+    TextOnly = 0
+    Empty = 1
+    ElementOnly = 2
+    Mixed = 3
 
 
 class XmlSchemaDatatypeVariety(Enum):
-    Atomic: IntType = 0
-    List: IntType = 1
-    Union: IntType = 2
+    Atomic = 0
+    List = 1
+    Union = 2
 
 
 class XmlSchemaDerivationMethod(Enum):
-    Empty: IntType = 0
-    Substitution: IntType = 1
-    Extension: IntType = 2
-    Restriction: IntType = 4
-    List: IntType = 8
-    Union: IntType = 16
-    All: IntType = 255
-    #None: IntType = 256
+    Empty = 0
+    Substitution = 1
+    Extension = 2
+    Restriction = 4
+    List = 8
+    Union = 16
+    All = 255
+    #None = 256
 
 
 class XmlSchemaForm(Enum):
-    #None: IntType = 0
-    Qualified: IntType = 1
-    Unqualified: IntType = 2
+    #None = 0
+    Qualified = 1
+    Unqualified = 2
 
 
 class XmlSchemaUse(Enum):
-    #None: IntType = 0
-    Optional: IntType = 1
-    Prohibited: IntType = 2
-    Required: IntType = 3
+    #None = 0
+    Optional = 1
+    Prohibited = 2
+    Required = 3
 
 
 class XmlSchemaValidationFlags(Enum):
-    #None: IntType = 0
-    ProcessInlineSchema: IntType = 1
-    ProcessSchemaLocation: IntType = 2
-    ReportValidationWarnings: IntType = 4
-    ProcessIdentityConstraints: IntType = 8
-    AllowXmlAttributes: IntType = 16
+    #None = 0
+    ProcessInlineSchema = 1
+    ProcessSchemaLocation = 2
+    ReportValidationWarnings = 4
+    ProcessIdentityConstraints = 8
+    AllowXmlAttributes = 16
 
 
 class XmlSchemaValidity(Enum):
-    NotKnown: IntType = 0
-    Valid: IntType = 1
-    Invalid: IntType = 2
+    NotKnown = 0
+    Valid = 1
+    Invalid = 2
 
 
 class XmlSchemaWhiteSpace(Enum):
-    Preserve: IntType = 0
-    Replace: IntType = 1
-    Collapse: IntType = 2
+    Preserve = 0
+    Replace = 1
+    Collapse = 2
 
 
 class XmlSeverityType(Enum):
-    Error: IntType = 0
-    Warning: IntType = 1
+    Error = 0
+    Warning = 1
 
 
 class XmlTypeCode(Enum):
-    #None: IntType = 0
-    Item: IntType = 1
-    Node: IntType = 2
-    Document: IntType = 3
-    Element: IntType = 4
-    Attribute: IntType = 5
-    Namespace: IntType = 6
-    ProcessingInstruction: IntType = 7
-    Comment: IntType = 8
-    Text: IntType = 9
-    AnyAtomicType: IntType = 10
-    UntypedAtomic: IntType = 11
-    String: IntType = 12
-    Boolean: IntType = 13
-    Decimal: IntType = 14
-    Float: IntType = 15
-    Double: IntType = 16
-    Duration: IntType = 17
-    DateTime: IntType = 18
-    Time: IntType = 19
-    Date: IntType = 20
-    GYearMonth: IntType = 21
-    GYear: IntType = 22
-    GMonthDay: IntType = 23
-    GDay: IntType = 24
-    GMonth: IntType = 25
-    HexBinary: IntType = 26
-    Base64Binary: IntType = 27
-    AnyUri: IntType = 28
-    QName: IntType = 29
-    Notation: IntType = 30
-    NormalizedString: IntType = 31
-    Token: IntType = 32
-    Language: IntType = 33
-    NmToken: IntType = 34
-    Name: IntType = 35
-    NCName: IntType = 36
-    Id: IntType = 37
-    Idref: IntType = 38
-    Entity: IntType = 39
-    Integer: IntType = 40
-    NonPositiveInteger: IntType = 41
-    NegativeInteger: IntType = 42
-    Long: IntType = 43
-    Int: IntType = 44
-    Short: IntType = 45
-    Byte: IntType = 46
-    NonNegativeInteger: IntType = 47
-    UnsignedLong: IntType = 48
-    UnsignedInt: IntType = 49
-    UnsignedShort: IntType = 50
-    UnsignedByte: IntType = 51
-    PositiveInteger: IntType = 52
-    YearMonthDuration: IntType = 53
-    DayTimeDuration: IntType = 54
+    #None = 0
+    Item = 1
+    Node = 2
+    Document = 3
+    Element = 4
+    Attribute = 5
+    Namespace = 6
+    ProcessingInstruction = 7
+    Comment = 8
+    Text = 9
+    AnyAtomicType = 10
+    UntypedAtomic = 11
+    String = 12
+    Boolean = 13
+    Decimal = 14
+    Float = 15
+    Double = 16
+    Duration = 17
+    DateTime = 18
+    Time = 19
+    Date = 20
+    GYearMonth = 21
+    GYear = 22
+    GMonthDay = 23
+    GDay = 24
+    GMonth = 25
+    HexBinary = 26
+    Base64Binary = 27
+    AnyUri = 28
+    QName = 29
+    Notation = 30
+    NormalizedString = 31
+    Token = 32
+    Language = 33
+    NmToken = 34
+    Name = 35
+    NCName = 36
+    Id = 37
+    Idref = 38
+    Entity = 39
+    Integer = 40
+    NonPositiveInteger = 41
+    NegativeInteger = 42
+    Long = 43
+    Int = 44
+    Short = 45
+    Byte = 46
+    NonNegativeInteger = 47
+    UnsignedLong = 48
+    UnsignedInt = 49
+    UnsignedShort = 50
+    UnsignedByte = 51
+    PositiveInteger = 52
+    YearMonthDuration = 53
+    DayTimeDuration = 54
 
 
 class XsdDateTimeFlags(Enum):
-    DateTime: IntType = 1
-    Time: IntType = 2
-    Date: IntType = 4
-    GYearMonth: IntType = 8
-    GYear: IntType = 16
-    GMonthDay: IntType = 32
-    GDay: IntType = 64
-    GMonth: IntType = 128
-    AllXsd: IntType = 255
-    XdrDateTimeNoTz: IntType = 256
-    XdrDateTime: IntType = 512
-    XdrTimeNoTz: IntType = 1024
+    DateTime = 1
+    Time = 2
+    Date = 4
+    GYearMonth = 8
+    GYear = 16
+    GMonthDay = 32
+    GDay = 64
+    GMonth = 128
+    AllXsd = 255
+    XdrDateTimeNoTz = 256
+    XdrDateTime = 512
+    XdrTimeNoTz = 1024
 
 
 # ---------- Delegates ---------- #

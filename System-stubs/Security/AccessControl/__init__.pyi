@@ -2505,236 +2505,236 @@ class Win32(ABC, ObjectType):
 # ---------- Enums ---------- #
 
 class AccessControlActions(Enum):
-    #None: IntType = 0
-    View: IntType = 1
-    Change: IntType = 2
+    #None = 0
+    View = 1
+    Change = 2
 
 
 class AccessControlModification(Enum):
-    Add: IntType = 0
-    Set: IntType = 1
-    Reset: IntType = 2
-    Remove: IntType = 3
-    RemoveAll: IntType = 4
-    RemoveSpecific: IntType = 5
+    Add = 0
+    Set = 1
+    Reset = 2
+    Remove = 3
+    RemoveAll = 4
+    RemoveSpecific = 5
 
 
 class AccessControlSections(Enum):
-    #None: IntType = 0
-    Audit: IntType = 1
-    Access: IntType = 2
-    Owner: IntType = 4
-    Group: IntType = 8
-    All: IntType = 15
+    #None = 0
+    Audit = 1
+    Access = 2
+    Owner = 4
+    Group = 8
+    All = 15
 
 
 class AccessControlType(Enum):
-    Allow: IntType = 0
-    Deny: IntType = 1
+    Allow = 0
+    Deny = 1
 
 
 class AceFlags(Enum):
-    #None: ByteType = 0
-    ObjectInherit: ByteType = 1
-    ContainerInherit: ByteType = 2
-    NoPropagateInherit: ByteType = 4
-    InheritOnly: ByteType = 8
-    InheritanceFlags: ByteType = 15
-    Inherited: ByteType = 16
-    SuccessfulAccess: ByteType = 64
-    FailedAccess: ByteType = 128
-    AuditFlags: ByteType = 192
+    #None = 0
+    ObjectInherit = 1
+    ContainerInherit = 2
+    NoPropagateInherit = 4
+    InheritOnly = 8
+    InheritanceFlags = 15
+    Inherited = 16
+    SuccessfulAccess = 64
+    FailedAccess = 128
+    AuditFlags = 192
 
 
 class AceQualifier(Enum):
-    AccessAllowed: IntType = 0
-    AccessDenied: IntType = 1
-    SystemAudit: IntType = 2
-    SystemAlarm: IntType = 3
+    AccessAllowed = 0
+    AccessDenied = 1
+    SystemAudit = 2
+    SystemAlarm = 3
 
 
 class AceType(Enum):
-    AccessAllowed: ByteType = 0
-    AccessDenied: ByteType = 1
-    SystemAudit: ByteType = 2
-    SystemAlarm: ByteType = 3
-    AccessAllowedCompound: ByteType = 4
-    AccessAllowedObject: ByteType = 5
-    AccessDeniedObject: ByteType = 6
-    SystemAuditObject: ByteType = 7
-    SystemAlarmObject: ByteType = 8
-    AccessAllowedCallback: ByteType = 9
-    AccessDeniedCallback: ByteType = 10
-    AccessAllowedCallbackObject: ByteType = 11
-    AccessDeniedCallbackObject: ByteType = 12
-    SystemAuditCallback: ByteType = 13
-    SystemAlarmCallback: ByteType = 14
-    SystemAuditCallbackObject: ByteType = 15
-    SystemAlarmCallbackObject: ByteType = 16
-    MaxDefinedAceType: ByteType = 16
+    AccessAllowed = 0
+    AccessDenied = 1
+    SystemAudit = 2
+    SystemAlarm = 3
+    AccessAllowedCompound = 4
+    AccessAllowedObject = 5
+    AccessDeniedObject = 6
+    SystemAuditObject = 7
+    SystemAlarmObject = 8
+    AccessAllowedCallback = 9
+    AccessDeniedCallback = 10
+    AccessAllowedCallbackObject = 11
+    AccessDeniedCallbackObject = 12
+    SystemAuditCallback = 13
+    SystemAlarmCallback = 14
+    SystemAuditCallbackObject = 15
+    SystemAlarmCallbackObject = 16
+    MaxDefinedAceType = 16
 
 
 class AuditFlags(Enum):
-    #None: IntType = 0
-    Success: IntType = 1
-    Failure: IntType = 2
+    #None = 0
+    Success = 1
+    Failure = 2
 
 
 class CompoundAceType(Enum):
-    Impersonation: IntType = 1
+    Impersonation = 1
 
 
 class ControlFlags(Enum):
-    #None: IntType = 0
-    OwnerDefaulted: IntType = 1
-    GroupDefaulted: IntType = 2
-    DiscretionaryAclPresent: IntType = 4
-    DiscretionaryAclDefaulted: IntType = 8
-    SystemAclPresent: IntType = 16
-    SystemAclDefaulted: IntType = 32
-    DiscretionaryAclUntrusted: IntType = 64
-    ServerSecurity: IntType = 128
-    DiscretionaryAclAutoInheritRequired: IntType = 256
-    SystemAclAutoInheritRequired: IntType = 512
-    DiscretionaryAclAutoInherited: IntType = 1024
-    SystemAclAutoInherited: IntType = 2048
-    DiscretionaryAclProtected: IntType = 4096
-    SystemAclProtected: IntType = 8192
-    RMControlValid: IntType = 16384
-    SelfRelative: IntType = 32768
+    #None = 0
+    OwnerDefaulted = 1
+    GroupDefaulted = 2
+    DiscretionaryAclPresent = 4
+    DiscretionaryAclDefaulted = 8
+    SystemAclPresent = 16
+    SystemAclDefaulted = 32
+    DiscretionaryAclUntrusted = 64
+    ServerSecurity = 128
+    DiscretionaryAclAutoInheritRequired = 256
+    SystemAclAutoInheritRequired = 512
+    DiscretionaryAclAutoInherited = 1024
+    SystemAclAutoInherited = 2048
+    DiscretionaryAclProtected = 4096
+    SystemAclProtected = 8192
+    RMControlValid = 16384
+    SelfRelative = 32768
 
 
 class CryptoKeyRights(Enum):
-    GenericRead: IntType = -2147483648
-    ReadData: IntType = 1
-    WriteData: IntType = 2
-    ReadExtendedAttributes: IntType = 8
-    WriteExtendedAttributes: IntType = 16
-    ReadAttributes: IntType = 128
-    WriteAttributes: IntType = 256
-    Delete: IntType = 65536
-    ReadPermissions: IntType = 131072
-    ChangePermissions: IntType = 262144
-    TakeOwnership: IntType = 524288
-    Synchronize: IntType = 1048576
-    FullControl: IntType = 2032027
-    GenericAll: IntType = 268435456
-    GenericExecute: IntType = 536870912
-    GenericWrite: IntType = 1073741824
+    GenericRead = -2147483648
+    ReadData = 1
+    WriteData = 2
+    ReadExtendedAttributes = 8
+    WriteExtendedAttributes = 16
+    ReadAttributes = 128
+    WriteAttributes = 256
+    Delete = 65536
+    ReadPermissions = 131072
+    ChangePermissions = 262144
+    TakeOwnership = 524288
+    Synchronize = 1048576
+    FullControl = 2032027
+    GenericAll = 268435456
+    GenericExecute = 536870912
+    GenericWrite = 1073741824
 
 
 class EventWaitHandleRights(Enum):
-    Modify: IntType = 2
-    Delete: IntType = 65536
-    ReadPermissions: IntType = 131072
-    ChangePermissions: IntType = 262144
-    TakeOwnership: IntType = 524288
-    Synchronize: IntType = 1048576
-    FullControl: IntType = 2031619
+    Modify = 2
+    Delete = 65536
+    ReadPermissions = 131072
+    ChangePermissions = 262144
+    TakeOwnership = 524288
+    Synchronize = 1048576
+    FullControl = 2031619
 
 
 class FileSystemRights(Enum):
-    ListDirectory: IntType = 1
-    ReadData: IntType = 1
-    WriteData: IntType = 2
-    CreateFiles: IntType = 2
-    CreateDirectories: IntType = 4
-    AppendData: IntType = 4
-    ReadExtendedAttributes: IntType = 8
-    WriteExtendedAttributes: IntType = 16
-    Traverse: IntType = 32
-    ExecuteFile: IntType = 32
-    DeleteSubdirectoriesAndFiles: IntType = 64
-    ReadAttributes: IntType = 128
-    WriteAttributes: IntType = 256
-    Write: IntType = 278
-    Delete: IntType = 65536
-    ReadPermissions: IntType = 131072
-    Read: IntType = 131209
-    ReadAndExecute: IntType = 131241
-    Modify: IntType = 197055
-    ChangePermissions: IntType = 262144
-    TakeOwnership: IntType = 524288
-    Synchronize: IntType = 1048576
-    FullControl: IntType = 2032127
+    ListDirectory = 1
+    ReadData = 1
+    WriteData = 2
+    CreateFiles = 2
+    CreateDirectories = 4
+    AppendData = 4
+    ReadExtendedAttributes = 8
+    WriteExtendedAttributes = 16
+    Traverse = 32
+    ExecuteFile = 32
+    DeleteSubdirectoriesAndFiles = 64
+    ReadAttributes = 128
+    WriteAttributes = 256
+    Write = 278
+    Delete = 65536
+    ReadPermissions = 131072
+    Read = 131209
+    ReadAndExecute = 131241
+    Modify = 197055
+    ChangePermissions = 262144
+    TakeOwnership = 524288
+    Synchronize = 1048576
+    FullControl = 2032127
 
 
 class InheritanceFlags(Enum):
-    #None: IntType = 0
-    ContainerInherit: IntType = 1
-    ObjectInherit: IntType = 2
+    #None = 0
+    ContainerInherit = 1
+    ObjectInherit = 2
 
 
 class MutexRights(Enum):
-    Modify: IntType = 1
-    Delete: IntType = 65536
-    ReadPermissions: IntType = 131072
-    ChangePermissions: IntType = 262144
-    TakeOwnership: IntType = 524288
-    Synchronize: IntType = 1048576
-    FullControl: IntType = 2031617
+    Modify = 1
+    Delete = 65536
+    ReadPermissions = 131072
+    ChangePermissions = 262144
+    TakeOwnership = 524288
+    Synchronize = 1048576
+    FullControl = 2031617
 
 
 class ObjectAceFlags(Enum):
-    #None: IntType = 0
-    ObjectAceTypePresent: IntType = 1
-    InheritedObjectAceTypePresent: IntType = 2
+    #None = 0
+    ObjectAceTypePresent = 1
+    InheritedObjectAceTypePresent = 2
 
 
 class PropagationFlags(Enum):
-    #None: IntType = 0
-    NoPropagateInherit: IntType = 1
-    InheritOnly: IntType = 2
+    #None = 0
+    NoPropagateInherit = 1
+    InheritOnly = 2
 
 
 class RegistryRights(Enum):
-    QueryValues: IntType = 1
-    SetValue: IntType = 2
-    CreateSubKey: IntType = 4
-    EnumerateSubKeys: IntType = 8
-    Notify: IntType = 16
-    CreateLink: IntType = 32
-    Delete: IntType = 65536
-    ReadPermissions: IntType = 131072
-    WriteKey: IntType = 131078
-    ExecuteKey: IntType = 131097
-    ReadKey: IntType = 131097
-    ChangePermissions: IntType = 262144
-    TakeOwnership: IntType = 524288
-    FullControl: IntType = 983103
+    QueryValues = 1
+    SetValue = 2
+    CreateSubKey = 4
+    EnumerateSubKeys = 8
+    Notify = 16
+    CreateLink = 32
+    Delete = 65536
+    ReadPermissions = 131072
+    WriteKey = 131078
+    ExecuteKey = 131097
+    ReadKey = 131097
+    ChangePermissions = 262144
+    TakeOwnership = 524288
+    FullControl = 983103
 
 
 class ResourceType(Enum):
-    Unknown: IntType = 0
-    FileObject: IntType = 1
-    Service: IntType = 2
-    Printer: IntType = 3
-    RegistryKey: IntType = 4
-    LMShare: IntType = 5
-    KernelObject: IntType = 6
-    WindowObject: IntType = 7
-    DSObject: IntType = 8
-    DSObjectAll: IntType = 9
-    ProviderDefined: IntType = 10
-    WmiGuidObject: IntType = 11
-    RegistryWow6432Key: IntType = 12
+    Unknown = 0
+    FileObject = 1
+    Service = 2
+    Printer = 3
+    RegistryKey = 4
+    LMShare = 5
+    KernelObject = 6
+    WindowObject = 7
+    DSObject = 8
+    DSObjectAll = 9
+    ProviderDefined = 10
+    WmiGuidObject = 11
+    RegistryWow6432Key = 12
 
 
 class SecurityInfos(Enum):
-    Owner: IntType = 1
-    Group: IntType = 2
-    DiscretionaryAcl: IntType = 4
-    SystemAcl: IntType = 8
+    Owner = 1
+    Group = 2
+    DiscretionaryAcl = 4
+    SystemAcl = 8
 
 
 class SemaphoreRights(Enum):
-    Modify: IntType = 2
-    Delete: IntType = 65536
-    ReadPermissions: IntType = 131072
-    ChangePermissions: IntType = 262144
-    TakeOwnership: IntType = 524288
-    Synchronize: IntType = 1048576
-    FullControl: IntType = 2031619
+    Modify = 2
+    Delete = 65536
+    ReadPermissions = 131072
+    ChangePermissions = 262144
+    TakeOwnership = 524288
+    Synchronize = 1048576
+    FullControl = 2031619
 
 
 # No Delegates

@@ -1041,48 +1041,48 @@ class IXPathNavigable(Protocol):
 # ---------- Enums ---------- #
 
 class XPathNamespaceScope(Enum):
-    All: IntType = 0
-    ExcludeXml: IntType = 1
-    Local: IntType = 2
+    All = 0
+    ExcludeXml = 1
+    Local = 2
 
 
 class XPathNodeType(Enum):
-    Root: IntType = 0
-    Element: IntType = 1
-    Attribute: IntType = 2
-    Namespace: IntType = 3
-    Text: IntType = 4
-    SignificantWhitespace: IntType = 5
-    Whitespace: IntType = 6
-    ProcessingInstruction: IntType = 7
-    Comment: IntType = 8
-    All: IntType = 9
+    Root = 0
+    Element = 1
+    Attribute = 2
+    Namespace = 3
+    Text = 4
+    SignificantWhitespace = 5
+    Whitespace = 6
+    ProcessingInstruction = 7
+    Comment = 8
+    All = 9
 
 
 class XPathResultType(Enum):
-    Number: IntType = 0
-    String: IntType = 1
-    Navigator: IntType = 1
-    Boolean: IntType = 2
-    NodeSet: IntType = 3
-    Any: IntType = 5
-    Error: IntType = 6
+    Number = 0
+    String = 1
+    Navigator = 1
+    Boolean = 2
+    NodeSet = 3
+    Any = 5
+    Error = 6
 
 
 class XmlCaseOrder(Enum):
-    #None: IntType = 0
-    UpperFirst: IntType = 1
-    LowerFirst: IntType = 2
+    #None = 0
+    UpperFirst = 1
+    LowerFirst = 2
 
 
 class XmlDataType(Enum):
-    Text: IntType = 1
-    Number: IntType = 2
+    Text = 1
+    Number = 2
 
 
 class XmlSortOrder(Enum):
-    Ascending: IntType = 1
-    Descending: IntType = 2
+    Ascending = 1
+    Descending = 2
 
 
 # No Delegates

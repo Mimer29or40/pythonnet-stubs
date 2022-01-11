@@ -12039,265 +12039,265 @@ class IXmlNamespaceResolver(Protocol):
 # ---------- Enums ---------- #
 
 class AttributeProperties(Enum):
-    DEFAULT: UIntType = 0
-    URI: UIntType = 1
-    BOOLEAN: UIntType = 2
-    NAME: UIntType = 4
+    DEFAULT = 0
+    URI = 1
+    BOOLEAN = 2
+    NAME = 4
 
 
 class BinXmlToken(Enum):
-    NotImpl: IntType = -2
-    EOF: IntType = -1
-    Error: IntType = 0
-    SQL_SMALLINT: IntType = 1
-    SQL_INT: IntType = 2
-    SQL_REAL: IntType = 3
-    SQL_FLOAT: IntType = 4
-    SQL_MONEY: IntType = 5
-    SQL_BIT: IntType = 6
-    SQL_TINYINT: IntType = 7
-    SQL_BIGINT: IntType = 8
-    SQL_UUID: IntType = 9
-    SQL_DECIMAL: IntType = 10
-    SQL_NUMERIC: IntType = 11
-    SQL_BINARY: IntType = 12
-    SQL_CHAR: IntType = 13
-    SQL_NCHAR: IntType = 14
-    SQL_VARBINARY: IntType = 15
-    SQL_VARCHAR: IntType = 16
-    SQL_NVARCHAR: IntType = 17
-    SQL_DATETIME: IntType = 18
-    SQL_SMALLDATETIME: IntType = 19
-    SQL_SMALLMONEY: IntType = 20
-    SQL_TEXT: IntType = 22
-    SQL_IMAGE: IntType = 23
-    SQL_NTEXT: IntType = 24
-    SQL_UDT: IntType = 27
-    XSD_KATMAI_TIMEOFFSET: IntType = 122
-    XSD_KATMAI_DATETIMEOFFSET: IntType = 123
-    XSD_KATMAI_DATEOFFSET: IntType = 124
-    XSD_KATMAI_TIME: IntType = 125
-    XSD_KATMAI_DATETIME: IntType = 126
-    XSD_KATMAI_DATE: IntType = 127
-    XSD_TIME: IntType = 129
-    XSD_DATETIME: IntType = 130
-    XSD_DATE: IntType = 131
-    XSD_BINHEX: IntType = 132
-    XSD_BASE64: IntType = 133
-    XSD_BOOLEAN: IntType = 134
-    XSD_DECIMAL: IntType = 135
-    XSD_BYTE: IntType = 136
-    XSD_UNSIGNEDSHORT: IntType = 137
-    XSD_UNSIGNEDINT: IntType = 138
-    XSD_UNSIGNEDLONG: IntType = 139
-    XSD_QNAME: IntType = 140
-    NmFlush: IntType = 233
-    Extn: IntType = 234
-    EndNest: IntType = 235
-    Nest: IntType = 236
-    XmlText: IntType = 237
-    QName: IntType = 239
-    Name: IntType = 240
-    EndCData: IntType = 241
-    CData: IntType = 242
-    Comment: IntType = 243
-    PI: IntType = 244
-    EndAttrs: IntType = 245
-    Attr: IntType = 246
-    EndElem: IntType = 247
-    Element: IntType = 248
-    Subset: IntType = 249
-    Public: IntType = 250
-    System: IntType = 251
-    DocType: IntType = 252
-    Encoding: IntType = 253
-    XmlDecl: IntType = 254
+    NotImpl = -2
+    EOF = -1
+    Error = 0
+    SQL_SMALLINT = 1
+    SQL_INT = 2
+    SQL_REAL = 3
+    SQL_FLOAT = 4
+    SQL_MONEY = 5
+    SQL_BIT = 6
+    SQL_TINYINT = 7
+    SQL_BIGINT = 8
+    SQL_UUID = 9
+    SQL_DECIMAL = 10
+    SQL_NUMERIC = 11
+    SQL_BINARY = 12
+    SQL_CHAR = 13
+    SQL_NCHAR = 14
+    SQL_VARBINARY = 15
+    SQL_VARCHAR = 16
+    SQL_NVARCHAR = 17
+    SQL_DATETIME = 18
+    SQL_SMALLDATETIME = 19
+    SQL_SMALLMONEY = 20
+    SQL_TEXT = 22
+    SQL_IMAGE = 23
+    SQL_NTEXT = 24
+    SQL_UDT = 27
+    XSD_KATMAI_TIMEOFFSET = 122
+    XSD_KATMAI_DATETIMEOFFSET = 123
+    XSD_KATMAI_DATEOFFSET = 124
+    XSD_KATMAI_TIME = 125
+    XSD_KATMAI_DATETIME = 126
+    XSD_KATMAI_DATE = 127
+    XSD_TIME = 129
+    XSD_DATETIME = 130
+    XSD_DATE = 131
+    XSD_BINHEX = 132
+    XSD_BASE64 = 133
+    XSD_BOOLEAN = 134
+    XSD_DECIMAL = 135
+    XSD_BYTE = 136
+    XSD_UNSIGNEDSHORT = 137
+    XSD_UNSIGNEDINT = 138
+    XSD_UNSIGNEDLONG = 139
+    XSD_QNAME = 140
+    NmFlush = 233
+    Extn = 234
+    EndNest = 235
+    Nest = 236
+    XmlText = 237
+    QName = 239
+    Name = 240
+    EndCData = 241
+    CData = 242
+    Comment = 243
+    PI = 244
+    EndAttrs = 245
+    Attr = 246
+    EndElem = 247
+    Element = 248
+    Subset = 249
+    Public = 250
+    System = 251
+    DocType = 252
+    Encoding = 253
+    XmlDecl = 254
 
 
 class ConformanceLevel(Enum):
-    Auto: IntType = 0
-    Fragment: IntType = 1
-    Document: IntType = 2
+    Auto = 0
+    Fragment = 1
+    Document = 2
 
 
 class DocumentXmlWriterType(Enum):
-    InsertSiblingAfter: IntType = 0
-    InsertSiblingBefore: IntType = 1
-    PrependChild: IntType = 2
-    AppendChild: IntType = 3
-    AppendAttribute: IntType = 4
-    ReplaceToFollowingSibling: IntType = 5
+    InsertSiblingAfter = 0
+    InsertSiblingBefore = 1
+    PrependChild = 2
+    AppendChild = 3
+    AppendAttribute = 4
+    ReplaceToFollowingSibling = 5
 
 
 class DtdProcessing(Enum):
-    Prohibit: IntType = 0
-    Ignore: IntType = 1
-    Parse: IntType = 2
+    Prohibit = 0
+    Ignore = 1
+    Parse = 2
 
 
 class ElementProperties(Enum):
-    DEFAULT: UIntType = 0
-    URI_PARENT: UIntType = 1
-    BOOL_PARENT: UIntType = 2
-    NAME_PARENT: UIntType = 4
-    EMPTY: UIntType = 8
-    NO_ENTITIES: UIntType = 16
-    HEAD: UIntType = 32
-    BLOCK_WS: UIntType = 64
-    HAS_NS: UIntType = 128
+    DEFAULT = 0
+    URI_PARENT = 1
+    BOOL_PARENT = 2
+    NAME_PARENT = 4
+    EMPTY = 8
+    NO_ENTITIES = 16
+    HEAD = 32
+    BLOCK_WS = 64
+    HAS_NS = 128
 
 
 class EntityHandling(Enum):
-    ExpandEntities: IntType = 1
-    ExpandCharEntities: IntType = 2
+    ExpandEntities = 1
+    ExpandCharEntities = 2
 
 
 class ExceptionType(Enum):
-    ArgumentException: IntType = 0
-    XmlException: IntType = 1
+    ArgumentException = 0
+    XmlException = 1
 
 
 class Formatting(Enum):
-    #None: IntType = 0
-    Indented: IntType = 1
+    #None = 0
+    Indented = 1
 
 
 class NamespaceHandling(Enum):
-    Default: IntType = 0
-    OmitDuplicates: IntType = 1
+    Default = 0
+    OmitDuplicates = 1
 
 
 class NewLineHandling(Enum):
-    Replace: IntType = 0
-    Entitize: IntType = 1
-    #None: IntType = 2
+    Replace = 0
+    Entitize = 1
+    #None = 2
 
 
 class ReadState(Enum):
-    Initial: IntType = 0
-    Interactive: IntType = 1
-    Error: IntType = 2
-    EndOfFile: IntType = 3
-    Closed: IntType = 4
+    Initial = 0
+    Interactive = 1
+    Error = 2
+    EndOfFile = 3
+    Closed = 4
 
 
 class TernaryTreeByte(Enum):
-    characterByte: IntType = 0
-    leftTree: IntType = 1
-    rightTree: IntType = 2
-    data: IntType = 3
+    characterByte = 0
+    leftTree = 1
+    rightTree = 2
+    data = 3
 
 
 class TriState(Enum):
-    Unknown: IntType = -1
-    #False: IntType = 0
-    #True: IntType = 1
+    Unknown = -1
+    #False = 0
+    #True = 1
 
 
 class ValidationType(Enum):
-    #None: IntType = 0
-    Auto: IntType = 1
-    DTD: IntType = 2
-    XDR: IntType = 3
-    Schema: IntType = 4
+    #None = 0
+    Auto = 1
+    DTD = 2
+    XDR = 3
+    Schema = 4
 
 
 class WhitespaceHandling(Enum):
-    All: IntType = 0
-    Significant: IntType = 1
-    #None: IntType = 2
+    All = 0
+    Significant = 1
+    #None = 2
 
 
 class WriteState(Enum):
-    Start: IntType = 0
-    Prolog: IntType = 1
-    Element: IntType = 2
-    Attribute: IntType = 3
-    Content: IntType = 4
-    Closed: IntType = 5
-    Error: IntType = 6
+    Start = 0
+    Prolog = 1
+    Element = 2
+    Attribute = 3
+    Content = 4
+    Closed = 5
+    Error = 6
 
 
 class XmlDateTimeSerializationMode(Enum):
-    Local: IntType = 0
-    Utc: IntType = 1
-    Unspecified: IntType = 2
-    RoundtripKind: IntType = 3
+    Local = 0
+    Utc = 1
+    Unspecified = 2
+    RoundtripKind = 3
 
 
 class XmlNamespaceScope(Enum):
-    All: IntType = 0
-    ExcludeXml: IntType = 1
-    Local: IntType = 2
+    All = 0
+    ExcludeXml = 1
+    Local = 2
 
 
 class XmlNodeChangedAction(Enum):
-    Insert: IntType = 0
-    Remove: IntType = 1
-    Change: IntType = 2
+    Insert = 0
+    Remove = 1
+    Change = 2
 
 
 class XmlNodeOrder(Enum):
-    Before: IntType = 0
-    After: IntType = 1
-    Same: IntType = 2
-    Unknown: IntType = 3
+    Before = 0
+    After = 1
+    Same = 2
+    Unknown = 3
 
 
 class XmlNodeType(Enum):
-    #None: IntType = 0
-    Element: IntType = 1
-    Attribute: IntType = 2
-    Text: IntType = 3
-    CDATA: IntType = 4
-    EntityReference: IntType = 5
-    Entity: IntType = 6
-    ProcessingInstruction: IntType = 7
-    Comment: IntType = 8
-    Document: IntType = 9
-    DocumentType: IntType = 10
-    DocumentFragment: IntType = 11
-    Notation: IntType = 12
-    Whitespace: IntType = 13
-    SignificantWhitespace: IntType = 14
-    EndElement: IntType = 15
-    EndEntity: IntType = 16
-    XmlDeclaration: IntType = 17
+    #None = 0
+    Element = 1
+    Attribute = 2
+    Text = 3
+    CDATA = 4
+    EntityReference = 5
+    Entity = 6
+    ProcessingInstruction = 7
+    Comment = 8
+    Document = 9
+    DocumentType = 10
+    DocumentFragment = 11
+    Notation = 12
+    Whitespace = 13
+    SignificantWhitespace = 14
+    EndElement = 15
+    EndEntity = 16
+    XmlDeclaration = 17
 
 
 class XmlOutputMethod(Enum):
-    Xml: IntType = 0
-    Html: IntType = 1
-    Text: IntType = 2
-    AutoDetect: IntType = 3
+    Xml = 0
+    Html = 1
+    Text = 2
+    AutoDetect = 3
 
 
 class XmlSpace(Enum):
-    #None: IntType = 0
-    Default: IntType = 1
-    Preserve: IntType = 2
+    #None = 0
+    Default = 1
+    Preserve = 2
 
 
 class XmlStandalone(Enum):
-    Omit: IntType = 0
-    Yes: IntType = 1
-    No: IntType = 2
+    Omit = 0
+    Yes = 1
+    No = 2
 
 
 class XmlTokenizedType(Enum):
-    CDATA: IntType = 0
-    ID: IntType = 1
-    IDREF: IntType = 2
-    IDREFS: IntType = 3
-    ENTITY: IntType = 4
-    ENTITIES: IntType = 5
-    NMTOKEN: IntType = 6
-    NMTOKENS: IntType = 7
-    NOTATION: IntType = 8
-    ENUMERATION: IntType = 9
-    QName: IntType = 10
-    NCName: IntType = 11
-    #None: IntType = 12
+    CDATA = 0
+    ID = 1
+    IDREF = 2
+    IDREFS = 3
+    ENTITY = 4
+    ENTITIES = 5
+    NMTOKEN = 6
+    NMTOKENS = 7
+    NOTATION = 8
+    ENUMERATION = 9
+    QName = 10
+    NCName = 11
+    #None = 12
 
 
 # ---------- Delegates ---------- #

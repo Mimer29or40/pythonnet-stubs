@@ -1075,11 +1075,11 @@ class IOrderedDictionary(Protocol, IDictionary, ICollection, IEnumerable):
 # ---------- Enums ---------- #
 
 class NotifyCollectionChangedAction(Enum):
-    Add: IntType = 0
-    Remove: IntType = 1
-    Replace: IntType = 2
-    Move: IntType = 3
-    Reset: IntType = 4
+    Add = 0
+    Remove = 1
+    Replace = 2
+    Move = 3
+    Reset = 4
 
 
 # ---------- Delegates ---------- #

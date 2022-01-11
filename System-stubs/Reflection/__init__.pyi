@@ -5355,415 +5355,415 @@ class IReflectableType(Protocol):
 # ---------- Enums ---------- #
 
 class AssemblyContentType(Enum):
-    Default: IntType = 0
-    WindowsRuntime: IntType = 1
+    Default = 0
+    WindowsRuntime = 1
 
 
 class AssemblyNameFlags(Enum):
-    #None: IntType = 0
-    PublicKey: IntType = 1
-    Retargetable: IntType = 256
-    EnableJITcompileOptimizer: IntType = 16384
-    EnableJITcompileTracking: IntType = 32768
+    #None = 0
+    PublicKey = 1
+    Retargetable = 256
+    EnableJITcompileOptimizer = 16384
+    EnableJITcompileTracking = 32768
 
 
 class BindingFlags(Enum):
-    Default: IntType = 0
-    IgnoreCase: IntType = 1
-    DeclaredOnly: IntType = 2
-    Instance: IntType = 4
-    Static: IntType = 8
-    Public: IntType = 16
-    NonPublic: IntType = 32
-    FlattenHierarchy: IntType = 64
-    InvokeMethod: IntType = 256
-    CreateInstance: IntType = 512
-    GetField: IntType = 1024
-    SetField: IntType = 2048
-    GetProperty: IntType = 4096
-    SetProperty: IntType = 8192
-    PutDispProperty: IntType = 16384
-    PutRefDispProperty: IntType = 32768
-    ExactBinding: IntType = 65536
-    SuppressChangeType: IntType = 131072
-    OptionalParamBinding: IntType = 262144
-    IgnoreReturn: IntType = 16777216
+    Default = 0
+    IgnoreCase = 1
+    DeclaredOnly = 2
+    Instance = 4
+    Static = 8
+    Public = 16
+    NonPublic = 32
+    FlattenHierarchy = 64
+    InvokeMethod = 256
+    CreateInstance = 512
+    GetField = 1024
+    SetField = 2048
+    GetProperty = 4096
+    SetProperty = 8192
+    PutDispProperty = 16384
+    PutRefDispProperty = 32768
+    ExactBinding = 65536
+    SuppressChangeType = 131072
+    OptionalParamBinding = 262144
+    IgnoreReturn = 16777216
 
 
 class CallingConventions(Enum):
-    Standard: IntType = 1
-    VarArgs: IntType = 2
-    Any: IntType = 3
-    HasThis: IntType = 32
-    ExplicitThis: IntType = 64
+    Standard = 1
+    VarArgs = 2
+    Any = 3
+    HasThis = 32
+    ExplicitThis = 64
 
 
 class CorElementType(Enum):
-    End: ByteType = 0
-    Void: ByteType = 1
-    Boolean: ByteType = 2
-    Char: ByteType = 3
-    I1: ByteType = 4
-    U1: ByteType = 5
-    I2: ByteType = 6
-    U2: ByteType = 7
-    I4: ByteType = 8
-    U4: ByteType = 9
-    I8: ByteType = 10
-    U8: ByteType = 11
-    R4: ByteType = 12
-    R8: ByteType = 13
-    String: ByteType = 14
-    Ptr: ByteType = 15
-    ByRef: ByteType = 16
-    ValueType: ByteType = 17
-    Class: ByteType = 18
-    Var: ByteType = 19
-    Array: ByteType = 20
-    GenericInst: ByteType = 21
-    TypedByRef: ByteType = 22
-    I: ByteType = 24
-    U: ByteType = 25
-    FnPtr: ByteType = 27
-    Object: ByteType = 28
-    SzArray: ByteType = 29
-    MVar: ByteType = 30
-    CModReqd: ByteType = 31
-    CModOpt: ByteType = 32
-    Internal: ByteType = 33
-    Max: ByteType = 34
-    Modifier: ByteType = 64
-    Sentinel: ByteType = 65
-    Pinned: ByteType = 69
+    End = 0
+    Void = 1
+    Boolean = 2
+    Char = 3
+    I1 = 4
+    U1 = 5
+    I2 = 6
+    U2 = 7
+    I4 = 8
+    U4 = 9
+    I8 = 10
+    U8 = 11
+    R4 = 12
+    R8 = 13
+    String = 14
+    Ptr = 15
+    ByRef = 16
+    ValueType = 17
+    Class = 18
+    Var = 19
+    Array = 20
+    GenericInst = 21
+    TypedByRef = 22
+    I = 24
+    U = 25
+    FnPtr = 27
+    Object = 28
+    SzArray = 29
+    MVar = 30
+    CModReqd = 31
+    CModOpt = 32
+    Internal = 33
+    Max = 34
+    Modifier = 64
+    Sentinel = 65
+    Pinned = 69
 
 
 class CustomAttributeEncoding(Enum):
-    Undefined: IntType = 0
-    Boolean: IntType = 2
-    Char: IntType = 3
-    SByte: IntType = 4
-    Byte: IntType = 5
-    Int16: IntType = 6
-    UInt16: IntType = 7
-    Int32: IntType = 8
-    UInt32: IntType = 9
-    Int64: IntType = 10
-    UInt64: IntType = 11
-    Float: IntType = 12
-    Double: IntType = 13
-    String: IntType = 14
-    Array: IntType = 29
-    Type: IntType = 80
-    Object: IntType = 81
-    Field: IntType = 83
-    Property: IntType = 84
-    Enum: IntType = 85
+    Undefined = 0
+    Boolean = 2
+    Char = 3
+    SByte = 4
+    Byte = 5
+    Int16 = 6
+    UInt16 = 7
+    Int32 = 8
+    UInt32 = 9
+    Int64 = 10
+    UInt64 = 11
+    Float = 12
+    Double = 13
+    String = 14
+    Array = 29
+    Type = 80
+    Object = 81
+    Field = 83
+    Property = 84
+    Enum = 85
 
 
 class EventAttributes(Enum):
-    #None: IntType = 0
-    SpecialName: IntType = 512
-    ReservedMask: IntType = 1024
-    RTSpecialName: IntType = 1024
+    #None = 0
+    SpecialName = 512
+    ReservedMask = 1024
+    RTSpecialName = 1024
 
 
 class ExceptionHandlingClauseOptions(Enum):
-    Clause: IntType = 0
-    Filter: IntType = 1
-    Finally: IntType = 2
-    Fault: IntType = 4
+    Clause = 0
+    Filter = 1
+    Finally = 2
+    Fault = 4
 
 
 class FieldAttributes(Enum):
-    PrivateScope: IntType = 0
-    Private: IntType = 1
-    FamANDAssem: IntType = 2
-    Assembly: IntType = 3
-    Family: IntType = 4
-    FamORAssem: IntType = 5
-    Public: IntType = 6
-    FieldAccessMask: IntType = 7
-    Static: IntType = 16
-    InitOnly: IntType = 32
-    Literal: IntType = 64
-    NotSerialized: IntType = 128
-    HasFieldRVA: IntType = 256
-    SpecialName: IntType = 512
-    RTSpecialName: IntType = 1024
-    HasFieldMarshal: IntType = 4096
-    PinvokeImpl: IntType = 8192
-    HasDefault: IntType = 32768
-    ReservedMask: IntType = 38144
+    PrivateScope = 0
+    Private = 1
+    FamANDAssem = 2
+    Assembly = 3
+    Family = 4
+    FamORAssem = 5
+    Public = 6
+    FieldAccessMask = 7
+    Static = 16
+    InitOnly = 32
+    Literal = 64
+    NotSerialized = 128
+    HasFieldRVA = 256
+    SpecialName = 512
+    RTSpecialName = 1024
+    HasFieldMarshal = 4096
+    PinvokeImpl = 8192
+    HasDefault = 32768
+    ReservedMask = 38144
 
 
 class GenericParameterAttributes(Enum):
-    #None: IntType = 0
-    Covariant: IntType = 1
-    Contravariant: IntType = 2
-    VarianceMask: IntType = 3
-    ReferenceTypeConstraint: IntType = 4
-    NotNullableValueTypeConstraint: IntType = 8
-    DefaultConstructorConstraint: IntType = 16
-    SpecialConstraintMask: IntType = 28
+    #None = 0
+    Covariant = 1
+    Contravariant = 2
+    VarianceMask = 3
+    ReferenceTypeConstraint = 4
+    NotNullableValueTypeConstraint = 8
+    DefaultConstructorConstraint = 16
+    SpecialConstraintMask = 28
 
 
 class INVOCATION_FLAGS(Enum):
-    INVOCATION_FLAGS_UNKNOWN: UIntType = 0
-    INVOCATION_FLAGS_INITIALIZED: UIntType = 1
-    INVOCATION_FLAGS_NO_INVOKE: UIntType = 2
-    INVOCATION_FLAGS_NEED_SECURITY: UIntType = 4
-    INVOCATION_FLAGS_NO_CTOR_INVOKE: UIntType = 8
-    INVOCATION_FLAGS_IS_CTOR: UIntType = 16
-    INVOCATION_FLAGS_SPECIAL_FIELD: UIntType = 16
-    INVOCATION_FLAGS_RISKY_METHOD: UIntType = 32
-    INVOCATION_FLAGS_FIELD_SPECIAL_CAST: UIntType = 32
-    INVOCATION_FLAGS_NON_W8P_FX_API: UIntType = 64
-    INVOCATION_FLAGS_IS_DELEGATE_CTOR: UIntType = 128
-    INVOCATION_FLAGS_CONTAINS_STACK_POINTERS: UIntType = 256
-    INVOCATION_FLAGS_CONSTRUCTOR_INVOKE: UIntType = 268435456
+    INVOCATION_FLAGS_UNKNOWN = 0
+    INVOCATION_FLAGS_INITIALIZED = 1
+    INVOCATION_FLAGS_NO_INVOKE = 2
+    INVOCATION_FLAGS_NEED_SECURITY = 4
+    INVOCATION_FLAGS_NO_CTOR_INVOKE = 8
+    INVOCATION_FLAGS_IS_CTOR = 16
+    INVOCATION_FLAGS_SPECIAL_FIELD = 16
+    INVOCATION_FLAGS_RISKY_METHOD = 32
+    INVOCATION_FLAGS_FIELD_SPECIAL_CAST = 32
+    INVOCATION_FLAGS_NON_W8P_FX_API = 64
+    INVOCATION_FLAGS_IS_DELEGATE_CTOR = 128
+    INVOCATION_FLAGS_CONTAINS_STACK_POINTERS = 256
+    INVOCATION_FLAGS_CONSTRUCTOR_INVOKE = 268435456
 
 
 class ImageFileMachine(Enum):
-    I386: IntType = 332
-    ARM: IntType = 452
-    IA64: IntType = 512
-    AMD64: IntType = 34404
+    I386 = 332
+    ARM = 452
+    IA64 = 512
+    AMD64 = 34404
 
 
 class LoadContext(Enum):
-    DEFAULT: IntType = 0
-    LOADFROM: IntType = 1
-    UNKNOWN: IntType = 2
-    HOSTED: IntType = 3
+    DEFAULT = 0
+    LOADFROM = 1
+    UNKNOWN = 2
+    HOSTED = 3
 
 
 class MdSigCallingConvention(Enum):
-    Default: ByteType = 0
-    C: ByteType = 1
-    StdCall: ByteType = 2
-    ThisCall: ByteType = 3
-    FastCall: ByteType = 4
-    Vararg: ByteType = 5
-    Field: ByteType = 6
-    LocalSig: ByteType = 7
-    Property: ByteType = 8
-    Unmgd: ByteType = 9
-    GenericInst: ByteType = 10
-    CallConvMask: ByteType = 15
-    Generic: ByteType = 16
-    HasThis: ByteType = 32
-    ExplicitThis: ByteType = 64
+    Default = 0
+    C = 1
+    StdCall = 2
+    ThisCall = 3
+    FastCall = 4
+    Vararg = 5
+    Field = 6
+    LocalSig = 7
+    Property = 8
+    Unmgd = 9
+    GenericInst = 10
+    CallConvMask = 15
+    Generic = 16
+    HasThis = 32
+    ExplicitThis = 64
 
 
 class MemberTypes(Enum):
-    Constructor: IntType = 1
-    Event: IntType = 2
-    Field: IntType = 4
-    Method: IntType = 8
-    Property: IntType = 16
-    TypeInfo: IntType = 32
-    Custom: IntType = 64
-    NestedType: IntType = 128
-    All: IntType = 191
+    Constructor = 1
+    Event = 2
+    Field = 4
+    Method = 8
+    Property = 16
+    TypeInfo = 32
+    Custom = 64
+    NestedType = 128
+    All = 191
 
 
 class MetadataTokenType(Enum):
-    Module: IntType = 0
-    TypeRef: IntType = 16777216
-    TypeDef: IntType = 33554432
-    FieldDef: IntType = 67108864
-    MethodDef: IntType = 100663296
-    ParamDef: IntType = 134217728
-    InterfaceImpl: IntType = 150994944
-    MemberRef: IntType = 167772160
-    CustomAttribute: IntType = 201326592
-    Permission: IntType = 234881024
-    Signature: IntType = 285212672
-    Event: IntType = 335544320
-    Property: IntType = 385875968
-    ModuleRef: IntType = 436207616
-    TypeSpec: IntType = 452984832
-    Assembly: IntType = 536870912
-    AssemblyRef: IntType = 587202560
-    File: IntType = 637534208
-    ExportedType: IntType = 654311424
-    ManifestResource: IntType = 671088640
-    GenericPar: IntType = 704643072
-    MethodSpec: IntType = 721420288
-    String: IntType = 1879048192
-    Name: IntType = 1895825408
-    BaseType: IntType = 1912602624
-    Invalid: IntType = 2147483647
+    Module = 0
+    TypeRef = 16777216
+    TypeDef = 33554432
+    FieldDef = 67108864
+    MethodDef = 100663296
+    ParamDef = 134217728
+    InterfaceImpl = 150994944
+    MemberRef = 167772160
+    CustomAttribute = 201326592
+    Permission = 234881024
+    Signature = 285212672
+    Event = 335544320
+    Property = 385875968
+    ModuleRef = 436207616
+    TypeSpec = 452984832
+    Assembly = 536870912
+    AssemblyRef = 587202560
+    File = 637534208
+    ExportedType = 654311424
+    ManifestResource = 671088640
+    GenericPar = 704643072
+    MethodSpec = 721420288
+    String = 1879048192
+    Name = 1895825408
+    BaseType = 1912602624
+    Invalid = 2147483647
 
 
 class MethodAttributes(Enum):
-    ReuseSlot: IntType = 0
-    PrivateScope: IntType = 0
-    Private: IntType = 1
-    FamANDAssem: IntType = 2
-    Assembly: IntType = 3
-    Family: IntType = 4
-    FamORAssem: IntType = 5
-    Public: IntType = 6
-    MemberAccessMask: IntType = 7
-    UnmanagedExport: IntType = 8
-    Static: IntType = 16
-    Final: IntType = 32
-    Virtual: IntType = 64
-    HideBySig: IntType = 128
-    NewSlot: IntType = 256
-    VtableLayoutMask: IntType = 256
-    CheckAccessOnOverride: IntType = 512
-    Abstract: IntType = 1024
-    SpecialName: IntType = 2048
-    RTSpecialName: IntType = 4096
-    PinvokeImpl: IntType = 8192
-    HasSecurity: IntType = 16384
-    RequireSecObject: IntType = 32768
-    ReservedMask: IntType = 53248
+    ReuseSlot = 0
+    PrivateScope = 0
+    Private = 1
+    FamANDAssem = 2
+    Assembly = 3
+    Family = 4
+    FamORAssem = 5
+    Public = 6
+    MemberAccessMask = 7
+    UnmanagedExport = 8
+    Static = 16
+    Final = 32
+    Virtual = 64
+    HideBySig = 128
+    NewSlot = 256
+    VtableLayoutMask = 256
+    CheckAccessOnOverride = 512
+    Abstract = 1024
+    SpecialName = 2048
+    RTSpecialName = 4096
+    PinvokeImpl = 8192
+    HasSecurity = 16384
+    RequireSecObject = 32768
+    ReservedMask = 53248
 
 
 class MethodImplAttributes(Enum):
-    IL: IntType = 0
-    Managed: IntType = 0
-    Native: IntType = 1
-    OPTIL: IntType = 2
-    Runtime: IntType = 3
-    CodeTypeMask: IntType = 3
-    Unmanaged: IntType = 4
-    ManagedMask: IntType = 4
-    NoInlining: IntType = 8
-    ForwardRef: IntType = 16
-    Synchronized: IntType = 32
-    NoOptimization: IntType = 64
-    PreserveSig: IntType = 128
-    AggressiveInlining: IntType = 256
-    SecurityMitigations: IntType = 1024
-    InternalCall: IntType = 4096
-    MaxMethodImplVal: IntType = 65535
+    IL = 0
+    Managed = 0
+    Native = 1
+    OPTIL = 2
+    Runtime = 3
+    CodeTypeMask = 3
+    Unmanaged = 4
+    ManagedMask = 4
+    NoInlining = 8
+    ForwardRef = 16
+    Synchronized = 32
+    NoOptimization = 64
+    PreserveSig = 128
+    AggressiveInlining = 256
+    SecurityMitigations = 1024
+    InternalCall = 4096
+    MaxMethodImplVal = 65535
 
 
 class MethodSemanticsAttributes(Enum):
-    Setter: IntType = 1
-    Getter: IntType = 2
-    Other: IntType = 4
-    AddOn: IntType = 8
-    RemoveOn: IntType = 16
-    Fire: IntType = 32
+    Setter = 1
+    Getter = 2
+    Other = 4
+    AddOn = 8
+    RemoveOn = 16
+    Fire = 32
 
 
 class PInvokeAttributes(Enum):
-    ThrowOnUnmappableCharUseAssem: IntType = 0
-    CharSetNotSpec: IntType = 0
-    BestFitUseAssem: IntType = 0
-    NoMangle: IntType = 1
-    CharSetAnsi: IntType = 2
-    CharSetUnicode: IntType = 4
-    CharSetAuto: IntType = 6
-    CharSetMask: IntType = 6
-    BestFitEnabled: IntType = 16
-    BestFitDisabled: IntType = 32
-    BestFitMask: IntType = 48
-    SupportsLastError: IntType = 64
-    CallConvWinapi: IntType = 256
-    CallConvCdecl: IntType = 512
-    CallConvStdcall: IntType = 768
-    CallConvThiscall: IntType = 1024
-    CallConvFastcall: IntType = 1280
-    CallConvMask: IntType = 1792
-    ThrowOnUnmappableCharEnabled: IntType = 4096
-    ThrowOnUnmappableCharDisabled: IntType = 8192
-    ThrowOnUnmappableCharMask: IntType = 12288
-    MaxValue: IntType = 65535
+    ThrowOnUnmappableCharUseAssem = 0
+    CharSetNotSpec = 0
+    BestFitUseAssem = 0
+    NoMangle = 1
+    CharSetAnsi = 2
+    CharSetUnicode = 4
+    CharSetAuto = 6
+    CharSetMask = 6
+    BestFitEnabled = 16
+    BestFitDisabled = 32
+    BestFitMask = 48
+    SupportsLastError = 64
+    CallConvWinapi = 256
+    CallConvCdecl = 512
+    CallConvStdcall = 768
+    CallConvThiscall = 1024
+    CallConvFastcall = 1280
+    CallConvMask = 1792
+    ThrowOnUnmappableCharEnabled = 4096
+    ThrowOnUnmappableCharDisabled = 8192
+    ThrowOnUnmappableCharMask = 12288
+    MaxValue = 65535
 
 
 class ParameterAttributes(Enum):
-    #None: IntType = 0
-    In: IntType = 1
-    Out: IntType = 2
-    Lcid: IntType = 4
-    Retval: IntType = 8
-    Optional: IntType = 16
-    HasDefault: IntType = 4096
-    HasFieldMarshal: IntType = 8192
-    Reserved3: IntType = 16384
-    Reserved4: IntType = 32768
-    ReservedMask: IntType = 61440
+    #None = 0
+    In = 1
+    Out = 2
+    Lcid = 4
+    Retval = 8
+    Optional = 16
+    HasDefault = 4096
+    HasFieldMarshal = 8192
+    Reserved3 = 16384
+    Reserved4 = 32768
+    ReservedMask = 61440
 
 
 class PortableExecutableKinds(Enum):
-    NotAPortableExecutableImage: IntType = 0
-    ILOnly: IntType = 1
-    Required32Bit: IntType = 2
-    PE32Plus: IntType = 4
-    Unmanaged32Bit: IntType = 8
-    Preferred32Bit: IntType = 16
+    NotAPortableExecutableImage = 0
+    ILOnly = 1
+    Required32Bit = 2
+    PE32Plus = 4
+    Unmanaged32Bit = 8
+    Preferred32Bit = 16
 
 
 class ProcessorArchitecture(Enum):
-    #None: IntType = 0
-    MSIL: IntType = 1
-    X86: IntType = 2
-    IA64: IntType = 3
-    Amd64: IntType = 4
-    Arm: IntType = 5
+    #None = 0
+    MSIL = 1
+    X86 = 2
+    IA64 = 3
+    Amd64 = 4
+    Arm = 5
 
 
 class PropertyAttributes(Enum):
-    #None: IntType = 0
-    SpecialName: IntType = 512
-    RTSpecialName: IntType = 1024
-    HasDefault: IntType = 4096
-    Reserved2: IntType = 8192
-    Reserved3: IntType = 16384
-    Reserved4: IntType = 32768
-    ReservedMask: IntType = 62464
+    #None = 0
+    SpecialName = 512
+    RTSpecialName = 1024
+    HasDefault = 4096
+    Reserved2 = 8192
+    Reserved3 = 16384
+    Reserved4 = 32768
+    ReservedMask = 62464
 
 
 class ResourceAttributes(Enum):
-    Public: IntType = 1
-    Private: IntType = 2
+    Public = 1
+    Private = 2
 
 
 class ResourceLocation(Enum):
-    Embedded: IntType = 1
-    ContainedInAnotherAssembly: IntType = 2
-    ContainedInManifestFile: IntType = 4
+    Embedded = 1
+    ContainedInAnotherAssembly = 2
+    ContainedInManifestFile = 4
 
 
 class TypeAttributes(Enum):
-    NotPublic: IntType = 0
-    AutoLayout: IntType = 0
-    AnsiClass: IntType = 0
-    Class: IntType = 0
-    Public: IntType = 1
-    NestedPublic: IntType = 2
-    NestedPrivate: IntType = 3
-    NestedFamily: IntType = 4
-    NestedAssembly: IntType = 5
-    NestedFamANDAssem: IntType = 6
-    NestedFamORAssem: IntType = 7
-    VisibilityMask: IntType = 7
-    SequentialLayout: IntType = 8
-    ExplicitLayout: IntType = 16
-    LayoutMask: IntType = 24
-    Interface: IntType = 32
-    ClassSemanticsMask: IntType = 32
-    Abstract: IntType = 128
-    Sealed: IntType = 256
-    SpecialName: IntType = 1024
-    RTSpecialName: IntType = 2048
-    Import: IntType = 4096
-    Serializable: IntType = 8192
-    WindowsRuntime: IntType = 16384
-    UnicodeClass: IntType = 65536
-    AutoClass: IntType = 131072
-    StringFormatMask: IntType = 196608
-    CustomFormatClass: IntType = 196608
-    HasSecurity: IntType = 262144
-    ReservedMask: IntType = 264192
-    BeforeFieldInit: IntType = 1048576
-    CustomFormatMask: IntType = 12582912
+    NotPublic = 0
+    AutoLayout = 0
+    AnsiClass = 0
+    Class = 0
+    Public = 1
+    NestedPublic = 2
+    NestedPrivate = 3
+    NestedFamily = 4
+    NestedAssembly = 5
+    NestedFamANDAssem = 6
+    NestedFamORAssem = 7
+    VisibilityMask = 7
+    SequentialLayout = 8
+    ExplicitLayout = 16
+    LayoutMask = 24
+    Interface = 32
+    ClassSemanticsMask = 32
+    Abstract = 128
+    Sealed = 256
+    SpecialName = 1024
+    RTSpecialName = 2048
+    Import = 4096
+    Serializable = 8192
+    WindowsRuntime = 16384
+    UnicodeClass = 65536
+    AutoClass = 131072
+    StringFormatMask = 196608
+    CustomFormatClass = 196608
+    HasSecurity = 262144
+    ReservedMask = 264192
+    BeforeFieldInit = 1048576
+    CustomFormatMask = 12582912
 
 
 # ---------- Delegates ---------- #

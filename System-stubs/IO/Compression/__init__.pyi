@@ -1015,10 +1015,10 @@ class ZLibNative(ABC, ObjectType):
         # ---------- Sub Enums ---------- #
         
         class State(Enum):
-            NotInitialized: IntType = 0
-            InitializedForDeflate: IntType = 1
-            InitializedForInflate: IntType = 2
-            Disposed: IntType = 3
+            NotInitialized = 0
+            InitializedForDeflate = 1
+            InitializedForInflate = 2
+            Disposed = 3
         
     
     
@@ -1029,43 +1029,43 @@ class ZLibNative(ABC, ObjectType):
     # ---------- Sub Enums ---------- #
     
     class FlushCode(Enum):
-        NoFlush: IntType = 0
-        PartialFlush: IntType = 1
-        SyncFlush: IntType = 2
-        FullFlush: IntType = 3
-        Finish: IntType = 4
-        Block: IntType = 5
+        NoFlush = 0
+        PartialFlush = 1
+        SyncFlush = 2
+        FullFlush = 3
+        Finish = 4
+        Block = 5
     
     
     class ErrorCode(Enum):
-        VersionError: IntType = -6
-        BufError: IntType = -5
-        MemError: IntType = -4
-        DataError: IntType = -3
-        StreamError: IntType = -2
-        ErrorNo: IntType = -1
-        Ok: IntType = 0
-        StreamEnd: IntType = 1
-        NeedDictionary: IntType = 2
+        VersionError = -6
+        BufError = -5
+        MemError = -4
+        DataError = -3
+        StreamError = -2
+        ErrorNo = -1
+        Ok = 0
+        StreamEnd = 1
+        NeedDictionary = 2
     
     
     class CompressionLevel(Enum):
-        DefaultCompression: IntType = -1
-        NoCompression: IntType = 0
-        BestSpeed: IntType = 1
-        BestCompression: IntType = 9
+        DefaultCompression = -1
+        NoCompression = 0
+        BestSpeed = 1
+        BestCompression = 9
     
     
     class CompressionStrategy(Enum):
-        DefaultStrategy: IntType = 0
-        Filtered: IntType = 1
-        HuffmanOnly: IntType = 2
-        Rle: IntType = 3
-        Fixed: IntType = 4
+        DefaultStrategy = 0
+        Filtered = 1
+        HuffmanOnly = 2
+        Rle = 3
+        Fixed = 4
     
     
     class CompressionMethod(Enum):
-        Deflated: IntType = 8
+        Deflated = 8
     
 
 
@@ -1143,52 +1143,52 @@ class IInflater(Protocol, IDisposable):
 # ---------- Enums ---------- #
 
 class BlockType(Enum):
-    Uncompressed: IntType = 0
-    Static: IntType = 1
-    Dynamic: IntType = 2
+    Uncompressed = 0
+    Static = 1
+    Dynamic = 2
 
 
 class CompressionLevel(Enum):
-    Optimal: IntType = 0
-    Fastest: IntType = 1
-    NoCompression: IntType = 2
+    Optimal = 0
+    Fastest = 1
+    NoCompression = 2
 
 
 class CompressionMode(Enum):
-    Decompress: IntType = 0
-    Compress: IntType = 1
+    Decompress = 0
+    Compress = 1
 
 
 class CompressionTracingSwitchLevel(Enum):
-    Off: IntType = 0
-    Informational: IntType = 1
-    Verbose: IntType = 2
+    Off = 0
+    Informational = 1
+    Verbose = 2
 
 
 class InflaterState(Enum):
-    ReadingHeader: IntType = 0
-    ReadingBFinal: IntType = 2
-    ReadingBType: IntType = 3
-    ReadingNumLitCodes: IntType = 4
-    ReadingNumDistCodes: IntType = 5
-    ReadingNumCodeLengthCodes: IntType = 6
-    ReadingCodeLengthCodes: IntType = 7
-    ReadingTreeCodesBefore: IntType = 8
-    ReadingTreeCodesAfter: IntType = 9
-    DecodeTop: IntType = 10
-    HaveInitialLength: IntType = 11
-    HaveFullLength: IntType = 12
-    HaveDistCode: IntType = 13
-    UncompressedAligning: IntType = 15
-    UncompressedByte1: IntType = 16
-    UncompressedByte2: IntType = 17
-    UncompressedByte3: IntType = 18
-    UncompressedByte4: IntType = 19
-    DecodingUncompressed: IntType = 20
-    StartReadingFooter: IntType = 21
-    ReadingFooter: IntType = 22
-    VerifyingFooter: IntType = 23
-    Done: IntType = 24
+    ReadingHeader = 0
+    ReadingBFinal = 2
+    ReadingBType = 3
+    ReadingNumLitCodes = 4
+    ReadingNumDistCodes = 5
+    ReadingNumCodeLengthCodes = 6
+    ReadingCodeLengthCodes = 7
+    ReadingTreeCodesBefore = 8
+    ReadingTreeCodesAfter = 9
+    DecodeTop = 10
+    HaveInitialLength = 11
+    HaveFullLength = 12
+    HaveDistCode = 13
+    UncompressedAligning = 15
+    UncompressedByte1 = 16
+    UncompressedByte2 = 17
+    UncompressedByte3 = 18
+    UncompressedByte4 = 19
+    DecodingUncompressed = 20
+    StartReadingFooter = 21
+    ReadingFooter = 22
+    VerifyingFooter = 23
+    Done = 24
 
 
 # No Delegates

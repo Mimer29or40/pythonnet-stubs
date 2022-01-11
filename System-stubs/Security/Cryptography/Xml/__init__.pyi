@@ -3289,26 +3289,26 @@ class IRelDecryptor(Protocol):
 # ---------- Enums ---------- #
 
 class CertUsageType(Enum):
-    Verification: IntType = 0
-    Decryption: IntType = 1
+    Verification = 0
+    Decryption = 1
 
 
 class DocPosition(Enum):
-    BeforeRootElement: IntType = 0
-    InRootElement: IntType = 1
-    AfterRootElement: IntType = 2
+    BeforeRootElement = 0
+    InRootElement = 1
+    AfterRootElement = 2
 
 
 class ReferenceTargetType(Enum):
-    Stream: IntType = 0
-    XmlElement: IntType = 1
-    UriReference: IntType = 2
+    Stream = 0
+    XmlElement = 1
+    UriReference = 2
 
 
 class TransformInputType(Enum):
-    XmlDocument: IntType = 1
-    XmlStream: IntType = 2
-    XmlNodeSet: IntType = 3
+    XmlDocument = 1
+    XmlStream = 2
+    XmlNodeSet = 3
 
 
 # No Delegates

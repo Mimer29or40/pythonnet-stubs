@@ -1026,21 +1026,21 @@ class ProxyElement(ConfigurationElement):
     # ---------- Sub Enums ---------- #
     
     class BypassOnLocalValues(Enum):
-        Unspecified: IntType = -1
-        #False: IntType = 0
-        #True: IntType = 1
+        Unspecified = -1
+        #False = 0
+        #True = 1
     
     
     class UseSystemDefaultValues(Enum):
-        Unspecified: IntType = -1
-        #False: IntType = 0
-        #True: IntType = 1
+        Unspecified = -1
+        #False = 0
+        #True = 1
     
     
     class AutoDetectValues(Enum):
-        Unspecified: IntType = -1
-        #False: IntType = 0
-        #True: IntType = 1
+        Unspecified = -1
+        #False = 0
+        #True = 1
     
 
 
@@ -1910,16 +1910,16 @@ class WindowsAuthenticationElement(ConfigurationElement):
 # ---------- Enums ---------- #
 
 class UnicodeDecodingConformance(Enum):
-    Auto: IntType = 0
-    Strict: IntType = 1
-    Compat: IntType = 2
-    Loose: IntType = 3
+    Auto = 0
+    Strict = 1
+    Compat = 2
+    Loose = 3
 
 
 class UnicodeEncodingConformance(Enum):
-    Auto: IntType = 0
-    Strict: IntType = 1
-    Compat: IntType = 2
+    Auto = 0
+    Strict = 1
+    Compat = 2
 
 
 # No Delegates

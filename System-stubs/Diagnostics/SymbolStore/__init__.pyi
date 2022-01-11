@@ -482,16 +482,16 @@ class ISymbolWriter(Protocol):
 # ---------- Enums ---------- #
 
 class SymAddressKind(Enum):
-    ILOffset: IntType = 1
-    NativeRVA: IntType = 2
-    NativeRegister: IntType = 3
-    NativeRegisterRelative: IntType = 4
-    NativeOffset: IntType = 5
-    NativeRegisterRegister: IntType = 6
-    NativeRegisterStack: IntType = 7
-    NativeStackRegister: IntType = 8
-    BitField: IntType = 9
-    NativeSectionOffset: IntType = 10
+    ILOffset = 1
+    NativeRVA = 2
+    NativeRegister = 3
+    NativeRegisterRelative = 4
+    NativeOffset = 5
+    NativeRegisterRegister = 6
+    NativeRegisterStack = 7
+    NativeStackRegister = 8
+    BitField = 9
+    NativeSectionOffset = 10
 
 
 # No Delegates

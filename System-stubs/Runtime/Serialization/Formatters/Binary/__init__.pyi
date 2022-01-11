@@ -1280,187 +1280,187 @@ class IStreamable(Protocol):
 # ---------- Enums ---------- #
 
 class BinaryArrayTypeEnum(Enum):
-    Single: IntType = 0
-    Jagged: IntType = 1
-    Rectangular: IntType = 2
-    SingleOffset: IntType = 3
-    JaggedOffset: IntType = 4
-    RectangularOffset: IntType = 5
+    Single = 0
+    Jagged = 1
+    Rectangular = 2
+    SingleOffset = 3
+    JaggedOffset = 4
+    RectangularOffset = 5
 
 
 class BinaryHeaderEnum(Enum):
-    SerializedStreamHeader: IntType = 0
-    Object: IntType = 1
-    ObjectWithMap: IntType = 2
-    ObjectWithMapAssemId: IntType = 3
-    ObjectWithMapTyped: IntType = 4
-    ObjectWithMapTypedAssemId: IntType = 5
-    ObjectString: IntType = 6
-    Array: IntType = 7
-    MemberPrimitiveTyped: IntType = 8
-    MemberReference: IntType = 9
-    ObjectNull: IntType = 10
-    MessageEnd: IntType = 11
-    Assembly: IntType = 12
-    ObjectNullMultiple256: IntType = 13
-    ObjectNullMultiple: IntType = 14
-    ArraySinglePrimitive: IntType = 15
-    ArraySingleObject: IntType = 16
-    ArraySingleString: IntType = 17
-    CrossAppDomainMap: IntType = 18
-    CrossAppDomainString: IntType = 19
-    CrossAppDomainAssembly: IntType = 20
-    MethodCall: IntType = 21
-    MethodReturn: IntType = 22
+    SerializedStreamHeader = 0
+    Object = 1
+    ObjectWithMap = 2
+    ObjectWithMapAssemId = 3
+    ObjectWithMapTyped = 4
+    ObjectWithMapTypedAssemId = 5
+    ObjectString = 6
+    Array = 7
+    MemberPrimitiveTyped = 8
+    MemberReference = 9
+    ObjectNull = 10
+    MessageEnd = 11
+    Assembly = 12
+    ObjectNullMultiple256 = 13
+    ObjectNullMultiple = 14
+    ArraySinglePrimitive = 15
+    ArraySingleObject = 16
+    ArraySingleString = 17
+    CrossAppDomainMap = 18
+    CrossAppDomainString = 19
+    CrossAppDomainAssembly = 20
+    MethodCall = 21
+    MethodReturn = 22
 
 
 class BinaryTypeEnum(Enum):
-    Primitive: IntType = 0
-    String: IntType = 1
-    Object: IntType = 2
-    ObjectUrt: IntType = 3
-    ObjectUser: IntType = 4
-    ObjectArray: IntType = 5
-    StringArray: IntType = 6
-    PrimitiveArray: IntType = 7
+    Primitive = 0
+    String = 1
+    Object = 2
+    ObjectUrt = 3
+    ObjectUser = 4
+    ObjectArray = 5
+    StringArray = 6
+    PrimitiveArray = 7
 
 
 class InternalArrayTypeE(Enum):
-    Empty: IntType = 0
-    Single: IntType = 1
-    Jagged: IntType = 2
-    Rectangular: IntType = 3
-    Base64: IntType = 4
+    Empty = 0
+    Single = 1
+    Jagged = 2
+    Rectangular = 3
+    Base64 = 4
 
 
 class InternalElementTypeE(Enum):
-    ObjectBegin: IntType = 0
-    ObjectEnd: IntType = 1
-    Member: IntType = 2
+    ObjectBegin = 0
+    ObjectEnd = 1
+    Member = 2
 
 
 class InternalMemberTypeE(Enum):
-    Empty: IntType = 0
-    Header: IntType = 1
-    Field: IntType = 2
-    Item: IntType = 3
+    Empty = 0
+    Header = 1
+    Field = 2
+    Item = 3
 
 
 class InternalMemberValueE(Enum):
-    Empty: IntType = 0
-    InlineValue: IntType = 1
-    Nested: IntType = 2
-    Reference: IntType = 3
-    Null: IntType = 4
+    Empty = 0
+    InlineValue = 1
+    Nested = 2
+    Reference = 3
+    Null = 4
 
 
 class InternalNameSpaceE(Enum):
-    #None: IntType = 0
-    Soap: IntType = 1
-    XdrPrimitive: IntType = 2
-    XdrString: IntType = 3
-    UrtSystem: IntType = 4
-    UrtUser: IntType = 5
-    UserNameSpace: IntType = 6
-    MemberName: IntType = 7
-    Interop: IntType = 8
-    CallElement: IntType = 9
+    #None = 0
+    Soap = 1
+    XdrPrimitive = 2
+    XdrString = 3
+    UrtSystem = 4
+    UrtUser = 5
+    UserNameSpace = 6
+    MemberName = 7
+    Interop = 8
+    CallElement = 9
 
 
 class InternalObjectPositionE(Enum):
-    Empty: IntType = 0
-    Top: IntType = 1
-    Child: IntType = 2
-    Headers: IntType = 3
+    Empty = 0
+    Top = 1
+    Child = 2
+    Headers = 3
 
 
 class InternalObjectTypeE(Enum):
-    Empty: IntType = 0
-    Object: IntType = 1
-    Array: IntType = 2
+    Empty = 0
+    Object = 1
+    Array = 2
 
 
 class InternalParseStateE(Enum):
-    Initial: IntType = 0
-    Object: IntType = 1
-    Member: IntType = 2
-    MemberChild: IntType = 3
+    Initial = 0
+    Object = 1
+    Member = 2
+    MemberChild = 3
 
 
 class InternalParseTypeE(Enum):
-    Empty: IntType = 0
-    SerializedStreamHeader: IntType = 1
-    Object: IntType = 2
-    Member: IntType = 3
-    ObjectEnd: IntType = 4
-    MemberEnd: IntType = 5
-    Headers: IntType = 6
-    HeadersEnd: IntType = 7
-    SerializedStreamHeaderEnd: IntType = 8
-    Envelope: IntType = 9
-    EnvelopeEnd: IntType = 10
-    Body: IntType = 11
-    BodyEnd: IntType = 12
+    Empty = 0
+    SerializedStreamHeader = 1
+    Object = 2
+    Member = 3
+    ObjectEnd = 4
+    MemberEnd = 5
+    Headers = 6
+    HeadersEnd = 7
+    SerializedStreamHeaderEnd = 8
+    Envelope = 9
+    EnvelopeEnd = 10
+    Body = 11
+    BodyEnd = 12
 
 
 class InternalPrimitiveTypeE(Enum):
-    Invalid: IntType = 0
-    Boolean: IntType = 1
-    Byte: IntType = 2
-    Char: IntType = 3
-    Currency: IntType = 4
-    Decimal: IntType = 5
-    Double: IntType = 6
-    Int16: IntType = 7
-    Int32: IntType = 8
-    Int64: IntType = 9
-    SByte: IntType = 10
-    Single: IntType = 11
-    TimeSpan: IntType = 12
-    DateTime: IntType = 13
-    UInt16: IntType = 14
-    UInt32: IntType = 15
-    UInt64: IntType = 16
-    Null: IntType = 17
-    String: IntType = 18
+    Invalid = 0
+    Boolean = 1
+    Byte = 2
+    Char = 3
+    Currency = 4
+    Decimal = 5
+    Double = 6
+    Int16 = 7
+    Int32 = 8
+    Int64 = 9
+    SByte = 10
+    Single = 11
+    TimeSpan = 12
+    DateTime = 13
+    UInt16 = 14
+    UInt32 = 15
+    UInt64 = 16
+    Null = 17
+    String = 18
 
 
 class InternalSerializerTypeE(Enum):
-    Soap: IntType = 1
-    Binary: IntType = 2
+    Soap = 1
+    Binary = 2
 
 
 class MessageEnum(Enum):
-    NoArgs: IntType = 1
-    ArgsInline: IntType = 2
-    ArgsIsArray: IntType = 4
-    ArgsInArray: IntType = 8
-    NoContext: IntType = 16
-    ContextInline: IntType = 32
-    ContextInArray: IntType = 64
-    MethodSignatureInArray: IntType = 128
-    PropertyInArray: IntType = 256
-    NoReturnValue: IntType = 512
-    ReturnValueVoid: IntType = 1024
-    ReturnValueInline: IntType = 2048
-    ReturnValueInArray: IntType = 4096
-    ExceptionInArray: IntType = 8192
-    GenericMethod: IntType = 32768
+    NoArgs = 1
+    ArgsInline = 2
+    ArgsIsArray = 4
+    ArgsInArray = 8
+    NoContext = 16
+    ContextInline = 32
+    ContextInArray = 64
+    MethodSignatureInArray = 128
+    PropertyInArray = 256
+    NoReturnValue = 512
+    ReturnValueVoid = 1024
+    ReturnValueInline = 2048
+    ReturnValueInArray = 4096
+    ExceptionInArray = 8192
+    GenericMethod = 32768
 
 
 class SoapAttributeType(Enum):
-    #None: IntType = 0
-    SchemaType: IntType = 1
-    Embedded: IntType = 2
-    XmlElement: IntType = 4
-    XmlAttribute: IntType = 8
+    #None = 0
+    SchemaType = 1
+    Embedded = 2
+    XmlElement = 4
+    XmlAttribute = 8
 
 
 class ValueFixupEnum(Enum):
-    Empty: IntType = 0
-    Array: IntType = 1
-    Header: IntType = 2
-    Member: IntType = 3
+    Empty = 0
+    Array = 1
+    Header = 2
+    Member = 3
 
 
 # No Delegates

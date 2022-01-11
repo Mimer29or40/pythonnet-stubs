@@ -1326,12 +1326,12 @@ class EventProvider(ObjectType, IDisposable):
     # ---------- Sub Enums ---------- #
     
     class WriteEventErrorCode(Enum):
-        NoError: IntType = 0
-        NoFreeBuffers: IntType = 1
-        EventTooBig: IntType = 2
-        NullInput: IntType = 3
-        TooManyArgs: IntType = 4
-        Other: IntType = 5
+        NoError = 0
+        NoFreeBuffers = 1
+        EventTooBig = 2
+        NullInput = 3
+        TooManyArgs = 4
+        Other = 5
     
 
 
@@ -3741,7 +3741,7 @@ class ManifestEnvelope(ValueType):
     # ---------- Sub Enums ---------- #
     
     class ManifestFormats(Enum):
-        SimpleXmlFormat: ByteType = 1
+        SimpleXmlFormat = 1
     
 
 
@@ -3821,152 +3821,152 @@ class SessionMask(ValueType):
 # ---------- Enums ---------- #
 
 class ControllerCommand(Enum):
-    Disable: IntType = -3
-    Enable: IntType = -2
-    SendManifest: IntType = -1
-    Update: IntType = 0
+    Disable = -3
+    Enable = -2
+    SendManifest = -1
+    Update = 0
 
 
 class EventActivityOptions(Enum):
-    #None: IntType = 0
-    Disable: IntType = 2
-    Recursive: IntType = 4
-    Detachable: IntType = 8
+    #None = 0
+    Disable = 2
+    Recursive = 4
+    Detachable = 8
 
 
 class EventChannel(Enum):
-    #None: ByteType = 0
-    Admin: ByteType = 16
-    Operational: ByteType = 17
-    Analytic: ByteType = 18
-    Debug: ByteType = 19
+    #None = 0
+    Admin = 16
+    Operational = 17
+    Analytic = 18
+    Debug = 19
 
 
 class EventChannelType(Enum):
-    Admin: IntType = 1
-    Operational: IntType = 2
-    Analytic: IntType = 3
-    Debug: IntType = 4
+    Admin = 1
+    Operational = 2
+    Analytic = 3
+    Debug = 4
 
 
 class EventCommand(Enum):
-    Disable: IntType = -3
-    Enable: IntType = -2
-    SendManifest: IntType = -1
-    Update: IntType = 0
+    Disable = -3
+    Enable = -2
+    SendManifest = -1
+    Update = 0
 
 
 class EventFieldFormat(Enum):
-    Default: IntType = 0
-    String: IntType = 2
-    Boolean: IntType = 3
-    Hexadecimal: IntType = 4
-    Xml: IntType = 11
-    Json: IntType = 12
-    HResult: IntType = 15
+    Default = 0
+    String = 2
+    Boolean = 3
+    Hexadecimal = 4
+    Xml = 11
+    Json = 12
+    HResult = 15
 
 
 class EventFieldTags(Enum):
-    #None: IntType = 0
+    #None = 0
 
 
 class EventKeywords(Enum):
-    All: LongType = -1
-    #None: LongType = 0
-    MicrosoftTelemetry: LongType = 562949953421312
-    WdiContext: LongType = 562949953421312
-    WdiDiagnostic: LongType = 1125899906842624
-    Sqm: LongType = 2251799813685248
-    AuditFailure: LongType = 4503599627370496
-    CorrelationHint: LongType = 4503599627370496
-    AuditSuccess: LongType = 9007199254740992
-    EventLogClassic: LongType = 36028797018963968
+    All = -1
+    #None = 0
+    MicrosoftTelemetry = 562949953421312
+    WdiContext = 562949953421312
+    WdiDiagnostic = 1125899906842624
+    Sqm = 2251799813685248
+    AuditFailure = 4503599627370496
+    CorrelationHint = 4503599627370496
+    AuditSuccess = 9007199254740992
+    EventLogClassic = 36028797018963968
 
 
 class EventLevel(Enum):
-    LogAlways: IntType = 0
-    Critical: IntType = 1
-    Error: IntType = 2
-    Warning: IntType = 3
-    Informational: IntType = 4
-    Verbose: IntType = 5
+    LogAlways = 0
+    Critical = 1
+    Error = 2
+    Warning = 3
+    Informational = 4
+    Verbose = 5
 
 
 class EventManifestOptions(Enum):
-    #None: IntType = 0
-    Strict: IntType = 1
-    AllCultures: IntType = 2
-    OnlyIfNeededForRegistration: IntType = 4
-    AllowEventSourceOverride: IntType = 8
+    #None = 0
+    Strict = 1
+    AllCultures = 2
+    OnlyIfNeededForRegistration = 4
+    AllowEventSourceOverride = 8
 
 
 class EventOpcode(Enum):
-    Info: IntType = 0
-    Start: IntType = 1
-    Stop: IntType = 2
-    DataCollectionStart: IntType = 3
-    DataCollectionStop: IntType = 4
-    Extension: IntType = 5
-    Reply: IntType = 6
-    Resume: IntType = 7
-    Suspend: IntType = 8
-    Send: IntType = 9
-    Receive: IntType = 240
+    Info = 0
+    Start = 1
+    Stop = 2
+    DataCollectionStart = 3
+    DataCollectionStop = 4
+    Extension = 5
+    Reply = 6
+    Resume = 7
+    Suspend = 8
+    Send = 9
+    Receive = 240
 
 
 class EventSourceSettings(Enum):
-    Default: IntType = 0
-    ThrowOnEventWriteErrors: IntType = 1
-    EtwManifestEventFormat: IntType = 4
-    EtwSelfDescribingEventFormat: IntType = 8
+    Default = 0
+    ThrowOnEventWriteErrors = 1
+    EtwManifestEventFormat = 4
+    EtwSelfDescribingEventFormat = 8
 
 
 class EventTags(Enum):
-    #None: IntType = 0
+    #None = 0
 
 
 class EventTask(Enum):
-    #None: IntType = 0
+    #None = 0
 
 
 class TraceLoggingDataType(Enum):
-    Nil: IntType = 0
-    Utf16String: IntType = 1
-    MbcsString: IntType = 2
-    Int8: IntType = 3
-    UInt8: IntType = 4
-    Int16: IntType = 5
-    UInt16: IntType = 6
-    Int32: IntType = 7
-    UInt32: IntType = 8
-    Int64: IntType = 9
-    UInt64: IntType = 10
-    Float: IntType = 11
-    Double: IntType = 12
-    Boolean32: IntType = 13
-    Binary: IntType = 14
-    Guid: IntType = 15
-    FileTime: IntType = 17
-    SystemTime: IntType = 18
-    HexInt32: IntType = 20
-    HexInt64: IntType = 21
-    CountedUtf16String: IntType = 22
-    CountedMbcsString: IntType = 23
-    Struct: IntType = 24
-    Char8: IntType = 516
-    Char16: IntType = 518
-    Boolean8: IntType = 772
-    HexInt8: IntType = 1028
-    HexInt16: IntType = 1030
-    Utf16Xml: IntType = 2817
-    MbcsXml: IntType = 2818
-    CountedUtf16Xml: IntType = 2838
-    CountedMbcsXml: IntType = 2839
-    Utf16Json: IntType = 3073
-    MbcsJson: IntType = 3074
-    CountedUtf16Json: IntType = 3094
-    CountedMbcsJson: IntType = 3095
-    HResult: IntType = 3847
+    Nil = 0
+    Utf16String = 1
+    MbcsString = 2
+    Int8 = 3
+    UInt8 = 4
+    Int16 = 5
+    UInt16 = 6
+    Int32 = 7
+    UInt32 = 8
+    Int64 = 9
+    UInt64 = 10
+    Float = 11
+    Double = 12
+    Boolean32 = 13
+    Binary = 14
+    Guid = 15
+    FileTime = 17
+    SystemTime = 18
+    HexInt32 = 20
+    HexInt64 = 21
+    CountedUtf16String = 22
+    CountedMbcsString = 23
+    Struct = 24
+    Char8 = 516
+    Char16 = 518
+    Boolean8 = 772
+    HexInt8 = 1028
+    HexInt16 = 1030
+    Utf16Xml = 2817
+    MbcsXml = 2818
+    CountedUtf16Xml = 2838
+    CountedMbcsXml = 2839
+    Utf16Json = 3073
+    MbcsJson = 3074
+    CountedUtf16Json = 3094
+    CountedMbcsJson = 3095
+    HResult = 3847
 
 
 # No Delegates

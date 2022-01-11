@@ -73,9 +73,9 @@ class DateTimeSerializationSection(ConfigurationSection):
     # ---------- Sub Enums ---------- #
     
     class DateTimeSerializationMode(Enum):
-        Default: IntType = 0
-        Roundtrip: IntType = 1
-        Local: IntType = 2
+        Default = 0
+        Roundtrip = 1
+        Local = 2
     
 
 

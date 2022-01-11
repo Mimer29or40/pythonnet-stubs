@@ -97,10 +97,10 @@ class XmlPreloadedResolver(XmlResolver):
 # ---------- Enums ---------- #
 
 class XmlKnownDtds(Enum):
-    #None: IntType = 0
-    Xhtml10: IntType = 1
-    Rss091: IntType = 2
-    All: IntType = 65535
+    #None = 0
+    Xhtml10 = 1
+    Rss091 = 2
+    All = 65535
 
 
 # No Delegates

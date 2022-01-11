@@ -548,12 +548,12 @@ class TokenBasedSetEnumerator(ValueType):
 # ---------- Enums ---------- #
 
 class QuickCacheEntryType(Enum):
-    FullTrustZoneMyComputer: IntType = 16777216
-    FullTrustZoneIntranet: IntType = 33554432
-    FullTrustZoneInternet: IntType = 67108864
-    FullTrustZoneTrusted: IntType = 134217728
-    FullTrustZoneUntrusted: IntType = 268435456
-    FullTrustAll: IntType = 536870912
+    FullTrustZoneMyComputer = 16777216
+    FullTrustZoneIntranet = 33554432
+    FullTrustZoneInternet = 67108864
+    FullTrustZoneTrusted = 134217728
+    FullTrustZoneUntrusted = 268435456
+    FullTrustAll = 536870912
 
 
 # No Delegates

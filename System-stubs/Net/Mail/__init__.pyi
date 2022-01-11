@@ -1995,168 +1995,168 @@ class ISmtpAuthenticationModule(Protocol):
 # ---------- Enums ---------- #
 
 class DeliveryNotificationOptions(Enum):
-    #None: IntType = 0
-    OnSuccess: IntType = 1
-    OnFailure: IntType = 2
-    Delay: IntType = 4
-    Never: IntType = 134217728
+    #None = 0
+    OnSuccess = 1
+    OnFailure = 2
+    Delay = 4
+    Never = 134217728
 
 
 class MBDataType(Enum):
-    All: ByteType = 0
-    Dword: ByteType = 1
-    String: ByteType = 2
-    Binary: ByteType = 3
-    StringExpand: ByteType = 4
-    MultiString: ByteType = 5
+    All = 0
+    Dword = 1
+    String = 2
+    Binary = 3
+    StringExpand = 4
+    MultiString = 5
 
 
 class MBErrors(Enum):
-    PathNotFound: IntType = -2147024893
-    AccessDenied: IntType = -2147024891
-    InvalidParameter: IntType = -2147024809
-    InsufficientBuffer: IntType = -2147024774
-    PathBusy: IntType = -2147024748
-    AlreadyExists: IntType = -2147024713
-    NoMoreItems: IntType = -2147024637
-    DataNotFound: IntType = -2146646015
-    InvalidVersion: IntType = -2146646014
-    DuplicateNameWarning: IntType = 837636
-    InvalidDataWarning: IntType = 837637
+    PathNotFound = -2147024893
+    AccessDenied = -2147024891
+    InvalidParameter = -2147024809
+    InsufficientBuffer = -2147024774
+    PathBusy = -2147024748
+    AlreadyExists = -2147024713
+    NoMoreItems = -2147024637
+    DataNotFound = -2146646015
+    InvalidVersion = -2146646014
+    DuplicateNameWarning = 837636
+    InvalidDataWarning = 837637
 
 
 class MBKeyAccess(Enum):
-    Read: UIntType = 1
-    Write: UIntType = 2
+    Read = 1
+    Write = 2
 
 
 class MBUserType(Enum):
-    Other: ByteType = 0
-    Server: ByteType = 1
-    File: ByteType = 2
-    Wam: ByteType = 100
-    Asp: ByteType = 101
+    Other = 0
+    Server = 1
+    File = 2
+    Wam = 100
+    Asp = 101
 
 
 class MailHeaderID(Enum):
-    Unknown: IntType = -1
-    Bcc: IntType = 0
-    Cc: IntType = 1
-    Comments: IntType = 2
-    ContentDescription: IntType = 3
-    ContentDisposition: IntType = 4
-    ContentID: IntType = 5
-    ContentLocation: IntType = 6
-    ContentTransferEncoding: IntType = 7
-    ContentType: IntType = 8
-    Date: IntType = 9
-    From: IntType = 10
-    Importance: IntType = 11
-    InReplyTo: IntType = 12
-    Keywords: IntType = 13
-    Max: IntType = 14
-    MessageID: IntType = 15
-    MimeVersion: IntType = 16
-    Priority: IntType = 17
-    References: IntType = 18
-    ReplyTo: IntType = 19
-    ResentBcc: IntType = 20
-    ResentCc: IntType = 21
-    ResentDate: IntType = 22
-    ResentFrom: IntType = 23
-    ResentMessageID: IntType = 24
-    ResentSender: IntType = 25
-    ResentTo: IntType = 26
-    Sender: IntType = 27
-    Subject: IntType = 28
-    To: IntType = 29
-    XPriority: IntType = 30
-    XReceiver: IntType = 31
-    XSender: IntType = 32
-    ZMaxEnumValue: IntType = 32
+    Unknown = -1
+    Bcc = 0
+    Cc = 1
+    Comments = 2
+    ContentDescription = 3
+    ContentDisposition = 4
+    ContentID = 5
+    ContentLocation = 6
+    ContentTransferEncoding = 7
+    ContentType = 8
+    Date = 9
+    From = 10
+    Importance = 11
+    InReplyTo = 12
+    Keywords = 13
+    Max = 14
+    MessageID = 15
+    MimeVersion = 16
+    Priority = 17
+    References = 18
+    ReplyTo = 19
+    ResentBcc = 20
+    ResentCc = 21
+    ResentDate = 22
+    ResentFrom = 23
+    ResentMessageID = 24
+    ResentSender = 25
+    ResentTo = 26
+    Sender = 27
+    Subject = 28
+    To = 29
+    XPriority = 30
+    XReceiver = 31
+    XSender = 32
+    ZMaxEnumValue = 32
 
 
 class MailPriority(Enum):
-    Normal: IntType = 0
-    Low: IntType = 1
-    High: IntType = 2
+    Normal = 0
+    Low = 1
+    High = 2
 
 
 class PropertyName(Enum):
-    Invalid: IntType = 0
-    ServerState: IntType = 1016
-    PickupDirectory: IntType = 36880
+    Invalid = 0
+    ServerState = 1016
+    PickupDirectory = 36880
 
 
 class RecipientLocationType(Enum):
-    Local: IntType = 0
-    Unknown: IntType = 1
-    NotLocal: IntType = 2
-    WillForward: IntType = 3
-    Ambiguous: IntType = 4
+    Local = 0
+    Unknown = 1
+    NotLocal = 2
+    WillForward = 3
+    Ambiguous = 4
 
 
 class ServerState(Enum):
-    Starting: IntType = 1
-    Started: IntType = 2
-    Stopping: IntType = 3
-    Stopped: IntType = 4
-    Pausing: IntType = 5
-    Paused: IntType = 6
-    Continuing: IntType = 7
+    Starting = 1
+    Started = 2
+    Stopping = 3
+    Stopped = 4
+    Pausing = 5
+    Paused = 6
+    Continuing = 7
 
 
 class SmtpAccess(Enum):
-    #None: IntType = 0
-    Connect: IntType = 1
-    ConnectToUnrestrictedPort: IntType = 2
+    #None = 0
+    Connect = 1
+    ConnectToUnrestrictedPort = 2
 
 
 class SmtpDeliveryFormat(Enum):
-    SevenBit: IntType = 0
-    International: IntType = 1
+    SevenBit = 0
+    International = 1
 
 
 class SmtpDeliveryMethod(Enum):
-    Network: IntType = 0
-    SpecifiedPickupDirectory: IntType = 1
-    PickupDirectoryFromIis: IntType = 2
+    Network = 0
+    SpecifiedPickupDirectory = 1
+    PickupDirectoryFromIis = 2
 
 
 class SmtpStatusCode(Enum):
-    GeneralFailure: IntType = -1
-    SystemStatus: IntType = 211
-    HelpMessage: IntType = 214
-    ServiceReady: IntType = 220
-    ServiceClosingTransmissionChannel: IntType = 221
-    Ok: IntType = 250
-    UserNotLocalWillForward: IntType = 251
-    CannotVerifyUserWillAttemptDelivery: IntType = 252
-    StartMailInput: IntType = 354
-    ServiceNotAvailable: IntType = 421
-    MailboxBusy: IntType = 450
-    LocalErrorInProcessing: IntType = 451
-    InsufficientStorage: IntType = 452
-    ClientNotPermitted: IntType = 454
-    CommandUnrecognized: IntType = 500
-    SyntaxError: IntType = 501
-    CommandNotImplemented: IntType = 502
-    BadCommandSequence: IntType = 503
-    CommandParameterNotImplemented: IntType = 504
-    MustIssueStartTlsFirst: IntType = 530
-    MailboxUnavailable: IntType = 550
-    UserNotLocalTryAlternatePath: IntType = 551
-    ExceededStorageAllocation: IntType = 552
-    MailboxNameNotAllowed: IntType = 553
-    TransactionFailed: IntType = 554
+    GeneralFailure = -1
+    SystemStatus = 211
+    HelpMessage = 214
+    ServiceReady = 220
+    ServiceClosingTransmissionChannel = 221
+    Ok = 250
+    UserNotLocalWillForward = 251
+    CannotVerifyUserWillAttemptDelivery = 252
+    StartMailInput = 354
+    ServiceNotAvailable = 421
+    MailboxBusy = 450
+    LocalErrorInProcessing = 451
+    InsufficientStorage = 452
+    ClientNotPermitted = 454
+    CommandUnrecognized = 500
+    SyntaxError = 501
+    CommandNotImplemented = 502
+    BadCommandSequence = 503
+    CommandParameterNotImplemented = 504
+    MustIssueStartTlsFirst = 530
+    MailboxUnavailable = 550
+    UserNotLocalTryAlternatePath = 551
+    ExceededStorageAllocation = 552
+    MailboxNameNotAllowed = 553
+    TransactionFailed = 554
 
 
 class SupportedAuth(Enum):
-    #None: IntType = 0
-    Login: IntType = 1
-    NTLM: IntType = 2
-    GSSAPI: IntType = 4
-    WDigest: IntType = 8
+    #None = 0
+    Login = 1
+    NTLM = 2
+    GSSAPI = 4
+    WDigest = 8
 
 
 # ---------- Delegates ---------- #

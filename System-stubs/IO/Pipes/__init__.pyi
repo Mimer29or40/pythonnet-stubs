@@ -657,48 +657,48 @@ class PipeStreamImpersonationWorker(MulticastDelegate, ICloneable, ISerializable
 # ---------- Enums ---------- #
 
 class PipeAccessRights(Enum):
-    ReadData: IntType = 1
-    WriteData: IntType = 2
-    CreateNewInstance: IntType = 4
-    ReadExtendedAttributes: IntType = 8
-    WriteExtendedAttributes: IntType = 16
-    ReadAttributes: IntType = 128
-    WriteAttributes: IntType = 256
-    Write: IntType = 274
-    Delete: IntType = 65536
-    ReadPermissions: IntType = 131072
-    Read: IntType = 131209
-    ReadWrite: IntType = 131483
-    ChangePermissions: IntType = 262144
-    TakeOwnership: IntType = 524288
-    Synchronize: IntType = 1048576
-    FullControl: IntType = 2032031
-    AccessSystemSecurity: IntType = 16777216
+    ReadData = 1
+    WriteData = 2
+    CreateNewInstance = 4
+    ReadExtendedAttributes = 8
+    WriteExtendedAttributes = 16
+    ReadAttributes = 128
+    WriteAttributes = 256
+    Write = 274
+    Delete = 65536
+    ReadPermissions = 131072
+    Read = 131209
+    ReadWrite = 131483
+    ChangePermissions = 262144
+    TakeOwnership = 524288
+    Synchronize = 1048576
+    FullControl = 2032031
+    AccessSystemSecurity = 16777216
 
 
 class PipeDirection(Enum):
-    In: IntType = 1
-    Out: IntType = 2
-    InOut: IntType = 3
+    In = 1
+    Out = 2
+    InOut = 3
 
 
 class PipeOptions(Enum):
-    WriteThrough: IntType = -2147483648
-    #None: IntType = 0
-    Asynchronous: IntType = 1073741824
+    WriteThrough = -2147483648
+    #None = 0
+    Asynchronous = 1073741824
 
 
 class PipeState(Enum):
-    WaitingToConnect: IntType = 0
-    Connected: IntType = 1
-    Broken: IntType = 2
-    Disconnected: IntType = 3
-    Closed: IntType = 4
+    WaitingToConnect = 0
+    Connected = 1
+    Broken = 2
+    Disconnected = 3
+    Closed = 4
 
 
 class PipeTransmissionMode(Enum):
-    Byte: IntType = 0
-    Message: IntType = 1
+    Byte = 0
+    Message = 1
 
 
 # ---------- Delegates ---------- #

@@ -732,8 +732,8 @@ class IProducerConsumerCollection(Protocol[T], IEnumerable[T], IEnumerable, ICol
 # ---------- Enums ---------- #
 
 class EnumerablePartitionerOptions(Enum):
-    #None: IntType = 0
-    NoBuffering: IntType = 1
+    #None = 0
+    NoBuffering = 1
 
 
 # No Delegates

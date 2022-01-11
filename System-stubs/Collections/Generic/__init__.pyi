@@ -3077,10 +3077,10 @@ class ISet(Protocol[T], ICollection[T], IEnumerable[T], IEnumerable):
 # ---------- Enums ---------- #
 
 class TreeRotation(Enum):
-    LeftRotation: IntType = 1
-    RightRotation: IntType = 2
-    RightLeftRotation: IntType = 3
-    LeftRightRotation: IntType = 4
+    LeftRotation = 1
+    RightRotation = 2
+    RightLeftRotation = 3
+    LeftRightRotation = 4
 
 
 # ---------- Delegates ---------- #

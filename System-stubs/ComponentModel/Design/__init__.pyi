@@ -2003,36 +2003,36 @@ class ITypeResolutionService(Protocol):
 # ---------- Enums ---------- #
 
 class HelpContextType(Enum):
-    Ambient: IntType = 0
-    Window: IntType = 1
-    Selection: IntType = 2
-    ToolWindowSelection: IntType = 3
+    Ambient = 0
+    Window = 1
+    Selection = 2
+    ToolWindowSelection = 3
 
 
 class HelpKeywordType(Enum):
-    F1Keyword: IntType = 0
-    GeneralKeyword: IntType = 1
-    FilterKeyword: IntType = 2
+    F1Keyword = 0
+    GeneralKeyword = 1
+    FilterKeyword = 2
 
 
 class SelectionTypes(Enum):
-    Auto: IntType = 1
-    Normal: IntType = 1
-    Replace: IntType = 2
-    MouseDown: IntType = 4
-    MouseUp: IntType = 8
-    Click: IntType = 16
-    Primary: IntType = 16
-    Valid: IntType = 31
-    Toggle: IntType = 32
-    Add: IntType = 64
-    Remove: IntType = 128
+    Auto = 1
+    Normal = 1
+    Replace = 2
+    MouseDown = 4
+    MouseUp = 8
+    Click = 16
+    Primary = 16
+    Valid = 31
+    Toggle = 32
+    Add = 64
+    Remove = 128
 
 
 class ViewTechnology(Enum):
-    Passthrough: IntType = 0
-    WindowsForms: IntType = 1
-    Default: IntType = 2
+    Passthrough = 0
+    WindowsForms = 1
+    Default = 2
 
 
 # ---------- Delegates ---------- #

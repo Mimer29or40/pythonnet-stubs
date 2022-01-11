@@ -414,19 +414,19 @@ class ISoapMessage(Protocol):
 # ---------- Enums ---------- #
 
 class FormatterAssemblyStyle(Enum):
-    Simple: IntType = 0
-    Full: IntType = 1
+    Simple = 0
+    Full = 1
 
 
 class FormatterTypeStyle(Enum):
-    TypesWhenNeeded: IntType = 0
-    TypesAlways: IntType = 1
-    XsdString: IntType = 2
+    TypesWhenNeeded = 0
+    TypesAlways = 1
+    XsdString = 2
 
 
 class TypeFilterLevel(Enum):
-    Low: IntType = 2
-    Full: IntType = 3
+    Low = 2
+    Full = 3
 
 
 # No Delegates

@@ -801,67 +801,67 @@ class _WinInetCache(ABC, ObjectType):
 # ---------- Enums ---------- #
 
 class CacheFreshnessStatus(Enum):
-    Undefined: IntType = 0
-    Fresh: IntType = 1
-    Stale: IntType = 2
+    Undefined = 0
+    Fresh = 1
+    Stale = 2
 
 
 class CacheValidationStatus(Enum):
-    DoNotUseCache: IntType = 0
-    Fail: IntType = 1
-    DoNotTakeFromCache: IntType = 2
-    RetryResponseFromCache: IntType = 3
-    RetryResponseFromServer: IntType = 4
-    ReturnCachedResponse: IntType = 5
-    CombineCachedAndServerResponse: IntType = 6
-    CacheResponse: IntType = 7
-    UpdateResponseInformation: IntType = 8
-    RemoveFromCache: IntType = 9
-    DoNotUpdateCache: IntType = 10
-    Continue: IntType = 11
+    DoNotUseCache = 0
+    Fail = 1
+    DoNotTakeFromCache = 2
+    RetryResponseFromCache = 3
+    RetryResponseFromServer = 4
+    ReturnCachedResponse = 5
+    CombineCachedAndServerResponse = 6
+    CacheResponse = 7
+    UpdateResponseInformation = 8
+    RemoveFromCache = 9
+    DoNotUpdateCache = 10
+    Continue = 11
 
 
 class HttpCacheAgeControl(Enum):
-    #None: IntType = 0
-    MinFresh: IntType = 1
-    MaxAge: IntType = 2
-    MaxAgeAndMinFresh: IntType = 3
-    MaxStale: IntType = 4
-    MaxAgeAndMaxStale: IntType = 6
+    #None = 0
+    MinFresh = 1
+    MaxAge = 2
+    MaxAgeAndMinFresh = 3
+    MaxStale = 4
+    MaxAgeAndMaxStale = 6
 
 
 class HttpMethod(Enum):
-    Other: IntType = -1
-    Head: IntType = 0
-    Get: IntType = 1
-    Post: IntType = 2
-    Put: IntType = 3
-    Delete: IntType = 4
-    Options: IntType = 5
-    Trace: IntType = 6
-    Connect: IntType = 7
+    Other = -1
+    Head = 0
+    Get = 1
+    Post = 2
+    Put = 3
+    Delete = 4
+    Options = 5
+    Trace = 6
+    Connect = 7
 
 
 class HttpRequestCacheLevel(Enum):
-    Default: IntType = 0
-    BypassCache: IntType = 1
-    CacheOnly: IntType = 2
-    CacheIfAvailable: IntType = 3
-    Revalidate: IntType = 4
-    Reload: IntType = 5
-    NoCacheNoStore: IntType = 6
-    CacheOrNextCacheOnly: IntType = 7
-    Refresh: IntType = 8
+    Default = 0
+    BypassCache = 1
+    CacheOnly = 2
+    CacheIfAvailable = 3
+    Revalidate = 4
+    Reload = 5
+    NoCacheNoStore = 6
+    CacheOrNextCacheOnly = 7
+    Refresh = 8
 
 
 class RequestCacheLevel(Enum):
-    Default: IntType = 0
-    BypassCache: IntType = 1
-    CacheOnly: IntType = 2
-    CacheIfAvailable: IntType = 3
-    Revalidate: IntType = 4
-    Reload: IntType = 5
-    NoCacheNoStore: IntType = 6
+    Default = 0
+    BypassCache = 1
+    CacheOnly = 2
+    CacheIfAvailable = 3
+    Revalidate = 4
+    Reload = 5
+    NoCacheNoStore = 6
 
 
 # No Delegates

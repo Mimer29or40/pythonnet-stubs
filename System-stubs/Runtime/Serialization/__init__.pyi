@@ -1462,15 +1462,15 @@ class ISurrogateSelector(Protocol):
 # ---------- Enums ---------- #
 
 class StreamingContextStates(Enum):
-    CrossProcess: IntType = 1
-    CrossMachine: IntType = 2
-    File: IntType = 4
-    Persistence: IntType = 8
-    Remoting: IntType = 16
-    Other: IntType = 32
-    Clone: IntType = 64
-    CrossAppDomain: IntType = 128
-    All: IntType = 255
+    CrossProcess = 1
+    CrossMachine = 2
+    File = 4
+    Persistence = 8
+    Remoting = 16
+    Other = 32
+    Clone = 64
+    CrossAppDomain = 128
+    All = 255
 
 
 # ---------- Delegates ---------- #

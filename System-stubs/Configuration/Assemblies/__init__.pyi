@@ -68,18 +68,18 @@ class AssemblyHash(ValueType, ICloneable):
 # ---------- Enums ---------- #
 
 class AssemblyHashAlgorithm(Enum):
-    #None: IntType = 0
-    MD5: IntType = 32771
-    SHA1: IntType = 32772
-    SHA256: IntType = 32780
-    SHA384: IntType = 32781
-    SHA512: IntType = 32782
+    #None = 0
+    MD5 = 32771
+    SHA1 = 32772
+    SHA256 = 32780
+    SHA384 = 32781
+    SHA512 = 32782
 
 
 class AssemblyVersionCompatibility(Enum):
-    SameMachine: IntType = 1
-    SameProcess: IntType = 2
-    SameDomain: IntType = 3
+    SameMachine = 1
+    SameProcess = 2
+    SameDomain = 3
 
 
 # No Delegates

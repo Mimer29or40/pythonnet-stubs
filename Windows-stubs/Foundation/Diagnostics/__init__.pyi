@@ -95,36 +95,36 @@ class ITracingStatusChangedEventArgs(Protocol):
 # ---------- Enums ---------- #
 
 class AsyncCausalityStatus(Enum):
-    Started: IntType = 0
-    Completed: IntType = 1
-    Canceled: IntType = 2
-    Error: IntType = 3
+    Started = 0
+    Completed = 1
+    Canceled = 2
+    Error = 3
 
 
 class CausalityRelation(Enum):
-    AssignDelegate: IntType = 0
-    Join: IntType = 1
-    Choice: IntType = 2
-    Cancel: IntType = 3
-    Error: IntType = 4
+    AssignDelegate = 0
+    Join = 1
+    Choice = 2
+    Cancel = 3
+    Error = 4
 
 
 class CausalitySource(Enum):
-    Application: IntType = 0
-    Library: IntType = 1
-    System: IntType = 2
+    Application = 0
+    Library = 1
+    System = 2
 
 
 class CausalitySynchronousWork(Enum):
-    CompletionNotification: IntType = 0
-    ProgressNotification: IntType = 1
-    Execution: IntType = 2
+    CompletionNotification = 0
+    ProgressNotification = 1
+    Execution = 2
 
 
 class CausalityTraceLevel(Enum):
-    Required: IntType = 0
-    Important: IntType = 1
-    Verbose: IntType = 2
+    Required = 0
+    Important = 1
+    Verbose = 2
 
 
 # No Delegates

@@ -818,11 +818,11 @@ class DebuggableAttribute(Attribute, _Attribute):
     # ---------- Sub Enums ---------- #
     
     class DebuggingModes(Enum):
-        #None: IntType = 0
-        Default: IntType = 1
-        IgnoreSymbolStoreSequencePoints: IntType = 2
-        EnableEditAndContinue: IntType = 4
-        DisableOptimizations: IntType = 256
+        #None = 0
+        Default = 1
+        IgnoreSymbolStoreSequencePoints = 2
+        EnableEditAndContinue = 4
+        DisableOptimizations = 256
     
 
 
@@ -7174,221 +7174,221 @@ class ICustomDebuggerNotification(Protocol):
 # ---------- Enums ---------- #
 
 class AssertFilters(Enum):
-    FailDebug: IntType = 0
-    FailIgnore: IntType = 1
-    FailTerminate: IntType = 2
-    FailContinueFilter: IntType = 3
+    FailDebug = 0
+    FailIgnore = 1
+    FailTerminate = 2
+    FailContinueFilter = 3
 
 
 class DebuggerBrowsableState(Enum):
-    Never: IntType = 0
-    Collapsed: IntType = 2
-    RootHidden: IntType = 3
+    Never = 0
+    Collapsed = 2
+    RootHidden = 3
 
 
 class EventLogEntryType(Enum):
-    Error: IntType = 1
-    Warning: IntType = 2
-    Information: IntType = 4
-    SuccessAudit: IntType = 8
-    FailureAudit: IntType = 16
+    Error = 1
+    Warning = 2
+    Information = 4
+    SuccessAudit = 8
+    FailureAudit = 16
 
 
 class EventLogPermissionAccess(Enum):
-    #None: IntType = 0
-    Browse: IntType = 2
-    Instrument: IntType = 6
-    Audit: IntType = 10
-    Write: IntType = 16
-    Administer: IntType = 48
+    #None = 0
+    Browse = 2
+    Instrument = 6
+    Audit = 10
+    Write = 16
+    Administer = 48
 
 
 class InitState(Enum):
-    NotInitialized: IntType = 0
-    Initializing: IntType = 1
-    Initialized: IntType = 2
+    NotInitialized = 0
+    Initializing = 1
+    Initialized = 2
 
 
 class LoggingLevels(Enum):
-    TraceLevel0: IntType = 0
-    TraceLevel1: IntType = 1
-    TraceLevel2: IntType = 2
-    TraceLevel3: IntType = 3
-    TraceLevel4: IntType = 4
-    StatusLevel0: IntType = 20
-    StatusLevel1: IntType = 21
-    StatusLevel2: IntType = 22
-    StatusLevel3: IntType = 23
-    StatusLevel4: IntType = 24
-    WarningLevel: IntType = 40
-    ErrorLevel: IntType = 50
-    PanicLevel: IntType = 100
+    TraceLevel0 = 0
+    TraceLevel1 = 1
+    TraceLevel2 = 2
+    TraceLevel3 = 3
+    TraceLevel4 = 4
+    StatusLevel0 = 20
+    StatusLevel1 = 21
+    StatusLevel2 = 22
+    StatusLevel3 = 23
+    StatusLevel4 = 24
+    WarningLevel = 40
+    ErrorLevel = 50
+    PanicLevel = 100
 
 
 class OverflowAction(Enum):
-    DoNotOverwrite: IntType = -1
-    OverwriteAsNeeded: IntType = 0
-    OverwriteOlder: IntType = 1
+    DoNotOverwrite = -1
+    OverwriteAsNeeded = 0
+    OverwriteOlder = 1
 
 
 class PerformanceCounterCategoryOptions(Enum):
-    EnableReuse: IntType = 1
-    UseUniqueSharedMemory: IntType = 2
+    EnableReuse = 1
+    UseUniqueSharedMemory = 2
 
 
 class PerformanceCounterCategoryType(Enum):
-    Unknown: IntType = -1
-    SingleInstance: IntType = 0
-    MultiInstance: IntType = 1
+    Unknown = -1
+    SingleInstance = 0
+    MultiInstance = 1
 
 
 class PerformanceCounterInstanceLifetime(Enum):
-    Global: IntType = 0
-    Process: IntType = 1
+    Global = 0
+    Process = 1
 
 
 class PerformanceCounterPermissionAccess(Enum):
-    #None: IntType = 0
-    Read: IntType = 1
-    Browse: IntType = 1
-    Write: IntType = 2
-    Instrument: IntType = 3
-    Administer: IntType = 7
+    #None = 0
+    Read = 1
+    Browse = 1
+    Write = 2
+    Instrument = 3
+    Administer = 7
 
 
 class PerformanceCounterType(Enum):
-    NumberOfItemsHEX32: IntType = 0
-    NumberOfItemsHEX64: IntType = 256
-    NumberOfItems32: IntType = 65536
-    NumberOfItems64: IntType = 65792
-    CounterDelta32: IntType = 4195328
-    CounterDelta64: IntType = 4195584
-    SampleCounter: IntType = 4260864
-    CountPerTimeInterval32: IntType = 4523008
-    CountPerTimeInterval64: IntType = 4523264
-    RateOfCountsPerSecond32: IntType = 272696320
-    RateOfCountsPerSecond64: IntType = 272696576
-    RawFraction: IntType = 537003008
-    CounterTimer: IntType = 541132032
-    Timer100Ns: IntType = 542180608
-    SampleFraction: IntType = 549585920
-    CounterTimerInverse: IntType = 557909248
-    Timer100NsInverse: IntType = 558957824
-    CounterMultiTimer: IntType = 574686464
-    CounterMultiTimer100Ns: IntType = 575735040
-    CounterMultiTimerInverse: IntType = 591463680
-    CounterMultiTimer100NsInverse: IntType = 592512256
-    AverageTimer32: IntType = 805438464
-    ElapsedTime: IntType = 807666944
-    AverageCount64: IntType = 1073874176
-    SampleBase: IntType = 1073939457
-    AverageBase: IntType = 1073939458
-    RawBase: IntType = 1073939459
-    CounterMultiBase: IntType = 1107494144
+    NumberOfItemsHEX32 = 0
+    NumberOfItemsHEX64 = 256
+    NumberOfItems32 = 65536
+    NumberOfItems64 = 65792
+    CounterDelta32 = 4195328
+    CounterDelta64 = 4195584
+    SampleCounter = 4260864
+    CountPerTimeInterval32 = 4523008
+    CountPerTimeInterval64 = 4523264
+    RateOfCountsPerSecond32 = 272696320
+    RateOfCountsPerSecond64 = 272696576
+    RawFraction = 537003008
+    CounterTimer = 541132032
+    Timer100Ns = 542180608
+    SampleFraction = 549585920
+    CounterTimerInverse = 557909248
+    Timer100NsInverse = 558957824
+    CounterMultiTimer = 574686464
+    CounterMultiTimer100Ns = 575735040
+    CounterMultiTimerInverse = 591463680
+    CounterMultiTimer100NsInverse = 592512256
+    AverageTimer32 = 805438464
+    ElapsedTime = 807666944
+    AverageCount64 = 1073874176
+    SampleBase = 1073939457
+    AverageBase = 1073939458
+    RawBase = 1073939459
+    CounterMultiBase = 1107494144
 
 
 class ProcessPriorityClass(Enum):
-    Normal: IntType = 32
-    Idle: IntType = 64
-    High: IntType = 128
-    RealTime: IntType = 256
-    BelowNormal: IntType = 16384
-    AboveNormal: IntType = 32768
+    Normal = 32
+    Idle = 64
+    High = 128
+    RealTime = 256
+    BelowNormal = 16384
+    AboveNormal = 32768
 
 
 class ProcessWindowStyle(Enum):
-    Normal: IntType = 0
-    Hidden: IntType = 1
-    Minimized: IntType = 2
-    Maximized: IntType = 3
+    Normal = 0
+    Hidden = 1
+    Minimized = 2
+    Maximized = 3
 
 
 class SourceLevels(Enum):
-    All: IntType = -1
-    Off: IntType = 0
-    Critical: IntType = 1
-    Error: IntType = 3
-    Warning: IntType = 7
-    Information: IntType = 15
-    Verbose: IntType = 31
-    ActivityTracing: IntType = 65280
+    All = -1
+    Off = 0
+    Critical = 1
+    Error = 3
+    Warning = 7
+    Information = 15
+    Verbose = 31
+    ActivityTracing = 65280
 
 
 class ThreadPriorityLevel(Enum):
-    Idle: IntType = -15
-    Lowest: IntType = -2
-    BelowNormal: IntType = -1
-    Normal: IntType = 0
-    AboveNormal: IntType = 1
-    Highest: IntType = 2
-    TimeCritical: IntType = 15
+    Idle = -15
+    Lowest = -2
+    BelowNormal = -1
+    Normal = 0
+    AboveNormal = 1
+    Highest = 2
+    TimeCritical = 15
 
 
 class ThreadState(Enum):
-    Initialized: IntType = 0
-    Ready: IntType = 1
-    Running: IntType = 2
-    Standby: IntType = 3
-    Terminated: IntType = 4
-    Wait: IntType = 5
-    Transition: IntType = 6
-    Unknown: IntType = 7
+    Initialized = 0
+    Ready = 1
+    Running = 2
+    Standby = 3
+    Terminated = 4
+    Wait = 5
+    Transition = 6
+    Unknown = 7
 
 
 class ThreadWaitReason(Enum):
-    Executive: IntType = 0
-    FreePage: IntType = 1
-    PageIn: IntType = 2
-    SystemAllocation: IntType = 3
-    ExecutionDelay: IntType = 4
-    Suspended: IntType = 5
-    UserRequest: IntType = 6
-    EventPairHigh: IntType = 7
-    EventPairLow: IntType = 8
-    LpcReceive: IntType = 9
-    LpcReply: IntType = 10
-    VirtualMemory: IntType = 11
-    PageOut: IntType = 12
-    Unknown: IntType = 13
+    Executive = 0
+    FreePage = 1
+    PageIn = 2
+    SystemAllocation = 3
+    ExecutionDelay = 4
+    Suspended = 5
+    UserRequest = 6
+    EventPairHigh = 7
+    EventPairLow = 8
+    LpcReceive = 9
+    LpcReply = 10
+    VirtualMemory = 11
+    PageOut = 12
+    Unknown = 13
 
 
 class TraceEventType(Enum):
-    Critical: IntType = 1
-    Error: IntType = 2
-    Warning: IntType = 4
-    Information: IntType = 8
-    Verbose: IntType = 16
-    Start: IntType = 256
-    Stop: IntType = 512
-    Suspend: IntType = 1024
-    Resume: IntType = 2048
-    Transfer: IntType = 4096
+    Critical = 1
+    Error = 2
+    Warning = 4
+    Information = 8
+    Verbose = 16
+    Start = 256
+    Stop = 512
+    Suspend = 1024
+    Resume = 2048
+    Transfer = 4096
 
 
 class TraceLevel(Enum):
-    Off: IntType = 0
-    Error: IntType = 1
-    Warning: IntType = 2
-    Info: IntType = 3
-    Verbose: IntType = 4
+    Off = 0
+    Error = 1
+    Warning = 2
+    Info = 3
+    Verbose = 4
 
 
 class TraceLogRetentionOption(Enum):
-    UnlimitedSequentialFiles: IntType = 0
-    LimitedCircularFiles: IntType = 1
-    SingleFileUnboundedSize: IntType = 2
-    LimitedSequentialFiles: IntType = 3
-    SingleFileBoundedSize: IntType = 4
+    UnlimitedSequentialFiles = 0
+    LimitedCircularFiles = 1
+    SingleFileUnboundedSize = 2
+    LimitedSequentialFiles = 3
+    SingleFileBoundedSize = 4
 
 
 class TraceOptions(Enum):
-    #None: IntType = 0
-    LogicalOperationStack: IntType = 1
-    DateTime: IntType = 2
-    Timestamp: IntType = 4
-    ProcessId: IntType = 8
-    ThreadId: IntType = 16
-    Callstack: IntType = 32
+    #None = 0
+    LogicalOperationStack = 1
+    DateTime = 2
+    Timestamp = 4
+    ProcessId = 8
+    ThreadId = 16
+    Callstack = 32
 
 
 # ---------- Delegates ---------- #
