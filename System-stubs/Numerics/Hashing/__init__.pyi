@@ -36,52 +36,6 @@ class HashHelpers(ABC, ObjectType):
     # No Sub Enums
 
 
-class HashHelpers(ABC, ObjectType):
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    @staticmethod
-    def Combine(h1: IntType, h2: IntType) -> IntType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class HashHelpers(ABC, ObjectType):
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    @staticmethod
-    def Combine(h1: IntType, h2: IntType) -> IntType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 # No Structs
 
 # No Interfaces

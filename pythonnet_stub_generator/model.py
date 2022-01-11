@@ -15,11 +15,11 @@ class Namespace:
         self.var_types: Dict[str, VarType] = {}
         self.sys_types: Dict[str, SystemType] = {}
         self.special_types: Dict[str, SpecialType] = {}
-        self.classes: Dict[str, List[Class]] = defaultdict(list)
-        self.structs: Dict[str, List[Class]] = defaultdict(list)
-        self.interfaces: Dict[str, List[Interface]] = defaultdict(list)
-        self.enums: Dict[str, List[Enum]] = defaultdict(list)
-        self.delegates: Dict[str, List[Delegate]] = defaultdict(list)
+        self.classes: Dict[str, Set[Class]] = defaultdict(set)
+        self.structs: Dict[str, Set[Class]] = defaultdict(set)
+        self.interfaces: Dict[str, Set[Interface]] = defaultdict(set)
+        self.enums: Dict[str, Set[Enum]] = defaultdict(set)
+        self.delegates: Dict[str, Set[Delegate]] = defaultdict(set)
         self.doc_string: str = ''
     
     def to_lines(self) -> List[str]:
@@ -90,7 +90,7 @@ class Namespace:
         if len(classes_sorted) > 0:
             lines.extend(['# ---------- Classes ---------- #'])
             for class_name in classes_sorted:
-                for i in self.classes[class_name]:
+                for i in sorted(self.classes[class_name], key=lambda c: str(c), reverse=True):
                     lines.extend(['', *i.to_lines(), ''])
         else:
             lines.append('# No Classes')
@@ -100,7 +100,7 @@ class Namespace:
         if len(structs_sorted) > 0:
             lines.extend(['# ---------- Structs ---------- #'])
             for struct_name in structs_sorted:
-                for i in self.structs[struct_name]:
+                for i in sorted(self.structs[struct_name], key=lambda s: str(s), reverse=True):
                     lines.extend(['', *i.to_lines(), ''])
         else:
             lines.append('# No Structs')
@@ -110,7 +110,7 @@ class Namespace:
         if len(interfaces_sorted) > 0:
             lines.extend(['# ---------- Interfaces ---------- #'])
             for interface_name in interfaces_sorted:
-                for i in self.interfaces[interface_name]:
+                for i in sorted(self.interfaces[interface_name], key=lambda i: str(i), reverse=True):
                     lines.extend(['', *i.to_lines(), ''])
         else:
             lines.append('# No Interfaces')
@@ -120,7 +120,7 @@ class Namespace:
         if len(enums_sorted) > 0:
             lines.extend(['# ---------- Enums ---------- #'])
             for enum_name in enums_sorted:
-                for i in self.enums[enum_name]:
+                for i in sorted(self.enums[enum_name], key=lambda e: str(e), reverse=True):
                     lines.extend(['', *i.to_lines(), ''])
         else:
             lines.append('# No Enums')
@@ -130,7 +130,7 @@ class Namespace:
         if len(self.delegates) > 0:
             lines.extend(['# ---------- Delegates ---------- #'])
             for delegate_name in delegates_sorted:
-                for i in self.delegates[delegate_name]:
+                for i in sorted(self.delegates[delegate_name], key=lambda d: str(d), reverse=True):
                     lines.extend(['', *i.to_lines()])
         else:
             lines.append('# No Delegates')
@@ -164,6 +164,34 @@ class Class:
         self.sub_interfaces: List[Interface] = []
         self.sub_enums: List[Enum] = []
         self.doc_string: str = ''
+    
+    def __repr__(self) -> str:
+        imports = []
+        if len(self.generic_args) > 0:
+            args = ', '.join(str(a) for a in self.generic_args)
+            if self.abstract:
+                imports.append(f'Protocol[{args}]')
+            else:
+                imports.append(f'Generic[{args}]')
+        elif self.abstract:
+            imports.append('ABC')
+        
+        if self.super_type is not None:
+            imports.append(str(self.super_type))
+        
+        imports.extend(str(i) for i in self.interfaces)
+        
+        import_str = f'({", ".join(imports)})' if len(imports) > 0 else ''
+        
+        return f'class {self.name}{import_str}:'
+    
+    def __hash__(self):
+        return hash(repr(self))
+    
+    def __eq__(self, other):
+        if isinstance(other, Class):
+            return repr(self) == repr(other)
+        return False
     
     def to_lines(self) -> List[str]:
         lines: List[str] = []
@@ -293,6 +321,26 @@ class Interface:
         self.events: List[Event] = []
         self.doc_string: str = ''
     
+    def __repr__(self) -> str:
+        type_args = ''
+        if len(self.generic_args) > 0:
+            type_args = f'[{", ".join(str(t) for t in self.generic_args)}]'
+        
+        super_types = ''
+        if len(self.super_classes) > 0:
+            super_types = f', '.join(str(b) for b in self.super_classes)
+            super_types = f', {super_types}'
+        
+        return f'class {self.name}(Protocol{type_args}{super_types}):'
+    
+    def __hash__(self):
+        return hash(repr(self))
+    
+    def __eq__(self, other):
+        if isinstance(other, Interface):
+            return repr(self) == repr(other)
+        return False
+    
     def to_lines(self) -> List[str]:
         lines: List[str] = []
         
@@ -343,6 +391,17 @@ class Enum:
         self.name: str = name
         self.fields: List[EnumField] = []
         self.doc_string: str = ''
+
+    def __repr__(self) -> str:
+        return f'class {self.name}(Enum):'
+
+    def __hash__(self):
+        return hash(repr(self))
+
+    def __eq__(self, other):
+        if isinstance(other, Enum):
+            return repr(self) == repr(other)
+        return False
     
     def to_lines(self) -> List[str]:
         lines: List[str] = [f'class {self.name}(Enum):']
@@ -367,6 +426,23 @@ class Delegate:
         self.input_types: List[BaseType] = []
         self.return_type: Optional[BaseType] = None
         self.doc_string: str = ''
+
+    def __repr__(self) -> str:
+        input_types = ', '.join(str(t) for t in self.input_types)
+    
+        return_type = 'None'
+        if self.return_type is not None:
+            return_type = str(self.return_type)
+    
+        return f'{self.name} = Callable[[{input_types}], {return_type}]'
+
+    def __hash__(self):
+        return hash(repr(self))
+
+    def __eq__(self, other):
+        if isinstance(other, Delegate):
+            return repr(self) == repr(other)
+        return False
     
     def to_lines(self) -> List[str]:
         lines: List[str] = []
@@ -374,7 +450,7 @@ class Delegate:
         input_types = ', '.join(str(t) for t in self.input_types)
         
         return_type = 'None'
-        if self.doc_string is not None:
+        if self.return_type is not None:
             return_type = str(self.return_type)
         
         lines.append(f'{self.name} = Callable[[{input_types}], {return_type}]')

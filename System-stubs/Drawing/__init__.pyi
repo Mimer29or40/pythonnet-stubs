@@ -28,28 +28,6 @@ class BitmapSuffixInSatelliteAssemblyAttribute(Attribute, _Attribute):
     # No Sub Enums
 
 
-class BitmapSuffixInSatelliteAssemblyAttribute(Attribute, _Attribute):
-    # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 # No Structs
 
 # No Interfaces

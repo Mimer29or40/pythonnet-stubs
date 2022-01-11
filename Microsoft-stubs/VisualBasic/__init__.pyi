@@ -45,74 +45,6 @@ class VBCodeGenerator(CodeCompiler, ICodeGenerator, ICodeCompiler):
     # No Sub Enums
 
 
-class VBCodeGenerator(CodeCompiler, ICodeGenerator, ICodeCompiler):
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    @staticmethod
-    def IsKeyword(value: StringType) -> BooleanType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class VBCodeProvider(CodeDomProvider, IComponent, IDisposable):
-    # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    @overload
-    def __init__(self): ...
-    
-    @overload
-    def __init__(self, providerOptions: IDictionary[StringType, StringType]): ...
-    
-    # ---------- Properties ---------- #
-    
-    @property
-    def FileExtension(self) -> StringType: ...
-    
-    @property
-    def LanguageOptions(self) -> LanguageOptions: ...
-    
-    # ---------- Methods ---------- #
-    
-    def CreateCompiler(self) -> ICodeCompiler: ...
-    
-    @overload
-    def CreateGenerator(self) -> ICodeGenerator: ...
-    
-    def GenerateCodeFromMember(self, member: CodeTypeMember, writer: TextWriter, options: CodeGeneratorOptions) -> VoidType: ...
-    
-    def GetConverter(self, type: TypeType) -> TypeConverter: ...
-    
-    def get_FileExtension(self) -> StringType: ...
-    
-    def get_LanguageOptions(self) -> LanguageOptions: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class VBCodeProvider(CodeDomProvider, IComponent, IDisposable):
     # No Fields
     
@@ -185,33 +117,6 @@ class VBMemberAttributeConverter(VBModifierAttributeConverter):
     # No Sub Enums
 
 
-class VBMemberAttributeConverter(VBModifierAttributeConverter):
-    # No Fields
-    
-    # No Constructors
-    
-    # ---------- Properties ---------- #
-    
-    @staticmethod
-    @property
-    def Default() -> VBMemberAttributeConverter: ...
-    
-    # ---------- Methods ---------- #
-    
-    @staticmethod
-    def get_Default() -> VBMemberAttributeConverter: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class VBModifierAttributeConverter(ABC, TypeConverter):
     # No Fields
     
@@ -238,71 +143,6 @@ class VBModifierAttributeConverter(ABC, TypeConverter):
     
     @overload
     def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> BooleanType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class VBModifierAttributeConverter(ABC, TypeConverter):
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    @overload
-    def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: TypeType) -> BooleanType: ...
-    
-    @overload
-    def ConvertFrom(self, context: ITypeDescriptorContext, culture: CultureInfo, value: ObjectType) -> ObjectType: ...
-    
-    @overload
-    def ConvertTo(self, context: ITypeDescriptorContext, culture: CultureInfo, value: ObjectType, destinationType: TypeType) -> ObjectType: ...
-    
-    @overload
-    def GetStandardValues(self, context: ITypeDescriptorContext) -> StandardValuesCollection: ...
-    
-    @overload
-    def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> BooleanType: ...
-    
-    @overload
-    def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> BooleanType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class VBTypeAttributeConverter(VBModifierAttributeConverter):
-    # No Fields
-    
-    # No Constructors
-    
-    # ---------- Properties ---------- #
-    
-    @staticmethod
-    @property
-    def Default() -> VBTypeAttributeConverter: ...
-    
-    # ---------- Methods ---------- #
-    
-    @staticmethod
-    def get_Default() -> VBTypeAttributeConverter: ...
     
     # No Events
     

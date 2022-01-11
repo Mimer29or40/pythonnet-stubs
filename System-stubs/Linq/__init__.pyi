@@ -810,28 +810,6 @@ class Enumerable(ABC, ObjectType):
     # No Sub Enums
 
 
-class EnumerableExecutor(ABC, ObjectType):
-    """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class EnumerableExecutor(Generic[T], EnumerableExecutor):
     # No Fields
     
@@ -854,7 +832,7 @@ class EnumerableExecutor(Generic[T], EnumerableExecutor):
     # No Sub Enums
 
 
-class EnumerableQuery(ABC, ObjectType):
+class EnumerableExecutor(ABC, ObjectType):
     """"""
     
     # No Fields
@@ -892,6 +870,28 @@ class EnumerableQuery(Generic[T], EnumerableQuery, IOrderedQueryable[T], IQuerya
     # ---------- Methods ---------- #
     
     def ToString(self) -> StringType: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class EnumerableQuery(ABC, ObjectType):
+    """"""
+    
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # No Methods
     
     # No Events
     
@@ -992,30 +992,6 @@ class Error(ABC, ObjectType):
     # No Sub Enums
 
 
-class GroupedEnumerable(Generic[TSource, TKey, TElement, TResult], ObjectType, IEnumerable[TResult], IEnumerable):
-    # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self, source: IEnumerable[TSource], keySelector: Func[TSource, TKey], elementSelector: Func[TSource, TElement], resultSelector: Func[TKey, IEnumerable[TElement], TResult], comparer: IEqualityComparer[TKey]): ...
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def GetEnumerator(self) -> IEnumerator[TResult]: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class GroupedEnumerable(Generic[TSource, TKey, TElement], ObjectType, IEnumerable[IGrouping[TKey, TElement]], IEnumerable):
     # No Fields
     
@@ -1028,6 +1004,30 @@ class GroupedEnumerable(Generic[TSource, TKey, TElement], ObjectType, IEnumerabl
     # ---------- Methods ---------- #
     
     def GetEnumerator(self) -> IEnumerator[IGrouping[TKey, TElement]]: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class GroupedEnumerable(Generic[TSource, TKey, TElement, TResult], ObjectType, IEnumerable[TResult], IEnumerable):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, source: IEnumerable[TSource], keySelector: Func[TSource, TKey], elementSelector: Func[TSource, TElement], resultSelector: Func[TKey, IEnumerable[TElement], TResult], comparer: IEqualityComparer[TKey]): ...
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    def GetEnumerator(self) -> IEnumerator[TResult]: ...
     
     # No Events
     
@@ -2714,33 +2714,6 @@ class Strings(ABC, ObjectType):
     # No Sub Enums
 
 
-class SystemCore_EnumerableDebugView(Generic[T], ObjectType):
-    # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self, enumerable: IEnumerable[T]): ...
-    
-    # ---------- Properties ---------- #
-    
-    @property
-    def Items(self) -> ArrayType[T]: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_Items(self) -> ArrayType[T]: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class SystemCore_EnumerableDebugView(ObjectType):
     # No Fields
     
@@ -2756,6 +2729,33 @@ class SystemCore_EnumerableDebugView(ObjectType):
     # ---------- Methods ---------- #
     
     def get_Items(self) -> ArrayType[ObjectType]: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
+class SystemCore_EnumerableDebugView(Generic[T], ObjectType):
+    # No Fields
+    
+    # ---------- Constructors ---------- #
+    
+    def __init__(self, enumerable: IEnumerable[T]): ...
+    
+    # ---------- Properties ---------- #
+    
+    @property
+    def Items(self) -> ArrayType[T]: ...
+    
+    # ---------- Methods ---------- #
+    
+    def get_Items(self) -> ArrayType[T]: ...
     
     # No Events
     
@@ -2899,7 +2899,7 @@ class IOrderedEnumerable(Protocol[TElement], IEnumerable[TElement], IEnumerable)
     # No Events
 
 
-class IOrderedQueryable(Protocol, IQueryable, IEnumerable):
+class IOrderedQueryable(Protocol[T], IQueryable[T], IEnumerable[T], IEnumerable, IQueryable, IOrderedQueryable):
     """"""
     
     # No Properties
@@ -2909,7 +2909,7 @@ class IOrderedQueryable(Protocol, IQueryable, IEnumerable):
     # No Events
 
 
-class IOrderedQueryable(Protocol[T], IQueryable[T], IEnumerable[T], IEnumerable, IQueryable, IOrderedQueryable):
+class IOrderedQueryable(Protocol, IQueryable, IEnumerable):
     """"""
     
     # No Properties
@@ -2939,6 +2939,16 @@ class IQueryProvider(Protocol):
     # No Events
 
 
+class IQueryable(Protocol[T], IEnumerable[T], IEnumerable, IQueryable):
+    """"""
+    
+    # No Properties
+    
+    # No Methods
+    
+    # No Events
+
+
 class IQueryable(Protocol, IEnumerable):
     # ---------- Properties ---------- #
     
@@ -2958,16 +2968,6 @@ class IQueryable(Protocol, IEnumerable):
     def get_Expression(self) -> Expression: ...
     
     def get_Provider(self) -> IQueryProvider: ...
-    
-    # No Events
-
-
-class IQueryable(Protocol[T], IEnumerable[T], IEnumerable, IQueryable):
-    """"""
-    
-    # No Properties
-    
-    # No Methods
     
     # No Events
 

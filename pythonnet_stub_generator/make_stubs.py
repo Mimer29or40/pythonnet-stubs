@@ -227,21 +227,21 @@ def _process_system_type_obj(namespace: Namespace, system_type_obj: System.Type)
     if system_type_obj.IsValueType:
         if system_type_obj.IsEnum:
             enum = _process_enum(namespace, system_type_obj)
-            namespace.enums[enum.name].append(enum)
+            namespace.enums[enum.name].add(enum)
             return
         struct = _process_class(namespace, system_type_obj)
-        namespace.structs[struct.name].append(struct)
+        namespace.structs[struct.name].add(struct)
         return
     if system_type_obj.IsInterface:
         interface = _process_interface(namespace, system_type_obj)
-        namespace.interfaces[interface.name].append(interface)
+        namespace.interfaces[interface.name].add(interface)
         return
     if (system_type_obj.IsSubclassOf(System.Delegate) or system_type_obj.IsSubclassOf(System.MulticastDelegate)) and system_type_obj not in [System.Type.GetType('System.Delegate'), System.Type.GetType('System.MulticastDelegate')]:
         delegate = _process_delegate(namespace, system_type_obj)
-        namespace.delegates[delegate.name].append(delegate)
+        namespace.delegates[delegate.name].add(delegate)
     if system_type_obj.IsClass:
         clazz = _process_class(namespace, system_type_obj)
-        namespace.classes[clazz.name].append(clazz)
+        namespace.classes[clazz.name].add(clazz)
         return
 
 

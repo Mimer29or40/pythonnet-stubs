@@ -998,6 +998,37 @@ class Error(ABC, ObjectType):
     # No Sub Enums
 
 
+class Expression(Generic[TDelegate], LambdaExpression):
+    # No Fields
+    
+    # No Constructors
+    
+    # No Properties
+    
+    # ---------- Methods ---------- #
+    
+    @overload
+    def Compile(self) -> TDelegate: ...
+    
+    @overload
+    def Compile(self, debugInfoGenerator: DebugInfoGenerator) -> TDelegate: ...
+    
+    @overload
+    def Compile(self, preferInterpretation: BooleanType) -> TDelegate: ...
+    
+    def Update(self, body: Expression, parameters: IEnumerable[ParameterExpression]) -> Expression[TDelegate]: ...
+    
+    # No Events
+    
+    # No Sub Classes
+    
+    # No Sub Structs
+    
+    # No Sub Interfaces
+    
+    # No Sub Enums
+
+
 class Expression(ABC, ObjectType):
     # No Fields
     
@@ -2235,37 +2266,6 @@ class Expression(ABC, ObjectType):
     def get_NodeType(self) -> ExpressionType: ...
     
     def get_Type(self) -> TypeType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class Expression(Generic[TDelegate], LambdaExpression):
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    @overload
-    def Compile(self) -> TDelegate: ...
-    
-    @overload
-    def Compile(self, debugInfoGenerator: DebugInfoGenerator) -> TDelegate: ...
-    
-    @overload
-    def Compile(self, preferInterpretation: BooleanType) -> TDelegate: ...
-    
-    def Update(self, body: Expression, parameters: IEnumerable[ParameterExpression]) -> Expression[TDelegate]: ...
     
     # No Events
     

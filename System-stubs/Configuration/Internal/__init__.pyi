@@ -76,28 +76,6 @@ class ConfigurationManagerHelper(ObjectType, IConfigurationManagerHelper):
     # No Sub Enums
 
 
-class ConfigurationManagerHelper(ObjectType, IConfigurationManagerHelper):
-    """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class ConfigurationManagerInternal(ObjectType, IConfigurationManagerInternal):
     """"""
     

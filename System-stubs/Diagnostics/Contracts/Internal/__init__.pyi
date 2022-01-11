@@ -41,58 +41,6 @@ class ContractHelper(ABC, ObjectType):
     # No Sub Enums
 
 
-class ContractHelper(ABC, ObjectType):
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    @staticmethod
-    def RaiseContractFailedEvent(failureKind: ContractFailureKind, userMessage: StringType, conditionText: StringType, innerException: Exception) -> StringType: ...
-    
-    @staticmethod
-    def TriggerFailure(kind: ContractFailureKind, displayMessage: StringType, userMessage: StringType, conditionText: StringType, innerException: Exception) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class ContractHelper(ABC, ObjectType):
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    @staticmethod
-    def RaiseContractFailedEvent(failureKind: ContractFailureKind, userMessage: StringType, conditionText: StringType, innerException: Exception) -> StringType: ...
-    
-    @staticmethod
-    def TriggerFailure(kind: ContractFailureKind, displayMessage: StringType, userMessage: StringType, conditionText: StringType, innerException: Exception) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 # No Structs
 
 # No Interfaces

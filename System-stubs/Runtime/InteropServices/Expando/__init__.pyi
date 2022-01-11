@@ -33,38 +33,6 @@ class IExpando(Protocol, IReflect):
     # No Events
 
 
-class IExpando(Protocol, IReflect):
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def AddField(self, name: StringType) -> FieldInfo: ...
-    
-    def AddMethod(self, name: StringType, method: Delegate) -> MethodInfo: ...
-    
-    def AddProperty(self, name: StringType) -> PropertyInfo: ...
-    
-    def RemoveMember(self, m: MemberInfo) -> VoidType: ...
-    
-    # No Events
-
-
-class IExpando(Protocol, IReflect):
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def AddField(self, name: StringType) -> FieldInfo: ...
-    
-    def AddMethod(self, name: StringType, method: Delegate) -> MethodInfo: ...
-    
-    def AddProperty(self, name: StringType) -> PropertyInfo: ...
-    
-    def RemoveMember(self, m: MemberInfo) -> VoidType: ...
-    
-    # No Events
-
-
 # No Enums
 
 # No Delegates

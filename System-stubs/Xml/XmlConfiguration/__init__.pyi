@@ -37,28 +37,6 @@ class XmlConfigurationString(ABC, ObjectType):
     # No Sub Enums
 
 
-class XmlConfigurationString(ABC, ObjectType):
-    """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
 class XmlReaderSection(ConfigurationSection):
     # No Fields
     
@@ -87,80 +65,6 @@ class XmlReaderSection(ConfigurationSection):
     def get_ProhibitDefaultResolverString(self) -> StringType: ...
     
     def set_CollapseWhiteSpaceIntoEmptyStringString(self, value: StringType) -> VoidType: ...
-    
-    def set_ProhibitDefaultResolverString(self, value: StringType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class XmlReaderSection(ConfigurationSection):
-    # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self): ...
-    
-    # ---------- Properties ---------- #
-    
-    @property
-    def CollapseWhiteSpaceIntoEmptyStringString(self) -> StringType: ...
-    
-    @CollapseWhiteSpaceIntoEmptyStringString.setter
-    def CollapseWhiteSpaceIntoEmptyStringString(self, value: StringType) -> None: ...
-    
-    @property
-    def ProhibitDefaultResolverString(self) -> StringType: ...
-    
-    @ProhibitDefaultResolverString.setter
-    def ProhibitDefaultResolverString(self, value: StringType) -> None: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_CollapseWhiteSpaceIntoEmptyStringString(self) -> StringType: ...
-    
-    def get_ProhibitDefaultResolverString(self) -> StringType: ...
-    
-    def set_CollapseWhiteSpaceIntoEmptyStringString(self, value: StringType) -> VoidType: ...
-    
-    def set_ProhibitDefaultResolverString(self, value: StringType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
-
-
-class XsltConfigSection(ConfigurationSection):
-    # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self): ...
-    
-    # ---------- Properties ---------- #
-    
-    @property
-    def ProhibitDefaultResolverString(self) -> StringType: ...
-    
-    @ProhibitDefaultResolverString.setter
-    def ProhibitDefaultResolverString(self, value: StringType) -> None: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_ProhibitDefaultResolverString(self) -> StringType: ...
     
     def set_ProhibitDefaultResolverString(self, value: StringType) -> VoidType: ...
     
