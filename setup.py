@@ -7,7 +7,7 @@ here = Path(__file__).parent.resolve()
 long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
-    name='pythonnet_stub_generator',
+    name='stubgen',
     version='1.1.0',
     description='A library for getting data from PIServers',
     long_description=long_description,
@@ -33,7 +33,7 @@ setup(
     keywords='pythonnet, generation',
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
-    python_requires='==3.8, <4',
+    python_requires='>=3.8',
     install_requires=[
         'pythonnet==2.5.2',
         'docopt',

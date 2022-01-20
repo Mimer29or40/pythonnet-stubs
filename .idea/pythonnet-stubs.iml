@@ -11,6 +11,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/.tox" />
       <excludeFolder url="file://$MODULE_DIR$/src/pythonnet_stub_generator.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/src/stubgen.egg-info" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (pythonnet-stubs)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
