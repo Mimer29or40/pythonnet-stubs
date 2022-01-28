@@ -4,21 +4,21 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional, Tuple
 
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 __doc__ = f"""
     Stub Generator | {__version__}
     
     Python.NET Stub Generator
     
     Usage:
-      pythonnet_stub_generator make (<assembly-name>|--all|--built_in|--core) [options]
-      pythonnet_stub_generator group [<assembly-names>...] [--all|--built_in|--core] [options]
-      pythonnet_stub_generator minify <folder> [options]
-      pythonnet_stub_generator (-h | --help)
-      pythonnet_stub_generator (-V | --version)
+      stubgen make (<assembly-name>|--all|--built_in|--core) [options]
+      stubgen group [<assembly-names>...] [--all|--built_in|--core] [options]
+      stubgen minify <folder> [options]
+      stubgen (-h | --help)
+      stubgen (-V | --version)
     
     Examples:
-      ipy -m pythonnet_stub_generator make System.Reflection --overwrite
+      ipy -m stubgen make System.Reflection --overwrite
     
     Options:
         <assembly-name>         Name of Dll Assembly to Process

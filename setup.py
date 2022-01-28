@@ -8,8 +8,8 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='stubgen',
-    version='1.1.0',
-    description='A library for getting data from PIServers',
+    version='1.1.1',
+    description='A library for generating stubs of .NET libraries',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/Mimer29or40/pythonnet-stubs',
