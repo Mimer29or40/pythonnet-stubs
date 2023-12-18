@@ -1,1 +1,4 @@
 recursive-include src *.pyi
+recursive-exclude test *
+recursive-exclude .idea *
+exclude tox.ini

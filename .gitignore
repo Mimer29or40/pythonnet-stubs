@@ -212,3 +212,4 @@ cython_debug/
 
 logs/
 /stubs/
+/__version__.py
