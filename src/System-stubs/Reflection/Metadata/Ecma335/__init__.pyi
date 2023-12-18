@@ -1,10 +1,22 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Tuple, Union
+from typing import Tuple
+from typing import Union
 
-from System import Boolean, Byte, Enum, Int32, Object, String, UInt64, ValueType
-from System.Reflection.Metadata import DocumentNameBlobHandle, Handle, HandleKind, MethodDebugInformationHandle, MethodDefinitionHandle
+from System import Boolean
+from System import Byte
+from System import Enum
+from System import Int32
+from System import Object
+from System import String
+from System import UInt64
+from System import ValueType
+from System.Reflection.Metadata import DocumentNameBlobHandle
+from System.Reflection.Metadata import Handle
+from System.Reflection.Metadata import HandleKind
+from System.Reflection.Metadata import MethodDebugInformationHandle
+from System.Reflection.Metadata import MethodDefinitionHandle
 
 # ---------- Types ---------- #
 
@@ -15,272 +27,255 @@ ObjectType = Object
 StringType = Union[str, String]
 ULongType = Union[int, UInt64]
 
-
 # ---------- Classes ---------- #
 
 class COR20Constants(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class HandleType(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class HeapHandleType(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class MetadataStreamConstants(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class MetadataTokens(ABC, ObjectType):
     # ---------- Fields ---------- #
-    
+
     @staticmethod
     @property
     def TableCount() -> IntType: ...
-    
+
     # No Constructors
-    
+
     # No Properties
-    
+
     # ---------- Methods ---------- #
-    
+
     @staticmethod
     def GetHeapOffset(handle: Handle) -> IntType: ...
-    
     @staticmethod
     def GetToken(handle: Handle) -> IntType: ...
-    
     @staticmethod
     def Handle(token: IntType) -> Handle: ...
-    
     @staticmethod
     def MethodDebugInformationHandle(rowNumber: IntType) -> MethodDebugInformationHandle: ...
-    
     @staticmethod
     def MethodDefinitionHandle(rowNumber: IntType) -> MethodDefinitionHandle: ...
-    
     @staticmethod
     def TryGetTableIndex(type: HandleKind, index: TableIndex) -> Tuple[BooleanType, TableIndex]: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class StringHandleType(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class TokenTypeIds(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 # ---------- Structs ---------- #
 
 class BlobHeap(ValueType):
     # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def GetDocumentName(self, handle: DocumentNameBlobHandle) -> StringType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Constructors
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def GetDocumentName(self, handle: DocumentNameBlobHandle) -> StringType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class DocumentTableReader(ValueType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class MethodDebugInformationTableReader(ValueType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class StreamHeader(ValueType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 # No Interfaces
 
@@ -293,26 +288,22 @@ class HeapSizeFlag(Enum):
     EncDeltas = 32
     DeletedMarks = 128
 
-
 class HeapSizes(Enum):
     StringHeapLarge = 1
     GuidHeapLarge = 2
     BlobHeapLarge = 4
     ExtraData = 64
 
-
 class MetadataStreamKind(Enum):
     Illegal = 0
     Compressed = 1
     Uncompressed = 2
-
 
 class StringKind(Enum):
     Plain = 0
     DotTerminated = 1
     Virtual = 4
     WinRTPrefixed = 5
-
 
 class TableIndex(Enum):
     Module = 0
@@ -368,7 +359,6 @@ class TableIndex(Enum):
     ImportScope = 53
     StateMachineMethod = 54
     CustomDebugInformation = 55
-
 
 class TableMask(Enum):
     Module = 1
@@ -426,7 +416,6 @@ class TableMask(Enum):
     CustomDebugInformation = 36028797018963968
     DebugTables = 71776119061217280
     AllTables = 71811071505072127
-
 
 # No Delegates
 

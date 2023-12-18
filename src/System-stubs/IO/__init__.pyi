@@ -1,24 +1,78 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Callable, Generic, List, Protocol, Tuple, TypeVar, Union, overload
+from typing import Callable
+from typing import Generic
+from typing import List
+from typing import Protocol
+from typing import Tuple
+from typing import TypeVar
+from typing import Union
+from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeFileHandle
-from System import Array, ArraySegment, AsyncCallback, Boolean, Byte, Char, DateTime, Decimal, Double, Enum, EventArgs, Exception, IAsyncResult, ICloneable, IDisposable, IFormatProvider, Int16, Int32, Int64, IntPtr, MarshalByRefObject, MulticastDelegate, Object, SByte, Single, String, SystemException, UInt16, UInt32, UInt64, ValueType, Void
-from System.Collections import IEnumerable, IEnumerator
-from System.Collections.Generic import IEnumerable, IEnumerator
-from System.ComponentModel import Component, DescriptionAttribute, IComponent, ISite, ISupportInitialize, ISynchronizeInvoke
-from System.Runtime.InteropServices import SafeBuffer, _Attribute, _Exception
-from System.Runtime.Serialization import ISerializable, SerializationInfo, StreamingContext
-from System.Security.AccessControl import AccessControlSections, DirectorySecurity, FileSecurity, FileSystemRights
-from System.Text import Encoding, StringBuilder
-from System.Threading import CancellationToken, WaitHandle
+from System import Array
+from System import ArraySegment
+from System import AsyncCallback
+from System import Boolean
+from System import Byte
+from System import Char
+from System import DateTime
+from System import Decimal
+from System import Double
+from System import Enum
+from System import EventArgs
+from System import Exception
+from System import IAsyncResult
+from System import ICloneable
+from System import IDisposable
+from System import IFormatProvider
+from System import Int16
+from System import Int32
+from System import Int64
+from System import IntPtr
+from System import MarshalByRefObject
+from System import MulticastDelegate
+from System import Object
+from System import SByte
+from System import Single
+from System import String
+from System import SystemException
+from System import UInt16
+from System import UInt32
+from System import UInt64
+from System import ValueType
+from System import Void
+from System.Collections import IEnumerable
+from System.Collections import IEnumerator
+from System.Collections.Generic import IEnumerable
+from System.Collections.Generic import IEnumerator
+from System.ComponentModel import Component
+from System.ComponentModel import DescriptionAttribute
+from System.ComponentModel import IComponent
+from System.ComponentModel import ISite
+from System.ComponentModel import ISupportInitialize
+from System.ComponentModel import ISynchronizeInvoke
+from System.Runtime.InteropServices import SafeBuffer
+from System.Runtime.InteropServices import _Attribute
+from System.Runtime.InteropServices import _Exception
+from System.Runtime.Serialization import ISerializable
+from System.Runtime.Serialization import SerializationInfo
+from System.Runtime.Serialization import StreamingContext
+from System.Security.AccessControl import AccessControlSections
+from System.Security.AccessControl import DirectorySecurity
+from System.Security.AccessControl import FileSecurity
+from System.Security.AccessControl import FileSystemRights
+from System.Text import Encoding
+from System.Text import StringBuilder
+from System.Threading import CancellationToken
+from System.Threading import WaitHandle
 from System.Threading.Tasks import Task
 
 # ---------- Types ---------- #
 
-T = TypeVar('T')
-TSource = TypeVar('TSource')
+T = TypeVar("T")
+TSource = TypeVar("TSource")
 
 ArrayType = Union[List, Array]
 BooleanType = Union[bool, Boolean]
@@ -39,3929 +93,3391 @@ ULongType = Union[int, UInt64]
 UShortType = Union[int, UInt16]
 VoidType = Union[None, Void]
 
-
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
-    
     def __isub__(self, other: T): ...
-
-
 
 # ---------- Classes ---------- #
 
 class BinaryReader(ObjectType, IDisposable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self, input: Stream): ...
-    
     @overload
     def __init__(self, input: Stream, encoding: Encoding): ...
-    
     @overload
     def __init__(self, input: Stream, encoding: Encoding, leaveOpen: BooleanType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def BaseStream(self) -> Stream: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def Close(self) -> VoidType: ...
-    
     def Dispose(self) -> VoidType: ...
-    
     def PeekChar(self) -> IntType: ...
-    
     @overload
     def Read(self) -> IntType: ...
-    
     @overload
     def Read(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> IntType: ...
-    
     @overload
     def Read(self, buffer: ArrayType[ByteType], index: IntType, count: IntType) -> IntType: ...
-    
     def ReadBoolean(self) -> BooleanType: ...
-    
     def ReadByte(self) -> ByteType: ...
-    
     def ReadBytes(self, count: IntType) -> ArrayType[ByteType]: ...
-    
     def ReadChar(self) -> CharType: ...
-    
     def ReadChars(self, count: IntType) -> ArrayType[CharType]: ...
-    
     def ReadDecimal(self) -> DecimalType: ...
-    
     def ReadDouble(self) -> DoubleType: ...
-    
     def ReadInt16(self) -> ShortType: ...
-    
     def ReadInt32(self) -> IntType: ...
-    
     def ReadInt64(self) -> LongType: ...
-    
     def ReadSByte(self) -> SByteType: ...
-    
     def ReadSingle(self) -> FloatType: ...
-    
     def ReadString(self) -> StringType: ...
-    
     def ReadUInt16(self) -> UShortType: ...
-    
     def ReadUInt32(self) -> UIntType: ...
-    
     def ReadUInt64(self) -> ULongType: ...
-    
     def get_BaseStream(self) -> Stream: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class BinaryWriter(ObjectType, IDisposable):
     # ---------- Fields ---------- #
-    
+
     @staticmethod
     @property
     def Null() -> BinaryWriter: ...
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self, output: Stream): ...
-    
     @overload
     def __init__(self, output: Stream, encoding: Encoding): ...
-    
     @overload
     def __init__(self, output: Stream, encoding: Encoding, leaveOpen: BooleanType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def BaseStream(self) -> Stream: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def Close(self) -> VoidType: ...
-    
     def Dispose(self) -> VoidType: ...
-    
     def Flush(self) -> VoidType: ...
-    
     def Seek(self, offset: IntType, origin: SeekOrigin) -> LongType: ...
-    
     @overload
     def Write(self, value: BooleanType) -> VoidType: ...
-    
     @overload
     def Write(self, value: ByteType) -> VoidType: ...
-    
     @overload
     def Write(self, value: SByteType) -> VoidType: ...
-    
     @overload
     def Write(self, buffer: ArrayType[ByteType]) -> VoidType: ...
-    
     @overload
     def Write(self, buffer: ArrayType[ByteType], index: IntType, count: IntType) -> VoidType: ...
-    
     @overload
     def Write(self, ch: CharType) -> VoidType: ...
-    
     @overload
     def Write(self, chars: ArrayType[CharType]) -> VoidType: ...
-    
     @overload
     def Write(self, chars: ArrayType[CharType], index: IntType, count: IntType) -> VoidType: ...
-    
     @overload
     def Write(self, value: DoubleType) -> VoidType: ...
-    
     @overload
     def Write(self, value: DecimalType) -> VoidType: ...
-    
     @overload
     def Write(self, value: ShortType) -> VoidType: ...
-    
     @overload
     def Write(self, value: UShortType) -> VoidType: ...
-    
     @overload
     def Write(self, value: IntType) -> VoidType: ...
-    
     @overload
     def Write(self, value: UIntType) -> VoidType: ...
-    
     @overload
     def Write(self, value: LongType) -> VoidType: ...
-    
     @overload
     def Write(self, value: ULongType) -> VoidType: ...
-    
     @overload
     def Write(self, value: FloatType) -> VoidType: ...
-    
     @overload
     def Write(self, value: StringType) -> VoidType: ...
-    
     def get_BaseStream(self) -> Stream: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class BufferedStream(Stream, IDisposable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self, stream: Stream): ...
-    
     @overload
     def __init__(self, stream: Stream, bufferSize: IntType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def CanRead(self) -> BooleanType: ...
-    
     @property
     def CanSeek(self) -> BooleanType: ...
-    
     @property
     def CanWrite(self) -> BooleanType: ...
-    
     @property
     def Length(self) -> LongType: ...
-    
     @property
     def Position(self) -> LongType: ...
-    
     @Position.setter
     def Position(self, value: LongType) -> None: ...
-    
+
     # ---------- Methods ---------- #
-    
-    def BeginRead(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, callback: AsyncCallback, state: ObjectType) -> IAsyncResult: ...
-    
-    def BeginWrite(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, callback: AsyncCallback, state: ObjectType) -> IAsyncResult: ...
-    
+
+    def BeginRead(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        callback: AsyncCallback,
+        state: ObjectType,
+    ) -> IAsyncResult: ...
+    def BeginWrite(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        callback: AsyncCallback,
+        state: ObjectType,
+    ) -> IAsyncResult: ...
     def EndRead(self, asyncResult: IAsyncResult) -> IntType: ...
-    
     def EndWrite(self, asyncResult: IAsyncResult) -> VoidType: ...
-    
     def Flush(self) -> VoidType: ...
-    
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task: ...
-    
-    def Read(self, array: ArrayType[ByteType], offset: IntType, count: IntType) -> Tuple[IntType, ArrayType[ByteType]]: ...
-    
+    def Read(
+        self, array: ArrayType[ByteType], offset: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[ByteType]]: ...
     @overload
-    def ReadAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task[IntType]: ...
-    
+    def ReadAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task[IntType]: ...
     def ReadByte(self) -> IntType: ...
-    
     def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    
     def SetLength(self, value: LongType) -> VoidType: ...
-    
     def Write(self, array: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    
     @overload
-    def WriteAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task: ...
-    
+    def WriteAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task: ...
     def WriteByte(self, value: ByteType) -> VoidType: ...
-    
     def get_CanRead(self) -> BooleanType: ...
-    
     def get_CanSeek(self) -> BooleanType: ...
-    
     def get_CanWrite(self) -> BooleanType: ...
-    
     def get_Length(self) -> LongType: ...
-    
     def get_Position(self) -> LongType: ...
-    
     def set_Position(self, value: LongType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class BufferedStream2(ABC, Stream, IDisposable):
     # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def Flush(self) -> VoidType: ...
-    
-    def Write(self, array: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Constructors
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def Flush(self) -> VoidType: ...
+    def Write(self, array: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class Direct(ABC, ObjectType):
     # ---------- Fields ---------- #
-    
+
     @staticmethod
     @property
     def FILE_ACTION_ADDED() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_ACTION_MODIFIED() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_ACTION_REMOVED() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_ACTION_RENAMED_NEW_NAME() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_ACTION_RENAMED_OLD_NAME() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_NOTIFY_CHANGE_ATTRIBUTES() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_NOTIFY_CHANGE_CREATION() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_NOTIFY_CHANGE_DIR_NAME() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_NOTIFY_CHANGE_FILE_NAME() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_NOTIFY_CHANGE_LAST_ACCESS() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_NOTIFY_CHANGE_LAST_WRITE() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_NOTIFY_CHANGE_NAME() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_NOTIFY_CHANGE_SECURITY() -> IntType: ...
-    
     @staticmethod
     @property
     def FILE_NOTIFY_CHANGE_SIZE() -> IntType: ...
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class Directory(ABC, ObjectType):
     # No Fields
-    
+
     # No Constructors
-    
+
     # No Properties
-    
+
     # ---------- Methods ---------- #
-    
+
     @staticmethod
     @overload
     def CreateDirectory(path: StringType) -> DirectoryInfo: ...
-    
     @staticmethod
     @overload
-    def CreateDirectory(path: StringType, directorySecurity: DirectorySecurity) -> DirectoryInfo: ...
-    
+    def CreateDirectory(
+        path: StringType, directorySecurity: DirectorySecurity
+    ) -> DirectoryInfo: ...
     @staticmethod
     @overload
     def Delete(path: StringType) -> VoidType: ...
-    
     @staticmethod
     @overload
     def Delete(path: StringType, recursive: BooleanType) -> VoidType: ...
-    
     @staticmethod
     @overload
-    def EnumerateDirectories(path: StringType, searchPattern: StringType) -> IEnumerable[StringType]: ...
-    
+    def EnumerateDirectories(
+        path: StringType, searchPattern: StringType
+    ) -> IEnumerable[StringType]: ...
     @staticmethod
     @overload
-    def EnumerateDirectories(path: StringType, searchPattern: StringType, searchOption: SearchOption) -> IEnumerable[StringType]: ...
-    
+    def EnumerateDirectories(
+        path: StringType, searchPattern: StringType, searchOption: SearchOption
+    ) -> IEnumerable[StringType]: ...
     @staticmethod
     @overload
     def EnumerateDirectories(path: StringType) -> IEnumerable[StringType]: ...
-    
     @staticmethod
     @overload
-    def EnumerateFileSystemEntries(path: StringType, searchPattern: StringType) -> IEnumerable[StringType]: ...
-    
+    def EnumerateFileSystemEntries(
+        path: StringType, searchPattern: StringType
+    ) -> IEnumerable[StringType]: ...
     @staticmethod
     @overload
-    def EnumerateFileSystemEntries(path: StringType, searchPattern: StringType, searchOption: SearchOption) -> IEnumerable[StringType]: ...
-    
+    def EnumerateFileSystemEntries(
+        path: StringType, searchPattern: StringType, searchOption: SearchOption
+    ) -> IEnumerable[StringType]: ...
     @staticmethod
     @overload
     def EnumerateFileSystemEntries(path: StringType) -> IEnumerable[StringType]: ...
-    
     @staticmethod
     @overload
     def EnumerateFiles(path: StringType, searchPattern: StringType) -> IEnumerable[StringType]: ...
-    
     @staticmethod
     @overload
-    def EnumerateFiles(path: StringType, searchPattern: StringType, searchOption: SearchOption) -> IEnumerable[StringType]: ...
-    
+    def EnumerateFiles(
+        path: StringType, searchPattern: StringType, searchOption: SearchOption
+    ) -> IEnumerable[StringType]: ...
     @staticmethod
     @overload
     def EnumerateFiles(path: StringType) -> IEnumerable[StringType]: ...
-    
     @staticmethod
     def Exists(path: StringType) -> BooleanType: ...
-    
     @staticmethod
     @overload
     def GetAccessControl(path: StringType) -> DirectorySecurity: ...
-    
     @staticmethod
     @overload
-    def GetAccessControl(path: StringType, includeSections: AccessControlSections) -> DirectorySecurity: ...
-    
+    def GetAccessControl(
+        path: StringType, includeSections: AccessControlSections
+    ) -> DirectorySecurity: ...
     @staticmethod
     def GetCreationTime(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetCreationTimeUtc(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetCurrentDirectory() -> StringType: ...
-    
     @staticmethod
     @overload
     def GetDirectories(path: StringType, searchPattern: StringType) -> ArrayType[StringType]: ...
-    
     @staticmethod
     @overload
-    def GetDirectories(path: StringType, searchPattern: StringType, searchOption: SearchOption) -> ArrayType[StringType]: ...
-    
+    def GetDirectories(
+        path: StringType, searchPattern: StringType, searchOption: SearchOption
+    ) -> ArrayType[StringType]: ...
     @staticmethod
     @overload
     def GetDirectories(path: StringType) -> ArrayType[StringType]: ...
-    
     @staticmethod
     def GetDirectoryRoot(path: StringType) -> StringType: ...
-    
     @staticmethod
     @overload
-    def GetFileSystemEntries(path: StringType, searchPattern: StringType) -> ArrayType[StringType]: ...
-    
+    def GetFileSystemEntries(
+        path: StringType, searchPattern: StringType
+    ) -> ArrayType[StringType]: ...
     @staticmethod
     @overload
-    def GetFileSystemEntries(path: StringType, searchPattern: StringType, searchOption: SearchOption) -> ArrayType[StringType]: ...
-    
+    def GetFileSystemEntries(
+        path: StringType, searchPattern: StringType, searchOption: SearchOption
+    ) -> ArrayType[StringType]: ...
     @staticmethod
     @overload
     def GetFileSystemEntries(path: StringType) -> ArrayType[StringType]: ...
-    
     @staticmethod
     @overload
     def GetFiles(path: StringType, searchPattern: StringType) -> ArrayType[StringType]: ...
-    
     @staticmethod
     @overload
-    def GetFiles(path: StringType, searchPattern: StringType, searchOption: SearchOption) -> ArrayType[StringType]: ...
-    
+    def GetFiles(
+        path: StringType, searchPattern: StringType, searchOption: SearchOption
+    ) -> ArrayType[StringType]: ...
     @staticmethod
     @overload
     def GetFiles(path: StringType) -> ArrayType[StringType]: ...
-    
     @staticmethod
     def GetLastAccessTime(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetLastAccessTimeUtc(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetLastWriteTime(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetLastWriteTimeUtc(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetLogicalDrives() -> ArrayType[StringType]: ...
-    
     @staticmethod
     def GetParent(path: StringType) -> DirectoryInfo: ...
-    
     @staticmethod
     def Move(sourceDirName: StringType, destDirName: StringType) -> VoidType: ...
-    
     @staticmethod
     def SetAccessControl(path: StringType, directorySecurity: DirectorySecurity) -> VoidType: ...
-    
     @staticmethod
     def SetCreationTime(path: StringType, creationTime: DateTime) -> VoidType: ...
-    
     @staticmethod
     def SetCreationTimeUtc(path: StringType, creationTimeUtc: DateTime) -> VoidType: ...
-    
     @staticmethod
     def SetCurrentDirectory(path: StringType) -> VoidType: ...
-    
     @staticmethod
     def SetLastAccessTime(path: StringType, lastAccessTime: DateTime) -> VoidType: ...
-    
     @staticmethod
     def SetLastAccessTimeUtc(path: StringType, lastAccessTimeUtc: DateTime) -> VoidType: ...
-    
     @staticmethod
     def SetLastWriteTime(path: StringType, lastWriteTime: DateTime) -> VoidType: ...
-    
     @staticmethod
     def SetLastWriteTimeUtc(path: StringType, lastWriteTimeUtc: DateTime) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class DirectoryInfo(FileSystemInfo, ISerializable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     def __init__(self, path: StringType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def Exists(self) -> BooleanType: ...
-    
     @property
     def FullName(self) -> StringType: ...
-    
     @property
     def Name(self) -> StringType: ...
-    
     @property
     def Parent(self) -> DirectoryInfo: ...
-    
     @property
     def Root(self) -> DirectoryInfo: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     @overload
     def Create(self) -> VoidType: ...
-    
     @overload
     def Create(self, directorySecurity: DirectorySecurity) -> VoidType: ...
-    
     @overload
     def CreateSubdirectory(self, path: StringType) -> DirectoryInfo: ...
-    
     @overload
-    def CreateSubdirectory(self, path: StringType, directorySecurity: DirectorySecurity) -> DirectoryInfo: ...
-    
+    def CreateSubdirectory(
+        self, path: StringType, directorySecurity: DirectorySecurity
+    ) -> DirectoryInfo: ...
     @overload
     def Delete(self) -> VoidType: ...
-    
     @overload
     def Delete(self, recursive: BooleanType) -> VoidType: ...
-    
     @overload
     def EnumerateDirectories(self) -> IEnumerable[DirectoryInfo]: ...
-    
     @overload
     def EnumerateDirectories(self, searchPattern: StringType) -> IEnumerable[DirectoryInfo]: ...
-    
     @overload
-    def EnumerateDirectories(self, searchPattern: StringType, searchOption: SearchOption) -> IEnumerable[DirectoryInfo]: ...
-    
+    def EnumerateDirectories(
+        self, searchPattern: StringType, searchOption: SearchOption
+    ) -> IEnumerable[DirectoryInfo]: ...
     @overload
     def EnumerateFileSystemInfos(self) -> IEnumerable[FileSystemInfo]: ...
-    
     @overload
-    def EnumerateFileSystemInfos(self, searchPattern: StringType) -> IEnumerable[FileSystemInfo]: ...
-    
+    def EnumerateFileSystemInfos(
+        self, searchPattern: StringType
+    ) -> IEnumerable[FileSystemInfo]: ...
     @overload
-    def EnumerateFileSystemInfos(self, searchPattern: StringType, searchOption: SearchOption) -> IEnumerable[FileSystemInfo]: ...
-    
+    def EnumerateFileSystemInfos(
+        self, searchPattern: StringType, searchOption: SearchOption
+    ) -> IEnumerable[FileSystemInfo]: ...
     @overload
     def EnumerateFiles(self) -> IEnumerable[FileInfo]: ...
-    
     @overload
     def EnumerateFiles(self, searchPattern: StringType) -> IEnumerable[FileInfo]: ...
-    
     @overload
-    def EnumerateFiles(self, searchPattern: StringType, searchOption: SearchOption) -> IEnumerable[FileInfo]: ...
-    
+    def EnumerateFiles(
+        self, searchPattern: StringType, searchOption: SearchOption
+    ) -> IEnumerable[FileInfo]: ...
     @overload
     def GetAccessControl(self) -> DirectorySecurity: ...
-    
     @overload
     def GetAccessControl(self, includeSections: AccessControlSections) -> DirectorySecurity: ...
-    
     @overload
     def GetDirectories(self) -> ArrayType[DirectoryInfo]: ...
-    
     @overload
     def GetDirectories(self, searchPattern: StringType) -> ArrayType[DirectoryInfo]: ...
-    
     @overload
-    def GetDirectories(self, searchPattern: StringType, searchOption: SearchOption) -> ArrayType[DirectoryInfo]: ...
-    
+    def GetDirectories(
+        self, searchPattern: StringType, searchOption: SearchOption
+    ) -> ArrayType[DirectoryInfo]: ...
     @overload
     def GetFileSystemInfos(self, searchPattern: StringType) -> ArrayType[FileSystemInfo]: ...
-    
     @overload
-    def GetFileSystemInfos(self, searchPattern: StringType, searchOption: SearchOption) -> ArrayType[FileSystemInfo]: ...
-    
+    def GetFileSystemInfos(
+        self, searchPattern: StringType, searchOption: SearchOption
+    ) -> ArrayType[FileSystemInfo]: ...
     @overload
     def GetFileSystemInfos(self) -> ArrayType[FileSystemInfo]: ...
-    
     @overload
     def GetFiles(self, searchPattern: StringType) -> ArrayType[FileInfo]: ...
-    
     @overload
-    def GetFiles(self, searchPattern: StringType, searchOption: SearchOption) -> ArrayType[FileInfo]: ...
-    
+    def GetFiles(
+        self, searchPattern: StringType, searchOption: SearchOption
+    ) -> ArrayType[FileInfo]: ...
     @overload
     def GetFiles(self) -> ArrayType[FileInfo]: ...
-    
     def MoveTo(self, destDirName: StringType) -> VoidType: ...
-    
     def SetAccessControl(self, directorySecurity: DirectorySecurity) -> VoidType: ...
-    
     def ToString(self) -> StringType: ...
-    
     def get_Exists(self) -> BooleanType: ...
-    
     def get_FullName(self) -> StringType: ...
-    
     def get_Name(self) -> StringType: ...
-    
     def get_Parent(self) -> DirectoryInfo: ...
-    
     def get_Root(self) -> DirectoryInfo: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class DirectoryInfoResultHandler(SearchResultHandler[DirectoryInfo]):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self): ...
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class DirectoryNotFoundException(IOException, ISerializable, _Exception):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, message: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, innerException: Exception): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class DriveInfo(ObjectType, ISerializable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     def __init__(self, driveName: StringType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def AvailableFreeSpace(self) -> LongType: ...
-    
     @property
     def DriveFormat(self) -> StringType: ...
-    
     @property
     def DriveType(self) -> DriveType: ...
-    
     @property
     def IsReady(self) -> BooleanType: ...
-    
     @property
     def Name(self) -> StringType: ...
-    
     @property
     def RootDirectory(self) -> DirectoryInfo: ...
-    
     @property
     def TotalFreeSpace(self) -> LongType: ...
-    
     @property
     def TotalSize(self) -> LongType: ...
-    
     @property
     def VolumeLabel(self) -> StringType: ...
-    
     @VolumeLabel.setter
     def VolumeLabel(self, value: StringType) -> None: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     @staticmethod
     def GetDrives() -> ArrayType[DriveInfo]: ...
-    
     def ToString(self) -> StringType: ...
-    
     def get_AvailableFreeSpace(self) -> LongType: ...
-    
     def get_DriveFormat(self) -> StringType: ...
-    
     def get_DriveType(self) -> DriveType: ...
-    
     def get_IsReady(self) -> BooleanType: ...
-    
     def get_Name(self) -> StringType: ...
-    
     def get_RootDirectory(self) -> DirectoryInfo: ...
-    
     def get_TotalFreeSpace(self) -> LongType: ...
-    
     def get_TotalSize(self) -> LongType: ...
-    
     def get_VolumeLabel(self) -> StringType: ...
-    
     def set_VolumeLabel(self, value: StringType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class DriveNotFoundException(IOException, ISerializable, _Exception):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, message: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, innerException: Exception): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class EndOfStreamException(IOException, ISerializable, _Exception):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, message: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, innerException: Exception): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class ErrorEventArgs(EventArgs):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self, exception: Exception): ...
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def GetException(self) -> Exception: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self, exception: Exception): ...
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def GetException(self) -> Exception: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class ErrorEventHandler(MulticastDelegate, ICloneable, ISerializable):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self, object: ObjectType, method: NIntType): ...
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def BeginInvoke(self, sender: ObjectType, e: ErrorEventArgs, callback: AsyncCallback, object: ObjectType) -> IAsyncResult: ...
-    
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    
-    def Invoke(self, sender: ObjectType, e: ErrorEventArgs) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self, object: ObjectType, method: NIntType): ...
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def BeginInvoke(
+        self, sender: ObjectType, e: ErrorEventArgs, callback: AsyncCallback, object: ObjectType
+    ) -> IAsyncResult: ...
+    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
+    def Invoke(self, sender: ObjectType, e: ErrorEventArgs) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class File(ABC, ObjectType):
     # No Fields
-    
+
     # No Constructors
-    
+
     # No Properties
-    
+
     # ---------- Methods ---------- #
-    
+
     @staticmethod
     @overload
     def AppendAllLines(path: StringType, contents: IEnumerable[StringType]) -> VoidType: ...
-    
     @staticmethod
     @overload
-    def AppendAllLines(path: StringType, contents: IEnumerable[StringType], encoding: Encoding) -> VoidType: ...
-    
+    def AppendAllLines(
+        path: StringType, contents: IEnumerable[StringType], encoding: Encoding
+    ) -> VoidType: ...
     @staticmethod
     @overload
     def AppendAllText(path: StringType, contents: StringType) -> VoidType: ...
-    
     @staticmethod
     @overload
     def AppendAllText(path: StringType, contents: StringType, encoding: Encoding) -> VoidType: ...
-    
     @staticmethod
     def AppendText(path: StringType) -> StreamWriter: ...
-    
     @staticmethod
     @overload
     def Copy(sourceFileName: StringType, destFileName: StringType) -> VoidType: ...
-    
     @staticmethod
     @overload
-    def Copy(sourceFileName: StringType, destFileName: StringType, overwrite: BooleanType) -> VoidType: ...
-    
+    def Copy(
+        sourceFileName: StringType, destFileName: StringType, overwrite: BooleanType
+    ) -> VoidType: ...
     @staticmethod
     @overload
     def Create(path: StringType) -> FileStream: ...
-    
     @staticmethod
     @overload
     def Create(path: StringType, bufferSize: IntType) -> FileStream: ...
-    
     @staticmethod
     @overload
     def Create(path: StringType, bufferSize: IntType, options: FileOptions) -> FileStream: ...
-    
     @staticmethod
     @overload
-    def Create(path: StringType, bufferSize: IntType, options: FileOptions, fileSecurity: FileSecurity) -> FileStream: ...
-    
+    def Create(
+        path: StringType, bufferSize: IntType, options: FileOptions, fileSecurity: FileSecurity
+    ) -> FileStream: ...
     @staticmethod
     def CreateText(path: StringType) -> StreamWriter: ...
-    
     @staticmethod
     def Decrypt(path: StringType) -> VoidType: ...
-    
     @staticmethod
     def Delete(path: StringType) -> VoidType: ...
-    
     @staticmethod
     def Encrypt(path: StringType) -> VoidType: ...
-    
     @staticmethod
     def Exists(path: StringType) -> BooleanType: ...
-    
     @staticmethod
     @overload
     def GetAccessControl(path: StringType) -> FileSecurity: ...
-    
     @staticmethod
     @overload
-    def GetAccessControl(path: StringType, includeSections: AccessControlSections) -> FileSecurity: ...
-    
+    def GetAccessControl(
+        path: StringType, includeSections: AccessControlSections
+    ) -> FileSecurity: ...
     @staticmethod
     def GetAttributes(path: StringType) -> FileAttributes: ...
-    
     @staticmethod
     def GetCreationTime(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetCreationTimeUtc(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetLastAccessTime(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetLastAccessTimeUtc(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetLastWriteTime(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def GetLastWriteTimeUtc(path: StringType) -> DateTime: ...
-    
     @staticmethod
     def Move(sourceFileName: StringType, destFileName: StringType) -> VoidType: ...
-    
     @staticmethod
     @overload
     def Open(path: StringType, mode: FileMode) -> FileStream: ...
-    
     @staticmethod
     @overload
     def Open(path: StringType, mode: FileMode, access: FileAccess) -> FileStream: ...
-    
     @staticmethod
     @overload
-    def Open(path: StringType, mode: FileMode, access: FileAccess, share: FileShare) -> FileStream: ...
-    
+    def Open(
+        path: StringType, mode: FileMode, access: FileAccess, share: FileShare
+    ) -> FileStream: ...
     @staticmethod
     def OpenRead(path: StringType) -> FileStream: ...
-    
     @staticmethod
     def OpenText(path: StringType) -> StreamReader: ...
-    
     @staticmethod
     def OpenWrite(path: StringType) -> FileStream: ...
-    
     @staticmethod
     def ReadAllBytes(path: StringType) -> ArrayType[ByteType]: ...
-    
     @staticmethod
     @overload
     def ReadAllLines(path: StringType) -> ArrayType[StringType]: ...
-    
     @staticmethod
     @overload
     def ReadAllLines(path: StringType, encoding: Encoding) -> ArrayType[StringType]: ...
-    
     @staticmethod
     @overload
     def ReadAllText(path: StringType) -> StringType: ...
-    
     @staticmethod
     @overload
     def ReadAllText(path: StringType, encoding: Encoding) -> StringType: ...
-    
     @staticmethod
     @overload
     def ReadLines(path: StringType) -> IEnumerable[StringType]: ...
-    
     @staticmethod
     @overload
     def ReadLines(path: StringType, encoding: Encoding) -> IEnumerable[StringType]: ...
-    
     @staticmethod
     @overload
-    def Replace(sourceFileName: StringType, destinationFileName: StringType, destinationBackupFileName: StringType) -> VoidType: ...
-    
+    def Replace(
+        sourceFileName: StringType,
+        destinationFileName: StringType,
+        destinationBackupFileName: StringType,
+    ) -> VoidType: ...
     @staticmethod
     @overload
-    def Replace(sourceFileName: StringType, destinationFileName: StringType, destinationBackupFileName: StringType, ignoreMetadataErrors: BooleanType) -> VoidType: ...
-    
+    def Replace(
+        sourceFileName: StringType,
+        destinationFileName: StringType,
+        destinationBackupFileName: StringType,
+        ignoreMetadataErrors: BooleanType,
+    ) -> VoidType: ...
     @staticmethod
     def SetAccessControl(path: StringType, fileSecurity: FileSecurity) -> VoidType: ...
-    
     @staticmethod
     def SetAttributes(path: StringType, fileAttributes: FileAttributes) -> VoidType: ...
-    
     @staticmethod
     def SetCreationTime(path: StringType, creationTime: DateTime) -> VoidType: ...
-    
     @staticmethod
     def SetCreationTimeUtc(path: StringType, creationTimeUtc: DateTime) -> VoidType: ...
-    
     @staticmethod
     def SetLastAccessTime(path: StringType, lastAccessTime: DateTime) -> VoidType: ...
-    
     @staticmethod
     def SetLastAccessTimeUtc(path: StringType, lastAccessTimeUtc: DateTime) -> VoidType: ...
-    
     @staticmethod
     def SetLastWriteTime(path: StringType, lastWriteTime: DateTime) -> VoidType: ...
-    
     @staticmethod
     def SetLastWriteTimeUtc(path: StringType, lastWriteTimeUtc: DateTime) -> VoidType: ...
-    
     @staticmethod
     def WriteAllBytes(path: StringType, bytes: ArrayType[ByteType]) -> VoidType: ...
-    
     @staticmethod
     @overload
     def WriteAllLines(path: StringType, contents: ArrayType[StringType]) -> VoidType: ...
-    
     @staticmethod
     @overload
-    def WriteAllLines(path: StringType, contents: ArrayType[StringType], encoding: Encoding) -> VoidType: ...
-    
+    def WriteAllLines(
+        path: StringType, contents: ArrayType[StringType], encoding: Encoding
+    ) -> VoidType: ...
     @staticmethod
     @overload
     def WriteAllLines(path: StringType, contents: IEnumerable[StringType]) -> VoidType: ...
-    
     @staticmethod
     @overload
-    def WriteAllLines(path: StringType, contents: IEnumerable[StringType], encoding: Encoding) -> VoidType: ...
-    
+    def WriteAllLines(
+        path: StringType, contents: IEnumerable[StringType], encoding: Encoding
+    ) -> VoidType: ...
     @staticmethod
     @overload
     def WriteAllText(path: StringType, contents: StringType) -> VoidType: ...
-    
     @staticmethod
     @overload
     def WriteAllText(path: StringType, contents: StringType, encoding: Encoding) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileInfo(FileSystemInfo, ISerializable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     def __init__(self, fileName: StringType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def Directory(self) -> DirectoryInfo: ...
-    
     @property
     def DirectoryName(self) -> StringType: ...
-    
     @property
     def Exists(self) -> BooleanType: ...
-    
     @property
     def IsReadOnly(self) -> BooleanType: ...
-    
     @IsReadOnly.setter
     def IsReadOnly(self, value: BooleanType) -> None: ...
-    
     @property
     def Length(self) -> LongType: ...
-    
     @property
     def Name(self) -> StringType: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def AppendText(self) -> StreamWriter: ...
-    
     @overload
     def CopyTo(self, destFileName: StringType) -> FileInfo: ...
-    
     @overload
     def CopyTo(self, destFileName: StringType, overwrite: BooleanType) -> FileInfo: ...
-    
     def Create(self) -> FileStream: ...
-    
     def CreateText(self) -> StreamWriter: ...
-    
     def Decrypt(self) -> VoidType: ...
-    
     def Delete(self) -> VoidType: ...
-    
     def Encrypt(self) -> VoidType: ...
-    
     @overload
     def GetAccessControl(self) -> FileSecurity: ...
-    
     @overload
     def GetAccessControl(self, includeSections: AccessControlSections) -> FileSecurity: ...
-    
     def MoveTo(self, destFileName: StringType) -> VoidType: ...
-    
     @overload
     def Open(self, mode: FileMode) -> FileStream: ...
-    
     @overload
     def Open(self, mode: FileMode, access: FileAccess) -> FileStream: ...
-    
     @overload
     def Open(self, mode: FileMode, access: FileAccess, share: FileShare) -> FileStream: ...
-    
     def OpenRead(self) -> FileStream: ...
-    
     def OpenText(self) -> StreamReader: ...
-    
     def OpenWrite(self) -> FileStream: ...
-    
     @overload
-    def Replace(self, destinationFileName: StringType, destinationBackupFileName: StringType) -> FileInfo: ...
-    
+    def Replace(
+        self, destinationFileName: StringType, destinationBackupFileName: StringType
+    ) -> FileInfo: ...
     @overload
-    def Replace(self, destinationFileName: StringType, destinationBackupFileName: StringType, ignoreMetadataErrors: BooleanType) -> FileInfo: ...
-    
+    def Replace(
+        self,
+        destinationFileName: StringType,
+        destinationBackupFileName: StringType,
+        ignoreMetadataErrors: BooleanType,
+    ) -> FileInfo: ...
     def SetAccessControl(self, fileSecurity: FileSecurity) -> VoidType: ...
-    
     def ToString(self) -> StringType: ...
-    
     def get_Directory(self) -> DirectoryInfo: ...
-    
     def get_DirectoryName(self) -> StringType: ...
-    
     def get_Exists(self) -> BooleanType: ...
-    
     def get_IsReadOnly(self) -> BooleanType: ...
-    
     def get_Length(self) -> LongType: ...
-    
     def get_Name(self) -> StringType: ...
-    
     def set_IsReadOnly(self, value: BooleanType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileInfoResultHandler(SearchResultHandler[FileInfo]):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self): ...
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileLoadException(IOException, ISerializable, _Exception):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, message: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, inner: Exception): ...
-    
     @overload
     def __init__(self, message: StringType, fileName: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, fileName: StringType, inner: Exception): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def FileName(self) -> StringType: ...
-    
     @property
     def FusionLog(self) -> StringType: ...
-    
     @property
     def Message(self) -> StringType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    
-    def ToString(self) -> StringType: ...
-    
-    def get_FileName(self) -> StringType: ...
-    
-    def get_FusionLog(self) -> StringType: ...
-    
-    def get_Message(self) -> StringType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
+    def ToString(self) -> StringType: ...
+    def get_FileName(self) -> StringType: ...
+    def get_FusionLog(self) -> StringType: ...
+    def get_Message(self) -> StringType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileNotFoundException(IOException, ISerializable, _Exception):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, message: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, innerException: Exception): ...
-    
     @overload
     def __init__(self, message: StringType, fileName: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, fileName: StringType, innerException: Exception): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def FileName(self) -> StringType: ...
-    
     @property
     def FusionLog(self) -> StringType: ...
-    
     @property
     def Message(self) -> StringType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    
-    def ToString(self) -> StringType: ...
-    
-    def get_FileName(self) -> StringType: ...
-    
-    def get_FusionLog(self) -> StringType: ...
-    
-    def get_Message(self) -> StringType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
+    def ToString(self) -> StringType: ...
+    def get_FileName(self) -> StringType: ...
+    def get_FusionLog(self) -> StringType: ...
+    def get_Message(self) -> StringType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileStream(Stream, IDisposable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self, path: StringType, mode: FileMode): ...
-    
     @overload
     def __init__(self, path: StringType, mode: FileMode, access: FileAccess): ...
-    
     @overload
     def __init__(self, path: StringType, mode: FileMode, access: FileAccess, share: FileShare): ...
-    
     @overload
-    def __init__(self, path: StringType, mode: FileMode, access: FileAccess, share: FileShare, bufferSize: IntType): ...
-    
+    def __init__(
+        self,
+        path: StringType,
+        mode: FileMode,
+        access: FileAccess,
+        share: FileShare,
+        bufferSize: IntType,
+    ): ...
     @overload
-    def __init__(self, path: StringType, mode: FileMode, access: FileAccess, share: FileShare, bufferSize: IntType, options: FileOptions): ...
-    
+    def __init__(
+        self,
+        path: StringType,
+        mode: FileMode,
+        access: FileAccess,
+        share: FileShare,
+        bufferSize: IntType,
+        options: FileOptions,
+    ): ...
     @overload
-    def __init__(self, path: StringType, mode: FileMode, access: FileAccess, share: FileShare, bufferSize: IntType, useAsync: BooleanType): ...
-    
+    def __init__(
+        self,
+        path: StringType,
+        mode: FileMode,
+        access: FileAccess,
+        share: FileShare,
+        bufferSize: IntType,
+        useAsync: BooleanType,
+    ): ...
     @overload
-    def __init__(self, path: StringType, mode: FileMode, rights: FileSystemRights, share: FileShare, bufferSize: IntType, options: FileOptions, fileSecurity: FileSecurity): ...
-    
+    def __init__(
+        self,
+        path: StringType,
+        mode: FileMode,
+        rights: FileSystemRights,
+        share: FileShare,
+        bufferSize: IntType,
+        options: FileOptions,
+        fileSecurity: FileSecurity,
+    ): ...
     @overload
-    def __init__(self, path: StringType, mode: FileMode, rights: FileSystemRights, share: FileShare, bufferSize: IntType, options: FileOptions): ...
-    
+    def __init__(
+        self,
+        path: StringType,
+        mode: FileMode,
+        rights: FileSystemRights,
+        share: FileShare,
+        bufferSize: IntType,
+        options: FileOptions,
+    ): ...
     @overload
     def __init__(self, handle: NIntType, access: FileAccess): ...
-    
     @overload
     def __init__(self, handle: NIntType, access: FileAccess, ownsHandle: BooleanType): ...
-    
     @overload
-    def __init__(self, handle: NIntType, access: FileAccess, ownsHandle: BooleanType, bufferSize: IntType): ...
-    
+    def __init__(
+        self, handle: NIntType, access: FileAccess, ownsHandle: BooleanType, bufferSize: IntType
+    ): ...
     @overload
-    def __init__(self, handle: NIntType, access: FileAccess, ownsHandle: BooleanType, bufferSize: IntType, isAsync: BooleanType): ...
-    
+    def __init__(
+        self,
+        handle: NIntType,
+        access: FileAccess,
+        ownsHandle: BooleanType,
+        bufferSize: IntType,
+        isAsync: BooleanType,
+    ): ...
     @overload
     def __init__(self, handle: SafeFileHandle, access: FileAccess): ...
-    
     @overload
     def __init__(self, handle: SafeFileHandle, access: FileAccess, bufferSize: IntType): ...
-    
     @overload
-    def __init__(self, handle: SafeFileHandle, access: FileAccess, bufferSize: IntType, isAsync: BooleanType): ...
-    
+    def __init__(
+        self, handle: SafeFileHandle, access: FileAccess, bufferSize: IntType, isAsync: BooleanType
+    ): ...
+
     # ---------- Properties ---------- #
-    
+
     @property
     def CanRead(self) -> BooleanType: ...
-    
     @property
     def CanSeek(self) -> BooleanType: ...
-    
     @property
     def CanWrite(self) -> BooleanType: ...
-    
     @property
     def Handle(self) -> NIntType: ...
-    
     @property
     def IsAsync(self) -> BooleanType: ...
-    
     @property
     def Length(self) -> LongType: ...
-    
     @property
     def Name(self) -> StringType: ...
-    
     @property
     def Position(self) -> LongType: ...
-    
     @Position.setter
     def Position(self, value: LongType) -> None: ...
-    
     @property
     def SafeFileHandle(self) -> SafeFileHandle: ...
-    
+
     # ---------- Methods ---------- #
-    
-    def BeginRead(self, array: ArrayType[ByteType], offset: IntType, numBytes: IntType, userCallback: AsyncCallback, stateObject: ObjectType) -> IAsyncResult: ...
-    
-    def BeginWrite(self, array: ArrayType[ByteType], offset: IntType, numBytes: IntType, userCallback: AsyncCallback, stateObject: ObjectType) -> IAsyncResult: ...
-    
+
+    def BeginRead(
+        self,
+        array: ArrayType[ByteType],
+        offset: IntType,
+        numBytes: IntType,
+        userCallback: AsyncCallback,
+        stateObject: ObjectType,
+    ) -> IAsyncResult: ...
+    def BeginWrite(
+        self,
+        array: ArrayType[ByteType],
+        offset: IntType,
+        numBytes: IntType,
+        userCallback: AsyncCallback,
+        stateObject: ObjectType,
+    ) -> IAsyncResult: ...
     def EndRead(self, asyncResult: IAsyncResult) -> IntType: ...
-    
     def EndWrite(self, asyncResult: IAsyncResult) -> VoidType: ...
-    
     @overload
     def Flush(self) -> VoidType: ...
-    
     @overload
     def Flush(self, flushToDisk: BooleanType) -> VoidType: ...
-    
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task: ...
-    
     def GetAccessControl(self) -> FileSecurity: ...
-    
     def Lock(self, position: LongType, length: LongType) -> VoidType: ...
-    
-    def Read(self, array: ArrayType[ByteType], offset: IntType, count: IntType) -> Tuple[IntType, ArrayType[ByteType]]: ...
-    
+    def Read(
+        self, array: ArrayType[ByteType], offset: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[ByteType]]: ...
     @overload
-    def ReadAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task[IntType]: ...
-    
+    def ReadAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task[IntType]: ...
     def ReadByte(self) -> IntType: ...
-    
     def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    
     def SetAccessControl(self, fileSecurity: FileSecurity) -> VoidType: ...
-    
     def SetLength(self, value: LongType) -> VoidType: ...
-    
     def Unlock(self, position: LongType, length: LongType) -> VoidType: ...
-    
     def Write(self, array: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    
     @overload
-    def WriteAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task: ...
-    
+    def WriteAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task: ...
     def WriteByte(self, value: ByteType) -> VoidType: ...
-    
     def get_CanRead(self) -> BooleanType: ...
-    
     def get_CanSeek(self) -> BooleanType: ...
-    
     def get_CanWrite(self) -> BooleanType: ...
-    
     def get_Handle(self) -> NIntType: ...
-    
     def get_IsAsync(self) -> BooleanType: ...
-    
     def get_Length(self) -> LongType: ...
-    
     def get_Name(self) -> StringType: ...
-    
     def get_Position(self) -> LongType: ...
-    
     def get_SafeFileHandle(self) -> SafeFileHandle: ...
-    
     def set_Position(self, value: LongType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileStreamAsyncResult(ObjectType, IAsyncResult):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def AsyncState(self) -> ObjectType: ...
-    
     @property
     def AsyncWaitHandle(self) -> WaitHandle: ...
-    
     @property
     def CompletedSynchronously(self) -> BooleanType: ...
-    
     @property
     def IsCompleted(self) -> BooleanType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_AsyncState(self) -> ObjectType: ...
-    
-    def get_AsyncWaitHandle(self) -> WaitHandle: ...
-    
-    def get_CompletedSynchronously(self) -> BooleanType: ...
-    
-    def get_IsCompleted(self) -> BooleanType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def get_AsyncState(self) -> ObjectType: ...
+    def get_AsyncWaitHandle(self) -> WaitHandle: ...
+    def get_CompletedSynchronously(self) -> BooleanType: ...
+    def get_IsCompleted(self) -> BooleanType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileSystemEnumerableFactory(ABC, ObjectType):
     """"""
-    
+
     # No Fields
-    
+
     # No Constructors
-    
+
     # No Properties
-    
+
     # No Methods
-    
+
     # No Events
-    
+
     # No Sub Classes
-    
+
     # No Sub Structs
-    
+
     # No Sub Interfaces
-    
+
     # No Sub Enums
 
-
-class FileSystemEnumerableIterator(Generic[TSource], Iterator[TSource], IEnumerable[TSource], IEnumerable, IEnumerator[TSource], IDisposable, IEnumerator):
+class FileSystemEnumerableIterator(
+    Generic[TSource],
+    Iterator[TSource],
+    IEnumerable[TSource],
+    IEnumerable,
+    IEnumerator[TSource],
+    IDisposable,
+    IEnumerator,
+):
     # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def MoveNext(self) -> BooleanType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Constructors
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def MoveNext(self) -> BooleanType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileSystemEventArgs(EventArgs):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     def __init__(self, changeType: WatcherChangeTypes, directory: StringType, name: StringType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def ChangeType(self) -> WatcherChangeTypes: ...
-    
     @property
     def FullPath(self) -> StringType: ...
-    
     @property
     def Name(self) -> StringType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_ChangeType(self) -> WatcherChangeTypes: ...
-    
-    def get_FullPath(self) -> StringType: ...
-    
-    def get_Name(self) -> StringType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def get_ChangeType(self) -> WatcherChangeTypes: ...
+    def get_FullPath(self) -> StringType: ...
+    def get_Name(self) -> StringType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileSystemEventHandler(MulticastDelegate, ICloneable, ISerializable):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self, object: ObjectType, method: NIntType): ...
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def BeginInvoke(self, sender: ObjectType, e: FileSystemEventArgs, callback: AsyncCallback, object: ObjectType) -> IAsyncResult: ...
-    
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    
-    def Invoke(self, sender: ObjectType, e: FileSystemEventArgs) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self, object: ObjectType, method: NIntType): ...
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def BeginInvoke(
+        self,
+        sender: ObjectType,
+        e: FileSystemEventArgs,
+        callback: AsyncCallback,
+        object: ObjectType,
+    ) -> IAsyncResult: ...
+    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
+    def Invoke(self, sender: ObjectType, e: FileSystemEventArgs) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileSystemInfo(ABC, MarshalByRefObject, ISerializable):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def Attributes(self) -> FileAttributes: ...
-    
     @Attributes.setter
     def Attributes(self, value: FileAttributes) -> None: ...
-    
     @property
     def CreationTime(self) -> DateTime: ...
-    
     @CreationTime.setter
     def CreationTime(self, value: DateTime) -> None: ...
-    
     @property
     def CreationTimeUtc(self) -> DateTime: ...
-    
     @CreationTimeUtc.setter
     def CreationTimeUtc(self, value: DateTime) -> None: ...
-    
     @property
     def Exists(self) -> BooleanType: ...
-    
     @property
     def Extension(self) -> StringType: ...
-    
     @property
     def FullName(self) -> StringType: ...
-    
     @property
     def LastAccessTime(self) -> DateTime: ...
-    
     @LastAccessTime.setter
     def LastAccessTime(self, value: DateTime) -> None: ...
-    
     @property
     def LastAccessTimeUtc(self) -> DateTime: ...
-    
     @LastAccessTimeUtc.setter
     def LastAccessTimeUtc(self, value: DateTime) -> None: ...
-    
     @property
     def LastWriteTime(self) -> DateTime: ...
-    
     @LastWriteTime.setter
     def LastWriteTime(self, value: DateTime) -> None: ...
-    
     @property
     def LastWriteTimeUtc(self) -> DateTime: ...
-    
     @LastWriteTimeUtc.setter
     def LastWriteTimeUtc(self, value: DateTime) -> None: ...
-    
     @property
     def Name(self) -> StringType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def Delete(self) -> VoidType: ...
-    
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    
-    def Refresh(self) -> VoidType: ...
-    
-    def get_Attributes(self) -> FileAttributes: ...
-    
-    def get_CreationTime(self) -> DateTime: ...
-    
-    def get_CreationTimeUtc(self) -> DateTime: ...
-    
-    def get_Exists(self) -> BooleanType: ...
-    
-    def get_Extension(self) -> StringType: ...
-    
-    def get_FullName(self) -> StringType: ...
-    
-    def get_LastAccessTime(self) -> DateTime: ...
-    
-    def get_LastAccessTimeUtc(self) -> DateTime: ...
-    
-    def get_LastWriteTime(self) -> DateTime: ...
-    
-    def get_LastWriteTimeUtc(self) -> DateTime: ...
-    
-    def get_Name(self) -> StringType: ...
-    
-    def set_Attributes(self, value: FileAttributes) -> VoidType: ...
-    
-    def set_CreationTime(self, value: DateTime) -> VoidType: ...
-    
-    def set_CreationTimeUtc(self, value: DateTime) -> VoidType: ...
-    
-    def set_LastAccessTime(self, value: DateTime) -> VoidType: ...
-    
-    def set_LastAccessTimeUtc(self, value: DateTime) -> VoidType: ...
-    
-    def set_LastWriteTime(self, value: DateTime) -> VoidType: ...
-    
-    def set_LastWriteTimeUtc(self, value: DateTime) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def Delete(self) -> VoidType: ...
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
+    def Refresh(self) -> VoidType: ...
+    def get_Attributes(self) -> FileAttributes: ...
+    def get_CreationTime(self) -> DateTime: ...
+    def get_CreationTimeUtc(self) -> DateTime: ...
+    def get_Exists(self) -> BooleanType: ...
+    def get_Extension(self) -> StringType: ...
+    def get_FullName(self) -> StringType: ...
+    def get_LastAccessTime(self) -> DateTime: ...
+    def get_LastAccessTimeUtc(self) -> DateTime: ...
+    def get_LastWriteTime(self) -> DateTime: ...
+    def get_LastWriteTimeUtc(self) -> DateTime: ...
+    def get_Name(self) -> StringType: ...
+    def set_Attributes(self, value: FileAttributes) -> VoidType: ...
+    def set_CreationTime(self, value: DateTime) -> VoidType: ...
+    def set_CreationTimeUtc(self, value: DateTime) -> VoidType: ...
+    def set_LastAccessTime(self, value: DateTime) -> VoidType: ...
+    def set_LastAccessTimeUtc(self, value: DateTime) -> VoidType: ...
+    def set_LastWriteTime(self, value: DateTime) -> VoidType: ...
+    def set_LastWriteTimeUtc(self, value: DateTime) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileSystemInfoResultHandler(SearchResultHandler[FileSystemInfo]):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self): ...
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class FileSystemWatcher(Component, IComponent, IDisposable, ISupportInitialize):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, path: StringType): ...
-    
     @overload
     def __init__(self, path: StringType, filter: StringType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def EnableRaisingEvents(self) -> BooleanType: ...
-    
     @EnableRaisingEvents.setter
     def EnableRaisingEvents(self, value: BooleanType) -> None: ...
-    
     @property
     def Filter(self) -> StringType: ...
-    
     @Filter.setter
     def Filter(self, value: StringType) -> None: ...
-    
     @property
     def IncludeSubdirectories(self) -> BooleanType: ...
-    
     @IncludeSubdirectories.setter
     def IncludeSubdirectories(self, value: BooleanType) -> None: ...
-    
     @property
     def InternalBufferSize(self) -> IntType: ...
-    
     @InternalBufferSize.setter
     def InternalBufferSize(self, value: IntType) -> None: ...
-    
     @property
     def NotifyFilter(self) -> NotifyFilters: ...
-    
     @NotifyFilter.setter
     def NotifyFilter(self, value: NotifyFilters) -> None: ...
-    
     @property
     def Path(self) -> StringType: ...
-    
     @Path.setter
     def Path(self, value: StringType) -> None: ...
-    
     @property
     def Site(self) -> ISite: ...
-    
     @Site.setter
     def Site(self, value: ISite) -> None: ...
-    
     @property
     def SynchronizingObject(self) -> ISynchronizeInvoke: ...
-    
     @SynchronizingObject.setter
     def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def BeginInit(self) -> VoidType: ...
-    
     def EndInit(self) -> VoidType: ...
-    
     @overload
     def WaitForChanged(self, changeType: WatcherChangeTypes) -> WaitForChangedResult: ...
-    
     @overload
-    def WaitForChanged(self, changeType: WatcherChangeTypes, timeout: IntType) -> WaitForChangedResult: ...
-    
+    def WaitForChanged(
+        self, changeType: WatcherChangeTypes, timeout: IntType
+    ) -> WaitForChangedResult: ...
     def add_Changed(self, value: FileSystemEventHandler) -> VoidType: ...
-    
     def add_Created(self, value: FileSystemEventHandler) -> VoidType: ...
-    
     def add_Deleted(self, value: FileSystemEventHandler) -> VoidType: ...
-    
     def add_Error(self, value: ErrorEventHandler) -> VoidType: ...
-    
     def add_Renamed(self, value: RenamedEventHandler) -> VoidType: ...
-    
     def get_EnableRaisingEvents(self) -> BooleanType: ...
-    
     def get_Filter(self) -> StringType: ...
-    
     def get_IncludeSubdirectories(self) -> BooleanType: ...
-    
     def get_InternalBufferSize(self) -> IntType: ...
-    
     def get_NotifyFilter(self) -> NotifyFilters: ...
-    
     def get_Path(self) -> StringType: ...
-    
     def get_Site(self) -> ISite: ...
-    
     def get_SynchronizingObject(self) -> ISynchronizeInvoke: ...
-    
     def remove_Changed(self, value: FileSystemEventHandler) -> VoidType: ...
-    
     def remove_Created(self, value: FileSystemEventHandler) -> VoidType: ...
-    
     def remove_Deleted(self, value: FileSystemEventHandler) -> VoidType: ...
-    
     def remove_Error(self, value: ErrorEventHandler) -> VoidType: ...
-    
     def remove_Renamed(self, value: RenamedEventHandler) -> VoidType: ...
-    
     def set_EnableRaisingEvents(self, value: BooleanType) -> VoidType: ...
-    
     def set_Filter(self, value: StringType) -> VoidType: ...
-    
     def set_IncludeSubdirectories(self, value: BooleanType) -> VoidType: ...
-    
     def set_InternalBufferSize(self, value: IntType) -> VoidType: ...
-    
     def set_NotifyFilter(self, value: NotifyFilters) -> VoidType: ...
-    
     def set_Path(self, value: StringType) -> VoidType: ...
-    
     def set_Site(self, value: ISite) -> VoidType: ...
-    
     def set_SynchronizingObject(self, value: ISynchronizeInvoke) -> VoidType: ...
-    
-    # ---------- Events ---------- #
-    
-    Changed: EventType[FileSystemEventHandler] = ...
-    
-    Created: EventType[FileSystemEventHandler] = ...
-    
-    Deleted: EventType[FileSystemEventHandler] = ...
-    
-    Error: EventType[ErrorEventHandler] = ...
-    
-    Renamed: EventType[RenamedEventHandler] = ...
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Events ---------- #
+
+    Changed: EventType[FileSystemEventHandler] = ...
+
+    Created: EventType[FileSystemEventHandler] = ...
+
+    Deleted: EventType[FileSystemEventHandler] = ...
+
+    Error: EventType[ErrorEventHandler] = ...
+
+    Renamed: EventType[RenamedEventHandler] = ...
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class IODescriptionAttribute(DescriptionAttribute, _Attribute):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     def __init__(self, description: StringType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def Description(self) -> StringType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_Description(self) -> StringType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def get_Description(self) -> StringType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class IOException(SystemException, ISerializable, _Exception):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, message: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, hresult: IntType): ...
-    
     @overload
     def __init__(self, message: StringType, innerException: Exception): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class InternalBufferOverflowException(SystemException, ISerializable, _Exception):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, message: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, inner: Exception): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class InvalidDataException(SystemException, ISerializable, _Exception):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, message: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, innerException: Exception): ...
-    
+
     # No Properties
-    
+
     # No Methods
-    
+
     # No Events
-    
+
     # No Sub Classes
-    
+
     # No Sub Structs
-    
+
     # No Sub Interfaces
-    
+
     # No Sub Enums
 
-
-class Iterator(Protocol[TSource], ObjectType, IEnumerable[TSource], IEnumerable, IEnumerator[TSource], IDisposable, IEnumerator):
+class Iterator(
+    Protocol[TSource],
+    ObjectType,
+    IEnumerable[TSource],
+    IEnumerable,
+    IEnumerator[TSource],
+    IDisposable,
+    IEnumerator,
+):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     def __init__(self): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def Current(self) -> TSource: ...
-    
-    # ---------- Methods ---------- #
-    
-    def Dispose(self) -> VoidType: ...
-    
-    def GetEnumerator(self) -> IEnumerator[TSource]: ...
-    
-    def MoveNext(self) -> BooleanType: ...
-    
-    def get_Current(self) -> TSource: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def Dispose(self) -> VoidType: ...
+    def GetEnumerator(self) -> IEnumerator[TSource]: ...
+    def MoveNext(self) -> BooleanType: ...
+    def get_Current(self) -> TSource: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class LogStream(BufferedStream2, IDisposable):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def CanRead(self) -> BooleanType: ...
-    
     @property
     def CanSeek(self) -> BooleanType: ...
-    
     @property
     def CanWrite(self) -> BooleanType: ...
-    
     @property
     def Length(self) -> LongType: ...
-    
     @property
     def Position(self) -> LongType: ...
-    
     @Position.setter
     def Position(self, value: LongType) -> None: ...
-    
-    # ---------- Methods ---------- #
-    
-    def Read(self, array: ArrayType[ByteType], offset: IntType, count: IntType) -> IntType: ...
-    
-    def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    
-    def SetLength(self, value: LongType) -> VoidType: ...
-    
-    def get_CanRead(self) -> BooleanType: ...
-    
-    def get_CanSeek(self) -> BooleanType: ...
-    
-    def get_CanWrite(self) -> BooleanType: ...
-    
-    def get_Length(self) -> LongType: ...
-    
-    def get_Position(self) -> LongType: ...
-    
-    def set_Position(self, value: LongType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def Read(self, array: ArrayType[ByteType], offset: IntType, count: IntType) -> IntType: ...
+    def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
+    def SetLength(self, value: LongType) -> VoidType: ...
+    def get_CanRead(self) -> BooleanType: ...
+    def get_CanSeek(self) -> BooleanType: ...
+    def get_CanWrite(self) -> BooleanType: ...
+    def get_Length(self) -> LongType: ...
+    def get_Position(self) -> LongType: ...
+    def set_Position(self, value: LongType) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class LongPath(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class LongPathDirectory(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class LongPathFile(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class LongPathHelper(ObjectType):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self): ...
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class MemoryStream(Stream, IDisposable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, capacity: IntType): ...
-    
     @overload
     def __init__(self, buffer: ArrayType[ByteType]): ...
-    
     @overload
     def __init__(self, buffer: ArrayType[ByteType], writable: BooleanType): ...
-    
     @overload
     def __init__(self, buffer: ArrayType[ByteType], index: IntType, count: IntType): ...
-    
     @overload
-    def __init__(self, buffer: ArrayType[ByteType], index: IntType, count: IntType, writable: BooleanType): ...
-    
+    def __init__(
+        self, buffer: ArrayType[ByteType], index: IntType, count: IntType, writable: BooleanType
+    ): ...
     @overload
-    def __init__(self, buffer: ArrayType[ByteType], index: IntType, count: IntType, writable: BooleanType, publiclyVisible: BooleanType): ...
-    
+    def __init__(
+        self,
+        buffer: ArrayType[ByteType],
+        index: IntType,
+        count: IntType,
+        writable: BooleanType,
+        publiclyVisible: BooleanType,
+    ): ...
+
     # ---------- Properties ---------- #
-    
+
     @property
     def CanRead(self) -> BooleanType: ...
-    
     @property
     def CanSeek(self) -> BooleanType: ...
-    
     @property
     def CanWrite(self) -> BooleanType: ...
-    
     @property
     def Capacity(self) -> IntType: ...
-    
     @Capacity.setter
     def Capacity(self, value: IntType) -> None: ...
-    
     @property
     def Length(self) -> LongType: ...
-    
     @property
     def Position(self) -> LongType: ...
-    
     @Position.setter
     def Position(self, value: LongType) -> None: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     @overload
-    def CopyToAsync(self, destination: Stream, bufferSize: IntType, cancellationToken: CancellationToken) -> Task: ...
-    
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: IntType, cancellationToken: CancellationToken
+    ) -> Task: ...
     def Flush(self) -> VoidType: ...
-    
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task: ...
-    
     def GetBuffer(self) -> ArrayType[ByteType]: ...
-    
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> Tuple[IntType, ArrayType[ByteType]]: ...
-    
+    def Read(
+        self, buffer: ArrayType[ByteType], offset: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[ByteType]]: ...
     @overload
-    def ReadAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task[IntType]: ...
-    
+    def ReadAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task[IntType]: ...
     def ReadByte(self) -> IntType: ...
-    
     def Seek(self, offset: LongType, loc: SeekOrigin) -> LongType: ...
-    
     def SetLength(self, value: LongType) -> VoidType: ...
-    
     def ToArray(self) -> ArrayType[ByteType]: ...
-    
-    def TryGetBuffer(self, buffer: ArraySegment[ByteType]) -> Tuple[BooleanType, ArraySegment[ByteType]]: ...
-    
+    def TryGetBuffer(
+        self, buffer: ArraySegment[ByteType]
+    ) -> Tuple[BooleanType, ArraySegment[ByteType]]: ...
     def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    
     @overload
-    def WriteAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task: ...
-    
+    def WriteAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task: ...
     def WriteByte(self, value: ByteType) -> VoidType: ...
-    
     def WriteTo(self, stream: Stream) -> VoidType: ...
-    
     def get_CanRead(self) -> BooleanType: ...
-    
     def get_CanSeek(self) -> BooleanType: ...
-    
     def get_CanWrite(self) -> BooleanType: ...
-    
     def get_Capacity(self) -> IntType: ...
-    
     def get_Length(self) -> LongType: ...
-    
     def get_Position(self) -> LongType: ...
-    
     def set_Capacity(self, value: IntType) -> VoidType: ...
-    
     def set_Position(self, value: LongType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class Path(ABC, ObjectType):
     # ---------- Fields ---------- #
-    
+
     @staticmethod
     @property
     def AltDirectorySeparatorChar() -> CharType: ...
-    
     @staticmethod
     @property
     def DirectorySeparatorChar() -> CharType: ...
-    
     @staticmethod
     @property
     def InvalidPathChars() -> ArrayType[CharType]: ...
-    
     @staticmethod
     @property
     def PathSeparator() -> CharType: ...
-    
     @staticmethod
     @property
     def VolumeSeparatorChar() -> CharType: ...
-    
+
     # No Constructors
-    
+
     # No Properties
-    
+
     # ---------- Methods ---------- #
-    
+
     @staticmethod
     def ChangeExtension(path: StringType, extension: StringType) -> StringType: ...
-    
     @staticmethod
     @overload
     def Combine(paths: ArrayType[StringType]) -> StringType: ...
-    
     @staticmethod
     @overload
     def Combine(path1: StringType, path2: StringType, path3: StringType) -> StringType: ...
-    
     @staticmethod
     @overload
-    def Combine(path1: StringType, path2: StringType, path3: StringType, path4: StringType) -> StringType: ...
-    
+    def Combine(
+        path1: StringType, path2: StringType, path3: StringType, path4: StringType
+    ) -> StringType: ...
     @staticmethod
     @overload
     def Combine(path1: StringType, path2: StringType) -> StringType: ...
-    
     @staticmethod
     def GetDirectoryName(path: StringType) -> StringType: ...
-    
     @staticmethod
     def GetExtension(path: StringType) -> StringType: ...
-    
     @staticmethod
     def GetFileName(path: StringType) -> StringType: ...
-    
     @staticmethod
     def GetFileNameWithoutExtension(path: StringType) -> StringType: ...
-    
     @staticmethod
     def GetFullPath(path: StringType) -> StringType: ...
-    
     @staticmethod
     def GetInvalidFileNameChars() -> ArrayType[CharType]: ...
-    
     @staticmethod
     def GetInvalidPathChars() -> ArrayType[CharType]: ...
-    
     @staticmethod
     def GetPathRoot(path: StringType) -> StringType: ...
-    
     @staticmethod
     def GetRandomFileName() -> StringType: ...
-    
     @staticmethod
     def GetTempFileName() -> StringType: ...
-    
     @staticmethod
     def GetTempPath() -> StringType: ...
-    
     @staticmethod
     def HasExtension(path: StringType) -> BooleanType: ...
-    
     @staticmethod
     def IsPathRooted(path: StringType) -> BooleanType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class PathInternal(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class PathTooLongException(IOException, ISerializable, _Exception):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, message: StringType): ...
-    
     @overload
     def __init__(self, message: StringType, innerException: Exception): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class PatternMatcher(ABC, ObjectType):
     # No Fields
-    
+
     # No Constructors
-    
+
     # No Properties
-    
+
     # ---------- Methods ---------- #
-    
+
     @staticmethod
     def StrictMatchPattern(expression: StringType, name: StringType) -> BooleanType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class PinnedBufferMemoryStream(UnmanagedMemoryStream, IDisposable):
     """"""
-    
+
     # No Fields
-    
+
     # No Constructors
-    
+
     # No Properties
-    
+
     # No Methods
-    
+
     # No Events
-    
+
     # No Sub Classes
-    
+
     # No Sub Structs
-    
+
     # No Sub Interfaces
-    
+
     # No Sub Enums
 
-
-class ReadLinesIterator(Iterator[StringType], IEnumerable[StringType], IEnumerable, IEnumerator[StringType], IDisposable, IEnumerator):
+class ReadLinesIterator(
+    Iterator[StringType],
+    IEnumerable[StringType],
+    IEnumerable,
+    IEnumerator[StringType],
+    IDisposable,
+    IEnumerator,
+):
     # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def MoveNext(self) -> BooleanType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Constructors
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def MoveNext(self) -> BooleanType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class RenamedEventArgs(FileSystemEventArgs):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
-    def __init__(self, changeType: WatcherChangeTypes, directory: StringType, name: StringType, oldName: StringType): ...
-    
+
+    def __init__(
+        self,
+        changeType: WatcherChangeTypes,
+        directory: StringType,
+        name: StringType,
+        oldName: StringType,
+    ): ...
+
     # ---------- Properties ---------- #
-    
+
     @property
     def OldFullPath(self) -> StringType: ...
-    
     @property
     def OldName(self) -> StringType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_OldFullPath(self) -> StringType: ...
-    
-    def get_OldName(self) -> StringType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def get_OldFullPath(self) -> StringType: ...
+    def get_OldName(self) -> StringType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class RenamedEventHandler(MulticastDelegate, ICloneable, ISerializable):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self, object: ObjectType, method: NIntType): ...
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def BeginInvoke(self, sender: ObjectType, e: RenamedEventArgs, callback: AsyncCallback, object: ObjectType) -> IAsyncResult: ...
-    
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    
-    def Invoke(self, sender: ObjectType, e: RenamedEventArgs) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self, object: ObjectType, method: NIntType): ...
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def BeginInvoke(
+        self, sender: ObjectType, e: RenamedEventArgs, callback: AsyncCallback, object: ObjectType
+    ) -> IAsyncResult: ...
+    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
+    def Invoke(self, sender: ObjectType, e: RenamedEventArgs) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class SearchResultHandler(Protocol[TSource], ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class Stream(ABC, MarshalByRefObject, IDisposable):
     # ---------- Fields ---------- #
-    
+
     @staticmethod
     @property
     def Null() -> Stream: ...
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def CanRead(self) -> BooleanType: ...
-    
     @property
     def CanSeek(self) -> BooleanType: ...
-    
     @property
     def CanTimeout(self) -> BooleanType: ...
-    
     @property
     def CanWrite(self) -> BooleanType: ...
-    
     @property
     def Length(self) -> LongType: ...
-    
     @property
     def Position(self) -> LongType: ...
-    
     @Position.setter
     def Position(self, value: LongType) -> None: ...
-    
     @property
     def ReadTimeout(self) -> IntType: ...
-    
     @ReadTimeout.setter
     def ReadTimeout(self, value: IntType) -> None: ...
-    
     @property
     def WriteTimeout(self) -> IntType: ...
-    
     @WriteTimeout.setter
     def WriteTimeout(self, value: IntType) -> None: ...
-    
+
     # ---------- Methods ---------- #
-    
-    def BeginRead(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, callback: AsyncCallback, state: ObjectType) -> IAsyncResult: ...
-    
-    def BeginWrite(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, callback: AsyncCallback, state: ObjectType) -> IAsyncResult: ...
-    
+
+    def BeginRead(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        callback: AsyncCallback,
+        state: ObjectType,
+    ) -> IAsyncResult: ...
+    def BeginWrite(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        callback: AsyncCallback,
+        state: ObjectType,
+    ) -> IAsyncResult: ...
     def Close(self) -> VoidType: ...
-    
     @overload
     def CopyTo(self, destination: Stream) -> VoidType: ...
-    
     @overload
     def CopyTo(self, destination: Stream, bufferSize: IntType) -> VoidType: ...
-    
     @overload
-    def CopyToAsync(self, destination: Stream, bufferSize: IntType, cancellationToken: CancellationToken) -> Task: ...
-    
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: IntType, cancellationToken: CancellationToken
+    ) -> Task: ...
     @overload
     def CopyToAsync(self, destination: Stream) -> Task: ...
-    
     @overload
     def CopyToAsync(self, destination: Stream, bufferSize: IntType) -> Task: ...
-    
     def Dispose(self) -> VoidType: ...
-    
     def EndRead(self, asyncResult: IAsyncResult) -> IntType: ...
-    
     def EndWrite(self, asyncResult: IAsyncResult) -> VoidType: ...
-    
     def Flush(self) -> VoidType: ...
-    
     @overload
     def FlushAsync(self) -> Task: ...
-    
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task: ...
-    
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> Tuple[IntType, ArrayType[ByteType]]: ...
-    
+    def Read(
+        self, buffer: ArrayType[ByteType], offset: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[ByteType]]: ...
     @overload
-    def ReadAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task[IntType]: ...
-    
+    def ReadAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task[IntType]: ...
     @overload
-    def ReadAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> Task[IntType]: ...
-    
+    def ReadAsync(
+        self, buffer: ArrayType[ByteType], offset: IntType, count: IntType
+    ) -> Task[IntType]: ...
     def ReadByte(self) -> IntType: ...
-    
     def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    
     def SetLength(self, value: LongType) -> VoidType: ...
-    
     @staticmethod
     def Synchronized(stream: Stream) -> Stream: ...
-    
     def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    
     @overload
-    def WriteAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task: ...
-    
+    def WriteAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task: ...
     @overload
     def WriteAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> Task: ...
-    
     def WriteByte(self, value: ByteType) -> VoidType: ...
-    
     def get_CanRead(self) -> BooleanType: ...
-    
     def get_CanSeek(self) -> BooleanType: ...
-    
     def get_CanTimeout(self) -> BooleanType: ...
-    
     def get_CanWrite(self) -> BooleanType: ...
-    
     def get_Length(self) -> LongType: ...
-    
     def get_Position(self) -> LongType: ...
-    
     def get_ReadTimeout(self) -> IntType: ...
-    
     def get_WriteTimeout(self) -> IntType: ...
-    
     def set_Position(self, value: LongType) -> VoidType: ...
-    
     def set_ReadTimeout(self, value: IntType) -> VoidType: ...
-    
     def set_WriteTimeout(self, value: IntType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class StreamReader(TextReader, IDisposable):
     # ---------- Fields ---------- #
-    
+
     @staticmethod
     @property
     def Null() -> StreamReader: ...
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self, stream: Stream): ...
-    
     @overload
     def __init__(self, stream: Stream, detectEncodingFromByteOrderMarks: BooleanType): ...
-    
     @overload
     def __init__(self, stream: Stream, encoding: Encoding): ...
-    
     @overload
-    def __init__(self, stream: Stream, encoding: Encoding, detectEncodingFromByteOrderMarks: BooleanType): ...
-    
+    def __init__(
+        self, stream: Stream, encoding: Encoding, detectEncodingFromByteOrderMarks: BooleanType
+    ): ...
     @overload
-    def __init__(self, stream: Stream, encoding: Encoding, detectEncodingFromByteOrderMarks: BooleanType, bufferSize: IntType): ...
-    
+    def __init__(
+        self,
+        stream: Stream,
+        encoding: Encoding,
+        detectEncodingFromByteOrderMarks: BooleanType,
+        bufferSize: IntType,
+    ): ...
     @overload
-    def __init__(self, stream: Stream, encoding: Encoding, detectEncodingFromByteOrderMarks: BooleanType, bufferSize: IntType, leaveOpen: BooleanType): ...
-    
+    def __init__(
+        self,
+        stream: Stream,
+        encoding: Encoding,
+        detectEncodingFromByteOrderMarks: BooleanType,
+        bufferSize: IntType,
+        leaveOpen: BooleanType,
+    ): ...
     @overload
     def __init__(self, path: StringType): ...
-    
     @overload
     def __init__(self, path: StringType, detectEncodingFromByteOrderMarks: BooleanType): ...
-    
     @overload
     def __init__(self, path: StringType, encoding: Encoding): ...
-    
     @overload
-    def __init__(self, path: StringType, encoding: Encoding, detectEncodingFromByteOrderMarks: BooleanType): ...
-    
+    def __init__(
+        self, path: StringType, encoding: Encoding, detectEncodingFromByteOrderMarks: BooleanType
+    ): ...
     @overload
-    def __init__(self, path: StringType, encoding: Encoding, detectEncodingFromByteOrderMarks: BooleanType, bufferSize: IntType): ...
-    
+    def __init__(
+        self,
+        path: StringType,
+        encoding: Encoding,
+        detectEncodingFromByteOrderMarks: BooleanType,
+        bufferSize: IntType,
+    ): ...
+
     # ---------- Properties ---------- #
-    
+
     @property
     def BaseStream(self) -> Stream: ...
-    
     @property
     def CurrentEncoding(self) -> Encoding: ...
-    
     @property
     def EndOfStream(self) -> BooleanType: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def Close(self) -> VoidType: ...
-    
     def DiscardBufferedData(self) -> VoidType: ...
-    
     def Peek(self) -> IntType: ...
-    
     @overload
     def Read(self) -> IntType: ...
-    
     @overload
-    def Read(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Tuple[IntType, ArrayType[CharType]]: ...
-    
-    def ReadAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task[IntType]: ...
-    
-    def ReadBlock(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Tuple[IntType, ArrayType[CharType]]: ...
-    
-    def ReadBlockAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task[IntType]: ...
-    
+    def Read(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[CharType]]: ...
+    def ReadAsync(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Task[IntType]: ...
+    def ReadBlock(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[CharType]]: ...
+    def ReadBlockAsync(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Task[IntType]: ...
     def ReadLine(self) -> StringType: ...
-    
     def ReadLineAsync(self) -> Task[StringType]: ...
-    
     def ReadToEnd(self) -> StringType: ...
-    
     def ReadToEndAsync(self) -> Task[StringType]: ...
-    
     def get_BaseStream(self) -> Stream: ...
-    
     def get_CurrentEncoding(self) -> Encoding: ...
-    
     def get_EndOfStream(self) -> BooleanType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class StreamWriter(TextWriter, IDisposable):
     # ---------- Fields ---------- #
-    
+
     @staticmethod
     @property
     def Null() -> StreamWriter: ...
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self, stream: Stream): ...
-    
     @overload
     def __init__(self, stream: Stream, encoding: Encoding): ...
-    
     @overload
     def __init__(self, stream: Stream, encoding: Encoding, bufferSize: IntType): ...
-    
     @overload
-    def __init__(self, stream: Stream, encoding: Encoding, bufferSize: IntType, leaveOpen: BooleanType): ...
-    
+    def __init__(
+        self, stream: Stream, encoding: Encoding, bufferSize: IntType, leaveOpen: BooleanType
+    ): ...
     @overload
     def __init__(self, path: StringType): ...
-    
     @overload
     def __init__(self, path: StringType, append: BooleanType): ...
-    
     @overload
     def __init__(self, path: StringType, append: BooleanType, encoding: Encoding): ...
-    
     @overload
-    def __init__(self, path: StringType, append: BooleanType, encoding: Encoding, bufferSize: IntType): ...
-    
+    def __init__(
+        self, path: StringType, append: BooleanType, encoding: Encoding, bufferSize: IntType
+    ): ...
+
     # ---------- Properties ---------- #
-    
+
     @property
     def AutoFlush(self) -> BooleanType: ...
-    
     @AutoFlush.setter
     def AutoFlush(self, value: BooleanType) -> None: ...
-    
     @property
     def BaseStream(self) -> Stream: ...
-    
     @property
     def Encoding(self) -> Encoding: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def Close(self) -> VoidType: ...
-    
     def Flush(self) -> VoidType: ...
-    
     def FlushAsync(self) -> Task: ...
-    
     @overload
     def Write(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> VoidType: ...
-    
     @overload
     def Write(self, value: CharType) -> VoidType: ...
-    
     @overload
     def Write(self, buffer: ArrayType[CharType]) -> VoidType: ...
-    
     @overload
     def Write(self, value: StringType) -> VoidType: ...
-    
     @overload
     def WriteAsync(self, value: CharType) -> Task: ...
-    
     @overload
     def WriteAsync(self, value: StringType) -> Task: ...
-    
     @overload
     def WriteAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task: ...
-    
     @overload
     def WriteLineAsync(self) -> Task: ...
-    
     @overload
     def WriteLineAsync(self, value: CharType) -> Task: ...
-    
     @overload
     def WriteLineAsync(self, value: StringType) -> Task: ...
-    
     @overload
-    def WriteLineAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task: ...
-    
+    def WriteLineAsync(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Task: ...
     def get_AutoFlush(self) -> BooleanType: ...
-    
     def get_BaseStream(self) -> Stream: ...
-    
     def get_Encoding(self) -> Encoding: ...
-    
     def set_AutoFlush(self, value: BooleanType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class StringReader(TextReader, IDisposable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     def __init__(self, s: StringType): ...
-    
+
     # No Properties
-    
+
     # ---------- Methods ---------- #
-    
+
     def Close(self) -> VoidType: ...
-    
     def Peek(self) -> IntType: ...
-    
     @overload
     def Read(self) -> IntType: ...
-    
     @overload
-    def Read(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Tuple[IntType, ArrayType[CharType]]: ...
-    
-    def ReadAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task[IntType]: ...
-    
-    def ReadBlockAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task[IntType]: ...
-    
+    def Read(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[CharType]]: ...
+    def ReadAsync(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Task[IntType]: ...
+    def ReadBlockAsync(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Task[IntType]: ...
     def ReadLine(self) -> StringType: ...
-    
     def ReadLineAsync(self) -> Task[StringType]: ...
-    
     def ReadToEnd(self) -> StringType: ...
-    
     def ReadToEndAsync(self) -> Task[StringType]: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class StringResultHandler(SearchResultHandler[StringType]):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class StringWriter(TextWriter, IDisposable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self): ...
-    
     @overload
     def __init__(self, formatProvider: IFormatProvider): ...
-    
     @overload
     def __init__(self, sb: StringBuilder): ...
-    
     @overload
     def __init__(self, sb: StringBuilder, formatProvider: IFormatProvider): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def Encoding(self) -> Encoding: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def Close(self) -> VoidType: ...
-    
     def FlushAsync(self) -> Task: ...
-    
     def GetStringBuilder(self) -> StringBuilder: ...
-    
     def ToString(self) -> StringType: ...
-    
     @overload
     def Write(self, value: CharType) -> VoidType: ...
-    
     @overload
     def Write(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> VoidType: ...
-    
     @overload
     def Write(self, value: StringType) -> VoidType: ...
-    
     @overload
     def WriteAsync(self, value: CharType) -> Task: ...
-    
     @overload
     def WriteAsync(self, value: StringType) -> Task: ...
-    
     @overload
     def WriteAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task: ...
-    
     @overload
     def WriteLineAsync(self, value: CharType) -> Task: ...
-    
     @overload
     def WriteLineAsync(self, value: StringType) -> Task: ...
-    
     @overload
-    def WriteLineAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task: ...
-    
+    def WriteLineAsync(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Task: ...
     def get_Encoding(self) -> Encoding: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class TextReader(ABC, MarshalByRefObject, IDisposable):
     # ---------- Fields ---------- #
-    
+
     @staticmethod
     @property
     def Null() -> TextReader: ...
-    
+
     # No Constructors
-    
+
     # No Properties
-    
+
     # ---------- Methods ---------- #
-    
+
     def Close(self) -> VoidType: ...
-    
     def Dispose(self) -> VoidType: ...
-    
     def Peek(self) -> IntType: ...
-    
     @overload
     def Read(self) -> IntType: ...
-    
     @overload
-    def Read(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Tuple[IntType, ArrayType[CharType]]: ...
-    
-    def ReadAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task[IntType]: ...
-    
-    def ReadBlock(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Tuple[IntType, ArrayType[CharType]]: ...
-    
-    def ReadBlockAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task[IntType]: ...
-    
+    def Read(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[CharType]]: ...
+    def ReadAsync(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Task[IntType]: ...
+    def ReadBlock(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[CharType]]: ...
+    def ReadBlockAsync(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Task[IntType]: ...
     def ReadLine(self) -> StringType: ...
-    
     def ReadLineAsync(self) -> Task[StringType]: ...
-    
     def ReadToEnd(self) -> StringType: ...
-    
     def ReadToEndAsync(self) -> Task[StringType]: ...
-    
     @staticmethod
     def Synchronized(reader: TextReader) -> TextReader: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class TextWriter(ABC, MarshalByRefObject, IDisposable):
     # ---------- Fields ---------- #
-    
+
     @staticmethod
     @property
     def Null() -> TextWriter: ...
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def Encoding(self) -> Encoding: ...
-    
     @property
     def FormatProvider(self) -> IFormatProvider: ...
-    
     @property
     def NewLine(self) -> StringType: ...
-    
     @NewLine.setter
     def NewLine(self, value: StringType) -> None: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def Close(self) -> VoidType: ...
-    
     def Dispose(self) -> VoidType: ...
-    
     def Flush(self) -> VoidType: ...
-    
     def FlushAsync(self) -> Task: ...
-    
     @staticmethod
     def Synchronized(writer: TextWriter) -> TextWriter: ...
-    
     @overload
     def Write(self, value: CharType) -> VoidType: ...
-    
     @overload
     def Write(self, buffer: ArrayType[CharType]) -> VoidType: ...
-    
     @overload
     def Write(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> VoidType: ...
-    
     @overload
     def Write(self, value: IntType) -> VoidType: ...
-    
     @overload
     def Write(self, value: UIntType) -> VoidType: ...
-    
     @overload
     def Write(self, value: LongType) -> VoidType: ...
-    
     @overload
     def Write(self, value: ULongType) -> VoidType: ...
-    
     @overload
     def Write(self, value: FloatType) -> VoidType: ...
-    
     @overload
     def Write(self, value: DoubleType) -> VoidType: ...
-    
     @overload
     def Write(self, value: DecimalType) -> VoidType: ...
-    
     @overload
     def Write(self, value: StringType) -> VoidType: ...
-    
     @overload
     def Write(self, value: ObjectType) -> VoidType: ...
-    
     @overload
     def Write(self, format: StringType, arg0: ObjectType) -> VoidType: ...
-    
     @overload
     def Write(self, format: StringType, arg0: ObjectType, arg1: ObjectType) -> VoidType: ...
-    
     @overload
-    def Write(self, format: StringType, arg0: ObjectType, arg1: ObjectType, arg2: ObjectType) -> VoidType: ...
-    
+    def Write(
+        self, format: StringType, arg0: ObjectType, arg1: ObjectType, arg2: ObjectType
+    ) -> VoidType: ...
     @overload
     def Write(self, format: StringType, arg: ArrayType[ObjectType]) -> VoidType: ...
-    
     @overload
     def Write(self, value: BooleanType) -> VoidType: ...
-    
     @overload
     def WriteAsync(self, value: CharType) -> Task: ...
-    
     @overload
     def WriteAsync(self, value: StringType) -> Task: ...
-    
     @overload
     def WriteAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task: ...
-    
     @overload
     def WriteAsync(self, buffer: ArrayType[CharType]) -> Task: ...
-    
     @overload
     def WriteLine(self) -> VoidType: ...
-    
     @overload
     def WriteLine(self, value: CharType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, buffer: ArrayType[CharType]) -> VoidType: ...
-    
     @overload
-    def WriteLine(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> VoidType: ...
-    
+    def WriteLine(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> VoidType: ...
     @overload
     def WriteLine(self, value: BooleanType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, value: IntType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, value: UIntType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, value: LongType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, value: ULongType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, value: FloatType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, value: DoubleType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, value: DecimalType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, value: StringType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, value: ObjectType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, format: StringType, arg0: ObjectType) -> VoidType: ...
-    
     @overload
     def WriteLine(self, format: StringType, arg0: ObjectType, arg1: ObjectType) -> VoidType: ...
-    
     @overload
-    def WriteLine(self, format: StringType, arg0: ObjectType, arg1: ObjectType, arg2: ObjectType) -> VoidType: ...
-    
+    def WriteLine(
+        self, format: StringType, arg0: ObjectType, arg1: ObjectType, arg2: ObjectType
+    ) -> VoidType: ...
     @overload
     def WriteLine(self, format: StringType, arg: ArrayType[ObjectType]) -> VoidType: ...
-    
     @overload
     def WriteLineAsync(self, value: CharType) -> Task: ...
-    
     @overload
     def WriteLineAsync(self, value: StringType) -> Task: ...
-    
     @overload
-    def WriteLineAsync(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> Task: ...
-    
+    def WriteLineAsync(
+        self, buffer: ArrayType[CharType], index: IntType, count: IntType
+    ) -> Task: ...
     @overload
     def WriteLineAsync(self) -> Task: ...
-    
     @overload
     def WriteLineAsync(self, buffer: ArrayType[CharType]) -> Task: ...
-    
     def get_Encoding(self) -> Encoding: ...
-    
     def get_FormatProvider(self) -> IFormatProvider: ...
-    
     def get_NewLine(self) -> StringType: ...
-    
     def set_NewLine(self, value: StringType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class UnmanagedMemoryAccessor(ObjectType, IDisposable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self, buffer: SafeBuffer, offset: LongType, capacity: LongType): ...
-    
     @overload
-    def __init__(self, buffer: SafeBuffer, offset: LongType, capacity: LongType, access: FileAccess): ...
-    
+    def __init__(
+        self, buffer: SafeBuffer, offset: LongType, capacity: LongType, access: FileAccess
+    ): ...
+
     # ---------- Properties ---------- #
-    
+
     @property
     def CanRead(self) -> BooleanType: ...
-    
     @property
     def CanWrite(self) -> BooleanType: ...
-    
     @property
     def Capacity(self) -> LongType: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def Dispose(self) -> VoidType: ...
-    
     def Read(self, position: LongType, structure: T) -> Tuple[VoidType, T]: ...
-    
-    def ReadArray(self, position: LongType, array: ArrayType[T], offset: IntType, count: IntType) -> IntType: ...
-    
+    def ReadArray(
+        self, position: LongType, array: ArrayType[T], offset: IntType, count: IntType
+    ) -> IntType: ...
     def ReadBoolean(self, position: LongType) -> BooleanType: ...
-    
     def ReadByte(self, position: LongType) -> ByteType: ...
-    
     def ReadChar(self, position: LongType) -> CharType: ...
-    
     def ReadDecimal(self, position: LongType) -> DecimalType: ...
-    
     def ReadDouble(self, position: LongType) -> DoubleType: ...
-    
     def ReadInt16(self, position: LongType) -> ShortType: ...
-    
     def ReadInt32(self, position: LongType) -> IntType: ...
-    
     def ReadInt64(self, position: LongType) -> LongType: ...
-    
     def ReadSByte(self, position: LongType) -> SByteType: ...
-    
     def ReadSingle(self, position: LongType) -> FloatType: ...
-    
     def ReadUInt16(self, position: LongType) -> UShortType: ...
-    
     def ReadUInt32(self, position: LongType) -> UIntType: ...
-    
     def ReadUInt64(self, position: LongType) -> ULongType: ...
-    
     @overload
     def Write(self, position: LongType, value: BooleanType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: ByteType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: DecimalType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: CharType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: ShortType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: IntType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: LongType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: FloatType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: DoubleType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: SByteType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: UShortType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: UIntType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, value: ULongType) -> VoidType: ...
-    
     @overload
     def Write(self, position: LongType, structure: T) -> Tuple[VoidType, T]: ...
-    
-    def WriteArray(self, position: LongType, array: ArrayType[T], offset: IntType, count: IntType) -> VoidType: ...
-    
+    def WriteArray(
+        self, position: LongType, array: ArrayType[T], offset: IntType, count: IntType
+    ) -> VoidType: ...
     def get_CanRead(self) -> BooleanType: ...
-    
     def get_CanWrite(self) -> BooleanType: ...
-    
     def get_Capacity(self) -> LongType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class UnmanagedMemoryStream(Stream, IDisposable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     @overload
     def __init__(self, buffer: SafeBuffer, offset: LongType, length: LongType): ...
-    
     @overload
-    def __init__(self, buffer: SafeBuffer, offset: LongType, length: LongType, access: FileAccess): ...
-    
+    def __init__(
+        self, buffer: SafeBuffer, offset: LongType, length: LongType, access: FileAccess
+    ): ...
     @overload
     def __init__(self, pointer: ByteType, length: LongType): ...
-    
     @overload
-    def __init__(self, pointer: ByteType, length: LongType, capacity: LongType, access: FileAccess): ...
-    
+    def __init__(
+        self, pointer: ByteType, length: LongType, capacity: LongType, access: FileAccess
+    ): ...
+
     # ---------- Properties ---------- #
-    
+
     @property
     def CanRead(self) -> BooleanType: ...
-    
     @property
     def CanSeek(self) -> BooleanType: ...
-    
     @property
     def CanWrite(self) -> BooleanType: ...
-    
     @property
     def Capacity(self) -> LongType: ...
-    
     @property
     def Length(self) -> LongType: ...
-    
     @property
     def Position(self) -> LongType: ...
-    
     @Position.setter
     def Position(self, value: LongType) -> None: ...
-    
     @property
     def PositionPointer(self) -> ByteType: ...
-    
     @PositionPointer.setter
     def PositionPointer(self, value: ByteType) -> None: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def Flush(self) -> VoidType: ...
-    
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task: ...
-    
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> Tuple[IntType, ArrayType[ByteType]]: ...
-    
+    def Read(
+        self, buffer: ArrayType[ByteType], offset: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[ByteType]]: ...
     @overload
-    def ReadAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task[IntType]: ...
-    
+    def ReadAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task[IntType]: ...
     def ReadByte(self) -> IntType: ...
-    
     def Seek(self, offset: LongType, loc: SeekOrigin) -> LongType: ...
-    
     def SetLength(self, value: LongType) -> VoidType: ...
-    
     def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    
     @overload
-    def WriteAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task: ...
-    
+    def WriteAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task: ...
     def WriteByte(self, value: ByteType) -> VoidType: ...
-    
     def get_CanRead(self) -> BooleanType: ...
-    
     def get_CanSeek(self) -> BooleanType: ...
-    
     def get_CanWrite(self) -> BooleanType: ...
-    
     def get_Capacity(self) -> LongType: ...
-    
     def get_Length(self) -> LongType: ...
-    
     def get_Position(self) -> LongType: ...
-    
     def get_PositionPointer(self) -> ByteType: ...
-    
     def set_Position(self, value: LongType) -> VoidType: ...
-    
     def set_PositionPointer(self, value: ByteType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class UnmanagedMemoryStreamWrapper(MemoryStream, IDisposable):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def CanRead(self) -> BooleanType: ...
-    
     @property
     def CanSeek(self) -> BooleanType: ...
-    
     @property
     def CanWrite(self) -> BooleanType: ...
-    
     @property
     def Capacity(self) -> IntType: ...
-    
     @Capacity.setter
     def Capacity(self, value: IntType) -> None: ...
-    
     @property
     def Length(self) -> LongType: ...
-    
     @property
     def Position(self) -> LongType: ...
-    
     @Position.setter
     def Position(self, value: LongType) -> None: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     @overload
-    def CopyToAsync(self, destination: Stream, bufferSize: IntType, cancellationToken: CancellationToken) -> Task: ...
-    
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: IntType, cancellationToken: CancellationToken
+    ) -> Task: ...
     def Flush(self) -> VoidType: ...
-    
     @overload
     def FlushAsync(self, cancellationToken: CancellationToken) -> Task: ...
-    
     def GetBuffer(self) -> ArrayType[ByteType]: ...
-    
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> Tuple[IntType, ArrayType[ByteType]]: ...
-    
+    def Read(
+        self, buffer: ArrayType[ByteType], offset: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[ByteType]]: ...
     @overload
-    def ReadAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task[IntType]: ...
-    
+    def ReadAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task[IntType]: ...
     def ReadByte(self) -> IntType: ...
-    
     def Seek(self, offset: LongType, loc: SeekOrigin) -> LongType: ...
-    
     def SetLength(self, value: LongType) -> VoidType: ...
-    
     def ToArray(self) -> ArrayType[ByteType]: ...
-    
-    def TryGetBuffer(self, buffer: ArraySegment[ByteType]) -> Tuple[BooleanType, ArraySegment[ByteType]]: ...
-    
+    def TryGetBuffer(
+        self, buffer: ArraySegment[ByteType]
+    ) -> Tuple[BooleanType, ArraySegment[ByteType]]: ...
     def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    
     @overload
-    def WriteAsync(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType, cancellationToken: CancellationToken) -> Task: ...
-    
+    def WriteAsync(
+        self,
+        buffer: ArrayType[ByteType],
+        offset: IntType,
+        count: IntType,
+        cancellationToken: CancellationToken,
+    ) -> Task: ...
     def WriteByte(self, value: ByteType) -> VoidType: ...
-    
     def WriteTo(self, stream: Stream) -> VoidType: ...
-    
     def get_CanRead(self) -> BooleanType: ...
-    
     def get_CanSeek(self) -> BooleanType: ...
-    
     def get_CanWrite(self) -> BooleanType: ...
-    
     def get_Capacity(self) -> IntType: ...
-    
     def get_Length(self) -> LongType: ...
-    
     def get_Position(self) -> LongType: ...
-    
     def set_Capacity(self, value: IntType) -> VoidType: ...
-    
     def set_Position(self, value: LongType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class __ConsoleStream(Stream, IDisposable):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def CanRead(self) -> BooleanType: ...
-    
     @property
     def CanSeek(self) -> BooleanType: ...
-    
     @property
     def CanWrite(self) -> BooleanType: ...
-    
     @property
     def Length(self) -> LongType: ...
-    
     @property
     def Position(self) -> LongType: ...
-    
     @Position.setter
     def Position(self, value: LongType) -> None: ...
-    
-    # ---------- Methods ---------- #
-    
-    def Flush(self) -> VoidType: ...
-    
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> Tuple[IntType, ArrayType[ByteType]]: ...
-    
-    def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    
-    def SetLength(self, value: LongType) -> VoidType: ...
-    
-    def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    
-    def get_CanRead(self) -> BooleanType: ...
-    
-    def get_CanSeek(self) -> BooleanType: ...
-    
-    def get_CanWrite(self) -> BooleanType: ...
-    
-    def get_Length(self) -> LongType: ...
-    
-    def get_Position(self) -> LongType: ...
-    
-    def set_Position(self, value: LongType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def Flush(self) -> VoidType: ...
+    def Read(
+        self, buffer: ArrayType[ByteType], offset: IntType, count: IntType
+    ) -> Tuple[IntType, ArrayType[ByteType]]: ...
+    def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
+    def SetLength(self, value: LongType) -> VoidType: ...
+    def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
+    def get_CanRead(self) -> BooleanType: ...
+    def get_CanSeek(self) -> BooleanType: ...
+    def get_CanWrite(self) -> BooleanType: ...
+    def get_Length(self) -> LongType: ...
+    def get_Position(self) -> LongType: ...
+    def set_Position(self, value: LongType) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class __Error(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class __HResults(ABC, ObjectType):
     # ---------- Fields ---------- #
-    
+
     @staticmethod
     @property
     def COR_E_DIRECTORYNOTFOUND() -> IntType: ...
-    
     @staticmethod
     @property
     def COR_E_ENDOFSTREAM() -> IntType: ...
-    
     @staticmethod
     @property
     def COR_E_FILELOAD() -> IntType: ...
-    
     @staticmethod
     @property
     def COR_E_FILENOTFOUND() -> IntType: ...
-    
     @staticmethod
     @property
     def COR_E_IO() -> IntType: ...
-    
     @staticmethod
     @property
     def COR_E_PATHTOOLONG() -> IntType: ...
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 # ---------- Structs ---------- #
 
 class PathHelper(ValueType):
     # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def ToString(self) -> StringType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Constructors
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def ToString(self) -> StringType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class WaitForChangedResult(ValueType):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def ChangeType(self) -> WatcherChangeTypes: ...
-    
     @ChangeType.setter
     def ChangeType(self, value: WatcherChangeTypes) -> None: ...
-    
     @property
     def Name(self) -> StringType: ...
-    
     @Name.setter
     def Name(self, value: StringType) -> None: ...
-    
     @property
     def OldName(self) -> StringType: ...
-    
     @OldName.setter
     def OldName(self, value: StringType) -> None: ...
-    
     @property
     def TimedOut(self) -> BooleanType: ...
-    
     @TimedOut.setter
     def TimedOut(self, value: BooleanType) -> None: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_ChangeType(self) -> WatcherChangeTypes: ...
-    
-    def get_Name(self) -> StringType: ...
-    
-    def get_OldName(self) -> StringType: ...
-    
-    def get_TimedOut(self) -> BooleanType: ...
-    
-    def set_ChangeType(self, value: WatcherChangeTypes) -> VoidType: ...
-    
-    def set_Name(self, value: StringType) -> VoidType: ...
-    
-    def set_OldName(self, value: StringType) -> VoidType: ...
-    
-    def set_TimedOut(self, value: BooleanType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def get_ChangeType(self) -> WatcherChangeTypes: ...
+    def get_Name(self) -> StringType: ...
+    def get_OldName(self) -> StringType: ...
+    def get_TimedOut(self) -> BooleanType: ...
+    def set_ChangeType(self, value: WatcherChangeTypes) -> VoidType: ...
+    def set_Name(self, value: StringType) -> VoidType: ...
+    def set_OldName(self, value: StringType) -> VoidType: ...
+    def set_TimedOut(self, value: BooleanType) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 # No Interfaces
 
@@ -3976,12 +3492,10 @@ class DriveType(Enum):
     CDRom = 5
     Ram = 6
 
-
 class FileAccess(Enum):
     Read = 1
     Write = 2
     ReadWrite = 3
-
 
 class FileAttributes(Enum):
     ReadOnly = 1
@@ -4001,7 +3515,6 @@ class FileAttributes(Enum):
     IntegrityStream = 32768
     NoScrubData = 131072
 
-
 class FileMode(Enum):
     CreateNew = 1
     Create = 2
@@ -4010,16 +3523,14 @@ class FileMode(Enum):
     Truncate = 5
     Append = 6
 
-
 class FileOptions(Enum):
     WriteThrough = -2147483648
-    #None = 0
+    # None = 0
     Encrypted = 16384
     DeleteOnClose = 67108864
     SequentialScan = 134217728
     RandomAccess = 268435456
     Asynchronous = 1073741824
-
 
 class FileSecurityStateAccess(Enum):
     NoAccess = 0
@@ -4029,20 +3540,17 @@ class FileSecurityStateAccess(Enum):
     PathDiscovery = 8
     AllAccess = 15
 
-
 class FileShare(Enum):
-    #None = 0
+    # None = 0
     Read = 1
     Write = 2
     ReadWrite = 3
     Delete = 4
     Inheritable = 16
 
-
 class HandleInheritability(Enum):
-    #None = 0
+    # None = 0
     Inheritable = 1
-
 
 class LogRetentionOption(Enum):
     UnlimitedSequentialFiles = 0
@@ -4050,7 +3558,6 @@ class LogRetentionOption(Enum):
     SingleFileUnboundedSize = 2
     LimitedSequentialFiles = 3
     SingleFileBoundedSize = 4
-
 
 class NotifyFilters(Enum):
     FileName = 1
@@ -4062,17 +3569,14 @@ class NotifyFilters(Enum):
     CreationTime = 64
     Security = 256
 
-
 class SearchOption(Enum):
     TopDirectoryOnly = 0
     AllDirectories = 1
-
 
 class SeekOrigin(Enum):
     Begin = 0
     Current = 1
     End = 2
-
 
 class WatcherChangeTypes(Enum):
     Created = 1
@@ -4080,7 +3584,6 @@ class WatcherChangeTypes(Enum):
     Changed = 4
     Renamed = 8
     All = 15
-
 
 # ---------- Delegates ---------- #
 

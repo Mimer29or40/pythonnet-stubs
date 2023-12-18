@@ -3,7 +3,14 @@ from __future__ import annotations
 from abc import ABC
 from typing import Union
 
-from System import Attribute, Boolean, Enum, IDisposable, Int32, Object, String, Void
+from System import Attribute
+from System import Boolean
+from System import Enum
+from System import IDisposable
+from System import Int32
+from System import Object
+from System import String
+from System import Void
 from System.Runtime.ConstrainedExecution import CriticalFinalizerObject
 from System.Runtime.InteropServices import _Attribute
 
@@ -15,167 +22,152 @@ ObjectType = Object
 StringType = Union[str, String]
 VoidType = Union[None, Void]
 
-
 # ---------- Classes ---------- #
 
 class AssemblyTargetedPatchBandAttribute(Attribute, _Attribute):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     def __init__(self, targetedPatchBand: StringType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def TargetedPatchBand(self) -> StringType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_TargetedPatchBand(self) -> StringType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def get_TargetedPatchBand(self) -> StringType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class GCSettings(ABC, ObjectType):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @staticmethod
     @property
     def IsServerGC() -> BooleanType: ...
-    
     @staticmethod
     @property
     def LargeObjectHeapCompactionMode() -> GCLargeObjectHeapCompactionMode: ...
-    
     @staticmethod
     @LargeObjectHeapCompactionMode.setter
     def LargeObjectHeapCompactionMode(value: GCLargeObjectHeapCompactionMode) -> None: ...
-    
     @staticmethod
     @property
     def LatencyMode() -> GCLatencyMode: ...
-    
     @staticmethod
     @LatencyMode.setter
     def LatencyMode(value: GCLatencyMode) -> None: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     @staticmethod
     def get_IsServerGC() -> BooleanType: ...
-    
     @staticmethod
     def get_LargeObjectHeapCompactionMode() -> GCLargeObjectHeapCompactionMode: ...
-    
     @staticmethod
     def get_LatencyMode() -> GCLatencyMode: ...
-    
     @staticmethod
     def set_LargeObjectHeapCompactionMode(value: GCLargeObjectHeapCompactionMode) -> VoidType: ...
-    
     @staticmethod
     def set_LatencyMode(value: GCLatencyMode) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class MemoryFailPoint(CriticalFinalizerObject, IDisposable):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self, sizeInMegabytes: IntType): ...
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def Dispose(self) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self, sizeInMegabytes: IntType): ...
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def Dispose(self) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class ProfileOptimization(ABC, ObjectType):
     # No Fields
-    
+
     # No Constructors
-    
+
     # No Properties
-    
+
     # ---------- Methods ---------- #
-    
+
     @staticmethod
     def SetProfileRoot(directoryPath: StringType) -> VoidType: ...
-    
     @staticmethod
     def StartProfile(profile: StringType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class TargetedPatchingOptOutAttribute(Attribute, _Attribute):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     def __init__(self, reason: StringType): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def Reason(self) -> StringType: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_Reason(self) -> StringType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def get_Reason(self) -> StringType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 # No Structs
 
@@ -187,14 +179,12 @@ class GCLargeObjectHeapCompactionMode(Enum):
     Default = 1
     CompactOnce = 2
 
-
 class GCLatencyMode(Enum):
     Batch = 0
     Interactive = 1
     LowLatency = 2
     SustainedLowLatency = 3
     NoGCRegion = 4
-
 
 # No Delegates
 

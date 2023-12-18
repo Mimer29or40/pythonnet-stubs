@@ -1,10 +1,24 @@
 from __future__ import annotations
 
-from typing import Union, overload
+from typing import Union
+from typing import overload
 
-from Microsoft.Win32.SafeHandles import SafeMemoryMappedFileHandle, SafeMemoryMappedViewHandle
-from System import Boolean, Enum, IDisposable, Int32, Int64, IntPtr, Object, String, Void
-from System.IO import FileMode, FileStream, HandleInheritability, UnmanagedMemoryAccessor, UnmanagedMemoryStream
+from Microsoft.Win32.SafeHandles import SafeMemoryMappedFileHandle
+from Microsoft.Win32.SafeHandles import SafeMemoryMappedViewHandle
+from System import Boolean
+from System import Enum
+from System import IDisposable
+from System import Int32
+from System import Int64
+from System import IntPtr
+from System import Object
+from System import String
+from System import Void
+from System.IO import FileMode
+from System.IO import FileStream
+from System.IO import HandleInheritability
+from System.IO import UnmanagedMemoryAccessor
+from System.IO import UnmanagedMemoryStream
 from System.Security.AccessControl import ObjectSecurity
 
 # ---------- Types ---------- #
@@ -17,241 +31,265 @@ ObjectType = Object
 StringType = Union[str, String]
 VoidType = Union[None, Void]
 
-
 # ---------- Classes ---------- #
 
 class MemoryMappedFile(ObjectType, IDisposable):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def SafeMemoryMappedFileHandle(self) -> SafeMemoryMappedFileHandle: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     @staticmethod
     @overload
     def CreateFromFile(path: StringType) -> MemoryMappedFile: ...
-    
     @staticmethod
     @overload
     def CreateFromFile(path: StringType, mode: FileMode) -> MemoryMappedFile: ...
-    
     @staticmethod
     @overload
-    def CreateFromFile(path: StringType, mode: FileMode, mapName: StringType) -> MemoryMappedFile: ...
-    
+    def CreateFromFile(
+        path: StringType, mode: FileMode, mapName: StringType
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
-    def CreateFromFile(path: StringType, mode: FileMode, mapName: StringType, capacity: LongType) -> MemoryMappedFile: ...
-    
+    def CreateFromFile(
+        path: StringType, mode: FileMode, mapName: StringType, capacity: LongType
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
-    def CreateFromFile(path: StringType, mode: FileMode, mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess) -> MemoryMappedFile: ...
-    
+    def CreateFromFile(
+        path: StringType,
+        mode: FileMode,
+        mapName: StringType,
+        capacity: LongType,
+        access: MemoryMappedFileAccess,
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
-    def CreateFromFile(fileStream: FileStream, mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess, inheritability: HandleInheritability, leaveOpen: BooleanType) -> MemoryMappedFile: ...
-    
+    def CreateFromFile(
+        fileStream: FileStream,
+        mapName: StringType,
+        capacity: LongType,
+        access: MemoryMappedFileAccess,
+        inheritability: HandleInheritability,
+        leaveOpen: BooleanType,
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
-    def CreateFromFile(fileStream: FileStream, mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess, memoryMappedFileSecurity: MemoryMappedFileSecurity, inheritability: HandleInheritability, leaveOpen: BooleanType) -> MemoryMappedFile: ...
-    
+    def CreateFromFile(
+        fileStream: FileStream,
+        mapName: StringType,
+        capacity: LongType,
+        access: MemoryMappedFileAccess,
+        memoryMappedFileSecurity: MemoryMappedFileSecurity,
+        inheritability: HandleInheritability,
+        leaveOpen: BooleanType,
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
     def CreateNew(mapName: StringType, capacity: LongType) -> MemoryMappedFile: ...
-    
     @staticmethod
     @overload
-    def CreateNew(mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess) -> MemoryMappedFile: ...
-    
+    def CreateNew(
+        mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
-    def CreateNew(mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess, options: MemoryMappedFileOptions, inheritability: HandleInheritability) -> MemoryMappedFile: ...
-    
+    def CreateNew(
+        mapName: StringType,
+        capacity: LongType,
+        access: MemoryMappedFileAccess,
+        options: MemoryMappedFileOptions,
+        inheritability: HandleInheritability,
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
-    def CreateNew(mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess, options: MemoryMappedFileOptions, memoryMappedFileSecurity: MemoryMappedFileSecurity, inheritability: HandleInheritability) -> MemoryMappedFile: ...
-    
+    def CreateNew(
+        mapName: StringType,
+        capacity: LongType,
+        access: MemoryMappedFileAccess,
+        options: MemoryMappedFileOptions,
+        memoryMappedFileSecurity: MemoryMappedFileSecurity,
+        inheritability: HandleInheritability,
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
     def CreateOrOpen(mapName: StringType, capacity: LongType) -> MemoryMappedFile: ...
-    
     @staticmethod
     @overload
-    def CreateOrOpen(mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess) -> MemoryMappedFile: ...
-    
+    def CreateOrOpen(
+        mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
-    def CreateOrOpen(mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess, options: MemoryMappedFileOptions, inheritability: HandleInheritability) -> MemoryMappedFile: ...
-    
+    def CreateOrOpen(
+        mapName: StringType,
+        capacity: LongType,
+        access: MemoryMappedFileAccess,
+        options: MemoryMappedFileOptions,
+        inheritability: HandleInheritability,
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
-    def CreateOrOpen(mapName: StringType, capacity: LongType, access: MemoryMappedFileAccess, options: MemoryMappedFileOptions, memoryMappedFileSecurity: MemoryMappedFileSecurity, inheritability: HandleInheritability) -> MemoryMappedFile: ...
-    
+    def CreateOrOpen(
+        mapName: StringType,
+        capacity: LongType,
+        access: MemoryMappedFileAccess,
+        options: MemoryMappedFileOptions,
+        memoryMappedFileSecurity: MemoryMappedFileSecurity,
+        inheritability: HandleInheritability,
+    ) -> MemoryMappedFile: ...
     @overload
     def CreateViewAccessor(self) -> MemoryMappedViewAccessor: ...
-    
     @overload
     def CreateViewAccessor(self, offset: LongType, size: LongType) -> MemoryMappedViewAccessor: ...
-    
     @overload
-    def CreateViewAccessor(self, offset: LongType, size: LongType, access: MemoryMappedFileAccess) -> MemoryMappedViewAccessor: ...
-    
+    def CreateViewAccessor(
+        self, offset: LongType, size: LongType, access: MemoryMappedFileAccess
+    ) -> MemoryMappedViewAccessor: ...
     @overload
     def CreateViewStream(self) -> MemoryMappedViewStream: ...
-    
     @overload
     def CreateViewStream(self, offset: LongType, size: LongType) -> MemoryMappedViewStream: ...
-    
     @overload
-    def CreateViewStream(self, offset: LongType, size: LongType, access: MemoryMappedFileAccess) -> MemoryMappedViewStream: ...
-    
+    def CreateViewStream(
+        self, offset: LongType, size: LongType, access: MemoryMappedFileAccess
+    ) -> MemoryMappedViewStream: ...
     def Dispose(self) -> VoidType: ...
-    
     def GetAccessControl(self) -> MemoryMappedFileSecurity: ...
-    
     @staticmethod
     @overload
     def OpenExisting(mapName: StringType) -> MemoryMappedFile: ...
-    
     @staticmethod
     @overload
-    def OpenExisting(mapName: StringType, desiredAccessRights: MemoryMappedFileRights) -> MemoryMappedFile: ...
-    
+    def OpenExisting(
+        mapName: StringType, desiredAccessRights: MemoryMappedFileRights
+    ) -> MemoryMappedFile: ...
     @staticmethod
     @overload
-    def OpenExisting(mapName: StringType, desiredAccessRights: MemoryMappedFileRights, inheritability: HandleInheritability) -> MemoryMappedFile: ...
-    
+    def OpenExisting(
+        mapName: StringType,
+        desiredAccessRights: MemoryMappedFileRights,
+        inheritability: HandleInheritability,
+    ) -> MemoryMappedFile: ...
     def SetAccessControl(self, memoryMappedFileSecurity: MemoryMappedFileSecurity) -> VoidType: ...
-    
     def get_SafeMemoryMappedFileHandle(self) -> SafeMemoryMappedFileHandle: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class MemoryMappedFileSecurity(ObjectSecurity[MemoryMappedFileRights]):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self): ...
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class MemoryMappedView(ObjectType, IDisposable):
     # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # ---------- Methods ---------- #
-    
-    def Dispose(self) -> VoidType: ...
-    
-    def Flush(self, capacity: NIntType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Constructors
+
+    # No Properties
+
+    # ---------- Methods ---------- #
+
+    def Dispose(self) -> VoidType: ...
+    def Flush(self, capacity: NIntType) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class MemoryMappedViewAccessor(UnmanagedMemoryAccessor, IDisposable):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def PointerOffset(self) -> LongType: ...
-    
     @property
     def SafeMemoryMappedViewHandle(self) -> SafeMemoryMappedViewHandle: ...
-    
-    # ---------- Methods ---------- #
-    
-    def Flush(self) -> VoidType: ...
-    
-    def get_PointerOffset(self) -> LongType: ...
-    
-    def get_SafeMemoryMappedViewHandle(self) -> SafeMemoryMappedViewHandle: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def Flush(self) -> VoidType: ...
+    def get_PointerOffset(self) -> LongType: ...
+    def get_SafeMemoryMappedViewHandle(self) -> SafeMemoryMappedViewHandle: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class MemoryMappedViewStream(UnmanagedMemoryStream, IDisposable):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def PointerOffset(self) -> LongType: ...
-    
     @property
     def SafeMemoryMappedViewHandle(self) -> SafeMemoryMappedViewHandle: ...
-    
-    # ---------- Methods ---------- #
-    
-    def Flush(self) -> VoidType: ...
-    
-    def SetLength(self, value: LongType) -> VoidType: ...
-    
-    def get_PointerOffset(self) -> LongType: ...
-    
-    def get_SafeMemoryMappedViewHandle(self) -> SafeMemoryMappedViewHandle: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def Flush(self) -> VoidType: ...
+    def SetLength(self, value: LongType) -> VoidType: ...
+    def get_PointerOffset(self) -> LongType: ...
+    def get_SafeMemoryMappedViewHandle(self) -> SafeMemoryMappedViewHandle: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 # No Structs
 
@@ -267,11 +305,9 @@ class MemoryMappedFileAccess(Enum):
     ReadExecute = 4
     ReadWriteExecute = 5
 
-
 class MemoryMappedFileOptions(Enum):
-    #None = 0
+    # None = 0
     DelayAllocatePages = 67108864
-
 
 class MemoryMappedFileRights(Enum):
     CopyOnWrite = 1
@@ -287,7 +323,6 @@ class MemoryMappedFileRights(Enum):
     TakeOwnership = 524288
     FullControl = 983055
     AccessSystemSecurity = 16777216
-
 
 # No Delegates
 

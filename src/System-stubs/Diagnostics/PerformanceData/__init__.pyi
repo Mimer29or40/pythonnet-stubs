@@ -1,9 +1,17 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union, overload
+from typing import Union
+from typing import overload
 
-from System import Enum, Guid, IDisposable, Int32, Int64, Object, String, Void
+from System import Enum
+from System import Guid
+from System import IDisposable
+from System import Int32
+from System import Int64
+from System import Object
+from System import String
+from System import Void
 
 # ---------- Types ---------- #
 
@@ -13,189 +21,170 @@ ObjectType = Object
 StringType = Union[str, String]
 VoidType = Union[None, Void]
 
-
 # ---------- Classes ---------- #
 
 class CounterData(ObjectType):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def RawValue(self) -> LongType: ...
-    
     @RawValue.setter
     def RawValue(self, value: LongType) -> None: ...
-    
     @property
     def Value(self) -> LongType: ...
-    
     @Value.setter
     def Value(self, value: LongType) -> None: ...
-    
-    # ---------- Methods ---------- #
-    
-    def Decrement(self) -> VoidType: ...
-    
-    def Increment(self) -> VoidType: ...
-    
-    def IncrementBy(self, value: LongType) -> VoidType: ...
-    
-    def get_RawValue(self) -> LongType: ...
-    
-    def get_Value(self) -> LongType: ...
-    
-    def set_RawValue(self, value: LongType) -> VoidType: ...
-    
-    def set_Value(self, value: LongType) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def Decrement(self) -> VoidType: ...
+    def Increment(self) -> VoidType: ...
+    def IncrementBy(self, value: LongType) -> VoidType: ...
+    def get_RawValue(self) -> LongType: ...
+    def get_Value(self) -> LongType: ...
+    def set_RawValue(self, value: LongType) -> VoidType: ...
+    def set_Value(self, value: LongType) -> VoidType: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class CounterSet(ObjectType, IDisposable):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
-    def __init__(self, providerGuid: Guid, counterSetGuid: Guid, instanceType: CounterSetInstanceType): ...
-    
+
+    def __init__(
+        self, providerGuid: Guid, counterSetGuid: Guid, instanceType: CounterSetInstanceType
+    ): ...
+
     # No Properties
-    
+
     # ---------- Methods ---------- #
-    
+
     @overload
     def AddCounter(self, counterId: IntType, counterType: CounterType) -> VoidType: ...
-    
     @overload
-    def AddCounter(self, counterId: IntType, counterType: CounterType, counterName: StringType) -> VoidType: ...
-    
+    def AddCounter(
+        self, counterId: IntType, counterType: CounterType, counterName: StringType
+    ) -> VoidType: ...
     def CreateCounterSetInstance(self, instanceName: StringType) -> CounterSetInstance: ...
-    
     def Dispose(self) -> VoidType: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class CounterSetInstance(ObjectType, IDisposable):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def Counters(self) -> CounterSetInstanceCounterDataSet: ...
-    
-    # ---------- Methods ---------- #
-    
-    def Dispose(self) -> VoidType: ...
-    
-    def get_Counters(self) -> CounterSetInstanceCounterDataSet: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def Dispose(self) -> VoidType: ...
+    def get_Counters(self) -> CounterSetInstanceCounterDataSet: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class CounterSetInstanceCounterDataSet(ObjectType, IDisposable):
     # No Fields
-    
+
     # No Constructors
-    
+
     # ---------- Properties ---------- #
-    
+
     def __getitem__(self, key: IntType) -> CounterData: ...
-    
     def __getitem__(self, key: StringType) -> CounterData: ...
-    
+
     # ---------- Methods ---------- #
-    
+
     def Dispose(self) -> VoidType: ...
-    
     @overload
     def get_Item(self, counterId: IntType) -> CounterData: ...
-    
     @overload
     def get_Item(self, counterName: StringType) -> CounterData: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class PerfProvider(ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class PerfProviderCollection(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 # No Structs
 
@@ -210,7 +199,6 @@ class CounterSetInstanceType(Enum):
     MultipleAggregate = 6
     GlobalAggregateWithHistory = 11
     InstanceAggregate = 22
-
 
 class CounterType(Enum):
     RawDataHex32 = 0
@@ -249,7 +237,6 @@ class CounterType(Enum):
     RawBase32 = 1073939459
     RawBase64 = 1073939712
     MultiTimerBase = 1107494144
-
 
 # No Delegates
 

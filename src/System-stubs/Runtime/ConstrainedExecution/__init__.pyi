@@ -3,7 +3,10 @@ from __future__ import annotations
 from abc import ABC
 from typing import Union
 
-from System import Attribute, Enum, Int32, Object
+from System import Attribute
+from System import Enum
+from System import Int32
+from System import Object
 from System.Runtime.InteropServices import _Attribute
 
 # ---------- Types ---------- #
@@ -11,84 +14,78 @@ from System.Runtime.InteropServices import _Attribute
 IntType = Union[int, Int32]
 ObjectType = Object
 
-
 # ---------- Classes ---------- #
 
 class CriticalFinalizerObject(ABC, ObjectType):
     """"""
-    
-    # No Fields
-    
-    # No Constructors
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # No Fields
+
+    # No Constructors
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class PrePrepareMethodAttribute(Attribute, _Attribute):
     # No Fields
-    
-    # ---------- Constructors ---------- #
-    
-    def __init__(self): ...
-    
-    # No Properties
-    
-    # No Methods
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Constructors ---------- #
+
+    def __init__(self): ...
+
+    # No Properties
+
+    # No Methods
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 class ReliabilityContractAttribute(Attribute, _Attribute):
     # No Fields
-    
+
     # ---------- Constructors ---------- #
-    
+
     def __init__(self, consistencyGuarantee: Consistency, cer: Cer): ...
-    
+
     # ---------- Properties ---------- #
-    
+
     @property
     def Cer(self) -> Cer: ...
-    
     @property
     def ConsistencyGuarantee(self) -> Consistency: ...
-    
-    # ---------- Methods ---------- #
-    
-    def get_Cer(self) -> Cer: ...
-    
-    def get_ConsistencyGuarantee(self) -> Consistency: ...
-    
-    # No Events
-    
-    # No Sub Classes
-    
-    # No Sub Structs
-    
-    # No Sub Interfaces
-    
-    # No Sub Enums
 
+    # ---------- Methods ---------- #
+
+    def get_Cer(self) -> Cer: ...
+    def get_ConsistencyGuarantee(self) -> Consistency: ...
+
+    # No Events
+
+    # No Sub Classes
+
+    # No Sub Structs
+
+    # No Sub Interfaces
+
+    # No Sub Enums
 
 # No Structs
 
@@ -97,17 +94,15 @@ class ReliabilityContractAttribute(Attribute, _Attribute):
 # ---------- Enums ---------- #
 
 class Cer(Enum):
-    #None = 0
+    # None = 0
     MayFail = 1
     Success = 2
-
 
 class Consistency(Enum):
     MayCorruptProcess = 0
     MayCorruptAppDomain = 1
     MayCorruptInstance = 2
     WillNotCorruptState = 3
-
 
 # No Delegates
 
