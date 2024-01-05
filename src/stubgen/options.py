@@ -2,9 +2,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Optional
+from typing import Tuple
 
-__version__ = '1.1.1'
+__version__ = "1.1.1"
 __doc__ = f"""
     Stub Generator | {__version__}
     
@@ -45,14 +46,14 @@ from docopt import docopt
 class Options:
     make: bool
     group: bool
-    
+
     assembly_name: Optional[str]
     assembly_names: Tuple[str, ...]
-    
+
     all: bool
     built_in: bool
     core: bool
-    
+
     output_dir: Path
     path_dirs: Tuple[str, ...]
     json: bool
@@ -62,19 +63,17 @@ class Options:
 arguments = docopt(__doc__, version=__version__)
 
 options = Options(
-    arguments['make'],
-    arguments['group'],
-    arguments['<assembly-name>'],
-    tuple() if arguments['<assembly-names>'] is None else tuple(arguments['<assembly-names>']),
-    arguments['--all'],
-    arguments['--built_in'],
-    arguments['--core'],
-    Path(arguments['--output']),
-    tuple() if arguments['--paths'] is None else tuple(arguments['--paths'].split(sep=',')),
-    not arguments['--no-json'],
-    arguments['--overwrite'],
+    arguments["make"],
+    arguments["group"],
+    arguments["<assembly-name>"],
+    tuple() if arguments["<assembly-names>"] is None else tuple(arguments["<assembly-names>"]),
+    arguments["--all"],
+    arguments["--built_in"],
+    arguments["--core"],
+    Path(arguments["--output"]),
+    tuple() if arguments["--paths"] is None else tuple(arguments["--paths"].split(sep=",")),
+    not arguments["--no-json"],
+    arguments["--overwrite"],
 )
 
-__all__ = [
-    options
-]
+__all__ = [options]

@@ -1,696 +1,805 @@
 from __future__ import annotations
 
-from collections import defaultdict
+import copy
+import re
+from abc import ABC
 from dataclasses import dataclass
-from typing import Optional, Tuple, List, Dict, Set, Any
+from dataclasses import field
+from types import NoneType
+from typing import Dict
+from typing import List
+from typing import Mapping
+from typing import Optional
+from typing import Sequence
+from typing import Tuple
+from typing import Type
+from typing import TypeVar
+from typing import Union
 
-from .util import reserved_python_names
+from System import Delegate
+from System import MulticastDelegate
+from System.Reflection import ConstructorInfo
+from System.Reflection import EventInfo
+from System.Reflection import FieldInfo
+from System.Reflection import MethodInfo
+from System.Reflection import ParameterInfo
+from System.Reflection import PropertyInfo
+from System.Reflection import TypeInfo
 
+from stubgen.log import get_logger
+from stubgen.util import make_python_name
 
-class Namespace:
-    def __init__(self, name: str):
-        self.name: str = name
-        self.py_imports: Set[str] = set()
-        self.net_imports: Set[str] = set()
-        self.var_types: Dict[str, VarType] = {}
-        self.sys_types: Dict[str, SystemType] = {}
-        self.special_types: Dict[str, SpecialType] = {}
-        self.classes: Dict[str, Set[Class]] = defaultdict(set)
-        self.structs: Dict[str, Set[Class]] = defaultdict(set)
-        self.interfaces: Dict[str, Set[Interface]] = defaultdict(set)
-        self.enums: Dict[str, Set[Enum]] = defaultdict(set)
-        self.delegates: Dict[str, Set[Delegate]] = defaultdict(set)
-        self.doc_string: str = ''
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = ['from __future__ import annotations']
-        
-        classes_sorted = sorted(self.classes.keys())
-        structs_sorted = sorted(self.structs.keys())
-        interfaces_sorted = sorted(self.interfaces.keys())
-        enums_sorted = sorted(self.enums.keys())
-        delegates_sorted = sorted(self.delegates.keys())
-        
-        all_list = []
-        all_list.extend(classes_sorted)
-        all_list.extend(structs_sorted)
-        all_list.extend(interfaces_sorted)
-        all_list.extend(enums_sorted)
-        all_list.extend(delegates_sorted)
-        
-        if len(self.py_imports) > 0:
-            bases = sorted(set('.'.join(i.split('.')[:-1]) for i in self.py_imports))
-            import_str_list = []
-            for base in bases:
-                prefix = f'{base}.'
-                classes = sorted(set(i[len(prefix):] for i in self.py_imports if i.startswith(prefix)))
-                import_str_list.append(f'from {base} import {", ".join(classes)}')
-            if len(import_str_list) > 0:
-                lines.extend(['', *import_str_list])
-        
-        if len(self.net_imports) > 0:
-            bases = sorted(set('.'.join(i.split('.')[:-1]) for i in self.net_imports))
-            import_str_list = []
-            for base in bases:
-                if base == '':
-                    continue
-                prefix = f'{base}.'
-                classes = sorted(set(s for i in self.net_imports if i.startswith(prefix) and '.' not in (s := i[len(prefix):]) and s not in all_list))
-                if len(classes) == 0:
-                    continue
-                import_str_list.append(f'from {base} import {", ".join(classes)}')
-            if len(import_str_list) > 0:
-                lines.extend(['', *import_str_list])
-        
-        var_types_list = sorted(self.var_types.values(), key=lambda t: t.name)
-        sys_types_list = sorted(self.sys_types.values(), key=lambda t: t.name)
-        special_types_list = sorted(self.special_types.values(), key=lambda t: t.name)
-        
-        if len(var_types_list) > 0 or len(sys_types_list) > 0 or len(special_types_list) > 0:
-            lines.extend(['', '# ---------- Types ---------- #'])
-            
-            if len(var_types_list) > 0:
-                lines.append('')
-                for t in var_types_list:
-                    lines.extend(t.to_lines())
-            
-            if len(sys_types_list) > 0:
-                lines.append('')
-                for t in sys_types_list:
-                    lines.extend(t.to_lines())
-            
-            if len(special_types_list) > 0:
-                lines.append('')
-                for t in special_types_list:
-                    lines.extend(['', *t.to_lines(), ''])
-        
-        lines.append('')
-        lines.append('')
-        
-        if len(classes_sorted) > 0:
-            lines.extend(['# ---------- Classes ---------- #'])
-            for class_name in classes_sorted:
-                for i in sorted(self.classes[class_name], key=lambda c: str(c), reverse=True):
-                    lines.extend(['', *i.to_lines(), ''])
-        else:
-            lines.append('# No Classes')
-        
-        lines.append('')
-        
-        if len(structs_sorted) > 0:
-            lines.extend(['# ---------- Structs ---------- #'])
-            for struct_name in structs_sorted:
-                for i in sorted(self.structs[struct_name], key=lambda s: str(s), reverse=True):
-                    lines.extend(['', *i.to_lines(), ''])
-        else:
-            lines.append('# No Structs')
-        
-        lines.append('')
-        
-        if len(interfaces_sorted) > 0:
-            lines.extend(['# ---------- Interfaces ---------- #'])
-            for interface_name in interfaces_sorted:
-                for i in sorted(self.interfaces[interface_name], key=lambda i: str(i), reverse=True):
-                    lines.extend(['', *i.to_lines(), ''])
-        else:
-            lines.append('# No Interfaces')
-        
-        lines.append('')
-        
-        if len(enums_sorted) > 0:
-            lines.extend(['# ---------- Enums ---------- #'])
-            for enum_name in enums_sorted:
-                for i in sorted(self.enums[enum_name], key=lambda e: str(e), reverse=True):
-                    lines.extend(['', *i.to_lines(), ''])
-        else:
-            lines.append('# No Enums')
-        
-        lines.append('')
-        
-        if len(self.delegates) > 0:
-            lines.extend(['# ---------- Delegates ---------- #'])
-            for delegate_name in delegates_sorted:
-                for i in sorted(self.delegates[delegate_name], key=lambda d: str(d), reverse=True):
-                    lines.extend(['', *i.to_lines()])
-        else:
-            lines.append('# No Delegates')
-        
-        lines.append('')
-        
-        if len(all_list) > 0:
-            lines.extend(['__all__ = [', *(f'    {a},' for a in all_list), ']'])
-        else:
-            lines.append('__all__ = []')
-        
-        lines.append('')
-        
-        return lines
+logger = get_logger(__name__)
 
+T = TypeVar("T")
 
-class Class:
-    def __init__(self, name: str):
-        self.name: str = name
-        self.abstract: bool = False
-        self.generic_args: List[VarType] = []
-        self.super_type: Optional[BaseType] = None
-        self.interfaces: List[BaseType] = []
-        self.fields: List[Property] = []
-        self.constructors: List[Constructor] = []
-        self.properties: List[Property] = []
-        self.methods: List[Method] = []
-        self.events: List[Event] = []
-        self.sub_classes: List[Class] = []
-        self.sub_structs: List[Class] = []
-        self.sub_interfaces: List[Interface] = []
-        self.sub_enums: List[Enum] = []
-        self.doc_string: str = ''
-    
-    def __repr__(self) -> str:
-        imports = []
-        if len(self.generic_args) > 0:
-            args = ', '.join(str(a) for a in self.generic_args)
-            if self.abstract:
-                imports.append(f'Protocol[{args}]')
-            else:
-                imports.append(f'Generic[{args}]')
-        elif self.abstract:
-            imports.append('ABC')
-        
-        if self.super_type is not None:
-            imports.append(str(self.super_type))
-        
-        imports.extend(str(i) for i in self.interfaces)
-        
-        import_str = f'({", ".join(imports)})' if len(imports) > 0 else ''
-        
-        return f'class {self.name}{import_str}:'
-    
-    def __hash__(self):
-        return hash(repr(self))
-    
-    def __eq__(self, other):
-        if isinstance(other, Class):
-            return repr(self) == repr(other)
-        return False
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = []
-        
-        imports = []
-        if len(self.generic_args) > 0:
-            args = ', '.join(str(a) for a in self.generic_args)
-            if self.abstract:
-                imports.append(f'Protocol[{args}]')
-            else:
-                imports.append(f'Generic[{args}]')
-        elif self.abstract:
-            imports.append('ABC')
-        
-        if self.super_type is not None:
-            imports.append(str(self.super_type))
-        
-        imports.extend(str(i) for i in self.interfaces)
-        
-        import_str = f'({", ".join(imports)})' if len(imports) > 0 else ''
-        
-        lines.append(f'class {self.name}{import_str}:')
-        
-        if self.doc_string != '' or (
-                len(self.fields) == 0 and
-                len(self.constructors) == 0 and
-                len(self.properties) == 0 and
-                len(self.methods) == 0 and
-                len(self.events) == 0 and
-                len(self.sub_classes) == 0 and
-                len(self.sub_structs) == 0 and
-                len(self.sub_interfaces) == 0 and
-                len(self.sub_enums) == 0
-        ):
-            lines.extend([f'    """{self.doc_string}"""', '    '])
-        
-        if len(self.fields) > 0:
-            lines.append('    # ---------- Fields ---------- #')
-            for field in self.fields:
-                lines.extend(['    ', *(f'    {line}' for line in field.to_lines())])
-        else:
-            lines.append('    # No Fields')
-        
-        lines.append('    ')
-        
-        if len(self.constructors) > 0:
-            lines.append('    # ---------- Constructors ---------- #')
-            for constructor in self.constructors:
-                lines.extend(['    ', *(f'    {line}' for line in constructor.to_lines())])
-        else:
-            lines.append('    # No Constructors')
-        
-        lines.append('    ')
-        
-        if len(self.properties) > 0:
-            lines.append('    # ---------- Properties ---------- #')
-            for property in self.properties:
-                lines.extend(['    ', *(f'    {line}' for line in property.to_lines())])
-        else:
-            lines.append('    # No Properties')
-        
-        lines.append('    ')
-        
-        if len(self.methods) > 0:
-            lines.append('    # ---------- Methods ---------- #')
-            for method in self.methods:
-                lines.extend(['    ', *(f'    {line}' for line in method.to_lines())])
-        else:
-            lines.append('    # No Methods')
-        
-        lines.append('    ')
-        
-        if len(self.events) > 0:
-            lines.append('    # ---------- Events ---------- #')
-            for event in self.events:
-                lines.extend(['    ', *(f'    {line}' for line in event.to_lines())])
-        else:
-            lines.append('    # No Events')
-        
-        lines.append('    ')
-        
-        if len(self.sub_classes) > 0:
-            lines.append('    ')
-            lines.append('    # ---------- Sub Classes ---------- #')
-            for clazz in self.sub_classes:
-                lines.extend(['    ', *(f'    {line}' for line in clazz.to_lines()), '    '])
-        else:
-            lines.append('    # No Sub Classes')
-        
-        lines.append('    ')
-        
-        if len(self.sub_structs) > 0:
-            lines.append('    # ---------- Sub Structs ---------- #')
-            for struct in self.sub_structs:
-                lines.extend(['    ', *(f'    {line}' for line in struct.to_lines()), '    '])
-        else:
-            lines.append('    # No Sub Structs')
-        
-        lines.append('    ')
-        
-        if len(self.sub_interfaces) > 0:
-            lines.extend(['    # ---------- Sub Interfaces ---------- #'])
-            for interface in self.sub_structs:
-                lines.extend(['    ', *(f'    {line}' for line in interface.to_lines()), '    '])
-        else:
-            lines.extend(['    # No Sub Interfaces'])
-        
-        lines.append('    ')
-        
-        if len(self.sub_enums) > 0:
-            lines.extend(['    # ---------- Sub Enums ---------- #'])
-            for enum in self.sub_enums:
-                lines.extend(['    ', *(f'    {line}' for line in enum.to_lines()), '    '])
-        else:
-            lines.append('    # No Sub Enums')
-        
-        return lines
-
-
-class Interface:
-    def __init__(self, name: str):
-        self.name: str = name
-        self.generic_args: List[VarType] = []
-        self.super_classes: List[BaseType] = []
-        self.properties: List[Property] = []
-        self.methods: List[Method] = []
-        self.events: List[Event] = []
-        self.doc_string: str = ''
-    
-    def __repr__(self) -> str:
-        type_args = ''
-        if len(self.generic_args) > 0:
-            type_args = f'[{", ".join(str(t) for t in self.generic_args)}]'
-        
-        super_types = ''
-        if len(self.super_classes) > 0:
-            super_types = f', '.join(str(b) for b in self.super_classes)
-            super_types = f', {super_types}'
-        
-        return f'class {self.name}(Protocol{type_args}{super_types}):'
-    
-    def __hash__(self):
-        return hash(repr(self))
-    
-    def __eq__(self, other):
-        if isinstance(other, Interface):
-            return repr(self) == repr(other)
-        return False
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = []
-        
-        type_args = ''
-        if len(self.generic_args) > 0:
-            type_args = f'[{", ".join(str(t) for t in self.generic_args)}]'
-        
-        super_types = ''
-        if len(self.super_classes) > 0:
-            super_types = f', '.join(str(b) for b in self.super_classes)
-            super_types = f', {super_types}'
-        
-        lines.append(f'class {self.name}(Protocol{type_args}{super_types}):')
-        
-        if self.doc_string != '' or (len(self.properties) == 0 and len(self.methods) == 0 and len(self.events) == 0):
-            lines.extend([f'    """{self.doc_string}"""', '    '])
-        
-        if len(self.properties) > 0:
-            lines.extend(['    # ---------- Properties ---------- #'])
-            for property in self.properties:
-                lines.extend(['    ', *(f'    {line}' for line in property.to_lines())])
-        else:
-            lines.append('    # No Properties')
-        
-        lines.append('    ')
-        
-        if len(self.methods) > 0:
-            lines.extend(['    # ---------- Methods ---------- #'])
-            for method in self.methods:
-                lines.extend(['    ', *(f'    {line}' for line in method.to_lines())])
-        else:
-            lines.append('    # No Methods')
-        
-        lines.append('    ')
-        
-        if len(self.events) > 0:
-            lines.extend(['    # ---------- Events ---------- #'])
-            for event in self.events:
-                lines.extend(['    ', *(f'    {line}' for line in event.to_lines())])
-        else:
-            lines.append('    # No Events')
-        
-        return lines
-
-
-class Enum:
-    def __init__(self, name: str):
-        self.name: str = name
-        self.fields: List[EnumField] = []
-        self.doc_string: str = ''
-
-    def __repr__(self) -> str:
-        return f'class {self.name}(Enum):'
-
-    def __hash__(self):
-        return hash(repr(self))
-
-    def __eq__(self, other):
-        if isinstance(other, Enum):
-            return repr(self) == repr(other)
-        return False
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = [f'class {self.name}(Enum):']
-        
-        if self.doc_string != '' or len(self.fields) == 0:
-            lines.extend([f'    """{self.doc_string}"""', '    '])
-        
-        if len(self.fields) > 0:
-            previous_doc = False
-            for field in self.fields:
-                if previous_doc:
-                    lines.append('    ')
-                lines.extend(f'    {line}' for line in field.to_lines())
-                previous_doc = field.doc_string != ''
-        
-        return lines
-
-
-class Delegate:
-    def __init__(self, name: str):
-        self.name = name
-        self.input_types: List[BaseType] = []
-        self.return_type: Optional[BaseType] = None
-        self.doc_string: str = ''
-
-    def __repr__(self) -> str:
-        input_types = ', '.join(str(t) for t in self.input_types)
-    
-        return_type = 'None'
-        if self.return_type is not None:
-            return_type = str(self.return_type)
-    
-        return f'{self.name} = Callable[[{input_types}], {return_type}]'
-
-    def __hash__(self):
-        return hash(repr(self))
-
-    def __eq__(self, other):
-        if isinstance(other, Delegate):
-            return repr(self) == repr(other)
-        return False
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = []
-        
-        input_types = ', '.join(str(t) for t in self.input_types)
-        
-        return_type = 'None'
-        if self.return_type is not None:
-            return_type = str(self.return_type)
-        
-        lines.append(f'{self.name} = Callable[[{input_types}], {return_type}]')
-        
-        if self.doc_string != '':
-            lines.append(f'"""{self.doc_string}"""')
-        
-        return lines
+JsonType = Union[NoneType, int, float, str, Sequence, Mapping]
 
 
 @dataclass
-class EnumField:
+class CAssembly:
     name: str
-    type: BaseType
-    value: Any
-    doc_string: str
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = []
-        
-        name = self.name
-        if name in reserved_python_names:
-            name = f'#{self.name}'
-        
-        # lines.append(f'{name}: {self.type} = {self.value}')
-        lines.append(f'{name} = {self.value}')
-        
-        if self.doc_string != '':
-            lines.append(f'"""{self.doc_string}"""')
-        
-        return lines
+    version: str
+    culture: str
+    public_key_token: str
+    namespaces: Dict[str, CNamespace] = field(default_factory=dict)
 
 
 @dataclass
-class Constructor:
-    parameters: List[Parameter]
-    overload: bool = False
-    doc_string: str = ''
-    
+class CNamespace:
+    name: str
+    classes: Dict[str, CClass] = field(default_factory=dict)
+    structs: Dict[str, CStruct] = field(default_factory=dict)
+    interfaces: Dict[str, CInterface] = field(default_factory=dict)
+    enums: Dict[str, CEnum] = field(default_factory=dict)
+    delegates: Dict[str, CDelegate] = field(default_factory=dict)
+
+
+@dataclass
+class CTypeDefinition(ABC):
+    name: str
+    namespace: Optional[str]
+
+    def to_json(self) -> JsonType:
+        pass
+
+    @classmethod
+    def from_json(cls: Type[T], json: JsonType) -> T:
+        pass
+
+    @classmethod
+    def from_info(cls: Type[T], info: TypeInfo) -> T:
+        if info.IsValueType:
+            if info.IsEnum:
+                return CEnum.from_info(info)
+            return CStruct.from_info(info)
+        if info.IsInterface:
+            return CInterface.from_info(info)
+        if (
+            info.IsSubclassOf(Delegate) or info.IsSubclassOf(MulticastDelegate)
+        ) and info not in (Delegate, MulticastDelegate):
+            return CDelegate.from_info(info)
+        if info.IsClass:
+            return CClass.from_info(info)
+
+
+@dataclass
+class CClass(CTypeDefinition):
+    abstract: bool
+    generic_args: Sequence[CType]
+    super_class: CType
+    interfaces: Sequence[CType]
+    fields: Mapping[str, CField]
+    constructors: Mapping[str, CConstructor]
+    properties: Mapping[str, CProperty]
+    methods: Mapping[str, CMethod]
+    events: Mapping[str, CEvent]
+
     def __str__(self) -> str:
-        return f'__init__({", ".join(["self"] + list(map(str, self.parameters)))})'
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = []
-        
-        if self.overload:
-            lines.append('@overload')
-        
-        lines.append(f'def __init__({", ".join(["self", *map(str, self.parameters)])}):{" ..." if self.doc_string == "" else ""}')
-        
-        if self.doc_string != '':
-            if len(self.parameters) > 0:
-                lines.extend([f'    """{self.doc_string}', '    '])
-                for param in self.parameters:
-                    lines.append(f'    :param {param.name}: {param.doc_string}')
-                lines.append(f'    """')
-            else:
-                lines.append(f'    """{self.doc_string}"""')
-        
-        return lines
+        name: str = self.name
+        if self.namespace is not None:
+            name = f"{self.namespace}.{name}"
+        # TODO - Handle generic
+        return name
+
+    def to_json(self) -> JsonType:
+        return {
+            "name": self.name,
+            "namespace": self.namespace,
+            "abstract": self.abstract,
+            "generic_args": tuple(map(CType.to_json, self.generic_args)),
+            "super_class": CType.to_json(self.super_class),
+            "interfaces": tuple(map(CType.to_json, self.interfaces)),
+            "fields": {k: CField.to_json(v) for k, v in self.fields.items()},
+            "constructors": {k: CConstructor.to_json(v) for k, v in self.constructors.items()},
+            "properties": {k: CProperty.to_json(v) for k, v in self.properties.items()},
+            "methods": {k: CMethod.to_json(v) for k, v in self.methods.items()},
+            "events": {k: CEvent.to_json(v) for k, v in self.events.items()},
+        }
+
+    @classmethod
+    def from_json(cls: Type[T], json: JsonType) -> T:
+        return cls(
+            name=json["name"],
+            namespace=json["namespace"],
+            abstract=json["abstract"],
+            generic_args=tuple(map(CType.from_json, json["generic_args"])),
+            super_class=CType.from_json(json["super_class"]),
+            interfaces=tuple(map(CType.from_json, json["interfaces"])),
+            fields={k: CField.from_json(v) for k, v in json["fields"].items()},
+            constructors={k: CConstructor.from_json(v) for k, v in json["constructors"].items()},
+            properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
+            methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
+            events={k: CEvent.from_json(v) for k, v in json["events"].items()},
+        )
+
+    @classmethod
+    def from_info(cls: Type[T], info: TypeInfo) -> T:
+        logger.info(f'Processing {cls.__name__} "{info.Namespace}.{info.Name}"')
+
+        generic_args: List[CType] = list(map(CType.from_info, info.GetGenericArguments()))
+        super_class: CType = CType.from_info(info.BaseType)
+        interfaces: List[CType] = list(map(CType.from_info, info.GetInterfaces()))
+
+        fields: List[CField] = CField.get(info)
+        constructors: List[CConstructor] = CConstructor.get(info)
+        properties: List[CProperty] = CProperty.get(info)
+        methods: List[CMethod] = CMethod.get(info)
+
+        dunder_methods: Mapping[str, Tuple[str, bool]] = {
+            # Arithmetic
+            "op_Addition": ("__add__", True),
+            "op_Subtraction": ("__sub__", True),
+            "op_Multiply": ("__mul__", True),
+            "op_Division": ("__truediv__", True),
+            "op_Modulus": ("__mod__", True),
+            "op_UnaryNegation": ("__neg__", True),
+            "op_UnaryPlus": ("__pos__", True),
+            # "op_Increment": "",
+            # "op_Decrement": "",
+            # Bitwise
+            "op_BitwiseAnd": ("__and__", True),
+            "op_BitwiseOr": ("__or__", True),
+            "op_ExclusiveOr": ("__xor__", True),
+            "op_LeftShift": ("__lshift__", True),
+            "op_RightShift": ("__rshift__", True),
+            "op_OnesComplement": ("__invert__", True),
+            # "op_UnsignedRightShift": "",
+            # Comparison
+            "op_Equality": ("__eq__", True),
+            "op_Inequality": ("__ne__", True),
+            "op_LessThanOrEqual": ("__le__", True),
+            "op_GreaterThanOrEqual": ("__ge__", True),
+            "op_LessThan": ("__lt__", True),
+            "op_GreaterThan": ("__gt__", True),
+            # Other
+            # "op_Implicit": ""
+            # Collections
+            "get_Item": ("__getitem__", False),
+            "set_Item": ("__setitem__", False),
+        }
+        # Remove -> __delitem__
+        for method in tuple(methods):
+            if method.name in dunder_methods:
+                new_name, remove_param = dunder_methods[method.name]
+                method: CMethod = copy.deepcopy(method)
+                method.name = new_name
+                if remove_param:
+                    method.parameters = method.parameters[1:]
+                method.static = False
+                methods.append(method)
+        for interface in interfaces:
+            if len(interface.inner) > 0:
+                if interface.name == "IEnumerable":
+                    method = CMethod(
+                        name="__iter__",
+                        declaring_type=CType.from_info(info),
+                        parameters=tuple(),
+                        returns=(
+                            CType("Iterator", "typing", copy.deepcopy(interface.inner), False),
+                        ),
+                        static=False,
+                        overload=False,
+                    )
+                    methods.append(method)
+                elif interface.name == "ICollection":
+                    method = CMethod(
+                        name="__len__",
+                        declaring_type=CType.from_info(info),
+                        parameters=tuple(),
+                        returns=(CType("int", None, tuple(), False),),
+                        static=False,
+                        overload=False,
+                    )
+                    methods.append(method)
+                    method = CMethod(
+                        name="__contains__",
+                        declaring_type=CType.from_info(info),
+                        parameters=(
+                            CParameter("value", copy.deepcopy(interface.inner[0]), False, False),
+                        ),
+                        returns=(CType("bool", None, tuple(), False),),
+                        static=False,
+                        overload=False,
+                    )
+                    methods.append(method)
+
+        methods = sorted(methods)
+        # TODO - Sorting methods
+
+        # TODO - event_info.DeclaringType == info
+        events: Sequence[CEvent] = tuple(map(CEvent.from_info, info.GetEvents()))
+
+        # TODO - Nested things
+        # nested_type_obj: System.Type
+        # for nested_type_obj in class_obj.GetNestedTypes():
+        #     if nested_type_obj.IsValueType:
+        #         if nested_type_obj.IsEnum:
+        #             clazz.sub_enums.append(_process_enum(namespace, nested_type_obj))
+        #             continue
+        #         clazz.sub_structs.append(_process_class(namespace, nested_type_obj))
+        #         continue
+        #     if nested_type_obj.IsInterface:
+        #         clazz.sub_interfaces.append(_process_interface(namespace, nested_type_obj))
+        #         continue
+        #     if nested_type_obj.IsClass:
+        #         clazz.sub_classes.append(_process_class(namespace, nested_type_obj))
+        #         continue
+
+        return cls(
+            name=make_python_name(info.Name),
+            namespace=info.Namespace,
+            abstract=info.IsAbstract,
+            generic_args=generic_args,
+            super_class=super_class,
+            interfaces=interfaces,
+            fields={str(f): f for f in fields if f is not None},
+            constructors={str(c): c for c in constructors if c is not None},
+            properties={str(p): p for p in properties if p is not None},
+            methods={str(m): m for m in methods if m is not None},
+            events={str(e): e for e in events if e is not None},
+        )
 
 
 @dataclass
-class Property:
+class CStruct(CClass):
+    pass
+
+
+@dataclass
+class CInterface(CTypeDefinition):
+    abstract: bool
+    generic_args: Sequence[CType]
+    super_class: CType
+    properties: Mapping[str, CProperty]
+    methods: Mapping[str, CMethod]
+    # events: Mapping[str, CEvent]
+    dunder_methods: Mapping[str, CMethod]
+
+    def to_json(self) -> JsonType:
+        pass
+
+    @classmethod
+    def from_json(cls: Type[T], json: JsonType) -> T:
+        pass
+
+    @classmethod
+    def from_info(cls: Type[T], info: TypeInfo) -> T:
+        logger.info(f'Processing {cls.__name__} "{info.Namespace}.{info.Name}"')
+
+        # generic_args: Sequence[CType] = tuple(map(CType.from_info, info.GetGenericArguments()))
+        # super_class: CType = CType.from_info(info.BaseType)
+        # interfaces: Sequence[CType] = tuple(map(CType.from_info, info.GetInterfaces()))
+        # fields: Sequence[CField] = tuple(map(CField.from_info, CField.get_fields(info)))
+        # constructors: Sequence[CConstructor] = tuple(
+        #     map(CConstructor.from_info, info.GetConstructors())
+        # )
+        # properties: Sequence[CProperty] = tuple(
+        #     map(CProperty.from_info, CProperty.get_properties(info))
+        # )
+        # methods: Sequence[CMethod] = tuple(map(CMethod.from_info, CMethod.get_methods(info)))
+        #
+        # dunder_methods: Dict[str, CMethod] = {}
+        # supported_methods: Mapping[str, Tuple[str, bool]] = {
+        #     # Arithmetic
+        #     "op_Addition": ("__add__", True),
+        #     "op_Subtraction": ("__sub__", True),
+        #     "op_Multiply": ("__mul__", True),
+        #     "op_Division": ("__truediv__", True),
+        #     "op_Modulus": ("__mod__", True),
+        #     "op_UnaryNegation": ("__neg__", True),
+        #     "op_UnaryPlus": ("__pos__", True),
+        #     # "op_Increment": "",
+        #     # "op_Decrement": "",
+        #     # Bitwise
+        #     "op_BitwiseAnd": ("__and__", True),
+        #     "op_BitwiseOr": ("__or__", True),
+        #     "op_ExclusiveOr": ("__xor__", True),
+        #     "op_LeftShift": ("__lshift__", True),
+        #     "op_RightShift": ("__rshift__", True),
+        #     "op_OnesComplement": ("__invert__", True),
+        #     # "op_UnsignedRightShift": "",
+        #     # Comparison
+        #     "op_Equality": ("__eq__", True),
+        #     "op_Inequality": ("__ne__", True),
+        #     "op_LessThanOrEqual": ("__le__", True),
+        #     "op_GreaterThanOrEqual": ("__ge__", True),
+        #     "op_LessThan": ("__lt__", True),
+        #     "op_GreaterThan": ("__gt__", True),
+        #     # Other
+        #     # "op_Implicit": ""
+        #     # Collections
+        #     "get_Item": ("__getitem__", False),
+        #     "set_Item": ("__setitem__", False),
+        # }
+        # # Remove -> __delitem__
+        # for method in methods:
+        #     if method.name in supported_methods:
+        #         new_name, remove_param = supported_methods[method.name]
+        #         method: CMethod = copy.deepcopy(method)
+        #         method.name = new_name
+        #         if remove_param:
+        #             method.parameters = method.parameters[1:]
+        #         method.static = False
+        #         dunder_methods[str(method)] = method
+        # for interface in interfaces:
+        #     if len(interface.inner) > 0:
+        #         if interface.name == "IEnumerable":
+        #             method = CMethod(
+        #                 name="__iter__",
+        #                 declaring_type=CType.from_info(info),
+        #                 parameters=tuple(),
+        #                 returns=(
+        #                     CType("Iterator", "typing", copy.deepcopy(interface.inner), False),
+        #                 ),
+        #                 static=False,
+        #                 overload=False,
+        #             )
+        #             dunder_methods[str(method)] = method
+        #         elif interface.name == "ICollection":
+        #             method = CMethod(
+        #                 name="__len__",
+        #                 declaring_type=CType.from_info(info),
+        #                 parameters=tuple(),
+        #                 returns=(CType("int", None, tuple(), False),),
+        #                 static=False,
+        #                 overload=False,
+        #             )
+        #             dunder_methods[str(method)] = method
+        #             method = CMethod(
+        #                 name="__contains__",
+        #                 declaring_type=CType.from_info(info),
+        #                 parameters=(
+        #                     CParameter("value", copy.deepcopy(interface.inner[0]), False, False),
+        #                 ),
+        #                 returns=(CType("bool", None, tuple(), False),),
+        #                 static=False,
+        #                 overload=False,
+        #             )
+        #             dunder_methods[str(method)] = method
+        #
+        # # TODO - Culling/Sorting methods
+        #
+        # # TODO - Events
+        # # event_info: EventInfo
+        # # for event_info in class_obj.GetEvents():
+        # #     if event_info.DeclaringType == class_obj:
+        # #         clazz.events.append(_process_event(namespace, event_info))
+        # # clazz.events.sort(key=lambda e: e.name)
+        #
+        # # TODO - Nested things
+        # # nested_type_obj: System.Type
+        # # for nested_type_obj in class_obj.GetNestedTypes():
+        # #     if nested_type_obj.IsValueType:
+        # #         if nested_type_obj.IsEnum:
+        # #             clazz.sub_enums.append(_process_enum(namespace, nested_type_obj))
+        # #             continue
+        # #         clazz.sub_structs.append(_process_class(namespace, nested_type_obj))
+        # #         continue
+        # #     if nested_type_obj.IsInterface:
+        # #         clazz.sub_interfaces.append(_process_interface(namespace, nested_type_obj))
+        # #         continue
+        # #     if nested_type_obj.IsClass:
+        # #         clazz.sub_classes.append(_process_class(namespace, nested_type_obj))
+        # #         continue
+        #
+        # return cls(
+        #     name=make_python_name(info.Name),
+        #     namespace=info.Namespace,
+        #     abstract=info.IsAbstract,
+        #     generic_args=generic_args,
+        #     super_class=super_class,
+        #     interfaces=interfaces,
+        #     fields={str(f): f for f in fields if f is not None},
+        #     constructors={str(c): c for c in constructors if c is not None},
+        #     properties={str(p): p for p in properties if p is not None},
+        #     methods={
+        #         str(m): m
+        #         for m in methods
+        #         if m is not None and not m.name.startswith("get_") and not m.name.startswith("set_")
+        #     },
+        #     dunder_methods=dunder_methods,
+        # )
+
+
+@dataclass
+class CEnum(CTypeDefinition):
+    fields: Sequence[str]
+
+    def to_json(self) -> JsonType:
+        return {
+            "name": self.name,
+            "namespace": self.namespace,
+            "fields": self.fields,
+        }
+
+    @classmethod
+    def from_json(cls: Type[T], json: JsonType) -> T:
+        return cls(
+            name=json["name"],
+            namespace=json["namespace"],
+            fields=tuple(json["fields"]),
+        )
+
+    @classmethod
+    def from_info(cls: Type[T], info: TypeInfo) -> T:
+        logger.info(f'Processing {cls.__name__} "{info.Namespace}.{info.Name}"')
+        return cls(
+            name=make_python_name(info.Name),
+            namespace=info.Namespace,
+            fields=tuple(info.GetEnumNames()),
+        )
+
+
+@dataclass
+class CDelegate(CTypeDefinition):
+    def to_json(self) -> JsonType:
+        pass
+
+    @classmethod
+    def from_json(cls: Type[T], json: JsonType) -> T:
+        pass
+
+    @classmethod
+    def from_info(cls: Type[T], info: TypeInfo) -> T:
+        logger.info(f'Processing {cls.__name__} "{info.Namespace}.{info.Name}"')
+
+
+@dataclass
+class CType:
     name: str
-    type: BaseType
+    namespace: Optional[str]
+    inner: Sequence[CType]
+    is_generic: bool
+
+    def __str__(self) -> str:
+        name: str = ("$" if self.is_generic else "") + self.name
+        if self.namespace is not None:
+            name = f"{self.namespace}.{name}"
+        if len(self.inner) > 0:
+            name = f"{name}[{', '.join(map(str, self.inner))}]"
+        return name
+
+    def to_json(self) -> JsonType:
+        return str(self)
+
+    @classmethod
+    def from_json(cls, json: JsonType) -> CType:
+        match: re.Match = re.match(r"(\w+(?:\.\w+)+)\.(\$?\w+)(?:\[(.*)])?", json)
+        name: str = match.group(2)
+        inner: Sequence[CType] = tuple()
+        if (inner_str := match.group(3)) is not None:
+            inner = tuple(map(CType.from_json, inner_str.split(", ")))
+        return cls(
+            name=name.replace("$", ""),
+            namespace=match.group(1),
+            inner=inner,
+            is_generic="$" in name,
+        )
+
+    @classmethod
+    def from_info(cls, info: TypeInfo) -> CType:
+        return cls(
+            name=make_python_name(info.Name),
+            namespace=info.Namespace,
+            inner=tuple(map(CType.from_info, info.GetGenericArguments())),
+            is_generic=info.IsGenericParameter,
+        )
+
+
+@dataclass
+class CField:
+    name: str
+    declaring_type: CType
+    returns: CType
+    static: bool
+
+    def __str__(self) -> str:
+        return f"{self.declaring_type}.{self.name}"
+
+    def to_json(self) -> JsonType:
+        return {
+            "name": self.name,
+            "declaring_type": CType.to_json(self.declaring_type),
+            "returns": CType.to_json(self.returns),
+            "static": self.static,
+        }
+
+    @classmethod
+    def from_json(cls, json: JsonType) -> CField:
+        return cls(
+            name=json["name"],
+            declaring_type=CType.from_json(json["declaring_type"]),
+            returns=CType.from_json(json["returns"]),
+            static=json["static"],
+        )
+
+    @classmethod
+    def from_info(cls, info: FieldInfo) -> CField:
+        return cls(
+            name=make_python_name(info.Name),
+            declaring_type=CType.from_info(info.DeclaringType),
+            returns=CType.from_info(info.FieldType),
+            static=info.IsStatic,
+        )
+
+    @classmethod
+    def get(cls, type: TypeInfo, exclude_static: bool = False) -> List[CField]:
+        def check(obj: CField) -> str:
+            return obj.name
+
+        found: List[CField] = []
+        if type.BaseType is not None:
+            found.extend(cls.get(type.BaseType, exclude_static=True))
+        for interface in type.GetInterfaces():
+            found.extend(cls.get(interface, exclude_static=True))
+
+        check_list: Sequence[str] = tuple(map(check, found))
+        info: MethodInfo
+        for info in type.GetFields():
+            if info.IsStatic and exclude_static:
+                continue
+            parsed = cls.from_info(info)
+            if check(parsed) in check_list:
+                continue
+            found.append(parsed)
+        return found
+
+
+@dataclass
+class CConstructor:
+    declaring_type: CType
+    parameters: Sequence[CParameter]
+
+    def __str__(self) -> str:
+        param_types: str = ", ".join(str(p.type) for p in self.parameters)
+        return f"{self.declaring_type}.__init__({param_types})"
+
+    def to_json(self) -> JsonType:
+        return {
+            "declaring_type": CType.to_json(self.declaring_type),
+            "parameters": tuple(map(CParameter.to_json, self.parameters)),
+        }
+
+    @classmethod
+    def from_json(cls, info: JsonType) -> CConstructor:
+        return cls(
+            declaring_type=CType.from_json(info["declaring_type"]),
+            parameters=tuple(map(CParameter.from_json, info["parameters"])),
+        )
+
+    @classmethod
+    def from_info(cls, info: ConstructorInfo) -> CConstructor:
+        return cls(
+            declaring_type=CType.from_info(info.DeclaringType),
+            parameters=tuple(map(CParameter.from_info, info.GetParameters())),
+        )
+
+    @classmethod
+    def get(cls, type: TypeInfo) -> List[CConstructor]:
+        return list(map(CConstructor.from_info, type.GetConstructors()))
+
+
+@dataclass
+class CProperty:
+    name: str
+    declaring_type: CType
+    type: CType
     setter: bool
     static: bool
-    doc_string: str
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = []
-        
-        if self.static:
-            lines.append('@staticmethod')
-        
-        lines.append(f'@{self.name}.setter' if self.setter else '@property')
-        
-        args = ', '.join(([] if self.static else ['self']) + ([f'value: {self.type}'] if self.setter else []))
-        
-        lines.append(f'def {self.name}({args}) -> {"None" if self.setter else self.type}:{" ..." if self.doc_string == "" else ""}')
-        
-        if self.doc_string != '':
-            lines.append(f'    """{self.doc_string}"""')
-        
-        return lines
 
-
-@dataclass
-class ItemProperty(Property):
-    def __init__(self, key_type: BaseType, value_type: BaseType, setter: bool, doc_string: str = ''):
-        super().__init__('Item', value_type, setter, False, doc_string)
-        self.key_type: BaseType = key_type
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = []
-        
-        if self.setter:
-            lines.append(f'def __setitem__(self, key: {self.key_type}, value: {self.type}) -> None:{" ..." if self.doc_string == "" else ""}')
-        else:
-            lines.append(f'def __getitem__(self, key: {self.key_type}) -> {self.type}:{" ..." if self.doc_string == "" else ""}')
-        
-        if self.doc_string != '':
-            lines.append(f'    """{self.doc_string}"""')
-        
-        return lines
-
-
-@dataclass
-class Method:
-    name: str
-    parameters: Tuple[Parameter, ...]
-    return_types: Tuple[BaseType, ...]
-    static: bool = False
-    overload: bool = False
-    doc_string: str = ''
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = []
-        
-        if self.static:
-            lines.append('@staticmethod')
-        
-        if self.overload:
-            lines.append('@overload')
-        
-        params = ', '.join(([] if self.static else ['self']) + list(map(str, self.parameters)))
-        
-        return_str = ''
-        if len(self.return_types) > 0:
-            if len(self.return_types) == 1:
-                return_str = f' -> {self.return_types[0]}'
-            else:
-                return_str = f' -> Tuple[{", ".join(str(t) for t in self.return_types)}]'
-        
-        lines.append(f'def {self.name}({params}){return_str}:{" ..." if self.doc_string == "" else ""}')
-        
-        if self.doc_string != '':
-            if len(self.parameters) > 0:
-                lines.extend([f'    """{self.doc_string}', '    '])
-                for param in self.parameters:
-                    lines.append(f'    :param {param.name}: {param.doc_string}')
-                lines.append(f'    """')
-            else:
-                lines.append(f'    """{self.doc_string}"""')
-        
-        return lines
-
-
-@dataclass
-class Event:
-    name: str
-    type: BaseType
-    doc_string: str = ''
-    
-    def to_lines(self) -> List[str]:
-        lines: List[str] = [f'{self.name}: EventType[{self.type}] = ...']
-        
-        if self.doc_string != '':
-            lines.append(f'"""{self.doc_string}"""')
-        
-        return lines
-
-
-@dataclass
-class Parameter:
-    name: str
-    type: BaseType
-    default: Optional[str] = None
-    is_out: bool = False
-    doc_string: str = ''
-    
     def __str__(self) -> str:
-        return f'{self.name}: {self.type}{f" = {self.default}" if self.default else ""}'
+        return f"{self.declaring_type}.{self.name}"
+
+    def to_json(self) -> JsonType:
+        return {
+            "name": self.name,
+            "declaring_type": CType.to_json(self.declaring_type),
+            "type": CType.to_json(self.type),
+            "setter": self.setter,
+            "static": self.static,
+        }
+
+    @classmethod
+    def from_json(cls, info: JsonType) -> CProperty:
+        return cls(
+            name=info["name"],
+            declaring_type=CType.from_json(info["declaring_type"]),
+            type=CType.from_json(info["type"]),
+            setter=info["setter"],
+            static=info["static"],
+        )
+
+    @classmethod
+    def from_info(cls, info: PropertyInfo) -> CProperty:
+        get_method: MethodInfo = info.GetGetMethod()
+        set_method: MethodInfo = info.GetSetMethod()
+
+        return cls(
+            name=make_python_name(info.Name),
+            declaring_type=CType.from_info(info.DeclaringType),
+            type=CType.from_info(info.PropertyType),
+            setter=set_method is not None,
+            static=get_method is not None and get_method.IsStatic,
+        )
+
+    @classmethod
+    def get(cls, type: TypeInfo) -> List[CProperty]:
+        def check(obj: CProperty) -> str:
+            return obj.name
+
+        found: List[CProperty] = []
+        if type.BaseType is not None:
+            found.extend(cls.get(type.BaseType))
+        for interface in type.GetInterfaces():
+            found.extend(cls.get(interface))
+
+        check_list: Sequence[str] = tuple(map(check, found))
+        info: PropertyInfo
+        for info in type.GetProperties():
+            parsed = cls.from_info(info)
+            if check(parsed) in check_list:
+                continue
+            found.append(parsed)
+        return found
 
 
-class BaseType:
-    def __init__(self, name: str):
-        self.name = name
-        self.is_ref = False
-        self.is_pointer = False
-    
+@dataclass
+class CMethod:
+    name: str
+    declaring_type: CType
+    parameters: Sequence[CParameter]
+    returns: Sequence[CType]
+    static: bool
+    overload: bool
+
     def __str__(self) -> str:
-        return self.name
-    
-    def __repr__(self) -> str:
-        return self.name
+        param_types: str = ", ".join(str(p.type) for p in self.parameters)
+        return f"{self.declaring_type}.{self.name}({param_types})"
+
+    def to_json(self) -> JsonType:
+        return {
+            "name": self.name,
+            "declaring_type": CType.to_json(self.declaring_type),
+            "parameters": tuple(map(CParameter.to_json, self.parameters)),
+            "returns": tuple(map(CType.to_json, self.returns)),
+            "static": self.static,
+            "overload": self.overload,
+        }
+
+    @classmethod
+    def from_json(cls, json: JsonType) -> CMethod:
+        return cls(
+            name=json["name"],
+            declaring_type=CType.from_json(json["declaring_type"]),
+            parameters=tuple(map(CParameter.from_json, json["parameters"])),
+            returns=tuple(map(CType.from_json, json["returns"])),
+            static=json["static"],
+            overload=json["overload"],
+        )
+
+    @classmethod
+    def from_info(cls, info: MethodInfo) -> CMethod:
+        return_types: List[CType] = [CType.from_info(info.ReturnType)]
+
+        parameters: List[CParameter] = []
+        for parameter_info in info.GetParameters():
+            parameter: CParameter = CParameter.from_info(parameter_info)
+            parameters.append(parameter)
+            if parameter.is_out:
+                return_types.append(copy.deepcopy(parameter.type))
+
+        return cls(
+            name=make_python_name(info.Name),
+            declaring_type=CType.from_info(info.DeclaringType),
+            parameters=parameters,
+            returns=return_types,
+            static=info.IsStatic,
+            overload=False,  # TODO
+        )
+
+    @classmethod
+    def get(cls, type: TypeInfo, exclude_static: bool = False) -> List[CMethod]:
+        def check(obj: CMethod) -> Tuple[str, Sequence[str]]:
+            return obj.name, tuple(map(lambda p: p.type, obj.parameters))
+
+        found: List[CMethod] = []
+        if type.BaseType is not None:
+            found.extend(cls.get(type.BaseType, exclude_static=True))
+        for interface in type.GetInterfaces():
+            found.extend(cls.get(interface, exclude_static=True))
+
+        check_list: Sequence[Tuple[str, Sequence[str]]] = tuple(map(check, found))
+        info: MethodInfo
+        for info in type.GetMethods():
+            if info.IsStatic and exclude_static:
+                continue
+            parsed = cls.from_info(info)
+            if check(parsed) in check_list:
+                continue
+            found.append(parsed)
+        return found
 
 
-class WrappedType(BaseType):
-    def __init__(self, base: BaseType, inner: Tuple[BaseType, ...] = ()):
-        super().__init__(str(base))
-        
-        self.base: BaseType = base
-        self.inner: Tuple[BaseType, ...] = inner
-    
-    def __str__(self) -> str:
-        return str(self.base) + (f'[{", ".join(map(str, self.inner))}]' if len(self.inner) > 0 else '')
+@dataclass
+class CParameter:
+    name: str
+    type: CType
+    has_default: bool
+    is_out: bool
+
+    def to_json(self) -> JsonType:
+        return {
+            "name": self.name,
+            "type": CType.to_json(self.type),
+            "has_default": self.has_default,
+            "is_out": self.is_out,
+        }
+
+    @classmethod
+    def from_json(cls, json: JsonType) -> CParameter:
+        return cls(
+            name=json["name"],
+            type=CType.from_json(json["type"]),
+            has_default=json["has_default"],
+            is_out=json["is_out"],
+        )
+
+    @classmethod
+    def from_info(cls, info: ParameterInfo) -> CParameter:
+        return cls(
+            name=make_python_name(info.Name),
+            type=CType.from_info(info.ParameterType),
+            has_default=info.HasDefaultValue,
+            is_out=info.IsOut,
+        )
 
 
-class SpecialType(BaseType):
-    def __init__(self, name: str, value: str):
-        super().__init__(name)
-        self.value = value
-    
-    def to_lines(self) -> List[str]:
-        return [self.__str__()]
+@dataclass
+class CEvent:
+    name: str
+    declaring_type: CType
+    type: CType
 
+    def to_json(self) -> JsonType:
+        return {
+            "name": self.name,
+            "declaring_type": CType.to_json(self.declaring_type),
+            "type": CType.to_json(self.type),
+        }
 
-class SystemType(SpecialType):
-    def __init__(self, name: str, value: str):
-        super().__init__(name, value)
-    
-    def to_lines(self) -> List[str]:
-        return [f'{self.name} = {self.value}']
+    @classmethod
+    def from_json(cls, json: JsonType) -> CEvent:
+        return cls(
+            name=json["name"],
+            declaring_type=CType.from_json(json["declaring_type"]),
+            type=CType.from_json(json["type"]),
+        )
 
-
-class EventType(SpecialType):
-    def __init__(self):
-        super().__init__('EventType', '')
-    
-    def to_lines(self) -> List[str]:
-        return [
-            'class EventType(Generic[T]):',
-            '    def __iadd__(self, other: T): ...',
-            '    ',
-            '    def __isub__(self, other: T): ...',
-        ]
-
-
-class VarType(BaseType):
-    def __init__(self, name: str, bounds: Tuple[BaseType, ...] = ()):
-        super().__init__(name)
-        self.bounds: Tuple[BaseType, ...] = bounds
-    
-    def to_lines(self) -> List[str]:
-        bound = ''
-        if len(self.bounds) > 0:
-            if len(self.bounds) == 1:
-                bound = f', bound={self.bounds[0]}'
-            else:
-                bound = f', bound=Union[{", ".join(str(b) for b in self.bounds)}]'
-        return [f'{self.name} = TypeVar(\'{self.name}\'{bound})']
+    @classmethod
+    def from_info(cls, info: EventInfo) -> CEvent:
+        return cls(
+            name=make_python_name(info.Name),
+            declaring_type=CType.from_info(info.DeclaringType),
+            type=CType.from_info(info.EventHandlerType),
+        )
