@@ -130,14 +130,12 @@ class TestCClass(unittest.TestCase):
                     (CParameter("obj", CType("Object", "System", (), False), False, False),),
                     (CType("Boolean", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.Object.GetHashCode()": CMethod(
                     "GetHashCode",
                     CType("Object", "System", (), False),
                     (),
                     (CType("Int32", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.Object.GetType()": CMethod(
@@ -146,7 +144,6 @@ class TestCClass(unittest.TestCase):
                     (),
                     (CType("Type", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.Random.Next()": CMethod(
                     "Next",
@@ -154,14 +151,12 @@ class TestCClass(unittest.TestCase):
                     (),
                     (CType("Int32", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.Random.Next(System.Int32)": CMethod(
                     "Next",
                     CType("Random", "System", (), False),
                     (CParameter("maxValue", CType("Int32", "System", (), False), False, False),),
                     (CType("Int32", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.Random.Next(System.Int32, System.Int32)": CMethod(
@@ -173,14 +168,12 @@ class TestCClass(unittest.TestCase):
                     ),
                     (CType("Int32", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.Random.NextBytes(System.Byte)": CMethod(
                     "NextBytes",
                     CType("Random", "System", (), False),
                     (CParameter("buffer", CType("Byte", "System", (), False), False, False),),
                     (CType("Void", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.Random.NextDouble()": CMethod(
@@ -189,14 +182,12 @@ class TestCClass(unittest.TestCase):
                     (),
                     (CType("Double", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.Object.ToString()": CMethod(
                     "ToString",
                     CType("Object", "System", (), False),
                     (),
                     (CType("String", "System", (), False),),
-                    False,
                     False,
                 ),
             },
@@ -245,7 +236,6 @@ class TestCClass(unittest.TestCase):
                         ),
                         "returns": ("System.Int32",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.Object.Equals(System.Object)": {
                         "name": "Equals",
@@ -260,7 +250,6 @@ class TestCClass(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.Nullable.Equals(System.Nullable[System.$T], System.Nullable[System.$T])": {
                         "name": "Equals",
@@ -281,7 +270,6 @@ class TestCClass(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.Object.GetHashCode()": {
                         "name": "GetHashCode",
@@ -289,7 +277,6 @@ class TestCClass(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.Int32",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.Object.GetType()": {
                         "name": "GetType",
@@ -297,7 +284,6 @@ class TestCClass(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.Type",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.Nullable.GetUnderlyingType(System.Type)": {
                         "name": "GetUnderlyingType",
@@ -312,7 +298,6 @@ class TestCClass(unittest.TestCase):
                         ),
                         "returns": ("System.Type",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.Object.ToString()": {
                         "name": "ToString",
@@ -320,7 +305,6 @@ class TestCClass(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                 },
                 "dunder_methods": {},
@@ -453,14 +437,12 @@ class TestCStruct(unittest.TestCase):
                     (CParameter("other", CType("Int32", "System", (), False), False, False),),
                     (CType("Int32", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.IComparable.CompareTo(System.Object)": CMethod(
                     "CompareTo",
                     CType("IComparable", "System", (), False),
                     (CParameter("obj", CType("Object", "System", (), False), False, False),),
                     (CType("Int32", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.IEquatable[System.Int32].Equals(System.Int32)": CMethod(
@@ -469,14 +451,12 @@ class TestCStruct(unittest.TestCase):
                     (CParameter("other", CType("Int32", "System", (), False), False, False),),
                     (CType("Boolean", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.Object.Equals(System.Object)": CMethod(
                     "Equals",
                     CType("Object", "System", (), False),
                     (CParameter("obj", CType("Object", "System", (), False), False, False),),
                     (CType("Boolean", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.Object.GetHashCode()": CMethod(
@@ -485,14 +465,12 @@ class TestCStruct(unittest.TestCase):
                     (),
                     (CType("Int32", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.Object.GetType()": CMethod(
                     "GetType",
                     CType("Object", "System", (), False),
                     (),
                     (CType("Type", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.IConvertible.GetTypeCode()": CMethod(
@@ -501,7 +479,6 @@ class TestCStruct(unittest.TestCase):
                     (),
                     (CType("TypeCode", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.Int32.Parse(System.String)": CMethod(
                     "Parse",
@@ -509,7 +486,6 @@ class TestCStruct(unittest.TestCase):
                     (CParameter("s", CType("String", "System", (), False), False, False),),
                     (CType("Int32", "System", (), False),),
                     True,
-                    False,
                 ),
                 "System.Int32.Parse(System.String, System.Globalization.NumberStyles)": CMethod(
                     "Parse",
@@ -525,7 +501,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("Int32", "System", (), False),),
                     True,
-                    False,
                 ),
                 "System.Int32.Parse(System.String, System.IFormatProvider)": CMethod(
                     "Parse",
@@ -538,7 +513,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("Int32", "System", (), False),),
                     True,
-                    False,
                 ),
                 "System.Int32.Parse(System.String, System.Globalization.NumberStyles, System.IFormatProvider)": CMethod(
                     "Parse",
@@ -557,7 +531,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("Int32", "System", (), False),),
                     True,
-                    False,
                 ),
                 "System.IConvertible.ToBoolean(System.IFormatProvider)": CMethod(
                     "ToBoolean",
@@ -568,7 +541,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                     ),
                     (CType("Boolean", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.IConvertible.ToByte(System.IFormatProvider)": CMethod(
@@ -581,7 +553,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("Byte", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.IConvertible.ToChar(System.IFormatProvider)": CMethod(
                     "ToChar",
@@ -592,7 +563,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                     ),
                     (CType("Char", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.IConvertible.ToDateTime(System.IFormatProvider)": CMethod(
@@ -605,7 +575,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("DateTime", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.IConvertible.ToDecimal(System.IFormatProvider)": CMethod(
                     "ToDecimal",
@@ -616,7 +585,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                     ),
                     (CType("Decimal", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.IConvertible.ToDouble(System.IFormatProvider)": CMethod(
@@ -629,7 +597,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("Double", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.IConvertible.ToInt16(System.IFormatProvider)": CMethod(
                     "ToInt16",
@@ -640,7 +607,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                     ),
                     (CType("Int16", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.IConvertible.ToInt32(System.IFormatProvider)": CMethod(
@@ -653,7 +619,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("Int32", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.IConvertible.ToInt64(System.IFormatProvider)": CMethod(
                     "ToInt64",
@@ -664,7 +629,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                     ),
                     (CType("Int64", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.IConvertible.ToSByte(System.IFormatProvider)": CMethod(
@@ -677,7 +641,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("SByte", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.IConvertible.ToSingle(System.IFormatProvider)": CMethod(
                     "ToSingle",
@@ -689,14 +652,12 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("Single", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.Object.ToString()": CMethod(
                     "ToString",
                     CType("Object", "System", (), False),
                     (),
                     (CType("String", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.IConvertible.ToString(System.IFormatProvider)": CMethod(
@@ -708,7 +669,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                     ),
                     (CType("String", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.Int32.ToString(System.String)": CMethod(
@@ -723,7 +683,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                     ),
                     (CType("String", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.IFormattable.ToString(System.String, System.IFormatProvider)": CMethod(
@@ -745,7 +704,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("String", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.IConvertible.ToType(System.Type, System.IFormatProvider)": CMethod(
                     "ToType",
@@ -760,7 +718,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("Object", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.IConvertible.ToUInt16(System.IFormatProvider)": CMethod(
                     "ToUInt16",
@@ -771,7 +728,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                     ),
                     (CType("UInt16", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.IConvertible.ToUInt32(System.IFormatProvider)": CMethod(
@@ -784,7 +740,6 @@ class TestCStruct(unittest.TestCase):
                     ),
                     (CType("UInt32", "System", (), False),),
                     False,
-                    False,
                 ),
                 "System.IConvertible.ToUInt64(System.IFormatProvider)": CMethod(
                     "ToUInt64",
@@ -795,7 +750,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                     ),
                     (CType("UInt64", "System", (), False),),
-                    False,
                     False,
                 ),
                 "System.Int32.TryParse(System.String, System.Globalization.NumberStyles, System.IFormatProvider, System.Int32)": CMethod(
@@ -824,7 +778,6 @@ class TestCStruct(unittest.TestCase):
                         CType("Int32", "System", (), False),
                     ),
                     True,
-                    False,
                 ),
                 "System.Int32.TryParse(System.String, System.Int32)": CMethod(
                     "TryParse",
@@ -838,7 +791,6 @@ class TestCStruct(unittest.TestCase):
                         CType("Int32", "System", (), False),
                     ),
                     True,
-                    False,
                 ),
             },
             dunder_methods={},
@@ -1441,7 +1393,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.AddDays(System.Double)": {
                         "name": "AddDays",
@@ -1456,7 +1407,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.AddHours(System.Double)": {
                         "name": "AddHours",
@@ -1471,7 +1421,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.AddMilliseconds(System.Double)": {
                         "name": "AddMilliseconds",
@@ -1486,7 +1435,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.AddMinutes(System.Double)": {
                         "name": "AddMinutes",
@@ -1501,7 +1449,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.AddMonths(System.Int32)": {
                         "name": "AddMonths",
@@ -1516,7 +1463,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.AddSeconds(System.Double)": {
                         "name": "AddSeconds",
@@ -1531,7 +1477,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.AddTicks(System.Int64)": {
                         "name": "AddTicks",
@@ -1546,7 +1491,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.AddYears(System.Int32)": {
                         "name": "AddYears",
@@ -1561,7 +1505,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.Compare(System.DateTime, System.DateTime)": {
                         "name": "Compare",
@@ -1582,7 +1525,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Int32",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.IComparable[System.DateTime].CompareTo(System.DateTime)": {
                         "name": "CompareTo",
@@ -1597,7 +1539,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Int32",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IComparable.CompareTo(System.Object)": {
                         "name": "CompareTo",
@@ -1612,7 +1553,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Int32",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.DaysInMonth(System.Int32, System.Int32)": {
                         "name": "DaysInMonth",
@@ -1633,7 +1573,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Int32",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.IEquatable[System.DateTime].Equals(System.DateTime)": {
                         "name": "Equals",
@@ -1648,7 +1587,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.Object.Equals(System.Object)": {
                         "name": "Equals",
@@ -1663,7 +1601,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.Equals(System.DateTime, System.DateTime)": {
                         "name": "Equals",
@@ -1684,7 +1621,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.FromBinary(System.Int64)": {
                         "name": "FromBinary",
@@ -1699,7 +1635,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.FromFileTime(System.Int64)": {
                         "name": "FromFileTime",
@@ -1714,7 +1649,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.FromFileTimeUtc(System.Int64)": {
                         "name": "FromFileTimeUtc",
@@ -1729,7 +1663,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.FromOADate(System.Double)": {
                         "name": "FromOADate",
@@ -1744,7 +1677,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.GetDateTimeFormats()": {
                         "name": "GetDateTimeFormats",
@@ -1752,7 +1684,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.GetDateTimeFormats(System.Char)": {
                         "name": "GetDateTimeFormats",
@@ -1767,7 +1698,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.GetDateTimeFormats(System.IFormatProvider)": {
                         "name": "GetDateTimeFormats",
@@ -1782,7 +1712,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.GetDateTimeFormats(System.Char, System.IFormatProvider)": {
                         "name": "GetDateTimeFormats",
@@ -1803,7 +1732,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.Object.GetHashCode()": {
                         "name": "GetHashCode",
@@ -1811,7 +1739,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.Int32",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)": {
                         "name": "GetObjectData",
@@ -1832,7 +1759,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Void",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.Object.GetType()": {
                         "name": "GetType",
@@ -1840,7 +1766,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.Type",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.GetTypeCode()": {
                         "name": "GetTypeCode",
@@ -1848,7 +1773,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.TypeCode",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.IsDaylightSavingTime()": {
                         "name": "IsDaylightSavingTime",
@@ -1856,7 +1780,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.IsLeapYear(System.Int32)": {
                         "name": "IsLeapYear",
@@ -1871,7 +1794,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.Parse(System.String)": {
                         "name": "Parse",
@@ -1886,7 +1808,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.Parse(System.String, System.IFormatProvider)": {
                         "name": "Parse",
@@ -1907,7 +1828,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.Parse(System.String, System.IFormatProvider, System.Globalization.DateTimeStyles)": {
                         "name": "Parse",
@@ -1934,7 +1854,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.ParseExact(System.String, System.String, System.IFormatProvider)": {
                         "name": "ParseExact",
@@ -1961,7 +1880,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.ParseExact(System.String, System.String, System.IFormatProvider, System.Globalization.DateTimeStyles)": {
                         "name": "ParseExact",
@@ -1994,7 +1912,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.SpecifyKind(System.DateTime, System.DateTimeKind)": {
                         "name": "SpecifyKind",
@@ -2015,7 +1932,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.Subtract(System.DateTime)": {
                         "name": "Subtract",
@@ -2030,7 +1946,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.TimeSpan",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.Subtract(System.TimeSpan)": {
                         "name": "Subtract",
@@ -2045,7 +1960,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToBinary()": {
                         "name": "ToBinary",
@@ -2053,7 +1967,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.Int64",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToBoolean(System.IFormatProvider)": {
                         "name": "ToBoolean",
@@ -2068,7 +1981,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToByte(System.IFormatProvider)": {
                         "name": "ToByte",
@@ -2083,7 +1995,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Byte",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToChar(System.IFormatProvider)": {
                         "name": "ToChar",
@@ -2098,7 +2009,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Char",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToDateTime(System.IFormatProvider)": {
                         "name": "ToDateTime",
@@ -2113,7 +2023,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToDecimal(System.IFormatProvider)": {
                         "name": "ToDecimal",
@@ -2128,7 +2037,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Decimal",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToDouble(System.IFormatProvider)": {
                         "name": "ToDouble",
@@ -2143,7 +2051,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Double",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToFileTime()": {
                         "name": "ToFileTime",
@@ -2151,7 +2058,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.Int64",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToFileTimeUtc()": {
                         "name": "ToFileTimeUtc",
@@ -2159,7 +2065,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.Int64",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToInt16(System.IFormatProvider)": {
                         "name": "ToInt16",
@@ -2174,7 +2079,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Int16",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToInt32(System.IFormatProvider)": {
                         "name": "ToInt32",
@@ -2189,7 +2093,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Int32",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToInt64(System.IFormatProvider)": {
                         "name": "ToInt64",
@@ -2204,7 +2107,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Int64",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToLocalTime()": {
                         "name": "ToLocalTime",
@@ -2212,7 +2114,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToLongDateString()": {
                         "name": "ToLongDateString",
@@ -2220,7 +2121,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToLongTimeString()": {
                         "name": "ToLongTimeString",
@@ -2228,7 +2128,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToOADate()": {
                         "name": "ToOADate",
@@ -2236,7 +2135,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.Double",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToSByte(System.IFormatProvider)": {
                         "name": "ToSByte",
@@ -2251,7 +2149,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.SByte",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToShortDateString()": {
                         "name": "ToShortDateString",
@@ -2259,7 +2156,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToShortTimeString()": {
                         "name": "ToShortTimeString",
@@ -2267,7 +2163,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToSingle(System.IFormatProvider)": {
                         "name": "ToSingle",
@@ -2282,7 +2177,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Single",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.Object.ToString()": {
                         "name": "ToString",
@@ -2290,7 +2184,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToString(System.IFormatProvider)": {
                         "name": "ToString",
@@ -2305,7 +2198,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToString(System.String)": {
                         "name": "ToString",
@@ -2320,7 +2212,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IFormattable.ToString(System.String, System.IFormatProvider)": {
                         "name": "ToString",
@@ -2341,7 +2232,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToType(System.Type, System.IFormatProvider)": {
                         "name": "ToType",
@@ -2362,7 +2252,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Object",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToUInt16(System.IFormatProvider)": {
                         "name": "ToUInt16",
@@ -2377,7 +2266,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.UInt16",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToUInt32(System.IFormatProvider)": {
                         "name": "ToUInt32",
@@ -2392,7 +2280,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.UInt32",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.IConvertible.ToUInt64(System.IFormatProvider)": {
                         "name": "ToUInt64",
@@ -2407,7 +2294,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.UInt64",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.ToUniversalTime()": {
                         "name": "ToUniversalTime",
@@ -2415,7 +2301,6 @@ class TestCStruct(unittest.TestCase):
                         "parameters": (),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.TryParse(System.String, System.DateTime)": {
                         "name": "TryParse",
@@ -2436,7 +2321,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean", "System.DateTime"),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.TryParse(System.String, System.IFormatProvider, System.Globalization.DateTimeStyles, System.DateTime)": {
                         "name": "TryParse",
@@ -2469,7 +2353,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean", "System.DateTime"),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.TryParseExact(System.String, System.String, System.IFormatProvider, System.Globalization.DateTimeStyles, System.DateTime)": {
                         "name": "TryParseExact",
@@ -2508,7 +2391,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean", "System.DateTime"),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.op_Addition(System.DateTime, System.TimeSpan)": {
                         "name": "op_Addition",
@@ -2529,7 +2411,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.op_Equality(System.DateTime, System.DateTime)": {
                         "name": "op_Equality",
@@ -2550,7 +2431,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.op_GreaterThan(System.DateTime, System.DateTime)": {
                         "name": "op_GreaterThan",
@@ -2571,7 +2451,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.op_GreaterThanOrEqual(System.DateTime, System.DateTime)": {
                         "name": "op_GreaterThanOrEqual",
@@ -2592,7 +2471,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.op_Inequality(System.DateTime, System.DateTime)": {
                         "name": "op_Inequality",
@@ -2613,7 +2491,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.op_LessThan(System.DateTime, System.DateTime)": {
                         "name": "op_LessThan",
@@ -2634,7 +2511,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.op_LessThanOrEqual(System.DateTime, System.DateTime)": {
                         "name": "op_LessThanOrEqual",
@@ -2655,7 +2531,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.op_Subtraction(System.DateTime, System.DateTime)": {
                         "name": "op_Subtraction",
@@ -2676,7 +2551,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.TimeSpan",),
                         "static": True,
-                        "overload": False,
                     },
                     "System.DateTime.op_Subtraction(System.DateTime, System.TimeSpan)": {
                         "name": "op_Subtraction",
@@ -2697,7 +2571,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": True,
-                        "overload": False,
                     },
                 },
                 "dunder_methods": {
@@ -2714,7 +2587,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.__eq__(System.DateTime)": {
                         "name": "__eq__",
@@ -2729,7 +2601,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.__ge__(System.DateTime)": {
                         "name": "__ge__",
@@ -2744,7 +2615,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.__gt__(System.DateTime)": {
                         "name": "__gt__",
@@ -2759,7 +2629,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.__le__(System.DateTime)": {
                         "name": "__le__",
@@ -2774,7 +2643,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.__lt__(System.DateTime)": {
                         "name": "__lt__",
@@ -2789,7 +2657,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.__ne__(System.DateTime)": {
                         "name": "__ne__",
@@ -2804,7 +2671,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.Boolean",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.__sub__(System.DateTime)": {
                         "name": "__sub__",
@@ -2819,7 +2685,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.TimeSpan",),
                         "static": False,
-                        "overload": False,
                     },
                     "System.DateTime.__sub__(System.TimeSpan)": {
                         "name": "__sub__",
@@ -2834,7 +2699,6 @@ class TestCStruct(unittest.TestCase):
                         ),
                         "returns": ("System.DateTime",),
                         "static": False,
-                        "overload": False,
                     },
                 },
                 "events": {},
@@ -2933,7 +2797,6 @@ class TestCInterface(unittest.TestCase):
                     (CParameter("other", CType("T", "System", (), True), False, False),),
                     (CType("Boolean", "System", (), False),),
                     False,
-                    False,
                 ),
             },
             dunder_methods={},
@@ -2976,7 +2839,6 @@ class TestCInterface(unittest.TestCase):
                         ),
                         "returns": ("System.String",),
                         "static": False,
-                        "overload": False,
                     }
                 },
                 "dunder_methods": {},
@@ -3953,7 +3815,6 @@ class TestCMethod(unittest.TestCase):
         parameters: Sequence[CParameter],
         returns: Sequence[CType],
         static: bool,
-        overload: bool,
     ) -> None:
         self.assertIsNotNone(method)
         self.assertIsInstance(method, CMethod)
@@ -3962,7 +3823,6 @@ class TestCMethod(unittest.TestCase):
         self.assertSequenceEqual(method.parameters, parameters)
         self.assertSequenceEqual(method.returns, returns)
         self.assertEqual(method.static, static)
-        self.assertEqual(method.overload, overload)
 
     def test_from_info(self) -> None:
         type_info: TypeInfo = clr.GetClrType(Object)
@@ -3978,7 +3838,6 @@ class TestCMethod(unittest.TestCase):
             parameters=(),
             returns=(CType("Int32", "System", (), False),),
             static=False,
-            overload=False,
         )
 
         method_info: PropertyInfo = type_info.GetMethod("ReferenceEquals")
@@ -3994,7 +3853,6 @@ class TestCMethod(unittest.TestCase):
             ),
             returns=(CType("Boolean", "System", (), False),),
             static=True,
-            overload=False,
         )
 
     def test_json(self) -> None:
@@ -4013,7 +3871,6 @@ class TestCMethod(unittest.TestCase):
                 "parameters": (),
                 "returns": ("System.Type",),
                 "static": False,
-                "overload": False,
             },
         )
 

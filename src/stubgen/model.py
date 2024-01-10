@@ -734,7 +734,6 @@ class CMethod:
     parameters: Sequence[CParameter]
     returns: Sequence[CType]
     static: bool
-    overload: bool
 
     def __str__(self) -> str:
         param_types: str = ", ".join(str(p.type) for p in self.parameters)
@@ -767,7 +766,6 @@ class CMethod:
             "parameters": tuple(map(CParameter.to_json, self.parameters)),
             "returns": tuple(map(CType.to_json, self.returns)),
             "static": self.static,
-            "overload": self.overload,
         }
 
     @classmethod
@@ -778,7 +776,6 @@ class CMethod:
             parameters=tuple(map(CParameter.from_json, json["parameters"])),
             returns=tuple(map(CType.from_json, json["returns"])),
             static=json["static"],
-            overload=json["overload"],
         )
 
     @classmethod
@@ -798,7 +795,6 @@ class CMethod:
             parameters=tuple(parameters),
             returns=tuple(return_types),
             static=info.IsStatic,
-            overload=False,  # TODO
         )
 
     @classmethod
@@ -901,7 +897,6 @@ class CMethod:
                     parameters=tuple(),
                     returns=(CType("Iterator", "typing", (return_type,), False),),
                     static=False,
-                    overload=False,
                 )
                 dunder_methods.add(method)
             elif interface.name == "ICollection":
@@ -911,7 +906,6 @@ class CMethod:
                     parameters=tuple(),
                     returns=(CType("int", None, tuple(), False),),
                     static=False,
-                    overload=False,
                 )
                 dunder_methods.add(method)
 
@@ -926,7 +920,6 @@ class CMethod:
                     parameters=(CParameter("value", return_type, False, False),),
                     returns=(CType("bool", None, tuple(), False),),
                     static=False,
-                    overload=False,
                 )
                 dunder_methods.add(method)
         return tuple(sorted(dunder_methods))
