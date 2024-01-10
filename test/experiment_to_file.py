@@ -1,7 +1,13 @@
 from __future__ import annotations
 
+import json
 import sys
+from collections import defaultdict
+from pathlib import Path
+from typing import Dict
+from typing import List
 from typing import Mapping
+from typing import Sequence
 from typing import Type
 
 import clr
@@ -25,46 +31,14 @@ sys.path.append("C:/Projects/pythonnet-stubs/dlls")
 def main() -> None:
     import pprint
 
-    raw_assembly: Assembly = clr.AddReference("OSIsoft.AFSDK")
-    asm_name: AssemblyName = raw_assembly.GetName()
+    # raw_assembly: Assembly = clr.AddReference("OSIsoft.AFSDK")
+    raw_assembly: Assembly = clr.AddReference("mscorlib")
 
-    assembly = CAssembly(
-        name=asm_name.Name,
-        version=asm_name.Version.ToString(),
-        culture=asm_name.CultureName,
-        public_key_token="".join(map(lambda b: f"{b:0x}", asm_name.GetPublicKeyToken())),
-    )
+    assembly = CAssembly.extract(raw_assembly)
+    # json = assembly.to_json()
 
-    info: TypeInfo
-    for info in raw_assembly.GetTypes():
-        if info.Namespace is None or info.IsNested:
-            continue
-        wrapper: CTypeDefinition = CTypeDefinition.from_info(info)
-        if wrapper is None:
-            print("Unable to parse type:", info.FullName)
-            continue
-
-        if wrapper.namespace not in assembly.namespaces:
-            assembly.namespaces[wrapper.namespace] = CNamespace(wrapper.namespace)
-        namespace: CNamespace = assembly.namespaces[wrapper.namespace]
-
-        if wrapper.__class__ == CClass and isinstance(wrapper, CClass):
-            namespace.classes[wrapper.name] = wrapper
-        elif wrapper.__class__ == CStruct and isinstance(wrapper, CStruct):
-            namespace.structs[wrapper.name] = wrapper
-        elif wrapper.__class__ == CInterface and isinstance(wrapper, CInterface):
-            namespace.interfaces[wrapper.name] = wrapper
-        elif wrapper.__class__ == CEnum and isinstance(wrapper, CEnum):
-            namespace.enums[wrapper.name] = wrapper
-        elif wrapper.__class__ == CDelegate and isinstance(wrapper, CDelegate):
-            namespace.delegates[wrapper.name] = wrapper
-
-        # # if info.Name == "IAFNamedCollection":
-        # type = CType.from_info(info)
-        # # if type.name == "IAFNamedCollection":
-        # #     type = TypeWrapper.from_info(info)
-        # json = CType.from_json(type.to_json())
-        # print(type, type == json)
+    file: Path = Path("out.json")
+    file.write_text(json.dumps(assembly.to_json(), indent=4))
     print("DONE")
 
 
