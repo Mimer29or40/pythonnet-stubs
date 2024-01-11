@@ -31,8 +31,8 @@ sys.path.append("C:/Projects/pythonnet-stubs/dlls")
 def main() -> None:
     import pprint
 
-    # raw_assembly: Assembly = clr.AddReference("OSIsoft.AFSDK")
-    raw_assembly: Assembly = clr.AddReference("mscorlib")
+    raw_assembly: Assembly = clr.AddReference("OSIsoft.AFSDK")
+    # raw_assembly: Assembly = clr.AddReference("mscorlib")
 
     assembly = CAssembly.extract(raw_assembly)
     # json = assembly.to_json()
