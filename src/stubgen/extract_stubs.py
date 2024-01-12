@@ -54,7 +54,7 @@ def extract_stubs(assembly_name: str, output_dir: Path, overwrite: bool) -> Unio
     namespaces: Sequence[CNamespace] = tuple(
         CNamespace(
             name=namespace,
-            types={str(t): t.to_json() for t in sorted(type_list)},
+            types={str(t): t for t in sorted(type_list)},
         )
         for namespace, type_list in type_lists.items()
     )

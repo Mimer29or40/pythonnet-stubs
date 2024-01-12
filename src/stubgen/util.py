@@ -5,6 +5,9 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Callable
 
+import clr
+from System import Nullable
+from System import Type
 from stubgen.log import get_logger
 
 logger = get_logger(__name__)
@@ -35,6 +38,14 @@ def time_function(func=None, *, log_func: Callable = logger.debug):
         return wrapper
 
     return decorator if func is None else decorator(func)
+
+
+def make_ref_type(type: Type) -> Type:
+    return clr.Reference[type]
+
+
+def make_nullable(type: Type) -> "Nullable[Type]":
+    return Nullable[type]
 
 
 def make_python_name(string: str) -> str:

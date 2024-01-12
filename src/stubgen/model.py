@@ -20,6 +20,7 @@ from typing import Union
 
 from System import Delegate
 from System import MulticastDelegate
+from System import Nullable
 from System.Reflection import ConstructorInfo
 from System.Reflection import EventInfo
 from System.Reflection import FieldInfo
@@ -235,10 +236,12 @@ class CStruct(CClass):
 class CInterface(CTypeDefinition):
     generic_args: Sequence[CType]
     super_class: CType
+    # TODO - fields: Mapping[str, CField]
     properties: Mapping[str, CProperty]
     methods: Mapping[str, CMethod]
     dunder_methods: Mapping[str, CMethod]
     events: Mapping[str, CEvent]
+    # TODO - nested: Mapping[str, CTypeDefinition]
 
     def __str__(self) -> str:
         name: str = self.name
@@ -389,12 +392,20 @@ class CDelegate(CTypeDefinition):
 @dataclass(frozen=True)
 class CType:
     name: str
-    namespace: Optional[str]
-    inner: Sequence[CType]
-    is_generic: bool
+    namespace: Optional[str] = None
+    inner: Sequence[CType] = tuple()
+    reference: bool = False
+    generic: bool = False
+    nullable: bool = False
 
     def __str__(self) -> str:
-        name: str = ("$" if self.is_generic else "") + self.name
+        name: str = self.name
+        if self.reference:
+            name = "*" + name
+        if self.generic:
+            name = "$" + name
+        if self.nullable:
+            name = "?" + name
         if self.namespace is not None:
             name = f"{self.namespace}.{name}"
         if len(self.inner) > 0:
@@ -402,24 +413,16 @@ class CType:
         return name
 
     def __lt__(self, other: CType) -> bool:
-        if self.name == other.name:
-            return CType.compare(self.inner, other.inner) < 0
-        return self.name < other.name
+        return CType.compare(self, other) < 0
 
     def __le__(self, other: CType) -> bool:
-        if self.name == other.name:
-            return CType.compare(self.inner, other.inner) <= 0
-        return self.name <= other.name
+        return CType.compare(self, other) <= 0
 
     def __gt__(self, other: CType) -> bool:
-        if self.name == other.name:
-            return CType.compare(self.inner, other.inner) > 0
-        return self.name > other.name
+        return CType.compare(self, other) > 0
 
     def __ge__(self, other: CType) -> bool:
-        if self.name == other.name:
-            return CType.compare(self.inner, other.inner) >= 0
-        return self.name >= other.name
+        return CType.compare(self, other) >= 0
 
     def to_json(self) -> JsonType:
         return str(self)
@@ -428,27 +431,36 @@ class CType:
     def from_json(cls, json: JsonType) -> Optional[CType]:
         if json is None:
             return None
-        match: re.Match = re.match(r"(\w+(?:\.\w+)*)\.(\$?\w+)(?:\[(.*)])?", json)
+        match: re.Match = re.match(r"(?:(\w+(?:\.\w+)*)\.)?(\*?\$?\??\w+)(?:\[(.*)])?", json)
         name: str = match.group(2)
         inner: Sequence[CType] = tuple()
         if (inner_str := match.group(3)) is not None:
             inner = tuple(map(CType.from_json, inner_str.split(", ")))
         return cls(
-            name=name.replace("$", ""),
+            name=re.sub(r"[*$?]", "", name),
             namespace=match.group(1),
             inner=inner,
-            is_generic="$" in name,
+            reference="*" in name,
+            generic="$" in name,
+            nullable="?" in name,
         )
 
     @classmethod
     def from_info(cls, info: TypeInfo) -> Optional[CType]:
         if info is None:
             return None
+        nullable: bool = False
+        underlying_type: TypeInfo = Nullable.GetUnderlyingType(info)
+        if underlying_type is not None:
+            info = underlying_type
+            nullable = True
         return cls(
             name=make_python_name(info.Name),
             namespace=info.Namespace,
             inner=tuple(map(CType.from_info, info.GetGenericArguments())),
-            is_generic=info.IsGenericParameter,
+            reference=info.IsByRef,
+            generic=info.IsGenericParameter,
+            nullable=nullable,
         )
 
     @classmethod
@@ -462,7 +474,23 @@ class CType:
         return tuple(dict.fromkeys(found).keys())
 
     @staticmethod
-    def compare(types0: Sequence[CType], types1: Sequence[CType]) -> int:
+    def compare(type0: CType, type1: CType) -> int:
+        if type0.namespace != type1.namespace:
+            return -1 if type0.namespace < type1.namespace else 1
+        if type0.name != type1.name:
+            return -1 if type0.name < type1.name else 1
+        if (inner := CType.compare_seq(type0.inner, type1.inner)) != 0:
+            return inner
+        if type0.reference != type1.reference:
+            return 1 if type0.reference else -1
+        if type0.generic != type1.generic:
+            return 1 if type0.generic else -1
+        if type0.nullable != type1.nullable:
+            return 1 if type0.nullable else -1
+        return 0
+
+    @staticmethod
+    def compare_seq(types0: Sequence[CType], types1: Sequence[CType]) -> int:
         len0: int = len(types0)
         len1: int = len(types1)
         if len0 < len1:
@@ -473,10 +501,8 @@ class CType:
         type0: CType
         type1: CType
         for type0, type1 in zip(types0, types1):
-            if type0 < type1:
-                return -1
-            if type0 > type1:
-                return 1
+            if (compare := CType.compare(type0, type1)) != 0:
+                return compare
         return 0
 
 
@@ -624,6 +650,10 @@ class CField(CMember):
 class CConstructor(CMember):
     parameters: Sequence[CParameter]
 
+    def __init__(self, declaring_type: CType, parameters: Sequence[CParameter]) -> None:
+        super().__init__("__init__", declaring_type)
+        object.__setattr__(self, "parameters", parameters)
+
     def __str__(self) -> str:
         param_types: str = ", ".join(str(p.type) for p in self.parameters)
         return f"{self.declaring_type}.__init__({param_types})"
@@ -651,13 +681,12 @@ class CConstructor(CMember):
         return f"__init__({param_types})", {
             "doc": "",
             "doc_formatted": {},
-            "parameters": {p.name: {"doc": ""} for p in self.parameters},
+            "parameters": {p.name: "" for p in self.parameters},
         }
 
     @classmethod
     def from_json(cls, json: JsonType) -> CConstructor:
         return cls(
-            name="__init__",
             declaring_type=CType.from_json(json["declaring_type"]),
             parameters=tuple(map(CParameter.from_json, json["parameters"])),
         )
@@ -665,7 +694,6 @@ class CConstructor(CMember):
     @classmethod
     def from_info(cls, info: ConstructorInfo) -> CConstructor:
         return cls(
-            name="__init__",
             declaring_type=CType.from_info(info.DeclaringType),
             parameters=tuple(map(CParameter.from_info, info.GetParameters())),
         )
@@ -793,8 +821,9 @@ class CMethod(CMember):
         return f"{self.name}({param_types})", {
             "doc": "",
             "doc_formatted": {},
-            "parameters": {p.name: {"doc": ""} for p in self.parameters},
+            "parameters": {p.name: "" for p in self.parameters},
             "return": "",
+            "exceptions": {},
         }
 
     @classmethod
@@ -860,15 +889,15 @@ class CMethod(CMember):
 
         supported_methods: Mapping[str, Tuple[str, bool]] = {
             # Arithmetic
+            "op_UnaryPlus": ("__pos__", True),
+            "op_UnaryNegation": ("__neg__", True),
+            # "op_Increment": "",
+            # "op_Decrement": "",
             "op_Addition": ("__add__", True),
             "op_Subtraction": ("__sub__", True),
             "op_Multiply": ("__mul__", True),
             "op_Division": ("__truediv__", True),
             "op_Modulus": ("__mod__", True),
-            "op_UnaryNegation": ("__neg__", True),
-            "op_UnaryPlus": ("__pos__", True),
-            # "op_Increment": "",
-            # "op_Decrement": "",
             # Bitwise
             "op_BitwiseAnd": ("__and__", True),
             "op_BitwiseOr": ("__or__", True),
@@ -919,7 +948,7 @@ class CMethod(CMember):
                 if len(interface.inner) > 0:
                     return_type = interface.inner[0]
                 else:
-                    return_type = CType("object", None, (), False)
+                    return_type = CType("object", None)
                 method = CMethod(
                     name="__iter__",
                     declaring_type=CType.from_info(type),
@@ -933,7 +962,7 @@ class CMethod(CMember):
                     name="__len__",
                     declaring_type=CType.from_info(type),
                     parameters=tuple(),
-                    returns=(CType("int", None, tuple(), False),),
+                    returns=(CType("int", None),),
                     static=False,
                 )
                 dunder_methods.add(method)
@@ -942,12 +971,12 @@ class CMethod(CMember):
                 if len(interface.inner) > 0:
                     return_type = interface.inner[0]
                 else:
-                    return_type = CType("object", None, (), False)
+                    return_type = CType("object", None)
                 method = CMethod(
                     name="__contains__",
                     declaring_type=CType.from_info(type),
                     parameters=(CParameter("value", return_type, False, False),),
-                    returns=(CType("bool", None, tuple(), False),),
+                    returns=(CType("bool", None),),
                     static=False,
                 )
                 dunder_methods.add(method)

@@ -38,8 +38,6 @@ from System import UInt32
 from System import UnhandledExceptionEventHandler
 from System import UriBuilder
 from System import UriParser
-from System import ValueType
-from System.Collections import Stack
 from System.Collections.Generic import Dictionary
 from System.Collections.Generic import IEnumerable
 from System.ComponentModel import IComponent
@@ -48,6 +46,7 @@ from System.Net import WebClient
 from System.Reflection import EventInfo
 from System.Reflection import FieldInfo
 from System.Reflection import MethodInfo
+from System.Reflection import ParameterInfo
 from System.Reflection import PropertyInfo
 from System.Reflection import TypeInfo
 
@@ -112,82 +111,82 @@ class TestCClass(unittest.TestCase):
             namespace="System",
             abstract=False,
             generic_args=(),
-            super_class=CType("Object", "System", (), False),
+            super_class=CType("Object", "System"),
             interfaces=(),
             fields={},
             constructors={
-                "System.Random.__init__()": CConstructor(CType("Random", "System", (), False), ()),
+                "System.Random.__init__()": CConstructor(CType("Random", "System"), ()),
                 "System.Random.__init__(System.Int32)": CConstructor(
-                    CType("Random", "System", (), False),
-                    (CParameter("Seed", CType("Int32", "System", (), False), False, False),),
+                    CType("Random", "System"),
+                    (CParameter("Seed", CType("Int32", "System"), False, False),),
                 ),
             },
             properties={},
             methods={
                 "System.Object.Equals(System.Object)": CMethod(
                     "Equals",
-                    CType("Object", "System", (), False),
-                    (CParameter("obj", CType("Object", "System", (), False), False, False),),
-                    (CType("Boolean", "System", (), False),),
+                    CType("Object", "System"),
+                    (CParameter("obj", CType("Object", "System"), False, False),),
+                    (CType("Boolean", "System"),),
                     False,
                 ),
                 "System.Object.GetHashCode()": CMethod(
                     "GetHashCode",
-                    CType("Object", "System", (), False),
+                    CType("Object", "System"),
                     (),
-                    (CType("Int32", "System", (), False),),
+                    (CType("Int32", "System"),),
                     False,
                 ),
                 "System.Object.GetType()": CMethod(
                     "GetType",
-                    CType("Object", "System", (), False),
+                    CType("Object", "System"),
                     (),
-                    (CType("Type", "System", (), False),),
+                    (CType("Type", "System"),),
                     False,
                 ),
                 "System.Random.Next()": CMethod(
                     "Next",
-                    CType("Random", "System", (), False),
+                    CType("Random", "System"),
                     (),
-                    (CType("Int32", "System", (), False),),
+                    (CType("Int32", "System"),),
                     False,
                 ),
                 "System.Random.Next(System.Int32)": CMethod(
                     "Next",
-                    CType("Random", "System", (), False),
-                    (CParameter("maxValue", CType("Int32", "System", (), False), False, False),),
-                    (CType("Int32", "System", (), False),),
+                    CType("Random", "System"),
+                    (CParameter("maxValue", CType("Int32", "System"), False, False),),
+                    (CType("Int32", "System"),),
                     False,
                 ),
                 "System.Random.Next(System.Int32, System.Int32)": CMethod(
                     "Next",
-                    CType("Random", "System", (), False),
+                    CType("Random", "System"),
                     (
-                        CParameter("minValue", CType("Int32", "System", (), False), False, False),
-                        CParameter("maxValue", CType("Int32", "System", (), False), False, False),
+                        CParameter("minValue", CType("Int32", "System"), False, False),
+                        CParameter("maxValue", CType("Int32", "System"), False, False),
                     ),
-                    (CType("Int32", "System", (), False),),
+                    (CType("Int32", "System"),),
                     False,
                 ),
                 "System.Random.NextBytes(System.Byte)": CMethod(
                     "NextBytes",
-                    CType("Random", "System", (), False),
-                    (CParameter("buffer", CType("Byte", "System", (), False), False, False),),
-                    (CType("Void", "System", (), False),),
+                    CType("Random", "System"),
+                    (CParameter("buffer", CType("Byte", "System"), False, False),),
+                    (CType("Void", "System"),),
                     False,
                 ),
                 "System.Random.NextDouble()": CMethod(
                     "NextDouble",
-                    CType("Random", "System", (), False),
+                    CType("Random", "System"),
                     (),
-                    (CType("Double", "System", (), False),),
+                    (CType("Double", "System"),),
                     False,
                 ),
                 "System.Object.ToString()": CMethod(
                     "ToString",
-                    CType("Object", "System", (), False),
+                    CType("Object", "System"),
                     (),
-                    (CType("String", "System", (), False),),
+                    (CType("String", "System"),),
                     False,
                 ),
             },
@@ -406,25 +405,25 @@ class TestCStruct(unittest.TestCase):
             namespace="System",
             abstract=False,
             generic_args=(),
-            super_class=CType("ValueType", "System", (), False),
+            super_class=CType("ValueType", "System"),
             interfaces=(
-                CType("IComparable", "System", (), False),
-                CType("IComparable", "System", (CType("Int32", "System", (), False),), False),
-                CType("IConvertible", "System", (), False),
-                CType("IEquatable", "System", (CType("Int32", "System", (), False),), False),
-                CType("IFormattable", "System", (), False),
+                CType("IComparable", "System"),
+                CType("IComparable", "System", (CType("Int32", "System"),)),
+                CType("IConvertible", "System"),
+                CType("IEquatable", "System", (CType("Int32", "System"),)),
+                CType("IFormattable", "System"),
             ),
             fields={
                 "System.Int32.MaxValue": CField(
                     "MaxValue",
-                    CType("Int32", "System", (), False),
-                    CType("Int32", "System", (), False),
+                    CType("Int32", "System"),
+                    CType("Int32", "System"),
                     True,
                 ),
                 "System.Int32.MinValue": CField(
                     "MinValue",
-                    CType("Int32", "System", (), False),
-                    CType("Int32", "System", (), False),
+                    CType("Int32", "System"),
+                    CType("Int32", "System"),
                     True,
                 ),
             },
@@ -433,330 +432,330 @@ class TestCStruct(unittest.TestCase):
             methods={
                 "System.IComparable[System.Int32].CompareTo(System.Int32)": CMethod(
                     "CompareTo",
-                    CType("IComparable", "System", (CType("Int32", "System", (), False),), False),
-                    (CParameter("other", CType("Int32", "System", (), False), False, False),),
-                    (CType("Int32", "System", (), False),),
+                    CType("IComparable", "System", (CType("Int32", "System"),)),
+                    (CParameter("other", CType("Int32", "System"), False, False),),
+                    (CType("Int32", "System"),),
                     False,
                 ),
                 "System.IComparable.CompareTo(System.Object)": CMethod(
                     "CompareTo",
-                    CType("IComparable", "System", (), False),
-                    (CParameter("obj", CType("Object", "System", (), False), False, False),),
-                    (CType("Int32", "System", (), False),),
+                    CType("IComparable", "System"),
+                    (CParameter("obj", CType("Object", "System"), False, False),),
+                    (CType("Int32", "System"),),
                     False,
                 ),
                 "System.IEquatable[System.Int32].Equals(System.Int32)": CMethod(
                     "Equals",
-                    CType("IEquatable", "System", (CType("Int32", "System", (), False),), False),
-                    (CParameter("other", CType("Int32", "System", (), False), False, False),),
-                    (CType("Boolean", "System", (), False),),
+                    CType("IEquatable", "System", (CType("Int32", "System"),)),
+                    (CParameter("other", CType("Int32", "System"), False, False),),
+                    (CType("Boolean", "System"),),
                     False,
                 ),
                 "System.Object.Equals(System.Object)": CMethod(
                     "Equals",
-                    CType("Object", "System", (), False),
-                    (CParameter("obj", CType("Object", "System", (), False), False, False),),
-                    (CType("Boolean", "System", (), False),),
+                    CType("Object", "System"),
+                    (CParameter("obj", CType("Object", "System"), False, False),),
+                    (CType("Boolean", "System"),),
                     False,
                 ),
                 "System.Object.GetHashCode()": CMethod(
                     "GetHashCode",
-                    CType("Object", "System", (), False),
+                    CType("Object", "System"),
                     (),
-                    (CType("Int32", "System", (), False),),
+                    (CType("Int32", "System"),),
                     False,
                 ),
                 "System.Object.GetType()": CMethod(
                     "GetType",
-                    CType("Object", "System", (), False),
+                    CType("Object", "System"),
                     (),
-                    (CType("Type", "System", (), False),),
+                    (CType("Type", "System"),),
                     False,
                 ),
                 "System.IConvertible.GetTypeCode()": CMethod(
                     "GetTypeCode",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (),
-                    (CType("TypeCode", "System", (), False),),
+                    (CType("TypeCode", "System"),),
                     False,
                 ),
                 "System.Int32.Parse(System.String)": CMethod(
                     "Parse",
-                    CType("Int32", "System", (), False),
-                    (CParameter("s", CType("String", "System", (), False), False, False),),
-                    (CType("Int32", "System", (), False),),
+                    CType("Int32", "System"),
+                    (CParameter("s", CType("String", "System"), False, False),),
+                    (CType("Int32", "System"),),
                     True,
                 ),
                 "System.Int32.Parse(System.String, System.Globalization.NumberStyles)": CMethod(
                     "Parse",
-                    CType("Int32", "System", (), False),
+                    CType("Int32", "System"),
                     (
-                        CParameter("s", CType("String", "System", (), False), False, False),
+                        CParameter("s", CType("String", "System"), False, False),
                         CParameter(
                             "style",
-                            CType("NumberStyles", "System.Globalization", (), False),
+                            CType("NumberStyles", "System.Globalization"),
                             False,
                             False,
                         ),
                     ),
-                    (CType("Int32", "System", (), False),),
+                    (CType("Int32", "System"),),
                     True,
                 ),
                 "System.Int32.Parse(System.String, System.IFormatProvider)": CMethod(
                     "Parse",
-                    CType("Int32", "System", (), False),
+                    CType("Int32", "System"),
                     (
-                        CParameter("s", CType("String", "System", (), False), False, False),
+                        CParameter("s", CType("String", "System"), False, False),
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Int32", "System", (), False),),
+                    (CType("Int32", "System"),),
                     True,
                 ),
                 "System.Int32.Parse(System.String, System.Globalization.NumberStyles, System.IFormatProvider)": CMethod(
                     "Parse",
-                    CType("Int32", "System", (), False),
+                    CType("Int32", "System"),
                     (
-                        CParameter("s", CType("String", "System", (), False), False, False),
+                        CParameter("s", CType("String", "System"), False, False),
                         CParameter(
                             "style",
-                            CType("NumberStyles", "System.Globalization", (), False),
+                            CType("NumberStyles", "System.Globalization"),
                             False,
                             False,
                         ),
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Int32", "System", (), False),),
+                    (CType("Int32", "System"),),
                     True,
                 ),
                 "System.IConvertible.ToBoolean(System.IFormatProvider)": CMethod(
                     "ToBoolean",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Boolean", "System", (), False),),
+                    (CType("Boolean", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToByte(System.IFormatProvider)": CMethod(
                     "ToByte",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Byte", "System", (), False),),
+                    (CType("Byte", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToChar(System.IFormatProvider)": CMethod(
                     "ToChar",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Char", "System", (), False),),
+                    (CType("Char", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToDateTime(System.IFormatProvider)": CMethod(
                     "ToDateTime",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("DateTime", "System", (), False),),
+                    (CType("DateTime", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToDecimal(System.IFormatProvider)": CMethod(
                     "ToDecimal",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Decimal", "System", (), False),),
+                    (CType("Decimal", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToDouble(System.IFormatProvider)": CMethod(
                     "ToDouble",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Double", "System", (), False),),
+                    (CType("Double", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToInt16(System.IFormatProvider)": CMethod(
                     "ToInt16",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Int16", "System", (), False),),
+                    (CType("Int16", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToInt32(System.IFormatProvider)": CMethod(
                     "ToInt32",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Int32", "System", (), False),),
+                    (CType("Int32", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToInt64(System.IFormatProvider)": CMethod(
                     "ToInt64",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Int64", "System", (), False),),
+                    (CType("Int64", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToSByte(System.IFormatProvider)": CMethod(
                     "ToSByte",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("SByte", "System", (), False),),
+                    (CType("SByte", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToSingle(System.IFormatProvider)": CMethod(
                     "ToSingle",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Single", "System", (), False),),
+                    (CType("Single", "System"),),
                     False,
                 ),
                 "System.Object.ToString()": CMethod(
                     "ToString",
-                    CType("Object", "System", (), False),
+                    CType("Object", "System"),
                     (),
-                    (CType("String", "System", (), False),),
+                    (CType("String", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToString(System.IFormatProvider)": CMethod(
                     "ToString",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("String", "System", (), False),),
+                    (CType("String", "System"),),
                     False,
                 ),
                 "System.Int32.ToString(System.String)": CMethod(
                     "ToString",
-                    CType("Int32", "System", (), False),
+                    CType("Int32", "System"),
                     (
                         CParameter(
                             "format",
-                            CType("String", "System", (), False),
+                            CType("String", "System"),
                             False,
                             False,
                         ),
                     ),
-                    (CType("String", "System", (), False),),
+                    (CType("String", "System"),),
                     False,
                 ),
                 "System.IFormattable.ToString(System.String, System.IFormatProvider)": CMethod(
                     "ToString",
-                    CType("IFormattable", "System", (), False),
+                    CType("IFormattable", "System"),
                     (
                         CParameter(
                             "format",
-                            CType("String", "System", (), False),
+                            CType("String", "System"),
                             False,
                             False,
                         ),
                         CParameter(
                             "formatProvider",
-                            CType("IFormatProvider", "System", (), False),
+                            CType("IFormatProvider", "System"),
                             False,
                             False,
                         ),
                     ),
-                    (CType("String", "System", (), False),),
+                    (CType("String", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToType(System.Type, System.IFormatProvider)": CMethod(
                     "ToType",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "conversionType", CType("Type", "System", (), False), False, False
+                            "conversionType", CType("Type", "System"), False, False
                         ),
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("Object", "System", (), False),),
+                    (CType("Object", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToUInt16(System.IFormatProvider)": CMethod(
                     "ToUInt16",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("UInt16", "System", (), False),),
+                    (CType("UInt16", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToUInt32(System.IFormatProvider)": CMethod(
                     "ToUInt32",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("UInt32", "System", (), False),),
+                    (CType("UInt32", "System"),),
                     False,
                 ),
                 "System.IConvertible.ToUInt64(System.IFormatProvider)": CMethod(
                     "ToUInt64",
-                    CType("IConvertible", "System", (), False),
+                    CType("IConvertible", "System"),
                     (
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
                     ),
-                    (CType("UInt64", "System", (), False),),
+                    (CType("UInt64", "System"),),
                     False,
                 ),
                 "System.Int32.TryParse(System.String, System.Globalization.NumberStyles, System.IFormatProvider, System.Int32)": CMethod(
                     "TryParse",
-                    CType("Int32", "System", (), False),
+                    CType("Int32", "System"),
                     (
-                        CParameter("s", CType("String", "System", (), False), False, False),
+                        CParameter("s", CType("String", "System"), False, False),
                         CParameter(
                             "style",
                             CType(
@@ -769,26 +768,26 @@ class TestCStruct(unittest.TestCase):
                             False,
                         ),
                         CParameter(
-                            "provider", CType("IFormatProvider", "System", (), False), False, False
+                            "provider", CType("IFormatProvider", "System"), False, False
                         ),
-                        CParameter("result", CType("Int32", "System", (), False), False, True),
+                        CParameter("result", CType("Int32", "System"), False, True),
                     ),
                     (
-                        CType("Boolean", "System", (), False),
-                        CType("Int32", "System", (), False),
+                        CType("Boolean", "System"),
+                        CType("Int32", "System"),
                     ),
                     True,
                 ),
                 "System.Int32.TryParse(System.String, System.Int32)": CMethod(
                     "TryParse",
-                    CType("Int32", "System", (), False),
+                    CType("Int32", "System"),
                     (
-                        CParameter("s", CType("String", "System", (), False), False, False),
-                        CParameter("result", CType("Int32", "System", (), False), False, True),
+                        CParameter("s", CType("String", "System"), False, False),
+                        CParameter("result", CType("Int32", "System"), False, True),
                     ),
                     (
-                        CType("Boolean", "System", (), False),
-                        CType("Int32", "System", (), False),
+                        CType("Boolean", "System"),
+                        CType("Int32", "System"),
                     ),
                     True,
                 ),
@@ -2793,9 +2792,9 @@ class TestCInterface(unittest.TestCase):
             methods={
                 "System.IEquatable[System.$T].Equals(System.$T)": CMethod(
                     "Equals",
-                    CType("IEquatable", "System", (CType("T", "System", (), True),), False),
+                    CType("IEquatable", "System", (CType("T", "System", (), True),)),
                     (CParameter("other", CType("T", "System", (), True), False, False),),
-                    (CType("Boolean", "System", (), False),),
+                    (CType("Boolean", "System"),),
                     False,
                 ),
             },
@@ -3013,7 +3012,7 @@ class TestCDelegate(unittest.TestCase):
             name="Predicate",
             namespace="System",
             parameters=(CParameter("obj", CType("T", "System", (), True), False, False),),
-            return_type=CType("Boolean", "System", (), False),
+            return_type=CType("Boolean", "System"),
         )
 
         type_info: TypeInfo = clr.GetClrType(Comparison)
@@ -3027,7 +3026,7 @@ class TestCDelegate(unittest.TestCase):
                 CParameter("x", CType("T", "System", (), True), False, False),
                 CParameter("y", CType("T", "System", (), True), False, False),
             ),
-            return_type=CType("Int32", "System", (), False),
+            return_type=CType("Int32", "System"),
         )
 
     def test_json(self) -> None:
@@ -3106,34 +3105,39 @@ class TestCDelegate(unittest.TestCase):
 
 class TestCType(unittest.TestCase):
     def assertCType(
-        self, type: CType, name: str, namespace: str, inner: Sequence[CType], generic: bool
+        self,
+        type: CType,
+        name: str,
+        namespace: str,
+        inner: Sequence[CType],
+        reference: bool,
+        generic: bool,
+        nullable: bool,
     ) -> None:
         self.assertIsNotNone(type)
         self.assertIsInstance(type, CType)
         self.assertEqual(type.name, name)
         self.assertEqual(type.namespace, namespace)
         self.assertSequenceEqual(type.inner, inner)
-        self.assertEqual(type.is_generic, generic)
+        self.assertEqual(type.reference, reference)
+        self.assertEqual(type.generic, generic)
+        self.assertEqual(type.nullable, nullable)
 
-    def test_simple_from_info(self) -> None:
+    def test_from_info_simple(self) -> None:
         type_info: TypeInfo = clr.GetClrType(String)
-        c_type: CType = CType.from_info(type_info)
-
-        self.assertCType(type=c_type, name="String", namespace="System", inner=(), generic=False)
-
-    def test_generic_from_info(self) -> None:
-        type_info: TypeInfo = clr.GetClrType(IEnumerable)
         c_type: CType = CType.from_info(type_info)
 
         self.assertCType(
             type=c_type,
-            name="IEnumerable",
-            namespace="System.Collections.Generic",
-            inner=(CType("T", "System.Collections.Generic", (), True),),
+            name="String",
+            namespace="System",
+            inner=(),
+            reference=False,
             generic=False,
+            nullable=False,
         )
 
-    def test_complex_generic_from_info(self) -> None:
+    def test_from_info_inner(self) -> None:
         type_info: TypeInfo = clr.GetClrType(Dictionary)
         c_type: CType = CType.from_info(type_info)
 
@@ -3142,80 +3146,266 @@ class TestCType(unittest.TestCase):
             name="Dictionary",
             namespace="System.Collections.Generic",
             inner=(
-                CType("TKey", "System.Collections.Generic", (), True),
-                CType("TValue", "System.Collections.Generic", (), True),
+                CType("TKey", "System.Collections.Generic", generic=True),
+                CType("TValue", "System.Collections.Generic", generic=True),
             ),
+            reference=False,
             generic=False,
+            nullable=False,
         )
 
-    def test_simple_json(self) -> None:
-        type_info: TypeInfo = clr.GetClrType(String)
+    def test_from_info_reference(self) -> None:
+        type_info: TypeInfo = clr.GetClrType(Int32).MakeByRefType()
         c_type: CType = CType.from_info(type_info)
-        json: JsonType = c_type.to_json()
 
-        self.assertIsNotNone(json)
-        self.assertIsInstance(json, str)
-        self.assertEqual(json, "System.String")
+        self.assertCType(
+            type=c_type,
+            name="Int32",
+            namespace="System",
+            inner=(),
+            reference=True,
+            generic=False,
+            nullable=False,
+        )
 
-        from_json: CType = CType.from_json(json)
-
-        self.assertEqual(from_json, c_type)
-
-    def test_generic_json(self) -> None:
+    def test_from_info_generic(self) -> None:
         type_info: TypeInfo = clr.GetClrType(IEnumerable)
         c_type: CType = CType.from_info(type_info)
+
+        self.assertCType(
+            type=c_type,
+            name="IEnumerable",
+            namespace="System.Collections.Generic",
+            inner=(CType("T", "System.Collections.Generic", generic=True),),
+            reference=False,
+            generic=False,
+            nullable=False,
+        )
+
+    def test_from_info_nullable(self) -> None:
+        type_info: TypeInfo = clr.GetClrType(Nullable)
+        method_info: MethodInfo = type_info.GetMethod("Compare")
+        parameter_info: ParameterInfo = method_info.GetParameters()[0]
+        c_type: CType = CType.from_info(parameter_info.ParameterType)
+
+        self.assertCType(
+            type=c_type,
+            name="T",
+            namespace="System",
+            inner=(),
+            reference=False,
+            generic=True,
+            nullable=True,
+        )
+
+    def test_json_no_namespace(self) -> None:
+        c_type: CType = CType("String")
         json: JsonType = c_type.to_json()
 
         self.assertIsNotNone(json)
         self.assertIsInstance(json, str)
-        self.assertEqual(
-            json, "System.Collections.Generic.IEnumerable[System.Collections.Generic.$T]"
-        )
+        self.assertEqual(json, "String")
 
         from_json: CType = CType.from_json(json)
 
         self.assertEqual(from_json, c_type)
 
-    def test_complex_generic_json(self) -> None:
-        type_info: TypeInfo = clr.GetClrType(Dictionary)
-        c_type: CType = CType.from_info(type_info)
+    def test_json_simple(self) -> None:
+        c_type: CType = CType("String", "Namespace")
         json: JsonType = c_type.to_json()
 
         self.assertIsNotNone(json)
         self.assertIsInstance(json, str)
-        self.assertEqual(
-            json,
-            (
-                "System.Collections.Generic.Dictionary["
-                "System.Collections.Generic.$TKey, System.Collections.Generic.$TValue"
-                "]"
+        self.assertEqual(json, "Namespace.String")
+
+        from_json: CType = CType.from_json(json)
+
+        self.assertEqual(from_json, c_type)
+
+    def test_json_reference(self) -> None:
+        c_type: CType = CType("T", "Namespace", reference=True)
+        json: JsonType = c_type.to_json()
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, str)
+        self.assertEqual(json, "Namespace.*T")
+
+        from_json: CType = CType.from_json(json)
+
+        self.assertEqual(from_json, c_type)
+
+    def test_json_generic(self) -> None:
+        c_type: CType = CType("T", "Namespace", generic=True)
+        json: JsonType = c_type.to_json()
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, str)
+        self.assertEqual(json, "Namespace.$T")
+
+        from_json: CType = CType.from_json(json)
+
+        self.assertEqual(from_json, c_type)
+
+    def test_json_nullable(self) -> None:
+        c_type: CType = CType("String", "Namespace", nullable=True)
+        json: JsonType = c_type.to_json()
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, str)
+        self.assertEqual(json, "Namespace.?String")
+
+        from_json: CType = CType.from_json(json)
+
+        self.assertEqual(from_json, c_type)
+
+    def test_json_generic_nullable(self) -> None:
+        c_type: CType = CType("String", "Namespace", generic=True, nullable=True)
+        json: JsonType = c_type.to_json()
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, str)
+        self.assertEqual(json, "Namespace.?$String")
+
+        from_json: CType = CType.from_json(json)
+
+        self.assertEqual(from_json, c_type)
+
+    def test_json_inner(self) -> None:
+        c_type: CType = CType(
+            name="Dict",
+            namespace="Namespace",
+            inner=(
+                CType("TKey", "Namespace", generic=True),
+                CType("TValue", "Namespace", generic=True),
             ),
         )
+        json: JsonType = c_type.to_json()
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, str)
+        self.assertEqual(json, "Namespace.Dict[Namespace.$TKey, Namespace.$TValue]")
 
         from_json: CType = CType.from_json(json)
 
         self.assertEqual(from_json, c_type)
 
-    def test_compare(self) -> None:
-        type0: CType = CType.from_info(clr.GetClrType(Dictionary))
-        type1: CType = CType.from_info(clr.GetClrType(String))
-        type2: CType = CType.from_info(clr.GetClrType(ValueType))
-        type3: CType = CType.from_info(clr.GetClrType(Stack))
+    def test_compare_namespace(self) -> None:
+        type0: CType = CType("Type", "NamespaceA")
+        type1: CType = CType("Type", "NamespaceB")
 
         self.assertLess(type0, type1)
+
         self.assertLessEqual(type0, type1)
+
         self.assertLessEqual(type0, type0)
-        self.assertGreater(type2, type3)
-        self.assertGreaterEqual(type2, type3)
-        self.assertGreaterEqual(type2, type2)
+        self.assertLessEqual(type1, type1)
+
+        self.assertGreater(type1, type0)
+
+        self.assertGreaterEqual(type1, type0)
+
+        self.assertGreaterEqual(type0, type0)
+        self.assertGreaterEqual(type1, type1)
+
+    def test_compare_name(self) -> None:
+        type0: CType = CType("A", "Namespace")
+        type1: CType = CType("B", "Namespace")
+
+        self.assertLess(type0, type1)
+
+        self.assertLessEqual(type0, type1)
+
+        self.assertLessEqual(type0, type0)
+        self.assertLessEqual(type1, type1)
+
+        self.assertGreater(type1, type0)
+
+        self.assertGreaterEqual(type1, type0)
+
+        self.assertGreaterEqual(type0, type0)
+        self.assertGreaterEqual(type1, type1)
+
+    def test_compare_inner_len(self) -> None:
+        type0: CType = CType("Type", "Namespace", ())
+        type1: CType = CType("Type", "Namespace", (CType("T", "Namespace"),))
+
+        self.assertLess(type0, type1)
+
+        self.assertLessEqual(type0, type1)
+
+        self.assertLessEqual(type0, type0)
+        self.assertLessEqual(type1, type1)
+
+        self.assertGreater(type1, type0)
+
+        self.assertGreaterEqual(type1, type0)
+
+        self.assertGreaterEqual(type0, type0)
+        self.assertGreaterEqual(type1, type1)
+
+    def test_compare_inner(self) -> None:
+        type0: CType = CType("Type", "Namespace", (CType("A", "Namespace"),))
+        type1: CType = CType("Type", "Namespace", (CType("B", "Namespace"),))
+
+        self.assertLess(type0, type1)
+
+        self.assertLessEqual(type0, type1)
+
+        self.assertLessEqual(type0, type0)
+        self.assertLessEqual(type1, type1)
+
+        self.assertGreater(type1, type0)
+
+        self.assertGreaterEqual(type1, type0)
+
+        self.assertGreaterEqual(type0, type0)
+        self.assertGreaterEqual(type1, type1)
+
+    def test_compare_generic(self) -> None:
+        type0: CType = CType("Type", "Namespace", (CType("T", "Namespace"),), False)
+        type1: CType = CType("Type", "Namespace", (CType("T", "Namespace"),), True)
+
+        self.assertLess(type0, type1)
+
+        self.assertLessEqual(type0, type1)
+
+        self.assertLessEqual(type0, type0)
+        self.assertLessEqual(type1, type1)
+
+        self.assertGreater(type1, type0)
+
+        self.assertGreaterEqual(type1, type0)
+
+        self.assertGreaterEqual(type0, type0)
+        self.assertGreaterEqual(type1, type1)
+
+    def test_compare_nullable(self) -> None:
+        type0: CType = CType("Type", "Namespace", (CType("T", "Namespace"),), False, False)
+        type1: CType = CType("Type", "Namespace", (CType("T", "Namespace"),), False, True)
+
+        self.assertLess(type0, type1)
+
+        self.assertLessEqual(type0, type1)
+
+        self.assertLessEqual(type0, type0)
+        self.assertLessEqual(type1, type1)
+
+        self.assertGreater(type1, type0)
+
+        self.assertGreaterEqual(type1, type0)
+
+        self.assertGreaterEqual(type0, type0)
+        self.assertGreaterEqual(type1, type1)
 
     def test_sorted(self) -> None:
-        type0: CType = CType.from_info(clr.GetClrType(Dictionary))
-        type1: CType = CType.from_info(clr.GetClrType(Stack))
-        type2: CType = CType.from_info(clr.GetClrType(String))
-        type3: CType = CType.from_info(clr.GetClrType(ValueType))
-
-        ordered: Sequence[CType] = (type0, type1, type2, type3)
+        ordered: Sequence[CType] = (
+            CType("TypeA", "NamespaceA"),
+            CType("TypeA", "NamespaceB"),
+            CType("TypeB", "NamespaceB"),
+            CType("TypeB", "NamespaceB", (CType("Type"),)),
+            CType("TypeB", "NamespaceB", (CType("Type"),), generic=True),
+            CType("TypeB", "NamespaceB", (CType("Type"),), generic=True, nullable=True),
+        )
         unordered: MutableSequence[CType] = list(ordered)
         random.shuffle(unordered)
 
@@ -3243,16 +3433,31 @@ class TestCParameter(unittest.TestCase):
         self.assertCParameter(
             parameter=parameters[0],
             name="y",
-            type=CType("Double", "System", (), False),
+            type=CType("Double", "System"),
             has_default=False,
             is_out=False,
         )
         self.assertCParameter(
             parameter=parameters[1],
             name="x",
-            type=CType("Double", "System", (), False),
+            type=CType("Double", "System"),
             has_default=False,
             is_out=False,
+        )
+
+    def test_from_info_is_out(self) -> None:
+        type_info: TypeInfo = clr.GetClrType(Math)
+        params: Array[Type] = Array[Type]((Int32, Int32, clr.GetClrType(Int32).MakeByRefType()))
+        method_info: MethodInfo = type_info.GetMethod("DivRem", params)
+        parameter_info: ParameterInfo = method_info.GetParameters()[2]
+        c_parameter: CParameter = CParameter.from_info(parameter_info)
+
+        self.assertCParameter(
+            parameter=c_parameter,
+            name="result",
+            type=CType("Int32", "System", reference=True),
+            has_default=False,
+            is_out=True,
         )
 
     def test_json(self) -> None:
@@ -3282,19 +3487,19 @@ class TestCParameter(unittest.TestCase):
     def test_compare(self) -> None:
         message: CParameter = CParameter(
             name="message",
-            type=CType("String", "System", (), False),
+            type=CType("String", "System"),
             has_default=False,
             is_out=False,
         )
         param_name: CParameter = CParameter(
             name="paramName",
-            type=CType("String", "System", (), False),
+            type=CType("String", "System"),
             has_default=False,
             is_out=False,
         )
         inner_exception: CParameter = CParameter(
             name="innerException",
-            type=CType("Exception", "System", (), False),
+            type=CType("Exception", "System"),
             has_default=False,
             is_out=False,
         )
@@ -3329,7 +3534,7 @@ class TestCParameter(unittest.TestCase):
             params0 = [
                 CParameter(
                     name="params0",
-                    type=CType("String", "System", (), False),
+                    type=CType("String", "System"),
                     has_default=False,
                     is_out=False,
                 )
@@ -3337,7 +3542,7 @@ class TestCParameter(unittest.TestCase):
             params1 = [
                 CParameter(
                     name="params1",
-                    type=CType("String", "System", (), False),
+                    type=CType("String", "System"),
                     has_default=False,
                     is_out=False,
                 )
@@ -3349,7 +3554,7 @@ class TestCParameter(unittest.TestCase):
             params0 = [
                 CParameter(
                     name="name",
-                    type=CType("String", "System", (), False),
+                    type=CType("String", "System"),
                     has_default=True,
                     is_out=False,
                 )
@@ -3357,7 +3562,7 @@ class TestCParameter(unittest.TestCase):
             params1 = [
                 CParameter(
                     name="name",
-                    type=CType("String", "System", (), False),
+                    type=CType("String", "System"),
                     has_default=False,
                     is_out=False,
                 )
@@ -3369,7 +3574,7 @@ class TestCParameter(unittest.TestCase):
             params0 = [
                 CParameter(
                     name="name",
-                    type=CType("String", "System", (), False),
+                    type=CType("String", "System"),
                     has_default=False,
                     is_out=True,
                 )
@@ -3377,7 +3582,7 @@ class TestCParameter(unittest.TestCase):
             params1 = [
                 CParameter(
                     name="name",
-                    type=CType("String", "System", (), False),
+                    type=CType("String", "System"),
                     has_default=False,
                     is_out=False,
                 )
@@ -3449,14 +3654,15 @@ class TestCField(unittest.TestCase):
 
     def test_sorted(self) -> None:
         type_info: TypeInfo = clr.GetClrType(Double)
-        field0: CField = CField.from_info(type_info.GetField("Epsilon"))
-        field1: CField = CField.from_info(type_info.GetField("MaxValue"))
-        field2: CField = CField.from_info(type_info.GetField("MinValue"))
-        field3: CField = CField.from_info(type_info.GetField("NaN"))
-        field4: CField = CField.from_info(type_info.GetField("NegativeInfinity"))
-        field5: CField = CField.from_info(type_info.GetField("PositiveInfinity"))
 
-        ordered: Sequence[CField] = (field0, field1, field2, field3, field4, field5)
+        ordered: Sequence[CField] = (
+            CField.from_info(type_info.GetField("Epsilon")),
+            CField.from_info(type_info.GetField("MaxValue")),
+            CField.from_info(type_info.GetField("MinValue")),
+            CField.from_info(type_info.GetField("NaN")),
+            CField.from_info(type_info.GetField("NegativeInfinity")),
+            CField.from_info(type_info.GetField("PositiveInfinity")),
+        )
         unordered: MutableSequence[CField] = list(ordered)
         random.shuffle(unordered)
 
@@ -3507,31 +3713,31 @@ class TestCConstructor(unittest.TestCase):
         self.assertCConstructor(
             constructor=constructors[1],
             declaring_type=c_type,
-            parameters=(CParameter("message", CType("String", "System", (), False), False, False),),
+            parameters=(CParameter("message", CType("String", "System"), False, False),),
         )
         self.assertCConstructor(
             constructor=constructors[2],
             declaring_type=c_type,
             parameters=(
-                CParameter("message", CType("String", "System", (), False), False, False),
-                CParameter("innerException", CType("Exception", "System", (), False), False, False),
+                CParameter("message", CType("String", "System"), False, False),
+                CParameter("innerException", CType("Exception", "System"), False, False),
             ),
         )
         self.assertCConstructor(
             constructor=constructors[3],
             declaring_type=c_type,
             parameters=(
-                CParameter("message", CType("String", "System", (), False), False, False),
-                CParameter("paramName", CType("String", "System", (), False), False, False),
-                CParameter("innerException", CType("Exception", "System", (), False), False, False),
+                CParameter("message", CType("String", "System"), False, False),
+                CParameter("paramName", CType("String", "System"), False, False),
+                CParameter("innerException", CType("Exception", "System"), False, False),
             ),
         )
         self.assertCConstructor(
             constructor=constructors[4],
             declaring_type=c_type,
             parameters=(
-                CParameter("message", CType("String", "System", (), False), False, False),
-                CParameter("paramName", CType("String", "System", (), False), False, False),
+                CParameter("message", CType("String", "System"), False, False),
+                CParameter("paramName", CType("String", "System"), False, False),
             ),
         )
 
@@ -3625,13 +3831,13 @@ class TestCConstructor(unittest.TestCase):
             map(CConstructor.from_info, type_info.GetConstructors())
         )
 
-        ctor0: CConstructor = constructors[0]
-        ctor1: CConstructor = constructors[1]
-        ctor2: CConstructor = constructors[2]
-        ctor3: CConstructor = constructors[4]
-        ctor4: CConstructor = constructors[3]
-
-        ordered: Sequence[CConstructor] = (ctor0, ctor1, ctor2, ctor3, ctor4)
+        ordered: Sequence[CConstructor] = (
+            constructors[0],
+            constructors[1],
+            constructors[2],
+            constructors[4],
+            constructors[3],
+        )
         unordered: MutableSequence[CConstructor] = list(ordered)
         random.shuffle(unordered)
 
@@ -3772,13 +3978,14 @@ class TestCProperty(unittest.TestCase):
 
     def test_sorted(self) -> None:
         type_info: TypeInfo = clr.GetClrType(UriBuilder)
-        prop0: CProperty = CProperty.from_info(type_info.GetProperty("Fragment"))
-        prop1: CProperty = CProperty.from_info(type_info.GetProperty("Host"))
-        prop2: CProperty = CProperty.from_info(type_info.GetProperty("Password"))
-        prop3: CProperty = CProperty.from_info(type_info.GetProperty("Path"))
-        prop4: CProperty = CProperty.from_info(type_info.GetProperty("Port"))
 
-        ordered: Sequence[CProperty] = (prop0, prop1, prop2, prop3, prop4)
+        ordered: Sequence[CProperty] = (
+            CProperty.from_info(type_info.GetProperty("Fragment")),
+            CProperty.from_info(type_info.GetProperty("Host")),
+            CProperty.from_info(type_info.GetProperty("Password")),
+            CProperty.from_info(type_info.GetProperty("Path")),
+            CProperty.from_info(type_info.GetProperty("Port")),
+        )
         unordered: MutableSequence[CProperty] = list(ordered)
         random.shuffle(unordered)
 
@@ -3836,7 +4043,7 @@ class TestCMethod(unittest.TestCase):
             name="GetHashCode",
             declaring_type=c_type,
             parameters=(),
-            returns=(CType("Int32", "System", (), False),),
+            returns=(CType("Int32", "System"),),
             static=False,
         )
 
@@ -3848,10 +4055,10 @@ class TestCMethod(unittest.TestCase):
             name="ReferenceEquals",
             declaring_type=c_type,
             parameters=(
-                CParameter("objA", CType("Object", "System", (), False), False, False),
-                CParameter("objB", CType("Object", "System", (), False), False, False),
+                CParameter("objA", CType("Object", "System"), False, False),
+                CParameter("objB", CType("Object", "System"), False, False),
             ),
-            returns=(CType("Boolean", "System", (), False),),
+            returns=(CType("Boolean", "System"),),
             static=True,
         )
 
@@ -3929,16 +4136,15 @@ class TestCMethod(unittest.TestCase):
 
     def test_sorted(self) -> None:
         type_info: TypeInfo = clr.GetClrType(Object)
-        method0: CMethod = CMethod.from_info(type_info.GetMethod("Equals", Array[Type]([Object])))
-        method1: CMethod = CMethod.from_info(
-            type_info.GetMethod("Equals", Array[Type]([Object, Object]))
-        )
-        method2: CMethod = CMethod.from_info(type_info.GetMethod("GetHashCode"))
-        method3: CMethod = CMethod.from_info(type_info.GetMethod("GetType"))
-        method4: CMethod = CMethod.from_info(type_info.GetMethod("ReferenceEquals"))
-        method5: CMethod = CMethod.from_info(type_info.GetMethod("ToString"))
 
-        ordered: Sequence[CMethod] = (method0, method1, method2, method3, method4, method5)
+        ordered: Sequence[CMethod] = (
+            CMethod.from_info(type_info.GetMethod("Equals", Array[Type]([Object]))),
+            CMethod.from_info(type_info.GetMethod("Equals", Array[Type]([Object, Object]))),
+            CMethod.from_info(type_info.GetMethod("GetHashCode")),
+            CMethod.from_info(type_info.GetMethod("GetType")),
+            CMethod.from_info(type_info.GetMethod("ReferenceEquals")),
+            CMethod.from_info(type_info.GetMethod("ToString")),
+        )
         unordered: MutableSequence[CMethod] = list(ordered)
         random.shuffle(unordered)
 
@@ -4055,14 +4261,15 @@ class TestCEvent(unittest.TestCase):
 
     def test_sorted(self) -> None:
         type_info: TypeInfo = clr.GetClrType(WebClient)
-        event0: CEvent = CEvent.from_info(type_info.GetEvent("DownloadDataCompleted"))
-        event1: CEvent = CEvent.from_info(type_info.GetEvent("DownloadFileCompleted"))
-        event2: CEvent = CEvent.from_info(type_info.GetEvent("DownloadProgressChanged"))
-        event3: CEvent = CEvent.from_info(type_info.GetEvent("DownloadStringCompleted"))
-        event4: CEvent = CEvent.from_info(type_info.GetEvent("OpenReadCompleted"))
-        event5: CEvent = CEvent.from_info(type_info.GetEvent("OpenWriteCompleted"))
 
-        ordered: Sequence[CEvent] = (event0, event1, event2, event3, event4, event5)
+        ordered: Sequence[CEvent] = (
+            CEvent.from_info(type_info.GetEvent("DownloadDataCompleted")),
+            CEvent.from_info(type_info.GetEvent("DownloadFileCompleted")),
+            CEvent.from_info(type_info.GetEvent("DownloadProgressChanged")),
+            CEvent.from_info(type_info.GetEvent("DownloadStringCompleted")),
+            CEvent.from_info(type_info.GetEvent("OpenReadCompleted")),
+            CEvent.from_info(type_info.GetEvent("OpenWriteCompleted")),
+        )
         unordered: MutableSequence[CEvent] = list(ordered)
         random.shuffle(unordered)
 

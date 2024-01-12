@@ -103,11 +103,12 @@ def main(*args: Any) -> Union[int, str]:
             skip_failed: bool = parsed_args.skip_failed
 
             paths: Sequence[Path] = parsed_args.path
-            path: Path
-            for path in paths:
-                path_str: str = str(path.resolve())
-                logger.debug("Adding to sys.path: %r", path_str)
-                sys.path.append(path_str)
+            if paths is not None:
+                path: Path
+                for path in paths:
+                    path_str: str = str(path.resolve())
+                    logger.debug("Adding to sys.path: %r", path_str)
+                    sys.path.append(path_str)
 
             assembly_names: List[str] = list()
             if use_all:
