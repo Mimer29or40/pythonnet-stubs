@@ -7,7 +7,6 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Any
 from typing import Dict
-from typing import Iterable
 from typing import List
 from typing import Mapping
 from typing import Optional
@@ -45,10 +44,7 @@ class CNamespace:
     types: Mapping[str, CTypeDefinition]
 
     def to_json(self) -> JsonType:
-        return {
-            "name": self.name,
-            "types": {k: v.to_json() for k, v in self.types.items()}
-        }
+        return {"name": self.name, "types": {k: v.to_json() for k, v in self.types.items()}}
 
     @classmethod
     def from_json(cls, json: JsonType) -> CNamespace:
@@ -128,7 +124,7 @@ class CTypeDefinition(ABC):
 class CClass(CTypeDefinition):
     abstract: bool
     generic_args: Sequence[CType]
-    super_class: CType
+    super_class: Optional[CType]
     interfaces: Sequence[CType]
     fields: Mapping[str, CField]
     constructors: Mapping[str, CConstructor]
@@ -173,6 +169,7 @@ class CClass(CTypeDefinition):
             *self.methods.values(),
             *self.dunder_methods.values(),
             *self.events.values(),
+            *self.nested.values(),
         )
         for member in members:
             if member.declaring_type.name == self.name:
@@ -235,13 +232,13 @@ class CStruct(CClass):
 @dataclass(frozen=True)
 class CInterface(CTypeDefinition):
     generic_args: Sequence[CType]
-    super_class: CType
-    # TODO - fields: Mapping[str, CField]
+    interfaces: Sequence[CType]
+    fields: Mapping[str, CField]
     properties: Mapping[str, CProperty]
     methods: Mapping[str, CMethod]
     dunder_methods: Mapping[str, CMethod]
     events: Mapping[str, CEvent]
-    # TODO - nested: Mapping[str, CTypeDefinition]
+    nested: Mapping[str, CTypeDefinition]
 
     def __str__(self) -> str:
         name: str = self.name
@@ -256,21 +253,25 @@ class CInterface(CTypeDefinition):
             "name": self.name,
             "namespace": self.namespace,
             "generic_args": tuple(map(CType.to_json, self.generic_args)),
-            "super_class": None if self.super_class is None else self.super_class.to_json(),
+            "interfaces": tuple(sorted(map(CType.to_json, self.interfaces))),
+            "fields": {k: v.to_json() for k, v in self.fields.items()},
             "properties": {k: v.to_json() for k, v in self.properties.items()},
             "methods": {k: v.to_json() for k, v in self.methods.items()},
             "dunder_methods": {k: v.to_json() for k, v in self.dunder_methods.items()},
             "events": {k: v.to_json() for k, v in self.events.items()},
+            "nested": {k: v.to_json() for k, v in self.nested.items()},
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
         doc_dict: Dict[str, Any] = {"doc": ""}
 
         members: Sequence[CMember] = (
+            *self.fields.values(),
             *self.properties.values(),
             *self.methods.values(),
             *self.dunder_methods.values(),
             *self.events.values(),
+            *self.nested.values(),
         )
         for member in members:
             if member.declaring_type.name == self.name:
@@ -285,11 +286,13 @@ class CInterface(CTypeDefinition):
             name=json["name"],
             namespace=json["namespace"],
             generic_args=tuple(sorted(map(CType.from_json, json["generic_args"]))),
-            super_class=CType.from_json(json["super_class"]),
+            interfaces=tuple(map(CType.from_json, json["interfaces"])),
+            fields={k: CField.from_json(v) for k, v in json["fields"].items()},
             properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
             methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
             dunder_methods={k: CMethod.from_json(v) for k, v in json["dunder_methods"].items()},
             events={k: CEvent.from_json(v) for k, v in json["events"].items()},
+            nested={k: CTypeDefinition.from_json(v) for k, v in json["nested"].items()},
         )
 
     @classmethod
@@ -299,11 +302,13 @@ class CInterface(CTypeDefinition):
             name=make_python_name(info.Name),
             namespace=info.Namespace,
             generic_args=tuple(map(CType.from_info, info.GetGenericArguments())),
-            super_class=CType.from_info(info.BaseType),
+            interfaces=tuple(sorted(map(CType.from_info, info.GetInterfaces()))),
+            fields={str(f): f for f in CField.get(info) if f is not None},
             properties={str(p): p for p in CProperty.get(info) if p is not None},
             methods={str(m): m for m in CMethod.get(info) if m is not None},
             dunder_methods={str(m): m for m in CMethod.get_dunder(info) if m is not None},
             events={str(e): e for e in CEvent.get(info) if e is not None},
+            nested={str(n): n for n in CTypeDefinition.get_nested_types(info) if n is not None},
         )
 
 
@@ -405,7 +410,7 @@ class CType:
         if self.generic:
             name = "$" + name
         if self.nullable:
-            name = "?" + name
+            name = name + "?"
         if self.namespace is not None:
             name = f"{self.namespace}.{name}"
         if len(self.inner) > 0:
@@ -431,13 +436,13 @@ class CType:
     def from_json(cls, json: JsonType) -> Optional[CType]:
         if json is None:
             return None
-        match: re.Match = re.match(r"(?:(\w+(?:\.\w+)*)\.)?(\*?\$?\??\w+)(?:\[(.*)])?", json)
+        match: re.Match = re.match(r"(?:(\w+(?:\.\w+)*)\.)?(\$?\*?\w+\??)(?:\[(.*)])?", json)
         name: str = match.group(2)
         inner: Sequence[CType] = tuple()
         if (inner_str := match.group(3)) is not None:
             inner = tuple(map(CType.from_json, inner_str.split(", ")))
         return cls(
-            name=re.sub(r"[*$?]", "", name),
+            name=re.sub(r"[?$*]", "", name),
             namespace=match.group(1),
             inner=inner,
             reference="*" in name,
@@ -449,16 +454,25 @@ class CType:
     def from_info(cls, info: TypeInfo) -> Optional[CType]:
         if info is None:
             return None
+        name: str = make_python_name(info.Name)
+        reference: bool = info.IsByRef
         nullable: bool = False
+
         underlying_type: TypeInfo = Nullable.GetUnderlyingType(info)
         if underlying_type is not None:
             info = underlying_type
+            name = make_python_name(info.Name)
             nullable = True
+        elif name == "Nullable":
+            info = info.GetGenericArguments()[0]
+            name = make_python_name(info.Name)
+            nullable = True
+
         return cls(
-            name=make_python_name(info.Name),
+            name=name,
             namespace=info.Namespace,
             inner=tuple(map(CType.from_info, info.GetGenericArguments())),
-            reference=info.IsByRef,
+            reference=reference,
             generic=info.IsGenericParameter,
             nullable=nullable,
         )
@@ -510,15 +524,15 @@ class CType:
 class CParameter:
     name: str
     type: CType
-    has_default: bool
-    is_out: bool
+    default: bool = False
+    out: bool = False
 
     def to_json(self) -> JsonType:
         return {
             "name": self.name,
             "type": self.type.to_json(),
-            "has_default": self.has_default,
-            "is_out": self.is_out,
+            "default": self.default,
+            "out": self.out,
         }
 
     @classmethod
@@ -526,8 +540,8 @@ class CParameter:
         return cls(
             name=json["name"],
             type=CType.from_json(json["type"]),
-            has_default=json["has_default"],
-            is_out=json["is_out"],
+            default=json["default"],
+            out=json["out"],
         )
 
     @classmethod
@@ -535,8 +549,8 @@ class CParameter:
         return cls(
             name=make_python_name(info.Name),
             type=CType.from_info(info.ParameterType),
-            has_default=info.HasDefaultValue,
-            is_out=info.IsOut,
+            default=info.HasDefaultValue,
+            out=info.IsOut,
         )
 
     @staticmethod
@@ -580,7 +594,7 @@ class CMember(ABC):
 @dataclass(frozen=True)
 class CField(CMember):
     returns: CType
-    static: bool
+    static: bool = False
 
     def __lt__(self, other: CField) -> bool:
         return self.name < other.name
@@ -706,8 +720,8 @@ class CConstructor(CMember):
 @dataclass(frozen=True)
 class CProperty(CMember):
     type: CType
-    setter: bool
-    static: bool
+    setter: bool = False
+    static: bool = False
 
     def __lt__(self, other: CProperty) -> bool:
         return self.name < other.name
@@ -781,11 +795,12 @@ class CProperty(CMember):
 class CMethod(CMember):
     parameters: Sequence[CParameter]
     returns: Sequence[CType]
-    static: bool
+    static: bool = False
 
     def __str__(self) -> str:
         param_types: str = ", ".join(str(p.type) for p in self.parameters)
-        return f"{self.declaring_type}.{self.name}({param_types})"
+        returns: str = ", ".join(map(str, self.returns))
+        return f"{self.declaring_type}.{self.name}({param_types}) -> {returns}"
 
     def __lt__(self, other: CMethod) -> bool:
         if self.name == other.name:
@@ -844,7 +859,7 @@ class CMethod(CMember):
         for parameter_info in info.GetParameters():
             parameter: CParameter = CParameter.from_info(parameter_info)
             parameters.append(parameter)
-            if parameter.is_out:
+            if parameter.out:
                 return_types.append(parameter.type)
 
         return cls(
@@ -879,7 +894,12 @@ class CMethod(CMember):
     @classmethod
     def get(cls, type: TypeInfo) -> Sequence[CMethod]:
         def func(method: CMethod) -> bool:
-            return not (method.name.startswith("get_") or method.name.startswith("set_"))
+            return not (
+                method.name.startswith("get_")
+                or method.name.startswith("set_")
+                or method.name.startswith("add_")
+                or method.name.startswith("remove_")
+            )
 
         return tuple(sorted(filter(func, map(cls.from_info, cls._get_raw(type)))))
 

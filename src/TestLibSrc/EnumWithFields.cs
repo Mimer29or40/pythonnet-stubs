@@ -1,7 +1,5 @@
 ﻿namespace TestLib
 {
-    public enum EnumWithNoFields{ }
-
     public enum EnumWithFields
     {
         Field0 = 0,

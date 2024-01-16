@@ -9,10 +9,10 @@ from typing import Sequence
 from typing import Union
 
 import clr
-
 from System.Reflection import Assembly
 from System.Reflection import AssemblyName
 from System.Reflection import TypeInfo
+
 from stubgen.log import get_logger
 from stubgen.model import CNamespace
 from stubgen.model import CTypeDefinition

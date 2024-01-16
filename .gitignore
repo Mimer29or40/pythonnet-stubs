@@ -214,3 +214,6 @@ logs/
 /stubs/
 /__version__.py
 /dlls/
+/src/TestLibSrc/.vs/
+/src/TestLibSrc/bin/
+/src/TestLibSrc/obj/

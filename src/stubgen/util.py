@@ -8,6 +8,7 @@ from typing import Callable
 import clr
 from System import Nullable
 from System import Type
+
 from stubgen.log import get_logger
 
 logger = get_logger(__name__)

@@ -4,7 +4,7 @@ import clr
 
 
 def main() -> None:
-    assembly = clr.AddReference("StubgenTestLib")
+    assembly = clr.AddReference("TestLib")
     for type in assembly.GetTypes():
         print(type.Name)
 
