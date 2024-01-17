@@ -4184,6 +4184,148 @@ class TestCClass(TestBase):
 
         self.assertEqual(type_def, from_json)
 
+    def test_doc_json(self) -> None:
+        type_def: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={
+                "Namespace.Class.Field": CField(
+                    name="Field",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    returns=CType(name="Type", namespace="Namespace"),
+                )
+            },
+            constructors={
+                "Namespace.Class.__init__(Namespace.Type)": CConstructor(
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                ),
+            },
+            properties={
+                "Namespace.Class.Property": CProperty(
+                    name="Property",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+            methods={
+                "Namespace.Class.Method": CMethod(
+                    name="Method",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    returns=(CType(name="Type", namespace="Namespace"),),
+                ),
+            },
+            dunder_methods={},
+            events={
+                "Namespace.Class.Event": CEvent(
+                    name="Event",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="EventHandler", namespace="System"),
+                ),
+            },
+            nested={
+                "Namespace.INestedInterface": CInterface(
+                    name="INestedInterface",
+                    namespace="Namespace",
+                    generic_args=(),
+                    interfaces=(),
+                    fields={},
+                    properties={},
+                    methods={},
+                    dunder_methods={},
+                    events={},
+                    nested={},
+                ),
+                "Namespace.NestedClass": CClass(
+                    name="NestedClass",
+                    namespace="Namespace",
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    dunder_methods={},
+                    events={},
+                    nested={},
+                ),
+                "Namespace.NestedDelegate": CDelegate(
+                    name="NestedDelegate",
+                    namespace="Namespace",
+                    parameters=(),
+                    return_type=CType(name="Void", namespace="System"),
+                ),
+                "Namespace.NestedEnum": CEnum(
+                    name="NestedEnum",
+                    namespace="Namespace",
+                    fields=(),
+                ),
+                "Namespace.NestedStruct": CStruct(
+                    name="NestedStruct",
+                    namespace="Namespace",
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    dunder_methods={},
+                    events={},
+                    nested={},
+                ),
+            },
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Class", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": {},
+                "Field": {"doc": "", "doc_formatted": {}, "return": ""},
+                "__init__(Namespace.Type)": {
+                    "doc": "",
+                    "doc_formatted": {},
+                    "parameters": {"param0": ""},
+                },
+                "Property": {"doc": "", "doc_formatted": {}, "return": ""},
+                "Method(Namespace.Type)": {
+                    "doc": "",
+                    "doc_formatted": {},
+                    "parameters": {"param0": ""},
+                    "return": "",
+                    "exceptions": {},
+                },
+                "Event -> (System.EventHandler)": {"doc": "", "doc_formatted": {}},
+                "INestedInterface": {"doc": "", "doc_formatted": {}},
+                "NestedClass": {"doc": "", "doc_formatted": {}},
+                "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
+                "NestedEnum": {"doc": "", "doc_formatted": "", "fields": {}},
+                "NestedStruct": {"doc": "", "doc_formatted": {}},
+            },
+            json,
+        )
+
     def test_compare(self) -> None:
         struct0: CClass = CClass(
             name="ClassA",
@@ -8232,6 +8374,148 @@ class TestCStruct(TestBase):
 
         self.assertEqual(type_def, from_json)
 
+    def test_doc_json(self) -> None:
+        type_def: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={
+                "Namespace.Struct.Field": CField(
+                    name="Field",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    returns=CType(name="Type", namespace="Namespace"),
+                )
+            },
+            constructors={
+                "Namespace.Struct.__init__(Namespace.Type)": CConstructor(
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                ),
+            },
+            properties={
+                "Namespace.Struct.Property": CProperty(
+                    name="Property",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+            methods={
+                "Namespace.Struct.Method": CMethod(
+                    name="Method",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    returns=(CType(name="Type", namespace="Namespace"),),
+                ),
+            },
+            dunder_methods={},
+            events={
+                "Namespace.Struct.Event": CEvent(
+                    name="Event",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="EventHandler", namespace="System"),
+                ),
+            },
+            nested={
+                "Namespace.INestedInterface": CInterface(
+                    name="INestedInterface",
+                    namespace="Namespace",
+                    generic_args=(),
+                    interfaces=(),
+                    fields={},
+                    properties={},
+                    methods={},
+                    dunder_methods={},
+                    events={},
+                    nested={},
+                ),
+                "Namespace.NestedClass": CClass(
+                    name="NestedClass",
+                    namespace="Namespace",
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    dunder_methods={},
+                    events={},
+                    nested={},
+                ),
+                "Namespace.NestedDelegate": CDelegate(
+                    name="NestedDelegate",
+                    namespace="Namespace",
+                    parameters=(),
+                    return_type=CType(name="Void", namespace="System"),
+                ),
+                "Namespace.NestedEnum": CEnum(
+                    name="NestedEnum",
+                    namespace="Namespace",
+                    fields=(),
+                ),
+                "Namespace.NestedStruct": CStruct(
+                    name="NestedStruct",
+                    namespace="Namespace",
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    dunder_methods={},
+                    events={},
+                    nested={},
+                ),
+            },
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Struct", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": {},
+                "Field": {"doc": "", "doc_formatted": {}, "return": ""},
+                "__init__(Namespace.Type)": {
+                    "doc": "",
+                    "doc_formatted": {},
+                    "parameters": {"param0": ""},
+                },
+                "Property": {"doc": "", "doc_formatted": {}, "return": ""},
+                "Method(Namespace.Type)": {
+                    "doc": "",
+                    "doc_formatted": {},
+                    "parameters": {"param0": ""},
+                    "return": "",
+                    "exceptions": {},
+                },
+                "Event -> (System.EventHandler)": {"doc": "", "doc_formatted": {}},
+                "INestedInterface": {"doc": "", "doc_formatted": {}},
+                "NestedClass": {"doc": "", "doc_formatted": {}},
+                "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
+                "NestedEnum": {"doc": "", "doc_formatted": "", "fields": {}},
+                "NestedStruct": {"doc": "", "doc_formatted": {}},
+            },
+            json,
+        )
+
     def test_compare(self) -> None:
         struct0: CStruct = CStruct(
             name="StructA",
@@ -10787,6 +11071,133 @@ class TestCInterface(TestBase):
 
         self.assertEqual(type_def, from_json)
 
+    def test_doc_json(self) -> None:
+        type_def: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            generic_args=(),
+            interfaces=(),
+            fields={
+                "Namespace.Interface.Field": CField(
+                    name="Field",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    returns=CType(name="Type", namespace="Namespace"),
+                )
+            },
+            properties={
+                "Namespace.Interface.Property": CProperty(
+                    name="Property",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="Type", namespace="Namespace"),
+                ),
+            },
+            methods={
+                "Namespace.Interface.Method": CMethod(
+                    name="Method",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                    ),
+                    returns=(CType(name="Type", namespace="Namespace"),),
+                ),
+            },
+            dunder_methods={},
+            events={
+                "Namespace.Interface.Event": CEvent(
+                    name="Event",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="EventHandler", namespace="System"),
+                ),
+            },
+            nested={
+                "Namespace.INestedInterface": CInterface(
+                    name="INestedInterface",
+                    namespace="Namespace",
+                    generic_args=(),
+                    interfaces=(),
+                    fields={},
+                    properties={},
+                    methods={},
+                    dunder_methods={},
+                    events={},
+                    nested={},
+                ),
+                "Namespace.NestedClass": CClass(
+                    name="NestedClass",
+                    namespace="Namespace",
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    dunder_methods={},
+                    events={},
+                    nested={},
+                ),
+                "Namespace.NestedDelegate": CDelegate(
+                    name="NestedDelegate",
+                    namespace="Namespace",
+                    parameters=(),
+                    return_type=CType(name="Void", namespace="System"),
+                ),
+                "Namespace.NestedEnum": CEnum(
+                    name="NestedEnum",
+                    namespace="Namespace",
+                    fields=(),
+                ),
+                "Namespace.NestedStruct": CStruct(
+                    name="NestedStruct",
+                    namespace="Namespace",
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    dunder_methods={},
+                    events={},
+                    nested={},
+                ),
+            },
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Interface", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": {},
+                "Field": {"doc": "", "doc_formatted": {}, "return": ""},
+                "Property": {"doc": "", "doc_formatted": {}, "return": ""},
+                "Method(Namespace.Type)": {
+                    "doc": "",
+                    "doc_formatted": {},
+                    "parameters": {"param0": ""},
+                    "return": "",
+                    "exceptions": {},
+                },
+                "Event -> (System.EventHandler)": {"doc": "", "doc_formatted": {}},
+                "INestedInterface": {"doc": "", "doc_formatted": {}},
+                "NestedClass": {"doc": "", "doc_formatted": {}},
+                "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
+                "NestedEnum": {"doc": "", "doc_formatted": "", "fields": {}},
+                "NestedStruct": {"doc": "", "doc_formatted": {}},
+            },
+            json,
+        )
+
     def test_compare(self) -> None:
         interface0: CInterface = CInterface(
             name="InterfaceA",
@@ -10941,6 +11352,36 @@ class TestCEnum(TestBase):
 
         self.assertEqual(enum, from_json)
 
+    def test_doc_json(self) -> None:
+        type_def: CEnum = CEnum(
+            name="Enum",
+            namespace="Namespace",
+            fields=("Field0", "Field1", "Field2", "Field3"),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Enum", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": "",
+                "fields": {
+                    "Field0": {"doc": ""},
+                    "Field1": {"doc": ""},
+                    "Field2": {"doc": ""},
+                    "Field3": {"doc": ""},
+                },
+            },
+            json,
+        )
+
     def test_compare(self) -> None:
         enum0: CEnum = CEnum(
             name="EnumA",
@@ -11092,6 +11533,39 @@ class TestCDelegate(TestBase):
         from_json: CDelegate = CDelegate.from_json(json)
 
         self.assertEqual(delegate, from_json)
+
+    def test_doc_json(self) -> None:
+        type_def: CDelegate = CDelegate(
+            name="Delegate",
+            namespace="Namespace",
+            parameters=(
+                CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+            ),
+            return_type=CType(name="Type", namespace="Namespace"),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Delegate", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": "",
+                "parameters": {
+                    "param0": {"doc": ""},
+                    "param1": {"doc": ""},
+                },
+                "return": "",
+            },
+            json,
+        )
 
     def test_compare_namespace(self) -> None:
         delegate0: CDelegate = CDelegate(
@@ -11775,6 +12249,27 @@ class TestCField(TestBase):
 
         self.assertEqual(c_field, from_json)
 
+    def test_doc_json(self) -> None:
+        type_def: CField = CField(
+            name="Field",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            returns=CType(name="Type", namespace="Namespace"),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Field", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {"doc": "", "doc_formatted": {}, "return": ""},
+            json,
+        )
+
     def test_compare(self) -> None:
         field0: CField = CField(
             name="FieldA",
@@ -11928,6 +12423,33 @@ class TestCConstructor(TestBase):
         from_json: CConstructor = CConstructor.from_json(json)
 
         self.assertEqual(c_constructor, from_json)
+
+    def test_doc_json(self) -> None:
+        type_def: CConstructor = CConstructor(
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+            ),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("__init__(Namespace.Type, Namespace.Type)", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": {},
+                "parameters": {"param0": "", "param1": ""},
+            },
+            json,
+        )
 
     def test_compare(self) -> None:
         ctor0: CConstructor = CConstructor(
@@ -12156,6 +12678,27 @@ class TestCProperty(TestBase):
         from_json: CProperty = CProperty.from_json(json)
 
         self.assertEqual(c_property, from_json)
+
+    def test_doc_json(self) -> None:
+        type_def: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            type=CType(name="Type", namespace="Namespace"),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Property", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {"doc": "", "doc_formatted": {}, "return": ""},
+            json,
+        )
 
     def test_compare(self) -> None:
         prop0: CProperty = CProperty(
@@ -12395,6 +12938,37 @@ class TestCMethod(TestBase):
 
         self.assertEqual(c_method, from_json)
 
+    def test_doc_json(self) -> None:
+        type_def: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+            ),
+            returns=(CType(name="Type", namespace="Namespace"),),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Method(Namespace.Type, Namespace.Type)", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": {},
+                "parameters": {"param0": "", "param1": ""},
+                "return": "",
+                "exceptions": {},
+            },
+            json,
+        )
+
     def test_compare(self) -> None:
         method0: CMethod = CMethod(
             name="MethodA",
@@ -12533,6 +13107,27 @@ class TestCEvent(TestBase):
         from_json: CEvent = CEvent.from_json(json)
 
         self.assertEqual(c_event, from_json)
+
+    def test_doc_json(self) -> None:
+        type_def: CEvent = CEvent(
+            name="Event",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            type=CType(name="Type", namespace="Namespace"),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Event -> (Namespace.Type)", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {"doc": "", "doc_formatted": {}},
+            json,
+        )
 
     def test_compare(self) -> None:
         event0: CEvent = CEvent(

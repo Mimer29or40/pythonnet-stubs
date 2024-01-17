@@ -138,7 +138,9 @@ class CClass(CTypeDefinition):
         name: str = self.name
         if self.namespace is not None:
             name = f"{self.namespace}.{name}"
-        # TODO - Handle generic
+        if len(self.generic_args) > 0:
+            generic: str = ", ".join(map(str, self.generic_args))
+            name = f"{name}[{generic}]"
         return name
 
     def to_json(self) -> JsonType:
@@ -160,7 +162,7 @@ class CClass(CTypeDefinition):
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        doc_dict: Dict[str, Any] = {"doc": ""}
+        doc_dict: Dict[str, Any] = {"doc": "", "doc_formatted": {}}
 
         members: Sequence[CMember] = (
             *self.fields.values(),
@@ -169,7 +171,6 @@ class CClass(CTypeDefinition):
             *self.methods.values(),
             *self.dunder_methods.values(),
             *self.events.values(),
-            *self.nested.values(),
         )
         for member in members:
             if member.declaring_type.name == self.name:
@@ -244,7 +245,9 @@ class CInterface(CTypeDefinition):
         name: str = self.name
         if self.namespace is not None:
             name = f"{self.namespace}.{name}"
-        # TODO - Handle generic
+        if len(self.generic_args) > 0:
+            generic: str = ", ".join(map(str, self.generic_args))
+            name = f"{name}[{generic}]"
         return name
 
     def to_json(self) -> JsonType:
@@ -263,7 +266,7 @@ class CInterface(CTypeDefinition):
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        doc_dict: Dict[str, Any] = {"doc": ""}
+        doc_dict: Dict[str, Any] = {"doc": "", "doc_formatted": {}}
 
         members: Sequence[CMember] = (
             *self.fields.values(),
@@ -271,12 +274,16 @@ class CInterface(CTypeDefinition):
             *self.methods.values(),
             *self.dunder_methods.values(),
             *self.events.values(),
-            *self.nested.values(),
         )
         for member in members:
             if member.declaring_type.name == self.name:
                 name, json = member.to_doc_json()
                 doc_dict[name] = json
+
+        child: CTypeDefinition
+        for child in self.nested.values():
+            name, json = child.to_doc_json()
+            doc_dict[name] = json
 
         return self.name, doc_dict
 
@@ -587,7 +594,7 @@ class CMember(ABC):
         pass
 
     @abstractmethod
-    def to_doc_json(self) -> Tuple[str, JsonType]:
+    def to_doc_json(self) -> Tuple[str, JsonType]:  # TODO - tests
         pass
 
 
@@ -935,7 +942,7 @@ class CMethod(CMember):
             "op_GreaterThan": ("__gt__", True),
             # Other
             # "op_Implicit": ""
-            # Collections
+            # Collections  # TODO - Tests for get_Item, set_Item
             "get_Item": ("__getitem__", False),  # TODO - Check parameters
             "set_Item": ("__setitem__", False),  # TODO - Check parameters
         }
