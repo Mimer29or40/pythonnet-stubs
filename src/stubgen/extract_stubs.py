@@ -78,7 +78,6 @@ def extract_class(info: TypeInfo) -> CClass:
         constructors=extract_constructors(info),
         properties=extract_properties(info),
         methods=extract_methods(info),
-        dunder_methods=extract_dunder_methods(info),
         events=extract_events(info),
         nested=extract_nested(info),
     )
@@ -97,7 +96,6 @@ def extract_struct(info: TypeInfo) -> CStruct:
         constructors=extract_constructors(info),
         properties=extract_properties(info),
         methods=extract_methods(info),
-        dunder_methods=extract_dunder_methods(info),
         events=extract_events(info),
         nested=extract_nested(info),
     )
@@ -113,7 +111,6 @@ def extract_interface(info: TypeInfo) -> CInterface:
         fields=extract_fields(info),
         properties=extract_properties(info),
         methods=extract_methods(info),
-        dunder_methods=extract_dunder_methods(info),
         events=extract_events(info),
         nested=extract_nested(info),
     )
@@ -306,60 +303,39 @@ def _extract_methods(type: TypeInfo, exclude_static: bool = False) -> Sequence[M
 
 
 def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
-    # TODO - Combine methods and dunder_methods
-    def func(method: CMethod) -> bool:
-        return not (
-            method.name.startswith("get_")
-            or method.name.startswith("set_")
-            or method.name.startswith("add_")
-            or method.name.startswith("remove_")
-        )
-
-    return {str(m): m for m in sorted(filter(func, map(extract_method, _extract_methods(info))))}
-
-
-def extract_dunder_methods(info: TypeInfo) -> Mapping[str, CMethod]:
-    dunder_methods: Set[CMethod] = set()
+    methods: List[CMethod] = list(map(extract_method, _extract_methods(info)))
 
     supported_methods: Mapping[str, Tuple[str, bool]] = {
-        # Arithmetic
-        "op_UnaryPlus": ("__pos__", True),
-        "op_UnaryNegation": ("__neg__", True),
-        # "op_Increment": "",
-        # "op_Decrement": "",
         "op_Addition": ("__add__", True),
-        "op_Subtraction": ("__sub__", True),
-        "op_Multiply": ("__mul__", True),
-        "op_Division": ("__truediv__", True),
-        "op_Modulus": ("__mod__", True),
-        # Bitwise
         "op_BitwiseAnd": ("__and__", True),
         "op_BitwiseOr": ("__or__", True),
-        "op_ExclusiveOr": ("__xor__", True),
-        "op_LeftShift": ("__lshift__", True),
-        "op_RightShift": ("__rshift__", True),
-        "op_OnesComplement": ("__invert__", True),
-        # "op_UnsignedRightShift": "",
-        # Comparison
+        # "op_Decrement": "",
+        "op_Division": ("__truediv__", True),
         "op_Equality": ("__eq__", True),
-        "op_Inequality": ("__ne__", True),
-        "op_LessThanOrEqual": ("__le__", True),
-        "op_GreaterThanOrEqual": ("__ge__", True),
-        "op_LessThan": ("__lt__", True),
+        "op_ExclusiveOr": ("__xor__", True),
         "op_GreaterThan": ("__gt__", True),
-        # Other
+        "op_GreaterThanOrEqual": ("__ge__", True),
         # "op_Implicit": ""
-        # Collections  # TODO - Tests for get_Item, set_Item
-        "get_Item": ("__getitem__", False),  # TODO - Check parameters
-        "set_Item": ("__setitem__", False),  # TODO - Check parameters
+        # "op_Increment": "",
+        "op_Inequality": ("__ne__", True),
+        "op_LeftShift": ("__lshift__", True),
+        "op_LessThan": ("__lt__", True),
+        "op_LessThanOrEqual": ("__le__", True),
+        "op_Modulus": ("__mod__", True),
+        "op_Multiply": ("__mul__", True),
+        "op_OnesComplement": ("__invert__", True),
+        "op_RightShift": ("__rshift__", True),
+        "op_Subtraction": ("__sub__", True),
+        "op_UnaryNegation": ("__neg__", True),
+        "op_UnaryPlus": ("__pos__", True),
+        # "op_UnsignedRightShift": "",
+        "get_Item": ("__getitem__", False),
+        "set_Item": ("__setitem__", False),
     }
     # Remove -> __delitem__
 
-    def func(method: CMethod) -> bool:
-        return method.name in supported_methods
-
     method: CMethod
-    for method in filter(func, map(extract_method, _extract_methods(info))):
+    for method in tuple(filter(lambda m: m.name in supported_methods, methods)):
         new_name, remove_param = supported_methods[method.name]
         parameters: Sequence[CParameter] = method.parameters
         if remove_param:
@@ -373,7 +349,7 @@ def extract_dunder_methods(info: TypeInfo) -> Mapping[str, CMethod]:
             parameters=parameters,
             static=False,
         )
-        dunder_methods.add(method)
+        methods.append(method)
 
     def get_base_types(_info: TypeInfo) -> Sequence[CType]:
         found: List[CType] = []
@@ -394,19 +370,19 @@ def extract_dunder_methods(info: TypeInfo) -> Mapping[str, CMethod]:
                 return_type = CType("object", None)
             method = CMethod(
                 name="__iter__",
-                declaring_type=extract_type(info),
+                declaring_type=interface,
                 parameters=tuple(),
                 returns=(CType(name="Iterator", namespace="typing", inner=(return_type,)),),
             )
-            dunder_methods.add(method)
+            methods.append(method)
         elif interface.name == "ICollection":
             method = CMethod(
                 name="__len__",
-                declaring_type=extract_type(info),
+                declaring_type=interface,
                 parameters=tuple(),
                 returns=(CType(name="int"),),
             )
-            dunder_methods.add(method)
+            methods.append(method)
 
             return_type: CType
             if len(interface.inner) > 0:
@@ -415,13 +391,21 @@ def extract_dunder_methods(info: TypeInfo) -> Mapping[str, CMethod]:
                 return_type = CType("object", None)
             method = CMethod(
                 name="__contains__",
-                declaring_type=extract_type(info),
+                declaring_type=interface,
                 parameters=(CParameter(name="value", type=return_type),),
                 returns=(CType(name="bool"),),
             )
-            dunder_methods.add(method)
+            methods.append(method)
 
-    return {str(m): m for m in sorted(dunder_methods)}
+    def func(method: CMethod) -> bool:
+        return not (
+            method.name.startswith("get_")
+            or method.name.startswith("set_")
+            or method.name.startswith("add_")
+            or method.name.startswith("remove_")
+        )
+
+    return {str(m): m for m in sorted(filter(func, methods))}
 
 
 def _extract_events(info: TypeInfo) -> Sequence[EventInfo]:

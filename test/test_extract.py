@@ -11,6 +11,7 @@ from System.Reflection import MethodInfo
 from System.Reflection import ParameterInfo
 from System.Reflection import PropertyInfo
 from System.Reflection import TypeInfo
+from test_base import TestBase
 
 from stubgen.extract_stubs import extract_constructor
 from stubgen.extract_stubs import extract_constructors
@@ -41,7 +42,7 @@ from stubgen.model import CTypeDefinition
 from stubgen.util import make_python_name
 
 
-class TestBase(unittest.TestCase):
+class TestExtractBase(TestBase):
     assembly: Assembly
 
     @classmethod
@@ -75,7 +76,7 @@ class TestBase(unittest.TestCase):
         return type_map
 
 
-class TestCClass(TestBase):
+class TestCClass(TestExtractBase):
     def test_extract_class_generic(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithGeneric")
 
@@ -127,13 +128,10 @@ class TestCClass(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CClass)
         self.assertEqual(manual, extracted)
 
     def test_extract_class_generic_multi(self) -> None:
@@ -193,13 +191,10 @@ class TestCClass(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CClass)
         self.assertEqual(manual, extracted)
 
     def test_extract_class_interfaces(self) -> None:
@@ -270,13 +265,10 @@ class TestCClass(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CClass)
         self.assertEqual(manual, extracted)
 
     def test_extract_class_fields(self) -> None:
@@ -360,13 +352,10 @@ class TestCClass(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CClass)
         self.assertEqual(manual, extracted)
 
     def test_extract_class_constructors(self) -> None:
@@ -437,13 +426,10 @@ class TestCClass(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CClass)
         self.assertEqual(manual, extracted)
 
     def test_extract_class_properties(self) -> None:
@@ -566,13 +552,10 @@ class TestCClass(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CClass)
         self.assertEqual(manual, extracted)
 
     def test_extract_class_methods(self) -> None:
@@ -810,13 +793,10 @@ class TestCClass(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CClass)
         self.assertEqual(manual, extracted)
 
     def test_extract_class_methods_dunder(self) -> None:
@@ -1188,8 +1168,6 @@ class TestCClass(TestBase):
                     returns=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-            },
-            dunder_methods={
                 "TestLib.ClassWithOperatorMethods.__add__(TestLib.ClassWithOperatorMethods) -> TestLib.ClassWithOperatorMethods": CMethod(
                     name="__add__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
@@ -1367,8 +1345,278 @@ class TestCClass(TestBase):
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CClass)
+        self.assertEqual(manual, extracted)
+
+    def test_extract_class_methods_list(self) -> None:
+        type_info: TypeInfo = self.get_type("ClassWithListMethods")
+
+        extracted: CTypeDefinition = extract_type_def(type_info)
+        manual: CClass = CClass(
+            name="ClassWithListMethods",
+            namespace="TestLib",
+            abstract=False,
+            generic_args=(),
+            super_class=CType(name="Object", namespace="System"),
+            interfaces=(
+                CType(name="IEnumerable", namespace="System.Collections"),
+                CType(
+                    name="ICollection",
+                    namespace="System.Collections.Generic",
+                    inner=(CType(name="Int32", namespace="System"),),
+                ),
+                CType(
+                    name="IEnumerable",
+                    namespace="System.Collections.Generic",
+                    inner=(CType(name="Int32", namespace="System"),),
+                ),
+                CType(
+                    name="IList",
+                    namespace="System.Collections.Generic",
+                    inner=(CType(name="Int32", namespace="System"),),
+                ),
+            ),
+            fields={},
+            constructors={
+                "TestLib.ClassWithListMethods.__init__()": CConstructor(
+                    declaring_type=CType(name="ClassWithListMethods", namespace="TestLib"),
+                    parameters=(),
+                ),
+            },
+            properties={
+                "System.Collections.Generic.ICollection[System.Int32].Count": CProperty(
+                    name="Count",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    type=CType(name="Int32", namespace="System"),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].IsReadOnly": CProperty(
+                    name="IsReadOnly",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    type=CType(name="Boolean", namespace="System"),
+                ),
+                "System.Collections.Generic.IList[System.Int32].Item": CProperty(
+                    name="Item",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    type=CType(name="Int32", namespace="System"),
+                    setter=True,
+                ),
+            },
+            methods={
+                "System.Collections.Generic.ICollection[System.Int32].Add(System.Int32) -> System.Void": CMethod(
+                    name="Add",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].Clear() -> System.Void": CMethod(
+                    name="Clear",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].Contains(System.Int32) -> System.Boolean": CMethod(
+                    name="Contains",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Boolean", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].CopyTo(System.Int32, System.Int32) -> System.Void": CMethod(
+                    name="CopyTo",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="array", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="arrayIndex", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Object.Equals(System.Object) -> System.Boolean": CMethod(
+                    name="Equals",
+                    declaring_type=CType(name="Object", namespace="System"),
+                    parameters=(
+                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
+                    ),
+                    returns=(CType(name="Boolean", namespace="System"),),
+                ),
+                "System.Collections.IEnumerable.GetEnumerator() -> System.Collections.IEnumerator": CMethod(
+                    name="GetEnumerator",
+                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
+                    parameters=(),
+                    returns=(CType(name="IEnumerator", namespace="System.Collections"),),
+                ),
+                "System.Object.GetHashCode() -> System.Int32": CMethod(
+                    name="GetHashCode",
+                    declaring_type=CType(name="Object", namespace="System"),
+                    parameters=(),
+                    returns=(CType(name="Int32", namespace="System"),),
+                ),
+                "System.Object.GetType() -> System.Type": CMethod(
+                    name="GetType",
+                    declaring_type=CType(name="Object", namespace="System"),
+                    parameters=(),
+                    returns=(CType(name="Type", namespace="System"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].IndexOf(System.Int32) -> System.Int32": CMethod(
+                    name="IndexOf",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Int32", namespace="System"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].Insert(System.Int32, System.Int32) -> System.Void": CMethod(
+                    name="Insert",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].Remove(System.Int32) -> System.Boolean": CMethod(
+                    name="Remove",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Boolean", namespace="System"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].RemoveAt(System.Int32) -> System.Void": CMethod(
+                    name="RemoveAt",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Object.ToString() -> System.String": CMethod(
+                    name="ToString",
+                    declaring_type=CType(name="Object", namespace="System"),
+                    parameters=(),
+                    returns=(CType(name="String", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].__contains__(System.Int32) -> bool": CMethod(
+                    name="__contains__",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="bool"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].__getitem__(System.Int32) -> System.Int32": CMethod(
+                    name="__getitem__",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Int32", namespace="System"),),
+                ),
+                "System.Collections.IEnumerable.__iter__() -> typing.Iterator[object]": CMethod(
+                    name="__iter__",
+                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
+                    parameters=(),
+                    returns=(
+                        CType(name="Iterator", namespace="typing", inner=(CType(name="object"),)),
+                    ),
+                ),
+                "System.Collections.Generic.IEnumerable[System.Int32].__iter__() -> typing.Iterator[System.Int32]": CMethod(
+                    name="__iter__",
+                    declaring_type=CType(
+                        name="IEnumerable",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(),
+                    returns=(
+                        CType(
+                            name="Iterator",
+                            namespace="typing",
+                            inner=(CType(name="Int32", namespace="System"),),
+                        ),
+                    ),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].__len__() -> int": CMethod(
+                    name="__len__",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(),
+                    returns=(CType(name="int"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].__setitem__(System.Int32, System.Int32) -> System.Void": CMethod(
+                    name="__setitem__",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+            },
+            events={},
+            nested={},
+        )
+
         self.assertEqual(manual, extracted)
 
     def test_extract_class_events(self) -> None:
@@ -1418,7 +1666,6 @@ class TestCClass(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={
                 "TestLib.ClassWithEvents.Event -> (System.EventHandler)": CEvent(
                     name="Event",
@@ -1438,8 +1685,6 @@ class TestCClass(TestBase):
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CClass)
         self.assertEqual(manual, extracted)
 
     def test_extract_class_nested(self) -> None:
@@ -1489,7 +1734,6 @@ class TestCClass(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={
                 "TestLib.INestedInterface": CInterface(
@@ -1500,7 +1744,6 @@ class TestCClass(TestBase):
                     fields={},
                     properties={},
                     methods={},
-                    dunder_methods={},
                     events={},
                     nested={},
                 ),
@@ -1550,7 +1793,6 @@ class TestCClass(TestBase):
                             returns=(CType(name="String", namespace="System"),),
                         ),
                     },
-                    dunder_methods={},
                     events={},
                     nested={},
                 ),
@@ -1602,19 +1844,16 @@ class TestCClass(TestBase):
                             returns=(CType(name="String", namespace="System"),),
                         ),
                     },
-                    dunder_methods={},
                     events={},
                     nested={},
                 ),
             },
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CClass)
         self.assertEqual(manual, extracted)
 
 
-class TestCStruct(TestBase):
+class TestCStruct(TestExtractBase):
     def test_extract_struct_generic(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithGeneric")
 
@@ -1657,13 +1896,10 @@ class TestCStruct(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CStruct)
         self.assertEqual(manual, extracted)
 
     def test_extract_struct_generic_multi(self) -> None:
@@ -1711,13 +1947,10 @@ class TestCStruct(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CStruct)
         self.assertEqual(manual, extracted)
 
     def test_extract_struct_interfaces(self) -> None:
@@ -1829,8 +2062,6 @@ class TestCStruct(TestBase):
                     returns=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-            },
-            dunder_methods={
                 "TestLib.StructWithInterface.__eq__(TestLib.StructWithInterface) -> System.Boolean": CMethod(
                     name="__eq__",
                     declaring_type=CType(name="StructWithInterface", namespace="TestLib"),
@@ -1858,8 +2089,6 @@ class TestCStruct(TestBase):
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CStruct)
         self.assertEqual(manual, extracted)
 
     def test_extract_struct_fields(self) -> None:
@@ -1943,13 +2172,10 @@ class TestCStruct(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CStruct)
         self.assertEqual(manual, extracted)
 
     def test_extract_struct_constructors(self) -> None:
@@ -2020,13 +2246,10 @@ class TestCStruct(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CStruct)
         self.assertEqual(manual, extracted)
 
     def test_extract_struct_properties(self) -> None:
@@ -2144,13 +2367,10 @@ class TestCStruct(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CStruct)
         self.assertEqual(manual, extracted)
 
     def test_extract_struct_methods(self) -> None:
@@ -2383,13 +2603,10 @@ class TestCStruct(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CStruct)
         self.assertEqual(manual, extracted)
 
     def test_extract_struct_methods_dunder(self) -> None:
@@ -2756,8 +2973,6 @@ class TestCStruct(TestBase):
                     returns=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-            },
-            dunder_methods={
                 "TestLib.StructWithOperatorMethods.__add__(TestLib.StructWithOperatorMethods) -> TestLib.StructWithOperatorMethods": CMethod(
                     name="__add__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
@@ -2935,8 +3150,273 @@ class TestCStruct(TestBase):
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CStruct)
+        self.assertEqual(manual, extracted)
+
+    def test_extract_struct_methods_list(self) -> None:
+        type_info: TypeInfo = self.get_type("StructWithListMethods")
+
+        extracted: CTypeDefinition = extract_type_def(type_info)
+        manual: CStruct = CStruct(
+            name="StructWithListMethods",
+            namespace="TestLib",
+            abstract=False,
+            generic_args=(),
+            super_class=CType(name="ValueType", namespace="System"),
+            interfaces=(
+                CType(name="IEnumerable", namespace="System.Collections"),
+                CType(
+                    name="ICollection",
+                    namespace="System.Collections.Generic",
+                    inner=(CType(name="Int32", namespace="System"),),
+                ),
+                CType(
+                    name="IEnumerable",
+                    namespace="System.Collections.Generic",
+                    inner=(CType(name="Int32", namespace="System"),),
+                ),
+                CType(
+                    name="IList",
+                    namespace="System.Collections.Generic",
+                    inner=(CType(name="Int32", namespace="System"),),
+                ),
+            ),
+            fields={},
+            constructors={},
+            properties={
+                "System.Collections.Generic.ICollection[System.Int32].Count": CProperty(
+                    name="Count",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    type=CType(name="Int32", namespace="System"),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].IsReadOnly": CProperty(
+                    name="IsReadOnly",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    type=CType(name="Boolean", namespace="System"),
+                ),
+                "System.Collections.Generic.IList[System.Int32].Item": CProperty(
+                    name="Item",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    type=CType(name="Int32", namespace="System"),
+                    setter=True,
+                ),
+            },
+            methods={
+                "System.Collections.Generic.ICollection[System.Int32].Add(System.Int32) -> System.Void": CMethod(
+                    name="Add",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].Clear() -> System.Void": CMethod(
+                    name="Clear",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].Contains(System.Int32) -> System.Boolean": CMethod(
+                    name="Contains",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Boolean", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].CopyTo(System.Int32, System.Int32) -> System.Void": CMethod(
+                    name="CopyTo",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="array", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="arrayIndex", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Object.Equals(System.Object) -> System.Boolean": CMethod(
+                    name="Equals",
+                    declaring_type=CType(name="Object", namespace="System"),
+                    parameters=(
+                        CParameter(name="obj", type=CType(name="Object", namespace="System")),
+                    ),
+                    returns=(CType(name="Boolean", namespace="System"),),
+                ),
+                "System.Collections.IEnumerable.GetEnumerator() -> System.Collections.IEnumerator": CMethod(
+                    name="GetEnumerator",
+                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
+                    parameters=(),
+                    returns=(CType(name="IEnumerator", namespace="System.Collections"),),
+                ),
+                "System.Object.GetHashCode() -> System.Int32": CMethod(
+                    name="GetHashCode",
+                    declaring_type=CType(name="Object", namespace="System"),
+                    parameters=(),
+                    returns=(CType(name="Int32", namespace="System"),),
+                ),
+                "System.Object.GetType() -> System.Type": CMethod(
+                    name="GetType",
+                    declaring_type=CType(name="Object", namespace="System"),
+                    parameters=(),
+                    returns=(CType(name="Type", namespace="System"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].IndexOf(System.Int32) -> System.Int32": CMethod(
+                    name="IndexOf",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Int32", namespace="System"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].Insert(System.Int32, System.Int32) -> System.Void": CMethod(
+                    name="Insert",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].Remove(System.Int32) -> System.Boolean": CMethod(
+                    name="Remove",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Boolean", namespace="System"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].RemoveAt(System.Int32) -> System.Void": CMethod(
+                    name="RemoveAt",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Object.ToString() -> System.String": CMethod(
+                    name="ToString",
+                    declaring_type=CType(name="Object", namespace="System"),
+                    parameters=(),
+                    returns=(CType(name="String", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].__contains__(System.Int32) -> bool": CMethod(
+                    name="__contains__",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="bool"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].__getitem__(System.Int32) -> System.Int32": CMethod(
+                    name="__getitem__",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Int32", namespace="System"),),
+                ),
+                "System.Collections.IEnumerable.__iter__() -> typing.Iterator[object]": CMethod(
+                    name="__iter__",
+                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
+                    parameters=(),
+                    returns=(
+                        CType(name="Iterator", namespace="typing", inner=(CType(name="object"),)),
+                    ),
+                ),
+                "System.Collections.Generic.IEnumerable[System.Int32].__iter__() -> typing.Iterator[System.Int32]": CMethod(
+                    name="__iter__",
+                    declaring_type=CType(
+                        name="IEnumerable",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(),
+                    returns=(
+                        CType(
+                            name="Iterator",
+                            namespace="typing",
+                            inner=(CType(name="Int32", namespace="System"),),
+                        ),
+                    ),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].__len__() -> int": CMethod(
+                    name="__len__",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(),
+                    returns=(CType(name="int"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].__setitem__(System.Int32, System.Int32) -> System.Void": CMethod(
+                    name="__setitem__",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+            },
+            events={},
+            nested={},
+        )
+
         self.assertEqual(manual, extracted)
 
     def test_extract_struct_events(self) -> None:
@@ -2981,7 +3461,6 @@ class TestCStruct(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={
                 "TestLib.StructWithEvents.Event -> (System.EventHandler)": CEvent(
                     name="Event",
@@ -3001,8 +3480,6 @@ class TestCStruct(TestBase):
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CStruct)
         self.assertEqual(manual, extracted)
 
     def test_extract_struct_nested(self) -> None:
@@ -3047,7 +3524,6 @@ class TestCStruct(TestBase):
                     returns=(CType(name="String", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={
                 "TestLib.INestedInterface": CInterface(
@@ -3058,7 +3534,6 @@ class TestCStruct(TestBase):
                     fields={},
                     properties={},
                     methods={},
-                    dunder_methods={},
                     events={},
                     nested={},
                 ),
@@ -3108,7 +3583,6 @@ class TestCStruct(TestBase):
                             returns=(CType(name="String", namespace="System"),),
                         ),
                     },
-                    dunder_methods={},
                     events={},
                     nested={},
                 ),
@@ -3160,19 +3634,16 @@ class TestCStruct(TestBase):
                             returns=(CType(name="String", namespace="System"),),
                         ),
                     },
-                    dunder_methods={},
                     events={},
                     nested={},
                 ),
             },
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CStruct)
         self.assertEqual(manual, extracted)
 
 
-class TestCInterface(TestBase):
+class TestCInterface(TestExtractBase):
     def test_extract_interface_generic(self) -> None:
         type_info: TypeInfo = self.get_type("IInterfaceWithGeneric")
 
@@ -3185,13 +3656,10 @@ class TestCInterface(TestBase):
             fields={},
             properties={},
             methods={},
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CInterface)
         self.assertEqual(manual, extracted)
 
     def test_extract_interface_generic_multi(self) -> None:
@@ -3209,13 +3677,10 @@ class TestCInterface(TestBase):
             fields={},
             properties={},
             methods={},
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CInterface)
         self.assertEqual(manual, extracted)
 
     def test_extract_interface_interfaces(self) -> None:
@@ -3252,13 +3717,10 @@ class TestCInterface(TestBase):
                     returns=(CType(name="Boolean", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CInterface)
         self.assertEqual(manual, extracted)
 
     def test_extract_interface_fields(self) -> None:
@@ -3292,13 +3754,10 @@ class TestCInterface(TestBase):
             },
             properties={},
             methods={},
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CInterface)
         self.assertEqual(manual, extracted)
 
     def test_extract_interface_properties(self) -> None:
@@ -3386,13 +3845,10 @@ class TestCInterface(TestBase):
                 ),
             },
             methods={},
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CInterface)
         self.assertEqual(manual, extracted)
 
     def test_extract_interface_methods(self) -> None:
@@ -3502,13 +3958,10 @@ class TestCInterface(TestBase):
                     returns=(CType(name="Int32", namespace="System"),),
                 ),
             },
-            dunder_methods={},
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CInterface)
         self.assertEqual(manual, extracted)
 
     def test_extract_interface_methods_dunder(self) -> None:
@@ -3811,8 +4264,6 @@ class TestCInterface(TestBase):
                     returns=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-            },
-            dunder_methods={
                 "TestLib.IInterfaceWithOperatorMethods.__add__(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
                     name="__add__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
@@ -3968,16 +4419,14 @@ class TestCInterface(TestBase):
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CInterface)
         self.assertEqual(manual, extracted)
 
-    def test_extract_interface_methods_collection(self) -> None:
-        type_info: TypeInfo = self.get_type("IInterfaceWithCollectionMethods")
+    def test_extract_interface_methods_list(self) -> None:
+        type_info: TypeInfo = self.get_type("IInterfaceWithListMethods")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
         manual: CInterface = CInterface(
-            name="IInterfaceWithCollectionMethods",
+            name="IInterfaceWithListMethods",
             namespace="TestLib",
             generic_args=(),
             interfaces=(
@@ -3989,6 +4438,11 @@ class TestCInterface(TestBase):
                 ),
                 CType(
                     name="IEnumerable",
+                    namespace="System.Collections.Generic",
+                    inner=(CType(name="Int32", namespace="System"),),
+                ),
+                CType(
+                    name="IList",
                     namespace="System.Collections.Generic",
                     inner=(CType(name="Int32", namespace="System"),),
                 ),
@@ -4012,6 +4466,16 @@ class TestCInterface(TestBase):
                         inner=(CType(name="Int32", namespace="System"),),
                     ),
                     type=CType(name="Boolean", namespace="System"),
+                ),
+                "System.Collections.Generic.IList[System.Int32].Item": CProperty(
+                    name="Item",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    type=CType(name="Int32", namespace="System"),
+                    setter=True,
                 ),
             },
             methods={
@@ -4068,6 +4532,31 @@ class TestCInterface(TestBase):
                     parameters=(),
                     returns=(CType(name="IEnumerator", namespace="System.Collections"),),
                 ),
+                "System.Collections.Generic.IList[System.Int32].IndexOf(System.Int32) -> System.Int32": CMethod(
+                    name="IndexOf",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Int32", namespace="System"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].Insert(System.Int32, System.Int32) -> System.Void": CMethod(
+                    name="Insert",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
                 "System.Collections.Generic.ICollection[System.Int32].Remove(System.Int32) -> System.Boolean": CMethod(
                     name="Remove",
                     declaring_type=CType(
@@ -4080,23 +4569,56 @@ class TestCInterface(TestBase):
                     ),
                     returns=(CType(name="Boolean", namespace="System"),),
                 ),
-            },
-            dunder_methods={
-                "TestLib.IInterfaceWithCollectionMethods.__contains__(System.Int32) -> bool": CMethod(
+                "System.Collections.Generic.IList[System.Int32].RemoveAt(System.Int32) -> System.Void": CMethod(
+                    name="RemoveAt",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
+                ),
+                "System.Collections.Generic.ICollection[System.Int32].__contains__(System.Int32) -> bool": CMethod(
                     name="__contains__",
                     declaring_type=CType(
-                        name="IInterfaceWithCollectionMethods",
-                        namespace="TestLib",
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
                     ),
                     parameters=(
                         CParameter(name="value", type=CType(name="Int32", namespace="System")),
                     ),
                     returns=(CType(name="bool"),),
                 ),
-                "TestLib.IInterfaceWithCollectionMethods.__iter__() -> typing.Iterator[System.Int32]": CMethod(
+                "System.Collections.Generic.IList[System.Int32].__getitem__(System.Int32) -> System.Int32": CMethod(
+                    name="__getitem__",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Int32", namespace="System"),),
+                ),
+                "System.Collections.IEnumerable.__iter__() -> typing.Iterator[object]": CMethod(
+                    name="__iter__",
+                    declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
+                    parameters=(),
+                    returns=(
+                        CType(name="Iterator", namespace="typing", inner=(CType(name="object"),)),
+                    ),
+                ),
+                "System.Collections.Generic.IEnumerable[System.Int32].__iter__() -> typing.Iterator[System.Int32]": CMethod(
                     name="__iter__",
                     declaring_type=CType(
-                        name="IInterfaceWithCollectionMethods", namespace="TestLib"
+                        name="IEnumerable",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
                     ),
                     parameters=(),
                     returns=(
@@ -4107,35 +4629,34 @@ class TestCInterface(TestBase):
                         ),
                     ),
                 ),
-                "TestLib.IInterfaceWithCollectionMethods.__iter__() -> typing.Iterator[object]": CMethod(
-                    name="__iter__",
-                    declaring_type=CType(
-                        name="IInterfaceWithCollectionMethods", namespace="TestLib"
-                    ),
-                    parameters=(),
-                    returns=(
-                        CType(
-                            name="Iterator",
-                            namespace="typing",
-                            inner=(CType(name="object"),),
-                        ),
-                    ),
-                ),
-                "TestLib.IInterfaceWithCollectionMethods.__len__() -> int": CMethod(
+                "System.Collections.Generic.ICollection[System.Int32].__len__() -> int": CMethod(
                     name="__len__",
                     declaring_type=CType(
-                        name="IInterfaceWithCollectionMethods", namespace="TestLib"
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
                     ),
                     parameters=(),
                     returns=(CType(name="int"),),
+                ),
+                "System.Collections.Generic.IList[System.Int32].__setitem__(System.Int32, System.Int32) -> System.Void": CMethod(
+                    name="__setitem__",
+                    declaring_type=CType(
+                        name="IList",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="Int32", namespace="System"),),
+                    ),
+                    parameters=(
+                        CParameter(name="index", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
+                    ),
+                    returns=(CType(name="Void", namespace="System"),),
                 ),
             },
             events={},
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CInterface)
         self.assertEqual(manual, extracted)
 
     def test_extract_interface_events(self) -> None:
@@ -4150,7 +4671,6 @@ class TestCInterface(TestBase):
             fields={},
             properties={},
             methods={},
-            dunder_methods={},
             events={
                 "TestLib.IInterfaceWithEvents.Event -> (System.EventHandler)": CEvent(
                     name="Event",
@@ -4170,8 +4690,6 @@ class TestCInterface(TestBase):
             nested={},
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CInterface)
         self.assertEqual(manual, extracted)
 
     def test_extract_interface_nested(self) -> None:
@@ -4186,7 +4704,6 @@ class TestCInterface(TestBase):
             fields={},
             properties={},
             methods={},
-            dunder_methods={},
             events={},
             nested={
                 "TestLib.INestedInterface": CInterface(
@@ -4197,7 +4714,6 @@ class TestCInterface(TestBase):
                     fields={},
                     properties={},
                     methods={},
-                    dunder_methods={},
                     events={},
                     nested={},
                 ),
@@ -4247,7 +4763,6 @@ class TestCInterface(TestBase):
                             returns=(CType(name="String", namespace="System"),),
                         ),
                     },
-                    dunder_methods={},
                     events={},
                     nested={},
                 ),
@@ -4303,19 +4818,16 @@ class TestCInterface(TestBase):
                             returns=(CType(name="String", namespace="System"),),
                         ),
                     },
-                    dunder_methods={},
                     events={},
                     nested={},
                 ),
             },
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CInterface)
         self.assertEqual(manual, extracted)
 
 
-class TestCEnum(TestBase):
+class TestCEnum(TestExtractBase):
     def test_extract_enum(self) -> None:
         type_info: TypeInfo = self.get_type("EnumWithFields")
 
@@ -4326,8 +4838,6 @@ class TestCEnum(TestBase):
             fields=("Field0", "Field1", "Field2", "Field3"),
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CEnum)
         self.assertEqual(manual, extracted)
 
     def test_extract_enum_no_fields(self) -> None:
@@ -4340,12 +4850,10 @@ class TestCEnum(TestBase):
             fields=(),
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CEnum)
         self.assertEqual(manual, extracted)
 
 
-class TestCDelegate(TestBase):
+class TestCDelegate(TestExtractBase):
     def test_extract_delegate_no_params_no_return(self) -> None:
         type_info: TypeInfo = self.get_type("DelegateWithNoParametersNoReturn")
 
@@ -4357,8 +4865,6 @@ class TestCDelegate(TestBase):
             return_type=CType(name="Void", namespace="System"),
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CDelegate)
         self.assertEqual(manual, extracted)
 
     def test_extract_delegate_no_params_return(self) -> None:
@@ -4372,8 +4878,6 @@ class TestCDelegate(TestBase):
             return_type=CType(name="Int32", namespace="System"),
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CDelegate)
         self.assertEqual(manual, extracted)
 
     def test_extract_delegate_params_no_return(self) -> None:
@@ -4390,8 +4894,6 @@ class TestCDelegate(TestBase):
             return_type=CType(name="Void", namespace="System"),
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CDelegate)
         self.assertEqual(manual, extracted)
 
     def test_extract_delegate_params_return(self) -> None:
@@ -4408,20 +4910,16 @@ class TestCDelegate(TestBase):
             return_type=CType(name="Int32", namespace="System"),
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CDelegate)
         self.assertEqual(manual, extracted)
 
 
-class TestCType(TestBase):
+class TestCType(TestExtractBase):
     def test_extract_type_simple(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithSuper")
 
         extracted: CType = extract_type(type_info)
         manual: CType = CType(name="ClassWithSuper", namespace="TestLib")
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CType)
         self.assertEqual(manual, extracted)
 
     def test_extract_type_inner(self) -> None:
@@ -4434,8 +4932,6 @@ class TestCType(TestBase):
             inner=(CType(name="T", namespace="TestLib", generic=True),),
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CType)
         self.assertEqual(manual, extracted)
 
     def test_extract_type_inner_multi(self) -> None:
@@ -4451,8 +4947,6 @@ class TestCType(TestBase):
             ),
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CType)
         self.assertEqual(manual, extracted)
 
     def test_extract_type_reference(self) -> None:
@@ -4461,8 +4955,6 @@ class TestCType(TestBase):
         extracted: CType = extract_type(type_info)
         manual: CType = CType(name="ClassThatsAbstract", namespace="TestLib", reference=True)
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CType)
         self.assertEqual(manual, extracted)
 
     def test_extract_type_generic(self) -> None:
@@ -4471,8 +4963,6 @@ class TestCType(TestBase):
         extracted: CType = extract_type(type_info.GenericTypeParameters[0])
         manual: CType = CType(name="T", namespace="TestLib", generic=True)
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CType)
         self.assertEqual(manual, extracted)
 
     def test_extract_type_nullable(self) -> None:
@@ -4483,8 +4973,6 @@ class TestCType(TestBase):
         extracted: CType = extract_type(parameter_info.ParameterType)
         manual: CType = CType(name="Int32", namespace="System", nullable=True)
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CType)
         self.assertEqual(manual, extracted)
 
     def test_extract_type_reference_nullable(self) -> None:
@@ -4495,12 +4983,10 @@ class TestCType(TestBase):
         extracted: CType = extract_type(parameter_info.ParameterType)
         manual: CType = CType(name="Int32", namespace="System", reference=True, nullable=True)
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CType)
         self.assertEqual(manual, extracted)
 
 
-class TestCParameter(TestBase):
+class TestCParameter(TestExtractBase):
     def test_extract_parameter_simple(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMethods")
         method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithParams1")
@@ -4509,12 +4995,8 @@ class TestCParameter(TestBase):
         manual: CParameter = CParameter(
             name="param0",
             type=CType(name="Int32", namespace="System"),
-            default=False,
-            out=False,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CParameter)
         self.assertEqual(manual, extracted)
 
     def test_extract_parameter_default(self) -> None:
@@ -4526,11 +5008,8 @@ class TestCParameter(TestBase):
             name="param0",
             type=CType(name="Int32", namespace="System"),
             default=True,
-            out=False,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CParameter)
         self.assertEqual(manual, extracted)
 
     def test_extract_parameter_out(self) -> None:
@@ -4541,16 +5020,13 @@ class TestCParameter(TestBase):
         manual: CParameter = CParameter(
             name="param0",
             type=CType(name="Int32", namespace="System", reference=True),
-            default=False,
             out=True,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CParameter)
         self.assertEqual(manual, extracted)
 
 
-class TestCField(TestBase):
+class TestCField(TestExtractBase):
     def test_extract_field(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithFields")
         field_info: FieldInfo = type_info.GetField("InstanceFieldA")
@@ -4560,11 +5036,8 @@ class TestCField(TestBase):
             name="InstanceFieldA",
             declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
             returns=CType(name="Int32", namespace="System"),
-            static=False,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CField)
         self.assertEqual(manual, extracted)
 
     def test_extract_field_static(self) -> None:
@@ -4579,8 +5052,6 @@ class TestCField(TestBase):
             static=True,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CField)
         self.assertEqual(manual, extracted)
 
     def test_extract_fields(self) -> None:
@@ -4622,12 +5093,10 @@ class TestCField(TestBase):
             ),
         }
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, Mapping)
         self.assertDictEqual(manual, extracted)
 
 
-class TestCConstructor(TestBase):
+class TestCConstructor(TestExtractBase):
     def test_extract_constructor(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithConstructors")
         extracted: Sequence[CConstructor] = list(
@@ -4639,8 +5108,6 @@ class TestCConstructor(TestBase):
             parameters=(),
         )
 
-        self.assertIsNotNone(extracted[0])
-        self.assertIsInstance(extracted[0], CConstructor)
         self.assertEqual(manual, extracted[0])
 
         manual: CConstructor = CConstructor(
@@ -4648,8 +5115,6 @@ class TestCConstructor(TestBase):
             parameters=(CParameter(name="param0", type=CType(name="Int32", namespace="System")),),
         )
 
-        self.assertIsNotNone(extracted[1])
-        self.assertIsInstance(extracted[1], CConstructor)
         self.assertEqual(manual, extracted[1])
 
         manual: CConstructor = CConstructor(
@@ -4660,8 +5125,6 @@ class TestCConstructor(TestBase):
             ),
         )
 
-        self.assertIsNotNone(extracted[2])
-        self.assertIsInstance(extracted[2], CConstructor)
         self.assertEqual(manual, extracted[2])
 
         manual: CConstructor = CConstructor(
@@ -4673,8 +5136,6 @@ class TestCConstructor(TestBase):
             ),
         )
 
-        self.assertIsNotNone(extracted[3])
-        self.assertIsInstance(extracted[3], CConstructor)
         self.assertEqual(manual, extracted[3])
 
     def test_extract_constructors(self) -> None:
@@ -4708,12 +5169,10 @@ class TestCConstructor(TestBase):
             ),
         }
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, Mapping)
         self.assertDictEqual(manual, extracted)
 
 
-class TestCProperty(TestBase):
+class TestCProperty(TestExtractBase):
     def test_extract_property(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithProperties")
         property_info: PropertyInfo = type_info.GetProperty("InstanceReadOnlyProperty0")
@@ -4723,12 +5182,8 @@ class TestCProperty(TestBase):
             name="InstanceReadOnlyProperty0",
             declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
             type=CType(name="Int32", namespace="System"),
-            setter=False,
-            static=False,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CProperty)
         self.assertEqual(manual, extracted)
 
     def test_extract_property_setter(self) -> None:
@@ -4741,11 +5196,8 @@ class TestCProperty(TestBase):
             declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
             type=CType(name="Int32", namespace="System"),
             setter=True,
-            static=False,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CProperty)
         self.assertEqual(manual, extracted)
 
     def test_extract_property_static(self) -> None:
@@ -4757,12 +5209,9 @@ class TestCProperty(TestBase):
             name="StaticReadOnlyProperty0",
             declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
             type=CType(name="Int32", namespace="System"),
-            setter=False,
             static=True,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CProperty)
         self.assertEqual(manual, extracted)
 
     def test_extract_property_setter_static(self) -> None:
@@ -4778,8 +5227,6 @@ class TestCProperty(TestBase):
             static=True,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CProperty)
         self.assertEqual(manual, extracted)
 
     def test_extract_properties(self) -> None:
@@ -4860,12 +5307,10 @@ class TestCProperty(TestBase):
             ),
         }
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, Mapping)
         self.assertDictEqual(manual, extracted)
 
 
-class TestCMethod(TestBase):
+class TestCMethod(TestExtractBase):
     def test_extract_method(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMethods")
         method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithParams1")
@@ -4876,11 +5321,8 @@ class TestCMethod(TestBase):
             declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
             parameters=(CParameter(name="param0", type=CType(name="Int32", namespace="System")),),
             returns=(CType(name="Int32", namespace="System"),),
-            static=False,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CMethod)
         self.assertEqual(manual, extracted)
 
     def test_extract_method_static(self) -> None:
@@ -4896,8 +5338,6 @@ class TestCMethod(TestBase):
             static=True,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CMethod)
         self.assertEqual(manual, extracted)
 
     def test_extract_method_out(self) -> None:
@@ -4919,11 +5359,8 @@ class TestCMethod(TestBase):
                 CType(name="Int32", namespace="System"),
                 CType(name="Int32", namespace="System", reference=True),
             ),
-            static=False,
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CMethod)
         self.assertEqual(manual, extracted)
 
     def test_extract_methods(self) -> None:
@@ -5134,12 +5571,10 @@ class TestCMethod(TestBase):
             ),
         }
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, Mapping)
         self.assertDictEqual(manual, extracted)
 
 
-class TestCEvent(TestBase):
+class TestCEvent(TestExtractBase):
     def test_extract_event(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithEvents")
         event_info: EventInfo = type_info.GetEvent("Event")
@@ -5151,8 +5586,6 @@ class TestCEvent(TestBase):
             type=CType(name="EventHandler", namespace="System"),
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CEvent)
         self.assertEqual(manual, extracted)
 
     def test_extract_event_args(self) -> None:
@@ -5170,8 +5603,6 @@ class TestCEvent(TestBase):
             ),
         )
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, CEvent)
         self.assertEqual(manual, extracted)
 
     def test_extract_events(self) -> None:
@@ -5194,8 +5625,6 @@ class TestCEvent(TestBase):
             ),
         }
 
-        self.assertIsNotNone(extracted)
-        self.assertIsInstance(extracted, Mapping)
         self.assertDictEqual(manual, extracted)
 
 

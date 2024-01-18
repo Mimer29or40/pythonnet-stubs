@@ -182,7 +182,6 @@ class CClass(CTypeDefinition):
     constructors: Mapping[str, CConstructor]
     properties: Mapping[str, CProperty]
     methods: Mapping[str, CMethod]
-    dunder_methods: Mapping[str, CMethod]
     events: Mapping[str, CEvent]
     nested: Mapping[str, CTypeDefinition]
 
@@ -208,7 +207,6 @@ class CClass(CTypeDefinition):
             "constructors": {k: v.to_json() for k, v in self.constructors.items()},
             "properties": {k: v.to_json() for k, v in self.properties.items()},
             "methods": {k: v.to_json() for k, v in self.methods.items()},
-            "dunder_methods": {k: v.to_json() for k, v in self.dunder_methods.items()},
             "events": {k: v.to_json() for k, v in self.events.items()},
             "nested": {k: v.to_json() for k, v in self.nested.items()},
         }
@@ -221,7 +219,6 @@ class CClass(CTypeDefinition):
             *self.constructors.values(),
             *self.properties.values(),
             *self.methods.values(),
-            *self.dunder_methods.values(),
             *self.events.values(),
         )
         for member in members:
@@ -245,7 +242,6 @@ class CClass(CTypeDefinition):
         # constructors: Mapping[str, CConstructor]
         # properties: Mapping[str, CProperty]
         # methods: Mapping[str, CMethod]
-        # dunder_methods: Mapping[str, CMethod]
         # events: Mapping[str, CEvent]
         # nested: Mapping[str, CTypeDefinition]
 
@@ -292,7 +288,6 @@ class CClass(CTypeDefinition):
             constructors={k: CConstructor.from_json(v) for k, v in json["constructors"].items()},
             properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
             methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
-            dunder_methods={k: CMethod.from_json(v) for k, v in json["dunder_methods"].items()},
             events={k: CEvent.from_json(v) for k, v in json["events"].items()},
             nested={k: CTypeDefinition.from_json(v) for k, v in json["nested"].items()},
         )
@@ -313,7 +308,6 @@ class CInterface(CTypeDefinition):
     fields: Mapping[str, CField]
     properties: Mapping[str, CProperty]
     methods: Mapping[str, CMethod]
-    dunder_methods: Mapping[str, CMethod]
     events: Mapping[str, CEvent]
     nested: Mapping[str, CTypeDefinition]
 
@@ -336,7 +330,6 @@ class CInterface(CTypeDefinition):
             "fields": {k: v.to_json() for k, v in self.fields.items()},
             "properties": {k: v.to_json() for k, v in self.properties.items()},
             "methods": {k: v.to_json() for k, v in self.methods.items()},
-            "dunder_methods": {k: v.to_json() for k, v in self.dunder_methods.items()},
             "events": {k: v.to_json() for k, v in self.events.items()},
             "nested": {k: v.to_json() for k, v in self.nested.items()},
         }
@@ -348,7 +341,6 @@ class CInterface(CTypeDefinition):
             *self.fields.values(),
             *self.properties.values(),
             *self.methods.values(),
-            *self.dunder_methods.values(),
             *self.events.values(),
         )
         for member in members:
@@ -376,7 +368,6 @@ class CInterface(CTypeDefinition):
             fields={k: CField.from_json(v) for k, v in json["fields"].items()},
             properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
             methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
-            dunder_methods={k: CMethod.from_json(v) for k, v in json["dunder_methods"].items()},
             events={k: CEvent.from_json(v) for k, v in json["events"].items()},
             nested={k: CTypeDefinition.from_json(v) for k, v in json["nested"].items()},
         )
