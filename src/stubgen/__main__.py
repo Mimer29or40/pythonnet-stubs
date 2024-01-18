@@ -1,3 +1,4 @@
+import glob
 import logging
 import sys
 from argparse import ONE_OR_MORE
@@ -7,17 +8,14 @@ from pathlib import Path
 from typing import Any
 from typing import List
 from typing import Sequence
-from typing import Set
 from typing import Union
 
 import stubgen
 from stubgen.defaults import ASSEMBLIES
 from stubgen.defaults import BUILT_INS
 from stubgen.defaults import CORE
-from stubgen.extract_stubs import extract_stubs
 from stubgen.log import console_handler
 from stubgen.log import get_logger
-from stubgen.make_stubs import make_stubs
 
 logger = get_logger(__name__)
 
@@ -82,6 +80,16 @@ def main(*args: Any) -> Union[int, str]:
         help="names of dll assemblies to process",
     )
 
+    build_command = commands.add_parser("build", help="build stub file tree")
+    build_command.add_argument(
+        "skeletons",
+        help="glob to the skeleton files",
+    )
+    build_command.add_argument(
+        "docs",
+        help="glob to the doc files",
+    )
+
     parsed_args: Namespace = parser.parse_args(args)
 
     verbose: bool = parsed_args.verbose
@@ -96,6 +104,8 @@ def main(*args: Any) -> Union[int, str]:
     try:
         command: str = parsed_args.command
         if command == "extract":
+            from stubgen.extract_stubs import extract_stubs
+
             use_all: bool = parsed_args.all
             use_built_in: bool = parsed_args.built_in
             use_core: bool = parsed_args.core
@@ -135,6 +145,25 @@ def main(*args: Any) -> Union[int, str]:
             except Exception as e:
                 if not skip_failed:
                     raise e from None
+        elif command == "build":
+            from stubgen.build_stubs import build_stubs
+
+            skeleton_glob: str = parsed_args.skeletons
+            doc_glob: str = parsed_args.docs
+
+            skeleton_files: List[Path] = []
+            for file in glob.glob(skeleton_glob):
+                path: Path = Path(file).resolve()
+                skeleton_files.append(path)
+                logger.debug("Using skeleton file: %r", str(path))
+
+            doc_files: List[Path] = []
+            for file in glob.glob(doc_glob):
+                path: Path = Path(file).resolve()
+                doc_files.append(path)
+                logger.debug("Using doc file: %r", str(path))
+
+            exit_code = build_stubs(skeleton_files, doc_files, output_dir)
 
     except Exception as e:
         logger.exception("An unhandled exception occurred:", exc_info=e)

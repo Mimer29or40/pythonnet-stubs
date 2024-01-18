@@ -38,6 +38,87 @@ T = TypeVar("T")
 JsonType = Union[None, int, float, str, Sequence, Mapping]
 
 
+class DocDict:
+    doc_tree: Mapping[str, Any]
+    imports: Set[str] = set()
+    type_vars: Set[str] = set()
+
+    def __init__(self, doc_tree: Mapping[str, Any]):
+        self.doc_tree = doc_tree
+
+    @staticmethod
+    def split(text: str, indent: int = 0, line_limit: int = 100, prefix: str = "") -> Sequence[str]:
+        lines: List[str] = []
+        for doc_paragraph in text.splitlines():
+            words: List[str] = doc_paragraph.split(" ")
+            doc_line: str = ("    " * indent) + words[0]
+            for word in words[1:]:
+                if len(doc_line) + len(word) + 1 > line_limit:
+                    lines.append(doc_line)
+                    doc_line = ("    " * indent) + prefix + word
+                else:
+                    doc_line += " " + word
+            lines.append(doc_line)
+        return lines
+
+    def get_doc(self, type_str: str, indent: int = 0, line_limit: int = 100) -> Sequence[str]:
+        search: str
+        doc_dict: Mapping[str, Any] = self.doc_tree
+        while True:
+            if type_str in doc_dict:
+                doc_dict = doc_dict[type_str]
+                break
+            if "." in type_str:
+                search, type_str = type_str.split(".", 1)
+            else:
+                search = type_str
+            if search not in doc_dict:
+                return (f'{"    " * indent}""""""',)
+            doc_dict = doc_dict[search]
+
+        doc: str = doc_dict.get("doc", "")
+        parameters: Mapping[str, str] = doc_dict.get("parameters", {})
+        return_str: Optional[str] = doc_dict.get("return", None)
+        exceptions: Mapping[str, str] = doc_dict.get("exceptions", {})
+        if len(parameters) == 0 and return_str is None and len(exceptions) == 0:
+            if doc == "":
+                return (f'{"    " * indent}""""""',)
+            if "\n" not in doc and 4 * indent + len(doc) + 3 <= line_limit:
+                return (f'{"    " * indent}"""{doc}"""',)
+
+        doc = '"""' + doc.replace("\n", "\n\n")
+        doc_lines: List[str] = list(self.split(doc, indent, line_limit))
+
+        if len(parameters) > 0 or return_str is not None or len(exceptions) > 0:
+            doc_lines.append("")
+
+            for param, param_doc in parameters.items():
+                param_str: str = f":param {param}: {param_doc}"
+                doc_lines.extend(self.split(param_str, indent, line_limit, "  "))
+
+            if return_str is not None:
+                doc_lines.extend(self.split(f":return: {return_str}", indent, line_limit, "  "))
+
+            for exception, exception_doc in exceptions.items():
+                param_str: str = f":except {exception}: {exception_doc}"
+                doc_lines.extend(self.split(param_str, indent, line_limit, "  "))
+
+        doc_formatted: Mapping[str, Sequence[str]] = doc_dict.get("doc_formatted", {})
+        line_index: int = 0
+        while line_index < len(doc_lines):
+            line: str = doc_lines[line_index]
+            for replace_str, replace_seq in doc_formatted.items():
+                replace_str = f"%{replace_str}%"
+                if replace_str in line:
+                    doc_lines[line_index] = line.replace(replace_str, replace_seq[0])
+                    for new_line in reversed(replace_seq[1:]):
+                        doc_lines.insert(line_index + 1, ("    " * indent) + new_line)
+            line_index += 1
+
+        doc_lines.append(("    " * indent) + '"""')
+        return tuple(doc_lines)
+
+
 @dataclass(frozen=True)
 class CNamespace:
     name: str
@@ -83,6 +164,10 @@ class CTypeDefinition(ABC):
 
     @abstractmethod
     def to_doc_json(self) -> Tuple[str, JsonType]:
+        pass
+
+    @abstractmethod
+    def to_stub_lines(self, doc_dict: DocDict, indent: int = 0) -> Sequence[str]:
         pass
 
     @classmethod
@@ -183,6 +268,47 @@ class CClass(CTypeDefinition):
             doc_dict[name] = json
 
         return self.name, doc_dict
+
+    def to_stub_lines(self, doc_dict: DocDict, indent: int = 0) -> Sequence[str]:
+        # abstract: bool
+        # generic_args: Sequence[CType]
+        # super_class: Optional[CType]
+        # interfaces: Sequence[CType]
+        # fields: Mapping[str, CField]
+        # constructors: Mapping[str, CConstructor]
+        # properties: Mapping[str, CProperty]
+        # methods: Mapping[str, CMethod]
+        # dunder_methods: Mapping[str, CMethod]
+        # events: Mapping[str, CEvent]
+        # nested: Mapping[str, CTypeDefinition]
+
+        if self.abstract:
+            doc_dict.imports.add("abc.ABC")
+        if self.super_class is not None:
+            doc_dict.imports.add(self.super_class.import_name)
+        for interface in self.interfaces:
+            doc_dict.imports.add(interface.import_name)
+
+        # if self.super_class is not None or len(self.interfaces) > 0:
+        parents: List[CType] = []
+        if self.super_class is not None:
+            parents.append(self.super_class)
+        parents.extend(self.interfaces)
+        class_def: str = f"{'    ' * indent}{self.name}:"
+        if len(parents) > 0:
+            class_def = f"{'    ' * indent}{self.name}({', '.join(t.simple_name for t in parents)}):"
+
+        lines: List[str] = [
+            class_def,
+            *doc_dict.get_doc(f"{self.namespace}.{self.name}", indent + 1),
+            "",
+        ]
+        for field in self.fields.values():
+            lines.extend(field.to_stub_lines(doc_dict, indent + 1))
+        for constructor in self.constructors.values():
+            lines.extend(constructor.to_stub_lines(doc_dict, indent + 1))
+
+        return lines
 
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
@@ -411,18 +537,7 @@ class CType:
     nullable: bool = False
 
     def __str__(self) -> str:
-        name: str = self.name
-        if self.reference:
-            name = "*" + name
-        if self.generic:
-            name = "$" + name
-        if self.nullable:
-            name = name + "?"
-        if self.namespace is not None:
-            name = f"{self.namespace}.{name}"
-        if len(self.inner) > 0:
-            name = f"{name}[{', '.join(map(str, self.inner))}]"
-        return name
+        return self.full_name
 
     def __lt__(self, other: CType) -> bool:
         return CType.compare(self, other) < 0
@@ -435,6 +550,35 @@ class CType:
 
     def __ge__(self, other: CType) -> bool:
         return CType.compare(self, other) >= 0
+
+    @property
+    def import_name(self) -> str:
+        name: str = self.name
+        if self.namespace is not None:
+            name = f"{self.namespace}.{name}"
+        return name
+
+    @property
+    def simple_name(self) -> str:
+        name: str = self.name
+        if len(self.inner) > 0:
+            name = f"{name}[{', '.join(t.simple_name for t in self.inner)}]"
+        return name
+
+    @property
+    def full_name(self) -> str:
+        name: str = self.name
+        if self.reference:
+            name = "*" + name
+        if self.generic:
+            name = "$" + name
+        if self.nullable:
+            name = name + "?"
+        if self.namespace is not None:
+            name = f"{self.namespace}.{name}"
+        if len(self.inner) > 0:
+            name = f"{name}[{', '.join(map(str, self.inner))}]"
+        return name
 
     def to_json(self) -> JsonType:
         return str(self)
@@ -471,9 +615,11 @@ class CType:
             name = make_python_name(info.Name)
             nullable = True
         elif name == "Nullable":
-            info = info.GetGenericArguments()[0]
-            name = make_python_name(info.Name)
-            nullable = True
+            args = info.GetGenericArguments()
+            if len(args) > 0:
+                info = args[0]
+                name = make_python_name(info.Name)
+                nullable = True
 
         return cls(
             name=name,
@@ -626,6 +772,20 @@ class CField(CMember):
     def to_doc_json(self) -> Tuple[str, JsonType]:
         return self.name, {"doc": "", "doc_formatted": {}, "return": ""}
 
+    def to_stub_lines(self, doc_dict: DocDict, indent: int = 0) -> Sequence[str]:
+        doc_dict.imports.add("typing.Final")
+        doc_dict.imports.add(self.returns.import_name)
+
+        type_str: str = self.returns.name
+        if self.static:
+            doc_dict.imports.add("typing.ClassVar")
+            type_str = f"ClassVar[{type_str}]"
+
+        return (
+            f"{'    ' * indent}{self.name}: Final[{type_str}]",
+            *doc_dict.get_doc(f"{self.declaring_type.import_name}.{self.name}", indent),
+        )
+
     @classmethod
     def from_json(cls, json: JsonType) -> CField:
         return cls(
@@ -704,6 +864,23 @@ class CConstructor(CMember):
             "doc_formatted": {},
             "parameters": {p.name: "" for p in self.parameters},
         }
+
+    def to_stub_lines(self, doc_dict: DocDict, overload: bool, indent: int = 0) -> Sequence[str]:
+        lines: List[str] = []
+
+        if overload:
+            doc_dict.imports.add("typing.overload")
+            lines.append(f"{'    ' * indent}@overload")
+
+        parameters: List[str] = []
+        for parameter in self.parameters:
+            doc_dict.imports.add(parameter.type.import_name)
+            parameters.append(f", {parameter.name}: {parameter.type.simple_name}")
+
+        lines.append(f"{'    ' * indent}def __init__(self{''.join(parameters)}):")
+        lines.extend(doc_dict.get_doc(str(self), indent + 1))
+
+        return lines
 
     @classmethod
     def from_json(cls, json: JsonType) -> CConstructor:
@@ -1074,3 +1251,7 @@ class CEvent(CMember):
                 continue
             found.add(parsed)
         return tuple(sorted(found))
+
+
+class StubFile:
+    imports: List[str] = []

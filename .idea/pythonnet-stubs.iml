@@ -13,6 +13,10 @@
       <excludeFolder url="file://$MODULE_DIR$/.tox" />
       <excludeFolder url="file://$MODULE_DIR$/src/pythonnet_stub_generator.egg-info" />
       <excludeFolder url="file://$MODULE_DIR$/src/stubgen.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/dlls" />
+      <excludeFolder url="file://$MODULE_DIR$/src/TestLibSrc/.vs" />
+      <excludeFolder url="file://$MODULE_DIR$/src/TestLibSrc/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/src/TestLibSrc/obj" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

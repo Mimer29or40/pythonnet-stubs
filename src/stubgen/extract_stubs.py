@@ -29,7 +29,7 @@ def extract_stubs(assembly_name: str, output_dir: Path, overwrite: bool) -> Unio
     assembly_name: str = name.Name
     assembly_version: str = name.Version.ToString()
 
-    extract_file: Path = output_dir / f"{assembly_name}_{assembly_version}.json"
+    extract_file: Path = output_dir / f"{assembly_name}_{assembly_version}_skeleton.json"
     if extract_file.exists() and not overwrite:
         logger.critical("Extract file already exists: %r", str(extract_file))
         return 1
