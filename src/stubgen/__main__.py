@@ -104,7 +104,7 @@ def main(*args: Any) -> Union[int, str]:
     try:
         command: str = parsed_args.command
         if command == "extract":
-            from stubgen.extract_stubs import extract_stubs
+            from stubgen.extract_stubs import extract_assembly
 
             use_all: bool = parsed_args.all
             use_built_in: bool = parsed_args.built_in
@@ -139,7 +139,7 @@ def main(*args: Any) -> Union[int, str]:
             try:
                 assembly: str
                 for assembly in assembly_names:
-                    exit_code = extract_stubs(assembly, output_dir, True)
+                    exit_code = extract_assembly(assembly, output_dir, True)
                     if exit_code != 0 and not skip_failed:
                         break
             except Exception as e:

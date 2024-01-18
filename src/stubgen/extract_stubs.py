@@ -1,26 +1,456 @@
 from __future__ import annotations
 
+import dataclasses
 import json
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict
 from typing import List
+from typing import Mapping
+from typing import Optional
 from typing import Sequence
+from typing import Set
+from typing import Tuple
 from typing import Union
 
 import clr
+from System import Delegate
+from System import MulticastDelegate
+from System import Nullable
 from System.Reflection import Assembly
 from System.Reflection import AssemblyName
+from System.Reflection import ConstructorInfo
+from System.Reflection import EventInfo
+from System.Reflection import FieldInfo
+from System.Reflection import MethodInfo
+from System.Reflection import ParameterInfo
+from System.Reflection import PropertyInfo
 from System.Reflection import TypeInfo
 
 from stubgen.log import get_logger
+from stubgen.model import CClass
+from stubgen.model import CConstructor
+from stubgen.model import CDelegate
+from stubgen.model import CEnum
+from stubgen.model import CEvent
+from stubgen.model import CField
+from stubgen.model import CInterface
+from stubgen.model import CMethod
 from stubgen.model import CNamespace
+from stubgen.model import CParameter
+from stubgen.model import CProperty
+from stubgen.model import CStruct
+from stubgen.model import CType
 from stubgen.model import CTypeDefinition
+from stubgen.util import make_python_name
 
 logger = get_logger(__name__)
 
 
-def extract_stubs(assembly_name: str, output_dir: Path, overwrite: bool) -> Union[int, str]:
+def extract_type_def(info: TypeInfo) -> CTypeDefinition:
+    def is_delegate() -> bool:
+        if info in (Delegate, MulticastDelegate):
+            return False
+        return info.IsSubclassOf(Delegate) or info.IsSubclassOf(MulticastDelegate)
+
+    if info.IsValueType:
+        if info.IsEnum:
+            return extract_enum(info)
+        return extract_struct(info)
+    if info.IsInterface:
+        return extract_interface(info)
+    if is_delegate():
+        return extract_delegate(info)
+    if info.IsClass:
+        return extract_class(info)
+
+
+def extract_class(info: TypeInfo) -> CClass:
+    logger.info(f'Processing class "{info.Namespace}.{info.Name}"')
+    return CClass(
+        name=make_python_name(info.Name),
+        namespace=info.Namespace,
+        abstract=info.IsAbstract,
+        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
+        super_class=extract_type(info.BaseType),
+        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
+        fields=extract_fields(info),
+        constructors=extract_constructors(info),
+        properties=extract_properties(info),
+        methods=extract_methods(info),
+        dunder_methods=extract_dunder_methods(info),
+        events=extract_events(info),
+        nested=extract_nested(info),
+    )
+
+
+def extract_struct(info: TypeInfo) -> CStruct:
+    logger.info(f'Processing struct "{info.Namespace}.{info.Name}"')
+    return CStruct(
+        name=make_python_name(info.Name),
+        namespace=info.Namespace,
+        abstract=info.IsAbstract,
+        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
+        super_class=extract_type(info.BaseType),
+        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
+        fields=extract_fields(info),
+        constructors=extract_constructors(info),
+        properties=extract_properties(info),
+        methods=extract_methods(info),
+        dunder_methods=extract_dunder_methods(info),
+        events=extract_events(info),
+        nested=extract_nested(info),
+    )
+
+
+def extract_interface(info: TypeInfo) -> CInterface:
+    logger.info(f'Processing interface "{info.Namespace}.{info.Name}"')
+    return CInterface(
+        name=make_python_name(info.Name),
+        namespace=info.Namespace,
+        generic_args=tuple(map(extract_type, info.GetGenericArguments())),
+        interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
+        fields=extract_fields(info),
+        properties=extract_properties(info),
+        methods=extract_methods(info),
+        dunder_methods=extract_dunder_methods(info),
+        events=extract_events(info),
+        nested=extract_nested(info),
+    )
+
+
+def extract_enum(info: TypeInfo) -> CEnum:
+    logger.info(f'Processing enum "{info.Namespace}.{info.Name}"')
+    return CEnum(
+        name=make_python_name(info.Name),
+        namespace=info.Namespace,
+        fields=tuple(info.GetEnumNames()),
+    )
+
+
+def extract_delegate(info: TypeInfo) -> CDelegate:
+    logger.info(f'Processing delegate "{info.Namespace}.{info.Name}"')
+
+    invoke: MethodInfo = info.GetMethod("Invoke")
+
+    return CDelegate(
+        name=make_python_name(info.Name),
+        namespace=info.Namespace,
+        parameters=tuple(map(extract_parameter, invoke.GetParameters())),
+        return_type=extract_type(invoke.ReturnType),
+    )
+
+
+def extract_type(info: TypeInfo) -> Optional[CType]:
+    if info is None:
+        return None
+    name: str = make_python_name(info.Name)
+    reference: bool = info.IsByRef
+    nullable: bool = False
+
+    underlying_type: TypeInfo = Nullable.GetUnderlyingType(info)
+    if underlying_type is not None:
+        info = underlying_type
+        name = make_python_name(info.Name)
+        nullable = True
+    elif name == "Nullable":
+        args = info.GetGenericArguments()
+        if len(args) > 0:
+            info = args[0]
+            name = make_python_name(info.Name)
+            nullable = True
+
+    return CType(
+        name=name,
+        namespace=info.Namespace,
+        inner=tuple(map(extract_type, info.GetGenericArguments())),
+        reference=reference,
+        generic=info.IsGenericParameter,
+        nullable=nullable,
+    )
+
+
+def extract_parameter(info: ParameterInfo) -> CParameter:
+    return CParameter(
+        name=make_python_name(info.Name),
+        type=extract_type(info.ParameterType),
+        default=info.HasDefaultValue,
+        out=info.IsOut,
+    )
+
+
+def extract_field(info: FieldInfo) -> CField:
+    return CField(
+        name=make_python_name(info.Name),
+        declaring_type=extract_type(info.DeclaringType),
+        returns=extract_type(info.FieldType),
+        static=info.IsStatic,
+    )
+
+
+def extract_constructor(info: ConstructorInfo) -> CConstructor:
+    return CConstructor(
+        declaring_type=extract_type(info.DeclaringType),
+        parameters=tuple(map(extract_parameter, info.GetParameters())),
+    )
+
+
+def extract_property(info: PropertyInfo) -> CProperty:
+    get_method: MethodInfo = info.GetGetMethod()
+    set_method: MethodInfo = info.GetSetMethod()
+
+    return CProperty(
+        name=make_python_name(info.Name),
+        declaring_type=extract_type(info.DeclaringType),
+        type=extract_type(info.PropertyType),
+        setter=set_method is not None,
+        static=get_method is not None and get_method.IsStatic,
+    )
+
+
+def extract_method(info: MethodInfo) -> CMethod:
+    return_types: List[CType] = [extract_type(info.ReturnType)]
+
+    parameters: List[CParameter] = []
+    for parameter_info in info.GetParameters():
+        parameter: CParameter = extract_parameter(parameter_info)
+        parameters.append(parameter)
+        if parameter.out:
+            return_types.append(parameter.type)
+
+    return CMethod(
+        name=make_python_name(info.Name),
+        declaring_type=extract_type(info.DeclaringType),
+        parameters=tuple(parameters),
+        returns=tuple(return_types),
+        static=info.IsStatic,
+    )
+
+
+def extract_event(info: EventInfo) -> CEvent:
+    return CEvent(
+        name=make_python_name(info.Name),
+        declaring_type=extract_type(info.DeclaringType),
+        type=extract_type(info.EventHandlerType),
+    )
+
+
+def _extract_fields(info: TypeInfo, exclude_static: bool = False) -> Sequence[FieldInfo]:
+    def check(obj: FieldInfo) -> str:
+        return obj.Name
+
+    found: Set[FieldInfo] = set()
+    if info.BaseType is not None:
+        found.update(_extract_fields(info.BaseType, exclude_static=True))
+    for interface in info.GetInterfaces():
+        found.update(_extract_fields(interface, exclude_static=True))
+
+    check_list: Sequence[str] = tuple(map(check, found))
+    info: MethodInfo
+    for info in info.GetFields():
+        if info.IsStatic and exclude_static:
+            continue
+        if check(info) not in check_list:
+            found.add(info)
+    return tuple(found)
+
+
+def extract_fields(info: TypeInfo) -> Mapping[str, CField]:
+    return {str(f): f for f in sorted(map(extract_field, _extract_fields(info)))}
+
+
+def extract_constructors(info: TypeInfo) -> Mapping[str, CConstructor]:
+    return {str(c): c for c in sorted(map(extract_constructor, info.GetConstructors()))}
+
+
+def _extract_properties(type: TypeInfo) -> Sequence[PropertyInfo]:
+    def check(obj: PropertyInfo) -> str:
+        return obj.Name
+
+    found: Set[PropertyInfo] = set()
+    if type.BaseType is not None:
+        found.update(_extract_properties(type.BaseType))
+    for interface in type.GetInterfaces():
+        found.update(_extract_properties(interface))
+
+    check_list: Sequence[str] = tuple(map(check, found))
+    info: PropertyInfo
+    for info in type.GetProperties():
+        if check(info) not in check_list:
+            found.add(info)
+    return tuple(found)
+
+
+def extract_properties(info: TypeInfo) -> Mapping[str, CProperty]:
+    return {str(p): p for p in sorted(map(extract_property, _extract_properties(info)))}
+
+
+def _extract_methods(type: TypeInfo, exclude_static: bool = False) -> Sequence[MethodInfo]:
+    def check(obj: MethodInfo) -> Tuple[str, Sequence[str]]:
+        return obj.Name, tuple(map(lambda p: p.ParameterType.FullName, obj.GetParameters()))
+
+    found: List[MethodInfo] = []
+    if type.BaseType is not None:
+        found.extend(_extract_methods(type.BaseType, exclude_static=True))
+    for interface in type.GetInterfaces():
+        found.extend(_extract_methods(interface, exclude_static=True))
+
+    check_list: Sequence[Tuple[str, Sequence[str]]] = tuple(map(check, found))
+    info: MethodInfo
+    for info in type.GetMethods():
+        if info.IsStatic and exclude_static:
+            continue
+        if check(info) not in check_list:
+            found.append(info)
+    return tuple(found)
+
+
+def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
+    # TODO - Combine methods and dunder_methods
+    def func(method: CMethod) -> bool:
+        return not (
+            method.name.startswith("get_")
+            or method.name.startswith("set_")
+            or method.name.startswith("add_")
+            or method.name.startswith("remove_")
+        )
+
+    return {str(m): m for m in sorted(filter(func, map(extract_method, _extract_methods(info))))}
+
+
+def extract_dunder_methods(info: TypeInfo) -> Mapping[str, CMethod]:
+    dunder_methods: Set[CMethod] = set()
+
+    supported_methods: Mapping[str, Tuple[str, bool]] = {
+        # Arithmetic
+        "op_UnaryPlus": ("__pos__", True),
+        "op_UnaryNegation": ("__neg__", True),
+        # "op_Increment": "",
+        # "op_Decrement": "",
+        "op_Addition": ("__add__", True),
+        "op_Subtraction": ("__sub__", True),
+        "op_Multiply": ("__mul__", True),
+        "op_Division": ("__truediv__", True),
+        "op_Modulus": ("__mod__", True),
+        # Bitwise
+        "op_BitwiseAnd": ("__and__", True),
+        "op_BitwiseOr": ("__or__", True),
+        "op_ExclusiveOr": ("__xor__", True),
+        "op_LeftShift": ("__lshift__", True),
+        "op_RightShift": ("__rshift__", True),
+        "op_OnesComplement": ("__invert__", True),
+        # "op_UnsignedRightShift": "",
+        # Comparison
+        "op_Equality": ("__eq__", True),
+        "op_Inequality": ("__ne__", True),
+        "op_LessThanOrEqual": ("__le__", True),
+        "op_GreaterThanOrEqual": ("__ge__", True),
+        "op_LessThan": ("__lt__", True),
+        "op_GreaterThan": ("__gt__", True),
+        # Other
+        # "op_Implicit": ""
+        # Collections  # TODO - Tests for get_Item, set_Item
+        "get_Item": ("__getitem__", False),  # TODO - Check parameters
+        "set_Item": ("__setitem__", False),  # TODO - Check parameters
+    }
+    # Remove -> __delitem__
+
+    def func(method: CMethod) -> bool:
+        return method.name in supported_methods
+
+    method: CMethod
+    for method in filter(func, map(extract_method, _extract_methods(info))):
+        new_name, remove_param = supported_methods[method.name]
+        parameters: Sequence[CParameter] = method.parameters
+        if remove_param:
+            parameters = tuple(
+                map(lambda p: dataclasses.replace(p, name="other"), method.parameters[1:])
+            )
+
+        method: CMethod = dataclasses.replace(
+            method,
+            name=new_name,
+            parameters=parameters,
+            static=False,
+        )
+        dunder_methods.add(method)
+
+    def get_base_types(_info: TypeInfo) -> Sequence[CType]:
+        found: List[CType] = []
+        if _info.BaseType is not None:
+            found.extend(get_base_types(_info.BaseType))
+        for interface in _info.GetInterfaces():
+            found.extend(get_base_types(interface))
+        found.append(extract_type(_info))
+        return tuple(dict.fromkeys(found).keys())
+
+    interface: TypeInfo
+    for interface in get_base_types(info):
+        if interface.name == "IEnumerable":
+            return_type: CType
+            if len(interface.inner) > 0:
+                return_type = interface.inner[0]
+            else:
+                return_type = CType("object", None)
+            method = CMethod(
+                name="__iter__",
+                declaring_type=extract_type(info),
+                parameters=tuple(),
+                returns=(CType(name="Iterator", namespace="typing", inner=(return_type,)),),
+            )
+            dunder_methods.add(method)
+        elif interface.name == "ICollection":
+            method = CMethod(
+                name="__len__",
+                declaring_type=extract_type(info),
+                parameters=tuple(),
+                returns=(CType(name="int"),),
+            )
+            dunder_methods.add(method)
+
+            return_type: CType
+            if len(interface.inner) > 0:
+                return_type = interface.inner[0]
+            else:
+                return_type = CType("object", None)
+            method = CMethod(
+                name="__contains__",
+                declaring_type=extract_type(info),
+                parameters=(CParameter(name="value", type=return_type),),
+                returns=(CType(name="bool"),),
+            )
+            dunder_methods.add(method)
+
+    return {str(m): m for m in sorted(dunder_methods)}
+
+
+def _extract_events(info: TypeInfo) -> Sequence[EventInfo]:
+    def check(obj: EventInfo) -> str:
+        return obj.Name
+
+    found: Set[EventInfo] = set()
+    if info.BaseType is not None:
+        found.update(_extract_events(info.BaseType))
+    for interface in info.GetInterfaces():
+        found.update(_extract_events(interface))
+
+    check_list: Sequence[str] = tuple(map(check, found))
+    info: EventInfo
+    for info in info.GetEvents():
+        if check(info) not in check_list:
+            found.add(info)
+    return tuple(found)
+
+
+def extract_events(info: TypeInfo) -> Mapping[str, CEvent]:
+    return {str(e): e for e in sorted(map(extract_event, _extract_events(info)))}
+
+
+def extract_nested(info: TypeInfo) -> Mapping[str, CTypeDefinition]:
+    return {str(n): n for n in sorted(map(extract_type_def, info.GetNestedTypes()))}
+
+
+def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> Union[int, str]:
     logger.debug(f"Extracting assembly: %r", assembly_name)
 
     assembly: Assembly = clr.AddReference(assembly_name)
@@ -40,23 +470,23 @@ def extract_stubs(assembly_name: str, output_dir: Path, overwrite: bool) -> Unio
         return 1
 
     logger.info("Parsing types")
-    type_lists: Dict[str, List[CTypeDefinition]] = defaultdict(list)
+    type_definitions: Dict[str, List[CTypeDefinition]] = defaultdict(list)
     info: TypeInfo
     for info in assembly.GetTypes():
         if info.Namespace is None or info.IsNested:
             continue
-        wrapper: CTypeDefinition = CTypeDefinition.from_info(info)
-        if wrapper is None:
+        type_definition: CTypeDefinition = extract_type_def(info)
+        if type_definition is None:
             logger.warning("Unable to parse type:", info.FullName)
             continue
-        type_lists[wrapper.namespace].append(wrapper)
+        type_definitions[type_definition.namespace].append(type_definition)
 
     namespaces: Sequence[CNamespace] = tuple(
         CNamespace(
             name=namespace,
             types={str(t): t for t in sorted(type_list)},
         )
-        for namespace, type_list in type_lists.items()
+        for namespace, type_list in type_definitions.items()
     )
 
     logger.info("Saving types to file")

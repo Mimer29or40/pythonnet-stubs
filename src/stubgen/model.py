@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import dataclasses
 import re
 from abc import ABC
 from abc import abstractmethod
@@ -17,19 +16,7 @@ from typing import Type
 from typing import TypeVar
 from typing import Union
 
-from System import Delegate
-from System import MulticastDelegate
-from System import Nullable
-from System.Reflection import ConstructorInfo
-from System.Reflection import EventInfo
-from System.Reflection import FieldInfo
-from System.Reflection import MethodInfo
-from System.Reflection import ParameterInfo
-from System.Reflection import PropertyInfo
-from System.Reflection import TypeInfo
-
 from stubgen.log import get_logger
-from stubgen.util import make_python_name
 
 logger = get_logger(__name__)
 
@@ -184,26 +171,6 @@ class CTypeDefinition(ABC):
         if type == "delegate":
             return CDelegate.from_json(json)
 
-    @classmethod
-    def from_info(cls: Type[T], info: TypeInfo) -> T:
-        if info.IsValueType:
-            if info.IsEnum:
-                return CEnum.from_info(info)
-            return CStruct.from_info(info)
-        if info.IsInterface:
-            return CInterface.from_info(info)
-        if (info.IsSubclassOf(Delegate) or info.IsSubclassOf(MulticastDelegate)) and info not in (
-            Delegate,
-            MulticastDelegate,
-        ):
-            return CDelegate.from_info(info)
-        if info.IsClass:
-            return CClass.from_info(info)
-
-    @classmethod
-    def get_nested_types(cls, type: TypeInfo) -> Sequence[CTypeDefinition]:
-        return tuple(sorted(map(CTypeDefinition.from_info, type.GetNestedTypes())))
-
 
 @dataclass(frozen=True)
 class CClass(CTypeDefinition):
@@ -296,7 +263,9 @@ class CClass(CTypeDefinition):
         parents.extend(self.interfaces)
         class_def: str = f"{'    ' * indent}{self.name}:"
         if len(parents) > 0:
-            class_def = f"{'    ' * indent}{self.name}({', '.join(t.simple_name for t in parents)}):"
+            class_def = (
+                f"{'    ' * indent}{self.name}({', '.join(t.simple_name for t in parents)}):"
+            )
 
         lines: List[str] = [
             class_def,
@@ -306,7 +275,7 @@ class CClass(CTypeDefinition):
         for field in self.fields.values():
             lines.extend(field.to_stub_lines(doc_dict, indent + 1))
         for constructor in self.constructors.values():
-            lines.extend(constructor.to_stub_lines(doc_dict, indent + 1))
+            lines.extend(constructor.to_stub_lines(doc_dict, False, indent=indent + 1))
 
         return lines
 
@@ -326,25 +295,6 @@ class CClass(CTypeDefinition):
             dunder_methods={k: CMethod.from_json(v) for k, v in json["dunder_methods"].items()},
             events={k: CEvent.from_json(v) for k, v in json["events"].items()},
             nested={k: CTypeDefinition.from_json(v) for k, v in json["nested"].items()},
-        )
-
-    @classmethod
-    def from_info(cls: Type[T], info: TypeInfo) -> T:
-        logger.info(f'Processing {cls.__name__} "{info.Namespace}.{info.Name}"')
-        return cls(
-            name=make_python_name(info.Name),
-            namespace=info.Namespace,
-            abstract=info.IsAbstract,
-            generic_args=tuple(map(CType.from_info, info.GetGenericArguments())),
-            super_class=CType.from_info(info.BaseType),
-            interfaces=tuple(sorted(map(CType.from_info, info.GetInterfaces()))),
-            fields={str(f): f for f in CField.get(info) if f is not None},
-            constructors={str(c): c for c in CConstructor.get(info) if c is not None},
-            properties={str(p): p for p in CProperty.get(info) if p is not None},
-            methods={str(m): m for m in CMethod.get(info) if m is not None},
-            dunder_methods={str(m): m for m in CMethod.get_dunder(info) if m is not None},
-            events={str(e): e for e in CEvent.get(info) if e is not None},
-            nested={str(n): n for n in CTypeDefinition.get_nested_types(info) if n is not None},
         )
 
 
@@ -413,6 +363,9 @@ class CInterface(CTypeDefinition):
 
         return self.name, doc_dict
 
+    def to_stub_lines(self, doc_dict: DocDict, indent: int = 0) -> Sequence[str]:
+        return ()
+
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
         return cls(
@@ -426,22 +379,6 @@ class CInterface(CTypeDefinition):
             dunder_methods={k: CMethod.from_json(v) for k, v in json["dunder_methods"].items()},
             events={k: CEvent.from_json(v) for k, v in json["events"].items()},
             nested={k: CTypeDefinition.from_json(v) for k, v in json["nested"].items()},
-        )
-
-    @classmethod
-    def from_info(cls: Type[T], info: TypeInfo) -> T:
-        logger.info(f'Processing {cls.__name__} "{info.Namespace}.{info.Name}"')
-        return cls(
-            name=make_python_name(info.Name),
-            namespace=info.Namespace,
-            generic_args=tuple(map(CType.from_info, info.GetGenericArguments())),
-            interfaces=tuple(sorted(map(CType.from_info, info.GetInterfaces()))),
-            fields={str(f): f for f in CField.get(info) if f is not None},
-            properties={str(p): p for p in CProperty.get(info) if p is not None},
-            methods={str(m): m for m in CMethod.get(info) if m is not None},
-            dunder_methods={str(m): m for m in CMethod.get_dunder(info) if m is not None},
-            events={str(e): e for e in CEvent.get(info) if e is not None},
-            nested={str(n): n for n in CTypeDefinition.get_nested_types(info) if n is not None},
         )
 
 
@@ -464,21 +401,15 @@ class CEnum(CTypeDefinition):
             "fields": {f: {"doc": ""} for f in self.fields},
         }
 
+    def to_stub_lines(self, doc_dict: DocDict, indent: int = 0) -> Sequence[str]:
+        return ()
+
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
         return cls(
             name=json["name"],
             namespace=json["namespace"],
             fields=tuple(json["fields"]),
-        )
-
-    @classmethod
-    def from_info(cls: Type[T], info: TypeInfo) -> T:
-        logger.info(f'Processing {cls.__name__} "{info.Namespace}.{info.Name}"')
-        return cls(
-            name=make_python_name(info.Name),
-            namespace=info.Namespace,
-            fields=tuple(info.GetEnumNames()),
         )
 
 
@@ -504,6 +435,9 @@ class CDelegate(CTypeDefinition):
             "return": "",
         }
 
+    def to_stub_lines(self, doc_dict: DocDict, indent: int = 0) -> Sequence[str]:
+        return ()
+
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
         return cls(
@@ -511,19 +445,6 @@ class CDelegate(CTypeDefinition):
             namespace=json["namespace"],
             parameters=tuple(map(CParameter.from_json, json["parameters"])),
             return_type=CType.from_json(json["return_type"]),
-        )
-
-    @classmethod
-    def from_info(cls: Type[T], info: TypeInfo) -> T:
-        logger.info(f'Processing {cls.__name__} "{info.Namespace}.{info.Name}"')
-
-        invoke: MethodInfo = info.GetMethod("Invoke")
-
-        return cls(
-            name=make_python_name(info.Name),
-            namespace=info.Namespace,
-            parameters=tuple(map(CParameter.from_info, invoke.GetParameters())),
-            return_type=CType.from_info(invoke.ReturnType),
         )
 
 
@@ -601,45 +522,6 @@ class CType:
             nullable="?" in name,
         )
 
-    @classmethod
-    def from_info(cls, info: TypeInfo) -> Optional[CType]:
-        if info is None:
-            return None
-        name: str = make_python_name(info.Name)
-        reference: bool = info.IsByRef
-        nullable: bool = False
-
-        underlying_type: TypeInfo = Nullable.GetUnderlyingType(info)
-        if underlying_type is not None:
-            info = underlying_type
-            name = make_python_name(info.Name)
-            nullable = True
-        elif name == "Nullable":
-            args = info.GetGenericArguments()
-            if len(args) > 0:
-                info = args[0]
-                name = make_python_name(info.Name)
-                nullable = True
-
-        return cls(
-            name=name,
-            namespace=info.Namespace,
-            inner=tuple(map(CType.from_info, info.GetGenericArguments())),
-            reference=reference,
-            generic=info.IsGenericParameter,
-            nullable=nullable,
-        )
-
-    @classmethod
-    def get_base_types(cls, type: TypeInfo) -> Sequence[CType]:
-        found: List[CType] = []
-        if type.BaseType is not None:
-            found.extend(cls.get_base_types(type.BaseType))
-        for interface in type.GetInterfaces():
-            found.extend(cls.get_base_types(interface))
-        found.append(CType.from_info(type))
-        return tuple(dict.fromkeys(found).keys())
-
     @staticmethod
     def compare(type0: CType, type1: CType) -> int:
         if type0.namespace != type1.namespace:
@@ -695,15 +577,6 @@ class CParameter:
             type=CType.from_json(json["type"]),
             default=json["default"],
             out=json["out"],
-        )
-
-    @classmethod
-    def from_info(cls, info: ParameterInfo) -> CParameter:
-        return cls(
-            name=make_python_name(info.Name),
-            type=CType.from_info(info.ParameterType),
-            default=info.HasDefaultValue,
-            out=info.IsOut,
         )
 
     @staticmethod
@@ -795,37 +668,6 @@ class CField(CMember):
             static=json["static"],
         )
 
-    @classmethod
-    def from_info(cls, info: FieldInfo) -> CField:
-        return cls(
-            name=make_python_name(info.Name),
-            declaring_type=CType.from_info(info.DeclaringType),
-            returns=CType.from_info(info.FieldType),
-            static=info.IsStatic,
-        )
-
-    @classmethod
-    def get(cls, type: TypeInfo, exclude_static: bool = False) -> Sequence[CField]:
-        def check(obj: CField) -> str:
-            return obj.name
-
-        found: Set[CField] = set()
-        if type.BaseType is not None:
-            found.update(cls.get(type.BaseType, exclude_static=True))
-        for interface in type.GetInterfaces():
-            found.update(cls.get(interface, exclude_static=True))
-
-        check_list: Sequence[str] = tuple(map(check, found))
-        info: MethodInfo
-        for info in type.GetFields():
-            if info.IsStatic and exclude_static:
-                continue
-            parsed = cls.from_info(info)
-            if check(parsed) in check_list:
-                continue
-            found.add(parsed)
-        return tuple(sorted(found))
-
 
 @dataclass(frozen=True)
 class CConstructor(CMember):
@@ -889,17 +731,6 @@ class CConstructor(CMember):
             parameters=tuple(map(CParameter.from_json, json["parameters"])),
         )
 
-    @classmethod
-    def from_info(cls, info: ConstructorInfo) -> CConstructor:
-        return cls(
-            declaring_type=CType.from_info(info.DeclaringType),
-            parameters=tuple(map(CParameter.from_info, info.GetParameters())),
-        )
-
-    @classmethod
-    def get(cls, type: TypeInfo) -> Sequence[CConstructor]:
-        return tuple(sorted(map(CConstructor.from_info, type.GetConstructors())))
-
 
 @dataclass(frozen=True)
 class CProperty(CMember):
@@ -940,39 +771,6 @@ class CProperty(CMember):
             setter=json["setter"],
             static=json["static"],
         )
-
-    @classmethod
-    def from_info(cls, info: PropertyInfo) -> CProperty:
-        get_method: MethodInfo = info.GetGetMethod()
-        set_method: MethodInfo = info.GetSetMethod()
-
-        return cls(
-            name=make_python_name(info.Name),
-            declaring_type=CType.from_info(info.DeclaringType),
-            type=CType.from_info(info.PropertyType),
-            setter=set_method is not None,
-            static=get_method is not None and get_method.IsStatic,
-        )
-
-    @classmethod
-    def get(cls, type: TypeInfo) -> Sequence[CProperty]:
-        def check(obj: CProperty) -> str:
-            return obj.name
-
-        found: Set[CProperty] = set()
-        if type.BaseType is not None:
-            found.update(cls.get(type.BaseType))
-        for interface in type.GetInterfaces():
-            found.update(cls.get(interface))
-
-        check_list: Sequence[str] = tuple(map(check, found))
-        info: PropertyInfo
-        for info in type.GetProperties():
-            parsed = cls.from_info(info)
-            if check(parsed) in check_list:
-                continue
-            found.add(parsed)
-        return tuple(sorted(found))
 
 
 @dataclass(frozen=True)
@@ -1035,157 +833,6 @@ class CMethod(CMember):
             static=json["static"],
         )
 
-    @classmethod
-    def from_info(cls, info: MethodInfo) -> CMethod:
-        return_types: List[CType] = [CType.from_info(info.ReturnType)]
-
-        parameters: List[CParameter] = []
-        for parameter_info in info.GetParameters():
-            parameter: CParameter = CParameter.from_info(parameter_info)
-            parameters.append(parameter)
-            if parameter.out:
-                return_types.append(parameter.type)
-
-        return cls(
-            name=make_python_name(info.Name),
-            declaring_type=CType.from_info(info.DeclaringType),
-            parameters=tuple(parameters),
-            returns=tuple(return_types),
-            static=info.IsStatic,
-        )
-
-    @classmethod
-    def _get_raw(cls, type: TypeInfo, exclude_static: bool = False) -> Sequence[MethodInfo]:
-        def check(obj: MethodInfo) -> Tuple[str, Sequence[str]]:
-            return obj.Name, tuple(map(lambda p: p.ParameterType.FullName, obj.GetParameters()))
-
-        found: List[MethodInfo] = []
-        if type.BaseType is not None:
-            found.extend(cls._get_raw(type.BaseType, exclude_static=True))
-        for interface in type.GetInterfaces():
-            found.extend(cls._get_raw(interface, exclude_static=True))
-
-        check_list: Sequence[Tuple[str, Sequence[str]]] = tuple(map(check, found))
-        info: MethodInfo
-        for info in type.GetMethods():
-            if info.IsStatic and exclude_static:
-                continue
-            if check(info) in check_list:
-                continue
-            found.append(info)
-        return tuple(found)
-
-    @classmethod
-    def get(cls, type: TypeInfo) -> Sequence[CMethod]:
-        def func(method: CMethod) -> bool:
-            return not (
-                method.name.startswith("get_")
-                or method.name.startswith("set_")
-                or method.name.startswith("add_")
-                or method.name.startswith("remove_")
-            )
-
-        return tuple(sorted(filter(func, map(cls.from_info, cls._get_raw(type)))))
-
-    @classmethod
-    def get_dunder(cls, type: TypeInfo) -> Sequence[CMethod]:
-        dunder_methods: Set[CMethod] = set()
-
-        supported_methods: Mapping[str, Tuple[str, bool]] = {
-            # Arithmetic
-            "op_UnaryPlus": ("__pos__", True),
-            "op_UnaryNegation": ("__neg__", True),
-            # "op_Increment": "",
-            # "op_Decrement": "",
-            "op_Addition": ("__add__", True),
-            "op_Subtraction": ("__sub__", True),
-            "op_Multiply": ("__mul__", True),
-            "op_Division": ("__truediv__", True),
-            "op_Modulus": ("__mod__", True),
-            # Bitwise
-            "op_BitwiseAnd": ("__and__", True),
-            "op_BitwiseOr": ("__or__", True),
-            "op_ExclusiveOr": ("__xor__", True),
-            "op_LeftShift": ("__lshift__", True),
-            "op_RightShift": ("__rshift__", True),
-            "op_OnesComplement": ("__invert__", True),
-            # "op_UnsignedRightShift": "",
-            # Comparison
-            "op_Equality": ("__eq__", True),
-            "op_Inequality": ("__ne__", True),
-            "op_LessThanOrEqual": ("__le__", True),
-            "op_GreaterThanOrEqual": ("__ge__", True),
-            "op_LessThan": ("__lt__", True),
-            "op_GreaterThan": ("__gt__", True),
-            # Other
-            # "op_Implicit": ""
-            # Collections  # TODO - Tests for get_Item, set_Item
-            "get_Item": ("__getitem__", False),  # TODO - Check parameters
-            "set_Item": ("__setitem__", False),  # TODO - Check parameters
-        }
-        # Remove -> __delitem__
-
-        def func(method: CMethod) -> bool:
-            return method.name in supported_methods
-
-        method: CMethod
-        for method in filter(func, map(cls.from_info, cls._get_raw(type))):
-            new_name, remove_param = supported_methods[method.name]
-            parameters: Sequence[CParameter] = method.parameters
-            if remove_param:
-                parameters = tuple(
-                    map(lambda p: dataclasses.replace(p, name="other"), method.parameters[1:])
-                )
-
-            method: CMethod = dataclasses.replace(
-                method,
-                name=new_name,
-                parameters=parameters,
-                static=False,
-            )
-            dunder_methods.add(method)
-
-        interface: TypeInfo
-        for interface in CType.get_base_types(type):
-            if interface.name == "IEnumerable":
-                return_type: CType
-                if len(interface.inner) > 0:
-                    return_type = interface.inner[0]
-                else:
-                    return_type = CType("object", None)
-                method = CMethod(
-                    name="__iter__",
-                    declaring_type=CType.from_info(type),
-                    parameters=tuple(),
-                    returns=(CType("Iterator", "typing", (return_type,), False),),
-                    static=False,
-                )
-                dunder_methods.add(method)
-            elif interface.name == "ICollection":
-                method = CMethod(
-                    name="__len__",
-                    declaring_type=CType.from_info(type),
-                    parameters=tuple(),
-                    returns=(CType("int", None),),
-                    static=False,
-                )
-                dunder_methods.add(method)
-
-                return_type: CType
-                if len(interface.inner) > 0:
-                    return_type = interface.inner[0]
-                else:
-                    return_type = CType("object", None)
-                method = CMethod(
-                    name="__contains__",
-                    declaring_type=CType.from_info(type),
-                    parameters=(CParameter("value", return_type, False, False),),
-                    returns=(CType("bool", None),),
-                    static=False,
-                )
-                dunder_methods.add(method)
-        return tuple(sorted(dunder_methods))
-
 
 @dataclass(frozen=True)
 class CEvent(CMember):
@@ -1223,34 +870,6 @@ class CEvent(CMember):
             declaring_type=CType.from_json(json["declaring_type"]),
             type=CType.from_json(json["type"]),
         )
-
-    @classmethod
-    def from_info(cls, info: EventInfo) -> CEvent:
-        return cls(
-            name=make_python_name(info.Name),
-            declaring_type=CType.from_info(info.DeclaringType),
-            type=CType.from_info(info.EventHandlerType),
-        )
-
-    @classmethod
-    def get(cls, type: TypeInfo) -> Sequence[CEvent]:
-        def check(obj: CEvent) -> str:
-            return obj.name
-
-        found: Set[CEvent] = set()
-        if type.BaseType is not None:
-            found.update(cls.get(type.BaseType))
-        for interface in type.GetInterfaces():
-            found.update(cls.get(interface))
-
-        check_list: Sequence[str] = tuple(map(check, found))
-        info: EventInfo
-        for info in type.GetEvents():
-            parsed = cls.from_info(info)
-            if check(parsed) in check_list:
-                continue
-            found.add(parsed)
-        return tuple(sorted(found))
 
 
 class StubFile:
