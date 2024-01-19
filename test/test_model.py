@@ -164,34 +164,34 @@ class TestCClass(unittest.TestCase):
                 "Namespace.Class.InstanceFieldA": CField(
                     name="InstanceFieldA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                 ),
                 "Namespace.Class.InstanceFieldB": CField(
                     name="InstanceFieldB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                 ),
                 "Namespace.Class.InstanceFieldC": CField(
                     name="InstanceFieldC",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                 ),
                 "Namespace.Class.StaticFieldA": CField(
                     name="StaticFieldA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                     static=True,
                 ),
                 "Namespace.Class.StaticFieldB": CField(
                     name="StaticFieldB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                     static=True,
                 ),
                 "Namespace.Class.StaticFieldC": CField(
                     name="StaticFieldC",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                     static=True,
                 ),
             },
@@ -218,37 +218,37 @@ class TestCClass(unittest.TestCase):
                     "Namespace.Class.InstanceFieldA": {
                         "name": "InstanceFieldA",
                         "declaring_type": "Namespace.Class",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": False,
                     },
                     "Namespace.Class.InstanceFieldB": {
                         "name": "InstanceFieldB",
                         "declaring_type": "Namespace.Class",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": False,
                     },
                     "Namespace.Class.InstanceFieldC": {
                         "name": "InstanceFieldC",
                         "declaring_type": "Namespace.Class",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": False,
                     },
                     "Namespace.Class.StaticFieldA": {
                         "name": "StaticFieldA",
                         "declaring_type": "Namespace.Class",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": True,
                     },
                     "Namespace.Class.StaticFieldB": {
                         "name": "StaticFieldB",
                         "declaring_type": "Namespace.Class",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": True,
                     },
                     "Namespace.Class.StaticFieldC": {
                         "name": "StaticFieldC",
                         "declaring_type": "Namespace.Class",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": True,
                     },
                 },
@@ -611,7 +611,7 @@ class TestCClass(unittest.TestCase):
                             default=True,
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.InstanceMethodWithNullableDefaultParam(Namespace.Type?) -> Namespace.Type": CMethod(
                     name="InstanceMethodWithNullableDefaultParam",
@@ -623,7 +623,7 @@ class TestCClass(unittest.TestCase):
                             default=True,
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.InstanceMethodWithNullableOutParam(Namespace.*Type?) -> Namespace.Type, Namespace.*Type?": CMethod(
                     name="InstanceMethodWithNullableOutParam",
@@ -637,7 +637,7 @@ class TestCClass(unittest.TestCase):
                             out=True,
                         ),
                     ),
-                    returns=(
+                    return_types=(
                         CType(name="Type", namespace="Namespace"),
                         CType(name="Type", namespace="Namespace", reference=True, nullable=True),
                     ),
@@ -651,7 +651,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Type", namespace="Namespace", nullable=True),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.InstanceMethodWithOutParam(Namespace.*Type) -> Namespace.Type, Namespace.*Type": CMethod(
                     name="InstanceMethodWithOutParam",
@@ -663,7 +663,7 @@ class TestCClass(unittest.TestCase):
                             out=True,
                         ),
                     ),
-                    returns=(
+                    return_types=(
                         CType(name="Type", namespace="Namespace"),
                         CType(name="Type", namespace="Namespace", reference=True),
                     ),
@@ -672,7 +672,7 @@ class TestCClass(unittest.TestCase):
                     name="InstanceMethodWithParams0",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.InstanceMethodWithParams1(Namespace.Type) -> Namespace.Type": CMethod(
                     name="InstanceMethodWithParams1",
@@ -680,7 +680,7 @@ class TestCClass(unittest.TestCase):
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.InstanceMethodWithParams2(Namespace.Type, Namespace.Type) -> Namespace.Type": CMethod(
                     name="InstanceMethodWithParams2",
@@ -689,7 +689,7 @@ class TestCClass(unittest.TestCase):
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                         CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.StaticMethodWithDefaultParam(Namespace.Type) -> Namespace.Type": CMethod(
                     name="StaticMethodWithDefaultParam",
@@ -701,7 +701,7 @@ class TestCClass(unittest.TestCase):
                             default=True,
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.StaticMethodWithNullableDefaultParam(Namespace.Type?) -> Namespace.Type": CMethod(
@@ -714,7 +714,7 @@ class TestCClass(unittest.TestCase):
                             default=True,
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.StaticMethodWithNullableOutParam(Namespace.*Type?) -> Namespace.Type, Namespace.*Type?": CMethod(
@@ -729,7 +729,7 @@ class TestCClass(unittest.TestCase):
                             out=True,
                         ),
                     ),
-                    returns=(
+                    return_types=(
                         CType(name="Type", namespace="Namespace"),
                         CType(name="Type", namespace="Namespace", reference=True, nullable=True),
                     ),
@@ -744,7 +744,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Type", namespace="Namespace", nullable=True),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.StaticMethodWithOutParam(Namespace.*Type) -> Namespace.Type, Namespace.*Type": CMethod(
@@ -757,7 +757,7 @@ class TestCClass(unittest.TestCase):
                             out=True,
                         ),
                     ),
-                    returns=(
+                    return_types=(
                         CType(name="Type", namespace="Namespace"),
                         CType(name="Type", namespace="Namespace", reference=True),
                     ),
@@ -767,7 +767,7 @@ class TestCClass(unittest.TestCase):
                     name="StaticMethodWithParams0",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.StaticMethodWithParams1(Namespace.Type) -> Namespace.Type": CMethod(
@@ -776,7 +776,7 @@ class TestCClass(unittest.TestCase):
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.StaticMethodWithParams2(Namespace.Type, Namespace.Type) -> Namespace.Type": CMethod(
@@ -786,7 +786,7 @@ class TestCClass(unittest.TestCase):
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                         CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
             },
@@ -821,7 +821,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.InstanceMethodWithNullableDefaultParam(Namespace.Type?) -> Namespace.Type": {
@@ -835,7 +835,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.InstanceMethodWithNullableOutParam(Namespace.*Type?) -> Namespace.Type, Namespace.*Type?": {
@@ -849,7 +849,7 @@ class TestCClass(unittest.TestCase):
                                 "out": True,
                             },
                         ),
-                        "returns": ("Namespace.Type", "Namespace.*Type?"),
+                        "return_types": ("Namespace.Type", "Namespace.*Type?"),
                         "static": False,
                     },
                     "Namespace.Class.InstanceMethodWithNullableParam(Namespace.Type?) -> Namespace.Type": {
@@ -863,7 +863,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.InstanceMethodWithOutParam(Namespace.*Type) -> Namespace.Type, Namespace.*Type": {
@@ -877,14 +877,14 @@ class TestCClass(unittest.TestCase):
                                 "out": True,
                             },
                         ),
-                        "returns": ("Namespace.Type", "Namespace.*Type"),
+                        "return_types": ("Namespace.Type", "Namespace.*Type"),
                         "static": False,
                     },
                     "Namespace.Class.InstanceMethodWithParams0() -> Namespace.Type": {
                         "name": "InstanceMethodWithParams0",
                         "declaring_type": "Namespace.Class",
                         "parameters": (),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.InstanceMethodWithParams1(Namespace.Type) -> Namespace.Type": {
@@ -898,7 +898,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.InstanceMethodWithParams2(Namespace.Type, Namespace.Type) -> Namespace.Type": {
@@ -918,7 +918,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.StaticMethodWithDefaultParam(Namespace.Type) -> Namespace.Type": {
@@ -932,7 +932,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.StaticMethodWithNullableDefaultParam(Namespace.Type?) -> Namespace.Type": {
@@ -946,7 +946,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.StaticMethodWithNullableOutParam(Namespace.*Type?) -> Namespace.Type, Namespace.*Type?": {
@@ -960,7 +960,7 @@ class TestCClass(unittest.TestCase):
                                 "out": True,
                             },
                         ),
-                        "returns": ("Namespace.Type", "Namespace.*Type?"),
+                        "return_types": ("Namespace.Type", "Namespace.*Type?"),
                         "static": True,
                     },
                     "Namespace.Class.StaticMethodWithNullableParam(Namespace.Type?) -> Namespace.Type": {
@@ -974,7 +974,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.StaticMethodWithOutParam(Namespace.*Type) -> Namespace.Type, Namespace.*Type": {
@@ -988,14 +988,14 @@ class TestCClass(unittest.TestCase):
                                 "out": True,
                             },
                         ),
-                        "returns": ("Namespace.Type", "Namespace.*Type"),
+                        "return_types": ("Namespace.Type", "Namespace.*Type"),
                         "static": True,
                     },
                     "Namespace.Class.StaticMethodWithParams0() -> Namespace.Type": {
                         "name": "StaticMethodWithParams0",
                         "declaring_type": "Namespace.Class",
                         "parameters": (),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.StaticMethodWithParams1(Namespace.Type) -> Namespace.Type": {
@@ -1009,7 +1009,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.StaticMethodWithParams2(Namespace.Type, Namespace.Type) -> Namespace.Type": {
@@ -1029,7 +1029,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                 },
@@ -1068,7 +1068,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_BitwiseAnd(Namespace.Class, Namespace.Class) -> Namespace.Class": CMethod(
@@ -1084,7 +1084,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_BitwiseOr(Namespace.Class, Namespace.Class) -> Namespace.Class": CMethod(
@@ -1100,7 +1100,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_Decrement(Namespace.Class) -> Namespace.Class": CMethod(
@@ -1112,7 +1112,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_Division(Namespace.Class, Namespace.Class) -> Namespace.Class": CMethod(
@@ -1128,7 +1128,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_Equality(Namespace.Class, Namespace.Class) -> Namespace.Type": CMethod(
@@ -1144,7 +1144,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_ExclusiveOr(Namespace.Class, Namespace.Class) -> Namespace.Class": CMethod(
@@ -1160,7 +1160,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_False(Namespace.Class) -> Namespace.Type": CMethod(
@@ -1169,7 +1169,7 @@ class TestCClass(unittest.TestCase):
                     parameters=(
                         CParameter(name="self", type=CType(name="Class", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_GreaterThan(Namespace.Class, Namespace.Class) -> Namespace.Type": CMethod(
@@ -1185,7 +1185,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_GreaterThanOrEqual(Namespace.Class, Namespace.Class) -> Namespace.Type": CMethod(
@@ -1201,7 +1201,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_Increment(Namespace.Class) -> Namespace.Class": CMethod(
@@ -1213,7 +1213,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_Inequality(Namespace.Class, Namespace.Class) -> Namespace.Type": CMethod(
@@ -1229,7 +1229,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_LessThan(Namespace.Class, Namespace.Class) -> Namespace.Type": CMethod(
@@ -1245,7 +1245,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_LessThanOrEqual(Namespace.Class, Namespace.Class) -> Namespace.Type": CMethod(
@@ -1261,7 +1261,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_LogicalNot(Namespace.Class) -> Namespace.Type": CMethod(
@@ -1273,7 +1273,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_Modulus(Namespace.Class, Namespace.Class) -> Namespace.Class": CMethod(
@@ -1289,7 +1289,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_Multiply(Namespace.Class, Namespace.Class) -> Namespace.Class": CMethod(
@@ -1305,7 +1305,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_OnesComplement(Namespace.Class) -> Namespace.Class": CMethod(
@@ -1317,7 +1317,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_Subtraction(Namespace.Class, Namespace.Class) -> Namespace.Class": CMethod(
@@ -1333,7 +1333,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_True(Namespace.Class) -> Namespace.Type": CMethod(
@@ -1345,7 +1345,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_UnaryNegation(Namespace.Class) -> Namespace.Class": CMethod(
@@ -1357,7 +1357,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.op_UnaryPlus(Namespace.Class) -> Namespace.Class": CMethod(
@@ -1369,7 +1369,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Class.__add__(Namespace.Class) -> Namespace.Class": CMethod(
@@ -1381,7 +1381,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__and__(Namespace.Class) -> Namespace.Class": CMethod(
                     name="__and__",
@@ -1392,7 +1392,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__eq__(Namespace.Class) -> Namespace.Type": CMethod(
                     name="__eq__",
@@ -1403,7 +1403,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__ge__(Namespace.Class) -> Namespace.Type": CMethod(
                     name="__ge__",
@@ -1414,7 +1414,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__gt__(Namespace.Class) -> Namespace.Type": CMethod(
                     name="__gt__",
@@ -1425,13 +1425,13 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__invert__() -> Namespace.Class": CMethod(
                     name="__invert__",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__le__(Namespace.Class) -> Namespace.Type": CMethod(
                     name="__le__",
@@ -1442,7 +1442,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__lt__(Namespace.Class) -> Namespace.Type": CMethod(
                     name="__lt__",
@@ -1453,7 +1453,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__mod__(Namespace.Class) -> Namespace.Class": CMethod(
                     name="__mod__",
@@ -1464,7 +1464,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__mul__(Namespace.Class) -> Namespace.Class": CMethod(
                     name="__mul__",
@@ -1475,7 +1475,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__ne__(Namespace.Class) -> Namespace.Type": CMethod(
                     name="__ne__",
@@ -1486,13 +1486,13 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="System"),),
+                    return_types=(CType(name="Type", namespace="System"),),
                 ),
                 "Namespace.Class.__neg__() -> Namespace.Class": CMethod(
                     name="__neg__",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__or__(Namespace.Class) -> Namespace.Class": CMethod(
                     name="__or__",
@@ -1503,13 +1503,13 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__pos__() -> Namespace.Class": CMethod(
                     name="__pos__",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__sub__(Namespace.Class) -> Namespace.Class": CMethod(
                     name="__sub__",
@@ -1520,7 +1520,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__truediv__(Namespace.Class) -> Namespace.Class": CMethod(
                     name="__truediv__",
@@ -1531,7 +1531,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
                 "Namespace.Class.__xor__(Namespace.Class) -> Namespace.Class": CMethod(
                     name="__xor__",
@@ -1542,7 +1542,7 @@ class TestCClass(unittest.TestCase):
                             type=CType(name="Class", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Class", namespace="Namespace"),),
+                    return_types=(CType(name="Class", namespace="Namespace"),),
                 ),
             },
             events={},
@@ -1582,7 +1582,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_BitwiseAnd(Namespace.Class, Namespace.Class) -> Namespace.Class": {
@@ -1602,7 +1602,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_BitwiseOr(Namespace.Class, Namespace.Class) -> Namespace.Class": {
@@ -1622,7 +1622,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_Decrement(Namespace.Class) -> Namespace.Class": {
@@ -1636,7 +1636,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_Division(Namespace.Class, Namespace.Class) -> Namespace.Class": {
@@ -1656,7 +1656,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_Equality(Namespace.Class, Namespace.Class) -> Namespace.Type": {
@@ -1676,7 +1676,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.op_ExclusiveOr(Namespace.Class, Namespace.Class) -> Namespace.Class": {
@@ -1696,7 +1696,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_False(Namespace.Class) -> Namespace.Type": {
@@ -1710,7 +1710,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.op_GreaterThan(Namespace.Class, Namespace.Class) -> Namespace.Type": {
@@ -1730,7 +1730,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.op_GreaterThanOrEqual(Namespace.Class, Namespace.Class) -> Namespace.Type": {
@@ -1750,7 +1750,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.op_Increment(Namespace.Class) -> Namespace.Class": {
@@ -1764,7 +1764,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_Inequality(Namespace.Class, Namespace.Class) -> Namespace.Type": {
@@ -1784,7 +1784,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.op_LessThan(Namespace.Class, Namespace.Class) -> Namespace.Type": {
@@ -1804,7 +1804,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.op_LessThanOrEqual(Namespace.Class, Namespace.Class) -> Namespace.Type": {
@@ -1824,7 +1824,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.op_LogicalNot(Namespace.Class) -> Namespace.Type": {
@@ -1838,7 +1838,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.op_Modulus(Namespace.Class, Namespace.Class) -> Namespace.Class": {
@@ -1858,7 +1858,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_Multiply(Namespace.Class, Namespace.Class) -> Namespace.Class": {
@@ -1878,7 +1878,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_OnesComplement(Namespace.Class) -> Namespace.Class": {
@@ -1892,7 +1892,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_Subtraction(Namespace.Class, Namespace.Class) -> Namespace.Class": {
@@ -1912,7 +1912,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_True(Namespace.Class) -> Namespace.Type": {
@@ -1926,7 +1926,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Class.op_UnaryNegation(Namespace.Class) -> Namespace.Class": {
@@ -1940,7 +1940,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.op_UnaryPlus(Namespace.Class) -> Namespace.Class": {
@@ -1954,7 +1954,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": True,
                     },
                     "Namespace.Class.__add__(Namespace.Class) -> Namespace.Class": {
@@ -1968,7 +1968,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                     "Namespace.Class.__and__(Namespace.Class) -> Namespace.Class": {
@@ -1982,7 +1982,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                     "Namespace.Class.__eq__(Namespace.Class) -> Namespace.Type": {
@@ -1996,7 +1996,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.__ge__(Namespace.Class) -> Namespace.Type": {
@@ -2010,7 +2010,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.__gt__(Namespace.Class) -> Namespace.Type": {
@@ -2024,14 +2024,14 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.__invert__() -> Namespace.Class": {
                         "name": "__invert__",
                         "declaring_type": "Namespace.Class",
                         "parameters": (),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                     "Namespace.Class.__le__(Namespace.Class) -> Namespace.Type": {
@@ -2045,7 +2045,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.__lt__(Namespace.Class) -> Namespace.Type": {
@@ -2059,7 +2059,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Class.__mod__(Namespace.Class) -> Namespace.Class": {
@@ -2073,7 +2073,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                     "Namespace.Class.__mul__(Namespace.Class) -> Namespace.Class": {
@@ -2087,7 +2087,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                     "Namespace.Class.__ne__(Namespace.Class) -> Namespace.Type": {
@@ -2101,14 +2101,14 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Type",),
+                        "return_types": ("System.Type",),
                         "static": False,
                     },
                     "Namespace.Class.__neg__() -> Namespace.Class": {
                         "name": "__neg__",
                         "declaring_type": "Namespace.Class",
                         "parameters": (),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                     "Namespace.Class.__or__(Namespace.Class) -> Namespace.Class": {
@@ -2122,14 +2122,14 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                     "Namespace.Class.__pos__() -> Namespace.Class": {
                         "name": "__pos__",
                         "declaring_type": "Namespace.Class",
                         "parameters": (),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                     "Namespace.Class.__sub__(Namespace.Class) -> Namespace.Class": {
@@ -2143,7 +2143,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                     "Namespace.Class.__truediv__(Namespace.Class) -> Namespace.Class": {
@@ -2157,7 +2157,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                     "Namespace.Class.__xor__(Namespace.Class) -> Namespace.Class": {
@@ -2171,7 +2171,7 @@ class TestCClass(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Class",),
+                        "return_types": ("Namespace.Class",),
                         "static": False,
                     },
                 },
@@ -2410,7 +2410,7 @@ class TestCClass(unittest.TestCase):
                 "Namespace.Class.Field": CField(
                     name="Field",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                 )
             },
             constructors={
@@ -2435,7 +2435,7 @@ class TestCClass(unittest.TestCase):
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
             },
             events={
@@ -2790,34 +2790,34 @@ class TestCStruct(unittest.TestCase):
                 "Namespace.Struct.InstanceFieldA": CField(
                     name="InstanceFieldA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                 ),
                 "Namespace.Struct.InstanceFieldB": CField(
                     name="InstanceFieldB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                 ),
                 "Namespace.Struct.InstanceFieldC": CField(
                     name="InstanceFieldC",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                 ),
                 "Namespace.Struct.StaticFieldA": CField(
                     name="StaticFieldA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                     static=True,
                 ),
                 "Namespace.Struct.StaticFieldB": CField(
                     name="StaticFieldB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                     static=True,
                 ),
                 "Namespace.Struct.StaticFieldC": CField(
                     name="StaticFieldC",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                     static=True,
                 ),
             },
@@ -2844,37 +2844,37 @@ class TestCStruct(unittest.TestCase):
                     "Namespace.Struct.InstanceFieldA": {
                         "name": "InstanceFieldA",
                         "declaring_type": "Namespace.Struct",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": False,
                     },
                     "Namespace.Struct.InstanceFieldB": {
                         "name": "InstanceFieldB",
                         "declaring_type": "Namespace.Struct",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": False,
                     },
                     "Namespace.Struct.InstanceFieldC": {
                         "name": "InstanceFieldC",
                         "declaring_type": "Namespace.Struct",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": False,
                     },
                     "Namespace.Struct.StaticFieldA": {
                         "name": "StaticFieldA",
                         "declaring_type": "Namespace.Struct",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": True,
                     },
                     "Namespace.Struct.StaticFieldB": {
                         "name": "StaticFieldB",
                         "declaring_type": "Namespace.Struct",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": True,
                     },
                     "Namespace.Struct.StaticFieldC": {
                         "name": "StaticFieldC",
                         "declaring_type": "Namespace.Struct",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": True,
                     },
                 },
@@ -3237,7 +3237,7 @@ class TestCStruct(unittest.TestCase):
                             default=True,
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.InstanceMethodWithNullableDefaultParam(Namespace.Type?) -> Namespace.Type": CMethod(
                     name="InstanceMethodWithNullableDefaultParam",
@@ -3249,7 +3249,7 @@ class TestCStruct(unittest.TestCase):
                             default=True,
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.InstanceMethodWithNullableOutParam(Namespace.*Type?) -> Namespace.Type, Namespace.*Type?": CMethod(
                     name="InstanceMethodWithNullableOutParam",
@@ -3263,7 +3263,7 @@ class TestCStruct(unittest.TestCase):
                             out=True,
                         ),
                     ),
-                    returns=(
+                    return_types=(
                         CType(name="Type", namespace="Namespace"),
                         CType(name="Type", namespace="Namespace", reference=True, nullable=True),
                     ),
@@ -3277,7 +3277,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Type", namespace="Namespace", nullable=True),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.InstanceMethodWithOutParam(Namespace.*Type) -> Namespace.Type, Namespace.*Type": CMethod(
                     name="InstanceMethodWithOutParam",
@@ -3289,7 +3289,7 @@ class TestCStruct(unittest.TestCase):
                             out=True,
                         ),
                     ),
-                    returns=(
+                    return_types=(
                         CType(name="Type", namespace="Namespace"),
                         CType(name="Type", namespace="Namespace", reference=True),
                     ),
@@ -3298,7 +3298,7 @@ class TestCStruct(unittest.TestCase):
                     name="InstanceMethodWithParams0",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.InstanceMethodWithParams1(Namespace.Type) -> Namespace.Type": CMethod(
                     name="InstanceMethodWithParams1",
@@ -3306,7 +3306,7 @@ class TestCStruct(unittest.TestCase):
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.InstanceMethodWithParams2(Namespace.Type, Namespace.Type) -> Namespace.Type": CMethod(
                     name="InstanceMethodWithParams2",
@@ -3315,7 +3315,7 @@ class TestCStruct(unittest.TestCase):
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                         CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.StaticMethodWithDefaultParam(Namespace.Type) -> Namespace.Type": CMethod(
                     name="StaticMethodWithDefaultParam",
@@ -3327,7 +3327,7 @@ class TestCStruct(unittest.TestCase):
                             default=True,
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.StaticMethodWithNullableDefaultParam(Namespace.Type?) -> Namespace.Type": CMethod(
@@ -3340,7 +3340,7 @@ class TestCStruct(unittest.TestCase):
                             default=True,
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.StaticMethodWithNullableOutParam(Namespace.*Type?) -> Namespace.Type, Namespace.*Type?": CMethod(
@@ -3355,7 +3355,7 @@ class TestCStruct(unittest.TestCase):
                             out=True,
                         ),
                     ),
-                    returns=(
+                    return_types=(
                         CType(name="Type", namespace="Namespace"),
                         CType(name="Type", namespace="Namespace", reference=True, nullable=True),
                     ),
@@ -3370,7 +3370,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Type", namespace="Namespace", nullable=True),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.StaticMethodWithOutParam(Namespace.*Type) -> Namespace.Type, Namespace.*Type": CMethod(
@@ -3383,7 +3383,7 @@ class TestCStruct(unittest.TestCase):
                             out=True,
                         ),
                     ),
-                    returns=(
+                    return_types=(
                         CType(name="Type", namespace="Namespace"),
                         CType(name="Type", namespace="Namespace", reference=True),
                     ),
@@ -3393,7 +3393,7 @@ class TestCStruct(unittest.TestCase):
                     name="StaticMethodWithParams0",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.StaticMethodWithParams1(Namespace.Type) -> Namespace.Type": CMethod(
@@ -3402,7 +3402,7 @@ class TestCStruct(unittest.TestCase):
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.StaticMethodWithParams2(Namespace.Type, Namespace.Type) -> Namespace.Type": CMethod(
@@ -3412,7 +3412,7 @@ class TestCStruct(unittest.TestCase):
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                         CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
             },
@@ -3447,7 +3447,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.InstanceMethodWithNullableDefaultParam(Namespace.Type?) -> Namespace.Type": {
@@ -3461,7 +3461,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.InstanceMethodWithNullableOutParam(Namespace.*Type?) -> Namespace.Type, Namespace.*Type?": {
@@ -3475,7 +3475,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": True,
                             },
                         ),
-                        "returns": ("Namespace.Type", "Namespace.*Type?"),
+                        "return_types": ("Namespace.Type", "Namespace.*Type?"),
                         "static": False,
                     },
                     "Namespace.Struct.InstanceMethodWithNullableParam(Namespace.Type?) -> Namespace.Type": {
@@ -3489,7 +3489,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.InstanceMethodWithOutParam(Namespace.*Type) -> Namespace.Type, Namespace.*Type": {
@@ -3503,14 +3503,14 @@ class TestCStruct(unittest.TestCase):
                                 "out": True,
                             },
                         ),
-                        "returns": ("Namespace.Type", "Namespace.*Type"),
+                        "return_types": ("Namespace.Type", "Namespace.*Type"),
                         "static": False,
                     },
                     "Namespace.Struct.InstanceMethodWithParams0() -> Namespace.Type": {
                         "name": "InstanceMethodWithParams0",
                         "declaring_type": "Namespace.Struct",
                         "parameters": (),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.InstanceMethodWithParams1(Namespace.Type) -> Namespace.Type": {
@@ -3524,7 +3524,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.InstanceMethodWithParams2(Namespace.Type, Namespace.Type) -> Namespace.Type": {
@@ -3544,7 +3544,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.StaticMethodWithDefaultParam(Namespace.Type) -> Namespace.Type": {
@@ -3558,7 +3558,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.StaticMethodWithNullableDefaultParam(Namespace.Type?) -> Namespace.Type": {
@@ -3572,7 +3572,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.StaticMethodWithNullableOutParam(Namespace.*Type?) -> Namespace.Type, Namespace.*Type?": {
@@ -3586,7 +3586,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": True,
                             },
                         ),
-                        "returns": ("Namespace.Type", "Namespace.*Type?"),
+                        "return_types": ("Namespace.Type", "Namespace.*Type?"),
                         "static": True,
                     },
                     "Namespace.Struct.StaticMethodWithNullableParam(Namespace.Type?) -> Namespace.Type": {
@@ -3600,7 +3600,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.StaticMethodWithOutParam(Namespace.*Type) -> Namespace.Type, Namespace.*Type": {
@@ -3614,14 +3614,14 @@ class TestCStruct(unittest.TestCase):
                                 "out": True,
                             },
                         ),
-                        "returns": ("Namespace.Type", "Namespace.*Type"),
+                        "return_types": ("Namespace.Type", "Namespace.*Type"),
                         "static": True,
                     },
                     "Namespace.Struct.StaticMethodWithParams0() -> Namespace.Type": {
                         "name": "StaticMethodWithParams0",
                         "declaring_type": "Namespace.Struct",
                         "parameters": (),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.StaticMethodWithParams1(Namespace.Type) -> Namespace.Type": {
@@ -3635,7 +3635,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.StaticMethodWithParams2(Namespace.Type, Namespace.Type) -> Namespace.Type": {
@@ -3655,7 +3655,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                 },
@@ -3694,7 +3694,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_BitwiseAnd(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3710,7 +3710,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_BitwiseOr(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3726,7 +3726,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_Decrement(Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3738,7 +3738,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_Division(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3754,7 +3754,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_Equality(Namespace.Struct, Namespace.Struct) -> Namespace.Type": CMethod(
@@ -3770,7 +3770,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_ExclusiveOr(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3786,7 +3786,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_False(Namespace.Struct) -> Namespace.Type": CMethod(
@@ -3795,7 +3795,7 @@ class TestCStruct(unittest.TestCase):
                     parameters=(
                         CParameter(name="self", type=CType(name="Struct", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_GreaterThan(Namespace.Struct, Namespace.Struct) -> Namespace.Type": CMethod(
@@ -3811,7 +3811,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_GreaterThanOrEqual(Namespace.Struct, Namespace.Struct) -> Namespace.Type": CMethod(
@@ -3827,7 +3827,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_Increment(Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3839,7 +3839,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_Inequality(Namespace.Struct, Namespace.Struct) -> Namespace.Type": CMethod(
@@ -3855,7 +3855,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_LessThan(Namespace.Struct, Namespace.Struct) -> Namespace.Type": CMethod(
@@ -3871,7 +3871,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_LessThanOrEqual(Namespace.Struct, Namespace.Struct) -> Namespace.Type": CMethod(
@@ -3887,7 +3887,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_LogicalNot(Namespace.Struct) -> Namespace.Type": CMethod(
@@ -3899,7 +3899,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_Modulus(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3915,7 +3915,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_Multiply(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3931,7 +3931,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_OnesComplement(Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3943,7 +3943,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_Subtraction(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3959,7 +3959,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_True(Namespace.Struct) -> Namespace.Type": CMethod(
@@ -3971,7 +3971,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_UnaryNegation(Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3983,7 +3983,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.op_UnaryPlus(Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -3995,7 +3995,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                     static=True,
                 ),
                 "Namespace.Struct.__add__(Namespace.Struct) -> Namespace.Struct": CMethod(
@@ -4007,7 +4007,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__and__(Namespace.Struct) -> Namespace.Struct": CMethod(
                     name="__and__",
@@ -4018,7 +4018,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__eq__(Namespace.Struct) -> Namespace.Type": CMethod(
                     name="__eq__",
@@ -4029,7 +4029,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__ge__(Namespace.Struct) -> Namespace.Type": CMethod(
                     name="__ge__",
@@ -4040,7 +4040,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__gt__(Namespace.Struct) -> Namespace.Type": CMethod(
                     name="__gt__",
@@ -4051,13 +4051,13 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__invert__() -> Namespace.Struct": CMethod(
                     name="__invert__",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__le__(Namespace.Struct) -> Namespace.Type": CMethod(
                     name="__le__",
@@ -4068,7 +4068,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__lt__(Namespace.Struct) -> Namespace.Type": CMethod(
                     name="__lt__",
@@ -4079,7 +4079,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__mod__(Namespace.Struct) -> Namespace.Struct": CMethod(
                     name="__mod__",
@@ -4090,7 +4090,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__mul__(Namespace.Struct) -> Namespace.Struct": CMethod(
                     name="__mul__",
@@ -4101,7 +4101,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__ne__(Namespace.Struct) -> Namespace.Type": CMethod(
                     name="__ne__",
@@ -4112,13 +4112,13 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Type", namespace="System"),),
+                    return_types=(CType(name="Type", namespace="System"),),
                 ),
                 "Namespace.Struct.__neg__() -> Namespace.Struct": CMethod(
                     name="__neg__",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__or__(Namespace.Struct) -> Namespace.Struct": CMethod(
                     name="__or__",
@@ -4129,13 +4129,13 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__pos__() -> Namespace.Struct": CMethod(
                     name="__pos__",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__sub__(Namespace.Struct) -> Namespace.Struct": CMethod(
                     name="__sub__",
@@ -4146,7 +4146,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__truediv__(Namespace.Struct) -> Namespace.Struct": CMethod(
                     name="__truediv__",
@@ -4157,7 +4157,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
                 "Namespace.Struct.__xor__(Namespace.Struct) -> Namespace.Struct": CMethod(
                     name="__xor__",
@@ -4168,7 +4168,7 @@ class TestCStruct(unittest.TestCase):
                             type=CType(name="Struct", namespace="Namespace"),
                         ),
                     ),
-                    returns=(CType(name="Struct", namespace="Namespace"),),
+                    return_types=(CType(name="Struct", namespace="Namespace"),),
                 ),
             },
             events={},
@@ -4208,7 +4208,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_BitwiseAnd(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": {
@@ -4228,7 +4228,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_BitwiseOr(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": {
@@ -4248,7 +4248,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_Decrement(Namespace.Struct) -> Namespace.Struct": {
@@ -4262,7 +4262,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_Division(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": {
@@ -4282,7 +4282,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_Equality(Namespace.Struct, Namespace.Struct) -> Namespace.Type": {
@@ -4302,7 +4302,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.op_ExclusiveOr(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": {
@@ -4322,7 +4322,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_False(Namespace.Struct) -> Namespace.Type": {
@@ -4336,7 +4336,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.op_GreaterThan(Namespace.Struct, Namespace.Struct) -> Namespace.Type": {
@@ -4356,7 +4356,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.op_GreaterThanOrEqual(Namespace.Struct, Namespace.Struct) -> Namespace.Type": {
@@ -4376,7 +4376,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.op_Increment(Namespace.Struct) -> Namespace.Struct": {
@@ -4390,7 +4390,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_Inequality(Namespace.Struct, Namespace.Struct) -> Namespace.Type": {
@@ -4410,7 +4410,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.op_LessThan(Namespace.Struct, Namespace.Struct) -> Namespace.Type": {
@@ -4430,7 +4430,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.op_LessThanOrEqual(Namespace.Struct, Namespace.Struct) -> Namespace.Type": {
@@ -4450,7 +4450,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.op_LogicalNot(Namespace.Struct) -> Namespace.Type": {
@@ -4464,7 +4464,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.op_Modulus(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": {
@@ -4484,7 +4484,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_Multiply(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": {
@@ -4504,7 +4504,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_OnesComplement(Namespace.Struct) -> Namespace.Struct": {
@@ -4518,7 +4518,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_Subtraction(Namespace.Struct, Namespace.Struct) -> Namespace.Struct": {
@@ -4538,7 +4538,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_True(Namespace.Struct) -> Namespace.Type": {
@@ -4552,7 +4552,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": True,
                     },
                     "Namespace.Struct.op_UnaryNegation(Namespace.Struct) -> Namespace.Struct": {
@@ -4566,7 +4566,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.op_UnaryPlus(Namespace.Struct) -> Namespace.Struct": {
@@ -4580,7 +4580,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": True,
                     },
                     "Namespace.Struct.__add__(Namespace.Struct) -> Namespace.Struct": {
@@ -4594,7 +4594,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                     "Namespace.Struct.__and__(Namespace.Struct) -> Namespace.Struct": {
@@ -4608,7 +4608,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                     "Namespace.Struct.__eq__(Namespace.Struct) -> Namespace.Type": {
@@ -4622,7 +4622,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.__ge__(Namespace.Struct) -> Namespace.Type": {
@@ -4636,7 +4636,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.__gt__(Namespace.Struct) -> Namespace.Type": {
@@ -4650,14 +4650,14 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.__invert__() -> Namespace.Struct": {
                         "name": "__invert__",
                         "declaring_type": "Namespace.Struct",
                         "parameters": (),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                     "Namespace.Struct.__le__(Namespace.Struct) -> Namespace.Type": {
@@ -4671,7 +4671,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.__lt__(Namespace.Struct) -> Namespace.Type": {
@@ -4685,7 +4685,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Type",),
+                        "return_types": ("Namespace.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.__mod__(Namespace.Struct) -> Namespace.Struct": {
@@ -4699,7 +4699,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                     "Namespace.Struct.__mul__(Namespace.Struct) -> Namespace.Struct": {
@@ -4713,7 +4713,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                     "Namespace.Struct.__ne__(Namespace.Struct) -> Namespace.Type": {
@@ -4727,14 +4727,14 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Type",),
+                        "return_types": ("System.Type",),
                         "static": False,
                     },
                     "Namespace.Struct.__neg__() -> Namespace.Struct": {
                         "name": "__neg__",
                         "declaring_type": "Namespace.Struct",
                         "parameters": (),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                     "Namespace.Struct.__or__(Namespace.Struct) -> Namespace.Struct": {
@@ -4748,14 +4748,14 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                     "Namespace.Struct.__pos__() -> Namespace.Struct": {
                         "name": "__pos__",
                         "declaring_type": "Namespace.Struct",
                         "parameters": (),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                     "Namespace.Struct.__sub__(Namespace.Struct) -> Namespace.Struct": {
@@ -4769,7 +4769,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                     "Namespace.Struct.__truediv__(Namespace.Struct) -> Namespace.Struct": {
@@ -4783,7 +4783,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                     "Namespace.Struct.__xor__(Namespace.Struct) -> Namespace.Struct": {
@@ -4797,7 +4797,7 @@ class TestCStruct(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Struct",),
+                        "return_types": ("Namespace.Struct",),
                         "static": False,
                     },
                 },
@@ -5036,7 +5036,7 @@ class TestCStruct(unittest.TestCase):
                 "Namespace.Struct.Field": CField(
                     name="Field",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                 )
             },
             constructors={
@@ -5061,7 +5061,7 @@ class TestCStruct(unittest.TestCase):
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
             },
             events={
@@ -5396,19 +5396,19 @@ class TestCInterface(unittest.TestCase):
                 "Namespace.Interface.StaticFieldA": CField(
                     name="StaticFieldA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                     static=True,
                 ),
                 "Namespace.Interface.StaticFieldB": CField(
                     name="StaticFieldB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                     static=True,
                 ),
                 "Namespace.Interface.StaticFieldC": CField(
                     name="StaticFieldC",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                     static=True,
                 ),
             },
@@ -5432,19 +5432,19 @@ class TestCInterface(unittest.TestCase):
                     "Namespace.Interface.StaticFieldA": {
                         "name": "StaticFieldA",
                         "declaring_type": "Namespace.Interface",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": True,
                     },
                     "Namespace.Interface.StaticFieldB": {
                         "name": "StaticFieldB",
                         "declaring_type": "Namespace.Interface",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": True,
                     },
                     "Namespace.Interface.StaticFieldC": {
                         "name": "StaticFieldC",
                         "declaring_type": "Namespace.Interface",
-                        "returns": "Namespace.Type",
+                        "return_type": "Namespace.Type",
                         "static": True,
                     },
                 },
@@ -5673,7 +5673,7 @@ class TestCInterface(unittest.TestCase):
                             default=True,
                         ),
                     ),
-                    returns=(CType(name="Int32", namespace="System"),),
+                    return_types=(CType(name="Int32", namespace="System"),),
                 ),
                 "Namespace.Interface.InstanceMethodWithNullableDefaultParam(System.Int32?) -> System.Int32": CMethod(
                     name="InstanceMethodWithNullableDefaultParam",
@@ -5689,7 +5689,7 @@ class TestCInterface(unittest.TestCase):
                             default=True,
                         ),
                     ),
-                    returns=(CType(name="Int32", namespace="System"),),
+                    return_types=(CType(name="Int32", namespace="System"),),
                 ),
                 "Namespace.Interface.InstanceMethodWithNullableOutParam(System.*Int32?) -> System.Int32, System.*Int32?": CMethod(
                     name="InstanceMethodWithNullableOutParam",
@@ -5703,7 +5703,7 @@ class TestCInterface(unittest.TestCase):
                             out=True,
                         ),
                     ),
-                    returns=(
+                    return_types=(
                         CType(name="Int32", namespace="System"),
                         CType(name="Int32", namespace="System", reference=True, nullable=True),
                     ),
@@ -5717,7 +5717,7 @@ class TestCInterface(unittest.TestCase):
                             type=CType(name="Int32", namespace="System", nullable=True),
                         ),
                     ),
-                    returns=(CType(name="Int32", namespace="System"),),
+                    return_types=(CType(name="Int32", namespace="System"),),
                 ),
                 "Namespace.Interface.InstanceMethodWithOutParam(System.*Int32) -> System.Int32, System.*Int32": CMethod(
                     name="InstanceMethodWithOutParam",
@@ -5729,7 +5729,7 @@ class TestCInterface(unittest.TestCase):
                             out=True,
                         ),
                     ),
-                    returns=(
+                    return_types=(
                         CType(name="Int32", namespace="System"),
                         CType(name="Int32", namespace="System", reference=True),
                     ),
@@ -5738,7 +5738,7 @@ class TestCInterface(unittest.TestCase):
                     name="InstanceMethodWithParams",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Int32", namespace="System"),),
+                    return_types=(CType(name="Int32", namespace="System"),),
                 ),
                 "Namespace.Interface.InstanceMethodWithParams(System.Int32) -> System.Int32": CMethod(
                     name="InstanceMethodWithParams",
@@ -5746,7 +5746,7 @@ class TestCInterface(unittest.TestCase):
                     parameters=(
                         CParameter(name="param0", type=CType(name="Int32", namespace="System")),
                     ),
-                    returns=(CType(name="Int32", namespace="System"),),
+                    return_types=(CType(name="Int32", namespace="System"),),
                 ),
                 "Namespace.Interface.InstanceMethodWithParams(System.Int32, System.Int32) -> System.Int32": CMethod(
                     name="InstanceMethodWithParams",
@@ -5755,7 +5755,7 @@ class TestCInterface(unittest.TestCase):
                         CParameter(name="param0", type=CType(name="Int32", namespace="System")),
                         CParameter(name="param1", type=CType(name="Int32", namespace="System")),
                     ),
-                    returns=(CType(name="Int32", namespace="System"),),
+                    return_types=(CType(name="Int32", namespace="System"),),
                 ),
             },
             events={},
@@ -5786,7 +5786,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Int32",),
+                        "return_types": ("System.Int32",),
                         "static": False,
                     },
                     "Namespace.Interface.InstanceMethodWithNullableDefaultParam(System.Int32?) -> System.Int32": {
@@ -5800,7 +5800,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Int32",),
+                        "return_types": ("System.Int32",),
                         "static": False,
                     },
                     "Namespace.Interface.InstanceMethodWithNullableOutParam(System.*Int32?) -> System.Int32, System.*Int32?": {
@@ -5814,7 +5814,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": True,
                             },
                         ),
-                        "returns": ("System.Int32", "System.*Int32?"),
+                        "return_types": ("System.Int32", "System.*Int32?"),
                         "static": False,
                     },
                     "Namespace.Interface.InstanceMethodWithNullableParam(System.Int32?) -> System.Int32": {
@@ -5828,7 +5828,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Int32",),
+                        "return_types": ("System.Int32",),
                         "static": False,
                     },
                     "Namespace.Interface.InstanceMethodWithOutParam(System.*Int32) -> System.Int32, System.*Int32": {
@@ -5842,14 +5842,14 @@ class TestCInterface(unittest.TestCase):
                                 "out": True,
                             },
                         ),
-                        "returns": ("System.Int32", "System.*Int32"),
+                        "return_types": ("System.Int32", "System.*Int32"),
                         "static": False,
                     },
                     "Namespace.Interface.InstanceMethodWithParams() -> System.Int32": {
                         "name": "InstanceMethodWithParams",
                         "declaring_type": "Namespace.Interface",
                         "parameters": (),
-                        "returns": ("System.Int32",),
+                        "return_types": ("System.Int32",),
                         "static": False,
                     },
                     "Namespace.Interface.InstanceMethodWithParams(System.Int32) -> System.Int32": {
@@ -5863,7 +5863,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Int32",),
+                        "return_types": ("System.Int32",),
                         "static": False,
                     },
                     "Namespace.Interface.InstanceMethodWithParams(System.Int32, System.Int32) -> System.Int32": {
@@ -5883,7 +5883,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Int32",),
+                        "return_types": ("System.Int32",),
                         "static": False,
                     },
                 },
@@ -5914,7 +5914,7 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
                 "Namespace.Interface.__and__(Namespace.Interface) -> Namespace.Interface": CMethod(
                     name="__and__",
@@ -5924,7 +5924,7 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
                 "Namespace.Interface.__ge__(Namespace.Interface) -> System.Boolean": CMethod(
                     name="__ge__",
@@ -5934,7 +5934,7 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Boolean", namespace="System"),),
+                    return_types=(CType(name="Boolean", namespace="System"),),
                 ),
                 "Namespace.Interface.__gt__(Namespace.Interface) -> System.Boolean": CMethod(
                     name="__gt__",
@@ -5944,13 +5944,13 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Boolean", namespace="System"),),
+                    return_types=(CType(name="Boolean", namespace="System"),),
                 ),
                 "Namespace.Interface.__invert__() -> Namespace.Interface": CMethod(
                     name="__invert__",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
                 "Namespace.Interface.__le__(Namespace.Interface) -> System.Boolean": CMethod(
                     name="__le__",
@@ -5960,7 +5960,7 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Boolean", namespace="System"),),
+                    return_types=(CType(name="Boolean", namespace="System"),),
                 ),
                 "Namespace.Interface.__lt__(Namespace.Interface) -> System.Boolean": CMethod(
                     name="__lt__",
@@ -5970,7 +5970,7 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Boolean", namespace="System"),),
+                    return_types=(CType(name="Boolean", namespace="System"),),
                 ),
                 "Namespace.Interface.__mod__(Namespace.Interface) -> Namespace.Interface": CMethod(
                     name="__mod__",
@@ -5980,7 +5980,7 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
                 "Namespace.Interface.__mul__(Namespace.Interface) -> Namespace.Interface": CMethod(
                     name="__mul__",
@@ -5990,13 +5990,13 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
                 "Namespace.Interface.__neg__() -> Namespace.Interface": CMethod(
                     name="__neg__",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
                 "Namespace.Interface.__or__(Namespace.Interface) -> Namespace.Interface": CMethod(
                     name="__or__",
@@ -6006,13 +6006,13 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
                 "Namespace.Interface.__pos__() -> Namespace.Interface": CMethod(
                     name="__pos__",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
                 "Namespace.Interface.__sub__(Namespace.Interface) -> Namespace.Interface": CMethod(
                     name="__sub__",
@@ -6022,7 +6022,7 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
                 "Namespace.Interface.__truediv__(Namespace.Interface) -> Namespace.Interface": CMethod(
                     name="__truediv__",
@@ -6032,7 +6032,7 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
                 "Namespace.Interface.__xor__(Namespace.Interface) -> Namespace.Interface": CMethod(
                     name="__xor__",
@@ -6042,7 +6042,7 @@ class TestCInterface(unittest.TestCase):
                             name="other", type=CType(name="Interface", namespace="Namespace")
                         ),
                     ),
-                    returns=(CType(name="Interface", namespace="Namespace"),),
+                    return_types=(CType(name="Interface", namespace="Namespace"),),
                 ),
             },
             events={},
@@ -6073,7 +6073,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                     "Namespace.Interface.__and__(Namespace.Interface) -> Namespace.Interface": {
@@ -6087,7 +6087,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                     "Namespace.Interface.__ge__(Namespace.Interface) -> System.Boolean": {
@@ -6101,7 +6101,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Boolean",),
+                        "return_types": ("System.Boolean",),
                         "static": False,
                     },
                     "Namespace.Interface.__gt__(Namespace.Interface) -> System.Boolean": {
@@ -6115,14 +6115,14 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Boolean",),
+                        "return_types": ("System.Boolean",),
                         "static": False,
                     },
                     "Namespace.Interface.__invert__() -> Namespace.Interface": {
                         "name": "__invert__",
                         "declaring_type": "Namespace.Interface",
                         "parameters": (),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                     "Namespace.Interface.__le__(Namespace.Interface) -> System.Boolean": {
@@ -6136,7 +6136,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Boolean",),
+                        "return_types": ("System.Boolean",),
                         "static": False,
                     },
                     "Namespace.Interface.__lt__(Namespace.Interface) -> System.Boolean": {
@@ -6150,7 +6150,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("System.Boolean",),
+                        "return_types": ("System.Boolean",),
                         "static": False,
                     },
                     "Namespace.Interface.__mod__(Namespace.Interface) -> Namespace.Interface": {
@@ -6164,7 +6164,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                     "Namespace.Interface.__mul__(Namespace.Interface) -> Namespace.Interface": {
@@ -6178,14 +6178,14 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                     "Namespace.Interface.__neg__() -> Namespace.Interface": {
                         "name": "__neg__",
                         "declaring_type": "Namespace.Interface",
                         "parameters": (),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                     "Namespace.Interface.__or__(Namespace.Interface) -> Namespace.Interface": {
@@ -6199,14 +6199,14 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                     "Namespace.Interface.__pos__() -> Namespace.Interface": {
                         "name": "__pos__",
                         "declaring_type": "Namespace.Interface",
                         "parameters": (),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                     "Namespace.Interface.__sub__(Namespace.Interface) -> Namespace.Interface": {
@@ -6220,7 +6220,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                     "Namespace.Interface.__truediv__(Namespace.Interface) -> Namespace.Interface": {
@@ -6234,7 +6234,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                     "Namespace.Interface.__xor__(Namespace.Interface) -> Namespace.Interface": {
@@ -6248,7 +6248,7 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("Namespace.Interface",),
+                        "return_types": ("Namespace.Interface",),
                         "static": False,
                     },
                 },
@@ -6277,13 +6277,13 @@ class TestCInterface(unittest.TestCase):
                     parameters=(
                         CParameter(name="value", type=CType(name="Int32", namespace="System")),
                     ),
-                    returns=(CType(name="bool"),),
+                    return_types=(CType(name="bool"),),
                 ),
                 "Namespace.Interface.__iter__() -> typing.Iterator[System.Int32]": CMethod(
                     name="__iter__",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
-                    returns=(
+                    return_types=(
                         CType(
                             name="Iterator",
                             namespace="typing",
@@ -6295,7 +6295,7 @@ class TestCInterface(unittest.TestCase):
                     name="__iter__",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
-                    returns=(
+                    return_types=(
                         CType(name="Iterator", namespace="typing", inner=(CType(name="object"),)),
                     ),
                 ),
@@ -6303,7 +6303,7 @@ class TestCInterface(unittest.TestCase):
                     name="__len__",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
-                    returns=(CType(name="int"),),
+                    return_types=(CType(name="int"),),
                 ),
             },
             events={},
@@ -6334,28 +6334,28 @@ class TestCInterface(unittest.TestCase):
                                 "out": False,
                             },
                         ),
-                        "returns": ("bool",),
+                        "return_types": ("bool",),
                         "static": False,
                     },
                     "Namespace.Interface.__iter__() -> typing.Iterator[System.Int32]": {
                         "name": "__iter__",
                         "declaring_type": "Namespace.Interface",
                         "parameters": (),
-                        "returns": ("typing.Iterator[System.Int32]",),
+                        "return_types": ("typing.Iterator[System.Int32]",),
                         "static": False,
                     },
                     "Namespace.Interface.__iter__() -> typing.Iterator[object]": {
                         "name": "__iter__",
                         "declaring_type": "Namespace.Interface",
                         "parameters": (),
-                        "returns": ("typing.Iterator[object]",),
+                        "return_types": ("typing.Iterator[object]",),
                         "static": False,
                     },
                     "Namespace.Interface.__len__() -> int": {
                         "name": "__len__",
                         "declaring_type": "Namespace.Interface",
                         "parameters": (),
-                        "returns": ("int",),
+                        "return_types": ("int",),
                         "static": False,
                     },
                 },
@@ -6584,7 +6584,7 @@ class TestCInterface(unittest.TestCase):
                 "Namespace.Interface.Field": CField(
                     name="Field",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    returns=CType(name="Type", namespace="Namespace"),
+                    return_type=CType(name="Type", namespace="Namespace"),
                 )
             },
             properties={
@@ -6601,7 +6601,7 @@ class TestCInterface(unittest.TestCase):
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                     ),
-                    returns=(CType(name="Type", namespace="Namespace"),),
+                    return_types=(CType(name="Type", namespace="Namespace"),),
                 ),
             },
             events={
@@ -7451,7 +7451,7 @@ class TestCField(unittest.TestCase):
         c_field: CField = CField(
             name="Field",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            returns=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="Type", namespace="Namespace"),
         )
         json: JsonType = c_field.to_json()
 
@@ -7461,7 +7461,7 @@ class TestCField(unittest.TestCase):
             {
                 "name": "Field",
                 "declaring_type": "Namespace.Type",
-                "returns": "Namespace.Type",
+                "return_type": "Namespace.Type",
                 "static": False,
             },
             json,
@@ -7475,7 +7475,7 @@ class TestCField(unittest.TestCase):
         c_field: CField = CField(
             name="Field",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            returns=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="Type", namespace="Namespace"),
             static=True,
         )
         json: JsonType = c_field.to_json()
@@ -7486,7 +7486,7 @@ class TestCField(unittest.TestCase):
             {
                 "name": "Field",
                 "declaring_type": "Namespace.Type",
-                "returns": "Namespace.Type",
+                "return_type": "Namespace.Type",
                 "static": True,
             },
             json,
@@ -7500,7 +7500,7 @@ class TestCField(unittest.TestCase):
         type_def: CField = CField(
             name="Field",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            returns=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="Type", namespace="Namespace"),
         )
         name: str
         json: JsonType
@@ -7521,12 +7521,12 @@ class TestCField(unittest.TestCase):
         field0: CField = CField(
             name="FieldA",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            returns=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="Type", namespace="Namespace"),
         )
         field1: CField = CField(
             name="FieldB",
             declaring_type=CType(name="Type", namespace="Namespace"),
-            returns=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="Type", namespace="Namespace"),
         )
 
         self.assertLess(field0, field1)
@@ -7547,10 +7547,10 @@ class TestCField(unittest.TestCase):
         declaring_type: CType = CType(name="Type", namespace="Namespace")
         return_type: CType = CType(name="Type", namespace="Namespace")
         ordered: Sequence[CField] = (
-            CField(name="FieldA", declaring_type=declaring_type, returns=return_type),
-            CField(name="FieldB", declaring_type=declaring_type, returns=return_type),
-            CField(name="FieldC", declaring_type=declaring_type, returns=return_type),
-            CField(name="FieldD", declaring_type=declaring_type, returns=return_type),
+            CField(name="FieldA", declaring_type=declaring_type, return_type=return_type),
+            CField(name="FieldB", declaring_type=declaring_type, return_type=return_type),
+            CField(name="FieldC", declaring_type=declaring_type, return_type=return_type),
+            CField(name="FieldD", declaring_type=declaring_type, return_type=return_type),
         )
         unordered: MutableSequence[CField] = list(ordered)
         random.shuffle(unordered)
@@ -7894,7 +7894,7 @@ class TestCMethod(unittest.TestCase):
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
             parameters=(CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),),
-            returns=(CType(name="Type", namespace="Namespace"),),
+            return_types=(CType(name="Type", namespace="Namespace"),),
         )
         json: JsonType = c_method.to_json()
 
@@ -7912,7 +7912,7 @@ class TestCMethod(unittest.TestCase):
                         "out": False,
                     },
                 ),
-                "returns": ("Namespace.Type",),
+                "return_types": ("Namespace.Type",),
                 "static": False,
             },
             json,
@@ -7927,7 +7927,7 @@ class TestCMethod(unittest.TestCase):
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
             parameters=(CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),),
-            returns=(),
+            return_types=(),
         )
         json: JsonType = c_method.to_json()
 
@@ -7945,7 +7945,7 @@ class TestCMethod(unittest.TestCase):
                         "out": False,
                     },
                 ),
-                "returns": (),
+                "return_types": (),
                 "static": False,
             },
             json,
@@ -7960,7 +7960,7 @@ class TestCMethod(unittest.TestCase):
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
             parameters=(CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),),
-            returns=(CType(name="Type", namespace="Namespace"),),
+            return_types=(CType(name="Type", namespace="Namespace"),),
             static=True,
         )
         json: JsonType = c_method.to_json()
@@ -7979,7 +7979,7 @@ class TestCMethod(unittest.TestCase):
                         "out": False,
                     },
                 ),
-                "returns": ("Namespace.Type",),
+                "return_types": ("Namespace.Type",),
                 "static": True,
             },
             json,
@@ -7997,7 +7997,7 @@ class TestCMethod(unittest.TestCase):
                 CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                 CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
             ),
-            returns=(CType(name="Type", namespace="Namespace"),),
+            return_types=(CType(name="Type", namespace="Namespace"),),
         )
         name: str
         json: JsonType
@@ -8025,13 +8025,13 @@ class TestCMethod(unittest.TestCase):
             name="MethodA",
             declaring_type=CType(name="Type", namespace="Namespace"),
             parameters=(),
-            returns=(),
+            return_types=(),
         )
         method1: CMethod = CMethod(
             name="MethodB",
             declaring_type=CType(name="Type", namespace="Namespace"),
             parameters=(),
-            returns=(),
+            return_types=(),
         )
 
         self.assertLess(method0, method1)
@@ -8055,7 +8055,7 @@ class TestCMethod(unittest.TestCase):
             parameters=(
                 CParameter(name="param0", type=CType(name="TypeA", namespace="Namespace")),
             ),
-            returns=(),
+            return_types=(),
         )
         method1: CMethod = CMethod(
             name="Method",
@@ -8063,7 +8063,7 @@ class TestCMethod(unittest.TestCase):
             parameters=(
                 CParameter(name="param0", type=CType(name="TypeB", namespace="Namespace")),
             ),
-            returns=(),
+            return_types=(),
         )
 
         self.assertLess(method0, method1)
@@ -8085,7 +8085,7 @@ class TestCMethod(unittest.TestCase):
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
             parameters=(CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),),
-            returns=(),
+            return_types=(),
         )
         method1: CMethod = CMethod(
             name="Method",
@@ -8094,7 +8094,7 @@ class TestCMethod(unittest.TestCase):
                 CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
                 CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
             ),
-            returns=(),
+            return_types=(),
         )
 
         self.assertLess(method0, method1)
@@ -8117,13 +8117,13 @@ class TestCMethod(unittest.TestCase):
                 name="MethodA",
                 declaring_type=CType(name="Type", namespace="Namespace"),
                 parameters=(),
-                returns=(),
+                return_types=(),
             ),
             CMethod(
                 name="MethodB",
                 declaring_type=CType(name="Type", namespace="Namespace"),
                 parameters=(),
-                returns=(),
+                return_types=(),
             ),
             CMethod(
                 name="MethodB",
@@ -8131,7 +8131,7 @@ class TestCMethod(unittest.TestCase):
                 parameters=(
                     CParameter(name="param0", type=CType(name="TypeA", namespace="Namespace")),
                 ),
-                returns=(),
+                return_types=(),
             ),
             CMethod(
                 name="MethodB",
@@ -8139,7 +8139,7 @@ class TestCMethod(unittest.TestCase):
                 parameters=(
                     CParameter(name="param0", type=CType(name="TypeB", namespace="Namespace")),
                 ),
-                returns=(),
+                return_types=(),
             ),
             CMethod(
                 name="MethodB",
@@ -8148,7 +8148,7 @@ class TestCMethod(unittest.TestCase):
                     CParameter(name="param0", type=CType(name="TypeB", namespace="Namespace")),
                     CParameter(name="param0", type=CType(name="TypeB", namespace="Namespace")),
                 ),
-                returns=(),
+                return_types=(),
             ),
         )
         unordered: MutableSequence[CMethod] = list(ordered)

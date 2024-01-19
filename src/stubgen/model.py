@@ -610,7 +610,7 @@ class CMember(ABC):
 
 @dataclass(frozen=True)
 class CField(CMember):
-    returns: CType
+    return_type: CType
     static: bool = False
 
     def __lt__(self, other: CField) -> bool:
@@ -629,7 +629,7 @@ class CField(CMember):
         return {
             "name": self.name,
             "declaring_type": self.declaring_type.to_json(),
-            "returns": self.returns.to_json(),
+            "return_type": self.return_type.to_json(),
             "static": self.static,
         }
 
@@ -638,9 +638,9 @@ class CField(CMember):
 
     def to_stub_lines(self, doc_dict: DocDict, indent: int = 0) -> Sequence[str]:
         doc_dict.imports.add("typing.Final")
-        doc_dict.imports.add(self.returns.import_name)
+        doc_dict.imports.add(self.return_type.import_name)
 
-        type_str: str = self.returns.name
+        type_str: str = self.return_type.name
         if self.static:
             doc_dict.imports.add("typing.ClassVar")
             type_str = f"ClassVar[{type_str}]"
@@ -655,7 +655,7 @@ class CField(CMember):
         return cls(
             name=json["name"],
             declaring_type=CType.from_json(json["declaring_type"]),
-            returns=CType.from_json(json["returns"]),
+            return_type=CType.from_json(json["return_type"]),
             static=json["static"],
         )
 
@@ -767,12 +767,12 @@ class CProperty(CMember):
 @dataclass(frozen=True)
 class CMethod(CMember):
     parameters: Sequence[CParameter]
-    returns: Sequence[CType]
+    return_types: Sequence[CType]
     static: bool = False
 
     def __str__(self) -> str:
         param_types: str = ", ".join(str(p.type) for p in self.parameters)
-        returns: str = ", ".join(map(str, self.returns))
+        returns: str = ", ".join(map(str, self.return_types))
         return f"{self.declaring_type}.{self.name}({param_types}) -> {returns}"
 
     def __lt__(self, other: CMethod) -> bool:
@@ -800,7 +800,7 @@ class CMethod(CMember):
             "name": self.name,
             "declaring_type": self.declaring_type.to_json(),
             "parameters": tuple(map(CParameter.to_json, self.parameters)),
-            "returns": tuple(map(CType.to_json, self.returns)),
+            "return_types": tuple(map(CType.to_json, self.return_types)),
             "static": self.static,
         }
 
@@ -820,7 +820,7 @@ class CMethod(CMember):
             name=json["name"],
             declaring_type=CType.from_json(json["declaring_type"]),
             parameters=tuple(map(CParameter.from_json, json["parameters"])),
-            returns=tuple(map(CType.from_json, json["returns"])),
+            return_types=tuple(map(CType.from_json, json["return_types"])),
             static=json["static"],
         )
 

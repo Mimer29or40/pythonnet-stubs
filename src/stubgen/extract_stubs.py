@@ -180,7 +180,7 @@ def extract_field(info: FieldInfo) -> CField:
     return CField(
         name=make_python_name(info.Name),
         declaring_type=extract_type(info.DeclaringType),
-        returns=extract_type(info.FieldType),
+        return_type=extract_type(info.FieldType),
         static=info.IsStatic,
     )
 
@@ -219,7 +219,7 @@ def extract_method(info: MethodInfo) -> CMethod:
         name=make_python_name(info.Name),
         declaring_type=extract_type(info.DeclaringType),
         parameters=tuple(parameters),
-        returns=tuple(return_types),
+        return_types=tuple(return_types),
         static=info.IsStatic,
     )
 
@@ -372,7 +372,7 @@ def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
                 name="__iter__",
                 declaring_type=interface,
                 parameters=tuple(),
-                returns=(CType(name="Iterator", namespace="typing", inner=(return_type,)),),
+                return_types=(CType(name="Iterator", namespace="typing", inner=(return_type,)),),
             )
             methods.append(method)
         elif interface.name == "ICollection":
@@ -380,7 +380,7 @@ def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
                 name="__len__",
                 declaring_type=interface,
                 parameters=tuple(),
-                returns=(CType(name="int"),),
+                return_types=(CType(name="int"),),
             )
             methods.append(method)
 
@@ -393,7 +393,7 @@ def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
                 name="__contains__",
                 declaring_type=interface,
                 parameters=(CParameter(name="value", type=return_type),),
-                returns=(CType(name="bool"),),
+                return_types=(CType(name="bool"),),
             )
             methods.append(method)
 
