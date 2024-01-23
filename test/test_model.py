@@ -3,6 +3,9 @@ import unittest
 from typing import MutableSequence
 from typing import Sequence
 
+from stubgen.model import CNamespace
+from test_base import TestBase
+
 from stubgen.model import CClass
 from stubgen.model import CConstructor
 from stubgen.model import CDelegate
@@ -19,7 +22,163 @@ from stubgen.model import CTypeDefinition
 from stubgen.model import JsonType
 
 
-class TestCClass(unittest.TestCase):
+class TestCNamespace(TestBase):
+    def test_json(self) -> None:
+        namespace: CNamespace = CNamespace(
+            name="Namespace",
+            types={
+                "Namespace.IInterface": CInterface(
+                    name="IInterface",
+                    namespace="Namespace",
+                    generic_args=(),
+                    interfaces=(),
+                    fields={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested={},
+                ),
+                "Namespace.Class": CClass(
+                    name="Class",
+                    namespace="Namespace",
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested={},
+                ),
+                "Namespace.Delegate": CDelegate(
+                    name="Delegate",
+                    namespace="Namespace",
+                    parameters=(),
+                    return_type=CType(name="Void", namespace="System"),
+                ),
+                "Namespace.Enum": CEnum(name="Enum", namespace="Namespace", fields=()),
+                "Namespace.Struct": CStruct(
+                    name="Struct",
+                    namespace="Namespace",
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested={},
+                ),
+            },
+        )
+        json: JsonType = namespace.to_json()
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "name": "Namespace",
+                "types": {
+                    "Namespace.IInterface": {
+                        "type": "interface",
+                        "name": "IInterface",
+                        "namespace": "Namespace",
+                        "generic_args": (),
+                        "interfaces": (),
+                        "fields": {},
+                        "properties": {},
+                        "methods": {},
+                        "events": {},
+                        "nested": {},
+                    },
+                    "Namespace.Class": {
+                        "type": "class",
+                        "name": "Class",
+                        "namespace": "Namespace",
+                        "abstract": False,
+                        "generic_args": (),
+                        "super_class": None,
+                        "interfaces": (),
+                        "fields": {},
+                        "constructors": {},
+                        "properties": {},
+                        "methods": {},
+                        "events": {},
+                        "nested": {},
+                    },
+                    "Namespace.Delegate": {
+                        "type": "delegate",
+                        "name": "Delegate",
+                        "namespace": "Namespace",
+                        "parameters": (),
+                        "return_type": "System.Void",
+                    },
+                    "Namespace.Enum": {
+                        "type": "enum",
+                        "name": "Enum",
+                        "namespace": "Namespace",
+                        "fields": (),
+                    },
+                    "Namespace.Struct": {
+                        "type": "struct",
+                        "name": "Struct",
+                        "namespace": "Namespace",
+                        "abstract": False,
+                        "generic_args": (),
+                        "super_class": None,
+                        "interfaces": (),
+                        "fields": {},
+                        "constructors": {},
+                        "properties": {},
+                        "methods": {},
+                        "events": {},
+                        "nested": {},
+                    },
+                },
+            },
+            json,
+        )
+
+        from_json: CNamespace = CNamespace.from_json(json)
+
+        self.assertEqual(namespace, from_json)
+
+    def test_compare(self) -> None:
+        namespace0: CNamespace = CNamespace(name="NamespaceA", types={})
+        namespace1: CNamespace = CNamespace(name="NamespaceB", types={})
+
+        self.assertLess(namespace0, namespace1)
+
+        self.assertLessEqual(namespace0, namespace1)
+
+        self.assertLessEqual(namespace0, namespace0)
+        self.assertLessEqual(namespace1, namespace1)
+
+        self.assertGreater(namespace1, namespace0)
+
+        self.assertGreaterEqual(namespace1, namespace0)
+
+        self.assertGreaterEqual(namespace0, namespace0)
+        self.assertGreaterEqual(namespace1, namespace1)
+
+    def test_sorted(self) -> None:
+        ordered: Sequence[CNamespace] = (
+            CNamespace(name="NamespaceA", types={}),
+            CNamespace(name="NamespaceB", types={}),
+            CNamespace(name="NamespaceC", types={}),
+            CNamespace(name="NamespaceD", types={}),
+        )
+        unordered: MutableSequence[CNamespace] = list(ordered)
+        random.shuffle(unordered)
+
+        self.assertSequenceEqual(ordered, sorted(unordered))
+
+
+class TestCClass(TestBase):
     def test_json_generic(self) -> None:
         type_def: CClass = CClass(
             name="Class",
@@ -2645,7 +2804,7 @@ class TestCClass(unittest.TestCase):
         self.assertSequenceEqual(ordered, sorted(unordered))
 
 
-class TestCStruct(unittest.TestCase):
+class TestCStruct(TestBase):
     def test_json_generic(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
@@ -5271,7 +5430,7 @@ class TestCStruct(unittest.TestCase):
         self.assertSequenceEqual(ordered, sorted(unordered))
 
 
-class TestCInterface(unittest.TestCase):
+class TestCInterface(TestBase):
     def test_json_generic(self) -> None:
         type_def: CInterface = CInterface(
             name="Interface",
@@ -6788,7 +6947,7 @@ class TestCInterface(unittest.TestCase):
         self.assertSequenceEqual(ordered, sorted(unordered))
 
 
-class TestCEnum(unittest.TestCase):
+class TestCEnum(TestBase):
     def test_json(self) -> None:
         enum: CEnum = CEnum(
             name="Enum",
@@ -6908,7 +7067,7 @@ class TestCEnum(unittest.TestCase):
         self.assertSequenceEqual(ordered, sorted(unordered))
 
 
-class TestCDelegate(unittest.TestCase):
+class TestCDelegate(TestBase):
     def test_json(self) -> None:
         delegate: CDelegate = CDelegate(
             name="Delegate",
@@ -7045,7 +7204,7 @@ class TestCDelegate(unittest.TestCase):
         self.assertSequenceEqual(ordered, sorted(unordered))
 
 
-class TestCType(unittest.TestCase):
+class TestCType(TestBase):
     def test_json_no_namespace(self) -> None:
         c_type: CType = CType(name="Type")
         json: JsonType = c_type.to_json()
@@ -7302,7 +7461,7 @@ class TestCType(unittest.TestCase):
         self.assertSequenceEqual(ordered, sorted(unordered))
 
 
-class TestCParameter(unittest.TestCase):
+class TestCParameter(TestBase):
     def test_json(self) -> None:
         parameter: CParameter = CParameter(
             name="Parameter",
@@ -7446,7 +7605,7 @@ class TestCParameter(unittest.TestCase):
         self.assertEqual(CParameter.compare(params4, params3), +1)
 
 
-class TestCField(unittest.TestCase):
+class TestCField(TestBase):
     def test_json(self) -> None:
         c_field: CField = CField(
             name="Field",
@@ -7558,7 +7717,7 @@ class TestCField(unittest.TestCase):
         self.assertSequenceEqual(ordered, sorted(unordered))
 
 
-class TestCConstructor(unittest.TestCase):
+class TestCConstructor(TestBase):
     def test_json(self) -> None:
         c_constructor: CConstructor = CConstructor(
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7700,7 +7859,7 @@ class TestCConstructor(unittest.TestCase):
         self.assertSequenceEqual(ordered, sorted(unordered))
 
 
-class TestCProperty(unittest.TestCase):
+class TestCProperty(TestBase):
     def test_json(self) -> None:
         c_property: CProperty = CProperty(
             name="Property",
@@ -7888,7 +8047,7 @@ class TestCProperty(unittest.TestCase):
         self.assertSequenceEqual(ordered, sorted(unordered))
 
 
-class TestCMethod(unittest.TestCase):
+class TestCMethod(TestBase):
     def test_json(self) -> None:
         c_method: CMethod = CMethod(
             name="Method",
@@ -8157,7 +8316,7 @@ class TestCMethod(unittest.TestCase):
         self.assertSequenceEqual(ordered, sorted(unordered))
 
 
-class TestCEvent(unittest.TestCase):
+class TestCEvent(TestBase):
     def test_json(self) -> None:
         c_event: CEvent = CEvent(
             name="Event",

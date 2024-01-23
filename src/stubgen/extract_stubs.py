@@ -466,10 +466,7 @@ def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> U
         type_definitions[type_definition.namespace].append(type_definition)
 
     namespaces: Sequence[CNamespace] = tuple(
-        CNamespace(
-            name=namespace,
-            types={str(t): t for t in sorted(type_list)},
-        )
+        CNamespace(name=namespace, types={str(t): t for t in sorted(type_list)})
         for namespace, type_list in type_definitions.items()
     )
 
@@ -479,7 +476,9 @@ def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> U
             {
                 "name": assembly_name,
                 "version": assembly_version,
-                "namespaces": {namespace.name: namespace.to_json() for namespace in namespaces},
+                "namespaces": {
+                    str(namespace): namespace.to_json() for namespace in sorted(namespaces)
+                },
             },
             file,
             indent=2,

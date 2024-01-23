@@ -29,6 +29,21 @@ class CNamespace:
     name: str
     types: Mapping[str, CTypeDefinition]
 
+    def __str__(self) -> str:
+        return self.name
+
+    def __lt__(self, other: CField) -> bool:
+        return self.name < other.name
+
+    def __le__(self, other: CField) -> bool:
+        return self.name <= other.name
+
+    def __gt__(self, other: CField) -> bool:
+        return self.name > other.name
+
+    def __ge__(self, other: CField) -> bool:
+        return self.name >= other.name
+
     def to_json(self) -> JsonType:
         return {"name": self.name, "types": {k: v.to_json() for k, v in self.types.items()}}
 

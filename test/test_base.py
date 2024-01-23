@@ -14,6 +14,7 @@ from stubgen.model import CEvent
 from stubgen.model import CField
 from stubgen.model import CInterface
 from stubgen.model import CMethod
+from stubgen.model import CNamespace
 from stubgen.model import CParameter
 from stubgen.model import CProperty
 from stubgen.model import CStruct
@@ -23,6 +24,8 @@ from stubgen.model import CType
 class TestBase(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.addTypeEqualityFunc(CNamespace, self.assertCNamespace)
 
         self.addTypeEqualityFunc(CClass, self.assertCClass)
         self.addTypeEqualityFunc(CStruct, self.assertCStruct)
@@ -109,6 +112,13 @@ class TestBase(unittest.TestCase):
         standard_msg = self._truncateMessage(standard_msg, diff_msg)  # noqa
         msg = self._formatMessage(msg, standard_msg)
         self.fail(msg)
+
+    def assertCNamespace(self, first: CNamespace, second: CNamespace, msg: str = None) -> None:
+        self.assertIsInstance(first, CNamespace, "First argument is not a CClass")
+        self.assertIsInstance(second, CNamespace, "Second argument is not a CClass")
+
+        self.assertEqual(first.name, second.name, "Names are not equal")
+        self.assertMapping(first.types, second.types, "Types are not equal")
 
     def assertCClass(self, first: CClass, second: CClass, msg: str = None) -> None:
         self.assertIsInstance(first, CClass, "First argument is not a CClass")
