@@ -3989,7 +3989,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_BitwiseAnd(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
@@ -4005,7 +4007,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_BitwiseOr(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
@@ -4021,7 +4025,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_Decrement(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
@@ -4033,7 +4039,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_Division(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
@@ -4049,7 +4057,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_ExclusiveOr(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
@@ -4065,7 +4075,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_False(TestLib.IInterfaceWithOperatorMethods) -> System.Boolean": CMethod(
@@ -4121,7 +4133,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_LessThan(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods) -> System.Boolean": CMethod(
@@ -4181,7 +4195,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_Multiply(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
@@ -4197,7 +4213,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_OnesComplement(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
@@ -4209,7 +4227,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_Subtraction(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
@@ -4225,7 +4245,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_True(TestLib.IInterfaceWithOperatorMethods) -> System.Boolean": CMethod(
@@ -4249,7 +4271,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.op_UnaryPlus(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
@@ -4261,7 +4285,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                     static=True,
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__add__(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
@@ -4273,7 +4299,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__and__(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
                     name="__and__",
@@ -4284,7 +4312,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__ge__(TestLib.IInterfaceWithOperatorMethods) -> System.Boolean": CMethod(
                     name="__ge__",
@@ -4312,7 +4342,9 @@ class TestCInterface(TestExtractBase):
                     name="__invert__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__le__(TestLib.IInterfaceWithOperatorMethods) -> System.Boolean": CMethod(
                     name="__le__",
@@ -4345,7 +4377,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__mul__(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
                     name="__mul__",
@@ -4356,13 +4390,17 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__neg__() -> TestLib.IInterfaceWithOperatorMethods": CMethod(
                     name="__neg__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__or__(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
                     name="__or__",
@@ -4373,13 +4411,17 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__pos__() -> TestLib.IInterfaceWithOperatorMethods": CMethod(
                     name="__pos__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__sub__(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
                     name="__sub__",
@@ -4390,7 +4432,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__truediv__(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
                     name="__truediv__",
@@ -4401,7 +4445,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
                 "TestLib.IInterfaceWithOperatorMethods.__xor__(TestLib.IInterfaceWithOperatorMethods) -> TestLib.IInterfaceWithOperatorMethods": CMethod(
                     name="__xor__",
@@ -4412,7 +4458,9 @@ class TestCInterface(TestExtractBase):
                             type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                         ),
                     ),
-                    return_types=(CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),),
+                    return_types=(
+                        CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
+                    ),
                 ),
             },
             events={},

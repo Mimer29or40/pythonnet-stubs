@@ -102,7 +102,7 @@ class TestBase(unittest.TestCase):
                 except (TypeError, IndexError, NotImplementedError):
                     differing += f"Unable to index element {len1} of second Mapping\n"
         standard_msg: Optional[str] = differing
-        diff_msg = '\n' + '\n'.join(
+        diff_msg = "\n" + "\n".join(
             difflib.ndiff(pprint.pformat(map1).splitlines(), pprint.pformat(map2).splitlines())
         )
 
