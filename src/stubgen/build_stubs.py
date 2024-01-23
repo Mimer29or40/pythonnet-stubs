@@ -14,6 +14,7 @@ from typing import Union
 
 from stubgen.log import get_logger
 from stubgen.model import CNamespace
+from stubgen.model import CTypeDefinition
 from stubgen.util import rm_tree
 
 logger = get_logger(__name__)
@@ -24,54 +25,39 @@ class Stub:
     type_vars: Final[Set[str]] = set()
 
 
-class DocDict:
+def merge_namespace(namespace1: CNamespace, namespace2: CNamespace) -> CNamespace:
+    if namespace1.name != namespace2.name:
+        raise NameError(f"Namespace name mismatch: {namespace1.name} != {namespace2.name}")
+
+    type_list: Set[str] = set(namespace1.types.keys())
+    type_list.update(namespace2.types.keys())
+
+    type_map: Dict[str, CTypeDefinition] = {}
+    for type_str in sorted(type_list):
+        if type_str in namespace1.types:
+            type_def: CTypeDefinition = namespace1.types[type_str]
+            if type_str in namespace2.types:
+                logger.warning("Duplicate type in namespace %r: %r", namespace1.name, str(type_def))
+            type_map[type_str] = type_def
+        elif type_str in namespace2.types:
+            type_def: CTypeDefinition = namespace2.types[type_str]
+            type_map[type_str] = type_def
+
+    return CNamespace(name=namespace1.name, types=type_map)
+
+
+class Doc:
     data: Mapping[str, Any]
 
     def __init__(self, data: Mapping[str, Any]):
         self.data = data
 
-    def merge(self, other: DocDict) -> DocDict:
-        return DocDict(DocDict.merge_node(self.data, other.data))
-
-    @staticmethod
-    def merge_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str, Any]:
-        new_dict: Dict[str, Any] = dict(**d1)
-
-        for k2, v2 in d2.items():
-            if k2 not in new_dict:
-                new_dict[k2] = v2
-                continue
-
-            v1: Any = new_dict[k2]
-            if k2 in ("doc", "return"):
-                new_dict[k2] = (v1 + "\n" + v2) if v1 != "" and v2 != "" else (v1 + v2)
-            elif k2 == "doc_formatted":
-                new: Dict[str, Sequence[str]] = dict(**v1)
-                for k, v in v2.items():
-                    if k in new:
-                        new[k] += v
-                    else:
-                        new[k] = v
-                new_dict[k2] = new
-            elif k2 in ("parameters", "exceptions"):
-                new: Dict[str, str] = dict(**v1)
-                for k, v in v2.items():
-                    if k in new:
-                        new[k] = (new[k] + "\n" + v) if new[k] != "" and v != "" else (new[k] + v)
-                    else:
-                        new[k] = v
-                new_dict[k2] = new
-            else:
-                new_dict[k2] = DocDict.merge_node(v1, v2)
-
-        return new_dict
-
-    def get(self, node_str: str) -> Optional[DocDict]:
+    def get(self, node_str: str) -> Optional[Doc]:
         search: str
         doc_dict: Mapping[str, Any] = self.data
         while True:
             if node_str in doc_dict:
-                return DocDict(doc_dict[node_str])
+                return Doc(doc_dict[node_str])
             if "." in node_str:
                 search, node_str = node_str.split(".", 1)
             else:
@@ -144,6 +130,42 @@ class DocDict:
         return lines
 
 
+def merge_doc(self, other: Doc) -> Doc:
+    return Doc(merge_doc_node(self.data, other.data))
+
+
+def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str, Any]:
+    new_dict: Dict[str, Any] = dict(**d1)
+
+    for k2, v2 in d2.items():
+        if k2 not in new_dict:
+            new_dict[k2] = v2
+            continue
+
+        v1: Any = new_dict[k2]
+        if k2 in ("doc", "return"):
+            new_dict[k2] = (v1 + "\n" + v2) if v1 != "" and v2 != "" else (v1 + v2)
+        elif k2 == "doc_formatted":
+            new: Dict[str, Sequence[str]] = dict(**v1)
+            for k, v in v2.items():
+                if k in new:
+                    new[k] += v
+                else:
+                    new[k] = v
+            new_dict[k2] = new
+        elif k2 in ("parameters", "exceptions"):
+            new: Dict[str, str] = dict(**v1)
+            for k, v in v2.items():
+                if k in new:
+                    new[k] = (new[k] + "\n" + v) if new[k] != "" and v != "" else (new[k] + v)
+                else:
+                    new[k] = v
+            new_dict[k2] = new
+        else:
+            new_dict[k2] = merge_doc_node(v1, v2)
+    return new_dict
+
+
 def build_stubs(
     skeleton_files: Sequence[Path], doc_files: Sequence[Path], output_dir: Path
 ) -> Union[int, str]:
@@ -158,18 +180,18 @@ def build_stubs(
 
         for namespace_json in skeleton_dict["namespaces"].values():
             namespace: CNamespace = CNamespace.from_json(namespace_json)
-            if namespace.name not in namespaces:
-                namespaces[namespace.name] = namespace
-            # else:
-            #     namespaces[namespace.name] += namespace  # TODO - Combine namespaces
+            if namespace.name in namespaces:
+                namespace = merge_namespace(namespaces[namespace.name], namespace)
+            namespaces[namespace.name] = namespace
 
-    doc_dict: DocDict = DocDict({})
+    doc_dict: Doc = Doc({})
     for doc_file in doc_files:
         logger.info("Loading Doc File: %r", str(doc_file))
         with doc_file.open("r") as file:
             loaded_doc_dict_tree: Dict[str, Any] = json.load(file)
 
-        doc_dict = doc_dict.merge(DocDict(loaded_doc_dict_tree))
+        new_doc: Doc = Doc(loaded_doc_dict_tree)
+        doc_dict = merge_doc(doc_dict, new_doc)
 
     for namespace in namespaces.values():
         namespace_dir: Path = output_dir

@@ -15,10 +15,6 @@ from typing import Type
 from typing import TypeVar
 from typing import Union
 
-from stubgen.log import get_logger
-
-logger = get_logger(__name__)
-
 T = TypeVar("T")
 
 JsonType = Union[None, int, float, str, Sequence, Mapping]

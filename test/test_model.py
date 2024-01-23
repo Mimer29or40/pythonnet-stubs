@@ -3,7 +3,6 @@ import unittest
 from typing import MutableSequence
 from typing import Sequence
 
-from stubgen.model import CNamespace
 from test_base import TestBase
 
 from stubgen.model import CClass
@@ -14,6 +13,7 @@ from stubgen.model import CEvent
 from stubgen.model import CField
 from stubgen.model import CInterface
 from stubgen.model import CMethod
+from stubgen.model import CNamespace
 from stubgen.model import CParameter
 from stubgen.model import CProperty
 from stubgen.model import CStruct
