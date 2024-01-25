@@ -2685,7 +2685,7 @@ class TestCClass(TestBase):
                     "return": "",
                     "exceptions": {},
                 },
-                "Event -> (System.EventHandler)": {"doc": "", "doc_formatted": {}},
+                "Event": {"doc": "", "doc_formatted": {}},
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
                 "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
@@ -5311,7 +5311,7 @@ class TestCStruct(TestBase):
                     "return": "",
                     "exceptions": {},
                 },
-                "Event -> (System.EventHandler)": {"doc": "", "doc_formatted": {}},
+                "Event": {"doc": "", "doc_formatted": {}},
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
                 "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
@@ -6846,7 +6846,7 @@ class TestCInterface(TestBase):
                     "return": "",
                     "exceptions": {},
                 },
-                "Event -> (System.EventHandler)": {"doc": "", "doc_formatted": {}},
+                "Event": {"doc": "", "doc_formatted": {}},
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
                 "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
@@ -8352,7 +8352,7 @@ class TestCEvent(TestBase):
 
         self.assertIsNotNone(name)
         self.assertIsInstance(name, str)
-        self.assertEqual("Event -> (Namespace.Type)", name)
+        self.assertEqual("Event", name)
 
         self.assertIsNotNone(json)
         self.assertIsInstance(json, dict)

@@ -6,7 +6,6 @@ from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Any
 from typing import Dict
-from typing import List
 from typing import Mapping
 from typing import Optional
 from typing import Sequence
@@ -80,10 +79,6 @@ class CTypeDefinition(ABC):
 
     @abstractmethod
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        pass
-
-    @abstractmethod
-    def to_stub_lines(self, indent: int = 0) -> Sequence[str]:
         pass
 
     @classmethod
@@ -161,49 +156,6 @@ class CClass(CTypeDefinition):
             doc_dict[name] = json
 
         return self.name, doc_dict
-
-    def to_stub_lines(self, indent: int = 0) -> Sequence[str]:
-        # abstract: bool
-        # generic_args: Sequence[CType]
-        # super_class: Optional[CType]
-        # interfaces: Sequence[CType]
-        # fields: Mapping[str, CField]
-        # constructors: Mapping[str, CConstructor]
-        # properties: Mapping[str, CProperty]
-        # methods: Mapping[str, CMethod]
-        # events: Mapping[str, CEvent]
-        # nested: Mapping[str, CTypeDefinition]
-
-        # if self.abstract:
-        #     doc_dict.imports.add("abc.ABC")
-        # if self.super_class is not None:
-        #     doc_dict.imports.add(self.super_class.import_name)
-        # for interface in self.interfaces:
-        #     doc_dict.imports.add(interface.import_name)
-        #
-        # # if self.super_class is not None or len(self.interfaces) > 0:
-        # parents: List[CType] = []
-        # if self.super_class is not None:
-        #     parents.append(self.super_class)
-        # parents.extend(self.interfaces)
-        # class_def: str = f"{'    ' * indent}{self.name}:"
-        # if len(parents) > 0:
-        #     class_def = (
-        #         f"{'    ' * indent}{self.name}({', '.join(t.simple_name for t in parents)}):"
-        #     )
-        #
-        # lines: List[str] = [
-        #     class_def,
-        #     *doc_dict.get_doc(f"{self.namespace}.{self.name}", indent + 1),
-        #     "",
-        # ]
-        # for field in self.fields.values():
-        #     lines.extend(field.to_stub_lines(doc_dict, indent + 1))
-        # for constructor in self.constructors.values():
-        #     lines.extend(constructor.to_stub_lines(doc_dict, False, indent=indent + 1))
-        #
-        # return lines
-        return []
 
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
@@ -285,9 +237,6 @@ class CInterface(CTypeDefinition):
 
         return self.name, doc_dict
 
-    def to_stub_lines(self, indent: int = 0) -> Sequence[str]:
-        return ()
-
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
         return cls(
@@ -322,9 +271,6 @@ class CEnum(CTypeDefinition):
             "fields": {f: {"doc": ""} for f in self.fields},
         }
 
-    def to_stub_lines(self, indent: int = 0) -> Sequence[str]:
-        return ()
-
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
         return cls(
@@ -355,9 +301,6 @@ class CDelegate(CTypeDefinition):
             "parameters": {p.name: {"doc": ""} for p in self.parameters},
             "return": "",
         }
-
-    def to_stub_lines(self, indent: int = 0) -> Sequence[str]:
-        return ()
 
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
@@ -534,7 +477,7 @@ class CMember(ABC):
         pass
 
     @abstractmethod
-    def to_doc_json(self) -> Tuple[str, JsonType]:  # TODO - tests
+    def to_doc_json(self) -> Tuple[str, JsonType]:
         pass
 
 
@@ -565,21 +508,6 @@ class CField(CMember):
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
         return self.name, {"doc": "", "doc_formatted": {}, "return": ""}
-
-    def to_stub_lines(self, indent: int = 0) -> Sequence[str]:
-        # doc_dict.imports.add("typing.Final")
-        # doc_dict.imports.add(self.return_type.import_name)
-        #
-        # type_str: str = self.return_type.name
-        # if self.static:
-        #     doc_dict.imports.add("typing.ClassVar")
-        #     type_str = f"ClassVar[{type_str}]"
-        #
-        # return (
-        #     f"{'    ' * indent}{self.name}: Final[{type_str}]",
-        #     *doc_dict.get_doc(f"{self.declaring_type.import_name}.{self.name}", indent),
-        # )
-        return []
 
     @classmethod
     def from_json(cls, json: JsonType) -> CField:
@@ -628,23 +556,6 @@ class CConstructor(CMember):
             "doc_formatted": {},
             "parameters": {p.name: "" for p in self.parameters},
         }
-
-    def to_stub_lines(self, overload: bool, indent: int = 0) -> Sequence[str]:
-        lines: List[str] = []
-
-        # if overload:
-        #     doc_dict.imports.add("typing.overload")
-        #     lines.append(f"{'    ' * indent}@overload")
-        #
-        # parameters: List[str] = []
-        # for parameter in self.parameters:
-        #     doc_dict.imports.add(parameter.type.import_name)
-        #     parameters.append(f", {parameter.name}: {parameter.type.simple_name}")
-        #
-        # lines.append(f"{'    ' * indent}def __init__(self{''.join(parameters)}):")
-        # lines.extend(doc_dict.get_doc(str(self), indent + 1))
-
-        return lines
 
     @classmethod
     def from_json(cls, json: JsonType) -> CConstructor:
@@ -783,7 +694,7 @@ class CEvent(CMember):
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        return f"{self.name} -> ({self.type})", {"doc": "", "doc_formatted": {}}
+        return self.name, {"doc": "", "doc_formatted": {}}
 
     @classmethod
     def from_json(cls, json: JsonType) -> CEvent:
@@ -792,7 +703,3 @@ class CEvent(CMember):
             declaring_type=CType.from_json(json["declaring_type"]),
             type=CType.from_json(json["type"]),
         )
-
-
-class StubFile:
-    imports: List[str] = []
