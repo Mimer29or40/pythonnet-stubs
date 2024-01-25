@@ -15,6 +15,11 @@ from typing import Set
 from typing import Union
 from typing import cast
 
+import black
+from black import FileMode
+from black import Mode
+from black import TargetVersion
+
 from stubgen.log import get_logger
 from stubgen.model import CClass
 from stubgen.model import CConstructor
@@ -125,7 +130,7 @@ class Doc:
                 return None
             doc_dict = doc_dict[search]
 
-    def doc_string(self, indent: int = 0, line_limit: int = 100) -> Sequence[str]:
+    def doc_string(self, indent: int = 0, line_length: int = 100) -> Sequence[str]:
         indent_str: str = "    " * indent
 
         doc: Optional[str] = self.data.get("doc", None)
@@ -137,25 +142,25 @@ class Doc:
         if len(parameters) == 0 and return_str is None and len(exceptions) == 0:
             if doc is None:
                 return (f'{indent_str}""""""',)
-            if "\n" not in doc and 4 * indent + len(doc) + 3 <= line_limit:
+            if "\n" not in doc and 4 * indent + len(doc) + 3 <= line_length:
                 return (f'{indent_str}"""{doc}"""',)
 
         doc = '"""' + doc.replace("\n", "\n\n")
-        doc_lines: List[str] = list(self.split(doc, indent, line_limit))
+        doc_lines: List[str] = list(self.split(doc, indent, line_length))
 
         if len(parameters) > 0 or return_str is not None or len(exceptions) > 0:
             doc_lines.append(indent_str)
 
             for param, param_doc in parameters.items():
                 param_str: str = f":param {param}: {param_doc}"
-                doc_lines.extend(self.split(param_str, indent, line_limit, "  "))
+                doc_lines.extend(self.split(param_str, indent, line_length, "  "))
 
             if return_str is not None:
-                doc_lines.extend(self.split(f":return: {return_str}", indent, line_limit, "  "))
+                doc_lines.extend(self.split(f":return: {return_str}", indent, line_length, "  "))
 
             for exception, exception_doc in exceptions.items():
                 param_str: str = f":except {exception}: {exception_doc}"
-                doc_lines.extend(self.split(param_str, indent, line_limit, "  "))
+                doc_lines.extend(self.split(param_str, indent, line_length, "  "))
 
         line_index: int = 0
         while line_index < len(doc_lines):
@@ -172,7 +177,7 @@ class Doc:
         return tuple(doc_lines)
 
     @staticmethod
-    def split(text: str, indent: int = 0, line_limit: int = 100, prefix: str = "") -> Sequence[str]:
+    def split(text: str, indent: int = 0, line_length: int = 100, prefix: str = "") -> Sequence[str]:
         indent_str: str = "    " * indent
 
         lines: List[str] = []
@@ -180,7 +185,7 @@ class Doc:
             words: List[str] = doc_paragraph.split(" ")
             doc_line: str = indent_str + words[0]
             for word in words[1:]:
-                if len(doc_line) + len(word) + 1 > line_limit:
+                if len(doc_line) + len(word) + 1 > line_length:
                     lines.append(doc_line)
                     doc_line = indent_str + prefix + word
                 else:
@@ -232,19 +237,19 @@ def build_type_def(
     imports: Imports,
     doc: Doc,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     type_name: str = type_def.__class__.__name__
     if type_name == "CClass":
-        return build_class(cast(CClass, type_def), imports, doc, indent, line_limit)
+        return build_class(cast(CClass, type_def), imports, doc, indent, line_length)
     if type_name == "CStruct":
-        return build_struct(cast(CStruct, type_def), imports, doc, indent, line_limit)
+        return build_struct(cast(CStruct, type_def), imports, doc, indent, line_length)
     if type_name == "CInterface":
-        return build_interface(cast(CInterface, type_def), imports, doc, indent, line_limit)
+        return build_interface(cast(CInterface, type_def), imports, doc, indent, line_length)
     if type_name == "CEnum":
-        return build_enum(cast(CEnum, type_def), imports, doc, indent, line_limit)
+        return build_enum(cast(CEnum, type_def), imports, doc, indent, line_length)
     if type_name == "CDelegate":
-        return build_delegate(cast(CDelegate, type_def), imports, doc, indent, line_limit)
+        return build_delegate(cast(CDelegate, type_def), imports, doc, indent, line_length)
 
 
 def build_class(
@@ -252,7 +257,7 @@ def build_class(
     imports: Imports,
     doc: Doc,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     parents: List[str] = []
     if type_def.abstract:
@@ -284,7 +289,7 @@ def build_class(
     doc_lines: Sequence[str]
     doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}")
     if doc_node is not None:
-        doc_lines = doc_node.doc_string(indent=indent + 1, line_limit=line_limit)
+        doc_lines = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
         doc_lines = [f'{"    " * (indent + 1)}""""""']
     lines.extend(doc_lines)
@@ -295,7 +300,7 @@ def build_class(
             imports=imports,
             doc=doc,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(field_lines)
 
@@ -307,7 +312,7 @@ def build_class(
             doc=doc,
             overload=constructor_overload,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(constructor_lines)
 
@@ -317,7 +322,7 @@ def build_class(
             imports=imports,
             doc=doc,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(property_lines)
 
@@ -330,7 +335,7 @@ def build_class(
             doc=doc,
             overload=method_overload,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(method_lines)
 
@@ -340,7 +345,7 @@ def build_class(
             imports=imports,
             doc=doc,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(event_lines)
 
@@ -350,7 +355,7 @@ def build_class(
             imports=imports,
             doc=doc,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(nested_type_def_lines)
 
@@ -362,14 +367,14 @@ def build_struct(
     imports: Imports,
     doc: Doc,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     return build_class(
         type_def=type_def,
         imports=imports,
         doc=doc,
         indent=indent,
-        line_limit=line_limit,
+        line_length=line_length,
     )
 
 
@@ -378,7 +383,7 @@ def build_interface(
     imports: Imports,
     doc: Doc,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     parents: List[str] = []
     if len(type_def.generic_args) > 0:
@@ -403,7 +408,7 @@ def build_interface(
     doc_lines: Sequence[str]
     doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}")
     if doc_node is not None:
-        doc_lines = doc_node.doc_string(indent=indent + 1, line_limit=line_limit)
+        doc_lines = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
         doc_lines = [f'{"    " * (indent + 1)}""""""']
     lines.extend(doc_lines)
@@ -414,7 +419,7 @@ def build_interface(
             imports=imports,
             doc=doc,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(field_lines)
 
@@ -424,7 +429,7 @@ def build_interface(
             imports=imports,
             doc=doc,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(property_lines)
 
@@ -437,7 +442,7 @@ def build_interface(
             doc=doc,
             overload=method_overload,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(method_lines)
 
@@ -447,7 +452,7 @@ def build_interface(
             imports=imports,
             doc=doc,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(event_lines)
 
@@ -457,7 +462,7 @@ def build_interface(
             imports=imports,
             doc=doc,
             indent=indent + 1,
-            line_limit=line_limit,
+            line_length=line_length,
         )
         lines.extend(nested_type_def_lines)
 
@@ -469,7 +474,7 @@ def build_enum(
     imports: Imports,
     doc: Doc,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     imports.add_c_type(CType(name="Enum", namespace="System"))
     lines: List[str] = [f"{'    ' * indent}class {type_def.name}(Enum):"]
@@ -478,7 +483,7 @@ def build_enum(
     indent_str: str = "    " * (indent + 1)
     doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}")
     if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_limit=line_limit)
+        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
         doc_str = [f'{indent_str}""""""']
     lines.extend(doc_str)
@@ -488,7 +493,7 @@ def build_enum(
 
         doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}.{field}")
         if doc_node is not None:
-            doc_str = doc_node.doc_string(indent=indent + 1, line_limit=line_limit)
+            doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
         else:
             doc_str = [f'{indent_str}""""""']
         lines.extend(doc_str)
@@ -501,7 +506,7 @@ def build_delegate(
     imports: Imports,
     doc: Doc,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     indent_str: str = "    " * indent
 
@@ -521,7 +526,7 @@ def build_delegate(
     doc_str: Sequence[str]
     doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}")
     if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent, line_limit=line_limit)
+        doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
     else:
         doc_str = [f'{indent_str}""""""']
     lines.extend(doc_str)
@@ -534,7 +539,7 @@ def build_field(
     imports: Imports,
     doc: Doc,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     imports.add_py_type("typing.Final")
     imports.add_c_type(field.return_type)
@@ -547,7 +552,7 @@ def build_field(
     doc_str: Sequence[str]
     doc_node: Doc = doc.get(f"{field.declaring_type.import_name}.{field.name}")
     if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent, line_limit=line_limit)
+        doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
     else:
         doc_str = [f'{"    " * indent}""""""']
 
@@ -560,7 +565,7 @@ def build_constructor(
     doc: Doc,
     overload: bool,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     lines: List[str] = []
 
@@ -578,7 +583,7 @@ def build_constructor(
     doc_str: Sequence[str]
     doc_node: Doc = doc.get(str(constructor))
     if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_limit=line_limit)
+        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
         doc_str = [f'{"    " * (indent + 1)}""""""']
     lines.extend(doc_str)
@@ -591,7 +596,7 @@ def build_property(
     imports: Imports,
     doc: Doc,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     indent_str: str = "    " * indent
 
@@ -609,7 +614,7 @@ def build_property(
     doc_str: Sequence[str]
     doc_node: Doc = doc.get(f"{property.declaring_type.import_name}.{property.name}")
     if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_limit=line_limit)
+        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
         doc_str = [f'{"    " * (indent + 1)}""""""']
     lines.extend(doc_str)
@@ -632,7 +637,7 @@ def build_method(
     doc: Doc,
     overload: bool,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     lines: List[str] = []
 
@@ -669,7 +674,7 @@ def build_method(
     param_types: str = ", ".join(str(p.type) for p in method.parameters)
     doc_node: Doc = doc.get(f"{method.declaring_type.import_name}.{method.name}({param_types})")
     if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent + 1, line_limit=line_limit)
+        doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
         doc_str = [f'{"    " * (indent + 1)}""""""']
     lines.extend(doc_str)
@@ -682,7 +687,7 @@ def build_event(
     imports: Imports,
     doc: Doc,
     indent: int = 0,
-    line_limit: int = 100,
+    line_length: int = 100,
 ) -> Sequence[str]:
     indent_str: str = "    " * indent
 
@@ -694,7 +699,7 @@ def build_event(
     doc_str: Sequence[str]
     doc_node: Doc = doc.get(f"{event.declaring_type.import_name}.{event.name}")
     if doc_node is not None:
-        doc_str = doc_node.doc_string(indent=indent, line_limit=line_limit)
+        doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
     else:
         doc_str = [f'{indent_str}""""""']
     lines.extend(doc_str)
@@ -705,6 +710,8 @@ def build_event(
 def build_stubs(
     skeleton_files: Sequence[Path], doc_files: Sequence[Path], output_dir: Path
 ) -> Union[int, str]:
+    line_length: int = 100  # TODO - cmd arg
+
     namespaces: Dict[str, CNamespace] = {}
     for skeleton_file in skeleton_files:
         with skeleton_file.open("r") as file:
@@ -748,11 +755,42 @@ def build_stubs(
         built_types: List[Sequence[str]] = []
         for type_def in namespace.types.values():
             logger.info("Building type: %s", type_def)
-            built_type: Sequence[str] = build_type_def(type_def, imports, doc, indent=0)
+            built_type: Sequence[str] = build_type_def(
+                type_def=type_def,
+                imports=imports,
+                doc=doc,
+                indent=0,
+                line_length=line_length,
+            )
             built_types.append(built_type)
 
         lines: List[str] = list(imports.build(namespace.name))
         for built_type in built_types:
             lines.extend(built_type)
+
+        logger.info("Formatting code")
+        code: str = "\n".join(lines)
+        black_mode: Mode = Mode(
+            target_versions={
+                TargetVersion.PY38,
+                TargetVersion.PY39,
+                TargetVersion.PY310,
+                TargetVersion.PY311,
+                TargetVersion.PY312,
+            },
+            line_length=line_length,
+            # string_normalization: bool = True
+            is_pyi=True,
+            # is_ipynb: bool = False
+            # skip_source_first_line: bool = False
+            # magic_trailing_comma: bool = True
+            # experimental_string_processing: bool = False
+            # python_cell_magics: Set[str] = field(default_factory=set)
+            # preview: bool = False
+        )
+        formatted_code: str = black.format_str(code, mode=black_mode)
+
+        logger.info("Writing file: %r", str(namespace_file))
+        namespace_file.write_text(formatted_code)
 
     return 0
