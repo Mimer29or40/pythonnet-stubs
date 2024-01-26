@@ -233,7 +233,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.IEquatable[TestLib.ClassWithInterface].Equals(TestLib.ClassWithInterface)": CMethod(
+                "System.IEquatable[$T].Equals(TestLib.ClassWithInterface)": CMethod(
                     name="Equals",
                     declaring_type=CType(
                         name="IEquatable",

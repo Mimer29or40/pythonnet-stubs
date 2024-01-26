@@ -16,7 +16,6 @@ from typing import Union
 from typing import cast
 
 import black
-from black import FileMode
 from black import Mode
 from black import TargetVersion
 
