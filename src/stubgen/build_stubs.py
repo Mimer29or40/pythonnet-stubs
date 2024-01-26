@@ -177,7 +177,9 @@ class Doc:
         return tuple(doc_lines)
 
     @staticmethod
-    def split(text: str, indent: int = 0, line_length: int = 100, prefix: str = "") -> Sequence[str]:
+    def split(
+        text: str, indent: int = 0, line_length: int = 100, prefix: str = ""
+    ) -> Sequence[str]:
         indent_str: str = "    " * indent
 
         lines: List[str] = []
@@ -228,6 +230,16 @@ def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str,
         else:
             new_dict[k2] = merge_doc_node(v1, v2)
     return new_dict
+
+
+type_conversion: Final[Mapping[str, str]] = {}
+
+
+def convert_type(type: CType) -> str:
+    if len(type.inner) > 0:
+        return type.simple_name
+
+    return ""
 
 
 # TODO - Nested types break doc tree
@@ -287,7 +299,7 @@ def build_class(
         lines.append(f"{'    ' * indent}class {type_def.name}:")
 
     doc_lines: Sequence[str]
-    doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}")
+    doc_node: Doc = doc.get(str(type_def))
     if doc_node is not None:
         doc_lines = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -406,7 +418,7 @@ def build_interface(
         lines.append(f"{'    ' * indent}class {type_def.name}:")
 
     doc_lines: Sequence[str]
-    doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}")
+    doc_node: Doc = doc.get(str(type_def))
     if doc_node is not None:
         doc_lines = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -708,10 +720,8 @@ def build_event(
 
 
 def build_stubs(
-    skeleton_files: Sequence[Path], doc_files: Sequence[Path], output_dir: Path
+    skeleton_files: Sequence[Path], doc_files: Sequence[Path], output_dir: Path, line_length: int
 ) -> Union[int, str]:
-    line_length: int = 100  # TODO - cmd arg
-
     namespaces: Dict[str, CNamespace] = {}
     for skeleton_file in skeleton_files:
         with skeleton_file.open("r") as file:
@@ -788,7 +798,7 @@ def build_stubs(
             # python_cell_magics: Set[str] = field(default_factory=set)
             # preview: bool = False
         )
-        formatted_code: str = black.format_str(code, mode=black_mode)
+        formatted_code: str = black.format_file_contents(code, fast=False, mode=black_mode)
 
         logger.info("Writing file: %r", str(namespace_file))
         namespace_file.write_text(formatted_code)

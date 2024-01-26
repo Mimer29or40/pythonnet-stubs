@@ -137,9 +137,14 @@ def main(*args: Any) -> Union[int, str]:
             assembly_names = list(dict.fromkeys(assembly_names).keys())
 
             try:
-                assembly: str
-                for assembly in assembly_names:
-                    exit_code = extract_assembly(assembly, output_dir, True)
+                assembly_name: str
+                for assembly_name in assembly_names:
+                    overwrite: bool = True  # TODO - cmd arg
+                    exit_code = extract_assembly(
+                        assembly_name=assembly_name,
+                        output_dir=output_dir,
+                        overwrite=overwrite,
+                    )
                     if exit_code != 0 and not skip_failed:
                         break
             except Exception as e:
@@ -163,7 +168,13 @@ def main(*args: Any) -> Union[int, str]:
                 doc_files.append(path)
                 logger.debug("Using doc file: %r", str(path))
 
-            exit_code = build_stubs(skeleton_files, doc_files, output_dir)
+            line_length: int = 100  # TODO - cmd arg
+            exit_code = build_stubs(
+                skeleton_files=skeleton_files,
+                doc_files=doc_files,
+                output_dir=output_dir,
+                line_length=line_length,
+            )
 
     except Exception as e:
         logger.exception("An unhandled exception occurred:", exc_info=e)

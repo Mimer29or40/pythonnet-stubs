@@ -145,6 +145,10 @@ def extract_type(info: TypeInfo) -> Optional[CType]:
     reference: bool = info.IsByRef
     nullable: bool = False
 
+    # TODO - Convert IEquatable[ClassWithInterface] -> IEquatable[$T]
+    # info.IsConstructedGenericType
+    # info.IsGenericType
+
     underlying_type: TypeInfo = Nullable.GetUnderlyingType(info)
     if underlying_type is not None:
         info = underlying_type
@@ -157,19 +161,20 @@ def extract_type(info: TypeInfo) -> Optional[CType]:
             name = make_python_name(info.Name)
             nullable = True
 
+    generic: bool = info.IsGenericParameter
     return CType(
         name=name,
-        namespace=info.Namespace,
+        namespace=None if generic else info.Namespace,
         inner=tuple(map(extract_type, info.GetGenericArguments())),
         reference=reference,
-        generic=info.IsGenericParameter,
+        generic=generic,
         nullable=nullable,
     )
 
 
 def extract_parameter(info: ParameterInfo) -> CParameter:
     return CParameter(
-        name=make_python_name(info.Name),
+        name="param" if info.Name is None else make_python_name(info.Name),
         type=extract_type(info.ParameterType),
         default=info.HasDefaultValue,
         out=info.IsOut,
@@ -367,7 +372,7 @@ def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
             if len(interface.inner) > 0:
                 return_type = interface.inner[0]
             else:
-                return_type = CType("object", None)
+                return_type = CType(name="Object", namespace="System")
             method = CMethod(
                 name="__iter__",
                 declaring_type=interface,
@@ -380,7 +385,7 @@ def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
                 name="__len__",
                 declaring_type=interface,
                 parameters=tuple(),
-                return_types=(CType(name="int"),),
+                return_types=(CType(name="Int32", namespace="System"),),
             )
             methods.append(method)
 
@@ -388,12 +393,12 @@ def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
             if len(interface.inner) > 0:
                 return_type = interface.inner[0]
             else:
-                return_type = CType("object", None)
+                return_type = CType(name="Object", namespace="System")
             method = CMethod(
                 name="__contains__",
                 declaring_type=interface,
                 parameters=(CParameter(name="value", type=return_type),),
-                return_types=(CType(name="bool"),),
+                return_types=(CType(name="Boolean", namespace="System"),),
             )
             methods.append(method)
 

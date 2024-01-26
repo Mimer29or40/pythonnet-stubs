@@ -1,0 +1,93 @@
+{
+  "name": "TestLib",
+  "version": "1.0.0.0",
+  "namespaces": {
+    "TestLib": {
+      "name": "TestLib",
+      "types": {
+        "TestLib.ClassWithInterface": {
+          "type": "class",
+          "name": "ClassWithInterface",
+          "namespace": "TestLib",
+          "abstract": false,
+          "generic_args": [],
+          "super_class": "System.Object",
+          "interfaces": [
+            "System.IEquatable[TestLib.ClassWithInterface]"
+          ],
+          "fields": {},
+          "constructors": {
+            "TestLib.ClassWithInterface.__init__()": {
+              "declaring_type": "TestLib.ClassWithInterface",
+              "parameters": []
+            }
+          },
+          "properties": {},
+          "methods": {
+            "System.Object.Equals(System.Object) -> System.Boolean": {
+              "name": "Equals",
+              "declaring_type": "System.Object",
+              "parameters": [
+                {
+                  "name": "obj",
+                  "type": "System.Object",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System.Boolean"
+              ],
+              "static": false
+            },
+            "System.IEquatable[TestLib.ClassWithInterface].Equals(TestLib.ClassWithInterface) -> System.Boolean": {
+              "name": "Equals",
+              "declaring_type": "System.IEquatable[TestLib.ClassWithInterface]",
+              "parameters": [
+                {
+                  "name": "other",
+                  "type": "TestLib.ClassWithInterface",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System.Boolean"
+              ],
+              "static": false
+            },
+            "System.Object.GetHashCode() -> System.Int32": {
+              "name": "GetHashCode",
+              "declaring_type": "System.Object",
+              "parameters": [],
+              "return_types": [
+                "System.Int32"
+              ],
+              "static": false
+            },
+            "System.Object.GetType() -> System.Type": {
+              "name": "GetType",
+              "declaring_type": "System.Object",
+              "parameters": [],
+              "return_types": [
+                "System.Type"
+              ],
+              "static": false
+            },
+            "System.Object.ToString() -> System.String": {
+              "name": "ToString",
+              "declaring_type": "System.Object",
+              "parameters": [],
+              "return_types": [
+                "System.String"
+              ],
+              "static": false
+            }
+          },
+          "events": {},
+          "nested": {}
+        }
+      }
+    }
+  }
+}

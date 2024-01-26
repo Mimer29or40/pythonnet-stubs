@@ -184,7 +184,7 @@ class TestCClass(TestBase):
             name="Class",
             namespace="Namespace",
             abstract=False,
-            generic_args=(CType(name="T", namespace="Namespace", generic=True),),
+            generic_args=(CType(name="T", generic=True),),
             super_class=None,
             interfaces=(),
             fields={},
@@ -204,7 +204,7 @@ class TestCClass(TestBase):
                 "name": "Class",
                 "namespace": "Namespace",
                 "abstract": False,
-                "generic_args": ("Namespace.$T",),
+                "generic_args": ("$T",),
                 "super_class": None,
                 "interfaces": (),
                 "fields": {},
@@ -227,8 +227,8 @@ class TestCClass(TestBase):
             namespace="Namespace",
             abstract=False,
             generic_args=(
-                CType(name="U", namespace="Namespace", generic=True),
-                CType(name="V", namespace="Namespace", generic=True),
+                CType(name="U", generic=True),
+                CType(name="V", generic=True),
             ),
             super_class=None,
             interfaces=(),
@@ -249,7 +249,7 @@ class TestCClass(TestBase):
                 "name": "Class",
                 "namespace": "Namespace",
                 "abstract": False,
-                "generic_args": ("Namespace.$U", "Namespace.$V"),
+                "generic_args": ("$U", "$V"),
                 "super_class": None,
                 "interfaces": (),
                 "fields": {},
@@ -2689,7 +2689,7 @@ class TestCClass(TestBase):
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
                 "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
-                "NestedEnum": {"doc": "", "doc_formatted": "", "fields": {}},
+                "NestedEnum": {"doc": "", "doc_formatted": ""},
                 "NestedStruct": {"doc": "", "doc_formatted": {}},
             },
             json,
@@ -2810,7 +2810,7 @@ class TestCStruct(TestBase):
             name="Struct",
             namespace="Namespace",
             abstract=False,
-            generic_args=(CType(name="T", namespace="Namespace", generic=True),),
+            generic_args=(CType(name="T", generic=True),),
             super_class=None,
             interfaces=(),
             fields={},
@@ -2830,7 +2830,7 @@ class TestCStruct(TestBase):
                 "name": "Struct",
                 "namespace": "Namespace",
                 "abstract": False,
-                "generic_args": ("Namespace.$T",),
+                "generic_args": ("$T",),
                 "super_class": None,
                 "interfaces": (),
                 "fields": {},
@@ -2853,8 +2853,8 @@ class TestCStruct(TestBase):
             namespace="Namespace",
             abstract=False,
             generic_args=(
-                CType(name="U", namespace="Namespace", generic=True),
-                CType(name="V", namespace="Namespace", generic=True),
+                CType(name="U", generic=True),
+                CType(name="V", generic=True),
             ),
             super_class=None,
             interfaces=(),
@@ -2875,7 +2875,7 @@ class TestCStruct(TestBase):
                 "name": "Struct",
                 "namespace": "Namespace",
                 "abstract": False,
-                "generic_args": ("Namespace.$U", "Namespace.$V"),
+                "generic_args": ("$U", "$V"),
                 "super_class": None,
                 "interfaces": (),
                 "fields": {},
@@ -5315,7 +5315,7 @@ class TestCStruct(TestBase):
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
                 "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
-                "NestedEnum": {"doc": "", "doc_formatted": "", "fields": {}},
+                "NestedEnum": {"doc": "", "doc_formatted": ""},
                 "NestedStruct": {"doc": "", "doc_formatted": {}},
             },
             json,
@@ -5435,7 +5435,7 @@ class TestCInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
-            generic_args=(CType(name="T", namespace="Namespace", generic=True),),
+            generic_args=(CType(name="T", generic=True),),
             interfaces=(),
             fields={},
             properties={},
@@ -5452,7 +5452,7 @@ class TestCInterface(TestBase):
                 "type": "interface",
                 "name": "Interface",
                 "namespace": "Namespace",
-                "generic_args": ("Namespace.$T",),
+                "generic_args": ("$T",),
                 "interfaces": (),
                 "fields": {},
                 "properties": {},
@@ -5472,8 +5472,8 @@ class TestCInterface(TestBase):
             name="Interface",
             namespace="Namespace",
             generic_args=(
-                CType(name="U", namespace="Namespace", generic=True),
-                CType(name="V", namespace="Namespace", generic=True),
+                CType(name="U", generic=True),
+                CType(name="V", generic=True),
             ),
             interfaces=(),
             fields={},
@@ -5491,7 +5491,7 @@ class TestCInterface(TestBase):
                 "type": "interface",
                 "name": "Interface",
                 "namespace": "Namespace",
-                "generic_args": ("Namespace.$U", "Namespace.$V"),
+                "generic_args": ("$U", "$V"),
                 "interfaces": (),
                 "fields": {},
                 "properties": {},
@@ -6850,7 +6850,7 @@ class TestCInterface(TestBase):
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
                 "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
-                "NestedEnum": {"doc": "", "doc_formatted": "", "fields": {}},
+                "NestedEnum": {"doc": "", "doc_formatted": ""},
                 "NestedStruct": {"doc": "", "doc_formatted": {}},
             },
             json,
@@ -7002,12 +7002,10 @@ class TestCEnum(TestBase):
             {
                 "doc": "",
                 "doc_formatted": "",
-                "fields": {
-                    "Field0": {"doc": ""},
-                    "Field1": {"doc": ""},
-                    "Field2": {"doc": ""},
-                    "Field3": {"doc": ""},
-                },
+                "Field0": {"doc": ""},
+                "Field1": {"doc": ""},
+                "Field2": {"doc": ""},
+                "Field3": {"doc": ""},
             },
             json,
         )
@@ -7135,8 +7133,8 @@ class TestCDelegate(TestBase):
                 "doc": "",
                 "doc_formatted": "",
                 "parameters": {
-                    "param0": {"doc": ""},
-                    "param1": {"doc": ""},
+                    "param0": "",
+                    "param1": "",
                 },
                 "return": "",
             },
@@ -7242,12 +7240,12 @@ class TestCType(TestBase):
         self.assertEqual(c_type, from_json)
 
     def test_json_generic(self) -> None:
-        c_type: CType = CType(name="Type", namespace="Namespace", generic=True)
+        c_type: CType = CType(name="Type", generic=True)
         json: JsonType = c_type.to_json()
 
         self.assertIsNotNone(json)
         self.assertIsInstance(json, str)
-        self.assertEqual("Namespace.$Type", json)
+        self.assertEqual("$Type", json)
 
         from_json: CType = CType.from_json(json)
 
@@ -7266,12 +7264,12 @@ class TestCType(TestBase):
         self.assertEqual(c_type, from_json)
 
     def test_json_reference_generic(self) -> None:
-        c_type: CType = CType(name="Type", namespace="Namespace", reference=True, generic=True)
+        c_type: CType = CType(name="Type", reference=True, generic=True)
         json: JsonType = c_type.to_json()
 
         self.assertIsNotNone(json)
         self.assertIsInstance(json, str)
-        self.assertEqual("Namespace.$*Type", json)
+        self.assertEqual("$*Type", json)
 
         from_json: CType = CType.from_json(json)
 
@@ -7290,30 +7288,24 @@ class TestCType(TestBase):
         self.assertEqual(c_type, from_json)
 
     def test_json_generic_nullable(self) -> None:
-        c_type: CType = CType(name="Type", namespace="Namespace", generic=True, nullable=True)
+        c_type: CType = CType(name="Type", generic=True, nullable=True)
         json: JsonType = c_type.to_json()
 
         self.assertIsNotNone(json)
         self.assertIsInstance(json, str)
-        self.assertEqual("Namespace.$Type?", json)
+        self.assertEqual("$Type?", json)
 
         from_json: CType = CType.from_json(json)
 
         self.assertEqual(c_type, from_json)
 
     def test_json_reference_generic_nullable(self) -> None:
-        c_type: CType = CType(
-            name="Type",
-            namespace="Namespace",
-            reference=True,
-            generic=True,
-            nullable=True,
-        )
+        c_type: CType = CType(name="Type", reference=True, generic=True, nullable=True)
         json: JsonType = c_type.to_json()
 
         self.assertIsNotNone(json)
         self.assertIsInstance(json, str)
-        self.assertEqual("Namespace.$*Type?", json)
+        self.assertEqual("$*Type?", json)
 
         from_json: CType = CType.from_json(json)
 

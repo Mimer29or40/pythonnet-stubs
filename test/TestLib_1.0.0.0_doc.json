@@ -1,0 +1,1740 @@
+{
+  "System": {
+    "doc": "System doc string.",
+    "IEquatable[$T]": {
+      "doc": "IEquatable doc string.",
+      "Equals($T)": {
+        "doc": "Equals doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      }
+    },
+    "Object": {
+      "doc": "Object doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      },
+      "Equals(System.Object)": {
+        "doc": "Equals doc string.",
+        "parameters": {
+          "obj": "obj doc string."
+        },
+        "return": "Return doc string."
+      },
+      "Equals(System.Object?, System.Object?)": {
+        "doc": "Equals doc string.",
+        "parameters": {
+          "objA": "objA doc string.",
+          "objB": "objB doc string."
+        },
+        "return": "Return doc string."
+      },
+      "GetHashCode()": {
+        "doc": "GetHashCode doc string.",
+        "return": "Return doc string."
+      },
+      "GetType()": {
+        "doc": "GetType doc string.",
+        "return": "Return doc string."
+      },
+      "ReferenceEquals(System.Object?, System.Object?)": {
+        "doc": "ReferenceEquals doc string.",
+        "parameters": {
+          "objA": "objA doc string.",
+          "objB": "objB doc string."
+        },
+        "return": "Return doc string."
+      },
+      "ToString()": {
+        "doc": "ToString doc string.",
+        "return": "Return doc string."
+      }
+    }
+  },
+  "TestLib": {
+    "doc": "TestLib doc string.",
+    "ClassThatsAbstract": {
+      "doc": "ClassThatsAbstract doc string."
+    },
+    "ClassWithConstructors": {
+      "doc": "ClassWithConstructors doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      },
+      "__init__(System.Int32)": {
+        "doc": "__init__ doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        }
+      },
+      "__init__(System.Int32, System.Int32)": {
+        "doc": "__init__ doc string.",
+        "parameters": {
+          "param0": "Param0 doc string.",
+          "param1": "Param1 doc string."
+        }
+      },
+      "__init__(System.Int32, System.Int32, System.Int32)": {
+        "doc": "__init__ doc string.",
+        "parameters": {
+          "param0": "Param0 doc string.",
+          "param1": "Param1 doc string.",
+          "param2": "Param2 doc string."
+        }
+      }
+    },
+    "ClassWithEvents": {
+      "doc": "ClassWithEvents doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      },
+      "Event": {
+        "doc": "Event doc string."
+      },
+      "EventWithArgs": {
+        "doc": "EventWithArgs doc string."
+      }
+    },
+    "ClassWithFields": {
+      "doc": "ClassWithFields doc string.",
+      "InstanceFieldA": {
+        "doc": "InstanceFieldA doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceFieldB": {
+        "doc": "InstanceFieldB doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceFieldC": {
+        "doc": "InstanceFieldC doc string.",
+        "return": "Return doc string."
+      },
+      "StaticFieldA": {
+        "doc": "StaticFieldA doc string.",
+        "return": "Return doc string."
+      },
+      "StaticFieldB": {
+        "doc": "StaticFieldB doc string.",
+        "return": "Return doc string."
+      },
+      "StaticFieldC": {
+        "doc": "StaticFieldC doc string.",
+        "return": "Return doc string."
+      },
+      "__init__()": {
+        "doc": "__init__ doc string."
+      }
+    },
+    "ClassWithGeneric[$T]": {
+      "doc": "ClassWithGeneric doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      }
+    },
+    "ClassWithInterface": {
+      "doc": "ClassWithInterface doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      }
+    },
+    "ClassWithListMethods": {
+      "doc": "ClassWithListMethods doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      }
+    },
+    "ClassWithMethods": {
+      "doc": "ClassWithMethods doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      },
+      "InstanceMethodWithDefaultParam(System.Int32)": {
+        "doc": "InstanceMethodWithDefaultParam doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithNullableDefaultParam(System.Int32?)": {
+        "doc": "InstanceMethodWithNullableDefaultParam doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithNullableOutParam(System.*Int32?)": {
+        "doc": "InstanceMethodWithNullableOutParam doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithNullableParam(System.Int32?)": {
+        "doc": "InstanceMethodWithNullableParam doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithOutParam(System.*Int32)": {
+        "doc": "InstanceMethodWithOutParam doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithParams0()": {
+        "doc": "InstanceMethodWithParams0 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithParams1(System.Int32)": {
+        "doc": "InstanceMethodWithParams1 doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithParams2(System.Int32, System.Int32)": {
+        "doc": "InstanceMethodWithParams2 doc string.",
+        "parameters": {
+          "param0": "Param0 doc string.",
+          "param1": "Param1 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithDefaultParam(System.Int32)": {
+        "doc": "StaticMethodWithDefaultParam doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithNullableDefaultParam(System.Int32?)": {
+        "doc": "StaticMethodWithNullableDefaultParam doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithNullableOutParam(System.*Int32?)": {
+        "doc": "StaticMethodWithNullableOutParam doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithNullableParam(System.Int32?)": {
+        "doc": "StaticMethodWithNullableParam doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithOutParam(System.*Int32)": {
+        "doc": "StaticMethodWithOutParam doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithParams0()": {
+        "doc": "StaticMethodWithParams0 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticMethodWithParams1(System.Int32)": {
+        "doc": "StaticMethodWithParams1 doc string.",
+        "parameters": {
+          "param0": "Param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithParams2(System.Int32, System.Int32)": {
+        "doc": "StaticMethodWithParams2 doc string.",
+        "parameters": {
+          "param0": "Param0 doc string.",
+          "param1": "Param1 doc string."
+        },
+        "return": "Return doc string."
+      }
+    },
+    "ClassWithMultiGeneric": {
+      "doc": "ClassWithMultiGeneric doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      }
+    },
+    "ClassWithNested": {
+      "doc": "ClassWithNested doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      },
+      "INestedInterface": {
+        "doc": "INestedInterface doc string."
+      },
+      "NestedClass": {
+        "doc": "NestedClass doc string.",
+        "__init__()": {
+          "doc": "__init__ doc string."
+        }
+      },
+      "NestedDelegate": {
+        "doc": "NestedDelegate doc string.",
+        "return": "Return doc string."
+      },
+      "NestedEnum": {
+        "doc": "NestedEnum doc string."
+      },
+      "NestedStruct": {
+        "doc": "NestedStruct doc string."
+      }
+    },
+    "ClassWithOperatorMethods": {
+      "doc": "ClassWithOperatorMethods doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      },
+      "__add__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__add__ doc string.",
+        "parameters": {
+          "other": "Other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__and__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__and__ doc string.",
+        "parameters": {
+          "other": "Other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__eq__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__eq__ doc string.",
+        "parameters": {
+          "other": "Other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__ge__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__ge__ doc string.",
+        "parameters": {
+          "other": "Other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__gt__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__gt__ doc string.",
+        "parameters": {
+          "other": "Other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__invert__()": {
+        "doc": "__invert__ doc string.",
+        "return": "Return doc string."
+      },
+      "__le__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__le__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__lt__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__lt__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__mod__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__mod__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__mul__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__mul__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__ne__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__ne__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__neg__()": {
+        "doc": "__neg__ doc string.",
+        "return": "Return doc string."
+      },
+      "__or__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__or__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__pos__()": {
+        "doc": "__pos__ doc string.",
+        "return": "Return doc string."
+      },
+      "__sub__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__sub__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__truediv__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__truediv__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__xor__(TestLib.ClassWithOperatorMethods)": {
+        "doc": "__xor__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Addition(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_Addition doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_BitwiseAnd(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_BitwiseAnd doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_BitwiseOr(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_BitwiseOr doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Decrement(TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_Decrement doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Division(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_Division doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Equality(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_Equality doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_ExclusiveOr(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_ExclusiveOr doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_False(TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_False doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_GreaterThan(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_GreaterThan doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_GreaterThanOrEqual(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_GreaterThanOrEqual doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Increment(TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_Increment doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Inequality(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_Inequality doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_LessThan(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_LessThan doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_LessThanOrEqual(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_LessThanOrEqual doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_LogicalNot(TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_LogicalNot doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Modulus(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_Modulus doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Multiply(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_Multiply doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_OnesComplement(TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_OnesComplement doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Subtraction(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_Subtraction doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_True(TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_True doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_UnaryNegation(TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_UnaryNegation doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_UnaryPlus(TestLib.ClassWithOperatorMethods)": {
+        "doc": "op_UnaryPlus doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      }
+    },
+    "ClassWithProperties": {
+      "doc": "ClassWithProperties doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      },
+      "InstanceProperty0": {
+        "doc": "InstanceProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceProperty1": {
+        "doc": "InstanceProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceProperty2": {
+        "doc": "InstanceProperty2 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceReadOnlyProperty0": {
+        "doc": "InstanceReadOnlyProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceReadOnlyProperty1": {
+        "doc": "InstanceReadOnlyProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceReadOnlyProperty2": {
+        "doc": "InstanceReadOnlyProperty2 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticProperty0": {
+        "doc": "StaticProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticProperty1": {
+        "doc": "StaticProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticProperty2": {
+        "doc": "StaticProperty2 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticReadOnlyProperty0": {
+        "doc": "StaticReadOnlyProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticReadOnlyProperty1": {
+        "doc": "StaticReadOnlyProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticReadOnlyProperty2": {
+        "doc": "StaticReadOnlyProperty2 doc string.",
+        "return": "Return doc string."
+      }
+    },
+    "ClassWithSuper": {
+      "doc": "ClassWithSuper doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      }
+    },
+    "ClassWithTypes": {
+      "doc": "ClassWithTypes doc string.",
+      "MethodReturnsBoolean()": {
+        "doc": "MethodReturnsBoolean doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsByte()": {
+        "doc": "MethodReturnsByte doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsChar()": {
+        "doc": "MethodReturnsChar doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsDouble()": {
+        "doc": "MethodReturnsDouble doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsInt16()": {
+        "doc": "MethodReturnsInt16 doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsInt32()": {
+        "doc": "MethodReturnsInt32 doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsInt64()": {
+        "doc": "MethodReturnsInt64 doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsObject()": {
+        "doc": "MethodReturnsObject doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsSByte()": {
+        "doc": "MethodReturnsSByte doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsSingle()": {
+        "doc": "MethodReturnsSingle doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsString()": {
+        "doc": "MethodReturnsString doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsUInt16()": {
+        "doc": "MethodReturnsUInt16 doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsUInt32()": {
+        "doc": "MethodReturnsUInt32 doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsUInt64()": {
+        "doc": "MethodReturnsUInt64 doc string.",
+        "return": "Return doc string."
+      },
+      "MethodReturnsVoid()": {
+        "doc": "MethodReturnsVoid doc string.",
+        "return": "Return doc string."
+      }
+    },
+    "DelegateWithNoParametersNoReturn": {
+      "doc": "DelegateWithNoParametersNoReturn doc string.",
+      "return": "Return doc string."
+    },
+    "DelegateWithNoParametersReturn": {
+      "doc": "DelegateWithNoParametersReturn doc string.",
+      "return": "Return doc string."
+    },
+    "DelegateWithParametersNoReturn": {
+      "doc": "DelegateWithParametersNoReturn doc string.",
+      "parameters": {
+        "param0": "param0 doc string.",
+        "param1": "param1 doc string."
+      },
+      "return": "Return doc string."
+    },
+    "DelegateWithParametersReturn": {
+      "doc": "DelegateWithParametersReturn doc string.",
+      "parameters": {
+        "param0": "param0 doc string.",
+        "param1": "param1 doc string."
+      },
+      "return": "Return doc string."
+    },
+    "EnumWithFields": {
+      "doc": "EnumWithFields doc string.",
+      "Field0": {
+        "doc": "Field0 doc string."
+      },
+      "Field1": {
+        "doc": "Field1 doc string."
+      },
+      "Field2": {
+        "doc": "Field2 doc string."
+      },
+      "Field3": {
+        "doc": "Field3 doc string."
+      }
+    },
+    "EnumWithNoFields": {
+      "doc": "EnumWithNoFields doc string."
+    },
+    "IInterfaceWithEvents": {
+      "doc": "IInterfaceWithEvents doc string.",
+      "Event": {
+        "doc": "Event doc string."
+      },
+      "EventWithArgs": {
+        "doc": "EventWithArgs doc string."
+      }
+    },
+    "IInterfaceWithFields": {
+      "doc": "IInterfaceWithFields doc string.",
+      "StaticFieldA": {
+        "doc": "StaticFieldA doc string.",
+        "return": "Return doc string."
+      },
+      "StaticFieldB": {
+        "doc": "StaticFieldB doc string.",
+        "return": "Return doc string."
+      },
+      "StaticFieldC": {
+        "doc": "StaticFieldC doc string.",
+        "return": "Return doc string."
+      }
+    },
+    "IInterfaceWithGeneric": {
+      "doc": "IInterfaceWithGeneric doc string."
+    },
+    "IInterfaceWithInterface": {
+      "doc": "IInterfaceWithInterface doc string."
+    },
+    "IInterfaceWithListMethods": {
+      "doc": "IInterfaceWithListMethods doc string."
+    },
+    "IInterfaceWithMethods": {
+      "doc": "IInterfaceWithMethods doc string.",
+      "InstanceMethodWithDefaultParam(System.Int32)": {
+        "doc": "InstanceMethodWithDefaultParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithNullableDefaultParam(System.Int32?)": {
+        "doc": "InstanceMethodWithNullableDefaultParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithNullableOutParam(System.*Int32?)": {
+        "doc": "InstanceMethodWithNullableOutParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithNullableParam(System.Int32?)": {
+        "doc": "InstanceMethodWithNullableParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithOutParam(System.*Int32)": {
+        "doc": "InstanceMethodWithOutParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithParams()": {
+        "doc": "InstanceMethodWithParams doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithParams(System.Int32)": {
+        "doc": "InstanceMethodWithParams doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithParams(System.Int32, System.Int32)": {
+        "doc": "InstanceMethodWithParams doc string.",
+        "parameters": {
+          "param0": "param0 doc string.",
+          "param1": "param1 doc string."
+        },
+        "return": "Return doc string."
+      }
+    },
+    "IInterfaceWithMultiGeneric": {
+      "doc": "IInterfaceWithMultiGeneric doc string."
+    },
+    "IInterfaceWithNested": {
+      "doc": "IInterfaceWithNested doc string.",
+      "INestedInterface": {
+        "doc": "INestedInterface doc string."
+      },
+      "NestedClass": {
+        "doc": "NestedClass doc string.",
+        "__init__()": {
+          "doc": "__init__ doc string."
+        }
+      },
+      "NestedDelegate": {
+        "doc": "NestedDelegate doc string.",
+        "return": "Return doc string."
+      },
+      "NestedEnum": {
+        "doc": "NestedEnum doc string."
+      },
+      "NestedStruct": {
+        "doc": "NestedStruct doc string."
+      }
+    },
+    "IInterfaceWithOperatorMethods": {
+      "doc": "IInterfaceWithOperatorMethods doc string.",
+      "__add__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__add__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__and__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__and__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__ge__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__ge__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__gt__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__gt__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__invert__()": {
+        "doc": "__invert__ doc string.",
+        "return": "Return doc string."
+      },
+      "__le__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__le__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__lt__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__lt__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__mod__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__mod__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__mul__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__mul__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__neg__()": {
+        "doc": "__neg__ doc string.",
+        "return": "Return doc string."
+      },
+      "__or__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__or__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__pos__()": {
+        "doc": "__pos__ doc string.",
+        "return": "Return doc string."
+      },
+      "__sub__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__sub__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__truediv__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__truediv__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__xor__(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "__xor__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Addition(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_Addition doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_BitwiseAnd(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_BitwiseAnd doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_BitwiseOr(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_BitwiseOr doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Decrement(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_Decrement doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Division(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_Division doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_ExclusiveOr(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_ExclusiveOr doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_False(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_False doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_GreaterThan(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_GreaterThan doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_GreaterThanOrEqual(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_GreaterThanOrEqual doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Increment(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_Increment doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_LessThan(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_LessThan doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_LessThanOrEqual(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_LessThanOrEqual doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_LogicalNot(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_LogicalNot doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Modulus(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_Modulus doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Multiply(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_Multiply doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_OnesComplement(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_OnesComplement doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Subtraction(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_Subtraction doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_True(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_True doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_UnaryNegation(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_UnaryNegation doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_UnaryPlus(TestLib.IInterfaceWithOperatorMethods)": {
+        "doc": "op_UnaryPlus doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      }
+    },
+    "IInterfaceWithProperties": {
+      "doc": "IInterfaceWithProperties doc string.",
+      "InstanceProperty0": {
+        "doc": "InstanceProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceProperty1": {
+        "doc": "InstanceProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceProperty2": {
+        "doc": "InstanceProperty2 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceReadOnlyProperty0": {
+        "doc": "InstanceReadOnlyProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceReadOnlyProperty1": {
+        "doc": "InstanceReadOnlyProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceReadOnlyProperty2": {
+        "doc": "InstanceReadOnlyProperty2 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticProperty0": {
+        "doc": "StaticProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticProperty1": {
+        "doc": "StaticProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticProperty2": {
+        "doc": "StaticProperty2 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticReadOnlyProperty0": {
+        "doc": "StaticReadOnlyProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticReadOnlyProperty1": {
+        "doc": "StaticReadOnlyProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticReadOnlyProperty2": {
+        "doc": "StaticReadOnlyProperty2 doc string.",
+        "return": "Return doc string."
+      }
+    },
+    "StructWithConstructors": {
+      "doc": "StructWithConstructors doc string.",
+      "__init__()": {
+        "doc": "__init__ doc string."
+      },
+      "__init__(System.Int32)": {
+        "doc": "__init__ doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        }
+      },
+      "__init__(System.Int32, System.Int32)": {
+        "doc": "__init__ doc string.",
+        "parameters": {
+          "param0": "param0 doc string.",
+          "param1": "param1 doc string."
+        }
+      },
+      "__init__(System.Int32, System.Int32, System.Int32)": {
+        "doc": "__init__ doc string.",
+        "parameters": {
+          "param0": "param0 doc string.",
+          "param1": "param1 doc string.",
+          "param2": "param2 doc string."
+        }
+      }
+    },
+    "StructWithEvents": {
+      "doc": "StructWithEvents doc string.",
+      "Event": {
+        "doc": "Event doc string."
+      },
+      "EventWithArgs": {
+        "doc": "EventWithArgs doc string."
+      }
+    },
+    "StructWithFields": {
+      "doc": "StructWithFields doc string.",
+      "InstanceFieldA": {
+        "doc": "InstanceFieldA doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceFieldB": {
+        "doc": "InstanceFieldB doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceFieldC": {
+        "doc": "InstanceFieldC doc string.",
+        "return": "Return doc string."
+      },
+      "StaticFieldA": {
+        "doc": "StaticFieldA doc string.",
+        "return": "Return doc string."
+      },
+      "StaticFieldB": {
+        "doc": "StaticFieldB doc string.",
+        "return": "Return doc string."
+      },
+      "StaticFieldC": {
+        "doc": "StaticFieldC doc string.",
+        "return": "Return doc string."
+      },
+      "__init__()": {
+        "doc": "__init__ doc string."
+      }
+    },
+    "StructWithGeneric": {
+      "doc": "StructWithGeneric doc string."
+    },
+    "StructWithInterface": {
+      "doc": "StructWithInterface doc string.",
+      "Equals(TestLib.StructWithInterface?)": {
+        "doc": "Equals doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__eq__(TestLib.StructWithInterface)": {
+        "doc": "__eq__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__ne__(TestLib.StructWithInterface)": {
+        "doc": "__ne__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Equality(TestLib.StructWithInterface, TestLib.StructWithInterface)": {
+        "doc": "op_Equality doc string.",
+        "parameters": {
+          "left": "left doc string.",
+          "right": "right doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Inequality(TestLib.StructWithInterface, TestLib.StructWithInterface)": {
+        "doc": "op_Inequality doc string.",
+        "parameters": {
+          "left": "left doc string.",
+          "right": "right doc string."
+        },
+        "return": "Return doc string."
+      }
+    },
+    "StructWithListMethods": {
+      "doc": "StructWithListMethods doc string."
+    },
+    "StructWithMethods": {
+      "doc": "StructWithMethods doc string.",
+      "InstanceMethodWithDefaultParam(System.Int32)": {
+        "doc": "InstanceMethodWithDefaultParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithNullableDefaultParam(System.Int32?)": {
+        "doc": "InstanceMethodWithNullableDefaultParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithNullableOutParam(System.*Int32?)": {
+        "doc": "InstanceMethodWithNullableOutParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithNullableParam(System.Int32?)": {
+        "doc": "InstanceMethodWithNullableParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithOutParam(System.*Int32)": {
+        "doc": "InstanceMethodWithOutParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithParams0()": {
+        "doc": "InstanceMethodWithParams0 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithParams1(System.Int32)": {
+        "doc": "InstanceMethodWithParams1 doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "InstanceMethodWithParams2(System.Int32, System.Int32)": {
+        "doc": "InstanceMethodWithParams2 doc string.",
+        "parameters": {
+          "param0": "param0 doc string.",
+          "param1": "param1 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithDefaultParam(System.Int32)": {
+        "doc": "StaticMethodWithDefaultParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithNullableDefaultParam(System.Int32?)": {
+        "doc": "StaticMethodWithNullableDefaultParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithNullableOutParam(System.*Int32?)": {
+        "doc": "StaticMethodWithNullableOutParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithNullableParam(System.Int32?)": {
+        "doc": "StaticMethodWithNullableParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithOutParam(System.*Int32)": {
+        "doc": "StaticMethodWithOutParam doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithParams0()": {
+        "doc": "StaticMethodWithParams0 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticMethodWithParams1(System.Int32)": {
+        "doc": "StaticMethodWithParams1 doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      },
+      "StaticMethodWithParams2(System.Int32, System.Int32)": {
+        "doc": "StaticMethodWithParams2 doc string.",
+        "parameters": {
+          "param0": "param0 doc string.",
+          "param1": "param1 doc string."
+        },
+        "return": "Return doc string."
+      }
+    },
+    "StructWithMultiGeneric": {
+      "doc": "StructWithMultiGeneric doc string."
+    },
+    "StructWithNested": {
+      "doc": "StructWithNested doc string.",
+      "INestedInterface": {
+        "doc": "INestedInterface doc string."
+      },
+      "NestedClass": {
+        "doc": "NestedClass doc string.",
+        "__init__()": {
+          "doc": "__init__ doc string."
+        }
+      },
+      "NestedDelegate": {
+        "doc": "NestedDelegate doc string.",
+        "return": "Return doc string."
+      },
+      "NestedEnum": {
+        "doc": "NestedEnum doc string."
+      },
+      "NestedStruct": {
+        "doc": "NestedStruct doc string."
+      }
+    },
+    "StructWithOperatorMethods": {
+      "doc": "StructWithOperatorMethods doc string.",
+      "__add__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__add__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__and__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__and__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__eq__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__eq__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__ge__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__ge__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__gt__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__gt__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__invert__()": {
+        "doc": "__invert__ doc string.",
+        "return": "Return doc string."
+      },
+      "__le__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__le__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__lt__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__lt__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__mod__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__mod__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__mul__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__mul__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__ne__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__ne__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__neg__()": {
+        "doc": "__neg__ doc string.",
+        "return": "Return doc string."
+      },
+      "__or__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__or__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__pos__()": {
+        "doc": "__pos__ doc string.",
+        "return": "Return doc string."
+      },
+      "__sub__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__sub__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__truediv__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__truediv__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "__xor__(TestLib.StructWithOperatorMethods)": {
+        "doc": "__xor__ doc string.",
+        "parameters": {
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Addition(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_Addition doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_BitwiseAnd(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_BitwiseAnd doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_BitwiseOr(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_BitwiseOr doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Decrement(TestLib.StructWithOperatorMethods)": {
+        "doc": "op_Decrement doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Division(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_Division doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Equality(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_Equality doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_ExclusiveOr(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_ExclusiveOr doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_False(TestLib.StructWithOperatorMethods)": {
+        "doc": "op_False doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_GreaterThan(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_GreaterThan doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_GreaterThanOrEqual(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_GreaterThanOrEqual doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Increment(TestLib.StructWithOperatorMethods)": {
+        "doc": "op_Increment doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Inequality(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_Inequality doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_LessThan(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_LessThan doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_LessThanOrEqual(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_LessThanOrEqual doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_LogicalNot(TestLib.StructWithOperatorMethods)": {
+        "doc": "op_LogicalNot doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Modulus(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_Modulus doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Multiply(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_Multiply doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_OnesComplement(TestLib.StructWithOperatorMethods)": {
+        "doc": "op_OnesComplement doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_Subtraction(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": {
+        "doc": "op_Subtraction doc string.",
+        "parameters": {
+          "self": "self doc string.",
+          "other": "other doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_True(TestLib.StructWithOperatorMethods)": {
+        "doc": "op_True doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_UnaryNegation(TestLib.StructWithOperatorMethods)": {
+        "doc": "op_UnaryNegation doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      },
+      "op_UnaryPlus(TestLib.StructWithOperatorMethods)": {
+        "doc": "op_UnaryPlus doc string.",
+        "parameters": {
+          "self": "self doc string."
+        },
+        "return": "Return doc string."
+      }
+    },
+    "StructWithProperties": {
+      "doc": "StructWithProperties doc string.",
+      "InstanceProperty0": {
+        "doc": "InstanceProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceProperty1": {
+        "doc": "InstanceProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceProperty2": {
+        "doc": "InstanceProperty2 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceReadOnlyProperty0": {
+        "doc": "InstanceReadOnlyProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceReadOnlyProperty1": {
+        "doc": "InstanceReadOnlyProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "InstanceReadOnlyProperty2": {
+        "doc": "InstanceReadOnlyProperty2 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticProperty0": {
+        "doc": "StaticProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticProperty1": {
+        "doc": "StaticProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticProperty2": {
+        "doc": "StaticProperty2 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticReadOnlyProperty0": {
+        "doc": "StaticReadOnlyProperty0 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticReadOnlyProperty1": {
+        "doc": "StaticReadOnlyProperty1 doc string.",
+        "return": "Return doc string."
+      },
+      "StaticReadOnlyProperty2": {
+        "doc": "StaticReadOnlyProperty2 doc string.",
+        "return": "Return doc string."
+      }
+    }
+  }
+}

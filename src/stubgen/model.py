@@ -110,9 +110,14 @@ class CClass(CTypeDefinition):
     nested: Mapping[str, CTypeDefinition]
 
     def __str__(self) -> str:
-        name: str = self.name
+        name: str = self.simple_name
         if self.namespace is not None:
             name = f"{self.namespace}.{name}"
+        return name
+
+    @property
+    def simple_name(self) -> str:
+        name: str = self.name
         if len(self.generic_args) > 0:
             generic: str = ", ".join(map(str, self.generic_args))
             name = f"{name}[{generic}]"
@@ -155,7 +160,7 @@ class CClass(CTypeDefinition):
             name, json = child.to_doc_json()
             doc_dict[name] = json
 
-        return self.name, doc_dict
+        return self.simple_name, doc_dict
 
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
@@ -194,9 +199,14 @@ class CInterface(CTypeDefinition):
     nested: Mapping[str, CTypeDefinition]
 
     def __str__(self) -> str:
-        name: str = self.name
+        name: str = self.simple_name
         if self.namespace is not None:
             name = f"{self.namespace}.{name}"
+        return name
+
+    @property
+    def simple_name(self) -> str:
+        name: str = self.name
         if len(self.generic_args) > 0:
             generic: str = ", ".join(map(str, self.generic_args))
             name = f"{name}[{generic}]"
@@ -235,7 +245,7 @@ class CInterface(CTypeDefinition):
             name, json = child.to_doc_json()
             doc_dict[name] = json
 
-        return self.name, doc_dict
+        return self.simple_name, doc_dict
 
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
@@ -268,7 +278,7 @@ class CEnum(CTypeDefinition):
         return self.name, {
             "doc": "",
             "doc_formatted": "",
-            "fields": {f: {"doc": ""} for f in self.fields},
+            **{f: {"doc": ""} for f in self.fields},
         }
 
     @classmethod
@@ -298,7 +308,7 @@ class CDelegate(CTypeDefinition):
         return self.name, {
             "doc": "",
             "doc_formatted": "",
-            "parameters": {p.name: {"doc": ""} for p in self.parameters},
+            "parameters": {p.name: "" for p in self.parameters},
             "return": "",
         }
 
@@ -614,8 +624,7 @@ class CMethod(CMember):
 
     def __str__(self) -> str:
         param_types: str = ", ".join(str(p.type) for p in self.parameters)
-        returns: str = ", ".join(map(str, self.return_types))
-        return f"{self.declaring_type}.{self.name}({param_types}) -> {returns}"
+        return f"{self.declaring_type}.{self.name}({param_types})"
 
     def __lt__(self, other: CMethod) -> bool:
         if self.name == other.name:
@@ -672,7 +681,7 @@ class CEvent(CMember):
     type: CType
 
     def __str__(self) -> str:
-        return f"{self.declaring_type}.{self.name} -> ({self.type})"
+        return f"{self.declaring_type}.{self.name}"
 
     def __lt__(self, other: CProperty) -> bool:
         return self.name < other.name

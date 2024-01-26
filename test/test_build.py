@@ -1,4 +1,5 @@
 import unittest
+from pathlib import Path
 from typing import Any
 from typing import Mapping
 from typing import Sequence
@@ -18,6 +19,7 @@ from stubgen.build_stubs import build_interface
 from stubgen.build_stubs import build_method
 from stubgen.build_stubs import build_property
 from stubgen.build_stubs import build_struct
+from stubgen.build_stubs import build_stubs
 from stubgen.build_stubs import merge_doc
 from stubgen.build_stubs import merge_namespace
 from stubgen.model import CClass
@@ -7985,6 +7987,28 @@ class TestBuildEvent(TestBase):
         )
 
         self.assertEqual(manual, lines)
+
+
+class TestBuildStubs(TestBase):
+    output_dir: Path
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.output_dir = Path("output")
+        cls.output_dir.mkdir(parents=True, exist_ok=True)
+
+    def test_build_test_lib(self) -> None:
+        skeleton_name: str = "TestLib_1.0.0.0_skeleton.json"
+        doc_name: str = "TestLib_1.0.0.0_doc.json"
+
+        result = build_stubs(
+            skeleton_files=(Path(skeleton_name),),
+            doc_files=(Path(doc_name),),
+            output_dir=self.output_dir,
+            line_length=100,
+        )
+
+        self.assertEqual(0, result)
 
 
 if __name__ == "__main__":
