@@ -37,168 +37,6 @@ from stubgen.model import CStruct
 from stubgen.model import CType
 
 
-class TestImports(TestBase):
-    def test_add_py_type(self) -> None:
-        imports = Imports()
-        imports.add_py_type("namespaceA.TypeA")
-        imports.add_py_type("namespaceA.TypeA")
-        imports.add_py_type("namespaceA.TypeB")
-        imports.add_py_type("namespaceB.TypeA")
-        imports.add_py_type("namespaceB.TypeA")
-        imports.add_py_type("namespaceB.TypeB")
-
-        manual: Set[str] = {
-            "namespaceA.TypeA",
-            "namespaceA.TypeB",
-            "namespaceB.TypeA",
-            "namespaceB.TypeB",
-        }
-
-        self.assertEqual(manual, imports.py)
-
-    def test_add_c_type(self) -> None:
-        imports = Imports()
-        imports.add_c_type(CType(name="TypeA", namespace="NamespaceA"))
-        imports.add_c_type(CType(name="TypeA", namespace="NamespaceA"))
-        imports.add_c_type(CType(name="TypeB", namespace="NamespaceA"))
-        imports.add_c_type(CType(name="TypeA", namespace="NamespaceB"))
-        imports.add_c_type(CType(name="TypeA", namespace="NamespaceB"))
-        imports.add_c_type(CType(name="TypeB", namespace="NamespaceB"))
-
-        manual: Set[str] = {
-            "NamespaceA.TypeA",
-            "NamespaceA.TypeB",
-            "NamespaceB.TypeA",
-            "NamespaceB.TypeB",
-        }
-
-        self.assertEqual(manual, imports.c)
-
-    def test_add_c_type_inner(self) -> None:
-        imports = Imports()
-        imports.add_c_type(
-            CType(
-                name="Type",
-                namespace="Namespace",
-                inner=(CType(name="InnerA", namespace="Namespace"),),
-            )
-        )
-        imports.add_c_type(
-            CType(
-                name="Type",
-                namespace="Namespace",
-                inner=(CType(name="InnerB", namespace="Namespace"),),
-            )
-        )
-
-        manual: Set[str] = {
-            "Namespace.Type",
-            "Namespace.InnerA",
-            "Namespace.InnerB",
-        }
-
-        self.assertEqual(manual, imports.c)
-
-    def test_add_c_type_type_var(self) -> None:
-        imports = Imports()
-        imports.add_c_type(CType(name="T", namespace="Namespace", generic=True))
-        imports.add_c_type(CType(name="U", namespace="Namespace", generic=True))
-        imports.add_c_type(CType(name="V", namespace="Namespace", generic=True))
-
-        manual: Set[str] = {"T", "U", "V"}
-
-        self.assertEqual(set(), imports.c)
-        self.assertEqual(manual, imports.type_vars)
-
-    def test_build_empty(self) -> None:
-        imports = Imports()
-
-        lines: Sequence[str] = imports.build("Namespace")
-        manual: Sequence[str] = ()
-
-        self.assertEqual(manual, lines)
-
-    def test_build_py(self) -> None:
-        imports = Imports()
-        imports.add_py_type("namespace.TypeA")
-        imports.add_py_type("namespace.TypeB")
-        imports.add_py_type("namespace.TypeC")
-        imports.add_py_type("namespace.TypeD")
-
-        lines: Sequence[str] = imports.build()
-        manual: Sequence[str] = (
-            "from namespace import TypeA",
-            "from namespace import TypeB",
-            "from namespace import TypeC",
-            "from namespace import TypeD",
-        )
-
-        self.assertEqual(manual, lines)
-
-    def test_build_c(self) -> None:
-        imports = Imports()
-        imports.add_c_type(CType(name="TypeA", namespace="Namespace"))
-        imports.add_c_type(CType(name="TypeB", namespace="Namespace"))
-        imports.add_c_type(CType(name="TypeC", namespace="Namespace"))
-        imports.add_c_type(CType(name="TypeD", namespace="Namespace"))
-
-        lines: Sequence[str] = imports.build()
-        manual: Sequence[str] = (
-            "from Namespace import TypeA",
-            "from Namespace import TypeB",
-            "from Namespace import TypeC",
-            "from Namespace import TypeD",
-        )
-
-        self.assertEqual(manual, lines)
-
-    def test_build_c_namespace(self) -> None:
-        imports = Imports()
-        imports.add_c_type(CType(name="TypeA", namespace="Namespace"))
-        imports.add_c_type(CType(name="TypeB", namespace="Namespace.Namespace"))
-        imports.add_c_type(CType(name="TypeC", namespace="Namespace.Namespace"))
-        imports.add_c_type(CType(name="TypeD", namespace="Namespace.Namespace.Namespace"))
-
-        lines: Sequence[str] = imports.build("Namespace.Namespace")
-        manual: Sequence[str] = (
-            "from Namespace.Namespace.Namespace import TypeD",
-            "from Namespace import TypeA",
-        )
-
-        self.assertEqual(manual, lines)
-
-    def test_build_type_vars(self) -> None:
-        imports = Imports()
-        imports.add_c_type(CType(name="T", namespace="Namespace", generic=True))
-        imports.add_c_type(CType(name="U", namespace="Namespace", generic=True))
-        imports.add_c_type(CType(name="V", namespace="Namespace", generic=True))
-
-        lines: Sequence[str] = imports.build()
-        manual: Sequence[str] = (
-            "from typing import TypeVar",
-            f'T = TypeVar("T")',
-            f'U = TypeVar("U")',
-            f'V = TypeVar("V")',
-        )
-
-        self.assertEqual(manual, lines)
-
-    def test_build_include_event_type(self) -> None:
-        imports = Imports()
-        imports.include_event_type = True
-
-        lines: Sequence[str] = imports.build()
-        manual: Sequence[str] = (
-            "from typing import Generic",
-            f'T = TypeVar("T")',
-            "class EventType(Generic[T]):",
-            "    def __iadd__(self, other: T): ...",
-            "    def __isub__(self, other: T): ...",
-        )
-
-        self.assertEqual(manual, lines)
-
-
 class TestMergeNamespace(TestBase):
     def test_name_mismatch(self) -> None:
         namespace1: CNamespace = CNamespace(name="NamespaceA", types={})
@@ -442,7 +280,352 @@ class TestMergeNamespace(TestBase):
         self.assertEqual(manual, merged)
 
 
+class TestImports(TestBase):
+    def test_add_py_type(self) -> None:
+        imports = Imports()
+        imports.add_py_type("namespaceA.TypeA")
+        imports.add_py_type("namespaceA.TypeA")
+        imports.add_py_type("namespaceA.TypeB")
+        imports.add_py_type("namespaceB.TypeA")
+        imports.add_py_type("namespaceB.TypeA")
+        imports.add_py_type("namespaceB.TypeB")
+
+        manual: Set[str] = {
+            "namespaceA.TypeA",
+            "namespaceA.TypeB",
+            "namespaceB.TypeA",
+            "namespaceB.TypeB",
+        }
+
+        self.assertEqual(manual, imports.py)
+
+    def test_add_c_type(self) -> None:
+        imports = Imports()
+        imports.add_c_type(CType(name="TypeA", namespace="NamespaceA"))
+        imports.add_c_type(CType(name="TypeA", namespace="NamespaceA"))
+        imports.add_c_type(CType(name="TypeB", namespace="NamespaceA"))
+        imports.add_c_type(CType(name="TypeA", namespace="NamespaceB"))
+        imports.add_c_type(CType(name="TypeA", namespace="NamespaceB"))
+        imports.add_c_type(CType(name="TypeB", namespace="NamespaceB"))
+
+        manual: Set[str] = {
+            "NamespaceA.TypeA",
+            "NamespaceA.TypeB",
+            "NamespaceB.TypeA",
+            "NamespaceB.TypeB",
+        }
+
+        self.assertEqual(manual, imports.c)
+
+    def test_add_c_type_inner(self) -> None:
+        imports = Imports()
+        imports.add_c_type(
+            CType(
+                name="Type",
+                namespace="Namespace",
+                inner=(CType(name="InnerA", namespace="Namespace"),),
+            )
+        )
+        imports.add_c_type(
+            CType(
+                name="Type",
+                namespace="Namespace",
+                inner=(CType(name="InnerB", namespace="Namespace"),),
+            )
+        )
+
+        manual: Set[str] = {
+            "Namespace.Type",
+            "Namespace.InnerA",
+            "Namespace.InnerB",
+        }
+
+        self.assertEqual(manual, imports.c)
+
+    def test_add_c_type_type_var(self) -> None:
+        imports = Imports()
+        imports.add_c_type(CType(name="T", namespace="Namespace", generic=True))
+        imports.add_c_type(CType(name="U", namespace="Namespace", generic=True))
+        imports.add_c_type(CType(name="V", namespace="Namespace", generic=True))
+
+        manual: Set[str] = {"T", "U", "V"}
+
+        self.assertEqual(set(), imports.c)
+        self.assertEqual(manual, imports.type_vars)
+
+    def test_build_empty(self) -> None:
+        imports = Imports()
+
+        lines: Sequence[str] = imports.build("Namespace")
+        manual: Sequence[str] = ()
+
+        self.assertEqual(manual, lines)
+
+    def test_build_py(self) -> None:
+        imports = Imports()
+        imports.add_py_type("namespace.TypeA")
+        imports.add_py_type("namespace.TypeB")
+        imports.add_py_type("namespace.TypeC")
+        imports.add_py_type("namespace.TypeD")
+
+        lines: Sequence[str] = imports.build()
+        manual: Sequence[str] = (
+            "from namespace import TypeA",
+            "from namespace import TypeB",
+            "from namespace import TypeC",
+            "from namespace import TypeD",
+        )
+
+        self.assertEqual(manual, lines)
+
+    def test_build_c(self) -> None:
+        imports = Imports()
+        imports.add_c_type(CType(name="TypeA", namespace="Namespace"))
+        imports.add_c_type(CType(name="TypeB", namespace="Namespace"))
+        imports.add_c_type(CType(name="TypeC", namespace="Namespace"))
+        imports.add_c_type(CType(name="TypeD", namespace="Namespace"))
+
+        lines: Sequence[str] = imports.build()
+        manual: Sequence[str] = (
+            "from Namespace import TypeA",
+            "from Namespace import TypeB",
+            "from Namespace import TypeC",
+            "from Namespace import TypeD",
+        )
+
+        self.assertEqual(manual, lines)
+
+    def test_build_c_namespace(self) -> None:
+        imports = Imports()
+        imports.add_c_type(CType(name="TypeA", namespace="Namespace"))
+        imports.add_c_type(CType(name="TypeB", namespace="Namespace.Namespace"))
+        imports.add_c_type(CType(name="TypeC", namespace="Namespace.Namespace"))
+        imports.add_c_type(CType(name="TypeD", namespace="Namespace.Namespace.Namespace"))
+
+        lines: Sequence[str] = imports.build("Namespace.Namespace")
+        manual: Sequence[str] = (
+            "from Namespace.Namespace.Namespace import TypeD",
+            "from Namespace import TypeA",
+        )
+
+        self.assertEqual(manual, lines)
+
+    def test_build_type_vars(self) -> None:
+        imports = Imports()
+        imports.add_c_type(CType(name="T", namespace="Namespace", generic=True))
+        imports.add_c_type(CType(name="U", namespace="Namespace", generic=True))
+        imports.add_c_type(CType(name="V", namespace="Namespace", generic=True))
+
+        lines: Sequence[str] = imports.build()
+        manual: Sequence[str] = (
+            "from typing import TypeVar",
+            f'T = TypeVar("T")',
+            f'U = TypeVar("U")',
+            f'V = TypeVar("V")',
+        )
+
+        self.assertEqual(manual, lines)
+
+    def test_build_include_event_type(self) -> None:
+        imports = Imports()
+        imports.include_event_type = True
+
+        lines: Sequence[str] = imports.build()
+        manual: Sequence[str] = (
+            "from typing import Generic",
+            f'T = TypeVar("T")',
+            "class EventType(Generic[T]):",
+            "    def __iadd__(self, other: T): ...",
+            "    def __isub__(self, other: T): ...",
+        )
+
+        self.assertEqual(manual, lines)
+
+
 class TestDoc(TestBase):
+    def test_split_node_str(self) -> None:
+        node_str: str = "Node.Node.Node.Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node", result)
+        self.assertEqual("Node.Node.Node", remainder)
+
+    def test_split_node_str_no_remainder(self) -> None:
+        node_str: str = "Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node", result)
+        self.assertEqual(None, remainder)
+
+    def test_split_node_str_brackets(self) -> None:
+        node_str: str = "Node[Namespace.Type].Node.Node.Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node[Namespace.Type]", result)
+        self.assertEqual("Node.Node.Node", remainder)
+
+    def test_split_node_str_brackets_no_remainder(self) -> None:
+        node_str: str = "Node[Namespace.Type]"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node[Namespace.Type]", result)
+        self.assertEqual(None, remainder)
+
+    def test_split_node_str_brackets_multi(self) -> None:
+        node_str: str = "Node[Namespace.Type, Namespace.Type].Node.Node.Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node[Namespace.Type, Namespace.Type]", result)
+        self.assertEqual("Node.Node.Node", remainder)
+
+    def test_split_node_str_brackets_multi_no_remainder(self) -> None:
+        node_str: str = "Node[Namespace.Type, Namespace.Type]"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node[Namespace.Type, Namespace.Type]", result)
+        self.assertEqual(None, remainder)
+
+    def test_split_node_str_brackets_nested(self) -> None:
+        node_str: str = "Node[Namespace.Type[$T]].Node.Node.Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node[Namespace.Type[$T]]", result)
+        self.assertEqual("Node.Node.Node", remainder)
+
+    def test_split_node_str_parenthesis(self) -> None:
+        node_str: str = "Node(Namespace.Type).Node.Node.Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node(Namespace.Type)", result)
+        self.assertEqual("Node.Node.Node", remainder)
+
+    def test_split_node_str_parenthesis_no_remainder(self) -> None:
+        node_str: str = "Node(Namespace.Type)"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node(Namespace.Type)", result)
+        self.assertEqual(None, remainder)
+
+    def test_split_node_str_parenthesis_multi(self) -> None:
+        node_str: str = "Node(Namespace.Type, Namespace.Type).Node.Node.Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node(Namespace.Type, Namespace.Type)", result)
+        self.assertEqual("Node.Node.Node", remainder)
+
+    def test_split_node_str_parenthesis_multi_no_remainder(self) -> None:
+        node_str: str = "Node(Namespace.Type, Namespace.Type)"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node(Namespace.Type, Namespace.Type)", result)
+        self.assertEqual(None, remainder)
+
+    def test_split_node_str_parenthesis_nested(self) -> None:
+        node_str: str = "Node(Namespace.Type($T)).Node.Node.Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node(Namespace.Type($T))", result)
+        self.assertEqual("Node.Node.Node", remainder)
+
+    def test_translate(self) -> None:
+        pattern: str = "Pattern"
+
+        result: str = Doc.translate(pattern)
+
+        self.assertEqual(r"(?s:Pattern)\Z", result)
+
+    def test_translate_brackets(self) -> None:
+        pattern: str = "Pattern[Namespace.Type]"
+
+        result: str = Doc.translate(pattern)
+
+        self.assertEqual(r"(?s:Pattern\[Namespace\.Type\])\Z", result)
+
+    def test_translate_wildcard_star(self) -> None:
+        pattern: str = "Pattern[*]"
+
+        result: str = Doc.translate(pattern)
+
+        self.assertEqual(r"(?s:Pattern\[.*\])\Z", result)
+
+    def test_translate_wildcard_generic_bracket(self) -> None:
+        pattern: str = "Pattern[$T]"
+
+        result: str = Doc.translate(pattern)
+
+        self.assertEqual(r"(?s:Pattern\[.*\])\Z", result)
+
+    def test_translate_wildcard_generic_bracket_long(self) -> None:
+        pattern: str = "Pattern[$TKey]"
+
+        result: str = Doc.translate(pattern)
+
+        self.assertEqual(r"(?s:Pattern\[.*\])\Z", result)
+
+    def test_translate_wildcard_generic_bracket_multi(self) -> None:
+        pattern: str = "Pattern[$TKey, $TValue]"
+
+        result: str = Doc.translate(pattern)
+
+        self.assertEqual(r"(?s:Pattern\[(?=(?P<g0>.*?,\ ))(?P=g0).*\])\Z", result)
+
+    def test_translate_wildcard_generic_parenthesis(self) -> None:
+        pattern: str = "Pattern($T)"
+
+        result: str = Doc.translate(pattern)
+
+        self.assertEqual(r"(?s:Pattern\(.*\))\Z", result)
+
+    def test_translate_wildcard_generic_parenthesis_long(self) -> None:
+        pattern: str = "Pattern($TKey)"
+
+        result: str = Doc.translate(pattern)
+
+        self.assertEqual(r"(?s:Pattern\(.*\))\Z", result)
+
+    def test_translate_wildcard_generic_parenthesis_multi(self) -> None:
+        pattern: str = "Pattern($TKey, $TValue)"
+
+        result: str = Doc.translate(pattern)
+
+        self.assertEqual(r"(?s:Pattern\((?=(?P<g0>.*?,\ ))(?P=g0).*\))\Z", result)
+
     def test_get_shallow_node(self) -> None:
         doc_tree: Mapping[str, Any] = {"Node": {"doc": ""}}
         doc_dict: Doc = Doc(doc_tree)
@@ -459,6 +642,51 @@ class TestDoc(TestBase):
 
         self.assertIsNone(node)
 
+    def test_get_shallow_node_wildcard(self) -> None:
+        doc_tree: Mapping[str, Any] = {"Node[*]": {"doc": ""}}
+        doc_dict: Doc = Doc(doc_tree)
+        node: Doc = doc_dict.get("Node[Namespace.TypeA]")
+
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, Doc)
+        self.assertEqual({"doc": ""}, node.data)
+
+    def test_get_shallow_node_wildcard_generic_bracket(self) -> None:
+        doc_tree: Mapping[str, Any] = {"Node[$T]": {"doc": ""}}
+        doc_dict: Doc = Doc(doc_tree)
+        node: Doc = doc_dict.get("Node[Namespace.TypeA]")
+
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, Doc)
+        self.assertEqual({"doc": ""}, node.data)
+
+    def test_get_shallow_node_wildcard_generic_bracket_multi(self) -> None:
+        doc_tree: Mapping[str, Any] = {"Node[$K, $V]": {"doc": ""}}
+        doc_dict: Doc = Doc(doc_tree)
+        node: Doc = doc_dict.get("Node[Namespace.TypeA, Namespace.TypeB]")
+
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, Doc)
+        self.assertEqual({"doc": ""}, node.data)
+
+    def test_get_shallow_node_wildcard_generic_parenthesis(self) -> None:
+        doc_tree: Mapping[str, Any] = {"Node($T)": {"doc": ""}}
+        doc_dict: Doc = Doc(doc_tree)
+        node: Doc = doc_dict.get("Node(Namespace.TypeA)")
+
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, Doc)
+        self.assertEqual({"doc": ""}, node.data)
+
+    def test_get_shallow_node_wildcard_generic_parenthesis_multi(self) -> None:
+        doc_tree: Mapping[str, Any] = {"Node($K, $V)": {"doc": ""}}
+        doc_dict: Doc = Doc(doc_tree)
+        node: Doc = doc_dict.get("Node(Namespace.TypeA, Namespace.TypeB)")
+
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, Doc)
+        self.assertEqual({"doc": ""}, node.data)
+
     def test_get_deep_node(self) -> None:
         doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"NodeD": {"doc": ""}}}}}
         doc_dict: Doc = Doc(doc_tree)
@@ -474,6 +702,51 @@ class TestDoc(TestBase):
         node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Not Present")
 
         self.assertIsNone(node)
+
+    def test_get_deep_node_wildcard(self) -> None:
+        doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"Node[*]": {"doc": ""}}}}}
+        doc_dict: Doc = Doc(doc_tree)
+        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node[Namespace.TypeA]")
+
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, Doc)
+        self.assertEqual({"doc": ""}, node.data)
+
+    def test_get_deep_node_wildcard_generic_bracket(self) -> None:
+        doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"Node[$T]": {"doc": ""}}}}}
+        doc_dict: Doc = Doc(doc_tree)
+        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node[Namespace.TypeA]")
+
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, Doc)
+        self.assertEqual({"doc": ""}, node.data)
+
+    def test_get_deep_node_wildcard_generic_bracket_multi(self) -> None:
+        doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"Node[$K, $V]": {"doc": ""}}}}}
+        doc_dict: Doc = Doc(doc_tree)
+        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node[Namespace.TypeA, Namespace.TypeB]")
+
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, Doc)
+        self.assertEqual({"doc": ""}, node.data)
+
+    def test_get_deep_node_wildcard_generic_parenthesis(self) -> None:
+        doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"Node($T)": {"doc": ""}}}}}
+        doc_dict: Doc = Doc(doc_tree)
+        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node(Namespace.TypeA)")
+
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, Doc)
+        self.assertEqual({"doc": ""}, node.data)
+
+    def test_get_deep_node_wildcard_generic_parenthesis_multi(self) -> None:
+        doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"Node($K, $V)": {"doc": ""}}}}}
+        doc_dict: Doc = Doc(doc_tree)
+        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node(Namespace.TypeA, Namespace.TypeB)")
+
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, Doc)
+        self.assertEqual({"doc": ""}, node.data)
 
     def test_doc_string_empty(self) -> None:
         doc_tree: Mapping[str, Any] = {}

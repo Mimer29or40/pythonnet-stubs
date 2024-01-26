@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import functools
+import itertools
 import json
+import re
 from dataclasses import dataclass
 from dataclasses import field
 from pathlib import Path
 from typing import Any
+from typing import AnyStr
 from typing import Dict
 from typing import Final
 from typing import List
@@ -12,6 +16,7 @@ from typing import Mapping
 from typing import Optional
 from typing import Sequence
 from typing import Set
+from typing import Tuple
 from typing import Union
 from typing import cast
 
@@ -36,6 +41,27 @@ from stubgen.model import CTypeDefinition
 from stubgen.util import rm_tree
 
 logger = get_logger(__name__)
+
+
+def merge_namespace(namespace1: CNamespace, namespace2: CNamespace) -> CNamespace:
+    if namespace1.name != namespace2.name:
+        raise NameError(f"Namespace name mismatch: {namespace1.name} != {namespace2.name}")
+
+    type_list: Set[str] = set(namespace1.types.keys())
+    type_list.update(namespace2.types.keys())
+
+    type_map: Dict[str, CTypeDefinition] = {}
+    for type_str in sorted(type_list):
+        if type_str in namespace1.types:
+            type_def: CTypeDefinition = namespace1.types[type_str]
+            if type_str in namespace2.types:
+                logger.warning("Duplicate type in namespace %r: %r", namespace1.name, str(type_def))
+            type_map[type_str] = type_def
+        elif type_str in namespace2.types:
+            type_def: CTypeDefinition = namespace2.types[type_str]
+            type_map[type_str] = type_def
+
+    return CNamespace(name=namespace1.name, types=type_map)
 
 
 @dataclass
@@ -88,46 +114,112 @@ class Imports:
         return tuple(lines)
 
 
-def merge_namespace(namespace1: CNamespace, namespace2: CNamespace) -> CNamespace:
-    if namespace1.name != namespace2.name:
-        raise NameError(f"Namespace name mismatch: {namespace1.name} != {namespace2.name}")
-
-    type_list: Set[str] = set(namespace1.types.keys())
-    type_list.update(namespace2.types.keys())
-
-    type_map: Dict[str, CTypeDefinition] = {}
-    for type_str in sorted(type_list):
-        if type_str in namespace1.types:
-            type_def: CTypeDefinition = namespace1.types[type_str]
-            if type_str in namespace2.types:
-                logger.warning("Duplicate type in namespace %r: %r", namespace1.name, str(type_def))
-            type_map[type_str] = type_def
-        elif type_str in namespace2.types:
-            type_def: CTypeDefinition = namespace2.types[type_str]
-            type_map[type_str] = type_def
-
-    return CNamespace(name=namespace1.name, types=type_map)
-
-
 class Doc:
     data: Mapping[str, Any]
 
     def __init__(self, data: Mapping[str, Any]):
         self.data = data
 
-    def get(self, node_str: str) -> Optional[Doc]:
-        search: str
-        doc_dict: Mapping[str, Any] = self.data
-        while True:
-            if node_str in doc_dict:
-                return Doc(doc_dict[node_str])
-            if "." in node_str:
-                search, node_str = node_str.split(".", 1)
+    @classmethod
+    def split_node_str(cls, node_str: str) -> Tuple[str, Optional[str]]:
+        result: List[str] = []
+        i: int = 0
+        n: int = len(node_str)
+        bracket_count: int = 0
+        while i < n:
+            c: str = node_str[i]
+            i = i + 1
+            if c == "." and bracket_count == 0:
+                return "".join(result), "".join(node_str[i:])
+            if c in ("[", "("):
+                bracket_count += 1
+            elif c in ("]", ")"):
+                bracket_count -= 1
+            result.append(c)
+        return "".join(result), None
+
+    @classmethod
+    def translate(cls, pattern: str) -> str:
+        star: object = object()
+
+        parts: List[Union[str, object]] = []
+        i: int = 0
+        n: int = len(pattern)
+        while i < n:
+            c: str = pattern[i]
+            i = i + 1
+            if c == "*":
+                parts.append(star)
+            elif c == "$":
+                j = i
+                while j < n and pattern[j] not in (",", "]", ")"):
+                    j = j + 1
+                parts.append(r"\$" if j >= n else star)
+                i = j
             else:
-                search = node_str
-            if search not in doc_dict:
+                parts.append(re.escape(c))
+        assert i == n
+
+        result: List[str] = []
+        i: int = 0
+        n: int = len(parts)
+        while i < n and parts[i] is not star:
+            result.append(parts[i])
+            i += 1
+
+        next_group_num = itertools.count().__next__
+        while i < n:
+            assert parts[i] is star
+            i += 1
+            if i == n:
+                result.append(".*")
+                break
+            assert parts[i] is not star
+            fixed: List[Union[str, object]] = []
+            while i < n and parts[i] is not star:
+                fixed.append(parts[i])
+                i += 1
+            fixed_str: str = "".join(fixed)
+            if i == n:
+                result.append(".*")
+                result.append(fixed_str)
+            else:
+                group_num: int = next_group_num()
+                result.append(f"(?=(?P<g{group_num}>.*?{fixed_str}))(?P=g{group_num})")
+        assert i == n
+
+        result_str: str = "".join(result)
+        return rf"(?s:{result_str})\Z"
+
+    @classmethod
+    @functools.lru_cache(maxsize=256, typed=True)
+    def _compile_pattern(cls, pattern: AnyStr) -> re.Pattern:
+        result: AnyStr
+        if isinstance(pattern, bytes):
+            pat_str: str = str(pattern, "ISO-8859-1")
+            res_str: str = cls.translate(pat_str)
+            result = bytes(res_str, "ISO-8859-1")
+        else:
+            result = cls.translate(pattern)
+        return re.compile(result)
+
+    def get(self, node_str: str) -> Optional[Doc]:
+        node: str
+        search: str = node_str
+        data: Mapping[str, Any] = self.data
+        while True:
+            if search in data:
+                return Doc(data[search])
+            node, search = self.split_node_str(search)
+            for key in data:
+                pattern: re.Pattern = self._compile_pattern(key)
+                if pattern.match(node) is not None:
+                    data = data[key]
+                    if search is None:
+                        return Doc(data)
+                    break
+            else:
                 return None
-            doc_dict = doc_dict[search]
 
     def doc_string(self, indent: int = 0, line_length: int = 100) -> Sequence[str]:
         indent_str: str = "    " * indent
@@ -490,9 +582,9 @@ def build_enum(
     imports.add_c_type(CType(name="Enum", namespace="System"))
     lines: List[str] = [f"{'    ' * indent}class {type_def.name}(Enum):"]
 
-    doc_str: Sequence[str]
     indent_str: str = "    " * (indent + 1)
-    doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}")
+    doc_str: Sequence[str]
+    doc_node: Doc = doc.get(str(type_def))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -535,7 +627,7 @@ def build_delegate(
     ]
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}")
+    doc_node: Doc = doc.get(str(type_def))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
     else:
@@ -561,7 +653,7 @@ def build_field(
         type_str = f"ClassVar[{type_str}]"
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get(f"{field.declaring_type.import_name}.{field.name}")
+    doc_node: Doc = doc.get(str(field))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
     else:
@@ -623,7 +715,7 @@ def build_property(
     lines.append(f"{indent_str}def {property.name}({self_cls}) -> {property.type.simple_name}:")
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get(f"{property.declaring_type.import_name}.{property.name}")
+    doc_node: Doc = doc.get(str(property))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -682,8 +774,7 @@ def build_method(
     )
 
     doc_str: Sequence[str]
-    param_types: str = ", ".join(str(p.type) for p in method.parameters)
-    doc_node: Doc = doc.get(f"{method.declaring_type.import_name}.{method.name}({param_types})")
+    doc_node: Doc = doc.get(str(method))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent + 1, line_length=line_length)
     else:
@@ -708,7 +799,7 @@ def build_event(
     lines: List[str] = [f"{indent_str}{event.name}: EventType[{event.type.simple_name}] = ..."]
 
     doc_str: Sequence[str]
-    doc_node: Doc = doc.get(f"{event.declaring_type.import_name}.{event.name}")
+    doc_node: Doc = doc.get(str(event))
     if doc_node is not None:
         doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
     else:

@@ -51,6 +51,89 @@
         "doc": "ToString doc string.",
         "return": "Return doc string."
       }
+    },
+    "Collections": {
+      "IEnumerable": {
+        "GetEnumerator()": {
+          "doc": "GetEnumerator doc string.",
+          "return": "Return doc string."
+        }
+      },
+      "Generic": {
+        "ICollection[$T]": {
+          "Add($T)": {
+            "doc": "Add doc string.",
+            "parameters": {
+              "item": "item doc string."
+            },
+            "return": "Return doc string."
+          },
+          "Clear()": {
+            "doc": "Clear doc string."
+          },
+          "Contains($T)": {
+            "doc": "Contains doc string.",
+            "parameters": {
+              "item": "item doc string."
+            },
+            "return": "Return doc string."
+          },
+          "CopyTo(System.Array[$T], System.Int32)": {
+            "doc": "CopyTo doc string.",
+            "parameters": {
+              "array": "array doc string.",
+              "arrayIndex": "arrayIndex doc string."
+            }
+          },
+          "Count": {
+            "doc": "Count doc string.",
+            "return": "Return doc string."
+          },
+          "IsReadOnly": {
+            "doc": "IsReadOnly doc string.",
+            "return": "Return doc string."
+          },
+          "Remove($T)": {
+            "doc": "Remove doc string.",
+            "parameters": {
+              "item": "item doc string."
+            },
+            "return": "Return doc string."
+          }
+        },
+        "IEnumerable[$T]": {
+          "GetEnumerator()": {
+            "doc": "GetEnumerator doc string.",
+            "return": "Return doc string."
+          }
+        },
+        "IList[$T]": {
+          "IndexOf($T)": {
+            "doc": "IndexOf doc string.",
+            "parameters": {
+              "item": "item doc string."
+            },
+            "return": "Return doc string."
+          },
+          "Insert(System.Int32, $T)": {
+            "doc": "Insert doc string.",
+            "parameters": {
+              "index": "index doc string.",
+              "item": "item doc string."
+            }
+          },
+          "Item": {
+            "doc": "Item doc string.",
+            "return": "Return doc string."
+          },
+          "RemoveAt(System.Int32)": {
+            "doc": "RemoveAt doc string.",
+            "parameters": {
+              "index": "index doc string."
+            }
+          }
+        }
+      }
     }
   },
   "TestLib": {
@@ -131,6 +214,13 @@
       "doc": "ClassWithGeneric doc string.",
       "__init__()": {
         "doc": "__init__ doc string."
+      },
+      "MethodWithGeneric($T)": {
+        "doc": "MethodWithGeneric doc string.",
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
       }
     },
     "ClassWithInterface": {
@@ -259,7 +349,7 @@
         "return": "Return doc string."
       }
     },
-    "ClassWithMultiGeneric": {
+    "ClassWithMultiGeneric[$U, $V]": {
       "doc": "ClassWithMultiGeneric doc string.",
       "__init__()": {
         "doc": "__init__ doc string."
@@ -763,8 +853,16 @@
         "return": "Return doc string."
       }
     },
-    "IInterfaceWithGeneric": {
-      "doc": "IInterfaceWithGeneric doc string."
+    "IInterfaceWithGeneric[$T]": {
+      "doc": "IInterfaceWithGeneric doc string.",
+      "MethodWithGeneric($T)": {
+        "doc": "MethodWithGeneric doc string.",
+        "doc_formatted": {},
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      }
     },
     "IInterfaceWithInterface": {
       "doc": "IInterfaceWithInterface doc string."
@@ -829,7 +927,7 @@
         "return": "Return doc string."
       }
     },
-    "IInterfaceWithMultiGeneric": {
+    "IInterfaceWithMultiGeneric[$U, $V]": {
       "doc": "IInterfaceWithMultiGeneric doc string."
     },
     "IInterfaceWithNested": {
@@ -1222,8 +1320,16 @@
         "doc": "__init__ doc string."
       }
     },
-    "StructWithGeneric": {
-      "doc": "StructWithGeneric doc string."
+    "StructWithGeneric[$T]": {
+      "doc": "StructWithGeneric doc string.",
+      "MethodWithGeneric($T)": {
+        "doc": "MethodWithGeneric doc string.",
+        "doc_formatted": {},
+        "parameters": {
+          "param0": "param0 doc string."
+        },
+        "return": "Return doc string."
+      }
     },
     "StructWithInterface": {
       "doc": "StructWithInterface doc string.",
@@ -1379,7 +1485,7 @@
         "return": "Return doc string."
       }
     },
-    "StructWithMultiGeneric": {
+    "StructWithMultiGeneric[$U, $V]": {
       "doc": "StructWithMultiGeneric doc string."
     },
     "StructWithNested": {

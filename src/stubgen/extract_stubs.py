@@ -138,16 +138,18 @@ def extract_delegate(info: TypeInfo) -> CDelegate:
     )
 
 
-def extract_type(info: TypeInfo) -> Optional[CType]:
+def extract_type(info: TypeInfo, use_generic: bool = False) -> Optional[CType]:
+    # TODO - Extract array types, i.e. Int32[]
     if info is None:
         return None
+
+    if use_generic and info.IsConstructedGenericType:
+        # Converts IEquatable[Class] -> IEquatable[$T]
+        info = info.GetGenericTypeDefinition()
+
     name: str = make_python_name(info.Name)
     reference: bool = info.IsByRef
     nullable: bool = False
-
-    # TODO - Convert IEquatable[ClassWithInterface] -> IEquatable[$T]
-    # info.IsConstructedGenericType
-    # info.IsGenericType
 
     underlying_type: TypeInfo = Nullable.GetUnderlyingType(info)
     if underlying_type is not None:
@@ -162,7 +164,7 @@ def extract_type(info: TypeInfo) -> Optional[CType]:
             nullable = True
 
     generic: bool = info.IsGenericParameter
-    return CType(
+    extracted = CType(
         name=name,
         namespace=None if generic else info.Namespace,
         inner=tuple(map(extract_type, info.GetGenericArguments())),
@@ -170,6 +172,10 @@ def extract_type(info: TypeInfo) -> Optional[CType]:
         generic=generic,
         nullable=nullable,
     )
+
+    if info.IsArray and extracted.name != "Array":
+        return CType(name="Array", namespace="System", inner=(extracted,))
+    return extracted
 
 
 def extract_parameter(info: ParameterInfo) -> CParameter:
@@ -198,12 +204,13 @@ def extract_constructor(info: ConstructorInfo) -> CConstructor:
 
 
 def extract_property(info: PropertyInfo) -> CProperty:
+    # TODO - Item property should actually be a method
     get_method: MethodInfo = info.GetGetMethod()
     set_method: MethodInfo = info.GetSetMethod()
 
     return CProperty(
         name=make_python_name(info.Name),
-        declaring_type=extract_type(info.DeclaringType),
+        declaring_type=extract_type(info.DeclaringType, use_generic=True),
         type=extract_type(info.PropertyType),
         setter=set_method is not None,
         static=get_method is not None and get_method.IsStatic,
@@ -222,7 +229,7 @@ def extract_method(info: MethodInfo) -> CMethod:
 
     return CMethod(
         name=make_python_name(info.Name),
-        declaring_type=extract_type(info.DeclaringType),
+        declaring_type=extract_type(info.DeclaringType, use_generic=True),
         parameters=tuple(parameters),
         return_types=tuple(return_types),
         static=info.IsStatic,
@@ -356,47 +363,49 @@ def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
         )
         methods.append(method)
 
-    def get_base_types(_info: TypeInfo) -> Sequence[CType]:
+    def get_base_types(_info: TypeInfo) -> Sequence[TypeInfo]:
         found: List[CType] = []
         if _info.BaseType is not None:
             found.extend(get_base_types(_info.BaseType))
         for interface in _info.GetInterfaces():
             found.extend(get_base_types(interface))
-        found.append(extract_type(_info))
+        found.append(_info)
         return tuple(dict.fromkeys(found).keys())
 
     interface: TypeInfo
     for interface in get_base_types(info):
-        if interface.name == "IEnumerable":
-            return_type: CType
-            if len(interface.inner) > 0:
-                return_type = interface.inner[0]
+        declaring_type: CType = extract_type(interface, use_generic=True)
+        inner_types: Sequence[CType] = tuple(map(extract_type, interface.GetGenericArguments()))
+        if interface.Name in ("IEnumerable", "IEnumerable`1"):
+            return_types: Sequence[CType]
+            if len(inner_types) > 0:
+                return_types = inner_types
             else:
-                return_type = CType(name="Object", namespace="System")
+                return_types = (CType(name="Object", namespace="System"),)
             method = CMethod(
                 name="__iter__",
-                declaring_type=interface,
+                declaring_type=declaring_type,
                 parameters=tuple(),
-                return_types=(CType(name="Iterator", namespace="typing", inner=(return_type,)),),
+                return_types=(CType(name="Iterator", namespace="typing", inner=return_types),),
             )
             methods.append(method)
-        elif interface.name == "ICollection":
+        elif interface.Name in ("ICollection", "ICollection`1"):
             method = CMethod(
                 name="__len__",
-                declaring_type=interface,
+                declaring_type=declaring_type,
                 parameters=tuple(),
                 return_types=(CType(name="Int32", namespace="System"),),
             )
             methods.append(method)
 
             return_type: CType
-            if len(interface.inner) > 0:
-                return_type = interface.inner[0]
+            if len(inner_types) > 0:
+                return_type = inner_types[0]
             else:
                 return_type = CType(name="Object", namespace="System")
             method = CMethod(
                 name="__contains__",
-                declaring_type=interface,
+                declaring_type=declaring_type,
                 parameters=(CParameter(name="value", type=return_type),),
                 return_types=(CType(name="Boolean", namespace="System"),),
             )

@@ -123,6 +123,16 @@ class TestCClass(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
+                "TestLib.ClassWithGeneric[$T].MethodWithGeneric($T)": CMethod(
+                    name="MethodWithGeneric",
+                    declaring_type=CType(
+                        name="ClassWithGeneric",
+                        namespace="TestLib",
+                        inner=(CType(name="T", generic=True),),
+                    ),
+                    parameters=(CParameter(name="param0", type=CType("T", generic=True)),),
+                    return_types=(CType(name="Void", namespace="System"),),
+                ),
                 "System.Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
@@ -1385,79 +1395,86 @@ class TestCClass(TestExtractBase):
                 ),
             },
             properties={
-                "System.Collections.Generic.ICollection[System.Int32].Count": CProperty(
+                "System.Collections.Generic.ICollection[$T].Count": CProperty(
                     name="Count",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].IsReadOnly": CProperty(
+                "System.Collections.Generic.ICollection[$T].IsReadOnly": CProperty(
                     name="IsReadOnly",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     type=CType(name="Boolean", namespace="System"),
                 ),
-                "System.Collections.Generic.IList[System.Int32].Item": CProperty(
+                "System.Collections.Generic.IList[$T].Item": CProperty(
                     name="Item",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
             },
             methods={
-                "System.Collections.Generic.ICollection[System.Int32].Add(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].Add(System.Int32)": CMethod(
                     name="Add",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].Clear()": CMethod(
+                "System.Collections.Generic.ICollection[$T].Clear()": CMethod(
                     name="Clear",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].Contains(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].Contains(System.Int32)": CMethod(
                     name="Contains",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].CopyTo(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].CopyTo(System.Array[System.Int32], System.Int32)": CMethod(
                     name="CopyTo",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
-                        CParameter(name="array", type=CType(name="Int32", namespace="System")),
+                        CParameter(
+                            name="array",
+                            type=CType(
+                                name="Array",
+                                namespace="System",
+                                inner=(CType(name="Int32", namespace="System"),),
+                            ),
+                        ),
                         CParameter(name="arrayIndex", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
@@ -1488,24 +1505,24 @@ class TestCClass(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].IndexOf(System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].IndexOf(System.Int32)": CMethod(
                     name="IndexOf",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].Insert(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].Insert(System.Int32, System.Int32)": CMethod(
                     name="Insert",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
@@ -1513,24 +1530,24 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].Remove(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].Remove(System.Int32)": CMethod(
                     name="Remove",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].RemoveAt(System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].RemoveAt(System.Int32)": CMethod(
                     name="RemoveAt",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
@@ -1543,24 +1560,24 @@ class TestCClass(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="String", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].__contains__(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].__contains__(System.Int32)": CMethod(
                     name="__contains__",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="value", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].__getitem__(System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].__getitem__(System.Int32)": CMethod(
                     name="__getitem__",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
@@ -1579,12 +1596,12 @@ class TestCClass(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.IEnumerable[System.Int32].__iter__()": CMethod(
+                "System.Collections.Generic.IEnumerable[$T].__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(
                         name="IEnumerable",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(),
                     return_types=(
@@ -1595,22 +1612,22 @@ class TestCClass(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].__len__()": CMethod(
+                "System.Collections.Generic.ICollection[$T].__len__()": CMethod(
                     name="__len__",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].__setitem__(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].__setitem__(System.Int32, System.Int32)": CMethod(
                     name="__setitem__",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
@@ -1895,6 +1912,16 @@ class TestCStruct(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
+                "TestLib.StructWithGeneric[$T].MethodWithGeneric($T)": CMethod(
+                    name="MethodWithGeneric",
+                    declaring_type=CType(
+                        name="StructWithGeneric",
+                        namespace="TestLib",
+                        inner=(CType(name="T", generic=True),),
+                    ),
+                    parameters=(CParameter(name="param0", type=CType("T", generic=True)),),
+                    return_types=(CType(name="Void", namespace="System"),),
+                ),
                 "System.Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
@@ -1988,12 +2015,12 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.IEquatable[TestLib.StructWithInterface].Equals(TestLib.StructWithInterface)": CMethod(
+                "System.IEquatable[$T].Equals(TestLib.StructWithInterface)": CMethod(
                     name="Equals",
                     declaring_type=CType(
                         name="IEquatable",
                         namespace="System",
-                        inner=(CType(name="StructWithInterface", namespace="TestLib"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(
@@ -3189,79 +3216,86 @@ class TestCStruct(TestExtractBase):
             fields={},
             constructors={},
             properties={
-                "System.Collections.Generic.ICollection[System.Int32].Count": CProperty(
+                "System.Collections.Generic.ICollection[$T].Count": CProperty(
                     name="Count",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].IsReadOnly": CProperty(
+                "System.Collections.Generic.ICollection[$T].IsReadOnly": CProperty(
                     name="IsReadOnly",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     type=CType(name="Boolean", namespace="System"),
                 ),
-                "System.Collections.Generic.IList[System.Int32].Item": CProperty(
+                "System.Collections.Generic.IList[$T].Item": CProperty(
                     name="Item",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
             },
             methods={
-                "System.Collections.Generic.ICollection[System.Int32].Add(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].Add(System.Int32)": CMethod(
                     name="Add",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].Clear()": CMethod(
+                "System.Collections.Generic.ICollection[$T].Clear()": CMethod(
                     name="Clear",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].Contains(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].Contains(System.Int32)": CMethod(
                     name="Contains",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].CopyTo(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].CopyTo(System.Array[System.Int32], System.Int32)": CMethod(
                     name="CopyTo",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
-                        CParameter(name="array", type=CType(name="Int32", namespace="System")),
+                        CParameter(
+                            name="array",
+                            type=CType(
+                                name="Array",
+                                namespace="System",
+                                inner=(CType(name="Int32", namespace="System"),),
+                            ),
+                        ),
                         CParameter(name="arrayIndex", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
@@ -3292,24 +3326,24 @@ class TestCStruct(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].IndexOf(System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].IndexOf(System.Int32)": CMethod(
                     name="IndexOf",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].Insert(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].Insert(System.Int32, System.Int32)": CMethod(
                     name="Insert",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
@@ -3317,24 +3351,24 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].Remove(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].Remove(System.Int32)": CMethod(
                     name="Remove",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].RemoveAt(System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].RemoveAt(System.Int32)": CMethod(
                     name="RemoveAt",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
@@ -3347,24 +3381,24 @@ class TestCStruct(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="String", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].__contains__(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].__contains__(System.Int32)": CMethod(
                     name="__contains__",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="value", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].__getitem__(System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].__getitem__(System.Int32)": CMethod(
                     name="__getitem__",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
@@ -3383,12 +3417,12 @@ class TestCStruct(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.IEnumerable[System.Int32].__iter__()": CMethod(
+                "System.Collections.Generic.IEnumerable[$T].__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(
                         name="IEnumerable",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(),
                     return_types=(
@@ -3399,22 +3433,22 @@ class TestCStruct(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].__len__()": CMethod(
+                "System.Collections.Generic.ICollection[$T].__len__()": CMethod(
                     name="__len__",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].__setitem__(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].__setitem__(System.Int32, System.Int32)": CMethod(
                     name="__setitem__",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
@@ -3665,7 +3699,18 @@ class TestCInterface(TestExtractBase):
             interfaces=(),
             fields={},
             properties={},
-            methods={},
+            methods={
+                "TestLib.IInterfaceWithGeneric[$T].MethodWithGeneric($T)": CMethod(
+                    name="MethodWithGeneric",
+                    declaring_type=CType(
+                        name="IInterfaceWithGeneric",
+                        namespace="TestLib",
+                        inner=(CType(name="T", generic=True),),
+                    ),
+                    parameters=(CParameter(name="param0", type=CType("T", generic=True)),),
+                    return_types=(CType(name="Void", namespace="System"),),
+                ),
+            },
             events={},
             nested={},
         )
@@ -3711,12 +3756,12 @@ class TestCInterface(TestExtractBase):
             fields={},
             properties={},
             methods={
-                "System.IEquatable[TestLib.IInterfaceWithInterface].Equals(TestLib.IInterfaceWithInterface)": CMethod(
+                "System.IEquatable[$T].Equals(TestLib.IInterfaceWithInterface)": CMethod(
                     name="Equals",
                     declaring_type=CType(
                         name="IEquatable",
                         namespace="System",
-                        inner=(CType(name="IInterfaceWithInterface", namespace="TestLib"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(
@@ -4507,79 +4552,86 @@ class TestCInterface(TestExtractBase):
             ),
             fields={},
             properties={
-                "System.Collections.Generic.ICollection[System.Int32].Count": CProperty(
+                "System.Collections.Generic.ICollection[$T].Count": CProperty(
                     name="Count",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].IsReadOnly": CProperty(
+                "System.Collections.Generic.ICollection[$T].IsReadOnly": CProperty(
                     name="IsReadOnly",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     type=CType(name="Boolean", namespace="System"),
                 ),
-                "System.Collections.Generic.IList[System.Int32].Item": CProperty(
+                "System.Collections.Generic.IList[$T].Item": CProperty(
                     name="Item",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
             },
             methods={
-                "System.Collections.Generic.ICollection[System.Int32].Add(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].Add(System.Int32)": CMethod(
                     name="Add",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].Clear()": CMethod(
+                "System.Collections.Generic.ICollection[$T].Clear()": CMethod(
                     name="Clear",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].Contains(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].Contains(System.Int32)": CMethod(
                     name="Contains",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].CopyTo(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].CopyTo(System.Array[System.Int32], System.Int32)": CMethod(
                     name="CopyTo",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
-                        CParameter(name="array", type=CType(name="Int32", namespace="System")),
+                        CParameter(
+                            name="array",
+                            type=CType(
+                                name="Array",
+                                namespace="System",
+                                inner=(CType(name="Int32", namespace="System"),),
+                            ),
+                        ),
                         CParameter(name="arrayIndex", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
@@ -4590,24 +4642,24 @@ class TestCInterface(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="IEnumerator", namespace="System.Collections"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].IndexOf(System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].IndexOf(System.Int32)": CMethod(
                     name="IndexOf",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].Insert(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].Insert(System.Int32, System.Int32)": CMethod(
                     name="Insert",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
@@ -4615,48 +4667,48 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].Remove(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].Remove(System.Int32)": CMethod(
                     name="Remove",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].RemoveAt(System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].RemoveAt(System.Int32)": CMethod(
                     name="RemoveAt",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].__contains__(System.Int32)": CMethod(
+                "System.Collections.Generic.ICollection[$T].__contains__(System.Int32)": CMethod(
                     name="__contains__",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="value", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].__getitem__(System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].__getitem__(System.Int32)": CMethod(
                     name="__getitem__",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
@@ -4675,12 +4727,12 @@ class TestCInterface(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.IEnumerable[System.Int32].__iter__()": CMethod(
+                "System.Collections.Generic.IEnumerable[$T].__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(
                         name="IEnumerable",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(),
                     return_types=(
@@ -4691,22 +4743,22 @@ class TestCInterface(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.ICollection[System.Int32].__len__()": CMethod(
+                "System.Collections.Generic.ICollection[$T].__len__()": CMethod(
                     name="__len__",
                     declaring_type=CType(
                         name="ICollection",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[System.Int32].__setitem__(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic.IList[$T].__setitem__(System.Int32, System.Int32)": CMethod(
                     name="__setitem__",
                     declaring_type=CType(
                         name="IList",
                         namespace="System.Collections.Generic",
-                        inner=(CType(name="Int32", namespace="System"),),
+                        inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
                         CParameter(name="index", type=CType(name="Int32", namespace="System")),
