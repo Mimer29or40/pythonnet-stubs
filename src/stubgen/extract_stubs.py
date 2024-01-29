@@ -70,6 +70,7 @@ def extract_class(info: TypeInfo) -> CClass:
     return CClass(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
+        nested=extract_type(info.DeclaringType),
         abstract=info.IsAbstract,
         generic_args=tuple(map(extract_type, info.GetGenericArguments())),
         super_class=extract_type(info.BaseType),
@@ -79,7 +80,7 @@ def extract_class(info: TypeInfo) -> CClass:
         properties=extract_properties(info),
         methods=extract_methods(info),
         events=extract_events(info),
-        nested=extract_nested(info),
+        nested_types=extract_nested_types(info),
     )
 
 
@@ -88,6 +89,7 @@ def extract_struct(info: TypeInfo) -> CStruct:
     return CStruct(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
+        nested=extract_type(info.DeclaringType),
         abstract=info.IsAbstract,
         generic_args=tuple(map(extract_type, info.GetGenericArguments())),
         super_class=extract_type(info.BaseType),
@@ -97,7 +99,7 @@ def extract_struct(info: TypeInfo) -> CStruct:
         properties=extract_properties(info),
         methods=extract_methods(info),
         events=extract_events(info),
-        nested=extract_nested(info),
+        nested_types=extract_nested_types(info),
     )
 
 
@@ -106,13 +108,14 @@ def extract_interface(info: TypeInfo) -> CInterface:
     return CInterface(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
+        nested=extract_type(info.DeclaringType),
         generic_args=tuple(map(extract_type, info.GetGenericArguments())),
         interfaces=tuple(sorted(map(extract_type, info.GetInterfaces()))),
         fields=extract_fields(info),
         properties=extract_properties(info),
         methods=extract_methods(info),
         events=extract_events(info),
-        nested=extract_nested(info),
+        nested_types=extract_nested_types(info),
     )
 
 
@@ -121,6 +124,7 @@ def extract_enum(info: TypeInfo) -> CEnum:
     return CEnum(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
+        nested=extract_type(info.DeclaringType),
         fields=tuple(info.GetEnumNames()),
     )
 
@@ -133,13 +137,13 @@ def extract_delegate(info: TypeInfo) -> CDelegate:
     return CDelegate(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
+        nested=extract_type(info.DeclaringType),
         parameters=tuple(map(extract_parameter, invoke.GetParameters())),
         return_type=extract_type(invoke.ReturnType),
     )
 
 
 def extract_type(info: TypeInfo, use_generic: bool = False) -> Optional[CType]:
-    # TODO - Extract array types, i.e. Int32[]
     if info is None:
         return None
 
@@ -147,10 +151,10 @@ def extract_type(info: TypeInfo, use_generic: bool = False) -> Optional[CType]:
         # Converts IEquatable[Class] -> IEquatable[$T]
         info = info.GetGenericTypeDefinition()
 
-    name: str = make_python_name(info.Name)
     reference: bool = info.IsByRef
     nullable: bool = False
 
+    name: str = make_python_name(info.Name)
     underlying_type: TypeInfo = Nullable.GetUnderlyingType(info)
     if underlying_type is not None:
         info = underlying_type
@@ -164,6 +168,12 @@ def extract_type(info: TypeInfo, use_generic: bool = False) -> Optional[CType]:
             nullable = True
 
     generic: bool = info.IsGenericParameter
+    if info.IsNested and not generic:
+        parent: TypeInfo = info.DeclaringType
+        while parent is not None:
+            name = f"{make_python_name(parent.Name)}.{name}"
+            parent = parent.DeclaringType
+
     extracted = CType(
         name=name,
         namespace=None if generic else info.Namespace,
@@ -444,7 +454,7 @@ def extract_events(info: TypeInfo) -> Mapping[str, CEvent]:
     return {str(e): e for e in sorted(map(extract_event, _extract_events(info)))}
 
 
-def extract_nested(info: TypeInfo) -> Mapping[str, CTypeDefinition]:
+def extract_nested_types(info: TypeInfo) -> Mapping[str, CTypeDefinition]:
     return {str(n): n for n in sorted(map(extract_type_def, info.GetNestedTypes()))}
 
 

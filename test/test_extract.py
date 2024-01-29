@@ -1,5 +1,7 @@
+import json
 import unittest
 from pathlib import Path
+from typing import Any
 from typing import Dict
 from typing import Mapping
 from typing import Sequence
@@ -86,13 +88,14 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithGeneric",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(CType(name="T", generic=True),),
             super_class=CType(name="Object", namespace="System"),
             interfaces=(),
             fields={},
             constructors={
-                "TestLib.ClassWithGeneric[$T].__init__()": CConstructor(
+                "TestLib:ClassWithGeneric[$T].__init__()": CConstructor(
                     declaring_type=CType(
                         name="ClassWithGeneric",
                         namespace="TestLib",
@@ -103,7 +106,7 @@ class TestCClass(TestExtractBase):
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -111,19 +114,19 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "TestLib.ClassWithGeneric[$T].MethodWithGeneric($T)": CMethod(
+                "TestLib:ClassWithGeneric[$T].MethodWithGeneric($T)": CMethod(
                     name="MethodWithGeneric",
                     declaring_type=CType(
                         name="ClassWithGeneric",
@@ -133,7 +136,7 @@ class TestCClass(TestExtractBase):
                     parameters=(CParameter(name="param0", type=CType("T", generic=True)),),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -141,7 +144,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -153,6 +156,7 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithMultiGeneric",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(
                 CType(name="U", generic=True),
@@ -162,7 +166,7 @@ class TestCClass(TestExtractBase):
             interfaces=(),
             fields={},
             constructors={
-                "TestLib.ClassWithMultiGeneric[$U, $V].__init__()": CConstructor(
+                "TestLib:ClassWithMultiGeneric[$U, $V].__init__()": CConstructor(
                     declaring_type=CType(
                         name="ClassWithMultiGeneric",
                         namespace="TestLib",
@@ -176,7 +180,7 @@ class TestCClass(TestExtractBase):
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -184,19 +188,19 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -204,7 +208,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -216,6 +220,7 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithInterface",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Object", namespace="System"),
@@ -228,14 +233,14 @@ class TestCClass(TestExtractBase):
             ),
             fields={},
             constructors={
-                "TestLib.ClassWithInterface.__init__()": CConstructor(
+                "TestLib:ClassWithInterface.__init__()": CConstructor(
                     declaring_type=CType(name="ClassWithInterface", namespace="TestLib"),
                     parameters=(),
                 ),
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -243,7 +248,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.IEquatable[$T].Equals(TestLib.ClassWithInterface)": CMethod(
+                "System:IEquatable[$T].Equals(TestLib:ClassWithInterface)": CMethod(
                     name="Equals",
                     declaring_type=CType(
                         name="IEquatable",
@@ -258,19 +263,19 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -278,7 +283,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -290,39 +295,40 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithFields",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Object", namespace="System"),
             interfaces=(),
             fields={
-                "TestLib.ClassWithFields.InstanceFieldA": CField(
+                "TestLib:ClassWithFields.InstanceFieldA": CField(
                     name="InstanceFieldA",
                     declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.ClassWithFields.InstanceFieldB": CField(
+                "TestLib:ClassWithFields.InstanceFieldB": CField(
                     name="InstanceFieldB",
                     declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.ClassWithFields.InstanceFieldC": CField(
+                "TestLib:ClassWithFields.InstanceFieldC": CField(
                     name="InstanceFieldC",
                     declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.ClassWithFields.StaticFieldA": CField(
+                "TestLib:ClassWithFields.StaticFieldA": CField(
                     name="StaticFieldA",
                     declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.ClassWithFields.StaticFieldB": CField(
+                "TestLib:ClassWithFields.StaticFieldB": CField(
                     name="StaticFieldB",
                     declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.ClassWithFields.StaticFieldC": CField(
+                "TestLib:ClassWithFields.StaticFieldC": CField(
                     name="StaticFieldC",
                     declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
@@ -330,14 +336,14 @@ class TestCClass(TestExtractBase):
                 ),
             },
             constructors={
-                "TestLib.ClassWithFields.__init__()": CConstructor(
+                "TestLib:ClassWithFields.__init__()": CConstructor(
                     declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                     parameters=(),
                 ),
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -345,19 +351,19 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -365,7 +371,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -377,30 +383,31 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithConstructors",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Object", namespace="System"),
             interfaces=(),
             fields={},
             constructors={
-                "TestLib.ClassWithConstructors.__init__()": CConstructor(
+                "TestLib:ClassWithConstructors.__init__()": CConstructor(
                     declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
                     parameters=(),
                 ),
-                "TestLib.ClassWithConstructors.__init__(System.Int32)": CConstructor(
+                "TestLib:ClassWithConstructors.__init__(System:Int32)": CConstructor(
                     declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Int32", namespace="System")),
                     ),
                 ),
-                "TestLib.ClassWithConstructors.__init__(System.Int32, System.Int32)": CConstructor(
+                "TestLib:ClassWithConstructors.__init__(System:Int32, System:Int32)": CConstructor(
                     declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Int32", namespace="System")),
                         CParameter(name="param1", type=CType(name="Int32", namespace="System")),
                     ),
                 ),
-                "TestLib.ClassWithConstructors.__init__(System.Int32, System.Int32, System.Int32)": CConstructor(
+                "TestLib:ClassWithConstructors.__init__(System:Int32, System:Int32, System:Int32)": CConstructor(
                     declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Int32", namespace="System")),
@@ -411,7 +418,7 @@ class TestCClass(TestExtractBase):
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -419,19 +426,19 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -439,7 +446,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -451,85 +458,86 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithProperties",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Object", namespace="System"),
             interfaces=(),
             fields={},
             constructors={
-                "TestLib.ClassWithProperties.__init__()": CConstructor(
+                "TestLib:ClassWithProperties.__init__()": CConstructor(
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     parameters=(),
                 ),
             },
             properties={
-                "TestLib.ClassWithProperties.InstanceProperty0": CProperty(
+                "TestLib:ClassWithProperties.InstanceProperty0": CProperty(
                     name="InstanceProperty0",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
-                "TestLib.ClassWithProperties.InstanceProperty1": CProperty(
+                "TestLib:ClassWithProperties.InstanceProperty1": CProperty(
                     name="InstanceProperty1",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
-                "TestLib.ClassWithProperties.InstanceProperty2": CProperty(
+                "TestLib:ClassWithProperties.InstanceProperty2": CProperty(
                     name="InstanceProperty2",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
-                "TestLib.ClassWithProperties.InstanceReadOnlyProperty0": CProperty(
+                "TestLib:ClassWithProperties.InstanceReadOnlyProperty0": CProperty(
                     name="InstanceReadOnlyProperty0",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.ClassWithProperties.InstanceReadOnlyProperty1": CProperty(
+                "TestLib:ClassWithProperties.InstanceReadOnlyProperty1": CProperty(
                     name="InstanceReadOnlyProperty1",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.ClassWithProperties.InstanceReadOnlyProperty2": CProperty(
+                "TestLib:ClassWithProperties.InstanceReadOnlyProperty2": CProperty(
                     name="InstanceReadOnlyProperty2",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.ClassWithProperties.StaticProperty0": CProperty(
+                "TestLib:ClassWithProperties.StaticProperty0": CProperty(
                     name="StaticProperty0",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                     static=True,
                 ),
-                "TestLib.ClassWithProperties.StaticProperty1": CProperty(
+                "TestLib:ClassWithProperties.StaticProperty1": CProperty(
                     name="StaticProperty1",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                     static=True,
                 ),
-                "TestLib.ClassWithProperties.StaticProperty2": CProperty(
+                "TestLib:ClassWithProperties.StaticProperty2": CProperty(
                     name="StaticProperty2",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                     static=True,
                 ),
-                "TestLib.ClassWithProperties.StaticReadOnlyProperty0": CProperty(
+                "TestLib:ClassWithProperties.StaticReadOnlyProperty0": CProperty(
                     name="StaticReadOnlyProperty0",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.ClassWithProperties.StaticReadOnlyProperty1": CProperty(
+                "TestLib:ClassWithProperties.StaticReadOnlyProperty1": CProperty(
                     name="StaticReadOnlyProperty1",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.ClassWithProperties.StaticReadOnlyProperty2": CProperty(
+                "TestLib:ClassWithProperties.StaticReadOnlyProperty2": CProperty(
                     name="StaticReadOnlyProperty2",
                     declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
@@ -537,7 +545,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -545,19 +553,19 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -565,7 +573,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -577,20 +585,21 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithMethods",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Object", namespace="System"),
             interfaces=(),
             fields={},
             constructors={
-                "TestLib.ClassWithMethods.__init__()": CConstructor(
+                "TestLib:ClassWithMethods.__init__()": CConstructor(
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(),
                 ),
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -598,19 +607,19 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "TestLib.ClassWithMethods.InstanceMethodWithDefaultParam(System.Int32)": CMethod(
+                "TestLib:ClassWithMethods.InstanceMethodWithDefaultParam(System:Int32)": CMethod(
                     name="InstanceMethodWithDefaultParam",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -622,7 +631,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.ClassWithMethods.InstanceMethodWithNullableDefaultParam(System.Int32?)": CMethod(
+                "TestLib:ClassWithMethods.InstanceMethodWithNullableDefaultParam(System:Int32?)": CMethod(
                     name="InstanceMethodWithNullableDefaultParam",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -634,7 +643,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.ClassWithMethods.InstanceMethodWithNullableOutParam(System.*Int32?)": CMethod(
+                "TestLib:ClassWithMethods.InstanceMethodWithNullableOutParam(System:*Int32?)": CMethod(
                     name="InstanceMethodWithNullableOutParam",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -651,7 +660,7 @@ class TestCClass(TestExtractBase):
                         CType(name="Int32", namespace="System", reference=True, nullable=True),
                     ),
                 ),
-                "TestLib.ClassWithMethods.InstanceMethodWithNullableParam(System.Int32?)": CMethod(
+                "TestLib:ClassWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
                     name="InstanceMethodWithNullableParam",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -662,7 +671,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.ClassWithMethods.InstanceMethodWithOutParam(System.*Int32)": CMethod(
+                "TestLib:ClassWithMethods.InstanceMethodWithOutParam(System:*Int32)": CMethod(
                     name="InstanceMethodWithOutParam",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -677,13 +686,13 @@ class TestCClass(TestExtractBase):
                         CType(name="Int32", namespace="System", reference=True),
                     ),
                 ),
-                "TestLib.ClassWithMethods.InstanceMethodWithParams0()": CMethod(
+                "TestLib:ClassWithMethods.InstanceMethodWithParams0()": CMethod(
                     name="InstanceMethodWithParams0",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.ClassWithMethods.InstanceMethodWithParams1(System.Int32)": CMethod(
+                "TestLib:ClassWithMethods.InstanceMethodWithParams1(System:Int32)": CMethod(
                     name="InstanceMethodWithParams1",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -691,7 +700,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.ClassWithMethods.InstanceMethodWithParams2(System.Int32, System.Int32)": CMethod(
+                "TestLib:ClassWithMethods.InstanceMethodWithParams2(System:Int32, System:Int32)": CMethod(
                     name="InstanceMethodWithParams2",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -700,7 +709,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.ClassWithMethods.StaticMethodWithDefaultParam(System.Int32)": CMethod(
+                "TestLib:ClassWithMethods.StaticMethodWithDefaultParam(System:Int32)": CMethod(
                     name="StaticMethodWithDefaultParam",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -713,7 +722,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithMethods.StaticMethodWithNullableDefaultParam(System.Int32?)": CMethod(
+                "TestLib:ClassWithMethods.StaticMethodWithNullableDefaultParam(System:Int32?)": CMethod(
                     name="StaticMethodWithNullableDefaultParam",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -726,7 +735,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithMethods.StaticMethodWithNullableOutParam(System.*Int32?)": CMethod(
+                "TestLib:ClassWithMethods.StaticMethodWithNullableOutParam(System:*Int32?)": CMethod(
                     name="StaticMethodWithNullableOutParam",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -744,7 +753,7 @@ class TestCClass(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.ClassWithMethods.StaticMethodWithNullableParam(System.Int32?)": CMethod(
+                "TestLib:ClassWithMethods.StaticMethodWithNullableParam(System:Int32?)": CMethod(
                     name="StaticMethodWithNullableParam",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -756,7 +765,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithMethods.StaticMethodWithOutParam(System.*Int32)": CMethod(
+                "TestLib:ClassWithMethods.StaticMethodWithOutParam(System:*Int32)": CMethod(
                     name="StaticMethodWithOutParam",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -772,14 +781,14 @@ class TestCClass(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.ClassWithMethods.StaticMethodWithParams0()": CMethod(
+                "TestLib:ClassWithMethods.StaticMethodWithParams0()": CMethod(
                     name="StaticMethodWithParams0",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithMethods.StaticMethodWithParams1(System.Int32)": CMethod(
+                "TestLib:ClassWithMethods.StaticMethodWithParams1(System:Int32)": CMethod(
                     name="StaticMethodWithParams1",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -788,7 +797,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithMethods.StaticMethodWithParams2(System.Int32, System.Int32)": CMethod(
+                "TestLib:ClassWithMethods.StaticMethodWithParams2(System:Int32, System:Int32)": CMethod(
                     name="StaticMethodWithParams2",
                     declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                     parameters=(
@@ -798,7 +807,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -806,7 +815,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -818,20 +827,21 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithOperatorMethods",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Object", namespace="System"),
             interfaces=(),
             fields={},
             constructors={
-                "TestLib.ClassWithOperatorMethods.__init__()": CConstructor(
+                "TestLib:ClassWithOperatorMethods.__init__()": CConstructor(
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
                 ),
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -842,25 +852,25 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="String", namespace="System"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__add__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__add__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__add__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -871,7 +881,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__and__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__and__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__and__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -882,7 +892,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__eq__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__eq__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__eq__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -893,7 +903,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__ge__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__ge__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__ge__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -904,7 +914,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__gt__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__gt__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__gt__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -915,13 +925,13 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__invert__()": CMethod(
+                "TestLib:ClassWithOperatorMethods.__invert__()": CMethod(
                     name="__invert__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__le__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__le__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__le__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -932,7 +942,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__lt__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__lt__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__lt__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -943,7 +953,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__mod__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__mod__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__mod__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -954,7 +964,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__mul__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__mul__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__mul__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -965,7 +975,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__ne__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__ne__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__ne__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -976,13 +986,13 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__neg__()": CMethod(
+                "TestLib:ClassWithOperatorMethods.__neg__()": CMethod(
                     name="__neg__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__or__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__or__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__or__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -993,13 +1003,13 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__pos__()": CMethod(
+                "TestLib:ClassWithOperatorMethods.__pos__()": CMethod(
                     name="__pos__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__sub__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__sub__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__sub__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1010,7 +1020,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__truediv__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__truediv__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__truediv__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1021,7 +1031,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.__xor__(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.__xor__(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="__xor__",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1032,7 +1042,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.ClassWithOperatorMethods.op_Addition(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_Addition(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_Addition",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1048,7 +1058,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_BitwiseAnd(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_BitwiseAnd(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_BitwiseAnd",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1064,7 +1074,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_BitwiseOr(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_BitwiseOr(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_BitwiseOr",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1080,7 +1090,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_Decrement(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_Decrement(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_Decrement",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1092,7 +1102,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_Division(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_Division(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_Division",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1108,7 +1118,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_Equality(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_Equality(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_Equality",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1124,7 +1134,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_ExclusiveOr(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_ExclusiveOr(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_ExclusiveOr",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1140,7 +1150,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_False(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_False(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_False",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1152,7 +1162,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_GreaterThan(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_GreaterThan(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_GreaterThan",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1168,7 +1178,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_GreaterThanOrEqual(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_GreaterThanOrEqual(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_GreaterThanOrEqual",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1184,7 +1194,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_Increment(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_Increment(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_Increment",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1196,7 +1206,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_Inequality(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_Inequality(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_Inequality",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1212,7 +1222,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_LessThan(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_LessThan(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_LessThan",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1228,7 +1238,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_LessThanOrEqual(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_LessThanOrEqual(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_LessThanOrEqual",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1244,7 +1254,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_LogicalNot(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_LogicalNot(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_LogicalNot",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1256,7 +1266,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_Modulus(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_Modulus(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_Modulus",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1272,7 +1282,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_Multiply(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_Multiply(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_Multiply",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1288,7 +1298,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_OnesComplement(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_OnesComplement(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_OnesComplement",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1300,7 +1310,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_Subtraction(TestLib.ClassWithOperatorMethods, TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_Subtraction(TestLib:ClassWithOperatorMethods, TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_Subtraction",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1316,7 +1326,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_True(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_True(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_True",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1328,7 +1338,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_UnaryNegation(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_UnaryNegation(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_UnaryNegation",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1340,7 +1350,7 @@ class TestCClass(TestExtractBase):
                     return_types=(CType(name="ClassWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.ClassWithOperatorMethods.op_UnaryPlus(TestLib.ClassWithOperatorMethods)": CMethod(
+                "TestLib:ClassWithOperatorMethods.op_UnaryPlus(TestLib:ClassWithOperatorMethods)": CMethod(
                     name="op_UnaryPlus",
                     declaring_type=CType(name="ClassWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -1354,7 +1364,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -1366,6 +1376,7 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithListMethods",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Object", namespace="System"),
@@ -1389,13 +1400,13 @@ class TestCClass(TestExtractBase):
             ),
             fields={},
             constructors={
-                "TestLib.ClassWithListMethods.__init__()": CConstructor(
+                "TestLib:ClassWithListMethods.__init__()": CConstructor(
                     declaring_type=CType(name="ClassWithListMethods", namespace="TestLib"),
                     parameters=(),
                 ),
             },
             properties={
-                "System.Collections.Generic.ICollection[$T].Count": CProperty(
+                "System.Collections.Generic:ICollection[$T].Count": CProperty(
                     name="Count",
                     declaring_type=CType(
                         name="ICollection",
@@ -1404,7 +1415,7 @@ class TestCClass(TestExtractBase):
                     ),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "System.Collections.Generic.ICollection[$T].IsReadOnly": CProperty(
+                "System.Collections.Generic:ICollection[$T].IsReadOnly": CProperty(
                     name="IsReadOnly",
                     declaring_type=CType(
                         name="ICollection",
@@ -1413,7 +1424,7 @@ class TestCClass(TestExtractBase):
                     ),
                     type=CType(name="Boolean", namespace="System"),
                 ),
-                "System.Collections.Generic.IList[$T].Item": CProperty(
+                "System.Collections.Generic:IList[$T].Item": CProperty(
                     name="Item",
                     declaring_type=CType(
                         name="IList",
@@ -1425,7 +1436,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             methods={
-                "System.Collections.Generic.ICollection[$T].Add(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].Add(System:Int32)": CMethod(
                     name="Add",
                     declaring_type=CType(
                         name="ICollection",
@@ -1437,7 +1448,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].Clear()": CMethod(
+                "System.Collections.Generic:ICollection[$T].Clear()": CMethod(
                     name="Clear",
                     declaring_type=CType(
                         name="ICollection",
@@ -1447,7 +1458,7 @@ class TestCClass(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].Contains(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].Contains(System:Int32)": CMethod(
                     name="Contains",
                     declaring_type=CType(
                         name="ICollection",
@@ -1459,7 +1470,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].CopyTo(System.Array[System.Int32], System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].CopyTo(System:Array[System:Int32], System:Int32)": CMethod(
                     name="CopyTo",
                     declaring_type=CType(
                         name="ICollection",
@@ -1479,7 +1490,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -1487,25 +1498,25 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.IEnumerable.GetEnumerator()": CMethod(
+                "System.Collections:IEnumerable.GetEnumerator()": CMethod(
                     name="GetEnumerator",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
                     parameters=(),
                     return_types=(CType(name="IEnumerator", namespace="System.Collections"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].IndexOf(System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].IndexOf(System:Int32)": CMethod(
                     name="IndexOf",
                     declaring_type=CType(
                         name="IList",
@@ -1517,7 +1528,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].Insert(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].Insert(System:Int32, System:Int32)": CMethod(
                     name="Insert",
                     declaring_type=CType(
                         name="IList",
@@ -1530,7 +1541,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].Remove(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].Remove(System:Int32)": CMethod(
                     name="Remove",
                     declaring_type=CType(
                         name="ICollection",
@@ -1542,7 +1553,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].RemoveAt(System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].RemoveAt(System:Int32)": CMethod(
                     name="RemoveAt",
                     declaring_type=CType(
                         name="IList",
@@ -1554,13 +1565,13 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="String", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].__contains__(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].__contains__(System:Int32)": CMethod(
                     name="__contains__",
                     declaring_type=CType(
                         name="ICollection",
@@ -1572,7 +1583,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].__getitem__(System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].__getitem__(System:Int32)": CMethod(
                     name="__getitem__",
                     declaring_type=CType(
                         name="IList",
@@ -1584,7 +1595,7 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.IEnumerable.__iter__()": CMethod(
+                "System.Collections:IEnumerable.__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
                     parameters=(),
@@ -1596,7 +1607,7 @@ class TestCClass(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.IEnumerable[$T].__iter__()": CMethod(
+                "System.Collections.Generic:IEnumerable[$T].__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(
                         name="IEnumerable",
@@ -1612,7 +1623,7 @@ class TestCClass(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.ICollection[$T].__len__()": CMethod(
+                "System.Collections.Generic:ICollection[$T].__len__()": CMethod(
                     name="__len__",
                     declaring_type=CType(
                         name="ICollection",
@@ -1622,7 +1633,7 @@ class TestCClass(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].__setitem__(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].__setitem__(System:Int32, System:Int32)": CMethod(
                     name="__setitem__",
                     declaring_type=CType(
                         name="IList",
@@ -1637,7 +1648,7 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -1649,20 +1660,21 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithEvents",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Object", namespace="System"),
             interfaces=(),
             fields={},
             constructors={
-                "TestLib.ClassWithEvents.__init__()": CConstructor(
+                "TestLib:ClassWithEvents.__init__()": CConstructor(
                     declaring_type=CType(name="ClassWithEvents", namespace="TestLib"),
                     parameters=(),
                 ),
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -1670,19 +1682,19 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -1690,12 +1702,12 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={
-                "TestLib.ClassWithEvents.Event": CEvent(
+                "TestLib:ClassWithEvents.Event": CEvent(
                     name="Event",
                     declaring_type=CType(name="ClassWithEvents", namespace="TestLib"),
                     type=CType(name="EventHandler", namespace="System"),
                 ),
-                "TestLib.ClassWithEvents.EventWithArgs": CEvent(
+                "TestLib:ClassWithEvents.EventWithArgs": CEvent(
                     name="EventWithArgs",
                     declaring_type=CType(name="ClassWithEvents", namespace="TestLib"),
                     type=CType(
@@ -1705,7 +1717,7 @@ class TestCClass(TestExtractBase):
                     ),
                 ),
             },
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -1717,20 +1729,21 @@ class TestCClass(TestExtractBase):
         manual: CClass = CClass(
             name="ClassWithNested",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Object", namespace="System"),
             interfaces=(),
             fields={},
             constructors={
-                "TestLib.ClassWithNested.__init__()": CConstructor(
+                "TestLib:ClassWithNested.__init__()": CConstructor(
                     declaring_type=CType(name="ClassWithNested", namespace="TestLib"),
                     parameters=(),
                 ),
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -1738,19 +1751,19 @@ class TestCClass(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -1758,35 +1771,40 @@ class TestCClass(TestExtractBase):
                 ),
             },
             events={},
-            nested={
-                "TestLib.INestedInterface": CInterface(
+            nested_types={
+                "TestLib:ClassWithNested.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="TestLib",
+                    nested=CType(name="ClassWithNested", namespace="TestLib"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "TestLib.NestedClass": CClass(
+                "TestLib:ClassWithNested.NestedClass": CClass(
                     name="NestedClass",
                     namespace="TestLib",
+                    nested=CType(name="ClassWithNested", namespace="TestLib"),
                     abstract=False,
                     generic_args=(),
                     super_class=CType(name="Object", namespace="System"),
                     interfaces=(),
                     fields={},
                     constructors={
-                        "TestLib.NestedClass.__init__()": CConstructor(
-                            declaring_type=CType(name="NestedClass", namespace="TestLib"),
+                        "TestLib:ClassWithNested.NestedClass.__init__()": CConstructor(
+                            declaring_type=CType(
+                                name="ClassWithNested.NestedClass",
+                                namespace="TestLib",
+                            ),
                             parameters=(),
                         )
                     },
                     properties={},
                     methods={
-                        "System.Object.Equals(System.Object)": CMethod(
+                        "System:Object.Equals(System:Object)": CMethod(
                             name="Equals",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(
@@ -1797,19 +1815,19 @@ class TestCClass(TestExtractBase):
                             ),
                             return_types=(CType(name="Boolean", namespace="System"),),
                         ),
-                        "System.Object.GetHashCode()": CMethod(
+                        "System:Object.GetHashCode()": CMethod(
                             name="GetHashCode",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Int32", namespace="System"),),
                         ),
-                        "System.Object.GetType()": CMethod(
+                        "System:Object.GetType()": CMethod(
                             name="GetType",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Type", namespace="System"),),
                         ),
-                        "System.Object.ToString()": CMethod(
+                        "System:Object.ToString()": CMethod(
                             name="ToString",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
@@ -1817,18 +1835,25 @@ class TestCClass(TestExtractBase):
                         ),
                     },
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "TestLib.NestedDelegate": CDelegate(
+                "TestLib:ClassWithNested.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="TestLib",
+                    nested=CType(name="ClassWithNested", namespace="TestLib"),
                     parameters=(),
                     return_type=CType(name="Void", namespace="System"),
                 ),
-                "TestLib.NestedEnum": CEnum(name="NestedEnum", namespace="TestLib", fields=()),
-                "TestLib.NestedStruct": CStruct(
+                "TestLib:ClassWithNested.NestedEnum": CEnum(
+                    name="NestedEnum",
+                    namespace="TestLib",
+                    nested=CType(name="ClassWithNested", namespace="TestLib"),
+                    fields=(),
+                ),
+                "TestLib:ClassWithNested.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="TestLib",
+                    nested=CType(name="ClassWithNested", namespace="TestLib"),
                     abstract=False,
                     generic_args=(),
                     super_class=CType(name="ValueType", namespace="System"),
@@ -1837,7 +1862,7 @@ class TestCClass(TestExtractBase):
                     constructors={},
                     properties={},
                     methods={
-                        "System.Object.Equals(System.Object)": CMethod(
+                        "System:Object.Equals(System:Object)": CMethod(
                             name="Equals",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(
@@ -1848,19 +1873,19 @@ class TestCClass(TestExtractBase):
                             ),
                             return_types=(CType(name="Boolean", namespace="System"),),
                         ),
-                        "System.Object.GetHashCode()": CMethod(
+                        "System:Object.GetHashCode()": CMethod(
                             name="GetHashCode",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Int32", namespace="System"),),
                         ),
-                        "System.Object.GetType()": CMethod(
+                        "System:Object.GetType()": CMethod(
                             name="GetType",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Type", namespace="System"),),
                         ),
-                        "System.Object.ToString()": CMethod(
+                        "System:Object.ToString()": CMethod(
                             name="ToString",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
@@ -1868,7 +1893,7 @@ class TestCClass(TestExtractBase):
                         ),
                     },
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
@@ -1884,6 +1909,7 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithGeneric",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(CType(name="T", generic=True),),
             super_class=CType(name="ValueType", namespace="System"),
@@ -1892,7 +1918,7 @@ class TestCStruct(TestExtractBase):
             constructors={},
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -1900,19 +1926,19 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "TestLib.StructWithGeneric[$T].MethodWithGeneric($T)": CMethod(
+                "TestLib:StructWithGeneric[$T].MethodWithGeneric($T)": CMethod(
                     name="MethodWithGeneric",
                     declaring_type=CType(
                         name="StructWithGeneric",
@@ -1922,7 +1948,7 @@ class TestCStruct(TestExtractBase):
                     parameters=(CParameter(name="param0", type=CType("T", generic=True)),),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -1930,7 +1956,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -1942,6 +1968,7 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithMultiGeneric",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(
                 CType(name="U", generic=True),
@@ -1953,7 +1980,7 @@ class TestCStruct(TestExtractBase):
             constructors={},
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -1961,19 +1988,19 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -1981,7 +2008,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -1993,6 +2020,7 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithInterface",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="ValueType", namespace="System"),
@@ -2007,7 +2035,7 @@ class TestCStruct(TestExtractBase):
             constructors={},
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -2015,7 +2043,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.IEquatable[$T].Equals(TestLib.StructWithInterface)": CMethod(
+                "System:IEquatable[$T].Equals(TestLib:StructWithInterface)": CMethod(
                     name="Equals",
                     declaring_type=CType(
                         name="IEquatable",
@@ -2030,7 +2058,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.StructWithInterface.Equals(TestLib.StructWithInterface?)": CMethod(
+                "TestLib:StructWithInterface.Equals(TestLib:StructWithInterface?)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="StructWithInterface", namespace="TestLib"),
                     parameters=(
@@ -2045,25 +2073,25 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="String", namespace="System"),),
                 ),
-                "TestLib.StructWithInterface.op_Equality(TestLib.StructWithInterface, TestLib.StructWithInterface)": CMethod(
+                "TestLib:StructWithInterface.op_Equality(TestLib:StructWithInterface, TestLib:StructWithInterface)": CMethod(
                     name="op_Equality",
                     declaring_type=CType(name="StructWithInterface", namespace="TestLib"),
                     parameters=(
@@ -2079,7 +2107,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithInterface.op_Inequality(TestLib.StructWithInterface, TestLib.StructWithInterface)": CMethod(
+                "TestLib:StructWithInterface.op_Inequality(TestLib:StructWithInterface, TestLib:StructWithInterface)": CMethod(
                     name="op_Inequality",
                     declaring_type=CType(name="StructWithInterface", namespace="TestLib"),
                     parameters=(
@@ -2095,7 +2123,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithInterface.__eq__(TestLib.StructWithInterface)": CMethod(
+                "TestLib:StructWithInterface.__eq__(TestLib:StructWithInterface)": CMethod(
                     name="__eq__",
                     declaring_type=CType(name="StructWithInterface", namespace="TestLib"),
                     parameters=(
@@ -2106,7 +2134,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.StructWithInterface.__ne__(TestLib.StructWithInterface)": CMethod(
+                "TestLib:StructWithInterface.__ne__(TestLib:StructWithInterface)": CMethod(
                     name="__ne__",
                     declaring_type=CType(name="StructWithInterface", namespace="TestLib"),
                     parameters=(
@@ -2119,7 +2147,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -2131,39 +2159,40 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithFields",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="ValueType", namespace="System"),
             interfaces=(),
             fields={
-                "TestLib.StructWithFields.InstanceFieldA": CField(
+                "TestLib:StructWithFields.InstanceFieldA": CField(
                     name="InstanceFieldA",
                     declaring_type=CType(name="StructWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.StructWithFields.InstanceFieldB": CField(
+                "TestLib:StructWithFields.InstanceFieldB": CField(
                     name="InstanceFieldB",
                     declaring_type=CType(name="StructWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.StructWithFields.InstanceFieldC": CField(
+                "TestLib:StructWithFields.InstanceFieldC": CField(
                     name="InstanceFieldC",
                     declaring_type=CType(name="StructWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.StructWithFields.StaticFieldA": CField(
+                "TestLib:StructWithFields.StaticFieldA": CField(
                     name="StaticFieldA",
                     declaring_type=CType(name="StructWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.StructWithFields.StaticFieldB": CField(
+                "TestLib:StructWithFields.StaticFieldB": CField(
                     name="StaticFieldB",
                     declaring_type=CType(name="StructWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.StructWithFields.StaticFieldC": CField(
+                "TestLib:StructWithFields.StaticFieldC": CField(
                     name="StaticFieldC",
                     declaring_type=CType(name="StructWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
@@ -2171,14 +2200,14 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             constructors={
-                "TestLib.StructWithFields.__init__()": CConstructor(
+                "TestLib:StructWithFields.__init__()": CConstructor(
                     declaring_type=CType(name="StructWithFields", namespace="TestLib"),
                     parameters=(),
                 ),
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -2186,19 +2215,19 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -2206,7 +2235,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -2218,30 +2247,31 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithConstructors",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="ValueType", namespace="System"),
             interfaces=(),
             fields={},
             constructors={
-                "TestLib.StructWithConstructors.__init__()": CConstructor(
+                "TestLib:StructWithConstructors.__init__()": CConstructor(
                     declaring_type=CType(name="StructWithConstructors", namespace="TestLib"),
                     parameters=(),
                 ),
-                "TestLib.StructWithConstructors.__init__(System.Int32)": CConstructor(
+                "TestLib:StructWithConstructors.__init__(System:Int32)": CConstructor(
                     declaring_type=CType(name="StructWithConstructors", namespace="TestLib"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Int32", namespace="System")),
                     ),
                 ),
-                "TestLib.StructWithConstructors.__init__(System.Int32, System.Int32)": CConstructor(
+                "TestLib:StructWithConstructors.__init__(System:Int32, System:Int32)": CConstructor(
                     declaring_type=CType(name="StructWithConstructors", namespace="TestLib"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Int32", namespace="System")),
                         CParameter(name="param1", type=CType(name="Int32", namespace="System")),
                     ),
                 ),
-                "TestLib.StructWithConstructors.__init__(System.Int32, System.Int32, System.Int32)": CConstructor(
+                "TestLib:StructWithConstructors.__init__(System:Int32, System:Int32, System:Int32)": CConstructor(
                     declaring_type=CType(name="StructWithConstructors", namespace="TestLib"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Int32", namespace="System")),
@@ -2252,7 +2282,7 @@ class TestCStruct(TestExtractBase):
             },
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -2260,19 +2290,19 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -2280,7 +2310,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -2292,6 +2322,7 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithProperties",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="ValueType", namespace="System"),
@@ -2299,73 +2330,73 @@ class TestCStruct(TestExtractBase):
             fields={},
             constructors={},
             properties={
-                "TestLib.StructWithProperties.InstanceProperty0": CProperty(
+                "TestLib:StructWithProperties.InstanceProperty0": CProperty(
                     name="InstanceProperty0",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
-                "TestLib.StructWithProperties.InstanceProperty1": CProperty(
+                "TestLib:StructWithProperties.InstanceProperty1": CProperty(
                     name="InstanceProperty1",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
-                "TestLib.StructWithProperties.InstanceProperty2": CProperty(
+                "TestLib:StructWithProperties.InstanceProperty2": CProperty(
                     name="InstanceProperty2",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
-                "TestLib.StructWithProperties.InstanceReadOnlyProperty0": CProperty(
+                "TestLib:StructWithProperties.InstanceReadOnlyProperty0": CProperty(
                     name="InstanceReadOnlyProperty0",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.StructWithProperties.InstanceReadOnlyProperty1": CProperty(
+                "TestLib:StructWithProperties.InstanceReadOnlyProperty1": CProperty(
                     name="InstanceReadOnlyProperty1",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.StructWithProperties.InstanceReadOnlyProperty2": CProperty(
+                "TestLib:StructWithProperties.InstanceReadOnlyProperty2": CProperty(
                     name="InstanceReadOnlyProperty2",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.StructWithProperties.StaticProperty0": CProperty(
+                "TestLib:StructWithProperties.StaticProperty0": CProperty(
                     name="StaticProperty0",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                     static=True,
                 ),
-                "TestLib.StructWithProperties.StaticProperty1": CProperty(
+                "TestLib:StructWithProperties.StaticProperty1": CProperty(
                     name="StaticProperty1",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                     static=True,
                 ),
-                "TestLib.StructWithProperties.StaticProperty2": CProperty(
+                "TestLib:StructWithProperties.StaticProperty2": CProperty(
                     name="StaticProperty2",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                     static=True,
                 ),
-                "TestLib.StructWithProperties.StaticReadOnlyProperty0": CProperty(
+                "TestLib:StructWithProperties.StaticReadOnlyProperty0": CProperty(
                     name="StaticReadOnlyProperty0",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.StructWithProperties.StaticReadOnlyProperty1": CProperty(
+                "TestLib:StructWithProperties.StaticReadOnlyProperty1": CProperty(
                     name="StaticReadOnlyProperty1",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.StructWithProperties.StaticReadOnlyProperty2": CProperty(
+                "TestLib:StructWithProperties.StaticReadOnlyProperty2": CProperty(
                     name="StaticReadOnlyProperty2",
                     declaring_type=CType(name="StructWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
@@ -2373,7 +2404,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -2381,19 +2412,19 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -2401,7 +2432,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -2413,6 +2444,7 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithMethods",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="ValueType", namespace="System"),
@@ -2421,7 +2453,7 @@ class TestCStruct(TestExtractBase):
             constructors={},
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -2429,19 +2461,19 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "TestLib.StructWithMethods.InstanceMethodWithDefaultParam(System.Int32)": CMethod(
+                "TestLib:StructWithMethods.InstanceMethodWithDefaultParam(System:Int32)": CMethod(
                     name="InstanceMethodWithDefaultParam",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2453,7 +2485,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.StructWithMethods.InstanceMethodWithNullableDefaultParam(System.Int32?)": CMethod(
+                "TestLib:StructWithMethods.InstanceMethodWithNullableDefaultParam(System:Int32?)": CMethod(
                     name="InstanceMethodWithNullableDefaultParam",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2465,7 +2497,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.StructWithMethods.InstanceMethodWithNullableOutParam(System.*Int32?)": CMethod(
+                "TestLib:StructWithMethods.InstanceMethodWithNullableOutParam(System:*Int32?)": CMethod(
                     name="InstanceMethodWithNullableOutParam",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2482,7 +2514,7 @@ class TestCStruct(TestExtractBase):
                         CType(name="Int32", namespace="System", reference=True, nullable=True),
                     ),
                 ),
-                "TestLib.StructWithMethods.InstanceMethodWithNullableParam(System.Int32?)": CMethod(
+                "TestLib:StructWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
                     name="InstanceMethodWithNullableParam",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2493,7 +2525,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.StructWithMethods.InstanceMethodWithOutParam(System.*Int32)": CMethod(
+                "TestLib:StructWithMethods.InstanceMethodWithOutParam(System:*Int32)": CMethod(
                     name="InstanceMethodWithOutParam",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2508,13 +2540,13 @@ class TestCStruct(TestExtractBase):
                         CType(name="Int32", namespace="System", reference=True),
                     ),
                 ),
-                "TestLib.StructWithMethods.InstanceMethodWithParams0()": CMethod(
+                "TestLib:StructWithMethods.InstanceMethodWithParams0()": CMethod(
                     name="InstanceMethodWithParams0",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.StructWithMethods.InstanceMethodWithParams1(System.Int32)": CMethod(
+                "TestLib:StructWithMethods.InstanceMethodWithParams1(System:Int32)": CMethod(
                     name="InstanceMethodWithParams1",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2522,7 +2554,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.StructWithMethods.InstanceMethodWithParams2(System.Int32, System.Int32)": CMethod(
+                "TestLib:StructWithMethods.InstanceMethodWithParams2(System:Int32, System:Int32)": CMethod(
                     name="InstanceMethodWithParams2",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2531,7 +2563,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.StructWithMethods.StaticMethodWithDefaultParam(System.Int32)": CMethod(
+                "TestLib:StructWithMethods.StaticMethodWithDefaultParam(System:Int32)": CMethod(
                     name="StaticMethodWithDefaultParam",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2544,7 +2576,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithMethods.StaticMethodWithNullableDefaultParam(System.Int32?)": CMethod(
+                "TestLib:StructWithMethods.StaticMethodWithNullableDefaultParam(System:Int32?)": CMethod(
                     name="StaticMethodWithNullableDefaultParam",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2557,7 +2589,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithMethods.StaticMethodWithNullableOutParam(System.*Int32?)": CMethod(
+                "TestLib:StructWithMethods.StaticMethodWithNullableOutParam(System:*Int32?)": CMethod(
                     name="StaticMethodWithNullableOutParam",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2575,7 +2607,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.StructWithMethods.StaticMethodWithNullableParam(System.Int32?)": CMethod(
+                "TestLib:StructWithMethods.StaticMethodWithNullableParam(System:Int32?)": CMethod(
                     name="StaticMethodWithNullableParam",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2587,7 +2619,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithMethods.StaticMethodWithOutParam(System.*Int32)": CMethod(
+                "TestLib:StructWithMethods.StaticMethodWithOutParam(System:*Int32)": CMethod(
                     name="StaticMethodWithOutParam",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2603,14 +2635,14 @@ class TestCStruct(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.StructWithMethods.StaticMethodWithParams0()": CMethod(
+                "TestLib:StructWithMethods.StaticMethodWithParams0()": CMethod(
                     name="StaticMethodWithParams0",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithMethods.StaticMethodWithParams1(System.Int32)": CMethod(
+                "TestLib:StructWithMethods.StaticMethodWithParams1(System:Int32)": CMethod(
                     name="StaticMethodWithParams1",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2619,7 +2651,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithMethods.StaticMethodWithParams2(System.Int32, System.Int32)": CMethod(
+                "TestLib:StructWithMethods.StaticMethodWithParams2(System:Int32, System:Int32)": CMethod(
                     name="StaticMethodWithParams2",
                     declaring_type=CType(name="StructWithMethods", namespace="TestLib"),
                     parameters=(
@@ -2629,7 +2661,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Int32", namespace="System"),),
                     static=True,
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -2637,7 +2669,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -2649,6 +2681,7 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithOperatorMethods",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="ValueType", namespace="System"),
@@ -2657,7 +2690,7 @@ class TestCStruct(TestExtractBase):
             constructors={},
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -2668,25 +2701,25 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="String", namespace="System"),),
                 ),
-                "TestLib.StructWithOperatorMethods.op_Addition(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_Addition(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_Addition",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2702,7 +2735,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_BitwiseAnd(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_BitwiseAnd(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_BitwiseAnd",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2718,7 +2751,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_BitwiseOr(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_BitwiseOr(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_BitwiseOr",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2734,7 +2767,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_Decrement(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_Decrement(TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_Decrement",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2746,7 +2779,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_Division(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_Division(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_Division",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2762,7 +2795,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_Equality(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_Equality(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_Equality",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2778,7 +2811,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_ExclusiveOr(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_ExclusiveOr(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_ExclusiveOr",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2794,7 +2827,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_False(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_False(TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_False",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2806,7 +2839,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_GreaterThan(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_GreaterThan(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_GreaterThan",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2822,7 +2855,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_GreaterThanOrEqual(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_GreaterThanOrEqual(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_GreaterThanOrEqual",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2838,7 +2871,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_Increment(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_Increment(TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_Increment",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2850,7 +2883,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_Inequality(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_Inequality(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_Inequality",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2866,7 +2899,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_LessThan(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_LessThan(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_LessThan",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2882,7 +2915,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_LessThanOrEqual(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_LessThanOrEqual(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_LessThanOrEqual",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2898,7 +2931,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_LogicalNot(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_LogicalNot(TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_LogicalNot",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2910,7 +2943,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_Modulus(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_Modulus(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_Modulus",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2926,7 +2959,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_Multiply(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_Multiply(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_Multiply",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2942,7 +2975,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_OnesComplement(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_OnesComplement(TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_OnesComplement",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2954,7 +2987,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_Subtraction(TestLib.StructWithOperatorMethods, TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_Subtraction(TestLib:StructWithOperatorMethods, TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_Subtraction",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2970,7 +3003,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_True(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_True(TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_True",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2982,7 +3015,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_UnaryNegation(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_UnaryNegation(TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_UnaryNegation",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -2994,7 +3027,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.op_UnaryPlus(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.op_UnaryPlus(TestLib:StructWithOperatorMethods)": CMethod(
                     name="op_UnaryPlus",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3006,7 +3039,7 @@ class TestCStruct(TestExtractBase):
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                     static=True,
                 ),
-                "TestLib.StructWithOperatorMethods.__add__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__add__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__add__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3017,7 +3050,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__and__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__and__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__and__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3028,7 +3061,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__eq__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__eq__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__eq__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3039,7 +3072,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__ge__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__ge__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__ge__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3050,7 +3083,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__gt__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__gt__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__gt__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3061,13 +3094,13 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__invert__()": CMethod(
+                "TestLib:StructWithOperatorMethods.__invert__()": CMethod(
                     name="__invert__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__le__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__le__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__le__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3078,7 +3111,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__lt__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__lt__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__lt__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3089,7 +3122,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__mod__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__mod__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__mod__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3100,7 +3133,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__mul__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__mul__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__mul__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3111,7 +3144,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__ne__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__ne__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__ne__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3122,13 +3155,13 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__neg__()": CMethod(
+                "TestLib:StructWithOperatorMethods.__neg__()": CMethod(
                     name="__neg__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__or__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__or__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__or__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3139,13 +3172,13 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__pos__()": CMethod(
+                "TestLib:StructWithOperatorMethods.__pos__()": CMethod(
                     name="__pos__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__sub__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__sub__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__sub__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3156,7 +3189,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__truediv__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__truediv__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__truediv__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3167,7 +3200,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="StructWithOperatorMethods", namespace="TestLib"),),
                 ),
-                "TestLib.StructWithOperatorMethods.__xor__(TestLib.StructWithOperatorMethods)": CMethod(
+                "TestLib:StructWithOperatorMethods.__xor__(TestLib:StructWithOperatorMethods)": CMethod(
                     name="__xor__",
                     declaring_type=CType(name="StructWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -3180,7 +3213,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -3192,6 +3225,7 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithListMethods",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="ValueType", namespace="System"),
@@ -3216,7 +3250,7 @@ class TestCStruct(TestExtractBase):
             fields={},
             constructors={},
             properties={
-                "System.Collections.Generic.ICollection[$T].Count": CProperty(
+                "System.Collections.Generic:ICollection[$T].Count": CProperty(
                     name="Count",
                     declaring_type=CType(
                         name="ICollection",
@@ -3225,7 +3259,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "System.Collections.Generic.ICollection[$T].IsReadOnly": CProperty(
+                "System.Collections.Generic:ICollection[$T].IsReadOnly": CProperty(
                     name="IsReadOnly",
                     declaring_type=CType(
                         name="ICollection",
@@ -3234,7 +3268,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     type=CType(name="Boolean", namespace="System"),
                 ),
-                "System.Collections.Generic.IList[$T].Item": CProperty(
+                "System.Collections.Generic:IList[$T].Item": CProperty(
                     name="Item",
                     declaring_type=CType(
                         name="IList",
@@ -3246,7 +3280,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             methods={
-                "System.Collections.Generic.ICollection[$T].Add(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].Add(System:Int32)": CMethod(
                     name="Add",
                     declaring_type=CType(
                         name="ICollection",
@@ -3258,7 +3292,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].Clear()": CMethod(
+                "System.Collections.Generic:ICollection[$T].Clear()": CMethod(
                     name="Clear",
                     declaring_type=CType(
                         name="ICollection",
@@ -3268,7 +3302,7 @@ class TestCStruct(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].Contains(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].Contains(System:Int32)": CMethod(
                     name="Contains",
                     declaring_type=CType(
                         name="ICollection",
@@ -3280,7 +3314,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].CopyTo(System.Array[System.Int32], System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].CopyTo(System:Array[System:Int32], System:Int32)": CMethod(
                     name="CopyTo",
                     declaring_type=CType(
                         name="ICollection",
@@ -3300,7 +3334,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -3308,25 +3342,25 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.IEnumerable.GetEnumerator()": CMethod(
+                "System.Collections:IEnumerable.GetEnumerator()": CMethod(
                     name="GetEnumerator",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
                     parameters=(),
                     return_types=(CType(name="IEnumerator", namespace="System.Collections"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].IndexOf(System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].IndexOf(System:Int32)": CMethod(
                     name="IndexOf",
                     declaring_type=CType(
                         name="IList",
@@ -3338,7 +3372,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].Insert(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].Insert(System:Int32, System:Int32)": CMethod(
                     name="Insert",
                     declaring_type=CType(
                         name="IList",
@@ -3351,7 +3385,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].Remove(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].Remove(System:Int32)": CMethod(
                     name="Remove",
                     declaring_type=CType(
                         name="ICollection",
@@ -3363,7 +3397,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].RemoveAt(System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].RemoveAt(System:Int32)": CMethod(
                     name="RemoveAt",
                     declaring_type=CType(
                         name="IList",
@@ -3375,13 +3409,13 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="String", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].__contains__(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].__contains__(System:Int32)": CMethod(
                     name="__contains__",
                     declaring_type=CType(
                         name="ICollection",
@@ -3393,7 +3427,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].__getitem__(System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].__getitem__(System:Int32)": CMethod(
                     name="__getitem__",
                     declaring_type=CType(
                         name="IList",
@@ -3405,7 +3439,7 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.IEnumerable.__iter__()": CMethod(
+                "System.Collections:IEnumerable.__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
                     parameters=(),
@@ -3417,7 +3451,7 @@ class TestCStruct(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.IEnumerable[$T].__iter__()": CMethod(
+                "System.Collections.Generic:IEnumerable[$T].__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(
                         name="IEnumerable",
@@ -3433,7 +3467,7 @@ class TestCStruct(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.ICollection[$T].__len__()": CMethod(
+                "System.Collections.Generic:ICollection[$T].__len__()": CMethod(
                     name="__len__",
                     declaring_type=CType(
                         name="ICollection",
@@ -3443,7 +3477,7 @@ class TestCStruct(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].__setitem__(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].__setitem__(System:Int32, System:Int32)": CMethod(
                     name="__setitem__",
                     declaring_type=CType(
                         name="IList",
@@ -3458,7 +3492,7 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -3470,6 +3504,7 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithEvents",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="ValueType", namespace="System"),
@@ -3478,7 +3513,7 @@ class TestCStruct(TestExtractBase):
             constructors={},
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -3486,19 +3521,19 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -3506,12 +3541,12 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={
-                "TestLib.StructWithEvents.Event": CEvent(
+                "TestLib:StructWithEvents.Event": CEvent(
                     name="Event",
                     declaring_type=CType(name="StructWithEvents", namespace="TestLib"),
                     type=CType(name="EventHandler", namespace="System"),
                 ),
-                "TestLib.StructWithEvents.EventWithArgs": CEvent(
+                "TestLib:StructWithEvents.EventWithArgs": CEvent(
                     name="EventWithArgs",
                     declaring_type=CType(name="StructWithEvents", namespace="TestLib"),
                     type=CType(
@@ -3521,7 +3556,7 @@ class TestCStruct(TestExtractBase):
                     ),
                 ),
             },
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -3533,6 +3568,7 @@ class TestCStruct(TestExtractBase):
         manual: CStruct = CStruct(
             name="StructWithNested",
             namespace="TestLib",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="ValueType", namespace="System"),
@@ -3541,7 +3577,7 @@ class TestCStruct(TestExtractBase):
             constructors={},
             properties={},
             methods={
-                "System.Object.Equals(System.Object)": CMethod(
+                "System:Object.Equals(System:Object)": CMethod(
                     name="Equals",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(
@@ -3549,19 +3585,19 @@ class TestCStruct(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Object.GetHashCode()": CMethod(
+                "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Object.GetType()": CMethod(
+                "System:Object.GetType()": CMethod(
                     name="GetType",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
                     return_types=(CType(name="Type", namespace="System"),),
                 ),
-                "System.Object.ToString()": CMethod(
+                "System:Object.ToString()": CMethod(
                     name="ToString",
                     declaring_type=CType(name="Object", namespace="System"),
                     parameters=(),
@@ -3569,35 +3605,40 @@ class TestCStruct(TestExtractBase):
                 ),
             },
             events={},
-            nested={
-                "TestLib.INestedInterface": CInterface(
+            nested_types={
+                "TestLib:StructWithNested.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="TestLib",
+                    nested=CType(name="StructWithNested", namespace="TestLib"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "TestLib.NestedClass": CClass(
+                "TestLib:StructWithNested.NestedClass": CClass(
                     name="NestedClass",
                     namespace="TestLib",
+                    nested=CType(name="StructWithNested", namespace="TestLib"),
                     abstract=False,
                     generic_args=(),
                     super_class=CType(name="Object", namespace="System"),
                     interfaces=(),
                     fields={},
                     constructors={
-                        "TestLib.NestedClass.__init__()": CConstructor(
-                            declaring_type=CType(name="NestedClass", namespace="TestLib"),
+                        "TestLib:StructWithNested.NestedClass.__init__()": CConstructor(
+                            declaring_type=CType(
+                                name="StructWithNested.NestedClass",
+                                namespace="TestLib",
+                            ),
                             parameters=(),
                         )
                     },
                     properties={},
                     methods={
-                        "System.Object.Equals(System.Object)": CMethod(
+                        "System:Object.Equals(System:Object)": CMethod(
                             name="Equals",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(
@@ -3608,19 +3649,19 @@ class TestCStruct(TestExtractBase):
                             ),
                             return_types=(CType(name="Boolean", namespace="System"),),
                         ),
-                        "System.Object.GetHashCode()": CMethod(
+                        "System:Object.GetHashCode()": CMethod(
                             name="GetHashCode",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Int32", namespace="System"),),
                         ),
-                        "System.Object.GetType()": CMethod(
+                        "System:Object.GetType()": CMethod(
                             name="GetType",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Type", namespace="System"),),
                         ),
-                        "System.Object.ToString()": CMethod(
+                        "System:Object.ToString()": CMethod(
                             name="ToString",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
@@ -3628,18 +3669,25 @@ class TestCStruct(TestExtractBase):
                         ),
                     },
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "TestLib.NestedDelegate": CDelegate(
+                "TestLib:StructWithNested.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="TestLib",
+                    nested=CType(name="StructWithNested", namespace="TestLib"),
                     parameters=(),
                     return_type=CType(name="Void", namespace="System"),
                 ),
-                "TestLib.NestedEnum": CEnum(name="NestedEnum", namespace="TestLib", fields=()),
-                "TestLib.NestedStruct": CStruct(
+                "TestLib:StructWithNested.NestedEnum": CEnum(
+                    name="NestedEnum",
+                    namespace="TestLib",
+                    nested=CType(name="StructWithNested", namespace="TestLib"),
+                    fields=(),
+                ),
+                "TestLib:StructWithNested.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="TestLib",
+                    nested=CType(name="StructWithNested", namespace="TestLib"),
                     abstract=False,
                     generic_args=(),
                     super_class=CType(name="ValueType", namespace="System"),
@@ -3648,7 +3696,7 @@ class TestCStruct(TestExtractBase):
                     constructors={},
                     properties={},
                     methods={
-                        "System.Object.Equals(System.Object)": CMethod(
+                        "System:Object.Equals(System:Object)": CMethod(
                             name="Equals",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(
@@ -3659,19 +3707,19 @@ class TestCStruct(TestExtractBase):
                             ),
                             return_types=(CType(name="Boolean", namespace="System"),),
                         ),
-                        "System.Object.GetHashCode()": CMethod(
+                        "System:Object.GetHashCode()": CMethod(
                             name="GetHashCode",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Int32", namespace="System"),),
                         ),
-                        "System.Object.GetType()": CMethod(
+                        "System:Object.GetType()": CMethod(
                             name="GetType",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Type", namespace="System"),),
                         ),
-                        "System.Object.ToString()": CMethod(
+                        "System:Object.ToString()": CMethod(
                             name="ToString",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
@@ -3679,7 +3727,7 @@ class TestCStruct(TestExtractBase):
                         ),
                     },
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
@@ -3695,12 +3743,13 @@ class TestCInterface(TestExtractBase):
         manual: CInterface = CInterface(
             name="IInterfaceWithGeneric",
             namespace="TestLib",
+            nested=None,
             generic_args=(CType(name="T", generic=True),),
             interfaces=(),
             fields={},
             properties={},
             methods={
-                "TestLib.IInterfaceWithGeneric[$T].MethodWithGeneric($T)": CMethod(
+                "TestLib:IInterfaceWithGeneric[$T].MethodWithGeneric($T)": CMethod(
                     name="MethodWithGeneric",
                     declaring_type=CType(
                         name="IInterfaceWithGeneric",
@@ -3712,7 +3761,7 @@ class TestCInterface(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -3724,6 +3773,7 @@ class TestCInterface(TestExtractBase):
         manual: CInterface = CInterface(
             name="IInterfaceWithMultiGeneric",
             namespace="TestLib",
+            nested=None,
             generic_args=(
                 CType(name="U", generic=True),
                 CType(name="V", generic=True),
@@ -3733,7 +3783,7 @@ class TestCInterface(TestExtractBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -3745,6 +3795,7 @@ class TestCInterface(TestExtractBase):
         manual: CInterface = CInterface(
             name="IInterfaceWithInterface",
             namespace="TestLib",
+            nested=None,
             generic_args=(),
             interfaces=(
                 CType(
@@ -3756,7 +3807,7 @@ class TestCInterface(TestExtractBase):
             fields={},
             properties={},
             methods={
-                "System.IEquatable[$T].Equals(TestLib.IInterfaceWithInterface)": CMethod(
+                "System:IEquatable[$T].Equals(TestLib:IInterfaceWithInterface)": CMethod(
                     name="Equals",
                     declaring_type=CType(
                         name="IEquatable",
@@ -3773,7 +3824,7 @@ class TestCInterface(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -3785,22 +3836,23 @@ class TestCInterface(TestExtractBase):
         manual: CInterface = CInterface(
             name="IInterfaceWithFields",
             namespace="TestLib",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={
-                "TestLib.IInterfaceWithFields.StaticFieldA": CField(
+                "TestLib:IInterfaceWithFields.StaticFieldA": CField(
                     name="StaticFieldA",
                     declaring_type=CType(name="IInterfaceWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithFields.StaticFieldB": CField(
+                "TestLib:IInterfaceWithFields.StaticFieldB": CField(
                     name="StaticFieldB",
                     declaring_type=CType(name="IInterfaceWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithFields.StaticFieldC": CField(
+                "TestLib:IInterfaceWithFields.StaticFieldC": CField(
                     name="StaticFieldC",
                     declaring_type=CType(name="IInterfaceWithFields", namespace="TestLib"),
                     return_type=CType(name="Int32", namespace="System"),
@@ -3810,7 +3862,7 @@ class TestCInterface(TestExtractBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -3822,77 +3874,78 @@ class TestCInterface(TestExtractBase):
         manual: CInterface = CInterface(
             name="IInterfaceWithProperties",
             namespace="TestLib",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={
-                "TestLib.IInterfaceWithProperties.InstanceProperty0": CProperty(
+                "TestLib:IInterfaceWithProperties.InstanceProperty0": CProperty(
                     name="InstanceProperty0",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
-                "TestLib.IInterfaceWithProperties.InstanceProperty1": CProperty(
+                "TestLib:IInterfaceWithProperties.InstanceProperty1": CProperty(
                     name="InstanceProperty1",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
-                "TestLib.IInterfaceWithProperties.InstanceProperty2": CProperty(
+                "TestLib:IInterfaceWithProperties.InstanceProperty2": CProperty(
                     name="InstanceProperty2",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                 ),
-                "TestLib.IInterfaceWithProperties.InstanceReadOnlyProperty0": CProperty(
+                "TestLib:IInterfaceWithProperties.InstanceReadOnlyProperty0": CProperty(
                     name="InstanceReadOnlyProperty0",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.IInterfaceWithProperties.InstanceReadOnlyProperty1": CProperty(
+                "TestLib:IInterfaceWithProperties.InstanceReadOnlyProperty1": CProperty(
                     name="InstanceReadOnlyProperty1",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.IInterfaceWithProperties.InstanceReadOnlyProperty2": CProperty(
+                "TestLib:IInterfaceWithProperties.InstanceReadOnlyProperty2": CProperty(
                     name="InstanceReadOnlyProperty2",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "TestLib.IInterfaceWithProperties.StaticProperty0": CProperty(
+                "TestLib:IInterfaceWithProperties.StaticProperty0": CProperty(
                     name="StaticProperty0",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                     static=True,
                 ),
-                "TestLib.IInterfaceWithProperties.StaticProperty1": CProperty(
+                "TestLib:IInterfaceWithProperties.StaticProperty1": CProperty(
                     name="StaticProperty1",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                     static=True,
                 ),
-                "TestLib.IInterfaceWithProperties.StaticProperty2": CProperty(
+                "TestLib:IInterfaceWithProperties.StaticProperty2": CProperty(
                     name="StaticProperty2",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     setter=True,
                     static=True,
                 ),
-                "TestLib.IInterfaceWithProperties.StaticReadOnlyProperty0": CProperty(
+                "TestLib:IInterfaceWithProperties.StaticReadOnlyProperty0": CProperty(
                     name="StaticReadOnlyProperty0",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithProperties.StaticReadOnlyProperty1": CProperty(
+                "TestLib:IInterfaceWithProperties.StaticReadOnlyProperty1": CProperty(
                     name="StaticReadOnlyProperty1",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithProperties.StaticReadOnlyProperty2": CProperty(
+                "TestLib:IInterfaceWithProperties.StaticReadOnlyProperty2": CProperty(
                     name="StaticReadOnlyProperty2",
                     declaring_type=CType(name="IInterfaceWithProperties", namespace="TestLib"),
                     type=CType(name="Int32", namespace="System"),
@@ -3901,7 +3954,7 @@ class TestCInterface(TestExtractBase):
             },
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -3913,12 +3966,13 @@ class TestCInterface(TestExtractBase):
         manual: CInterface = CInterface(
             name="IInterfaceWithMethods",
             namespace="TestLib",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={
-                "TestLib.IInterfaceWithMethods.InstanceMethodWithDefaultParam(System.Int32)": CMethod(
+                "TestLib:IInterfaceWithMethods.InstanceMethodWithDefaultParam(System:Int32)": CMethod(
                     name="InstanceMethodWithDefaultParam",
                     declaring_type=CType(name="IInterfaceWithMethods", namespace="TestLib"),
                     parameters=(
@@ -3930,7 +3984,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.IInterfaceWithMethods.InstanceMethodWithNullableDefaultParam(System.Int32?)": CMethod(
+                "TestLib:IInterfaceWithMethods.InstanceMethodWithNullableDefaultParam(System:Int32?)": CMethod(
                     name="InstanceMethodWithNullableDefaultParam",
                     declaring_type=CType(name="IInterfaceWithMethods", namespace="TestLib"),
                     parameters=(
@@ -3946,7 +4000,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.IInterfaceWithMethods.InstanceMethodWithNullableOutParam(System.*Int32?)": CMethod(
+                "TestLib:IInterfaceWithMethods.InstanceMethodWithNullableOutParam(System:*Int32?)": CMethod(
                     name="InstanceMethodWithNullableOutParam",
                     declaring_type=CType(name="IInterfaceWithMethods", namespace="TestLib"),
                     parameters=(
@@ -3963,7 +4017,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="Int32", namespace="System", reference=True, nullable=True),
                     ),
                 ),
-                "TestLib.IInterfaceWithMethods.InstanceMethodWithNullableParam(System.Int32?)": CMethod(
+                "TestLib:IInterfaceWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
                     name="InstanceMethodWithNullableParam",
                     declaring_type=CType(name="IInterfaceWithMethods", namespace="TestLib"),
                     parameters=(
@@ -3974,7 +4028,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.IInterfaceWithMethods.InstanceMethodWithOutParam(System.*Int32)": CMethod(
+                "TestLib:IInterfaceWithMethods.InstanceMethodWithOutParam(System:*Int32)": CMethod(
                     name="InstanceMethodWithOutParam",
                     declaring_type=CType(name="IInterfaceWithMethods", namespace="TestLib"),
                     parameters=(
@@ -3989,13 +4043,13 @@ class TestCInterface(TestExtractBase):
                         CType(name="Int32", namespace="System", reference=True),
                     ),
                 ),
-                "TestLib.IInterfaceWithMethods.InstanceMethodWithParams()": CMethod(
+                "TestLib:IInterfaceWithMethods.InstanceMethodWithParams()": CMethod(
                     name="InstanceMethodWithParams",
                     declaring_type=CType(name="IInterfaceWithMethods", namespace="TestLib"),
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.IInterfaceWithMethods.InstanceMethodWithParams(System.Int32)": CMethod(
+                "TestLib:IInterfaceWithMethods.InstanceMethodWithParams(System:Int32)": CMethod(
                     name="InstanceMethodWithParams",
                     declaring_type=CType(name="IInterfaceWithMethods", namespace="TestLib"),
                     parameters=(
@@ -4003,7 +4057,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "TestLib.IInterfaceWithMethods.InstanceMethodWithParams(System.Int32, System.Int32)": CMethod(
+                "TestLib:IInterfaceWithMethods.InstanceMethodWithParams(System:Int32, System:Int32)": CMethod(
                     name="InstanceMethodWithParams",
                     declaring_type=CType(name="IInterfaceWithMethods", namespace="TestLib"),
                     parameters=(
@@ -4014,7 +4068,7 @@ class TestCInterface(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -4026,12 +4080,13 @@ class TestCInterface(TestExtractBase):
         manual: CInterface = CInterface(
             name="IInterfaceWithOperatorMethods",
             namespace="TestLib",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={
-                "TestLib.IInterfaceWithOperatorMethods.op_Addition(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_Addition(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_Addition",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4049,7 +4104,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_BitwiseAnd(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_BitwiseAnd(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_BitwiseAnd",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4067,7 +4122,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_BitwiseOr(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_BitwiseOr(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_BitwiseOr",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4085,7 +4140,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_Decrement(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_Decrement(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_Decrement",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4099,7 +4154,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_Division(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_Division(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_Division",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4117,7 +4172,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_ExclusiveOr(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_ExclusiveOr(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_ExclusiveOr",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4135,7 +4190,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_False(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_False(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_False",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4147,7 +4202,7 @@ class TestCInterface(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_GreaterThan(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_GreaterThan(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_GreaterThan",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4163,7 +4218,7 @@ class TestCInterface(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_GreaterThanOrEqual(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_GreaterThanOrEqual(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_GreaterThanOrEqual",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4179,7 +4234,7 @@ class TestCInterface(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_Increment(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_Increment(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_Increment",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4193,7 +4248,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_LessThan(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_LessThan(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_LessThan",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4209,7 +4264,7 @@ class TestCInterface(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_LessThanOrEqual(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_LessThanOrEqual(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_LessThanOrEqual",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4225,7 +4280,7 @@ class TestCInterface(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_LogicalNot(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_LogicalNot(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_LogicalNot",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4237,7 +4292,7 @@ class TestCInterface(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_Modulus(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_Modulus(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_Modulus",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4255,7 +4310,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_Multiply(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_Multiply(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_Multiply",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4273,7 +4328,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_OnesComplement(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_OnesComplement(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_OnesComplement",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4287,7 +4342,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_Subtraction(TestLib.IInterfaceWithOperatorMethods, TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_Subtraction(TestLib:IInterfaceWithOperatorMethods, TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_Subtraction",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4305,7 +4360,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_True(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_True(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_True",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4317,7 +4372,7 @@ class TestCInterface(TestExtractBase):
                     return_types=(CType(name="Boolean", namespace="System"),),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_UnaryNegation(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_UnaryNegation(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_UnaryNegation",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4331,7 +4386,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.op_UnaryPlus(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.op_UnaryPlus(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="op_UnaryPlus",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4345,7 +4400,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     static=True,
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__add__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__add__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__add__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4358,7 +4413,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     ),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__and__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__and__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__and__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4371,7 +4426,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     ),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__ge__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__ge__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__ge__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4382,7 +4437,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__gt__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__gt__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__gt__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4393,7 +4448,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__invert__()": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__invert__()": CMethod(
                     name="__invert__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
@@ -4401,7 +4456,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     ),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__le__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__le__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__le__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4412,7 +4467,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__lt__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__lt__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__lt__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4423,7 +4478,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__mod__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__mod__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__mod__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4436,7 +4491,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     ),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__mul__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__mul__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__mul__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4449,7 +4504,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     ),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__neg__()": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__neg__()": CMethod(
                     name="__neg__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
@@ -4457,7 +4512,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     ),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__or__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__or__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__or__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4470,7 +4525,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     ),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__pos__()": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__pos__()": CMethod(
                     name="__pos__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(),
@@ -4478,7 +4533,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     ),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__sub__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__sub__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__sub__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4491,7 +4546,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     ),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__truediv__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__truediv__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__truediv__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4504,7 +4559,7 @@ class TestCInterface(TestExtractBase):
                         CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     ),
                 ),
-                "TestLib.IInterfaceWithOperatorMethods.__xor__(TestLib.IInterfaceWithOperatorMethods)": CMethod(
+                "TestLib:IInterfaceWithOperatorMethods.__xor__(TestLib:IInterfaceWithOperatorMethods)": CMethod(
                     name="__xor__",
                     declaring_type=CType(name="IInterfaceWithOperatorMethods", namespace="TestLib"),
                     parameters=(
@@ -4519,7 +4574,7 @@ class TestCInterface(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -4531,6 +4586,7 @@ class TestCInterface(TestExtractBase):
         manual: CInterface = CInterface(
             name="IInterfaceWithListMethods",
             namespace="TestLib",
+            nested=None,
             generic_args=(),
             interfaces=(
                 CType(name="IEnumerable", namespace="System.Collections"),
@@ -4552,7 +4608,7 @@ class TestCInterface(TestExtractBase):
             ),
             fields={},
             properties={
-                "System.Collections.Generic.ICollection[$T].Count": CProperty(
+                "System.Collections.Generic:ICollection[$T].Count": CProperty(
                     name="Count",
                     declaring_type=CType(
                         name="ICollection",
@@ -4561,7 +4617,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     type=CType(name="Int32", namespace="System"),
                 ),
-                "System.Collections.Generic.ICollection[$T].IsReadOnly": CProperty(
+                "System.Collections.Generic:ICollection[$T].IsReadOnly": CProperty(
                     name="IsReadOnly",
                     declaring_type=CType(
                         name="ICollection",
@@ -4570,7 +4626,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     type=CType(name="Boolean", namespace="System"),
                 ),
-                "System.Collections.Generic.IList[$T].Item": CProperty(
+                "System.Collections.Generic:IList[$T].Item": CProperty(
                     name="Item",
                     declaring_type=CType(
                         name="IList",
@@ -4582,7 +4638,7 @@ class TestCInterface(TestExtractBase):
                 ),
             },
             methods={
-                "System.Collections.Generic.ICollection[$T].Add(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].Add(System:Int32)": CMethod(
                     name="Add",
                     declaring_type=CType(
                         name="ICollection",
@@ -4594,7 +4650,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].Clear()": CMethod(
+                "System.Collections.Generic:ICollection[$T].Clear()": CMethod(
                     name="Clear",
                     declaring_type=CType(
                         name="ICollection",
@@ -4604,7 +4660,7 @@ class TestCInterface(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].Contains(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].Contains(System:Int32)": CMethod(
                     name="Contains",
                     declaring_type=CType(
                         name="ICollection",
@@ -4616,7 +4672,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].CopyTo(System.Array[System.Int32], System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].CopyTo(System:Array[System:Int32], System:Int32)": CMethod(
                     name="CopyTo",
                     declaring_type=CType(
                         name="ICollection",
@@ -4636,13 +4692,13 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.IEnumerable.GetEnumerator()": CMethod(
+                "System.Collections:IEnumerable.GetEnumerator()": CMethod(
                     name="GetEnumerator",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
                     parameters=(),
                     return_types=(CType(name="IEnumerator", namespace="System.Collections"),),
                 ),
-                "System.Collections.Generic.IList[$T].IndexOf(System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].IndexOf(System:Int32)": CMethod(
                     name="IndexOf",
                     declaring_type=CType(
                         name="IList",
@@ -4654,7 +4710,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].Insert(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].Insert(System:Int32, System:Int32)": CMethod(
                     name="Insert",
                     declaring_type=CType(
                         name="IList",
@@ -4667,7 +4723,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].Remove(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].Remove(System:Int32)": CMethod(
                     name="Remove",
                     declaring_type=CType(
                         name="ICollection",
@@ -4679,7 +4735,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].RemoveAt(System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].RemoveAt(System:Int32)": CMethod(
                     name="RemoveAt",
                     declaring_type=CType(
                         name="IList",
@@ -4691,7 +4747,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Void", namespace="System"),),
                 ),
-                "System.Collections.Generic.ICollection[$T].__contains__(System.Int32)": CMethod(
+                "System.Collections.Generic:ICollection[$T].__contains__(System:Int32)": CMethod(
                     name="__contains__",
                     declaring_type=CType(
                         name="ICollection",
@@ -4703,7 +4759,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].__getitem__(System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].__getitem__(System:Int32)": CMethod(
                     name="__getitem__",
                     declaring_type=CType(
                         name="IList",
@@ -4715,7 +4771,7 @@ class TestCInterface(TestExtractBase):
                     ),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.IEnumerable.__iter__()": CMethod(
+                "System.Collections:IEnumerable.__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
                     parameters=(),
@@ -4727,7 +4783,7 @@ class TestCInterface(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.IEnumerable[$T].__iter__()": CMethod(
+                "System.Collections.Generic:IEnumerable[$T].__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(
                         name="IEnumerable",
@@ -4743,7 +4799,7 @@ class TestCInterface(TestExtractBase):
                         ),
                     ),
                 ),
-                "System.Collections.Generic.ICollection[$T].__len__()": CMethod(
+                "System.Collections.Generic:ICollection[$T].__len__()": CMethod(
                     name="__len__",
                     declaring_type=CType(
                         name="ICollection",
@@ -4753,7 +4809,7 @@ class TestCInterface(TestExtractBase):
                     parameters=(),
                     return_types=(CType(name="Int32", namespace="System"),),
                 ),
-                "System.Collections.Generic.IList[$T].__setitem__(System.Int32, System.Int32)": CMethod(
+                "System.Collections.Generic:IList[$T].__setitem__(System:Int32, System:Int32)": CMethod(
                     name="__setitem__",
                     declaring_type=CType(
                         name="IList",
@@ -4768,7 +4824,7 @@ class TestCInterface(TestExtractBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -4780,18 +4836,19 @@ class TestCInterface(TestExtractBase):
         manual: CInterface = CInterface(
             name="IInterfaceWithEvents",
             namespace="TestLib",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={
-                "TestLib.IInterfaceWithEvents.Event": CEvent(
+                "TestLib:IInterfaceWithEvents.Event": CEvent(
                     name="Event",
                     declaring_type=CType(name="IInterfaceWithEvents", namespace="TestLib"),
                     type=CType(name="EventHandler", namespace="System"),
                 ),
-                "TestLib.IInterfaceWithEvents.EventWithArgs": CEvent(
+                "TestLib:IInterfaceWithEvents.EventWithArgs": CEvent(
                     name="EventWithArgs",
                     declaring_type=CType(name="IInterfaceWithEvents", namespace="TestLib"),
                     type=CType(
@@ -4801,7 +4858,7 @@ class TestCInterface(TestExtractBase):
                     ),
                 ),
             },
-            nested={},
+            nested_types={},
         )
 
         self.assertEqual(manual, extracted)
@@ -4813,41 +4870,47 @@ class TestCInterface(TestExtractBase):
         manual: CInterface = CInterface(
             name="IInterfaceWithNested",
             namespace="TestLib",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={},
-            nested={
-                "TestLib.INestedInterface": CInterface(
+            nested_types={
+                "TestLib:IInterfaceWithNested.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="TestLib",
+                    nested=CType(name="IInterfaceWithNested", namespace="TestLib"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "TestLib.NestedClass": CClass(
+                "TestLib:IInterfaceWithNested.NestedClass": CClass(
                     name="NestedClass",
                     namespace="TestLib",
+                    nested=CType(name="IInterfaceWithNested", namespace="TestLib"),
                     abstract=False,
                     generic_args=(),
                     super_class=CType(name="Object", namespace="System"),
                     interfaces=(),
                     fields={},
                     constructors={
-                        "TestLib.NestedClass.__init__()": CConstructor(
-                            declaring_type=CType(name="NestedClass", namespace="TestLib"),
+                        "TestLib:IInterfaceWithNested.NestedClass.__init__()": CConstructor(
+                            declaring_type=CType(
+                                name="IInterfaceWithNested.NestedClass",
+                                namespace="TestLib",
+                            ),
                             parameters=(),
                         ),
                     },
                     properties={},
                     methods={
-                        "System.Object.Equals(System.Object)": CMethod(
+                        "System:Object.Equals(System:Object)": CMethod(
                             name="Equals",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(
@@ -4858,19 +4921,19 @@ class TestCInterface(TestExtractBase):
                             ),
                             return_types=(CType(name="Boolean", namespace="System"),),
                         ),
-                        "System.Object.GetHashCode()": CMethod(
+                        "System:Object.GetHashCode()": CMethod(
                             name="GetHashCode",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Int32", namespace="System"),),
                         ),
-                        "System.Object.GetType()": CMethod(
+                        "System:Object.GetType()": CMethod(
                             name="GetType",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Type", namespace="System"),),
                         ),
-                        "System.Object.ToString()": CMethod(
+                        "System:Object.ToString()": CMethod(
                             name="ToString",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
@@ -4878,22 +4941,25 @@ class TestCInterface(TestExtractBase):
                         ),
                     },
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "TestLib.NestedDelegate": CDelegate(
+                "TestLib:IInterfaceWithNested.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="TestLib",
+                    nested=CType(name="IInterfaceWithNested", namespace="TestLib"),
                     parameters=(),
                     return_type=CType(name="Void", namespace="System"),
                 ),
-                "TestLib.NestedEnum": CEnum(
+                "TestLib:IInterfaceWithNested.NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="TestLib",
+                    nested=CType(name="IInterfaceWithNested", namespace="TestLib"),
                     fields=(),
                 ),
-                "TestLib.NestedStruct": CStruct(
+                "TestLib:IInterfaceWithNested.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="TestLib",
+                    nested=CType(name="IInterfaceWithNested", namespace="TestLib"),
                     abstract=False,
                     generic_args=(),
                     super_class=CType(name="ValueType", namespace="System"),
@@ -4902,7 +4968,7 @@ class TestCInterface(TestExtractBase):
                     constructors={},
                     properties={},
                     methods={
-                        "System.Object.Equals(System.Object)": CMethod(
+                        "System:Object.Equals(System:Object)": CMethod(
                             name="Equals",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(
@@ -4913,19 +4979,19 @@ class TestCInterface(TestExtractBase):
                             ),
                             return_types=(CType(name="Boolean", namespace="System"),),
                         ),
-                        "System.Object.GetHashCode()": CMethod(
+                        "System:Object.GetHashCode()": CMethod(
                             name="GetHashCode",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Int32", namespace="System"),),
                         ),
-                        "System.Object.GetType()": CMethod(
+                        "System:Object.GetType()": CMethod(
                             name="GetType",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
                             return_types=(CType(name="Type", namespace="System"),),
                         ),
-                        "System.Object.ToString()": CMethod(
+                        "System:Object.ToString()": CMethod(
                             name="ToString",
                             declaring_type=CType(name="Object", namespace="System"),
                             parameters=(),
@@ -4933,7 +4999,7 @@ class TestCInterface(TestExtractBase):
                         ),
                     },
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
@@ -4949,6 +5015,7 @@ class TestCEnum(TestExtractBase):
         manual: CEnum = CEnum(
             name="EnumWithFields",
             namespace="TestLib",
+            nested=None,
             fields=("Field0", "Field1", "Field2", "Field3"),
         )
 
@@ -4961,6 +5028,7 @@ class TestCEnum(TestExtractBase):
         manual: CEnum = CEnum(
             name="EnumWithNoFields",
             namespace="TestLib",
+            nested=None,
             fields=(),
         )
 
@@ -4975,6 +5043,7 @@ class TestCDelegate(TestExtractBase):
         manual: CDelegate = CDelegate(
             name="DelegateWithNoParametersNoReturn",
             namespace="TestLib",
+            nested=None,
             parameters=(),
             return_type=CType(name="Void", namespace="System"),
         )
@@ -4988,6 +5057,7 @@ class TestCDelegate(TestExtractBase):
         manual: CDelegate = CDelegate(
             name="DelegateWithNoParametersReturn",
             namespace="TestLib",
+            nested=None,
             parameters=(),
             return_type=CType(name="Int32", namespace="System"),
         )
@@ -5001,6 +5071,7 @@ class TestCDelegate(TestExtractBase):
         manual: CDelegate = CDelegate(
             name="DelegateWithParametersNoReturn",
             namespace="TestLib",
+            nested=None,
             parameters=(
                 CParameter(name="param0", type=CType(name="Int32", namespace="System")),
                 CParameter(name="param1", type=CType(name="Int32", namespace="System")),
@@ -5017,6 +5088,7 @@ class TestCDelegate(TestExtractBase):
         manual: CDelegate = CDelegate(
             name="DelegateWithParametersReturn",
             namespace="TestLib",
+            nested=None,
             parameters=(
                 CParameter(name="param0", type=CType(name="Int32", namespace="System")),
                 CParameter(name="param1", type=CType(name="Int32", namespace="System")),
@@ -5172,34 +5244,34 @@ class TestCField(TestExtractBase):
         type_info: TypeInfo = self.get_type("ClassWithFields")
         extracted: Mapping[str, CField] = extract_fields(type_info)
         manual: Mapping[str, CField] = {
-            "TestLib.ClassWithFields.InstanceFieldA": CField(
+            "TestLib:ClassWithFields.InstanceFieldA": CField(
                 name="InstanceFieldA",
                 declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                 return_type=CType(name="Int32", namespace="System"),
             ),
-            "TestLib.ClassWithFields.InstanceFieldB": CField(
+            "TestLib:ClassWithFields.InstanceFieldB": CField(
                 name="InstanceFieldB",
                 declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                 return_type=CType(name="Int32", namespace="System"),
             ),
-            "TestLib.ClassWithFields.InstanceFieldC": CField(
+            "TestLib:ClassWithFields.InstanceFieldC": CField(
                 name="InstanceFieldC",
                 declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                 return_type=CType(name="Int32", namespace="System"),
             ),
-            "TestLib.ClassWithFields.StaticFieldA": CField(
+            "TestLib:ClassWithFields.StaticFieldA": CField(
                 name="StaticFieldA",
                 declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                 return_type=CType(name="Int32", namespace="System"),
                 static=True,
             ),
-            "TestLib.ClassWithFields.StaticFieldB": CField(
+            "TestLib:ClassWithFields.StaticFieldB": CField(
                 name="StaticFieldB",
                 declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                 return_type=CType(name="Int32", namespace="System"),
                 static=True,
             ),
-            "TestLib.ClassWithFields.StaticFieldC": CField(
+            "TestLib:ClassWithFields.StaticFieldC": CField(
                 name="StaticFieldC",
                 declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
                 return_type=CType(name="Int32", namespace="System"),
@@ -5256,24 +5328,24 @@ class TestCConstructor(TestExtractBase):
         type_info: TypeInfo = self.get_type("ClassWithConstructors")
         extracted: Mapping[str, CConstructor] = extract_constructors(type_info)
         manual: Mapping[str, CConstructor] = {
-            "TestLib.ClassWithConstructors.__init__()": CConstructor(
+            "TestLib:ClassWithConstructors.__init__()": CConstructor(
                 declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
                 parameters=(),
             ),
-            "TestLib.ClassWithConstructors.__init__(System.Int32)": CConstructor(
+            "TestLib:ClassWithConstructors.__init__(System:Int32)": CConstructor(
                 declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
                 parameters=(
                     CParameter(name="param0", type=CType(name="Int32", namespace="System")),
                 ),
             ),
-            "TestLib.ClassWithConstructors.__init__(System.Int32, System.Int32)": CConstructor(
+            "TestLib:ClassWithConstructors.__init__(System:Int32, System:Int32)": CConstructor(
                 declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
                 parameters=(
                     CParameter(name="param0", type=CType(name="Int32", namespace="System")),
                     CParameter(name="param1", type=CType(name="Int32", namespace="System")),
                 ),
             ),
-            "TestLib.ClassWithConstructors.__init__(System.Int32, System.Int32, System.Int32)": CConstructor(
+            "TestLib:ClassWithConstructors.__init__(System:Int32, System:Int32, System:Int32)": CConstructor(
                 declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
                 parameters=(
                     CParameter(name="param0", type=CType(name="Int32", namespace="System")),
@@ -5347,73 +5419,73 @@ class TestCProperty(TestExtractBase):
         type_info: TypeInfo = self.get_type("ClassWithProperties")
         extracted: Mapping[str, CProperty] = extract_properties(type_info)
         manual: Mapping[str, CProperty] = {
-            "TestLib.ClassWithProperties.InstanceProperty0": CProperty(
+            "TestLib:ClassWithProperties.InstanceProperty0": CProperty(
                 name="InstanceProperty0",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
                 setter=True,
             ),
-            "TestLib.ClassWithProperties.InstanceProperty1": CProperty(
+            "TestLib:ClassWithProperties.InstanceProperty1": CProperty(
                 name="InstanceProperty1",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
                 setter=True,
             ),
-            "TestLib.ClassWithProperties.InstanceProperty2": CProperty(
+            "TestLib:ClassWithProperties.InstanceProperty2": CProperty(
                 name="InstanceProperty2",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
                 setter=True,
             ),
-            "TestLib.ClassWithProperties.InstanceReadOnlyProperty0": CProperty(
+            "TestLib:ClassWithProperties.InstanceReadOnlyProperty0": CProperty(
                 name="InstanceReadOnlyProperty0",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
             ),
-            "TestLib.ClassWithProperties.InstanceReadOnlyProperty1": CProperty(
+            "TestLib:ClassWithProperties.InstanceReadOnlyProperty1": CProperty(
                 name="InstanceReadOnlyProperty1",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
             ),
-            "TestLib.ClassWithProperties.InstanceReadOnlyProperty2": CProperty(
+            "TestLib:ClassWithProperties.InstanceReadOnlyProperty2": CProperty(
                 name="InstanceReadOnlyProperty2",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
             ),
-            "TestLib.ClassWithProperties.StaticProperty0": CProperty(
+            "TestLib:ClassWithProperties.StaticProperty0": CProperty(
                 name="StaticProperty0",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
                 setter=True,
                 static=True,
             ),
-            "TestLib.ClassWithProperties.StaticProperty1": CProperty(
+            "TestLib:ClassWithProperties.StaticProperty1": CProperty(
                 name="StaticProperty1",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
                 setter=True,
                 static=True,
             ),
-            "TestLib.ClassWithProperties.StaticProperty2": CProperty(
+            "TestLib:ClassWithProperties.StaticProperty2": CProperty(
                 name="StaticProperty2",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
                 setter=True,
                 static=True,
             ),
-            "TestLib.ClassWithProperties.StaticReadOnlyProperty0": CProperty(
+            "TestLib:ClassWithProperties.StaticReadOnlyProperty0": CProperty(
                 name="StaticReadOnlyProperty0",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
                 static=True,
             ),
-            "TestLib.ClassWithProperties.StaticReadOnlyProperty1": CProperty(
+            "TestLib:ClassWithProperties.StaticReadOnlyProperty1": CProperty(
                 name="StaticReadOnlyProperty1",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
                 static=True,
             ),
-            "TestLib.ClassWithProperties.StaticReadOnlyProperty2": CProperty(
+            "TestLib:ClassWithProperties.StaticReadOnlyProperty2": CProperty(
                 name="StaticReadOnlyProperty2",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
                 type=CType(name="Int32", namespace="System"),
@@ -5481,25 +5553,25 @@ class TestCMethod(TestExtractBase):
         type_info: TypeInfo = self.get_type("ClassWithMethods")
         extracted: Mapping[str, CMethod] = extract_methods(type_info)
         manual: Mapping[str, CMethod] = {
-            "System.Object.Equals(System.Object)": CMethod(
+            "System:Object.Equals(System:Object)": CMethod(
                 name="Equals",
                 declaring_type=CType(name="Object", namespace="System"),
                 parameters=(CParameter(name="obj", type=CType(name="Object", namespace="System")),),
                 return_types=(CType(name="Boolean", namespace="System"),),
             ),
-            "System.Object.GetHashCode()": CMethod(
+            "System:Object.GetHashCode()": CMethod(
                 name="GetHashCode",
                 declaring_type=CType(name="Object", namespace="System"),
                 parameters=(),
                 return_types=(CType(name="Int32", namespace="System"),),
             ),
-            "System.Object.GetType()": CMethod(
+            "System:Object.GetType()": CMethod(
                 name="GetType",
                 declaring_type=CType(name="Object", namespace="System"),
                 parameters=(),
                 return_types=(CType(name="Type", namespace="System"),),
             ),
-            "TestLib.ClassWithMethods.InstanceMethodWithDefaultParam(System.Int32)": CMethod(
+            "TestLib:ClassWithMethods.InstanceMethodWithDefaultParam(System:Int32)": CMethod(
                 name="InstanceMethodWithDefaultParam",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5509,7 +5581,7 @@ class TestCMethod(TestExtractBase):
                 ),
                 return_types=(CType(name="Int32", namespace="System"),),
             ),
-            "TestLib.ClassWithMethods.InstanceMethodWithNullableDefaultParam(System.Int32?)": CMethod(
+            "TestLib:ClassWithMethods.InstanceMethodWithNullableDefaultParam(System:Int32?)": CMethod(
                 name="InstanceMethodWithNullableDefaultParam",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5521,7 +5593,7 @@ class TestCMethod(TestExtractBase):
                 ),
                 return_types=(CType(name="Int32", namespace="System"),),
             ),
-            "TestLib.ClassWithMethods.InstanceMethodWithNullableOutParam(System.*Int32?)": CMethod(
+            "TestLib:ClassWithMethods.InstanceMethodWithNullableOutParam(System:*Int32?)": CMethod(
                 name="InstanceMethodWithNullableOutParam",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5536,7 +5608,7 @@ class TestCMethod(TestExtractBase):
                     CType(name="Int32", namespace="System", reference=True, nullable=True),
                 ),
             ),
-            "TestLib.ClassWithMethods.InstanceMethodWithNullableParam(System.Int32?)": CMethod(
+            "TestLib:ClassWithMethods.InstanceMethodWithNullableParam(System:Int32?)": CMethod(
                 name="InstanceMethodWithNullableParam",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5546,7 +5618,7 @@ class TestCMethod(TestExtractBase):
                 ),
                 return_types=(CType(name="Int32", namespace="System"),),
             ),
-            "TestLib.ClassWithMethods.InstanceMethodWithOutParam(System.*Int32)": CMethod(
+            "TestLib:ClassWithMethods.InstanceMethodWithOutParam(System:*Int32)": CMethod(
                 name="InstanceMethodWithOutParam",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5561,13 +5633,13 @@ class TestCMethod(TestExtractBase):
                     CType(name="Int32", namespace="System", reference=True),
                 ),
             ),
-            "TestLib.ClassWithMethods.InstanceMethodWithParams0()": CMethod(
+            "TestLib:ClassWithMethods.InstanceMethodWithParams0()": CMethod(
                 name="InstanceMethodWithParams0",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(),
                 return_types=(CType(name="Int32", namespace="System"),),
             ),
-            "TestLib.ClassWithMethods.InstanceMethodWithParams1(System.Int32)": CMethod(
+            "TestLib:ClassWithMethods.InstanceMethodWithParams1(System:Int32)": CMethod(
                 name="InstanceMethodWithParams1",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5575,7 +5647,7 @@ class TestCMethod(TestExtractBase):
                 ),
                 return_types=(CType(name="Int32", namespace="System"),),
             ),
-            "TestLib.ClassWithMethods.InstanceMethodWithParams2(System.Int32, System.Int32)": CMethod(
+            "TestLib:ClassWithMethods.InstanceMethodWithParams2(System:Int32, System:Int32)": CMethod(
                 name="InstanceMethodWithParams2",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5584,7 +5656,7 @@ class TestCMethod(TestExtractBase):
                 ),
                 return_types=(CType(name="Int32", namespace="System"),),
             ),
-            "TestLib.ClassWithMethods.StaticMethodWithDefaultParam(System.Int32)": CMethod(
+            "TestLib:ClassWithMethods.StaticMethodWithDefaultParam(System:Int32)": CMethod(
                 name="StaticMethodWithDefaultParam",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5595,7 +5667,7 @@ class TestCMethod(TestExtractBase):
                 return_types=(CType(name="Int32", namespace="System"),),
                 static=True,
             ),
-            "TestLib.ClassWithMethods.StaticMethodWithNullableDefaultParam(System.Int32?)": CMethod(
+            "TestLib:ClassWithMethods.StaticMethodWithNullableDefaultParam(System:Int32?)": CMethod(
                 name="StaticMethodWithNullableDefaultParam",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5608,7 +5680,7 @@ class TestCMethod(TestExtractBase):
                 return_types=(CType(name="Int32", namespace="System"),),
                 static=True,
             ),
-            "TestLib.ClassWithMethods.StaticMethodWithNullableOutParam(System.*Int32?)": CMethod(
+            "TestLib:ClassWithMethods.StaticMethodWithNullableOutParam(System:*Int32?)": CMethod(
                 name="StaticMethodWithNullableOutParam",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5624,7 +5696,7 @@ class TestCMethod(TestExtractBase):
                 ),
                 static=True,
             ),
-            "TestLib.ClassWithMethods.StaticMethodWithNullableParam(System.Int32?)": CMethod(
+            "TestLib:ClassWithMethods.StaticMethodWithNullableParam(System:Int32?)": CMethod(
                 name="StaticMethodWithNullableParam",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5635,7 +5707,7 @@ class TestCMethod(TestExtractBase):
                 return_types=(CType(name="Int32", namespace="System"),),
                 static=True,
             ),
-            "TestLib.ClassWithMethods.StaticMethodWithOutParam(System.*Int32)": CMethod(
+            "TestLib:ClassWithMethods.StaticMethodWithOutParam(System:*Int32)": CMethod(
                 name="StaticMethodWithOutParam",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5651,14 +5723,14 @@ class TestCMethod(TestExtractBase):
                 ),
                 static=True,
             ),
-            "TestLib.ClassWithMethods.StaticMethodWithParams0()": CMethod(
+            "TestLib:ClassWithMethods.StaticMethodWithParams0()": CMethod(
                 name="StaticMethodWithParams0",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(),
                 return_types=(CType(name="Int32", namespace="System"),),
                 static=True,
             ),
-            "TestLib.ClassWithMethods.StaticMethodWithParams1(System.Int32)": CMethod(
+            "TestLib:ClassWithMethods.StaticMethodWithParams1(System:Int32)": CMethod(
                 name="StaticMethodWithParams1",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5667,7 +5739,7 @@ class TestCMethod(TestExtractBase):
                 return_types=(CType(name="Int32", namespace="System"),),
                 static=True,
             ),
-            "TestLib.ClassWithMethods.StaticMethodWithParams2(System.Int32, System.Int32)": CMethod(
+            "TestLib:ClassWithMethods.StaticMethodWithParams2(System:Int32, System:Int32)": CMethod(
                 name="StaticMethodWithParams2",
                 declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
                 parameters=(
@@ -5677,7 +5749,7 @@ class TestCMethod(TestExtractBase):
                 return_types=(CType(name="Int32", namespace="System"),),
                 static=True,
             ),
-            "System.Object.ToString()": CMethod(
+            "System:Object.ToString()": CMethod(
                 name="ToString",
                 declaring_type=CType(name="Object", namespace="System"),
                 parameters=(),
@@ -5723,12 +5795,12 @@ class TestCEvent(TestExtractBase):
         type_info: TypeInfo = self.get_type("ClassWithEvents")
         extracted: Mapping[str, CEvent] = extract_events(type_info)
         manual: Mapping[str, CEvent] = {
-            "TestLib.ClassWithEvents.Event": CEvent(
+            "TestLib:ClassWithEvents.Event": CEvent(
                 name="Event",
                 declaring_type=CType(name="ClassWithEvents", namespace="TestLib"),
                 type=CType(name="EventHandler", namespace="System"),
             ),
-            "TestLib.ClassWithEvents.EventWithArgs": CEvent(
+            "TestLib:ClassWithEvents.EventWithArgs": CEvent(
                 name="EventWithArgs",
                 declaring_type=CType(name="ClassWithEvents", namespace="TestLib"),
                 type=CType(
@@ -5767,6 +5839,71 @@ class TestExtractAssembly(TestBase):
 
         self.assertTrue(skeleton_path.exists())
         self.assertTrue(doc_path.exists())
+
+        skeleton_dict: Mapping[str, Any]
+        with skeleton_path.open("r") as skeleton_file:
+            skeleton_dict = json.load(skeleton_file)
+
+        self.assertEqual("TestLib", skeleton_dict.get("name", None))
+        self.assertEqual("1.0.0.0", skeleton_dict.get("version", None))
+
+        namespaces: Mapping[str, Any] = skeleton_dict.get("namespaces", None)
+        self.assertIsNotNone(namespaces)
+
+        test_lib: Mapping[str, Any] = namespaces.get("TestLib", None)
+        self.assertIsNotNone(test_lib)
+
+        self.assertEqual("TestLib", test_lib.get("name", None))
+
+        type_map: Mapping[str, Any] = test_lib.get("types", None)
+        self.assertIsNotNone(type_map)
+
+        types: Sequence[str] = (
+            "TestLib.ClassThatsAbstract",
+            "TestLib.ClassWithConstructors",
+            "TestLib.ClassWithEvents",
+            "TestLib.ClassWithFields",
+            "TestLib.ClassWithGeneric[$T]",
+            "TestLib.ClassWithInterface",
+            "TestLib.ClassWithListMethods",
+            "TestLib.ClassWithMethods",
+            "TestLib.ClassWithMultiGeneric[$U, $V]",
+            "TestLib.ClassWithNested",
+            "TestLib.ClassWithOperatorMethods",
+            "TestLib.ClassWithProperties",
+            "TestLib.ClassWithSuper",
+            "TestLib.ClassWithTypes",
+            "TestLib.DelegateWithNoParametersNoReturn",
+            "TestLib.DelegateWithNoParametersReturn",
+            "TestLib.DelegateWithParametersNoReturn",
+            "TestLib.DelegateWithParametersReturn",
+            "TestLib.EnumWithFields",
+            "TestLib.EnumWithNoFields",
+            "TestLib.IInterfaceWithEvents",
+            "TestLib.IInterfaceWithFields",
+            "TestLib.IInterfaceWithGeneric[$T]",
+            "TestLib.IInterfaceWithInterface",
+            "TestLib.IInterfaceWithListMethods",
+            "TestLib.IInterfaceWithMethods",
+            "TestLib.IInterfaceWithMultiGeneric[$U, $V]",
+            "TestLib.IInterfaceWithNested",
+            "TestLib.IInterfaceWithOperatorMethods",
+            "TestLib.IInterfaceWithProperties",
+            "TestLib.StructWithConstructors",
+            "TestLib.StructWithEvents",
+            "TestLib.StructWithFields",
+            "TestLib.StructWithGeneric[$T]",
+            "TestLib.StructWithInterface",
+            "TestLib.StructWithListMethods",
+            "TestLib.StructWithMethods",
+            "TestLib.StructWithMultiGeneric[$U, $V]",
+            "TestLib.StructWithNested",
+            "TestLib.StructWithOperatorMethods",
+            "TestLib.StructWithProperties",
+        )
+        for type_str in types:
+            type_def: Mapping[str, Any] = type_map.get(type_str, None)
+            self.assertIsNotNone(type_def)
 
 
 if __name__ == "__main__":

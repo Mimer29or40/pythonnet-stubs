@@ -66,9 +66,10 @@ class TestMergeNamespace(TestBase):
         namespace1: CNamespace = CNamespace(
             name="Namespace",
             types={
-                "Namespace.ClassA": CClass(
+                "Namespace:ClassA": CClass(
                     name="ClassA",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -78,16 +79,17 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
         namespace2: CNamespace = CNamespace(
             name="Namespace",
             types={
-                "Namespace.ClassB": CClass(
+                "Namespace:ClassB": CClass(
                     name="ClassB",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -97,7 +99,7 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
@@ -106,9 +108,10 @@ class TestMergeNamespace(TestBase):
         manual: CNamespace = CNamespace(
             name="Namespace",
             types={
-                "Namespace.ClassA": CClass(
+                "Namespace:ClassA": CClass(
                     name="ClassA",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -118,11 +121,12 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.ClassB": CClass(
+                "Namespace:ClassB": CClass(
                     name="ClassB",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -132,7 +136,7 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
@@ -143,9 +147,10 @@ class TestMergeNamespace(TestBase):
         namespace1: CNamespace = CNamespace(
             name="Namespace",
             types={
-                "Namespace.ClassB": CClass(
+                "Namespace:ClassB": CClass(
                     name="ClassB",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -155,16 +160,17 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
         namespace2: CNamespace = CNamespace(
             name="Namespace",
             types={
-                "Namespace.ClassA": CClass(
+                "Namespace:ClassA": CClass(
                     name="ClassA",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -174,7 +180,7 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
@@ -183,9 +189,10 @@ class TestMergeNamespace(TestBase):
         manual: CNamespace = CNamespace(
             name="Namespace",
             types={
-                "Namespace.ClassA": CClass(
+                "Namespace:ClassA": CClass(
                     name="ClassA",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -195,11 +202,12 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.ClassB": CClass(
+                "Namespace:ClassB": CClass(
                     name="ClassB",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -209,7 +217,7 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
@@ -220,9 +228,10 @@ class TestMergeNamespace(TestBase):
         namespace1: CNamespace = CNamespace(
             name="Namespace",
             types={
-                "Namespace.ClassA": CClass(
+                "Namespace:ClassA": CClass(
                     name="ClassA",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -232,16 +241,17 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
         namespace2: CNamespace = CNamespace(
             name="Namespace",
             types={
-                "Namespace.ClassA": CClass(
+                "Namespace:ClassA": CClass(
                     name="ClassA",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -251,7 +261,7 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
@@ -260,9 +270,10 @@ class TestMergeNamespace(TestBase):
         manual: CNamespace = CNamespace(
             name="Namespace",
             types={
-                "Namespace.ClassA": CClass(
+                "Namespace:ClassA": CClass(
                     name="ClassA",
                     namespace="Namespace",
+                    nested=None,
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -272,7 +283,7 @@ class TestMergeNamespace(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
             },
         )
@@ -334,11 +345,7 @@ class TestImports(TestBase):
             )
         )
 
-        manual: Set[str] = {
-            "Namespace.Type",
-            "Namespace.InnerA",
-            "Namespace.InnerB",
-        }
+        manual: Set[str] = {"Namespace.Type", "Namespace.InnerA", "Namespace.InnerB"}
 
         self.assertEqual(manual, imports.c)
 
@@ -563,6 +570,126 @@ class TestDoc(TestBase):
         self.assertEqual("Node(Namespace.Type($T))", result)
         self.assertEqual("Node.Node.Node", remainder)
 
+    def test_split_node_str_colon(self) -> None:
+        node_str: str = "Node:Node:Node:Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node", result)
+        self.assertEqual("Node:Node:Node", remainder)
+
+    def test_split_node_str_colon_no_remainder(self) -> None:
+        node_str: str = "Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node", result)
+        self.assertEqual(None, remainder)
+
+    def test_split_node_str_colon_brackets(self) -> None:
+        node_str: str = "Node[Namespace:Type]:Node:Node:Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node[Namespace:Type]", result)
+        self.assertEqual("Node:Node:Node", remainder)
+
+    def test_split_node_str_colon_brackets_no_remainder(self) -> None:
+        node_str: str = "Node[Namespace:Type]"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node[Namespace:Type]", result)
+        self.assertEqual(None, remainder)
+
+    def test_split_node_str_colon_brackets_multi(self) -> None:
+        node_str: str = "Node[Namespace:Type, Namespace:Type]:Node:Node:Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node[Namespace:Type, Namespace:Type]", result)
+        self.assertEqual("Node:Node:Node", remainder)
+
+    def test_split_node_str_colon_brackets_multi_no_remainder(self) -> None:
+        node_str: str = "Node[Namespace:Type, Namespace:Type]"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node[Namespace:Type, Namespace:Type]", result)
+        self.assertEqual(None, remainder)
+
+    def test_split_node_str_colon_brackets_nested(self) -> None:
+        node_str: str = "Node[Namespace:Type[$T]]:Node:Node:Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node[Namespace:Type[$T]]", result)
+        self.assertEqual("Node:Node:Node", remainder)
+
+    def test_split_node_str_colon_parenthesis(self) -> None:
+        node_str: str = "Node(Namespace:Type):Node:Node:Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node(Namespace:Type)", result)
+        self.assertEqual("Node:Node:Node", remainder)
+
+    def test_split_node_str_colon_parenthesis_no_remainder(self) -> None:
+        node_str: str = "Node(Namespace:Type)"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node(Namespace:Type)", result)
+        self.assertEqual(None, remainder)
+
+    def test_split_node_str_colon_parenthesis_multi(self) -> None:
+        node_str: str = "Node(Namespace:Type, Namespace:Type):Node:Node:Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node(Namespace:Type, Namespace:Type)", result)
+        self.assertEqual("Node:Node:Node", remainder)
+
+    def test_split_node_str_colon_parenthesis_multi_no_remainder(self) -> None:
+        node_str: str = "Node(Namespace:Type, Namespace:Type)"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node(Namespace:Type, Namespace:Type)", result)
+        self.assertEqual(None, remainder)
+
+    def test_split_node_str_colon_parenthesis_nested(self) -> None:
+        node_str: str = "Node(Namespace:Type($T)):Node:Node:Node"
+
+        result: str
+        remainder: str
+        result, remainder = Doc.split_node_str(node_str)
+
+        self.assertEqual("Node(Namespace:Type($T))", result)
+        self.assertEqual("Node:Node:Node", remainder)
+
     def test_translate(self) -> None:
         pattern: str = "Pattern"
 
@@ -571,11 +698,11 @@ class TestDoc(TestBase):
         self.assertEqual(r"(?s:Pattern)\Z", result)
 
     def test_translate_brackets(self) -> None:
-        pattern: str = "Pattern[Namespace.Type]"
+        pattern: str = "Pattern[Namespace:Type]"
 
         result: str = Doc.translate(pattern)
 
-        self.assertEqual(r"(?s:Pattern\[Namespace\.Type\])\Z", result)
+        self.assertEqual(r"(?s:Pattern\[Namespace:Type\])\Z", result)
 
     def test_translate_wildcard_star(self) -> None:
         pattern: str = "Pattern[*]"
@@ -645,7 +772,7 @@ class TestDoc(TestBase):
     def test_get_shallow_node_wildcard(self) -> None:
         doc_tree: Mapping[str, Any] = {"Node[*]": {"doc": ""}}
         doc_dict: Doc = Doc(doc_tree)
-        node: Doc = doc_dict.get("Node[Namespace.TypeA]")
+        node: Doc = doc_dict.get("Node[Namespace:TypeA]")
 
         self.assertIsNotNone(node)
         self.assertIsInstance(node, Doc)
@@ -654,7 +781,7 @@ class TestDoc(TestBase):
     def test_get_shallow_node_wildcard_generic_bracket(self) -> None:
         doc_tree: Mapping[str, Any] = {"Node[$T]": {"doc": ""}}
         doc_dict: Doc = Doc(doc_tree)
-        node: Doc = doc_dict.get("Node[Namespace.TypeA]")
+        node: Doc = doc_dict.get("Node[Namespace:TypeA]")
 
         self.assertIsNotNone(node)
         self.assertIsInstance(node, Doc)
@@ -663,7 +790,7 @@ class TestDoc(TestBase):
     def test_get_shallow_node_wildcard_generic_bracket_multi(self) -> None:
         doc_tree: Mapping[str, Any] = {"Node[$K, $V]": {"doc": ""}}
         doc_dict: Doc = Doc(doc_tree)
-        node: Doc = doc_dict.get("Node[Namespace.TypeA, Namespace.TypeB]")
+        node: Doc = doc_dict.get("Node[Namespace:TypeA, Namespace:TypeB]")
 
         self.assertIsNotNone(node)
         self.assertIsInstance(node, Doc)
@@ -672,7 +799,7 @@ class TestDoc(TestBase):
     def test_get_shallow_node_wildcard_generic_parenthesis(self) -> None:
         doc_tree: Mapping[str, Any] = {"Node($T)": {"doc": ""}}
         doc_dict: Doc = Doc(doc_tree)
-        node: Doc = doc_dict.get("Node(Namespace.TypeA)")
+        node: Doc = doc_dict.get("Node(Namespace:TypeA)")
 
         self.assertIsNotNone(node)
         self.assertIsInstance(node, Doc)
@@ -681,7 +808,7 @@ class TestDoc(TestBase):
     def test_get_shallow_node_wildcard_generic_parenthesis_multi(self) -> None:
         doc_tree: Mapping[str, Any] = {"Node($K, $V)": {"doc": ""}}
         doc_dict: Doc = Doc(doc_tree)
-        node: Doc = doc_dict.get("Node(Namespace.TypeA, Namespace.TypeB)")
+        node: Doc = doc_dict.get("Node(Namespace:TypeA, Namespace:TypeB)")
 
         self.assertIsNotNone(node)
         self.assertIsInstance(node, Doc)
@@ -706,7 +833,7 @@ class TestDoc(TestBase):
     def test_get_deep_node_wildcard(self) -> None:
         doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"Node[*]": {"doc": ""}}}}}
         doc_dict: Doc = Doc(doc_tree)
-        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node[Namespace.TypeA]")
+        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node[Namespace:TypeA]")
 
         self.assertIsNotNone(node)
         self.assertIsInstance(node, Doc)
@@ -715,7 +842,7 @@ class TestDoc(TestBase):
     def test_get_deep_node_wildcard_generic_bracket(self) -> None:
         doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"Node[$T]": {"doc": ""}}}}}
         doc_dict: Doc = Doc(doc_tree)
-        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node[Namespace.TypeA]")
+        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node[Namespace:TypeA]")
 
         self.assertIsNotNone(node)
         self.assertIsInstance(node, Doc)
@@ -724,7 +851,7 @@ class TestDoc(TestBase):
     def test_get_deep_node_wildcard_generic_bracket_multi(self) -> None:
         doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"Node[$K, $V]": {"doc": ""}}}}}
         doc_dict: Doc = Doc(doc_tree)
-        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node[Namespace.TypeA, Namespace.TypeB]")
+        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node[Namespace:TypeA, Namespace:TypeB]")
 
         self.assertIsNotNone(node)
         self.assertIsInstance(node, Doc)
@@ -733,7 +860,7 @@ class TestDoc(TestBase):
     def test_get_deep_node_wildcard_generic_parenthesis(self) -> None:
         doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"Node($T)": {"doc": ""}}}}}
         doc_dict: Doc = Doc(doc_tree)
-        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node(Namespace.TypeA)")
+        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node(Namespace:TypeA)")
 
         self.assertIsNotNone(node)
         self.assertIsInstance(node, Doc)
@@ -742,7 +869,7 @@ class TestDoc(TestBase):
     def test_get_deep_node_wildcard_generic_parenthesis_multi(self) -> None:
         doc_tree: Mapping[str, Any] = {"NodeA": {"NodeB": {"NodeC": {"Node($K, $V)": {"doc": ""}}}}}
         doc_dict: Doc = Doc(doc_tree)
-        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node(Namespace.TypeA, Namespace.TypeB)")
+        node: Doc = doc_dict.get("NodeA.NodeB.NodeC.Node(Namespace:TypeA, Namespace:TypeB)")
 
         self.assertIsNotNone(node)
         self.assertIsInstance(node, Doc)
@@ -1358,6 +1485,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -1367,7 +1495,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1384,6 +1512,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=True,
             generic_args=(),
             super_class=None,
@@ -1393,7 +1522,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1410,6 +1539,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(
                 CType(name="K", namespace="Namespace", generic=True),
@@ -1422,7 +1552,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1439,6 +1569,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Super", namespace="Namespace"),
@@ -1448,7 +1579,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1465,6 +1596,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -1477,7 +1609,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1494,17 +1626,18 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={
-                "Namespace.Class.FieldA": CField(
+                "Namespace:Class.FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
                 ),
-                "Namespace.Class.FieldB": CField(
+                "Namespace:Class.FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
@@ -1514,7 +1647,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1535,13 +1668,14 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Class.__init__()": CConstructor(
+                "Namespace:Class.__init__()": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
                 ),
@@ -1549,7 +1683,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1568,17 +1702,18 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Class.__init__()": CConstructor(
+                "Namespace:Class.__init__()": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
                 ),
-                "Namespace.Class.__init__(Namespace.Type)": CConstructor(
+                "Namespace:Class.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
@@ -1588,7 +1723,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1611,6 +1746,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -1618,12 +1754,12 @@ class TestBuildClass(TestBase):
             fields={},
             constructors={},
             properties={
-                "Namespace.Class.PropertyA": CProperty(
+                "Namespace:Class.PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
                 ),
-                "Namespace.Class.PropertyB": CProperty(
+                "Namespace:Class.PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
@@ -1631,7 +1767,7 @@ class TestBuildClass(TestBase):
             },
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1654,6 +1790,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -1662,7 +1799,7 @@ class TestBuildClass(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Class.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -1675,7 +1812,7 @@ class TestBuildClass(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Class.MethodB(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -1690,7 +1827,7 @@ class TestBuildClass(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1711,6 +1848,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -1719,7 +1857,7 @@ class TestBuildClass(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Class.MethodA(Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodA(Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -1729,7 +1867,7 @@ class TestBuildClass(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Class.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -1744,7 +1882,7 @@ class TestBuildClass(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1767,6 +1905,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -1776,18 +1915,18 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={
-                "Namespace.Class.EventA": CEvent(
+                "Namespace:Class.EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
-                "Namespace.Class.EventB": CEvent(
+                "Namespace:Class.EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
             },
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1804,10 +1943,11 @@ class TestBuildClass(TestBase):
 
         self.assertEqual(manual, lines)
 
-    def test_build_nested(self) -> None:
+    def test_build_nested_types(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -1817,10 +1957,11 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={
-                "Namespace.NestedClass": CClass(
+            nested_types={
+                "Namespace:Class.NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -1830,11 +1971,12 @@ class TestBuildClass(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedStruct": CStruct(
+                "Namespace:Class.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -1844,27 +1986,30 @@ class TestBuildClass(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.INestedInterface": CInterface(
+                "Namespace:Class.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedEnum": CEnum(
+                "Namespace:Class.NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     fields=(),
                 ),
-                "Namespace.NestedDelegate": CDelegate(
+                "Namespace:Class.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     parameters=(),
                     return_type=CType(name="DelegateType", namespace="Namespace"),
                 ),
@@ -1895,6 +2040,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -1904,7 +2050,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1918,6 +2064,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=True,
             generic_args=(),
             super_class=None,
@@ -1927,7 +2074,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1941,6 +2088,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(
                 CType(name="K", namespace="Namespace", generic=True),
@@ -1953,7 +2101,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1967,6 +2115,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Super", namespace="Namespace"),
@@ -1976,7 +2125,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -1990,6 +2139,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2002,7 +2152,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2016,17 +2166,18 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={
-                "Namespace.Class.FieldA": CField(
+                "Namespace:Class.FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
                 ),
-                "Namespace.Class.FieldB": CField(
+                "Namespace:Class.FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
@@ -2036,7 +2187,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2050,13 +2201,14 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Class.__init__()": CConstructor(
+                "Namespace:Class.__init__()": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
                 ),
@@ -2064,7 +2216,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2078,17 +2230,18 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Class.__init__()": CConstructor(
+                "Namespace:Class.__init__()": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
                 ),
-                "Namespace.Class.__init__(Namespace.Type)": CConstructor(
+                "Namespace:Class.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
@@ -2098,7 +2251,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2112,6 +2265,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2119,12 +2273,12 @@ class TestBuildClass(TestBase):
             fields={},
             constructors={},
             properties={
-                "Namespace.Class.PropertyA": CProperty(
+                "Namespace:Class.PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
                 ),
-                "Namespace.Class.PropertyB": CProperty(
+                "Namespace:Class.PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
@@ -2132,7 +2286,7 @@ class TestBuildClass(TestBase):
             },
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2146,6 +2300,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2154,7 +2309,7 @@ class TestBuildClass(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Class.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -2167,7 +2322,7 @@ class TestBuildClass(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Class.MethodB(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -2182,7 +2337,7 @@ class TestBuildClass(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2196,6 +2351,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2204,7 +2360,7 @@ class TestBuildClass(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Class.MethodA(Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodA(Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -2214,7 +2370,7 @@ class TestBuildClass(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Class.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -2229,7 +2385,7 @@ class TestBuildClass(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2243,6 +2399,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2252,18 +2409,18 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={
-                "Namespace.Class.EventA": CEvent(
+                "Namespace:Class.EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
-                "Namespace.Class.EventB": CEvent(
+                "Namespace:Class.EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
             },
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2277,6 +2434,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2286,10 +2444,11 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={
-                "Namespace.NestedClass": CClass(
+            nested_types={
+                "Namespace:Class.NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -2299,11 +2458,12 @@ class TestBuildClass(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedStruct": CStruct(
+                "Namespace:Class.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -2313,27 +2473,30 @@ class TestBuildClass(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.INestedInterface": CInterface(
+                "Namespace:Class.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedEnum": CEnum(
+                "Namespace:Class.NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     fields=(),
                 ),
-                "Namespace.NestedDelegate": CDelegate(
+                "Namespace:Class.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     parameters=(),
                     return_type=CType(name="DelegateType", namespace="Namespace"),
                 ),
@@ -2351,6 +2514,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2360,7 +2524,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2374,6 +2538,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=True,
             generic_args=(),
             super_class=None,
@@ -2383,7 +2548,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2397,6 +2562,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(
                 CType(name="K", namespace="Namespace", generic=True),
@@ -2409,7 +2575,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2423,6 +2589,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Super", namespace="Namespace"),
@@ -2432,7 +2599,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2446,6 +2613,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2458,7 +2626,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2472,17 +2640,18 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={
-                "Namespace.Class.FieldA": CField(
+                "Namespace:Class.FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
                 ),
-                "Namespace.Class.FieldB": CField(
+                "Namespace:Class.FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
@@ -2492,7 +2661,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2506,13 +2675,14 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Class.__init__()": CConstructor(
+                "Namespace:Class.__init__()": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
                 ),
@@ -2520,7 +2690,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2534,17 +2704,18 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Class.__init__()": CConstructor(
+                "Namespace:Class.__init__()": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(),
                 ),
-                "Namespace.Class.__init__(Namespace.Type)": CConstructor(
+                "Namespace:Class.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
@@ -2554,7 +2725,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2568,6 +2739,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2575,12 +2747,12 @@ class TestBuildClass(TestBase):
             fields={},
             constructors={},
             properties={
-                "Namespace.Class.PropertyA": CProperty(
+                "Namespace:Class.PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
                 ),
-                "Namespace.Class.PropertyB": CProperty(
+                "Namespace:Class.PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
@@ -2588,7 +2760,7 @@ class TestBuildClass(TestBase):
             },
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2602,6 +2774,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2610,7 +2783,7 @@ class TestBuildClass(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Class.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -2623,7 +2796,7 @@ class TestBuildClass(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Class.MethodB(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -2638,7 +2811,7 @@ class TestBuildClass(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2652,6 +2825,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2660,7 +2834,7 @@ class TestBuildClass(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Class.MethodA(Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodA(Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -2670,7 +2844,7 @@ class TestBuildClass(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Class.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     parameters=(
@@ -2685,7 +2859,7 @@ class TestBuildClass(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2699,6 +2873,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2708,18 +2883,18 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={
-                "Namespace.Class.EventA": CEvent(
+                "Namespace:Class.EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
-                "Namespace.Class.EventB": CEvent(
+                "Namespace:Class.EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
             },
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2733,6 +2908,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2742,10 +2918,11 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={
-                "Namespace.NestedClass": CClass(
+            nested_types={
+                "Namespace:Class.NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -2755,11 +2932,12 @@ class TestBuildClass(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedStruct": CStruct(
+                "Namespace:Class.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -2769,27 +2947,30 @@ class TestBuildClass(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.INestedInterface": CInterface(
+                "Namespace:Class.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedEnum": CEnum(
+                "Namespace:Class.NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     fields=(),
                 ),
-                "Namespace.NestedDelegate": CDelegate(
+                "Namespace:Class.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     parameters=(),
                     return_type=CType(name="DelegateType", namespace="Namespace"),
                 ),
@@ -2807,6 +2988,7 @@ class TestBuildClass(TestBase):
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2816,7 +2998,7 @@ class TestBuildClass(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc(
@@ -2843,6 +3025,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2852,7 +3035,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2869,6 +3052,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=True,
             generic_args=(),
             super_class=None,
@@ -2878,7 +3062,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2895,6 +3079,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(
                 CType(name="K", namespace="Namespace", generic=True),
@@ -2907,7 +3092,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2924,6 +3109,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Super", namespace="Namespace"),
@@ -2933,7 +3119,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2950,6 +3136,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -2962,7 +3149,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -2979,17 +3166,18 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={
-                "Namespace.Struct.FieldA": CField(
+                "Namespace:Struct.FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
                 ),
-                "Namespace.Struct.FieldB": CField(
+                "Namespace:Struct.FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
@@ -2999,7 +3187,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3020,13 +3208,14 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Struct.__init__()": CConstructor(
+                "Namespace:Struct.__init__()": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
                 ),
@@ -3034,7 +3223,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3053,17 +3242,18 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Struct.__init__()": CConstructor(
+                "Namespace:Struct.__init__()": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
                 ),
-                "Namespace.Struct.__init__(Namespace.Type)": CConstructor(
+                "Namespace:Struct.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
@@ -3073,7 +3263,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3096,6 +3286,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3103,12 +3294,12 @@ class TestBuildStruct(TestBase):
             fields={},
             constructors={},
             properties={
-                "Namespace.Struct.PropertyA": CProperty(
+                "Namespace:Struct.PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
                 ),
-                "Namespace.Struct.PropertyB": CProperty(
+                "Namespace:Struct.PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
@@ -3116,7 +3307,7 @@ class TestBuildStruct(TestBase):
             },
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3139,6 +3330,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3147,7 +3339,7 @@ class TestBuildStruct(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Struct.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -3160,7 +3352,7 @@ class TestBuildStruct(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Struct.MethodB(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -3175,7 +3367,7 @@ class TestBuildStruct(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3196,6 +3388,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3204,7 +3397,7 @@ class TestBuildStruct(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Struct.MethodA(Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodA(Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -3214,7 +3407,7 @@ class TestBuildStruct(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Struct.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -3229,7 +3422,7 @@ class TestBuildStruct(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3252,6 +3445,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3261,18 +3455,18 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={
-                "Namespace.Struct.EventA": CEvent(
+                "Namespace:Struct.EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
-                "Namespace.Struct.EventB": CEvent(
+                "Namespace:Struct.EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
             },
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3293,6 +3487,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3302,10 +3497,11 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={
-                "Namespace.NestedClass": CClass(
+            nested_types={
+                "Namespace:Struct.NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -3315,11 +3511,12 @@ class TestBuildStruct(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedStruct": CStruct(
+                "Namespace:Struct.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -3329,27 +3526,30 @@ class TestBuildStruct(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.INestedInterface": CInterface(
+                "Namespace:Struct.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedEnum": CEnum(
+                "Namespace:Struct.NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     fields=(),
                 ),
-                "Namespace.NestedDelegate": CDelegate(
+                "Namespace:Struct.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
                     return_type=CType(name="DelegateType", namespace="Namespace"),
                 ),
@@ -3380,6 +3580,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3389,7 +3590,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3403,6 +3604,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=True,
             generic_args=(),
             super_class=None,
@@ -3412,7 +3614,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3426,6 +3628,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(
                 CType(name="K", namespace="Namespace", generic=True),
@@ -3438,7 +3641,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3452,6 +3655,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Super", namespace="Namespace"),
@@ -3461,7 +3665,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3475,6 +3679,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3487,7 +3692,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3501,17 +3706,18 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={
-                "Namespace.Struct.FieldA": CField(
+                "Namespace:Struct.FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
                 ),
-                "Namespace.Struct.FieldB": CField(
+                "Namespace:Struct.FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
@@ -3521,7 +3727,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3535,13 +3741,14 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Struct.__init__()": CConstructor(
+                "Namespace:Struct.__init__()": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
                 ),
@@ -3549,7 +3756,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3563,17 +3770,18 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Struct.__init__()": CConstructor(
+                "Namespace:Struct.__init__()": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
                 ),
-                "Namespace.Struct.__init__(Namespace.Type)": CConstructor(
+                "Namespace:Struct.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
@@ -3583,7 +3791,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3597,6 +3805,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3604,12 +3813,12 @@ class TestBuildStruct(TestBase):
             fields={},
             constructors={},
             properties={
-                "Namespace.Struct.PropertyA": CProperty(
+                "Namespace:Struct.PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
                 ),
-                "Namespace.Struct.PropertyB": CProperty(
+                "Namespace:Struct.PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
@@ -3617,7 +3826,7 @@ class TestBuildStruct(TestBase):
             },
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3631,6 +3840,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3639,7 +3849,7 @@ class TestBuildStruct(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Struct.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -3652,7 +3862,7 @@ class TestBuildStruct(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Struct.MethodB(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -3667,7 +3877,7 @@ class TestBuildStruct(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3681,6 +3891,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3689,7 +3900,7 @@ class TestBuildStruct(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Struct.MethodA(Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodA(Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -3699,7 +3910,7 @@ class TestBuildStruct(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Struct.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -3714,7 +3925,7 @@ class TestBuildStruct(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3728,6 +3939,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3737,18 +3949,18 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={
-                "Namespace.Struct.EventA": CEvent(
+                "Namespace:Struct.EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
-                "Namespace.Struct.EventB": CEvent(
+                "Namespace:Struct.EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
             },
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3762,6 +3974,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3771,10 +3984,11 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={
-                "Namespace.NestedClass": CClass(
+            nested_types={
+                "Namespace:Struct.NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -3784,11 +3998,12 @@ class TestBuildStruct(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedStruct": CStruct(
+                "Namespace:Struct.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -3798,27 +4013,30 @@ class TestBuildStruct(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.INestedInterface": CInterface(
+                "Namespace:Struct.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedEnum": CEnum(
+                "Namespace:Struct.NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     fields=(),
                 ),
-                "Namespace.NestedDelegate": CDelegate(
+                "Namespace:Struct.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
                     return_type=CType(name="DelegateType", namespace="Namespace"),
                 ),
@@ -3836,6 +4054,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3845,7 +4064,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3859,6 +4078,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=True,
             generic_args=(),
             super_class=None,
@@ -3868,7 +4088,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3882,6 +4102,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(
                 CType(name="K", namespace="Namespace", generic=True),
@@ -3894,7 +4115,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3908,6 +4129,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=CType(name="Super", namespace="Namespace"),
@@ -3917,7 +4139,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3931,6 +4153,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -3943,7 +4166,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3957,17 +4180,18 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={
-                "Namespace.Struct.FieldA": CField(
+                "Namespace:Struct.FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
                 ),
-                "Namespace.Struct.FieldB": CField(
+                "Namespace:Struct.FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
@@ -3977,7 +4201,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -3991,13 +4215,14 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Struct.__init__()": CConstructor(
+                "Namespace:Struct.__init__()": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
                 ),
@@ -4005,7 +4230,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4019,17 +4244,18 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
             interfaces=(),
             fields={},
             constructors={
-                "Namespace.Struct.__init__()": CConstructor(
+                "Namespace:Struct.__init__()": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
                 ),
-                "Namespace.Struct.__init__(Namespace.Type)": CConstructor(
+                "Namespace:Struct.__init__(Namespace:Type)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
                         CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
@@ -4039,7 +4265,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4053,6 +4279,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -4060,12 +4287,12 @@ class TestBuildStruct(TestBase):
             fields={},
             constructors={},
             properties={
-                "Namespace.Struct.PropertyA": CProperty(
+                "Namespace:Struct.PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
                 ),
-                "Namespace.Struct.PropertyB": CProperty(
+                "Namespace:Struct.PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
@@ -4073,7 +4300,7 @@ class TestBuildStruct(TestBase):
             },
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4087,6 +4314,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -4095,7 +4323,7 @@ class TestBuildStruct(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Struct.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -4108,7 +4336,7 @@ class TestBuildStruct(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Struct.MethodB(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -4123,7 +4351,7 @@ class TestBuildStruct(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4137,6 +4365,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -4145,7 +4374,7 @@ class TestBuildStruct(TestBase):
             constructors={},
             properties={},
             methods={
-                "Namespace.Struct.MethodA(Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodA(Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -4155,7 +4384,7 @@ class TestBuildStruct(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Struct.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     parameters=(
@@ -4170,7 +4399,7 @@ class TestBuildStruct(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4184,6 +4413,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -4193,18 +4423,18 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={
-                "Namespace.Struct.EventA": CEvent(
+                "Namespace:Struct.EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
-                "Namespace.Struct.EventB": CEvent(
+                "Namespace:Struct.EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
             },
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4218,6 +4448,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -4227,10 +4458,11 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={
-                "Namespace.NestedClass": CClass(
+            nested_types={
+                "Namespace:Struct.NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -4240,11 +4472,12 @@ class TestBuildStruct(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedStruct": CStruct(
+                "Namespace:Struct.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -4254,27 +4487,30 @@ class TestBuildStruct(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.INestedInterface": CInterface(
+                "Namespace:Struct.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedEnum": CEnum(
+                "Namespace:Struct.NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     fields=(),
                 ),
-                "Namespace.NestedDelegate": CDelegate(
+                "Namespace:Struct.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     parameters=(),
                     return_type=CType(name="DelegateType", namespace="Namespace"),
                 ),
@@ -4292,6 +4528,7 @@ class TestBuildStruct(TestBase):
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
+            nested=None,
             abstract=False,
             generic_args=(),
             super_class=None,
@@ -4301,7 +4538,7 @@ class TestBuildStruct(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc(
@@ -4328,13 +4565,14 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4351,6 +4589,7 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(
                 CType(name="K", namespace="Namespace", generic=True),
                 CType(name="V", namespace="Namespace", generic=True),
@@ -4360,7 +4599,7 @@ class TestBuildInterface(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4377,6 +4616,7 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(
                 CType(name="InterfaceA", namespace="Namespace"),
@@ -4386,7 +4626,7 @@ class TestBuildInterface(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4403,15 +4643,16 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={
-                "Namespace.Interface.FieldA": CField(
+                "Namespace:Interface.FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
                 ),
-                "Namespace.Interface.FieldB": CField(
+                "Namespace:Interface.FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
@@ -4420,7 +4661,7 @@ class TestBuildInterface(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4441,16 +4682,17 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={
-                "Namespace.Interface.PropertyA": CProperty(
+                "Namespace:Interface.PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
                 ),
-                "Namespace.Interface.PropertyB": CProperty(
+                "Namespace:Interface.PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
@@ -4458,7 +4700,7 @@ class TestBuildInterface(TestBase):
             },
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4481,12 +4723,13 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={
-                "Namespace.Interface.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -4499,7 +4742,7 @@ class TestBuildInterface(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Interface.MethodB(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -4514,7 +4757,7 @@ class TestBuildInterface(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4535,12 +4778,13 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={
-                "Namespace.Interface.MethodA(Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodA(Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -4550,7 +4794,7 @@ class TestBuildInterface(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Interface.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -4565,7 +4809,7 @@ class TestBuildInterface(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4588,24 +4832,25 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={
-                "Namespace.Interface.EventA": CEvent(
+                "Namespace:Interface.EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
-                "Namespace.Interface.EventB": CEvent(
+                "Namespace:Interface.EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
             },
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4626,16 +4871,18 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={},
-            nested={
-                "Namespace.NestedClass": CClass(
+            nested_types={
+                "Namespace:Interface.NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -4645,11 +4892,12 @@ class TestBuildInterface(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedStruct": CStruct(
+                "Namespace:Interface.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -4659,27 +4907,30 @@ class TestBuildInterface(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.INestedInterface": CInterface(
+                "Namespace:Interface.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedEnum": CEnum(
+                "Namespace:Interface.NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     fields=(),
                 ),
-                "Namespace.NestedDelegate": CDelegate(
+                "Namespace:Interface.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
                     return_type=CType(name="DelegateType", namespace="Namespace"),
                 ),
@@ -4710,13 +4961,14 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4730,6 +4982,7 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(
                 CType(name="K", namespace="Namespace", generic=True),
                 CType(name="V", namespace="Namespace", generic=True),
@@ -4739,7 +4992,7 @@ class TestBuildInterface(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4753,6 +5006,7 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(
                 CType(name="InterfaceA", namespace="Namespace"),
@@ -4762,7 +5016,7 @@ class TestBuildInterface(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4776,15 +5030,16 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={
-                "Namespace.Interface.FieldA": CField(
+                "Namespace:Interface.FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
                 ),
-                "Namespace.Interface.FieldB": CField(
+                "Namespace:Interface.FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
@@ -4793,7 +5048,7 @@ class TestBuildInterface(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4807,16 +5062,17 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={
-                "Namespace.Interface.PropertyA": CProperty(
+                "Namespace:Interface.PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
                 ),
-                "Namespace.Interface.PropertyB": CProperty(
+                "Namespace:Interface.PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
@@ -4824,7 +5080,7 @@ class TestBuildInterface(TestBase):
             },
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4838,12 +5094,13 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={
-                "Namespace.Interface.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -4856,7 +5113,7 @@ class TestBuildInterface(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Interface.MethodB(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -4871,7 +5128,7 @@ class TestBuildInterface(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4885,12 +5142,13 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={
-                "Namespace.Interface.MethodA(Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodA(Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -4900,7 +5158,7 @@ class TestBuildInterface(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Interface.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -4915,7 +5173,7 @@ class TestBuildInterface(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4929,24 +5187,25 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={
-                "Namespace.Interface.EventA": CEvent(
+                "Namespace:Interface.EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
-                "Namespace.Interface.EventB": CEvent(
+                "Namespace:Interface.EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
             },
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -4960,16 +5219,18 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={},
-            nested={
-                "Namespace.NestedClass": CClass(
+            nested_types={
+                "Namespace:Interface.NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -4979,11 +5240,12 @@ class TestBuildInterface(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedStruct": CStruct(
+                "Namespace:Interface.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -4993,27 +5255,30 @@ class TestBuildInterface(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.INestedInterface": CInterface(
+                "Namespace:Interface.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedEnum": CEnum(
+                "Namespace:Interface.NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     fields=(),
                 ),
-                "Namespace.NestedDelegate": CDelegate(
+                "Namespace:Interface.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
                     return_type=CType(name="DelegateType", namespace="Namespace"),
                 ),
@@ -5031,13 +5296,14 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -5051,6 +5317,7 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(
                 CType(name="K", namespace="Namespace", generic=True),
                 CType(name="V", namespace="Namespace", generic=True),
@@ -5060,7 +5327,7 @@ class TestBuildInterface(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -5074,6 +5341,7 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(
                 CType(name="InterfaceA", namespace="Namespace"),
@@ -5083,7 +5351,7 @@ class TestBuildInterface(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -5097,15 +5365,16 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={
-                "Namespace.Interface.FieldA": CField(
+                "Namespace:Interface.FieldA": CField(
                     name="FieldA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
                 ),
-                "Namespace.Interface.FieldB": CField(
+                "Namespace:Interface.FieldB": CField(
                     name="FieldB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     return_type=CType(name="FieldType", namespace="Namespace"),
@@ -5114,7 +5383,7 @@ class TestBuildInterface(TestBase):
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -5128,16 +5397,17 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={
-                "Namespace.Interface.PropertyA": CProperty(
+                "Namespace:Interface.PropertyA": CProperty(
                     name="PropertyA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
                 ),
-                "Namespace.Interface.PropertyB": CProperty(
+                "Namespace:Interface.PropertyB": CProperty(
                     name="PropertyB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="PropertyType", namespace="Namespace"),
@@ -5145,7 +5415,7 @@ class TestBuildInterface(TestBase):
             },
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -5159,12 +5429,13 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={
-                "Namespace.Interface.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -5177,7 +5448,7 @@ class TestBuildInterface(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Interface.MethodB(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -5192,7 +5463,7 @@ class TestBuildInterface(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -5206,12 +5477,13 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={
-                "Namespace.Interface.MethodA(Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodA(Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -5221,7 +5493,7 @@ class TestBuildInterface(TestBase):
                     ),
                     return_types=(CType(name="MethodType", namespace="Namespace"),),
                 ),
-                "Namespace.Interface.MethodA(Namespace.ParamType, Namespace.ParamType)": CMethod(
+                "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     parameters=(
@@ -5236,7 +5508,7 @@ class TestBuildInterface(TestBase):
                 ),
             },
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -5250,24 +5522,25 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={
-                "Namespace.Interface.EventA": CEvent(
+                "Namespace:Interface.EventA": CEvent(
                     name="EventA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
-                "Namespace.Interface.EventB": CEvent(
+                "Namespace:Interface.EventB": CEvent(
                     name="EventB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
                     type=CType(name="EventHandler", namespace="Namespace"),
                 ),
             },
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc({})
@@ -5281,16 +5554,18 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={},
-            nested={
-                "Namespace.NestedClass": CClass(
+            nested_types={
+                "Namespace:Interface.NestedClass": CClass(
                     name="NestedClass",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -5300,11 +5575,12 @@ class TestBuildInterface(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedStruct": CStruct(
+                "Namespace:Interface.NestedStruct": CStruct(
                     name="NestedStruct",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -5314,27 +5590,30 @@ class TestBuildInterface(TestBase):
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.INestedInterface": CInterface(
+                "Namespace:Interface.INestedInterface": CInterface(
                     name="INestedInterface",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     generic_args=(),
                     interfaces=(),
                     fields={},
                     properties={},
                     methods={},
                     events={},
-                    nested={},
+                    nested_types={},
                 ),
-                "Namespace.NestedEnum": CEnum(
+                "Namespace:Interface.NestedEnum": CEnum(
                     name="NestedEnum",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     fields=(),
                 ),
-                "Namespace.NestedDelegate": CDelegate(
+                "Namespace:Interface.NestedDelegate": CDelegate(
                     name="NestedDelegate",
                     namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
                     parameters=(),
                     return_type=CType(name="DelegateType", namespace="Namespace"),
                 ),
@@ -5352,13 +5631,14 @@ class TestBuildInterface(TestBase):
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
+            nested=None,
             generic_args=(),
             interfaces=(),
             fields={},
             properties={},
             methods={},
             events={},
-            nested={},
+            nested_types={},
         )
         imports: Imports = Imports()
         doc: Doc = Doc(
@@ -5385,6 +5665,7 @@ class TestBuildEnum(TestBase):
         type_def: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
+            nested=None,
             fields=("FieldA", "FieldB", "FieldC", "FieldD"),
         )
         imports: Imports = Imports()
@@ -5410,6 +5691,7 @@ class TestBuildEnum(TestBase):
         type_def: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
+            nested=None,
             fields=(),
         )
         imports: Imports = Imports()
@@ -5427,6 +5709,7 @@ class TestBuildEnum(TestBase):
         type_def: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
+            nested=None,
             fields=("FieldA", "FieldB", "FieldC", "FieldD"),
         )
         imports: Imports = Imports()
@@ -5441,6 +5724,7 @@ class TestBuildEnum(TestBase):
         type_def: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
+            nested=None,
             fields=(),
         )
         imports: Imports = Imports()
@@ -5455,6 +5739,7 @@ class TestBuildEnum(TestBase):
         type_def: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
+            nested=None,
             fields=("FieldA", "FieldB", "FieldC", "FieldD"),
         )
         imports: Imports = Imports()
@@ -5469,6 +5754,7 @@ class TestBuildEnum(TestBase):
         type_def: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
+            nested=None,
             fields=(),
         )
         imports: Imports = Imports()
@@ -5483,6 +5769,7 @@ class TestBuildEnum(TestBase):
         type_def: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
+            nested=None,
             fields=("FieldA", "FieldB", "FieldC", "FieldD"),
         )
         imports: Imports = Imports()
@@ -5520,6 +5807,7 @@ class TestBuildEnum(TestBase):
         type_def: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
+            nested=None,
             fields=(),
         )
         imports: Imports = Imports()
@@ -5547,6 +5835,7 @@ class TestBuildDelegate(TestBase):
         type_def: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
+            nested=None,
             parameters=(
                 CParameter(name="param0", type=CType(name="ParamType", namespace="Namespace")),
                 CParameter(name="param1", type=CType(name="ParamType", namespace="Namespace")),
@@ -5568,6 +5857,7 @@ class TestBuildDelegate(TestBase):
         type_def: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
+            nested=None,
             parameters=(),
             return_type=CType(name="ReturnType", namespace="Namespace"),
         )
@@ -5586,6 +5876,7 @@ class TestBuildDelegate(TestBase):
         type_def: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
+            nested=None,
             parameters=(
                 CParameter(name="param0", type=CType(name="ParamType", namespace="Namespace")),
                 CParameter(name="param1", type=CType(name="ParamType", namespace="Namespace")),
@@ -5604,6 +5895,7 @@ class TestBuildDelegate(TestBase):
         type_def: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
+            nested=None,
             parameters=(),
             return_type=CType(name="ReturnType", namespace="Namespace"),
         )
@@ -5619,6 +5911,7 @@ class TestBuildDelegate(TestBase):
         type_def: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
+            nested=None,
             parameters=(
                 CParameter(name="param0", type=CType(name="ParamType", namespace="Namespace")),
                 CParameter(name="param1", type=CType(name="ParamType", namespace="Namespace")),
@@ -5637,6 +5930,7 @@ class TestBuildDelegate(TestBase):
         type_def: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
+            nested=None,
             parameters=(),
             return_type=CType(name="ReturnType", namespace="Namespace"),
         )
@@ -5652,6 +5946,7 @@ class TestBuildDelegate(TestBase):
         type_def: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
+            nested=None,
             parameters=(
                 CParameter(name="param0", type=CType(name="ParamType", namespace="Namespace")),
                 CParameter(name="param1", type=CType(name="ParamType", namespace="Namespace")),
@@ -5691,6 +5986,7 @@ class TestBuildDelegate(TestBase):
         type_def: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
+            nested=None,
             parameters=(),
             return_type=CType(name="ReturnType", namespace="Namespace"),
         )
@@ -6122,7 +6418,7 @@ class TestBuildConstructor(TestBase):
             {
                 "Namespace": {
                     "Type": {
-                        "__init__(Namespace.Param, Namespace.Param)": {
+                        "__init__(Namespace:Param, Namespace:Param)": {
                             "doc": "Constructor doc string.",
                             "parameters": {
                                 "param0": "Parameter 0 doc string.",
@@ -6164,7 +6460,7 @@ class TestBuildConstructor(TestBase):
             {
                 "Namespace": {
                     "Type": {
-                        "__init__(Namespace.Param, Namespace.Param)": {
+                        "__init__(Namespace:Param, Namespace:Param)": {
                             "doc": "Constructor doc string.",
                             "parameters": {
                                 "param0": "Parameter 0 doc string.",
@@ -7570,7 +7866,7 @@ class TestBuildMethod(TestBase):
             {
                 "Namespace": {
                     "Type": {
-                        "Method(Namespace.Param, Namespace.Param)": {
+                        "Method(Namespace:Param, Namespace:Param)": {
                             "doc": "Method doc string.",
                             "parameters": {
                                 "param0": "Parameter 0 doc string.",
@@ -7612,7 +7908,7 @@ class TestBuildMethod(TestBase):
             {
                 "Namespace": {
                     "Type": {
-                        "Method(Namespace.Param, Namespace.Param)": {
+                        "Method(Namespace:Param, Namespace:Param)": {
                             "doc": "Method doc string.",
                             "parameters": {
                                 "param0": "Parameter 0 doc string.",
@@ -7654,7 +7950,7 @@ class TestBuildMethod(TestBase):
             {
                 "Namespace": {
                     "Type": {
-                        "Method(Namespace.Param, Namespace.Param)": {
+                        "Method(Namespace:Param, Namespace:Param)": {
                             "doc": "Method doc string.",
                             "parameters": {
                                 "param0": "Parameter 0 doc string.",
@@ -7697,7 +7993,7 @@ class TestBuildMethod(TestBase):
             {
                 "Namespace": {
                     "Type": {
-                        "Method(Namespace.Param, Namespace.Param)": {
+                        "Method(Namespace:Param, Namespace:Param)": {
                             "doc": "Method doc string.",
                             "parameters": {
                                 "param0": "Parameter 0 doc string.",
@@ -7877,7 +8173,7 @@ class TestBuildMethod(TestBase):
             {
                 "Namespace": {
                     "Type": {
-                        "Method(Namespace.Param, Namespace.Param)": {
+                        "Method(Namespace:Param, Namespace:Param)": {
                             "doc": "Method doc string.",
                             "parameters": {
                                 "param0": "Parameter 0 doc string.",
@@ -7922,7 +8218,7 @@ class TestBuildMethod(TestBase):
             {
                 "Namespace": {
                     "Type": {
-                        "Method(Namespace.Param, Namespace.Param)": {
+                        "Method(Namespace:Param, Namespace:Param)": {
                             "doc": "Method doc string.",
                             "parameters": {
                                 "param0": "Parameter 0 doc string.",
@@ -7967,7 +8263,7 @@ class TestBuildMethod(TestBase):
             {
                 "Namespace": {
                     "Type": {
-                        "Method(Namespace.Param, Namespace.Param)": {
+                        "Method(Namespace:Param, Namespace:Param)": {
                             "doc": "Method doc string.",
                             "parameters": {
                                 "param0": "Parameter 0 doc string.",
@@ -8013,7 +8309,7 @@ class TestBuildMethod(TestBase):
             {
                 "Namespace": {
                     "Type": {
-                        "Method(Namespace.Param, Namespace.Param)": {
+                        "Method(Namespace:Param, Namespace:Param)": {
                             "doc": "Method doc string.",
                             "parameters": {
                                 "param0": "Parameter 0 doc string.",

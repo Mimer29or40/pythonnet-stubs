@@ -129,7 +129,7 @@ class Doc:
         while i < n:
             c: str = node_str[i]
             i = i + 1
-            if c == "." and bracket_count == 0:
+            if c in (".", ":") and bracket_count == 0:
                 return "".join(result), "".join(node_str[i:])
             if c in ("[", "("):
                 bracket_count += 1
@@ -333,7 +333,6 @@ def convert_type(type: CType) -> str:
     return ""
 
 
-# TODO - Nested types break doc tree
 # TODO - Replace c types with python types, i.e. Int32 -> int, String -> str, Void -> None, etc
 def build_type_def(
     type_def: CTypeDefinition,
@@ -452,7 +451,7 @@ def build_class(
         )
         lines.extend(event_lines)
 
-    for nested_type_def in type_def.nested.values():
+    for nested_type_def in type_def.nested_types.values():
         nested_type_def_lines: Sequence[str] = build_type_def(
             type_def=nested_type_def,
             imports=imports,
@@ -559,7 +558,7 @@ def build_interface(
         )
         lines.extend(event_lines)
 
-    for nested_type_def in type_def.nested.values():
+    for nested_type_def in type_def.nested_types.values():
         nested_type_def_lines: Sequence[str] = build_type_def(
             type_def=nested_type_def,
             imports=imports,

@@ -5,6 +5,7 @@ from abc import ABC
 from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Any
+from typing import ClassVar
 from typing import Dict
 from typing import Mapping
 from typing import Optional
@@ -54,10 +55,13 @@ class CNamespace:
 class CTypeDefinition(ABC):
     name: str
     namespace: Optional[str]
+    nested: Optional[CType]
 
     def __str__(self) -> str:
-        name: str = self.name
-        if self.namespace is not None:
+        name: str = self.simple_name
+        if self.nested is not None:
+            name = f"{self.nested.full_name}.{name}"
+        elif self.namespace is not None:
             name = f"{self.namespace}.{name}"
         return name
 
@@ -72,6 +76,15 @@ class CTypeDefinition(ABC):
 
     def __ge__(self, other: CField) -> bool:
         return self.name >= other.name
+
+    @property
+    def simple_name(self) -> str:
+        name: str = self.name
+        if hasattr(self, "generic_args"):
+            if len(self.generic_args) > 0:
+                generic: str = ", ".join(map(str, self.generic_args))
+                name = f"{name}[{generic}]"
+        return name
 
     @abstractmethod
     def to_json(self) -> JsonType:
@@ -107,27 +120,14 @@ class CClass(CTypeDefinition):
     properties: Mapping[str, CProperty]
     methods: Mapping[str, CMethod]
     events: Mapping[str, CEvent]
-    nested: Mapping[str, CTypeDefinition]
-
-    def __str__(self) -> str:
-        name: str = self.simple_name
-        if self.namespace is not None:
-            name = f"{self.namespace}.{name}"
-        return name
-
-    @property
-    def simple_name(self) -> str:
-        name: str = self.name
-        if len(self.generic_args) > 0:
-            generic: str = ", ".join(map(str, self.generic_args))
-            name = f"{name}[{generic}]"
-        return name
+    nested_types: Mapping[str, CTypeDefinition]
 
     def to_json(self) -> JsonType:
         return {
             "type": "class",
             "name": self.name,
             "namespace": self.namespace,
+            "nested": None if self.nested is None else self.nested.to_json(),
             "abstract": self.abstract,
             "generic_args": tuple(sorted(map(CType.to_json, self.generic_args))),
             "super_class": None if self.super_class is None else self.super_class.to_json(),
@@ -137,7 +137,7 @@ class CClass(CTypeDefinition):
             "properties": {k: v.to_json() for k, v in self.properties.items()},
             "methods": {k: v.to_json() for k, v in self.methods.items()},
             "events": {k: v.to_json() for k, v in self.events.items()},
-            "nested": {k: v.to_json() for k, v in self.nested.items()},
+            "nested_types": {k: v.to_json() for k, v in self.nested_types.items()},
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
@@ -156,7 +156,7 @@ class CClass(CTypeDefinition):
                 doc_dict[name] = json
 
         child: CTypeDefinition
-        for child in self.nested.values():
+        for child in self.nested_types.values():
             name, json = child.to_doc_json()
             doc_dict[name] = json
 
@@ -167,6 +167,7 @@ class CClass(CTypeDefinition):
         return cls(
             name=json["name"],
             namespace=json["namespace"],
+            nested=CType.from_json(json["nested"]),
             abstract=json["abstract"],
             generic_args=tuple(map(CType.from_json, json["generic_args"])),
             super_class=CType.from_json(json["super_class"]),
@@ -176,7 +177,7 @@ class CClass(CTypeDefinition):
             properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
             methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
             events={k: CEvent.from_json(v) for k, v in json["events"].items()},
-            nested={k: CTypeDefinition.from_json(v) for k, v in json["nested"].items()},
+            nested_types={k: CTypeDefinition.from_json(v) for k, v in json["nested_types"].items()},
         )
 
 
@@ -196,34 +197,21 @@ class CInterface(CTypeDefinition):
     properties: Mapping[str, CProperty]
     methods: Mapping[str, CMethod]
     events: Mapping[str, CEvent]
-    nested: Mapping[str, CTypeDefinition]
-
-    def __str__(self) -> str:
-        name: str = self.simple_name
-        if self.namespace is not None:
-            name = f"{self.namespace}.{name}"
-        return name
-
-    @property
-    def simple_name(self) -> str:
-        name: str = self.name
-        if len(self.generic_args) > 0:
-            generic: str = ", ".join(map(str, self.generic_args))
-            name = f"{name}[{generic}]"
-        return name
+    nested_types: Mapping[str, CTypeDefinition]
 
     def to_json(self) -> JsonType:
         return {
             "type": "interface",
             "name": self.name,
             "namespace": self.namespace,
+            "nested": None if self.nested is None else self.nested.to_json(),
             "generic_args": tuple(map(CType.to_json, self.generic_args)),
             "interfaces": tuple(sorted(map(CType.to_json, self.interfaces))),
             "fields": {k: v.to_json() for k, v in self.fields.items()},
             "properties": {k: v.to_json() for k, v in self.properties.items()},
             "methods": {k: v.to_json() for k, v in self.methods.items()},
             "events": {k: v.to_json() for k, v in self.events.items()},
-            "nested": {k: v.to_json() for k, v in self.nested.items()},
+            "nested_types": {k: v.to_json() for k, v in self.nested_types.items()},
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
@@ -241,7 +229,7 @@ class CInterface(CTypeDefinition):
                 doc_dict[name] = json
 
         child: CTypeDefinition
-        for child in self.nested.values():
+        for child in self.nested_types.values():
             name, json = child.to_doc_json()
             doc_dict[name] = json
 
@@ -252,13 +240,14 @@ class CInterface(CTypeDefinition):
         return cls(
             name=json["name"],
             namespace=json["namespace"],
+            nested=CType.from_json(json["nested"]),
             generic_args=tuple(sorted(map(CType.from_json, json["generic_args"]))),
             interfaces=tuple(map(CType.from_json, json["interfaces"])),
             fields={k: CField.from_json(v) for k, v in json["fields"].items()},
             properties={k: CProperty.from_json(v) for k, v in json["properties"].items()},
             methods={k: CMethod.from_json(v) for k, v in json["methods"].items()},
             events={k: CEvent.from_json(v) for k, v in json["events"].items()},
-            nested={k: CTypeDefinition.from_json(v) for k, v in json["nested"].items()},
+            nested_types={k: CTypeDefinition.from_json(v) for k, v in json["nested_types"].items()},
         )
 
 
@@ -271,6 +260,7 @@ class CEnum(CTypeDefinition):
             "type": "enum",
             "name": self.name,
             "namespace": self.namespace,
+            "nested": None if self.nested is None else self.nested.to_json(),
             "fields": self.fields,
         }
 
@@ -286,6 +276,7 @@ class CEnum(CTypeDefinition):
         return cls(
             name=json["name"],
             namespace=json["namespace"],
+            nested=CType.from_json(json["nested"]),
             fields=tuple(json["fields"]),
         )
 
@@ -300,6 +291,7 @@ class CDelegate(CTypeDefinition):
             "type": "delegate",
             "name": self.name,
             "namespace": self.namespace,
+            "nested": None if self.nested is None else self.nested.to_json(),
             "parameters": tuple(map(CParameter.to_json, self.parameters)),
             "return_type": self.return_type.to_json(),
         }
@@ -317,6 +309,7 @@ class CDelegate(CTypeDefinition):
         return cls(
             name=json["name"],
             namespace=json["namespace"],
+            nested=CType.from_json(json["nested"]),
             parameters=tuple(map(CParameter.from_json, json["parameters"])),
             return_type=CType.from_json(json["return_type"]),
         )
@@ -370,7 +363,7 @@ class CType:
         if self.nullable:
             name = name + "?"
         if self.namespace is not None:
-            name = f"{self.namespace}.{name}"
+            name = f"{self.namespace}:{name}"
         if len(self.inner) > 0:
             name = f"{name}[{', '.join(map(str, self.inner))}]"
         return name
@@ -382,7 +375,9 @@ class CType:
     def from_json(cls, json: JsonType) -> Optional[CType]:
         if json is None:
             return None
-        match: re.Match = re.match(r"(?:(\w+(?:\.\w+)*)\.)?(\$?\*?\w+\??)(?:\[(.*)])?", json)
+        match: re.Match = re.match(
+            r"(?:(\w+(?:\.\w+)*):)?(\$?\*?\w+(?:\.\w+)*\??)(?:\[(.*)])?", json
+        )
         name: str = match.group(2)
         inner: Sequence[CType] = tuple()
         if (inner_str := match.group(3)) is not None:

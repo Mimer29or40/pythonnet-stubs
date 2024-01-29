@@ -135,7 +135,7 @@ class TestBase(unittest.TestCase):
         self.assertMapping(first.properties, second.properties, "Properties are not equal")
         self.assertMapping(first.methods, second.methods, "Methods are not equal")
         self.assertMapping(first.events, second.events, "Events are not equal")
-        self.assertMapping(first.nested, second.nested, "Nested are not equal")
+        self.assertMapping(first.nested_types, second.nested_types, "nested_types are not equal")
 
     def assertCStruct(self, first: CStruct, second: CStruct, msg: str = None) -> None:
         self.assertIsInstance(first, CStruct, "First argument is not a CStruct")
@@ -152,7 +152,7 @@ class TestBase(unittest.TestCase):
         self.assertMapping(first.properties, second.properties, "Properties are not equal")
         self.assertMapping(first.methods, second.methods, "Methods are not equal")
         self.assertMapping(first.events, second.events, "Events are not equal")
-        self.assertMapping(first.nested, second.nested, "Nested are not equal")
+        self.assertMapping(first.nested_types, second.nested_types, "nested_types are not equal")
 
     def assertCInterface(self, first: CInterface, second: CInterface, msg: str = None) -> None:
         self.assertIsInstance(first, CInterface, "First argument is not a CInterface")
@@ -167,7 +167,7 @@ class TestBase(unittest.TestCase):
         self.assertMapping(first.properties, second.properties, "Properties are not equal")
         self.assertMapping(first.methods, second.methods, "Methods are not equal")
         self.assertMapping(first.events, second.events, "Events are not equal")
-        self.assertMapping(first.nested, second.nested, "Nested are not equal")
+        self.assertMapping(first.nested_types, second.nested_types, "nested_types are not equal")
 
     def assertCEnum(self, first: CEnum, second: CEnum, msg: str = None) -> None:
         self.assertIsInstance(first, CEnum, "First argument is not a CEnum")
