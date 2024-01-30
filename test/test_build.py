@@ -4,6 +4,7 @@ from typing import Any
 from typing import Mapping
 from typing import Sequence
 from typing import Set
+from typing import Tuple
 
 from test_base import TestBase
 
@@ -17,9 +18,11 @@ from stubgen.build_stubs import build_event
 from stubgen.build_stubs import build_field
 from stubgen.build_stubs import build_interface
 from stubgen.build_stubs import build_method
+from stubgen.build_stubs import build_parameter
 from stubgen.build_stubs import build_property
 from stubgen.build_stubs import build_struct
 from stubgen.build_stubs import build_stubs
+from stubgen.build_stubs import build_type
 from stubgen.build_stubs import merge_doc
 from stubgen.build_stubs import merge_namespace
 from stubgen.model import CClass
@@ -55,12 +58,12 @@ class TestMergeNamespace(TestBase):
         )
 
         merged: CNamespace = merge_namespace(namespace1, namespace2)
-        manual: CNamespace = CNamespace(
+        expected: CNamespace = CNamespace(
             name="Namespace",
             types={},
         )
 
-        self.assertEqual(manual, merged)
+        self.assertEqual(expected, merged)
 
     def test_merge_simple(self) -> None:
         namespace1: CNamespace = CNamespace(
@@ -105,7 +108,7 @@ class TestMergeNamespace(TestBase):
         )
 
         merged: CNamespace = merge_namespace(namespace1, namespace2)
-        manual: CNamespace = CNamespace(
+        expected: CNamespace = CNamespace(
             name="Namespace",
             types={
                 "Namespace:ClassA": CClass(
@@ -141,7 +144,7 @@ class TestMergeNamespace(TestBase):
             },
         )
 
-        self.assertEqual(manual, merged)
+        self.assertEqual(expected, merged)
 
     def test_merge_simple_rev(self) -> None:
         namespace1: CNamespace = CNamespace(
@@ -186,7 +189,7 @@ class TestMergeNamespace(TestBase):
         )
 
         merged: CNamespace = merge_namespace(namespace1, namespace2)
-        manual: CNamespace = CNamespace(
+        expected: CNamespace = CNamespace(
             name="Namespace",
             types={
                 "Namespace:ClassA": CClass(
@@ -222,7 +225,7 @@ class TestMergeNamespace(TestBase):
             },
         )
 
-        self.assertEqual(manual, merged)
+        self.assertEqual(expected, merged)
 
     def test_merge_overlap(self) -> None:
         namespace1: CNamespace = CNamespace(
@@ -267,7 +270,7 @@ class TestMergeNamespace(TestBase):
         )
 
         merged: CNamespace = merge_namespace(namespace1, namespace2)
-        manual: CNamespace = CNamespace(
+        expected: CNamespace = CNamespace(
             name="Namespace",
             types={
                 "Namespace:ClassA": CClass(
@@ -288,165 +291,160 @@ class TestMergeNamespace(TestBase):
             },
         )
 
-        self.assertEqual(manual, merged)
+        self.assertEqual(expected, merged)
 
 
 class TestImports(TestBase):
-    def test_add_py_type(self) -> None:
+    def test_add_type(self) -> None:
         imports = Imports()
-        imports.add_py_type("namespaceA.TypeA")
-        imports.add_py_type("namespaceA.TypeA")
-        imports.add_py_type("namespaceA.TypeB")
-        imports.add_py_type("namespaceB.TypeA")
-        imports.add_py_type("namespaceB.TypeA")
-        imports.add_py_type("namespaceB.TypeB")
+        imports.add_type(CType(name="TypeA", namespace="NamespaceA"))
+        imports.add_type(CType(name="TypeA", namespace="NamespaceA"))
+        imports.add_type(CType(name="TypeB", namespace="NamespaceA"))
+        imports.add_type(CType(name="TypeA", namespace="NamespaceB"))
+        imports.add_type(CType(name="TypeA", namespace="NamespaceB"))
+        imports.add_type(CType(name="TypeB", namespace="NamespaceB"))
 
-        manual: Set[str] = {
-            "namespaceA.TypeA",
-            "namespaceA.TypeB",
-            "namespaceB.TypeA",
-            "namespaceB.TypeB",
-        }
-
-        self.assertEqual(manual, imports.py)
-
-    def test_add_c_type(self) -> None:
-        imports = Imports()
-        imports.add_c_type(CType(name="TypeA", namespace="NamespaceA"))
-        imports.add_c_type(CType(name="TypeA", namespace="NamespaceA"))
-        imports.add_c_type(CType(name="TypeB", namespace="NamespaceA"))
-        imports.add_c_type(CType(name="TypeA", namespace="NamespaceB"))
-        imports.add_c_type(CType(name="TypeA", namespace="NamespaceB"))
-        imports.add_c_type(CType(name="TypeB", namespace="NamespaceB"))
-
-        manual: Set[str] = {
+        expected: Set[str] = {
             "NamespaceA.TypeA",
             "NamespaceA.TypeB",
             "NamespaceB.TypeA",
             "NamespaceB.TypeB",
         }
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
-    def test_add_c_type_inner(self) -> None:
+    def test_add_type_inner(self) -> None:
         imports = Imports()
-        imports.add_c_type(
+
+        types: Sequence[CType] = (
             CType(
                 name="Type",
                 namespace="Namespace",
                 inner=(CType(name="InnerA", namespace="Namespace"),),
-            )
-        )
-        imports.add_c_type(
+            ),
             CType(
                 name="Type",
                 namespace="Namespace",
                 inner=(CType(name="InnerB", namespace="Namespace"),),
-            )
+            ),
         )
+        for type in types:
+            imports.add_type(type)
 
-        manual: Set[str] = {"Namespace.Type", "Namespace.InnerA", "Namespace.InnerB"}
+        expected: Set[str] = {"Namespace.Type", "Namespace.InnerA", "Namespace.InnerB"}
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
-    def test_add_c_type_type_var(self) -> None:
+    def test_add_type_inner_false(self) -> None:
         imports = Imports()
-        imports.add_c_type(CType(name="T", namespace="Namespace", generic=True))
-        imports.add_c_type(CType(name="U", namespace="Namespace", generic=True))
-        imports.add_c_type(CType(name="V", namespace="Namespace", generic=True))
 
-        manual: Set[str] = {"T", "U", "V"}
+        types: Sequence[CType] = (
+            CType(
+                name="Type",
+                namespace="Namespace",
+                inner=(CType(name="InnerA", namespace="Namespace"),),
+            ),
+            CType(
+                name="Type",
+                namespace="Namespace",
+                inner=(CType(name="InnerB", namespace="Namespace"),),
+            ),
+        )
+        for type in types:
+            imports.add_type(type, inner=False)
 
-        self.assertEqual(set(), imports.c)
-        self.assertEqual(manual, imports.type_vars)
+        expected: Set[str] = {"Namespace.Type"}
+
+        self.assertEqual(expected, imports.types)
+
+    def test_add_type_type_var(self) -> None:
+        imports = Imports()
+
+        types: Sequence[CType] = (
+            CType(name="T", namespace="Namespace", generic=True),
+            CType(name="U", namespace="Namespace", generic=True),
+            CType(name="V", namespace="Namespace", generic=True),
+        )
+        for type in types:
+            imports.add_type(type)
+
+        expected_types: Set[str] = {"typing.TypeVar"}
+        expected_type_vars: Set[str] = {"T", "U", "V"}
+
+        self.assertEqual(expected_types, imports.types)
+        self.assertEqual(expected_type_vars, imports.type_vars)
 
     def test_build_empty(self) -> None:
         imports = Imports()
 
         lines: Sequence[str] = imports.build("Namespace")
-        manual: Sequence[str] = ()
+        expected: Sequence[str] = ()
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_build_py(self) -> None:
+    def test_build(self) -> None:
         imports = Imports()
-        imports.add_py_type("namespace.TypeA")
-        imports.add_py_type("namespace.TypeB")
-        imports.add_py_type("namespace.TypeC")
-        imports.add_py_type("namespace.TypeD")
+        imports.add_type(CType(name="TypeA", namespace="namespace"))
+        imports.add_type(CType(name="TypeB", namespace="namespace"))
+        imports.add_type(CType(name="TypeC", namespace="namespace"))
+        imports.add_type(CType(name="TypeD", namespace="namespace"))
 
         lines: Sequence[str] = imports.build()
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "from namespace import TypeA",
             "from namespace import TypeB",
             "from namespace import TypeC",
             "from namespace import TypeD",
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_build_c(self) -> None:
+    def test_build_namespace(self) -> None:
         imports = Imports()
-        imports.add_c_type(CType(name="TypeA", namespace="Namespace"))
-        imports.add_c_type(CType(name="TypeB", namespace="Namespace"))
-        imports.add_c_type(CType(name="TypeC", namespace="Namespace"))
-        imports.add_c_type(CType(name="TypeD", namespace="Namespace"))
-
-        lines: Sequence[str] = imports.build()
-        manual: Sequence[str] = (
-            "from Namespace import TypeA",
-            "from Namespace import TypeB",
-            "from Namespace import TypeC",
-            "from Namespace import TypeD",
-        )
-
-        self.assertEqual(manual, lines)
-
-    def test_build_c_namespace(self) -> None:
-        imports = Imports()
-        imports.add_c_type(CType(name="TypeA", namespace="Namespace"))
-        imports.add_c_type(CType(name="TypeB", namespace="Namespace.Namespace"))
-        imports.add_c_type(CType(name="TypeC", namespace="Namespace.Namespace"))
-        imports.add_c_type(CType(name="TypeD", namespace="Namespace.Namespace.Namespace"))
+        imports.add_type(CType(name="TypeA", namespace="Namespace"))
+        imports.add_type(CType(name="TypeB", namespace="Namespace.Namespace"))
+        imports.add_type(CType(name="TypeC", namespace="Namespace.Namespace"))
+        imports.add_type(CType(name="TypeD", namespace="Namespace.Namespace.Namespace"))
 
         lines: Sequence[str] = imports.build("Namespace.Namespace")
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "from Namespace.Namespace.Namespace import TypeD",
             "from Namespace import TypeA",
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_type_vars(self) -> None:
         imports = Imports()
-        imports.add_c_type(CType(name="T", namespace="Namespace", generic=True))
-        imports.add_c_type(CType(name="U", namespace="Namespace", generic=True))
-        imports.add_c_type(CType(name="V", namespace="Namespace", generic=True))
+        imports.add_type(CType(name="T", namespace="Namespace", generic=True))
+        imports.add_type(CType(name="U", namespace="Namespace", generic=True))
+        imports.add_type(CType(name="V", namespace="Namespace", generic=True))
 
         lines: Sequence[str] = imports.build()
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "from typing import TypeVar",
             f'T = TypeVar("T")',
             f'U = TypeVar("U")',
             f'V = TypeVar("V")',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_include_event_type(self) -> None:
         imports = Imports()
         imports.include_event_type = True
 
         lines: Sequence[str] = imports.build()
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "from typing import Generic",
+            "from typing import TypeVar",
             f'T = TypeVar("T")',
             "class EventType(Generic[T]):",
             "    def __iadd__(self, other: T): ...",
             "    def __isub__(self, other: T): ...",
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
 
 class TestDoc(TestBase):
@@ -1501,12 +1499,12 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_abstract(self) -> None:
         type_def: CClass = CClass(
@@ -1528,12 +1526,12 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class(ABC):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_generic(self) -> None:
         type_def: CClass = CClass(
@@ -1558,12 +1556,12 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class(Generic[K, V]):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_super(self) -> None:
         type_def: CClass = CClass(
@@ -1585,12 +1583,12 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class(Super):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_interfaces(self) -> None:
         type_def: CClass = CClass(
@@ -1615,12 +1613,12 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class(InterfaceA, InterfaceB):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_fields(self) -> None:
         type_def: CClass = CClass(
@@ -1653,7 +1651,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class:",
             '    """"""',
             "    FieldA: Final[FieldType] = ...",
@@ -1662,7 +1660,7 @@ class TestBuildClass(TestBase):
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_constructors(self) -> None:
         type_def: CClass = CClass(
@@ -1689,14 +1687,14 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class:",
             '    """"""',
             "    def __init__(self):",
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_constructors_overload(self) -> None:
         type_def: CClass = CClass(
@@ -1729,7 +1727,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class:",
             '    """"""',
             "    @overload",
@@ -1740,7 +1738,7 @@ class TestBuildClass(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_properties(self) -> None:
         type_def: CClass = CClass(
@@ -1773,7 +1771,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class:",
             '    """"""',
             "    @property",
@@ -1784,7 +1782,7 @@ class TestBuildClass(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_methods(self) -> None:
         type_def: CClass = CClass(
@@ -1833,7 +1831,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class:",
             '    """"""',
             "    def MethodA(self, param0: ParamType, param1: ParamType) -> MethodType:",
@@ -1842,7 +1840,7 @@ class TestBuildClass(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_methods_overload(self) -> None:
         type_def: CClass = CClass(
@@ -1888,7 +1886,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class:",
             '    """"""',
             "    @overload",
@@ -1899,7 +1897,7 @@ class TestBuildClass(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_events(self) -> None:
         type_def: CClass = CClass(
@@ -1932,7 +1930,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class:",
             '    """"""',
             "    EventA: EventType[EventHandler] = ...",
@@ -1941,7 +1939,7 @@ class TestBuildClass(TestBase):
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_nested_types(self) -> None:
         type_def: CClass = CClass(
@@ -2019,7 +2017,7 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class:",
             '    """"""',
             "    class NestedClass:",
@@ -2034,9 +2032,9 @@ class TestBuildClass(TestBase):
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_py_imports(self) -> None:
+    def test_imports(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2056,11 +2054,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = set()
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_abstract(self) -> None:
+    def test_imports_abstract(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2080,11 +2078,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"abc.ABC"}
+        expected: Set[str] = {"abc.ABC"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_generic(self) -> None:
+    def test_imports_generic(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2107,11 +2105,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Generic", "typing.TypeVar"}
+        expected: Set[str] = {"typing.Generic", "typing.TypeVar"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_super(self) -> None:
+    def test_imports_super(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2131,11 +2129,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.Super"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_interfaces(self) -> None:
+    def test_imports_interfaces(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2158,11 +2156,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_fields(self) -> None:
+    def test_imports_fields(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2193,11 +2191,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Final"}
+        expected: Set[str] = {"typing.Final", "Namespace.FieldType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_constructors(self) -> None:
+    def test_imports_constructors(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2222,11 +2220,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = set()
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_constructors_overload(self) -> None:
+    def test_imports_constructors_overload(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2257,11 +2255,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload", "Namespace.Type"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_properties(self) -> None:
+    def test_imports_properties(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2292,11 +2290,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.PropertyType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_methods(self) -> None:
+    def test_imports_methods(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2343,11 +2341,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.ParamType", "Namespace.MethodType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_methods_overload(self) -> None:
+    def test_imports_methods_overload(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2391,11 +2389,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload", "Namespace.ParamType", "Namespace.MethodType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_events(self) -> None:
+    def test_imports_events(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2426,11 +2424,11 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.EventHandler"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_nested(self) -> None:
+    def test_imports_nested(self) -> None:
         type_def: CClass = CClass(
             name="Class",
             namespace="Namespace",
@@ -2506,483 +2504,9 @@ class TestBuildClass(TestBase):
         doc: Doc = Doc({})
 
         build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Callable"}
+        expected: Set[str] = {"typing.Callable", "System.Enum", "Namespace.DelegateType"}
 
-        self.assertEqual(manual, imports.py)
-
-    def test_c_imports(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_abstract(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=True,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_generic(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(
-                CType(name="K", namespace="Namespace", generic=True),
-                CType(name="V", namespace="Namespace", generic=True),
-            ),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_super(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Super", namespace="Namespace"),
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.Super"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_interfaces(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(
-                CType(name="InterfaceA", namespace="Namespace"),
-                CType(name="InterfaceB", namespace="Namespace"),
-            ),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_fields(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={
-                "Namespace:Class.FieldA": CField(
-                    name="FieldA",
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    return_type=CType(name="FieldType", namespace="Namespace"),
-                ),
-                "Namespace:Class.FieldB": CField(
-                    name="FieldB",
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    return_type=CType(name="FieldType", namespace="Namespace"),
-                ),
-            },
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.FieldType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_constructors(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={
-                "Namespace:Class.__init__()": CConstructor(
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(),
-                ),
-            },
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_constructors_overload(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={
-                "Namespace:Class.__init__()": CConstructor(
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(),
-                ),
-                "Namespace:Class.__init__(Namespace:Type)": CConstructor(
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                ),
-            },
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.Type"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_properties(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={
-                "Namespace:Class.PropertyA": CProperty(
-                    name="PropertyA",
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    type=CType(name="PropertyType", namespace="Namespace"),
-                ),
-                "Namespace:Class.PropertyB": CProperty(
-                    name="PropertyB",
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    type=CType(name="PropertyType", namespace="Namespace"),
-                ),
-            },
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.PropertyType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_methods(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={
-                "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-                    name="MethodA",
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                        CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-                "Namespace:Class.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
-                    name="MethodB",
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                        CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_methods_overload(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={
-                "Namespace:Class.MethodA(Namespace:ParamType)": CMethod(
-                    name="MethodA",
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-                "Namespace:Class.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-                    name="MethodA",
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                        CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_events(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={
-                "Namespace:Class.EventA": CEvent(
-                    name="EventA",
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    type=CType(name="EventHandler", namespace="Namespace"),
-                ),
-                "Namespace:Class.EventB": CEvent(
-                    name="EventB",
-                    declaring_type=CType(name="Class", namespace="Namespace"),
-                    type=CType(name="EventHandler", namespace="Namespace"),
-                ),
-            },
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.EventHandler"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_nested(self) -> None:
-        type_def: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={
-                "Namespace:Class.NestedClass": CClass(
-                    name="NestedClass",
-                    namespace="Namespace",
-                    nested=CType(name="Class", namespace="Namespace"),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=None,
-                    interfaces=(),
-                    fields={},
-                    constructors={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "Namespace:Class.NestedStruct": CStruct(
-                    name="NestedStruct",
-                    namespace="Namespace",
-                    nested=CType(name="Class", namespace="Namespace"),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=None,
-                    interfaces=(),
-                    fields={},
-                    constructors={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "Namespace:Class.INestedInterface": CInterface(
-                    name="INestedInterface",
-                    namespace="Namespace",
-                    nested=CType(name="Class", namespace="Namespace"),
-                    generic_args=(),
-                    interfaces=(),
-                    fields={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "Namespace:Class.NestedEnum": CEnum(
-                    name="NestedEnum",
-                    namespace="Namespace",
-                    nested=CType(name="Class", namespace="Namespace"),
-                    fields=(),
-                ),
-                "Namespace:Class.NestedDelegate": CDelegate(
-                    name="NestedDelegate",
-                    namespace="Namespace",
-                    nested=CType(name="Class", namespace="Namespace"),
-                    parameters=(),
-                    return_type=CType(name="DelegateType", namespace="Namespace"),
-                ),
-            },
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"System.Enum", "Namespace.DelegateType"}
-
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
     def test_doc(self) -> None:
         type_def: CClass = CClass(
@@ -3012,12 +2536,12 @@ class TestBuildClass(TestBase):
         )
 
         lines: Sequence[str] = build_class(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Class:",
             '    """Class doc string."""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
 
 class TestBuildStruct(TestBase):
@@ -3041,12 +2565,12 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_abstract(self) -> None:
         type_def: CStruct = CStruct(
@@ -3068,12 +2592,12 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct(ABC):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_generic(self) -> None:
         type_def: CStruct = CStruct(
@@ -3098,12 +2622,12 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct(Generic[K, V]):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_super(self) -> None:
         type_def: CStruct = CStruct(
@@ -3125,12 +2649,12 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct(Super):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_interfaces(self) -> None:
         type_def: CStruct = CStruct(
@@ -3155,12 +2679,12 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct(InterfaceA, InterfaceB):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_fields(self) -> None:
         type_def: CStruct = CStruct(
@@ -3193,7 +2717,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct:",
             '    """"""',
             "    FieldA: Final[FieldType] = ...",
@@ -3202,7 +2726,7 @@ class TestBuildStruct(TestBase):
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_constructors(self) -> None:
         type_def: CStruct = CStruct(
@@ -3229,14 +2753,14 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct:",
             '    """"""',
             "    def __init__(self):",
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_constructors_overload(self) -> None:
         type_def: CStruct = CStruct(
@@ -3269,7 +2793,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct:",
             '    """"""',
             "    @overload",
@@ -3280,7 +2804,7 @@ class TestBuildStruct(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_properties(self) -> None:
         type_def: CStruct = CStruct(
@@ -3313,7 +2837,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct:",
             '    """"""',
             "    @property",
@@ -3324,7 +2848,7 @@ class TestBuildStruct(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_methods(self) -> None:
         type_def: CStruct = CStruct(
@@ -3373,7 +2897,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct:",
             '    """"""',
             "    def MethodA(self, param0: ParamType, param1: ParamType) -> MethodType:",
@@ -3382,7 +2906,7 @@ class TestBuildStruct(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_methods_overload(self) -> None:
         type_def: CStruct = CStruct(
@@ -3428,7 +2952,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct:",
             '    """"""',
             "    @overload",
@@ -3439,7 +2963,7 @@ class TestBuildStruct(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_events(self) -> None:
         type_def: CStruct = CStruct(
@@ -3472,7 +2996,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct:",
             '    """"""',
             "    EventA: EventType[EventHandler] = ...",
@@ -3481,7 +3005,7 @@ class TestBuildStruct(TestBase):
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_nested(self) -> None:
         type_def: CStruct = CStruct(
@@ -3559,7 +3083,7 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct:",
             '    """"""',
             "    class NestedClass:",
@@ -3574,9 +3098,9 @@ class TestBuildStruct(TestBase):
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_py_imports(self) -> None:
+    def test_imports(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3596,11 +3120,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = set()
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_abstract(self) -> None:
+    def test_imports_abstract(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3620,11 +3144,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"abc.ABC"}
+        expected: Set[str] = {"abc.ABC"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_generic(self) -> None:
+    def test_imports_generic(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3647,11 +3171,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Generic", "typing.TypeVar"}
+        expected: Set[str] = {"typing.Generic", "typing.TypeVar"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_super(self) -> None:
+    def test_imports_super(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3671,11 +3195,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.Super"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_interfaces(self) -> None:
+    def test_imports_interfaces(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3698,11 +3222,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_fields(self) -> None:
+    def test_imports_fields(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3733,11 +3257,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Final"}
+        expected: Set[str] = {"typing.Final", "Namespace.FieldType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_constructors(self) -> None:
+    def test_imports_constructors(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3762,11 +3286,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = set()
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_constructors_overload(self) -> None:
+    def test_imports_constructors_overload(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3797,11 +3321,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload", "Namespace.Type"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_properties(self) -> None:
+    def test_imports_properties(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3832,11 +3356,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.PropertyType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_methods(self) -> None:
+    def test_imports_methods(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3883,11 +3407,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_methods_overload(self) -> None:
+    def test_imports_methods_overload(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3931,11 +3455,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload", "Namespace.MethodType", "Namespace.ParamType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_events(self) -> None:
+    def test_imports_events(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -3966,11 +3490,11 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.EventHandler"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_nested(self) -> None:
+    def test_imports_nested(self) -> None:
         type_def: CStruct = CStruct(
             name="Struct",
             namespace="Namespace",
@@ -4046,483 +3570,9 @@ class TestBuildStruct(TestBase):
         doc: Doc = Doc({})
 
         build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Callable"}
+        expected: Set[str] = {"typing.Callable", "Namespace.DelegateType", "System.Enum"}
 
-        self.assertEqual(manual, imports.py)
-
-    def test_c_imports(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_abstract(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=True,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_generic(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(
-                CType(name="K", namespace="Namespace", generic=True),
-                CType(name="V", namespace="Namespace", generic=True),
-            ),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_super(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=CType(name="Super", namespace="Namespace"),
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.Super"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_interfaces(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(
-                CType(name="InterfaceA", namespace="Namespace"),
-                CType(name="InterfaceB", namespace="Namespace"),
-            ),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_fields(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={
-                "Namespace:Struct.FieldA": CField(
-                    name="FieldA",
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    return_type=CType(name="FieldType", namespace="Namespace"),
-                ),
-                "Namespace:Struct.FieldB": CField(
-                    name="FieldB",
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    return_type=CType(name="FieldType", namespace="Namespace"),
-                ),
-            },
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.FieldType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_constructors(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={
-                "Namespace:Struct.__init__()": CConstructor(
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(),
-                ),
-            },
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_constructors_overload(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={
-                "Namespace:Struct.__init__()": CConstructor(
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(),
-                ),
-                "Namespace:Struct.__init__(Namespace:Type)": CConstructor(
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
-                    ),
-                ),
-            },
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.Type"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_properties(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={
-                "Namespace:Struct.PropertyA": CProperty(
-                    name="PropertyA",
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    type=CType(name="PropertyType", namespace="Namespace"),
-                ),
-                "Namespace:Struct.PropertyB": CProperty(
-                    name="PropertyB",
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    type=CType(name="PropertyType", namespace="Namespace"),
-                ),
-            },
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.PropertyType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_methods(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={
-                "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-                    name="MethodA",
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                        CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-                "Namespace:Struct.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
-                    name="MethodB",
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                        CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_methods_overload(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={
-                "Namespace:Struct.MethodA(Namespace:ParamType)": CMethod(
-                    name="MethodA",
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-                "Namespace:Struct.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-                    name="MethodA",
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                        CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_events(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={
-                "Namespace:Struct.EventA": CEvent(
-                    name="EventA",
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    type=CType(name="EventHandler", namespace="Namespace"),
-                ),
-                "Namespace:Struct.EventB": CEvent(
-                    name="EventB",
-                    declaring_type=CType(name="Struct", namespace="Namespace"),
-                    type=CType(name="EventHandler", namespace="Namespace"),
-                ),
-            },
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.EventHandler"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_nested(self) -> None:
-        type_def: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={
-                "Namespace:Struct.NestedClass": CClass(
-                    name="NestedClass",
-                    namespace="Namespace",
-                    nested=CType(name="Struct", namespace="Namespace"),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=None,
-                    interfaces=(),
-                    fields={},
-                    constructors={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "Namespace:Struct.NestedStruct": CStruct(
-                    name="NestedStruct",
-                    namespace="Namespace",
-                    nested=CType(name="Struct", namespace="Namespace"),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=None,
-                    interfaces=(),
-                    fields={},
-                    constructors={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "Namespace:Struct.INestedInterface": CInterface(
-                    name="INestedInterface",
-                    namespace="Namespace",
-                    nested=CType(name="Struct", namespace="Namespace"),
-                    generic_args=(),
-                    interfaces=(),
-                    fields={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "Namespace:Struct.NestedEnum": CEnum(
-                    name="NestedEnum",
-                    namespace="Namespace",
-                    nested=CType(name="Struct", namespace="Namespace"),
-                    fields=(),
-                ),
-                "Namespace:Struct.NestedDelegate": CDelegate(
-                    name="NestedDelegate",
-                    namespace="Namespace",
-                    nested=CType(name="Struct", namespace="Namespace"),
-                    parameters=(),
-                    return_type=CType(name="DelegateType", namespace="Namespace"),
-                ),
-            },
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"System.Enum", "Namespace.DelegateType"}
-
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
     def test_doc(self) -> None:
         type_def: CStruct = CStruct(
@@ -4552,12 +3602,12 @@ class TestBuildStruct(TestBase):
         )
 
         lines: Sequence[str] = build_struct(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Struct:",
             '    """Struct doc string."""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
 
 class TestBuildInterface(TestBase):
@@ -4578,12 +3628,12 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Interface:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_generic(self) -> None:
         type_def: CInterface = CInterface(
@@ -4605,12 +3655,12 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Interface(Generic[K, V]):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_interfaces(self) -> None:
         type_def: CInterface = CInterface(
@@ -4632,12 +3682,12 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Interface(InterfaceA, InterfaceB):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_fields(self) -> None:
         type_def: CInterface = CInterface(
@@ -4667,7 +3717,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Interface:",
             '    """"""',
             "    FieldA: Final[FieldType] = ...",
@@ -4676,7 +3726,7 @@ class TestBuildInterface(TestBase):
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_properties(self) -> None:
         type_def: CInterface = CInterface(
@@ -4706,7 +3756,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Interface:",
             '    """"""',
             "    @property",
@@ -4717,7 +3767,7 @@ class TestBuildInterface(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_methods(self) -> None:
         type_def: CInterface = CInterface(
@@ -4763,7 +3813,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Interface:",
             '    """"""',
             "    def MethodA(self, param0: ParamType, param1: ParamType) -> MethodType:",
@@ -4772,7 +3822,7 @@ class TestBuildInterface(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_methods_overload(self) -> None:
         type_def: CInterface = CInterface(
@@ -4815,7 +3865,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Interface:",
             '    """"""',
             "    @overload",
@@ -4826,7 +3876,7 @@ class TestBuildInterface(TestBase):
             '        """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_events(self) -> None:
         type_def: CInterface = CInterface(
@@ -4856,7 +3906,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Interface:",
             '    """"""',
             "    EventA: EventType[EventHandler] = ...",
@@ -4865,7 +3915,7 @@ class TestBuildInterface(TestBase):
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_nested(self) -> None:
         type_def: CInterface = CInterface(
@@ -4940,7 +3990,7 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Interface:",
             '    """"""',
             "    class NestedClass:",
@@ -4955,9 +4005,9 @@ class TestBuildInterface(TestBase):
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_py_imports(self) -> None:
+    def test_imports(self) -> None:
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
@@ -4974,11 +4024,11 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = set()
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_generic(self) -> None:
+    def test_imports_generic(self) -> None:
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
@@ -4998,11 +4048,11 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Generic", "typing.TypeVar"}
+        expected: Set[str] = {"typing.Generic", "typing.TypeVar"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_interfaces(self) -> None:
+    def test_imports_interfaces(self) -> None:
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
@@ -5022,11 +4072,11 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_fields(self) -> None:
+    def test_imports_fields(self) -> None:
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
@@ -5054,11 +4104,11 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Final"}
+        expected: Set[str] = {"typing.Final", "Namespace.FieldType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_properties(self) -> None:
+    def test_imports_properties(self) -> None:
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
@@ -5086,11 +4136,11 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.PropertyType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_methods(self) -> None:
+    def test_imports_methods(self) -> None:
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
@@ -5134,11 +4184,11 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.ParamType", "Namespace.MethodType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_methods_overload(self) -> None:
+    def test_imports_methods_overload(self) -> None:
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
@@ -5179,11 +4229,11 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload", "Namespace.ParamType", "Namespace.MethodType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_events(self) -> None:
+    def test_imports_events(self) -> None:
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
@@ -5211,11 +4261,11 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.EventHandler"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_nested(self) -> None:
+    def test_imports_nested(self) -> None:
         type_def: CInterface = CInterface(
             name="Interface",
             namespace="Namespace",
@@ -5288,344 +4338,9 @@ class TestBuildInterface(TestBase):
         doc: Doc = Doc({})
 
         build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Callable"}
+        expected: Set[str] = {"typing.Callable", "Namespace.DelegateType", "System.Enum"}
 
-        self.assertEqual(manual, imports.py)
-
-    def test_c_imports(self) -> None:
-        type_def: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_generic(self) -> None:
-        type_def: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(
-                CType(name="K", namespace="Namespace", generic=True),
-                CType(name="V", namespace="Namespace", generic=True),
-            ),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_interfaces(self) -> None:
-        type_def: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(),
-            interfaces=(
-                CType(name="InterfaceA", namespace="Namespace"),
-                CType(name="InterfaceB", namespace="Namespace"),
-            ),
-            fields={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.InterfaceA", "Namespace.InterfaceB"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_fields(self) -> None:
-        type_def: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={
-                "Namespace:Interface.FieldA": CField(
-                    name="FieldA",
-                    declaring_type=CType(name="Interface", namespace="Namespace"),
-                    return_type=CType(name="FieldType", namespace="Namespace"),
-                ),
-                "Namespace:Interface.FieldB": CField(
-                    name="FieldB",
-                    declaring_type=CType(name="Interface", namespace="Namespace"),
-                    return_type=CType(name="FieldType", namespace="Namespace"),
-                ),
-            },
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.FieldType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_properties(self) -> None:
-        type_def: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={
-                "Namespace:Interface.PropertyA": CProperty(
-                    name="PropertyA",
-                    declaring_type=CType(name="Interface", namespace="Namespace"),
-                    type=CType(name="PropertyType", namespace="Namespace"),
-                ),
-                "Namespace:Interface.PropertyB": CProperty(
-                    name="PropertyB",
-                    declaring_type=CType(name="Interface", namespace="Namespace"),
-                    type=CType(name="PropertyType", namespace="Namespace"),
-                ),
-            },
-            methods={},
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.PropertyType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_methods(self) -> None:
-        type_def: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={
-                "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-                    name="MethodA",
-                    declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                        CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-                "Namespace:Interface.MethodB(Namespace:ParamType, Namespace:ParamType)": CMethod(
-                    name="MethodB",
-                    declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                        CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_methods_overload(self) -> None:
-        type_def: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={
-                "Namespace:Interface.MethodA(Namespace:ParamType)": CMethod(
-                    name="MethodA",
-                    declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-                "Namespace:Interface.MethodA(Namespace:ParamType, Namespace:ParamType)": CMethod(
-                    name="MethodA",
-                    declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(
-                            name="param0", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                        CParameter(
-                            name="param1", type=CType(name="ParamType", namespace="Namespace")
-                        ),
-                    ),
-                    return_types=(CType(name="MethodType", namespace="Namespace"),),
-                ),
-            },
-            events={},
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.MethodType", "Namespace.ParamType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_events(self) -> None:
-        type_def: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={},
-            events={
-                "Namespace:Interface.EventA": CEvent(
-                    name="EventA",
-                    declaring_type=CType(name="Interface", namespace="Namespace"),
-                    type=CType(name="EventHandler", namespace="Namespace"),
-                ),
-                "Namespace:Interface.EventB": CEvent(
-                    name="EventB",
-                    declaring_type=CType(name="Interface", namespace="Namespace"),
-                    type=CType(name="EventHandler", namespace="Namespace"),
-                ),
-            },
-            nested_types={},
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.EventHandler"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_nested(self) -> None:
-        type_def: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={
-                "Namespace:Interface.NestedClass": CClass(
-                    name="NestedClass",
-                    namespace="Namespace",
-                    nested=CType(name="Interface", namespace="Namespace"),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=None,
-                    interfaces=(),
-                    fields={},
-                    constructors={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "Namespace:Interface.NestedStruct": CStruct(
-                    name="NestedStruct",
-                    namespace="Namespace",
-                    nested=CType(name="Interface", namespace="Namespace"),
-                    abstract=False,
-                    generic_args=(),
-                    super_class=None,
-                    interfaces=(),
-                    fields={},
-                    constructors={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "Namespace:Interface.INestedInterface": CInterface(
-                    name="INestedInterface",
-                    namespace="Namespace",
-                    nested=CType(name="Interface", namespace="Namespace"),
-                    generic_args=(),
-                    interfaces=(),
-                    fields={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-                "Namespace:Interface.NestedEnum": CEnum(
-                    name="NestedEnum",
-                    namespace="Namespace",
-                    nested=CType(name="Interface", namespace="Namespace"),
-                    fields=(),
-                ),
-                "Namespace:Interface.NestedDelegate": CDelegate(
-                    name="NestedDelegate",
-                    namespace="Namespace",
-                    nested=CType(name="Interface", namespace="Namespace"),
-                    parameters=(),
-                    return_type=CType(name="DelegateType", namespace="Namespace"),
-                ),
-            },
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"System.Enum", "Namespace.DelegateType"}
-
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
     def test_doc(self) -> None:
         type_def: CInterface = CInterface(
@@ -5652,12 +4367,12 @@ class TestBuildInterface(TestBase):
         )
 
         lines: Sequence[str] = build_interface(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Interface:",
             '    """Interface doc string."""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
 
 class TestBuildEnum(TestBase):
@@ -5672,7 +4387,7 @@ class TestBuildEnum(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_enum(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Enum(Enum):",
             '    """"""',
             "    FieldA: Enum = ...",
@@ -5685,7 +4400,7 @@ class TestBuildEnum(TestBase):
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_no_fields(self) -> None:
         type_def: CEnum = CEnum(
@@ -5698,14 +4413,14 @@ class TestBuildEnum(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_enum(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Enum(Enum):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_py_imports(self) -> None:
+    def test_imports(self) -> None:
         type_def: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
@@ -5716,11 +4431,11 @@ class TestBuildEnum(TestBase):
         doc: Doc = Doc({})
 
         build_enum(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"System.Enum"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_no_fields(self) -> None:
+    def test_imports_no_fields(self) -> None:
         type_def: CEnum = CEnum(
             name="Enum",
             namespace="Namespace",
@@ -5731,39 +4446,9 @@ class TestBuildEnum(TestBase):
         doc: Doc = Doc({})
 
         build_enum(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"System.Enum"}
 
-        self.assertEqual(manual, imports.py)
-
-    def test_c_imports(self) -> None:
-        type_def: CEnum = CEnum(
-            name="Enum",
-            namespace="Namespace",
-            nested=None,
-            fields=("FieldA", "FieldB", "FieldC", "FieldD"),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_enum(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"System.Enum"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_no_fields(self) -> None:
-        type_def: CEnum = CEnum(
-            name="Enum",
-            namespace="Namespace",
-            nested=None,
-            fields=(),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_enum(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"System.Enum"}
-
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
     def test_doc(self) -> None:
         type_def: CEnum = CEnum(
@@ -5788,7 +4473,7 @@ class TestBuildEnum(TestBase):
         )
 
         lines: Sequence[str] = build_enum(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Enum(Enum):",
             '    """Enum doc string."""',
             "    FieldA: Enum = ...",
@@ -5801,7 +4486,7 @@ class TestBuildEnum(TestBase):
             '    """FieldD doc string."""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_no_fields(self) -> None:
         type_def: CEnum = CEnum(
@@ -5822,12 +4507,12 @@ class TestBuildEnum(TestBase):
         )
 
         lines: Sequence[str] = build_enum(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "class Enum(Enum):",
             '    """Enum doc string."""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
 
 class TestBuildDelegate(TestBase):
@@ -5846,12 +4531,12 @@ class TestBuildDelegate(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_delegate(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "Delegate: Callable[[ParamType, ParamType], ReturnType] = ...",
             '""""""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_no_params(self) -> None:
         type_def: CDelegate = CDelegate(
@@ -5865,14 +4550,14 @@ class TestBuildDelegate(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_delegate(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "Delegate: Callable[[], ReturnType] = ...",
             '""""""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_py_imports(self) -> None:
+    def test_imports(self) -> None:
         type_def: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
@@ -5887,11 +4572,11 @@ class TestBuildDelegate(TestBase):
         doc: Doc = Doc({})
 
         build_delegate(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Callable"}
+        expected: Set[str] = {"typing.Callable", "Namespace.ReturnType", "Namespace.ParamType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_no_params(self) -> None:
+    def test_imports_no_params(self) -> None:
         type_def: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
@@ -5903,44 +4588,9 @@ class TestBuildDelegate(TestBase):
         doc: Doc = Doc({})
 
         build_delegate(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Callable"}
+        expected: Set[str] = {"typing.Callable", "Namespace.ReturnType"}
 
-        self.assertEqual(manual, imports.py)
-
-    def test_c_imports(self) -> None:
-        type_def: CDelegate = CDelegate(
-            name="Delegate",
-            namespace="Namespace",
-            nested=None,
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="ParamType", namespace="Namespace")),
-            ),
-            return_type=CType(name="ReturnType", namespace="Namespace"),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_delegate(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.ParamType", "Namespace.ReturnType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_no_params(self) -> None:
-        type_def: CDelegate = CDelegate(
-            name="Delegate",
-            namespace="Namespace",
-            nested=None,
-            parameters=(),
-            return_type=CType(name="ReturnType", namespace="Namespace"),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_delegate(type_def=type_def, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.ReturnType"}
-
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
     def test_doc(self) -> None:
         type_def: CDelegate = CDelegate(
@@ -5970,7 +4620,7 @@ class TestBuildDelegate(TestBase):
         )
 
         lines: Sequence[str] = build_delegate(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "Delegate: Callable[[ParamType, ParamType], ReturnType] = ...",
             '"""Delegate doc string.',
             "",
@@ -5980,7 +4630,7 @@ class TestBuildDelegate(TestBase):
             '"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_no_params(self) -> None:
         type_def: CDelegate = CDelegate(
@@ -6003,7 +4653,7 @@ class TestBuildDelegate(TestBase):
         )
 
         lines: Sequence[str] = build_delegate(type_def=type_def, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "Delegate: Callable[[], ReturnType] = ...",
             '"""Delegate doc string.',
             "",
@@ -6011,7 +4661,296 @@ class TestBuildDelegate(TestBase):
             '"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
+
+
+class TestBuildType(TestBase):
+    def test_build(self) -> None:
+        tests: Sequence[Tuple[CType, str, Set[str]]] = (
+            (CType(name="Boolean", namespace="System"), "Boolean", {"System.Boolean"}),
+            (CType(name="SByte", namespace="System"), "SByte", {"System.SByte"}),
+            (CType(name="Byte", namespace="System"), "Byte", {"System.Byte"}),
+            (CType(name="Int16", namespace="System"), "Int16", {"System.Int16"}),
+            (CType(name="UInt16", namespace="System"), "UInt16", {"System.UInt16"}),
+            (CType(name="Int32", namespace="System"), "Int32", {"System.Int32"}),
+            (CType(name="UInt32", namespace="System"), "UInt32", {"System.UInt32"}),
+            (CType(name="Int64", namespace="System"), "Int64", {"System.Int64"}),
+            (CType(name="UInt64", namespace="System"), "UInt64", {"System.UInt64"}),
+            (CType(name="Single", namespace="System"), "Single", {"System.Single"}),
+            (CType(name="Double", namespace="System"), "Double", {"System.Double"}),
+            (CType(name="String", namespace="System"), "String", {"System.String"}),
+            (CType(name="Object", namespace="System"), "Object", {"System.Object"}),
+            (CType(name="Void", namespace="System"), "Void", {"System.Void"}),
+            (CType(name="T", generic=True), "T", {"typing.TypeVar"}),
+        )
+        for test in tests:
+            imports = Imports()
+
+            type: CType = test[0]
+            expected: str = test[1]
+            expected_types: Set[str] = test[2]
+
+            with self.subTest(type=type.name):
+                result: str = build_type(type, imports)
+
+                self.assertEqual(expected, result)
+                self.assertEqual(expected_types, imports.types)
+
+    def test_build_nullable(self) -> None:
+        tests: Sequence[Tuple[CType, str, Set[str]]] = (
+            (
+                CType(name="Boolean", namespace="System", nullable=True),
+                "Optional[Boolean]",
+                {"typing.Optional", "System.Boolean"},
+            ),
+            (
+                CType(name="SByte", namespace="System", nullable=True),
+                "Optional[SByte]",
+                {"typing.Optional", "System.SByte"},
+            ),
+            (
+                CType(name="Byte", namespace="System", nullable=True),
+                "Optional[Byte]",
+                {"typing.Optional", "System.Byte"},
+            ),
+            (
+                CType(name="Int16", namespace="System", nullable=True),
+                "Optional[Int16]",
+                {"typing.Optional", "System.Int16"},
+            ),
+            (
+                CType(name="UInt16", namespace="System", nullable=True),
+                "Optional[UInt16]",
+                {"typing.Optional", "System.UInt16"},
+            ),
+            (
+                CType(name="Int32", namespace="System", nullable=True),
+                "Optional[Int32]",
+                {"typing.Optional", "System.Int32"},
+            ),
+            (
+                CType(name="UInt32", namespace="System", nullable=True),
+                "Optional[UInt32]",
+                {"typing.Optional", "System.UInt32"},
+            ),
+            (
+                CType(name="Int64", namespace="System", nullable=True),
+                "Optional[Int64]",
+                {"typing.Optional", "System.Int64"},
+            ),
+            (
+                CType(name="UInt64", namespace="System", nullable=True),
+                "Optional[UInt64]",
+                {"typing.Optional", "System.UInt64"},
+            ),
+            (
+                CType(name="Single", namespace="System", nullable=True),
+                "Optional[Single]",
+                {"typing.Optional", "System.Single"},
+            ),
+            (
+                CType(name="Double", namespace="System", nullable=True),
+                "Optional[Double]",
+                {"typing.Optional", "System.Double"},
+            ),
+            (
+                CType(name="String", namespace="System", nullable=True),
+                "Optional[String]",
+                {"typing.Optional", "System.String"},
+            ),
+            (
+                CType(name="Object", namespace="System", nullable=True),
+                "Optional[Object]",
+                {"typing.Optional", "System.Object"},
+            ),
+            (
+                CType(name="Void", namespace="System", nullable=True),
+                "Optional[Void]",
+                {"typing.Optional", "System.Void"},
+            ),
+            (
+                CType(name="T", generic=True, nullable=True),
+                "Optional[T]",
+                {"typing.Optional", "typing.TypeVar"},
+            ),
+        )
+        for test in tests:
+            imports = Imports()
+
+            type: CType = test[0]
+            expected: str = test[1]
+            expected_types: Set[str] = test[2]
+
+            with self.subTest(type=type.name):
+                result: str = build_type(type, imports)
+
+                self.assertEqual(expected, result)
+                self.assertEqual(expected_types, imports.types)
+
+    def test_build_convert(self) -> None:
+        tests: Sequence[Tuple[CType, str, Set[str]]] = (
+            (CType(name="Boolean", namespace="System"), "bool", set()),
+            (CType(name="SByte", namespace="System"), "int", set()),
+            (CType(name="Byte", namespace="System"), "int", set()),
+            (CType(name="Int16", namespace="System"), "int", set()),
+            (CType(name="UInt16", namespace="System"), "int", set()),
+            (CType(name="Int32", namespace="System"), "int", set()),
+            (CType(name="UInt32", namespace="System"), "int", set()),
+            (CType(name="Int64", namespace="System"), "int", set()),
+            (CType(name="UInt64", namespace="System"), "int", set()),
+            (CType(name="Single", namespace="System"), "float", set()),
+            (CType(name="Double", namespace="System"), "float", set()),
+            (CType(name="String", namespace="System"), "str", set()),
+            (CType(name="Object", namespace="System"), "object", set()),
+            (CType(name="Void", namespace="System"), "None", set()),
+        )
+        for test in tests:
+            imports = Imports()
+
+            type: CType = test[0]
+            expected: str = test[1]
+            expected_types: Set[str] = test[2]
+
+            with self.subTest(type=type.name):
+                result: str = build_type(type, imports, convert=True)
+
+                self.assertEqual(expected, result)
+                self.assertEqual(expected_types, imports.types)
+
+    def test_build_convert_nullable(self) -> None:
+        tests: Sequence[Tuple[CType, str, Set[str]]] = (
+            (
+                CType(name="Boolean", namespace="System", nullable=True),
+                "Optional[bool]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="SByte", namespace="System", nullable=True),
+                "Optional[int]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="Byte", namespace="System", nullable=True),
+                "Optional[int]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="Int16", namespace="System", nullable=True),
+                "Optional[int]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="UInt16", namespace="System", nullable=True),
+                "Optional[int]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="Int32", namespace="System", nullable=True),
+                "Optional[int]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="UInt32", namespace="System", nullable=True),
+                "Optional[int]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="Int64", namespace="System", nullable=True),
+                "Optional[int]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="UInt64", namespace="System", nullable=True),
+                "Optional[int]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="Single", namespace="System", nullable=True),
+                "Optional[float]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="Double", namespace="System", nullable=True),
+                "Optional[float]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="String", namespace="System", nullable=True),
+                "Optional[str]",
+                {"typing.Optional"},
+            ),
+            (
+                CType(name="Object", namespace="System", nullable=True),
+                "Optional[object]",
+                {"typing.Optional"},
+            ),
+        )
+        for test in tests:
+            imports = Imports()
+
+            type: CType = test[0]
+            expected: str = test[1]
+            expected_types: Set[str] = test[2]
+
+            with self.subTest(type=type.name):
+                result: str = build_type(type, imports, convert=True)
+
+                self.assertEqual(expected, result)
+                self.assertEqual(expected_types, imports.types)
+
+
+class TestBuildParameter(TestBase):
+    def test_build(self) -> None:
+        parameter: CParameter = CParameter(
+            name="param",
+            type=CType(name="Type", namespace="Namespace"),
+        )
+        imports: Imports = Imports()
+
+        lines: Sequence[str] = build_parameter(parameter=parameter, imports=imports)
+        expected: str = ", param: Type"
+
+        self.assertEqual(expected, lines)
+
+    def test_build_default(self) -> None:
+        parameter: CParameter = CParameter(
+            name="param",
+            type=CType(name="Type", namespace="Namespace"),
+            default=True,
+        )
+        imports: Imports = Imports()
+
+        lines: Sequence[str] = build_parameter(parameter=parameter, imports=imports)
+        expected: str = ", param: Type = ..."
+
+        self.assertEqual(expected, lines)
+
+    def test_build_out(self) -> None:
+        parameter: CParameter = CParameter(
+            name="param",
+            type=CType(name="Type", namespace="Namespace"),
+            out=True,
+        )
+        imports: Imports = Imports()
+
+        lines: Sequence[str] = build_parameter(parameter=parameter, imports=imports)
+        expected: str = ", param: Type"
+
+        self.assertEqual(expected, lines)
+
+    def test_build_default_out(self) -> None:
+        parameter: CParameter = CParameter(
+            name="param",
+            type=CType(name="Type", namespace="Namespace"),
+            default=True,
+            out=True,
+        )
+        imports: Imports = Imports()
+
+        lines: Sequence[str] = build_parameter(parameter=parameter, imports=imports)
+        expected: str = ", param: Type = ..."
+
+        self.assertEqual(expected, lines)
 
 
 class TestBuildField(TestBase):
@@ -6025,12 +4964,12 @@ class TestBuildField(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "Field: Final[ReturnType] = ...",
             '""""""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_static(self) -> None:
         field: CField = CField(
@@ -6043,14 +4982,14 @@ class TestBuildField(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "Field: Final[ClassVar[ReturnType]] = ...",
             '""""""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_py_imports(self) -> None:
+    def test_imports(self) -> None:
         field: CField = CField(
             name="Field",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -6060,40 +4999,11 @@ class TestBuildField(TestBase):
         doc: Doc = Doc({})
 
         build_field(field=field, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Final"}
+        expected: Set[str] = {"typing.Final", "Namespace.ReturnType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_static(self) -> None:
-        field: CField = CField(
-            name="Field",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            return_type=CType(name="ReturnType", namespace="Namespace"),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_field(field=field, imports=imports, doc=doc)
-        manual: Set[str] = {"typing.Final", "typing.ClassVar"}
-
-        self.assertEqual(manual, imports.py)
-
-    def test_c_imports(self) -> None:
-        field: CField = CField(
-            name="Field",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            return_type=CType(name="ReturnType", namespace="Namespace"),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_field(field=field, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.ReturnType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_static(self) -> None:
+    def test_imports_static(self) -> None:
         field: CField = CField(
             name="Field",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -6104,9 +5014,9 @@ class TestBuildField(TestBase):
         doc: Doc = Doc({})
 
         build_field(field=field, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.ReturnType"}
+        expected: Set[str] = {"typing.Final", "typing.ClassVar", "Namespace.ReturnType"}
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
     def test_doc(self) -> None:
         field: CField = CField(
@@ -6124,12 +5034,12 @@ class TestBuildField(TestBase):
         )
 
         lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "Field: Final[ReturnType] = ...",
             '"""Field doc string."""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_static(self) -> None:
         field: CField = CField(
@@ -6148,12 +5058,12 @@ class TestBuildField(TestBase):
         )
 
         lines: Sequence[str] = build_field(field=field, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "Field: Final[ClassVar[ReturnType]] = ...",
             '"""Field doc string."""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
 
 class TestBuildConstructor(TestBase):
@@ -6174,12 +5084,12 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=False,
         )
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def __init__(self, param0: Param, param1: Param):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_overload(self) -> None:
         constructor: CConstructor = CConstructor(
@@ -6198,13 +5108,13 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=True,
         )
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def __init__(self, param0: Param, param1: Param):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_no_parameters(self) -> None:
         constructor: CConstructor = CConstructor(
@@ -6220,12 +5130,12 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=False,
         )
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def __init__(self):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_no_parameters_overload(self) -> None:
         constructor: CConstructor = CConstructor(
@@ -6241,15 +5151,15 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=True,
         )
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def __init__(self):",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_py_imports_parameters(self) -> None:
+    def test_imports(self) -> None:
         constructor: CConstructor = CConstructor(
             declaring_type=CType(name="Type", namespace="Namespace"),
             parameters=(
@@ -6266,11 +5176,11 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=False,
         )
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.Param"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_parameters_overload(self) -> None:
+    def test_imports_overload(self) -> None:
         constructor: CConstructor = CConstructor(
             declaring_type=CType(name="Type", namespace="Namespace"),
             parameters=(
@@ -6287,11 +5197,11 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=True,
         )
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload", "Namespace.Param"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_parameters_none(self) -> None:
+    def test_imports_no_parameters(self) -> None:
         constructor: CConstructor = CConstructor(
             declaring_type=CType(name="Type", namespace="Namespace"),
             parameters=(),
@@ -6305,11 +5215,11 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=False,
         )
-        manual: Set[str] = set()
+        expected: Set[str] = set()
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_parameters_none_overload(self) -> None:
+    def test_imports_no_parameters_overload(self) -> None:
         constructor: CConstructor = CConstructor(
             declaring_type=CType(name="Type", namespace="Namespace"),
             parameters=(),
@@ -6323,87 +5233,9 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=True,
         )
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload"}
 
-        self.assertEqual(manual, imports.py)
-
-    def test_c_imports_parameters(self) -> None:
-        constructor: CConstructor = CConstructor(
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-            ),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_constructor(
-            constructor=constructor,
-            imports=imports,
-            doc=doc,
-            overload=False,
-        )
-        manual: Set[str] = {"Namespace.Param"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_parameters_overload(self) -> None:
-        constructor: CConstructor = CConstructor(
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-            ),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_constructor(
-            constructor=constructor,
-            imports=imports,
-            doc=doc,
-            overload=True,
-        )
-        manual: Set[str] = {"Namespace.Param"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_parameters_none(self) -> None:
-        constructor: CConstructor = CConstructor(
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_constructor(
-            constructor=constructor,
-            imports=imports,
-            doc=doc,
-            overload=False,
-        )
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_parameters_none_overload(self) -> None:
-        constructor: CConstructor = CConstructor(
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_constructor(
-            constructor=constructor,
-            imports=imports,
-            doc=doc,
-            overload=True,
-        )
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
     def test_doc_parameters(self) -> None:
         constructor: CConstructor = CConstructor(
@@ -6436,7 +5268,7 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=False,
         )
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def __init__(self, param0: Param, param1: Param):",
             '    """Constructor doc string.',
             "    ",
@@ -6445,7 +5277,7 @@ class TestBuildConstructor(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_parameters_overload(self) -> None:
         constructor: CConstructor = CConstructor(
@@ -6478,7 +5310,7 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=True,
         )
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def __init__(self, param0: Param, param1: Param):",
             '    """Constructor doc string.',
@@ -6488,7 +5320,7 @@ class TestBuildConstructor(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_parameters_none(self) -> None:
         constructor: CConstructor = CConstructor(
@@ -6514,12 +5346,12 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=False,
         )
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def __init__(self):",
             '    """Constructor doc string."""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_parameters_none_overload(self) -> None:
         constructor: CConstructor = CConstructor(
@@ -6545,13 +5377,13 @@ class TestBuildConstructor(TestBase):
             doc=doc,
             overload=True,
         )
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def __init__(self):",
             '    """Constructor doc string."""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
 
 class TestBuildProperty(TestBase):
@@ -6565,13 +5397,13 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@property",
             "def Property(self) -> PropertyType:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_setter(self) -> None:
         property: CProperty = CProperty(
@@ -6584,7 +5416,7 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@property",
             "def Property(self) -> PropertyType:",
             '    """"""',
@@ -6592,7 +5424,7 @@ class TestBuildProperty(TestBase):
             "def Property(self, value: PropertyType) -> None: ...",
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_static(self) -> None:
         property: CProperty = CProperty(
@@ -6605,14 +5437,14 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@property",
             "def Property(cls) -> PropertyType:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_setter_static(self) -> None:
         property: CProperty = CProperty(
@@ -6626,7 +5458,7 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@property",
             "def Property(cls) -> PropertyType:",
@@ -6636,9 +5468,9 @@ class TestBuildProperty(TestBase):
             "def Property(cls, value: PropertyType) -> None: ...",
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_py_imports(self) -> None:
+    def test_imports(self) -> None:
         property: CProperty = CProperty(
             name="Property",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -6648,71 +5480,11 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         build_property(property=property, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.PropertyType"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_setter(self) -> None:
-        property: CProperty = CProperty(
-            name="Property",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            type=CType(name="PropertyType", namespace="Namespace"),
-            setter=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_property(property=property, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.py)
-
-    def test_py_imports_static(self) -> None:
-        property: CProperty = CProperty(
-            name="Property",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            type=CType(name="PropertyType", namespace="Namespace"),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_property(property=property, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.py)
-
-    def test_py_imports_setter_static(self) -> None:
-        property: CProperty = CProperty(
-            name="Property",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            type=CType(name="PropertyType", namespace="Namespace"),
-            setter=True,
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_property(property=property, imports=imports, doc=doc)
-        manual: Set[str] = set()
-
-        self.assertEqual(manual, imports.py)
-
-    def test_c_imports(self) -> None:
-        property: CProperty = CProperty(
-            name="Property",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            type=CType(name="PropertyType", namespace="Namespace"),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_property(property=property, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.PropertyType"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_setter(self) -> None:
+    def test_imports_setter(self) -> None:
         property: CProperty = CProperty(
             name="Property",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -6723,11 +5495,11 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         build_property(property=property, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.PropertyType"}
+        expected: Set[str] = {"Namespace.PropertyType"}
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
-    def test_c_imports_static(self) -> None:
+    def test_imports_static(self) -> None:
         property: CProperty = CProperty(
             name="Property",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -6738,11 +5510,11 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         build_property(property=property, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.PropertyType"}
+        expected: Set[str] = {"Namespace.PropertyType"}
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
-    def test_c_imports_setter_static(self) -> None:
+    def test_imports_setter_static(self) -> None:
         property: CProperty = CProperty(
             name="Property",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -6754,9 +5526,9 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         build_property(property=property, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.PropertyType"}
+        expected: Set[str] = {"Namespace.PropertyType"}
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
     def test_doc(self) -> None:
         property: CProperty = CProperty(
@@ -6779,7 +5551,7 @@ class TestBuildProperty(TestBase):
         )
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@property",
             "def Property(self) -> PropertyType:",
             '    """Property doc string.',
@@ -6788,7 +5560,7 @@ class TestBuildProperty(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_setter(self) -> None:
         property: CProperty = CProperty(
@@ -6812,7 +5584,7 @@ class TestBuildProperty(TestBase):
         )
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@property",
             "def Property(self) -> PropertyType:",
             '    """Property doc string.',
@@ -6823,7 +5595,7 @@ class TestBuildProperty(TestBase):
             "def Property(self, value: PropertyType) -> None: ...",
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_static(self) -> None:
         property: CProperty = CProperty(
@@ -6847,7 +5619,7 @@ class TestBuildProperty(TestBase):
         )
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@property",
             "def Property(cls) -> PropertyType:",
@@ -6857,7 +5629,7 @@ class TestBuildProperty(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_setter_static(self) -> None:
         property: CProperty = CProperty(
@@ -6882,7 +5654,7 @@ class TestBuildProperty(TestBase):
         )
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@property",
             "def Property(cls) -> PropertyType:",
@@ -6895,7 +5667,7 @@ class TestBuildProperty(TestBase):
             "def Property(cls, value: PropertyType) -> None: ...",
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
 
 class TestBuildMethod(TestBase):
@@ -6913,12 +5685,12 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def Method(self, param0: Param, param1: Param) -> Return:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_static(self) -> None:
         method: CMethod = CMethod(
@@ -6935,13 +5707,13 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "def Method(cls, param0: Param, param1: Param) -> Return:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_overload(self) -> None:
         method: CMethod = CMethod(
@@ -6957,13 +5729,13 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def Method(self, param0: Param, param1: Param) -> Return:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_overload_static(self) -> None:
         method: CMethod = CMethod(
@@ -6980,14 +5752,14 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@overload",
             "def Method(cls, param0: Param, param1: Param) -> Return:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_no_params(self) -> None:
         method: CMethod = CMethod(
@@ -7000,12 +5772,12 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def Method(self) -> Return:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_no_params_static(self) -> None:
         method: CMethod = CMethod(
@@ -7019,13 +5791,13 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "def Method(cls) -> Return:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_no_params_overload(self) -> None:
         method: CMethod = CMethod(
@@ -7038,13 +5810,13 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def Method(self) -> Return:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_no_params_overload_static(self) -> None:
         method: CMethod = CMethod(
@@ -7058,14 +5830,14 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@overload",
             "def Method(cls) -> Return:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_returns(self) -> None:
         method: CMethod = CMethod(
@@ -7084,12 +5856,12 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def Method(self, param0: Param, param1: Param) -> Tuple[Return, Return]:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_returns_static(self) -> None:
         method: CMethod = CMethod(
@@ -7109,13 +5881,13 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "def Method(cls, param0: Param, param1: Param) -> Tuple[Return, Return]:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_returns_overload(self) -> None:
         method: CMethod = CMethod(
@@ -7134,13 +5906,13 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def Method(self, param0: Param, param1: Param) -> Tuple[Return, Return]:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_returns_overload_static(self) -> None:
         method: CMethod = CMethod(
@@ -7160,14 +5932,14 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@overload",
             "def Method(cls, param0: Param, param1: Param) -> Tuple[Return, Return]:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_returns_no_params(self) -> None:
         method: CMethod = CMethod(
@@ -7183,12 +5955,12 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def Method(self) -> Tuple[Return, Return]:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_returns_no_params_static(self) -> None:
         method: CMethod = CMethod(
@@ -7205,13 +5977,13 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "def Method(cls) -> Tuple[Return, Return]:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_returns_no_params_overload(self) -> None:
         method: CMethod = CMethod(
@@ -7227,13 +5999,13 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def Method(self) -> Tuple[Return, Return]:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_build_returns_no_params_overload_static(self) -> None:
         method: CMethod = CMethod(
@@ -7250,16 +6022,16 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@overload",
             "def Method(cls) -> Tuple[Return, Return]:",
             '    """"""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_py_imports(self) -> None:
+    def test_imports(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7273,11 +6045,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.Param", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_static(self) -> None:
+    def test_imports_static(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7292,11 +6064,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.Param", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_overload(self) -> None:
+    def test_imports_overload(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7310,11 +6082,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload", "Namespace.Param", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_overload_static(self) -> None:
+    def test_imports_overload_static(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7329,11 +6101,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload", "Namespace.Param", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_no_params(self) -> None:
+    def test_imports_no_params(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7344,11 +6116,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.Return"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_no_params_static(self) -> None:
+    def test_imports_no_params_static(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7360,11 +6132,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.Return"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_no_params_overload(self) -> None:
+    def test_imports_no_params_overload(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7375,11 +6147,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_no_params_overload_static(self) -> None:
+    def test_imports_no_params_overload_static(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7391,11 +6163,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"typing.overload"}
+        expected: Set[str] = {"typing.overload", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_returns(self) -> None:
+    def test_imports_returns(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7412,307 +6184,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"typing.Tuple"}
+        expected: Set[str] = {"typing.Tuple", "Namespace.Param", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.py)
+        self.assertEqual(expected, imports.types)
 
-    def test_py_imports_returns_static(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-            ),
-            return_types=(
-                CType(name="Return", namespace="Namespace"),
-                CType(name="Return", namespace="Namespace"),
-            ),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"typing.Tuple"}
-
-        self.assertEqual(manual, imports.py)
-
-    def test_py_imports_returns_overload(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-            ),
-            return_types=(
-                CType(name="Return", namespace="Namespace"),
-                CType(name="Return", namespace="Namespace"),
-            ),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"typing.overload", "typing.Tuple"}
-
-        self.assertEqual(manual, imports.py)
-
-    def test_py_imports_returns_overload_static(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-            ),
-            return_types=(
-                CType(name="Return", namespace="Namespace"),
-                CType(name="Return", namespace="Namespace"),
-            ),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"typing.overload", "typing.Tuple"}
-
-        self.assertEqual(manual, imports.py)
-
-    def test_py_imports_returns_no_params(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(
-                CType(name="Return", namespace="Namespace"),
-                CType(name="Return", namespace="Namespace"),
-            ),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"typing.Tuple"}
-
-        self.assertEqual(manual, imports.py)
-
-    def test_py_imports_returns_no_params_static(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(
-                CType(name="Return", namespace="Namespace"),
-                CType(name="Return", namespace="Namespace"),
-            ),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"typing.Tuple"}
-
-        self.assertEqual(manual, imports.py)
-
-    def test_py_imports_returns_no_params_overload(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(
-                CType(name="Return", namespace="Namespace"),
-                CType(name="Return", namespace="Namespace"),
-            ),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"typing.overload", "typing.Tuple"}
-
-        self.assertEqual(manual, imports.py)
-
-    def test_py_imports_returns_no_params_overload_static(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(
-                CType(name="Return", namespace="Namespace"),
-                CType(name="Return", namespace="Namespace"),
-            ),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"typing.overload", "typing.Tuple"}
-
-        self.assertEqual(manual, imports.py)
-
-    def test_c_imports(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-            ),
-            return_types=(CType(name="Return", namespace="Namespace"),),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"Namespace.Param", "Namespace.Return"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_static(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-            ),
-            return_types=(CType(name="Return", namespace="Namespace"),),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"Namespace.Param", "Namespace.Return"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_overload(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-            ),
-            return_types=(CType(name="Return", namespace="Namespace"),),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"Namespace.Param", "Namespace.Return"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_overload_static(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-            ),
-            return_types=(CType(name="Return", namespace="Namespace"),),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"Namespace.Param", "Namespace.Return"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_no_params(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(CType(name="Return", namespace="Namespace"),),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"Namespace.Return"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_no_params_static(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(CType(name="Return", namespace="Namespace"),),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"Namespace.Return"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_no_params_overload(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(CType(name="Return", namespace="Namespace"),),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"Namespace.Return"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_no_params_overload_static(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(),
-            return_types=(CType(name="Return", namespace="Namespace"),),
-            static=True,
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"Namespace.Return"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_returns(self) -> None:
-        method: CMethod = CMethod(
-            name="Method",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="Param", namespace="Namespace")),
-                CParameter(name="param1", type=CType(name="Param", namespace="Namespace")),
-            ),
-            return_types=(
-                CType(name="Return", namespace="Namespace"),
-                CType(name="Return", namespace="Namespace"),
-            ),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"Namespace.Param", "Namespace.Return"}
-
-        self.assertEqual(manual, imports.c)
-
-    def test_c_imports_returns_static(self) -> None:
+    def test_imports_returns_static(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7730,11 +6206,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"Namespace.Param", "Namespace.Return"}
+        expected: Set[str] = {"typing.Tuple", "Namespace.Param", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
-    def test_c_imports_returns_overload(self) -> None:
+    def test_imports_returns_overload(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7751,11 +6227,16 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"Namespace.Param", "Namespace.Return"}
+        expected: Set[str] = {
+            "typing.overload",
+            "typing.Tuple",
+            "Namespace.Param",
+            "Namespace.Return",
+        }
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
-    def test_c_imports_returns_overload_static(self) -> None:
+    def test_imports_returns_overload_static(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7773,11 +6254,16 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"Namespace.Param", "Namespace.Return"}
+        expected: Set[str] = {
+            "typing.overload",
+            "typing.Tuple",
+            "Namespace.Param",
+            "Namespace.Return",
+        }
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
-    def test_c_imports_returns_no_params(self) -> None:
+    def test_imports_returns_no_params(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7791,11 +6277,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"Namespace.Return"}
+        expected: Set[str] = {"typing.Tuple", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
-    def test_c_imports_returns_no_params_static(self) -> None:
+    def test_imports_returns_no_params_static(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7810,11 +6296,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Set[str] = {"Namespace.Return"}
+        expected: Set[str] = {"typing.Tuple", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
-    def test_c_imports_returns_no_params_overload(self) -> None:
+    def test_imports_returns_no_params_overload(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7828,11 +6314,11 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"Namespace.Return"}
+        expected: Set[str] = {"typing.overload", "typing.Tuple", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
-    def test_c_imports_returns_no_params_overload_static(self) -> None:
+    def test_imports_returns_no_params_overload_static(self) -> None:
         method: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -7847,9 +6333,9 @@ class TestBuildMethod(TestBase):
         doc: Doc = Doc({})
 
         build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Set[str] = {"Namespace.Return"}
+        expected: Set[str] = {"typing.overload", "typing.Tuple", "Namespace.Return"}
 
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
     def test_doc(self) -> None:
         method: CMethod = CMethod(
@@ -7880,7 +6366,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def Method(self, param0: Param, param1: Param) -> Return:",
             '    """Method doc string.',
             "    ",
@@ -7890,7 +6376,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_static(self) -> None:
         method: CMethod = CMethod(
@@ -7922,7 +6408,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "def Method(cls, param0: Param, param1: Param) -> Return:",
             '    """Method doc string.',
@@ -7933,7 +6419,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_overload(self) -> None:
         method: CMethod = CMethod(
@@ -7964,7 +6450,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def Method(self, param0: Param, param1: Param) -> Return:",
             '    """Method doc string.',
@@ -7975,7 +6461,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_overload_static(self) -> None:
         method: CMethod = CMethod(
@@ -8007,7 +6493,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@overload",
             "def Method(cls, param0: Param, param1: Param) -> Return:",
@@ -8019,7 +6505,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_no_params(self) -> None:
         method: CMethod = CMethod(
@@ -8043,7 +6529,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def Method(self) -> Return:",
             '    """Method doc string.',
             "    ",
@@ -8051,7 +6537,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_no_params_static(self) -> None:
         method: CMethod = CMethod(
@@ -8076,7 +6562,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "def Method(cls) -> Return:",
             '    """Method doc string.',
@@ -8085,7 +6571,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_no_params_overload(self) -> None:
         method: CMethod = CMethod(
@@ -8109,7 +6595,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def Method(self) -> Return:",
             '    """Method doc string.',
@@ -8118,7 +6604,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_no_params_overload_static(self) -> None:
         method: CMethod = CMethod(
@@ -8143,7 +6629,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@overload",
             "def Method(cls) -> Return:",
@@ -8153,7 +6639,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_returns(self) -> None:
         method: CMethod = CMethod(
@@ -8187,7 +6673,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def Method(self, param0: Param, param1: Param) -> Tuple[Return, Return]:",
             '    """Method doc string.',
             "    ",
@@ -8197,7 +6683,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_returns_static(self) -> None:
         method: CMethod = CMethod(
@@ -8232,7 +6718,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "def Method(cls, param0: Param, param1: Param) -> Tuple[Return, Return]:",
             '    """Method doc string.',
@@ -8243,7 +6729,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_returns_overload(self) -> None:
         method: CMethod = CMethod(
@@ -8277,7 +6763,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def Method(self, param0: Param, param1: Param) -> Tuple[Return, Return]:",
             '    """Method doc string.',
@@ -8288,7 +6774,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_returns_overload_static(self) -> None:
         method: CMethod = CMethod(
@@ -8323,7 +6809,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@overload",
             "def Method(cls, param0: Param, param1: Param) -> Tuple[Return, Return]:",
@@ -8335,7 +6821,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_returns_no_params(self) -> None:
         method: CMethod = CMethod(
@@ -8362,7 +6848,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "def Method(self) -> Tuple[Return, Return]:",
             '    """Method doc string.',
             "    ",
@@ -8370,7 +6856,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_returns_no_params_static(self) -> None:
         method: CMethod = CMethod(
@@ -8398,7 +6884,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=False)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "def Method(cls) -> Tuple[Return, Return]:",
             '    """Method doc string.',
@@ -8407,7 +6893,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_returns_no_params_overload(self) -> None:
         method: CMethod = CMethod(
@@ -8434,7 +6920,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@overload",
             "def Method(self) -> Tuple[Return, Return]:",
             '    """Method doc string.',
@@ -8443,7 +6929,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
     def test_doc_returns_no_params_overload_static(self) -> None:
         method: CMethod = CMethod(
@@ -8471,7 +6957,7 @@ class TestBuildMethod(TestBase):
         )
 
         lines: Sequence[str] = build_method(method=method, imports=imports, doc=doc, overload=True)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "@classmethod",
             "@overload",
             "def Method(cls) -> Tuple[Return, Return]:",
@@ -8481,7 +6967,7 @@ class TestBuildMethod(TestBase):
             '    """',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
 
 class TestBuildEvent(TestBase):
@@ -8495,14 +6981,14 @@ class TestBuildEvent(TestBase):
         doc: Doc = Doc({})
 
         lines: Sequence[str] = build_event(event=event, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "Event: EventType[Event] = ...",
             '""""""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
-    def test_py_imports(self) -> None:
+    def test_imports(self) -> None:
         event: CEvent = CEvent(
             name="Event",
             declaring_type=CType(name="Type", namespace="Namespace"),
@@ -8512,23 +6998,9 @@ class TestBuildEvent(TestBase):
         doc: Doc = Doc({})
 
         build_event(event=event, imports=imports, doc=doc)
-        manual: Set[str] = set()
+        expected: Set[str] = {"Namespace.Event"}
 
-        self.assertEqual(manual, imports.py)
-
-    def test_c_imports(self) -> None:
-        event: CEvent = CEvent(
-            name="Event",
-            declaring_type=CType(name="Type", namespace="Namespace"),
-            type=CType(name="Event", namespace="Namespace"),
-        )
-        imports: Imports = Imports()
-        doc: Doc = Doc({})
-
-        build_event(event=event, imports=imports, doc=doc)
-        manual: Set[str] = {"Namespace.Event"}
-
-        self.assertEqual(manual, imports.c)
+        self.assertEqual(expected, imports.types)
 
     def test_doc(self) -> None:
         event: CEvent = CEvent(
@@ -8550,12 +7022,12 @@ class TestBuildEvent(TestBase):
         )
 
         lines: Sequence[str] = build_event(event=event, imports=imports, doc=doc)
-        manual: Sequence[str] = (
+        expected: Sequence[str] = (
             "Event: EventType[Event] = ...",
             '"""Event doc string."""',
         )
 
-        self.assertEqual(manual, lines)
+        self.assertEqual(expected, lines)
 
 
 class TestBuildStubs(TestBase):

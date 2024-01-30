@@ -75,12 +75,25 @@ def main(*args: Any) -> Union[int, str]:
         help="process core assemblies",
     )
     extract_command.add_argument(
+        "-w",
+        "--overwrite",
+        action="store_true",
+        help="overwrite existing files",
+    )
+    extract_command.add_argument(
         "assemblies",
         nargs=ONE_OR_MORE,
         help="names of dll assemblies to process",
     )
 
     build_command = commands.add_parser("build", help="build stub file tree")
+    build_command.add_argument(
+        "-l",
+        "--line_length",
+        type=int,
+        default=100,
+        help="process core assemblies",
+    )
     build_command.add_argument(
         "skeletons",
         help="glob to the skeleton files",
@@ -120,6 +133,8 @@ def main(*args: Any) -> Union[int, str]:
                     logger.debug("Adding to sys.path: %r", path_str)
                     sys.path.append(path_str)
 
+            overwrite: bool = parsed_args.overwrite
+
             assembly_names: List[str] = list()
             if use_all:
                 logger.debug("Adding all assemblies")
@@ -139,7 +154,6 @@ def main(*args: Any) -> Union[int, str]:
             try:
                 assembly_name: str
                 for assembly_name in assembly_names:
-                    overwrite: bool = True  # TODO - cmd arg
                     exit_code = extract_assembly(
                         assembly_name=assembly_name,
                         output_dir=output_dir,
@@ -153,22 +167,22 @@ def main(*args: Any) -> Union[int, str]:
         elif command == "build":
             from stubgen.build_stubs import build_stubs
 
-            skeleton_glob: str = parsed_args.skeletons
-            doc_glob: str = parsed_args.docs
+            line_length: int = parsed_args.line_length
 
+            skeleton_glob: str = parsed_args.skeletons
             skeleton_files: List[Path] = []
             for file in glob.glob(skeleton_glob):
                 path: Path = Path(file).resolve()
                 skeleton_files.append(path)
                 logger.debug("Using skeleton file: %r", str(path))
 
+            doc_glob: str = parsed_args.docs
             doc_files: List[Path] = []
             for file in glob.glob(doc_glob):
                 path: Path = Path(file).resolve()
                 doc_files.append(path)
                 logger.debug("Using doc file: %r", str(path))
 
-            line_length: int = 100  # TODO - cmd arg
             exit_code = build_stubs(
                 skeleton_files=skeleton_files,
                 doc_files=doc_files,

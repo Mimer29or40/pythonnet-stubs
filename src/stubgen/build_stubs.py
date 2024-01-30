@@ -21,8 +21,10 @@ from typing import Union
 from typing import cast
 
 import black
+import isort
 from black import Mode
 from black import TargetVersion
+from isort import Config
 
 from stubgen.log import get_logger
 from stubgen.model import CClass
@@ -34,11 +36,11 @@ from stubgen.model import CField
 from stubgen.model import CInterface
 from stubgen.model import CMethod
 from stubgen.model import CNamespace
+from stubgen.model import CParameter
 from stubgen.model import CProperty
 from stubgen.model import CStruct
 from stubgen.model import CType
 from stubgen.model import CTypeDefinition
-from stubgen.util import rm_tree
 
 logger = get_logger(__name__)
 
@@ -66,38 +68,33 @@ def merge_namespace(namespace1: CNamespace, namespace2: CNamespace) -> CNamespac
 
 @dataclass
 class Imports:
-    py: Final[Set[str]] = field(default_factory=set)
-    c: Final[Set[str]] = field(default_factory=set)
+    types: Final[Set[str]] = field(default_factory=set)
     type_vars: Final[Set[str]] = field(default_factory=set)
     include_event_type: bool = False
 
-    def add_py_type(self, type: str) -> None:
-        self.py.add(type)
-
-    def add_c_type(self, type: CType) -> None:
+    def add_type(self, type: CType, inner: bool = True) -> None:
         if type.generic:
-            self.py.add("typing.TypeVar")
-            self.type_vars.add(type.name)
-        else:
-            self.c.add(type.import_name)
-        for inner_type in type.inner:
-            self.add_c_type(inner_type)
+            self.add_type_var(type)
+            return
+
+        self.types.add(type.import_name)
+        if inner:
+            for inner_type in type.inner:
+                self.add_type(inner_type)
+
+    def add_type_var(self, type: CType) -> None:
+        self.add_type(CType(name="TypeVar", namespace="typing"))
+        self.type_vars.add(type.name)
 
     def build(self, namespace: str = None) -> Sequence[str]:
         if self.include_event_type:
-            self.py.add("typing.Generic")
-            self.type_vars.add("T")
+            self.add_type(CType(name="Generic", namespace="typing"))
+            self.add_type_var(CType(name="T"))
 
         lines: List[str] = []
 
-        for py_type in sorted(self.py):
-            split: Sequence[str] = py_type.split(".")
-            namespace_name: str = ".".join(split[:-1])
-            name: str = split[-1]
-            lines.append(f"from {namespace_name} import {name}")
-
-        for c_type in sorted(self.c):
-            split: Sequence[str] = c_type.split(".")
+        for type in sorted(self.types):
+            split: Sequence[str] = type.split(".")
             namespace_name: str = ".".join(split[:-1])
             name: str = split[-1]
             if namespace is not None and namespace == namespace_name:
@@ -326,14 +323,6 @@ def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str,
 type_conversion: Final[Mapping[str, str]] = {}
 
 
-def convert_type(type: CType) -> str:
-    if len(type.inner) > 0:
-        return type.simple_name
-
-    return ""
-
-
-# TODO - Replace c types with python types, i.e. Int32 -> int, String -> str, Void -> None, etc
 def build_type_def(
     type_def: CTypeDefinition,
     imports: Imports,
@@ -363,23 +352,20 @@ def build_class(
 ) -> Sequence[str]:
     parents: List[str] = []
     if type_def.abstract:
-        imports.add_py_type("abc.ABC")
+        imports.add_type(CType(name="ABC", namespace="abc"))
         parents.append("ABC")
 
     if len(type_def.generic_args) > 0:
-        imports.add_py_type("typing.Generic")
+        imports.add_type(CType(name="Generic", namespace="typing"))
         args: List[str] = []
         for arg in type_def.generic_args:
-            imports.add_c_type(arg)
-            args.append(arg.name)
+            args.append(build_type(arg, imports))
         parents.append(f"Generic[{', '.join(args)}]")
 
     if type_def.super_class is not None:
-        imports.add_c_type(type_def.super_class)
-        parents.append(type_def.super_class.simple_name)
+        parents.append(build_type(type_def.super_class, imports))
     for interface in type_def.interfaces:
-        imports.add_c_type(interface)
-        parents.append(interface.simple_name)
+        parents.append(build_type(interface, imports))
 
     lines: List[str] = []
     if len(parents) > 0:
@@ -489,16 +475,14 @@ def build_interface(
 ) -> Sequence[str]:
     parents: List[str] = []
     if len(type_def.generic_args) > 0:
-        imports.add_py_type("typing.Generic")
+        imports.add_type(CType(name="Generic", namespace="typing"))
         args: List[str] = []
         for arg in type_def.generic_args:
-            imports.add_c_type(arg)
-            args.append(arg.name)
+            args.append(build_type(arg, imports))
         parents.append(f"Generic[{', '.join(args)}]")
 
     for interface in type_def.interfaces:
-        imports.add_c_type(interface)
-        parents.append(interface.simple_name)
+        parents.append(build_type(interface, imports))
 
     lines: List[str] = []
     if len(parents) > 0:
@@ -578,7 +562,7 @@ def build_enum(
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
-    imports.add_c_type(CType(name="Enum", namespace="System"))
+    imports.add_type(CType(name="Enum", namespace="System"))
     lines: List[str] = [f"{'    ' * indent}class {type_def.name}(Enum):"]
 
     indent_str: str = "    " * (indent + 1)
@@ -614,13 +598,11 @@ def build_delegate(
 
     parameters: List[str] = []
     for parameter in type_def.parameters:
-        imports.add_c_type(parameter.type)
-        parameters.append(parameter.type.simple_name)
+        parameters.append(build_type(parameter.type, imports, convert=True))
 
-    imports.add_c_type(type_def.return_type)
-    return_str: str = type_def.return_type.simple_name
+    return_str: str = build_type(type_def.return_type, imports, convert=True)
 
-    imports.add_py_type("typing.Callable")
+    imports.add_type(CType(name="Callable", namespace="typing"))
     lines: List[str] = [
         f"{indent_str}{type_def.name}: Callable[[{', '.join(parameters)}], {return_str}] = ...",
     ]
@@ -636,6 +618,64 @@ def build_delegate(
     return tuple(lines)
 
 
+def build_type(
+    type: CType,
+    imports: Imports,
+    convert: bool = False,
+) -> str:
+    type_str: str
+    if convert:
+        type_map: Mapping[str, str] = {
+            "Boolean": "bool",
+            "SByte": "int",
+            "Byte": "int",
+            "Int16": "int",
+            "UInt16": "int",
+            "Int32": "int",
+            "UInt32": "int",
+            "Int64": "int",
+            "UInt64": "int",
+            "Single": "float",
+            "Double": "float",
+            "String": "str",
+            "Object": "object",
+            "Void": "None",
+        }
+        # char    System.Char
+        # decimal System.Decimal
+        # nint    System.IntPtr
+        # nuint   System.UIntPtr
+
+        try:
+            type_str = type_map[type.name]
+        except KeyError:
+            imports.add_type(type, inner=False)
+            type_str = type.name
+            if len(type.inner) > 0:
+                children: List[str] = []
+                for inner_type in type.inner:
+                    children.append(build_type(inner_type, imports, convert=convert))
+                type_str = f"{type_str}[{', '.join(children)}]"
+    else:
+        imports.add_type(type)
+        type_str = type.simple_name
+
+    if type.nullable:
+        imports.add_type(CType(name="Optional", namespace="typing"))
+        type_str = f"Optional[{type_str}]"
+    return type_str
+
+
+def build_parameter(
+    parameter: CParameter,
+    imports: Imports,
+) -> str:
+    param_str: str = f", {parameter.name}: {build_type(parameter.type, imports, convert=True)}"
+    if parameter.default:
+        param_str = param_str + " = ..."
+    return param_str
+
+
 def build_field(
     field: CField,
     imports: Imports,
@@ -643,12 +683,11 @@ def build_field(
     indent: int = 0,
     line_length: int = 100,
 ) -> Sequence[str]:
-    imports.add_py_type("typing.Final")
-    imports.add_c_type(field.return_type)
+    imports.add_type(CType(name="Final", namespace="typing"))
 
-    type_str: str = field.return_type.name
+    type_str: str = build_type(field.return_type, imports, convert=True)
     if field.static:
-        imports.add_py_type("typing.ClassVar")
+        imports.add_type(CType(name="ClassVar", namespace="typing"))
         type_str = f"ClassVar[{type_str}]"
 
     doc_str: Sequence[str]
@@ -672,14 +711,12 @@ def build_constructor(
     lines: List[str] = []
 
     if overload:
-        imports.add_py_type("typing.overload")
+        imports.add_type(CType(name="overload", namespace="typing"))
         lines.append(f"{'    ' * indent}@overload")
 
-    parameters: List[str] = []
-    for parameter in constructor.parameters:
-        imports.add_c_type(parameter.type)
-        parameters.append(f", {parameter.name}: {parameter.type.simple_name}")
-
+    parameters: Sequence[str] = tuple(
+        map(lambda p: build_parameter(p, imports), constructor.parameters)
+    )
     lines.append(f"{'    ' * indent}def __init__(self{''.join(parameters)}):")
 
     doc_str: Sequence[str]
@@ -710,8 +747,9 @@ def build_property(
         lines.append(f"{indent_str}@classmethod")
 
     lines.append(f"{indent_str}@property")
-    imports.add_c_type(property.type)
-    lines.append(f"{indent_str}def {property.name}({self_cls}) -> {property.type.simple_name}:")
+
+    property_type: str = build_type(property.type, imports, convert=True)
+    lines.append(f"{indent_str}def {property.name}({self_cls}) -> {property_type}:")
 
     doc_str: Sequence[str]
     doc_node: Doc = doc.get(str(property))
@@ -726,8 +764,7 @@ def build_property(
             lines.append(f"{indent_str}@classmethod")
         lines.append(f"{indent_str}@{property.name}.setter")
         lines.append(
-            f"{indent_str}def {property.name}({self_cls}, "
-            f"value: {property.type.simple_name}) -> None: ..."
+            f"{indent_str}def {property.name}({self_cls}, " f"value: {property_type}) -> None: ..."
         )
 
     return tuple(lines)
@@ -749,25 +786,21 @@ def build_method(
         lines.append(f"{'    ' * indent}@classmethod")
 
     if overload:
-        imports.add_py_type("typing.overload")
+        imports.add_type(CType(name="overload", namespace="typing"))
         lines.append(f"{'    ' * indent}@overload")
 
-    parameters: List[str] = []
-    for parameter in method.parameters:
-        imports.add_c_type(parameter.type)
-        parameters.append(f", {parameter.name}: {parameter.type.simple_name}")
+    parameters: Sequence[str] = tuple(map(lambda p: build_parameter(p, imports), method.parameters))
 
     return_str: str
     if len(method.return_types) > 1:
-        imports.add_py_type("typing.Tuple")
+        imports.add_type(CType(name="Tuple", namespace="typing"))
         return_types: List[str] = []
         for return_type in method.return_types:
-            imports.add_c_type(return_type)
-            return_types.append(return_type.simple_name)
+            return_types.append(build_type(return_type, imports, convert=True))
         return_str = f"Tuple[{', '.join(return_types)}]"
     else:
-        imports.add_c_type(method.return_types[0])
-        return_str = method.return_types[0].simple_name
+        return_str = build_type(method.return_types[0], imports, convert=True)
+
     lines.append(
         f"{'    ' * indent}def {method.name}({self_cls}{''.join(parameters)}) -> {return_str}:"
     )
@@ -793,9 +826,10 @@ def build_event(
     indent_str: str = "    " * indent
 
     imports.include_event_type = True
-    imports.add_c_type(event.type)
 
-    lines: List[str] = [f"{indent_str}{event.name}: EventType[{event.type.simple_name}] = ..."]
+    lines: List[str] = [
+        f"{indent_str}{event.name}: EventType[{build_type(event.type, imports, convert=True)}] = ..."
+    ]
 
     doc_str: Sequence[str]
     doc_node: Doc = doc.get(str(event))
@@ -849,7 +883,7 @@ def build_stubs(
             namespace_file.touch(exist_ok=True)
 
         imports = Imports()
-        imports.add_py_type("__future__.annotations")
+        imports.add_type(CType(name="annotations", namespace="__future__"))
 
         built_types: List[Sequence[str]] = []
         for type_def in namespace.types.values():
@@ -869,6 +903,14 @@ def build_stubs(
 
         logger.info("Formatting code")
         code: str = "\n".join(lines)
+
+        isort_config = Config(
+            profile="black",
+            line_length=line_length,
+            force_single_line=True,
+        )
+        code = isort.code(code, config=isort_config)
+
         black_mode: Mode = Mode(
             target_versions={
                 TargetVersion.PY38,

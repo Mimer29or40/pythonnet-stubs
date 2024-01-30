@@ -85,7 +85,7 @@ class TestCClass(TestExtractBase):
         type_info: TypeInfo = self.get_type("ClassWithGeneric")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithGeneric",
             namespace="TestLib",
             nested=None,
@@ -147,13 +147,13 @@ class TestCClass(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_class_generic_multi(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMultiGeneric")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithMultiGeneric",
             namespace="TestLib",
             nested=None,
@@ -211,13 +211,13 @@ class TestCClass(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_class_interfaces(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithInterface")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithInterface",
             namespace="TestLib",
             nested=None,
@@ -286,13 +286,13 @@ class TestCClass(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_class_fields(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithFields")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithFields",
             namespace="TestLib",
             nested=None,
@@ -374,13 +374,13 @@ class TestCClass(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_class_constructors(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithConstructors")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithConstructors",
             namespace="TestLib",
             nested=None,
@@ -449,13 +449,13 @@ class TestCClass(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_class_properties(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithProperties")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithProperties",
             namespace="TestLib",
             nested=None,
@@ -576,13 +576,13 @@ class TestCClass(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_class_methods(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMethods")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithMethods",
             namespace="TestLib",
             nested=None,
@@ -818,13 +818,13 @@ class TestCClass(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_class_methods_dunder(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithOperatorMethods")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithOperatorMethods",
             namespace="TestLib",
             nested=None,
@@ -1367,13 +1367,13 @@ class TestCClass(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_class_methods_list(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithListMethods")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithListMethods",
             namespace="TestLib",
             nested=None,
@@ -1651,13 +1651,13 @@ class TestCClass(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_class_events(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithEvents")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithEvents",
             namespace="TestLib",
             nested=None,
@@ -1720,13 +1720,13 @@ class TestCClass(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_class_nested(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithNested")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CClass = CClass(
+        expected: CClass = CClass(
             name="ClassWithNested",
             namespace="TestLib",
             nested=None,
@@ -1898,7 +1898,7 @@ class TestCClass(TestExtractBase):
             },
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
 
 class TestCStruct(TestExtractBase):
@@ -1906,7 +1906,7 @@ class TestCStruct(TestExtractBase):
         type_info: TypeInfo = self.get_type("StructWithGeneric")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithGeneric",
             namespace="TestLib",
             nested=None,
@@ -1959,13 +1959,13 @@ class TestCStruct(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_struct_generic_multi(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithMultiGeneric")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithMultiGeneric",
             namespace="TestLib",
             nested=None,
@@ -2011,13 +2011,13 @@ class TestCStruct(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_struct_interfaces(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithInterface")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithInterface",
             namespace="TestLib",
             nested=None,
@@ -2150,13 +2150,13 @@ class TestCStruct(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_struct_fields(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithFields")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithFields",
             namespace="TestLib",
             nested=None,
@@ -2238,13 +2238,13 @@ class TestCStruct(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_struct_constructors(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithConstructors")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithConstructors",
             namespace="TestLib",
             nested=None,
@@ -2313,13 +2313,13 @@ class TestCStruct(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_struct_properties(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithProperties")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithProperties",
             namespace="TestLib",
             nested=None,
@@ -2435,13 +2435,13 @@ class TestCStruct(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_struct_methods(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithMethods")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithMethods",
             namespace="TestLib",
             nested=None,
@@ -2672,13 +2672,13 @@ class TestCStruct(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_struct_methods_dunder(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithOperatorMethods")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithOperatorMethods",
             namespace="TestLib",
             nested=None,
@@ -3216,13 +3216,13 @@ class TestCStruct(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_struct_methods_list(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithListMethods")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithListMethods",
             namespace="TestLib",
             nested=None,
@@ -3495,13 +3495,13 @@ class TestCStruct(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_struct_events(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithEvents")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithEvents",
             namespace="TestLib",
             nested=None,
@@ -3559,13 +3559,13 @@ class TestCStruct(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_struct_nested(self) -> None:
         type_info: TypeInfo = self.get_type("StructWithNested")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CStruct = CStruct(
+        expected: CStruct = CStruct(
             name="StructWithNested",
             namespace="TestLib",
             nested=None,
@@ -3732,7 +3732,7 @@ class TestCStruct(TestExtractBase):
             },
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
 
 class TestCInterface(TestExtractBase):
@@ -3740,7 +3740,7 @@ class TestCInterface(TestExtractBase):
         type_info: TypeInfo = self.get_type("IInterfaceWithGeneric")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CInterface = CInterface(
+        expected: CInterface = CInterface(
             name="IInterfaceWithGeneric",
             namespace="TestLib",
             nested=None,
@@ -3764,13 +3764,13 @@ class TestCInterface(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_interface_generic_multi(self) -> None:
         type_info: TypeInfo = self.get_type("IInterfaceWithMultiGeneric")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CInterface = CInterface(
+        expected: CInterface = CInterface(
             name="IInterfaceWithMultiGeneric",
             namespace="TestLib",
             nested=None,
@@ -3786,13 +3786,13 @@ class TestCInterface(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_interface_interfaces(self) -> None:
         type_info: TypeInfo = self.get_type("IInterfaceWithInterface")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CInterface = CInterface(
+        expected: CInterface = CInterface(
             name="IInterfaceWithInterface",
             namespace="TestLib",
             nested=None,
@@ -3827,13 +3827,13 @@ class TestCInterface(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_interface_fields(self) -> None:
         type_info: TypeInfo = self.get_type("IInterfaceWithFields")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CInterface = CInterface(
+        expected: CInterface = CInterface(
             name="IInterfaceWithFields",
             namespace="TestLib",
             nested=None,
@@ -3865,13 +3865,13 @@ class TestCInterface(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_interface_properties(self) -> None:
         type_info: TypeInfo = self.get_type("IInterfaceWithProperties")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CInterface = CInterface(
+        expected: CInterface = CInterface(
             name="IInterfaceWithProperties",
             namespace="TestLib",
             nested=None,
@@ -3957,13 +3957,13 @@ class TestCInterface(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_interface_methods(self) -> None:
         type_info: TypeInfo = self.get_type("IInterfaceWithMethods")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CInterface = CInterface(
+        expected: CInterface = CInterface(
             name="IInterfaceWithMethods",
             namespace="TestLib",
             nested=None,
@@ -4071,13 +4071,13 @@ class TestCInterface(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_interface_methods_dunder(self) -> None:
         type_info: TypeInfo = self.get_type("IInterfaceWithOperatorMethods")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CInterface = CInterface(
+        expected: CInterface = CInterface(
             name="IInterfaceWithOperatorMethods",
             namespace="TestLib",
             nested=None,
@@ -4577,13 +4577,13 @@ class TestCInterface(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_interface_methods_list(self) -> None:
         type_info: TypeInfo = self.get_type("IInterfaceWithListMethods")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CInterface = CInterface(
+        expected: CInterface = CInterface(
             name="IInterfaceWithListMethods",
             namespace="TestLib",
             nested=None,
@@ -4827,13 +4827,13 @@ class TestCInterface(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_interface_events(self) -> None:
         type_info: TypeInfo = self.get_type("IInterfaceWithEvents")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CInterface = CInterface(
+        expected: CInterface = CInterface(
             name="IInterfaceWithEvents",
             namespace="TestLib",
             nested=None,
@@ -4861,13 +4861,13 @@ class TestCInterface(TestExtractBase):
             nested_types={},
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_interface_nested(self) -> None:
         type_info: TypeInfo = self.get_type("IInterfaceWithNested")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CInterface = CInterface(
+        expected: CInterface = CInterface(
             name="IInterfaceWithNested",
             namespace="TestLib",
             nested=None,
@@ -5004,7 +5004,7 @@ class TestCInterface(TestExtractBase):
             },
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
 
 class TestCEnum(TestExtractBase):
@@ -5012,27 +5012,27 @@ class TestCEnum(TestExtractBase):
         type_info: TypeInfo = self.get_type("EnumWithFields")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CEnum = CEnum(
+        expected: CEnum = CEnum(
             name="EnumWithFields",
             namespace="TestLib",
             nested=None,
             fields=("Field0", "Field1", "Field2", "Field3"),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_enum_no_fields(self) -> None:
         type_info: TypeInfo = self.get_type("EnumWithNoFields")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CEnum = CEnum(
+        expected: CEnum = CEnum(
             name="EnumWithNoFields",
             namespace="TestLib",
             nested=None,
             fields=(),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
 
 class TestCDelegate(TestExtractBase):
@@ -5040,7 +5040,7 @@ class TestCDelegate(TestExtractBase):
         type_info: TypeInfo = self.get_type("DelegateWithNoParametersNoReturn")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CDelegate = CDelegate(
+        expected: CDelegate = CDelegate(
             name="DelegateWithNoParametersNoReturn",
             namespace="TestLib",
             nested=None,
@@ -5048,13 +5048,13 @@ class TestCDelegate(TestExtractBase):
             return_type=CType(name="Void", namespace="System"),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_delegate_no_params_return(self) -> None:
         type_info: TypeInfo = self.get_type("DelegateWithNoParametersReturn")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CDelegate = CDelegate(
+        expected: CDelegate = CDelegate(
             name="DelegateWithNoParametersReturn",
             namespace="TestLib",
             nested=None,
@@ -5062,13 +5062,13 @@ class TestCDelegate(TestExtractBase):
             return_type=CType(name="Int32", namespace="System"),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_delegate_params_no_return(self) -> None:
         type_info: TypeInfo = self.get_type("DelegateWithParametersNoReturn")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CDelegate = CDelegate(
+        expected: CDelegate = CDelegate(
             name="DelegateWithParametersNoReturn",
             namespace="TestLib",
             nested=None,
@@ -5079,13 +5079,13 @@ class TestCDelegate(TestExtractBase):
             return_type=CType(name="Void", namespace="System"),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_delegate_params_return(self) -> None:
         type_info: TypeInfo = self.get_type("DelegateWithParametersReturn")
 
         extracted: CTypeDefinition = extract_type_def(type_info)
-        manual: CDelegate = CDelegate(
+        expected: CDelegate = CDelegate(
             name="DelegateWithParametersReturn",
             namespace="TestLib",
             nested=None,
@@ -5096,7 +5096,7 @@ class TestCDelegate(TestExtractBase):
             return_type=CType(name="Int32", namespace="System"),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
 
 class TestCType(TestExtractBase):
@@ -5104,27 +5104,27 @@ class TestCType(TestExtractBase):
         type_info: TypeInfo = self.get_type("ClassWithSuper")
 
         extracted: CType = extract_type(type_info)
-        manual: CType = CType(name="ClassWithSuper", namespace="TestLib")
+        expected: CType = CType(name="ClassWithSuper", namespace="TestLib")
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_type_inner(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithGeneric")
 
         extracted: CType = extract_type(type_info)
-        manual: CType = CType(
+        expected: CType = CType(
             name="ClassWithGeneric",
             namespace="TestLib",
             inner=(CType(name="T", generic=True),),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_type_inner_multi(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMultiGeneric")
 
         extracted: CType = extract_type(type_info)
-        manual: CType = CType(
+        expected: CType = CType(
             name="ClassWithMultiGeneric",
             namespace="TestLib",
             inner=(
@@ -5133,23 +5133,23 @@ class TestCType(TestExtractBase):
             ),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_type_reference(self) -> None:
         type_info: TypeInfo = self.get_type("ClassThatsAbstract").MakeByRefType()
 
         extracted: CType = extract_type(type_info)
-        manual: CType = CType(name="ClassThatsAbstract", namespace="TestLib", reference=True)
+        expected: CType = CType(name="ClassThatsAbstract", namespace="TestLib", reference=True)
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_type_generic(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithGeneric")
 
         extracted: CType = extract_type(type_info.GenericTypeParameters[0])
-        manual: CType = CType(name="T", generic=True)
+        expected: CType = CType(name="T", generic=True)
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_type_nullable(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMethods")
@@ -5157,9 +5157,9 @@ class TestCType(TestExtractBase):
         parameter_info: ParameterInfo = method_info.GetParameters()[0]
 
         extracted: CType = extract_type(parameter_info.ParameterType)
-        manual: CType = CType(name="Int32", namespace="System", nullable=True)
+        expected: CType = CType(name="Int32", namespace="System", nullable=True)
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_type_reference_nullable(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMethods")
@@ -5167,9 +5167,9 @@ class TestCType(TestExtractBase):
         parameter_info: ParameterInfo = method_info.GetParameters()[0]
 
         extracted: CType = extract_type(parameter_info.ParameterType)
-        manual: CType = CType(name="Int32", namespace="System", reference=True, nullable=True)
+        expected: CType = CType(name="Int32", namespace="System", reference=True, nullable=True)
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
 
 class TestCParameter(TestExtractBase):
@@ -5178,38 +5178,38 @@ class TestCParameter(TestExtractBase):
         method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithParams1")
 
         extracted: CParameter = extract_parameter(method_info.GetParameters()[0])
-        manual: CParameter = CParameter(
+        expected: CParameter = CParameter(
             name="param0",
             type=CType(name="Int32", namespace="System"),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_parameter_default(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMethods")
         method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithDefaultParam")
 
         extracted: CParameter = extract_parameter(method_info.GetParameters()[0])
-        manual: CParameter = CParameter(
+        expected: CParameter = CParameter(
             name="param0",
             type=CType(name="Int32", namespace="System"),
             default=True,
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_parameter_out(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMethods")
         method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithOutParam")
 
         extracted: CParameter = extract_parameter(method_info.GetParameters()[0])
-        manual: CParameter = CParameter(
+        expected: CParameter = CParameter(
             name="param0",
             type=CType(name="Int32", namespace="System", reference=True),
             out=True,
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
 
 class TestCField(TestExtractBase):
@@ -5218,32 +5218,32 @@ class TestCField(TestExtractBase):
         field_info: FieldInfo = type_info.GetField("InstanceFieldA")
 
         extracted: CField = extract_field(field_info)
-        manual: CField = CField(
+        expected: CField = CField(
             name="InstanceFieldA",
             declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
             return_type=CType(name="Int32", namespace="System"),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_field_static(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithFields")
         field_info: FieldInfo = type_info.GetField("StaticFieldA")
 
         extracted: CField = extract_field(field_info)
-        manual: CField = CField(
+        expected: CField = CField(
             name="StaticFieldA",
             declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
             return_type=CType(name="Int32", namespace="System"),
             static=True,
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_fields(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithFields")
         extracted: Mapping[str, CField] = extract_fields(type_info)
-        manual: Mapping[str, CField] = {
+        expected: Mapping[str, CField] = {
             "TestLib:ClassWithFields.InstanceFieldA": CField(
                 name="InstanceFieldA",
                 declaring_type=CType(name="ClassWithFields", namespace="TestLib"),
@@ -5279,7 +5279,7 @@ class TestCField(TestExtractBase):
             ),
         }
 
-        self.assertDictEqual(manual, extracted)
+        self.assertDictEqual(expected, extracted)
 
 
 class TestCConstructor(TestExtractBase):
@@ -5289,21 +5289,21 @@ class TestCConstructor(TestExtractBase):
             map(extract_constructor, type_info.GetConstructors())
         )
 
-        manual: CConstructor = CConstructor(
+        expected: CConstructor = CConstructor(
             declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
             parameters=(),
         )
 
-        self.assertEqual(manual, extracted[0])
+        self.assertEqual(expected, extracted[0])
 
-        manual: CConstructor = CConstructor(
+        expected: CConstructor = CConstructor(
             declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
             parameters=(CParameter(name="param0", type=CType(name="Int32", namespace="System")),),
         )
 
-        self.assertEqual(manual, extracted[1])
+        self.assertEqual(expected, extracted[1])
 
-        manual: CConstructor = CConstructor(
+        expected: CConstructor = CConstructor(
             declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
             parameters=(
                 CParameter(name="param0", type=CType(name="Int32", namespace="System")),
@@ -5311,9 +5311,9 @@ class TestCConstructor(TestExtractBase):
             ),
         )
 
-        self.assertEqual(manual, extracted[2])
+        self.assertEqual(expected, extracted[2])
 
-        manual: CConstructor = CConstructor(
+        expected: CConstructor = CConstructor(
             declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
             parameters=(
                 CParameter(name="param0", type=CType(name="Int32", namespace="System")),
@@ -5322,12 +5322,12 @@ class TestCConstructor(TestExtractBase):
             ),
         )
 
-        self.assertEqual(manual, extracted[3])
+        self.assertEqual(expected, extracted[3])
 
     def test_extract_constructors(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithConstructors")
         extracted: Mapping[str, CConstructor] = extract_constructors(type_info)
-        manual: Mapping[str, CConstructor] = {
+        expected: Mapping[str, CConstructor] = {
             "TestLib:ClassWithConstructors.__init__()": CConstructor(
                 declaring_type=CType(name="ClassWithConstructors", namespace="TestLib"),
                 parameters=(),
@@ -5355,7 +5355,7 @@ class TestCConstructor(TestExtractBase):
             ),
         }
 
-        self.assertDictEqual(manual, extracted)
+        self.assertDictEqual(expected, extracted)
 
 
 class TestCProperty(TestExtractBase):
@@ -5364,48 +5364,48 @@ class TestCProperty(TestExtractBase):
         property_info: PropertyInfo = type_info.GetProperty("InstanceReadOnlyProperty0")
 
         extracted: CProperty = extract_property(property_info)
-        manual: CProperty = CProperty(
+        expected: CProperty = CProperty(
             name="InstanceReadOnlyProperty0",
             declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
             type=CType(name="Int32", namespace="System"),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_property_setter(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithProperties")
         property_info: PropertyInfo = type_info.GetProperty("InstanceProperty0")
 
         extracted: CProperty = extract_property(property_info)
-        manual: CProperty = CProperty(
+        expected: CProperty = CProperty(
             name="InstanceProperty0",
             declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
             type=CType(name="Int32", namespace="System"),
             setter=True,
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_property_static(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithProperties")
         property_info: PropertyInfo = type_info.GetProperty("StaticReadOnlyProperty0")
 
         extracted: CProperty = extract_property(property_info)
-        manual: CProperty = CProperty(
+        expected: CProperty = CProperty(
             name="StaticReadOnlyProperty0",
             declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
             type=CType(name="Int32", namespace="System"),
             static=True,
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_property_setter_static(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithProperties")
         property_info: PropertyInfo = type_info.GetProperty("StaticProperty0")
 
         extracted: CProperty = extract_property(property_info)
-        manual: CProperty = CProperty(
+        expected: CProperty = CProperty(
             name="StaticProperty0",
             declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
             type=CType(name="Int32", namespace="System"),
@@ -5413,12 +5413,12 @@ class TestCProperty(TestExtractBase):
             static=True,
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_properties(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithProperties")
         extracted: Mapping[str, CProperty] = extract_properties(type_info)
-        manual: Mapping[str, CProperty] = {
+        expected: Mapping[str, CProperty] = {
             "TestLib:ClassWithProperties.InstanceProperty0": CProperty(
                 name="InstanceProperty0",
                 declaring_type=CType(name="ClassWithProperties", namespace="TestLib"),
@@ -5493,7 +5493,7 @@ class TestCProperty(TestExtractBase):
             ),
         }
 
-        self.assertDictEqual(manual, extracted)
+        self.assertDictEqual(expected, extracted)
 
 
 class TestCMethod(TestExtractBase):
@@ -5502,21 +5502,21 @@ class TestCMethod(TestExtractBase):
         method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithParams1")
 
         extracted: CMethod = extract_method(method_info)
-        manual: CMethod = CMethod(
+        expected: CMethod = CMethod(
             name="InstanceMethodWithParams1",
             declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
             parameters=(CParameter(name="param0", type=CType(name="Int32", namespace="System")),),
             return_types=(CType(name="Int32", namespace="System"),),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_method_static(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMethods")
         method_info: MethodInfo = type_info.GetMethod("StaticMethodWithParams1")
 
         extracted: CMethod = extract_method(method_info)
-        manual: CMethod = CMethod(
+        expected: CMethod = CMethod(
             name="StaticMethodWithParams1",
             declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
             parameters=(CParameter(name="param0", type=CType(name="Int32", namespace="System")),),
@@ -5524,14 +5524,14 @@ class TestCMethod(TestExtractBase):
             static=True,
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_method_out(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMethods")
         method_info: MethodInfo = type_info.GetMethod("InstanceMethodWithOutParam")
 
         extracted: CMethod = extract_method(method_info)
-        manual: CMethod = CMethod(
+        expected: CMethod = CMethod(
             name="InstanceMethodWithOutParam",
             declaring_type=CType(name="ClassWithMethods", namespace="TestLib"),
             parameters=(
@@ -5547,12 +5547,12 @@ class TestCMethod(TestExtractBase):
             ),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_methods(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithMethods")
         extracted: Mapping[str, CMethod] = extract_methods(type_info)
-        manual: Mapping[str, CMethod] = {
+        expected: Mapping[str, CMethod] = {
             "System:Object.Equals(System:Object)": CMethod(
                 name="Equals",
                 declaring_type=CType(name="Object", namespace="System"),
@@ -5757,7 +5757,7 @@ class TestCMethod(TestExtractBase):
             ),
         }
 
-        self.assertDictEqual(manual, extracted)
+        self.assertDictEqual(expected, extracted)
 
 
 class TestCEvent(TestExtractBase):
@@ -5766,20 +5766,20 @@ class TestCEvent(TestExtractBase):
         event_info: EventInfo = type_info.GetEvent("Event")
 
         extracted: CEvent = extract_event(event_info)
-        manual: CEvent = CEvent(
+        expected: CEvent = CEvent(
             name="Event",
             declaring_type=CType(name="ClassWithEvents", namespace="TestLib"),
             type=CType(name="EventHandler", namespace="System"),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_event_args(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithEvents")
         event_info: EventInfo = type_info.GetEvent("EventWithArgs")
 
         extracted: CEvent = extract_event(event_info)
-        manual: CEvent = CEvent(
+        expected: CEvent = CEvent(
             name="EventWithArgs",
             declaring_type=CType(name="ClassWithEvents", namespace="TestLib"),
             type=CType(
@@ -5789,12 +5789,12 @@ class TestCEvent(TestExtractBase):
             ),
         )
 
-        self.assertEqual(manual, extracted)
+        self.assertEqual(expected, extracted)
 
     def test_extract_events(self) -> None:
         type_info: TypeInfo = self.get_type("ClassWithEvents")
         extracted: Mapping[str, CEvent] = extract_events(type_info)
-        manual: Mapping[str, CEvent] = {
+        expected: Mapping[str, CEvent] = {
             "TestLib:ClassWithEvents.Event": CEvent(
                 name="Event",
                 declaring_type=CType(name="ClassWithEvents", namespace="TestLib"),
@@ -5811,7 +5811,7 @@ class TestCEvent(TestExtractBase):
             ),
         }
 
-        self.assertDictEqual(manual, extracted)
+        self.assertDictEqual(expected, extracted)
 
 
 class TestExtractAssembly(TestBase):

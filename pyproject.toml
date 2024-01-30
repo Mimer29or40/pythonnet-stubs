@@ -124,6 +124,8 @@ requires-python = ">=3.8"
 #   string. Each string maps directly to a Requires-Dist entry.
 dependencies = [
     "pythonnet>=3.0.0",
+    "black",
+    "isort",
 ]
 
 # dynamic
