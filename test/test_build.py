@@ -6,6 +6,18 @@ from typing import Sequence
 from typing import Set
 from typing import Tuple
 
+from stubgen.build_stubs import merge_class
+from stubgen.build_stubs import merge_constructor
+from stubgen.build_stubs import merge_delegate
+from stubgen.build_stubs import merge_enum
+from stubgen.build_stubs import merge_event
+from stubgen.build_stubs import merge_field
+from stubgen.build_stubs import merge_interface
+from stubgen.build_stubs import merge_method
+from stubgen.build_stubs import merge_property
+from stubgen.build_stubs import merge_struct
+from stubgen.build_stubs import merge_type_def
+from stubgen.model import CTypeDefinition
 from test_base import TestBase
 
 from stubgen.build_stubs import Doc
@@ -41,38 +53,799 @@ from stubgen.model import CType
 
 
 class TestMergeNamespace(TestBase):
-    def test_name_mismatch(self) -> None:
+    def test_merge(self) -> None:
+        namespace1: CNamespace = CNamespace(
+            name="Namespace",
+            types={},
+        )
+        namespace2: CNamespace = CNamespace(
+            name="Namespace",
+            types={},
+        )
+
+        merged: CNamespace = merge_namespace(namespace1, namespace2)
+        expected: CNamespace = CNamespace(
+            name="Namespace",
+            types={},
+        )
+
+        self.assertEqual(expected, merged)
+
+    def test_merge_types(self) -> None:
+        namespace1: CNamespace = CNamespace(
+            name="Namespace",
+            types={
+                "Namespace:ClassA": CClass(
+                    name="ClassA",
+                    namespace="Namespace",
+                    nested=None,
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:ClassB": CClass(
+                    name="ClassB",
+                    namespace="Namespace",
+                    nested=None,
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+            },
+        )
+        namespace2: CNamespace = CNamespace(
+            name="Namespace",
+            types={
+                "Namespace:ClassA": CClass(
+                    name="ClassA",
+                    namespace="Namespace",
+                    nested=None,
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:ClassC": CClass(
+                    name="ClassC",
+                    namespace="Namespace",
+                    nested=None,
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+            },
+        )
+
+        merged: CNamespace = merge_namespace(namespace1, namespace2)
+        expected: CNamespace = CNamespace(
+            name="Namespace",
+            types={
+                "Namespace:ClassA": CClass(
+                    name="ClassA",
+                    namespace="Namespace",
+                    nested=None,
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:ClassB": CClass(
+                    name="ClassB",
+                    namespace="Namespace",
+                    nested=None,
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:ClassC": CClass(
+                    name="ClassC",
+                    namespace="Namespace",
+                    nested=None,
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+            },
+        )
+
+        self.assertEqual(expected, merged)
+
+    def test_merge_error_name(self) -> None:
         namespace1: CNamespace = CNamespace(name="NamespaceA", types={})
         namespace2: CNamespace = CNamespace(name="NamespaceB", types={})
 
-        self.assertRaises(NameError, lambda: merge_namespace(namespace1, namespace2))
+        self.assertRaises(AttributeError, lambda: merge_namespace(namespace1, namespace2))
 
-    def test_merge_empty(self) -> None:
-        namespace1: CNamespace = CNamespace(
-            name="Namespace",
-            types={},
+
+class TestMergeTypeDefinition(TestBase):
+    def test_merge_error_type(self) -> None:
+        type_def1: CTypeDefinition = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
         )
-        namespace2: CNamespace = CNamespace(
-            name="Namespace",
-            types={},
+        type_def2: CTypeDefinition = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
         )
 
-        merged: CNamespace = merge_namespace(namespace1, namespace2)
-        expected: CNamespace = CNamespace(
-            name="Namespace",
-            types={},
+        self.assertRaises(TypeError, lambda: merge_type_def(type_def1, type_def2))
+
+    def test_merge_error_name(self) -> None:
+        type_def1: CTypeDefinition = CClass(
+            name="ClassA",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        type_def2: CTypeDefinition = CClass(
+            name="ClassB",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
         )
 
-        self.assertEqual(expected, merged)
+        self.assertRaises(AttributeError, lambda: merge_type_def(type_def1, type_def2))
 
-    def test_merge_simple(self) -> None:
-        namespace1: CNamespace = CNamespace(
-            name="Namespace",
-            types={
-                "Namespace:ClassA": CClass(
-                    name="ClassA",
+    def test_merge_error_namespace(self) -> None:
+        type_def1: CTypeDefinition = CClass(
+            name="Class",
+            namespace="NamespaceA",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        type_def2: CTypeDefinition = CClass(
+            name="Class",
+            namespace="NamespaceB",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_type_def(type_def1, type_def2))
+
+    def test_merge_error_nested(self) -> None:
+        type_def1: CTypeDefinition = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=CType(name="TypeA"),
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        type_def2: CTypeDefinition = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=CType(name="TypeB"),
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_type_def(type_def1, type_def2))
+
+
+class TestMergeClass(TestBase):
+    def test_merge_fields(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={
+                "Namespace.Class.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Class.FieldB": CField(
+                    name="FieldB",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+            },
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={
+                "Namespace.Class.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Class.FieldC": CField(
+                    name="FieldC",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+            },
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_class(class1, class2)
+        expected: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=True,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={
+                "Namespace.Class.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Class.FieldB": CField(
+                    name="FieldB",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Class.FieldC": CField(
+                    name="FieldC",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+            },
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_constructors(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={
+                "Namespace.Class.__init__()": CConstructor(
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(),
+                ),
+                "Namespace.Class.__init__(ParamType)": CConstructor(
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                ),
+            },
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={
+                "Namespace.Class.__init__()": CConstructor(
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(),
+                ),
+                "Namespace.Class.__init__(ParamType, ParamType)": CConstructor(
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                        CParameter(name="param1", type=CType(name="ParamType")),
+                    ),
+                ),
+            },
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_class(class1, class2)
+        expected: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=True,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={
+                "Namespace.Class.__init__()": CConstructor(
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(),
+                ),
+                "Namespace.Class.__init__(ParamType)": CConstructor(
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                ),
+                "Namespace.Class.__init__(ParamType, ParamType)": CConstructor(
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                        CParameter(name="param1", type=CType(name="ParamType")),
+                    ),
+                ),
+            },
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_properties(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={
+                "Namespace.Class.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Class.PropertyB": CProperty(
+                    name="PropertyB",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+            },
+            methods={},
+            events={},
+            nested_types={},
+        )
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={
+                "Namespace.Class.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Class.PropertyC": CProperty(
+                    name="PropertyC",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+            },
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_class(class1, class2)
+        expected: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=True,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={
+                "Namespace.Class.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Class.PropertyB": CProperty(
+                    name="PropertyB",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Class.PropertyC": CProperty(
+                    name="PropertyC",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+            },
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_methods(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={
+                "Namespace.Class.MethodA(ParamType)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Class.MethodB(ParamType)": CMethod(
+                    name="MethodB",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+            },
+            events={},
+            nested_types={},
+        )
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={
+                "Namespace.Class.MethodA(ParamType)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Class.MethodC(ParamType)": CMethod(
+                    name="MethodC",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+            },
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_class(class1, class2)
+        expected: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={
+                "Namespace.Class.MethodA(ParamType)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Class.MethodB(ParamType)": CMethod(
+                    name="MethodB",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Class.MethodC(ParamType)": CMethod(
+                    name="MethodC",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+            },
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_events(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={
+                "Namespace.Class.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Class.EventB": CEvent(
+                    name="EventB",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+            },
+            nested_types={},
+        )
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={
+                "Namespace.Class.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Class.EventC": CEvent(
+                    name="EventC",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+            },
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_class(class1, class2)
+        expected: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={
+                "Namespace.Class.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Class.EventB": CEvent(
+                    name="EventB",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Class.EventC": CEvent(
+                    name="EventC",
+                    declaring_type=CType(name="Class", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+            },
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_nested(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={
+                "Namespace:Class.NestedClassA": CClass(
+                    name="NestedClassA",
                     namespace="Namespace",
-                    nested=None,
+                    nested=CType(name="Class", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:Class.NestedClassB": CClass(
+                    name="NestedClassB",
+                    namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -86,13 +859,39 @@ class TestMergeNamespace(TestBase):
                 ),
             },
         )
-        namespace2: CNamespace = CNamespace(
-            name="Namespace",
-            types={
-                "Namespace:ClassB": CClass(
-                    name="ClassB",
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={
+                "Namespace:Class.NestedClassA": CClass(
+                    name="NestedClassA",
                     namespace="Namespace",
-                    nested=None,
+                    nested=CType(name="Class", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:Class.NestedClassC": CClass(
+                    name="NestedClassC",
+                    namespace="Namespace",
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -107,14 +906,25 @@ class TestMergeNamespace(TestBase):
             },
         )
 
-        merged: CNamespace = merge_namespace(namespace1, namespace2)
-        expected: CNamespace = CNamespace(
-            name="Namespace",
-            types={
-                "Namespace:ClassA": CClass(
-                    name="ClassA",
+        result: CTypeDefinition = merge_class(class1, class2)
+        expected: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={
+                "Namespace:Class.NestedClassA": CClass(
+                    name="NestedClassA",
                     namespace="Namespace",
-                    nested=None,
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -126,10 +936,10 @@ class TestMergeNamespace(TestBase):
                     events={},
                     nested_types={},
                 ),
-                "Namespace:ClassB": CClass(
-                    name="ClassB",
+                "Namespace:Class.NestedClassB": CClass(
+                    name="NestedClassB",
                     namespace="Namespace",
-                    nested=None,
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -141,39 +951,10 @@ class TestMergeNamespace(TestBase):
                     events={},
                     nested_types={},
                 ),
-            },
-        )
-
-        self.assertEqual(expected, merged)
-
-    def test_merge_simple_rev(self) -> None:
-        namespace1: CNamespace = CNamespace(
-            name="Namespace",
-            types={
-                "Namespace:ClassB": CClass(
-                    name="ClassB",
+                "Namespace:Class.NestedClassC": CClass(
+                    name="NestedClassC",
                     namespace="Namespace",
-                    nested=None,
-                    abstract=False,
-                    generic_args=(),
-                    super_class=None,
-                    interfaces=(),
-                    fields={},
-                    constructors={},
-                    properties={},
-                    methods={},
-                    events={},
-                    nested_types={},
-                ),
-            },
-        )
-        namespace2: CNamespace = CNamespace(
-            name="Namespace",
-            types={
-                "Namespace:ClassA": CClass(
-                    name="ClassA",
-                    namespace="Namespace",
-                    nested=None,
+                    nested=CType(name="Class", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -188,14 +969,634 @@ class TestMergeNamespace(TestBase):
             },
         )
 
-        merged: CNamespace = merge_namespace(namespace1, namespace2)
-        expected: CNamespace = CNamespace(
-            name="Namespace",
-            types={
-                "Namespace:ClassA": CClass(
-                    name="ClassA",
+        self.assertEqual(expected, result)
+
+    def test_merge_error_abstract(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=True,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_class(class1, class2))
+
+    def test_merge_error_generic_args(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(CType(name="T"),),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_class(class1, class2))
+
+    def test_merge_error_super_class(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=CType(name="Super", namespace="Namespace"),
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_class(class1, class2))
+
+    def test_merge_error_interfaces(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(CType(name="Interface", namespace="Namespace"),),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_class(class1, class2))
+
+
+class TestMergeStruct(TestBase):
+    def test_merge_fields(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={
+                "Namespace.Struct.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Struct.FieldB": CField(
+                    name="FieldB",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+            },
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={
+                "Namespace.Struct.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Struct.FieldC": CField(
+                    name="FieldC",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+            },
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_struct(struct1, struct2)
+        expected: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={
+                "Namespace.Struct.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Struct.FieldB": CField(
+                    name="FieldB",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Struct.FieldC": CField(
+                    name="FieldC",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+            },
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_constructors(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={
+                "Namespace.Struct.__init__()": CConstructor(
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(),
+                ),
+                "Namespace.Struct.__init__(ParamType)": CConstructor(
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                ),
+            },
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={
+                "Namespace.Struct.__init__()": CConstructor(
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(),
+                ),
+                "Namespace.Struct.__init__(ParamType, ParamType)": CConstructor(
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                        CParameter(name="param1", type=CType(name="ParamType")),
+                    ),
+                ),
+            },
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_struct(struct1, struct2)
+        expected: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=True,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={
+                "Namespace.Struct.__init__()": CConstructor(
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(),
+                ),
+                "Namespace.Struct.__init__(ParamType)": CConstructor(
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                ),
+                "Namespace.Struct.__init__(ParamType, ParamType)": CConstructor(
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                        CParameter(name="param1", type=CType(name="ParamType")),
+                    ),
+                ),
+            },
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_properties(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={
+                "Namespace.Struct.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Struct.PropertyB": CProperty(
+                    name="PropertyB",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+            },
+            methods={},
+            events={},
+            nested_types={},
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={
+                "Namespace.Struct.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Struct.PropertyC": CProperty(
+                    name="PropertyC",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+            },
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_struct(struct1, struct2)
+        expected: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=True,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={
+                "Namespace.Struct.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Struct.PropertyB": CProperty(
+                    name="PropertyB",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Struct.PropertyC": CProperty(
+                    name="PropertyC",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+            },
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_methods(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={
+                "Namespace.Struct.MethodA(ParamType)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Struct.MethodB(ParamType)": CMethod(
+                    name="MethodB",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+            },
+            events={},
+            nested_types={},
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={
+                "Namespace.Struct.MethodA(ParamType)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Struct.MethodC(ParamType)": CMethod(
+                    name="MethodC",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+            },
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_struct(struct1, struct2)
+        expected: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={
+                "Namespace.Struct.MethodA(ParamType)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Struct.MethodB(ParamType)": CMethod(
+                    name="MethodB",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Struct.MethodC(ParamType)": CMethod(
+                    name="MethodC",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+            },
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_events(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={
+                "Namespace.Struct.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Struct.EventB": CEvent(
+                    name="EventB",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+            },
+            nested_types={},
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={
+                "Namespace.Struct.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Struct.EventC": CEvent(
+                    name="EventC",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+            },
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_struct(struct1, struct2)
+        expected: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={
+                "Namespace.Struct.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Struct.EventB": CEvent(
+                    name="EventB",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Struct.EventC": CEvent(
+                    name="EventC",
+                    declaring_type=CType(name="Struct", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+            },
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_nested(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={
+                "Namespace:Struct.NestedClassA": CClass(
+                    name="NestedClassA",
                     namespace="Namespace",
-                    nested=None,
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -207,10 +1608,56 @@ class TestMergeNamespace(TestBase):
                     events={},
                     nested_types={},
                 ),
-                "Namespace:ClassB": CClass(
-                    name="ClassB",
+                "Namespace:Struct.NestedClassB": CClass(
+                    name="NestedClassB",
                     namespace="Namespace",
-                    nested=None,
+                    nested=CType(name="Struct", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+            },
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={
+                "Namespace:Struct.NestedClassA": CClass(
+                    name="NestedClassA",
+                    namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:Struct.NestedClassC": CClass(
+                    name="NestedClassC",
+                    namespace="Namespace",
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -225,16 +1672,25 @@ class TestMergeNamespace(TestBase):
             },
         )
 
-        self.assertEqual(expected, merged)
-
-    def test_merge_overlap(self) -> None:
-        namespace1: CNamespace = CNamespace(
-            name="Namespace",
-            types={
-                "Namespace:ClassA": CClass(
-                    name="ClassA",
+        result: CTypeDefinition = merge_struct(struct1, struct2)
+        expected: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={
+                "Namespace:Struct.NestedClassA": CClass(
+                    name="NestedClassA",
                     namespace="Namespace",
-                    nested=None,
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -246,15 +1702,10 @@ class TestMergeNamespace(TestBase):
                     events={},
                     nested_types={},
                 ),
-            },
-        )
-        namespace2: CNamespace = CNamespace(
-            name="Namespace",
-            types={
-                "Namespace:ClassA": CClass(
-                    name="ClassA",
+                "Namespace:Struct.NestedClassB": CClass(
+                    name="NestedClassB",
                     namespace="Namespace",
-                    nested=None,
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -266,17 +1717,10 @@ class TestMergeNamespace(TestBase):
                     events={},
                     nested_types={},
                 ),
-            },
-        )
-
-        merged: CNamespace = merge_namespace(namespace1, namespace2)
-        expected: CNamespace = CNamespace(
-            name="Namespace",
-            types={
-                "Namespace:ClassA": CClass(
-                    name="ClassA",
+                "Namespace:Struct.NestedClassC": CClass(
+                    name="NestedClassC",
                     namespace="Namespace",
-                    nested=None,
+                    nested=CType(name="Struct", namespace="Namespace"),
                     abstract=False,
                     generic_args=(),
                     super_class=None,
@@ -291,7 +1735,1247 @@ class TestMergeNamespace(TestBase):
             },
         )
 
-        self.assertEqual(expected, merged)
+        self.assertEqual(expected, result)
+
+    def test_merge_error_abstract(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=True,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_struct(struct1, struct2))
+
+    def test_merge_error_generic_args(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(CType(name="T"),),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_struct(struct1, struct2))
+
+    def test_merge_error_super_class(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=CType(name="Super", namespace="Namespace"),
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_struct(struct1, struct2))
+
+    def test_merge_error_interfaces(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(CType(name="Interface", namespace="Namespace"),),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_struct(struct1, struct2))
+
+
+class TestMergeInterface(TestBase):
+    def test_merge_fields(self) -> None:
+        interface1: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={
+                "Namespace.Interface.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Interface.FieldB": CField(
+                    name="FieldB",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+            },
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        interface2: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={
+                "Namespace.Interface.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Interface.FieldC": CField(
+                    name="FieldC",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+            },
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_interface(interface1, interface2)
+        expected: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={
+                "Namespace.Interface.FieldA": CField(
+                    name="FieldA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Interface.FieldB": CField(
+                    name="FieldB",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+                "Namespace.Interface.FieldC": CField(
+                    name="FieldC",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    return_type=CType(name="ReturnType"),
+                ),
+            },
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_properties(self) -> None:
+        interface1: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={
+                "Namespace.Interface.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Interface.PropertyB": CProperty(
+                    name="PropertyB",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+            },
+            methods={},
+            events={},
+            nested_types={},
+        )
+        interface2: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={
+                "Namespace.Interface.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Interface.PropertyC": CProperty(
+                    name="PropertyC",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+            },
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_interface(interface1, interface2)
+        expected: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={
+                "Namespace.Interface.PropertyA": CProperty(
+                    name="PropertyA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Interface.PropertyB": CProperty(
+                    name="PropertyB",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+                "Namespace.Interface.PropertyC": CProperty(
+                    name="PropertyC",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="PropertyType"),
+                ),
+            },
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_methods(self) -> None:
+        interface1: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={
+                "Namespace.Interface.MethodA(ParamType)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Interface.MethodB(ParamType)": CMethod(
+                    name="MethodB",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+            },
+            events={},
+            nested_types={},
+        )
+        interface2: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={
+                "Namespace.Interface.MethodA(ParamType)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Interface.MethodC(ParamType)": CMethod(
+                    name="MethodC",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+            },
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_interface(interface1, interface2)
+        expected: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={
+                "Namespace.Interface.MethodA(ParamType)": CMethod(
+                    name="MethodA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Interface.MethodB(ParamType)": CMethod(
+                    name="MethodB",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+                "Namespace.Interface.MethodC(ParamType)": CMethod(
+                    name="MethodC",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    parameters=(
+                        CParameter(name="param0", type=CType(name="ParamType")),
+                    ),
+                    return_types=(CType(name="PropertyType"),),
+                ),
+            },
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_events(self) -> None:
+        interface1: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={},
+            events={
+                "Namespace.Interface.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Interface.EventB": CEvent(
+                    name="EventB",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+            },
+            nested_types={},
+        )
+        interface2: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={},
+            events={
+                "Namespace.Interface.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Interface.EventC": CEvent(
+                    name="EventC",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+            },
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_interface(interface1, interface2)
+        expected: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={},
+            events={
+                "Namespace.Interface.EventA": CEvent(
+                    name="EventA",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Interface.EventB": CEvent(
+                    name="EventB",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+                "Namespace.Interface.EventC": CEvent(
+                    name="EventC",
+                    declaring_type=CType(name="Interface", namespace="Namespace"),
+                    type=CType(name="EventType"),
+                ),
+            },
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_nested(self) -> None:
+        interface1: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={
+                "Namespace:Interface.NestedClassA": CClass(
+                    name="NestedClassA",
+                    namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:Interface.NestedClassB": CClass(
+                    name="NestedClassB",
+                    namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+            },
+        )
+        interface2: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={
+                "Namespace:Interface.NestedClassA": CClass(
+                    name="NestedClassA",
+                    namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:Interface.NestedClassC": CClass(
+                    name="NestedClassC",
+                    namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+            },
+        )
+
+        result: CTypeDefinition = merge_interface(interface1, interface2)
+        expected: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={
+                "Namespace:Interface.NestedClassA": CClass(
+                    name="NestedClassA",
+                    namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:Interface.NestedClassB": CClass(
+                    name="NestedClassB",
+                    namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+                "Namespace:Interface.NestedClassC": CClass(
+                    name="NestedClassC",
+                    namespace="Namespace",
+                    nested=CType(name="Interface", namespace="Namespace"),
+                    abstract=False,
+                    generic_args=(),
+                    super_class=None,
+                    interfaces=(),
+                    fields={},
+                    constructors={},
+                    properties={},
+                    methods={},
+                    events={},
+                    nested_types={},
+                ),
+            },
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_error_generic_args(self) -> None:
+        interface1: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        interface2: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(CType(name="T"),),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_interface(interface1, interface2))
+
+    def test_merge_error_interfaces(self) -> None:
+        interface1: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(),
+            fields={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        interface2: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(CType(name="Interface", namespace="Namespace"),),
+            fields={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_interface(interface1, interface2))
+
+
+class TestMergeEnum(TestBase):
+    def test_merge(self) -> None:
+        enum1: CEnum = CEnum(
+            name="Enum",
+            namespace="Namespace",
+            nested=None,
+            fields=("FieldA", "FieldB", "FieldC", "FieldD"),
+        )
+        enum2: CEnum = CEnum(
+            name="Enum",
+            namespace="Namespace",
+            nested=None,
+            fields=("FieldA", "FieldB", "FieldC", "FieldD"),
+        )
+
+        result: CTypeDefinition = merge_type_def(enum1, enum2)
+        expected: CEnum = CEnum(
+            name="Enum",
+            namespace="Namespace",
+            nested=None,
+            fields=("FieldA", "FieldB", "FieldC", "FieldD"),
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_error_fields(self) -> None:
+        enum1: CEnum = CEnum(
+            name="Enum",
+            namespace="Namespace",
+            nested=None,
+            fields=("FieldA", "FieldB", "FieldC", "FieldD"),
+        )
+        enum2: CEnum = CEnum(
+            name="Enum",
+            namespace="Namespace",
+            nested=None,
+            fields=("FieldA", "FieldB", "FieldC", "FieldD", "FieldE"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_enum(enum1, enum2))
+
+
+class TestMergeDelegate(TestBase):
+    def test_merge(self) -> None:
+        delegate1: CDelegate = CDelegate(
+            name="Delegate",
+            namespace="Namespace",
+            nested=None,
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_type=CType(name="ReturnType"),
+        )
+        delegate2: CDelegate = CDelegate(
+            name="Delegate",
+            namespace="Namespace",
+            nested=None,
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_type=CType(name="ReturnType"),
+        )
+
+        result: CTypeDefinition = merge_type_def(delegate1, delegate2)
+        expected: CDelegate = CDelegate(
+            name="Delegate",
+            namespace="Namespace",
+            nested=None,
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_type=CType(name="ReturnType"),
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_error_parameters(self) -> None:
+        delegate1: CDelegate = CDelegate(
+            name="Delegate",
+            namespace="Namespace",
+            nested=None,
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_type=CType(name="ReturnType"),
+        )
+        delegate2: CDelegate = CDelegate(
+            name="Delegate",
+            namespace="Namespace",
+            nested=None,
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+                CParameter(name="param1", type=CType(name="ParamType")),
+            ),
+            return_type=CType(name="ReturnType"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_delegate(delegate1, delegate2))
+
+    def test_merge_error_return_type(self) -> None:
+        delegate1: CDelegate = CDelegate(
+            name="Delegate",
+            namespace="Namespace",
+            nested=None,
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_type=CType(name="ReturnTypeA"),
+        )
+        delegate2: CDelegate = CDelegate(
+            name="Delegate",
+            namespace="Namespace",
+            nested=None,
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_type=CType(name="ReturnTypeB"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_delegate(delegate1, delegate2))
+
+
+class TestMergeField(TestBase):
+    def test_merge(self) -> None:
+        field1: CField = CField(
+            name="Field",
+            declaring_type=CType(name="DeclaringType"),
+            return_type=CType(name="ReturnType"),
+        )
+        field2: CField = CField(
+            name="Field",
+            declaring_type=CType(name="DeclaringType"),
+            return_type=CType(name="ReturnType"),
+        )
+
+        result: CField = merge_field(field1, field2)
+        expected: CField = CField(
+            name="Field",
+            declaring_type=CType(name="DeclaringType"),
+            return_type=CType(name="ReturnType"),
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_error_name(self) -> None:
+        field1: CField = CField(
+            name="FieldA",
+            declaring_type=CType(name="DeclaringType"),
+            return_type=CType(name="ReturnType"),
+        )
+        field2: CField = CField(
+            name="FieldB",
+            declaring_type=CType(name="DeclaringType"),
+            return_type=CType(name="ReturnType"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_field(field1, field2))
+
+    def test_merge_error_declaring_type(self) -> None:
+        field1: CField = CField(
+            name="Field",
+            declaring_type=CType(name="DeclaringTypeA"),
+            return_type=CType(name="ReturnType"),
+        )
+        field2: CField = CField(
+            name="Field",
+            declaring_type=CType(name="DeclaringTypeB"),
+            return_type=CType(name="ReturnType"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_field(field1, field2))
+
+    def test_merge_error_return_type(self) -> None:
+        field1: CField = CField(
+            name="Field",
+            declaring_type=CType(name="DeclaringType"),
+            return_type=CType(name="ReturnTypeA"),
+        )
+        field2: CField = CField(
+            name="Field",
+            declaring_type=CType(name="DeclaringType"),
+            return_type=CType(name="ReturnTypeB"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_field(field1, field2))
+
+    def test_merge_error_static(self) -> None:
+        field1: CField = CField(
+            name="Field",
+            declaring_type=CType(name="DeclaringType"),
+            return_type=CType(name="ReturnType"),
+        )
+        field2: CField = CField(
+            name="Field",
+            declaring_type=CType(name="DeclaringType"),
+            return_type=CType(name="ReturnType"),
+            static=True,
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_field(field1, field2))
+
+
+class TestMergeConstructor(TestBase):
+    def test_merge(self) -> None:
+        constructor1: CConstructor = CConstructor(
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+        )
+        constructor2: CConstructor = CConstructor(
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+        )
+
+        result: CConstructor = merge_constructor(constructor1, constructor2)
+        expected: CConstructor = CConstructor(
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_error_declaring_type(self) -> None:
+        constructor1: CConstructor = CConstructor(
+            declaring_type=CType(name="DeclaringTypeA"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+        )
+        constructor2: CConstructor = CConstructor(
+            declaring_type=CType(name="DeclaringTypeB"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_constructor(constructor1, constructor2))
+
+    def test_merge_error_parameters(self) -> None:
+        constructor1: CConstructor = CConstructor(
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+        )
+        constructor2: CConstructor = CConstructor(
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+                CParameter(name="param1", type=CType(name="ParamType")),
+            ),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_constructor(constructor1, constructor2))
+
+
+class TestMergeProperty(TestBase):
+    def test_merge(self) -> None:
+        property1: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+        property2: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+
+        result: CProperty = merge_property(property1, property2)
+        expected: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_error_name(self) -> None:
+        property1: CProperty = CProperty(
+            name="PropertyA",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+        property2: CProperty = CProperty(
+            name="PropertyB",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_property(property1, property2))
+
+    def test_merge_error_declaring_type(self) -> None:
+        property1: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringTypeA"),
+            type=CType(name="Type"),
+        )
+        property2: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringTypeB"),
+            type=CType(name="Type"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_property(property1, property2))
+
+    def test_merge_error_type(self) -> None:
+        property1: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="TypeA"),
+        )
+        property2: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="TypeB"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_property(property1, property2))
+
+    def test_merge_error_setter(self) -> None:
+        property1: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+        property2: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+            setter=True,
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_property(property1, property2))
+
+    def test_merge_error_static(self) -> None:
+        property1: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+        property2: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+            static=True,
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_property(property1, property2))
+
+
+class TestMergeMethod(TestBase):
+    def test_merge(self) -> None:
+        method1: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnType"),),
+        )
+        method2: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnType"),),
+        )
+
+        result: CMethod = merge_method(method1, method2)
+        expected: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnType"),),
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_error_name(self) -> None:
+        method1: CMethod = CMethod(
+            name="MethodA",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnType"),),
+        )
+        method2: CMethod = CMethod(
+            name="MethodB",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnType"),),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_method(method1, method2))
+
+    def test_merge_error_declaring_type(self) -> None:
+        method1: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringTypeA"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnType"),),
+        )
+        method2: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringTypeB"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnType"),),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_method(method1, method2))
+
+    def test_merge_error_parameters(self) -> None:
+        method1: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnTypeA"),),
+        )
+        method2: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+                CParameter(name="param1", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnTypeB"),),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_method(method1, method2))
+
+    def test_merge_error_return_types(self) -> None:
+        method1: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnTypeA"),),
+        )
+        method2: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnTypeB"),),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_method(method1, method2))
+
+    def test_merge_error_static(self) -> None:
+        method1: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnTypeA"),),
+        )
+        method2: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="DeclaringType"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="ParamType")),
+            ),
+            return_types=(CType(name="ReturnTypeB"),),
+            static=True,
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_method(method1, method2))
+
+
+class TestMergeEvent(TestBase):
+    def test_merge(self) -> None:
+        event1: CEvent = CEvent(
+            name="Event",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+        event2: CEvent = CEvent(
+            name="Event",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+
+        result: CEvent = merge_event(event1, event2)
+        expected: CEvent = CEvent(
+            name="Event",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_error_name(self) -> None:
+        event1: CEvent = CEvent(
+            name="EventA",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+        event2: CEvent = CEvent(
+            name="EventB",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_event(event1, event2))
+
+    def test_merge_error_declaring_type(self) -> None:
+        event1: CEvent = CEvent(
+            name="Event",
+            declaring_type=CType(name="DeclaringTypeA"),
+            type=CType(name="Type"),
+        )
+        event2: CEvent = CEvent(
+            name="Event",
+            declaring_type=CType(name="DeclaringTypeB"),
+            type=CType(name="Type"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_event(event1, event2))
+
+    def test_merge_error_type(self) -> None:
+        event1: CEvent = CEvent(
+            name="Event",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="TypeA"),
+        )
+        event2: CEvent = CEvent(
+            name="Event",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="TypeB"),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_event(event1, event2))
 
 
 class TestImports(TestBase):

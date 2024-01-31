@@ -459,7 +459,7 @@ def extract_nested_types(info: TypeInfo) -> Mapping[str, CTypeDefinition]:
 
 
 def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> Union[int, str]:
-    logger.debug(f"Extracting assembly: %r", assembly_name)
+    logger.info(f"Extracting assembly: %r", assembly_name)
 
     assembly: Assembly = clr.AddReference(assembly_name)
     name: AssemblyName = assembly.GetName()
@@ -477,7 +477,7 @@ def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> U
         logger.critical("Doc file already exists: %r", str(doc_file))
         return 1
 
-    logger.info("Parsing types")
+    logger.debug("Parsing types")
     type_definitions: Dict[str, List[CTypeDefinition]] = defaultdict(list)
     info: TypeInfo
     for info in assembly.GetTypes():
@@ -494,7 +494,7 @@ def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> U
         for namespace, type_list in type_definitions.items()
     )
 
-    logger.info("Saving types to file")
+    logger.debug("Saving types to file: %r", str(extract_file))
     with extract_file.open("w") as file:
         json.dump(
             {
@@ -508,7 +508,7 @@ def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> U
             indent=2,
         )
 
-    logger.info("Generating doc file")
+    logger.debug("Generating doc file: %r", str(doc_file))
     main_doc_namespace = {}
     for namespace in namespaces:
         curr = main_doc_namespace

@@ -2725,13 +2725,14 @@ class TestCClass(TestBase):
             {
                 "doc": "",
                 "doc_formatted": {},
-                "Field": {"doc": "", "doc_formatted": {}, "return": ""},
+                "Field": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
                 "__init__(Namespace:Type)": {
                     "doc": "",
                     "doc_formatted": {},
                     "parameters": {"param0": ""},
+                    "exceptions": {},
                 },
-                "Property": {"doc": "", "doc_formatted": {}, "return": ""},
+                "Property": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
                 "Method(Namespace:Type)": {
                     "doc": "",
                     "doc_formatted": {},
@@ -2742,8 +2743,8 @@ class TestCClass(TestBase):
                 "Event": {"doc": "", "doc_formatted": {}},
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
-                "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
-                "NestedEnum": {"doc": "", "doc_formatted": ""},
+                "NestedDelegate": {"doc": "", "doc_formatted": {}, "parameters": {}, "return": ""},
+                "NestedEnum": {"doc": "", "doc_formatted": {}},
                 "NestedStruct": {"doc": "", "doc_formatted": {}},
             },
             json,
@@ -5397,13 +5398,14 @@ class TestCStruct(TestBase):
             {
                 "doc": "",
                 "doc_formatted": {},
-                "Field": {"doc": "", "doc_formatted": {}, "return": ""},
+                "Field": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
                 "__init__(Namespace:Type)": {
                     "doc": "",
                     "doc_formatted": {},
                     "parameters": {"param0": ""},
+                    "exceptions": {},
                 },
-                "Property": {"doc": "", "doc_formatted": {}, "return": ""},
+                "Property": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
                 "Method(Namespace:Type)": {
                     "doc": "",
                     "doc_formatted": {},
@@ -5414,8 +5416,8 @@ class TestCStruct(TestBase):
                 "Event": {"doc": "", "doc_formatted": {}},
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
-                "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
-                "NestedEnum": {"doc": "", "doc_formatted": ""},
+                "NestedDelegate": {"doc": "", "doc_formatted": {}, "parameters": {}, "return": ""},
+                "NestedEnum": {"doc": "", "doc_formatted": {}},
                 "NestedStruct": {"doc": "", "doc_formatted": {}},
             },
             json,
@@ -6979,8 +6981,8 @@ class TestCInterface(TestBase):
             {
                 "doc": "",
                 "doc_formatted": {},
-                "Field": {"doc": "", "doc_formatted": {}, "return": ""},
-                "Property": {"doc": "", "doc_formatted": {}, "return": ""},
+                "Field": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
+                "Property": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
                 "Method(Namespace:Type)": {
                     "doc": "",
                     "doc_formatted": {},
@@ -6991,8 +6993,8 @@ class TestCInterface(TestBase):
                 "Event": {"doc": "", "doc_formatted": {}},
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
-                "NestedDelegate": {"doc": "", "doc_formatted": "", "parameters": {}, "return": ""},
-                "NestedEnum": {"doc": "", "doc_formatted": ""},
+                "NestedDelegate": {"doc": "", "doc_formatted": {}, "parameters": {}, "return": ""},
+                "NestedEnum": {"doc": "", "doc_formatted": {}},
                 "NestedStruct": {"doc": "", "doc_formatted": {}},
             },
             json,
@@ -7152,7 +7154,7 @@ class TestCEnum(TestBase):
         self.assertDictEqual(
             {
                 "doc": "",
-                "doc_formatted": "",
+                "doc_formatted": {},
                 "Field0": {"doc": ""},
                 "Field1": {"doc": ""},
                 "Field2": {"doc": ""},
@@ -7291,7 +7293,7 @@ class TestCDelegate(TestBase):
         self.assertDictEqual(
             {
                 "doc": "",
-                "doc_formatted": "",
+                "doc_formatted": {},
                 "parameters": {
                     "param0": "",
                     "param1": "",
@@ -7874,7 +7876,7 @@ class TestCField(TestBase):
         self.assertIsNotNone(json)
         self.assertIsInstance(json, dict)
         self.assertDictEqual(
-            {"doc": "", "doc_formatted": {}, "return": ""},
+            {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
             json,
         )
 
@@ -8001,6 +8003,7 @@ class TestCConstructor(TestBase):
                 "doc": "",
                 "doc_formatted": {},
                 "parameters": {"param0": "", "param1": ""},
+                "exceptions": {},
             },
             json,
         )
@@ -8183,7 +8186,7 @@ class TestCProperty(TestBase):
         self.assertIsNotNone(json)
         self.assertIsInstance(json, dict)
         self.assertDictEqual(
-            {"doc": "", "doc_formatted": {}, "return": ""},
+            {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
             json,
         )
 

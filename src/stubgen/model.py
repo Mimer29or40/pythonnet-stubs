@@ -267,7 +267,7 @@ class CEnum(CTypeDefinition):
     def to_doc_json(self) -> Tuple[str, JsonType]:
         return self.name, {
             "doc": "",
-            "doc_formatted": "",
+            "doc_formatted": {},
             **{f: {"doc": ""} for f in self.fields},
         }
 
@@ -299,7 +299,7 @@ class CDelegate(CTypeDefinition):
     def to_doc_json(self) -> Tuple[str, JsonType]:
         return self.name, {
             "doc": "",
-            "doc_formatted": "",
+            "doc_formatted": {},
             "parameters": {p.name: "" for p in self.parameters},
             "return": "",
         }
@@ -512,7 +512,7 @@ class CField(CMember):
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        return self.name, {"doc": "", "doc_formatted": {}, "return": ""}
+        return self.name, {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}}
 
     @classmethod
     def from_json(cls, json: JsonType) -> CField:
@@ -560,6 +560,7 @@ class CConstructor(CMember):
             "doc": "",
             "doc_formatted": {},
             "parameters": {p.name: "" for p in self.parameters},
+            "exceptions": {},
         }
 
     @classmethod
@@ -598,7 +599,7 @@ class CProperty(CMember):
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        return self.name, {"doc": "", "doc_formatted": {}, "return": ""}
+        return self.name, {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}}
 
     @classmethod
     def from_json(cls, json: JsonType) -> CProperty:

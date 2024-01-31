@@ -9,6 +9,7 @@ from dataclasses import field
 from pathlib import Path
 from typing import Any
 from typing import AnyStr
+from typing import Callable
 from typing import Dict
 from typing import Final
 from typing import List
@@ -17,6 +18,7 @@ from typing import Optional
 from typing import Sequence
 from typing import Set
 from typing import Tuple
+from typing import TypeVar
 from typing import Union
 from typing import cast
 
@@ -43,28 +45,318 @@ from stubgen.model import CType
 from stubgen.model import CTypeDefinition
 from stubgen.util import make_python_name
 
+T = TypeVar("T")
+
 logger = get_logger(__name__)
 
 
+def verify_attribute(obj1, obj2, type: str, attribute: str) -> None:
+    attr1 = getattr(obj1, attribute)
+    attr2 = getattr(obj2, attribute)
+    if attr1 != attr2:
+        raise AttributeError(f"{type} have different {attribute} values: {attr1} != {attr2}")
+
+
+def merge_mapping(
+    mapping1: Mapping[str, T],
+    mapping2: Mapping[str, T],
+    merge_func: Callable[[T, T], T],
+) -> Mapping[str, T]:
+    key_list: Set[str] = set(mapping1.keys())
+    key_list.update(mapping2.keys())
+
+    obj: T
+    merged: Dict[str, T] = {}
+    for key in sorted(key_list):
+        if key in mapping1:
+            obj = mapping1[key]
+            if key in mapping2:
+                obj = merge_func(obj, mapping2[key])
+            merged[key] = obj
+        elif key in mapping2:
+            obj = mapping2[key]
+            merged[key] = obj
+
+    return merged
+
+
 def merge_namespace(namespace1: CNamespace, namespace2: CNamespace) -> CNamespace:
-    if namespace1.name != namespace2.name:
-        raise NameError(f"Namespace name mismatch: {namespace1.name} != {namespace2.name}")
+    verify_attribute(namespace1, namespace2, "Namespaces", "name")
 
-    type_list: Set[str] = set(namespace1.types.keys())
-    type_list.update(namespace2.types.keys())
-
-    type_map: Dict[str, CTypeDefinition] = {}
-    for type_str in sorted(type_list):
-        if type_str in namespace1.types:
-            type_def: CTypeDefinition = namespace1.types[type_str]
-            if type_str in namespace2.types:
-                logger.warning("Duplicate type in namespace %r: %r", namespace1.name, str(type_def))
-            type_map[type_str] = type_def
-        elif type_str in namespace2.types:
-            type_def: CTypeDefinition = namespace2.types[type_str]
-            type_map[type_str] = type_def
+    type_map: Mapping[str, CTypeDefinition] = merge_mapping(
+        mapping1=namespace1.types,
+        mapping2=namespace2.types,
+        merge_func=merge_type_def,
+    )
 
     return CNamespace(name=namespace1.name, types=type_map)
+
+
+def merge_type_def(type_def1: CTypeDefinition, type_def2: CTypeDefinition) -> CTypeDefinition:
+    class1: str = type_def1.__class__.__name__
+    class2: str = type_def2.__class__.__name__
+
+    if class1 != class2:
+        raise TypeError(f"Type definitions are not the same: {class1} != {class2}")
+
+    verify_attribute(type_def1, type_def2, "Type Definitions", "name")
+    verify_attribute(type_def1, type_def2, "Type Definitions", "namespace")
+    verify_attribute(type_def1, type_def2, "Type Definitions", "nested")
+
+    if class1 == "CClass":
+        return merge_class(cast(CClass, type_def1), cast(CClass, type_def2))
+    if class1 == "CStruct":
+        return merge_struct(cast(CStruct, type_def1), cast(CStruct, type_def2))
+    if class1 == "CInterface":
+        return merge_interface(cast(CInterface, type_def1), cast(CInterface, type_def2))
+    if class1 == "CEnum":
+        return merge_enum(cast(CEnum, type_def1), cast(CEnum, type_def2))
+    if class1 == "CDelegate":
+        return merge_delegate(cast(CDelegate, type_def1), cast(CDelegate, type_def2))
+
+
+def merge_class(class1: CClass, class2: CClass) -> CClass:
+    verify_attribute(class1, class2, "Classes", "abstract")
+    verify_attribute(class1, class2, "Classes", "generic_args")
+    verify_attribute(class1, class2, "Classes", "super_class")
+    verify_attribute(class1, class2, "Classes", "interfaces")
+
+    fields: Mapping[str, CField] = merge_mapping(
+        mapping1=class1.fields,
+        mapping2=class2.fields,
+        merge_func=merge_field,
+    )
+    constructors: Mapping[str, CConstructor] = merge_mapping(
+        mapping1=class1.constructors,
+        mapping2=class2.constructors,
+        merge_func=merge_constructor,
+    )
+    properties: Mapping[str, CProperty] = merge_mapping(
+        mapping1=class1.properties,
+        mapping2=class2.properties,
+        merge_func=merge_property,
+    )
+    methods: Mapping[str, CMethod] = merge_mapping(
+        mapping1=class1.methods,
+        mapping2=class2.methods,
+        merge_func=merge_method,
+    )
+    events: Mapping[str, CEvent] = merge_mapping(
+        mapping1=class1.events,
+        mapping2=class2.events,
+        merge_func=merge_event,
+    )
+    nested_types: Mapping[str, CTypeDefinition] = merge_mapping(
+        mapping1=class1.nested_types,
+        mapping2=class2.nested_types,
+        merge_func=merge_type_def,
+    )
+
+    return CClass(
+        name=class1.name,
+        namespace=class1.namespace,
+        nested=class1.nested,
+        abstract=class1.abstract,
+        generic_args=class1.generic_args,
+        super_class=class1.super_class,
+        interfaces=class1.interfaces,
+        fields=fields,
+        constructors=constructors,
+        properties=properties,
+        methods=methods,
+        events=events,
+        nested_types=nested_types,
+    )
+
+
+def merge_struct(struct1: CStruct, struct2: CStruct) -> CStruct:
+    verify_attribute(struct1, struct2, "Structs", "abstract")
+    verify_attribute(struct1, struct2, "Structs", "generic_args")
+    verify_attribute(struct1, struct2, "Structs", "super_class")
+    verify_attribute(struct1, struct2, "Structs", "interfaces")
+
+    fields: Mapping[str, CField] = merge_mapping(
+        mapping1=struct1.fields,
+        mapping2=struct2.fields,
+        merge_func=merge_field,
+    )
+    constructors: Mapping[str, CConstructor] = merge_mapping(
+        mapping1=struct1.constructors,
+        mapping2=struct2.constructors,
+        merge_func=merge_constructor,
+    )
+    properties: Mapping[str, CProperty] = merge_mapping(
+        mapping1=struct1.properties,
+        mapping2=struct2.properties,
+        merge_func=merge_property,
+    )
+    methods: Mapping[str, CMethod] = merge_mapping(
+        mapping1=struct1.methods,
+        mapping2=struct2.methods,
+        merge_func=merge_method,
+    )
+    events: Mapping[str, CEvent] = merge_mapping(
+        mapping1=struct1.events,
+        mapping2=struct2.events,
+        merge_func=merge_event,
+    )
+    nested_types: Mapping[str, CTypeDefinition] = merge_mapping(
+        mapping1=struct1.nested_types,
+        mapping2=struct2.nested_types,
+        merge_func=merge_type_def,
+    )
+
+    return CStruct(
+        name=struct1.name,
+        namespace=struct1.namespace,
+        nested=struct1.nested,
+        abstract=struct1.abstract,
+        generic_args=struct1.generic_args,
+        super_class=struct1.super_class,
+        interfaces=struct1.interfaces,
+        fields=fields,
+        constructors=constructors,
+        properties=properties,
+        methods=methods,
+        events=events,
+        nested_types=nested_types,
+    )
+
+
+def merge_interface(interface1: CInterface, interface2: CInterface) -> CInterface:
+    verify_attribute(interface1, interface2, "Interfaces", "generic_args")
+    verify_attribute(interface1, interface2, "Interfaces", "interfaces")
+
+    fields: Mapping[str, CField] = merge_mapping(
+        mapping1=interface1.fields,
+        mapping2=interface2.fields,
+        merge_func=merge_field,
+    )
+    properties: Mapping[str, CProperty] = merge_mapping(
+        mapping1=interface1.properties,
+        mapping2=interface2.properties,
+        merge_func=merge_property,
+    )
+    methods: Mapping[str, CMethod] = merge_mapping(
+        mapping1=interface1.methods,
+        mapping2=interface2.methods,
+        merge_func=merge_method,
+    )
+    events: Mapping[str, CEvent] = merge_mapping(
+        mapping1=interface1.events,
+        mapping2=interface2.events,
+        merge_func=merge_event,
+    )
+    nested_types: Mapping[str, CTypeDefinition] = merge_mapping(
+        mapping1=interface1.nested_types,
+        mapping2=interface2.nested_types,
+        merge_func=merge_type_def,
+    )
+
+    return CInterface(
+        name=interface1.name,
+        namespace=interface1.namespace,
+        nested=interface1.nested,
+        generic_args=interface1.generic_args,
+        interfaces=interface1.interfaces,
+        fields=fields,
+        properties=properties,
+        methods=methods,
+        events=events,
+        nested_types=nested_types,
+    )
+
+
+def merge_enum(enum1: CEnum, enum2: CEnum) -> CEnum:
+    verify_attribute(enum1, enum2, "Enums", "fields")
+
+    return CEnum(
+        name=enum1.name,
+        namespace=enum1.namespace,
+        nested=enum1.nested,
+        fields=enum1.fields,
+    )
+
+
+def merge_delegate(delegate1: CDelegate, delegate2: CDelegate) -> CDelegate:
+    verify_attribute(delegate1, delegate2, "Delegates", "parameters")
+    verify_attribute(delegate1, delegate2, "Delegates", "return_type")
+
+    return CDelegate(
+        name=delegate1.name,
+        namespace=delegate1.namespace,
+        nested=delegate1.nested,
+        parameters=delegate1.parameters,
+        return_type=delegate1.return_type,
+    )
+
+
+def merge_field(field1: CField, field2: CField) -> CField:
+    verify_attribute(field1, field2, "Fields", "name")
+    verify_attribute(field1, field2, "Fields", "declaring_type")
+    verify_attribute(field1, field2, "Fields", "return_type")
+    verify_attribute(field1, field2, "Fields", "static")
+
+    return CField(
+        name=field1.name,
+        declaring_type=field1.declaring_type,
+        return_type=field1.return_type,
+        static=field1.static,
+    )
+
+
+def merge_constructor(constructor1: CConstructor, constructor2: CConstructor) -> CConstructor:
+    verify_attribute(constructor1, constructor2, "Constructors", "declaring_type")
+    verify_attribute(constructor1, constructor2, "Constructors", "parameters")
+
+    return CConstructor(
+        declaring_type=constructor1.declaring_type,
+        parameters=constructor1.parameters,
+    )
+
+
+def merge_property(property1: CProperty, property2: CProperty) -> CProperty:
+    verify_attribute(property1, property2, "Properties", "name")
+    verify_attribute(property1, property2, "Properties", "declaring_type")
+    verify_attribute(property1, property2, "Properties", "type")
+    verify_attribute(property1, property2, "Properties", "setter")
+    verify_attribute(property1, property2, "Properties", "static")
+
+    return CProperty(
+        name=property1.name,
+        declaring_type=property1.declaring_type,
+        type=property1.type,
+        setter=property1.setter,
+        static=property1.static,
+    )
+
+
+def merge_method(method1: CMethod, method2: CMethod) -> CMethod:
+    verify_attribute(method1, method2, "Methods", "name")
+    verify_attribute(method1, method2, "Methods", "declaring_type")
+    verify_attribute(method1, method2, "Methods", "parameters")
+    verify_attribute(method1, method2, "Methods", "return_types")
+    verify_attribute(method1, method2, "Methods", "static")
+
+    return CMethod(
+        name=method1.name,
+        declaring_type=method1.declaring_type,
+        parameters=method1.parameters,
+        return_types=method1.return_types,
+        static=method1.static,
+    )
+
+
+def merge_event(event1: CEvent, event2: CEvent) -> CEvent:
+    verify_attribute(event1, event2, "Properties", "name")
+    verify_attribute(event1, event2, "Properties", "declaring_type")
+    verify_attribute(event1, event2, "Properties", "type")
+
+    return CEvent(
+        name=event1.name,
+        declaring_type=event1.declaring_type,
+        type=event1.type,
+    )
 
 
 @dataclass
@@ -871,6 +1163,7 @@ def build_stubs(
         doc = merge_doc(doc, new_doc)
 
     for namespace in namespaces.values():
+        logger.debug("Building namespace: %s", namespace.name)
         namespace_dir: Path = output_dir
         namespace_file: Path = Path()
         for name in namespace.name.split("."):
@@ -888,7 +1181,7 @@ def build_stubs(
 
         built_types: List[Sequence[str]] = []
         for type_def in namespace.types.values():
-            logger.info("Building type: %s", type_def)
+            logger.debug("Building type: %s", type_def)
             built_type: Sequence[str] = build_type_def(
                 type_def=type_def,
                 imports=imports,
@@ -902,7 +1195,7 @@ def build_stubs(
         for built_type in built_types:
             lines.extend(built_type)
 
-        logger.info("Formatting code")
+        logger.debug("Formatting code")
         code: str = "\n".join(lines)
 
         try:
