@@ -41,6 +41,7 @@ from stubgen.model import CProperty
 from stubgen.model import CStruct
 from stubgen.model import CType
 from stubgen.model import CTypeDefinition
+from stubgen.util import make_python_name
 
 logger = get_logger(__name__)
 
@@ -575,7 +576,7 @@ def build_enum(
     lines.extend(doc_str)
 
     for field in type_def.fields:
-        lines.append(f"{indent_str}{field}: {type_def.name} = ...")
+        lines.append(f"{indent_str}{make_python_name(field)}: {type_def.name} = ...")
 
         doc_node: Doc = doc.get(f"{type_def.namespace}.{type_def.name}.{field}")
         if doc_node is not None:
@@ -904,34 +905,40 @@ def build_stubs(
         logger.info("Formatting code")
         code: str = "\n".join(lines)
 
-        isort_config = Config(
-            profile="black",
-            line_length=line_length,
-            force_single_line=True,
-        )
-        code = isort.code(code, config=isort_config)
+        try:
+            isort_config = Config(
+                profile="black",
+                line_length=line_length,
+                force_single_line=True,
+            )
+            code = isort.code(code, config=isort_config)
+        except Exception as e:
+            logger.warning("Unable to run isort:", exc_info=e)
 
-        black_mode: Mode = Mode(
-            target_versions={
-                TargetVersion.PY38,
-                TargetVersion.PY39,
-                TargetVersion.PY310,
-                TargetVersion.PY311,
-                TargetVersion.PY312,
-            },
-            line_length=line_length,
-            # string_normalization: bool = True
-            is_pyi=True,
-            # is_ipynb: bool = False
-            # skip_source_first_line: bool = False
-            # magic_trailing_comma: bool = True
-            # experimental_string_processing: bool = False
-            # python_cell_magics: Set[str] = field(default_factory=set)
-            # preview: bool = False
-        )
-        formatted_code: str = black.format_file_contents(code, fast=False, mode=black_mode)
+        try:
+            black_mode: Mode = Mode(
+                target_versions={
+                    TargetVersion.PY38,
+                    TargetVersion.PY39,
+                    TargetVersion.PY310,
+                    TargetVersion.PY311,
+                    TargetVersion.PY312,
+                },
+                line_length=line_length,
+                # string_normalization: bool = True
+                is_pyi=True,
+                # is_ipynb: bool = False
+                # skip_source_first_line: bool = False
+                # magic_trailing_comma: bool = True
+                # experimental_string_processing: bool = False
+                # python_cell_magics: Set[str] = field(default_factory=set)
+                # preview: bool = False
+            )
+            code = black.format_file_contents(code, fast=False, mode=black_mode)
+        except Exception as e:
+            logger.warning("Unable to run black:", exc_info=e)
 
         logger.info("Writing file: %r", str(namespace_file))
-        namespace_file.write_text(formatted_code)
+        namespace_file.write_text(code)
 
     return 0
