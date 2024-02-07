@@ -6,18 +6,6 @@ from typing import Sequence
 from typing import Set
 from typing import Tuple
 
-from stubgen.build_stubs import merge_class
-from stubgen.build_stubs import merge_constructor
-from stubgen.build_stubs import merge_delegate
-from stubgen.build_stubs import merge_enum
-from stubgen.build_stubs import merge_event
-from stubgen.build_stubs import merge_field
-from stubgen.build_stubs import merge_interface
-from stubgen.build_stubs import merge_method
-from stubgen.build_stubs import merge_property
-from stubgen.build_stubs import merge_struct
-from stubgen.build_stubs import merge_type_def
-from stubgen.model import CTypeDefinition
 from test_base import TestBase
 
 from stubgen.build_stubs import Doc
@@ -35,8 +23,21 @@ from stubgen.build_stubs import build_property
 from stubgen.build_stubs import build_struct
 from stubgen.build_stubs import build_stubs
 from stubgen.build_stubs import build_type
+from stubgen.build_stubs import merge_class
+from stubgen.build_stubs import merge_constructor
+from stubgen.build_stubs import merge_delegate
 from stubgen.build_stubs import merge_doc
+from stubgen.build_stubs import merge_enum
+from stubgen.build_stubs import merge_event
+from stubgen.build_stubs import merge_field
+from stubgen.build_stubs import merge_interface
+from stubgen.build_stubs import merge_method
 from stubgen.build_stubs import merge_namespace
+from stubgen.build_stubs import merge_parameter
+from stubgen.build_stubs import merge_parameters
+from stubgen.build_stubs import merge_property
+from stubgen.build_stubs import merge_struct
+from stubgen.build_stubs import merge_type_def
 from stubgen.model import CClass
 from stubgen.model import CConstructor
 from stubgen.model import CDelegate
@@ -50,6 +51,7 @@ from stubgen.model import CParameter
 from stubgen.model import CProperty
 from stubgen.model import CStruct
 from stubgen.model import CType
+from stubgen.model import CTypeDefinition
 
 
 class TestMergeNamespace(TestBase):
@@ -343,6 +345,67 @@ class TestMergeTypeDefinition(TestBase):
 
 
 class TestMergeClass(TestBase):
+    def test_merge_interfaces(self) -> None:
+        class1: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceB", namespace="Namespace"),
+            ),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        class2: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceC", namespace="Namespace"),
+            ),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_class(class1, class2)
+        expected: CClass = CClass(
+            name="Class",
+            namespace="Namespace",
+            nested=None,
+            abstract=True,
+            generic_args=(),
+            super_class=None,
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceB", namespace="Namespace"),
+                CType(name="InterfaceC", namespace="Namespace"),
+            ),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
     def test_merge_fields(self) -> None:
         class1: CClass = CClass(
             name="Class",
@@ -449,9 +512,7 @@ class TestMergeClass(TestBase):
                 ),
                 "Namespace.Class.__init__(ParamType)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                 ),
             },
             properties={},
@@ -504,9 +565,7 @@ class TestMergeClass(TestBase):
                 ),
                 "Namespace.Class.__init__(ParamType)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                 ),
                 "Namespace.Class.__init__(ParamType, ParamType)": CConstructor(
                     declaring_type=CType(name="Class", namespace="Namespace"),
@@ -629,17 +688,13 @@ class TestMergeClass(TestBase):
                 "Namespace.Class.MethodA(ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Class.MethodB(ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
             },
@@ -661,17 +716,13 @@ class TestMergeClass(TestBase):
                 "Namespace.Class.MethodA(ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Class.MethodC(ParamType)": CMethod(
                     name="MethodC",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
             },
@@ -695,25 +746,19 @@ class TestMergeClass(TestBase):
                 "Namespace.Class.MethodA(ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Class.MethodB(ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Class.MethodC(ParamType)": CMethod(
                     name="MethodC",
                     declaring_type=CType(name="Class", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
             },
@@ -1063,40 +1108,6 @@ class TestMergeClass(TestBase):
             generic_args=(),
             super_class=CType(name="Super", namespace="Namespace"),
             interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-
-        self.assertRaises(AttributeError, lambda: merge_class(class1, class2))
-
-    def test_merge_error_interfaces(self) -> None:
-        class1: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        class2: CClass = CClass(
-            name="Class",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(CType(name="Interface", namespace="Namespace"),),
             fields={},
             constructors={},
             properties={},
@@ -1109,6 +1120,67 @@ class TestMergeClass(TestBase):
 
 
 class TestMergeStruct(TestBase):
+    def test_merge_interfaces(self) -> None:
+        struct1: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceB", namespace="Namespace"),
+            ),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        struct2: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=False,
+            generic_args=(),
+            super_class=None,
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceC", namespace="Namespace"),
+            ),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_struct(struct1, struct2)
+        expected: CStruct = CStruct(
+            name="Struct",
+            namespace="Namespace",
+            nested=None,
+            abstract=True,
+            generic_args=(),
+            super_class=None,
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceB", namespace="Namespace"),
+                CType(name="InterfaceC", namespace="Namespace"),
+            ),
+            fields={},
+            constructors={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
     def test_merge_fields(self) -> None:
         struct1: CStruct = CStruct(
             name="Struct",
@@ -1215,9 +1287,7 @@ class TestMergeStruct(TestBase):
                 ),
                 "Namespace.Struct.__init__(ParamType)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                 ),
             },
             properties={},
@@ -1270,9 +1340,7 @@ class TestMergeStruct(TestBase):
                 ),
                 "Namespace.Struct.__init__(ParamType)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                 ),
                 "Namespace.Struct.__init__(ParamType, ParamType)": CConstructor(
                     declaring_type=CType(name="Struct", namespace="Namespace"),
@@ -1395,17 +1463,13 @@ class TestMergeStruct(TestBase):
                 "Namespace.Struct.MethodA(ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Struct.MethodB(ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
             },
@@ -1427,17 +1491,13 @@ class TestMergeStruct(TestBase):
                 "Namespace.Struct.MethodA(ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Struct.MethodC(ParamType)": CMethod(
                     name="MethodC",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
             },
@@ -1461,25 +1521,19 @@ class TestMergeStruct(TestBase):
                 "Namespace.Struct.MethodA(ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Struct.MethodB(ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Struct.MethodC(ParamType)": CMethod(
                     name="MethodC",
                     declaring_type=CType(name="Struct", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
             },
@@ -1839,42 +1893,60 @@ class TestMergeStruct(TestBase):
 
         self.assertRaises(AttributeError, lambda: merge_struct(struct1, struct2))
 
-    def test_merge_error_interfaces(self) -> None:
-        struct1: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        struct2: CStruct = CStruct(
-            name="Struct",
-            namespace="Namespace",
-            nested=None,
-            abstract=False,
-            generic_args=(),
-            super_class=None,
-            interfaces=(CType(name="Interface", namespace="Namespace"),),
-            fields={},
-            constructors={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-
-        self.assertRaises(AttributeError, lambda: merge_struct(struct1, struct2))
-
 
 class TestMergeInterface(TestBase):
+    def test_merge_interfaces(self) -> None:
+        interface1: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceB", namespace="Namespace"),
+            ),
+            fields={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+        interface2: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceC", namespace="Namespace"),
+            ),
+            fields={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        result: CTypeDefinition = merge_interface(interface1, interface2)
+        expected: CInterface = CInterface(
+            name="Interface",
+            namespace="Namespace",
+            nested=None,
+            generic_args=(),
+            interfaces=(
+                CType(name="InterfaceA", namespace="Namespace"),
+                CType(name="InterfaceB", namespace="Namespace"),
+                CType(name="InterfaceC", namespace="Namespace"),
+            ),
+            fields={},
+            properties={},
+            methods={},
+            events={},
+            nested_types={},
+        )
+
+        self.assertEqual(expected, result)
+
     def test_merge_fields(self) -> None:
         interface1: CInterface = CInterface(
             name="Interface",
@@ -2048,17 +2120,13 @@ class TestMergeInterface(TestBase):
                 "Namespace.Interface.MethodA(ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Interface.MethodB(ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
             },
@@ -2077,17 +2145,13 @@ class TestMergeInterface(TestBase):
                 "Namespace.Interface.MethodA(ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Interface.MethodC(ParamType)": CMethod(
                     name="MethodC",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
             },
@@ -2108,25 +2172,19 @@ class TestMergeInterface(TestBase):
                 "Namespace.Interface.MethodA(ParamType)": CMethod(
                     name="MethodA",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Interface.MethodB(ParamType)": CMethod(
                     name="MethodB",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
                 "Namespace.Interface.MethodC(ParamType)": CMethod(
                     name="MethodC",
                     declaring_type=CType(name="Interface", namespace="Namespace"),
-                    parameters=(
-                        CParameter(name="param0", type=CType(name="ParamType")),
-                    ),
+                    parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
                     return_types=(CType(name="PropertyType"),),
                 ),
             },
@@ -2385,34 +2443,6 @@ class TestMergeInterface(TestBase):
             nested=None,
             generic_args=(CType(name="T"),),
             interfaces=(),
-            fields={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-
-        self.assertRaises(AttributeError, lambda: merge_interface(interface1, interface2))
-
-    def test_merge_error_interfaces(self) -> None:
-        interface1: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(),
-            interfaces=(),
-            fields={},
-            properties={},
-            methods={},
-            events={},
-            nested_types={},
-        )
-        interface2: CInterface = CInterface(
-            name="Interface",
-            namespace="Namespace",
-            nested=None,
-            generic_args=(),
-            interfaces=(CType(name="Interface", namespace="Namespace"),),
             fields={},
             properties={},
             methods={},
@@ -2471,18 +2501,14 @@ class TestMergeDelegate(TestBase):
             name="Delegate",
             namespace="Namespace",
             nested=None,
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_type=CType(name="ReturnType"),
         )
         delegate2: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
             nested=None,
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_type=CType(name="ReturnType"),
         )
 
@@ -2491,9 +2517,7 @@ class TestMergeDelegate(TestBase):
             name="Delegate",
             namespace="Namespace",
             nested=None,
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_type=CType(name="ReturnType"),
         )
 
@@ -2504,9 +2528,7 @@ class TestMergeDelegate(TestBase):
             name="Delegate",
             namespace="Namespace",
             nested=None,
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_type=CType(name="ReturnType"),
         )
         delegate2: CDelegate = CDelegate(
@@ -2527,22 +2549,121 @@ class TestMergeDelegate(TestBase):
             name="Delegate",
             namespace="Namespace",
             nested=None,
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_type=CType(name="ReturnTypeA"),
         )
         delegate2: CDelegate = CDelegate(
             name="Delegate",
             namespace="Namespace",
             nested=None,
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_type=CType(name="ReturnTypeB"),
         )
 
         self.assertRaises(AttributeError, lambda: merge_delegate(delegate1, delegate2))
+
+
+class TestMergeParameter(TestBase):
+    def test_merge(self) -> None:
+        parameter1: CParameter = CParameter(name="param0", type=CType(name="ParamType"))
+        parameter2: CParameter = CParameter(name="param0", type=CType(name="ParamType"))
+
+        result: CParameter = merge_parameter(parameter1, parameter2)
+        expected: CParameter = CParameter(name="param0", type=CType(name="ParamType"))
+
+        self.assertEqual(expected, result)
+
+    def test_merge_names(self) -> None:
+        parameter1: CParameter = CParameter(name="param0", type=CType(name="ParamType"))
+        parameter2: CParameter = CParameter(name="paramA", type=CType(name="ParamType"))
+
+        result: CParameter = merge_parameter(parameter1, parameter2)
+        expected: CParameter = CParameter(name="param0", type=CType(name="ParamType"))
+
+        self.assertEqual(expected, result)
+
+    def test_merge_error_type(self) -> None:
+        parameter1: CParameter = CParameter(name="param0", type=CType(name="ParamTypeA"))
+        parameter2: CParameter = CParameter(name="param0", type=CType(name="ParamTypeB"))
+
+        self.assertRaises(AttributeError, lambda: merge_parameter(parameter1, parameter2))
+
+    def test_merge_error_default(self) -> None:
+        parameter1: CParameter = CParameter(
+            name="param0",
+            type=CType(name="ParamTypeA"),
+        )
+        parameter2: CParameter = CParameter(
+            name="param0",
+            type=CType(name="ParamTypeB"),
+            default=True,
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_parameter(parameter1, parameter2))
+
+    def test_merge_error_out(self) -> None:
+        parameter1: CParameter = CParameter(
+            name="param0",
+            type=CType(name="ParamTypeA"),
+        )
+        parameter2: CParameter = CParameter(
+            name="param0",
+            type=CType(name="ParamTypeB"),
+            out=True,
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_parameter(parameter1, parameter2))
+
+
+class TestMergeParameters(TestBase):
+    def test_merge(self) -> None:
+        parameters1: Sequence[CParameter] = (
+            CParameter(name="param0", type=CType(name="ParamType")),
+            CParameter(name="param1", type=CType(name="ParamType")),
+        )
+        parameters2: Sequence[CParameter] = (
+            CParameter(name="param0", type=CType(name="ParamType")),
+            CParameter(name="param1", type=CType(name="ParamType")),
+        )
+
+        result: Sequence[CParameter] = merge_parameters(parameters1, parameters2)
+        expected: Sequence[CParameter] = (
+            CParameter(name="param0", type=CType(name="ParamType")),
+            CParameter(name="param1", type=CType(name="ParamType")),
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_names(self) -> None:
+        parameters1: Sequence[CParameter] = (
+            CParameter(name="param0", type=CType(name="ParamType")),
+            CParameter(name="param1", type=CType(name="ParamType")),
+        )
+        parameters2: Sequence[CParameter] = (
+            CParameter(name="paramA", type=CType(name="ParamType")),
+            CParameter(name="paramB", type=CType(name="ParamType")),
+        )
+
+        result: Sequence[CParameter] = merge_parameters(parameters1, parameters2)
+        expected: Sequence[CParameter] = (
+            CParameter(name="param0", type=CType(name="ParamType")),
+            CParameter(name="param1", type=CType(name="ParamType")),
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_error_len(self) -> None:
+        parameters1: Sequence[CParameter] = (
+            CParameter(name="param0", type=CType(name="ParamType")),
+            CParameter(name="param1", type=CType(name="ParamType")),
+        )
+        parameters2: Sequence[CParameter] = (
+            CParameter(name="param0", type=CType(name="ParamType")),
+            CParameter(name="param1", type=CType(name="ParamType")),
+            CParameter(name="param2", type=CType(name="ParamType")),
+        )
+
+        self.assertRaises(AttributeError, lambda: merge_parameters(parameters1, parameters2))
 
 
 class TestMergeField(TestBase):
@@ -2629,23 +2750,17 @@ class TestMergeConstructor(TestBase):
     def test_merge(self) -> None:
         constructor1: CConstructor = CConstructor(
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
         )
         constructor2: CConstructor = CConstructor(
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
         )
 
         result: CConstructor = merge_constructor(constructor1, constructor2)
         expected: CConstructor = CConstructor(
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
         )
 
         self.assertEqual(expected, result)
@@ -2653,15 +2768,11 @@ class TestMergeConstructor(TestBase):
     def test_merge_error_declaring_type(self) -> None:
         constructor1: CConstructor = CConstructor(
             declaring_type=CType(name="DeclaringTypeA"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
         )
         constructor2: CConstructor = CConstructor(
             declaring_type=CType(name="DeclaringTypeB"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
         )
 
         self.assertRaises(AttributeError, lambda: merge_constructor(constructor1, constructor2))
@@ -2669,9 +2780,7 @@ class TestMergeConstructor(TestBase):
     def test_merge_error_parameters(self) -> None:
         constructor1: CConstructor = CConstructor(
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
         )
         constructor2: CConstructor = CConstructor(
             declaring_type=CType(name="DeclaringType"),
@@ -2702,6 +2811,29 @@ class TestMergeProperty(TestBase):
             name="Property",
             declaring_type=CType(name="DeclaringType"),
             type=CType(name="Type"),
+        )
+
+        self.assertEqual(expected, result)
+
+    def test_merge_setter(self) -> None:
+        property1: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+        )
+        property2: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+            setter=True,
+        )
+
+        result: CProperty = merge_property(property1, property2)
+        expected: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="DeclaringType"),
+            type=CType(name="Type"),
+            setter=True,
         )
 
         self.assertEqual(expected, result)
@@ -2748,21 +2880,6 @@ class TestMergeProperty(TestBase):
 
         self.assertRaises(AttributeError, lambda: merge_property(property1, property2))
 
-    def test_merge_error_setter(self) -> None:
-        property1: CProperty = CProperty(
-            name="Property",
-            declaring_type=CType(name="DeclaringType"),
-            type=CType(name="Type"),
-        )
-        property2: CProperty = CProperty(
-            name="Property",
-            declaring_type=CType(name="DeclaringType"),
-            type=CType(name="Type"),
-            setter=True,
-        )
-
-        self.assertRaises(AttributeError, lambda: merge_property(property1, property2))
-
     def test_merge_error_static(self) -> None:
         property1: CProperty = CProperty(
             name="Property",
@@ -2784,17 +2901,13 @@ class TestMergeMethod(TestBase):
         method1: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnType"),),
         )
         method2: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnType"),),
         )
 
@@ -2802,9 +2915,7 @@ class TestMergeMethod(TestBase):
         expected: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnType"),),
         )
 
@@ -2814,17 +2925,13 @@ class TestMergeMethod(TestBase):
         method1: CMethod = CMethod(
             name="MethodA",
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnType"),),
         )
         method2: CMethod = CMethod(
             name="MethodB",
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnType"),),
         )
 
@@ -2834,17 +2941,13 @@ class TestMergeMethod(TestBase):
         method1: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="DeclaringTypeA"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnType"),),
         )
         method2: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="DeclaringTypeB"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnType"),),
         )
 
@@ -2854,9 +2957,7 @@ class TestMergeMethod(TestBase):
         method1: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnTypeA"),),
         )
         method2: CMethod = CMethod(
@@ -2875,17 +2976,13 @@ class TestMergeMethod(TestBase):
         method1: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnTypeA"),),
         )
         method2: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnTypeB"),),
         )
 
@@ -2895,17 +2992,13 @@ class TestMergeMethod(TestBase):
         method1: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnTypeA"),),
         )
         method2: CMethod = CMethod(
             name="Method",
             declaring_type=CType(name="DeclaringType"),
-            parameters=(
-                CParameter(name="param0", type=CType(name="ParamType")),
-            ),
+            parameters=(CParameter(name="param0", type=CType(name="ParamType")),),
             return_types=(CType(name="ReturnTypeB"),),
             static=True,
         )
@@ -7291,7 +7384,7 @@ class TestBuildDelegate(TestBase):
         doc: Doc = Doc(
             {
                 "Namespace": {
-                    "Delegate": {
+                    "Delegate(Namespace:ParamType, Namespace:ParamType)": {
                         "doc": "Delegate doc string.",
                         "parameters": {
                             "param0": "Parameter 0 doc string.",
@@ -7328,7 +7421,7 @@ class TestBuildDelegate(TestBase):
         doc: Doc = Doc(
             {
                 "Namespace": {
-                    "Delegate": {
+                    "Delegate()": {
                         "doc": "Delegate doc string.",
                         "return": "Return doc string.",
                     },

@@ -4,6 +4,8 @@ import functools
 import itertools
 import json
 import re
+from concurrent.futures import Executor
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from dataclasses import field
 from pathlib import Path
@@ -26,6 +28,7 @@ import black
 import isort
 from black import Mode
 from black import TargetVersion
+from black import WriteBack
 from isort import Config
 
 from stubgen.log import get_logger
@@ -50,17 +53,22 @@ T = TypeVar("T")
 logger = get_logger(__name__)
 
 
-def verify_attribute(obj1, obj2, type: str, attribute: str) -> None:
+def verify_attribute(obj1, obj2, type: str, attribute: str, should_raise: bool = True) -> None:
     attr1 = getattr(obj1, attribute)
     attr2 = getattr(obj2, attribute)
     if attr1 != attr2:
-        raise AttributeError(f"{type} have different {attribute} values: {attr1} != {attr2}")
+        message: str = f"{type} have different {attribute} values: {attr1} != {attr2}"
+        if should_raise:
+            raise AttributeError(message)
+        else:
+            logger.warning(message)
 
 
 def merge_mapping(
     mapping1: Mapping[str, T],
     mapping2: Mapping[str, T],
-    merge_func: Callable[[T, T], T],
+    merge_func: Callable[[T, T, bool], T],
+    should_raise: bool = True,
 ) -> Mapping[str, T]:
     key_list: Set[str] = set(mapping1.keys())
     key_list.update(mapping2.keys())
@@ -71,7 +79,7 @@ def merge_mapping(
         if key in mapping1:
             obj = mapping1[key]
             if key in mapping2:
-                obj = merge_func(obj, mapping2[key])
+                obj = merge_func(obj, mapping2[key], should_raise)
             merged[key] = obj
         elif key in mapping2:
             obj = mapping2[key]
@@ -80,76 +88,88 @@ def merge_mapping(
     return merged
 
 
-def merge_namespace(namespace1: CNamespace, namespace2: CNamespace) -> CNamespace:
-    verify_attribute(namespace1, namespace2, "Namespaces", "name")
+def merge_namespace(namespace1: CNamespace, namespace2: CNamespace, should_raise: bool = True) -> CNamespace:
+    logger.debug("Merging Namespaces: %s", namespace1)
+
+    verify_attribute(namespace1, namespace2, "Namespaces", "name", should_raise)
 
     type_map: Mapping[str, CTypeDefinition] = merge_mapping(
         mapping1=namespace1.types,
         mapping2=namespace2.types,
         merge_func=merge_type_def,
+        should_raise=should_raise,
     )
 
     return CNamespace(name=namespace1.name, types=type_map)
 
 
-def merge_type_def(type_def1: CTypeDefinition, type_def2: CTypeDefinition) -> CTypeDefinition:
+def merge_type_def(
+    type_def1: CTypeDefinition, type_def2: CTypeDefinition, should_raise: bool = True
+) -> CTypeDefinition:
+    logger.debug("Merging Type Definitions: %s", type_def1)
     class1: str = type_def1.__class__.__name__
     class2: str = type_def2.__class__.__name__
 
     if class1 != class2:
         raise TypeError(f"Type definitions are not the same: {class1} != {class2}")
 
-    verify_attribute(type_def1, type_def2, "Type Definitions", "name")
-    verify_attribute(type_def1, type_def2, "Type Definitions", "namespace")
-    verify_attribute(type_def1, type_def2, "Type Definitions", "nested")
+    verify_attribute(type_def1, type_def2, "Type Definitions", "name", True)
+    verify_attribute(type_def1, type_def2, "Type Definitions", "namespace", True)
+    verify_attribute(type_def1, type_def2, "Type Definitions", "nested", True)
 
     if class1 == "CClass":
-        return merge_class(cast(CClass, type_def1), cast(CClass, type_def2))
+        return merge_class(cast(CClass, type_def1), cast(CClass, type_def2), should_raise)
     if class1 == "CStruct":
-        return merge_struct(cast(CStruct, type_def1), cast(CStruct, type_def2))
+        return merge_struct(cast(CStruct, type_def1), cast(CStruct, type_def2), should_raise)
     if class1 == "CInterface":
-        return merge_interface(cast(CInterface, type_def1), cast(CInterface, type_def2))
+        return merge_interface(cast(CInterface, type_def1), cast(CInterface, type_def2), should_raise)
     if class1 == "CEnum":
-        return merge_enum(cast(CEnum, type_def1), cast(CEnum, type_def2))
+        return merge_enum(cast(CEnum, type_def1), cast(CEnum, type_def2), should_raise)
     if class1 == "CDelegate":
-        return merge_delegate(cast(CDelegate, type_def1), cast(CDelegate, type_def2))
+        return merge_delegate(cast(CDelegate, type_def1), cast(CDelegate, type_def2), should_raise)
 
 
-def merge_class(class1: CClass, class2: CClass) -> CClass:
-    verify_attribute(class1, class2, "Classes", "abstract")
-    verify_attribute(class1, class2, "Classes", "generic_args")
-    verify_attribute(class1, class2, "Classes", "super_class")
-    verify_attribute(class1, class2, "Classes", "interfaces")
+def merge_class(class1: CClass, class2: CClass, should_raise: bool = True) -> CClass:
+    verify_attribute(class1, class2, "Classes", "abstract", should_raise)
+    verify_attribute(class1, class2, "Classes", "generic_args", should_raise)
+    verify_attribute(class1, class2, "Classes", "super_class", should_raise)
 
+    interfaces: Sequence[CType] = tuple(sorted({*class1.interfaces, *class2.interfaces}))
     fields: Mapping[str, CField] = merge_mapping(
         mapping1=class1.fields,
         mapping2=class2.fields,
         merge_func=merge_field,
+        should_raise=should_raise,
     )
     constructors: Mapping[str, CConstructor] = merge_mapping(
         mapping1=class1.constructors,
         mapping2=class2.constructors,
         merge_func=merge_constructor,
+        should_raise=should_raise,
     )
     properties: Mapping[str, CProperty] = merge_mapping(
         mapping1=class1.properties,
         mapping2=class2.properties,
         merge_func=merge_property,
+        should_raise=should_raise,
     )
     methods: Mapping[str, CMethod] = merge_mapping(
         mapping1=class1.methods,
         mapping2=class2.methods,
         merge_func=merge_method,
+        should_raise=should_raise,
     )
     events: Mapping[str, CEvent] = merge_mapping(
         mapping1=class1.events,
         mapping2=class2.events,
         merge_func=merge_event,
+        should_raise=should_raise,
     )
     nested_types: Mapping[str, CTypeDefinition] = merge_mapping(
         mapping1=class1.nested_types,
         mapping2=class2.nested_types,
         merge_func=merge_type_def,
+        should_raise=should_raise,
     )
 
     return CClass(
@@ -159,7 +179,7 @@ def merge_class(class1: CClass, class2: CClass) -> CClass:
         abstract=class1.abstract,
         generic_args=class1.generic_args,
         super_class=class1.super_class,
-        interfaces=class1.interfaces,
+        interfaces=interfaces,
         fields=fields,
         constructors=constructors,
         properties=properties,
@@ -169,41 +189,47 @@ def merge_class(class1: CClass, class2: CClass) -> CClass:
     )
 
 
-def merge_struct(struct1: CStruct, struct2: CStruct) -> CStruct:
-    verify_attribute(struct1, struct2, "Structs", "abstract")
-    verify_attribute(struct1, struct2, "Structs", "generic_args")
-    verify_attribute(struct1, struct2, "Structs", "super_class")
-    verify_attribute(struct1, struct2, "Structs", "interfaces")
+def merge_struct(struct1: CStruct, struct2: CStruct, should_raise: bool = True) -> CStruct:
+    verify_attribute(struct1, struct2, "Structs", "abstract", should_raise)
+    verify_attribute(struct1, struct2, "Structs", "generic_args", should_raise)
+    verify_attribute(struct1, struct2, "Structs", "super_class", should_raise)
 
+    interfaces: Sequence[CType] = tuple(sorted({*struct1.interfaces, *struct2.interfaces}))
     fields: Mapping[str, CField] = merge_mapping(
         mapping1=struct1.fields,
         mapping2=struct2.fields,
         merge_func=merge_field,
+        should_raise=should_raise,
     )
     constructors: Mapping[str, CConstructor] = merge_mapping(
         mapping1=struct1.constructors,
         mapping2=struct2.constructors,
         merge_func=merge_constructor,
+        should_raise=should_raise,
     )
     properties: Mapping[str, CProperty] = merge_mapping(
         mapping1=struct1.properties,
         mapping2=struct2.properties,
         merge_func=merge_property,
+        should_raise=should_raise,
     )
     methods: Mapping[str, CMethod] = merge_mapping(
         mapping1=struct1.methods,
         mapping2=struct2.methods,
         merge_func=merge_method,
+        should_raise=should_raise,
     )
     events: Mapping[str, CEvent] = merge_mapping(
         mapping1=struct1.events,
         mapping2=struct2.events,
         merge_func=merge_event,
+        should_raise=should_raise,
     )
     nested_types: Mapping[str, CTypeDefinition] = merge_mapping(
         mapping1=struct1.nested_types,
         mapping2=struct2.nested_types,
         merge_func=merge_type_def,
+        should_raise=should_raise,
     )
 
     return CStruct(
@@ -213,7 +239,7 @@ def merge_struct(struct1: CStruct, struct2: CStruct) -> CStruct:
         abstract=struct1.abstract,
         generic_args=struct1.generic_args,
         super_class=struct1.super_class,
-        interfaces=struct1.interfaces,
+        interfaces=interfaces,
         fields=fields,
         constructors=constructors,
         properties=properties,
@@ -223,34 +249,39 @@ def merge_struct(struct1: CStruct, struct2: CStruct) -> CStruct:
     )
 
 
-def merge_interface(interface1: CInterface, interface2: CInterface) -> CInterface:
-    verify_attribute(interface1, interface2, "Interfaces", "generic_args")
-    verify_attribute(interface1, interface2, "Interfaces", "interfaces")
+def merge_interface(interface1: CInterface, interface2: CInterface, should_raise: bool = True) -> CInterface:
+    verify_attribute(interface1, interface2, "Interfaces", "generic_args", should_raise)
 
+    interfaces: Sequence[CType] = tuple(sorted({*interface1.interfaces, *interface2.interfaces}))
     fields: Mapping[str, CField] = merge_mapping(
         mapping1=interface1.fields,
         mapping2=interface2.fields,
         merge_func=merge_field,
+        should_raise=should_raise,
     )
     properties: Mapping[str, CProperty] = merge_mapping(
         mapping1=interface1.properties,
         mapping2=interface2.properties,
         merge_func=merge_property,
+        should_raise=should_raise,
     )
     methods: Mapping[str, CMethod] = merge_mapping(
         mapping1=interface1.methods,
         mapping2=interface2.methods,
         merge_func=merge_method,
+        should_raise=should_raise,
     )
     events: Mapping[str, CEvent] = merge_mapping(
         mapping1=interface1.events,
         mapping2=interface2.events,
         merge_func=merge_event,
+        should_raise=should_raise,
     )
     nested_types: Mapping[str, CTypeDefinition] = merge_mapping(
         mapping1=interface1.nested_types,
         mapping2=interface2.nested_types,
         merge_func=merge_type_def,
+        should_raise=should_raise,
     )
 
     return CInterface(
@@ -258,7 +289,7 @@ def merge_interface(interface1: CInterface, interface2: CInterface) -> CInterfac
         namespace=interface1.namespace,
         nested=interface1.nested,
         generic_args=interface1.generic_args,
-        interfaces=interface1.interfaces,
+        interfaces=interfaces,
         fields=fields,
         properties=properties,
         methods=methods,
@@ -267,8 +298,8 @@ def merge_interface(interface1: CInterface, interface2: CInterface) -> CInterfac
     )
 
 
-def merge_enum(enum1: CEnum, enum2: CEnum) -> CEnum:
-    verify_attribute(enum1, enum2, "Enums", "fields")
+def merge_enum(enum1: CEnum, enum2: CEnum, should_raise: bool = True) -> CEnum:
+    verify_attribute(enum1, enum2, "Enums", "fields", should_raise)
 
     return CEnum(
         name=enum1.name,
@@ -278,9 +309,9 @@ def merge_enum(enum1: CEnum, enum2: CEnum) -> CEnum:
     )
 
 
-def merge_delegate(delegate1: CDelegate, delegate2: CDelegate) -> CDelegate:
-    verify_attribute(delegate1, delegate2, "Delegates", "parameters")
-    verify_attribute(delegate1, delegate2, "Delegates", "return_type")
+def merge_delegate(delegate1: CDelegate, delegate2: CDelegate, should_raise: bool = True) -> CDelegate:
+    verify_attribute(delegate1, delegate2, "Delegates", "parameters", should_raise)
+    verify_attribute(delegate1, delegate2, "Delegates", "return_type", should_raise)
 
     return CDelegate(
         name=delegate1.name,
@@ -291,11 +322,38 @@ def merge_delegate(delegate1: CDelegate, delegate2: CDelegate) -> CDelegate:
     )
 
 
-def merge_field(field1: CField, field2: CField) -> CField:
-    verify_attribute(field1, field2, "Fields", "name")
-    verify_attribute(field1, field2, "Fields", "declaring_type")
-    verify_attribute(field1, field2, "Fields", "return_type")
-    verify_attribute(field1, field2, "Fields", "static")
+def merge_parameter(parameter1: CParameter, parameter2: CParameter, should_raise: bool = True) -> CParameter:
+    verify_attribute(parameter1, parameter2, "Parameters", "type", should_raise)
+    verify_attribute(parameter1, parameter2, "Parameters", "default", should_raise)
+    verify_attribute(parameter1, parameter2, "Parameters", "out", should_raise)
+
+    return CParameter(
+        name=parameter1.name,
+        type=parameter1.type,
+        default=parameter1.default,
+        out=parameter1.out,
+    )
+
+
+def merge_parameters(
+    parameters1: Sequence[CParameter], parameters2: Sequence[CParameter], should_raise: bool = True
+) -> Sequence[CParameter]:
+    len1: int = len(parameters1)
+    len2: int = len(parameters2)
+    if len1 != len2:
+        message: str = f"Parameters have different length: {len1} != {len2}"
+        if should_raise:
+            raise AttributeError(message)
+        else:
+            logger.warning(message)
+    return tuple(merge_parameter(p1, p2, should_raise) for p1, p2 in zip(parameters1, parameters2))
+
+
+def merge_field(field1: CField, field2: CField, should_raise: bool = True) -> CField:
+    verify_attribute(field1, field2, "Fields", "name", should_raise)
+    verify_attribute(field1, field2, "Fields", "declaring_type", should_raise)
+    verify_attribute(field1, field2, "Fields", "return_type", should_raise)
+    verify_attribute(field1, field2, "Fields", "static", should_raise)
 
     return CField(
         name=field1.name,
@@ -305,52 +363,57 @@ def merge_field(field1: CField, field2: CField) -> CField:
     )
 
 
-def merge_constructor(constructor1: CConstructor, constructor2: CConstructor) -> CConstructor:
-    verify_attribute(constructor1, constructor2, "Constructors", "declaring_type")
-    verify_attribute(constructor1, constructor2, "Constructors", "parameters")
+def merge_constructor(constructor1: CConstructor, constructor2: CConstructor, should_raise: bool = True) -> CConstructor:
+    verify_attribute(constructor1, constructor2, "Constructors", "declaring_type", should_raise)
+
+    parameters: Sequence[CParameter] = merge_parameters(
+        constructor1.parameters, constructor2.parameters, should_raise
+    )
 
     return CConstructor(
         declaring_type=constructor1.declaring_type,
-        parameters=constructor1.parameters,
+        parameters=parameters,
     )
 
 
-def merge_property(property1: CProperty, property2: CProperty) -> CProperty:
-    verify_attribute(property1, property2, "Properties", "name")
-    verify_attribute(property1, property2, "Properties", "declaring_type")
-    verify_attribute(property1, property2, "Properties", "type")
-    verify_attribute(property1, property2, "Properties", "setter")
-    verify_attribute(property1, property2, "Properties", "static")
+def merge_property(property1: CProperty, property2: CProperty, should_raise: bool = True) -> CProperty:
+    verify_attribute(property1, property2, "Properties", "name", should_raise)
+    verify_attribute(property1, property2, "Properties", "declaring_type", should_raise)
+    verify_attribute(property1, property2, "Properties", "type", should_raise)
+    verify_attribute(property1, property2, "Properties", "static", should_raise)
 
     return CProperty(
         name=property1.name,
         declaring_type=property1.declaring_type,
         type=property1.type,
-        setter=property1.setter,
+        setter=property1.setter or property2.setter,
         static=property1.static,
     )
 
 
-def merge_method(method1: CMethod, method2: CMethod) -> CMethod:
-    verify_attribute(method1, method2, "Methods", "name")
-    verify_attribute(method1, method2, "Methods", "declaring_type")
-    verify_attribute(method1, method2, "Methods", "parameters")
-    verify_attribute(method1, method2, "Methods", "return_types")
-    verify_attribute(method1, method2, "Methods", "static")
+def merge_method(method1: CMethod, method2: CMethod, should_raise: bool = True) -> CMethod:
+    verify_attribute(method1, method2, "Methods", "name", should_raise)
+    verify_attribute(method1, method2, "Methods", "declaring_type", should_raise)
+    verify_attribute(method1, method2, "Methods", "return_types", should_raise)
+    verify_attribute(method1, method2, "Methods", "static", should_raise)
+
+    parameters: Sequence[CParameter] = merge_parameters(
+        method1.parameters, method2.parameters, should_raise
+    )
 
     return CMethod(
         name=method1.name,
         declaring_type=method1.declaring_type,
-        parameters=method1.parameters,
+        parameters=parameters,
         return_types=method1.return_types,
         static=method1.static,
     )
 
 
-def merge_event(event1: CEvent, event2: CEvent) -> CEvent:
-    verify_attribute(event1, event2, "Properties", "name")
-    verify_attribute(event1, event2, "Properties", "declaring_type")
-    verify_attribute(event1, event2, "Properties", "type")
+def merge_event(event1: CEvent, event2: CEvent, should_raise: bool = True) -> CEvent:
+    verify_attribute(event1, event2, "Properties", "name", should_raise)
+    verify_attribute(event1, event2, "Properties", "declaring_type", should_raise)
+    verify_attribute(event1, event2, "Properties", "type", should_raise)
 
     return CEvent(
         name=event1.name,
@@ -614,6 +677,32 @@ def merge_doc_node(d1: Mapping[str, Any], d2: Mapping[str, Any]) -> Mapping[str,
 
 
 type_conversion: Final[Mapping[str, str]] = {}
+
+
+def build_namespace(
+    namespace: CNamespace,
+    doc: Doc,
+    line_length: int = 100,
+) -> Sequence[str]:
+    imports = Imports()
+    imports.add_type(CType(name="annotations", namespace="__future__"))
+
+    built_types: List[Sequence[str]] = []
+    for type_def in namespace.types.values():
+        logger.debug("Building type: %s", type_def)
+        built_type: Sequence[str] = build_type_def(
+            type_def=type_def,
+            imports=imports,
+            doc=doc,
+            indent=0,
+            line_length=line_length,
+        )
+        built_types.append(built_type)
+
+    lines: List[str] = list(imports.build(namespace.name))
+    for built_type in built_types:
+        lines.extend(built_type)
+    return lines
 
 
 def build_type_def(
@@ -1135,22 +1224,46 @@ def build_event(
     return tuple(lines)
 
 
+def build_stub(namespace: CNamespace, doc: Doc, output_dir: Path, line_length: int) -> None:
+    logger.debug("Building namespace: %s", namespace.name)
+
+    namespace_dir: Path = output_dir
+    namespace_file: Path = Path()
+    for name in namespace.name.split("."):
+        dir_name: str = f"{name}-stubs" if namespace_dir is output_dir else name
+        namespace_dir = namespace_dir / dir_name
+        namespace_dir.mkdir(parents=True, exist_ok=True)
+
+        namespace_file = namespace_dir / "__init__.pyi"
+        namespace_file.touch(exist_ok=True)
+
+    lines: Sequence[str] = build_namespace(
+        namespace=namespace,
+        doc=doc,
+        line_length=line_length,
+    )
+
+    logger.info("Writing file: %r", str(namespace_file))
+    namespace_file.write_text("\n".join(lines))
+
+
 def build_stubs(
-    skeleton_files: Sequence[Path], doc_files: Sequence[Path], output_dir: Path, line_length: int
+    skeleton_files: Sequence[Path],
+    doc_files: Sequence[Path],
+    output_dir: Path,
+    line_length: int,
+    multi_threaded: bool,
 ) -> Union[int, str]:
     namespaces: Dict[str, CNamespace] = {}
     for skeleton_file in skeleton_files:
+        logger.info("Loading skeletons file: '%s'", skeleton_file)
         with skeleton_file.open("r") as file:
             skeleton_dict: Dict[str, Any] = json.load(file)
-
-        assembly_name: str = skeleton_dict["name"]
-        assembly_version: str = skeleton_dict["version"]
-        logger.info("Loading skeletons for assembly: '%s v%s'", assembly_name, assembly_version)
 
         for namespace_json in skeleton_dict["namespaces"].values():
             namespace: CNamespace = CNamespace.from_json(namespace_json)
             if namespace.name in namespaces:
-                namespace = merge_namespace(namespaces[namespace.name], namespace)
+                namespace = merge_namespace(namespaces[namespace.name], namespace, False)
             namespaces[namespace.name] = namespace
 
     doc: Doc = Doc({})
@@ -1162,76 +1275,42 @@ def build_stubs(
         new_doc: Doc = Doc(loaded_doc_dict_tree)
         doc = merge_doc(doc, new_doc)
 
-    for namespace in namespaces.values():
-        logger.debug("Building namespace: %s", namespace.name)
-        namespace_dir: Path = output_dir
-        namespace_file: Path = Path()
-        for name in namespace.name.split("."):
-            dir_name: str = f"{name}-stubs" if namespace_dir is output_dir else name
-            namespace_dir = namespace_dir / dir_name
-            # if namespace_dir.exists():
-            #     rm_tree(namespace_dir)
-            namespace_dir.mkdir(parents=True, exist_ok=True)
+    if multi_threaded:
+        executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
+        for namespace in namespaces.values():
+            executor.submit(build_stub, namespace, doc, output_dir, line_length)
+        executor.shutdown(wait=True)
+    else:
+        for namespace in namespaces.values():
+            build_stub(namespace, doc, output_dir, line_length)
 
-            namespace_file = namespace_dir / "__init__.pyi"
-            namespace_file.touch(exist_ok=True)
-
-        imports = Imports()
-        imports.add_type(CType(name="annotations", namespace="__future__"))
-
-        built_types: List[Sequence[str]] = []
-        for type_def in namespace.types.values():
-            logger.debug("Building type: %s", type_def)
-            built_type: Sequence[str] = build_type_def(
-                type_def=type_def,
-                imports=imports,
-                doc=doc,
-                indent=0,
-                line_length=line_length,
-            )
-            built_types.append(built_type)
-
-        lines: List[str] = list(imports.build(namespace.name))
-        for built_type in built_types:
-            lines.extend(built_type)
-
-        logger.debug("Formatting code")
-        code: str = "\n".join(lines)
+    logger.info("Formatting stub files")
+    isort_config = Config(
+        profile="black",
+        line_length=line_length,
+        force_single_line=True,
+    )
+    black_mode: Mode = Mode(
+        target_versions={
+            TargetVersion.PY38,
+            TargetVersion.PY39,
+            TargetVersion.PY310,
+            TargetVersion.PY311,
+            TargetVersion.PY312,
+        },
+        line_length=line_length,
+        is_pyi=True,
+    )
+    for file in output_dir.rglob("*.pyi"):
+        logger.debug("Formatting file: %s", file)
+        try:
+            isort.file(file, config=isort_config)
+        except Exception as e:
+            logger.warning('Unable to run isort on file "%s":', file, exc_info=e)
 
         try:
-            isort_config = Config(
-                profile="black",
-                line_length=line_length,
-                force_single_line=True,
-            )
-            code = isort.code(code, config=isort_config)
+            black.format_file_in_place(file, fast=False, mode=black_mode, write_back=WriteBack.YES)
         except Exception as e:
-            logger.warning("Unable to run isort:", exc_info=e)
-
-        try:
-            black_mode: Mode = Mode(
-                target_versions={
-                    TargetVersion.PY38,
-                    TargetVersion.PY39,
-                    TargetVersion.PY310,
-                    TargetVersion.PY311,
-                    TargetVersion.PY312,
-                },
-                line_length=line_length,
-                # string_normalization: bool = True
-                is_pyi=True,
-                # is_ipynb: bool = False
-                # skip_source_first_line: bool = False
-                # magic_trailing_comma: bool = True
-                # experimental_string_processing: bool = False
-                # python_cell_magics: Set[str] = field(default_factory=set)
-                # preview: bool = False
-            )
-            code = black.format_file_contents(code, fast=False, mode=black_mode)
-        except Exception as e:
-            logger.warning("Unable to run black:", exc_info=e)
-
-        logger.info("Writing file: %r", str(namespace_file))
-        namespace_file.write_text(code)
+            logger.warning('Unable to run black on file "%s":', file, exc_info=e)
 
     return 0

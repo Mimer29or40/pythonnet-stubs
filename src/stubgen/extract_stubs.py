@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import dataclasses
+import itertools
 import json
 from collections import defaultdict
+from concurrent.futures import Executor
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Dict
 from typing import List
@@ -42,16 +45,20 @@ from stubgen.model import CProperty
 from stubgen.model import CStruct
 from stubgen.model import CType
 from stubgen.model import CTypeDefinition
+from stubgen.util import is_name_valid
 from stubgen.util import make_python_name
 
 logger = get_logger(__name__)
 
 
-def extract_type_def(info: TypeInfo) -> CTypeDefinition:
+def extract_type_def(info: TypeInfo) -> Optional[CTypeDefinition]:
     def is_delegate() -> bool:
         if info in (Delegate, MulticastDelegate):
             return False
         return info.IsSubclassOf(Delegate) or info.IsSubclassOf(MulticastDelegate)
+
+    if not is_name_valid(info.Namespace):
+        return None
 
     if info.IsValueType:
         if info.IsEnum:
@@ -65,8 +72,8 @@ def extract_type_def(info: TypeInfo) -> CTypeDefinition:
         return extract_class(info)
 
 
-def extract_class(info: TypeInfo) -> CClass:
-    logger.info(f'Processing class "{info.Namespace}.{info.Name}"')
+def extract_class(info: TypeInfo) -> Optional[CClass]:
+    logger.info(f'Extracting class "{info.Namespace}.{info.Name}"')
     return CClass(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
@@ -84,8 +91,8 @@ def extract_class(info: TypeInfo) -> CClass:
     )
 
 
-def extract_struct(info: TypeInfo) -> CStruct:
-    logger.info(f'Processing struct "{info.Namespace}.{info.Name}"')
+def extract_struct(info: TypeInfo) -> Optional[CStruct]:
+    logger.info(f'Extracting struct "{info.Namespace}.{info.Name}"')
     return CStruct(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
@@ -103,8 +110,8 @@ def extract_struct(info: TypeInfo) -> CStruct:
     )
 
 
-def extract_interface(info: TypeInfo) -> CInterface:
-    logger.info(f'Processing interface "{info.Namespace}.{info.Name}"')
+def extract_interface(info: TypeInfo) -> Optional[CInterface]:
+    logger.info(f'Extracting interface "{info.Namespace}.{info.Name}"')
     return CInterface(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
@@ -119,8 +126,8 @@ def extract_interface(info: TypeInfo) -> CInterface:
     )
 
 
-def extract_enum(info: TypeInfo) -> CEnum:
-    logger.info(f'Processing enum "{info.Namespace}.{info.Name}"')
+def extract_enum(info: TypeInfo) -> Optional[CEnum]:
+    logger.info(f'Extracting enum "{info.Namespace}.{info.Name}"')
     return CEnum(
         name=make_python_name(info.Name),
         namespace=info.Namespace,
@@ -129,8 +136,8 @@ def extract_enum(info: TypeInfo) -> CEnum:
     )
 
 
-def extract_delegate(info: TypeInfo) -> CDelegate:
-    logger.info(f'Processing delegate "{info.Namespace}.{info.Name}"')
+def extract_delegate(info: TypeInfo) -> Optional[CDelegate]:
+    logger.info(f'Extracting delegate "{info.Namespace}.{info.Name}"')
 
     invoke: MethodInfo = info.GetMethod("Invoke")
 
@@ -485,7 +492,7 @@ def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> U
             continue
         type_definition: CTypeDefinition = extract_type_def(info)
         if type_definition is None:
-            logger.warning("Unable to parse type:", info.FullName)
+            logger.warning("Unable to parse type: %s", info.FullName)
             continue
         type_definitions[type_definition.namespace].append(type_definition)
 
@@ -526,5 +533,40 @@ def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> U
             file,
             indent=2,
         )
+
+    return 0
+
+
+def extract_assemblies(
+    assembly_names: Sequence[str],
+    output_dir: Path,
+    overwrite: bool,
+    skip_failed: bool,
+    multi_threaded: bool,
+) -> Union[int, str]:
+    if multi_threaded:
+        executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
+        for exit_code in executor.map(
+            extract_assembly,
+            assembly_names,
+            itertools.repeat(output_dir),
+            itertools.repeat(overwrite),
+        ):
+            if exit_code != 0 and not skip_failed:
+                executor.shutdown(cancel_futures=True)
+                return exit_code
+        executor.shutdown(wait=True)
+    else:
+        assembly_name: str
+        for assembly_name in assembly_names:
+            try:
+                exit_code: Union[int, str] = extract_assembly(assembly_name, output_dir, overwrite)
+                if exit_code != 0 and not skip_failed:
+                    return exit_code
+            except Exception as e:
+                if skip_failed:
+                    logger.warning("Could not extract assembly: %s", assembly_name, exc_info=e)
+                else:
+                    raise e from None
 
     return 0

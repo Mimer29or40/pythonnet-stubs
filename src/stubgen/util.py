@@ -1,13 +1,10 @@
 import functools
+import keyword
 import re
 import time
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Callable
-
-import clr
-from System import Nullable
-from System import Type
 
 from stubgen.log import get_logger
 
@@ -41,31 +38,22 @@ def time_function(func=None, *, log_func: Callable = logger.debug):
     return decorator if func is None else decorator(func)
 
 
-def make_ref_type(type: Type) -> Type:
-    return clr.Reference[type]
-
-
-def make_nullable(type: Type) -> "Nullable[Type]":
-    return Nullable[type]
+def is_name_valid(name: str) -> bool:
+    if "." in name:
+        return all(map(is_name_valid, name.split(".")))
+    return name.isidentifier() and not keyword.iskeyword(name)
 
 
 def make_python_name(string: str) -> str:
     if "[" in string:
         string = string[: string.index("[")]
     string = make_python_name.pattern.sub("", string)
-    if string in reserved_python_names:
+    if keyword.iskeyword(string):
         return f"_{string}"
     return string
 
 
-make_python_name.pattern = re.compile(r"`\d+|&|\[|]|\*")
-
-
-def strip_path_str(string: str) -> str:
-    return strip_path_str.pattern.sub("", string)
-
-
-strip_path_str.pattern = re.compile(r'[<>:"/\\|?*]')
+make_python_name.pattern = re.compile(r"`\d+|&|\[|]|\*|<|>")
 
 
 def rm_tree(path: Path):
@@ -75,40 +63,3 @@ def rm_tree(path: Path):
         else:
             rm_tree(child)
     path.rmdir()
-
-
-reserved_python_names = [
-    "and",
-    "as",
-    "assert",
-    "break",
-    "class",
-    "continue",
-    "def",
-    "del",
-    "elif",
-    "else",
-    "except",
-    "False",
-    "finally",
-    "for",
-    "from",
-    "global",
-    "if",
-    "import",
-    "in",
-    "is",
-    "lambda",
-    "None",
-    "nonlocal",
-    "not",
-    "or",
-    "pass",
-    "raise",
-    "return",
-    "True",
-    "try",
-    "while",
-    "with",
-    "yield",
-]

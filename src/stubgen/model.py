@@ -5,7 +5,6 @@ from abc import ABC
 from abc import abstractmethod
 from dataclasses import dataclass
 from typing import Any
-from typing import ClassVar
 from typing import Dict
 from typing import Mapping
 from typing import Optional
@@ -15,9 +14,13 @@ from typing import Type
 from typing import TypeVar
 from typing import Union
 
+from stubgen.log import get_logger
+
 T = TypeVar("T")
 
 JsonType = Union[None, int, float, str, Sequence, Mapping]
+
+logger = get_logger(__name__)
 
 
 @dataclass(frozen=True)
@@ -129,9 +132,9 @@ class CClass(CTypeDefinition):
             "namespace": self.namespace,
             "nested": None if self.nested is None else self.nested.to_json(),
             "abstract": self.abstract,
-            "generic_args": tuple(sorted(map(CType.to_json, self.generic_args))),
+            "generic_args": tuple(a.to_json() for a in self.generic_args),
             "super_class": None if self.super_class is None else self.super_class.to_json(),
-            "interfaces": tuple(sorted(map(CType.to_json, self.interfaces))),
+            "interfaces": tuple(sorted(i.to_json() for i in self.interfaces)),
             "fields": {k: v.to_json() for k, v in self.fields.items()},
             "constructors": {k: v.to_json() for k, v in self.constructors.items()},
             "properties": {k: v.to_json() for k, v in self.properties.items()},
@@ -141,7 +144,7 @@ class CClass(CTypeDefinition):
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        doc_dict: Dict[str, Any] = {"doc": "", "doc_formatted": {}}
+        doc_json: Dict[str, Any] = {"doc": "", "doc_formatted": {}}
 
         members: Sequence[CMember] = (
             *self.fields.values(),
@@ -153,14 +156,14 @@ class CClass(CTypeDefinition):
         for member in members:
             if member.declaring_type.name == self.name:
                 name, json = member.to_doc_json()
-                doc_dict[name] = json
+                doc_json[name] = json
 
         child: CTypeDefinition
         for child in self.nested_types.values():
             name, json = child.to_doc_json()
-            doc_dict[name] = json
+            doc_json[name] = json
 
-        return self.simple_name, doc_dict
+        return self.simple_name, doc_json
 
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
@@ -205,8 +208,8 @@ class CInterface(CTypeDefinition):
             "name": self.name,
             "namespace": self.namespace,
             "nested": None if self.nested is None else self.nested.to_json(),
-            "generic_args": tuple(map(CType.to_json, self.generic_args)),
-            "interfaces": tuple(sorted(map(CType.to_json, self.interfaces))),
+            "generic_args": tuple(a.to_json() for a in self.generic_args),
+            "interfaces": tuple(sorted(i.to_json() for i in self.interfaces)),
             "fields": {k: v.to_json() for k, v in self.fields.items()},
             "properties": {k: v.to_json() for k, v in self.properties.items()},
             "methods": {k: v.to_json() for k, v in self.methods.items()},
@@ -215,7 +218,7 @@ class CInterface(CTypeDefinition):
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        doc_dict: Dict[str, Any] = {"doc": "", "doc_formatted": {}}
+        doc_json: Dict[str, Any] = {"doc": "", "doc_formatted": {}}
 
         members: Sequence[CMember] = (
             *self.fields.values(),
@@ -226,14 +229,14 @@ class CInterface(CTypeDefinition):
         for member in members:
             if member.declaring_type.name == self.name:
                 name, json = member.to_doc_json()
-                doc_dict[name] = json
+                doc_json[name] = json
 
         child: CTypeDefinition
         for child in self.nested_types.values():
             name, json = child.to_doc_json()
-            doc_dict[name] = json
+            doc_json[name] = json
 
-        return self.simple_name, doc_dict
+        return self.simple_name, doc_json
 
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
@@ -265,7 +268,7 @@ class CEnum(CTypeDefinition):
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        return self.name, {
+        return self.simple_name, {
             "doc": "",
             "doc_formatted": {},
             **{f: {"doc": ""} for f in self.fields},
@@ -286,23 +289,28 @@ class CDelegate(CTypeDefinition):
     parameters: Sequence[CParameter]
     return_type: CType
 
+    @property
+    def simple_name(self) -> str:
+        param_types: str = ", ".join(str(p.type) for p in self.parameters)
+        return f"{self.name}({param_types})"
+
     def to_json(self) -> JsonType:
         return {
             "type": "delegate",
             "name": self.name,
             "namespace": self.namespace,
             "nested": None if self.nested is None else self.nested.to_json(),
-            "parameters": tuple(map(CParameter.to_json, self.parameters)),
+            "parameters": tuple(p.to_json() for p in self.parameters),
             "return_type": self.return_type.to_json(),
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        return self.name, {
-            "doc": "",
-            "doc_formatted": {},
-            "parameters": {p.name: "" for p in self.parameters},
-            "return": "",
-        }
+        doc_json: Dict[str, Any] = {"doc": "", "doc_formatted": {}}
+        if len(self.parameters) > 0:
+            doc_json["parameters"] = {p.name: "" for p in self.parameters}
+        if self.return_type is not None and self.return_type != CType("Void", "System"):
+            doc_json["return"] = ""
+        return self.simple_name, doc_json
 
     @classmethod
     def from_json(cls: Type[T], json: JsonType) -> T:
@@ -394,6 +402,10 @@ class CType:
     @staticmethod
     def compare(type0: CType, type1: CType) -> int:
         if type0.namespace != type1.namespace:
+            if type0.namespace is None:
+                return -1
+            if type1.namespace is None:
+                return 1
             return -1 if type0.namespace < type1.namespace else 1
         if type0.name != type1.name:
             return -1 if type0.name < type1.name else 1
@@ -512,7 +524,10 @@ class CField(CMember):
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        return self.name, {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}}
+        doc_json: Dict[str, Any] = {"doc": "", "doc_formatted": {}}
+        if self.return_type is not None and self.return_type != CType("Void", "System"):
+            doc_json["return"] = ""
+        return self.name, doc_json
 
     @classmethod
     def from_json(cls, json: JsonType) -> CField:
@@ -551,17 +566,15 @@ class CConstructor(CMember):
     def to_json(self) -> JsonType:
         return {
             "declaring_type": self.declaring_type.to_json(),
-            "parameters": tuple(map(CParameter.to_json, self.parameters)),
+            "parameters": tuple(p.to_json() for p in self.parameters),
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
+        doc_json: Dict[str, Any] = {"doc": "", "doc_formatted": {}}
+        if len(self.parameters) > 0:
+            doc_json["parameters"] = {p.name: "" for p in self.parameters}
         param_types: str = ", ".join(str(p.type) for p in self.parameters)
-        return f"__init__({param_types})", {
-            "doc": "",
-            "doc_formatted": {},
-            "parameters": {p.name: "" for p in self.parameters},
-            "exceptions": {},
-        }
+        return f"__init__({param_types})", doc_json
 
     @classmethod
     def from_json(cls, json: JsonType) -> CConstructor:
@@ -599,7 +612,10 @@ class CProperty(CMember):
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
-        return self.name, {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}}
+        doc_json: Dict[str, Any] = {"doc": "", "doc_formatted": {}}
+        if self.type is not None and self.type != CType("Void", "System"):
+            doc_json["return"] = ""
+        return self.name, doc_json
 
     @classmethod
     def from_json(cls, json: JsonType) -> CProperty:
@@ -646,20 +662,19 @@ class CMethod(CMember):
         return {
             "name": self.name,
             "declaring_type": self.declaring_type.to_json(),
-            "parameters": tuple(map(CParameter.to_json, self.parameters)),
-            "return_types": tuple(map(CType.to_json, self.return_types)),
+            "parameters": tuple(p.to_json() for p in self.parameters),
+            "return_types": tuple(r.to_json() for r in self.return_types),
             "static": self.static,
         }
 
     def to_doc_json(self) -> Tuple[str, JsonType]:
+        doc_json: Dict[str, Any] = {"doc": "", "doc_formatted": {}, "exceptions": {}}
+        if len(self.parameters) > 0:
+            doc_json["parameters"] = {p.name: "" for p in self.parameters}
+        if len(self.return_types) > 0 and self.return_types[0] != CType("Void", "System"):
+            doc_json["return"] = ""
         param_types: str = ", ".join(str(p.type) for p in self.parameters)
-        return f"{self.name}({param_types})", {
-            "doc": "",
-            "doc_formatted": {},
-            "parameters": {p.name: "" for p in self.parameters},
-            "return": "",
-            "exceptions": {},
-        }
+        return f"{self.name}({param_types})", doc_json
 
     @classmethod
     def from_json(cls, json: JsonType) -> CMethod:

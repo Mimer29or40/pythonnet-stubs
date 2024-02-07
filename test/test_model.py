@@ -2725,25 +2725,24 @@ class TestCClass(TestBase):
             {
                 "doc": "",
                 "doc_formatted": {},
-                "Field": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
+                "Field": {"doc": "", "doc_formatted": {}, "return": ""},
                 "__init__(Namespace:Type)": {
                     "doc": "",
                     "doc_formatted": {},
                     "parameters": {"param0": ""},
-                    "exceptions": {},
                 },
-                "Property": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
+                "Property": {"doc": "", "doc_formatted": {}, "return": ""},
                 "Method(Namespace:Type)": {
                     "doc": "",
                     "doc_formatted": {},
+                    "exceptions": {},
                     "parameters": {"param0": ""},
                     "return": "",
-                    "exceptions": {},
                 },
                 "Event": {"doc": "", "doc_formatted": {}},
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
-                "NestedDelegate": {"doc": "", "doc_formatted": {}, "parameters": {}, "return": ""},
+                "NestedDelegate()": {"doc": "", "doc_formatted": {}},
                 "NestedEnum": {"doc": "", "doc_formatted": {}},
                 "NestedStruct": {"doc": "", "doc_formatted": {}},
             },
@@ -5398,25 +5397,24 @@ class TestCStruct(TestBase):
             {
                 "doc": "",
                 "doc_formatted": {},
-                "Field": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
+                "Field": {"doc": "", "doc_formatted": {}, "return": ""},
                 "__init__(Namespace:Type)": {
                     "doc": "",
                     "doc_formatted": {},
                     "parameters": {"param0": ""},
-                    "exceptions": {},
                 },
-                "Property": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
+                "Property": {"doc": "", "doc_formatted": {}, "return": ""},
                 "Method(Namespace:Type)": {
                     "doc": "",
                     "doc_formatted": {},
+                    "exceptions": {},
                     "parameters": {"param0": ""},
                     "return": "",
-                    "exceptions": {},
                 },
                 "Event": {"doc": "", "doc_formatted": {}},
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
-                "NestedDelegate": {"doc": "", "doc_formatted": {}, "parameters": {}, "return": ""},
+                "NestedDelegate()": {"doc": "", "doc_formatted": {}},
                 "NestedEnum": {"doc": "", "doc_formatted": {}},
                 "NestedStruct": {"doc": "", "doc_formatted": {}},
             },
@@ -6981,19 +6979,19 @@ class TestCInterface(TestBase):
             {
                 "doc": "",
                 "doc_formatted": {},
-                "Field": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
-                "Property": {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
+                "Field": {"doc": "", "doc_formatted": {}, "return": ""},
+                "Property": {"doc": "", "doc_formatted": {}, "return": ""},
                 "Method(Namespace:Type)": {
                     "doc": "",
                     "doc_formatted": {},
+                    "exceptions": {},
                     "parameters": {"param0": ""},
                     "return": "",
-                    "exceptions": {},
                 },
                 "Event": {"doc": "", "doc_formatted": {}},
                 "INestedInterface": {"doc": "", "doc_formatted": {}},
                 "NestedClass": {"doc": "", "doc_formatted": {}},
-                "NestedDelegate": {"doc": "", "doc_formatted": {}, "parameters": {}, "return": ""},
+                "NestedDelegate()": {"doc": "", "doc_formatted": {}},
                 "NestedEnum": {"doc": "", "doc_formatted": {}},
                 "NestedStruct": {"doc": "", "doc_formatted": {}},
             },
@@ -7286,7 +7284,7 @@ class TestCDelegate(TestBase):
 
         self.assertIsNotNone(name)
         self.assertIsInstance(name, str)
-        self.assertEqual("Delegate", name)
+        self.assertEqual("Delegate(Namespace:Type, Namespace:Type)", name)
 
         self.assertIsNotNone(json)
         self.assertIsInstance(json, dict)
@@ -7299,6 +7297,66 @@ class TestCDelegate(TestBase):
                     "param1": "",
                 },
                 "return": "",
+            },
+            json,
+        )
+
+    def test_doc_json_no_parameters(self) -> None:
+        type_def: CDelegate = CDelegate(
+            name="Delegate",
+            namespace="Namespace",
+            nested=None,
+            parameters=(),
+            return_type=CType(name="Type", namespace="Namespace"),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Delegate()", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": {},
+                "return": "",
+            },
+            json,
+        )
+
+    def test_doc_json_no_return(self) -> None:
+        type_def: CDelegate = CDelegate(
+            name="Delegate",
+            namespace="Namespace",
+            nested=None,
+            parameters=(
+                CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+            ),
+            return_type=CType(name="Void", namespace="System"),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Delegate(Namespace:Type, Namespace:Type)", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": {},
+                "parameters": {
+                    "param0": "",
+                    "param1": "",
+                },
             },
             json,
         )
@@ -7531,6 +7589,24 @@ class TestCType(TestBase):
     def test_compare_namespace(self) -> None:
         type0: CType = CType(name="Type", namespace="NamespaceA")
         type1: CType = CType(name="Type", namespace="NamespaceB")
+
+        self.assertLess(type0, type1)
+
+        self.assertLessEqual(type0, type1)
+
+        self.assertLessEqual(type0, type0)
+        self.assertLessEqual(type1, type1)
+
+        self.assertGreater(type1, type0)
+
+        self.assertGreaterEqual(type1, type0)
+
+        self.assertGreaterEqual(type0, type0)
+        self.assertGreaterEqual(type1, type1)
+
+    def test_compare_namespace_none(self) -> None:
+        type0: CType = CType(name="Type")
+        type1: CType = CType(name="Type", namespace="NamespaceA")
 
         self.assertLess(type0, type1)
 
@@ -7876,7 +7952,28 @@ class TestCField(TestBase):
         self.assertIsNotNone(json)
         self.assertIsInstance(json, dict)
         self.assertDictEqual(
-            {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
+            {"doc": "", "doc_formatted": {}, "return": ""},
+            json,
+        )
+
+    def test_doc_json_no_return(self) -> None:
+        type_def: CField = CField(
+            name="Field",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            return_type=CType(name="Void", namespace="System"),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Field", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {"doc": "", "doc_formatted": {}},
             json,
         )
 
@@ -7999,12 +8096,27 @@ class TestCConstructor(TestBase):
         self.assertIsNotNone(json)
         self.assertIsInstance(json, dict)
         self.assertDictEqual(
-            {
-                "doc": "",
-                "doc_formatted": {},
-                "parameters": {"param0": "", "param1": ""},
-                "exceptions": {},
-            },
+            {"doc": "", "doc_formatted": {}, "parameters": {"param0": "", "param1": ""}},
+            json,
+        )
+
+    def test_doc_json_no_parameters(self) -> None:
+        type_def: CConstructor = CConstructor(
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("__init__()", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {"doc": "", "doc_formatted": {}},
             json,
         )
 
@@ -8186,7 +8298,28 @@ class TestCProperty(TestBase):
         self.assertIsNotNone(json)
         self.assertIsInstance(json, dict)
         self.assertDictEqual(
-            {"doc": "", "doc_formatted": {}, "return": "", "exceptions": {}},
+            {"doc": "", "doc_formatted": {}, "return": ""},
+            json,
+        )
+
+    def test_doc_json_no_return(self) -> None:
+        type_def: CProperty = CProperty(
+            name="Property",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            type=CType(name="Void", namespace="System"),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Property", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {"doc": "", "doc_formatted": {}},
             json,
         )
 
@@ -8380,6 +8513,63 @@ class TestCMethod(TestBase):
                 "parameters": {"param0": "", "param1": ""},
                 "return": "",
                 "exceptions": {},
+            },
+            json,
+        )
+
+    def test_doc_json_no_parameters(self) -> None:
+        type_def: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(),
+            return_types=(CType(name="Type", namespace="Namespace"),),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Method()", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": {},
+                "exceptions": {},
+                "return": "",
+            },
+            json,
+        )
+
+    def test_doc_json_no_return(self) -> None:
+        type_def: CMethod = CMethod(
+            name="Method",
+            declaring_type=CType(name="Type", namespace="Namespace"),
+            parameters=(
+                CParameter(name="param0", type=CType(name="Type", namespace="Namespace")),
+                CParameter(name="param1", type=CType(name="Type", namespace="Namespace")),
+            ),
+            return_types=(CType(name="Void", namespace="System"),),
+        )
+        name: str
+        json: JsonType
+        name, json = type_def.to_doc_json()
+
+        self.assertIsNotNone(name)
+        self.assertIsInstance(name, str)
+        self.assertEqual("Method(Namespace:Type, Namespace:Type)", name)
+
+        self.assertIsNotNone(json)
+        self.assertIsInstance(json, dict)
+        self.assertDictEqual(
+            {
+                "doc": "",
+                "doc_formatted": {},
+                "exceptions": {},
+                "parameters": {"param0": "", "param1": ""},
             },
             json,
         )

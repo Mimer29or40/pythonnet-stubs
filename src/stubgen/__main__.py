@@ -1,4 +1,3 @@
-import glob
 import logging
 import sys
 from argparse import ZERO_OR_MORE
@@ -14,6 +13,7 @@ import stubgen
 from stubgen.defaults import ASSEMBLIES
 from stubgen.defaults import BUILT_INS
 from stubgen.defaults import CORE
+from stubgen.extract_stubs import extract_assemblies
 from stubgen.log import console_handler
 from stubgen.log import get_logger
 
@@ -37,6 +37,13 @@ def main(*args: Any) -> Union[int, str]:
         type=Path,
         default=Path("."),
         help="path to output directory [default: .]",
+    )
+    parser.add_argument(
+        "-m",
+        "--multi-threaded",
+        dest="multi_threaded",
+        action="store_true",
+        help="flag to use multi threading",
     )
 
     commands = parser.add_subparsers(dest="command", metavar="command")
@@ -108,14 +115,19 @@ def main(*args: Any) -> Union[int, str]:
     verbose: bool = parsed_args.verbose
     if verbose:
         console_handler.setLevel(logging.DEBUG)
+    logger.debug("Using verbose flag: %s", verbose)
 
     output_dir: Path = parsed_args.output_dir
     output_dir = output_dir.resolve()
     logger.debug("Using output directory: %r", str(output_dir))
 
+    multi_threaded: bool = parsed_args.multi_threaded
+    logger.debug("Using multi threading flag: %s", multi_threaded)
+
     exit_code: Union[int, str] = 0
     try:
         command: str = parsed_args.command
+        logger.debug("Using command: %s", command)
         if command == "extract":
             from stubgen.extract_stubs import extract_assembly
 
@@ -124,6 +136,7 @@ def main(*args: Any) -> Union[int, str]:
             use_core: bool = parsed_args.core
 
             skip_failed: bool = parsed_args.skip_failed
+            logger.debug("Using skip failed flag: %s", skip_failed)
 
             paths: Sequence[Path] = parsed_args.path
             if paths is not None:
@@ -134,6 +147,7 @@ def main(*args: Any) -> Union[int, str]:
                     sys.path.append(path_str)
 
             overwrite: bool = parsed_args.overwrite
+            logger.debug("Using overwrite flag: %s", skip_failed)
 
             assembly_names: List[str] = list()
             if use_all:
@@ -151,25 +165,18 @@ def main(*args: Any) -> Union[int, str]:
             assembly_names.extend(assemblies)
             assembly_names = list(dict.fromkeys(assembly_names).keys())
 
-            assembly_name: str
-            for assembly_name in assembly_names:
-                try:
-                    exit_code = extract_assembly(
-                        assembly_name=assembly_name,
-                        output_dir=output_dir,
-                        overwrite=overwrite,
-                    )
-                    if exit_code != 0 and not skip_failed:
-                        break
-                except Exception as e:
-                    if skip_failed:
-                        logger.warning("An error occurred while extracting assembly:", exc_info=e)
-                    else:
-                        raise e from None
+            exit_code = extract_assemblies(
+                assembly_names=assembly_names,
+                output_dir=output_dir,
+                overwrite=overwrite,
+                skip_failed=skip_failed,
+                multi_threaded=multi_threaded,
+            )
         elif command == "build":
             from stubgen.build_stubs import build_stubs
 
             line_length: int = parsed_args.line_length
+            logger.debug("Using line length: %s", line_length)
 
             skeleton_glob: str = parsed_args.skeletons
             skeleton_files: List[Path] = []
@@ -188,6 +195,7 @@ def main(*args: Any) -> Union[int, str]:
                 doc_files=doc_files,
                 output_dir=output_dir,
                 line_length=line_length,
+                multi_threaded=multi_threaded,
             )
 
     except Exception as e:

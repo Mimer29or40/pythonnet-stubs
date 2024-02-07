@@ -1837,7 +1837,7 @@ class TestCClass(TestExtractBase):
                     events={},
                     nested_types={},
                 ),
-                "TestLib:ClassWithNested.NestedDelegate": CDelegate(
+                "TestLib:ClassWithNested.NestedDelegate()": CDelegate(
                     name="NestedDelegate",
                     namespace="TestLib",
                     nested=CType(name="ClassWithNested", namespace="TestLib"),
@@ -3671,7 +3671,7 @@ class TestCStruct(TestExtractBase):
                     events={},
                     nested_types={},
                 ),
-                "TestLib:StructWithNested.NestedDelegate": CDelegate(
+                "TestLib:StructWithNested.NestedDelegate()": CDelegate(
                     name="NestedDelegate",
                     namespace="TestLib",
                     nested=CType(name="StructWithNested", namespace="TestLib"),
@@ -4943,7 +4943,7 @@ class TestCInterface(TestExtractBase):
                     events={},
                     nested_types={},
                 ),
-                "TestLib:IInterfaceWithNested.NestedDelegate": CDelegate(
+                "TestLib:IInterfaceWithNested.NestedDelegate()": CDelegate(
                     name="NestedDelegate",
                     namespace="TestLib",
                     nested=CType(name="IInterfaceWithNested", namespace="TestLib"),
@@ -5873,10 +5873,10 @@ class TestExtractAssembly(TestBase):
             "TestLib.ClassWithProperties",
             "TestLib.ClassWithSuper",
             "TestLib.ClassWithTypes",
-            "TestLib.DelegateWithNoParametersNoReturn",
-            "TestLib.DelegateWithNoParametersReturn",
-            "TestLib.DelegateWithParametersNoReturn",
-            "TestLib.DelegateWithParametersReturn",
+            "TestLib.DelegateWithNoParametersNoReturn()",
+            "TestLib.DelegateWithNoParametersReturn()",
+            "TestLib.DelegateWithParametersNoReturn(System:Int32, System:Int32)",
+            "TestLib.DelegateWithParametersReturn(System:Int32, System:Int32)",
             "TestLib.EnumWithFields",
             "TestLib.EnumWithNoFields",
             "TestLib.IInterfaceWithEvents",
@@ -5902,8 +5902,9 @@ class TestExtractAssembly(TestBase):
             "TestLib.StructWithProperties",
         )
         for type_str in types:
-            type_def: Mapping[str, Any] = type_map.get(type_str, None)
-            self.assertIsNotNone(type_def)
+            with self.subTest(type_str=type_str):
+                type_def: Mapping[str, Any] = type_map.get(type_str, None)
+                self.assertIsNotNone(type_def)
 
 
 if __name__ == "__main__":
