@@ -179,7 +179,7 @@ Documentation = "https://github.com/Mimer29or40/pythonnet-stubs/wiki"
 #   [project.entry-points.console_scripts] or [project.entry-points.gui_scripts] table,
 #   as they would be ambiguous in the face of [project.scripts] and
 #   [project.gui-scripts], respectively.
-#[project.scripts]
+[project.scripts]
 stubgen = "stubgen.__main__:main"
 #[project.gui-scripts]
 #[project.entry-points]
