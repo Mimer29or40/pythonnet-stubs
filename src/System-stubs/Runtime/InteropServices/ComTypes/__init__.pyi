@@ -1,26 +1,19 @@
 from __future__ import annotations
 
-from typing import List
-from typing import Protocol
+from typing import ClassVar
+from typing import Final
+from typing import Iterator
 from typing import Tuple
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Delegate
 from System import Enum
 from System import Guid
-from System import Int16
-from System import Int32
-from System import Int64
 from System import IntPtr
-from System import Object
-from System import String
 from System import Type
 from System import ValueType
-from System import Void
+from System.Collections import IEnumerator
 from System.Globalization import CultureInfo
 from System.Reflection import Binder
 from System.Reflection import BindingFlags
@@ -29,1719 +22,2948 @@ from System.Reflection import MemberInfo
 from System.Reflection import MethodInfo
 from System.Reflection import ParameterModifier
 from System.Reflection import PropertyInfo
+from System.Runtime.InteropServices.ComTypes.ELEMDESC import DESCUNION
+from System.Runtime.InteropServices.ComTypes.VARDESC import DESCUNION
 
-# ---------- Types ---------- #
+class ADVF(Enum):
+    """"""
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-ShortType = Union[int, Int16]
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# No Classes
-
-# ---------- Structs ---------- #
+    ADVF_NODATA: ADVF = ...
+    """"""
+    ADVF_PRIMEFIRST: ADVF = ...
+    """"""
+    ADVF_ONLYONCE: ADVF = ...
+    """"""
+    ADVFCACHE_NOHANDLER: ADVF = ...
+    """"""
+    ADVFCACHE_FORCEBUILTIN: ADVF = ...
+    """"""
+    ADVFCACHE_ONSAVE: ADVF = ...
+    """"""
+    ADVF_DATAONSTOP: ADVF = ...
+    """"""
 
 class BINDPTR(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def lpfuncdesc(self) -> NIntType: ...
-    @lpfuncdesc.setter
-    def lpfuncdesc(self, value: NIntType) -> None: ...
-    @property
-    def lptcomp(self) -> NIntType: ...
-    @lptcomp.setter
-    def lptcomp(self, value: NIntType) -> None: ...
-    @property
-    def lpvardesc(self) -> NIntType: ...
-    @lpvardesc.setter
-    def lpvardesc(self, value: NIntType) -> None: ...
+    lpfuncdesc: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    lptcomp: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    lpvardesc: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class BIND_OPTS(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def cbStruct(self) -> IntType: ...
-    @cbStruct.setter
-    def cbStruct(self, value: IntType) -> None: ...
-    @property
-    def dwTickCountDeadline(self) -> IntType: ...
-    @dwTickCountDeadline.setter
-    def dwTickCountDeadline(self, value: IntType) -> None: ...
-    @property
-    def grfFlags(self) -> IntType: ...
-    @grfFlags.setter
-    def grfFlags(self, value: IntType) -> None: ...
-    @property
-    def grfMode(self) -> IntType: ...
-    @grfMode.setter
-    def grfMode(self, value: IntType) -> None: ...
+    cbStruct: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    dwTickCountDeadline: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    grfFlags: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    grfMode: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class CALLCONV(Enum):
+    """"""
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    CC_CDECL: CALLCONV = ...
+    """"""
+    CC_MSCPASCAL: CALLCONV = ...
+    """"""
+    CC_PASCAL: CALLCONV = ...
+    """"""
+    CC_MACPASCAL: CALLCONV = ...
+    """"""
+    CC_STDCALL: CALLCONV = ...
+    """"""
+    CC_RESERVED: CALLCONV = ...
+    """"""
+    CC_SYSCALL: CALLCONV = ...
+    """"""
+    CC_MPWCDECL: CALLCONV = ...
+    """"""
+    CC_MPWPASCAL: CALLCONV = ...
+    """"""
+    CC_MAX: CALLCONV = ...
+    """"""
 
 class CONNECTDATA(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def dwCookie(self) -> IntType: ...
-    @dwCookie.setter
-    def dwCookie(self, value: IntType) -> None: ...
-    @property
-    def pUnk(self) -> ObjectType: ...
-    @pUnk.setter
-    def pUnk(self, value: ObjectType) -> None: ...
+    dwCookie: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    pUnk: Final[object] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class DATADIR(Enum):
+    """"""
 
-    # No Sub Structs
+    DATADIR_GET: DATADIR = ...
+    """"""
+    DATADIR_SET: DATADIR = ...
+    """"""
 
-    # No Sub Interfaces
+class DESCKIND(Enum):
+    """"""
 
-    # No Sub Enums
+    DESCKIND_NONE: DESCKIND = ...
+    """"""
+    DESCKIND_FUNCDESC: DESCKIND = ...
+    """"""
+    DESCKIND_VARDESC: DESCKIND = ...
+    """"""
+    DESCKIND_TYPECOMP: DESCKIND = ...
+    """"""
+    DESCKIND_IMPLICITAPPOBJ: DESCKIND = ...
+    """"""
+    DESCKIND_MAX: DESCKIND = ...
+    """"""
 
 class DISPPARAMS(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def cArgs(self) -> IntType: ...
-    @cArgs.setter
-    def cArgs(self, value: IntType) -> None: ...
-    @property
-    def cNamedArgs(self) -> IntType: ...
-    @cNamedArgs.setter
-    def cNamedArgs(self, value: IntType) -> None: ...
-    @property
-    def rgdispidNamedArgs(self) -> NIntType: ...
-    @rgdispidNamedArgs.setter
-    def rgdispidNamedArgs(self, value: NIntType) -> None: ...
-    @property
-    def rgvarg(self) -> NIntType: ...
-    @rgvarg.setter
-    def rgvarg(self, value: NIntType) -> None: ...
+    cArgs: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    cNamedArgs: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    rgdispidNamedArgs: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    rgvarg: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class DVASPECT(Enum):
+    """"""
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    DVASPECT_CONTENT: DVASPECT = ...
+    """"""
+    DVASPECT_THUMBNAIL: DVASPECT = ...
+    """"""
+    DVASPECT_ICON: DVASPECT = ...
+    """"""
+    DVASPECT_DOCPRINT: DVASPECT = ...
+    """"""
 
 class ELEMDESC(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def desc(self) -> DESCUNION: ...
-    @desc.setter
-    def desc(self, value: DESCUNION) -> None: ...
-    @property
-    def tdesc(self) -> TYPEDESC: ...
-    @tdesc.setter
-    def tdesc(self, value: TYPEDESC) -> None: ...
+    desc: Final[ELEMDESC.DESCUNION] = ...
+    """
+    
+    :return: 
+    """
+    tdesc: Final[TYPEDESC] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # ---------- Sub Structs ---------- #
+        :return:
+        """
 
     class DESCUNION(ValueType):
-        # ---------- Fields ---------- #
+        """"""
 
-        @property
-        def idldesc(self) -> IDLDESC: ...
-        @idldesc.setter
-        def idldesc(self, value: IDLDESC) -> None: ...
-        @property
-        def paramdesc(self) -> PARAMDESC: ...
-        @paramdesc.setter
-        def paramdesc(self, value: PARAMDESC) -> None: ...
+        idldesc: Final[IDLDESC] = ...
+        """"""
+        paramdesc: Final[PARAMDESC] = ...
+        """"""
+        def Equals(self, obj: object) -> bool:
+            """
 
-        # No Constructors
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
 
-        # No Properties
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
 
-        # No Methods
+            :return:
+            """
+        def ToString(self) -> str:
+            """
 
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-    # No Sub Interfaces
-
-    # No Sub Enums
+            :return:
+            """
 
 class EXCEPINFO(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def bstrDescription(self) -> StringType: ...
-    @bstrDescription.setter
-    def bstrDescription(self, value: StringType) -> None: ...
-    @property
-    def bstrHelpFile(self) -> StringType: ...
-    @bstrHelpFile.setter
-    def bstrHelpFile(self, value: StringType) -> None: ...
-    @property
-    def bstrSource(self) -> StringType: ...
-    @bstrSource.setter
-    def bstrSource(self, value: StringType) -> None: ...
-    @property
-    def dwHelpContext(self) -> IntType: ...
-    @dwHelpContext.setter
-    def dwHelpContext(self, value: IntType) -> None: ...
-    @property
-    def pfnDeferredFillIn(self) -> NIntType: ...
-    @pfnDeferredFillIn.setter
-    def pfnDeferredFillIn(self, value: NIntType) -> None: ...
-    @property
-    def pvReserved(self) -> NIntType: ...
-    @pvReserved.setter
-    def pvReserved(self, value: NIntType) -> None: ...
-    @property
-    def scode(self) -> IntType: ...
-    @scode.setter
-    def scode(self, value: IntType) -> None: ...
-    @property
-    def wCode(self) -> ShortType: ...
-    @wCode.setter
-    def wCode(self, value: ShortType) -> None: ...
-    @property
-    def wReserved(self) -> ShortType: ...
-    @wReserved.setter
-    def wReserved(self, value: ShortType) -> None: ...
+    bstrDescription: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    bstrHelpFile: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    bstrSource: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    dwHelpContext: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    pfnDeferredFillIn: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    pvReserved: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    scode: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    wCode: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    wReserved: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class FILETIME(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def dwHighDateTime(self) -> IntType: ...
-    @dwHighDateTime.setter
-    def dwHighDateTime(self, value: IntType) -> None: ...
-    @property
-    def dwLowDateTime(self) -> IntType: ...
-    @dwLowDateTime.setter
-    def dwLowDateTime(self, value: IntType) -> None: ...
+    dwHighDateTime: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    dwLowDateTime: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class FORMATETC(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def cfFormat(self) -> ShortType: ...
-    @cfFormat.setter
-    def cfFormat(self, value: ShortType) -> None: ...
-    @property
-    def dwAspect(self) -> DVASPECT: ...
-    @dwAspect.setter
-    def dwAspect(self, value: DVASPECT) -> None: ...
-    @property
-    def lindex(self) -> IntType: ...
-    @lindex.setter
-    def lindex(self, value: IntType) -> None: ...
-    @property
-    def ptd(self) -> NIntType: ...
-    @ptd.setter
-    def ptd(self, value: NIntType) -> None: ...
-    @property
-    def tymed(self) -> TYMED: ...
-    @tymed.setter
-    def tymed(self, value: TYMED) -> None: ...
+    cfFormat: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    dwAspect: Final[DVASPECT] = ...
+    """
+    
+    :return: 
+    """
+    lindex: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    ptd: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    tymed: Final[TYMED] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class FUNCDESC(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def cParams(self) -> ShortType: ...
-    @cParams.setter
-    def cParams(self, value: ShortType) -> None: ...
-    @property
-    def cParamsOpt(self) -> ShortType: ...
-    @cParamsOpt.setter
-    def cParamsOpt(self, value: ShortType) -> None: ...
-    @property
-    def cScodes(self) -> ShortType: ...
-    @cScodes.setter
-    def cScodes(self, value: ShortType) -> None: ...
-    @property
-    def callconv(self) -> CALLCONV: ...
-    @callconv.setter
-    def callconv(self, value: CALLCONV) -> None: ...
-    @property
-    def elemdescFunc(self) -> ELEMDESC: ...
-    @elemdescFunc.setter
-    def elemdescFunc(self, value: ELEMDESC) -> None: ...
-    @property
-    def funckind(self) -> FUNCKIND: ...
-    @funckind.setter
-    def funckind(self, value: FUNCKIND) -> None: ...
-    @property
-    def invkind(self) -> INVOKEKIND: ...
-    @invkind.setter
-    def invkind(self, value: INVOKEKIND) -> None: ...
-    @property
-    def lprgelemdescParam(self) -> NIntType: ...
-    @lprgelemdescParam.setter
-    def lprgelemdescParam(self, value: NIntType) -> None: ...
-    @property
-    def lprgscode(self) -> NIntType: ...
-    @lprgscode.setter
-    def lprgscode(self, value: NIntType) -> None: ...
-    @property
-    def memid(self) -> IntType: ...
-    @memid.setter
-    def memid(self, value: IntType) -> None: ...
-    @property
-    def oVft(self) -> ShortType: ...
-    @oVft.setter
-    def oVft(self, value: ShortType) -> None: ...
-    @property
-    def wFuncFlags(self) -> ShortType: ...
-    @wFuncFlags.setter
-    def wFuncFlags(self, value: ShortType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IDLDESC(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def dwReserved(self) -> NIntType: ...
-    @dwReserved.setter
-    def dwReserved(self, value: NIntType) -> None: ...
-    @property
-    def wIDLFlags(self) -> IDLFLAG: ...
-    @wIDLFlags.setter
-    def wIDLFlags(self, value: IDLFLAG) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PARAMDESC(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def lpVarValue(self) -> NIntType: ...
-    @lpVarValue.setter
-    def lpVarValue(self, value: NIntType) -> None: ...
-    @property
-    def wParamFlags(self) -> PARAMFLAG: ...
-    @wParamFlags.setter
-    def wParamFlags(self, value: PARAMFLAG) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class STATDATA(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def advSink(self) -> IAdviseSink: ...
-    @advSink.setter
-    def advSink(self, value: IAdviseSink) -> None: ...
-    @property
-    def advf(self) -> ADVF: ...
-    @advf.setter
-    def advf(self, value: ADVF) -> None: ...
-    @property
-    def connection(self) -> IntType: ...
-    @connection.setter
-    def connection(self, value: IntType) -> None: ...
-    @property
-    def formatetc(self) -> FORMATETC: ...
-    @formatetc.setter
-    def formatetc(self, value: FORMATETC) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class STATSTG(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def atime(self) -> FILETIME: ...
-    @atime.setter
-    def atime(self, value: FILETIME) -> None: ...
-    @property
-    def cbSize(self) -> LongType: ...
-    @cbSize.setter
-    def cbSize(self, value: LongType) -> None: ...
-    @property
-    def clsid(self) -> Guid: ...
-    @clsid.setter
-    def clsid(self, value: Guid) -> None: ...
-    @property
-    def ctime(self) -> FILETIME: ...
-    @ctime.setter
-    def ctime(self, value: FILETIME) -> None: ...
-    @property
-    def grfLocksSupported(self) -> IntType: ...
-    @grfLocksSupported.setter
-    def grfLocksSupported(self, value: IntType) -> None: ...
-    @property
-    def grfMode(self) -> IntType: ...
-    @grfMode.setter
-    def grfMode(self, value: IntType) -> None: ...
-    @property
-    def grfStateBits(self) -> IntType: ...
-    @grfStateBits.setter
-    def grfStateBits(self, value: IntType) -> None: ...
-    @property
-    def mtime(self) -> FILETIME: ...
-    @mtime.setter
-    def mtime(self, value: FILETIME) -> None: ...
-    @property
-    def pwcsName(self) -> StringType: ...
-    @pwcsName.setter
-    def pwcsName(self, value: StringType) -> None: ...
-    @property
-    def reserved(self) -> IntType: ...
-    @reserved.setter
-    def reserved(self, value: IntType) -> None: ...
-    @property
-    def type(self) -> IntType: ...
-    @type.setter
-    def type(self, value: IntType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class STGMEDIUM(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def pUnkForRelease(self) -> ObjectType: ...
-    @pUnkForRelease.setter
-    def pUnkForRelease(self, value: ObjectType) -> None: ...
-    @property
-    def tymed(self) -> TYMED: ...
-    @tymed.setter
-    def tymed(self, value: TYMED) -> None: ...
-    @property
-    def unionmember(self) -> NIntType: ...
-    @unionmember.setter
-    def unionmember(self, value: NIntType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TYPEATTR(ValueType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def MEMBER_ID_NIL() -> IntType: ...
-    @property
-    def cFuncs(self) -> ShortType: ...
-    @cFuncs.setter
-    def cFuncs(self, value: ShortType) -> None: ...
-    @property
-    def cImplTypes(self) -> ShortType: ...
-    @cImplTypes.setter
-    def cImplTypes(self, value: ShortType) -> None: ...
-    @property
-    def cVars(self) -> ShortType: ...
-    @cVars.setter
-    def cVars(self, value: ShortType) -> None: ...
-    @property
-    def cbAlignment(self) -> ShortType: ...
-    @cbAlignment.setter
-    def cbAlignment(self, value: ShortType) -> None: ...
-    @property
-    def cbSizeInstance(self) -> IntType: ...
-    @cbSizeInstance.setter
-    def cbSizeInstance(self, value: IntType) -> None: ...
-    @property
-    def cbSizeVft(self) -> ShortType: ...
-    @cbSizeVft.setter
-    def cbSizeVft(self, value: ShortType) -> None: ...
-    @property
-    def dwReserved(self) -> IntType: ...
-    @dwReserved.setter
-    def dwReserved(self, value: IntType) -> None: ...
-    @property
-    def guid(self) -> Guid: ...
-    @guid.setter
-    def guid(self, value: Guid) -> None: ...
-    @property
-    def idldescType(self) -> IDLDESC: ...
-    @idldescType.setter
-    def idldescType(self, value: IDLDESC) -> None: ...
-    @property
-    def lcid(self) -> IntType: ...
-    @lcid.setter
-    def lcid(self, value: IntType) -> None: ...
-    @property
-    def lpstrSchema(self) -> NIntType: ...
-    @lpstrSchema.setter
-    def lpstrSchema(self, value: NIntType) -> None: ...
-    @property
-    def memidConstructor(self) -> IntType: ...
-    @memidConstructor.setter
-    def memidConstructor(self, value: IntType) -> None: ...
-    @property
-    def memidDestructor(self) -> IntType: ...
-    @memidDestructor.setter
-    def memidDestructor(self, value: IntType) -> None: ...
-    @property
-    def tdescAlias(self) -> TYPEDESC: ...
-    @tdescAlias.setter
-    def tdescAlias(self, value: TYPEDESC) -> None: ...
-    @property
-    def typekind(self) -> TYPEKIND: ...
-    @typekind.setter
-    def typekind(self, value: TYPEKIND) -> None: ...
-    @property
-    def wMajorVerNum(self) -> ShortType: ...
-    @wMajorVerNum.setter
-    def wMajorVerNum(self, value: ShortType) -> None: ...
-    @property
-    def wMinorVerNum(self) -> ShortType: ...
-    @wMinorVerNum.setter
-    def wMinorVerNum(self, value: ShortType) -> None: ...
-    @property
-    def wTypeFlags(self) -> TYPEFLAGS: ...
-    @wTypeFlags.setter
-    def wTypeFlags(self, value: TYPEFLAGS) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TYPEDESC(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def lpValue(self) -> NIntType: ...
-    @lpValue.setter
-    def lpValue(self, value: NIntType) -> None: ...
-    @property
-    def vt(self) -> ShortType: ...
-    @vt.setter
-    def vt(self, value: ShortType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TYPELIBATTR(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def guid(self) -> Guid: ...
-    @guid.setter
-    def guid(self, value: Guid) -> None: ...
-    @property
-    def lcid(self) -> IntType: ...
-    @lcid.setter
-    def lcid(self, value: IntType) -> None: ...
-    @property
-    def syskind(self) -> SYSKIND: ...
-    @syskind.setter
-    def syskind(self, value: SYSKIND) -> None: ...
-    @property
-    def wLibFlags(self) -> LIBFLAGS: ...
-    @wLibFlags.setter
-    def wLibFlags(self, value: LIBFLAGS) -> None: ...
-    @property
-    def wMajorVerNum(self) -> ShortType: ...
-    @wMajorVerNum.setter
-    def wMajorVerNum(self, value: ShortType) -> None: ...
-    @property
-    def wMinorVerNum(self) -> ShortType: ...
-    @wMinorVerNum.setter
-    def wMinorVerNum(self, value: ShortType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class VARDESC(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def desc(self) -> DESCUNION: ...
-    @desc.setter
-    def desc(self, value: DESCUNION) -> None: ...
-    @property
-    def elemdescVar(self) -> ELEMDESC: ...
-    @elemdescVar.setter
-    def elemdescVar(self, value: ELEMDESC) -> None: ...
-    @property
-    def lpstrSchema(self) -> StringType: ...
-    @lpstrSchema.setter
-    def lpstrSchema(self, value: StringType) -> None: ...
-    @property
-    def memid(self) -> IntType: ...
-    @memid.setter
-    def memid(self, value: IntType) -> None: ...
-    @property
-    def varkind(self) -> VARKIND: ...
-    @varkind.setter
-    def varkind(self, value: VARKIND) -> None: ...
-    @property
-    def wVarFlags(self) -> ShortType: ...
-    @wVarFlags.setter
-    def wVarFlags(self, value: ShortType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # ---------- Sub Structs ---------- #
-
-    class DESCUNION(ValueType):
-        # ---------- Fields ---------- #
-
-        @property
-        def lpvarValue(self) -> NIntType: ...
-        @lpvarValue.setter
-        def lpvarValue(self, value: NIntType) -> None: ...
-        @property
-        def oInst(self) -> IntType: ...
-        @oInst.setter
-        def oInst(self, value: IntType) -> None: ...
-
-        # No Constructors
-
-        # No Properties
-
-        # No Methods
-
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Interfaces ---------- #
-
-class IAdviseSink(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def OnClose(self) -> VoidType: ...
-    def OnDataChange(
-        self, format: FORMATETC, stgmedium: STGMEDIUM
-    ) -> Tuple[VoidType, FORMATETC, STGMEDIUM]: ...
-    def OnRename(self, moniker: IMoniker) -> VoidType: ...
-    def OnSave(self) -> VoidType: ...
-    def OnViewChange(self, aspect: IntType, index: IntType) -> VoidType: ...
-
-    # No Events
-
-class IBindCtx(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def EnumObjectParam(self, ppenum: IEnumString) -> Tuple[VoidType, IEnumString]: ...
-    def GetBindOptions(self, pbindopts: BIND_OPTS) -> Tuple[VoidType, BIND_OPTS]: ...
-    def GetObjectParam(
-        self, pszKey: StringType, ppunk: ObjectType
-    ) -> Tuple[VoidType, ObjectType]: ...
-    def GetRunningObjectTable(
-        self, pprot: IRunningObjectTable
-    ) -> Tuple[VoidType, IRunningObjectTable]: ...
-    def RegisterObjectBound(self, punk: ObjectType) -> VoidType: ...
-    def RegisterObjectParam(self, pszKey: StringType, punk: ObjectType) -> VoidType: ...
-    def ReleaseBoundObjects(self) -> VoidType: ...
-    def RevokeObjectBound(self, punk: ObjectType) -> VoidType: ...
-    def RevokeObjectParam(self, pszKey: StringType) -> IntType: ...
-    def SetBindOptions(self, pbindopts: BIND_OPTS) -> Tuple[VoidType, BIND_OPTS]: ...
-
-    # No Events
-
-class IConnectionPoint(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Advise(self, pUnkSink: ObjectType, pdwCookie: IntType) -> Tuple[VoidType, IntType]: ...
-    def EnumConnections(self, ppEnum: IEnumConnections) -> Tuple[VoidType, IEnumConnections]: ...
-    def GetConnectionInterface(self, pIID: Guid) -> Tuple[VoidType, Guid]: ...
+    """"""
+
+    cParams: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    cParamsOpt: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    cScodes: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    callconv: Final[CALLCONV] = ...
+    """
+    
+    :return: 
+    """
+    elemdescFunc: Final[ELEMDESC] = ...
+    """
+    
+    :return: 
+    """
+    funckind: Final[FUNCKIND] = ...
+    """
+    
+    :return: 
+    """
+    invkind: Final[INVOKEKIND] = ...
+    """
+    
+    :return: 
+    """
+    lprgelemdescParam: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    lprgscode: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    memid: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    oVft: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    wFuncFlags: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class FUNCFLAGS(Enum):
+    """"""
+
+    FUNCFLAG_FRESTRICTED: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FSOURCE: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FBINDABLE: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FREQUESTEDIT: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FDISPLAYBIND: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FDEFAULTBIND: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FHIDDEN: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FUSESGETLASTERROR: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FDEFAULTCOLLELEM: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FUIDEFAULT: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FNONBROWSABLE: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FREPLACEABLE: FUNCFLAGS = ...
+    """"""
+    FUNCFLAG_FIMMEDIATEBIND: FUNCFLAGS = ...
+    """"""
+
+class FUNCKIND(Enum):
+    """"""
+
+    FUNC_VIRTUAL: FUNCKIND = ...
+    """"""
+    FUNC_PUREVIRTUAL: FUNCKIND = ...
+    """"""
+    FUNC_NONVIRTUAL: FUNCKIND = ...
+    """"""
+    FUNC_STATIC: FUNCKIND = ...
+    """"""
+    FUNC_DISPATCH: FUNCKIND = ...
+    """"""
+
+class IAdviseSink:
+    """"""
+
+    def OnClose(self) -> None:
+        """"""
+    def OnDataChange(self, format: FORMATETC, stgmedium: STGMEDIUM) -> None:
+        """
+
+        :param format:
+        :param stgmedium:
+        """
+    def OnRename(self, moniker: IMoniker) -> None:
+        """
+
+        :param moniker:
+        """
+    def OnSave(self) -> None:
+        """"""
+    def OnViewChange(self, aspect: int, index: int) -> None:
+        """
+
+        :param aspect:
+        :param index:
+        """
+
+class IBindCtx:
+    """"""
+
+    def EnumObjectParam(self, ppenum: IEnumString) -> Tuple[None, IEnumString]:
+        """
+
+        :param ppenum:
+        """
+    def GetBindOptions(self, pbindopts: BIND_OPTS) -> None:
+        """
+
+        :param pbindopts:
+        """
+    def GetObjectParam(self, pszKey: str, ppunk: object) -> Tuple[None, object]:
+        """
+
+        :param pszKey:
+        :param ppunk:
+        """
+    def GetRunningObjectTable(self, pprot: IRunningObjectTable) -> Tuple[None, IRunningObjectTable]:
+        """
+
+        :param pprot:
+        """
+    def RegisterObjectBound(self, punk: object) -> None:
+        """
+
+        :param punk:
+        """
+    def RegisterObjectParam(self, pszKey: str, punk: object) -> None:
+        """
+
+        :param pszKey:
+        :param punk:
+        """
+    def ReleaseBoundObjects(self) -> None:
+        """"""
+    def RevokeObjectBound(self, punk: object) -> None:
+        """
+
+        :param punk:
+        """
+    def RevokeObjectParam(self, pszKey: str) -> int:
+        """
+
+        :param pszKey:
+        :return:
+        """
+    def SetBindOptions(self, pbindopts: BIND_OPTS) -> None:
+        """
+
+        :param pbindopts:
+        """
+
+class IConnectionPoint:
+    """"""
+
+    def Advise(self, pUnkSink: object, pdwCookie: int) -> Tuple[None, int]:
+        """
+
+        :param pUnkSink:
+        :param pdwCookie:
+        """
+    def EnumConnections(self, ppEnum: IEnumConnections) -> Tuple[None, IEnumConnections]:
+        """
+
+        :param ppEnum:
+        """
+    def GetConnectionInterface(self, pIID: Guid) -> Tuple[None, Guid]:
+        """
+
+        :param pIID:
+        """
     def GetConnectionPointContainer(
         self, ppCPC: IConnectionPointContainer
-    ) -> Tuple[VoidType, IConnectionPointContainer]: ...
-    def Unadvise(self, dwCookie: IntType) -> VoidType: ...
+    ) -> Tuple[None, IConnectionPointContainer]:
+        """
 
-    # No Events
+        :param ppCPC:
+        """
+    def Unadvise(self, dwCookie: int) -> None:
+        """
 
-class IConnectionPointContainer(Protocol):
-    # No Properties
+        :param dwCookie:
+        """
 
-    # ---------- Methods ---------- #
+class IConnectionPointContainer:
+    """"""
 
     def EnumConnectionPoints(
         self, ppEnum: IEnumConnectionPoints
-    ) -> Tuple[VoidType, IEnumConnectionPoints]: ...
+    ) -> Tuple[None, IEnumConnectionPoints]:
+        """
+
+        :param ppEnum:
+        """
     def FindConnectionPoint(
         self, riid: Guid, ppCP: IConnectionPoint
-    ) -> Tuple[VoidType, Guid, IConnectionPoint]: ...
+    ) -> Tuple[None, IConnectionPoint]:
+        """
 
-    # No Events
+        :param riid:
+        :param ppCP:
+        """
 
-class IDataObject(Protocol):
-    # No Properties
+class IDLDESC(ValueType):
+    """"""
 
-    # ---------- Methods ---------- #
+    dwReserved: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    wIDLFlags: Final[IDLFLAG] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IDLFLAG(Enum):
+    """"""
+
+    IDLFLAG_NONE: IDLFLAG = ...
+    """"""
+    IDLFLAG_FIN: IDLFLAG = ...
+    """"""
+    IDLFLAG_FOUT: IDLFLAG = ...
+    """"""
+    IDLFLAG_FLCID: IDLFLAG = ...
+    """"""
+    IDLFLAG_FRETVAL: IDLFLAG = ...
+    """"""
+
+class IDataObject:
+    """"""
 
     def DAdvise(
-        self, pFormatetc: FORMATETC, advf: ADVF, adviseSink: IAdviseSink, connection: IntType
-    ) -> Tuple[IntType, FORMATETC, IntType]: ...
-    def DUnadvise(self, connection: IntType) -> VoidType: ...
-    def EnumDAdvise(self, enumAdvise: IEnumSTATDATA) -> Tuple[IntType, IEnumSTATDATA]: ...
-    def EnumFormatEtc(self, direction: DATADIR) -> IEnumFORMATETC: ...
+        self, pFormatetc: FORMATETC, advf: ADVF, adviseSink: IAdviseSink, connection: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param pFormatetc:
+        :param advf:
+        :param adviseSink:
+        :param connection:
+        :return:
+        """
+    def DUnadvise(self, connection: int) -> None:
+        """
+
+        :param connection:
+        """
+    def EnumDAdvise(self, enumAdvise: IEnumSTATDATA) -> Tuple[int, IEnumSTATDATA]:
+        """
+
+        :param enumAdvise:
+        :return:
+        """
+    def EnumFormatEtc(self, direction: DATADIR) -> IEnumFORMATETC:
+        """
+
+        :param direction:
+        :return:
+        """
     def GetCanonicalFormatEtc(
         self, formatIn: FORMATETC, formatOut: FORMATETC
-    ) -> Tuple[IntType, FORMATETC, FORMATETC]: ...
-    def GetData(
-        self, format: FORMATETC, medium: STGMEDIUM
-    ) -> Tuple[VoidType, FORMATETC, STGMEDIUM]: ...
-    def GetDataHere(
-        self, format: FORMATETC, medium: STGMEDIUM
-    ) -> Tuple[VoidType, FORMATETC, STGMEDIUM]: ...
-    def QueryGetData(self, format: FORMATETC) -> Tuple[IntType, FORMATETC]: ...
-    def SetData(
-        self, formatIn: FORMATETC, medium: STGMEDIUM, release: BooleanType
-    ) -> Tuple[VoidType, FORMATETC, STGMEDIUM]: ...
+    ) -> Tuple[int, FORMATETC]:
+        """
 
-    # No Events
+        :param formatIn:
+        :param formatOut:
+        :return:
+        """
+    def GetData(self, format: FORMATETC, medium: STGMEDIUM) -> Tuple[None, STGMEDIUM]:
+        """
 
-class IEnumConnectionPoints(Protocol):
-    # No Properties
+        :param format:
+        :param medium:
+        """
+    def GetDataHere(self, format: FORMATETC, medium: STGMEDIUM) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param format:
+        :param medium:
+        """
+    def QueryGetData(self, format: FORMATETC) -> int:
+        """
 
-    def Clone(self, ppenum: IEnumConnectionPoints) -> Tuple[VoidType, IEnumConnectionPoints]: ...
+        :param format:
+        :return:
+        """
+    def SetData(self, formatIn: FORMATETC, medium: STGMEDIUM, release: bool) -> None:
+        """
+
+        :param formatIn:
+        :param medium:
+        :param release:
+        """
+
+class IEnumConnectionPoints:
+    """"""
+
+    def Clone(self, ppenum: IEnumConnectionPoints) -> Tuple[None, IEnumConnectionPoints]:
+        """
+
+        :param ppenum:
+        """
     def Next(
-        self, celt: IntType, rgelt: ArrayType[IConnectionPoint], pceltFetched: NIntType
-    ) -> Tuple[IntType, ArrayType[IConnectionPoint]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: IntType) -> IntType: ...
+        self, celt: int, rgelt: Array[IConnectionPoint], pceltFetched: IntPtr
+    ) -> Tuple[int, Array[IConnectionPoint]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgelt:
+        :param pceltFetched:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> int:
+        """
 
-class IEnumConnections(Protocol):
-    # No Properties
+        :param celt:
+        :return:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumConnections:
+    """"""
 
-    def Clone(self, ppenum: IEnumConnections) -> Tuple[VoidType, IEnumConnections]: ...
+    def Clone(self, ppenum: IEnumConnections) -> Tuple[None, IEnumConnections]:
+        """
+
+        :param ppenum:
+        """
     def Next(
-        self, celt: IntType, rgelt: ArrayType[CONNECTDATA], pceltFetched: NIntType
-    ) -> Tuple[IntType, ArrayType[CONNECTDATA]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: IntType) -> IntType: ...
+        self, celt: int, rgelt: Array[CONNECTDATA], pceltFetched: IntPtr
+    ) -> Tuple[int, Array[CONNECTDATA]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgelt:
+        :param pceltFetched:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> int:
+        """
 
-class IEnumFORMATETC(Protocol):
-    # No Properties
+        :param celt:
+        :return:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumFORMATETC:
+    """"""
 
-    def Clone(self, newEnum: IEnumFORMATETC) -> Tuple[VoidType, IEnumFORMATETC]: ...
+    def Clone(self, newEnum: IEnumFORMATETC) -> Tuple[None, IEnumFORMATETC]:
+        """
+
+        :param newEnum:
+        """
     def Next(
-        self, celt: IntType, rgelt: ArrayType[FORMATETC], pceltFetched: ArrayType[IntType]
-    ) -> Tuple[IntType, ArrayType[FORMATETC], ArrayType[IntType]]: ...
-    def Reset(self) -> IntType: ...
-    def Skip(self, celt: IntType) -> IntType: ...
+        self, celt: int, rgelt: Array[FORMATETC], pceltFetched: Array[int]
+    ) -> Tuple[int, Array[FORMATETC], Array[int]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgelt:
+        :param pceltFetched:
+        :return:
+        """
+    def Reset(self) -> int:
+        """
 
-class IEnumMoniker(Protocol):
-    # No Properties
+        :return:
+        """
+    def Skip(self, celt: int) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :param celt:
+        :return:
+        """
 
-    def Clone(self, ppenum: IEnumMoniker) -> Tuple[VoidType, IEnumMoniker]: ...
+class IEnumMoniker:
+    """"""
+
+    def Clone(self, ppenum: IEnumMoniker) -> Tuple[None, IEnumMoniker]:
+        """
+
+        :param ppenum:
+        """
     def Next(
-        self, celt: IntType, rgelt: ArrayType[IMoniker], pceltFetched: NIntType
-    ) -> Tuple[IntType, ArrayType[IMoniker]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: IntType) -> IntType: ...
+        self, celt: int, rgelt: Array[IMoniker], pceltFetched: IntPtr
+    ) -> Tuple[int, Array[IMoniker]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgelt:
+        :param pceltFetched:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> int:
+        """
 
-class IEnumSTATDATA(Protocol):
-    # No Properties
+        :param celt:
+        :return:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumSTATDATA:
+    """"""
 
-    def Clone(self, newEnum: IEnumSTATDATA) -> Tuple[VoidType, IEnumSTATDATA]: ...
+    def Clone(self, newEnum: IEnumSTATDATA) -> Tuple[None, IEnumSTATDATA]:
+        """
+
+        :param newEnum:
+        """
     def Next(
-        self, celt: IntType, rgelt: ArrayType[STATDATA], pceltFetched: ArrayType[IntType]
-    ) -> Tuple[IntType, ArrayType[STATDATA], ArrayType[IntType]]: ...
-    def Reset(self) -> IntType: ...
-    def Skip(self, celt: IntType) -> IntType: ...
+        self, celt: int, rgelt: Array[STATDATA], pceltFetched: Array[int]
+    ) -> Tuple[int, Array[STATDATA], Array[int]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgelt:
+        :param pceltFetched:
+        :return:
+        """
+    def Reset(self) -> int:
+        """
 
-class IEnumString(Protocol):
-    # No Properties
+        :return:
+        """
+    def Skip(self, celt: int) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :param celt:
+        :return:
+        """
 
-    def Clone(self, ppenum: IEnumString) -> Tuple[VoidType, IEnumString]: ...
+class IEnumString:
+    """"""
+
+    def Clone(self, ppenum: IEnumString) -> Tuple[None, IEnumString]:
+        """
+
+        :param ppenum:
+        """
+    def Next(self, celt: int, rgelt: Array[str], pceltFetched: IntPtr) -> Tuple[int, Array[str]]:
+        """
+
+        :param celt:
+        :param rgelt:
+        :param pceltFetched:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> int:
+        """
+
+        :param celt:
+        :return:
+        """
+
+class IEnumVARIANT:
+    """"""
+
+    def Clone(self) -> IEnumVARIANT:
+        """
+
+        :return:
+        """
     def Next(
-        self, celt: IntType, rgelt: ArrayType[StringType], pceltFetched: NIntType
-    ) -> Tuple[IntType, ArrayType[StringType]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: IntType) -> IntType: ...
+        self, celt: int, rgVar: Array[object], pceltFetched: IntPtr
+    ) -> Tuple[int, Array[object]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgVar:
+        :param pceltFetched:
+        :return:
+        """
+    def Reset(self) -> int:
+        """
 
-class IEnumVARIANT(Protocol):
-    # No Properties
+        :return:
+        """
+    def Skip(self, celt: int) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :param celt:
+        :return:
+        """
 
-    def Clone(self) -> IEnumVARIANT: ...
-    def Next(
-        self, celt: IntType, rgVar: ArrayType[ObjectType], pceltFetched: NIntType
-    ) -> Tuple[IntType, ArrayType[ObjectType]]: ...
-    def Reset(self) -> IntType: ...
-    def Skip(self, celt: IntType) -> IntType: ...
+class IEnumerable:
+    """"""
 
-    # No Events
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-class IEnumerable(Protocol):
-    # No Properties
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
 
-    def GetEnumerator(self) -> IEnumerator: ...
-
-    # No Events
-
-class IEnumerator(Protocol):
-    # ---------- Properties ---------- #
+class IEnumerator:
+    """"""
 
     @property
-    def Current(self) -> ObjectType: ...
+    def Current(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
 
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> ObjectType: ...
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
 
-    # No Events
+class IExpando(IReflect):
+    """"""
 
-class IExpando(Protocol, IReflect):
-    # No Properties
+    @property
+    def UnderlyingSystemType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AddField(self, name: str) -> FieldInfo:
+        """
 
-    def AddField(self, name: StringType) -> FieldInfo: ...
-    def AddMethod(self, name: StringType, method: Delegate) -> MethodInfo: ...
-    def AddProperty(self, name: StringType) -> PropertyInfo: ...
-    def RemoveMember(self, m: MemberInfo) -> VoidType: ...
+        :param name:
+        :return:
+        """
+    def AddMethod(self, name: str, method: Delegate) -> MethodInfo:
+        """
 
-    # No Events
+        :param name:
+        :param method:
+        :return:
+        """
+    def AddProperty(self, name: str) -> PropertyInfo:
+        """
 
-class IMoniker(Protocol):
-    # No Properties
+        :param name:
+        :return:
+        """
+    def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
+        """
 
-    # ---------- Methods ---------- #
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
+    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
+        """
+
+        :param bindingAttr:
+        :return:
+        """
+    def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
+    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """
+
+        :param bindingAttr:
+        :return:
+        """
+    @overload
+    def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
+    @overload
+    def GetMethod(
+        self,
+        name: str,
+        bindingAttr: BindingFlags,
+        binder: Binder,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
+    ) -> MethodInfo:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :param binder:
+        :param types:
+        :param modifiers:
+        :return:
+        """
+    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
+        """
+
+        :param bindingAttr:
+        :return:
+        """
+    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
+        """
+
+        :param bindingAttr:
+        :return:
+        """
+    @overload
+    def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
+    @overload
+    def GetProperty(
+        self,
+        name: str,
+        bindingAttr: BindingFlags,
+        binder: Binder,
+        returnType: Type,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
+    ) -> PropertyInfo:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :param binder:
+        :param returnType:
+        :param types:
+        :param modifiers:
+        :return:
+        """
+    def InvokeMember(
+        self,
+        name: str,
+        invokeAttr: BindingFlags,
+        binder: Binder,
+        target: object,
+        args: Array[object],
+        modifiers: Array[ParameterModifier],
+        culture: CultureInfo,
+        namedParameters: Array[str],
+    ) -> object:
+        """
+
+        :param name:
+        :param invokeAttr:
+        :param binder:
+        :param target:
+        :param args:
+        :param modifiers:
+        :param culture:
+        :param namedParameters:
+        :return:
+        """
+    def RemoveMember(self, m: MemberInfo) -> None:
+        """
+
+        :param m:
+        """
+
+class IMPLTYPEFLAGS(Enum):
+    """"""
+
+    IMPLTYPEFLAG_FDEFAULT: IMPLTYPEFLAGS = ...
+    """"""
+    IMPLTYPEFLAG_FSOURCE: IMPLTYPEFLAGS = ...
+    """"""
+    IMPLTYPEFLAG_FRESTRICTED: IMPLTYPEFLAGS = ...
+    """"""
+    IMPLTYPEFLAG_FDEFAULTVTABLE: IMPLTYPEFLAGS = ...
+    """"""
+
+class IMoniker:
+    """"""
 
     def BindToObject(
-        self, pbc: IBindCtx, pmkToLeft: IMoniker, riidResult: Guid, ppvResult: ObjectType
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
+        self, pbc: IBindCtx, pmkToLeft: IMoniker, riidResult: Guid, ppvResult: object
+    ) -> Tuple[None, object]:
+        """
+
+        :param pbc:
+        :param pmkToLeft:
+        :param riidResult:
+        :param ppvResult:
+        """
     def BindToStorage(
-        self, pbc: IBindCtx, pmkToLeft: IMoniker, riid: Guid, ppvObj: ObjectType
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
-    def CommonPrefixWith(
-        self, pmkOther: IMoniker, ppmkPrefix: IMoniker
-    ) -> Tuple[VoidType, IMoniker]: ...
+        self, pbc: IBindCtx, pmkToLeft: IMoniker, riid: Guid, ppvObj: object
+    ) -> Tuple[None, object]:
+        """
+
+        :param pbc:
+        :param pmkToLeft:
+        :param riid:
+        :param ppvObj:
+        """
+    def CommonPrefixWith(self, pmkOther: IMoniker, ppmkPrefix: IMoniker) -> Tuple[None, IMoniker]:
+        """
+
+        :param pmkOther:
+        :param ppmkPrefix:
+        """
     def ComposeWith(
-        self, pmkRight: IMoniker, fOnlyIfNotGeneric: BooleanType, ppmkComposite: IMoniker
-    ) -> Tuple[VoidType, IMoniker]: ...
-    def Enum(
-        self, fForward: BooleanType, ppenumMoniker: IEnumMoniker
-    ) -> Tuple[VoidType, IEnumMoniker]: ...
-    def GetClassID(self, pClassID: Guid) -> Tuple[VoidType, Guid]: ...
+        self, pmkRight: IMoniker, fOnlyIfNotGeneric: bool, ppmkComposite: IMoniker
+    ) -> Tuple[None, IMoniker]:
+        """
+
+        :param pmkRight:
+        :param fOnlyIfNotGeneric:
+        :param ppmkComposite:
+        """
+    def Enum(self, fForward: bool, ppenumMoniker: IEnumMoniker) -> Tuple[None, IEnumMoniker]:
+        """
+
+        :param fForward:
+        :param ppenumMoniker:
+        """
+    def GetClassID(self, pClassID: Guid) -> Tuple[None, Guid]:
+        """
+
+        :param pClassID:
+        """
     def GetDisplayName(
-        self, pbc: IBindCtx, pmkToLeft: IMoniker, ppszDisplayName: StringType
-    ) -> Tuple[VoidType, StringType]: ...
-    def GetSizeMax(self, pcbSize: LongType) -> Tuple[VoidType, LongType]: ...
+        self, pbc: IBindCtx, pmkToLeft: IMoniker, ppszDisplayName: str
+    ) -> Tuple[None, str]:
+        """
+
+        :param pbc:
+        :param pmkToLeft:
+        :param ppszDisplayName:
+        """
+    def GetSizeMax(self, pcbSize: int) -> Tuple[None, int]:
+        """
+
+        :param pcbSize:
+        """
     def GetTimeOfLastChange(
         self, pbc: IBindCtx, pmkToLeft: IMoniker, pFileTime: FILETIME
-    ) -> Tuple[VoidType, FILETIME]: ...
-    def Hash(self, pdwHash: IntType) -> Tuple[VoidType, IntType]: ...
-    def Inverse(self, ppmk: IMoniker) -> Tuple[VoidType, IMoniker]: ...
-    def IsDirty(self) -> IntType: ...
-    def IsEqual(self, pmkOtherMoniker: IMoniker) -> IntType: ...
-    def IsRunning(
-        self, pbc: IBindCtx, pmkToLeft: IMoniker, pmkNewlyRunning: IMoniker
-    ) -> IntType: ...
-    def IsSystemMoniker(self, pdwMksys: IntType) -> Tuple[IntType, IntType]: ...
-    def Load(self, pStm: IStream) -> VoidType: ...
+    ) -> Tuple[None, FILETIME]:
+        """
+
+        :param pbc:
+        :param pmkToLeft:
+        :param pFileTime:
+        """
+    def Hash(self, pdwHash: int) -> Tuple[None, int]:
+        """
+
+        :param pdwHash:
+        """
+    def Inverse(self, ppmk: IMoniker) -> Tuple[None, IMoniker]:
+        """
+
+        :param ppmk:
+        """
+    def IsDirty(self) -> int:
+        """
+
+        :return:
+        """
+    def IsEqual(self, pmkOtherMoniker: IMoniker) -> int:
+        """
+
+        :param pmkOtherMoniker:
+        :return:
+        """
+    def IsRunning(self, pbc: IBindCtx, pmkToLeft: IMoniker, pmkNewlyRunning: IMoniker) -> int:
+        """
+
+        :param pbc:
+        :param pmkToLeft:
+        :param pmkNewlyRunning:
+        :return:
+        """
+    def IsSystemMoniker(self, pdwMksys: int) -> Tuple[int, int]:
+        """
+
+        :param pdwMksys:
+        :return:
+        """
+    def Load(self, pStm: IStream) -> None:
+        """
+
+        :param pStm:
+        """
     def ParseDisplayName(
         self,
         pbc: IBindCtx,
         pmkToLeft: IMoniker,
-        pszDisplayName: StringType,
-        pchEaten: IntType,
+        pszDisplayName: str,
+        pchEaten: int,
         ppmkOut: IMoniker,
-    ) -> Tuple[VoidType, IntType, IMoniker]: ...
+    ) -> Tuple[None, int, IMoniker]:
+        """
+
+        :param pbc:
+        :param pmkToLeft:
+        :param pszDisplayName:
+        :param pchEaten:
+        :param ppmkOut:
+        """
     def Reduce(
-        self, pbc: IBindCtx, dwReduceHowFar: IntType, ppmkToLeft: IMoniker, ppmkReduced: IMoniker
-    ) -> Tuple[VoidType, IMoniker, IMoniker]: ...
-    def RelativePathTo(
-        self, pmkOther: IMoniker, ppmkRelPath: IMoniker
-    ) -> Tuple[VoidType, IMoniker]: ...
-    def Save(self, pStm: IStream, fClearDirty: BooleanType) -> VoidType: ...
+        self, pbc: IBindCtx, dwReduceHowFar: int, ppmkToLeft: IMoniker, ppmkReduced: IMoniker
+    ) -> Tuple[None, IMoniker]:
+        """
 
-    # No Events
+        :param pbc:
+        :param dwReduceHowFar:
+        :param ppmkToLeft:
+        :param ppmkReduced:
+        """
+    def RelativePathTo(self, pmkOther: IMoniker, ppmkRelPath: IMoniker) -> Tuple[None, IMoniker]:
+        """
 
-class IPersistFile(Protocol):
-    # No Properties
+        :param pmkOther:
+        :param ppmkRelPath:
+        """
+    def Save(self, pStm: IStream, fClearDirty: bool) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param pStm:
+        :param fClearDirty:
+        """
 
-    def GetClassID(self, pClassID: Guid) -> Tuple[VoidType, Guid]: ...
-    def GetCurFile(self, ppszFileName: StringType) -> Tuple[VoidType, StringType]: ...
-    def IsDirty(self) -> IntType: ...
-    def Load(self, pszFileName: StringType, dwMode: IntType) -> VoidType: ...
-    def Save(self, pszFileName: StringType, fRemember: BooleanType) -> VoidType: ...
-    def SaveCompleted(self, pszFileName: StringType) -> VoidType: ...
+class INVOKEKIND(Enum):
+    """"""
 
-    # No Events
+    INVOKE_FUNC: INVOKEKIND = ...
+    """"""
+    INVOKE_PROPERTYGET: INVOKEKIND = ...
+    """"""
+    INVOKE_PROPERTYPUT: INVOKEKIND = ...
+    """"""
+    INVOKE_PROPERTYPUTREF: INVOKEKIND = ...
+    """"""
 
-class IReflect(Protocol):
-    # ---------- Properties ---------- #
+class IPersistFile:
+    """"""
+
+    def GetClassID(self, pClassID: Guid) -> Tuple[None, Guid]:
+        """
+
+        :param pClassID:
+        """
+    def GetCurFile(self, ppszFileName: str) -> Tuple[None, str]:
+        """
+
+        :param ppszFileName:
+        """
+    def IsDirty(self) -> int:
+        """
+
+        :return:
+        """
+    def Load(self, pszFileName: str, dwMode: int) -> None:
+        """
+
+        :param pszFileName:
+        :param dwMode:
+        """
+    def Save(self, pszFileName: str, fRemember: bool) -> None:
+        """
+
+        :param pszFileName:
+        :param fRemember:
+        """
+    def SaveCompleted(self, pszFileName: str) -> None:
+        """
+
+        :param pszFileName:
+        """
+
+class IReflect:
+    """"""
 
     @property
-    def UnderlyingSystemType(self) -> TypeType: ...
+    def UnderlyingSystemType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
+        """
 
-    def GetField(self, name: StringType, bindingAttr: BindingFlags) -> FieldInfo: ...
-    def GetFields(self, bindingAttr: BindingFlags) -> ArrayType[FieldInfo]: ...
-    def GetMember(self, name: StringType, bindingAttr: BindingFlags) -> ArrayType[MemberInfo]: ...
-    def GetMembers(self, bindingAttr: BindingFlags) -> ArrayType[MemberInfo]: ...
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
+    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
+        """
+
+        :param bindingAttr:
+        :return:
+        """
+    def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
+    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """
+
+        :param bindingAttr:
+        :return:
+        """
+    @overload
+    def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
     @overload
     def GetMethod(
         self,
-        name: StringType,
+        name: str,
         bindingAttr: BindingFlags,
         binder: Binder,
-        types: ArrayType[TypeType],
-        modifiers: ArrayType[ParameterModifier],
-    ) -> MethodInfo: ...
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
+    ) -> MethodInfo:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :param binder:
+        :param types:
+        :param modifiers:
+        :return:
+        """
+    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
+        """
+
+        :param bindingAttr:
+        :return:
+        """
+    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
+        """
+
+        :param bindingAttr:
+        :return:
+        """
     @overload
-    def GetMethod(self, name: StringType, bindingAttr: BindingFlags) -> MethodInfo: ...
-    def GetMethods(self, bindingAttr: BindingFlags) -> ArrayType[MethodInfo]: ...
-    def GetProperties(self, bindingAttr: BindingFlags) -> ArrayType[PropertyInfo]: ...
-    @overload
-    def GetProperty(self, name: StringType, bindingAttr: BindingFlags) -> PropertyInfo: ...
+    def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
     @overload
     def GetProperty(
         self,
-        name: StringType,
+        name: str,
         bindingAttr: BindingFlags,
         binder: Binder,
-        returnType: TypeType,
-        types: ArrayType[TypeType],
-        modifiers: ArrayType[ParameterModifier],
-    ) -> PropertyInfo: ...
+        returnType: Type,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
+    ) -> PropertyInfo:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :param binder:
+        :param returnType:
+        :param types:
+        :param modifiers:
+        :return:
+        """
     def InvokeMember(
         self,
-        name: StringType,
+        name: str,
         invokeAttr: BindingFlags,
         binder: Binder,
-        target: ObjectType,
-        args: ArrayType[ObjectType],
-        modifiers: ArrayType[ParameterModifier],
+        target: object,
+        args: Array[object],
+        modifiers: Array[ParameterModifier],
         culture: CultureInfo,
-        namedParameters: ArrayType[StringType],
-    ) -> ObjectType: ...
-    def get_UnderlyingSystemType(self) -> TypeType: ...
+        namedParameters: Array[str],
+    ) -> object:
+        """
 
-    # No Events
+        :param name:
+        :param invokeAttr:
+        :param binder:
+        :param target:
+        :param args:
+        :param modifiers:
+        :param culture:
+        :param namedParameters:
+        :return:
+        """
 
-class IRunningObjectTable(Protocol):
-    # No Properties
+class IRunningObjectTable:
+    """"""
 
-    # ---------- Methods ---------- #
+    def EnumRunning(self, ppenumMoniker: IEnumMoniker) -> Tuple[None, IEnumMoniker]:
+        """
 
-    def EnumRunning(self, ppenumMoniker: IEnumMoniker) -> Tuple[VoidType, IEnumMoniker]: ...
-    def GetObject(
-        self, pmkObjectName: IMoniker, ppunkObject: ObjectType
-    ) -> Tuple[IntType, ObjectType]: ...
+        :param ppenumMoniker:
+        """
+    def GetObject(self, pmkObjectName: IMoniker, ppunkObject: object) -> Tuple[int, object]:
+        """
+
+        :param pmkObjectName:
+        :param ppunkObject:
+        :return:
+        """
     def GetTimeOfLastChange(
         self, pmkObjectName: IMoniker, pfiletime: FILETIME
-    ) -> Tuple[IntType, FILETIME]: ...
-    def IsRunning(self, pmkObjectName: IMoniker) -> IntType: ...
-    def NoteChangeTime(
-        self, dwRegister: IntType, pfiletime: FILETIME
-    ) -> Tuple[VoidType, FILETIME]: ...
-    def Register(
-        self, grfFlags: IntType, punkObject: ObjectType, pmkObjectName: IMoniker
-    ) -> IntType: ...
-    def Revoke(self, dwRegister: IntType) -> VoidType: ...
+    ) -> Tuple[int, FILETIME]:
+        """
 
-    # No Events
+        :param pmkObjectName:
+        :param pfiletime:
+        :return:
+        """
+    def IsRunning(self, pmkObjectName: IMoniker) -> int:
+        """
 
-class IStream(Protocol):
-    # No Properties
+        :param pmkObjectName:
+        :return:
+        """
+    def NoteChangeTime(self, dwRegister: int, pfiletime: FILETIME) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param dwRegister:
+        :param pfiletime:
+        """
+    def Register(self, grfFlags: int, punkObject: object, pmkObjectName: IMoniker) -> int:
+        """
 
-    def Clone(self, ppstm: IStream) -> Tuple[VoidType, IStream]: ...
-    def Commit(self, grfCommitFlags: IntType) -> VoidType: ...
-    def CopyTo(
-        self, pstm: IStream, cb: LongType, pcbRead: NIntType, pcbWritten: NIntType
-    ) -> VoidType: ...
-    def LockRegion(self, libOffset: LongType, cb: LongType, dwLockType: IntType) -> VoidType: ...
-    def Read(
-        self, pv: ArrayType[ByteType], cb: IntType, pcbRead: NIntType
-    ) -> Tuple[VoidType, ArrayType[ByteType]]: ...
-    def Revert(self) -> VoidType: ...
-    def Seek(
-        self, dlibMove: LongType, dwOrigin: IntType, plibNewPosition: NIntType
-    ) -> VoidType: ...
-    def SetSize(self, libNewSize: LongType) -> VoidType: ...
-    def Stat(self, pstatstg: STATSTG, grfStatFlag: IntType) -> Tuple[VoidType, STATSTG]: ...
-    def UnlockRegion(self, libOffset: LongType, cb: LongType, dwLockType: IntType) -> VoidType: ...
-    def Write(self, pv: ArrayType[ByteType], cb: IntType, pcbWritten: NIntType) -> VoidType: ...
+        :param grfFlags:
+        :param punkObject:
+        :param pmkObjectName:
+        :return:
+        """
+    def Revoke(self, dwRegister: int) -> None:
+        """
 
-    # No Events
+        :param dwRegister:
+        """
 
-class ITypeComp(Protocol):
-    # No Properties
+class IStream:
+    """"""
 
-    # ---------- Methods ---------- #
+    def Clone(self, ppstm: IStream) -> Tuple[None, IStream]:
+        """
+
+        :param ppstm:
+        """
+    def Commit(self, grfCommitFlags: int) -> None:
+        """
+
+        :param grfCommitFlags:
+        """
+    def CopyTo(self, pstm: IStream, cb: int, pcbRead: IntPtr, pcbWritten: IntPtr) -> None:
+        """
+
+        :param pstm:
+        :param cb:
+        :param pcbRead:
+        :param pcbWritten:
+        """
+    def LockRegion(self, libOffset: int, cb: int, dwLockType: int) -> None:
+        """
+
+        :param libOffset:
+        :param cb:
+        :param dwLockType:
+        """
+    def Read(self, pv: Array[int], cb: int, pcbRead: IntPtr) -> Tuple[None, Array[int]]:
+        """
+
+        :param pv:
+        :param cb:
+        :param pcbRead:
+        """
+    def Revert(self) -> None:
+        """"""
+    def Seek(self, dlibMove: int, dwOrigin: int, plibNewPosition: IntPtr) -> None:
+        """
+
+        :param dlibMove:
+        :param dwOrigin:
+        :param plibNewPosition:
+        """
+    def SetSize(self, libNewSize: int) -> None:
+        """
+
+        :param libNewSize:
+        """
+    def Stat(self, pstatstg: STATSTG, grfStatFlag: int) -> Tuple[None, STATSTG]:
+        """
+
+        :param pstatstg:
+        :param grfStatFlag:
+        """
+    def UnlockRegion(self, libOffset: int, cb: int, dwLockType: int) -> None:
+        """
+
+        :param libOffset:
+        :param cb:
+        :param dwLockType:
+        """
+    def Write(self, pv: Array[int], cb: int, pcbWritten: IntPtr) -> None:
+        """
+
+        :param pv:
+        :param cb:
+        :param pcbWritten:
+        """
+
+class ITypeComp:
+    """"""
 
     def Bind(
         self,
-        szName: StringType,
-        lHashVal: IntType,
-        wFlags: ShortType,
+        szName: str,
+        lHashVal: int,
+        wFlags: int,
         ppTInfo: ITypeInfo,
         pDescKind: DESCKIND,
         pBindPtr: BINDPTR,
-    ) -> Tuple[VoidType, ITypeInfo, DESCKIND, BINDPTR]: ...
+    ) -> Tuple[None, ITypeInfo, DESCKIND, BINDPTR]:
+        """
+
+        :param szName:
+        :param lHashVal:
+        :param wFlags:
+        :param ppTInfo:
+        :param pDescKind:
+        :param pBindPtr:
+        """
     def BindType(
-        self, szName: StringType, lHashVal: IntType, ppTInfo: ITypeInfo, ppTComp: ITypeComp
-    ) -> Tuple[VoidType, ITypeInfo, ITypeComp]: ...
+        self, szName: str, lHashVal: int, ppTInfo: ITypeInfo, ppTComp: ITypeComp
+    ) -> Tuple[None, ITypeInfo, ITypeComp]:
+        """
 
-    # No Events
+        :param szName:
+        :param lHashVal:
+        :param ppTInfo:
+        :param ppTComp:
+        """
 
-class ITypeInfo(Protocol):
-    # No Properties
+class ITypeInfo:
+    """"""
 
-    # ---------- Methods ---------- #
+    def AddressOfMember(self, memid: int, invKind: INVOKEKIND, ppv: IntPtr) -> Tuple[None, IntPtr]:
+        """
 
-    def AddressOfMember(
-        self, memid: IntType, invKind: INVOKEKIND, ppv: NIntType
-    ) -> Tuple[VoidType, NIntType]: ...
-    def CreateInstance(
-        self, pUnkOuter: ObjectType, riid: Guid, ppvObj: ObjectType
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
-    def GetContainingTypeLib(
-        self, ppTLB: ITypeLib, pIndex: IntType
-    ) -> Tuple[VoidType, ITypeLib, IntType]: ...
+        :param memid:
+        :param invKind:
+        :param ppv:
+        """
+    def CreateInstance(self, pUnkOuter: object, riid: Guid, ppvObj: object) -> Tuple[None, object]:
+        """
+
+        :param pUnkOuter:
+        :param riid:
+        :param ppvObj:
+        """
+    def GetContainingTypeLib(self, ppTLB: ITypeLib, pIndex: int) -> Tuple[None, ITypeLib, int]:
+        """
+
+        :param ppTLB:
+        :param pIndex:
+        """
     def GetDllEntry(
         self,
-        memid: IntType,
+        memid: int,
         invKind: INVOKEKIND,
-        pBstrDllName: NIntType,
-        pBstrName: NIntType,
-        pwOrdinal: NIntType,
-    ) -> VoidType: ...
+        pBstrDllName: IntPtr,
+        pBstrName: IntPtr,
+        pwOrdinal: IntPtr,
+    ) -> None:
+        """
+
+        :param memid:
+        :param invKind:
+        :param pBstrDllName:
+        :param pBstrName:
+        :param pwOrdinal:
+        """
     def GetDocumentation(
-        self,
-        index: IntType,
-        strName: StringType,
-        strDocString: StringType,
-        dwHelpContext: IntType,
-        strHelpFile: StringType,
-    ) -> Tuple[VoidType, StringType, StringType, IntType, StringType]: ...
-    def GetFuncDesc(self, index: IntType, ppFuncDesc: NIntType) -> Tuple[VoidType, NIntType]: ...
+        self, index: int, strName: str, strDocString: str, dwHelpContext: int, strHelpFile: str
+    ) -> Tuple[None, str, str, int, str]:
+        """
+
+        :param index:
+        :param strName:
+        :param strDocString:
+        :param dwHelpContext:
+        :param strHelpFile:
+        """
+    def GetFuncDesc(self, index: int, ppFuncDesc: IntPtr) -> Tuple[None, IntPtr]:
+        """
+
+        :param index:
+        :param ppFuncDesc:
+        """
     def GetIDsOfNames(
-        self, rgszNames: ArrayType[StringType], cNames: IntType, pMemId: ArrayType[IntType]
-    ) -> Tuple[VoidType, ArrayType[IntType]]: ...
+        self, rgszNames: Array[str], cNames: int, pMemId: Array[int]
+    ) -> Tuple[None, Array[int]]:
+        """
+
+        :param rgszNames:
+        :param cNames:
+        :param pMemId:
+        """
     def GetImplTypeFlags(
-        self, index: IntType, pImplTypeFlags: IMPLTYPEFLAGS
-    ) -> Tuple[VoidType, IMPLTYPEFLAGS]: ...
-    def GetMops(self, memid: IntType, pBstrMops: StringType) -> Tuple[VoidType, StringType]: ...
+        self, index: int, pImplTypeFlags: IMPLTYPEFLAGS
+    ) -> Tuple[None, IMPLTYPEFLAGS]:
+        """
+
+        :param index:
+        :param pImplTypeFlags:
+        """
+    def GetMops(self, memid: int, pBstrMops: str) -> Tuple[None, str]:
+        """
+
+        :param memid:
+        :param pBstrMops:
+        """
     def GetNames(
-        self,
-        memid: IntType,
-        rgBstrNames: ArrayType[StringType],
-        cMaxNames: IntType,
-        pcNames: IntType,
-    ) -> Tuple[VoidType, ArrayType[StringType], IntType]: ...
-    def GetRefTypeInfo(self, hRef: IntType, ppTI: ITypeInfo) -> Tuple[VoidType, ITypeInfo]: ...
-    def GetRefTypeOfImplType(self, index: IntType, href: IntType) -> Tuple[VoidType, IntType]: ...
-    def GetTypeAttr(self, ppTypeAttr: NIntType) -> Tuple[VoidType, NIntType]: ...
-    def GetTypeComp(self, ppTComp: ITypeComp) -> Tuple[VoidType, ITypeComp]: ...
-    def GetVarDesc(self, index: IntType, ppVarDesc: NIntType) -> Tuple[VoidType, NIntType]: ...
+        self, memid: int, rgBstrNames: Array[str], cMaxNames: int, pcNames: int
+    ) -> Tuple[None, Array[str], int]:
+        """
+
+        :param memid:
+        :param rgBstrNames:
+        :param cMaxNames:
+        :param pcNames:
+        """
+    def GetRefTypeInfo(self, hRef: int, ppTI: ITypeInfo) -> Tuple[None, ITypeInfo]:
+        """
+
+        :param hRef:
+        :param ppTI:
+        """
+    def GetRefTypeOfImplType(self, index: int, href: int) -> Tuple[None, int]:
+        """
+
+        :param index:
+        :param href:
+        """
+    def GetTypeAttr(self, ppTypeAttr: IntPtr) -> Tuple[None, IntPtr]:
+        """
+
+        :param ppTypeAttr:
+        """
+    def GetTypeComp(self, ppTComp: ITypeComp) -> Tuple[None, ITypeComp]:
+        """
+
+        :param ppTComp:
+        """
+    def GetVarDesc(self, index: int, ppVarDesc: IntPtr) -> Tuple[None, IntPtr]:
+        """
+
+        :param index:
+        :param ppVarDesc:
+        """
     def Invoke(
         self,
-        pvInstance: ObjectType,
-        memid: IntType,
-        wFlags: ShortType,
+        pvInstance: object,
+        memid: int,
+        wFlags: int,
         pDispParams: DISPPARAMS,
-        pVarResult: NIntType,
-        pExcepInfo: NIntType,
-        puArgErr: IntType,
-    ) -> Tuple[VoidType, DISPPARAMS, IntType]: ...
-    def ReleaseFuncDesc(self, pFuncDesc: NIntType) -> VoidType: ...
-    def ReleaseTypeAttr(self, pTypeAttr: NIntType) -> VoidType: ...
-    def ReleaseVarDesc(self, pVarDesc: NIntType) -> VoidType: ...
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: int,
+    ) -> Tuple[None, int]:
+        """
 
-    # No Events
+        :param pvInstance:
+        :param memid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def ReleaseFuncDesc(self, pFuncDesc: IntPtr) -> None:
+        """
 
-class ITypeInfo2(Protocol, ITypeInfo):
-    # No Properties
+        :param pFuncDesc:
+        """
+    def ReleaseTypeAttr(self, pTypeAttr: IntPtr) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param pTypeAttr:
+        """
+    def ReleaseVarDesc(self, pVarDesc: IntPtr) -> None:
+        """
 
-    def AddressOfMember(
-        self, memid: IntType, invKind: INVOKEKIND, ppv: NIntType
-    ) -> Tuple[VoidType, NIntType]: ...
-    def CreateInstance(
-        self, pUnkOuter: ObjectType, riid: Guid, ppvObj: ObjectType
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
-    def GetAllCustData(self, pCustData: NIntType) -> VoidType: ...
-    def GetAllFuncCustData(self, index: IntType, pCustData: NIntType) -> VoidType: ...
-    def GetAllImplTypeCustData(self, index: IntType, pCustData: NIntType) -> VoidType: ...
-    def GetAllParamCustData(
-        self, indexFunc: IntType, indexParam: IntType, pCustData: NIntType
-    ) -> VoidType: ...
-    def GetAllVarCustData(self, index: IntType, pCustData: NIntType) -> VoidType: ...
-    def GetContainingTypeLib(
-        self, ppTLB: ITypeLib, pIndex: IntType
-    ) -> Tuple[VoidType, ITypeLib, IntType]: ...
-    def GetCustData(self, guid: Guid, pVarVal: ObjectType) -> Tuple[VoidType, Guid, ObjectType]: ...
+        :param pVarDesc:
+        """
+
+class ITypeInfo2(ITypeInfo):
+    """"""
+
+    def AddressOfMember(self, memid: int, invKind: INVOKEKIND, ppv: IntPtr) -> Tuple[None, IntPtr]:
+        """
+
+        :param memid:
+        :param invKind:
+        :param ppv:
+        """
+    def CreateInstance(self, pUnkOuter: object, riid: Guid, ppvObj: object) -> Tuple[None, object]:
+        """
+
+        :param pUnkOuter:
+        :param riid:
+        :param ppvObj:
+        """
+    def GetAllCustData(self, pCustData: IntPtr) -> None:
+        """
+
+        :param pCustData:
+        """
+    def GetAllFuncCustData(self, index: int, pCustData: IntPtr) -> None:
+        """
+
+        :param index:
+        :param pCustData:
+        """
+    def GetAllImplTypeCustData(self, index: int, pCustData: IntPtr) -> None:
+        """
+
+        :param index:
+        :param pCustData:
+        """
+    def GetAllParamCustData(self, indexFunc: int, indexParam: int, pCustData: IntPtr) -> None:
+        """
+
+        :param indexFunc:
+        :param indexParam:
+        :param pCustData:
+        """
+    def GetAllVarCustData(self, index: int, pCustData: IntPtr) -> None:
+        """
+
+        :param index:
+        :param pCustData:
+        """
+    def GetContainingTypeLib(self, ppTLB: ITypeLib, pIndex: int) -> Tuple[None, ITypeLib, int]:
+        """
+
+        :param ppTLB:
+        :param pIndex:
+        """
+    def GetCustData(self, guid: Guid, pVarVal: object) -> Tuple[None, object]:
+        """
+
+        :param guid:
+        :param pVarVal:
+        """
     def GetDllEntry(
         self,
-        memid: IntType,
+        memid: int,
         invKind: INVOKEKIND,
-        pBstrDllName: NIntType,
-        pBstrName: NIntType,
-        pwOrdinal: NIntType,
-    ) -> VoidType: ...
+        pBstrDllName: IntPtr,
+        pBstrName: IntPtr,
+        pwOrdinal: IntPtr,
+    ) -> None:
+        """
+
+        :param memid:
+        :param invKind:
+        :param pBstrDllName:
+        :param pBstrName:
+        :param pwOrdinal:
+        """
     def GetDocumentation(
-        self,
-        index: IntType,
-        strName: StringType,
-        strDocString: StringType,
-        dwHelpContext: IntType,
-        strHelpFile: StringType,
-    ) -> Tuple[VoidType, StringType, StringType, IntType, StringType]: ...
+        self, index: int, strName: str, strDocString: str, dwHelpContext: int, strHelpFile: str
+    ) -> Tuple[None, str, str, int, str]:
+        """
+
+        :param index:
+        :param strName:
+        :param strDocString:
+        :param dwHelpContext:
+        :param strHelpFile:
+        """
     def GetDocumentation2(
-        self,
-        memid: IntType,
-        pbstrHelpString: StringType,
-        pdwHelpStringContext: IntType,
-        pbstrHelpStringDll: StringType,
-    ) -> Tuple[VoidType, StringType, IntType, StringType]: ...
-    def GetFuncCustData(
-        self, index: IntType, guid: Guid, pVarVal: ObjectType
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
-    def GetFuncDesc(self, index: IntType, ppFuncDesc: NIntType) -> Tuple[VoidType, NIntType]: ...
+        self, memid: int, pbstrHelpString: str, pdwHelpStringContext: int, pbstrHelpStringDll: str
+    ) -> Tuple[None, str, int, str]:
+        """
+
+        :param memid:
+        :param pbstrHelpString:
+        :param pdwHelpStringContext:
+        :param pbstrHelpStringDll:
+        """
+    def GetFuncCustData(self, index: int, guid: Guid, pVarVal: object) -> Tuple[None, object]:
+        """
+
+        :param index:
+        :param guid:
+        :param pVarVal:
+        """
+    def GetFuncDesc(self, index: int, ppFuncDesc: IntPtr) -> Tuple[None, IntPtr]:
+        """
+
+        :param index:
+        :param ppFuncDesc:
+        """
     def GetFuncIndexOfMemId(
-        self, memid: IntType, invKind: INVOKEKIND, pFuncIndex: IntType
-    ) -> Tuple[VoidType, IntType]: ...
+        self, memid: int, invKind: INVOKEKIND, pFuncIndex: int
+    ) -> Tuple[None, int]:
+        """
+
+        :param memid:
+        :param invKind:
+        :param pFuncIndex:
+        """
     def GetIDsOfNames(
-        self, rgszNames: ArrayType[StringType], cNames: IntType, pMemId: ArrayType[IntType]
-    ) -> Tuple[VoidType, ArrayType[IntType]]: ...
-    def GetImplTypeCustData(
-        self, index: IntType, guid: Guid, pVarVal: ObjectType
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
+        self, rgszNames: Array[str], cNames: int, pMemId: Array[int]
+    ) -> Tuple[None, Array[int]]:
+        """
+
+        :param rgszNames:
+        :param cNames:
+        :param pMemId:
+        """
+    def GetImplTypeCustData(self, index: int, guid: Guid, pVarVal: object) -> Tuple[None, object]:
+        """
+
+        :param index:
+        :param guid:
+        :param pVarVal:
+        """
     def GetImplTypeFlags(
-        self, index: IntType, pImplTypeFlags: IMPLTYPEFLAGS
-    ) -> Tuple[VoidType, IMPLTYPEFLAGS]: ...
-    def GetMops(self, memid: IntType, pBstrMops: StringType) -> Tuple[VoidType, StringType]: ...
+        self, index: int, pImplTypeFlags: IMPLTYPEFLAGS
+    ) -> Tuple[None, IMPLTYPEFLAGS]:
+        """
+
+        :param index:
+        :param pImplTypeFlags:
+        """
+    def GetMops(self, memid: int, pBstrMops: str) -> Tuple[None, str]:
+        """
+
+        :param memid:
+        :param pBstrMops:
+        """
     def GetNames(
-        self,
-        memid: IntType,
-        rgBstrNames: ArrayType[StringType],
-        cMaxNames: IntType,
-        pcNames: IntType,
-    ) -> Tuple[VoidType, ArrayType[StringType], IntType]: ...
+        self, memid: int, rgBstrNames: Array[str], cMaxNames: int, pcNames: int
+    ) -> Tuple[None, Array[str], int]:
+        """
+
+        :param memid:
+        :param rgBstrNames:
+        :param cMaxNames:
+        :param pcNames:
+        """
     def GetParamCustData(
-        self, indexFunc: IntType, indexParam: IntType, guid: Guid, pVarVal: ObjectType
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
-    def GetRefTypeInfo(self, hRef: IntType, ppTI: ITypeInfo) -> Tuple[VoidType, ITypeInfo]: ...
-    def GetRefTypeOfImplType(self, index: IntType, href: IntType) -> Tuple[VoidType, IntType]: ...
-    def GetTypeAttr(self, ppTypeAttr: NIntType) -> Tuple[VoidType, NIntType]: ...
-    def GetTypeComp(self, ppTComp: ITypeComp) -> Tuple[VoidType, ITypeComp]: ...
-    def GetTypeFlags(self, pTypeFlags: IntType) -> Tuple[VoidType, IntType]: ...
-    def GetTypeKind(self, pTypeKind: TYPEKIND) -> Tuple[VoidType, TYPEKIND]: ...
-    def GetVarCustData(
-        self, index: IntType, guid: Guid, pVarVal: ObjectType
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
-    def GetVarDesc(self, index: IntType, ppVarDesc: NIntType) -> Tuple[VoidType, NIntType]: ...
-    def GetVarIndexOfMemId(
-        self, memid: IntType, pVarIndex: IntType
-    ) -> Tuple[VoidType, IntType]: ...
+        self, indexFunc: int, indexParam: int, guid: Guid, pVarVal: object
+    ) -> Tuple[None, object]:
+        """
+
+        :param indexFunc:
+        :param indexParam:
+        :param guid:
+        :param pVarVal:
+        """
+    def GetRefTypeInfo(self, hRef: int, ppTI: ITypeInfo) -> Tuple[None, ITypeInfo]:
+        """
+
+        :param hRef:
+        :param ppTI:
+        """
+    def GetRefTypeOfImplType(self, index: int, href: int) -> Tuple[None, int]:
+        """
+
+        :param index:
+        :param href:
+        """
+    def GetTypeAttr(self, ppTypeAttr: IntPtr) -> Tuple[None, IntPtr]:
+        """
+
+        :param ppTypeAttr:
+        """
+    def GetTypeComp(self, ppTComp: ITypeComp) -> Tuple[None, ITypeComp]:
+        """
+
+        :param ppTComp:
+        """
+    def GetTypeFlags(self, pTypeFlags: int) -> Tuple[None, int]:
+        """
+
+        :param pTypeFlags:
+        """
+    def GetTypeKind(self, pTypeKind: TYPEKIND) -> Tuple[None, TYPEKIND]:
+        """
+
+        :param pTypeKind:
+        """
+    def GetVarCustData(self, index: int, guid: Guid, pVarVal: object) -> Tuple[None, object]:
+        """
+
+        :param index:
+        :param guid:
+        :param pVarVal:
+        """
+    def GetVarDesc(self, index: int, ppVarDesc: IntPtr) -> Tuple[None, IntPtr]:
+        """
+
+        :param index:
+        :param ppVarDesc:
+        """
+    def GetVarIndexOfMemId(self, memid: int, pVarIndex: int) -> Tuple[None, int]:
+        """
+
+        :param memid:
+        :param pVarIndex:
+        """
     def Invoke(
         self,
-        pvInstance: ObjectType,
-        memid: IntType,
-        wFlags: ShortType,
+        pvInstance: object,
+        memid: int,
+        wFlags: int,
         pDispParams: DISPPARAMS,
-        pVarResult: NIntType,
-        pExcepInfo: NIntType,
-        puArgErr: IntType,
-    ) -> Tuple[VoidType, DISPPARAMS, IntType]: ...
-    def ReleaseFuncDesc(self, pFuncDesc: NIntType) -> VoidType: ...
-    def ReleaseTypeAttr(self, pTypeAttr: NIntType) -> VoidType: ...
-    def ReleaseVarDesc(self, pVarDesc: NIntType) -> VoidType: ...
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: int,
+    ) -> Tuple[None, int]:
+        """
 
-    # No Events
+        :param pvInstance:
+        :param memid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def ReleaseFuncDesc(self, pFuncDesc: IntPtr) -> None:
+        """
 
-class ITypeLib(Protocol):
-    # No Properties
+        :param pFuncDesc:
+        """
+    def ReleaseTypeAttr(self, pTypeAttr: IntPtr) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param pTypeAttr:
+        """
+    def ReleaseVarDesc(self, pVarDesc: IntPtr) -> None:
+        """
 
-    def FindName(
-        self,
-        szNameBuf: StringType,
-        lHashVal: IntType,
-        ppTInfo: ArrayType[ITypeInfo],
-        rgMemId: ArrayType[IntType],
-        pcFound: ShortType,
-    ) -> Tuple[VoidType, ArrayType[ITypeInfo], ArrayType[IntType], ShortType]: ...
-    def GetDocumentation(
-        self,
-        index: IntType,
-        strName: StringType,
-        strDocString: StringType,
-        dwHelpContext: IntType,
-        strHelpFile: StringType,
-    ) -> Tuple[VoidType, StringType, StringType, IntType, StringType]: ...
-    def GetLibAttr(self, ppTLibAttr: NIntType) -> Tuple[VoidType, NIntType]: ...
-    def GetTypeComp(self, ppTComp: ITypeComp) -> Tuple[VoidType, ITypeComp]: ...
-    def GetTypeInfo(self, index: IntType, ppTI: ITypeInfo) -> Tuple[VoidType, ITypeInfo]: ...
-    def GetTypeInfoCount(self) -> IntType: ...
-    def GetTypeInfoOfGuid(
-        self, guid: Guid, ppTInfo: ITypeInfo
-    ) -> Tuple[VoidType, Guid, ITypeInfo]: ...
-    def GetTypeInfoType(self, index: IntType, pTKind: TYPEKIND) -> Tuple[VoidType, TYPEKIND]: ...
-    def IsName(self, szNameBuf: StringType, lHashVal: IntType) -> BooleanType: ...
-    def ReleaseTLibAttr(self, pTLibAttr: NIntType) -> VoidType: ...
+        :param pVarDesc:
+        """
 
-    # No Events
-
-class ITypeLib2(Protocol, ITypeLib):
-    # No Properties
-
-    # ---------- Methods ---------- #
+class ITypeLib:
+    """"""
 
     def FindName(
         self,
-        szNameBuf: StringType,
-        lHashVal: IntType,
-        ppTInfo: ArrayType[ITypeInfo],
-        rgMemId: ArrayType[IntType],
-        pcFound: ShortType,
-    ) -> Tuple[VoidType, ArrayType[ITypeInfo], ArrayType[IntType], ShortType]: ...
-    def GetAllCustData(self, pCustData: NIntType) -> VoidType: ...
-    def GetCustData(self, guid: Guid, pVarVal: ObjectType) -> Tuple[VoidType, Guid, ObjectType]: ...
+        szNameBuf: str,
+        lHashVal: int,
+        ppTInfo: Array[ITypeInfo],
+        rgMemId: Array[int],
+        pcFound: int,
+    ) -> Tuple[None, Array[ITypeInfo], Array[int]]:
+        """
+
+        :param szNameBuf:
+        :param lHashVal:
+        :param ppTInfo:
+        :param rgMemId:
+        :param pcFound:
+        """
     def GetDocumentation(
+        self, index: int, strName: str, strDocString: str, dwHelpContext: int, strHelpFile: str
+    ) -> Tuple[None, str, str, int, str]:
+        """
+
+        :param index:
+        :param strName:
+        :param strDocString:
+        :param dwHelpContext:
+        :param strHelpFile:
+        """
+    def GetLibAttr(self, ppTLibAttr: IntPtr) -> Tuple[None, IntPtr]:
+        """
+
+        :param ppTLibAttr:
+        """
+    def GetTypeComp(self, ppTComp: ITypeComp) -> Tuple[None, ITypeComp]:
+        """
+
+        :param ppTComp:
+        """
+    def GetTypeInfo(self, index: int, ppTI: ITypeInfo) -> Tuple[None, ITypeInfo]:
+        """
+
+        :param index:
+        :param ppTI:
+        """
+    def GetTypeInfoCount(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTypeInfoOfGuid(self, guid: Guid, ppTInfo: ITypeInfo) -> Tuple[None, ITypeInfo]:
+        """
+
+        :param guid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoType(self, index: int, pTKind: TYPEKIND) -> Tuple[None, TYPEKIND]:
+        """
+
+        :param index:
+        :param pTKind:
+        """
+    def IsName(self, szNameBuf: str, lHashVal: int) -> bool:
+        """
+
+        :param szNameBuf:
+        :param lHashVal:
+        :return:
+        """
+    def ReleaseTLibAttr(self, pTLibAttr: IntPtr) -> None:
+        """
+
+        :param pTLibAttr:
+        """
+
+class ITypeLib2(ITypeLib):
+    """"""
+
+    def FindName(
         self,
-        index: IntType,
-        strName: StringType,
-        strDocString: StringType,
-        dwHelpContext: IntType,
-        strHelpFile: StringType,
-    ) -> Tuple[VoidType, StringType, StringType, IntType, StringType]: ...
+        szNameBuf: str,
+        lHashVal: int,
+        ppTInfo: Array[ITypeInfo],
+        rgMemId: Array[int],
+        pcFound: int,
+    ) -> Tuple[None, Array[ITypeInfo], Array[int]]:
+        """
+
+        :param szNameBuf:
+        :param lHashVal:
+        :param ppTInfo:
+        :param rgMemId:
+        :param pcFound:
+        """
+    def GetAllCustData(self, pCustData: IntPtr) -> None:
+        """
+
+        :param pCustData:
+        """
+    def GetCustData(self, guid: Guid, pVarVal: object) -> Tuple[None, object]:
+        """
+
+        :param guid:
+        :param pVarVal:
+        """
+    def GetDocumentation(
+        self, index: int, strName: str, strDocString: str, dwHelpContext: int, strHelpFile: str
+    ) -> Tuple[None, str, str, int, str]:
+        """
+
+        :param index:
+        :param strName:
+        :param strDocString:
+        :param dwHelpContext:
+        :param strHelpFile:
+        """
     def GetDocumentation2(
-        self,
-        index: IntType,
-        pbstrHelpString: StringType,
-        pdwHelpStringContext: IntType,
-        pbstrHelpStringDll: StringType,
-    ) -> Tuple[VoidType, StringType, IntType, StringType]: ...
-    def GetLibAttr(self, ppTLibAttr: NIntType) -> Tuple[VoidType, NIntType]: ...
-    def GetLibStatistics(
-        self, pcUniqueNames: NIntType, pcchUniqueNames: IntType
-    ) -> Tuple[VoidType, IntType]: ...
-    def GetTypeComp(self, ppTComp: ITypeComp) -> Tuple[VoidType, ITypeComp]: ...
-    def GetTypeInfo(self, index: IntType, ppTI: ITypeInfo) -> Tuple[VoidType, ITypeInfo]: ...
-    def GetTypeInfoCount(self) -> IntType: ...
-    def GetTypeInfoOfGuid(
-        self, guid: Guid, ppTInfo: ITypeInfo
-    ) -> Tuple[VoidType, Guid, ITypeInfo]: ...
-    def GetTypeInfoType(self, index: IntType, pTKind: TYPEKIND) -> Tuple[VoidType, TYPEKIND]: ...
-    def IsName(self, szNameBuf: StringType, lHashVal: IntType) -> BooleanType: ...
-    def ReleaseTLibAttr(self, pTLibAttr: NIntType) -> VoidType: ...
+        self, index: int, pbstrHelpString: str, pdwHelpStringContext: int, pbstrHelpStringDll: str
+    ) -> Tuple[None, str, int, str]:
+        """
 
-    # No Events
+        :param index:
+        :param pbstrHelpString:
+        :param pdwHelpStringContext:
+        :param pbstrHelpStringDll:
+        """
+    def GetLibAttr(self, ppTLibAttr: IntPtr) -> Tuple[None, IntPtr]:
+        """
 
-# ---------- Enums ---------- #
+        :param ppTLibAttr:
+        """
+    def GetLibStatistics(self, pcUniqueNames: IntPtr, pcchUniqueNames: int) -> Tuple[None, int]:
+        """
 
-class ADVF(Enum):
-    ADVF_NODATA = 1
-    ADVF_PRIMEFIRST = 2
-    ADVF_ONLYONCE = 4
-    ADVFCACHE_NOHANDLER = 8
-    ADVFCACHE_FORCEBUILTIN = 16
-    ADVFCACHE_ONSAVE = 32
-    ADVF_DATAONSTOP = 64
+        :param pcUniqueNames:
+        :param pcchUniqueNames:
+        """
+    def GetTypeComp(self, ppTComp: ITypeComp) -> Tuple[None, ITypeComp]:
+        """
 
-class CALLCONV(Enum):
-    CC_CDECL = 1
-    CC_MSCPASCAL = 2
-    CC_PASCAL = 2
-    CC_MACPASCAL = 3
-    CC_STDCALL = 4
-    CC_RESERVED = 5
-    CC_SYSCALL = 6
-    CC_MPWCDECL = 7
-    CC_MPWPASCAL = 8
-    CC_MAX = 9
+        :param ppTComp:
+        """
+    def GetTypeInfo(self, index: int, ppTI: ITypeInfo) -> Tuple[None, ITypeInfo]:
+        """
 
-class DATADIR(Enum):
-    DATADIR_GET = 1
-    DATADIR_SET = 2
+        :param index:
+        :param ppTI:
+        """
+    def GetTypeInfoCount(self) -> int:
+        """
 
-class DESCKIND(Enum):
-    DESCKIND_NONE = 0
-    DESCKIND_FUNCDESC = 1
-    DESCKIND_VARDESC = 2
-    DESCKIND_TYPECOMP = 3
-    DESCKIND_IMPLICITAPPOBJ = 4
-    DESCKIND_MAX = 5
+        :return:
+        """
+    def GetTypeInfoOfGuid(self, guid: Guid, ppTInfo: ITypeInfo) -> Tuple[None, ITypeInfo]:
+        """
 
-class DVASPECT(Enum):
-    DVASPECT_CONTENT = 1
-    DVASPECT_THUMBNAIL = 2
-    DVASPECT_ICON = 4
-    DVASPECT_DOCPRINT = 8
+        :param guid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoType(self, index: int, pTKind: TYPEKIND) -> Tuple[None, TYPEKIND]:
+        """
 
-class FUNCFLAGS(Enum):
-    FUNCFLAG_FRESTRICTED = 1
-    FUNCFLAG_FSOURCE = 2
-    FUNCFLAG_FBINDABLE = 4
-    FUNCFLAG_FREQUESTEDIT = 8
-    FUNCFLAG_FDISPLAYBIND = 16
-    FUNCFLAG_FDEFAULTBIND = 32
-    FUNCFLAG_FHIDDEN = 64
-    FUNCFLAG_FUSESGETLASTERROR = 128
-    FUNCFLAG_FDEFAULTCOLLELEM = 256
-    FUNCFLAG_FUIDEFAULT = 512
-    FUNCFLAG_FNONBROWSABLE = 1024
-    FUNCFLAG_FREPLACEABLE = 2048
-    FUNCFLAG_FIMMEDIATEBIND = 4096
+        :param index:
+        :param pTKind:
+        """
+    def IsName(self, szNameBuf: str, lHashVal: int) -> bool:
+        """
 
-class FUNCKIND(Enum):
-    FUNC_VIRTUAL = 0
-    FUNC_PUREVIRTUAL = 1
-    FUNC_NONVIRTUAL = 2
-    FUNC_STATIC = 3
-    FUNC_DISPATCH = 4
+        :param szNameBuf:
+        :param lHashVal:
+        :return:
+        """
+    def ReleaseTLibAttr(self, pTLibAttr: IntPtr) -> None:
+        """
 
-class IDLFLAG(Enum):
-    IDLFLAG_NONE = 0
-    IDLFLAG_FIN = 1
-    IDLFLAG_FOUT = 2
-    IDLFLAG_FLCID = 4
-    IDLFLAG_FRETVAL = 8
-
-class IMPLTYPEFLAGS(Enum):
-    IMPLTYPEFLAG_FDEFAULT = 1
-    IMPLTYPEFLAG_FSOURCE = 2
-    IMPLTYPEFLAG_FRESTRICTED = 4
-    IMPLTYPEFLAG_FDEFAULTVTABLE = 8
-
-class INVOKEKIND(Enum):
-    INVOKE_FUNC = 1
-    INVOKE_PROPERTYGET = 2
-    INVOKE_PROPERTYPUT = 4
-    INVOKE_PROPERTYPUTREF = 8
+        :param pTLibAttr:
+        """
 
 class LIBFLAGS(Enum):
-    LIBFLAG_FRESTRICTED = 1
-    LIBFLAG_FCONTROL = 2
-    LIBFLAG_FHIDDEN = 4
-    LIBFLAG_FHASDISKIMAGE = 8
+    """"""
+
+    LIBFLAG_FRESTRICTED: LIBFLAGS = ...
+    """"""
+    LIBFLAG_FCONTROL: LIBFLAGS = ...
+    """"""
+    LIBFLAG_FHIDDEN: LIBFLAGS = ...
+    """"""
+    LIBFLAG_FHASDISKIMAGE: LIBFLAGS = ...
+    """"""
+
+class PARAMDESC(ValueType):
+    """"""
+
+    lpVarValue: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    wParamFlags: Final[PARAMFLAG] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class PARAMFLAG(Enum):
-    PARAMFLAG_NONE = 0
-    PARAMFLAG_FIN = 1
-    PARAMFLAG_FOUT = 2
-    PARAMFLAG_FLCID = 4
-    PARAMFLAG_FRETVAL = 8
-    PARAMFLAG_FOPT = 16
-    PARAMFLAG_FHASDEFAULT = 32
-    PARAMFLAG_FHASCUSTDATA = 64
+    """"""
+
+    PARAMFLAG_NONE: PARAMFLAG = ...
+    """"""
+    PARAMFLAG_FIN: PARAMFLAG = ...
+    """"""
+    PARAMFLAG_FOUT: PARAMFLAG = ...
+    """"""
+    PARAMFLAG_FLCID: PARAMFLAG = ...
+    """"""
+    PARAMFLAG_FRETVAL: PARAMFLAG = ...
+    """"""
+    PARAMFLAG_FOPT: PARAMFLAG = ...
+    """"""
+    PARAMFLAG_FHASDEFAULT: PARAMFLAG = ...
+    """"""
+    PARAMFLAG_FHASCUSTDATA: PARAMFLAG = ...
+    """"""
+
+class STATDATA(ValueType):
+    """"""
+
+    advSink: Final[IAdviseSink] = ...
+    """
+    
+    :return: 
+    """
+    advf: Final[ADVF] = ...
+    """
+    
+    :return: 
+    """
+    connection: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    formatetc: Final[FORMATETC] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class STATSTG(ValueType):
+    """"""
+
+    atime: Final[FILETIME] = ...
+    """
+    
+    :return: 
+    """
+    cbSize: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    clsid: Final[Guid] = ...
+    """
+    
+    :return: 
+    """
+    ctime: Final[FILETIME] = ...
+    """
+    
+    :return: 
+    """
+    grfLocksSupported: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    grfMode: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    grfStateBits: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    mtime: Final[FILETIME] = ...
+    """
+    
+    :return: 
+    """
+    pwcsName: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    reserved: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    type: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class STGMEDIUM(ValueType):
+    """"""
+
+    pUnkForRelease: Final[object] = ...
+    """
+    
+    :return: 
+    """
+    tymed: Final[TYMED] = ...
+    """
+    
+    :return: 
+    """
+    unionmember: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SYSKIND(Enum):
-    SYS_WIN16 = 0
-    SYS_WIN32 = 1
-    SYS_MAC = 2
-    SYS_WIN64 = 3
+    """"""
+
+    SYS_WIN16: SYSKIND = ...
+    """"""
+    SYS_WIN32: SYSKIND = ...
+    """"""
+    SYS_MAC: SYSKIND = ...
+    """"""
+    SYS_WIN64: SYSKIND = ...
+    """"""
 
 class TYMED(Enum):
-    TYMED_NULL = 0
-    TYMED_HGLOBAL = 1
-    TYMED_FILE = 2
-    TYMED_ISTREAM = 4
-    TYMED_ISTORAGE = 8
-    TYMED_GDI = 16
-    TYMED_MFPICT = 32
-    TYMED_ENHMF = 64
+    """"""
+
+    TYMED_NULL: TYMED = ...
+    """"""
+    TYMED_HGLOBAL: TYMED = ...
+    """"""
+    TYMED_FILE: TYMED = ...
+    """"""
+    TYMED_ISTREAM: TYMED = ...
+    """"""
+    TYMED_ISTORAGE: TYMED = ...
+    """"""
+    TYMED_GDI: TYMED = ...
+    """"""
+    TYMED_MFPICT: TYMED = ...
+    """"""
+    TYMED_ENHMF: TYMED = ...
+    """"""
+
+class TYPEATTR(ValueType):
+    """"""
+
+    MEMBER_ID_NIL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    cFuncs: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    cImplTypes: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    cVars: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    cbAlignment: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    cbSizeInstance: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    cbSizeVft: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    dwReserved: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    guid: Final[Guid] = ...
+    """
+    
+    :return: 
+    """
+    idldescType: Final[IDLDESC] = ...
+    """
+    
+    :return: 
+    """
+    lcid: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    lpstrSchema: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    memidConstructor: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    memidDestructor: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    tdescAlias: Final[TYPEDESC] = ...
+    """
+    
+    :return: 
+    """
+    typekind: Final[TYPEKIND] = ...
+    """
+    
+    :return: 
+    """
+    wMajorVerNum: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    wMinorVerNum: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    wTypeFlags: Final[TYPEFLAGS] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TYPEDESC(ValueType):
+    """"""
+
+    lpValue: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    vt: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class TYPEFLAGS(Enum):
-    TYPEFLAG_FAPPOBJECT = 1
-    TYPEFLAG_FCANCREATE = 2
-    TYPEFLAG_FLICENSED = 4
-    TYPEFLAG_FPREDECLID = 8
-    TYPEFLAG_FHIDDEN = 16
-    TYPEFLAG_FCONTROL = 32
-    TYPEFLAG_FDUAL = 64
-    TYPEFLAG_FNONEXTENSIBLE = 128
-    TYPEFLAG_FOLEAUTOMATION = 256
-    TYPEFLAG_FRESTRICTED = 512
-    TYPEFLAG_FAGGREGATABLE = 1024
-    TYPEFLAG_FREPLACEABLE = 2048
-    TYPEFLAG_FDISPATCHABLE = 4096
-    TYPEFLAG_FREVERSEBIND = 8192
-    TYPEFLAG_FPROXY = 16384
+    """"""
+
+    TYPEFLAG_FAPPOBJECT: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FCANCREATE: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FLICENSED: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FPREDECLID: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FHIDDEN: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FCONTROL: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FDUAL: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FNONEXTENSIBLE: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FOLEAUTOMATION: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FRESTRICTED: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FAGGREGATABLE: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FREPLACEABLE: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FDISPATCHABLE: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FREVERSEBIND: TYPEFLAGS = ...
+    """"""
+    TYPEFLAG_FPROXY: TYPEFLAGS = ...
+    """"""
 
 class TYPEKIND(Enum):
-    TKIND_ENUM = 0
-    TKIND_RECORD = 1
-    TKIND_MODULE = 2
-    TKIND_INTERFACE = 3
-    TKIND_DISPATCH = 4
-    TKIND_COCLASS = 5
-    TKIND_ALIAS = 6
-    TKIND_UNION = 7
-    TKIND_MAX = 8
+    """"""
+
+    TKIND_ENUM: TYPEKIND = ...
+    """"""
+    TKIND_RECORD: TYPEKIND = ...
+    """"""
+    TKIND_MODULE: TYPEKIND = ...
+    """"""
+    TKIND_INTERFACE: TYPEKIND = ...
+    """"""
+    TKIND_DISPATCH: TYPEKIND = ...
+    """"""
+    TKIND_COCLASS: TYPEKIND = ...
+    """"""
+    TKIND_ALIAS: TYPEKIND = ...
+    """"""
+    TKIND_UNION: TYPEKIND = ...
+    """"""
+    TKIND_MAX: TYPEKIND = ...
+    """"""
+
+class TYPELIBATTR(ValueType):
+    """"""
+
+    guid: Final[Guid] = ...
+    """
+    
+    :return: 
+    """
+    lcid: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    syskind: Final[SYSKIND] = ...
+    """
+    
+    :return: 
+    """
+    wLibFlags: Final[LIBFLAGS] = ...
+    """
+    
+    :return: 
+    """
+    wMajorVerNum: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    wMinorVerNum: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class VARDESC(ValueType):
+    """"""
+
+    desc: Final[VARDESC.DESCUNION] = ...
+    """
+    
+    :return: 
+    """
+    elemdescVar: Final[ELEMDESC] = ...
+    """
+    
+    :return: 
+    """
+    lpstrSchema: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    memid: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    varkind: Final[VARKIND] = ...
+    """
+    
+    :return: 
+    """
+    wVarFlags: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class DESCUNION(ValueType):
+        """"""
+
+        lpvarValue: Final[IntPtr] = ...
+        """"""
+        oInst: Final[int] = ...
+        """"""
+        def Equals(self, obj: object) -> bool:
+            """
+
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
+
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
+
+            :return:
+            """
+        def ToString(self) -> str:
+            """
+
+            :return:
+            """
 
 class VARFLAGS(Enum):
-    VARFLAG_FREADONLY = 1
-    VARFLAG_FSOURCE = 2
-    VARFLAG_FBINDABLE = 4
-    VARFLAG_FREQUESTEDIT = 8
-    VARFLAG_FDISPLAYBIND = 16
-    VARFLAG_FDEFAULTBIND = 32
-    VARFLAG_FHIDDEN = 64
-    VARFLAG_FRESTRICTED = 128
-    VARFLAG_FDEFAULTCOLLELEM = 256
-    VARFLAG_FUIDEFAULT = 512
-    VARFLAG_FNONBROWSABLE = 1024
-    VARFLAG_FREPLACEABLE = 2048
-    VARFLAG_FIMMEDIATEBIND = 4096
+    """"""
+
+    VARFLAG_FREADONLY: VARFLAGS = ...
+    """"""
+    VARFLAG_FSOURCE: VARFLAGS = ...
+    """"""
+    VARFLAG_FBINDABLE: VARFLAGS = ...
+    """"""
+    VARFLAG_FREQUESTEDIT: VARFLAGS = ...
+    """"""
+    VARFLAG_FDISPLAYBIND: VARFLAGS = ...
+    """"""
+    VARFLAG_FDEFAULTBIND: VARFLAGS = ...
+    """"""
+    VARFLAG_FHIDDEN: VARFLAGS = ...
+    """"""
+    VARFLAG_FRESTRICTED: VARFLAGS = ...
+    """"""
+    VARFLAG_FDEFAULTCOLLELEM: VARFLAGS = ...
+    """"""
+    VARFLAG_FUIDEFAULT: VARFLAGS = ...
+    """"""
+    VARFLAG_FNONBROWSABLE: VARFLAGS = ...
+    """"""
+    VARFLAG_FREPLACEABLE: VARFLAGS = ...
+    """"""
+    VARFLAG_FIMMEDIATEBIND: VARFLAGS = ...
+    """"""
 
 class VARKIND(Enum):
-    VAR_PERINSTANCE = 0
-    VAR_STATIC = 1
-    VAR_CONST = 2
-    VAR_DISPATCH = 3
+    """"""
 
-# No Delegates
-
-__all__ = [
-    BINDPTR,
-    BIND_OPTS,
-    CONNECTDATA,
-    DISPPARAMS,
-    ELEMDESC,
-    EXCEPINFO,
-    FILETIME,
-    FORMATETC,
-    FUNCDESC,
-    IDLDESC,
-    PARAMDESC,
-    STATDATA,
-    STATSTG,
-    STGMEDIUM,
-    TYPEATTR,
-    TYPEDESC,
-    TYPELIBATTR,
-    VARDESC,
-    IAdviseSink,
-    IBindCtx,
-    IConnectionPoint,
-    IConnectionPointContainer,
-    IDataObject,
-    IEnumConnectionPoints,
-    IEnumConnections,
-    IEnumFORMATETC,
-    IEnumMoniker,
-    IEnumSTATDATA,
-    IEnumString,
-    IEnumVARIANT,
-    IEnumerable,
-    IEnumerator,
-    IExpando,
-    IMoniker,
-    IPersistFile,
-    IReflect,
-    IRunningObjectTable,
-    IStream,
-    ITypeComp,
-    ITypeInfo,
-    ITypeInfo2,
-    ITypeLib,
-    ITypeLib2,
-    ADVF,
-    CALLCONV,
-    DATADIR,
-    DESCKIND,
-    DVASPECT,
-    FUNCFLAGS,
-    FUNCKIND,
-    IDLFLAG,
-    IMPLTYPEFLAGS,
-    INVOKEKIND,
-    LIBFLAGS,
-    PARAMFLAG,
-    SYSKIND,
-    TYMED,
-    TYPEFLAGS,
-    TYPEKIND,
-    VARFLAGS,
-    VARKIND,
-]
+    VAR_PERINSTANCE: VARKIND = ...
+    """"""
+    VAR_STATIC: VARKIND = ...
+    """"""
+    VAR_CONST: VARKIND = ...
+    """"""
+    VAR_DISPATCH: VARKIND = ...
+    """"""

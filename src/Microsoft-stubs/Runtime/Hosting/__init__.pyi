@@ -1,464 +1,894 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
 from typing import Tuple
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Byte
-from System import Int32
 from System import IntPtr
 from System import Object
-from System import String
-from System import Void
+from System import Type
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class StrongNameHelpers(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def StrongNameErrorInfo() -> IntType: ...
-    @staticmethod
-    def StrongNameFreeBuffer(pbMemory: NIntType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def StrongNameGetPublicKey(
-        pwzKeyContainer: StringType,
-        pbKeyBlob: NIntType,
-        cbKeyBlob: IntType,
-        ppbPublicKeyBlob: NIntType,
-        pcbPublicKeyBlob: IntType,
-    ) -> Tuple[BooleanType, NIntType, IntType]: ...
-    @staticmethod
-    @overload
-    def StrongNameGetPublicKey(
-        pwzKeyContainer: StringType,
-        bKeyBlob: ArrayType[ByteType],
-        cbKeyBlob: IntType,
-        ppbPublicKeyBlob: NIntType,
-        pcbPublicKeyBlob: IntType,
-    ) -> Tuple[BooleanType, NIntType, IntType]: ...
-    @staticmethod
-    def StrongNameKeyDelete(pwzKeyContainer: StringType) -> BooleanType: ...
-    @staticmethod
-    def StrongNameKeyGen(
-        pwzKeyContainer: StringType, dwFlags: IntType, ppbKeyBlob: NIntType, pcbKeyBlob: IntType
-    ) -> Tuple[BooleanType, NIntType, IntType]: ...
-    @staticmethod
-    @overload
-    def StrongNameKeyInstall(
-        pwzKeyContainer: StringType, pbKeyBlob: NIntType, cbKeyBlob: IntType
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def StrongNameKeyInstall(
-        pwzKeyContainer: StringType, bKeyBlob: ArrayType[ByteType], cbKeyBlob: IntType
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def StrongNameSignatureGeneration(
-        pwzFilePath: StringType,
-        pwzKeyContainer: StringType,
-        pbKeyBlob: NIntType,
-        cbKeyBlob: IntType,
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def StrongNameSignatureGeneration(
-        pwzFilePath: StringType,
-        pwzKeyContainer: StringType,
-        pbKeyBlob: NIntType,
-        cbKeyBlob: IntType,
-        ppbSignatureBlob: NIntType,
-        pcbSignatureBlob: IntType,
-    ) -> Tuple[BooleanType, NIntType, IntType]: ...
-    @staticmethod
-    @overload
-    def StrongNameSignatureGeneration(
-        pwzFilePath: StringType,
-        pwzKeyContainer: StringType,
-        bKeyBlob: ArrayType[ByteType],
-        cbKeyBlob: IntType,
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def StrongNameSignatureGeneration(
-        pwzFilePath: StringType,
-        pwzKeyContainer: StringType,
-        bKeyBlob: ArrayType[ByteType],
-        cbKeyBlob: IntType,
-        ppbSignatureBlob: NIntType,
-        pcbSignatureBlob: IntType,
-    ) -> Tuple[BooleanType, NIntType, IntType]: ...
-    @staticmethod
-    @overload
-    def StrongNameSignatureSize(
-        pbPublicKeyBlob: NIntType, cbPublicKeyBlob: IntType, pcbSize: IntType
-    ) -> Tuple[BooleanType, IntType]: ...
-    @staticmethod
-    @overload
-    def StrongNameSignatureSize(
-        bPublicKeyBlob: ArrayType[ByteType], cbPublicKeyBlob: IntType, pcbSize: IntType
-    ) -> Tuple[BooleanType, IntType]: ...
-    @staticmethod
-    def StrongNameSignatureVerification(
-        pwzFilePath: StringType, dwInFlags: IntType, pdwOutFlags: IntType
-    ) -> Tuple[BooleanType, IntType]: ...
-    @staticmethod
-    def StrongNameSignatureVerificationEx(
-        pwzFilePath: StringType, fForceVerification: BooleanType, pfWasVerified: BooleanType
-    ) -> Tuple[BooleanType, BooleanType]: ...
-    @staticmethod
-    @overload
-    def StrongNameTokenFromPublicKey(
-        pbPublicKeyBlob: NIntType,
-        cbPublicKeyBlob: IntType,
-        ppbStrongNameToken: NIntType,
-        pcbStrongNameToken: IntType,
-    ) -> Tuple[BooleanType, NIntType, IntType]: ...
-    @staticmethod
-    @overload
-    def StrongNameTokenFromPublicKey(
-        bPublicKeyBlob: ArrayType[ByteType],
-        cbPublicKeyBlob: IntType,
-        ppbStrongNameToken: NIntType,
-        pcbStrongNameToken: IntType,
-    ) -> Tuple[BooleanType, NIntType, IntType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IClrStrongName(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
+class IClrStrongName:
+    """"""
 
     def GetHashFromAssemblyFile(
-        self,
-        pszFilePath: StringType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        self, pszFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param pszFilePath:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def GetHashFromAssemblyFileW(
-        self,
-        pwzFilePath: StringType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        self, pwzFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param pwzFilePath:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def GetHashFromBlob(
         self,
-        pbBlob: NIntType,
-        cchBlob: IntType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        pbBlob: IntPtr,
+        cchBlob: int,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param pbBlob:
+        :param cchBlob:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def GetHashFromFile(
-        self,
-        pszFilePath: StringType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        self, pszFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param pszFilePath:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def GetHashFromFileW(
-        self,
-        pwzFilePath: StringType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        self, pwzFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param pwzFilePath:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def GetHashFromHandle(
-        self,
-        hFile: NIntType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        self, hFile: IntPtr, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param hFile:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def StrongNameCompareAssemblies(
-        self, pwzAssembly1: StringType, pwzAssembly2: StringType, dwResult: IntType
-    ) -> Tuple[IntType, IntType]: ...
-    def StrongNameFreeBuffer(self, pbMemory: NIntType) -> IntType: ...
+        self, pwzAssembly1: str, pwzAssembly2: str, dwResult: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param pwzAssembly1:
+        :param pwzAssembly2:
+        :param dwResult:
+        :return:
+        """
+    def StrongNameFreeBuffer(self, pbMemory: IntPtr) -> int:
+        """
+
+        :param pbMemory:
+        :return:
+        """
     def StrongNameGetBlob(
-        self, pwzFilePath: StringType, pbBlob: ArrayType[ByteType], pcbBlob: IntType
-    ) -> Tuple[IntType, ArrayType[ByteType], IntType]: ...
+        self, pwzFilePath: str, pbBlob: Array[int], pcbBlob: int
+    ) -> Tuple[int, Array[int], int]:
+        """
+
+        :param pwzFilePath:
+        :param pbBlob:
+        :param pcbBlob:
+        :return:
+        """
     def StrongNameGetBlobFromImage(
-        self, pbBase: NIntType, dwLength: IntType, pbBlob: ArrayType[ByteType], pcbBlob: IntType
-    ) -> Tuple[IntType, ArrayType[ByteType], IntType]: ...
+        self, pbBase: IntPtr, dwLength: int, pbBlob: Array[int], pcbBlob: int
+    ) -> Tuple[int, Array[int], int]:
+        """
+
+        :param pbBase:
+        :param dwLength:
+        :param pbBlob:
+        :param pcbBlob:
+        :return:
+        """
     def StrongNameGetPublicKey(
         self,
-        pwzKeyContainer: StringType,
-        pbKeyBlob: ArrayType[ByteType],
-        cbKeyBlob: IntType,
-        ppbPublicKeyBlob: NIntType,
-        pcbPublicKeyBlob: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
-    def StrongNameHashSize(
-        self, ulHashAlg: IntType, cbSize: IntType
-    ) -> Tuple[IntType, IntType]: ...
-    def StrongNameKeyDelete(self, pwzKeyContainer: StringType) -> IntType: ...
+        pwzKeyContainer: str,
+        pbKeyBlob: Array[int],
+        cbKeyBlob: int,
+        ppbPublicKeyBlob: IntPtr,
+        pcbPublicKeyBlob: int,
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param pwzKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :param ppbPublicKeyBlob:
+        :param pcbPublicKeyBlob:
+        :return:
+        """
+    def StrongNameHashSize(self, ulHashAlg: int, cbSize: int) -> Tuple[int, int]:
+        """
+
+        :param ulHashAlg:
+        :param cbSize:
+        :return:
+        """
+    def StrongNameKeyDelete(self, pwzKeyContainer: str) -> int:
+        """
+
+        :param pwzKeyContainer:
+        :return:
+        """
     def StrongNameKeyGen(
-        self,
-        pwzKeyContainer: StringType,
-        dwFlags: IntType,
-        ppbKeyBlob: NIntType,
-        pcbKeyBlob: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        self, pwzKeyContainer: str, dwFlags: int, ppbKeyBlob: IntPtr, pcbKeyBlob: int
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param pwzKeyContainer:
+        :param dwFlags:
+        :param ppbKeyBlob:
+        :param pcbKeyBlob:
+        :return:
+        """
     def StrongNameKeyGenEx(
         self,
-        pwzKeyContainer: StringType,
-        dwFlags: IntType,
-        dwKeySize: IntType,
-        ppbKeyBlob: NIntType,
-        pcbKeyBlob: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        pwzKeyContainer: str,
+        dwFlags: int,
+        dwKeySize: int,
+        ppbKeyBlob: IntPtr,
+        pcbKeyBlob: int,
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param pwzKeyContainer:
+        :param dwFlags:
+        :param dwKeySize:
+        :param ppbKeyBlob:
+        :param pcbKeyBlob:
+        :return:
+        """
     def StrongNameKeyInstall(
-        self, pwzKeyContainer: StringType, pbKeyBlob: ArrayType[ByteType], cbKeyBlob: IntType
-    ) -> IntType: ...
+        self, pwzKeyContainer: str, pbKeyBlob: Array[int], cbKeyBlob: int
+    ) -> int:
+        """
+
+        :param pwzKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :return:
+        """
     def StrongNameSignatureGeneration(
         self,
-        pwzFilePath: StringType,
-        pwzKeyContainer: StringType,
-        pbKeyBlob: ArrayType[ByteType],
-        cbKeyBlob: IntType,
-        ppbSignatureBlob: NIntType,
-        pcbSignatureBlob: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        pwzFilePath: str,
+        pwzKeyContainer: str,
+        pbKeyBlob: Array[int],
+        cbKeyBlob: int,
+        ppbSignatureBlob: IntPtr,
+        pcbSignatureBlob: int,
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param pwzFilePath:
+        :param pwzKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :param ppbSignatureBlob:
+        :param pcbSignatureBlob:
+        :return:
+        """
     def StrongNameSignatureGenerationEx(
         self,
-        wszFilePath: StringType,
-        wszKeyContainer: StringType,
-        pbKeyBlob: ArrayType[ByteType],
-        cbKeyBlob: IntType,
-        ppbSignatureBlob: NIntType,
-        pcbSignatureBlob: IntType,
-        dwFlags: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        wszFilePath: str,
+        wszKeyContainer: str,
+        pbKeyBlob: Array[int],
+        cbKeyBlob: int,
+        ppbSignatureBlob: IntPtr,
+        pcbSignatureBlob: int,
+        dwFlags: int,
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param wszFilePath:
+        :param wszKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :param ppbSignatureBlob:
+        :param pcbSignatureBlob:
+        :param dwFlags:
+        :return:
+        """
     def StrongNameSignatureSize(
-        self, pbPublicKeyBlob: ArrayType[ByteType], cbPublicKeyBlob: IntType, pcbSize: IntType
-    ) -> Tuple[IntType, IntType]: ...
+        self, pbPublicKeyBlob: Array[int], cbPublicKeyBlob: int, pcbSize: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param pbPublicKeyBlob:
+        :param cbPublicKeyBlob:
+        :param pcbSize:
+        :return:
+        """
     def StrongNameSignatureVerification(
-        self, pwzFilePath: StringType, dwInFlags: IntType, dwOutFlags: IntType
-    ) -> Tuple[IntType, IntType]: ...
+        self, pwzFilePath: str, dwInFlags: int, dwOutFlags: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param pwzFilePath:
+        :param dwInFlags:
+        :param dwOutFlags:
+        :return:
+        """
     def StrongNameSignatureVerificationEx(
-        self, pwzFilePath: StringType, fForceVerification: BooleanType, fWasVerified: BooleanType
-    ) -> Tuple[IntType, BooleanType]: ...
+        self, pwzFilePath: str, fForceVerification: bool, fWasVerified: bool
+    ) -> Tuple[int, bool]:
+        """
+
+        :param pwzFilePath:
+        :param fForceVerification:
+        :param fWasVerified:
+        :return:
+        """
     def StrongNameSignatureVerificationFromImage(
-        self, pbBase: NIntType, dwLength: IntType, dwInFlags: IntType, dwOutFlags: IntType
-    ) -> Tuple[IntType, IntType]: ...
+        self, pbBase: IntPtr, dwLength: int, dwInFlags: int, dwOutFlags: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param pbBase:
+        :param dwLength:
+        :param dwInFlags:
+        :param dwOutFlags:
+        :return:
+        """
     def StrongNameTokenFromAssembly(
-        self, pwzFilePath: StringType, ppbStrongNameToken: NIntType, pcbStrongNameToken: IntType
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        self, pwzFilePath: str, ppbStrongNameToken: IntPtr, pcbStrongNameToken: int
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param pwzFilePath:
+        :param ppbStrongNameToken:
+        :param pcbStrongNameToken:
+        :return:
+        """
     def StrongNameTokenFromAssemblyEx(
         self,
-        pwzFilePath: StringType,
-        ppbStrongNameToken: NIntType,
-        pcbStrongNameToken: IntType,
-        ppbPublicKeyBlob: NIntType,
-        pcbPublicKeyBlob: IntType,
-    ) -> Tuple[IntType, NIntType, IntType, NIntType, IntType]: ...
+        pwzFilePath: str,
+        ppbStrongNameToken: IntPtr,
+        pcbStrongNameToken: int,
+        ppbPublicKeyBlob: IntPtr,
+        pcbPublicKeyBlob: int,
+    ) -> Tuple[int, IntPtr, int, IntPtr, int]:
+        """
+
+        :param pwzFilePath:
+        :param ppbStrongNameToken:
+        :param pcbStrongNameToken:
+        :param ppbPublicKeyBlob:
+        :param pcbPublicKeyBlob:
+        :return:
+        """
     def StrongNameTokenFromPublicKey(
         self,
-        pbPublicKeyBlob: ArrayType[ByteType],
-        cbPublicKeyBlob: IntType,
-        ppbStrongNameToken: NIntType,
-        pcbStrongNameToken: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        pbPublicKeyBlob: Array[int],
+        cbPublicKeyBlob: int,
+        ppbStrongNameToken: IntPtr,
+        pcbStrongNameToken: int,
+    ) -> Tuple[int, IntPtr, int]:
+        """
 
-    # No Events
+        :param pbPublicKeyBlob:
+        :param cbPublicKeyBlob:
+        :param ppbStrongNameToken:
+        :param pcbStrongNameToken:
+        :return:
+        """
 
-class IClrStrongNameUsingIntPtr(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
+class IClrStrongNameUsingIntPtr:
+    """"""
 
     def GetHashFromAssemblyFile(
-        self,
-        pszFilePath: StringType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        self, pszFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param pszFilePath:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def GetHashFromAssemblyFileW(
-        self,
-        pwzFilePath: StringType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        self, pwzFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param pwzFilePath:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def GetHashFromBlob(
         self,
-        pbBlob: NIntType,
-        cchBlob: IntType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        pbBlob: IntPtr,
+        cchBlob: int,
+        piHashAlg: int,
+        pbHash: Array[int],
+        cchHash: int,
+        pchHash: int,
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param pbBlob:
+        :param cchBlob:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def GetHashFromFile(
-        self,
-        pszFilePath: StringType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        self, pszFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param pszFilePath:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def GetHashFromFileW(
-        self,
-        pwzFilePath: StringType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        self, pwzFilePath: str, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param pwzFilePath:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def GetHashFromHandle(
-        self,
-        hFile: NIntType,
-        piHashAlg: IntType,
-        pbHash: ArrayType[ByteType],
-        cchHash: IntType,
-        pchHash: IntType,
-    ) -> Tuple[IntType, IntType, ArrayType[ByteType], IntType]: ...
+        self, hFile: IntPtr, piHashAlg: int, pbHash: Array[int], cchHash: int, pchHash: int
+    ) -> Tuple[int, int, Array[int], int]:
+        """
+
+        :param hFile:
+        :param piHashAlg:
+        :param pbHash:
+        :param cchHash:
+        :param pchHash:
+        :return:
+        """
     def StrongNameCompareAssemblies(
-        self, pwzAssembly1: StringType, pwzAssembly2: StringType, dwResult: IntType
-    ) -> Tuple[IntType, IntType]: ...
-    def StrongNameFreeBuffer(self, pbMemory: NIntType) -> IntType: ...
+        self, pwzAssembly1: str, pwzAssembly2: str, dwResult: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param pwzAssembly1:
+        :param pwzAssembly2:
+        :param dwResult:
+        :return:
+        """
+    def StrongNameFreeBuffer(self, pbMemory: IntPtr) -> int:
+        """
+
+        :param pbMemory:
+        :return:
+        """
     def StrongNameGetBlob(
-        self, pwzFilePath: StringType, pbBlob: ArrayType[ByteType], pcbBlob: IntType
-    ) -> Tuple[IntType, ArrayType[ByteType], IntType]: ...
+        self, pwzFilePath: str, pbBlob: Array[int], pcbBlob: int
+    ) -> Tuple[int, Array[int], int]:
+        """
+
+        :param pwzFilePath:
+        :param pbBlob:
+        :param pcbBlob:
+        :return:
+        """
     def StrongNameGetBlobFromImage(
-        self, pbBase: NIntType, dwLength: IntType, pbBlob: ArrayType[ByteType], pcbBlob: IntType
-    ) -> Tuple[IntType, ArrayType[ByteType], IntType]: ...
+        self, pbBase: IntPtr, dwLength: int, pbBlob: Array[int], pcbBlob: int
+    ) -> Tuple[int, Array[int], int]:
+        """
+
+        :param pbBase:
+        :param dwLength:
+        :param pbBlob:
+        :param pcbBlob:
+        :return:
+        """
     def StrongNameGetPublicKey(
         self,
-        pwzKeyContainer: StringType,
-        pbKeyBlob: NIntType,
-        cbKeyBlob: IntType,
-        ppbPublicKeyBlob: NIntType,
-        pcbPublicKeyBlob: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
-    def StrongNameHashSize(
-        self, ulHashAlg: IntType, cbSize: IntType
-    ) -> Tuple[IntType, IntType]: ...
-    def StrongNameKeyDelete(self, pwzKeyContainer: StringType) -> IntType: ...
+        pwzKeyContainer: str,
+        pbKeyBlob: IntPtr,
+        cbKeyBlob: int,
+        ppbPublicKeyBlob: IntPtr,
+        pcbPublicKeyBlob: int,
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param pwzKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :param ppbPublicKeyBlob:
+        :param pcbPublicKeyBlob:
+        :return:
+        """
+    def StrongNameHashSize(self, ulHashAlg: int, cbSize: int) -> Tuple[int, int]:
+        """
+
+        :param ulHashAlg:
+        :param cbSize:
+        :return:
+        """
+    def StrongNameKeyDelete(self, pwzKeyContainer: str) -> int:
+        """
+
+        :param pwzKeyContainer:
+        :return:
+        """
     def StrongNameKeyGen(
-        self,
-        pwzKeyContainer: StringType,
-        dwFlags: IntType,
-        ppbKeyBlob: NIntType,
-        pcbKeyBlob: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        self, pwzKeyContainer: str, dwFlags: int, ppbKeyBlob: IntPtr, pcbKeyBlob: int
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param pwzKeyContainer:
+        :param dwFlags:
+        :param ppbKeyBlob:
+        :param pcbKeyBlob:
+        :return:
+        """
     def StrongNameKeyGenEx(
         self,
-        pwzKeyContainer: StringType,
-        dwFlags: IntType,
-        dwKeySize: IntType,
-        ppbKeyBlob: NIntType,
-        pcbKeyBlob: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
-    def StrongNameKeyInstall(
-        self, pwzKeyContainer: StringType, pbKeyBlob: NIntType, cbKeyBlob: IntType
-    ) -> IntType: ...
+        pwzKeyContainer: str,
+        dwFlags: int,
+        dwKeySize: int,
+        ppbKeyBlob: IntPtr,
+        pcbKeyBlob: int,
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param pwzKeyContainer:
+        :param dwFlags:
+        :param dwKeySize:
+        :param ppbKeyBlob:
+        :param pcbKeyBlob:
+        :return:
+        """
+    def StrongNameKeyInstall(self, pwzKeyContainer: str, pbKeyBlob: IntPtr, cbKeyBlob: int) -> int:
+        """
+
+        :param pwzKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :return:
+        """
     def StrongNameSignatureGeneration(
         self,
-        pwzFilePath: StringType,
-        pwzKeyContainer: StringType,
-        pbKeyBlob: NIntType,
-        cbKeyBlob: IntType,
-        ppbSignatureBlob: NIntType,
-        pcbSignatureBlob: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        pwzFilePath: str,
+        pwzKeyContainer: str,
+        pbKeyBlob: IntPtr,
+        cbKeyBlob: int,
+        ppbSignatureBlob: IntPtr,
+        pcbSignatureBlob: int,
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param pwzFilePath:
+        :param pwzKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :param ppbSignatureBlob:
+        :param pcbSignatureBlob:
+        :return:
+        """
     def StrongNameSignatureGenerationEx(
         self,
-        wszFilePath: StringType,
-        wszKeyContainer: StringType,
-        pbKeyBlob: NIntType,
-        cbKeyBlob: IntType,
-        ppbSignatureBlob: NIntType,
-        pcbSignatureBlob: IntType,
-        dwFlags: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        wszFilePath: str,
+        wszKeyContainer: str,
+        pbKeyBlob: IntPtr,
+        cbKeyBlob: int,
+        ppbSignatureBlob: IntPtr,
+        pcbSignatureBlob: int,
+        dwFlags: int,
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param wszFilePath:
+        :param wszKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :param ppbSignatureBlob:
+        :param pcbSignatureBlob:
+        :param dwFlags:
+        :return:
+        """
     def StrongNameSignatureSize(
-        self, pbPublicKeyBlob: NIntType, cbPublicKeyBlob: IntType, pcbSize: IntType
-    ) -> Tuple[IntType, IntType]: ...
+        self, pbPublicKeyBlob: IntPtr, cbPublicKeyBlob: int, pcbSize: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param pbPublicKeyBlob:
+        :param cbPublicKeyBlob:
+        :param pcbSize:
+        :return:
+        """
     def StrongNameSignatureVerification(
-        self, pwzFilePath: StringType, dwInFlags: IntType, dwOutFlags: IntType
-    ) -> Tuple[IntType, IntType]: ...
+        self, pwzFilePath: str, dwInFlags: int, dwOutFlags: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param pwzFilePath:
+        :param dwInFlags:
+        :param dwOutFlags:
+        :return:
+        """
     def StrongNameSignatureVerificationEx(
-        self, pwzFilePath: StringType, fForceVerification: BooleanType, fWasVerified: BooleanType
-    ) -> Tuple[IntType, BooleanType]: ...
+        self, pwzFilePath: str, fForceVerification: bool, fWasVerified: bool
+    ) -> Tuple[int, bool]:
+        """
+
+        :param pwzFilePath:
+        :param fForceVerification:
+        :param fWasVerified:
+        :return:
+        """
     def StrongNameSignatureVerificationFromImage(
-        self, pbBase: NIntType, dwLength: IntType, dwInFlags: IntType, dwOutFlags: IntType
-    ) -> Tuple[IntType, IntType]: ...
+        self, pbBase: IntPtr, dwLength: int, dwInFlags: int, dwOutFlags: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param pbBase:
+        :param dwLength:
+        :param dwInFlags:
+        :param dwOutFlags:
+        :return:
+        """
     def StrongNameTokenFromAssembly(
-        self, pwzFilePath: StringType, ppbStrongNameToken: NIntType, pcbStrongNameToken: IntType
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        self, pwzFilePath: str, ppbStrongNameToken: IntPtr, pcbStrongNameToken: int
+    ) -> Tuple[int, IntPtr, int]:
+        """
+
+        :param pwzFilePath:
+        :param ppbStrongNameToken:
+        :param pcbStrongNameToken:
+        :return:
+        """
     def StrongNameTokenFromAssemblyEx(
         self,
-        pwzFilePath: StringType,
-        ppbStrongNameToken: NIntType,
-        pcbStrongNameToken: IntType,
-        ppbPublicKeyBlob: NIntType,
-        pcbPublicKeyBlob: IntType,
-    ) -> Tuple[IntType, NIntType, IntType, NIntType, IntType]: ...
+        pwzFilePath: str,
+        ppbStrongNameToken: IntPtr,
+        pcbStrongNameToken: int,
+        ppbPublicKeyBlob: IntPtr,
+        pcbPublicKeyBlob: int,
+    ) -> Tuple[int, IntPtr, int, IntPtr, int]:
+        """
+
+        :param pwzFilePath:
+        :param ppbStrongNameToken:
+        :param pcbStrongNameToken:
+        :param ppbPublicKeyBlob:
+        :param pcbPublicKeyBlob:
+        :return:
+        """
     def StrongNameTokenFromPublicKey(
         self,
-        pbPublicKeyBlob: NIntType,
-        cbPublicKeyBlob: IntType,
-        ppbStrongNameToken: NIntType,
-        pcbStrongNameToken: IntType,
-    ) -> Tuple[IntType, NIntType, IntType]: ...
+        pbPublicKeyBlob: IntPtr,
+        cbPublicKeyBlob: int,
+        ppbStrongNameToken: IntPtr,
+        pcbStrongNameToken: int,
+    ) -> Tuple[int, IntPtr, int]:
+        """
 
-    # No Events
+        :param pbPublicKeyBlob:
+        :param cbPublicKeyBlob:
+        :param ppbStrongNameToken:
+        :param pcbStrongNameToken:
+        :return:
+        """
 
-# No Enums
+class StrongNameHelpers(ABC, Object):
+    """"""
 
-# No Delegates
+    def Equals(self, obj: object) -> bool:
+        """
 
-__all__ = [
-    StrongNameHelpers,
-    IClrStrongName,
-    IClrStrongNameUsingIntPtr,
-]
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def StrongNameErrorInfo(cls) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def StrongNameFreeBuffer(cls, pbMemory: IntPtr) -> None:
+        """
+
+        :param pbMemory:
+        """
+    @classmethod
+    @overload
+    def StrongNameGetPublicKey(
+        cls,
+        pwzKeyContainer: str,
+        bKeyBlob: Array[int],
+        cbKeyBlob: int,
+        ppbPublicKeyBlob: IntPtr,
+        pcbPublicKeyBlob: int,
+    ) -> Tuple[bool, IntPtr, int]:
+        """
+
+        :param pwzKeyContainer:
+        :param bKeyBlob:
+        :param cbKeyBlob:
+        :param ppbPublicKeyBlob:
+        :param pcbPublicKeyBlob:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameGetPublicKey(
+        cls,
+        pwzKeyContainer: str,
+        pbKeyBlob: IntPtr,
+        cbKeyBlob: int,
+        ppbPublicKeyBlob: IntPtr,
+        pcbPublicKeyBlob: int,
+    ) -> Tuple[bool, IntPtr, int]:
+        """
+
+        :param pwzKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :param ppbPublicKeyBlob:
+        :param pcbPublicKeyBlob:
+        :return:
+        """
+    @classmethod
+    def StrongNameKeyDelete(cls, pwzKeyContainer: str) -> bool:
+        """
+
+        :param pwzKeyContainer:
+        :return:
+        """
+    @classmethod
+    def StrongNameKeyGen(
+        cls, pwzKeyContainer: str, dwFlags: int, ppbKeyBlob: IntPtr, pcbKeyBlob: int
+    ) -> Tuple[bool, IntPtr, int]:
+        """
+
+        :param pwzKeyContainer:
+        :param dwFlags:
+        :param ppbKeyBlob:
+        :param pcbKeyBlob:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameKeyInstall(
+        cls, pwzKeyContainer: str, bKeyBlob: Array[int], cbKeyBlob: int
+    ) -> bool:
+        """
+
+        :param pwzKeyContainer:
+        :param bKeyBlob:
+        :param cbKeyBlob:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameKeyInstall(cls, pwzKeyContainer: str, pbKeyBlob: IntPtr, cbKeyBlob: int) -> bool:
+        """
+
+        :param pwzKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameSignatureGeneration(
+        cls, pwzFilePath: str, pwzKeyContainer: str, bKeyBlob: Array[int], cbKeyBlob: int
+    ) -> bool:
+        """
+
+        :param pwzFilePath:
+        :param pwzKeyContainer:
+        :param bKeyBlob:
+        :param cbKeyBlob:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameSignatureGeneration(
+        cls, pwzFilePath: str, pwzKeyContainer: str, pbKeyBlob: IntPtr, cbKeyBlob: int
+    ) -> bool:
+        """
+
+        :param pwzFilePath:
+        :param pwzKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameSignatureGeneration(
+        cls,
+        pwzFilePath: str,
+        pwzKeyContainer: str,
+        bKeyBlob: Array[int],
+        cbKeyBlob: int,
+        ppbSignatureBlob: IntPtr,
+        pcbSignatureBlob: int,
+    ) -> Tuple[bool, int]:
+        """
+
+        :param pwzFilePath:
+        :param pwzKeyContainer:
+        :param bKeyBlob:
+        :param cbKeyBlob:
+        :param ppbSignatureBlob:
+        :param pcbSignatureBlob:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameSignatureGeneration(
+        cls,
+        pwzFilePath: str,
+        pwzKeyContainer: str,
+        pbKeyBlob: IntPtr,
+        cbKeyBlob: int,
+        ppbSignatureBlob: IntPtr,
+        pcbSignatureBlob: int,
+    ) -> Tuple[bool, int]:
+        """
+
+        :param pwzFilePath:
+        :param pwzKeyContainer:
+        :param pbKeyBlob:
+        :param cbKeyBlob:
+        :param ppbSignatureBlob:
+        :param pcbSignatureBlob:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameSignatureSize(
+        cls, bPublicKeyBlob: Array[int], cbPublicKeyBlob: int, pcbSize: int
+    ) -> Tuple[bool, int]:
+        """
+
+        :param bPublicKeyBlob:
+        :param cbPublicKeyBlob:
+        :param pcbSize:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameSignatureSize(
+        cls, pbPublicKeyBlob: IntPtr, cbPublicKeyBlob: int, pcbSize: int
+    ) -> Tuple[bool, int]:
+        """
+
+        :param pbPublicKeyBlob:
+        :param cbPublicKeyBlob:
+        :param pcbSize:
+        :return:
+        """
+    @classmethod
+    def StrongNameSignatureVerification(
+        cls, pwzFilePath: str, dwInFlags: int, pdwOutFlags: int
+    ) -> Tuple[bool, int]:
+        """
+
+        :param pwzFilePath:
+        :param dwInFlags:
+        :param pdwOutFlags:
+        :return:
+        """
+    @classmethod
+    def StrongNameSignatureVerificationEx(
+        cls, pwzFilePath: str, fForceVerification: bool, pfWasVerified: bool
+    ) -> Tuple[bool, bool]:
+        """
+
+        :param pwzFilePath:
+        :param fForceVerification:
+        :param pfWasVerified:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameTokenFromPublicKey(
+        cls,
+        bPublicKeyBlob: Array[int],
+        cbPublicKeyBlob: int,
+        ppbStrongNameToken: IntPtr,
+        pcbStrongNameToken: int,
+    ) -> Tuple[bool, IntPtr, int]:
+        """
+
+        :param bPublicKeyBlob:
+        :param cbPublicKeyBlob:
+        :param ppbStrongNameToken:
+        :param pcbStrongNameToken:
+        :return:
+        """
+    @classmethod
+    @overload
+    def StrongNameTokenFromPublicKey(
+        cls,
+        pbPublicKeyBlob: IntPtr,
+        cbPublicKeyBlob: int,
+        ppbStrongNameToken: IntPtr,
+        pcbStrongNameToken: int,
+    ) -> Tuple[bool, IntPtr, int]:
+        """
+
+        :param pbPublicKeyBlob:
+        :param cbPublicKeyBlob:
+        :param ppbStrongNameToken:
+        :param pcbStrongNameToken:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

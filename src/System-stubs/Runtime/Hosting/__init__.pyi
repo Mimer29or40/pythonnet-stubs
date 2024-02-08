@@ -1,128 +1,154 @@
 from __future__ import annotations
 
-from typing import List
-from typing import Union
 from typing import overload
 
 from System import ActivationContext
 from System import ApplicationIdentity
 from System import Array
 from System import Object
-from System import String
+from System import Type
 from System.Runtime.Remoting import ObjectHandle
 from System.Security.Policy import EvidenceBase
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-ObjectType = Object
-StringType = Union[str, String]
-
-# ---------- Classes ---------- #
-
 class ActivationArguments(EvidenceBase):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, applicationIdentity: ApplicationIdentity): ...
-    @overload
-    def __init__(
-        self, applicationIdentity: ApplicationIdentity, activationData: ArrayType[StringType]
-    ): ...
-    @overload
-    def __init__(self, activationData: ActivationContext): ...
-    @overload
-    def __init__(
-        self, activationContext: ActivationContext, activationData: ArrayType[StringType]
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ActivationContext(self) -> ActivationContext: ...
-    @property
-    def ActivationData(self) -> ArrayType[StringType]: ...
-    @property
-    def ApplicationIdentity(self) -> ApplicationIdentity: ...
-
-    # ---------- Methods ---------- #
-
-    def Clone(self) -> EvidenceBase: ...
-    def get_ActivationContext(self) -> ActivationContext: ...
-    def get_ActivationData(self) -> ArrayType[StringType]: ...
-    def get_ApplicationIdentity(self) -> ApplicationIdentity: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ApplicationActivator(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def CreateInstance(self, activationContext: ActivationContext) -> ObjectHandle: ...
-    @overload
-    def CreateInstance(
-        self, activationContext: ActivationContext, activationCustomData: ArrayType[StringType]
-    ) -> ObjectHandle: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ManifestRunner(ObjectType):
     """"""
 
-    # No Fields
+    @overload
+    def __init__(self, activationData: ActivationContext):
+        """
 
-    # No Constructors
+        :param activationData:
+        """
+    @overload
+    def __init__(self, applicationIdentity: ApplicationIdentity):
+        """
 
-    # No Properties
+        :param applicationIdentity:
+        """
+    @overload
+    def __init__(self, activationContext: ActivationContext, activationData: Array[str]):
+        """
 
-    # No Methods
+        :param activationContext:
+        :param activationData:
+        """
+    @overload
+    def __init__(self, applicationIdentity: ApplicationIdentity, activationData: Array[str]):
+        """
 
-    # No Events
+        :param applicationIdentity:
+        :param activationData:
+        """
+    @property
+    def ActivationContext(self) -> ActivationContext:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def ActivationData(self) -> Array[str]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def ApplicationIdentity(self) -> ApplicationIdentity:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-# No Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-# No Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-# No Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-# No Delegates
+        :return:
+        """
 
-__all__ = [
-    ActivationArguments,
-    ApplicationActivator,
-    ManifestRunner,
-]
+class ApplicationActivator(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    @overload
+    def CreateInstance(self, activationContext: ActivationContext) -> ObjectHandle:
+        """
+
+        :param activationContext:
+        :return:
+        """
+    @overload
+    def CreateInstance(
+        self, activationContext: ActivationContext, activationCustomData: Array[str]
+    ) -> ObjectHandle:
+        """
+
+        :param activationContext:
+        :param activationCustomData:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ManifestRunner(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

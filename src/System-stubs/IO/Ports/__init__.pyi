@@ -2,612 +2,916 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Callable
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import List
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Array
 from System import AsyncCallback
-from System import Boolean
-from System import Byte
 from System import Char
 from System import Enum
 from System import EventArgs
+from System import EventHandler
 from System import IAsyncResult
-from System import ICloneable
 from System import IDisposable
-from System import Int32
-from System import Int64
-from System import IntPtr
-from System import MulticastDelegate
 from System import Object
-from System import String
-from System import Void
+from System import Type
 from System.ComponentModel import Component
 from System.ComponentModel import IComponent
 from System.ComponentModel import IContainer
+from System.ComponentModel import ISite
 from System.IO import SeekOrigin
 from System.IO import Stream
-from System.Runtime.Serialization import ISerializable
+from System.Runtime.Remoting import ObjRef
 from System.Text import Encoding
-
-# ---------- Types ---------- #
+from System.Threading import CancellationToken
+from System.Threading.Tasks import Task
 
 T = TypeVar("T")
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-CharType = Union[str, Char]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
 
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
-
-class InternalResources(ABC, ObjectType):
+class Handshake(Enum):
     """"""
 
-    # No Fields
+    _None: Handshake = ...
+    """"""
+    XOnXOff: Handshake = ...
+    """"""
+    RequestToSend: Handshake = ...
+    """"""
+    RequestToSendXOnXOff: Handshake = ...
+    """"""
 
-    # No Constructors
+class InternalResources(ABC, Object):
+    """"""
 
-    # No Properties
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class Parity(Enum):
+    """"""
 
-    # No Sub Enums
+    _None: Parity = ...
+    """"""
+    Odd: Parity = ...
+    """"""
+    Even: Parity = ...
+    """"""
+    Mark: Parity = ...
+    """"""
+    Space: Parity = ...
+    """"""
+
+class SerialData(Enum):
+    """"""
+
+    Chars: SerialData = ...
+    """"""
+    Eof: SerialData = ...
+    """"""
 
 class SerialDataReceivedEventArgs(EventArgs):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def EventType(self) -> SerialData: ...
+    def EventType(self) -> SerialData:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_EventType(self) -> SerialData: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+SerialDataReceivedEventHandler: Callable[[object, SerialDataReceivedEventArgs], None] = ...
+"""
 
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
-class SerialDataReceivedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+class SerialError(Enum):
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: SerialDataReceivedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: SerialDataReceivedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    RXOver: SerialError = ...
+    """"""
+    Overrun: SerialError = ...
+    """"""
+    RXParity: SerialError = ...
+    """"""
+    Frame: SerialError = ...
+    """"""
+    TXFull: SerialError = ...
+    """"""
 
 class SerialErrorReceivedEventArgs(EventArgs):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def EventType(self) -> SerialError: ...
+    def EventType(self) -> SerialError:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_EventType(self) -> SerialError: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+SerialErrorReceivedEventHandler: Callable[[object, SerialErrorReceivedEventArgs], None] = ...
+"""
 
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
-class SerialErrorReceivedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+class SerialPinChange(Enum):
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: SerialErrorReceivedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: SerialErrorReceivedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    CtsChanged: SerialPinChange = ...
+    """"""
+    DsrChanged: SerialPinChange = ...
+    """"""
+    CDChanged: SerialPinChange = ...
+    """"""
+    Break: SerialPinChange = ...
+    """"""
+    Ring: SerialPinChange = ...
+    """"""
 
 class SerialPinChangedEventArgs(EventArgs):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def EventType(self) -> SerialPinChange: ...
+    def EventType(self) -> SerialPinChange:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_EventType(self) -> SerialPinChange: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+SerialPinChangedEventHandler: Callable[[object, SerialPinChangedEventArgs], None] = ...
+"""
 
-    # No Sub Enums
-
-class SerialPinChangedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: SerialPinChangedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: SerialPinChangedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
 class SerialPort(Component, IComponent, IDisposable):
-    # ---------- Fields ---------- #
+    """"""
 
-    @staticmethod
-    @property
-    def InfiniteTimeout() -> IntType: ...
+    InfiniteTimeout: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, container: IContainer):
+        """
 
-    # ---------- Constructors ---------- #
+        :param container:
+        """
+    @overload
+    def __init__(self, portName: str):
+        """
 
+        :param portName:
+        """
     @overload
-    def __init__(self, container: IContainer): ...
+    def __init__(self, portName: str, baudRate: int):
+        """
+
+        :param portName:
+        :param baudRate:
+        """
     @overload
-    def __init__(self): ...
+    def __init__(self, portName: str, baudRate: int, parity: Parity):
+        """
+
+        :param portName:
+        :param baudRate:
+        :param parity:
+        """
     @overload
-    def __init__(self, portName: StringType): ...
-    @overload
-    def __init__(self, portName: StringType, baudRate: IntType): ...
-    @overload
-    def __init__(self, portName: StringType, baudRate: IntType, parity: Parity): ...
+    def __init__(self, portName: str, baudRate: int, parity: Parity, dataBits: int):
+        """
+
+        :param portName:
+        :param baudRate:
+        :param parity:
+        :param dataBits:
+        """
     @overload
     def __init__(
-        self, portName: StringType, baudRate: IntType, parity: Parity, dataBits: IntType
-    ): ...
-    @overload
-    def __init__(
-        self,
-        portName: StringType,
-        baudRate: IntType,
-        parity: Parity,
-        dataBits: IntType,
-        stopBits: StopBits,
-    ): ...
+        self, portName: str, baudRate: int, parity: Parity, dataBits: int, stopBits: StopBits
+    ):
+        """
 
-    # ---------- Properties ---------- #
+        :param portName:
+        :param baudRate:
+        :param parity:
+        :param dataBits:
+        :param stopBits:
+        """
+    @property
+    def BaseStream(self) -> Stream:
+        """
 
+        :return:
+        """
     @property
-    def BaseStream(self) -> Stream: ...
-    @property
-    def BaudRate(self) -> IntType: ...
+    def BaudRate(self) -> int:
+        """
+
+        :return:
+        """
     @BaudRate.setter
-    def BaudRate(self, value: IntType) -> None: ...
+    def BaudRate(self, value: int) -> None: ...
     @property
-    def BreakState(self) -> BooleanType: ...
+    def BreakState(self) -> bool:
+        """
+
+        :return:
+        """
     @BreakState.setter
-    def BreakState(self, value: BooleanType) -> None: ...
+    def BreakState(self, value: bool) -> None: ...
     @property
-    def BytesToRead(self) -> IntType: ...
+    def BytesToRead(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def BytesToWrite(self) -> IntType: ...
+    def BytesToWrite(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def CDHolding(self) -> BooleanType: ...
+    def CDHolding(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CtsHolding(self) -> BooleanType: ...
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
     @property
-    def DataBits(self) -> IntType: ...
+    def CtsHolding(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def DataBits(self) -> int:
+        """
+
+        :return:
+        """
     @DataBits.setter
-    def DataBits(self, value: IntType) -> None: ...
+    def DataBits(self, value: int) -> None: ...
     @property
-    def DiscardNull(self) -> BooleanType: ...
+    def DiscardNull(self) -> bool:
+        """
+
+        :return:
+        """
     @DiscardNull.setter
-    def DiscardNull(self, value: BooleanType) -> None: ...
+    def DiscardNull(self, value: bool) -> None: ...
     @property
-    def DsrHolding(self) -> BooleanType: ...
+    def DsrHolding(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def DtrEnable(self) -> BooleanType: ...
+    def DtrEnable(self) -> bool:
+        """
+
+        :return:
+        """
     @DtrEnable.setter
-    def DtrEnable(self, value: BooleanType) -> None: ...
+    def DtrEnable(self, value: bool) -> None: ...
     @property
-    def Encoding(self) -> Encoding: ...
+    def Encoding(self) -> Encoding:
+        """
+
+        :return:
+        """
     @Encoding.setter
     def Encoding(self, value: Encoding) -> None: ...
     @property
-    def Handshake(self) -> Handshake: ...
+    def Handshake(self) -> Handshake:
+        """
+
+        :return:
+        """
     @Handshake.setter
     def Handshake(self, value: Handshake) -> None: ...
     @property
-    def IsOpen(self) -> BooleanType: ...
+    def IsOpen(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def NewLine(self) -> StringType: ...
+    def NewLine(self) -> str:
+        """
+
+        :return:
+        """
     @NewLine.setter
-    def NewLine(self, value: StringType) -> None: ...
+    def NewLine(self, value: str) -> None: ...
     @property
-    def Parity(self) -> Parity: ...
+    def Parity(self) -> Parity:
+        """
+
+        :return:
+        """
     @Parity.setter
     def Parity(self, value: Parity) -> None: ...
     @property
-    def ParityReplace(self) -> ByteType: ...
+    def ParityReplace(self) -> int:
+        """
+
+        :return:
+        """
     @ParityReplace.setter
-    def ParityReplace(self, value: ByteType) -> None: ...
+    def ParityReplace(self, value: int) -> None: ...
     @property
-    def PortName(self) -> StringType: ...
+    def PortName(self) -> str:
+        """
+
+        :return:
+        """
     @PortName.setter
-    def PortName(self, value: StringType) -> None: ...
+    def PortName(self, value: str) -> None: ...
     @property
-    def ReadBufferSize(self) -> IntType: ...
+    def ReadBufferSize(self) -> int:
+        """
+
+        :return:
+        """
     @ReadBufferSize.setter
-    def ReadBufferSize(self, value: IntType) -> None: ...
+    def ReadBufferSize(self, value: int) -> None: ...
     @property
-    def ReadTimeout(self) -> IntType: ...
+    def ReadTimeout(self) -> int:
+        """
+
+        :return:
+        """
     @ReadTimeout.setter
-    def ReadTimeout(self, value: IntType) -> None: ...
+    def ReadTimeout(self, value: int) -> None: ...
     @property
-    def ReceivedBytesThreshold(self) -> IntType: ...
+    def ReceivedBytesThreshold(self) -> int:
+        """
+
+        :return:
+        """
     @ReceivedBytesThreshold.setter
-    def ReceivedBytesThreshold(self, value: IntType) -> None: ...
+    def ReceivedBytesThreshold(self, value: int) -> None: ...
     @property
-    def RtsEnable(self) -> BooleanType: ...
+    def RtsEnable(self) -> bool:
+        """
+
+        :return:
+        """
     @RtsEnable.setter
-    def RtsEnable(self, value: BooleanType) -> None: ...
+    def RtsEnable(self, value: bool) -> None: ...
     @property
-    def StopBits(self) -> StopBits: ...
+    def Site(self) -> ISite:
+        """
+
+        :return:
+        """
+    @Site.setter
+    def Site(self, value: ISite) -> None: ...
+    @property
+    def StopBits(self) -> StopBits:
+        """
+
+        :return:
+        """
     @StopBits.setter
     def StopBits(self, value: StopBits) -> None: ...
     @property
-    def WriteBufferSize(self) -> IntType: ...
+    def WriteBufferSize(self) -> int:
+        """
+
+        :return:
+        """
     @WriteBufferSize.setter
-    def WriteBufferSize(self, value: IntType) -> None: ...
+    def WriteBufferSize(self, value: int) -> None: ...
     @property
-    def WriteTimeout(self) -> IntType: ...
+    def WriteTimeout(self) -> int:
+        """
+
+        :return:
+        """
     @WriteTimeout.setter
-    def WriteTimeout(self, value: IntType) -> None: ...
+    def WriteTimeout(self, value: int) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    # ---------- Methods ---------- #
+        :param requestedType:
+        :return:
+        """
+    def DiscardInBuffer(self) -> None:
+        """"""
+    def DiscardOutBuffer(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Close(self) -> VoidType: ...
-    def DiscardInBuffer(self) -> VoidType: ...
-    def DiscardOutBuffer(self) -> VoidType: ...
-    @staticmethod
-    def GetPortNames() -> ArrayType[StringType]: ...
-    def Open(self) -> VoidType: ...
-    @overload
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> IntType: ...
-    @overload
-    def Read(self, buffer: ArrayType[CharType], offset: IntType, count: IntType) -> IntType: ...
-    def ReadByte(self) -> IntType: ...
-    def ReadChar(self) -> IntType: ...
-    def ReadExisting(self) -> StringType: ...
-    def ReadLine(self) -> StringType: ...
-    def ReadTo(self, value: StringType) -> StringType: ...
-    @overload
-    def Write(self, text: StringType) -> VoidType: ...
-    @overload
-    def Write(self, buffer: ArrayType[CharType], offset: IntType, count: IntType) -> VoidType: ...
-    @overload
-    def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    def WriteLine(self, text: StringType) -> VoidType: ...
-    def add_DataReceived(self, value: SerialDataReceivedEventHandler) -> VoidType: ...
-    def add_ErrorReceived(self, value: SerialErrorReceivedEventHandler) -> VoidType: ...
-    def add_PinChanged(self, value: SerialPinChangedEventHandler) -> VoidType: ...
-    def get_BaseStream(self) -> Stream: ...
-    def get_BaudRate(self) -> IntType: ...
-    def get_BreakState(self) -> BooleanType: ...
-    def get_BytesToRead(self) -> IntType: ...
-    def get_BytesToWrite(self) -> IntType: ...
-    def get_CDHolding(self) -> BooleanType: ...
-    def get_CtsHolding(self) -> BooleanType: ...
-    def get_DataBits(self) -> IntType: ...
-    def get_DiscardNull(self) -> BooleanType: ...
-    def get_DsrHolding(self) -> BooleanType: ...
-    def get_DtrEnable(self) -> BooleanType: ...
-    def get_Encoding(self) -> Encoding: ...
-    def get_Handshake(self) -> Handshake: ...
-    def get_IsOpen(self) -> BooleanType: ...
-    def get_NewLine(self) -> StringType: ...
-    def get_Parity(self) -> Parity: ...
-    def get_ParityReplace(self) -> ByteType: ...
-    def get_PortName(self) -> StringType: ...
-    def get_ReadBufferSize(self) -> IntType: ...
-    def get_ReadTimeout(self) -> IntType: ...
-    def get_ReceivedBytesThreshold(self) -> IntType: ...
-    def get_RtsEnable(self) -> BooleanType: ...
-    def get_StopBits(self) -> StopBits: ...
-    def get_WriteBufferSize(self) -> IntType: ...
-    def get_WriteTimeout(self) -> IntType: ...
-    def remove_DataReceived(self, value: SerialDataReceivedEventHandler) -> VoidType: ...
-    def remove_ErrorReceived(self, value: SerialErrorReceivedEventHandler) -> VoidType: ...
-    def remove_PinChanged(self, value: SerialPinChangedEventHandler) -> VoidType: ...
-    def set_BaudRate(self, value: IntType) -> VoidType: ...
-    def set_BreakState(self, value: BooleanType) -> VoidType: ...
-    def set_DataBits(self, value: IntType) -> VoidType: ...
-    def set_DiscardNull(self, value: BooleanType) -> VoidType: ...
-    def set_DtrEnable(self, value: BooleanType) -> VoidType: ...
-    def set_Encoding(self, value: Encoding) -> VoidType: ...
-    def set_Handshake(self, value: Handshake) -> VoidType: ...
-    def set_NewLine(self, value: StringType) -> VoidType: ...
-    def set_Parity(self, value: Parity) -> VoidType: ...
-    def set_ParityReplace(self, value: ByteType) -> VoidType: ...
-    def set_PortName(self, value: StringType) -> VoidType: ...
-    def set_ReadBufferSize(self, value: IntType) -> VoidType: ...
-    def set_ReadTimeout(self, value: IntType) -> VoidType: ...
-    def set_ReceivedBytesThreshold(self, value: IntType) -> VoidType: ...
-    def set_RtsEnable(self, value: BooleanType) -> VoidType: ...
-    def set_StopBits(self, value: StopBits) -> VoidType: ...
-    def set_WriteBufferSize(self, value: IntType) -> VoidType: ...
-    def set_WriteTimeout(self, value: IntType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Events ---------- #
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
+        :return:
+        """
+    @classmethod
+    def GetPortNames(cls) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Open(self) -> None:
+        """"""
+    @overload
+    def Read(self, buffer: Array[int], offset: int, count: int) -> int:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def Read(self, buffer: Array[Char], offset: int, count: int) -> int:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadChar(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadExisting(self) -> str:
+        """
+
+        :return:
+        """
+    def ReadLine(self) -> str:
+        """
+
+        :return:
+        """
+    def ReadTo(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Write(self, text: str) -> None:
+        """
+
+        :param text:
+        """
+    @overload
+    def Write(self, buffer: Array[int], offset: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        """
+    @overload
+    def Write(self, buffer: Array[Char], offset: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        """
+    def WriteLine(self, text: str) -> None:
+        """
+
+        :param text:
+        """
     DataReceived: EventType[SerialDataReceivedEventHandler] = ...
-
+    """"""
+    Disposed: EventType[EventHandler] = ...
+    """"""
     ErrorReceived: EventType[SerialErrorReceivedEventHandler] = ...
-
+    """"""
     PinChanged: EventType[SerialPinChangedEventHandler] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    """"""
 
 class SerialStream(Stream, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def BreakState(self) -> BooleanType: ...
+    def BreakState(self) -> bool:
+        """
+
+        :return:
+        """
     @BreakState.setter
-    def BreakState(self, value: BooleanType) -> None: ...
+    def BreakState(self, value: bool) -> None: ...
     @property
-    def CanRead(self) -> BooleanType: ...
+    def CanRead(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanSeek(self) -> BooleanType: ...
+    def CanSeek(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanTimeout(self) -> BooleanType: ...
+    def CanTimeout(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanWrite(self) -> BooleanType: ...
+    def CanWrite(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Length(self) -> LongType: ...
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Position(self) -> LongType: ...
+    def Position(self) -> int:
+        """
+
+        :return:
+        """
     @Position.setter
-    def Position(self, value: LongType) -> None: ...
+    def Position(self, value: int) -> None: ...
     @property
-    def ReadTimeout(self) -> IntType: ...
+    def ReadTimeout(self) -> int:
+        """
+
+        :return:
+        """
     @ReadTimeout.setter
-    def ReadTimeout(self, value: IntType) -> None: ...
+    def ReadTimeout(self, value: int) -> None: ...
     @property
-    def WriteTimeout(self) -> IntType: ...
+    def WriteTimeout(self) -> int:
+        """
+
+        :return:
+        """
     @WriteTimeout.setter
-    def WriteTimeout(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
+    def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self,
-        array: ArrayType[ByteType],
-        offset: IntType,
-        numBytes: IntType,
-        userCallback: AsyncCallback,
-        stateObject: ObjectType,
-    ) -> IAsyncResult: ...
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
     def BeginWrite(
-        self,
-        array: ArrayType[ByteType],
-        offset: IntType,
-        numBytes: IntType,
-        userCallback: AsyncCallback,
-        stateObject: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndRead(self, asyncResult: IAsyncResult) -> IntType: ...
-    def EndWrite(self, asyncResult: IAsyncResult) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
-    def Read(
-        self, array: ArrayType[ByteType], offset: IntType, count: IntType
-    ) -> Tuple[IntType, ArrayType[ByteType]]: ...
-    def ReadByte(self) -> IntType: ...
-    def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    def SetLength(self, value: LongType) -> VoidType: ...
-    def Write(self, array: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    def WriteByte(self, value: ByteType) -> VoidType: ...
-    def get_BreakState(self) -> BooleanType: ...
-    def get_CanRead(self) -> BooleanType: ...
-    def get_CanSeek(self) -> BooleanType: ...
-    def get_CanTimeout(self) -> BooleanType: ...
-    def get_CanWrite(self) -> BooleanType: ...
-    def get_Length(self) -> LongType: ...
-    def get_Position(self) -> LongType: ...
-    def get_ReadTimeout(self) -> IntType: ...
-    def get_WriteTimeout(self) -> IntType: ...
-    def set_BreakState(self, value: BooleanType) -> VoidType: ...
-    def set_Position(self, value: LongType) -> VoidType: ...
-    def set_ReadTimeout(self, value: IntType) -> VoidType: ...
-    def set_WriteTimeout(self, value: IntType) -> VoidType: ...
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
 
-    # No Events
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    @overload
+    def CopyTo(self, destination: Stream) -> None:
+        """
 
-    # No Sub Classes
+        :param destination:
+        """
+    @overload
+    def CopyTo(self, destination: Stream, bufferSize: int) -> None:
+        """
 
-    # No Sub Structs
+        :param destination:
+        :param bufferSize:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream) -> Task:
+        """
 
-    # No Sub Interfaces
+        :param destination:
+        :return:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
+        """
 
-    # No Sub Enums
+        :param destination:
+        :param bufferSize:
+        :return:
+        """
+    @overload
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
 
-# No Structs
+        :param destination:
+        :param bufferSize:
+        :param cancellationToken:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-# No Interfaces
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndRead(self, asyncResult: IAsyncResult) -> int:
+        """
 
-# ---------- Enums ---------- #
+        :param asyncResult:
+        :return:
+        """
+    def EndWrite(self, asyncResult: IAsyncResult) -> None:
+        """
 
-class Handshake(Enum):
-    # None = 0
-    XOnXOff = 1
-    RequestToSend = 2
-    RequestToSendXOnXOff = 3
+        :param asyncResult:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class Parity(Enum):
-    # None = 0
-    Odd = 1
-    Even = 2
-    Mark = 3
-    Space = 4
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    @overload
+    def FlushAsync(self) -> Task:
+        """
 
-class SerialData(Enum):
-    Chars = 1
-    Eof = 2
+        :return:
+        """
+    @overload
+    def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
+        """
 
-class SerialError(Enum):
-    RXOver = 1
-    Overrun = 2
-    RXParity = 4
-    Frame = 8
-    TXFull = 256
+        :param cancellationToken:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class SerialPinChange(Enum):
-    CtsChanged = 8
-    DsrChanged = 16
-    CDChanged = 32
-    Break = 64
-    Ring = 256
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
+
+        :return:
+        """
+    def Seek(self, offset: int, origin: SeekOrigin) -> int:
+        """
+
+        :param offset:
+        :param origin:
+        :return:
+        """
+    def SetLength(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, buffer: Array[int], offset: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        """
+    @overload
+    def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def WriteAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def WriteByte(self, value: int) -> None:
+        """
+
+        :param value:
+        """
 
 class StopBits(Enum):
-    # None = 0
-    One = 1
-    Two = 2
-    OnePointFive = 3
+    """"""
 
-# ---------- Delegates ---------- #
-
-SerialDataReceivedEventHandler = Callable[[ObjectType, SerialDataReceivedEventArgs], VoidType]
-
-SerialErrorReceivedEventHandler = Callable[[ObjectType, SerialErrorReceivedEventArgs], VoidType]
-
-SerialPinChangedEventHandler = Callable[[ObjectType, SerialPinChangedEventArgs], VoidType]
-
-__all__ = [
-    InternalResources,
-    SerialDataReceivedEventArgs,
-    SerialDataReceivedEventHandler,
-    SerialErrorReceivedEventArgs,
-    SerialErrorReceivedEventHandler,
-    SerialPinChangedEventArgs,
-    SerialPinChangedEventHandler,
-    SerialPort,
-    SerialStream,
-    Handshake,
-    Parity,
-    SerialData,
-    SerialError,
-    SerialPinChange,
-    StopBits,
-    SerialDataReceivedEventHandler,
-    SerialErrorReceivedEventHandler,
-    SerialPinChangedEventHandler,
-]
+    _None: StopBits = ...
+    """"""
+    One: StopBits = ...
+    """"""
+    Two: StopBits = ...
+    """"""
+    OnePointFive: StopBits = ...
+    """"""

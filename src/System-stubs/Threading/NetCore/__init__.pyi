@@ -1,93 +1,103 @@
 from __future__ import annotations
 
-from typing import List
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
 from System import Object
-from System import UInt32
-from System import Void
+from System import Type
 from System.Threading import IThreadPoolWorkItem
+from System.Threading import ThreadAbortException
 from System.Threading import WaitHandle
 
-# ---------- Types ---------- #
+class TimerQueue(Object):
+    """"""
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ObjectType = Object
-UIntType = Union[int, UInt32]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class TimerQueue(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+    @classmethod
     @property
-    def Instances() -> ArrayType[TimerQueue]: ...
+    def Instances(cls) -> Array[TimerQueue]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def DeleteTimer(self, timer: TimerQueueTimer) -> None:
+        """
 
-    def DeleteTimer(self, timer: TimerQueueTimer) -> VoidType: ...
-    def MoveTimerToCorrectList(
-        self, timer: TimerQueueTimer, shortList: BooleanType
-    ) -> VoidType: ...
-    def UpdateTimer(
-        self, timer: TimerQueueTimer, dueTime: UIntType, period: UIntType
-    ) -> BooleanType: ...
-    @staticmethod
-    def get_Instances() -> ArrayType[TimerQueue]: ...
+        :param timer:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def MoveTimerToCorrectList(self, timer: TimerQueueTimer, shortList: bool) -> None:
+        """
 
-    # No Sub Interfaces
+        :param timer:
+        :param shortList:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def UpdateTimer(self, timer: TimerQueueTimer, dueTime: int, period: int) -> bool:
+        """
 
-class TimerQueueTimer(ObjectType, IThreadPoolWorkItem):
-    # No Fields
+        :param timer:
+        :param dueTime:
+        :param period:
+        :return:
+        """
 
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
+class TimerQueueTimer(Object, IThreadPoolWorkItem):
+    """"""
 
     @overload
-    def Close(self) -> VoidType: ...
+    def Close(self) -> None:
+        """"""
     @overload
-    def Close(self, toSignal: WaitHandle) -> BooleanType: ...
+    def Close(self, toSignal: WaitHandle) -> bool:
+        """
 
-    # No Events
+        :param toSignal:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def ExecuteWorkItem(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def MarkAborted(self, tae: ThreadAbortException) -> None:
+        """
 
-    # No Sub Enums
+        :param tae:
+        """
+    def ToString(self) -> str:
+        """
 
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    TimerQueue,
-    TimerQueueTimer,
-]
+        :return:
+        """

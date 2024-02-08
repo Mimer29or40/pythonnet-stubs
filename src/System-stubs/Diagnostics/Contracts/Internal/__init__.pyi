@@ -1,65 +1,66 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
 
 from System import Exception
 from System import Object
-from System import String
-from System import Void
+from System import Type
 from System.Diagnostics.Contracts import ContractFailureKind
 
-# ---------- Types ---------- #
+class ContractHelper(ABC, Object):
+    """"""
 
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
+    def Equals(self, obj: object) -> bool:
+        """
 
-# ---------- Classes ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class ContractHelper(ABC, ObjectType):
-    # No Fields
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
+        :return:
+        """
+    @classmethod
     def RaiseContractFailedEvent(
+        cls,
         failureKind: ContractFailureKind,
-        userMessage: StringType,
-        conditionText: StringType,
+        userMessage: str,
+        conditionText: str,
         innerException: Exception,
-    ) -> StringType: ...
-    @staticmethod
+    ) -> str:
+        """
+
+        :param failureKind:
+        :param userMessage:
+        :param conditionText:
+        :param innerException:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
     def TriggerFailure(
+        cls,
         kind: ContractFailureKind,
-        displayMessage: StringType,
-        userMessage: StringType,
-        conditionText: StringType,
+        displayMessage: str,
+        userMessage: str,
+        conditionText: str,
         innerException: Exception,
-    ) -> VoidType: ...
+    ) -> None:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    ContractHelper,
-]
+        :param kind:
+        :param displayMessage:
+        :param userMessage:
+        :param conditionText:
+        :param innerException:
+        """

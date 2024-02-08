@@ -1,1398 +1,1990 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Byte
 from System import DateTime
 from System import Decimal
-from System import Int32
 from System import Object
-from System import String
 from System import TimeSpan
-from System import Void
+from System import Type
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-ByteType = Union[int, Byte]
-DecimalType = Union[float, Decimal]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class SoapAnyUri(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapAnyUri: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapBase64Binary(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: ArrayType[ByteType]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> ArrayType[ByteType]: ...
-    @Value.setter
-    def Value(self, value: ArrayType[ByteType]) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapBase64Binary: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> ArrayType[ByteType]: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: ArrayType[ByteType]) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapDate(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: DateTime): ...
-    @overload
-    def __init__(self, value: DateTime, sign: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Sign(self) -> IntType: ...
-    @Sign.setter
-    def Sign(self, value: IntType) -> None: ...
-    @property
-    def Value(self) -> DateTime: ...
-    @Value.setter
-    def Value(self, value: DateTime) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapDate: ...
-    def ToString(self) -> StringType: ...
-    def get_Sign(self) -> IntType: ...
-    def get_Value(self) -> DateTime: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Sign(self, value: IntType) -> VoidType: ...
-    def set_Value(self, value: DateTime) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapDateTime(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Parse(value: StringType) -> DateTime: ...
-    @staticmethod
-    @overload
-    def ToString(value: DateTime) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapDay(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: DateTime): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> DateTime: ...
-    @Value.setter
-    def Value(self, value: DateTime) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapDay: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> DateTime: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: DateTime) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapDuration(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Parse(value: StringType) -> TimeSpan: ...
-    @staticmethod
-    @overload
-    def ToString(timeSpan: TimeSpan) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapEntities(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapEntities: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapEntity(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapEntity: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapHexBinary(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: ArrayType[ByteType]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> ArrayType[ByteType]: ...
-    @Value.setter
-    def Value(self, value: ArrayType[ByteType]) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapHexBinary: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> ArrayType[ByteType]: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: ArrayType[ByteType]) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapId(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapId: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapIdref(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapIdref: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapIdrefs(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapIdrefs: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapInteger(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: DecimalType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> DecimalType: ...
-    @Value.setter
-    def Value(self, value: DecimalType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapInteger: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> DecimalType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: DecimalType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapLanguage(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapLanguage: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapMonth(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: DateTime): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> DateTime: ...
-    @Value.setter
-    def Value(self, value: DateTime) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapMonth: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> DateTime: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: DateTime) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapMonthDay(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: DateTime): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> DateTime: ...
-    @Value.setter
-    def Value(self, value: DateTime) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapMonthDay: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> DateTime: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: DateTime) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapName(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapName: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapNcName(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapNcName: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapNegativeInteger(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: DecimalType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> DecimalType: ...
-    @Value.setter
-    def Value(self, value: DecimalType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapNegativeInteger: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> DecimalType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: DecimalType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapNmtoken(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapNmtoken: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapNmtokens(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapNmtokens: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapNonNegativeInteger(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: DecimalType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> DecimalType: ...
-    @Value.setter
-    def Value(self, value: DecimalType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapNonNegativeInteger: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> DecimalType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: DecimalType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapNonPositiveInteger(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: DecimalType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> DecimalType: ...
-    @Value.setter
-    def Value(self, value: DecimalType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapNonPositiveInteger: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> DecimalType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: DecimalType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapNormalizedString(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapNormalizedString: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapNotation(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapNotation: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapPositiveInteger(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: DecimalType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> DecimalType: ...
-    @Value.setter
-    def Value(self, value: DecimalType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapPositiveInteger: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> DecimalType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: DecimalType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapQName(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-    @overload
-    def __init__(self, key: StringType, name: StringType): ...
-    @overload
-    def __init__(self, key: StringType, name: StringType, namespaceValue: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Key(self) -> StringType: ...
-    @Key.setter
-    def Key(self, value: StringType) -> None: ...
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def Namespace(self) -> StringType: ...
-    @Namespace.setter
-    def Namespace(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapQName: ...
-    def ToString(self) -> StringType: ...
-    def get_Key(self) -> StringType: ...
-    def get_Name(self) -> StringType: ...
-    def get_Namespace(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Key(self, value: StringType) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_Namespace(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapTime(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: DateTime): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> DateTime: ...
-    @Value.setter
-    def Value(self, value: DateTime) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapTime: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> DateTime: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: DateTime) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapToken(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def XsdType() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapToken: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapType(ABC, ObjectType):
+class ISoapXsd:
     """"""
 
-    # No Fields
+    def GetXsdType(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapYear(ObjectType, ISoapXsd):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class SoapAnyUri(Object, ISoapXsd):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, value: DateTime): ...
-    @overload
-    def __init__(self, value: DateTime, sign: IntType): ...
+    def __init__(self, value: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param value:
+        """
     @property
-    def Sign(self) -> IntType: ...
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapAnyUri:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapBase64Binary(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: Array[int]):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: Array[int]) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapBase64Binary:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapDate(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: DateTime):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: DateTime, sign: int):
+        """
+
+        :param value:
+        :param sign:
+        """
+    @property
+    def Sign(self) -> int:
+        """
+
+        :return:
+        """
     @Sign.setter
-    def Sign(self, value: IntType) -> None: ...
+    def Sign(self, value: int) -> None: ...
     @property
-    def Value(self) -> DateTime: ...
+    def Value(self) -> DateTime:
+        """
+
+        :return:
+        """
     @Value.setter
     def Value(self, value: DateTime) -> None: ...
-    @staticmethod
+    @classmethod
     @property
-    def XsdType() -> StringType: ...
+    def XsdType(cls) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapYear: ...
-    def ToString(self) -> StringType: ...
-    def get_Sign(self) -> IntType: ...
-    def get_Value(self) -> DateTime: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Sign(self, value: IntType) -> VoidType: ...
-    def set_Value(self, value: DateTime) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapDate:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class SoapYearMonth(ObjectType, ISoapXsd):
-    # No Fields
+class SoapDateTime(Object):
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> DateTime:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def ToString(cls, value: DateTime) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+
+class SoapDay(Object, ISoapXsd):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, value: DateTime): ...
-    @overload
-    def __init__(self, value: DateTime, sign: IntType): ...
+    def __init__(self, value: DateTime):
+        """
 
-    # ---------- Properties ---------- #
+        :param value:
+        """
+    @property
+    def Value(self) -> DateTime:
+        """
 
-    @property
-    def Sign(self) -> IntType: ...
-    @Sign.setter
-    def Sign(self, value: IntType) -> None: ...
-    @property
-    def Value(self) -> DateTime: ...
+        :return:
+        """
     @Value.setter
     def Value(self, value: DateTime) -> None: ...
-    @staticmethod
+    @classmethod
     @property
-    def XsdType() -> StringType: ...
+    def XsdType(cls) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def GetXsdType(self) -> StringType: ...
-    @staticmethod
-    def Parse(value: StringType) -> SoapYearMonth: ...
-    def ToString(self) -> StringType: ...
-    def get_Sign(self) -> IntType: ...
-    def get_Value(self) -> DateTime: ...
-    @staticmethod
-    def get_XsdType() -> StringType: ...
-    def set_Sign(self, value: IntType) -> VoidType: ...
-    def set_Value(self, value: DateTime) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapDay:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-# No Structs
+class SoapDuration(Object):
+    """"""
 
-# ---------- Interfaces ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
 
-class ISoapXsd(Protocol):
-    # No Properties
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def GetXsdType(self) -> StringType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> TimeSpan:
+        """
 
-# No Enums
+        :param value:
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-# No Delegates
+        :return:
+        """
+    @classmethod
+    @overload
+    def ToString(cls, timeSpan: TimeSpan) -> str:
+        """
 
-__all__ = [
-    SoapAnyUri,
-    SoapBase64Binary,
-    SoapDate,
-    SoapDateTime,
-    SoapDay,
-    SoapDuration,
-    SoapEntities,
-    SoapEntity,
-    SoapHexBinary,
-    SoapId,
-    SoapIdref,
-    SoapIdrefs,
-    SoapInteger,
-    SoapLanguage,
-    SoapMonth,
-    SoapMonthDay,
-    SoapName,
-    SoapNcName,
-    SoapNegativeInteger,
-    SoapNmtoken,
-    SoapNmtokens,
-    SoapNonNegativeInteger,
-    SoapNonPositiveInteger,
-    SoapNormalizedString,
-    SoapNotation,
-    SoapPositiveInteger,
-    SoapQName,
-    SoapTime,
-    SoapToken,
-    SoapType,
-    SoapYear,
-    SoapYearMonth,
-    ISoapXsd,
-]
+        :param timeSpan:
+        :return:
+        """
+
+class SoapEntities(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapEntities:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapEntity(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapEntity:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapHexBinary(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: Array[int]):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: Array[int]) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapHexBinary:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapId(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapId:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapIdref(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapIdref:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapIdrefs(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapIdrefs:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapInteger(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: Decimal):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> Decimal:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: Decimal) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapInteger:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapLanguage(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapLanguage:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapMonth(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: DateTime):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: DateTime) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapMonth:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapMonthDay(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: DateTime):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: DateTime) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapMonthDay:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapName(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapName:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapNcName(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapNcName:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapNegativeInteger(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: Decimal):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> Decimal:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: Decimal) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapNegativeInteger:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapNmtoken(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapNmtoken:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapNmtokens(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapNmtokens:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapNonNegativeInteger(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: Decimal):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> Decimal:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: Decimal) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapNonNegativeInteger:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapNonPositiveInteger(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: Decimal):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> Decimal:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: Decimal) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapNonPositiveInteger:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapNormalizedString(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapNormalizedString:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapNotation(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapNotation:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapPositiveInteger(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: Decimal):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> Decimal:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: Decimal) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapPositiveInteger:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapQName(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, key: str, name: str):
+        """
+
+        :param key:
+        :param name:
+        """
+    @overload
+    def __init__(self, key: str, name: str, namespaceValue: str):
+        """
+
+        :param key:
+        :param name:
+        :param namespaceValue:
+        """
+    @property
+    def Key(self) -> str:
+        """
+
+        :return:
+        """
+    @Key.setter
+    def Key(self, value: str) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Namespace(self) -> str:
+        """
+
+        :return:
+        """
+    @Namespace.setter
+    def Namespace(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapQName:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapTime(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: DateTime):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: DateTime) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapTime:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapToken(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapToken:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapType(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapYear(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: DateTime):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: DateTime, sign: int):
+        """
+
+        :param value:
+        :param sign:
+        """
+    @property
+    def Sign(self) -> int:
+        """
+
+        :return:
+        """
+    @Sign.setter
+    def Sign(self, value: int) -> None: ...
+    @property
+    def Value(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: DateTime) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapYear:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapYearMonth(Object, ISoapXsd):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: DateTime):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: DateTime, sign: int):
+        """
+
+        :param value:
+        :param sign:
+        """
+    @property
+    def Sign(self) -> int:
+        """
+
+        :return:
+        """
+    @Sign.setter
+    def Sign(self, value: int) -> None: ...
+    @property
+    def Value(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: DateTime) -> None: ...
+    @classmethod
+    @property
+    def XsdType(cls) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetXsdType(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Parse(cls, value: str) -> SoapYearMonth:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

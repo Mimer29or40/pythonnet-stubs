@@ -2,205 +2,277 @@ from __future__ import annotations
 
 from typing import Callable
 from typing import Generic
+from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
-from System import AsyncCallback
-from System import Boolean
 from System import DateTime
-from System import Double
 from System import EventArgs
-from System import IAsyncResult
-from System import ICloneable
+from System import EventHandler
+from System import Guid
 from System import IDisposable
 from System import IntPtr
-from System import MulticastDelegate
-from System import Object
-from System import String
-from System import Void
+from System import Type
 from System.ComponentModel import Component
 from System.ComponentModel import DescriptionAttribute
 from System.ComponentModel import IComponent
+from System.ComponentModel import IContainer
 from System.ComponentModel import ISite
 from System.ComponentModel import ISupportInitialize
 from System.ComponentModel import ISynchronizeInvoke
 from System.Runtime.InteropServices import _Attribute
-from System.Runtime.Serialization import ISerializable
-
-# ---------- Types ---------- #
+from System.Runtime.Remoting import ObjRef
 
 T = TypeVar("T")
-
-BooleanType = Union[bool, Boolean]
-DoubleType = Union[float, Double]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
 
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
-
 class ElapsedEventArgs(EventArgs):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def SignalTime(self) -> DateTime: ...
+    def SignalTime(self) -> DateTime:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_SignalTime(self) -> DateTime: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+ElapsedEventHandler: Callable[[object, ElapsedEventArgs], None] = ...
+"""
 
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
-class ElapsedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, sender: ObjectType, e: ElapsedEventArgs, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: ElapsedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Timer(Component, IComponent, IDisposable, ISupportInitialize):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class Timer(Component, IComponent, ISupportInitialize, IDisposable):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, interval: DoubleType): ...
+    def __init__(self, interval: float):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param interval:
+        """
     @property
-    def AutoReset(self) -> BooleanType: ...
+    def AutoReset(self) -> bool:
+        """
+
+        :return:
+        """
     @AutoReset.setter
-    def AutoReset(self, value: BooleanType) -> None: ...
+    def AutoReset(self, value: bool) -> None: ...
     @property
-    def Enabled(self) -> BooleanType: ...
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
+    @property
+    def Enabled(self) -> bool:
+        """
+
+        :return:
+        """
     @Enabled.setter
-    def Enabled(self, value: BooleanType) -> None: ...
+    def Enabled(self, value: bool) -> None: ...
     @property
-    def Interval(self) -> DoubleType: ...
+    def Interval(self) -> float:
+        """
+
+        :return:
+        """
     @Interval.setter
-    def Interval(self, value: DoubleType) -> None: ...
+    def Interval(self, value: float) -> None: ...
     @property
-    def Site(self) -> ISite: ...
+    def Site(self) -> ISite:
+        """
+
+        :return:
+        """
     @Site.setter
     def Site(self, value: ISite) -> None: ...
     @property
-    def SynchronizingObject(self) -> ISynchronizeInvoke: ...
+    def SynchronizingObject(self) -> ISynchronizeInvoke:
+        """
+
+        :return:
+        """
     @SynchronizingObject.setter
     def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
+    def BeginInit(self) -> None:
+        """"""
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    # ---------- Methods ---------- #
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndInit(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def BeginInit(self) -> VoidType: ...
-    def Close(self) -> VoidType: ...
-    def EndInit(self) -> VoidType: ...
-    def Start(self) -> VoidType: ...
-    def Stop(self) -> VoidType: ...
-    def add_Elapsed(self, value: ElapsedEventHandler) -> VoidType: ...
-    def get_AutoReset(self) -> BooleanType: ...
-    def get_Enabled(self) -> BooleanType: ...
-    def get_Interval(self) -> DoubleType: ...
-    def get_Site(self) -> ISite: ...
-    def get_SynchronizingObject(self) -> ISynchronizeInvoke: ...
-    def remove_Elapsed(self, value: ElapsedEventHandler) -> VoidType: ...
-    def set_AutoReset(self, value: BooleanType) -> VoidType: ...
-    def set_Enabled(self, value: BooleanType) -> VoidType: ...
-    def set_Interval(self, value: DoubleType) -> VoidType: ...
-    def set_Site(self, value: ISite) -> VoidType: ...
-    def set_SynchronizingObject(self, value: ISynchronizeInvoke) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Events ---------- #
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Start(self) -> None:
+        """"""
+    def Stop(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    Disposed: EventType[EventHandler] = ...
+    """"""
     Elapsed: EventType[ElapsedEventHandler] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    """"""
 
 class TimersDescriptionAttribute(DescriptionAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, description: str):
+        """
 
-    def __init__(self, description: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param description:
+        """
     @property
-    def Description(self) -> StringType: ...
+    def Description(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
 
-    def get_Description(self) -> StringType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Structs
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Enums
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-# No Structs
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-# No Interfaces
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-# No Enums
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-# ---------- Delegates ---------- #
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-ElapsedEventHandler = Callable[[ObjectType, ElapsedEventArgs], VoidType]
-
-__all__ = [
-    ElapsedEventArgs,
-    ElapsedEventHandler,
-    Timer,
-    TimersDescriptionAttribute,
-    ElapsedEventHandler,
-]
+        :return:
+        """

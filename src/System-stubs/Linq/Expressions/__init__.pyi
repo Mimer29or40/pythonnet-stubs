@@ -2,29 +2,24 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Generic
-from typing import List
-from typing import Protocol
+from typing import Iterator
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Action
 from System import Array
-from System import Boolean
 from System import Delegate
 from System import Enum
 from System import Func
 from System import Guid
-from System import Int32
+from System import IntPtr
 from System import Object
-from System import String
 from System import Type
-from System import Void
 from System.Collections import IEnumerable
+from System.Collections import IEnumerator
 from System.Collections.Generic import ICollection
 from System.Collections.Generic import IEnumerable
-from System.Collections.Generic import IEnumerator
 from System.Collections.Generic import IList
 from System.Collections.ObjectModel import ReadOnlyCollection
 from System.ComponentModel import CategoryAttribute
@@ -40,8 +35,6 @@ from System.Runtime.CompilerServices import CallSiteBinder
 from System.Runtime.CompilerServices import DebugInfoGenerator
 from System.Runtime.InteropServices import _Attribute
 
-# ---------- Types ---------- #
-
 R = TypeVar("R")
 T = TypeVar("T")
 T1 = TypeVar("T1")
@@ -49,2436 +42,6843 @@ T2 = TypeVar("T2")
 T3 = TypeVar("T3")
 TDelegate = TypeVar("TDelegate")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class ArgumentProviderOps(ABC, ObjectType):
+class AnalyzeTypeIsResult(Enum):
     """"""
 
-    # No Fields
+    KnownFalse: AnalyzeTypeIsResult = ...
+    """"""
+    KnownTrue: AnalyzeTypeIsResult = ...
+    """"""
+    KnownAssignable: AnalyzeTypeIsResult = ...
+    """"""
+    Unknown: AnalyzeTypeIsResult = ...
+    """"""
 
-    # No Constructors
+class ArgumentProviderOps(ABC, Object):
+    """"""
 
-    # No Properties
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class AssignBinaryExpression(BinaryExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def Conversion(self) -> LambdaExpression:
+        """
 
-    # ---------- Methods ---------- #
-
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
     @property
-    def CanReduce(self) -> BooleanType: ...
-    @property
-    def Conversion(self) -> LambdaExpression: ...
-    @property
-    def IsLifted(self) -> BooleanType: ...
-    @property
-    def IsLiftedToNull(self) -> BooleanType: ...
-    @property
-    def Left(self) -> Expression: ...
-    @property
-    def Method(self) -> MethodInfo: ...
-    @property
-    def Right(self) -> Expression: ...
+    def IsLifted(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsLiftedToNull(self) -> bool:
+        """
 
-    def Reduce(self) -> Expression: ...
+        :return:
+        """
+    @property
+    def Left(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Right(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def Update(
         self, left: Expression, conversion: LambdaExpression, right: Expression
-    ) -> BinaryExpression: ...
-    def get_CanReduce(self) -> BooleanType: ...
-    def get_Conversion(self) -> LambdaExpression: ...
-    def get_IsLifted(self) -> BooleanType: ...
-    def get_IsLiftedToNull(self) -> BooleanType: ...
-    def get_Left(self) -> Expression: ...
-    def get_Method(self) -> MethodInfo: ...
-    def get_Right(self) -> Expression: ...
+    ) -> BinaryExpression:
+        """
 
-    # No Events
+        :param left:
+        :param conversion:
+        :param right:
+        :return:
+        """
 
-    # No Sub Classes
+class BinaryExpression(Expression):
+    """"""
 
-    # No Sub Structs
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Conversion(self) -> LambdaExpression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def IsLifted(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsLiftedToNull(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Left(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Right(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, left: Expression, conversion: LambdaExpression, right: Expression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param conversion:
+        :param right:
+        :return:
+        """
 
 class Block2(BlockExpression):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
 
 class Block3(BlockExpression):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
 
 class Block4(BlockExpression):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
 
 class Block5(BlockExpression):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BlockExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
     @property
-    def Expressions(self) -> ReadOnlyCollection[Expression]: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Result(self) -> Expression: ...
-    @property
-    def Type(self) -> TypeType: ...
-    @property
-    def Variables(self) -> ReadOnlyCollection[ParameterExpression]: ...
+    def CanReduce(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def Update(
         self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
-    ) -> BlockExpression: ...
-    def get_Expressions(self) -> ReadOnlyCollection[Expression]: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Result(self) -> Expression: ...
-    def get_Type(self) -> TypeType: ...
-    def get_Variables(self) -> ReadOnlyCollection[ParameterExpression]: ...
+    ) -> BlockExpression:
+        """
 
-    # No Events
+        :param variables:
+        :param expressions:
+        :return:
+        """
 
-    # No Sub Classes
+class BlockExpression(Expression):
+    """"""
 
-    # No Sub Structs
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
 
 class BlockExpressionList(
-    ObjectType, IList[Expression], ICollection[Expression], IEnumerable[Expression], IEnumerable
+    Object, ICollection[Expression], IEnumerable[Expression], IList[Expression], IEnumerable
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsReadOnly(self) -> BooleanType: ...
-    def __getitem__(self, key: IntType) -> Expression: ...
-    def __setitem__(self, key: IntType, value: Expression) -> None: ...
+    def IsReadOnly(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Item(self) -> Expression:
+        """
 
-    def Add(self, item: Expression) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Contains(self, item: Expression) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[Expression], arrayIndex: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[Expression]: ...
-    def IndexOf(self, item: Expression) -> IntType: ...
-    def Insert(self, index: IntType, item: Expression) -> VoidType: ...
-    def Remove(self, item: Expression) -> BooleanType: ...
-    def RemoveAt(self, index: IntType) -> VoidType: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_Item(self, index: IntType) -> Expression: ...
-    def set_Item(self, index: IntType, value: Expression) -> VoidType: ...
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: Expression) -> None: ...
+    def Add(self, item: Expression) -> None:
+        """
 
-    # No Events
+        :param item:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: Expression) -> bool:
+        """
 
-    # No Sub Classes
+        :param item:
+        :return:
+        """
+    def CopyTo(self, array: Array[Expression], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, item: Expression) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    def Insert(self, index: int, item: Expression) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    def Remove(self, item: Expression) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: Expression) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Expression]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, index: int, value: Expression) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class BlockN(BlockExpression):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
 
 class ByRefParameterExpression(TypedParameterExpression):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CatchBlock(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
     @property
-    def Body(self) -> Expression: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Filter(self) -> Expression: ...
+    def IsByRef(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Test(self) -> TypeType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Variable(self) -> ParameterExpression: ...
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # ---------- Methods ---------- #
-
-    def ToString(self) -> StringType: ...
-    def Update(
-        self, variable: ParameterExpression, filter: Expression, body: Expression
-    ) -> CatchBlock: ...
-    def get_Body(self) -> Expression: ...
-    def get_Filter(self) -> Expression: ...
-    def get_Test(self) -> TypeType: ...
-    def get_Variable(self) -> ParameterExpression: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ClearDebugInfoExpression(DebugInfoExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
     @property
-    def EndColumn(self) -> IntType: ...
-    @property
-    def EndLine(self) -> IntType: ...
-    @property
-    def IsClear(self) -> BooleanType: ...
-    @property
-    def StartColumn(self) -> IntType: ...
-    @property
-    def StartLine(self) -> IntType: ...
+    def Type(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_EndColumn(self) -> IntType: ...
-    def get_EndLine(self) -> IntType: ...
-    def get_IsClear(self) -> BooleanType: ...
-    def get_StartColumn(self) -> IntType: ...
-    def get_StartLine(self) -> IntType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class CoalesceConversionBinaryExpression(BinaryExpression):
-    # No Fields
+        :return:
+        """
 
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ConditionalExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IfFalse(self) -> Expression: ...
-    @property
-    def IfTrue(self) -> Expression: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Test(self) -> Expression: ...
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def Update(
-        self, test: Expression, ifTrue: Expression, ifFalse: Expression
-    ) -> ConditionalExpression: ...
-    def get_IfFalse(self) -> Expression: ...
-    def get_IfTrue(self) -> Expression: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Test(self) -> Expression: ...
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ConstantCheck(ABC, ObjectType):
+class CatchBlock(Object):
     """"""
 
-    # No Fields
+    @property
+    def Body(self) -> Expression:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Filter(self) -> Expression:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Test(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Variable(self) -> ParameterExpression:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Update(
+        self, variable: ParameterExpression, filter: Expression, body: Expression
+    ) -> CatchBlock:
+        """
+
+        :param variable:
+        :param filter:
+        :param body:
+        :return:
+        """
+
+class ClearDebugInfoExpression(DebugInfoExpression):
+    """"""
+
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Document(self) -> SymbolDocumentInfo:
+        """
+
+        :return:
+        """
+    @property
+    def EndColumn(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def EndLine(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsClear(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def StartColumn(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def StartLine(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CoalesceConversionBinaryExpression(BinaryExpression):
+    """"""
+
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Conversion(self) -> LambdaExpression:
+        """
+
+        :return:
+        """
+    @property
+    def IsLifted(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsLiftedToNull(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Left(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Right(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, left: Expression, conversion: LambdaExpression, right: Expression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param conversion:
+        :param right:
+        :return:
+        """
+
+class ConditionalExpression(Expression):
+    """"""
+
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IfFalse(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def IfTrue(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Test(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, test: Expression, ifTrue: Expression, ifFalse: Expression
+    ) -> ConditionalExpression:
+        """
+
+        :param test:
+        :param ifTrue:
+        :param ifFalse:
+        :return:
+        """
+
+class ConstantCheck(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ConstantExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
     @property
-    def Value(self) -> ObjectType: ...
+    def Type(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Value(self) -> object:
+        """
 
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
-    def get_Value(self) -> ObjectType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class DebugInfoExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Document(self) -> SymbolDocumentInfo: ...
-    @property
-    def EndColumn(self) -> IntType: ...
-    @property
-    def EndLine(self) -> IntType: ...
-    @property
-    def IsClear(self) -> BooleanType: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def StartColumn(self) -> IntType: ...
-    @property
-    def StartLine(self) -> IntType: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def CanReduce(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Document(self) -> SymbolDocumentInfo:
+        """
 
-    def get_Document(self) -> SymbolDocumentInfo: ...
-    def get_EndColumn(self) -> IntType: ...
-    def get_EndLine(self) -> IntType: ...
-    def get_IsClear(self) -> BooleanType: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_StartColumn(self) -> IntType: ...
-    def get_StartLine(self) -> IntType: ...
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def EndColumn(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def EndLine(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def IsClear(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def StartColumn(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def StartLine(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class DebugViewWriter(ExpressionVisitor):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def Visit(self, nodes: ReadOnlyCollection[Expression]) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Sub Classes
+        :param nodes:
+        :return:
+        """
+    @overload
+    def Visit(self, node: Expression) -> Expression:
+        """
 
-    # No Sub Structs
+        :param node:
+        :return:
+        """
+    @overload
+    def VisitAndConvert(self, node: T, callerName: str) -> T:
+        """
 
-    # No Sub Interfaces
+        :param node:
+        :param callerName:
+        :return:
+        """
+    @overload
+    def VisitAndConvert(
+        self, nodes: ReadOnlyCollection[T], callerName: str
+    ) -> ReadOnlyCollection[T]:
+        """
 
-    # No Sub Enums
+        :param nodes:
+        :param callerName:
+        :return:
+        """
 
 class DefaultExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
 
-class DynamicExpression(Expression, IDynamicExpression, IArgumentProvider):
-    # No Fields
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # ---------- Properties ---------- #
+class DynamicExpression(Expression, IArgumentProvider, IDynamicExpression):
+    """"""
 
     @property
-    def Arguments(self) -> ReadOnlyCollection[Expression]: ...
-    @property
-    def Binder(self) -> CallSiteBinder: ...
-    @property
-    def DelegateType(self) -> TypeType: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def ArgumentCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    @staticmethod
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
+
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
-        binder: CallSiteBinder, returnType: TypeType, arguments: ArrayType[Expression]
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, binder: CallSiteBinder, returnType: Type, arguments: IEnumerable[Expression]
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
-        binder: CallSiteBinder, returnType: TypeType, arguments: IEnumerable[Expression]
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, binder: CallSiteBinder, returnType: Type, arg0: Expression
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arg0:
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
-        binder: CallSiteBinder, returnType: TypeType, arg0: Expression
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, binder: CallSiteBinder, returnType: Type, arguments: Array[Expression]
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
-        binder: CallSiteBinder, returnType: TypeType, arg0: Expression, arg1: Expression
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, binder: CallSiteBinder, returnType: Type, arg0: Expression, arg1: Expression
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arg0:
+        :param arg1:
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
+        cls,
         binder: CallSiteBinder,
-        returnType: TypeType,
+        returnType: Type,
         arg0: Expression,
         arg1: Expression,
         arg2: Expression,
-    ) -> DynamicExpression: ...
-    @staticmethod
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
+        cls,
         binder: CallSiteBinder,
-        returnType: TypeType,
+        returnType: Type,
         arg0: Expression,
         arg1: Expression,
         arg2: Expression,
         arg3: Expression,
-    ) -> DynamicExpression: ...
-    @staticmethod
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType, binder: CallSiteBinder, arguments: IEnumerable[Expression]
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, delegateType: Type, binder: CallSiteBinder, arguments: IEnumerable[Expression]
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType, binder: CallSiteBinder, arguments: ArrayType[Expression]
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, delegateType: Type, binder: CallSiteBinder, arg0: Expression
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arg0:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType, binder: CallSiteBinder, arg0: Expression
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, delegateType: Type, binder: CallSiteBinder, arguments: Array[Expression]
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType, binder: CallSiteBinder, arg0: Expression, arg1: Expression
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, delegateType: Type, binder: CallSiteBinder, arg0: Expression, arg1: Expression
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arg0:
+        :param arg1:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType,
+        cls,
+        delegateType: Type,
         binder: CallSiteBinder,
         arg0: Expression,
         arg1: Expression,
         arg2: Expression,
-    ) -> DynamicExpression: ...
-    @staticmethod
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType,
+        cls,
+        delegateType: Type,
         binder: CallSiteBinder,
         arg0: Expression,
         arg1: Expression,
         arg2: Expression,
         arg3: Expression,
-    ) -> DynamicExpression: ...
-    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression: ...
-    def get_Arguments(self) -> ReadOnlyCollection[Expression]: ...
-    def get_Binder(self) -> CallSiteBinder: ...
-    def get_DelegateType(self) -> TypeType: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
+    ) -> DynamicExpression:
+        """
 
-    # No Events
+        :param delegateType:
+        :param binder:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
 
-    # No Sub Enums
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class DynamicExpression1(DynamicExpression, IDynamicExpression, IArgumentProvider):
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class DynamicExpression1(DynamicExpression, IArgumentProvider, IDynamicExpression):
     """"""
 
-    # No Fields
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class DynamicExpression2(DynamicExpression, IDynamicExpression, IArgumentProvider):
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class DynamicExpression2(DynamicExpression, IArgumentProvider, IDynamicExpression):
     """"""
 
-    # No Fields
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class DynamicExpression3(DynamicExpression, IDynamicExpression, IArgumentProvider):
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class DynamicExpression3(DynamicExpression, IArgumentProvider, IDynamicExpression):
     """"""
 
-    # No Fields
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class DynamicExpression4(DynamicExpression, IDynamicExpression, IArgumentProvider):
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class DynamicExpression4(DynamicExpression, IArgumentProvider, IDynamicExpression):
     """"""
 
-    # No Fields
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class DynamicExpressionN(DynamicExpression, IDynamicExpression, IArgumentProvider):
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class DynamicExpressionN(DynamicExpression, IArgumentProvider, IDynamicExpression):
     """"""
 
-    # No Fields
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
 
 class DynamicExpressionVisitor(ABC, ExpressionVisitor):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def Visit(self, nodes: ReadOnlyCollection[Expression]) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Sub Classes
+        :param nodes:
+        :return:
+        """
+    @overload
+    def Visit(self, node: Expression) -> Expression:
+        """
 
-    # No Sub Structs
+        :param node:
+        :return:
+        """
+    @overload
+    def VisitAndConvert(self, node: T, callerName: str) -> T:
+        """
 
-    # No Sub Interfaces
+        :param node:
+        :param callerName:
+        :return:
+        """
+    @overload
+    def VisitAndConvert(
+        self, nodes: ReadOnlyCollection[T], callerName: str
+    ) -> ReadOnlyCollection[T]:
+        """
 
-    # No Sub Enums
+        :param nodes:
+        :param callerName:
+        :return:
+        """
 
-class ElementInit(ObjectType, IArgumentProvider):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AddMethod(self) -> MethodInfo: ...
-    @property
-    def Arguments(self) -> ReadOnlyCollection[Expression]: ...
-
-    # ---------- Methods ---------- #
-
-    def ToString(self) -> StringType: ...
-    def Update(self, arguments: IEnumerable[Expression]) -> ElementInit: ...
-    def get_AddMethod(self) -> MethodInfo: ...
-    def get_Arguments(self) -> ReadOnlyCollection[Expression]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Error(ABC, ObjectType):
+class ElementInit(Object, IArgumentProvider):
     """"""
 
-    # No Fields
+    @property
+    def AddMethod(self) -> MethodInfo:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Methods
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
 
-    # No Sub Classes
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> ElementInit:
+        """
 
-class Expression(Generic[TDelegate], LambdaExpression):
-    # No Fields
+        :param arguments:
+        :return:
+        """
 
-    # No Constructors
+class Error(ABC, Object):
+    """"""
 
-    # No Properties
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    @overload
-    def Compile(self) -> TDelegate: ...
-    @overload
-    def Compile(self, debugInfoGenerator: DebugInfoGenerator) -> TDelegate: ...
-    @overload
-    def Compile(self, preferInterpretation: BooleanType) -> TDelegate: ...
-    def Update(
-        self, body: Expression, parameters: IEnumerable[ParameterExpression]
-    ) -> Expression[TDelegate]: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Expression(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class Expression(ABC, Object):
+    """"""
 
     @property
-    def CanReduce(self) -> BooleanType: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def CanReduce(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    @staticmethod
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def Add(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def Add(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def Add(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def Add(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def AddAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def AddAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def AddAssign(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def AddAssign(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def AddAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def AddAssignChecked(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def AddAssignChecked(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def AddAssignChecked(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def AddAssignChecked(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def AddChecked(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def AddChecked(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def AddChecked(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def AddChecked(
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def And(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def And(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def And(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def And(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def AndAlso(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def AndAlso(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def AndAlso(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def AndAlso(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def AndAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def AndAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def AndAssign(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def AndAssign(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def AndAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def ArrayAccess(array: Expression, indexes: ArrayType[Expression]) -> IndexExpression: ...
-    @staticmethod
+    def ArrayAccess(cls, array: Expression, indexes: IEnumerable[Expression]) -> IndexExpression:
+        """
+
+        :param array:
+        :param indexes:
+        :return:
+        """
+    @classmethod
     @overload
-    def ArrayAccess(array: Expression, indexes: IEnumerable[Expression]) -> IndexExpression: ...
-    @staticmethod
+    def ArrayAccess(cls, array: Expression, indexes: Array[Expression]) -> IndexExpression:
+        """
+
+        :param array:
+        :param indexes:
+        :return:
+        """
+    @classmethod
     @overload
-    def ArrayIndex(array: Expression, indexes: ArrayType[Expression]) -> MethodCallExpression: ...
-    @staticmethod
+    def ArrayIndex(
+        cls, array: Expression, indexes: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param array:
+        :param indexes:
+        :return:
+        """
+    @classmethod
     @overload
-    def ArrayIndex(array: Expression, index: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def ArrayIndex(cls, array: Expression, index: Expression) -> BinaryExpression:
+        """
+
+        :param array:
+        :param index:
+        :return:
+        """
+    @classmethod
     @overload
-    def ArrayIndex(array: Expression, indexes: IEnumerable[Expression]) -> MethodCallExpression: ...
-    @staticmethod
-    def ArrayLength(array: Expression) -> UnaryExpression: ...
-    @staticmethod
-    def Assign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def ArrayIndex(cls, array: Expression, indexes: Array[Expression]) -> MethodCallExpression:
+        """
+
+        :param array:
+        :param indexes:
+        :return:
+        """
+    @classmethod
+    def ArrayLength(cls, array: Expression) -> UnaryExpression:
+        """
+
+        :param array:
+        :return:
+        """
+    @classmethod
+    def Assign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def Bind(propertyAccessor: MethodInfo, expression: Expression) -> MemberAssignment: ...
-    @staticmethod
+    def Bind(cls, member: MemberInfo, expression: Expression) -> MemberAssignment:
+        """
+
+        :param member:
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def Bind(member: MemberInfo, expression: Expression) -> MemberAssignment: ...
-    @staticmethod
+    def Bind(cls, propertyAccessor: MethodInfo, expression: Expression) -> MemberAssignment:
+        """
+
+        :param propertyAccessor:
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def Block(expressions: IEnumerable[Expression]) -> BlockExpression: ...
-    @staticmethod
+    def Block(cls, expressions: IEnumerable[Expression]) -> BlockExpression:
+        """
+
+        :param expressions:
+        :return:
+        """
+    @classmethod
     @overload
-    def Block(type: TypeType, expressions: ArrayType[Expression]) -> BlockExpression: ...
-    @staticmethod
-    @overload
-    def Block(type: TypeType, expressions: IEnumerable[Expression]) -> BlockExpression: ...
-    @staticmethod
+    def Block(cls, expressions: Array[Expression]) -> BlockExpression:
+        """
+
+        :param expressions:
+        :return:
+        """
+    @classmethod
     @overload
     def Block(
-        variables: IEnumerable[ParameterExpression], expressions: ArrayType[Expression]
-    ) -> BlockExpression: ...
-    @staticmethod
+        cls, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
+    @classmethod
     @overload
     def Block(
-        type: TypeType,
-        variables: IEnumerable[ParameterExpression],
-        expressions: ArrayType[Expression],
-    ) -> BlockExpression: ...
-    @staticmethod
+        cls, variables: IEnumerable[ParameterExpression], expressions: Array[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
+    @classmethod
     @overload
-    def Block(arg0: Expression, arg1: Expression) -> BlockExpression: ...
-    @staticmethod
+    def Block(cls, arg0: Expression, arg1: Expression) -> BlockExpression:
+        """
+
+        :param arg0:
+        :param arg1:
+        :return:
+        """
+    @classmethod
     @overload
-    def Block(arg0: Expression, arg1: Expression, arg2: Expression) -> BlockExpression: ...
-    @staticmethod
+    def Block(cls, type: Type, expressions: IEnumerable[Expression]) -> BlockExpression:
+        """
+
+        :param type:
+        :param expressions:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Block(cls, type: Type, expressions: Array[Expression]) -> BlockExpression:
+        """
+
+        :param type:
+        :param expressions:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Block(cls, arg0: Expression, arg1: Expression, arg2: Expression) -> BlockExpression:
+        """
+
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :return:
+        """
+    @classmethod
     @overload
     def Block(
-        arg0: Expression, arg1: Expression, arg2: Expression, arg3: Expression
-    ) -> BlockExpression: ...
-    @staticmethod
-    @overload
-    def Block(
-        arg0: Expression, arg1: Expression, arg2: Expression, arg3: Expression, arg4: Expression
-    ) -> BlockExpression: ...
-    @staticmethod
-    @overload
-    def Block(expressions: ArrayType[Expression]) -> BlockExpression: ...
-    @staticmethod
-    @overload
-    def Block(
-        variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
-    ) -> BlockExpression: ...
-    @staticmethod
-    @overload
-    def Block(
-        type: TypeType,
+        cls,
+        type: Type,
         variables: IEnumerable[ParameterExpression],
         expressions: IEnumerable[Expression],
-    ) -> BlockExpression: ...
-    @staticmethod
+    ) -> BlockExpression:
+        """
+
+        :param type:
+        :param variables:
+        :param expressions:
+        :return:
+        """
+    @classmethod
     @overload
-    def Break(target: LabelTarget) -> GotoExpression: ...
-    @staticmethod
+    def Block(
+        cls, type: Type, variables: IEnumerable[ParameterExpression], expressions: Array[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param type:
+        :param variables:
+        :param expressions:
+        :return:
+        """
+    @classmethod
     @overload
-    def Break(target: LabelTarget, value: Expression) -> GotoExpression: ...
-    @staticmethod
+    def Block(
+        cls, arg0: Expression, arg1: Expression, arg2: Expression, arg3: Expression
+    ) -> BlockExpression:
+        """
+
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        :return:
+        """
+    @classmethod
     @overload
-    def Break(target: LabelTarget, type: TypeType) -> GotoExpression: ...
-    @staticmethod
+    def Block(
+        cls,
+        arg0: Expression,
+        arg1: Expression,
+        arg2: Expression,
+        arg3: Expression,
+        arg4: Expression,
+    ) -> BlockExpression:
+        """
+
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        :param arg4:
+        :return:
+        """
+    @classmethod
     @overload
-    def Break(target: LabelTarget, value: Expression, type: TypeType) -> GotoExpression: ...
-    @staticmethod
+    def Break(cls, target: LabelTarget) -> GotoExpression:
+        """
+
+        :param target:
+        :return:
+        """
+    @classmethod
     @overload
-    def Call(method: MethodInfo, arg0: Expression) -> MethodCallExpression: ...
-    @staticmethod
+    def Break(cls, target: LabelTarget, value: Expression) -> GotoExpression:
+        """
+
+        :param target:
+        :param value:
+        :return:
+        """
+    @classmethod
     @overload
-    def Call(method: MethodInfo, arg0: Expression, arg1: Expression) -> MethodCallExpression: ...
-    @staticmethod
+    def Break(cls, target: LabelTarget, type: Type) -> GotoExpression:
+        """
+
+        :param target:
+        :param type:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Break(cls, target: LabelTarget, value: Expression, type: Type) -> GotoExpression:
+        """
+
+        :param target:
+        :param value:
+        :param type:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(cls, instance: Expression, method: MethodInfo) -> MethodCallExpression:
+        """
+
+        :param instance:
+        :param method:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(cls, method: MethodInfo, arguments: IEnumerable[Expression]) -> MethodCallExpression:
+        """
+
+        :param method:
+        :param arguments:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(cls, method: MethodInfo, arg0: Expression) -> MethodCallExpression:
+        """
+
+        :param method:
+        :param arg0:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(cls, method: MethodInfo, arguments: Array[Expression]) -> MethodCallExpression:
+        """
+
+        :param method:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def Call(
-        method: MethodInfo, arg0: Expression, arg1: Expression, arg2: Expression
-    ) -> MethodCallExpression: ...
-    @staticmethod
+        cls, instance: Expression, method: MethodInfo, arguments: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param instance:
+        :param method:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def Call(
-        method: MethodInfo, arg0: Expression, arg1: Expression, arg2: Expression, arg3: Expression
-    ) -> MethodCallExpression: ...
-    @staticmethod
+        cls, instance: Expression, method: MethodInfo, arguments: Array[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param instance:
+        :param method:
+        :param arguments:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(cls, method: MethodInfo, arg0: Expression, arg1: Expression) -> MethodCallExpression:
+        """
+
+        :param method:
+        :param arg0:
+        :param arg1:
+        :return:
+        """
+    @classmethod
     @overload
     def Call(
+        cls, instance: Expression, method: MethodInfo, arg0: Expression, arg1: Expression
+    ) -> MethodCallExpression:
+        """
+
+        :param instance:
+        :param method:
+        :param arg0:
+        :param arg1:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(
+        cls,
+        instance: Expression,
+        methodName: str,
+        typeArguments: Array[Type],
+        arguments: Array[Expression],
+    ) -> MethodCallExpression:
+        """
+
+        :param instance:
+        :param methodName:
+        :param typeArguments:
+        :param arguments:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(
+        cls, method: MethodInfo, arg0: Expression, arg1: Expression, arg2: Expression
+    ) -> MethodCallExpression:
+        """
+
+        :param method:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(
+        cls, type: Type, methodName: str, typeArguments: Array[Type], arguments: Array[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param type:
+        :param methodName:
+        :param typeArguments:
+        :param arguments:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(
+        cls,
+        instance: Expression,
+        method: MethodInfo,
+        arg0: Expression,
+        arg1: Expression,
+        arg2: Expression,
+    ) -> MethodCallExpression:
+        """
+
+        :param instance:
+        :param method:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(
+        cls,
+        method: MethodInfo,
+        arg0: Expression,
+        arg1: Expression,
+        arg2: Expression,
+        arg3: Expression,
+    ) -> MethodCallExpression:
+        """
+
+        :param method:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Call(
+        cls,
         method: MethodInfo,
         arg0: Expression,
         arg1: Expression,
         arg2: Expression,
         arg3: Expression,
         arg4: Expression,
-    ) -> MethodCallExpression: ...
-    @staticmethod
+    ) -> MethodCallExpression:
+        """
+
+        :param method:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        :param arg4:
+        :return:
+        """
+    @classmethod
     @overload
-    def Call(method: MethodInfo, arguments: ArrayType[Expression]) -> MethodCallExpression: ...
-    @staticmethod
+    def Catch(cls, variable: ParameterExpression, body: Expression) -> CatchBlock:
+        """
+
+        :param variable:
+        :param body:
+        :return:
+        """
+    @classmethod
     @overload
-    def Call(method: MethodInfo, arguments: IEnumerable[Expression]) -> MethodCallExpression: ...
-    @staticmethod
-    @overload
-    def Call(instance: Expression, method: MethodInfo) -> MethodCallExpression: ...
-    @staticmethod
-    @overload
-    def Call(
-        instance: Expression, method: MethodInfo, arguments: ArrayType[Expression]
-    ) -> MethodCallExpression: ...
-    @staticmethod
-    @overload
-    def Call(
-        instance: Expression, method: MethodInfo, arg0: Expression, arg1: Expression
-    ) -> MethodCallExpression: ...
-    @staticmethod
-    @overload
-    def Call(
-        instance: Expression,
-        method: MethodInfo,
-        arg0: Expression,
-        arg1: Expression,
-        arg2: Expression,
-    ) -> MethodCallExpression: ...
-    @staticmethod
-    @overload
-    def Call(
-        instance: Expression, method: MethodInfo, arguments: IEnumerable[Expression]
-    ) -> MethodCallExpression: ...
-    @staticmethod
-    @overload
-    def Call(
-        instance: Expression,
-        methodName: StringType,
-        typeArguments: ArrayType[TypeType],
-        arguments: ArrayType[Expression],
-    ) -> MethodCallExpression: ...
-    @staticmethod
-    @overload
-    def Call(
-        type: TypeType,
-        methodName: StringType,
-        typeArguments: ArrayType[TypeType],
-        arguments: ArrayType[Expression],
-    ) -> MethodCallExpression: ...
-    @staticmethod
-    @overload
-    def Catch(type: TypeType, body: Expression) -> CatchBlock: ...
-    @staticmethod
-    @overload
-    def Catch(variable: ParameterExpression, body: Expression) -> CatchBlock: ...
-    @staticmethod
-    @overload
-    def Catch(type: TypeType, body: Expression, filter: Expression) -> CatchBlock: ...
-    @staticmethod
+    def Catch(cls, type: Type, body: Expression) -> CatchBlock:
+        """
+
+        :param type:
+        :param body:
+        :return:
+        """
+    @classmethod
     @overload
     def Catch(
-        variable: ParameterExpression, body: Expression, filter: Expression
-    ) -> CatchBlock: ...
-    @staticmethod
-    def ClearDebugInfo(document: SymbolDocumentInfo) -> DebugInfoExpression: ...
-    @staticmethod
+        cls, variable: ParameterExpression, body: Expression, filter: Expression
+    ) -> CatchBlock:
+        """
+
+        :param variable:
+        :param body:
+        :param filter:
+        :return:
+        """
+    @classmethod
     @overload
-    def Coalesce(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def Catch(cls, type: Type, body: Expression, filter: Expression) -> CatchBlock:
+        """
+
+        :param type:
+        :param body:
+        :param filter:
+        :return:
+        """
+    @classmethod
+    def ClearDebugInfo(cls, document: SymbolDocumentInfo) -> DebugInfoExpression:
+        """
+
+        :param document:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Coalesce(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def Coalesce(
-        left: Expression, right: Expression, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
     def Condition(
-        test: Expression, ifTrue: Expression, ifFalse: Expression
-    ) -> ConditionalExpression: ...
-    @staticmethod
+        cls, test: Expression, ifTrue: Expression, ifFalse: Expression
+    ) -> ConditionalExpression:
+        """
+
+        :param test:
+        :param ifTrue:
+        :param ifFalse:
+        :return:
+        """
+    @classmethod
     @overload
     def Condition(
-        test: Expression, ifTrue: Expression, ifFalse: Expression, type: TypeType
-    ) -> ConditionalExpression: ...
-    @staticmethod
+        cls, test: Expression, ifTrue: Expression, ifFalse: Expression, type: Type
+    ) -> ConditionalExpression:
+        """
+
+        :param test:
+        :param ifTrue:
+        :param ifFalse:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Constant(value: ObjectType) -> ConstantExpression: ...
-    @staticmethod
+    def Constant(cls, value: object) -> ConstantExpression:
+        """
+
+        :param value:
+        :return:
+        """
+    @classmethod
     @overload
-    def Constant(value: ObjectType, type: TypeType) -> ConstantExpression: ...
-    @staticmethod
+    def Constant(cls, value: object, type: Type) -> ConstantExpression:
+        """
+
+        :param value:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Continue(target: LabelTarget) -> GotoExpression: ...
-    @staticmethod
+    def Continue(cls, target: LabelTarget) -> GotoExpression:
+        """
+
+        :param target:
+        :return:
+        """
+    @classmethod
     @overload
-    def Continue(target: LabelTarget, type: TypeType) -> GotoExpression: ...
-    @staticmethod
+    def Continue(cls, target: LabelTarget, type: Type) -> GotoExpression:
+        """
+
+        :param target:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Convert(expression: Expression, type: TypeType) -> UnaryExpression: ...
-    @staticmethod
+    def Convert(cls, expression: Expression, type: Type) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Convert(expression: Expression, type: TypeType, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def Convert(cls, expression: Expression, type: Type, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param type:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def ConvertChecked(expression: Expression, type: TypeType) -> UnaryExpression: ...
-    @staticmethod
+    def ConvertChecked(cls, expression: Expression, type: Type) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
     def ConvertChecked(
-        expression: Expression, type: TypeType, method: MethodInfo
-    ) -> UnaryExpression: ...
-    @staticmethod
+        cls, expression: Expression, type: Type, method: MethodInfo
+    ) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param type:
+        :param method:
+        :return:
+        """
+    @classmethod
     def DebugInfo(
+        cls,
         document: SymbolDocumentInfo,
-        startLine: IntType,
-        startColumn: IntType,
-        endLine: IntType,
-        endColumn: IntType,
-    ) -> DebugInfoExpression: ...
-    @staticmethod
+        startLine: int,
+        startColumn: int,
+        endLine: int,
+        endColumn: int,
+    ) -> DebugInfoExpression:
+        """
+
+        :param document:
+        :param startLine:
+        :param startColumn:
+        :param endLine:
+        :param endColumn:
+        :return:
+        """
+    @classmethod
     @overload
-    def Decrement(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def Decrement(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def Decrement(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
-    def Default(type: TypeType) -> DefaultExpression: ...
-    @staticmethod
+    def Decrement(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
+    def Default(cls, type: Type) -> DefaultExpression:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Divide(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def Divide(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def Divide(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def Divide(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def DivideAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def DivideAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def DivideAssign(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def DivideAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
-        binder: CallSiteBinder, returnType: TypeType, arguments: ArrayType[Expression]
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, binder: CallSiteBinder, returnType: Type, arguments: IEnumerable[Expression]
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
-        binder: CallSiteBinder, returnType: TypeType, arg0: Expression
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, binder: CallSiteBinder, returnType: Type, arg0: Expression
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arg0:
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
-        binder: CallSiteBinder, returnType: TypeType, arg0: Expression, arg1: Expression
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, binder: CallSiteBinder, returnType: Type, arguments: Array[Expression]
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
+        cls, binder: CallSiteBinder, returnType: Type, arg0: Expression, arg1: Expression
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arg0:
+        :param arg1:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Dynamic(
+        cls,
         binder: CallSiteBinder,
-        returnType: TypeType,
+        returnType: Type,
         arg0: Expression,
         arg1: Expression,
         arg2: Expression,
-    ) -> DynamicExpression: ...
-    @staticmethod
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :return:
+        """
+    @classmethod
     @overload
     def Dynamic(
+        cls,
         binder: CallSiteBinder,
-        returnType: TypeType,
+        returnType: Type,
         arg0: Expression,
         arg1: Expression,
         arg2: Expression,
         arg3: Expression,
-    ) -> DynamicExpression: ...
-    @staticmethod
+    ) -> DynamicExpression:
+        """
+
+        :param binder:
+        :param returnType:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        :return:
+        """
+    @classmethod
     @overload
-    def Dynamic(
-        binder: CallSiteBinder, returnType: TypeType, arguments: IEnumerable[Expression]
-    ) -> DynamicExpression: ...
-    @staticmethod
+    def ElementInit(cls, addMethod: MethodInfo, arguments: IEnumerable[Expression]) -> ElementInit:
+        """
+
+        :param addMethod:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
-    def ElementInit(addMethod: MethodInfo, arguments: ArrayType[Expression]) -> ElementInit: ...
-    @staticmethod
+    def ElementInit(cls, addMethod: MethodInfo, arguments: Array[Expression]) -> ElementInit:
+        """
+
+        :param addMethod:
+        :param arguments:
+        :return:
+        """
+    @classmethod
+    def Empty(cls) -> DefaultExpression:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def ElementInit(addMethod: MethodInfo, arguments: IEnumerable[Expression]) -> ElementInit: ...
-    @staticmethod
-    def Empty() -> DefaultExpression: ...
-    @staticmethod
-    @overload
-    def Equal(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def Equal(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def Equal(
-        left: Expression, right: Expression, liftToNull: BooleanType, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, liftToNull: bool, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param liftToNull:
+        :param method:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
     @overload
-    def ExclusiveOr(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def ExclusiveOr(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def ExclusiveOr(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def ExclusiveOrAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def ExclusiveOrAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def ExclusiveOrAssign(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def ExclusiveOrAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def Field(
-        expression: Expression, type: TypeType, fieldName: StringType
-    ) -> MemberExpression: ...
-    @staticmethod
+    def Field(cls, expression: Expression, field: FieldInfo) -> MemberExpression:
+        """
+
+        :param expression:
+        :param field:
+        :return:
+        """
+    @classmethod
     @overload
-    def Field(expression: Expression, fieldName: StringType) -> MemberExpression: ...
-    @staticmethod
+    def Field(cls, expression: Expression, fieldName: str) -> MemberExpression:
+        """
+
+        :param expression:
+        :param fieldName:
+        :return:
+        """
+    @classmethod
     @overload
-    def Field(expression: Expression, field: FieldInfo) -> MemberExpression: ...
-    @staticmethod
-    def GetActionType(typeArgs: ArrayType[TypeType]) -> TypeType: ...
-    @staticmethod
-    def GetDelegateType(typeArgs: ArrayType[TypeType]) -> TypeType: ...
-    @staticmethod
-    def GetFuncType(typeArgs: ArrayType[TypeType]) -> TypeType: ...
-    @staticmethod
+    def Field(cls, expression: Expression, type: Type, fieldName: str) -> MemberExpression:
+        """
+
+        :param expression:
+        :param type:
+        :param fieldName:
+        :return:
+        """
+    @classmethod
+    def GetActionType(cls, typeArgs: Array[Type]) -> Type:
+        """
+
+        :param typeArgs:
+        :return:
+        """
+    @classmethod
+    def GetDelegateType(cls, typeArgs: Array[Type]) -> Type:
+        """
+
+        :param typeArgs:
+        :return:
+        """
+    @classmethod
+    def GetFuncType(cls, typeArgs: Array[Type]) -> Type:
+        """
+
+        :param typeArgs:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def Goto(target: LabelTarget) -> GotoExpression: ...
-    @staticmethod
+    def Goto(cls, target: LabelTarget) -> GotoExpression:
+        """
+
+        :param target:
+        :return:
+        """
+    @classmethod
     @overload
-    def Goto(target: LabelTarget, type: TypeType) -> GotoExpression: ...
-    @staticmethod
+    def Goto(cls, target: LabelTarget, value: Expression) -> GotoExpression:
+        """
+
+        :param target:
+        :param value:
+        :return:
+        """
+    @classmethod
     @overload
-    def Goto(target: LabelTarget, value: Expression) -> GotoExpression: ...
-    @staticmethod
+    def Goto(cls, target: LabelTarget, type: Type) -> GotoExpression:
+        """
+
+        :param target:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Goto(target: LabelTarget, value: Expression, type: TypeType) -> GotoExpression: ...
-    @staticmethod
+    def Goto(cls, target: LabelTarget, value: Expression, type: Type) -> GotoExpression:
+        """
+
+        :param target:
+        :param value:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def GreaterThan(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def GreaterThan(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def GreaterThan(
-        left: Expression, right: Expression, liftToNull: BooleanType, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, liftToNull: bool, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param liftToNull:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def GreaterThanOrEqual(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def GreaterThanOrEqual(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def GreaterThanOrEqual(
-        left: Expression, right: Expression, liftToNull: BooleanType, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
-    def IfThen(test: Expression, ifTrue: Expression) -> ConditionalExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, liftToNull: bool, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param liftToNull:
+        :param method:
+        :return:
+        """
+    @classmethod
+    def IfThen(cls, test: Expression, ifTrue: Expression) -> ConditionalExpression:
+        """
+
+        :param test:
+        :param ifTrue:
+        :return:
+        """
+    @classmethod
     def IfThenElse(
-        test: Expression, ifTrue: Expression, ifFalse: Expression
-    ) -> ConditionalExpression: ...
-    @staticmethod
+        cls, test: Expression, ifTrue: Expression, ifFalse: Expression
+    ) -> ConditionalExpression:
+        """
+
+        :param test:
+        :param ifTrue:
+        :param ifFalse:
+        :return:
+        """
+    @classmethod
     @overload
-    def Increment(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def Increment(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def Increment(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def Increment(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def Invoke(
-        expression: Expression, arguments: ArrayType[Expression]
-    ) -> InvocationExpression: ...
-    @staticmethod
+        cls, expression: Expression, arguments: IEnumerable[Expression]
+    ) -> InvocationExpression:
+        """
+
+        :param expression:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
-    def Invoke(
-        expression: Expression, arguments: IEnumerable[Expression]
-    ) -> InvocationExpression: ...
-    @staticmethod
+    def Invoke(cls, expression: Expression, arguments: Array[Expression]) -> InvocationExpression:
+        """
+
+        :param expression:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
-    def IsFalse(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def IsFalse(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def IsFalse(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def IsFalse(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def IsTrue(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def IsTrue(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def IsTrue(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def IsTrue(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def Label(target: LabelTarget) -> LabelExpression: ...
-    @staticmethod
+    def Label(cls) -> LabelTarget:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def Label() -> LabelTarget: ...
-    @staticmethod
+    def Label(cls, target: LabelTarget) -> LabelExpression:
+        """
+
+        :param target:
+        :return:
+        """
+    @classmethod
     @overload
-    def Label(name: StringType) -> LabelTarget: ...
-    @staticmethod
+    def Label(cls, name: str) -> LabelTarget:
+        """
+
+        :param name:
+        :return:
+        """
+    @classmethod
     @overload
-    def Label(type: TypeType) -> LabelTarget: ...
-    @staticmethod
+    def Label(cls, type: Type) -> LabelTarget:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Label(type: TypeType, name: StringType) -> LabelTarget: ...
-    @staticmethod
+    def Label(cls, target: LabelTarget, defaultValue: Expression) -> LabelExpression:
+        """
+
+        :param target:
+        :param defaultValue:
+        :return:
+        """
+    @classmethod
     @overload
-    def Label(target: LabelTarget, defaultValue: Expression) -> LabelExpression: ...
-    @staticmethod
+    def Label(cls, type: Type, name: str) -> LabelTarget:
+        """
+
+        :param type:
+        :param name:
+        :return:
+        """
+    @classmethod
     @overload
     def Lambda(
-        body: Expression, parameters: ArrayType[ParameterExpression]
-    ) -> LambdaExpression: ...
-    @staticmethod
+        cls, body: Expression, parameters: IEnumerable[ParameterExpression]
+    ) -> Expression[TDelegate]:
+        """
+
+        :param body:
+        :param parameters:
+        :return:
+        """
+    @classmethod
     @overload
     def Lambda(
-        body: Expression, tailCall: BooleanType, parameters: ArrayType[ParameterExpression]
-    ) -> LambdaExpression: ...
-    @staticmethod
+        cls, body: Expression, parameters: Array[ParameterExpression]
+    ) -> Expression[TDelegate]:
+        """
+
+        :param body:
+        :param parameters:
+        :return:
+        """
+    @classmethod
     @overload
     def Lambda(
-        body: Expression, parameters: IEnumerable[ParameterExpression]
-    ) -> LambdaExpression: ...
-    @staticmethod
+        cls, body: Expression, tailCall: bool, parameters: IEnumerable[ParameterExpression]
+    ) -> Expression[TDelegate]:
+        """
+
+        :param body:
+        :param tailCall:
+        :param parameters:
+        :return:
+        """
+    @classmethod
     @overload
     def Lambda(
-        body: Expression, tailCall: BooleanType, parameters: IEnumerable[ParameterExpression]
-    ) -> LambdaExpression: ...
-    @staticmethod
+        cls, body: Expression, tailCall: bool, parameters: Array[ParameterExpression]
+    ) -> Expression[TDelegate]:
+        """
+
+        :param body:
+        :param tailCall:
+        :param parameters:
+        :return:
+        """
+    @classmethod
     @overload
     def Lambda(
-        delegateType: TypeType, body: Expression, parameters: ArrayType[ParameterExpression]
-    ) -> LambdaExpression: ...
-    @staticmethod
+        cls, body: Expression, name: str, parameters: IEnumerable[ParameterExpression]
+    ) -> Expression[TDelegate]:
+        """
+
+        :param body:
+        :param name:
+        :param parameters:
+        :return:
+        """
+    @classmethod
     @overload
     def Lambda(
-        delegateType: TypeType,
+        cls, delegateType: Type, body: Expression, parameters: IEnumerable[ParameterExpression]
+    ) -> LambdaExpression:
+        """
+
+        :param delegateType:
+        :param body:
+        :param parameters:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Lambda(
+        cls, delegateType: Type, body: Expression, parameters: Array[ParameterExpression]
+    ) -> LambdaExpression:
+        """
+
+        :param delegateType:
+        :param body:
+        :param parameters:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Lambda(
+        cls,
         body: Expression,
-        tailCall: BooleanType,
-        parameters: ArrayType[ParameterExpression],
-    ) -> LambdaExpression: ...
-    @staticmethod
-    @overload
-    def Lambda(
-        delegateType: TypeType, body: Expression, parameters: IEnumerable[ParameterExpression]
-    ) -> LambdaExpression: ...
-    @staticmethod
-    @overload
-    def Lambda(
-        delegateType: TypeType,
-        body: Expression,
-        tailCall: BooleanType,
+        name: str,
+        tailCall: bool,
         parameters: IEnumerable[ParameterExpression],
-    ) -> LambdaExpression: ...
-    @staticmethod
+    ) -> LambdaExpression:
+        """
+
+        :param body:
+        :param name:
+        :param tailCall:
+        :param parameters:
+        :return:
+        """
+    @classmethod
     @overload
     def Lambda(
-        body: Expression, name: StringType, parameters: IEnumerable[ParameterExpression]
-    ) -> LambdaExpression: ...
-    @staticmethod
-    @overload
-    def Lambda(
-        delegateType: TypeType,
+        cls,
+        delegateType: Type,
         body: Expression,
-        name: StringType,
+        tailCall: bool,
         parameters: IEnumerable[ParameterExpression],
-    ) -> LambdaExpression: ...
-    @staticmethod
+    ) -> LambdaExpression:
+        """
+
+        :param delegateType:
+        :param body:
+        :param tailCall:
+        :param parameters:
+        :return:
+        """
+    @classmethod
     @overload
     def Lambda(
-        delegateType: TypeType,
+        cls,
+        delegateType: Type,
         body: Expression,
-        name: StringType,
-        tailCall: BooleanType,
-        parameters: IEnumerable[ParameterExpression],
-    ) -> LambdaExpression: ...
-    @staticmethod
+        tailCall: bool,
+        parameters: Array[ParameterExpression],
+    ) -> LambdaExpression:
+        """
+
+        :param delegateType:
+        :param body:
+        :param tailCall:
+        :param parameters:
+        :return:
+        """
+    @classmethod
     @overload
     def Lambda(
-        body: Expression, parameters: ArrayType[ParameterExpression]
-    ) -> Expression[TDelegate]: ...
-    @staticmethod
-    @overload
-    def Lambda(
-        body: Expression, tailCall: BooleanType, parameters: ArrayType[ParameterExpression]
-    ) -> Expression[TDelegate]: ...
-    @staticmethod
-    @overload
-    def Lambda(
-        body: Expression, parameters: IEnumerable[ParameterExpression]
-    ) -> Expression[TDelegate]: ...
-    @staticmethod
-    @overload
-    def Lambda(
-        body: Expression, tailCall: BooleanType, parameters: IEnumerable[ParameterExpression]
-    ) -> Expression[TDelegate]: ...
-    @staticmethod
-    @overload
-    def Lambda(
-        body: Expression, name: StringType, parameters: IEnumerable[ParameterExpression]
-    ) -> Expression[TDelegate]: ...
-    @staticmethod
-    @overload
-    def Lambda(
+        cls,
+        delegateType: Type,
         body: Expression,
-        name: StringType,
-        tailCall: BooleanType,
+        name: str,
         parameters: IEnumerable[ParameterExpression],
-    ) -> Expression[TDelegate]: ...
-    @staticmethod
+    ) -> LambdaExpression:
+        """
+
+        :param delegateType:
+        :param body:
+        :param name:
+        :param parameters:
+        :return:
+        """
+    @classmethod
     @overload
     def Lambda(
+        cls,
+        delegateType: Type,
         body: Expression,
-        name: StringType,
-        tailCall: BooleanType,
+        name: str,
+        tailCall: bool,
         parameters: IEnumerable[ParameterExpression],
-    ) -> LambdaExpression: ...
-    @staticmethod
+    ) -> LambdaExpression:
+        """
+
+        :param delegateType:
+        :param body:
+        :param name:
+        :param tailCall:
+        :param parameters:
+        :return:
+        """
+    @classmethod
     @overload
-    def LeftShift(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def LeftShift(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def LeftShift(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def LeftShift(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def LeftShiftAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def LeftShiftAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def LeftShiftAssign(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def LeftShiftAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def LessThan(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def LessThan(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def LessThan(
-        left: Expression, right: Expression, liftToNull: BooleanType, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, liftToNull: bool, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param liftToNull:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def LessThanOrEqual(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def LessThanOrEqual(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def LessThanOrEqual(
-        left: Expression, right: Expression, liftToNull: BooleanType, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
-    @overload
-    def ListBind(member: MemberInfo, initializers: ArrayType[ElementInit]) -> MemberListBinding: ...
-    @staticmethod
-    @overload
-    def ListBind(
-        member: MemberInfo, initializers: IEnumerable[ElementInit]
-    ) -> MemberListBinding: ...
-    @staticmethod
-    @overload
-    def ListBind(
-        propertyAccessor: MethodInfo, initializers: ArrayType[ElementInit]
-    ) -> MemberListBinding: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, liftToNull: bool, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param liftToNull:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def ListBind(
-        propertyAccessor: MethodInfo, initializers: IEnumerable[ElementInit]
-    ) -> MemberListBinding: ...
-    @staticmethod
+        cls, member: MemberInfo, initializers: IEnumerable[ElementInit]
+    ) -> MemberListBinding:
+        """
+
+        :param member:
+        :param initializers:
+        :return:
+        """
+    @classmethod
+    @overload
+    def ListBind(cls, member: MemberInfo, initializers: Array[ElementInit]) -> MemberListBinding:
+        """
+
+        :param member:
+        :param initializers:
+        :return:
+        """
+    @classmethod
+    @overload
+    def ListBind(
+        cls, propertyAccessor: MethodInfo, initializers: IEnumerable[ElementInit]
+    ) -> MemberListBinding:
+        """
+
+        :param propertyAccessor:
+        :param initializers:
+        :return:
+        """
+    @classmethod
+    @overload
+    def ListBind(
+        cls, propertyAccessor: MethodInfo, initializers: Array[ElementInit]
+    ) -> MemberListBinding:
+        """
+
+        :param propertyAccessor:
+        :param initializers:
+        :return:
+        """
+    @classmethod
     @overload
     def ListInit(
-        newExpression: NewExpression, initializers: ArrayType[Expression]
-    ) -> ListInitExpression: ...
-    @staticmethod
+        cls, newExpression: NewExpression, initializers: IEnumerable[ElementInit]
+    ) -> ListInitExpression:
+        """
+
+        :param newExpression:
+        :param initializers:
+        :return:
+        """
+    @classmethod
     @overload
     def ListInit(
-        newExpression: NewExpression, addMethod: MethodInfo, initializers: ArrayType[Expression]
-    ) -> ListInitExpression: ...
-    @staticmethod
+        cls, newExpression: NewExpression, initializers: IEnumerable[Expression]
+    ) -> ListInitExpression:
+        """
+
+        :param newExpression:
+        :param initializers:
+        :return:
+        """
+    @classmethod
     @overload
     def ListInit(
-        newExpression: NewExpression, initializers: ArrayType[ElementInit]
-    ) -> ListInitExpression: ...
-    @staticmethod
+        cls, newExpression: NewExpression, initializers: Array[ElementInit]
+    ) -> ListInitExpression:
+        """
+
+        :param newExpression:
+        :param initializers:
+        :return:
+        """
+    @classmethod
     @overload
     def ListInit(
-        newExpression: NewExpression, initializers: IEnumerable[ElementInit]
-    ) -> ListInitExpression: ...
-    @staticmethod
+        cls, newExpression: NewExpression, initializers: Array[Expression]
+    ) -> ListInitExpression:
+        """
+
+        :param newExpression:
+        :param initializers:
+        :return:
+        """
+    @classmethod
     @overload
     def ListInit(
-        newExpression: NewExpression, initializers: IEnumerable[Expression]
-    ) -> ListInitExpression: ...
-    @staticmethod
+        cls,
+        newExpression: NewExpression,
+        addMethod: MethodInfo,
+        initializers: IEnumerable[Expression],
+    ) -> ListInitExpression:
+        """
+
+        :param newExpression:
+        :param addMethod:
+        :param initializers:
+        :return:
+        """
+    @classmethod
     @overload
     def ListInit(
-        newExpression: NewExpression, addMethod: MethodInfo, initializers: IEnumerable[Expression]
-    ) -> ListInitExpression: ...
-    @staticmethod
+        cls, newExpression: NewExpression, addMethod: MethodInfo, initializers: Array[Expression]
+    ) -> ListInitExpression:
+        """
+
+        :param newExpression:
+        :param addMethod:
+        :param initializers:
+        :return:
+        """
+    @classmethod
     @overload
-    def Loop(body: Expression) -> LoopExpression: ...
-    @staticmethod
+    def Loop(cls, body: Expression) -> LoopExpression:
+        """
+
+        :param body:
+        :return:
+        """
+    @classmethod
     @overload
-    def Loop(body: Expression, _break: LabelTarget) -> LoopExpression: ...
-    @staticmethod
+    def Loop(cls, body: Expression, _break: LabelTarget) -> LoopExpression:
+        """
+
+        :param body:
+        :param _break:
+        :return:
+        """
+    @classmethod
     @overload
-    def Loop(body: Expression, _break: LabelTarget, _continue: LabelTarget) -> LoopExpression: ...
-    @staticmethod
+    def Loop(cls, body: Expression, _break: LabelTarget, _continue: LabelTarget) -> LoopExpression:
+        """
+
+        :param body:
+        :param _break:
+        :param _continue:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeBinary(
-        binaryType: ExpressionType, left: Expression, right: Expression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, binaryType: ExpressionType, left: Expression, right: Expression
+    ) -> BinaryExpression:
+        """
+
+        :param binaryType:
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeBinary(
+        cls,
         binaryType: ExpressionType,
         left: Expression,
         right: Expression,
-        liftToNull: BooleanType,
+        liftToNull: bool,
         method: MethodInfo,
-    ) -> BinaryExpression: ...
-    @staticmethod
+    ) -> BinaryExpression:
+        """
+
+        :param binaryType:
+        :param left:
+        :param right:
+        :param liftToNull:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeBinary(
+        cls,
         binaryType: ExpressionType,
         left: Expression,
         right: Expression,
-        liftToNull: BooleanType,
+        liftToNull: bool,
         method: MethodInfo,
         conversion: LambdaExpression,
-    ) -> BinaryExpression: ...
-    @staticmethod
+    ) -> BinaryExpression:
+        """
+
+        :param binaryType:
+        :param left:
+        :param right:
+        :param liftToNull:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     def MakeCatchBlock(
-        type: TypeType, variable: ParameterExpression, body: Expression, filter: Expression
-    ) -> CatchBlock: ...
-    @staticmethod
+        cls, type: Type, variable: ParameterExpression, body: Expression, filter: Expression
+    ) -> CatchBlock:
+        """
+
+        :param type:
+        :param variable:
+        :param body:
+        :param filter:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType, binder: CallSiteBinder, arguments: ArrayType[Expression]
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, delegateType: Type, binder: CallSiteBinder, arguments: IEnumerable[Expression]
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType, binder: CallSiteBinder, arguments: IEnumerable[Expression]
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, delegateType: Type, binder: CallSiteBinder, arg0: Expression
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arg0:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType, binder: CallSiteBinder, arg0: Expression
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, delegateType: Type, binder: CallSiteBinder, arguments: Array[Expression]
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType, binder: CallSiteBinder, arg0: Expression, arg1: Expression
-    ) -> DynamicExpression: ...
-    @staticmethod
+        cls, delegateType: Type, binder: CallSiteBinder, arg0: Expression, arg1: Expression
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arg0:
+        :param arg1:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType,
+        cls,
+        delegateType: Type,
         binder: CallSiteBinder,
         arg0: Expression,
         arg1: Expression,
         arg2: Expression,
-    ) -> DynamicExpression: ...
-    @staticmethod
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeDynamic(
-        delegateType: TypeType,
+        cls,
+        delegateType: Type,
         binder: CallSiteBinder,
         arg0: Expression,
         arg1: Expression,
         arg2: Expression,
         arg3: Expression,
-    ) -> DynamicExpression: ...
-    @staticmethod
+    ) -> DynamicExpression:
+        """
+
+        :param delegateType:
+        :param binder:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        :return:
+        """
+    @classmethod
     def MakeGoto(
-        kind: GotoExpressionKind, target: LabelTarget, value: Expression, type: TypeType
-    ) -> GotoExpression: ...
-    @staticmethod
+        cls, kind: GotoExpressionKind, target: LabelTarget, value: Expression, type: Type
+    ) -> GotoExpression:
+        """
+
+        :param kind:
+        :param target:
+        :param value:
+        :param type:
+        :return:
+        """
+    @classmethod
     def MakeIndex(
-        instance: Expression, indexer: PropertyInfo, arguments: IEnumerable[Expression]
-    ) -> IndexExpression: ...
-    @staticmethod
-    def MakeMemberAccess(expression: Expression, member: MemberInfo) -> MemberExpression: ...
-    @staticmethod
+        cls, instance: Expression, indexer: PropertyInfo, arguments: IEnumerable[Expression]
+    ) -> IndexExpression:
+        """
+
+        :param instance:
+        :param indexer:
+        :param arguments:
+        :return:
+        """
+    @classmethod
+    def MakeMemberAccess(cls, expression: Expression, member: MemberInfo) -> MemberExpression:
+        """
+
+        :param expression:
+        :param member:
+        :return:
+        """
+    @classmethod
     def MakeTry(
-        type: TypeType,
+        cls,
+        type: Type,
         body: Expression,
         _finally: Expression,
         fault: Expression,
         handlers: IEnumerable[CatchBlock],
-    ) -> TryExpression: ...
-    @staticmethod
+    ) -> TryExpression:
+        """
+
+        :param type:
+        :param body:
+        :param _finally:
+        :param fault:
+        :param handlers:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeUnary(
-        unaryType: ExpressionType, operand: Expression, type: TypeType
-    ) -> UnaryExpression: ...
-    @staticmethod
+        cls, unaryType: ExpressionType, operand: Expression, type: Type
+    ) -> UnaryExpression:
+        """
+
+        :param unaryType:
+        :param operand:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
     def MakeUnary(
-        unaryType: ExpressionType, operand: Expression, type: TypeType, method: MethodInfo
-    ) -> UnaryExpression: ...
-    @staticmethod
+        cls, unaryType: ExpressionType, operand: Expression, type: Type, method: MethodInfo
+    ) -> UnaryExpression:
+        """
+
+        :param unaryType:
+        :param operand:
+        :param type:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def MemberBind(
-        member: MemberInfo, bindings: ArrayType[MemberBinding]
-    ) -> MemberMemberBinding: ...
-    @staticmethod
+        cls, member: MemberInfo, bindings: IEnumerable[MemberBinding]
+    ) -> MemberMemberBinding:
+        """
+
+        :param member:
+        :param bindings:
+        :return:
+        """
+    @classmethod
+    @overload
+    def MemberBind(cls, member: MemberInfo, bindings: Array[MemberBinding]) -> MemberMemberBinding:
+        """
+
+        :param member:
+        :param bindings:
+        :return:
+        """
+    @classmethod
     @overload
     def MemberBind(
-        member: MemberInfo, bindings: IEnumerable[MemberBinding]
-    ) -> MemberMemberBinding: ...
-    @staticmethod
+        cls, propertyAccessor: MethodInfo, bindings: IEnumerable[MemberBinding]
+    ) -> MemberMemberBinding:
+        """
+
+        :param propertyAccessor:
+        :param bindings:
+        :return:
+        """
+    @classmethod
     @overload
     def MemberBind(
-        propertyAccessor: MethodInfo, bindings: ArrayType[MemberBinding]
-    ) -> MemberMemberBinding: ...
-    @staticmethod
-    @overload
-    def MemberBind(
-        propertyAccessor: MethodInfo, bindings: IEnumerable[MemberBinding]
-    ) -> MemberMemberBinding: ...
-    @staticmethod
+        cls, propertyAccessor: MethodInfo, bindings: Array[MemberBinding]
+    ) -> MemberMemberBinding:
+        """
+
+        :param propertyAccessor:
+        :param bindings:
+        :return:
+        """
+    @classmethod
     @overload
     def MemberInit(
-        newExpression: NewExpression, bindings: ArrayType[MemberBinding]
-    ) -> MemberInitExpression: ...
-    @staticmethod
+        cls, newExpression: NewExpression, bindings: IEnumerable[MemberBinding]
+    ) -> MemberInitExpression:
+        """
+
+        :param newExpression:
+        :param bindings:
+        :return:
+        """
+    @classmethod
     @overload
     def MemberInit(
-        newExpression: NewExpression, bindings: IEnumerable[MemberBinding]
-    ) -> MemberInitExpression: ...
-    @staticmethod
+        cls, newExpression: NewExpression, bindings: Array[MemberBinding]
+    ) -> MemberInitExpression:
+        """
+
+        :param newExpression:
+        :param bindings:
+        :return:
+        """
+    @classmethod
     @overload
-    def Modulo(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def Modulo(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def Modulo(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def Modulo(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def ModuloAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def ModuloAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def ModuloAssign(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def ModuloAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def Multiply(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def Multiply(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def Multiply(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def Multiply(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def MultiplyAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def MultiplyAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def MultiplyAssign(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def MultiplyAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def MultiplyAssignChecked(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def MultiplyAssignChecked(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def MultiplyAssignChecked(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def MultiplyAssignChecked(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def MultiplyChecked(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def MultiplyChecked(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def MultiplyChecked(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def Negate(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def Negate(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def Negate(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def Negate(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def NegateChecked(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def NegateChecked(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def NegateChecked(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def NegateChecked(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def New(constructor: ConstructorInfo) -> NewExpression: ...
-    @staticmethod
+    def New(cls, constructor: ConstructorInfo) -> NewExpression:
+        """
+
+        :param constructor:
+        :return:
+        """
+    @classmethod
     @overload
-    def New(constructor: ConstructorInfo, arguments: ArrayType[Expression]) -> NewExpression: ...
-    @staticmethod
+    def New(cls, type: Type) -> NewExpression:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def New(constructor: ConstructorInfo, arguments: IEnumerable[Expression]) -> NewExpression: ...
-    @staticmethod
+    def New(cls, constructor: ConstructorInfo, arguments: IEnumerable[Expression]) -> NewExpression:
+        """
+
+        :param constructor:
+        :param arguments:
+        :return:
+        """
+    @classmethod
+    @overload
+    def New(cls, constructor: ConstructorInfo, arguments: Array[Expression]) -> NewExpression:
+        """
+
+        :param constructor:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def New(
+        cls,
         constructor: ConstructorInfo,
         arguments: IEnumerable[Expression],
         members: IEnumerable[MemberInfo],
-    ) -> NewExpression: ...
-    @staticmethod
+    ) -> NewExpression:
+        """
+
+        :param constructor:
+        :param arguments:
+        :param members:
+        :return:
+        """
+    @classmethod
     @overload
     def New(
+        cls,
         constructor: ConstructorInfo,
         arguments: IEnumerable[Expression],
-        members: ArrayType[MemberInfo],
-    ) -> NewExpression: ...
-    @staticmethod
+        members: Array[MemberInfo],
+    ) -> NewExpression:
+        """
+
+        :param constructor:
+        :param arguments:
+        :param members:
+        :return:
+        """
+    @classmethod
     @overload
-    def New(type: TypeType) -> NewExpression: ...
-    @staticmethod
+    def NewArrayBounds(cls, type: Type, bounds: IEnumerable[Expression]) -> NewArrayExpression:
+        """
+
+        :param type:
+        :param bounds:
+        :return:
+        """
+    @classmethod
     @overload
-    def NewArrayBounds(type: TypeType, bounds: ArrayType[Expression]) -> NewArrayExpression: ...
-    @staticmethod
+    def NewArrayBounds(cls, type: Type, bounds: Array[Expression]) -> NewArrayExpression:
+        """
+
+        :param type:
+        :param bounds:
+        :return:
+        """
+    @classmethod
     @overload
-    def NewArrayBounds(type: TypeType, bounds: IEnumerable[Expression]) -> NewArrayExpression: ...
-    @staticmethod
+    def NewArrayInit(cls, type: Type, initializers: IEnumerable[Expression]) -> NewArrayExpression:
+        """
+
+        :param type:
+        :param initializers:
+        :return:
+        """
+    @classmethod
     @overload
-    def NewArrayInit(type: TypeType, initializers: ArrayType[Expression]) -> NewArrayExpression: ...
-    @staticmethod
+    def NewArrayInit(cls, type: Type, initializers: Array[Expression]) -> NewArrayExpression:
+        """
+
+        :param type:
+        :param initializers:
+        :return:
+        """
+    @classmethod
     @overload
-    def NewArrayInit(
-        type: TypeType, initializers: IEnumerable[Expression]
-    ) -> NewArrayExpression: ...
-    @staticmethod
+    def Not(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def Not(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def Not(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def Not(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
-    @overload
-    def NotEqual(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def NotEqual(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def NotEqual(
-        left: Expression, right: Expression, liftToNull: BooleanType, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, liftToNull: bool, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param liftToNull:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def OnesComplement(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def OnesComplement(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def OnesComplement(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def OnesComplement(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def Or(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def Or(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def Or(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def Or(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def OrAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def OrAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def OrAssign(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def OrAssign(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def OrAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def OrElse(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def OrElse(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def OrElse(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def OrElse(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def Parameter(type: TypeType) -> ParameterExpression: ...
-    @staticmethod
+    def Parameter(cls, type: Type) -> ParameterExpression:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Parameter(type: TypeType, name: StringType) -> ParameterExpression: ...
-    @staticmethod
+    def Parameter(cls, type: Type, name: str) -> ParameterExpression:
+        """
+
+        :param type:
+        :param name:
+        :return:
+        """
+    @classmethod
     @overload
-    def PostDecrementAssign(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def PostDecrementAssign(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def PostDecrementAssign(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def PostDecrementAssign(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def PostIncrementAssign(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def PostIncrementAssign(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def PostIncrementAssign(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def PostIncrementAssign(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def Power(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def Power(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def Power(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def Power(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def PowerAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def PowerAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def PowerAssign(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def PowerAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def PreDecrementAssign(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def PreDecrementAssign(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def PreDecrementAssign(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def PreDecrementAssign(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def PreIncrementAssign(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def PreIncrementAssign(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def PreIncrementAssign(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
+    def PreIncrementAssign(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Property(cls, expression: Expression, propertyAccessor: MethodInfo) -> MemberExpression:
+        """
+
+        :param expression:
+        :param propertyAccessor:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Property(cls, expression: Expression, property: PropertyInfo) -> MemberExpression:
+        """
+
+        :param expression:
+        :param property:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Property(cls, expression: Expression, propertyName: str) -> MemberExpression:
+        """
+
+        :param expression:
+        :param propertyName:
+        :return:
+        """
+    @classmethod
     @overload
     def Property(
-        instance: Expression, indexer: PropertyInfo, arguments: ArrayType[Expression]
-    ) -> IndexExpression: ...
-    @staticmethod
+        cls, instance: Expression, indexer: PropertyInfo, arguments: IEnumerable[Expression]
+    ) -> IndexExpression:
+        """
+
+        :param instance:
+        :param indexer:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def Property(
-        instance: Expression, indexer: PropertyInfo, arguments: IEnumerable[Expression]
-    ) -> IndexExpression: ...
-    @staticmethod
+        cls, instance: Expression, indexer: PropertyInfo, arguments: Array[Expression]
+    ) -> IndexExpression:
+        """
+
+        :param instance:
+        :param indexer:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
     def Property(
-        expression: Expression, type: TypeType, propertyName: StringType
-    ) -> MemberExpression: ...
-    @staticmethod
+        cls, instance: Expression, propertyName: str, arguments: Array[Expression]
+    ) -> IndexExpression:
+        """
+
+        :param instance:
+        :param propertyName:
+        :param arguments:
+        :return:
+        """
+    @classmethod
     @overload
-    def Property(expression: Expression, propertyAccessor: MethodInfo) -> MemberExpression: ...
-    @staticmethod
+    def Property(cls, expression: Expression, type: Type, propertyName: str) -> MemberExpression:
+        """
+
+        :param expression:
+        :param type:
+        :param propertyName:
+        :return:
+        """
+    @classmethod
+    def PropertyOrField(cls, expression: Expression, propertyOrFieldName: str) -> MemberExpression:
+        """
+
+        :param expression:
+        :param propertyOrFieldName:
+        :return:
+        """
+    @classmethod
+    def Quote(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    @classmethod
+    def ReferenceEqual(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def ReferenceNotEqual(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def Property(
-        instance: Expression, propertyName: StringType, arguments: ArrayType[Expression]
-    ) -> IndexExpression: ...
-    @staticmethod
+    def Rethrow(cls) -> UnaryExpression:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def Property(expression: Expression, propertyName: StringType) -> MemberExpression: ...
-    @staticmethod
+    def Rethrow(cls, type: Type) -> UnaryExpression:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Property(expression: Expression, property: PropertyInfo) -> MemberExpression: ...
-    @staticmethod
-    def PropertyOrField(
-        expression: Expression, propertyOrFieldName: StringType
-    ) -> MemberExpression: ...
-    @staticmethod
-    def Quote(expression: Expression) -> UnaryExpression: ...
-    def Reduce(self) -> Expression: ...
-    def ReduceAndCheck(self) -> Expression: ...
-    def ReduceExtensions(self) -> Expression: ...
-    @staticmethod
-    def ReferenceEqual(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
-    def ReferenceNotEqual(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def Return(cls, target: LabelTarget) -> GotoExpression:
+        """
+
+        :param target:
+        :return:
+        """
+    @classmethod
     @overload
-    def Rethrow() -> UnaryExpression: ...
-    @staticmethod
+    def Return(cls, target: LabelTarget, value: Expression) -> GotoExpression:
+        """
+
+        :param target:
+        :param value:
+        :return:
+        """
+    @classmethod
     @overload
-    def Rethrow(type: TypeType) -> UnaryExpression: ...
-    @staticmethod
+    def Return(cls, target: LabelTarget, type: Type) -> GotoExpression:
+        """
+
+        :param target:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Return(target: LabelTarget) -> GotoExpression: ...
-    @staticmethod
+    def Return(cls, target: LabelTarget, value: Expression, type: Type) -> GotoExpression:
+        """
+
+        :param target:
+        :param value:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Return(target: LabelTarget, type: TypeType) -> GotoExpression: ...
-    @staticmethod
+    def RightShift(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def Return(target: LabelTarget, value: Expression) -> GotoExpression: ...
-    @staticmethod
+    def RightShift(
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def Return(target: LabelTarget, value: Expression, type: TypeType) -> GotoExpression: ...
-    @staticmethod
-    @overload
-    def RightShift(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
-    @overload
-    def RightShift(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
-    @overload
-    def RightShiftAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def RightShiftAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def RightShiftAssign(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def RightShiftAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
     def RuntimeVariables(
-        variables: ArrayType[ParameterExpression],
-    ) -> RuntimeVariablesExpression: ...
-    @staticmethod
+        cls, variables: IEnumerable[ParameterExpression]
+    ) -> RuntimeVariablesExpression:
+        """
+
+        :param variables:
+        :return:
+        """
+    @classmethod
     @overload
-    def RuntimeVariables(
-        variables: IEnumerable[ParameterExpression],
-    ) -> RuntimeVariablesExpression: ...
-    @staticmethod
+    def RuntimeVariables(cls, variables: Array[ParameterExpression]) -> RuntimeVariablesExpression:
+        """
+
+        :param variables:
+        :return:
+        """
+    @classmethod
     @overload
-    def Subtract(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def Subtract(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
-    def Subtract(left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression: ...
-    @staticmethod
+    def Subtract(cls, left: Expression, right: Expression, method: MethodInfo) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def SubtractAssign(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def SubtractAssign(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def SubtractAssign(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def SubtractAssign(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def SubtractAssignChecked(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def SubtractAssignChecked(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def SubtractAssignChecked(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
     def SubtractAssignChecked(
-        left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo, conversion: LambdaExpression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :param conversion:
+        :return:
+        """
+    @classmethod
     @overload
-    def SubtractChecked(left: Expression, right: Expression) -> BinaryExpression: ...
-    @staticmethod
+    def SubtractChecked(cls, left: Expression, right: Expression) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     @overload
     def SubtractChecked(
-        left: Expression, right: Expression, method: MethodInfo
-    ) -> BinaryExpression: ...
-    @staticmethod
+        cls, left: Expression, right: Expression, method: MethodInfo
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param right:
+        :param method:
+        :return:
+        """
+    @classmethod
     @overload
-    def Switch(switchValue: Expression, cases: ArrayType[SwitchCase]) -> SwitchExpression: ...
-    @staticmethod
-    @overload
-    def Switch(
-        switchValue: Expression, defaultBody: Expression, cases: ArrayType[SwitchCase]
-    ) -> SwitchExpression: ...
-    @staticmethod
-    @overload
-    def Switch(
-        switchValue: Expression,
-        defaultBody: Expression,
-        comparison: MethodInfo,
-        cases: ArrayType[SwitchCase],
-    ) -> SwitchExpression: ...
-    @staticmethod
-    @overload
-    def Switch(
-        type: TypeType,
-        switchValue: Expression,
-        defaultBody: Expression,
-        comparison: MethodInfo,
-        cases: ArrayType[SwitchCase],
-    ) -> SwitchExpression: ...
-    @staticmethod
+    def Switch(cls, switchValue: Expression, cases: Array[SwitchCase]) -> SwitchExpression:
+        """
+
+        :param switchValue:
+        :param cases:
+        :return:
+        """
+    @classmethod
     @overload
     def Switch(
-        switchValue: Expression,
-        defaultBody: Expression,
-        comparison: MethodInfo,
-        cases: IEnumerable[SwitchCase],
-    ) -> SwitchExpression: ...
-    @staticmethod
+        cls, switchValue: Expression, defaultBody: Expression, cases: Array[SwitchCase]
+    ) -> SwitchExpression:
+        """
+
+        :param switchValue:
+        :param defaultBody:
+        :param cases:
+        :return:
+        """
+    @classmethod
     @overload
     def Switch(
-        type: TypeType,
+        cls,
         switchValue: Expression,
         defaultBody: Expression,
         comparison: MethodInfo,
         cases: IEnumerable[SwitchCase],
-    ) -> SwitchExpression: ...
-    @staticmethod
+    ) -> SwitchExpression:
+        """
+
+        :param switchValue:
+        :param defaultBody:
+        :param comparison:
+        :param cases:
+        :return:
+        """
+    @classmethod
     @overload
-    def SwitchCase(body: Expression, testValues: ArrayType[Expression]) -> SwitchCase: ...
-    @staticmethod
+    def Switch(
+        cls,
+        switchValue: Expression,
+        defaultBody: Expression,
+        comparison: MethodInfo,
+        cases: Array[SwitchCase],
+    ) -> SwitchExpression:
+        """
+
+        :param switchValue:
+        :param defaultBody:
+        :param comparison:
+        :param cases:
+        :return:
+        """
+    @classmethod
     @overload
-    def SwitchCase(body: Expression, testValues: IEnumerable[Expression]) -> SwitchCase: ...
-    @staticmethod
+    def Switch(
+        cls,
+        type: Type,
+        switchValue: Expression,
+        defaultBody: Expression,
+        comparison: MethodInfo,
+        cases: IEnumerable[SwitchCase],
+    ) -> SwitchExpression:
+        """
+
+        :param type:
+        :param switchValue:
+        :param defaultBody:
+        :param comparison:
+        :param cases:
+        :return:
+        """
+    @classmethod
     @overload
-    def SymbolDocument(fileName: StringType) -> SymbolDocumentInfo: ...
-    @staticmethod
+    def Switch(
+        cls,
+        type: Type,
+        switchValue: Expression,
+        defaultBody: Expression,
+        comparison: MethodInfo,
+        cases: Array[SwitchCase],
+    ) -> SwitchExpression:
+        """
+
+        :param type:
+        :param switchValue:
+        :param defaultBody:
+        :param comparison:
+        :param cases:
+        :return:
+        """
+    @classmethod
     @overload
-    def SymbolDocument(fileName: StringType, language: Guid) -> SymbolDocumentInfo: ...
-    @staticmethod
+    def SwitchCase(cls, body: Expression, testValues: IEnumerable[Expression]) -> SwitchCase:
+        """
+
+        :param body:
+        :param testValues:
+        :return:
+        """
+    @classmethod
+    @overload
+    def SwitchCase(cls, body: Expression, testValues: Array[Expression]) -> SwitchCase:
+        """
+
+        :param body:
+        :param testValues:
+        :return:
+        """
+    @classmethod
+    @overload
+    def SymbolDocument(cls, fileName: str) -> SymbolDocumentInfo:
+        """
+
+        :param fileName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def SymbolDocument(cls, fileName: str, language: Guid) -> SymbolDocumentInfo:
+        """
+
+        :param fileName:
+        :param language:
+        :return:
+        """
+    @classmethod
     @overload
     def SymbolDocument(
-        fileName: StringType, language: Guid, languageVendor: Guid
-    ) -> SymbolDocumentInfo: ...
-    @staticmethod
+        cls, fileName: str, language: Guid, languageVendor: Guid
+    ) -> SymbolDocumentInfo:
+        """
+
+        :param fileName:
+        :param language:
+        :param languageVendor:
+        :return:
+        """
+    @classmethod
     @overload
     def SymbolDocument(
-        fileName: StringType, language: Guid, languageVendor: Guid, documentType: Guid
-    ) -> SymbolDocumentInfo: ...
-    @staticmethod
+        cls, fileName: str, language: Guid, languageVendor: Guid, documentType: Guid
+    ) -> SymbolDocumentInfo:
+        """
+
+        :param fileName:
+        :param language:
+        :param languageVendor:
+        :param documentType:
+        :return:
+        """
+    @classmethod
     @overload
-    def Throw(value: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def Throw(cls, value: Expression) -> UnaryExpression:
+        """
+
+        :param value:
+        :return:
+        """
+    @classmethod
     @overload
-    def Throw(value: Expression, type: TypeType) -> UnaryExpression: ...
-    def ToString(self) -> StringType: ...
-    @staticmethod
-    def TryCatch(body: Expression, handlers: ArrayType[CatchBlock]) -> TryExpression: ...
-    @staticmethod
+    def Throw(cls, value: Expression, type: Type) -> UnaryExpression:
+        """
+
+        :param value:
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def TryCatch(cls, body: Expression, handlers: Array[CatchBlock]) -> TryExpression:
+        """
+
+        :param body:
+        :param handlers:
+        :return:
+        """
+    @classmethod
     def TryCatchFinally(
-        body: Expression, _finally: Expression, handlers: ArrayType[CatchBlock]
-    ) -> TryExpression: ...
-    @staticmethod
-    def TryFault(body: Expression, fault: Expression) -> TryExpression: ...
-    @staticmethod
-    def TryFinally(body: Expression, _finally: Expression) -> TryExpression: ...
-    @staticmethod
-    def TryGetActionType(
-        typeArgs: ArrayType[TypeType], actionType: TypeType
-    ) -> Tuple[BooleanType, TypeType]: ...
-    @staticmethod
-    def TryGetFuncType(
-        typeArgs: ArrayType[TypeType], funcType: TypeType
-    ) -> Tuple[BooleanType, TypeType]: ...
-    @staticmethod
-    def TypeAs(expression: Expression, type: TypeType) -> UnaryExpression: ...
-    @staticmethod
-    def TypeEqual(expression: Expression, type: TypeType) -> TypeBinaryExpression: ...
-    @staticmethod
-    def TypeIs(expression: Expression, type: TypeType) -> TypeBinaryExpression: ...
-    @staticmethod
+        cls, body: Expression, _finally: Expression, handlers: Array[CatchBlock]
+    ) -> TryExpression:
+        """
+
+        :param body:
+        :param _finally:
+        :param handlers:
+        :return:
+        """
+    @classmethod
+    def TryFault(cls, body: Expression, fault: Expression) -> TryExpression:
+        """
+
+        :param body:
+        :param fault:
+        :return:
+        """
+    @classmethod
+    def TryFinally(cls, body: Expression, _finally: Expression) -> TryExpression:
+        """
+
+        :param body:
+        :param _finally:
+        :return:
+        """
+    @classmethod
+    def TryGetActionType(cls, typeArgs: Array[Type], actionType: Type) -> Tuple[bool, Type]:
+        """
+
+        :param typeArgs:
+        :param actionType:
+        :return:
+        """
+    @classmethod
+    def TryGetFuncType(cls, typeArgs: Array[Type], funcType: Type) -> Tuple[bool, Type]:
+        """
+
+        :param typeArgs:
+        :param funcType:
+        :return:
+        """
+    @classmethod
+    def TypeAs(cls, expression: Expression, type: Type) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param type:
+        :return:
+        """
+    @classmethod
+    def TypeEqual(cls, expression: Expression, type: Type) -> TypeBinaryExpression:
+        """
+
+        :param expression:
+        :param type:
+        :return:
+        """
+    @classmethod
+    def TypeIs(cls, expression: Expression, type: Type) -> TypeBinaryExpression:
+        """
+
+        :param expression:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def UnaryPlus(expression: Expression) -> UnaryExpression: ...
-    @staticmethod
+    def UnaryPlus(cls, expression: Expression) -> UnaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+    @classmethod
     @overload
-    def UnaryPlus(expression: Expression, method: MethodInfo) -> UnaryExpression: ...
-    @staticmethod
-    def Unbox(expression: Expression, type: TypeType) -> UnaryExpression: ...
-    @staticmethod
+    def UnaryPlus(cls, expression: Expression, method: MethodInfo) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param method:
+        :return:
+        """
+    @classmethod
+    def Unbox(cls, expression: Expression, type: Type) -> UnaryExpression:
+        """
+
+        :param expression:
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Variable(type: TypeType) -> ParameterExpression: ...
-    @staticmethod
+    def Variable(cls, type: Type) -> ParameterExpression:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def Variable(type: TypeType, name: StringType) -> ParameterExpression: ...
-    def get_CanReduce(self) -> BooleanType: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
+    def Variable(cls, type: Type, name: str) -> ParameterExpression:
+        """
 
-    # No Events
+        :param type:
+        :param name:
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ExpressionStringBuilder(ExpressionVisitor):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def ToString(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ExpressionVisitor(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Visit(self, nodes: ReadOnlyCollection[Expression]) -> ReadOnlyCollection[Expression]: ...
-    @overload
-    def Visit(self, node: Expression) -> Expression: ...
-    @staticmethod
-    @overload
-    def Visit(
-        nodes: ReadOnlyCollection[T], elementVisitor: Func[T, T]
-    ) -> ReadOnlyCollection[T]: ...
-    @overload
-    def VisitAndConvert(self, node: T, callerName: StringType) -> T: ...
-    @overload
-    def VisitAndConvert(
-        self, nodes: ReadOnlyCollection[T], callerName: StringType
-    ) -> ReadOnlyCollection[T]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FieldExpression(MemberExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, expression: Expression, member: FieldInfo): ...
-
-    # ---------- Properties ---------- #
+class Expression(Generic[TDelegate], LambdaExpression):
+    """"""
 
     @property
-    def Type(self) -> TypeType: ...
+    def Body(self) -> Expression:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Parameters(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def ReturnType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def TailCall(self) -> bool:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Compile(self) -> Delegate:
+        """
+
+        :return:
+        """
+    @overload
+    def Compile(self, debugInfoGenerator: DebugInfoGenerator) -> Delegate:
+        """
+
+        :param debugInfoGenerator:
+        :return:
+        """
+    @overload
+    def Compile(self, preferInterpretation: bool) -> Delegate:
+        """
+
+        :param preferInterpretation:
+        :return:
+        """
+    @overload
+    def CompileToMethod(self, method: MethodBuilder) -> None:
+        """
+
+        :param method:
+        """
+    @overload
+    def CompileToMethod(
+        self, method: MethodBuilder, debugInfoGenerator: DebugInfoGenerator
+    ) -> None:
+        """
+
+        :param method:
+        :param debugInfoGenerator:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, body: Expression, parameters: IEnumerable[ParameterExpression]
+    ) -> Expression[TDelegate]:
+        """
+
+        :param body:
+        :param parameters:
+        :return:
+        """
+
+class ExpressionStringBuilder(ExpressionVisitor):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Visit(self, nodes: ReadOnlyCollection[Expression]) -> ReadOnlyCollection[Expression]:
+        """
+
+        :param nodes:
+        :return:
+        """
+    @overload
+    def Visit(self, node: Expression) -> Expression:
+        """
+
+        :param node:
+        :return:
+        """
+    @overload
+    def VisitAndConvert(self, node: T, callerName: str) -> T:
+        """
+
+        :param node:
+        :param callerName:
+        :return:
+        """
+    @overload
+    def VisitAndConvert(
+        self, nodes: ReadOnlyCollection[T], callerName: str
+    ) -> ReadOnlyCollection[T]:
+        """
+
+        :param nodes:
+        :param callerName:
+        :return:
+        """
+
+class ExpressionType(Enum):
+    """"""
+
+    Add: ExpressionType = ...
+    """"""
+    AddChecked: ExpressionType = ...
+    """"""
+    And: ExpressionType = ...
+    """"""
+    AndAlso: ExpressionType = ...
+    """"""
+    ArrayLength: ExpressionType = ...
+    """"""
+    ArrayIndex: ExpressionType = ...
+    """"""
+    Call: ExpressionType = ...
+    """"""
+    Coalesce: ExpressionType = ...
+    """"""
+    Conditional: ExpressionType = ...
+    """"""
+    Constant: ExpressionType = ...
+    """"""
+    Convert: ExpressionType = ...
+    """"""
+    ConvertChecked: ExpressionType = ...
+    """"""
+    Divide: ExpressionType = ...
+    """"""
+    Equal: ExpressionType = ...
+    """"""
+    ExclusiveOr: ExpressionType = ...
+    """"""
+    GreaterThan: ExpressionType = ...
+    """"""
+    GreaterThanOrEqual: ExpressionType = ...
+    """"""
+    Invoke: ExpressionType = ...
+    """"""
+    Lambda: ExpressionType = ...
+    """"""
+    LeftShift: ExpressionType = ...
+    """"""
+    LessThan: ExpressionType = ...
+    """"""
+    LessThanOrEqual: ExpressionType = ...
+    """"""
+    ListInit: ExpressionType = ...
+    """"""
+    MemberAccess: ExpressionType = ...
+    """"""
+    MemberInit: ExpressionType = ...
+    """"""
+    Modulo: ExpressionType = ...
+    """"""
+    Multiply: ExpressionType = ...
+    """"""
+    MultiplyChecked: ExpressionType = ...
+    """"""
+    Negate: ExpressionType = ...
+    """"""
+    UnaryPlus: ExpressionType = ...
+    """"""
+    NegateChecked: ExpressionType = ...
+    """"""
+    New: ExpressionType = ...
+    """"""
+    NewArrayInit: ExpressionType = ...
+    """"""
+    NewArrayBounds: ExpressionType = ...
+    """"""
+    Not: ExpressionType = ...
+    """"""
+    NotEqual: ExpressionType = ...
+    """"""
+    Or: ExpressionType = ...
+    """"""
+    OrElse: ExpressionType = ...
+    """"""
+    Parameter: ExpressionType = ...
+    """"""
+    Power: ExpressionType = ...
+    """"""
+    Quote: ExpressionType = ...
+    """"""
+    RightShift: ExpressionType = ...
+    """"""
+    Subtract: ExpressionType = ...
+    """"""
+    SubtractChecked: ExpressionType = ...
+    """"""
+    TypeAs: ExpressionType = ...
+    """"""
+    TypeIs: ExpressionType = ...
+    """"""
+    Assign: ExpressionType = ...
+    """"""
+    Block: ExpressionType = ...
+    """"""
+    DebugInfo: ExpressionType = ...
+    """"""
+    Decrement: ExpressionType = ...
+    """"""
+    Dynamic: ExpressionType = ...
+    """"""
+    Default: ExpressionType = ...
+    """"""
+    Extension: ExpressionType = ...
+    """"""
+    Goto: ExpressionType = ...
+    """"""
+    Increment: ExpressionType = ...
+    """"""
+    Index: ExpressionType = ...
+    """"""
+    Label: ExpressionType = ...
+    """"""
+    RuntimeVariables: ExpressionType = ...
+    """"""
+    Loop: ExpressionType = ...
+    """"""
+    Switch: ExpressionType = ...
+    """"""
+    Throw: ExpressionType = ...
+    """"""
+    Try: ExpressionType = ...
+    """"""
+    Unbox: ExpressionType = ...
+    """"""
+    AddAssign: ExpressionType = ...
+    """"""
+    AndAssign: ExpressionType = ...
+    """"""
+    DivideAssign: ExpressionType = ...
+    """"""
+    ExclusiveOrAssign: ExpressionType = ...
+    """"""
+    LeftShiftAssign: ExpressionType = ...
+    """"""
+    ModuloAssign: ExpressionType = ...
+    """"""
+    MultiplyAssign: ExpressionType = ...
+    """"""
+    OrAssign: ExpressionType = ...
+    """"""
+    PowerAssign: ExpressionType = ...
+    """"""
+    RightShiftAssign: ExpressionType = ...
+    """"""
+    SubtractAssign: ExpressionType = ...
+    """"""
+    AddAssignChecked: ExpressionType = ...
+    """"""
+    MultiplyAssignChecked: ExpressionType = ...
+    """"""
+    SubtractAssignChecked: ExpressionType = ...
+    """"""
+    PreIncrementAssign: ExpressionType = ...
+    """"""
+    PreDecrementAssign: ExpressionType = ...
+    """"""
+    PostIncrementAssign: ExpressionType = ...
+    """"""
+    PostDecrementAssign: ExpressionType = ...
+    """"""
+    TypeEqual: ExpressionType = ...
+    """"""
+    OnesComplement: ExpressionType = ...
+    """"""
+    IsTrue: ExpressionType = ...
+    """"""
+    IsFalse: ExpressionType = ...
+    """"""
+
+class ExpressionVisitor(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Visit(self, nodes: ReadOnlyCollection[Expression]) -> ReadOnlyCollection[Expression]:
+        """
+
+        :param nodes:
+        :return:
+        """
+    @overload
+    def Visit(self, node: Expression) -> Expression:
+        """
+
+        :param node:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Visit(
+        cls, nodes: ReadOnlyCollection[T], elementVisitor: Func[T, T]
+    ) -> ReadOnlyCollection[T]:
+        """
+
+        :param nodes:
+        :param elementVisitor:
+        :return:
+        """
+    @overload
+    def VisitAndConvert(self, node: T, callerName: str) -> T:
+        """
+
+        :param node:
+        :param callerName:
+        :return:
+        """
+    @overload
+    def VisitAndConvert(
+        self, nodes: ReadOnlyCollection[T], callerName: str
+    ) -> ReadOnlyCollection[T]:
+        """
+
+        :param nodes:
+        :param callerName:
+        :return:
+        """
+
+class FieldExpression(MemberExpression):
+    """"""
+
+    def __init__(self, expression: Expression, member: FieldInfo):
+        """
+
+        :param expression:
+        :param member:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Expression(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Member(self) -> MemberInfo:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, expression: Expression) -> MemberExpression:
+        """
+
+        :param expression:
+        :return:
+        """
 
 class FullConditionalExpression(ConditionalExpression):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IfFalse(self) -> Expression:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IfTrue(self) -> Expression:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Test(self) -> Expression:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, test: Expression, ifTrue: Expression, ifFalse: Expression
+    ) -> ConditionalExpression:
+        """
+
+        :param test:
+        :param ifTrue:
+        :param ifFalse:
+        :return:
+        """
 
 class FullConditionalExpressionWithType(FullConditionalExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Type(self) -> TypeType: ...
+    def CanReduce(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IfFalse(self) -> Expression:
+        """
 
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def IfTrue(self) -> Expression:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Test(self) -> Expression:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, test: Expression, ifTrue: Expression, ifFalse: Expression
+    ) -> ConditionalExpression:
+        """
+
+        :param test:
+        :param ifTrue:
+        :param ifFalse:
+        :return:
+        """
 
 class GotoExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Kind(self) -> GotoExpressionKind: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def Kind(self) -> GotoExpressionKind:
+        """
+
+        :return:
+        """
     @property
-    def Target(self) -> LabelTarget: ...
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def Target(self) -> LabelTarget:
+        """
+
+        :return:
+        """
     @property
-    def Value(self) -> Expression: ...
+    def Type(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Value(self) -> Expression:
+        """
 
-    def Update(self, target: LabelTarget, value: Expression) -> GotoExpression: ...
-    def get_Kind(self) -> GotoExpressionKind: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Target(self) -> LabelTarget: ...
-    def get_Type(self) -> TypeType: ...
-    def get_Value(self) -> Expression: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, target: LabelTarget, value: Expression) -> GotoExpression:
+        """
+
+        :param target:
+        :param value:
+        :return:
+        """
+
+class GotoExpressionKind(Enum):
+    """"""
+
+    Goto: GotoExpressionKind = ...
+    """"""
+    Return: GotoExpressionKind = ...
+    """"""
+    Break: GotoExpressionKind = ...
+    """"""
+    Continue: GotoExpressionKind = ...
+    """"""
+
+class IArgumentProvider:
+    """"""
+
+    @property
+    def ArgumentCount(self) -> int:
+        """
+
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+
+class IDynamicExpression(IArgumentProvider):
+    """"""
+
+    @property
+    def ArgumentCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
+
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
+
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
 
 class IndexExpression(Expression, IArgumentProvider):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Arguments(self) -> ReadOnlyCollection[Expression]: ...
+    def ArgumentCount(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Indexer(self) -> PropertyInfo: ...
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
+
+        :return:
+        """
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Object(self) -> Expression: ...
+    def Indexer(self) -> PropertyInfo:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
 
-    def Update(self, object: Expression, arguments: IEnumerable[Expression]) -> IndexExpression: ...
-    def get_Arguments(self) -> ReadOnlyCollection[Expression]: ...
-    def get_Indexer(self) -> PropertyInfo: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Object(self) -> Expression: ...
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
 
-    # No Sub Structs
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, object: Expression, arguments: IEnumerable[Expression]) -> IndexExpression:
+        """
+
+        :param object:
+        :param arguments:
+        :return:
+        """
 
 class InstanceMethodCallExpression2(MethodCallExpression, IArgumentProvider):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     def __init__(
         self, method: MethodInfo, instance: Expression, arg0: Expression, arg1: Expression
-    ): ...
+    ):
+        """
 
-    # No Properties
+        :param method:
+        :param instance:
+        :param arg0:
+        :param arg1:
+        """
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, object: Expression, arguments: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param object:
+        :param arguments:
+        :return:
+        """
 
 class InstanceMethodCallExpression3(MethodCallExpression, IArgumentProvider):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     def __init__(
         self,
@@ -2487,646 +6887,1799 @@ class InstanceMethodCallExpression3(MethodCallExpression, IArgumentProvider):
         arg0: Expression,
         arg1: Expression,
         arg2: Expression,
-    ): ...
+    ):
+        """
 
-    # No Properties
+        :param method:
+        :param instance:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        """
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, object: Expression, arguments: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param object:
+        :param arguments:
+        :return:
+        """
 
 class InstanceMethodCallExpressionN(MethodCallExpression, IArgumentProvider):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, method: MethodInfo, instance: Expression, args: IList[Expression]):
+        """
 
-    def __init__(self, method: MethodInfo, instance: Expression, args: IList[Expression]): ...
+        :param method:
+        :param instance:
+        :param args:
+        """
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, object: Expression, arguments: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param object:
+        :param arguments:
+        :return:
+        """
 
 class InvocationExpression(Expression, IArgumentProvider):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Arguments(self) -> ReadOnlyCollection[Expression]: ...
-    @property
-    def Expression(self) -> Expression: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def ArgumentCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Expression(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def Update(
         self, expression: Expression, arguments: IEnumerable[Expression]
-    ) -> InvocationExpression: ...
-    def get_Arguments(self) -> ReadOnlyCollection[Expression]: ...
-    def get_Expression(self) -> Expression: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
+    ) -> InvocationExpression:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param expression:
+        :param arguments:
+        :return:
+        """
 
 class LabelExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def DefaultValue(self) -> Expression: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def DefaultValue(self) -> Expression:
+        """
+
+        :return:
+        """
     @property
-    def Target(self) -> LabelTarget: ...
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def Target(self) -> LabelTarget:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    def Update(self, target: LabelTarget, defaultValue: Expression) -> LabelExpression: ...
-    def get_DefaultValue(self) -> Expression: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Target(self) -> LabelTarget: ...
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
 
-class LabelTarget(ObjectType):
-    # No Fields
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def Update(self, target: LabelTarget, defaultValue: Expression) -> LabelExpression:
+        """
 
-    # ---------- Properties ---------- #
+        :param target:
+        :param defaultValue:
+        :return:
+        """
+
+class LabelTarget(Object):
+    """"""
 
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def Type(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_Name(self) -> StringType: ...
-    def get_Type(self) -> TypeType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class LambdaExpression(ABC, Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Body(self) -> Expression: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Parameters(self) -> ReadOnlyCollection[ParameterExpression]: ...
-    @property
-    def ReturnType(self) -> TypeType: ...
-    @property
-    def TailCall(self) -> BooleanType: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def Body(self) -> Expression:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Parameters(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def TailCall(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def Compile(self) -> Delegate: ...
+    def Compile(self) -> Delegate:
+        """
+
+        :return:
+        """
     @overload
-    def Compile(self, debugInfoGenerator: DebugInfoGenerator) -> Delegate: ...
+    def Compile(self, debugInfoGenerator: DebugInfoGenerator) -> Delegate:
+        """
+
+        :param debugInfoGenerator:
+        :return:
+        """
     @overload
-    def Compile(self, preferInterpretation: BooleanType) -> Delegate: ...
+    def Compile(self, preferInterpretation: bool) -> Delegate:
+        """
+
+        :param preferInterpretation:
+        :return:
+        """
     @overload
-    def CompileToMethod(self, method: MethodBuilder) -> VoidType: ...
+    def CompileToMethod(self, method: MethodBuilder) -> None:
+        """
+
+        :param method:
+        """
     @overload
     def CompileToMethod(
         self, method: MethodBuilder, debugInfoGenerator: DebugInfoGenerator
-    ) -> VoidType: ...
-    def get_Body(self) -> Expression: ...
-    def get_Name(self) -> StringType: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Parameters(self) -> ReadOnlyCollection[ParameterExpression]: ...
-    def get_ReturnType(self) -> TypeType: ...
-    def get_TailCall(self) -> BooleanType: ...
-    def get_Type(self) -> TypeType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param method:
+        :param debugInfoGenerator:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ListArgumentProvider(
-    ObjectType, IList[Expression], ICollection[Expression], IEnumerable[Expression], IEnumerable
+    Object, ICollection[Expression], IEnumerable[Expression], IList[Expression], IEnumerable
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsReadOnly(self) -> BooleanType: ...
-    def __getitem__(self, key: IntType) -> Expression: ...
-    def __setitem__(self, key: IntType, value: Expression) -> None: ...
+    def IsReadOnly(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Item(self) -> Expression:
+        """
 
-    def Add(self, item: Expression) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Contains(self, item: Expression) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[Expression], arrayIndex: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[Expression]: ...
-    def IndexOf(self, item: Expression) -> IntType: ...
-    def Insert(self, index: IntType, item: Expression) -> VoidType: ...
-    def Remove(self, item: Expression) -> BooleanType: ...
-    def RemoveAt(self, index: IntType) -> VoidType: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_Item(self, index: IntType) -> Expression: ...
-    def set_Item(self, index: IntType, value: Expression) -> VoidType: ...
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: Expression) -> None: ...
+    def Add(self, item: Expression) -> None:
+        """
 
-    # No Events
+        :param item:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: Expression) -> bool:
+        """
 
-    # No Sub Classes
+        :param item:
+        :return:
+        """
+    def CopyTo(self, array: Array[Expression], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, item: Expression) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    def Insert(self, index: int, item: Expression) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    def Remove(self, item: Expression) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: Expression) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Expression]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, index: int, value: Expression) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class ListInitExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def CanReduce(self) -> BooleanType: ...
-    @property
-    def Initializers(self) -> ReadOnlyCollection[ElementInit]: ...
-    @property
-    def NewExpression(self) -> NewExpression: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def CanReduce(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Initializers(self) -> ReadOnlyCollection[ElementInit]:
+        """
 
-    def Reduce(self) -> Expression: ...
+        :return:
+        """
+    @property
+    def NewExpression(self) -> NewExpression:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def Update(
         self, newExpression: NewExpression, initializers: IEnumerable[ElementInit]
-    ) -> ListInitExpression: ...
-    def get_CanReduce(self) -> BooleanType: ...
-    def get_Initializers(self) -> ReadOnlyCollection[ElementInit]: ...
-    def get_NewExpression(self) -> NewExpression: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
+    ) -> ListInitExpression:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param newExpression:
+        :param initializers:
+        :return:
+        """
 
 class LogicalBinaryExpression(BinaryExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def Conversion(self) -> LambdaExpression:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsLifted(self) -> bool:
+        """
 
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def IsLiftedToNull(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Left(self) -> Expression:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Right(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, left: Expression, conversion: LambdaExpression, right: Expression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param conversion:
+        :param right:
+        :return:
+        """
 
 class LoopExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Body(self) -> Expression: ...
-    @property
-    def BreakLabel(self) -> LabelTarget: ...
-    @property
-    def ContinueLabel(self) -> LabelTarget: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def Body(self) -> Expression:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def BreakLabel(self) -> LabelTarget:
+        """
 
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def ContinueLabel(self) -> LabelTarget:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def Update(
         self, breakLabel: LabelTarget, continueLabel: LabelTarget, body: Expression
-    ) -> LoopExpression: ...
-    def get_Body(self) -> Expression: ...
-    def get_BreakLabel(self) -> LabelTarget: ...
-    def get_ContinueLabel(self) -> LabelTarget: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
+    ) -> LoopExpression:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param breakLabel:
+        :param continueLabel:
+        :param body:
+        :return:
+        """
 
 class MemberAssignment(MemberBinding):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Expression(self) -> Expression: ...
+    def BindingType(self) -> MemberBindingType:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Expression(self) -> Expression:
+        """
 
-    def Update(self, expression: Expression) -> MemberAssignment: ...
-    def get_Expression(self) -> Expression: ...
+        :return:
+        """
+    @property
+    def Member(self) -> MemberInfo:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Update(self, expression: Expression) -> MemberAssignment:
+        """
 
-class MemberBinding(ABC, ObjectType):
-    # No Fields
+        :param expression:
+        :return:
+        """
 
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class MemberBinding(ABC, Object):
+    """"""
 
     @property
-    def BindingType(self) -> MemberBindingType: ...
+    def BindingType(self) -> MemberBindingType:
+        """
+
+        :return:
+        """
     @property
-    def Member(self) -> MemberInfo: ...
+    def Member(self) -> MemberInfo:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_BindingType(self) -> MemberBindingType: ...
-    def get_Member(self) -> MemberInfo: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class MemberBindingType(Enum):
+    """"""
 
-    # No Sub Enums
+    Assignment: MemberBindingType = ...
+    """"""
+    MemberBinding: MemberBindingType = ...
+    """"""
+    ListBinding: MemberBindingType = ...
+    """"""
 
 class MemberExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Expression(self) -> Expression: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Member(self) -> MemberInfo: ...
+    def Expression(self) -> Expression:
+        """
+
+        :return:
+        """
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def Member(self) -> MemberInfo:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    def Update(self, expression: Expression) -> MemberExpression: ...
-    def get_Expression(self) -> Expression: ...
-    def get_Member(self) -> MemberInfo: ...
-    def get_NodeType(self) -> ExpressionType: ...
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, expression: Expression) -> MemberExpression:
+        """
+
+        :param expression:
+        :return:
+        """
 
 class MemberInitExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Bindings(self) -> ReadOnlyCollection[MemberBinding]: ...
-    @property
-    def CanReduce(self) -> BooleanType: ...
-    @property
-    def NewExpression(self) -> NewExpression: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def Bindings(self) -> ReadOnlyCollection[MemberBinding]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    def Reduce(self) -> Expression: ...
+        :return:
+        """
+    @property
+    def NewExpression(self) -> NewExpression:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def Update(
         self, newExpression: NewExpression, bindings: IEnumerable[MemberBinding]
-    ) -> MemberInitExpression: ...
-    def get_Bindings(self) -> ReadOnlyCollection[MemberBinding]: ...
-    def get_CanReduce(self) -> BooleanType: ...
-    def get_NewExpression(self) -> NewExpression: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
+    ) -> MemberInitExpression:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param newExpression:
+        :param bindings:
+        :return:
+        """
 
 class MemberListBinding(MemberBinding):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Initializers(self) -> ReadOnlyCollection[ElementInit]: ...
+    def BindingType(self) -> MemberBindingType:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Initializers(self) -> ReadOnlyCollection[ElementInit]:
+        """
 
-    def Update(self, initializers: IEnumerable[ElementInit]) -> MemberListBinding: ...
-    def get_Initializers(self) -> ReadOnlyCollection[ElementInit]: ...
+        :return:
+        """
+    @property
+    def Member(self) -> MemberInfo:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Update(self, initializers: IEnumerable[ElementInit]) -> MemberListBinding:
+        """
+
+        :param initializers:
+        :return:
+        """
 
 class MemberMemberBinding(MemberBinding):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Bindings(self) -> ReadOnlyCollection[MemberBinding]: ...
+    def BindingType(self) -> MemberBindingType:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Bindings(self) -> ReadOnlyCollection[MemberBinding]:
+        """
 
-    def Update(self, bindings: IEnumerable[MemberBinding]) -> MemberMemberBinding: ...
-    def get_Bindings(self) -> ReadOnlyCollection[MemberBinding]: ...
+        :return:
+        """
+    @property
+    def Member(self) -> MemberInfo:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Update(self, bindings: IEnumerable[MemberBinding]) -> MemberMemberBinding:
+        """
+
+        :param bindings:
+        :return:
+        """
 
 class MethodBinaryExpression(SimpleBinaryExpression):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Conversion(self) -> LambdaExpression:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsLifted(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def IsLiftedToNull(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Left(self) -> Expression:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Right(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, left: Expression, conversion: LambdaExpression, right: Expression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param conversion:
+        :param right:
+        :return:
+        """
 
 class MethodCallExpression(Expression, IArgumentProvider):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Arguments(self) -> ReadOnlyCollection[Expression]: ...
-    @property
-    def Method(self) -> MethodInfo: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Object(self) -> Expression: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def ArgumentCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def Update(
         self, object: Expression, arguments: IEnumerable[Expression]
-    ) -> MethodCallExpression: ...
-    def get_Arguments(self) -> ReadOnlyCollection[Expression]: ...
-    def get_Method(self) -> MethodInfo: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Object(self) -> Expression: ...
-    def get_Type(self) -> TypeType: ...
+    ) -> MethodCallExpression:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param object:
+        :param arguments:
+        :return:
+        """
 
 class MethodCallExpression1(MethodCallExpression, IArgumentProvider):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, method: MethodInfo, arg0: Expression):
+        """
 
-    def __init__(self, method: MethodInfo, arg0: Expression): ...
+        :param method:
+        :param arg0:
+        """
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, object: Expression, arguments: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param object:
+        :param arguments:
+        :return:
+        """
 
 class MethodCallExpression2(MethodCallExpression, IArgumentProvider):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, method: MethodInfo, arg0: Expression, arg1: Expression):
+        """
 
-    def __init__(self, method: MethodInfo, arg0: Expression, arg1: Expression): ...
+        :param method:
+        :param arg0:
+        :param arg1:
+        """
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, object: Expression, arguments: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param object:
+        :param arguments:
+        :return:
+        """
 
 class MethodCallExpression3(MethodCallExpression, IArgumentProvider):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, method: MethodInfo, arg0: Expression, arg1: Expression, arg2: Expression):
+        """
 
-    def __init__(
-        self, method: MethodInfo, arg0: Expression, arg1: Expression, arg2: Expression
-    ): ...
+        :param method:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        """
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, object: Expression, arguments: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param object:
+        :param arguments:
+        :return:
+        """
 
 class MethodCallExpression4(MethodCallExpression, IArgumentProvider):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     def __init__(
         self,
@@ -3135,26 +8688,111 @@ class MethodCallExpression4(MethodCallExpression, IArgumentProvider):
         arg1: Expression,
         arg2: Expression,
         arg3: Expression,
-    ): ...
+    ):
+        """
 
-    # No Properties
+        :param method:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        """
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, object: Expression, arguments: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param object:
+        :param arguments:
+        :return:
+        """
 
 class MethodCallExpression5(MethodCallExpression, IArgumentProvider):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     def __init__(
         self,
@@ -3164,1350 +8802,3283 @@ class MethodCallExpression5(MethodCallExpression, IArgumentProvider):
         arg2: Expression,
         arg3: Expression,
         arg4: Expression,
-    ): ...
+    ):
+        """
 
-    # No Properties
+        :param method:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        :param arg4:
+        """
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, object: Expression, arguments: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param object:
+        :param arguments:
+        :return:
+        """
 
 class MethodCallExpressionN(MethodCallExpression, IArgumentProvider):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, method: MethodInfo, args: IList[Expression]): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NewArrayBoundsExpression(NewArrayExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def NodeType(self) -> ExpressionType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_NodeType(self) -> ExpressionType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NewArrayExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Expressions(self) -> ReadOnlyCollection[Expression]: ...
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def Update(self, expressions: IEnumerable[Expression]) -> NewArrayExpression: ...
-    def get_Expressions(self) -> ReadOnlyCollection[Expression]: ...
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NewArrayInitExpression(NewArrayExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def NodeType(self) -> ExpressionType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_NodeType(self) -> ExpressionType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NewExpression(Expression, IArgumentProvider):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Arguments(self) -> ReadOnlyCollection[Expression]: ...
-    @property
-    def Constructor(self) -> ConstructorInfo: ...
-    @property
-    def Members(self) -> ReadOnlyCollection[MemberInfo]: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def Update(self, arguments: IEnumerable[Expression]) -> NewExpression: ...
-    def get_Arguments(self) -> ReadOnlyCollection[Expression]: ...
-    def get_Constructor(self) -> ConstructorInfo: ...
-    def get_Members(self) -> ReadOnlyCollection[MemberInfo]: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NewValueTypeExpression(NewExpression, IArgumentProvider):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class OldExpressionVisitor(ABC, ObjectType):
     """"""
 
-    # No Fields
+    def __init__(self, method: MethodInfo, args: IList[Expression]):
+        """
 
-    # No Constructors
+        :param method:
+        :param args:
+        """
+    @property
+    def ArgumentCount(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Object(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, object: Expression, arguments: IEnumerable[Expression]
+    ) -> MethodCallExpression:
+        """
+
+        :param object:
+        :param arguments:
+        :return:
+        """
+
+class NewArrayBoundsExpression(NewArrayExpression):
+    """"""
+
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, expressions: IEnumerable[Expression]) -> NewArrayExpression:
+        """
+
+        :param expressions:
+        :return:
+        """
+
+class NewArrayExpression(Expression):
+    """"""
+
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, expressions: IEnumerable[Expression]) -> NewArrayExpression:
+        """
+
+        :param expressions:
+        :return:
+        """
+
+class NewArrayInitExpression(NewArrayExpression):
+    """"""
+
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, expressions: IEnumerable[Expression]) -> NewArrayExpression:
+        """
+
+        :param expressions:
+        :return:
+        """
+
+class NewExpression(Expression, IArgumentProvider):
+    """"""
+
+    @property
+    def ArgumentCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
+
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Constructor(self) -> ConstructorInfo:
+        """
+
+        :return:
+        """
+    @property
+    def Members(self) -> ReadOnlyCollection[MemberInfo]:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> NewExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class NewValueTypeExpression(NewExpression, IArgumentProvider):
+    """"""
+
+    @property
+    def ArgumentCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
+
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Constructor(self) -> ConstructorInfo:
+        """
+
+        :return:
+        """
+    @property
+    def Members(self) -> ReadOnlyCollection[MemberInfo]:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> NewExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class OldExpressionVisitor(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class OpAssignMethodConversionBinaryExpression(MethodBinaryExpression):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Conversion(self) -> LambdaExpression:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsLifted(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def IsLiftedToNull(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Left(self) -> Expression:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Right(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, left: Expression, conversion: LambdaExpression, right: Expression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param conversion:
+        :param right:
+        :return:
+        """
 
 class ParameterExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsByRef(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_IsByRef(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PrimitiveParameterExpression(Generic[T], ParameterExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PropertyExpression(MemberExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, expression: Expression, member: PropertyInfo): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReadOnlyCollectionExtensions(ABC, ObjectType):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsByRef(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PrimitiveParameterExpression(Generic[T], ParameterExpression):
+    """"""
+
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsByRef(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PropertyExpression(MemberExpression):
+    """"""
+
+    def __init__(self, expression: Expression, member: PropertyInfo):
+        """
+
+        :param expression:
+        :param member:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Expression(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Member(self) -> MemberInfo:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, expression: Expression) -> MemberExpression:
+        """
+
+        :param expression:
+        :return:
+        """
+
+class ReadOnlyCollectionExtensions(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class RuntimeVariablesExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
     @property
-    def Variables(self) -> ReadOnlyCollection[ParameterExpression]: ...
+    def Type(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
-
-    def Update(self, variables: IEnumerable[ParameterExpression]) -> RuntimeVariablesExpression: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
-    def get_Variables(self) -> ReadOnlyCollection[ParameterExpression]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SR(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+        :return:
+        """
     @property
-    def Resources() -> ResourceManager: ...
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @staticmethod
-    def GetObject(name: StringType) -> ObjectType: ...
-    @staticmethod
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, variables: IEnumerable[ParameterExpression]) -> RuntimeVariablesExpression:
+        """
+
+        :param variables:
+        :return:
+        """
+
+class SR(Object):
+    """"""
+
+    @classmethod
+    @property
+    def Resources(cls) -> ResourceManager:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetObject(cls, name: str) -> object:
+        """
+
+        :param name:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetString(name: StringType) -> StringType: ...
-    @staticmethod
+    def GetString(cls, name: str) -> str:
+        """
+
+        :param name:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetString(
-        name: StringType, usedFallback: BooleanType
-    ) -> Tuple[StringType, BooleanType]: ...
-    @staticmethod
+    def GetString(cls, name: str, usedFallback: bool) -> Tuple[str, bool]:
+        """
+
+        :param name:
+        :param usedFallback:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetString(name: StringType, args: ArrayType[ObjectType]) -> StringType: ...
-    @staticmethod
-    def get_Resources() -> ResourceManager: ...
+    def GetString(cls, name: str, args: Array[object]) -> str:
+        """
 
-    # No Events
+        :param name:
+        :param args:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class SRCategoryAttribute(CategoryAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, category: str):
+        """
 
-    def __init__(self, category: StringType): ...
+        :param category:
+        """
+    @classmethod
+    @property
+    def Action(cls) -> CategoryAttribute:
+        """
 
-    # No Properties
+        :return:
+        """
+    @classmethod
+    @property
+    def Appearance(cls) -> CategoryAttribute:
+        """
 
-    # No Methods
+        :return:
+        """
+    @classmethod
+    @property
+    def Asynchronous(cls) -> CategoryAttribute:
+        """
 
-    # No Events
+        :return:
+        """
+    @classmethod
+    @property
+    def Behavior(cls) -> CategoryAttribute:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Category(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @classmethod
+    @property
+    def Data(cls) -> CategoryAttribute:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @classmethod
+    @property
+    def Default(cls) -> CategoryAttribute:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @classmethod
+    @property
+    def Design(cls) -> CategoryAttribute:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def DragDrop(cls) -> CategoryAttribute:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Focus(cls) -> CategoryAttribute:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Format(cls) -> CategoryAttribute:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Key(cls) -> CategoryAttribute:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Layout(cls) -> CategoryAttribute:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Mouse(cls) -> CategoryAttribute:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def WindowStyle(cls) -> CategoryAttribute:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SRDescriptionAttribute(DescriptionAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, description: str):
+        """
 
-    def __init__(self, description: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param description:
+        """
     @property
-    def Description(self) -> StringType: ...
+    def Description(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
 
-    def get_Description(self) -> StringType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Structs
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Enums
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class Scope1(ScopeExpression):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
 
 class ScopeExpression(BlockExpression):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
 
 class ScopeN(ScopeExpression):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
 
 class ScopeWithType(ScopeN):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Set(Generic[T], ObjectType, ICollection[T], IEnumerable[T], IEnumerable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Count(self) -> IntType: ...
-    @property
-    def IsReadOnly(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, item: T) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Contains(self, item: T) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[T], arrayIndex: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[T]: ...
-    def Remove(self, item: T) -> BooleanType: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SimpleBinaryExpression(BinaryExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SpanDebugInfoExpression(DebugInfoExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def EndColumn(self) -> IntType: ...
-    @property
-    def EndLine(self) -> IntType: ...
-    @property
-    def IsClear(self) -> BooleanType: ...
-    @property
-    def StartColumn(self) -> IntType: ...
-    @property
-    def StartLine(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_EndColumn(self) -> IntType: ...
-    def get_EndLine(self) -> IntType: ...
-    def get_IsClear(self) -> BooleanType: ...
-    def get_StartColumn(self) -> IntType: ...
-    def get_StartLine(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StackGuard(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def RunOnEmptyStack(self, action: Action[T1, T2], arg1: T1, arg2: T2) -> VoidType: ...
-    @overload
-    def RunOnEmptyStack(
-        self, action: Action[T1, T2, T3], arg1: T1, arg2: T2, arg3: T3
-    ) -> VoidType: ...
-    @overload
-    def RunOnEmptyStack(self, action: Func[T1, T2, R], arg1: T1, arg2: T2) -> R: ...
-    @overload
-    def RunOnEmptyStack(self, action: Func[T1, T2, T3, R], arg1: T1, arg2: T2, arg3: T3) -> R: ...
-    def TryEnterOnCurrentStack(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Strings(ABC, ObjectType):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class SwitchCase(ObjectType):
-    # No Fields
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
+
+class Set(Generic[T], Object, ICollection[T], IEnumerable[T], IEnumerable):
+    """"""
 
     @property
-    def Body(self) -> Expression: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def TestValues(self) -> ReadOnlyCollection[Expression]: ...
+    def IsReadOnly(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Add(self, item: T) -> None:
+        """
 
-    def ToString(self) -> StringType: ...
-    def Update(self, testValues: IEnumerable[Expression], body: Expression) -> SwitchCase: ...
-    def get_Body(self) -> Expression: ...
-    def get_TestValues(self) -> ReadOnlyCollection[Expression]: ...
+        :param item:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: T) -> bool:
+        """
 
-    # No Events
+        :param item:
+        :return:
+        """
+    def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Remove(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: T) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+
+class SimpleBinaryExpression(BinaryExpression):
+    """"""
+
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Conversion(self) -> LambdaExpression:
+        """
+
+        :return:
+        """
+    @property
+    def IsLifted(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsLiftedToNull(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Left(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Method(self) -> MethodInfo:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Right(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, left: Expression, conversion: LambdaExpression, right: Expression
+    ) -> BinaryExpression:
+        """
+
+        :param left:
+        :param conversion:
+        :param right:
+        :return:
+        """
+
+class SpanDebugInfoExpression(DebugInfoExpression):
+    """"""
+
+    @property
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Document(self) -> SymbolDocumentInfo:
+        """
+
+        :return:
+        """
+    @property
+    def EndColumn(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def EndLine(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsClear(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def StartColumn(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def StartLine(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StackGuard(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def RunOnEmptyStack(self, action: Action[T1, T2], arg1: T1, arg2: T2) -> None:
+        """
+
+        :param action:
+        :param arg1:
+        :param arg2:
+        """
+    @overload
+    def RunOnEmptyStack(self, action: Func[T1, T2, R], arg1: T1, arg2: T2) -> R:
+        """
+
+        :param action:
+        :param arg1:
+        :param arg2:
+        :return:
+        """
+    @overload
+    def RunOnEmptyStack(self, action: Action[T1, T2, T3], arg1: T1, arg2: T2, arg3: T3) -> None:
+        """
+
+        :param action:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        """
+    @overload
+    def RunOnEmptyStack(self, action: Func[T1, T2, T3, R], arg1: T1, arg2: T2, arg3: T3) -> R:
+        """
+
+        :param action:
+        :param arg1:
+        :param arg2:
+        :param arg3:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryEnterOnCurrentStack(self) -> bool:
+        """
+
+        :return:
+        """
+
+class Strings(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SwitchCase(Object):
+    """"""
+
+    @property
+    def Body(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def TestValues(self) -> ReadOnlyCollection[Expression]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, testValues: IEnumerable[Expression], body: Expression) -> SwitchCase:
+        """
+
+        :param testValues:
+        :param body:
+        :return:
+        """
 
 class SwitchExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Cases(self) -> ReadOnlyCollection[SwitchCase]: ...
-    @property
-    def Comparison(self) -> MethodInfo: ...
-    @property
-    def DefaultBody(self) -> Expression: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def SwitchValue(self) -> Expression: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def CanReduce(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Cases(self) -> ReadOnlyCollection[SwitchCase]:
+        """
 
+        :return:
+        """
+    @property
+    def Comparison(self) -> MethodInfo:
+        """
+
+        :return:
+        """
+    @property
+    def DefaultBody(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def SwitchValue(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def Update(
         self, switchValue: Expression, cases: IEnumerable[SwitchCase], defaultBody: Expression
-    ) -> SwitchExpression: ...
-    def get_Cases(self) -> ReadOnlyCollection[SwitchCase]: ...
-    def get_Comparison(self) -> MethodInfo: ...
-    def get_DefaultBody(self) -> Expression: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_SwitchValue(self) -> Expression: ...
-    def get_Type(self) -> TypeType: ...
+    ) -> SwitchExpression:
+        """
 
-    # No Events
+        :param switchValue:
+        :param cases:
+        :param defaultBody:
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SymbolDocumentInfo(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class SymbolDocumentInfo(Object):
+    """"""
 
     @property
-    def DocumentType(self) -> Guid: ...
+    def DocumentType(self) -> Guid:
+        """
+
+        :return:
+        """
     @property
-    def FileName(self) -> StringType: ...
+    def FileName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Language(self) -> Guid: ...
+    def Language(self) -> Guid:
+        """
+
+        :return:
+        """
     @property
-    def LanguageVendor(self) -> Guid: ...
+    def LanguageVendor(self) -> Guid:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_DocumentType(self) -> Guid: ...
-    def get_FileName(self) -> StringType: ...
-    def get_Language(self) -> Guid: ...
-    def get_LanguageVendor(self) -> Guid: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class SymbolDocumentWithGuids(SymbolDocumentInfo):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def DocumentType(self) -> Guid: ...
+    def DocumentType(self) -> Guid:
+        """
+
+        :return:
+        """
     @property
-    def Language(self) -> Guid: ...
+    def FileName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def LanguageVendor(self) -> Guid: ...
+    def Language(self) -> Guid:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def LanguageVendor(self) -> Guid:
+        """
 
-    def get_DocumentType(self) -> Guid: ...
-    def get_Language(self) -> Guid: ...
-    def get_LanguageVendor(self) -> Guid: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class TryExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Body(self) -> Expression: ...
-    @property
-    def Fault(self) -> Expression: ...
-    @property
-    def Finally(self) -> Expression: ...
-    @property
-    def Handlers(self) -> ReadOnlyCollection[CatchBlock]: ...
-    @property
-    def NodeType(self) -> ExpressionType: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def Body(self) -> Expression:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
+        :return:
+        """
+    @property
+    def Fault(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Finally(self) -> Expression:
+        """
+
+        :return:
+        """
+    @property
+    def Handlers(self) -> ReadOnlyCollection[CatchBlock]:
+        """
+
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def Update(
         self,
         body: Expression,
         handlers: IEnumerable[CatchBlock],
         _finally: Expression,
         fault: Expression,
-    ) -> TryExpression: ...
-    def get_Body(self) -> Expression: ...
-    def get_Fault(self) -> Expression: ...
-    def get_Finally(self) -> Expression: ...
-    def get_Handlers(self) -> ReadOnlyCollection[CatchBlock]: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
+    ) -> TryExpression:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param body:
+        :param handlers:
+        :param _finally:
+        :param fault:
+        :return:
+        """
 
 class TypeBinaryExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Expression(self) -> Expression: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def Expression(self) -> Expression:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
     @property
-    def TypeOperand(self) -> TypeType: ...
+    def Type(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def TypeOperand(self) -> Type:
+        """
 
-    def Update(self, expression: Expression) -> TypeBinaryExpression: ...
-    def get_Expression(self) -> Expression: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Type(self) -> TypeType: ...
-    def get_TypeOperand(self) -> TypeType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, expression: Expression) -> TypeBinaryExpression:
+        """
+
+        :param expression:
+        :return:
+        """
 
 class TypedConstantExpression(ConstantExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Type(self) -> TypeType: ...
+    def CanReduce(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Value(self) -> object:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-class TypedDynamicExpression1(DynamicExpression1, IDynamicExpression, IArgumentProvider):
-    # No Fields
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TypedDynamicExpression1(DynamicExpression1, IArgumentProvider, IDynamicExpression):
+    """"""
 
     @property
-    def Type(self) -> TypeType: ...
+    def ArgumentCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
 
-class TypedDynamicExpression2(DynamicExpression2, IDynamicExpression, IArgumentProvider):
-    # No Fields
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
 
-    # ---------- Properties ---------- #
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class TypedDynamicExpression2(DynamicExpression2, IArgumentProvider, IDynamicExpression):
+    """"""
 
     @property
-    def Type(self) -> TypeType: ...
+    def ArgumentCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
 
-class TypedDynamicExpression3(DynamicExpression3, IDynamicExpression, IArgumentProvider):
-    # No Fields
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
 
-    # ---------- Properties ---------- #
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class TypedDynamicExpression3(DynamicExpression3, IArgumentProvider, IDynamicExpression):
+    """"""
 
     @property
-    def Type(self) -> TypeType: ...
+    def ArgumentCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
 
-class TypedDynamicExpression4(DynamicExpression4, IDynamicExpression, IArgumentProvider):
-    # No Fields
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
 
-    # ---------- Properties ---------- #
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class TypedDynamicExpression4(DynamicExpression4, IArgumentProvider, IDynamicExpression):
+    """"""
 
     @property
-    def Type(self) -> TypeType: ...
+    def ArgumentCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
 
-class TypedDynamicExpressionN(DynamicExpressionN, IDynamicExpression, IArgumentProvider):
-    # No Fields
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
 
-    # ---------- Properties ---------- #
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
+
+class TypedDynamicExpressionN(DynamicExpressionN, IArgumentProvider, IDynamicExpression):
+    """"""
 
     @property
-    def Type(self) -> TypeType: ...
+    def ArgumentCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Arguments(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def Binder(self) -> CallSiteBinder:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def DelegateType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def CreateCallSite(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArgument(self, index: int) -> Expression:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def Rewrite(self, args: Array[Expression]) -> Expression:
+        """
+
+        :param args:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(self, arguments: IEnumerable[Expression]) -> DynamicExpression:
+        """
+
+        :param arguments:
+        :return:
+        """
 
 class TypedParameterExpression(ParameterExpression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Type(self) -> TypeType: ...
+    def CanReduce(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsByRef(self) -> bool:
+        """
 
-    def get_Type(self) -> TypeType: ...
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class UnaryExpression(Expression):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def CanReduce(self) -> BooleanType: ...
+    def CanReduce(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsLifted(self) -> BooleanType: ...
+    def IsLifted(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsLiftedToNull(self) -> BooleanType: ...
+    def IsLiftedToNull(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Method(self) -> MethodInfo: ...
+    def Method(self) -> MethodInfo:
+        """
+
+        :return:
+        """
     @property
-    def NodeType(self) -> ExpressionType: ...
+    def NodeType(self) -> ExpressionType:
+        """
+
+        :return:
+        """
     @property
-    def Operand(self) -> Expression: ...
+    def Operand(self) -> Expression:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> TypeType: ...
+    def Type(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Reduce(self) -> Expression: ...
-    def Update(self, operand: Expression) -> UnaryExpression: ...
-    def get_CanReduce(self) -> BooleanType: ...
-    def get_IsLifted(self) -> BooleanType: ...
-    def get_IsLiftedToNull(self) -> BooleanType: ...
-    def get_Method(self) -> MethodInfo: ...
-    def get_NodeType(self) -> ExpressionType: ...
-    def get_Operand(self) -> Expression: ...
-    def get_Type(self) -> TypeType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-# No Structs
+        :return:
+        """
+    def Update(self, operand: Expression) -> UnaryExpression:
+        """
 
-# ---------- Interfaces ---------- #
-
-class IArgumentProvider(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def ArgumentCount(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetArgument(self, index: IntType) -> Expression: ...
-    def get_ArgumentCount(self) -> IntType: ...
-
-    # No Events
-
-class IDynamicExpression(Protocol, IArgumentProvider):
-    # ---------- Properties ---------- #
-
-    @property
-    def DelegateType(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def CreateCallSite(self) -> ObjectType: ...
-    def Rewrite(self, args: ArrayType[Expression]) -> Expression: ...
-    def get_DelegateType(self) -> TypeType: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class AnalyzeTypeIsResult(Enum):
-    KnownFalse = 0
-    KnownTrue = 1
-    KnownAssignable = 2
-    Unknown = 3
-
-class ExpressionType(Enum):
-    Add = 0
-    AddChecked = 1
-    And = 2
-    AndAlso = 3
-    ArrayLength = 4
-    ArrayIndex = 5
-    Call = 6
-    Coalesce = 7
-    Conditional = 8
-    Constant = 9
-    Convert = 10
-    ConvertChecked = 11
-    Divide = 12
-    Equal = 13
-    ExclusiveOr = 14
-    GreaterThan = 15
-    GreaterThanOrEqual = 16
-    Invoke = 17
-    Lambda = 18
-    LeftShift = 19
-    LessThan = 20
-    LessThanOrEqual = 21
-    ListInit = 22
-    MemberAccess = 23
-    MemberInit = 24
-    Modulo = 25
-    Multiply = 26
-    MultiplyChecked = 27
-    Negate = 28
-    UnaryPlus = 29
-    NegateChecked = 30
-    New = 31
-    NewArrayInit = 32
-    NewArrayBounds = 33
-    Not = 34
-    NotEqual = 35
-    Or = 36
-    OrElse = 37
-    Parameter = 38
-    Power = 39
-    Quote = 40
-    RightShift = 41
-    Subtract = 42
-    SubtractChecked = 43
-    TypeAs = 44
-    TypeIs = 45
-    Assign = 46
-    Block = 47
-    DebugInfo = 48
-    Decrement = 49
-    Dynamic = 50
-    Default = 51
-    Extension = 52
-    Goto = 53
-    Increment = 54
-    Index = 55
-    Label = 56
-    RuntimeVariables = 57
-    Loop = 58
-    Switch = 59
-    Throw = 60
-    Try = 61
-    Unbox = 62
-    AddAssign = 63
-    AndAssign = 64
-    DivideAssign = 65
-    ExclusiveOrAssign = 66
-    LeftShiftAssign = 67
-    ModuloAssign = 68
-    MultiplyAssign = 69
-    OrAssign = 70
-    PowerAssign = 71
-    RightShiftAssign = 72
-    SubtractAssign = 73
-    AddAssignChecked = 74
-    MultiplyAssignChecked = 75
-    SubtractAssignChecked = 76
-    PreIncrementAssign = 77
-    PreDecrementAssign = 78
-    PostIncrementAssign = 79
-    PostDecrementAssign = 80
-    TypeEqual = 81
-    OnesComplement = 82
-    IsTrue = 83
-    IsFalse = 84
-
-class GotoExpressionKind(Enum):
-    Goto = 0
-    Return = 1
-    Break = 2
-    Continue = 3
-
-class MemberBindingType(Enum):
-    Assignment = 0
-    MemberBinding = 1
-    ListBinding = 2
-
-# No Delegates
-
-__all__ = [
-    ArgumentProviderOps,
-    AssignBinaryExpression,
-    BinaryExpression,
-    Block2,
-    Block3,
-    Block4,
-    Block5,
-    BlockExpression,
-    BlockExpressionList,
-    BlockN,
-    ByRefParameterExpression,
-    CatchBlock,
-    ClearDebugInfoExpression,
-    CoalesceConversionBinaryExpression,
-    ConditionalExpression,
-    ConstantCheck,
-    ConstantExpression,
-    DebugInfoExpression,
-    DebugViewWriter,
-    DefaultExpression,
-    DynamicExpression,
-    DynamicExpression1,
-    DynamicExpression2,
-    DynamicExpression3,
-    DynamicExpression4,
-    DynamicExpressionN,
-    DynamicExpressionVisitor,
-    ElementInit,
-    Error,
-    Expression,
-    ExpressionStringBuilder,
-    ExpressionVisitor,
-    FieldExpression,
-    FullConditionalExpression,
-    FullConditionalExpressionWithType,
-    GotoExpression,
-    IndexExpression,
-    InstanceMethodCallExpression2,
-    InstanceMethodCallExpression3,
-    InstanceMethodCallExpressionN,
-    InvocationExpression,
-    LabelExpression,
-    LabelTarget,
-    LambdaExpression,
-    ListArgumentProvider,
-    ListInitExpression,
-    LogicalBinaryExpression,
-    LoopExpression,
-    MemberAssignment,
-    MemberBinding,
-    MemberExpression,
-    MemberInitExpression,
-    MemberListBinding,
-    MemberMemberBinding,
-    MethodBinaryExpression,
-    MethodCallExpression,
-    MethodCallExpression1,
-    MethodCallExpression2,
-    MethodCallExpression3,
-    MethodCallExpression4,
-    MethodCallExpression5,
-    MethodCallExpressionN,
-    NewArrayBoundsExpression,
-    NewArrayExpression,
-    NewArrayInitExpression,
-    NewExpression,
-    NewValueTypeExpression,
-    OldExpressionVisitor,
-    OpAssignMethodConversionBinaryExpression,
-    ParameterExpression,
-    PrimitiveParameterExpression,
-    PropertyExpression,
-    ReadOnlyCollectionExtensions,
-    RuntimeVariablesExpression,
-    SR,
-    SRCategoryAttribute,
-    SRDescriptionAttribute,
-    Scope1,
-    ScopeExpression,
-    ScopeN,
-    ScopeWithType,
-    Set,
-    SimpleBinaryExpression,
-    SpanDebugInfoExpression,
-    StackGuard,
-    Strings,
-    SwitchCase,
-    SwitchExpression,
-    SymbolDocumentInfo,
-    SymbolDocumentWithGuids,
-    TryExpression,
-    TypeBinaryExpression,
-    TypedConstantExpression,
-    TypedDynamicExpression1,
-    TypedDynamicExpression2,
-    TypedDynamicExpression3,
-    TypedDynamicExpression4,
-    TypedDynamicExpressionN,
-    TypedParameterExpression,
-    UnaryExpression,
-    IArgumentProvider,
-    IDynamicExpression,
-    AnalyzeTypeIsResult,
-    ExpressionType,
-    GotoExpressionKind,
-    MemberBindingType,
-]
+        :param operand:
+        :return:
+        """

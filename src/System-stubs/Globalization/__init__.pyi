@@ -1,3239 +1,9378 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
+from typing import ClassVar
+from typing import Final
 from typing import Optional
-from typing import Union
 from typing import overload
 
 from System import ArgumentException
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Char
 from System import DateTime
 from System import DayOfWeek
-from System import Double
 from System import Enum
 from System import Exception
 from System import Guid
 from System import ICloneable
 from System import IEquatable
 from System import IFormatProvider
-from System import Int32
-from System import Nullable
 from System import Object
-from System import String
 from System import StringComparer
 from System import TimeSpan
 from System import Type
-from System import UInt16
-from System import UInt32
 from System import ValueType
-from System import Void
+from System.Collections import IDictionary
 from System.Collections import IEnumerator
 from System.Reflection import Assembly
+from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Serialization import IDeserializationCallback
 from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-CharType = Union[str, Char]
-DoubleType = Union[float, Double]
-IntType = Union[int, Int32]
-NullableType = Union[Optional, Nullable]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-UIntType = Union[int, UInt32]
-UShortType = Union[int, UInt16]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class AppDomainSortingSetupInfo(ObjectType):
+class AppDomainSortingSetupInfo(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class BidiCategory(Enum):
+    """"""
 
-    # No Sub Structs
+    LeftToRight: BidiCategory = ...
+    """"""
+    LeftToRightEmbedding: BidiCategory = ...
+    """"""
+    LeftToRightOverride: BidiCategory = ...
+    """"""
+    RightToLeft: BidiCategory = ...
+    """"""
+    RightToLeftArabic: BidiCategory = ...
+    """"""
+    RightToLeftEmbedding: BidiCategory = ...
+    """"""
+    RightToLeftOverride: BidiCategory = ...
+    """"""
+    PopDirectionalFormat: BidiCategory = ...
+    """"""
+    EuropeanNumber: BidiCategory = ...
+    """"""
+    EuropeanNumberSeparator: BidiCategory = ...
+    """"""
+    EuropeanNumberTerminator: BidiCategory = ...
+    """"""
+    ArabicNumber: BidiCategory = ...
+    """"""
+    CommonNumberSeparator: BidiCategory = ...
+    """"""
+    NonSpacingMark: BidiCategory = ...
+    """"""
+    BoundaryNeutral: BidiCategory = ...
+    """"""
+    ParagraphSeparator: BidiCategory = ...
+    """"""
+    SegmentSeparator: BidiCategory = ...
+    """"""
+    Whitespace: BidiCategory = ...
+    """"""
+    OtherNeutrals: BidiCategory = ...
+    """"""
+    LeftToRightIsolate: BidiCategory = ...
+    """"""
+    RightToLeftIsolate: BidiCategory = ...
+    """"""
+    FirstStrongIsolate: BidiCategory = ...
+    """"""
+    PopDirectionIsolate: BidiCategory = ...
+    """"""
 
-    # No Sub Interfaces
+class Calendar(ABC, Object, ICloneable):
+    """"""
 
-    # No Sub Enums
-
-class Calendar(ABC, ObjectType, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
+    CurrentEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
     @property
-    def CurrentEra() -> IntType: ...
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
+        :return:
+        """
     @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
     @property
-    def Eras(self) -> ArrayType[IntType]: ...
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
     @property
-    def IsReadOnly(self) -> BooleanType: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-    @property
-    def TwoDigitYearMax(self) -> IntType: ...
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
     @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
 
-    # ---------- Methods ---------- #
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
 
-    def AddDays(self, time: DateTime, days: IntType) -> DateTime: ...
-    def AddHours(self, time: DateTime, hours: IntType) -> DateTime: ...
-    def AddMilliseconds(self, time: DateTime, milliseconds: DoubleType) -> DateTime: ...
-    def AddMinutes(self, time: DateTime, minutes: IntType) -> DateTime: ...
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddSeconds(self, time: DateTime, seconds: IntType) -> DateTime: ...
-    def AddWeeks(self, time: DateTime, weeks: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def Clone(self) -> ObjectType: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType) -> IntType: ...
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
     @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
     @overload
-    def GetDaysInYear(self, year: IntType) -> IntType: ...
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
-    def GetHour(self, time: DateTime) -> IntType: ...
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def GetLeapMonth(self, year: IntType) -> IntType: ...
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMilliseconds(self, time: DateTime) -> DoubleType: ...
-    def GetMinute(self, time: DateTime) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def GetMonthsInYear(self, year: IntType) -> IntType: ...
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetSecond(self, time: DateTime) -> IntType: ...
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     def GetWeekOfYear(
         self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
-    ) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def IsLeapDay(self, year: IntType, month: IntType, day: IntType) -> BooleanType: ...
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
     @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
     @overload
-    def IsLeapMonth(self, year: IntType, month: IntType) -> BooleanType: ...
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
     @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
     @overload
-    def IsLeapYear(self, year: IntType) -> BooleanType: ...
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
-    @staticmethod
-    def ReadOnly(calendar: Calendar) -> Calendar: ...
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @classmethod
+    def ReadOnly(cls, calendar: Calendar) -> Calendar:
+        """
+
+        :param calendar:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
     @overload
     def ToDateTime(
         self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-    ) -> DateTime: ...
-    @overload
-    def ToDateTime(
-        self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
 
-    # No Events
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
 
-    # No Sub Classes
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CalendarData(ObjectType):
+class CalendarAlgorithmType(Enum):
     """"""
 
-    # No Fields
+    Unknown: CalendarAlgorithmType = ...
+    """"""
+    SolarCalendar: CalendarAlgorithmType = ...
+    """"""
+    LunarCalendar: CalendarAlgorithmType = ...
+    """"""
+    LunisolarCalendar: CalendarAlgorithmType = ...
+    """"""
 
-    # No Constructors
+class CalendarData(Object):
+    """"""
 
-    # No Properties
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class CalendarId(Enum):
+    """"""
 
-    # No Sub Enums
+    GREGORIAN: CalendarId = ...
+    """"""
+    GREGORIAN_US: CalendarId = ...
+    """"""
+    JAPAN: CalendarId = ...
+    """"""
+    TAIWAN: CalendarId = ...
+    """"""
+    KOREA: CalendarId = ...
+    """"""
+    HIJRI: CalendarId = ...
+    """"""
+    THAI: CalendarId = ...
+    """"""
+    HEBREW: CalendarId = ...
+    """"""
+    GREGORIAN_ME_FRENCH: CalendarId = ...
+    """"""
+    GREGORIAN_ARABIC: CalendarId = ...
+    """"""
+    GREGORIAN_XLIT_ENGLISH: CalendarId = ...
+    """"""
+    GREGORIAN_XLIT_FRENCH: CalendarId = ...
+    """"""
+    JULIAN: CalendarId = ...
+    """"""
+    JAPANESELUNISOLAR: CalendarId = ...
+    """"""
+    CHINESELUNISOLAR: CalendarId = ...
+    """"""
+    SAKA: CalendarId = ...
+    """"""
+    LUNAR_ETO_CHN: CalendarId = ...
+    """"""
+    LUNAR_ETO_KOR: CalendarId = ...
+    """"""
+    LUNAR_ETO_ROKUYOU: CalendarId = ...
+    """"""
+    KOREANLUNISOLAR: CalendarId = ...
+    """"""
+    TAIWANLUNISOLAR: CalendarId = ...
+    """"""
+    PERSIAN: CalendarId = ...
+    """"""
+    UMALQURA: CalendarId = ...
+    """"""
+    LAST_CALENDAR: CalendarId = ...
+    """"""
 
-class CalendricalCalculationsHelper(ObjectType):
-    # No Fields
+class CalendarWeekRule(Enum):
+    """"""
 
-    # ---------- Constructors ---------- #
+    FirstDay: CalendarWeekRule = ...
+    """"""
+    FirstFullWeek: CalendarWeekRule = ...
+    """"""
+    FirstFourDayWeek: CalendarWeekRule = ...
+    """"""
 
-    def __init__(self): ...
+class CalendricalCalculationsHelper(Object):
+    """"""
 
-    # No Properties
+    def __init__(self):
+        """"""
+    @classmethod
+    def Angle(cls, degrees: int, minutes: int, seconds: float) -> float:
+        """
 
-    # ---------- Methods ---------- #
+        :param degrees:
+        :param minutes:
+        :param seconds:
+        :return:
+        """
+    @classmethod
+    def AsDayFraction(cls, longitude: float) -> float:
+        """
 
-    @staticmethod
-    def Angle(degrees: IntType, minutes: IntType, seconds: DoubleType) -> DoubleType: ...
-    @staticmethod
-    def AsDayFraction(longitude: DoubleType) -> DoubleType: ...
-    @staticmethod
-    def AsSeason(longitude: DoubleType) -> DoubleType: ...
-    @staticmethod
-    def Compute(time: DoubleType) -> DoubleType: ...
-    @staticmethod
-    def JulianCenturies(moment: DoubleType) -> DoubleType: ...
-    @staticmethod
-    def Midday(date: DoubleType, longitude: DoubleType) -> DoubleType: ...
-    @staticmethod
-    def MiddayAtPersianObservationSite(date: DoubleType) -> DoubleType: ...
+        :param longitude:
+        :return:
+        """
+    @classmethod
+    def AsSeason(cls, longitude: float) -> float:
+        """
 
-    # No Events
+        :param longitude:
+        :return:
+        """
+    @classmethod
+    def Compute(cls, time: float) -> float:
+        """
 
-    # No Sub Classes
+        :param time:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @classmethod
+    def JulianCenturies(cls, moment: float) -> float:
+        """
 
-class CharUnicodeInfo(ABC, ObjectType):
-    # No Fields
+        :param moment:
+        :return:
+        """
+    @classmethod
+    def Midday(cls, date: float, longitude: float) -> float:
+        """
 
-    # No Constructors
+        :param date:
+        :param longitude:
+        :return:
+        """
+    @classmethod
+    def MiddayAtPersianObservationSite(cls, date: float) -> float:
+        """
 
-    # No Properties
+        :param date:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
 
-    @staticmethod
+class CharUnicodeInfo(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetDecimalDigitValue(ch: CharType) -> IntType: ...
-    @staticmethod
-    @overload
-    def GetDecimalDigitValue(s: StringType, index: IntType) -> IntType: ...
-    @staticmethod
-    @overload
-    def GetDigitValue(ch: CharType) -> IntType: ...
-    @staticmethod
-    @overload
-    def GetDigitValue(s: StringType, index: IntType) -> IntType: ...
-    @staticmethod
-    @overload
-    def GetNumericValue(ch: CharType) -> DoubleType: ...
-    @staticmethod
-    @overload
-    def GetNumericValue(s: StringType, index: IntType) -> DoubleType: ...
-    @staticmethod
-    @overload
-    def GetUnicodeCategory(ch: CharType) -> UnicodeCategory: ...
-    @staticmethod
-    @overload
-    def GetUnicodeCategory(s: StringType, index: IntType) -> UnicodeCategory: ...
+    def GetDecimalDigitValue(cls, ch: Char) -> int:
+        """
 
-    # No Events
+        :param ch:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetDecimalDigitValue(cls, s: str, index: int) -> int:
+        """
 
-    # No Sub Classes
+        :param s:
+        :param index:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetDigitValue(cls, ch: Char) -> int:
+        """
 
-    # No Sub Structs
+        :param ch:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetDigitValue(cls, s: str, index: int) -> int:
+        """
 
-    # No Sub Interfaces
+        :param s:
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetNumericValue(cls, ch: Char) -> float:
+        """
+
+        :param ch:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetNumericValue(cls, s: str, index: int) -> float:
+        """
+
+        :param s:
+        :param index:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetUnicodeCategory(cls, ch: Char) -> UnicodeCategory:
+        """
+
+        :param ch:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetUnicodeCategory(cls, s: str, index: int) -> UnicodeCategory:
+        """
+
+        :param s:
+        :param index:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ChineseLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
-    # ---------- Fields ---------- #
+    """"""
 
-    @staticmethod
+    ChineseEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
     @property
-    def ChineseEra() -> IntType: ...
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetCelestialStem(self, sexagenaryYear: int) -> int:
+        """
+
+        :param sexagenaryYear:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetSexagenaryYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetTerrestrialBranch(self, sexagenaryYear: int) -> int:
+        """
+
+        :param sexagenaryYear:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodePageDataItem(Object):
+    """"""
 
     @property
-    def Eras(self) -> ArrayType[IntType]: ...
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
+    def Flags(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def MinSupportedDateTime(self) -> DateTime: ...
+    def HeaderName(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    def GetEra(self, time: DateTime) -> IntType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodePageDataItem(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
     @property
-    def BodyName(self) -> StringType: ...
+    def UIFamilyCodePage(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Flags(self) -> UIntType: ...
-    @property
-    def HeaderName(self) -> StringType: ...
-    @property
-    def UIFamilyCodePage(self) -> IntType: ...
-    @property
-    def WebName(self) -> StringType: ...
+    def WebName(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_BodyName(self) -> StringType: ...
-    def get_Flags(self) -> UIntType: ...
-    def get_HeaderName(self) -> StringType: ...
-    def get_UIFamilyCodePage(self) -> IntType: ...
-    def get_WebName(self) -> StringType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CompareInfo(ObjectType, IDeserializationCallback):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class CompareInfo(Object, IDeserializationCallback):
+    """"""
 
     @property
-    def LCID(self) -> IntType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def Version(self) -> SortVersion: ...
+    def LCID(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
+        :return:
+        """
+    @property
+    def Version(self) -> SortVersion:
+        """
+
+        :return:
+        """
+    @overload
+    def Compare(self, string1: str, string2: str) -> int:
+        """
+
+        :param string1:
+        :param string2:
+        :return:
+        """
+    @overload
+    def Compare(self, string1: str, string2: str, options: CompareOptions) -> int:
+        """
+
+        :param string1:
+        :param string2:
+        :param options:
+        :return:
+        """
+    @overload
+    def Compare(self, string1: str, offset1: int, string2: str, offset2: int) -> int:
+        """
+
+        :param string1:
+        :param offset1:
+        :param string2:
+        :param offset2:
+        :return:
+        """
     @overload
     def Compare(
-        self, string1: StringType, string2: StringType, options: CompareOptions
-    ) -> IntType: ...
+        self, string1: str, offset1: int, string2: str, offset2: int, options: CompareOptions
+    ) -> int:
+        """
+
+        :param string1:
+        :param offset1:
+        :param string2:
+        :param offset2:
+        :param options:
+        :return:
+        """
+    @overload
+    def Compare(
+        self, string1: str, offset1: int, length1: int, string2: str, offset2: int, length2: int
+    ) -> int:
+        """
+
+        :param string1:
+        :param offset1:
+        :param length1:
+        :param string2:
+        :param offset2:
+        :param length2:
+        :return:
+        """
     @overload
     def Compare(
         self,
-        string1: StringType,
-        offset1: IntType,
-        length1: IntType,
-        string2: StringType,
-        offset2: IntType,
-        length2: IntType,
+        string1: str,
+        offset1: int,
+        length1: int,
+        string2: str,
+        offset2: int,
+        length2: int,
         options: CompareOptions,
-    ) -> IntType: ...
+    ) -> int:
+        """
+
+        :param string1:
+        :param offset1:
+        :param length1:
+        :param string2:
+        :param offset2:
+        :param length2:
+        :param options:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
     @overload
-    def Compare(self, string1: StringType, string2: StringType) -> IntType: ...
+    def GetCompareInfo(cls, culture: int) -> CompareInfo:
+        """
+
+        :param culture:
+        :return:
+        """
+    @classmethod
     @overload
-    def Compare(
-        self,
-        string1: StringType,
-        offset1: IntType,
-        length1: IntType,
-        string2: StringType,
-        offset2: IntType,
-        length2: IntType,
-    ) -> IntType: ...
+    def GetCompareInfo(cls, name: str) -> CompareInfo:
+        """
+
+        :param name:
+        :return:
+        """
+    @classmethod
     @overload
-    def Compare(
-        self,
-        string1: StringType,
-        offset1: IntType,
-        string2: StringType,
-        offset2: IntType,
-        options: CompareOptions,
-    ) -> IntType: ...
+    def GetCompareInfo(cls, culture: int, assembly: Assembly) -> CompareInfo:
+        """
+
+        :param culture:
+        :param assembly:
+        :return:
+        """
+    @classmethod
     @overload
-    def Compare(
-        self, string1: StringType, offset1: IntType, string2: StringType, offset2: IntType
-    ) -> IntType: ...
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    @staticmethod
+    def GetCompareInfo(cls, name: str, assembly: Assembly) -> CompareInfo:
+        """
+
+        :param name:
+        :param assembly:
+        :return:
+        """
     @overload
-    def GetCompareInfo(culture: IntType, assembly: Assembly) -> CompareInfo: ...
-    @staticmethod
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
     @overload
-    def GetCompareInfo(culture: IntType) -> CompareInfo: ...
-    @staticmethod
+    def GetHashCode(self, source: str, options: CompareOptions) -> int:
+        """
+
+        :param source:
+        :param options:
+        :return:
+        """
     @overload
-    def GetCompareInfo(name: StringType) -> CompareInfo: ...
-    @staticmethod
+    def GetSortKey(self, source: str) -> SortKey:
+        """
+
+        :param source:
+        :return:
+        """
     @overload
-    def GetCompareInfo(name: StringType, assembly: Assembly) -> CompareInfo: ...
+    def GetSortKey(self, source: str, options: CompareOptions) -> SortKey:
+        """
+
+        :param source:
+        :param options:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def GetHashCode(self) -> IntType: ...
+    def IndexOf(self, source: str, value: Char) -> int:
+        """
+
+        :param source:
+        :param value:
+        :return:
+        """
     @overload
-    def GetHashCode(self, source: StringType, options: CompareOptions) -> IntType: ...
+    def IndexOf(self, source: str, value: str) -> int:
+        """
+
+        :param source:
+        :param value:
+        :return:
+        """
     @overload
-    def GetSortKey(self, source: StringType, options: CompareOptions) -> SortKey: ...
+    def IndexOf(self, source: str, value: Char, options: CompareOptions) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param options:
+        :return:
+        """
     @overload
-    def GetSortKey(self, source: StringType) -> SortKey: ...
+    def IndexOf(self, source: str, value: Char, startIndex: int) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :return:
+        """
     @overload
-    def IndexOf(self, source: StringType, value: CharType) -> IntType: ...
+    def IndexOf(self, source: str, value: str, options: CompareOptions) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param options:
+        :return:
+        """
     @overload
-    def IndexOf(self, source: StringType, value: StringType) -> IntType: ...
+    def IndexOf(self, source: str, value: str, startIndex: int) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :return:
+        """
     @overload
-    def IndexOf(self, source: StringType, value: CharType, options: CompareOptions) -> IntType: ...
+    def IndexOf(self, source: str, value: Char, startIndex: int, options: CompareOptions) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param options:
+        :return:
+        """
+    @overload
+    def IndexOf(self, source: str, value: Char, startIndex: int, count: int) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param count:
+        :return:
+        """
+    @overload
+    def IndexOf(self, source: str, value: str, startIndex: int, options: CompareOptions) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param options:
+        :return:
+        """
+    @overload
+    def IndexOf(self, source: str, value: str, startIndex: int, count: int) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param count:
+        :return:
+        """
     @overload
     def IndexOf(
-        self, source: StringType, value: StringType, options: CompareOptions
-    ) -> IntType: ...
-    @overload
-    def IndexOf(self, source: StringType, value: CharType, startIndex: IntType) -> IntType: ...
-    @overload
-    def IndexOf(self, source: StringType, value: StringType, startIndex: IntType) -> IntType: ...
+        self, source: str, value: Char, startIndex: int, count: int, options: CompareOptions
+    ) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param count:
+        :param options:
+        :return:
+        """
     @overload
     def IndexOf(
-        self, source: StringType, value: CharType, startIndex: IntType, options: CompareOptions
-    ) -> IntType: ...
+        self, source: str, value: str, startIndex: int, count: int, options: CompareOptions
+    ) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param count:
+        :param options:
+        :return:
+        """
     @overload
-    def IndexOf(
-        self, source: StringType, value: StringType, startIndex: IntType, options: CompareOptions
-    ) -> IntType: ...
+    def IsPrefix(self, source: str, prefix: str) -> bool:
+        """
+
+        :param source:
+        :param prefix:
+        :return:
+        """
     @overload
-    def IndexOf(
-        self, source: StringType, value: CharType, startIndex: IntType, count: IntType
-    ) -> IntType: ...
+    def IsPrefix(self, source: str, prefix: str, options: CompareOptions) -> bool:
+        """
+
+        :param source:
+        :param prefix:
+        :param options:
+        :return:
+        """
+    @classmethod
     @overload
-    def IndexOf(
-        self, source: StringType, value: StringType, startIndex: IntType, count: IntType
-    ) -> IntType: ...
+    def IsSortable(cls, ch: Char) -> bool:
+        """
+
+        :param ch:
+        :return:
+        """
+    @classmethod
     @overload
-    def IndexOf(
-        self,
-        source: StringType,
-        value: CharType,
-        startIndex: IntType,
-        count: IntType,
-        options: CompareOptions,
-    ) -> IntType: ...
+    def IsSortable(cls, text: str) -> bool:
+        """
+
+        :param text:
+        :return:
+        """
     @overload
-    def IndexOf(
-        self,
-        source: StringType,
-        value: StringType,
-        startIndex: IntType,
-        count: IntType,
-        options: CompareOptions,
-    ) -> IntType: ...
+    def IsSuffix(self, source: str, suffix: str) -> bool:
+        """
+
+        :param source:
+        :param suffix:
+        :return:
+        """
     @overload
-    def IsPrefix(
-        self, source: StringType, prefix: StringType, options: CompareOptions
-    ) -> BooleanType: ...
+    def IsSuffix(self, source: str, suffix: str, options: CompareOptions) -> bool:
+        """
+
+        :param source:
+        :param suffix:
+        :param options:
+        :return:
+        """
     @overload
-    def IsPrefix(self, source: StringType, prefix: StringType) -> BooleanType: ...
-    @staticmethod
+    def LastIndexOf(self, source: str, value: Char) -> int:
+        """
+
+        :param source:
+        :param value:
+        :return:
+        """
     @overload
-    def IsSortable(ch: CharType) -> BooleanType: ...
-    @staticmethod
+    def LastIndexOf(self, source: str, value: str) -> int:
+        """
+
+        :param source:
+        :param value:
+        :return:
+        """
     @overload
-    def IsSortable(text: StringType) -> BooleanType: ...
+    def LastIndexOf(self, source: str, value: Char, options: CompareOptions) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param options:
+        :return:
+        """
     @overload
-    def IsSuffix(
-        self, source: StringType, suffix: StringType, options: CompareOptions
-    ) -> BooleanType: ...
+    def LastIndexOf(self, source: str, value: Char, startIndex: int) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :return:
+        """
     @overload
-    def IsSuffix(self, source: StringType, suffix: StringType) -> BooleanType: ...
+    def LastIndexOf(self, source: str, value: str, options: CompareOptions) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param options:
+        :return:
+        """
     @overload
-    def LastIndexOf(self, source: StringType, value: CharType) -> IntType: ...
-    @overload
-    def LastIndexOf(self, source: StringType, value: StringType) -> IntType: ...
+    def LastIndexOf(self, source: str, value: str, startIndex: int) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :return:
+        """
     @overload
     def LastIndexOf(
-        self, source: StringType, value: CharType, options: CompareOptions
-    ) -> IntType: ...
+        self, source: str, value: Char, startIndex: int, options: CompareOptions
+    ) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param options:
+        :return:
+        """
+    @overload
+    def LastIndexOf(self, source: str, value: Char, startIndex: int, count: int) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param count:
+        :return:
+        """
+    @overload
+    def LastIndexOf(self, source: str, value: str, startIndex: int, options: CompareOptions) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param options:
+        :return:
+        """
+    @overload
+    def LastIndexOf(self, source: str, value: str, startIndex: int, count: int) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param count:
+        :return:
+        """
     @overload
     def LastIndexOf(
-        self, source: StringType, value: StringType, options: CompareOptions
-    ) -> IntType: ...
-    @overload
-    def LastIndexOf(self, source: StringType, value: CharType, startIndex: IntType) -> IntType: ...
-    @overload
-    def LastIndexOf(
-        self, source: StringType, value: StringType, startIndex: IntType
-    ) -> IntType: ...
-    @overload
-    def LastIndexOf(
-        self, source: StringType, value: CharType, startIndex: IntType, options: CompareOptions
-    ) -> IntType: ...
-    @overload
-    def LastIndexOf(
-        self, source: StringType, value: StringType, startIndex: IntType, options: CompareOptions
-    ) -> IntType: ...
+        self, source: str, value: Char, startIndex: int, count: int, options: CompareOptions
+    ) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param count:
+        :param options:
+        :return:
+        """
     @overload
     def LastIndexOf(
-        self, source: StringType, value: CharType, startIndex: IntType, count: IntType
-    ) -> IntType: ...
+        self, source: str, value: str, startIndex: int, count: int, options: CompareOptions
+    ) -> int:
+        """
+
+        :param source:
+        :param value:
+        :param startIndex:
+        :param count:
+        :param options:
+        :return:
+        """
+    def OnDeserialization(self, sender: object) -> None:
+        """
+
+        :param sender:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CompareOptions(Enum):
+    """"""
+
+    _None: CompareOptions = ...
+    """"""
+    IgnoreCase: CompareOptions = ...
+    """"""
+    IgnoreNonSpace: CompareOptions = ...
+    """"""
+    IgnoreSymbols: CompareOptions = ...
+    """"""
+    IgnoreKanaType: CompareOptions = ...
+    """"""
+    IgnoreWidth: CompareOptions = ...
+    """"""
+    OrdinalIgnoreCase: CompareOptions = ...
+    """"""
+    StringSort: CompareOptions = ...
+    """"""
+    Ordinal: CompareOptions = ...
+    """"""
+
+class CultureData(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CultureInfo(Object, ICloneable, IFormatProvider):
+    """"""
+
     @overload
-    def LastIndexOf(
-        self, source: StringType, value: StringType, startIndex: IntType, count: IntType
-    ) -> IntType: ...
+    def __init__(self, culture: int):
+        """
+
+        :param culture:
+        """
     @overload
-    def LastIndexOf(
-        self,
-        source: StringType,
-        value: CharType,
-        startIndex: IntType,
-        count: IntType,
-        options: CompareOptions,
-    ) -> IntType: ...
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
     @overload
-    def LastIndexOf(
-        self,
-        source: StringType,
-        value: StringType,
-        startIndex: IntType,
-        count: IntType,
-        options: CompareOptions,
-    ) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_LCID(self) -> IntType: ...
-    def get_Name(self) -> StringType: ...
-    def get_Version(self) -> SortVersion: ...
+    def __init__(self, culture: int, useUserOverride: bool):
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CultureData(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CultureInfo(ObjectType, ICloneable, IFormatProvider):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
+        :param culture:
+        :param useUserOverride:
+        """
     @overload
-    def __init__(self, name: StringType): ...
-    @overload
-    def __init__(self, name: StringType, useUserOverride: BooleanType): ...
-    @overload
-    def __init__(self, culture: IntType): ...
-    @overload
-    def __init__(self, culture: IntType, useUserOverride: BooleanType): ...
+    def __init__(self, name: str, useUserOverride: bool):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param name:
+        :param useUserOverride:
+        """
     @property
-    def Calendar(self) -> Calendar: ...
+    def Calendar(self) -> Calendar:
+        """
+
+        :return:
+        """
     @property
-    def CompareInfo(self) -> CompareInfo: ...
+    def CompareInfo(self) -> CompareInfo:
+        """
+
+        :return:
+        """
     @property
-    def CultureTypes(self) -> CultureTypes: ...
-    @staticmethod
+    def CultureTypes(self) -> CultureTypes:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def CurrentCulture() -> CultureInfo: ...
-    @staticmethod
+    def CurrentCulture(cls) -> CultureInfo:
+        """
+
+        :return:
+        """
+    @classmethod
     @CurrentCulture.setter
-    def CurrentCulture(value: CultureInfo) -> None: ...
-    @staticmethod
+    def CurrentCulture(cls, value: CultureInfo) -> None: ...
+    @classmethod
     @property
-    def CurrentUICulture() -> CultureInfo: ...
-    @staticmethod
+    def CurrentUICulture(cls) -> CultureInfo:
+        """
+
+        :return:
+        """
+    @classmethod
     @CurrentUICulture.setter
-    def CurrentUICulture(value: CultureInfo) -> None: ...
+    def CurrentUICulture(cls, value: CultureInfo) -> None: ...
     @property
-    def DateTimeFormat(self) -> DateTimeFormatInfo: ...
+    def DateTimeFormat(self) -> DateTimeFormatInfo:
+        """
+
+        :return:
+        """
     @DateTimeFormat.setter
     def DateTimeFormat(self, value: DateTimeFormatInfo) -> None: ...
-    @staticmethod
+    @classmethod
     @property
-    def DefaultThreadCurrentCulture() -> CultureInfo: ...
-    @staticmethod
+    def DefaultThreadCurrentCulture(cls) -> CultureInfo:
+        """
+
+        :return:
+        """
+    @classmethod
     @DefaultThreadCurrentCulture.setter
-    def DefaultThreadCurrentCulture(value: CultureInfo) -> None: ...
-    @staticmethod
+    def DefaultThreadCurrentCulture(cls, value: CultureInfo) -> None: ...
+    @classmethod
     @property
-    def DefaultThreadCurrentUICulture() -> CultureInfo: ...
-    @staticmethod
+    def DefaultThreadCurrentUICulture(cls) -> CultureInfo:
+        """
+
+        :return:
+        """
+    @classmethod
     @DefaultThreadCurrentUICulture.setter
-    def DefaultThreadCurrentUICulture(value: CultureInfo) -> None: ...
+    def DefaultThreadCurrentUICulture(cls, value: CultureInfo) -> None: ...
     @property
-    def DisplayName(self) -> StringType: ...
+    def DisplayName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def EnglishName(self) -> StringType: ...
+    def EnglishName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def IetfLanguageTag(self) -> StringType: ...
-    @staticmethod
+    def IetfLanguageTag(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def InstalledUICulture() -> CultureInfo: ...
-    @staticmethod
+    def InstalledUICulture(cls) -> CultureInfo:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def InvariantCulture() -> CultureInfo: ...
+    def InvariantCulture(cls) -> CultureInfo:
+        """
+
+        :return:
+        """
     @property
-    def IsNeutralCulture(self) -> BooleanType: ...
+    def IsNeutralCulture(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsReadOnly(self) -> BooleanType: ...
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def KeyboardLayoutId(self) -> IntType: ...
+    def KeyboardLayoutId(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def LCID(self) -> IntType: ...
+    def LCID(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def NativeName(self) -> StringType: ...
+    def NativeName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def NumberFormat(self) -> NumberFormatInfo: ...
+    def NumberFormat(self) -> NumberFormatInfo:
+        """
+
+        :return:
+        """
     @NumberFormat.setter
     def NumberFormat(self, value: NumberFormatInfo) -> None: ...
     @property
-    def OptionalCalendars(self) -> ArrayType[Calendar]: ...
+    def OptionalCalendars(self) -> Array[Calendar]:
+        """
+
+        :return:
+        """
     @property
-    def Parent(self) -> CultureInfo: ...
+    def Parent(self) -> CultureInfo:
+        """
+
+        :return:
+        """
     @property
-    def TextInfo(self) -> TextInfo: ...
+    def TextInfo(self) -> TextInfo:
+        """
+
+        :return:
+        """
     @property
-    def ThreeLetterISOLanguageName(self) -> StringType: ...
+    def ThreeLetterISOLanguageName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def ThreeLetterWindowsLanguageName(self) -> StringType: ...
+    def ThreeLetterWindowsLanguageName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def TwoLetterISOLanguageName(self) -> StringType: ...
+    def TwoLetterISOLanguageName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def UseUserOverride(self) -> BooleanType: ...
+    def UseUserOverride(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def ClearCachedData(self) -> None:
+        """"""
+    def Clone(self) -> object:
+        """
 
-    def ClearCachedData(self) -> VoidType: ...
-    def Clone(self) -> ObjectType: ...
-    @staticmethod
-    def CreateSpecificCulture(name: StringType) -> CultureInfo: ...
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetConsoleFallbackUICulture(self) -> CultureInfo: ...
-    @staticmethod
+        :return:
+        """
+    @classmethod
+    def CreateSpecificCulture(cls, name: str) -> CultureInfo:
+        """
+
+        :param name:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetConsoleFallbackUICulture(self) -> CultureInfo:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def GetCultureInfo(culture: IntType) -> CultureInfo: ...
-    @staticmethod
+    def GetCultureInfo(cls, culture: int) -> CultureInfo:
+        """
+
+        :param culture:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetCultureInfo(name: StringType) -> CultureInfo: ...
-    @staticmethod
+    def GetCultureInfo(cls, name: str) -> CultureInfo:
+        """
+
+        :param name:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetCultureInfo(name: StringType, altName: StringType) -> CultureInfo: ...
-    @staticmethod
-    def GetCultureInfoByIetfLanguageTag(name: StringType) -> CultureInfo: ...
-    @staticmethod
-    def GetCultures(types: CultureTypes) -> ArrayType[CultureInfo]: ...
-    def GetFormat(self, formatType: TypeType) -> ObjectType: ...
-    def GetHashCode(self) -> IntType: ...
-    @staticmethod
-    def ReadOnly(ci: CultureInfo) -> CultureInfo: ...
-    def ToString(self) -> StringType: ...
-    def get_Calendar(self) -> Calendar: ...
-    def get_CompareInfo(self) -> CompareInfo: ...
-    def get_CultureTypes(self) -> CultureTypes: ...
-    @staticmethod
-    def get_CurrentCulture() -> CultureInfo: ...
-    @staticmethod
-    def get_CurrentUICulture() -> CultureInfo: ...
-    def get_DateTimeFormat(self) -> DateTimeFormatInfo: ...
-    @staticmethod
-    def get_DefaultThreadCurrentCulture() -> CultureInfo: ...
-    @staticmethod
-    def get_DefaultThreadCurrentUICulture() -> CultureInfo: ...
-    def get_DisplayName(self) -> StringType: ...
-    def get_EnglishName(self) -> StringType: ...
-    def get_IetfLanguageTag(self) -> StringType: ...
-    @staticmethod
-    def get_InstalledUICulture() -> CultureInfo: ...
-    @staticmethod
-    def get_InvariantCulture() -> CultureInfo: ...
-    def get_IsNeutralCulture(self) -> BooleanType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_KeyboardLayoutId(self) -> IntType: ...
-    def get_LCID(self) -> IntType: ...
-    def get_Name(self) -> StringType: ...
-    def get_NativeName(self) -> StringType: ...
-    def get_NumberFormat(self) -> NumberFormatInfo: ...
-    def get_OptionalCalendars(self) -> ArrayType[Calendar]: ...
-    def get_Parent(self) -> CultureInfo: ...
-    def get_TextInfo(self) -> TextInfo: ...
-    def get_ThreeLetterISOLanguageName(self) -> StringType: ...
-    def get_ThreeLetterWindowsLanguageName(self) -> StringType: ...
-    def get_TwoLetterISOLanguageName(self) -> StringType: ...
-    def get_UseUserOverride(self) -> BooleanType: ...
-    @staticmethod
-    def set_CurrentCulture(value: CultureInfo) -> VoidType: ...
-    @staticmethod
-    def set_CurrentUICulture(value: CultureInfo) -> VoidType: ...
-    def set_DateTimeFormat(self, value: DateTimeFormatInfo) -> VoidType: ...
-    @staticmethod
-    def set_DefaultThreadCurrentCulture(value: CultureInfo) -> VoidType: ...
-    @staticmethod
-    def set_DefaultThreadCurrentUICulture(value: CultureInfo) -> VoidType: ...
-    def set_NumberFormat(self, value: NumberFormatInfo) -> VoidType: ...
+    def GetCultureInfo(cls, name: str, altName: str) -> CultureInfo:
+        """
 
-    # No Events
+        :param name:
+        :param altName:
+        :return:
+        """
+    @classmethod
+    def GetCultureInfoByIetfLanguageTag(cls, name: str) -> CultureInfo:
+        """
 
-    # No Sub Classes
+        :param name:
+        :return:
+        """
+    @classmethod
+    def GetCultures(cls, types: CultureTypes) -> Array[CultureInfo]:
+        """
 
-    # No Sub Structs
+        :param types:
+        :return:
+        """
+    def GetFormat(self, formatType: Type) -> object:
+        """
 
-    # No Sub Interfaces
+        :param formatType:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class CultureNotFoundException(ArgumentException, ISerializable, _Exception):
-    # No Fields
+        :return:
+        """
+    @classmethod
+    def ReadOnly(cls, ci: CultureInfo) -> CultureInfo:
+        """
 
-    # ---------- Constructors ---------- #
+        :param ci:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CultureNotFoundException(ArgumentException, _Exception, ISerializable):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, paramName: StringType, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-    @overload
-    def __init__(self, paramName: StringType, invalidCultureId: IntType, message: StringType): ...
-    @overload
-    def __init__(
-        self, message: StringType, invalidCultureId: IntType, innerException: Exception
-    ): ...
-    @overload
-    def __init__(
-        self, paramName: StringType, invalidCultureName: StringType, message: StringType
-    ): ...
-    @overload
-    def __init__(
-        self, message: StringType, invalidCultureName: StringType, innerException: Exception
-    ): ...
+    def __init__(self, message: str):
+        """
 
-    # ---------- Properties ---------- #
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
 
+        :param message:
+        :param innerException:
+        """
+    @overload
+    def __init__(self, paramName: str, message: str):
+        """
+
+        :param paramName:
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, invalidCultureId: int, innerException: Exception):
+        """
+
+        :param message:
+        :param invalidCultureId:
+        :param innerException:
+        """
+    @overload
+    def __init__(self, paramName: str, invalidCultureId: int, message: str):
+        """
+
+        :param paramName:
+        :param invalidCultureId:
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, invalidCultureName: str, innerException: Exception):
+        """
+
+        :param message:
+        :param invalidCultureName:
+        :param innerException:
+        """
+    @overload
+    def __init__(self, paramName: str, invalidCultureName: str, message: str):
+        """
+
+        :param paramName:
+        :param invalidCultureName:
+        :param message:
+        """
     @property
-    def InvalidCultureId(self) -> NullableType[Nullable[IntType]]: ...
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
     @property
-    def InvalidCultureName(self) -> StringType: ...
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Message(self) -> StringType: ...
+    def HelpLink(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def get_InvalidCultureId(self) -> NullableType[Nullable[IntType]]: ...
-    def get_InvalidCultureName(self) -> StringType: ...
-    def get_Message(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DateTimeFormatInfo(ObjectType, ICloneable, IFormatProvider):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
     @property
-    def AMDesignator(self) -> StringType: ...
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def InvalidCultureId(self) -> Optional[int]:
+        """
+
+        :return:
+        """
+    @property
+    def InvalidCultureName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ParamName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CultureTypes(Enum):
+    """"""
+
+    NeutralCultures: CultureTypes = ...
+    """"""
+    SpecificCultures: CultureTypes = ...
+    """"""
+    InstalledWin32Cultures: CultureTypes = ...
+    """"""
+    AllCultures: CultureTypes = ...
+    """"""
+    UserCustomCulture: CultureTypes = ...
+    """"""
+    ReplacementCultures: CultureTypes = ...
+    """"""
+    WindowsOnlyCultures: CultureTypes = ...
+    """"""
+    FrameworkCultures: CultureTypes = ...
+    """"""
+
+class DateTimeFormatFlags(Enum):
+    """"""
+
+    _None: DateTimeFormatFlags = ...
+    """"""
+    UseGenitiveMonth: DateTimeFormatFlags = ...
+    """"""
+    UseLeapYearMonth: DateTimeFormatFlags = ...
+    """"""
+    UseSpacesInMonthNames: DateTimeFormatFlags = ...
+    """"""
+    UseHebrewRule: DateTimeFormatFlags = ...
+    """"""
+    UseSpacesInDayNames: DateTimeFormatFlags = ...
+    """"""
+    UseDigitPrefixInTokens: DateTimeFormatFlags = ...
+    """"""
+    NotInitialized: DateTimeFormatFlags = ...
+    """"""
+
+class DateTimeFormatInfo(Object, ICloneable, IFormatProvider):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def AMDesignator(self) -> str:
+        """
+
+        :return:
+        """
     @AMDesignator.setter
-    def AMDesignator(self, value: StringType) -> None: ...
+    def AMDesignator(self, value: str) -> None: ...
     @property
-    def AbbreviatedDayNames(self) -> ArrayType[StringType]: ...
+    def AbbreviatedDayNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @AbbreviatedDayNames.setter
-    def AbbreviatedDayNames(self, value: ArrayType[StringType]) -> None: ...
+    def AbbreviatedDayNames(self, value: Array[str]) -> None: ...
     @property
-    def AbbreviatedMonthGenitiveNames(self) -> ArrayType[StringType]: ...
+    def AbbreviatedMonthGenitiveNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @AbbreviatedMonthGenitiveNames.setter
-    def AbbreviatedMonthGenitiveNames(self, value: ArrayType[StringType]) -> None: ...
+    def AbbreviatedMonthGenitiveNames(self, value: Array[str]) -> None: ...
     @property
-    def AbbreviatedMonthNames(self) -> ArrayType[StringType]: ...
+    def AbbreviatedMonthNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @AbbreviatedMonthNames.setter
-    def AbbreviatedMonthNames(self, value: ArrayType[StringType]) -> None: ...
+    def AbbreviatedMonthNames(self, value: Array[str]) -> None: ...
     @property
-    def Calendar(self) -> Calendar: ...
+    def Calendar(self) -> Calendar:
+        """
+
+        :return:
+        """
     @Calendar.setter
     def Calendar(self, value: Calendar) -> None: ...
     @property
-    def CalendarWeekRule(self) -> CalendarWeekRule: ...
+    def CalendarWeekRule(self) -> CalendarWeekRule:
+        """
+
+        :return:
+        """
     @CalendarWeekRule.setter
     def CalendarWeekRule(self, value: CalendarWeekRule) -> None: ...
-    @staticmethod
+    @classmethod
     @property
-    def CurrentInfo() -> DateTimeFormatInfo: ...
+    def CurrentInfo(cls) -> DateTimeFormatInfo:
+        """
+
+        :return:
+        """
     @property
-    def DateSeparator(self) -> StringType: ...
+    def DateSeparator(self) -> str:
+        """
+
+        :return:
+        """
     @DateSeparator.setter
-    def DateSeparator(self, value: StringType) -> None: ...
+    def DateSeparator(self, value: str) -> None: ...
     @property
-    def DayNames(self) -> ArrayType[StringType]: ...
+    def DayNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @DayNames.setter
-    def DayNames(self, value: ArrayType[StringType]) -> None: ...
+    def DayNames(self, value: Array[str]) -> None: ...
     @property
-    def FirstDayOfWeek(self) -> DayOfWeek: ...
+    def FirstDayOfWeek(self) -> DayOfWeek:
+        """
+
+        :return:
+        """
     @FirstDayOfWeek.setter
     def FirstDayOfWeek(self, value: DayOfWeek) -> None: ...
     @property
-    def FullDateTimePattern(self) -> StringType: ...
+    def FullDateTimePattern(self) -> str:
+        """
+
+        :return:
+        """
     @FullDateTimePattern.setter
-    def FullDateTimePattern(self, value: StringType) -> None: ...
-    @staticmethod
+    def FullDateTimePattern(self, value: str) -> None: ...
+    @classmethod
     @property
-    def InvariantInfo() -> DateTimeFormatInfo: ...
+    def InvariantInfo(cls) -> DateTimeFormatInfo:
+        """
+
+        :return:
+        """
     @property
-    def IsReadOnly(self) -> BooleanType: ...
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def LongDatePattern(self) -> StringType: ...
+    def LongDatePattern(self) -> str:
+        """
+
+        :return:
+        """
     @LongDatePattern.setter
-    def LongDatePattern(self, value: StringType) -> None: ...
+    def LongDatePattern(self, value: str) -> None: ...
     @property
-    def LongTimePattern(self) -> StringType: ...
+    def LongTimePattern(self) -> str:
+        """
+
+        :return:
+        """
     @LongTimePattern.setter
-    def LongTimePattern(self, value: StringType) -> None: ...
+    def LongTimePattern(self, value: str) -> None: ...
     @property
-    def MonthDayPattern(self) -> StringType: ...
+    def MonthDayPattern(self) -> str:
+        """
+
+        :return:
+        """
     @MonthDayPattern.setter
-    def MonthDayPattern(self, value: StringType) -> None: ...
+    def MonthDayPattern(self, value: str) -> None: ...
     @property
-    def MonthGenitiveNames(self) -> ArrayType[StringType]: ...
+    def MonthGenitiveNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @MonthGenitiveNames.setter
-    def MonthGenitiveNames(self, value: ArrayType[StringType]) -> None: ...
+    def MonthGenitiveNames(self, value: Array[str]) -> None: ...
     @property
-    def MonthNames(self) -> ArrayType[StringType]: ...
+    def MonthNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @MonthNames.setter
-    def MonthNames(self, value: ArrayType[StringType]) -> None: ...
+    def MonthNames(self, value: Array[str]) -> None: ...
     @property
-    def NativeCalendarName(self) -> StringType: ...
+    def NativeCalendarName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def PMDesignator(self) -> StringType: ...
+    def PMDesignator(self) -> str:
+        """
+
+        :return:
+        """
     @PMDesignator.setter
-    def PMDesignator(self, value: StringType) -> None: ...
+    def PMDesignator(self, value: str) -> None: ...
     @property
-    def RFC1123Pattern(self) -> StringType: ...
+    def RFC1123Pattern(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def ShortDatePattern(self) -> StringType: ...
+    def ShortDatePattern(self) -> str:
+        """
+
+        :return:
+        """
     @ShortDatePattern.setter
-    def ShortDatePattern(self, value: StringType) -> None: ...
+    def ShortDatePattern(self, value: str) -> None: ...
     @property
-    def ShortTimePattern(self) -> StringType: ...
+    def ShortTimePattern(self) -> str:
+        """
+
+        :return:
+        """
     @ShortTimePattern.setter
-    def ShortTimePattern(self, value: StringType) -> None: ...
+    def ShortTimePattern(self, value: str) -> None: ...
     @property
-    def ShortestDayNames(self) -> ArrayType[StringType]: ...
+    def ShortestDayNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @ShortestDayNames.setter
-    def ShortestDayNames(self, value: ArrayType[StringType]) -> None: ...
+    def ShortestDayNames(self, value: Array[str]) -> None: ...
     @property
-    def SortableDateTimePattern(self) -> StringType: ...
+    def SortableDateTimePattern(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def TimeSeparator(self) -> StringType: ...
+    def TimeSeparator(self) -> str:
+        """
+
+        :return:
+        """
     @TimeSeparator.setter
-    def TimeSeparator(self, value: StringType) -> None: ...
+    def TimeSeparator(self, value: str) -> None: ...
     @property
-    def UniversalSortableDateTimePattern(self) -> StringType: ...
+    def UniversalSortableDateTimePattern(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def YearMonthPattern(self) -> StringType: ...
+    def YearMonthPattern(self) -> str:
+        """
+
+        :return:
+        """
     @YearMonthPattern.setter
-    def YearMonthPattern(self, value: StringType) -> None: ...
+    def YearMonthPattern(self, value: str) -> None: ...
+    def Clone(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Clone(self) -> ObjectType: ...
-    def GetAbbreviatedDayName(self, dayofweek: DayOfWeek) -> StringType: ...
-    def GetAbbreviatedEraName(self, era: IntType) -> StringType: ...
-    def GetAbbreviatedMonthName(self, month: IntType) -> StringType: ...
+        :param obj:
+        :return:
+        """
+    def GetAbbreviatedDayName(self, dayofweek: DayOfWeek) -> str:
+        """
+
+        :param dayofweek:
+        :return:
+        """
+    def GetAbbreviatedEraName(self, era: int) -> str:
+        """
+
+        :param era:
+        :return:
+        """
+    def GetAbbreviatedMonthName(self, month: int) -> str:
+        """
+
+        :param month:
+        :return:
+        """
     @overload
-    def GetAllDateTimePatterns(self, format: CharType) -> ArrayType[StringType]: ...
+    def GetAllDateTimePatterns(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @overload
-    def GetAllDateTimePatterns(self) -> ArrayType[StringType]: ...
-    def GetDayName(self, dayofweek: DayOfWeek) -> StringType: ...
-    def GetEra(self, eraName: StringType) -> IntType: ...
-    def GetEraName(self, era: IntType) -> StringType: ...
-    def GetFormat(self, formatType: TypeType) -> ObjectType: ...
-    @staticmethod
-    def GetInstance(provider: IFormatProvider) -> DateTimeFormatInfo: ...
-    def GetMonthName(self, month: IntType) -> StringType: ...
-    def GetShortestDayName(self, dayOfWeek: DayOfWeek) -> StringType: ...
-    @staticmethod
-    def ReadOnly(dtfi: DateTimeFormatInfo) -> DateTimeFormatInfo: ...
-    def SetAllDateTimePatterns(
-        self, patterns: ArrayType[StringType], format: CharType
-    ) -> VoidType: ...
-    def get_AMDesignator(self) -> StringType: ...
-    def get_AbbreviatedDayNames(self) -> ArrayType[StringType]: ...
-    def get_AbbreviatedMonthGenitiveNames(self) -> ArrayType[StringType]: ...
-    def get_AbbreviatedMonthNames(self) -> ArrayType[StringType]: ...
-    def get_Calendar(self) -> Calendar: ...
-    def get_CalendarWeekRule(self) -> CalendarWeekRule: ...
-    @staticmethod
-    def get_CurrentInfo() -> DateTimeFormatInfo: ...
-    def get_DateSeparator(self) -> StringType: ...
-    def get_DayNames(self) -> ArrayType[StringType]: ...
-    def get_FirstDayOfWeek(self) -> DayOfWeek: ...
-    def get_FullDateTimePattern(self) -> StringType: ...
-    @staticmethod
-    def get_InvariantInfo() -> DateTimeFormatInfo: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_LongDatePattern(self) -> StringType: ...
-    def get_LongTimePattern(self) -> StringType: ...
-    def get_MonthDayPattern(self) -> StringType: ...
-    def get_MonthGenitiveNames(self) -> ArrayType[StringType]: ...
-    def get_MonthNames(self) -> ArrayType[StringType]: ...
-    def get_NativeCalendarName(self) -> StringType: ...
-    def get_PMDesignator(self) -> StringType: ...
-    def get_RFC1123Pattern(self) -> StringType: ...
-    def get_ShortDatePattern(self) -> StringType: ...
-    def get_ShortTimePattern(self) -> StringType: ...
-    def get_ShortestDayNames(self) -> ArrayType[StringType]: ...
-    def get_SortableDateTimePattern(self) -> StringType: ...
-    def get_TimeSeparator(self) -> StringType: ...
-    def get_UniversalSortableDateTimePattern(self) -> StringType: ...
-    def get_YearMonthPattern(self) -> StringType: ...
-    def set_AMDesignator(self, value: StringType) -> VoidType: ...
-    def set_AbbreviatedDayNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_AbbreviatedMonthGenitiveNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_AbbreviatedMonthNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_Calendar(self, value: Calendar) -> VoidType: ...
-    def set_CalendarWeekRule(self, value: CalendarWeekRule) -> VoidType: ...
-    def set_DateSeparator(self, value: StringType) -> VoidType: ...
-    def set_DayNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_FirstDayOfWeek(self, value: DayOfWeek) -> VoidType: ...
-    def set_FullDateTimePattern(self, value: StringType) -> VoidType: ...
-    def set_LongDatePattern(self, value: StringType) -> VoidType: ...
-    def set_LongTimePattern(self, value: StringType) -> VoidType: ...
-    def set_MonthDayPattern(self, value: StringType) -> VoidType: ...
-    def set_MonthGenitiveNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_MonthNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_PMDesignator(self, value: StringType) -> VoidType: ...
-    def set_ShortDatePattern(self, value: StringType) -> VoidType: ...
-    def set_ShortTimePattern(self, value: StringType) -> VoidType: ...
-    def set_ShortestDayNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_TimeSeparator(self, value: StringType) -> VoidType: ...
-    def set_YearMonthPattern(self, value: StringType) -> VoidType: ...
+    def GetAllDateTimePatterns(self, format: Char) -> Array[str]:
+        """
 
-    # No Events
+        :param format:
+        :return:
+        """
+    def GetDayName(self, dayofweek: DayOfWeek) -> str:
+        """
 
-    # No Sub Classes
+        :param dayofweek:
+        :return:
+        """
+    def GetEra(self, eraName: str) -> int:
+        """
 
-    # No Sub Structs
+        :param eraName:
+        :return:
+        """
+    def GetEraName(self, era: int) -> str:
+        """
 
-    # No Sub Interfaces
+        :param era:
+        :return:
+        """
+    def GetFormat(self, formatType: Type) -> object:
+        """
 
-    # No Sub Enums
+        :param formatType:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class DateTimeFormatInfoScanner(ObjectType):
-    # No Fields
+        :return:
+        """
+    @classmethod
+    def GetInstance(cls, provider: IFormatProvider) -> DateTimeFormatInfo:
+        """
 
-    # ---------- Constructors ---------- #
+        :param provider:
+        :return:
+        """
+    def GetMonthName(self, month: int) -> str:
+        """
 
-    def __init__(self): ...
+        :param month:
+        :return:
+        """
+    def GetShortestDayName(self, dayOfWeek: DayOfWeek) -> str:
+        """
 
-    # No Properties
+        :param dayOfWeek:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    @classmethod
+    def ReadOnly(cls, dtfi: DateTimeFormatInfo) -> DateTimeFormatInfo:
+        """
 
-    # No Events
+        :param dtfi:
+        :return:
+        """
+    def SetAllDateTimePatterns(self, patterns: Array[str], format: Char) -> None:
+        """
 
-    # No Sub Classes
+        :param patterns:
+        :param format:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class DateTimeFormatInfoScanner(Object):
+    """"""
 
-    # No Sub Enums
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-class DaylightTime(ObjectType):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def __init__(self, start: DateTime, end: DateTime, delta: TimeSpan): ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
 
+class DateTimeStyles(Enum):
+    """"""
+
+    _None: DateTimeStyles = ...
+    """"""
+    AllowLeadingWhite: DateTimeStyles = ...
+    """"""
+    AllowTrailingWhite: DateTimeStyles = ...
+    """"""
+    AllowInnerWhite: DateTimeStyles = ...
+    """"""
+    AllowWhiteSpaces: DateTimeStyles = ...
+    """"""
+    NoCurrentDateDefault: DateTimeStyles = ...
+    """"""
+    AdjustToUniversal: DateTimeStyles = ...
+    """"""
+    AssumeLocal: DateTimeStyles = ...
+    """"""
+    AssumeUniversal: DateTimeStyles = ...
+    """"""
+    RoundtripKind: DateTimeStyles = ...
+    """"""
+
+class DaylightTime(Object):
+    """"""
+
+    def __init__(self, start: DateTime, end: DateTime, delta: TimeSpan):
+        """
+
+        :param start:
+        :param end:
+        :param delta:
+        """
     @property
-    def Delta(self) -> TimeSpan: ...
+    def Delta(self) -> TimeSpan:
+        """
+
+        :return:
+        """
     @property
-    def End(self) -> DateTime: ...
+    def End(self) -> DateTime:
+        """
+
+        :return:
+        """
     @property
-    def Start(self) -> DateTime: ...
+    def Start(self) -> DateTime:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Delta(self) -> TimeSpan: ...
-    def get_End(self) -> DateTime: ...
-    def get_Start(self) -> DateTime: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class DaylightTimeStruct(ValueType):
+    """"""
 
-    # No Sub Enums
+    def __init__(self, start: DateTime, end: DateTime, delta: TimeSpan):
+        """
+
+        :param start:
+        :param end:
+        :param delta:
+        """
+    @property
+    def Delta(self) -> TimeSpan:
+        """
+
+        :return:
+        """
+    @property
+    def End(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def Start(self) -> DateTime:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DigitShapes(Enum):
+    """"""
+
+    Context: DigitShapes = ...
+    """"""
+    _None: DigitShapes = ...
+    """"""
+    NativeNational: DigitShapes = ...
+    """"""
 
 class EastAsianLunisolarCalendar(ABC, Calendar, ICloneable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
     @property
-    def TwoDigitYearMax(self) -> IntType: ...
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
     @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
 
-    # ---------- Methods ---------- #
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
 
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetCelestialStem(self, sexagenaryYear: IntType) -> IntType: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetCelestialStem(self, sexagenaryYear: int) -> int:
+        """
+
+        :param sexagenaryYear:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
     @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
     @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetSexagenaryYear(self, time: DateTime) -> IntType: ...
-    def GetTerrestrialBranch(self, sexagenaryYear: IntType) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetSexagenaryYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetTerrestrialBranch(self, sexagenaryYear: int) -> int:
+        """
+
+        :param sexagenaryYear:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
     @overload
     def ToDateTime(
         self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
 
-    # No Events
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
 
-    # No Sub Classes
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EncodingTable(ABC, ObjectType):
+class EncodingTable(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EraInfo(ObjectType):
+class EraInfo(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class FORMATFLAGS(Enum):
+    """"""
 
-    # No Sub Structs
+    _None: FORMATFLAGS = ...
+    """"""
+    UseGenitiveMonth: FORMATFLAGS = ...
+    """"""
+    UseLeapYearMonth: FORMATFLAGS = ...
+    """"""
+    UseSpacesInMonthNames: FORMATFLAGS = ...
+    """"""
+    UseHebrewParsing: FORMATFLAGS = ...
+    """"""
+    UseSpacesInDayNames: FORMATFLAGS = ...
+    """"""
+    UseDigitPrefixInTokens: FORMATFLAGS = ...
+    """"""
 
-    # No Sub Interfaces
+class GlobalizationAssembly(Object):
+    """"""
 
-    # No Sub Enums
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-class GlobalizationAssembly(ObjectType):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Properties
+        :return:
+        """
 
-    # No Methods
+class GlobalizationExtensions(ABC, Object):
+    """"""
 
-    # No Events
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @classmethod
+    def GetStringComparer(cls, compareInfo: CompareInfo, options: CompareOptions) -> StringComparer:
+        """
 
-    # No Sub Interfaces
+        :param compareInfo:
+        :param options:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class GlobalizationExtensions(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetStringComparer(compareInfo: CompareInfo, options: CompareOptions) -> StringComparer: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class GregorianCalendar(Calendar, ICloneable):
-    # ---------- Fields ---------- #
+    """"""
 
-    @staticmethod
-    @property
-    def ADEra() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
+    ADEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, type: GregorianCalendarTypes): ...
+    def __init__(self, type: GregorianCalendarTypes):
+        """
 
-    # ---------- Properties ---------- #
+        :param type:
+        """
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
 
+        :return:
+        """
     @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
-    @property
-    def CalendarType(self) -> GregorianCalendarTypes: ...
+    def CalendarType(self) -> GregorianCalendarTypes:
+        """
+
+        :return:
+        """
     @CalendarType.setter
     def CalendarType(self, value: GregorianCalendarTypes) -> None: ...
     @property
-    def Eras(self) -> ArrayType[IntType]: ...
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
     @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def MinSupportedDateTime(self) -> DateTime: ...
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
     @property
-    def TwoDigitYearMax(self) -> IntType: ...
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
     @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
 
-    # ---------- Methods ---------- #
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
 
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
     @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
     @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def ToDateTime(
-        self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_CalendarType(self) -> GregorianCalendarTypes: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_CalendarType(self, value: GregorianCalendarTypes) -> VoidType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
 
-    # No Events
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
 
-    # No Sub Classes
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GregorianCalendarHelper(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-
-    # ---------- Methods ---------- #
-
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
+        :return:
+        """
     def GetWeekOfYear(
         self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
-    ) -> IntType: ...
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def GetYear(self, time: DateTime) -> IntType: ...
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
     @overload
-    def GetYear(self, year: IntType, time: DateTime) -> IntType: ...
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
     def ToDateTime(
         self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType, twoDigitYearMax: IntType) -> IntType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
 
-    # No Events
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
 
-    # No Sub Classes
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class GregorianCalendarHelper(Object):
+    """"""
 
-    # No Sub Enums
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    @overload
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetYear(self, year: int, time: DateTime) -> int:
+        """
+
+        :param year:
+        :param time:
+        :return:
+        """
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int, twoDigitYearMax: int) -> int:
+        """
+
+        :param year:
+        :param twoDigitYearMax:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class GregorianCalendarTypes(Enum):
+    """"""
+
+    Localized: GregorianCalendarTypes = ...
+    """"""
+    USEnglish: GregorianCalendarTypes = ...
+    """"""
+    MiddleEastFrench: GregorianCalendarTypes = ...
+    """"""
+    Arabic: GregorianCalendarTypes = ...
+    """"""
+    TransliteratedEnglish: GregorianCalendarTypes = ...
+    """"""
+    TransliteratedFrench: GregorianCalendarTypes = ...
+    """"""
 
 class HebrewCalendar(Calendar, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def HebrewEra() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-    @property
-    def TwoDigitYearMax(self) -> IntType: ...
-    @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
-    @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
-    @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def ToDateTime(
-        self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HebrewNumber(ObjectType):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HijriCalendar(Calendar, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
+    HebrewEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
     @property
-    def HijriEra() -> IntType: ...
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
 
+        :return:
+        """
     @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
     @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def HijriAdjustment(self) -> IntType: ...
-    @HijriAdjustment.setter
-    def HijriAdjustment(self, value: IntType) -> None: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-    @property
-    def TwoDigitYearMax(self) -> IntType: ...
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
     @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
 
-    # ---------- Methods ---------- #
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
 
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
     @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
     @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
     @overload
-    def ToDateTime(
-        self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_HijriAdjustment(self) -> IntType: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_HijriAdjustment(self, value: IntType) -> VoidType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
 
-    # No Events
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
 
-    # No Sub Classes
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IdnMapping(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AllowUnassigned(self) -> BooleanType: ...
-    @AllowUnassigned.setter
-    def AllowUnassigned(self, value: BooleanType) -> None: ...
-    @property
-    def UseStd3AsciiRules(self) -> BooleanType: ...
-    @UseStd3AsciiRules.setter
-    def UseStd3AsciiRules(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    @overload
-    def GetAscii(self, unicode: StringType) -> StringType: ...
-    @overload
-    def GetAscii(self, unicode: StringType, index: IntType) -> StringType: ...
-    @overload
-    def GetAscii(self, unicode: StringType, index: IntType, count: IntType) -> StringType: ...
-    def GetHashCode(self) -> IntType: ...
-    @overload
-    def GetUnicode(self, ascii: StringType) -> StringType: ...
-    @overload
-    def GetUnicode(self, ascii: StringType, index: IntType) -> StringType: ...
-    @overload
-    def GetUnicode(self, ascii: StringType, index: IntType, count: IntType) -> StringType: ...
-    def get_AllowUnassigned(self) -> BooleanType: ...
-    def get_UseStd3AsciiRules(self) -> BooleanType: ...
-    def set_AllowUnassigned(self, value: BooleanType) -> VoidType: ...
-    def set_UseStd3AsciiRules(self, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class JapaneseCalendar(Calendar, ICloneable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-    @property
-    def TwoDigitYearMax(self) -> IntType: ...
-    @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
-    @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
+        :return:
+        """
     def GetWeekOfYear(
         self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
-    ) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
     @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
     @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
     @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
     @overload
     def ToDateTime(
         self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class JapaneseLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def JapaneseEra() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-
-    # ---------- Methods ---------- #
-
-    def GetEra(self, time: DateTime) -> IntType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class JulianCalendar(Calendar, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def JulianEra() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-    @property
-    def TwoDigitYearMax(self) -> IntType: ...
-    @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
-    @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
-    @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def ToDateTime(
-        self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class KoreanCalendar(Calendar, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def KoreanEra() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-    @property
-    def TwoDigitYearMax(self) -> IntType: ...
-    @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
-    @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetWeekOfYear(
-        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
-    ) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
-    @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def ToDateTime(
-        self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class KoreanLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def GregorianEra() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-
-    # ---------- Methods ---------- #
-
-    def GetEra(self, time: DateTime) -> IntType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NumberFormatInfo(ObjectType, ICloneable, IFormatProvider):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CurrencyDecimalDigits(self) -> IntType: ...
-    @CurrencyDecimalDigits.setter
-    def CurrencyDecimalDigits(self, value: IntType) -> None: ...
-    @property
-    def CurrencyDecimalSeparator(self) -> StringType: ...
-    @CurrencyDecimalSeparator.setter
-    def CurrencyDecimalSeparator(self, value: StringType) -> None: ...
-    @property
-    def CurrencyGroupSeparator(self) -> StringType: ...
-    @CurrencyGroupSeparator.setter
-    def CurrencyGroupSeparator(self, value: StringType) -> None: ...
-    @property
-    def CurrencyGroupSizes(self) -> ArrayType[IntType]: ...
-    @CurrencyGroupSizes.setter
-    def CurrencyGroupSizes(self, value: ArrayType[IntType]) -> None: ...
-    @property
-    def CurrencyNegativePattern(self) -> IntType: ...
-    @CurrencyNegativePattern.setter
-    def CurrencyNegativePattern(self, value: IntType) -> None: ...
-    @property
-    def CurrencyPositivePattern(self) -> IntType: ...
-    @CurrencyPositivePattern.setter
-    def CurrencyPositivePattern(self, value: IntType) -> None: ...
-    @property
-    def CurrencySymbol(self) -> StringType: ...
-    @CurrencySymbol.setter
-    def CurrencySymbol(self, value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def CurrentInfo() -> NumberFormatInfo: ...
-    @property
-    def DigitSubstitution(self) -> DigitShapes: ...
-    @DigitSubstitution.setter
-    def DigitSubstitution(self, value: DigitShapes) -> None: ...
-    @staticmethod
-    @property
-    def InvariantInfo() -> NumberFormatInfo: ...
-    @property
-    def IsReadOnly(self) -> BooleanType: ...
-    @property
-    def NaNSymbol(self) -> StringType: ...
-    @NaNSymbol.setter
-    def NaNSymbol(self, value: StringType) -> None: ...
-    @property
-    def NativeDigits(self) -> ArrayType[StringType]: ...
-    @NativeDigits.setter
-    def NativeDigits(self, value: ArrayType[StringType]) -> None: ...
-    @property
-    def NegativeInfinitySymbol(self) -> StringType: ...
-    @NegativeInfinitySymbol.setter
-    def NegativeInfinitySymbol(self, value: StringType) -> None: ...
-    @property
-    def NegativeSign(self) -> StringType: ...
-    @NegativeSign.setter
-    def NegativeSign(self, value: StringType) -> None: ...
-    @property
-    def NumberDecimalDigits(self) -> IntType: ...
-    @NumberDecimalDigits.setter
-    def NumberDecimalDigits(self, value: IntType) -> None: ...
-    @property
-    def NumberDecimalSeparator(self) -> StringType: ...
-    @NumberDecimalSeparator.setter
-    def NumberDecimalSeparator(self, value: StringType) -> None: ...
-    @property
-    def NumberGroupSeparator(self) -> StringType: ...
-    @NumberGroupSeparator.setter
-    def NumberGroupSeparator(self, value: StringType) -> None: ...
-    @property
-    def NumberGroupSizes(self) -> ArrayType[IntType]: ...
-    @NumberGroupSizes.setter
-    def NumberGroupSizes(self, value: ArrayType[IntType]) -> None: ...
-    @property
-    def NumberNegativePattern(self) -> IntType: ...
-    @NumberNegativePattern.setter
-    def NumberNegativePattern(self, value: IntType) -> None: ...
-    @property
-    def PerMilleSymbol(self) -> StringType: ...
-    @PerMilleSymbol.setter
-    def PerMilleSymbol(self, value: StringType) -> None: ...
-    @property
-    def PercentDecimalDigits(self) -> IntType: ...
-    @PercentDecimalDigits.setter
-    def PercentDecimalDigits(self, value: IntType) -> None: ...
-    @property
-    def PercentDecimalSeparator(self) -> StringType: ...
-    @PercentDecimalSeparator.setter
-    def PercentDecimalSeparator(self, value: StringType) -> None: ...
-    @property
-    def PercentGroupSeparator(self) -> StringType: ...
-    @PercentGroupSeparator.setter
-    def PercentGroupSeparator(self, value: StringType) -> None: ...
-    @property
-    def PercentGroupSizes(self) -> ArrayType[IntType]: ...
-    @PercentGroupSizes.setter
-    def PercentGroupSizes(self, value: ArrayType[IntType]) -> None: ...
-    @property
-    def PercentNegativePattern(self) -> IntType: ...
-    @PercentNegativePattern.setter
-    def PercentNegativePattern(self, value: IntType) -> None: ...
-    @property
-    def PercentPositivePattern(self) -> IntType: ...
-    @PercentPositivePattern.setter
-    def PercentPositivePattern(self, value: IntType) -> None: ...
-    @property
-    def PercentSymbol(self) -> StringType: ...
-    @PercentSymbol.setter
-    def PercentSymbol(self, value: StringType) -> None: ...
-    @property
-    def PositiveInfinitySymbol(self) -> StringType: ...
-    @PositiveInfinitySymbol.setter
-    def PositiveInfinitySymbol(self, value: StringType) -> None: ...
-    @property
-    def PositiveSign(self) -> StringType: ...
-    @PositiveSign.setter
-    def PositiveSign(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Clone(self) -> ObjectType: ...
-    def GetFormat(self, formatType: TypeType) -> ObjectType: ...
-    @staticmethod
-    def GetInstance(formatProvider: IFormatProvider) -> NumberFormatInfo: ...
-    @staticmethod
-    def ReadOnly(nfi: NumberFormatInfo) -> NumberFormatInfo: ...
-    def get_CurrencyDecimalDigits(self) -> IntType: ...
-    def get_CurrencyDecimalSeparator(self) -> StringType: ...
-    def get_CurrencyGroupSeparator(self) -> StringType: ...
-    def get_CurrencyGroupSizes(self) -> ArrayType[IntType]: ...
-    def get_CurrencyNegativePattern(self) -> IntType: ...
-    def get_CurrencyPositivePattern(self) -> IntType: ...
-    def get_CurrencySymbol(self) -> StringType: ...
-    @staticmethod
-    def get_CurrentInfo() -> NumberFormatInfo: ...
-    def get_DigitSubstitution(self) -> DigitShapes: ...
-    @staticmethod
-    def get_InvariantInfo() -> NumberFormatInfo: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_NaNSymbol(self) -> StringType: ...
-    def get_NativeDigits(self) -> ArrayType[StringType]: ...
-    def get_NegativeInfinitySymbol(self) -> StringType: ...
-    def get_NegativeSign(self) -> StringType: ...
-    def get_NumberDecimalDigits(self) -> IntType: ...
-    def get_NumberDecimalSeparator(self) -> StringType: ...
-    def get_NumberGroupSeparator(self) -> StringType: ...
-    def get_NumberGroupSizes(self) -> ArrayType[IntType]: ...
-    def get_NumberNegativePattern(self) -> IntType: ...
-    def get_PerMilleSymbol(self) -> StringType: ...
-    def get_PercentDecimalDigits(self) -> IntType: ...
-    def get_PercentDecimalSeparator(self) -> StringType: ...
-    def get_PercentGroupSeparator(self) -> StringType: ...
-    def get_PercentGroupSizes(self) -> ArrayType[IntType]: ...
-    def get_PercentNegativePattern(self) -> IntType: ...
-    def get_PercentPositivePattern(self) -> IntType: ...
-    def get_PercentSymbol(self) -> StringType: ...
-    def get_PositiveInfinitySymbol(self) -> StringType: ...
-    def get_PositiveSign(self) -> StringType: ...
-    def set_CurrencyDecimalDigits(self, value: IntType) -> VoidType: ...
-    def set_CurrencyDecimalSeparator(self, value: StringType) -> VoidType: ...
-    def set_CurrencyGroupSeparator(self, value: StringType) -> VoidType: ...
-    def set_CurrencyGroupSizes(self, value: ArrayType[IntType]) -> VoidType: ...
-    def set_CurrencyNegativePattern(self, value: IntType) -> VoidType: ...
-    def set_CurrencyPositivePattern(self, value: IntType) -> VoidType: ...
-    def set_CurrencySymbol(self, value: StringType) -> VoidType: ...
-    def set_DigitSubstitution(self, value: DigitShapes) -> VoidType: ...
-    def set_NaNSymbol(self, value: StringType) -> VoidType: ...
-    def set_NativeDigits(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_NegativeInfinitySymbol(self, value: StringType) -> VoidType: ...
-    def set_NegativeSign(self, value: StringType) -> VoidType: ...
-    def set_NumberDecimalDigits(self, value: IntType) -> VoidType: ...
-    def set_NumberDecimalSeparator(self, value: StringType) -> VoidType: ...
-    def set_NumberGroupSeparator(self, value: StringType) -> VoidType: ...
-    def set_NumberGroupSizes(self, value: ArrayType[IntType]) -> VoidType: ...
-    def set_NumberNegativePattern(self, value: IntType) -> VoidType: ...
-    def set_PerMilleSymbol(self, value: StringType) -> VoidType: ...
-    def set_PercentDecimalDigits(self, value: IntType) -> VoidType: ...
-    def set_PercentDecimalSeparator(self, value: StringType) -> VoidType: ...
-    def set_PercentGroupSeparator(self, value: StringType) -> VoidType: ...
-    def set_PercentGroupSizes(self, value: ArrayType[IntType]) -> VoidType: ...
-    def set_PercentNegativePattern(self, value: IntType) -> VoidType: ...
-    def set_PercentPositivePattern(self, value: IntType) -> VoidType: ...
-    def set_PercentSymbol(self, value: StringType) -> VoidType: ...
-    def set_PositiveInfinitySymbol(self, value: StringType) -> VoidType: ...
-    def set_PositiveSign(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PersianCalendar(Calendar, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def PersianEra() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-    @property
-    def TwoDigitYearMax(self) -> IntType: ...
-    @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
-    @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
-    @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def ToDateTime(
-        self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegionInfo(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, name: StringType): ...
-    @overload
-    def __init__(self, culture: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CurrencyEnglishName(self) -> StringType: ...
-    @property
-    def CurrencyNativeName(self) -> StringType: ...
-    @property
-    def CurrencySymbol(self) -> StringType: ...
-    @staticmethod
-    @property
-    def CurrentRegion() -> RegionInfo: ...
-    @property
-    def DisplayName(self) -> StringType: ...
-    @property
-    def EnglishName(self) -> StringType: ...
-    @property
-    def GeoId(self) -> IntType: ...
-    @property
-    def ISOCurrencySymbol(self) -> StringType: ...
-    @property
-    def IsMetric(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def NativeName(self) -> StringType: ...
-    @property
-    def ThreeLetterISORegionName(self) -> StringType: ...
-    @property
-    def ThreeLetterWindowsRegionName(self) -> StringType: ...
-    @property
-    def TwoLetterISORegionName(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_CurrencyEnglishName(self) -> StringType: ...
-    def get_CurrencyNativeName(self) -> StringType: ...
-    def get_CurrencySymbol(self) -> StringType: ...
-    @staticmethod
-    def get_CurrentRegion() -> RegionInfo: ...
-    def get_DisplayName(self) -> StringType: ...
-    def get_EnglishName(self) -> StringType: ...
-    def get_GeoId(self) -> IntType: ...
-    def get_ISOCurrencySymbol(self) -> StringType: ...
-    def get_IsMetric(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_NativeName(self) -> StringType: ...
-    def get_ThreeLetterISORegionName(self) -> StringType: ...
-    def get_ThreeLetterWindowsRegionName(self) -> StringType: ...
-    def get_TwoLetterISORegionName(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SortKey(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def KeyData(self) -> ArrayType[ByteType]: ...
-    @property
-    def OriginalString(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Compare(sortkey1: SortKey, sortkey2: SortKey) -> IntType: ...
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_KeyData(self) -> ArrayType[ByteType]: ...
-    def get_OriginalString(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SortVersion(ObjectType, IEquatable[SortVersion]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, fullVersion: IntType, sortId: Guid): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def FullVersion(self) -> IntType: ...
-    @property
-    def SortId(self) -> Guid: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    @overload
-    def Equals(self, other: SortVersion) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_FullVersion(self) -> IntType: ...
-    def get_SortId(self) -> Guid: ...
-    @staticmethod
-    def op_Equality(left: SortVersion, right: SortVersion) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(left: SortVersion, right: SortVersion) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StringInfo(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def LengthInTextElements(self) -> IntType: ...
-    @property
-    def String(self) -> StringType: ...
-    @String.setter
-    def String(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    @staticmethod
-    @overload
-    def GetNextTextElement(str: StringType) -> StringType: ...
-    @staticmethod
-    @overload
-    def GetNextTextElement(str: StringType, index: IntType) -> StringType: ...
-    @staticmethod
-    @overload
-    def GetTextElementEnumerator(str: StringType) -> TextElementEnumerator: ...
-    @staticmethod
-    @overload
-    def GetTextElementEnumerator(str: StringType, index: IntType) -> TextElementEnumerator: ...
-    @staticmethod
-    def ParseCombiningCharacters(str: StringType) -> ArrayType[IntType]: ...
-    @overload
-    def SubstringByTextElements(self, startingTextElement: IntType) -> StringType: ...
-    @overload
-    def SubstringByTextElements(
-        self, startingTextElement: IntType, lengthInTextElements: IntType
-    ) -> StringType: ...
-    def get_LengthInTextElements(self) -> IntType: ...
-    def get_String(self) -> StringType: ...
-    def set_String(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TaiwanCalendar(Calendar, ICloneable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-    @property
-    def TwoDigitYearMax(self) -> IntType: ...
-    @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
-    @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetWeekOfYear(
-        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
-    ) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
-    @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def ToDateTime(
-        self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TaiwanLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-
-    # ---------- Methods ---------- #
-
-    def GetEra(self, time: DateTime) -> IntType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TextElementEnumerator(ObjectType, IEnumerator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> ObjectType: ...
-    @property
-    def ElementIndex(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetTextElement(self) -> StringType: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> ObjectType: ...
-    def get_ElementIndex(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TextInfo(ObjectType, ICloneable, IDeserializationCallback):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ANSICodePage(self) -> IntType: ...
-    @property
-    def CultureName(self) -> StringType: ...
-    @property
-    def EBCDICCodePage(self) -> IntType: ...
-    @property
-    def IsReadOnly(self) -> BooleanType: ...
-    @property
-    def IsRightToLeft(self) -> BooleanType: ...
-    @property
-    def LCID(self) -> IntType: ...
-    @property
-    def ListSeparator(self) -> StringType: ...
-    @ListSeparator.setter
-    def ListSeparator(self, value: StringType) -> None: ...
-    @property
-    def MacCodePage(self) -> IntType: ...
-    @property
-    def OEMCodePage(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def Clone(self) -> ObjectType: ...
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    @staticmethod
-    def ReadOnly(textInfo: TextInfo) -> TextInfo: ...
-    @overload
-    def ToLower(self, c: CharType) -> CharType: ...
-    @overload
-    def ToLower(self, str: StringType) -> StringType: ...
-    def ToString(self) -> StringType: ...
-    def ToTitleCase(self, str: StringType) -> StringType: ...
-    @overload
-    def ToUpper(self, c: CharType) -> CharType: ...
-    @overload
-    def ToUpper(self, str: StringType) -> StringType: ...
-    def get_ANSICodePage(self) -> IntType: ...
-    def get_CultureName(self) -> StringType: ...
-    def get_EBCDICCodePage(self) -> IntType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_IsRightToLeft(self) -> BooleanType: ...
-    def get_LCID(self) -> IntType: ...
-    def get_ListSeparator(self) -> StringType: ...
-    def get_MacCodePage(self) -> IntType: ...
-    def get_OEMCodePage(self) -> IntType: ...
-    def set_ListSeparator(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThaiBuddhistCalendar(Calendar, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def ThaiBuddhistEra() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-    @property
-    def TwoDigitYearMax(self) -> IntType: ...
-    @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
-    @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetWeekOfYear(
-        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
-    ) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
-    @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def ToDateTime(
-        self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TimeSpanFormat(ABC, ObjectType):
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class HebrewNumber(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TimeSpanParse(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TokenHashValue(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UmAlQuraCalendar(Calendar, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def UmAlQuraEra() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AlgorithmType(self) -> CalendarAlgorithmType: ...
-    @property
-    def Eras(self) -> ArrayType[IntType]: ...
-    @property
-    def MaxSupportedDateTime(self) -> DateTime: ...
-    @property
-    def MinSupportedDateTime(self) -> DateTime: ...
-    @property
-    def TwoDigitYearMax(self) -> IntType: ...
-    @TwoDigitYearMax.setter
-    def TwoDigitYearMax(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def AddMonths(self, time: DateTime, months: IntType) -> DateTime: ...
-    def AddYears(self, time: DateTime, years: IntType) -> DateTime: ...
-    def GetDayOfMonth(self, time: DateTime) -> IntType: ...
-    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek: ...
-    def GetDayOfYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetDaysInMonth(self, year: IntType, month: IntType, era: IntType) -> IntType: ...
-    @overload
-    def GetDaysInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetEra(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetLeapMonth(self, year: IntType, era: IntType) -> IntType: ...
-    def GetMonth(self, time: DateTime) -> IntType: ...
-    @overload
-    def GetMonthsInYear(self, year: IntType, era: IntType) -> IntType: ...
-    def GetYear(self, time: DateTime) -> IntType: ...
-    @overload
-    def IsLeapDay(
-        self, year: IntType, month: IntType, day: IntType, era: IntType
-    ) -> BooleanType: ...
-    @overload
-    def IsLeapMonth(self, year: IntType, month: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def IsLeapYear(self, year: IntType, era: IntType) -> BooleanType: ...
-    @overload
-    def ToDateTime(
-        self,
-        year: IntType,
-        month: IntType,
-        day: IntType,
-        hour: IntType,
-        minute: IntType,
-        second: IntType,
-        millisecond: IntType,
-        era: IntType,
-    ) -> DateTime: ...
-    def ToFourDigitYear(self, year: IntType) -> IntType: ...
-    def get_AlgorithmType(self) -> CalendarAlgorithmType: ...
-    def get_Eras(self) -> ArrayType[IntType]: ...
-    def get_MaxSupportedDateTime(self) -> DateTime: ...
-    def get_MinSupportedDateTime(self) -> DateTime: ...
-    def get_TwoDigitYearMax(self) -> IntType: ...
-    def set_TwoDigitYearMax(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
-
-class DaylightTimeStruct(ValueType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, start: DateTime, end: DateTime, delta: TimeSpan): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Delta(self) -> TimeSpan: ...
-    @property
-    def End(self) -> DateTime: ...
-    @property
-    def Start(self) -> DateTime: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Delta(self) -> TimeSpan: ...
-    def get_End(self) -> DateTime: ...
-    def get_Start(self) -> DateTime: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class HebrewNumberParsingContext(ValueType):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, result: int):
+        """
 
-    def __init__(self, result: IntType): ...
+        :param result:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class HebrewNumberParsingState(Enum):
+    """"""
 
-    # No Sub Interfaces
+    InvalidHebrewNumber: HebrewNumberParsingState = ...
+    """"""
+    NotHebrewDigit: HebrewNumberParsingState = ...
+    """"""
+    FoundEndOfHebrewNumber: HebrewNumberParsingState = ...
+    """"""
+    ContinueParsing: HebrewNumberParsingState = ...
+    """"""
 
-    # No Sub Enums
+class HijriCalendar(Calendar, ICloneable):
+    """"""
+
+    HijriEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def HijriAdjustment(self) -> int:
+        """
+
+        :return:
+        """
+    @HijriAdjustment.setter
+    def HijriAdjustment(self, value: int) -> None: ...
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IdnMapping(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def AllowUnassigned(self) -> bool:
+        """
+
+        :return:
+        """
+    @AllowUnassigned.setter
+    def AllowUnassigned(self, value: bool) -> None: ...
+    @property
+    def UseStd3AsciiRules(self) -> bool:
+        """
+
+        :return:
+        """
+    @UseStd3AsciiRules.setter
+    def UseStd3AsciiRules(self, value: bool) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetAscii(self, unicode: str) -> str:
+        """
+
+        :param unicode:
+        :return:
+        """
+    @overload
+    def GetAscii(self, unicode: str, index: int) -> str:
+        """
+
+        :param unicode:
+        :param index:
+        :return:
+        """
+    @overload
+    def GetAscii(self, unicode: str, index: int, count: int) -> str:
+        """
+
+        :param unicode:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetUnicode(self, ascii: str) -> str:
+        """
+
+        :param ascii:
+        :return:
+        """
+    @overload
+    def GetUnicode(self, ascii: str, index: int) -> str:
+        """
+
+        :param ascii:
+        :param index:
+        :return:
+        """
+    @overload
+    def GetUnicode(self, ascii: str, index: int, count: int) -> str:
+        """
+
+        :param ascii:
+        :param index:
+        :param count:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class InternalCodePageDataItem(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class InternalEncodingDataItem(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class JapaneseCalendar(Calendar, ICloneable):
+    """"""
 
-    # No Sub Structs
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-# No Interfaces
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
 
-# ---------- Enums ---------- #
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
 
-class BidiCategory(Enum):
-    LeftToRight = 0
-    LeftToRightEmbedding = 1
-    LeftToRightOverride = 2
-    RightToLeft = 3
-    RightToLeftArabic = 4
-    RightToLeftEmbedding = 5
-    RightToLeftOverride = 6
-    PopDirectionalFormat = 7
-    EuropeanNumber = 8
-    EuropeanNumberSeparator = 9
-    EuropeanNumberTerminator = 10
-    ArabicNumber = 11
-    CommonNumberSeparator = 12
-    NonSpacingMark = 13
-    BoundaryNeutral = 14
-    ParagraphSeparator = 15
-    SegmentSeparator = 16
-    Whitespace = 17
-    OtherNeutrals = 18
-    LeftToRightIsolate = 19
-    RightToLeftIsolate = 20
-    FirstStrongIsolate = 21
-    PopDirectionIsolate = 22
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
 
-class CalendarAlgorithmType(Enum):
-    Unknown = 0
-    SolarCalendar = 1
-    LunarCalendar = 2
-    LunisolarCalendar = 3
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
 
-class CalendarId(Enum):
-    GREGORIAN = 1
-    GREGORIAN_US = 2
-    JAPAN = 3
-    TAIWAN = 4
-    KOREA = 5
-    HIJRI = 6
-    THAI = 7
-    HEBREW = 8
-    GREGORIAN_ME_FRENCH = 9
-    GREGORIAN_ARABIC = 10
-    GREGORIAN_XLIT_ENGLISH = 11
-    GREGORIAN_XLIT_FRENCH = 12
-    JULIAN = 13
-    JAPANESELUNISOLAR = 14
-    CHINESELUNISOLAR = 15
-    SAKA = 16
-    LUNAR_ETO_CHN = 17
-    LUNAR_ETO_KOR = 18
-    LUNAR_ETO_ROKUYOU = 19
-    KOREANLUNISOLAR = 20
-    TAIWANLUNISOLAR = 21
-    PERSIAN = 22
-    UMALQURA = 23
-    LAST_CALENDAR = 23
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
 
-class CalendarWeekRule(Enum):
-    FirstDay = 0
-    FirstFullWeek = 1
-    FirstFourDayWeek = 2
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
 
-class CompareOptions(Enum):
-    # None = 0
-    IgnoreCase = 1
-    IgnoreNonSpace = 2
-    IgnoreSymbols = 4
-    IgnoreKanaType = 8
-    IgnoreWidth = 16
-    OrdinalIgnoreCase = 268435456
-    StringSort = 536870912
-    Ordinal = 1073741824
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
 
-class CultureTypes(Enum):
-    NeutralCultures = 1
-    SpecificCultures = 2
-    InstalledWin32Cultures = 4
-    AllCultures = 7
-    UserCustomCulture = 8
-    ReplacementCultures = 16
-    WindowsOnlyCultures = 32
-    FrameworkCultures = 64
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
 
-class DateTimeFormatFlags(Enum):
-    NotInitialized = -1
-    # None = 0
-    UseGenitiveMonth = 1
-    UseLeapYearMonth = 2
-    UseSpacesInMonthNames = 4
-    UseHebrewRule = 8
-    UseSpacesInDayNames = 16
-    UseDigitPrefixInTokens = 32
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
 
-class DateTimeStyles(Enum):
-    # None = 0
-    AllowLeadingWhite = 1
-    AllowTrailingWhite = 2
-    AllowInnerWhite = 4
-    AllowWhiteSpaces = 7
-    NoCurrentDateDefault = 8
-    AdjustToUniversal = 16
-    AssumeLocal = 32
-    AssumeUniversal = 64
-    RoundtripKind = 128
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
 
-class DigitShapes(Enum):
-    Context = 0
-    # None = 1
-    NativeNational = 2
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
 
-class FORMATFLAGS(Enum):
-    # None = 0
-    UseGenitiveMonth = 1
-    UseLeapYearMonth = 2
-    UseSpacesInMonthNames = 4
-    UseHebrewParsing = 8
-    UseSpacesInDayNames = 16
-    UseDigitPrefixInTokens = 32
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
 
-class GregorianCalendarTypes(Enum):
-    Localized = 1
-    USEnglish = 2
-    MiddleEastFrench = 9
-    Arabic = 10
-    TransliteratedEnglish = 11
-    TransliteratedFrench = 12
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class HebrewNumberParsingState(Enum):
-    InvalidHebrewNumber = 0
-    NotHebrewDigit = 1
-    FoundEndOfHebrewNumber = 2
-    ContinueParsing = 3
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class JapaneseLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
+    """"""
+
+    JapaneseEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetCelestialStem(self, sexagenaryYear: int) -> int:
+        """
+
+        :param sexagenaryYear:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetSexagenaryYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetTerrestrialBranch(self, sexagenaryYear: int) -> int:
+        """
+
+        :param sexagenaryYear:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class JulianCalendar(Calendar, ICloneable):
+    """"""
+
+    JulianEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class KoreanCalendar(Calendar, ICloneable):
+    """"""
+
+    KoreanEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class KoreanLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
+    """"""
+
+    GregorianEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetCelestialStem(self, sexagenaryYear: int) -> int:
+        """
+
+        :param sexagenaryYear:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetSexagenaryYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetTerrestrialBranch(self, sexagenaryYear: int) -> int:
+        """
+
+        :param sexagenaryYear:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class MonthNameStyles(Enum):
-    Regular = 0
-    Genitive = 1
-    LeapYear = 2
+    """"""
+
+    Regular: MonthNameStyles = ...
+    """"""
+    Genitive: MonthNameStyles = ...
+    """"""
+    LeapYear: MonthNameStyles = ...
+    """"""
+
+class NumberFormatInfo(Object, ICloneable, IFormatProvider):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def CurrencyDecimalDigits(self) -> int:
+        """
+
+        :return:
+        """
+    @CurrencyDecimalDigits.setter
+    def CurrencyDecimalDigits(self, value: int) -> None: ...
+    @property
+    def CurrencyDecimalSeparator(self) -> str:
+        """
+
+        :return:
+        """
+    @CurrencyDecimalSeparator.setter
+    def CurrencyDecimalSeparator(self, value: str) -> None: ...
+    @property
+    def CurrencyGroupSeparator(self) -> str:
+        """
+
+        :return:
+        """
+    @CurrencyGroupSeparator.setter
+    def CurrencyGroupSeparator(self, value: str) -> None: ...
+    @property
+    def CurrencyGroupSizes(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @CurrencyGroupSizes.setter
+    def CurrencyGroupSizes(self, value: Array[int]) -> None: ...
+    @property
+    def CurrencyNegativePattern(self) -> int:
+        """
+
+        :return:
+        """
+    @CurrencyNegativePattern.setter
+    def CurrencyNegativePattern(self, value: int) -> None: ...
+    @property
+    def CurrencyPositivePattern(self) -> int:
+        """
+
+        :return:
+        """
+    @CurrencyPositivePattern.setter
+    def CurrencyPositivePattern(self, value: int) -> None: ...
+    @property
+    def CurrencySymbol(self) -> str:
+        """
+
+        :return:
+        """
+    @CurrencySymbol.setter
+    def CurrencySymbol(self, value: str) -> None: ...
+    @classmethod
+    @property
+    def CurrentInfo(cls) -> NumberFormatInfo:
+        """
+
+        :return:
+        """
+    @property
+    def DigitSubstitution(self) -> DigitShapes:
+        """
+
+        :return:
+        """
+    @DigitSubstitution.setter
+    def DigitSubstitution(self, value: DigitShapes) -> None: ...
+    @classmethod
+    @property
+    def InvariantInfo(cls) -> NumberFormatInfo:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def NaNSymbol(self) -> str:
+        """
+
+        :return:
+        """
+    @NaNSymbol.setter
+    def NaNSymbol(self, value: str) -> None: ...
+    @property
+    def NativeDigits(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    @NativeDigits.setter
+    def NativeDigits(self, value: Array[str]) -> None: ...
+    @property
+    def NegativeInfinitySymbol(self) -> str:
+        """
+
+        :return:
+        """
+    @NegativeInfinitySymbol.setter
+    def NegativeInfinitySymbol(self, value: str) -> None: ...
+    @property
+    def NegativeSign(self) -> str:
+        """
+
+        :return:
+        """
+    @NegativeSign.setter
+    def NegativeSign(self, value: str) -> None: ...
+    @property
+    def NumberDecimalDigits(self) -> int:
+        """
+
+        :return:
+        """
+    @NumberDecimalDigits.setter
+    def NumberDecimalDigits(self, value: int) -> None: ...
+    @property
+    def NumberDecimalSeparator(self) -> str:
+        """
+
+        :return:
+        """
+    @NumberDecimalSeparator.setter
+    def NumberDecimalSeparator(self, value: str) -> None: ...
+    @property
+    def NumberGroupSeparator(self) -> str:
+        """
+
+        :return:
+        """
+    @NumberGroupSeparator.setter
+    def NumberGroupSeparator(self, value: str) -> None: ...
+    @property
+    def NumberGroupSizes(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @NumberGroupSizes.setter
+    def NumberGroupSizes(self, value: Array[int]) -> None: ...
+    @property
+    def NumberNegativePattern(self) -> int:
+        """
+
+        :return:
+        """
+    @NumberNegativePattern.setter
+    def NumberNegativePattern(self, value: int) -> None: ...
+    @property
+    def PerMilleSymbol(self) -> str:
+        """
+
+        :return:
+        """
+    @PerMilleSymbol.setter
+    def PerMilleSymbol(self, value: str) -> None: ...
+    @property
+    def PercentDecimalDigits(self) -> int:
+        """
+
+        :return:
+        """
+    @PercentDecimalDigits.setter
+    def PercentDecimalDigits(self, value: int) -> None: ...
+    @property
+    def PercentDecimalSeparator(self) -> str:
+        """
+
+        :return:
+        """
+    @PercentDecimalSeparator.setter
+    def PercentDecimalSeparator(self, value: str) -> None: ...
+    @property
+    def PercentGroupSeparator(self) -> str:
+        """
+
+        :return:
+        """
+    @PercentGroupSeparator.setter
+    def PercentGroupSeparator(self, value: str) -> None: ...
+    @property
+    def PercentGroupSizes(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @PercentGroupSizes.setter
+    def PercentGroupSizes(self, value: Array[int]) -> None: ...
+    @property
+    def PercentNegativePattern(self) -> int:
+        """
+
+        :return:
+        """
+    @PercentNegativePattern.setter
+    def PercentNegativePattern(self, value: int) -> None: ...
+    @property
+    def PercentPositivePattern(self) -> int:
+        """
+
+        :return:
+        """
+    @PercentPositivePattern.setter
+    def PercentPositivePattern(self, value: int) -> None: ...
+    @property
+    def PercentSymbol(self) -> str:
+        """
+
+        :return:
+        """
+    @PercentSymbol.setter
+    def PercentSymbol(self, value: str) -> None: ...
+    @property
+    def PositiveInfinitySymbol(self) -> str:
+        """
+
+        :return:
+        """
+    @PositiveInfinitySymbol.setter
+    def PositiveInfinitySymbol(self, value: str) -> None: ...
+    @property
+    def PositiveSign(self) -> str:
+        """
+
+        :return:
+        """
+    @PositiveSign.setter
+    def PositiveSign(self, value: str) -> None: ...
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetFormat(self, formatType: Type) -> object:
+        """
+
+        :param formatType:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetInstance(cls, formatProvider: IFormatProvider) -> NumberFormatInfo:
+        """
+
+        :param formatProvider:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def ReadOnly(cls, nfi: NumberFormatInfo) -> NumberFormatInfo:
+        """
+
+        :param nfi:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class NumberStyles(Enum):
-    # None = 0
-    AllowLeadingWhite = 1
-    AllowTrailingWhite = 2
-    AllowLeadingSign = 4
-    Integer = 7
-    AllowTrailingSign = 8
-    AllowParentheses = 16
-    AllowDecimalPoint = 32
-    AllowThousands = 64
-    Number = 111
-    AllowExponent = 128
-    Float = 167
-    AllowCurrencySymbol = 256
-    Currency = 383
-    Any = 511
-    AllowHexSpecifier = 512
-    HexNumber = 515
+    """"""
+
+    _None: NumberStyles = ...
+    """"""
+    AllowLeadingWhite: NumberStyles = ...
+    """"""
+    AllowTrailingWhite: NumberStyles = ...
+    """"""
+    AllowLeadingSign: NumberStyles = ...
+    """"""
+    Integer: NumberStyles = ...
+    """"""
+    AllowTrailingSign: NumberStyles = ...
+    """"""
+    AllowParentheses: NumberStyles = ...
+    """"""
+    AllowDecimalPoint: NumberStyles = ...
+    """"""
+    AllowThousands: NumberStyles = ...
+    """"""
+    Number: NumberStyles = ...
+    """"""
+    AllowExponent: NumberStyles = ...
+    """"""
+    Float: NumberStyles = ...
+    """"""
+    AllowCurrencySymbol: NumberStyles = ...
+    """"""
+    Currency: NumberStyles = ...
+    """"""
+    Any: NumberStyles = ...
+    """"""
+    AllowHexSpecifier: NumberStyles = ...
+    """"""
+    HexNumber: NumberStyles = ...
+    """"""
+
+class PersianCalendar(Calendar, ICloneable):
+    """"""
+
+    PersianEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RegionInfo(Object):
+    """"""
+
+    @overload
+    def __init__(self, culture: int):
+        """
+
+        :param culture:
+        """
+    @overload
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
+    @property
+    def CurrencyEnglishName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CurrencyNativeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CurrencySymbol(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def CurrentRegion(cls) -> RegionInfo:
+        """
+
+        :return:
+        """
+    @property
+    def DisplayName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def EnglishName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def GeoId(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ISOCurrencySymbol(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsMetric(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def NativeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ThreeLetterISORegionName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ThreeLetterWindowsRegionName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TwoLetterISORegionName(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SortKey(Object):
+    """"""
+
+    @property
+    def KeyData(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def OriginalString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Compare(cls, sortkey1: SortKey, sortkey2: SortKey) -> int:
+        """
+
+        :param sortkey1:
+        :param sortkey2:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SortVersion(Object, IEquatable[SortVersion]):
+    """"""
+
+    def __init__(self, fullVersion: int, sortId: Guid):
+        """
+
+        :param fullVersion:
+        :param sortId:
+        """
+    @property
+    def FullVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SortId(self) -> Guid:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, other: SortVersion) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __eq__(self, other: SortVersion) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: SortVersion) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: SortVersion, right: SortVersion) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: SortVersion, right: SortVersion) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+
+class StringInfo(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def LengthInTextElements(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def String(self) -> str:
+        """
+
+        :return:
+        """
+    @String.setter
+    def String(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetNextTextElement(cls, str: str) -> str:
+        """
+
+        :param str:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetNextTextElement(cls, str: str, index: int) -> str:
+        """
+
+        :param str:
+        :param index:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetTextElementEnumerator(cls, str: str) -> TextElementEnumerator:
+        """
+
+        :param str:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetTextElementEnumerator(cls, str: str, index: int) -> TextElementEnumerator:
+        """
+
+        :param str:
+        :param index:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def ParseCombiningCharacters(cls, str: str) -> Array[int]:
+        """
+
+        :param str:
+        :return:
+        """
+    @overload
+    def SubstringByTextElements(self, startingTextElement: int) -> str:
+        """
+
+        :param startingTextElement:
+        :return:
+        """
+    @overload
+    def SubstringByTextElements(self, startingTextElement: int, lengthInTextElements: int) -> str:
+        """
+
+        :param startingTextElement:
+        :param lengthInTextElements:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TaiwanCalendar(Calendar, ICloneable):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TaiwanLunisolarCalendar(EastAsianLunisolarCalendar, ICloneable):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetCelestialStem(self, sexagenaryYear: int) -> int:
+        """
+
+        :param sexagenaryYear:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetSexagenaryYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetTerrestrialBranch(self, sexagenaryYear: int) -> int:
+        """
+
+        :param sexagenaryYear:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TextElementEnumerator(Object, IEnumerator):
+    """"""
+
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def ElementIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTextElement(self) -> str:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TextInfo(Object, IDeserializationCallback, ICloneable):
+    """"""
+
+    @property
+    def ANSICodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def CultureName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def EBCDICCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsRightToLeft(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def LCID(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ListSeparator(self) -> str:
+        """
+
+        :return:
+        """
+    @ListSeparator.setter
+    def ListSeparator(self, value: str) -> None: ...
+    @property
+    def MacCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OEMCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def OnDeserialization(self, sender: object) -> None:
+        """
+
+        :param sender:
+        """
+    @classmethod
+    def ReadOnly(cls, textInfo: TextInfo) -> TextInfo:
+        """
+
+        :param textInfo:
+        :return:
+        """
+    @overload
+    def ToLower(self, c: Char) -> Char:
+        """
+
+        :param c:
+        :return:
+        """
+    @overload
+    def ToLower(self, str: str) -> str:
+        """
+
+        :param str:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToTitleCase(self, str: str) -> str:
+        """
+
+        :param str:
+        :return:
+        """
+    @overload
+    def ToUpper(self, c: Char) -> Char:
+        """
+
+        :param c:
+        :return:
+        """
+    @overload
+    def ToUpper(self, str: str) -> str:
+        """
+
+        :param str:
+        :return:
+        """
+
+class ThaiBuddhistCalendar(Calendar, ICloneable):
+    """"""
+
+    ThaiBuddhistEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TimeSpanFormat(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TimeSpanParse(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class TimeSpanStyles(Enum):
-    # None = 0
-    AssumeNegative = 1
+    """"""
+
+    _None: TimeSpanStyles = ...
+    """"""
+    AssumeNegative: TimeSpanStyles = ...
+    """"""
+
+class TokenHashValue(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class UmAlQuraCalendar(Calendar, ICloneable):
+    """"""
+
+    UmAlQuraEra: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    @property
+    def AlgorithmType(self) -> CalendarAlgorithmType:
+        """
+
+        :return:
+        """
+    @property
+    def Eras(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaxSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def MinSupportedDateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TwoDigitYearMax(self) -> int:
+        """
+
+        :return:
+        """
+    @TwoDigitYearMax.setter
+    def TwoDigitYearMax(self, value: int) -> None: ...
+    def AddDays(self, time: DateTime, days: int) -> DateTime:
+        """
+
+        :param time:
+        :param days:
+        :return:
+        """
+    def AddHours(self, time: DateTime, hours: int) -> DateTime:
+        """
+
+        :param time:
+        :param hours:
+        :return:
+        """
+    def AddMilliseconds(self, time: DateTime, milliseconds: float) -> DateTime:
+        """
+
+        :param time:
+        :param milliseconds:
+        :return:
+        """
+    def AddMinutes(self, time: DateTime, minutes: int) -> DateTime:
+        """
+
+        :param time:
+        :param minutes:
+        :return:
+        """
+    def AddMonths(self, time: DateTime, months: int) -> DateTime:
+        """
+
+        :param time:
+        :param months:
+        :return:
+        """
+    def AddSeconds(self, time: DateTime, seconds: int) -> DateTime:
+        """
+
+        :param time:
+        :param seconds:
+        :return:
+        """
+    def AddWeeks(self, time: DateTime, weeks: int) -> DateTime:
+        """
+
+        :param time:
+        :param weeks:
+        :return:
+        """
+    def AddYears(self, time: DateTime, years: int) -> DateTime:
+        """
+
+        :param time:
+        :param years:
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDayOfMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfWeek(self, time: DateTime) -> DayOfWeek:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetDayOfYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def GetDaysInMonth(self, year: int, month: int, era: int) -> int:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetDaysInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetEra(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetHour(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetLeapMonth(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetMilliseconds(self, time: DateTime) -> float:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMinute(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetMonth(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def GetMonthsInYear(self, year: int, era: int) -> int:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    def GetSecond(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetWeekOfYear(
+        self, time: DateTime, rule: CalendarWeekRule, firstDayOfWeek: DayOfWeek
+    ) -> int:
+        """
+
+        :param time:
+        :param rule:
+        :param firstDayOfWeek:
+        :return:
+        """
+    def GetYear(self, time: DateTime) -> int:
+        """
+
+        :param time:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :return:
+        """
+    @overload
+    def IsLeapDay(self, year: int, month: int, day: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :return:
+        """
+    @overload
+    def IsLeapMonth(self, year: int, month: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param month:
+        :param era:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int) -> bool:
+        """
+
+        :param year:
+        :return:
+        """
+    @overload
+    def IsLeapYear(self, year: int, era: int) -> bool:
+        """
+
+        :param year:
+        :param era:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self, year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :return:
+        """
+    @overload
+    def ToDateTime(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        second: int,
+        millisecond: int,
+        era: int,
+    ) -> DateTime:
+        """
+
+        :param year:
+        :param month:
+        :param day:
+        :param hour:
+        :param minute:
+        :param second:
+        :param millisecond:
+        :param era:
+        :return:
+        """
+    def ToFourDigitYear(self, year: int) -> int:
+        """
+
+        :param year:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class UnicodeCategory(Enum):
-    UppercaseLetter = 0
-    LowercaseLetter = 1
-    TitlecaseLetter = 2
-    ModifierLetter = 3
-    OtherLetter = 4
-    NonSpacingMark = 5
-    SpacingCombiningMark = 6
-    EnclosingMark = 7
-    DecimalDigitNumber = 8
-    LetterNumber = 9
-    OtherNumber = 10
-    SpaceSeparator = 11
-    LineSeparator = 12
-    ParagraphSeparator = 13
-    Control = 14
-    Format = 15
-    Surrogate = 16
-    PrivateUse = 17
-    ConnectorPunctuation = 18
-    DashPunctuation = 19
-    OpenPunctuation = 20
-    ClosePunctuation = 21
-    InitialQuotePunctuation = 22
-    FinalQuotePunctuation = 23
-    OtherPunctuation = 24
-    MathSymbol = 25
-    CurrencySymbol = 26
-    ModifierSymbol = 27
-    OtherSymbol = 28
-    OtherNotAssigned = 29
+    """"""
 
-# No Delegates
-
-__all__ = [
-    AppDomainSortingSetupInfo,
-    Calendar,
-    CalendarData,
-    CalendricalCalculationsHelper,
-    CharUnicodeInfo,
-    ChineseLunisolarCalendar,
-    CodePageDataItem,
-    CompareInfo,
-    CultureData,
-    CultureInfo,
-    CultureNotFoundException,
-    DateTimeFormatInfo,
-    DateTimeFormatInfoScanner,
-    DaylightTime,
-    EastAsianLunisolarCalendar,
-    EncodingTable,
-    EraInfo,
-    GlobalizationAssembly,
-    GlobalizationExtensions,
-    GregorianCalendar,
-    GregorianCalendarHelper,
-    HebrewCalendar,
-    HebrewNumber,
-    HijriCalendar,
-    IdnMapping,
-    JapaneseCalendar,
-    JapaneseLunisolarCalendar,
-    JulianCalendar,
-    KoreanCalendar,
-    KoreanLunisolarCalendar,
-    NumberFormatInfo,
-    PersianCalendar,
-    RegionInfo,
-    SortKey,
-    SortVersion,
-    StringInfo,
-    TaiwanCalendar,
-    TaiwanLunisolarCalendar,
-    TextElementEnumerator,
-    TextInfo,
-    ThaiBuddhistCalendar,
-    TimeSpanFormat,
-    TimeSpanParse,
-    TokenHashValue,
-    UmAlQuraCalendar,
-    DaylightTimeStruct,
-    HebrewNumberParsingContext,
-    InternalCodePageDataItem,
-    InternalEncodingDataItem,
-    BidiCategory,
-    CalendarAlgorithmType,
-    CalendarId,
-    CalendarWeekRule,
-    CompareOptions,
-    CultureTypes,
-    DateTimeFormatFlags,
-    DateTimeStyles,
-    DigitShapes,
-    FORMATFLAGS,
-    GregorianCalendarTypes,
-    HebrewNumberParsingState,
-    MonthNameStyles,
-    NumberStyles,
-    TimeSpanStyles,
-    UnicodeCategory,
-]
+    UppercaseLetter: UnicodeCategory = ...
+    """"""
+    LowercaseLetter: UnicodeCategory = ...
+    """"""
+    TitlecaseLetter: UnicodeCategory = ...
+    """"""
+    ModifierLetter: UnicodeCategory = ...
+    """"""
+    OtherLetter: UnicodeCategory = ...
+    """"""
+    NonSpacingMark: UnicodeCategory = ...
+    """"""
+    SpacingCombiningMark: UnicodeCategory = ...
+    """"""
+    EnclosingMark: UnicodeCategory = ...
+    """"""
+    DecimalDigitNumber: UnicodeCategory = ...
+    """"""
+    LetterNumber: UnicodeCategory = ...
+    """"""
+    OtherNumber: UnicodeCategory = ...
+    """"""
+    SpaceSeparator: UnicodeCategory = ...
+    """"""
+    LineSeparator: UnicodeCategory = ...
+    """"""
+    ParagraphSeparator: UnicodeCategory = ...
+    """"""
+    Control: UnicodeCategory = ...
+    """"""
+    Format: UnicodeCategory = ...
+    """"""
+    Surrogate: UnicodeCategory = ...
+    """"""
+    PrivateUse: UnicodeCategory = ...
+    """"""
+    ConnectorPunctuation: UnicodeCategory = ...
+    """"""
+    DashPunctuation: UnicodeCategory = ...
+    """"""
+    OpenPunctuation: UnicodeCategory = ...
+    """"""
+    ClosePunctuation: UnicodeCategory = ...
+    """"""
+    InitialQuotePunctuation: UnicodeCategory = ...
+    """"""
+    FinalQuotePunctuation: UnicodeCategory = ...
+    """"""
+    OtherPunctuation: UnicodeCategory = ...
+    """"""
+    MathSymbol: UnicodeCategory = ...
+    """"""
+    CurrencySymbol: UnicodeCategory = ...
+    """"""
+    ModifierSymbol: UnicodeCategory = ...
+    """"""
+    OtherSymbol: UnicodeCategory = ...
+    """"""
+    OtherNotAssigned: UnicodeCategory = ...
+    """"""

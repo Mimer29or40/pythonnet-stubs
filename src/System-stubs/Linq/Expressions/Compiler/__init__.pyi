@@ -3,383 +3,519 @@ from __future__ import annotations
 from abc import ABC
 from typing import Generic
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Enum
-from System import Int32
 from System import Object
-from System import String
+from System import Type
+from System.Collections.Generic import IEnumerable
+from System.Collections.ObjectModel import ReadOnlyCollection
+from System.Linq.Expressions import BlockExpression
 from System.Linq.Expressions import BlockN
 from System.Linq.Expressions import Expression
+from System.Linq.Expressions import ExpressionType
 from System.Linq.Expressions import ExpressionVisitor
-
-# ---------- Types ---------- #
+from System.Linq.Expressions import ParameterExpression
 
 K = TypeVar("K")
+T = TypeVar("T")
 V = TypeVar("V")
 
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-
-# ---------- Classes ---------- #
-
-class AnalyzedTree(ObjectType):
+class AnalyzedTree(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AssemblyGen(ObjectType):
+class AssemblyGen(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BoundConstants(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CompilerScope(ObjectType):
+class BoundConstants(Object):
     """"""
 
-    # No Fields
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DelegateHelpers(ABC, ObjectType):
+class CompilerScope(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HoistedLocals(ObjectType):
+class DelegateHelpers(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ILGen(ABC, ObjectType):
+class HoistedLocals(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class KeyedQueue(Generic[K, V], ObjectType):
+class ILGen(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LabelInfo(ObjectType):
+class KeyedQueue(Generic[K, V], Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LabelScopeInfo(ObjectType):
+class LabelInfo(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class LabelScopeInfo(Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class LambdaCompiler(ObjectType):
-    # No Fields
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # No Properties
+class LabelScopeKind(Enum):
+    """"""
 
-    # ---------- Methods ---------- #
+    Statement: LabelScopeKind = ...
+    """"""
+    Block: LabelScopeKind = ...
+    """"""
+    Switch: LabelScopeKind = ...
+    """"""
+    Lambda: LabelScopeKind = ...
+    """"""
+    Try: LabelScopeKind = ...
+    """"""
+    Catch: LabelScopeKind = ...
+    """"""
+    Finally: LabelScopeKind = ...
+    """"""
+    Filter: LabelScopeKind = ...
+    """"""
+    Expression: LabelScopeKind = ...
+    """"""
 
-    def ToString(self) -> StringType: ...
+class LambdaCompiler(Object):
+    """"""
 
-    # No Events
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SpilledExpressionBlock(BlockN):
     """"""
 
-    # No Fields
+    @property
+    def CanReduce(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Expressions(self) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def NodeType(self) -> ExpressionType:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Result(self) -> Expression:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Variables(self) -> ReadOnlyCollection[ParameterExpression]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class StackSpiller(ObjectType):
+        :return:
+        """
+    def Reduce(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceAndCheck(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ReduceExtensions(self) -> Expression:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Update(
+        self, variables: IEnumerable[ParameterExpression], expressions: IEnumerable[Expression]
+    ) -> BlockExpression:
+        """
+
+        :param variables:
+        :param expressions:
+        :return:
+        """
+
+class StackSpiller(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SymbolGuids(ABC, ObjectType):
+class SymbolGuids(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class VariableBinder(ExpressionVisitor):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def Visit(self, node: Expression) -> Expression: ...
+    def Visit(self, nodes: ReadOnlyCollection[Expression]) -> ReadOnlyCollection[Expression]:
+        """
 
-    # No Events
+        :param nodes:
+        :return:
+        """
+    @overload
+    def Visit(self, node: Expression) -> Expression:
+        """
 
-    # No Sub Classes
+        :param node:
+        :return:
+        """
+    @overload
+    def VisitAndConvert(self, node: T, callerName: str) -> T:
+        """
 
-    # No Sub Structs
+        :param node:
+        :param callerName:
+        :return:
+        """
+    @overload
+    def VisitAndConvert(
+        self, nodes: ReadOnlyCollection[T], callerName: str
+    ) -> ReadOnlyCollection[T]:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# ---------- Enums ---------- #
-
-class LabelScopeKind(Enum):
-    Statement = 0
-    Block = 1
-    Switch = 2
-    Lambda = 3
-    Try = 4
-    Catch = 5
-    Finally = 6
-    Filter = 7
-    Expression = 8
+        :param nodes:
+        :param callerName:
+        :return:
+        """
 
 class VariableStorageKind(Enum):
-    Local = 0
-    Hoisted = 1
+    """"""
 
-# No Delegates
-
-__all__ = [
-    AnalyzedTree,
-    AssemblyGen,
-    BoundConstants,
-    CompilerScope,
-    DelegateHelpers,
-    HoistedLocals,
-    ILGen,
-    KeyedQueue,
-    LabelInfo,
-    LabelScopeInfo,
-    LambdaCompiler,
-    SpilledExpressionBlock,
-    StackSpiller,
-    SymbolGuids,
-    VariableBinder,
-    LabelScopeKind,
-    VariableStorageKind,
-]
+    Local: VariableStorageKind = ...
+    """"""
+    Hoisted: VariableStorageKind = ...
+    """"""

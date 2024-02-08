@@ -2,637 +2,1422 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Callable
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import Protocol
+from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
-from System import AsyncCallback
 from System import Attribute
-from System import Boolean
 from System import EventArgs
 from System import EventHandler
-from System import IAsyncResult
-from System import ICloneable
+from System import Guid
 from System import IDisposable
-from System import Int32
 from System import IntPtr
 from System import IServiceProvider
-from System import MulticastDelegate
 from System import Object
-from System import String
 from System import Type
 from System import ValueType
-from System import Void
 from System.Collections import ICollection
+from System.ComponentModel import IComponent
 from System.ComponentModel import IContainer
 from System.ComponentModel import MemberDescriptor
 from System.ComponentModel import PropertyDescriptorCollection
+from System.ComponentModel.Design import DesignerTransaction
+from System.ComponentModel.Design import DesignerTransactionCloseEventHandler
+from System.ComponentModel.Design import IDesigner
 from System.ComponentModel.Design import IDesignerHost
 from System.ComponentModel.Design import IServiceContainer
+from System.ComponentModel.Design import ServiceCreatorCallback
 from System.IO import Stream
 from System.Reflection import MemberInfo
 from System.Runtime.InteropServices import _Attribute
-from System.Runtime.Serialization import ISerializable
-
-# ---------- Types ---------- #
 
 T = TypeVar("T")
-
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
 
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
+class ComponentSerializationService(ABC, Object):
+    """"""
 
-class ComponentSerializationService(ABC, ObjectType):
-    # No Fields
+    def CreateStore(self) -> SerializationStore:
+        """
 
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CreateStore(self) -> SerializationStore: ...
+        :return:
+        """
     @overload
-    def Deserialize(self, store: SerializationStore) -> ICollection: ...
+    def Deserialize(self, store: SerializationStore) -> ICollection:
+        """
+
+        :param store:
+        :return:
+        """
     @overload
-    def Deserialize(self, store: SerializationStore, container: IContainer) -> ICollection: ...
+    def Deserialize(self, store: SerializationStore, container: IContainer) -> ICollection:
+        """
+
+        :param store:
+        :param container:
+        :return:
+        """
     @overload
-    def DeserializeTo(self, store: SerializationStore, container: IContainer) -> VoidType: ...
+    def DeserializeTo(self, store: SerializationStore, container: IContainer) -> None:
+        """
+
+        :param store:
+        :param container:
+        """
     @overload
     def DeserializeTo(
-        self, store: SerializationStore, container: IContainer, validateRecycledTypes: BooleanType
-    ) -> VoidType: ...
+        self, store: SerializationStore, container: IContainer, validateRecycledTypes: bool
+    ) -> None:
+        """
+
+        :param store:
+        :param container:
+        :param validateRecycledTypes:
+        """
     @overload
     def DeserializeTo(
         self,
         store: SerializationStore,
         container: IContainer,
-        validateRecycledTypes: BooleanType,
-        applyDefaults: BooleanType,
-    ) -> VoidType: ...
-    def LoadStore(self, stream: Stream) -> SerializationStore: ...
-    def Serialize(self, store: SerializationStore, value: ObjectType) -> VoidType: ...
-    def SerializeAbsolute(self, store: SerializationStore, value: ObjectType) -> VoidType: ...
+        validateRecycledTypes: bool,
+        applyDefaults: bool,
+    ) -> None:
+        """
+
+        :param store:
+        :param container:
+        :param validateRecycledTypes:
+        :param applyDefaults:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def LoadStore(self, stream: Stream) -> SerializationStore:
+        """
+
+        :param stream:
+        :return:
+        """
+    def Serialize(self, store: SerializationStore, value: object) -> None:
+        """
+
+        :param store:
+        :param value:
+        """
+    def SerializeAbsolute(self, store: SerializationStore, value: object) -> None:
+        """
+
+        :param store:
+        :param value:
+        """
     def SerializeMember(
-        self, store: SerializationStore, owningObject: ObjectType, member: MemberDescriptor
-    ) -> VoidType: ...
+        self, store: SerializationStore, owningObject: object, member: MemberDescriptor
+    ) -> None:
+        """
+
+        :param store:
+        :param owningObject:
+        :param member:
+        """
     def SerializeMemberAbsolute(
-        self, store: SerializationStore, owningObject: ObjectType, member: MemberDescriptor
-    ) -> VoidType: ...
+        self, store: SerializationStore, owningObject: object, member: MemberDescriptor
+    ) -> None:
+        """
 
-    # No Events
+        :param store:
+        :param owningObject:
+        :param member:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class ContextStack(Object):
+    """"""
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ContextStack(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Current(self) -> ObjectType: ...
-    def __getitem__(self, key: IntType) -> ObjectType: ...
-    def __getitem__(self, key: TypeType) -> ObjectType: ...
+    def Current(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
 
-    def Append(self, context: ObjectType) -> VoidType: ...
-    def Pop(self) -> ObjectType: ...
-    def Push(self, context: ObjectType) -> VoidType: ...
-    def get_Current(self) -> ObjectType: ...
+        :return:
+        """
+    def Append(self, context: object) -> None:
+        """
+
+        :param context:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Pop(self) -> object:
+        """
+
+        :return:
+        """
+    def Push(self, context: object) -> None:
+        """
+
+        :param context:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def get_Item(self, level: IntType) -> ObjectType: ...
+    def __getitem__(self, level: int) -> object:
+        """
+
+        :param level:
+        :return:
+        """
     @overload
-    def get_Item(self, type: TypeType) -> ObjectType: ...
+    def __getitem__(self, type: Type) -> object:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param type:
+        :return:
+        """
 
 class DefaultSerializationProviderAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, providerType: TypeType): ...
+    def __init__(self, providerTypeName: str):
+        """
+
+        :param providerTypeName:
+        """
     @overload
-    def __init__(self, providerTypeName: StringType): ...
+    def __init__(self, providerType: Type):
+        """
 
-    # ---------- Properties ---------- #
+        :param providerType:
+        """
+    @property
+    def ProviderTypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DesignerLoader(ABC, Object):
+    """"""
 
     @property
-    def ProviderTypeName(self) -> StringType: ...
+    def Loading(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def BeginLoad(self, host: IDesignerLoaderHost) -> None:
+        """
 
-    def get_ProviderTypeName(self) -> StringType: ...
+        :param host:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DesignerLoader(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Loading(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def BeginLoad(self, host: IDesignerLoaderHost) -> VoidType: ...
-    def Dispose(self) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
-    def get_Loading(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class DesignerSerializerAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, serializerType: TypeType, baseSerializerType: TypeType): ...
-    @overload
-    def __init__(self, serializerTypeName: StringType, baseSerializerType: TypeType): ...
-    @overload
-    def __init__(self, serializerTypeName: StringType, baseSerializerTypeName: StringType): ...
+    def __init__(self, serializerTypeName: str, baseSerializerTypeName: str):
+        """
 
-    # ---------- Properties ---------- #
+        :param serializerTypeName:
+        :param baseSerializerTypeName:
+        """
+    @overload
+    def __init__(self, serializerTypeName: str, baseSerializerType: Type):
+        """
 
+        :param serializerTypeName:
+        :param baseSerializerType:
+        """
+    @overload
+    def __init__(self, serializerType: Type, baseSerializerType: Type):
+        """
+
+        :param serializerType:
+        :param baseSerializerType:
+        """
     @property
-    def SerializerBaseTypeName(self) -> StringType: ...
+    def SerializerBaseTypeName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def SerializerTypeName(self) -> StringType: ...
+    def SerializerTypeName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def TypeId(self) -> ObjectType: ...
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_SerializerBaseTypeName(self) -> StringType: ...
-    def get_SerializerTypeName(self) -> StringType: ...
-    def get_TypeId(self) -> ObjectType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Enums
-
-class InstanceDescriptor(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, member: MemberInfo, arguments: ICollection): ...
-    @overload
-    def __init__(self, member: MemberInfo, arguments: ICollection, isComplete: BooleanType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Arguments(self) -> ICollection: ...
-    @property
-    def IsComplete(self) -> BooleanType: ...
-    @property
-    def MemberInfo(self) -> MemberInfo: ...
-
-    # ---------- Methods ---------- #
-
-    def Invoke(self) -> ObjectType: ...
-    def get_Arguments(self) -> ICollection: ...
-    def get_IsComplete(self) -> BooleanType: ...
-    def get_MemberInfo(self) -> MemberInfo: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MemberRelationshipService(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: MemberRelationship) -> MemberRelationship: ...
-    def __setitem__(self, key: MemberRelationship, value: MemberRelationship) -> None: ...
-    def __getitem__(self, key: ObjectType) -> MemberRelationship: ...
-    def __setitem__(self, key: ObjectType, value: MemberRelationship) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def SupportsRelationship(
-        self, source: MemberRelationship, relationship: MemberRelationship
-    ) -> BooleanType: ...
-    @overload
-    def get_Item(self, source: MemberRelationship) -> MemberRelationship: ...
-    @overload
-    def get_Item(
-        self, sourceOwner: ObjectType, sourceMember: MemberDescriptor
-    ) -> MemberRelationship: ...
-    @overload
-    def set_Item(self, source: MemberRelationship, value: MemberRelationship) -> VoidType: ...
-    @overload
-    def set_Item(
-        self, sourceOwner: ObjectType, sourceMember: MemberDescriptor, value: MemberRelationship
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ResolveNameEventArgs(EventArgs):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def Value(self) -> ObjectType: ...
-    @Value.setter
-    def Value(self, value: ObjectType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Name(self) -> StringType: ...
-    def get_Value(self) -> ObjectType: ...
-    def set_Value(self, value: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ResolveNameEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
+        :param pcTInfo:
+        """
+    def Invoke(
         self,
-        sender: ObjectType,
-        e: ResolveNameEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: ResolveNameEventArgs) -> VoidType: ...
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Events
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
+class IDesignerLoaderHost(IDesignerHost, IServiceContainer, IServiceProvider):
+    """"""
 
-class RootDesignerSerializerAttribute(Attribute, _Attribute):
-    # No Fields
+    @property
+    def Container(self) -> IContainer:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def InTransaction(self) -> bool:
+        """
 
+        :return:
+        """
+    @property
+    def Loading(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def RootComponent(self) -> IComponent:
+        """
+
+        :return:
+        """
+    @property
+    def RootComponentClassName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TransactionDescription(self) -> str:
+        """
+
+        :return:
+        """
+    def Activate(self) -> None:
+        """"""
     @overload
-    def __init__(
-        self, serializerType: TypeType, baseSerializerType: TypeType, reloadable: BooleanType
-    ): ...
+    def AddService(self, serviceType: Type, callback: ServiceCreatorCallback) -> None:
+        """
+
+        :param serviceType:
+        :param callback:
+        """
     @overload
-    def __init__(
-        self, serializerTypeName: StringType, baseSerializerType: TypeType, reloadable: BooleanType
-    ): ...
+    def AddService(self, serviceType: Type, serviceInstance: object) -> None:
+        """
+
+        :param serviceType:
+        :param serviceInstance:
+        """
     @overload
-    def __init__(
-        self,
-        serializerTypeName: StringType,
-        baseSerializerTypeName: StringType,
-        reloadable: BooleanType,
-    ): ...
+    def AddService(
+        self, serviceType: Type, callback: ServiceCreatorCallback, promote: bool
+    ) -> None:
+        """
 
-    # ---------- Properties ---------- #
+        :param serviceType:
+        :param callback:
+        :param promote:
+        """
+    @overload
+    def AddService(self, serviceType: Type, serviceInstance: object, promote: bool) -> None:
+        """
 
-    @property
-    def Reloadable(self) -> BooleanType: ...
-    @property
-    def SerializerBaseTypeName(self) -> StringType: ...
-    @property
-    def SerializerTypeName(self) -> StringType: ...
-    @property
-    def TypeId(self) -> ObjectType: ...
+        :param serviceType:
+        :param serviceInstance:
+        :param promote:
+        """
+    @overload
+    def CreateComponent(self, componentClass: Type) -> IComponent:
+        """
 
-    # ---------- Methods ---------- #
+        :param componentClass:
+        :return:
+        """
+    @overload
+    def CreateComponent(self, componentClass: Type, name: str) -> IComponent:
+        """
 
-    def get_Reloadable(self) -> BooleanType: ...
-    def get_SerializerBaseTypeName(self) -> StringType: ...
-    def get_SerializerTypeName(self) -> StringType: ...
-    def get_TypeId(self) -> ObjectType: ...
+        :param componentClass:
+        :param name:
+        :return:
+        """
+    @overload
+    def CreateTransaction(self) -> DesignerTransaction:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def CreateTransaction(self, description: str) -> DesignerTransaction:
+        """
 
-    # No Sub Classes
+        :param description:
+        :return:
+        """
+    def DestroyComponent(self, component: IComponent) -> None:
+        """
 
-    # No Sub Structs
+        :param component:
+        """
+    def EndLoad(self, baseClassName: str, successful: bool, errorCollection: ICollection) -> None:
+        """
 
-    # No Sub Interfaces
+        :param baseClassName:
+        :param successful:
+        :param errorCollection:
+        """
+    def GetDesigner(self, component: IComponent) -> IDesigner:
+        """
 
-    # No Sub Enums
+        :param component:
+        :return:
+        """
+    def GetService(self, serviceType: Type) -> object:
+        """
 
-class SerializationStore(ABC, ObjectType, IDisposable):
-    # No Fields
+        :param serviceType:
+        :return:
+        """
+    def GetType(self, typeName: str) -> Type:
+        """
 
-    # No Constructors
+        :param typeName:
+        :return:
+        """
+    def Reload(self) -> None:
+        """"""
+    @overload
+    def RemoveService(self, serviceType: Type) -> None:
+        """
 
-    # ---------- Properties ---------- #
+        :param serviceType:
+        """
+    @overload
+    def RemoveService(self, serviceType: Type, promote: bool) -> None:
+        """
 
-    @property
-    def Errors(self) -> ICollection: ...
+        :param serviceType:
+        :param promote:
+        """
+    Activated: EventType[EventHandler] = ...
+    """"""
+    Deactivated: EventType[EventHandler] = ...
+    """"""
+    LoadComplete: EventType[EventHandler] = ...
+    """"""
+    TransactionClosed: EventType[DesignerTransactionCloseEventHandler] = ...
+    """"""
+    TransactionClosing: EventType[DesignerTransactionCloseEventHandler] = ...
+    """"""
+    TransactionOpened: EventType[EventHandler] = ...
+    """"""
+    TransactionOpening: EventType[EventHandler] = ...
+    """"""
 
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-    def Save(self, stream: Stream) -> VoidType: ...
-    def get_Errors(self) -> ICollection: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
-
-class MemberRelationship(ValueType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Empty() -> MemberRelationship: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, owner: ObjectType, member: MemberDescriptor): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsEmpty(self) -> BooleanType: ...
-    @property
-    def Member(self) -> MemberDescriptor: ...
-    @property
-    def Owner(self) -> ObjectType: ...
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_IsEmpty(self) -> BooleanType: ...
-    def get_Member(self) -> MemberDescriptor: ...
-    def get_Owner(self) -> ObjectType: ...
-    @staticmethod
-    def op_Equality(left: MemberRelationship, right: MemberRelationship) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(left: MemberRelationship, right: MemberRelationship) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Interfaces ---------- #
-
-class IDesignerLoaderHost(Protocol, IDesignerHost, IServiceContainer, IServiceProvider):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def EndLoad(
-        self, baseClassName: StringType, successful: BooleanType, errorCollection: ICollection
-    ) -> VoidType: ...
-    def Reload(self) -> VoidType: ...
-
-    # No Events
-
-class IDesignerLoaderHost2(
-    Protocol, IDesignerLoaderHost, IDesignerHost, IServiceContainer, IServiceProvider
-):
-    # ---------- Properties ---------- #
+class IDesignerLoaderHost2(IDesignerLoaderHost, IDesignerHost, IServiceContainer, IServiceProvider):
+    """"""
 
     @property
-    def CanReloadWithErrors(self) -> BooleanType: ...
+    def CanReloadWithErrors(self) -> bool:
+        """
+
+        :return:
+        """
     @CanReloadWithErrors.setter
-    def CanReloadWithErrors(self, value: BooleanType) -> None: ...
+    def CanReloadWithErrors(self, value: bool) -> None: ...
     @property
-    def IgnoreErrorsDuringReload(self) -> BooleanType: ...
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
+    @property
+    def IgnoreErrorsDuringReload(self) -> bool:
+        """
+
+        :return:
+        """
     @IgnoreErrorsDuringReload.setter
-    def IgnoreErrorsDuringReload(self, value: BooleanType) -> None: ...
+    def IgnoreErrorsDuringReload(self, value: bool) -> None: ...
+    @property
+    def InTransaction(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Loading(self) -> bool:
+        """
 
-    def get_CanReloadWithErrors(self) -> BooleanType: ...
-    def get_IgnoreErrorsDuringReload(self) -> BooleanType: ...
-    def set_CanReloadWithErrors(self, value: BooleanType) -> VoidType: ...
-    def set_IgnoreErrorsDuringReload(self, value: BooleanType) -> VoidType: ...
+        :return:
+        """
+    @property
+    def RootComponent(self) -> IComponent:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def RootComponentClassName(self) -> str:
+        """
 
-class IDesignerLoaderService(Protocol):
-    # No Properties
+        :return:
+        """
+    @property
+    def TransactionDescription(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Activate(self) -> None:
+        """"""
+    @overload
+    def AddService(self, serviceType: Type, callback: ServiceCreatorCallback) -> None:
+        """
 
-    def AddLoadDependency(self) -> VoidType: ...
-    def DependentLoadComplete(
-        self, successful: BooleanType, errorCollection: ICollection
-    ) -> VoidType: ...
-    def Reload(self) -> BooleanType: ...
+        :param serviceType:
+        :param callback:
+        """
+    @overload
+    def AddService(self, serviceType: Type, serviceInstance: object) -> None:
+        """
 
-    # No Events
+        :param serviceType:
+        :param serviceInstance:
+        """
+    @overload
+    def AddService(
+        self, serviceType: Type, callback: ServiceCreatorCallback, promote: bool
+    ) -> None:
+        """
 
-class IDesignerSerializationManager(Protocol, IServiceProvider):
-    # ---------- Properties ---------- #
+        :param serviceType:
+        :param callback:
+        :param promote:
+        """
+    @overload
+    def AddService(self, serviceType: Type, serviceInstance: object, promote: bool) -> None:
+        """
+
+        :param serviceType:
+        :param serviceInstance:
+        :param promote:
+        """
+    @overload
+    def CreateComponent(self, componentClass: Type) -> IComponent:
+        """
+
+        :param componentClass:
+        :return:
+        """
+    @overload
+    def CreateComponent(self, componentClass: Type, name: str) -> IComponent:
+        """
+
+        :param componentClass:
+        :param name:
+        :return:
+        """
+    @overload
+    def CreateTransaction(self) -> DesignerTransaction:
+        """
+
+        :return:
+        """
+    @overload
+    def CreateTransaction(self, description: str) -> DesignerTransaction:
+        """
+
+        :param description:
+        :return:
+        """
+    def DestroyComponent(self, component: IComponent) -> None:
+        """
+
+        :param component:
+        """
+    def EndLoad(self, baseClassName: str, successful: bool, errorCollection: ICollection) -> None:
+        """
+
+        :param baseClassName:
+        :param successful:
+        :param errorCollection:
+        """
+    def GetDesigner(self, component: IComponent) -> IDesigner:
+        """
+
+        :param component:
+        :return:
+        """
+    def GetService(self, serviceType: Type) -> object:
+        """
+
+        :param serviceType:
+        :return:
+        """
+    def GetType(self, typeName: str) -> Type:
+        """
+
+        :param typeName:
+        :return:
+        """
+    def Reload(self) -> None:
+        """"""
+    @overload
+    def RemoveService(self, serviceType: Type) -> None:
+        """
+
+        :param serviceType:
+        """
+    @overload
+    def RemoveService(self, serviceType: Type, promote: bool) -> None:
+        """
+
+        :param serviceType:
+        :param promote:
+        """
+    Activated: EventType[EventHandler] = ...
+    """"""
+    Deactivated: EventType[EventHandler] = ...
+    """"""
+    LoadComplete: EventType[EventHandler] = ...
+    """"""
+    TransactionClosed: EventType[DesignerTransactionCloseEventHandler] = ...
+    """"""
+    TransactionClosing: EventType[DesignerTransactionCloseEventHandler] = ...
+    """"""
+    TransactionOpened: EventType[EventHandler] = ...
+    """"""
+    TransactionOpening: EventType[EventHandler] = ...
+    """"""
+
+class IDesignerLoaderService:
+    """"""
+
+    def AddLoadDependency(self) -> None:
+        """"""
+    def DependentLoadComplete(self, successful: bool, errorCollection: ICollection) -> None:
+        """
+
+        :param successful:
+        :param errorCollection:
+        """
+    def Reload(self) -> bool:
+        """
+
+        :return:
+        """
+
+class IDesignerSerializationManager(IServiceProvider):
+    """"""
 
     @property
-    def Context(self) -> ContextStack: ...
+    def Context(self) -> ContextStack:
+        """
+
+        :return:
+        """
     @property
-    def Properties(self) -> PropertyDescriptorCollection: ...
+    def Properties(self) -> PropertyDescriptorCollection:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AddSerializationProvider(self, provider: IDesignerSerializationProvider) -> None:
+        """
 
-    def AddSerializationProvider(self, provider: IDesignerSerializationProvider) -> VoidType: ...
+        :param provider:
+        """
     def CreateInstance(
-        self, type: TypeType, arguments: ICollection, name: StringType, addToContainer: BooleanType
-    ) -> ObjectType: ...
-    def GetInstance(self, name: StringType) -> ObjectType: ...
-    def GetName(self, value: ObjectType) -> StringType: ...
-    def GetSerializer(self, objectType: TypeType, serializerType: TypeType) -> ObjectType: ...
-    def GetType(self, typeName: StringType) -> TypeType: ...
-    def RemoveSerializationProvider(self, provider: IDesignerSerializationProvider) -> VoidType: ...
-    def ReportError(self, errorInformation: ObjectType) -> VoidType: ...
-    def SetName(self, instance: ObjectType, name: StringType) -> VoidType: ...
-    def add_ResolveName(self, value: ResolveNameEventHandler) -> VoidType: ...
-    def add_SerializationComplete(self, value: EventHandler) -> VoidType: ...
-    def get_Context(self) -> ContextStack: ...
-    def get_Properties(self) -> PropertyDescriptorCollection: ...
-    def remove_ResolveName(self, value: ResolveNameEventHandler) -> VoidType: ...
-    def remove_SerializationComplete(self, value: EventHandler) -> VoidType: ...
+        self, type: Type, arguments: ICollection, name: str, addToContainer: bool
+    ) -> object:
+        """
 
-    # ---------- Events ---------- #
+        :param type:
+        :param arguments:
+        :param name:
+        :param addToContainer:
+        :return:
+        """
+    def GetInstance(self, name: str) -> object:
+        """
 
+        :param name:
+        :return:
+        """
+    def GetName(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetSerializer(self, objectType: Type, serializerType: Type) -> object:
+        """
+
+        :param objectType:
+        :param serializerType:
+        :return:
+        """
+    def GetService(self, serviceType: Type) -> object:
+        """
+
+        :param serviceType:
+        :return:
+        """
+    def GetType(self, typeName: str) -> Type:
+        """
+
+        :param typeName:
+        :return:
+        """
+    def RemoveSerializationProvider(self, provider: IDesignerSerializationProvider) -> None:
+        """
+
+        :param provider:
+        """
+    def ReportError(self, errorInformation: object) -> None:
+        """
+
+        :param errorInformation:
+        """
+    def SetName(self, instance: object, name: str) -> None:
+        """
+
+        :param instance:
+        :param name:
+        """
     ResolveName: EventType[ResolveNameEventHandler] = ...
-
+    """"""
     SerializationComplete: EventType[EventHandler] = ...
+    """"""
 
-class IDesignerSerializationProvider(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
+class IDesignerSerializationProvider:
+    """"""
 
     def GetSerializer(
         self,
         manager: IDesignerSerializationManager,
-        currentSerializer: ObjectType,
-        objectType: TypeType,
-        serializerType: TypeType,
-    ) -> ObjectType: ...
+        currentSerializer: object,
+        objectType: Type,
+        serializerType: Type,
+    ) -> object:
+        """
 
-    # No Events
+        :param manager:
+        :param currentSerializer:
+        :param objectType:
+        :param serializerType:
+        :return:
+        """
 
-class IDesignerSerializationService(Protocol):
-    # No Properties
+class IDesignerSerializationService:
+    """"""
 
-    # ---------- Methods ---------- #
+    def Deserialize(self, serializationData: object) -> ICollection:
+        """
 
-    def Deserialize(self, serializationData: ObjectType) -> ICollection: ...
-    def Serialize(self, objects: ICollection) -> ObjectType: ...
+        :param serializationData:
+        :return:
+        """
+    def Serialize(self, objects: ICollection) -> object:
+        """
 
-    # No Events
+        :param objects:
+        :return:
+        """
 
-class INameCreationService(Protocol):
-    # No Properties
+class INameCreationService:
+    """"""
 
-    # ---------- Methods ---------- #
+    def CreateName(self, container: IContainer, dataType: Type) -> str:
+        """
 
-    def CreateName(self, container: IContainer, dataType: TypeType) -> StringType: ...
-    def IsValidName(self, name: StringType) -> BooleanType: ...
-    def ValidateName(self, name: StringType) -> VoidType: ...
+        :param container:
+        :param dataType:
+        :return:
+        """
+    def IsValidName(self, name: str) -> bool:
+        """
 
-    # No Events
+        :param name:
+        :return:
+        """
+    def ValidateName(self, name: str) -> None:
+        """
 
-# No Enums
+        :param name:
+        """
 
-# ---------- Delegates ---------- #
+class InstanceDescriptor(Object):
+    """"""
 
-ResolveNameEventHandler = Callable[[ObjectType, ResolveNameEventArgs], VoidType]
+    @overload
+    def __init__(self, member: MemberInfo, arguments: ICollection):
+        """
 
-__all__ = [
-    ComponentSerializationService,
-    ContextStack,
-    DefaultSerializationProviderAttribute,
-    DesignerLoader,
-    DesignerSerializerAttribute,
-    InstanceDescriptor,
-    MemberRelationshipService,
-    ResolveNameEventArgs,
-    ResolveNameEventHandler,
-    RootDesignerSerializerAttribute,
-    SerializationStore,
-    MemberRelationship,
-    IDesignerLoaderHost,
-    IDesignerLoaderHost2,
-    IDesignerLoaderService,
-    IDesignerSerializationManager,
-    IDesignerSerializationProvider,
-    IDesignerSerializationService,
-    INameCreationService,
-    ResolveNameEventHandler,
-]
+        :param member:
+        :param arguments:
+        """
+    @overload
+    def __init__(self, member: MemberInfo, arguments: ICollection, isComplete: bool):
+        """
+
+        :param member:
+        :param arguments:
+        :param isComplete:
+        """
+    @property
+    def Arguments(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def IsComplete(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MemberInfo(self) -> MemberInfo:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Invoke(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MemberRelationship(ValueType):
+    """"""
+
+    Empty: Final[ClassVar[MemberRelationship]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, owner: object, member: MemberDescriptor):
+        """
+
+        :param owner:
+        :param member:
+        """
+    @property
+    def IsEmpty(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Member(self) -> MemberDescriptor:
+        """
+
+        :return:
+        """
+    @property
+    def Owner(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __eq__(self, other: MemberRelationship) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: MemberRelationship) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: MemberRelationship, right: MemberRelationship) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: MemberRelationship, right: MemberRelationship) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+
+class MemberRelationshipService(ABC, Object):
+    """"""
+
+    @property
+    def Item(self) -> MemberRelationship:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: MemberRelationship) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SupportsRelationship(
+        self, source: MemberRelationship, relationship: MemberRelationship
+    ) -> bool:
+        """
+
+        :param source:
+        :param relationship:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __getitem__(self, source: MemberRelationship) -> MemberRelationship:
+        """
+
+        :param source:
+        :return:
+        """
+    @overload
+    def __getitem__(
+        self, sourceOwner: object, sourceMember: MemberDescriptor
+    ) -> MemberRelationship:
+        """
+
+        :param sourceOwner:
+        :param sourceMember:
+        :return:
+        """
+    @overload
+    def __setitem__(self, source: MemberRelationship, value: MemberRelationship) -> None:
+        """
+
+        :param source:
+        :param value:
+        """
+    @overload
+    def __setitem__(
+        self, sourceOwner: object, sourceMember: MemberDescriptor, value: MemberRelationship
+    ) -> None:
+        """
+
+        :param sourceOwner:
+        :param sourceMember:
+        :param value:
+        """
+
+class ResolveNameEventArgs(EventArgs):
+    """"""
+
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> object:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: object) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+ResolveNameEventHandler: Callable[[object, ResolveNameEventArgs], None] = ...
+"""
+
+:param sender: 
+:param e: 
+"""
+
+class RootDesignerSerializerAttribute(Attribute, _Attribute):
+    """"""
+
+    @overload
+    def __init__(self, serializerTypeName: str, baseSerializerTypeName: str, reloadable: bool):
+        """
+
+        :param serializerTypeName:
+        :param baseSerializerTypeName:
+        :param reloadable:
+        """
+    @overload
+    def __init__(self, serializerTypeName: str, baseSerializerType: Type, reloadable: bool):
+        """
+
+        :param serializerTypeName:
+        :param baseSerializerType:
+        :param reloadable:
+        """
+    @overload
+    def __init__(self, serializerType: Type, baseSerializerType: Type, reloadable: bool):
+        """
+
+        :param serializerType:
+        :param baseSerializerType:
+        :param reloadable:
+        """
+    @property
+    def Reloadable(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def SerializerBaseTypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def SerializerTypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationStore(ABC, Object, IDisposable):
+    """"""
+
+    @property
+    def Errors(self) -> ICollection:
+        """
+
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Save(self, stream: Stream) -> None:
+        """
+
+        :param stream:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

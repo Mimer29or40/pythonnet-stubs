@@ -1,369 +1,827 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
+from typing import Tuple
 from typing import overload
 
 from System import Attribute
-from System import Boolean
 from System import Enum
+from System import Guid
 from System import IEquatable
-from System import Int32
+from System import IntPtr
 from System import Object
-from System import String
 from System import Type
 from System import Version
-from System import Void
 from System.Runtime.InteropServices import _Attribute
 
-# ---------- Types ---------- #
-
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class BinaryCompatibility(ABC, ObjectType):
+class BinaryCompatibility(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class CompatibilitySwitch(ABC, Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class CompatibilitySwitch(ABC, ObjectType):
-    # No Fields
+        :return:
+        """
+    @classmethod
+    def GetValue(cls, compatibilitySwitchName: str) -> str:
+        """
 
-    # No Constructors
+        :param compatibilitySwitchName:
+        :return:
+        """
+    @classmethod
+    def IsEnabled(cls, compatibilitySwitchName: str) -> bool:
+        """
 
-    # No Properties
+        :param compatibilitySwitchName:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetValue(compatibilitySwitchName: StringType) -> StringType: ...
-    @staticmethod
-    def IsEnabled(compatibilitySwitchName: StringType) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ComponentGuaranteesAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, guarantees: ComponentGuaranteesOptions): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Guarantees(self) -> ComponentGuaranteesOptions: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Guarantees(self) -> ComponentGuaranteesOptions: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FrameworkName(ObjectType, IEquatable[FrameworkName]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, identifier: StringType, version: Version): ...
-    @overload
-    def __init__(self, identifier: StringType, version: Version, profile: StringType): ...
-    @overload
-    def __init__(self, frameworkName: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def FullName(self) -> StringType: ...
-    @property
-    def Identifier(self) -> StringType: ...
-    @property
-    def Profile(self) -> StringType: ...
-    @property
-    def Version(self) -> Version: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    @overload
-    def Equals(self, other: FrameworkName) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_FullName(self) -> StringType: ...
-    def get_Identifier(self) -> StringType: ...
-    def get_Profile(self) -> StringType: ...
-    def get_Version(self) -> Version: ...
-    @staticmethod
-    def op_Equality(left: FrameworkName, right: FrameworkName) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(left: FrameworkName, right: FrameworkName) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MultitargetingHelpers(ABC, ObjectType):
     """"""
 
-    # No Fields
+    def __init__(self, guarantees: ComponentGuaranteesOptions):
+        """
 
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NonVersionableAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ResourceConsumptionAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, resourceScope: ResourceScope): ...
-    @overload
-    def __init__(self, resourceScope: ResourceScope, consumptionScope: ResourceScope): ...
-
-    # ---------- Properties ---------- #
-
+        :param guarantees:
+        """
     @property
-    def ConsumptionScope(self) -> ResourceScope: ...
+    def Guarantees(self) -> ComponentGuaranteesOptions:
+        """
+
+        :return:
+        """
     @property
-    def ResourceScope(self) -> ResourceScope: ...
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_ConsumptionScope(self) -> ResourceScope: ...
-    def get_ResourceScope(self) -> ResourceScope: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Enums
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-class ResourceExposureAttribute(Attribute, _Attribute):
-    # No Fields
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-    def __init__(self, exposureLevel: ResourceScope): ...
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Properties ---------- #
-
-    @property
-    def ResourceExposureLevel(self) -> ResourceScope: ...
-
-    # ---------- Methods ---------- #
-
-    def get_ResourceExposureLevel(self) -> ResourceScope: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TargetFrameworkAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, frameworkName: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def FrameworkDisplayName(self) -> StringType: ...
-    @FrameworkDisplayName.setter
-    def FrameworkDisplayName(self, value: StringType) -> None: ...
-    @property
-    def FrameworkName(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_FrameworkDisplayName(self) -> StringType: ...
-    def get_FrameworkName(self) -> StringType: ...
-    def set_FrameworkDisplayName(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class VersioningHelper(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def MakeVersionSafeName(
-        name: StringType, _from: ResourceScope, to: ResourceScope, type: TypeType
-    ) -> StringType: ...
-    @staticmethod
-    @overload
-    def MakeVersionSafeName(
-        name: StringType, _from: ResourceScope, to: ResourceScope
-    ) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# ---------- Enums ---------- #
+        :return:
+        """
 
 class ComponentGuaranteesOptions(Enum):
-    # None = 0
-    Exchange = 1
-    Stable = 2
-    SideBySide = 4
+    """"""
+
+    _None: ComponentGuaranteesOptions = ...
+    """"""
+    Exchange: ComponentGuaranteesOptions = ...
+    """"""
+    Stable: ComponentGuaranteesOptions = ...
+    """"""
+    SideBySide: ComponentGuaranteesOptions = ...
+    """"""
+
+class FrameworkName(Object, IEquatable[FrameworkName]):
+    """"""
+
+    @overload
+    def __init__(self, frameworkName: str):
+        """
+
+        :param frameworkName:
+        """
+    @overload
+    def __init__(self, identifier: str, version: Version):
+        """
+
+        :param identifier:
+        :param version:
+        """
+    @overload
+    def __init__(self, identifier: str, version: Version, profile: str):
+        """
+
+        :param identifier:
+        :param version:
+        :param profile:
+        """
+    @property
+    def FullName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Identifier(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Profile(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Version(self) -> Version:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, other: FrameworkName) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __eq__(self, other: FrameworkName) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: FrameworkName) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: FrameworkName, right: FrameworkName) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: FrameworkName, right: FrameworkName) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+
+class MultitargetingHelpers(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class NonVersionableAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ResourceConsumptionAttribute(Attribute, _Attribute):
+    """"""
+
+    @overload
+    def __init__(self, resourceScope: ResourceScope):
+        """
+
+        :param resourceScope:
+        """
+    @overload
+    def __init__(self, resourceScope: ResourceScope, consumptionScope: ResourceScope):
+        """
+
+        :param resourceScope:
+        :param consumptionScope:
+        """
+    @property
+    def ConsumptionScope(self) -> ResourceScope:
+        """
+
+        :return:
+        """
+    @property
+    def ResourceScope(self) -> ResourceScope:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ResourceExposureAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self, exposureLevel: ResourceScope):
+        """
+
+        :param exposureLevel:
+        """
+    @property
+    def ResourceExposureLevel(self) -> ResourceScope:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ResourceScope(Enum):
-    # None = 0
-    Machine = 1
-    Process = 2
-    AppDomain = 4
-    Library = 8
-    Private = 16
-    Assembly = 32
+    """"""
+
+    _None: ResourceScope = ...
+    """"""
+    Machine: ResourceScope = ...
+    """"""
+    Process: ResourceScope = ...
+    """"""
+    AppDomain: ResourceScope = ...
+    """"""
+    Library: ResourceScope = ...
+    """"""
+    Private: ResourceScope = ...
+    """"""
+    Assembly: ResourceScope = ...
+    """"""
 
 class SxSRequirements(Enum):
-    # None = 0
-    AppDomainID = 1
-    ProcessID = 2
-    CLRInstanceID = 4
-    AssemblyName = 8
-    TypeName = 16
+    """"""
+
+    _None: SxSRequirements = ...
+    """"""
+    AppDomainID: SxSRequirements = ...
+    """"""
+    ProcessID: SxSRequirements = ...
+    """"""
+    CLRInstanceID: SxSRequirements = ...
+    """"""
+    AssemblyName: SxSRequirements = ...
+    """"""
+    TypeName: SxSRequirements = ...
+    """"""
+
+class TargetFrameworkAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self, frameworkName: str):
+        """
+
+        :param frameworkName:
+        """
+    @property
+    def FrameworkDisplayName(self) -> str:
+        """
+
+        :return:
+        """
+    @FrameworkDisplayName.setter
+    def FrameworkDisplayName(self, value: str) -> None: ...
+    @property
+    def FrameworkName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class TargetFrameworkId(Enum):
-    NotYetChecked = 0
-    Unrecognized = 1
-    Unspecified = 2
-    NetFramework = 3
-    Portable = 4
-    NetCore = 5
-    Silverlight = 6
-    Phone = 7
+    """"""
 
-# No Delegates
+    NotYetChecked: TargetFrameworkId = ...
+    """"""
+    Unrecognized: TargetFrameworkId = ...
+    """"""
+    Unspecified: TargetFrameworkId = ...
+    """"""
+    NetFramework: TargetFrameworkId = ...
+    """"""
+    Portable: TargetFrameworkId = ...
+    """"""
+    NetCore: TargetFrameworkId = ...
+    """"""
+    Silverlight: TargetFrameworkId = ...
+    """"""
+    Phone: TargetFrameworkId = ...
+    """"""
 
-__all__ = [
-    BinaryCompatibility,
-    CompatibilitySwitch,
-    ComponentGuaranteesAttribute,
-    FrameworkName,
-    MultitargetingHelpers,
-    NonVersionableAttribute,
-    ResourceConsumptionAttribute,
-    ResourceExposureAttribute,
-    TargetFrameworkAttribute,
-    VersioningHelper,
-    ComponentGuaranteesOptions,
-    ResourceScope,
-    SxSRequirements,
-    TargetFrameworkId,
-]
+class VersioningHelper(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def MakeVersionSafeName(cls, name: str, _from: ResourceScope, to: ResourceScope) -> str:
+        """
+
+        :param name:
+        :param _from:
+        :param to:
+        :return:
+        """
+    @classmethod
+    @overload
+    def MakeVersionSafeName(
+        cls, name: str, _from: ResourceScope, to: ResourceScope, type: Type
+    ) -> str:
+        """
+
+        :param name:
+        :param _from:
+        :param to:
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

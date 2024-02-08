@@ -2,45 +2,48 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Callable
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import List
-from typing import Protocol
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
+from Microsoft.Win32.NativeMethods import PDH_FMT_COUNTERVALUE
+from Microsoft.Win32.NativeMethods import PDH_RAW_COUNTER
+from Microsoft.Win32.NativeMethods import SECURITY_ATTRIBUTES
+from Microsoft.Win32.NativeMethods import STARTUPINFO
+from Microsoft.Win32.NativeMethods import TEXTMETRIC
+from Microsoft.Win32.NativeMethods import USEROBJECTFLAGS
+from Microsoft.Win32.NativeMethods import WNDCLASS
+from Microsoft.Win32.NativeMethods import WNDCLASS_I
+from Microsoft.Win32.NativeMethods import ConHndlr
+from Microsoft.Win32.NativeMethods import EnumThreadWindowsCallback
+from Microsoft.Win32.NativeMethods import NtModuleInfo
+from Microsoft.Win32.NativeMethods import NtProcessBasicInfo
+from Microsoft.Win32.NativeMethods import ShellExecuteInfo
+from Microsoft.Win32.NativeMethods import TokenPrivileges
+from Microsoft.Win32.NativeMethods import WinThreadEntry
 from Microsoft.Win32.SafeHandles import SafeFileHandle
 from Microsoft.Win32.SafeHandles import SafeHandleZeroOrMinusOneIsInvalid
+from Microsoft.Win32.SafeHandles import SafeLibraryHandle
 from Microsoft.Win32.SafeHandles import SafeProcessHandle
 from Microsoft.Win32.SafeHandles import SafeRegistryHandle
 from Microsoft.Win32.SafeHandles import SafeThreadHandle
 from Microsoft.Win32.SafeHandles import SafeWaitHandle
+from Microsoft.Win32.SafeNativeMethods import PROCESS_INFORMATION
 from System import Array
-from System import AsyncCallback
-from System import Boolean
-from System import Byte
 from System import Delegate
-from System import Double
 from System import Enum
 from System import EventArgs
 from System import EventHandler
-from System import IAsyncResult
-from System import ICloneable
 from System import IDisposable
-from System import Int16
-from System import Int32
-from System import Int64
 from System import IntPtr
 from System import MarshalByRefObject
-from System import MulticastDelegate
 from System import Object
-from System import String
-from System import UInt16
-from System import UInt32
+from System import Type
 from System import Uri
 from System import ValueType
-from System import Void
 from System import __ComObject
 from System.Collections import ArrayList
 from System.Net import IAuthenticationModule
@@ -50,3699 +53,6536 @@ from System.Net import WebRequest
 from System.Net.Cache import RequestCache
 from System.Runtime.InteropServices import HandleRef
 from System.Runtime.InteropServices import SafeHandle
-from System.Runtime.Serialization import ISerializable
+from System.Runtime.Remoting import ObjRef
 from System.Security.AccessControl import AccessControlSections
 from System.Security.AccessControl import RegistryRights
 from System.Security.AccessControl import RegistrySecurity
 from System.Text import StringBuilder
 from System.Threading import NativeOverlapped
 
-# ---------- Types ---------- #
-
 T = TypeVar("T")
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-DoubleType = Union[float, Double]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-ShortType = Union[int, Int16]
-StringType = Union[str, String]
-UIntType = Union[int, UInt32]
-UShortType = Union[int, UInt16]
-VoidType = Union[None, Void]
 
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
+class ASM_CACHE(ABC, Object):
+    """"""
 
-class ASM_CACHE(ABC, ObjectType):
-    # ---------- Fields ---------- #
+    DOWNLOAD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GAC: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ZAP: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @staticmethod
-    @property
-    def DOWNLOAD() -> UIntType: ...
-    @staticmethod
-    @property
-    def GAC() -> UIntType: ...
-    @staticmethod
-    @property
-    def ZAP() -> UIntType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Properties
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Methods
+        :return:
+        """
 
-    # No Events
+class ASM_NAME(ABC, Object):
+    """"""
 
-    # No Sub Classes
+    ALIAS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    BUILD_NUMBER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CODEBASE_LASTMOD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CODEBASE_URL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CULTURE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CUSTOM: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    HASH_ALGID: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    HASH_VALUE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MAJOR_VERSION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MAX_PARAMS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MINOR_VERSION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MVID: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NAME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NULL_CUSTOM: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NULL_PUBLIC_KEY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NULL_PUBLIC_KEY_TOKEN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    OSINFO_ARRAY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESSOR_ID_ARRAY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PUBLIC_KEY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PUBLIC_KEY_TOKEN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    REVISION_NUMBER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    _32_BIT_ONLY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class ASM_NAME(ABC, ObjectType):
-    # ---------- Fields ---------- #
+        :return:
+        """
 
-    @staticmethod
-    @property
-    def ALIAS() -> UIntType: ...
-    @staticmethod
-    @property
-    def BUILD_NUMBER() -> UIntType: ...
-    @staticmethod
-    @property
-    def CODEBASE_LASTMOD() -> UIntType: ...
-    @staticmethod
-    @property
-    def CODEBASE_URL() -> UIntType: ...
-    @staticmethod
-    @property
-    def CULTURE() -> UIntType: ...
-    @staticmethod
-    @property
-    def CUSTOM() -> UIntType: ...
-    @staticmethod
-    @property
-    def HASH_ALGID() -> UIntType: ...
-    @staticmethod
-    @property
-    def HASH_VALUE() -> UIntType: ...
-    @staticmethod
-    @property
-    def MAJOR_VERSION() -> UIntType: ...
-    @staticmethod
-    @property
-    def MAX_PARAMS() -> UIntType: ...
-    @staticmethod
-    @property
-    def MINOR_VERSION() -> UIntType: ...
-    @staticmethod
-    @property
-    def MVID() -> UIntType: ...
-    @staticmethod
-    @property
-    def NAME() -> UIntType: ...
-    @staticmethod
-    @property
-    def NULL_CUSTOM() -> UIntType: ...
-    @staticmethod
-    @property
-    def NULL_PUBLIC_KEY() -> UIntType: ...
-    @staticmethod
-    @property
-    def NULL_PUBLIC_KEY_TOKEN() -> UIntType: ...
-    @staticmethod
-    @property
-    def OSINFO_ARRAY() -> UIntType: ...
-    @staticmethod
-    @property
-    def PROCESSOR_ID_ARRAY() -> UIntType: ...
-    @staticmethod
-    @property
-    def PUBLIC_KEY() -> UIntType: ...
-    @staticmethod
-    @property
-    def PUBLIC_KEY_TOKEN() -> UIntType: ...
-    @staticmethod
-    @property
-    def REVISION_NUMBER() -> UIntType: ...
-    @staticmethod
-    @property
-    def _32_BIT_ONLY() -> UIntType: ...
+class CANOF(ABC, Object):
+    """"""
 
-    # No Constructors
+    PARSE_DISPLAY_NAME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SET_DEFAULT_VALUES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class Fusion(ABC, Object):
+    """"""
 
-    # No Sub Interfaces
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class CANOF(ABC, ObjectType):
-    # ---------- Fields ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    @staticmethod
-    @property
-    def PARSE_DISPLAY_NAME() -> UIntType: ...
-    @staticmethod
-    @property
-    def SET_DEFAULT_VALUES() -> UIntType: ...
+        :return:
+        """
+    @classmethod
+    def ReadCache(cls, alAssems: ArrayList, name: str, nFlag: int) -> None:
+        """
 
-    # No Constructors
+        :param alAssems:
+        :param name:
+        :param nFlag:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Properties
+        :return:
+        """
 
-    # No Methods
+class IApplicationContext:
+    """"""
 
-    # No Events
+    def Get(self, szName: str, pvValue: int, pcbValue: int, dwFlags: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Classes
+        :param szName:
+        :param pvValue:
+        :param pcbValue:
+        :param dwFlags:
+        """
+    def GetContextNameObject(self, ppName: IAssemblyName) -> Tuple[None, IAssemblyName]:
+        """
 
-    # No Sub Structs
+        :param ppName:
+        """
+    def GetDynamicDirectory(self, wzDynamicDir: int, pdwSize: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Interfaces
+        :param wzDynamicDir:
+        :param pdwSize:
+        """
+    def Set(self, szName: str, pvValue: int, cbValue: int, dwFlags: int) -> None:
+        """
 
-    # No Sub Enums
+        :param szName:
+        :param pvValue:
+        :param cbValue:
+        :param dwFlags:
+        """
+    def SetContextNameObject(self, pName: IAssemblyName) -> None:
+        """
 
-class Fusion(ABC, ObjectType):
-    # No Fields
+        :param pName:
+        """
 
-    # No Constructors
+class IAssemblyEnum:
+    """"""
 
-    # No Properties
+    def Clone(self, ppEnum: IAssemblyEnum) -> Tuple[int, IAssemblyEnum]:
+        """
 
-    # ---------- Methods ---------- #
+        :param ppEnum:
+        :return:
+        """
+    def GetNextAssembly(
+        self, ppAppCtx: IApplicationContext, ppName: IAssemblyName, dwFlags: int
+    ) -> Tuple[int, IApplicationContext, IAssemblyName]:
+        """
 
-    @staticmethod
-    def ReadCache(alAssems: ArrayList, name: StringType, nFlag: UIntType) -> VoidType: ...
+        :param ppAppCtx:
+        :param ppName:
+        :param dwFlags:
+        :return:
+        """
+    def Reset(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class IAssemblyName:
+    """"""
 
-    # No Sub Structs
+    def BindToObject(
+        self,
+        refIID: object,
+        pAsmBindSink: object,
+        pApplicationContext: IApplicationContext,
+        szCodeBase: str,
+        llFlags: int,
+        pvReserved: int,
+        cbReserved: int,
+        ppv: int,
+    ) -> Tuple[int, int]:
+        """
 
-    # No Sub Interfaces
+        :param refIID:
+        :param pAsmBindSink:
+        :param pApplicationContext:
+        :param szCodeBase:
+        :param llFlags:
+        :param pvReserved:
+        :param cbReserved:
+        :param ppv:
+        :return:
+        """
+    def Clone(self, pName: IAssemblyName) -> Tuple[int, IAssemblyName]:
+        """
 
-    # No Sub Enums
+        :param pName:
+        :return:
+        """
+    def Finalize(self) -> int:
+        """
+
+        :return:
+        """
+    def GetDisplayName(
+        self, szDisplayName: IntPtr, pccDisplayName: int, dwDisplayFlags: int
+    ) -> int:
+        """
+
+        :param szDisplayName:
+        :param pccDisplayName:
+        :param dwDisplayFlags:
+        :return:
+        """
+    def GetName(self, lpcwBuffer: int, pwzName: int) -> Tuple[int, int, int]:
+        """
+
+        :param lpcwBuffer:
+        :param pwzName:
+        :return:
+        """
+    def GetProperty(self, PropertyId: int, pvProperty: IntPtr, pcbProperty: int) -> int:
+        """
+
+        :param PropertyId:
+        :param pvProperty:
+        :param pcbProperty:
+        :return:
+        """
+    def GetVersion(self, pdwVersionHi: int, pdwVersionLow: int) -> Tuple[int, int, int]:
+        """
+
+        :param pdwVersionHi:
+        :param pdwVersionLow:
+        :return:
+        """
+    def IsEqual(self, pName: IAssemblyName, dwCmpFlags: int) -> int:
+        """
+
+        :param pName:
+        :param dwCmpFlags:
+        :return:
+        """
+    def SetProperty(self, PropertyId: int, pvProperty: IntPtr, cbProperty: int) -> int:
+        """
+
+        :param PropertyId:
+        :param pvProperty:
+        :param cbProperty:
+        :return:
+        """
+
+class IInternetSecurityManager:
+    """"""
+
+    def GetSecurityId(
+        self, pwszUrl: str, pbSecurityId: int, pcbSecurityId: int, dwReserved: int
+    ) -> None:
+        """
+
+        :param pwszUrl:
+        :param pbSecurityId:
+        :param pcbSecurityId:
+        :param dwReserved:
+        """
+    def GetSecuritySite(self, ppSite: None) -> None:
+        """
+
+        :param ppSite:
+        """
+    def GetZoneMappings(self, dwZone: int, ppenumString: None, dwFlags: int) -> None:
+        """
+
+        :param dwZone:
+        :param ppenumString:
+        :param dwFlags:
+        """
+    def MapUrlToZone(self, pwszUrl: str, pdwZone: int, dwFlags: int) -> Tuple[None, int]:
+        """
+
+        :param pwszUrl:
+        :param pdwZone:
+        :param dwFlags:
+        """
+    def ProcessUrlAction(
+        self,
+        pwszUrl: str,
+        dwAction: int,
+        pPolicy: int,
+        cbPolicy: int,
+        pContext: int,
+        cbContext: int,
+        dwFlags: int,
+        dwReserved: int,
+    ) -> None:
+        """
+
+        :param pwszUrl:
+        :param dwAction:
+        :param pPolicy:
+        :param cbPolicy:
+        :param pContext:
+        :param cbContext:
+        :param dwFlags:
+        :param dwReserved:
+        """
+    def QueryCustomPolicy(
+        self,
+        pwszUrl: str,
+        guidKey: None,
+        ppPolicy: int,
+        pcbPolicy: int,
+        pContext: int,
+        cbContext: int,
+        dwReserved: int,
+    ) -> None:
+        """
+
+        :param pwszUrl:
+        :param guidKey:
+        :param ppPolicy:
+        :param pcbPolicy:
+        :param pContext:
+        :param cbContext:
+        :param dwReserved:
+        """
+    def SetSecuritySite(self, pSite: None) -> None:
+        """
+
+        :param pSite:
+        """
+    def SetZoneMapping(self, dwZone: int, lpszPattern: str, dwFlags: int) -> None:
+        """
+
+        :param dwZone:
+        :param lpszPattern:
+        :param dwFlags:
+        """
 
 class InternetSecurityManager(__ComObject):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    def __init__(self): ...
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
+class IntranetZoneCredentialPolicy(Object, ICredentialPolicy):
+    """"""
 
-class IntranetZoneCredentialPolicy(ObjectType, ICredentialPolicy):
-    # No Fields
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Properties
-
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     def ShouldSendCredential(
         self,
         challengeUri: Uri,
         request: WebRequest,
         credential: NetworkCredential,
-        authModule: IAuthenticationModule,
-    ) -> BooleanType: ...
+        authenticationModule: IAuthenticationModule,
+    ) -> bool:
+        """
 
-    # No Events
+        :param challengeUri:
+        :param request:
+        :param credential:
+        :param authenticationModule:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class NativeMethods(ABC, Object):
+    """"""
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NativeMethods(ABC, ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def BACKWARDS_READ() -> IntType: ...
-    @staticmethod
-    @property
-    def COLOR_WINDOW() -> IntType: ...
-    @staticmethod
-    @property
-    def CREATE_ALWAYS() -> IntType: ...
-    @staticmethod
-    @property
-    def CREATE_NO_WINDOW() -> IntType: ...
-    @staticmethod
-    @property
-    def CREATE_SUSPENDED() -> IntType: ...
-    @staticmethod
-    @property
-    def CREATE_UNICODE_ENVIRONMENT() -> IntType: ...
-    @staticmethod
-    @property
-    def CTRL_BREAK_EVENT() -> IntType: ...
-    @staticmethod
-    @property
-    def CTRL_CLOSE_EVENT() -> IntType: ...
-    @staticmethod
-    @property
-    def CTRL_C_EVENT() -> IntType: ...
-    @staticmethod
-    @property
-    def CTRL_LOGOFF_EVENT() -> IntType: ...
-    @staticmethod
-    @property
-    def CTRL_SHUTDOWN_EVENT() -> IntType: ...
-    @staticmethod
-    @property
-    def DEFAULT_GUI_FONT() -> IntType: ...
-    @staticmethod
-    @property
-    def DUPLICATE_CLOSE_SOURCE() -> IntType: ...
-    @staticmethod
-    @property
-    def DUPLICATE_SAME_ACCESS() -> IntType: ...
-    @staticmethod
-    @property
-    def DWORD_SIZE() -> IntType: ...
-    @staticmethod
-    @property
-    def ENDSESSION_LOGOFF() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_ACCESS_DENIED() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_ALREADY_EXISTS() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_BAD_COMMAND() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_BAD_EXE_FORMAT() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_BROKEN_PIPE() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_BUSY() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_CANCELLED() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_CLASS_ALREADY_EXISTS() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_COUNTER_TIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_DDE_FAIL() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_DLL_NOT_FOUND() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_EVENTLOG_FILE_CHANGED() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_EXE_MACHINE_TYPE_MISMATCH() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_FILENAME_EXCED_RANGE() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_FILE_EXISTS() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_FILE_NOT_FOUND() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_HANDLE_EOF() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_INSUFFICIENT_BUFFER() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_INVALID_HANDLE() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_INVALID_NAME() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_INVALID_PARAMETER() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_IO_INCOMPLETE() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_IO_PENDING() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_LOCK_FAILED() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_MORE_DATA() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_NONE_MAPPED() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_NOT_ENOUGH_MEMORY() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_NOT_READY() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_NO_ASSOCIATION() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_NO_DATA() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_OPERATION_ABORTED() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_PARTIAL_COPY() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_PATH_NOT_FOUND() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_PROC_NOT_FOUND() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_SHARING_VIOLATION() -> IntType: ...
-    @staticmethod
-    @property
-    def ERROR_SUCCESS() -> IntType: ...
-    @staticmethod
-    @property
-    def E_ABORT() -> IntType: ...
-    @staticmethod
-    @property
-    def E_NOTIMPL() -> IntType: ...
-    @staticmethod
-    @property
-    def FILE_ATTRIBUTE_NORMAL() -> IntType: ...
-    @staticmethod
-    @property
-    def FILE_FLAG_OVERLAPPED() -> IntType: ...
-    @staticmethod
-    @property
-    def FILE_MAP_READ() -> IntType: ...
-    @staticmethod
-    @property
-    def FILE_MAP_WRITE() -> IntType: ...
-    @staticmethod
-    @property
-    def FILE_SHARE_DELETE() -> IntType: ...
-    @staticmethod
-    @property
-    def FILE_SHARE_READ() -> IntType: ...
-    @staticmethod
-    @property
-    def FILE_SHARE_WRITE() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_ALLOCATE_BUFFER() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_ARGUMENT_ARRAY() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_FROM_HMODULE() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_FROM_STRING() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_FROM_SYSTEM() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_IGNORE_INSERTS() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_MAX_WIDTH_MASK() -> IntType: ...
-    @staticmethod
-    @property
-    def FORWARDS_READ() -> IntType: ...
-    @staticmethod
-    @property
-    def GCL_WNDPROC() -> IntType: ...
-    @staticmethod
-    @property
-    def GENERIC_ALL() -> IntType: ...
-    @staticmethod
-    @property
-    def GENERIC_EXECUTE() -> IntType: ...
-    @staticmethod
-    @property
-    def GENERIC_READ() -> IntType: ...
-    @staticmethod
-    @property
-    def GENERIC_WRITE() -> IntType: ...
-    @staticmethod
-    @property
-    def GHND() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_DDESHARE() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_DISCARDABLE() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_DISCARDED() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_FIXED() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_INVALID_HANDLE() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_LOCKCOUNT() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_LOWER() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_MODIFY() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_MOVEABLE() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_NOCOMPACT() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_NODISCARD() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_NOTIFY() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_NOT_BANKED() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_SHARE() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_VALID_FLAGS() -> IntType: ...
-    @staticmethod
-    @property
-    def GMEM_ZEROINIT() -> IntType: ...
-    @staticmethod
-    @property
-    def GPTR() -> IntType: ...
-    @staticmethod
-    @property
-    def GWL_STYLE() -> IntType: ...
-    @staticmethod
-    @property
-    def GWL_WNDPROC() -> IntType: ...
-    @staticmethod
-    @property
-    def GW_OWNER() -> IntType: ...
-    @staticmethod
-    @property
-    def HKEY_LOCAL_MACHINE() -> NIntType: ...
-    @staticmethod
-    @property
-    def HKEY_PERFORMANCE_DATA() -> IntType: ...
-    @staticmethod
-    @property
-    def IMPERSONATION_LEVEL_SecurityAnonymous() -> IntType: ...
-    @staticmethod
-    @property
-    def IMPERSONATION_LEVEL_SecurityDelegation() -> IntType: ...
-    @staticmethod
-    @property
-    def IMPERSONATION_LEVEL_SecurityIdentification() -> IntType: ...
-    @staticmethod
-    @property
-    def IMPERSONATION_LEVEL_SecurityImpersonation() -> IntType: ...
-    @staticmethod
-    @property
-    def INVALID_HANDLE_VALUE() -> NIntType: ...
-    @staticmethod
-    @property
-    def KEY_ENUMERATE_SUB_KEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def KEY_NOTIFY() -> IntType: ...
-    @staticmethod
-    @property
-    def KEY_QUERY_VALUE() -> IntType: ...
-    @staticmethod
-    @property
-    def KEY_READ() -> IntType: ...
-    @staticmethod
-    @property
-    def LARGE_INTEGER_SIZE() -> IntType: ...
-    @staticmethod
-    @property
-    def LOAD_LIBRARY_AS_DATAFILE() -> IntType: ...
-    @staticmethod
-    @property
-    def LOAD_WITH_ALTERED_SEARCH_PATH() -> IntType: ...
-    @staticmethod
-    @property
-    def LOGON32_LOGON_BATCH() -> IntType: ...
-    @staticmethod
-    @property
-    def LOGON32_LOGON_INTERACTIVE() -> IntType: ...
-    @staticmethod
-    @property
-    def LOGON32_PROVIDER_DEFAULT() -> IntType: ...
-    @staticmethod
-    @property
-    def MAX_PATH() -> IntType: ...
-    @staticmethod
-    @property
-    def MOVEFILE_REPLACE_EXISTING() -> IntType: ...
-    @staticmethod
-    @property
-    def MWMO_INPUTAVAILABLE() -> IntType: ...
-    @staticmethod
-    @property
-    def NOTIFY_FOR_THIS_SESSION() -> IntType: ...
-    @staticmethod
-    @property
-    def NtPerfCounterSizeDword() -> IntType: ...
-    @staticmethod
-    @property
-    def NtPerfCounterSizeLarge() -> IntType: ...
-    @staticmethod
-    @property
-    def NtQueryProcessBasicInfo() -> IntType: ...
-    @staticmethod
-    @property
-    def NtQuerySystemProcessInformation() -> IntType: ...
-    @staticmethod
-    @property
-    def NullHandleRef() -> HandleRef: ...
-    @staticmethod
-    @property
-    def PAGE_READWRITE() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMBATTERYLOW() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMOEMEVENT() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMPOWERSTATUSCHANGE() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMQUERYSTANDBY() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMQUERYSTANDBYFAILED() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMQUERYSUSPEND() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMQUERYSUSPENDFAILED() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMRESUMECRITICAL() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMRESUMESTANDBY() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMRESUMESUSPEND() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMSTANDBY() -> IntType: ...
-    @staticmethod
-    @property
-    def PBT_APMSUSPEND() -> IntType: ...
-    @staticmethod
-    @property
-    def PDH_CALC_NEGATIVE_DENOMINATOR() -> IntType: ...
-    @staticmethod
-    @property
-    def PDH_CALC_NEGATIVE_VALUE() -> IntType: ...
-    @staticmethod
-    @property
-    def PDH_FMT_DOUBLE() -> UIntType: ...
-    @staticmethod
-    @property
-    def PDH_FMT_NOCAP100() -> UIntType: ...
-    @staticmethod
-    @property
-    def PDH_FMT_NOSCALE() -> UIntType: ...
-    @staticmethod
-    @property
-    def PDH_NO_DATA() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_100NSEC_MULTI_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_100NSEC_MULTI_TIMER_INV() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_100NSEC_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_100NSEC_TIMER_INV() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_AVERAGE_BASE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_AVERAGE_BULK() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_AVERAGE_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_100NS_QUEUELEN_TYPE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_BASE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_BULK_COUNT() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_COUNTER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_DELTA() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_ELAPSED() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_FRACTION() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_HISTOGRAM() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_LARGE_DELTA() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_LARGE_QUEUELEN_TYPE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_LARGE_RAWCOUNT() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_LARGE_RAWCOUNT_HEX() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_MULTI_BASE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_MULTI_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_MULTI_TIMER_INV() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_NODATA() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_OBJ_TIME_QUEUELEN_TYPE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_PRECISION() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_QUEUELEN() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_QUEUELEN_TYPE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_RATE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_RAWCOUNT() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_RAWCOUNT_HEX() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_TEXT() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_TIMER_INV() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_COUNTER_VALUE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DELTA_BASE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DELTA_COUNTER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DETAIL_ADVANCED() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DETAIL_EXPERT() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DETAIL_NOVICE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DETAIL_WIZARD() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DISPLAY_NOSHOW() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DISPLAY_NO_SUFFIX() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DISPLAY_PERCENT() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DISPLAY_PER_SEC() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_DISPLAY_SECONDS() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_ELAPSED_TIME() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_INVERSE_COUNTER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_LARGE_RAW_BASE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_LARGE_RAW_FRACTION() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_MULTI_COUNTER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_NO_INSTANCES() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_NO_UNIQUE_ID() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_NUMBER_DECIMAL() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_NUMBER_DEC_1000() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_NUMBER_HEX() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_OBJECT_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_OBJ_TIME_TIME() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_OBJ_TIME_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_PRECISION_100NS_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_PRECISION_OBJECT_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_PRECISION_SYSTEM_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_RAW_BASE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_RAW_FRACTION() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_SAMPLE_BASE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_SAMPLE_COUNTER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_SAMPLE_FRACTION() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_SIZE_DWORD() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_SIZE_LARGE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_SIZE_VARIABLE_LEN() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_SIZE_ZERO() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_TEXT_ASCII() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_TEXT_UNICODE() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_TIMER_100NS() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_TIMER_TICK() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_TYPE_COUNTER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_TYPE_NUMBER() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_TYPE_TEXT() -> IntType: ...
-    @staticmethod
-    @property
-    def PERF_TYPE_ZERO() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_ACCESS_DUPLEX() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_ACCESS_INBOUND() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_ACCESS_OUTBOUND() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_NOWAIT() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_READMODE_BYTE() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_READMODE_MESSAGE() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_SINGLE_INSTANCES() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_TYPE_BYTE() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_TYPE_MESSAGE() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_UNLIMITED_INSTANCES() -> IntType: ...
-    @staticmethod
-    @property
-    def PIPE_WAIT() -> IntType: ...
-    @staticmethod
-    @property
-    def PM_REMOVE() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_ALL_ACCESS() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_CREATE_PROCESS() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_CREATE_THREAD() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_DUP_HANDLE() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_QUERY_INFORMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_QUERY_LIMITED_INFORMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_SET_INFORMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_SET_QUOTA() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_SET_SESSIONID() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_TERMINATE() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_VM_OPERATION() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_VM_READ() -> IntType: ...
-    @staticmethod
-    @property
-    def PROCESS_VM_WRITE() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_ALLEVENTS() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_ALLINPUT() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_ALLPOSTMESSAGE() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_HOTKEY() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_INPUT() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_KEY() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_MOUSE() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_MOUSEBUTTON() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_MOUSEMOVE() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_PAINT() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_POSTMESSAGE() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_SENDMESSAGE() -> IntType: ...
-    @staticmethod
-    @property
-    def QS_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def READ_CONTROL() -> IntType: ...
-    @staticmethod
-    @property
-    def REG_BINARY() -> IntType: ...
-    @staticmethod
-    @property
-    def REG_MULTI_SZ() -> IntType: ...
-    @staticmethod
-    @property
-    def RPC_S_CALL_FAILED() -> IntType: ...
-    @staticmethod
-    @property
-    def RPC_S_SERVER_UNAVAILABLE() -> IntType: ...
-    @staticmethod
-    @property
-    def SECURITY_DESCRIPTOR_REVISION() -> IntType: ...
-    @staticmethod
-    @property
-    def SEEK_READ() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_ASYNCOK() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_CLASSKEY() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_CLASSNAME() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_CONNECTNETDRV() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_DOENVSUBST() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_FLAG_DDEWAIT() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_FLAG_NO_UI() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_HOTKEY() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_ICON() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_IDLIST() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_INVOKEIDLIST() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_NOCLOSEPROCESS() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_NO_CONSOLE() -> IntType: ...
-    @staticmethod
-    @property
-    def SEE_MASK_UNICODE() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_ACCESSDENIED() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_ASSOCINCOMPLETE() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_DDEBUSY() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_DDEFAIL() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_DDETIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_DLLNOTFOUND() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_FNF() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_NOASSOC() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_OOM() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_PNF() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_ERR_SHARE() -> IntType: ...
-    @staticmethod
-    @property
-    def SE_PRIVILEGE_ENABLED() -> IntType: ...
-    @staticmethod
-    @property
-    def SHGFI_TYPENAME() -> IntType: ...
-    @staticmethod
-    @property
-    def SHGFI_USEFILEATTRIBUTES() -> IntType: ...
-    @staticmethod
-    @property
-    def SMTO_ABORTIFHUNG() -> IntType: ...
-    @staticmethod
-    @property
-    def SM_CYSCREEN() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETACCESSTIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETACTIVEWINDOWTRACKING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETACTIVEWNDTRKTIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETACTIVEWNDTRKZORDER() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETANIMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETBEEP() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETBORDER() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETCARETWIDTH() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETCOMBOBOXANIMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETCURSORSHADOW() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETDEFAULTINPUTLANG() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETDESKWALLPAPER() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETDRAGFULLWINDOWS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETFASTTASKSWITCH() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETFILTERKEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETFONTSMOOTHING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETFOREGROUNDFLASHCOUNT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETFOREGROUNDLOCKTIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETGRADIENTCAPTIONS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETGRIDGRANULARITY() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETHIGHCONTRAST() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETHOTTRACKING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETICONMETRICS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETICONTITLELOGFONT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETICONTITLEWRAP() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETKEYBOARDCUES() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETKEYBOARDDELAY() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETKEYBOARDPREF() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETKEYBOARDSPEED() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETLISTBOXSMOOTHSCROLLING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETLOWPOWERACTIVE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETLOWPOWERTIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMENUANIMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMENUDROPALIGNMENT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMENUFADE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMENUSHOWDELAY() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMENUUNDERLINES() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMINIMIZEDMETRICS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMOUSE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMOUSEHOVERHEIGHT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMOUSEHOVERTIME() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMOUSEHOVERWIDTH() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMOUSEKEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMOUSESPEED() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETMOUSETRAILS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETNONCLIENTMETRICS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETPOWEROFFACTIVE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETPOWEROFFTIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSCREENREADER() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSCREENSAVEACTIVE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSCREENSAVERRUNNING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSCREENSAVETIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSELECTIONFADE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSERIALKEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSHOWIMEUI() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSHOWSOUNDS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSNAPTODEFBUTTON() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSOUNDSENTRY() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETSTICKYKEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETTOGGLEKEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETTOOLTIPANIMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETTOOLTIPFADE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETUIEFFECTS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETWHEELSCROLLLINES() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETWINDOWSEXTENSION() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_GETWORKAREA() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_ICONHORIZONTALSPACING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_ICONVERTICALSPACING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_LANGDRIVER() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SCREENSAVERRUNNING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETACCESSTIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETACTIVEWINDOWTRACKING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETACTIVEWNDTRKTIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETACTIVEWNDTRKZORDER() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETANIMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETBEEP() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETBORDER() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETCARETWIDTH() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETCOMBOBOXANIMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETCURSORS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETCURSORSHADOW() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETDEFAULTINPUTLANG() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETDESKPATTERN() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETDESKWALLPAPER() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETDOUBLECLICKTIME() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETDOUBLECLKHEIGHT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETDOUBLECLKWIDTH() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETDRAGFULLWINDOWS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETDRAGHEIGHT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETDRAGWIDTH() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETFASTTASKSWITCH() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETFILTERKEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETFONTSMOOTHING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETFOREGROUNDFLASHCOUNT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETFOREGROUNDLOCKTIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETGRADIENTCAPTIONS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETGRIDGRANULARITY() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETHANDHELD() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETHIGHCONTRAST() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETHOTTRACKING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETICONMETRICS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETICONS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETICONTITLELOGFONT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETICONTITLEWRAP() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETKEYBOARDCUES() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETKEYBOARDDELAY() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETKEYBOARDPREF() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETKEYBOARDSPEED() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETLANGTOGGLE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETLISTBOXSMOOTHSCROLLING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETLOWPOWERACTIVE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETLOWPOWERTIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMENUANIMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMENUDROPALIGNMENT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMENUFADE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMENUSHOWDELAY() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMENUUNDERLINES() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMINIMIZEDMETRICS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMOUSE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMOUSEBUTTONSWAP() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMOUSEHOVERHEIGHT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMOUSEHOVERTIME() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMOUSEHOVERWIDTH() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMOUSEKEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMOUSESPEED() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETMOUSETRAILS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETNONCLIENTMETRICS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETPENWINDOWS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETPOWEROFFACTIVE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETPOWEROFFTIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSCREENREADER() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSCREENSAVEACTIVE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSCREENSAVERRUNNING() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSCREENSAVETIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSELECTIONFADE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSERIALKEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSHOWIMEUI() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSHOWSOUNDS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSNAPTODEFBUTTON() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSOUNDSENTRY() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETSTICKYKEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETTOGGLEKEYS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETTOOLTIPANIMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETTOOLTIPFADE() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETUIEFFECTS() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETWHEELSCROLLLINES() -> IntType: ...
-    @staticmethod
-    @property
-    def SPI_SETWORKAREA() -> IntType: ...
-    @staticmethod
-    @property
-    def STANDARD_RIGHTS_READ() -> IntType: ...
-    @staticmethod
-    @property
-    def STANDARD_RIGHTS_REQUIRED() -> IntType: ...
-    @staticmethod
-    @property
-    def STARTF_USESHOWWINDOW() -> IntType: ...
-    @staticmethod
-    @property
-    def STARTF_USESTDHANDLES() -> IntType: ...
-    @staticmethod
-    @property
-    def STATUS_INFO_LENGTH_MISMATCH() -> UIntType: ...
-    @staticmethod
-    @property
-    def STD_ERROR_HANDLE() -> IntType: ...
-    @staticmethod
-    @property
-    def STD_INPUT_HANDLE() -> IntType: ...
-    @staticmethod
-    @property
-    def STD_OUTPUT_HANDLE() -> IntType: ...
-    @staticmethod
-    @property
-    def STILL_ACTIVE() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_HIDE() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_MAX() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_MAXIMIZE() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_MINIMIZE() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_NORMAL() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_RESTORE() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_SHOW() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_SHOWDEFAULT() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_SHOWMAXIMIZED() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_SHOWMINIMIZED() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_SHOWMINNOACTIVE() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_SHOWNA() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_SHOWNOACTIVATE() -> IntType: ...
-    @staticmethod
-    @property
-    def SW_SHOWNORMAL() -> IntType: ...
-    @staticmethod
-    @property
-    def SYNCHRONIZE() -> IntType: ...
-    @staticmethod
-    @property
-    def S_OK() -> IntType: ...
-    @staticmethod
-    @property
-    def TH32CS_INHERIT() -> IntType: ...
-    @staticmethod
-    @property
-    def TH32CS_SNAPHEAPLIST() -> IntType: ...
-    @staticmethod
-    @property
-    def TH32CS_SNAPMODULE() -> IntType: ...
-    @staticmethod
-    @property
-    def TH32CS_SNAPPROCESS() -> IntType: ...
-    @staticmethod
-    @property
-    def TH32CS_SNAPTHREAD() -> IntType: ...
-    @staticmethod
-    @property
-    def THREAD_DIRECT_IMPERSONATION() -> IntType: ...
-    @staticmethod
-    @property
-    def THREAD_GET_CONTEXT() -> IntType: ...
-    @staticmethod
-    @property
-    def THREAD_IMPERSONATE() -> IntType: ...
-    @staticmethod
-    @property
-    def THREAD_QUERY_INFORMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def THREAD_SET_CONTEXT() -> IntType: ...
-    @staticmethod
-    @property
-    def THREAD_SET_INFORMATION() -> IntType: ...
-    @staticmethod
-    @property
-    def THREAD_SET_THREAD_TOKEN() -> IntType: ...
-    @staticmethod
-    @property
-    def THREAD_SUSPEND_RESUME() -> IntType: ...
-    @staticmethod
-    @property
-    def THREAD_TERMINATE() -> IntType: ...
-    @staticmethod
-    @property
-    def TOKEN_ADJUST_PRIVILEGES() -> IntType: ...
-    @staticmethod
-    @property
-    def TOKEN_ALL_ACCESS() -> IntType: ...
-    @staticmethod
-    @property
-    def TOKEN_EXECUTE() -> IntType: ...
-    @staticmethod
-    @property
-    def TOKEN_IMPERSONATE() -> IntType: ...
-    @staticmethod
-    @property
-    def TOKEN_QUERY() -> IntType: ...
-    @staticmethod
-    @property
-    def TOKEN_READ() -> IntType: ...
-    @staticmethod
-    @property
-    def TOKEN_TYPE_TokenImpersonation() -> IntType: ...
-    @staticmethod
-    @property
-    def TOKEN_TYPE_TokenPrimary() -> IntType: ...
-    @staticmethod
-    @property
-    def UISF_HIDEACCEL() -> IntType: ...
-    @staticmethod
-    @property
-    def UISF_HIDEFOCUS() -> IntType: ...
-    @staticmethod
-    @property
-    def UIS_CLEAR() -> IntType: ...
-    @staticmethod
-    @property
-    def UIS_SET() -> IntType: ...
-    @staticmethod
-    @property
-    def UOI_FLAGS() -> IntType: ...
-    @staticmethod
-    @property
-    def UOI_NAME() -> IntType: ...
-    @staticmethod
-    @property
-    def UOI_TYPE() -> IntType: ...
-    @staticmethod
-    @property
-    def UOI_USER_SID() -> IntType: ...
-    @staticmethod
-    @property
-    def USERCLASSTYPE_FULL() -> IntType: ...
-    @staticmethod
-    @property
-    def VER_PLATFORM_WIN32_NT() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_COMM() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_DISPLAY() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_INPUTMETHOD() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_INSTALLABLE() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_KEYBOARD() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_LANGUAGE() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_MOUSE() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_NETWORK() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_PRINTER() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_SOUND() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_DRV_SYSTEM() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_FONT_RASTER() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_FONT_TRUETYPE() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_FONT_VECTOR() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT2_UNKNOWN() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT_APP() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT_DLL() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT_DRV() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT_FONT() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT_STATIC_LIB() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT_UNKNOWN() -> IntType: ...
-    @staticmethod
-    @property
-    def VFT_VXD() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_FFI_FILEFLAGSMASK() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_FFI_SIGNATURE() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_FFI_STRUCVERSION() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_FF_DEBUG() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_FF_INFOINFERRED() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_FF_PATCHED() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_FF_PRERELEASE() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_FF_PRIVATEBUILD() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_FF_SPECIALBUILD() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_FILE_INFO() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_USER_DEFINED() -> IntType: ...
-    @staticmethod
-    @property
-    def VS_VERSION_INFO() -> IntType: ...
-    @staticmethod
-    @property
-    def WAIT_ABANDONED() -> IntType: ...
-    @staticmethod
-    @property
-    def WAIT_ABANDONED_0() -> IntType: ...
-    @staticmethod
-    @property
-    def WAIT_FAILED() -> IntType: ...
-    @staticmethod
-    @property
-    def WAIT_OBJECT_0() -> IntType: ...
-    @staticmethod
-    @property
-    def WAIT_TIMEOUT() -> IntType: ...
-    @staticmethod
-    @property
-    def WHITENESS() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_CLOSE() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_COMPACTING() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_CREATETIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_DISPLAYCHANGE() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_ENDSESSION() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_FONTCHANGE() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_KILLTIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_NULL() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_PALETTECHANGED() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_POWERBROADCAST() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_QUERYENDSESSION() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_QUIT() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_REFLECT() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_SETTINGCHANGE() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_SYSCOLORCHANGE() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_THEMECHANGED() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_TIMECHANGE() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_TIMER() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_USER() -> IntType: ...
-    @staticmethod
-    @property
-    def WM_WTSSESSION_CHANGE() -> IntType: ...
-    @staticmethod
-    @property
-    def WSF_VISIBLE() -> IntType: ...
-    @staticmethod
-    @property
-    def WS_DISABLED() -> IntType: ...
-    @staticmethod
-    @property
-    def WS_POPUP() -> IntType: ...
-    @staticmethod
-    @property
-    def WS_VISIBLE() -> IntType: ...
-    @staticmethod
-    @property
-    def WTS_CONSOLE_CONNECT() -> IntType: ...
-    @staticmethod
-    @property
-    def WTS_CONSOLE_DISCONNECT() -> IntType: ...
-    @staticmethod
-    @property
-    def WTS_REMOTE_CONNECT() -> IntType: ...
-    @staticmethod
-    @property
-    def WTS_REMOTE_DISCONNECT() -> IntType: ...
-    @staticmethod
-    @property
-    def WTS_SESSION_LOCK() -> IntType: ...
-    @staticmethod
-    @property
-    def WTS_SESSION_LOGOFF() -> IntType: ...
-    @staticmethod
-    @property
-    def WTS_SESSION_LOGON() -> IntType: ...
-    @staticmethod
-    @property
-    def WTS_SESSION_REMOTE_CONTROL() -> IntType: ...
-    @staticmethod
-    @property
-    def WTS_SESSION_UNLOCK() -> IntType: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
+    BACKWARDS_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    COLOR_WINDOW: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CREATE_ALWAYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CREATE_NO_WINDOW: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CREATE_SUSPENDED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CREATE_UNICODE_ENVIRONMENT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CTRL_BREAK_EVENT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CTRL_CLOSE_EVENT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CTRL_C_EVENT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CTRL_LOGOFF_EVENT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CTRL_SHUTDOWN_EVENT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    DEFAULT_GUI_FONT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    DUPLICATE_CLOSE_SOURCE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    DUPLICATE_SAME_ACCESS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    DWORD_SIZE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ENDSESSION_LOGOFF: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_ACCESS_DENIED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_ALREADY_EXISTS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_BAD_COMMAND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_BAD_EXE_FORMAT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_BROKEN_PIPE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_BUSY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_CANCELLED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_CLASS_ALREADY_EXISTS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_COUNTER_TIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_DDE_FAIL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_DLL_NOT_FOUND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_EVENTLOG_FILE_CHANGED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_EXE_MACHINE_TYPE_MISMATCH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_FILENAME_EXCED_RANGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_FILE_EXISTS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_FILE_NOT_FOUND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_HANDLE_EOF: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_INSUFFICIENT_BUFFER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_INVALID_HANDLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_INVALID_NAME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_INVALID_PARAMETER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_IO_INCOMPLETE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_IO_PENDING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_LOCK_FAILED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_MORE_DATA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_NONE_MAPPED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_NOT_ENOUGH_MEMORY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_NOT_READY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_NO_ASSOCIATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_NO_DATA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_OPERATION_ABORTED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_PARTIAL_COPY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_PATH_NOT_FOUND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_PROC_NOT_FOUND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_SHARING_VIOLATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    ERROR_SUCCESS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    E_ABORT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    E_NOTIMPL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ATTRIBUTE_NORMAL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_FLAG_OVERLAPPED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_MAP_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_MAP_WRITE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_SHARE_DELETE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_SHARE_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_SHARE_WRITE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_ALLOCATE_BUFFER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_ARGUMENT_ARRAY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_FROM_HMODULE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_FROM_STRING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_FROM_SYSTEM: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_IGNORE_INSERTS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_MAX_WIDTH_MASK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORWARDS_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GCL_WNDPROC: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GENERIC_ALL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GENERIC_EXECUTE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GENERIC_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GENERIC_WRITE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GHND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_DDESHARE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_DISCARDABLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_DISCARDED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_FIXED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_INVALID_HANDLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_LOCKCOUNT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_LOWER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_MODIFY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_MOVEABLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_NOCOMPACT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_NODISCARD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_NOTIFY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_NOT_BANKED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_SHARE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_VALID_FLAGS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GMEM_ZEROINIT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GPTR: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GWL_STYLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GWL_WNDPROC: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GW_OWNER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    HKEY_LOCAL_MACHINE: Final[ClassVar[IntPtr]] = ...
+    """
+    
+    :return: 
+    """
+    HKEY_PERFORMANCE_DATA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    IMPERSONATION_LEVEL_SecurityAnonymous: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    IMPERSONATION_LEVEL_SecurityDelegation: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    IMPERSONATION_LEVEL_SecurityIdentification: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    IMPERSONATION_LEVEL_SecurityImpersonation: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    INVALID_HANDLE_VALUE: Final[ClassVar[IntPtr]] = ...
+    """
+    
+    :return: 
+    """
+    KEY_ENUMERATE_SUB_KEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    KEY_NOTIFY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    KEY_QUERY_VALUE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    KEY_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    LARGE_INTEGER_SIZE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    LOAD_LIBRARY_AS_DATAFILE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    LOAD_WITH_ALTERED_SEARCH_PATH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    LOGON32_LOGON_BATCH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    LOGON32_LOGON_INTERACTIVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    LOGON32_PROVIDER_DEFAULT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MAX_PATH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MOVEFILE_REPLACE_EXISTING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MWMO_INPUTAVAILABLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NOTIFY_FOR_THIS_SESSION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NtPerfCounterSizeDword: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NtPerfCounterSizeLarge: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NtQueryProcessBasicInfo: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NtQuerySystemProcessInformation: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NullHandleRef: Final[ClassVar[HandleRef]] = ...
+    """
+    
+    :return: 
+    """
+    PAGE_READWRITE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMBATTERYLOW: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMOEMEVENT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMPOWERSTATUSCHANGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMQUERYSTANDBY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMQUERYSTANDBYFAILED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMQUERYSUSPEND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMQUERYSUSPENDFAILED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMRESUMECRITICAL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMRESUMESTANDBY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMRESUMESUSPEND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMSTANDBY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PBT_APMSUSPEND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PDH_CALC_NEGATIVE_DENOMINATOR: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PDH_CALC_NEGATIVE_VALUE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PDH_FMT_DOUBLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PDH_FMT_NOCAP100: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PDH_FMT_NOSCALE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PDH_NO_DATA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_100NSEC_MULTI_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_100NSEC_MULTI_TIMER_INV: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_100NSEC_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_100NSEC_TIMER_INV: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_AVERAGE_BASE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_AVERAGE_BULK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_AVERAGE_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_100NS_QUEUELEN_TYPE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_BASE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_BULK_COUNT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_COUNTER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_DELTA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_ELAPSED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_FRACTION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_HISTOGRAM: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_LARGE_DELTA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_LARGE_QUEUELEN_TYPE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_LARGE_RAWCOUNT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_LARGE_RAWCOUNT_HEX: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_MULTI_BASE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_MULTI_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_MULTI_TIMER_INV: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_NODATA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_OBJ_TIME_QUEUELEN_TYPE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_PRECISION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_QUEUELEN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_QUEUELEN_TYPE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_RATE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_RAWCOUNT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_RAWCOUNT_HEX: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_TEXT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_TIMER_INV: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_COUNTER_VALUE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DELTA_BASE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DELTA_COUNTER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DETAIL_ADVANCED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DETAIL_EXPERT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DETAIL_NOVICE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DETAIL_WIZARD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DISPLAY_NOSHOW: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DISPLAY_NO_SUFFIX: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DISPLAY_PERCENT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DISPLAY_PER_SEC: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_DISPLAY_SECONDS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_ELAPSED_TIME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_INVERSE_COUNTER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_LARGE_RAW_BASE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_LARGE_RAW_FRACTION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_MULTI_COUNTER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_NO_INSTANCES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_NO_UNIQUE_ID: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_NUMBER_DECIMAL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_NUMBER_DEC_1000: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_NUMBER_HEX: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_OBJECT_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_OBJ_TIME_TIME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_OBJ_TIME_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_PRECISION_100NS_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_PRECISION_OBJECT_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_PRECISION_SYSTEM_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_RAW_BASE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_RAW_FRACTION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_SAMPLE_BASE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_SAMPLE_COUNTER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_SAMPLE_FRACTION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_SIZE_DWORD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_SIZE_LARGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_SIZE_VARIABLE_LEN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_SIZE_ZERO: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_TEXT_ASCII: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_TEXT_UNICODE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_TIMER_100NS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_TIMER_TICK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_TYPE_COUNTER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_TYPE_NUMBER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_TYPE_TEXT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PERF_TYPE_ZERO: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_ACCESS_DUPLEX: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_ACCESS_INBOUND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_ACCESS_OUTBOUND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_NOWAIT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_READMODE_BYTE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_READMODE_MESSAGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_SINGLE_INSTANCES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_TYPE_BYTE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_TYPE_MESSAGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_UNLIMITED_INSTANCES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PIPE_WAIT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PM_REMOVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_ALL_ACCESS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_CREATE_PROCESS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_CREATE_THREAD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_DUP_HANDLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_QUERY_INFORMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_QUERY_LIMITED_INFORMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_SET_INFORMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_SET_QUOTA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_SET_SESSIONID: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_TERMINATE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_VM_OPERATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_VM_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    PROCESS_VM_WRITE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_ALLEVENTS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_ALLINPUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_ALLPOSTMESSAGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_HOTKEY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_INPUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_KEY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_MOUSE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_MOUSEBUTTON: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_MOUSEMOVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_PAINT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_POSTMESSAGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_SENDMESSAGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    QS_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    READ_CONTROL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    REG_BINARY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    REG_MULTI_SZ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    RPC_S_CALL_FAILED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    RPC_S_SERVER_UNAVAILABLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SECURITY_DESCRIPTOR_REVISION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEEK_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_ASYNCOK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_CLASSKEY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_CLASSNAME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_CONNECTNETDRV: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_DOENVSUBST: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_FLAG_DDEWAIT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_FLAG_NO_UI: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_HOTKEY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_ICON: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_IDLIST: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_INVOKEIDLIST: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_NOCLOSEPROCESS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_NO_CONSOLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SEE_MASK_UNICODE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_ACCESSDENIED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_ASSOCINCOMPLETE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_DDEBUSY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_DDEFAIL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_DDETIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_DLLNOTFOUND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_FNF: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_NOASSOC: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_OOM: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_PNF: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_ERR_SHARE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SE_PRIVILEGE_ENABLED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SHGFI_TYPENAME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SHGFI_USEFILEATTRIBUTES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SMTO_ABORTIFHUNG: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SM_CYSCREEN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETACCESSTIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETACTIVEWINDOWTRACKING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETACTIVEWNDTRKTIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETACTIVEWNDTRKZORDER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETANIMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETBEEP: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETBORDER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETCARETWIDTH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETCOMBOBOXANIMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETCURSORSHADOW: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETDEFAULTINPUTLANG: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETDESKWALLPAPER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETDRAGFULLWINDOWS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETFASTTASKSWITCH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETFILTERKEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETFONTSMOOTHING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETFOREGROUNDFLASHCOUNT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETFOREGROUNDLOCKTIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETGRADIENTCAPTIONS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETGRIDGRANULARITY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETHIGHCONTRAST: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETHOTTRACKING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETICONMETRICS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETICONTITLELOGFONT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETICONTITLEWRAP: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETKEYBOARDCUES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETKEYBOARDDELAY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETKEYBOARDPREF: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETKEYBOARDSPEED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETLISTBOXSMOOTHSCROLLING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETLOWPOWERACTIVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETLOWPOWERTIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMENUANIMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMENUDROPALIGNMENT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMENUFADE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMENUSHOWDELAY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMENUUNDERLINES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMINIMIZEDMETRICS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMOUSE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMOUSEHOVERHEIGHT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMOUSEHOVERTIME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMOUSEHOVERWIDTH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMOUSEKEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMOUSESPEED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETMOUSETRAILS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETNONCLIENTMETRICS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETPOWEROFFACTIVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETPOWEROFFTIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSCREENREADER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSCREENSAVEACTIVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSCREENSAVERRUNNING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSCREENSAVETIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSELECTIONFADE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSERIALKEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSHOWIMEUI: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSHOWSOUNDS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSNAPTODEFBUTTON: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSOUNDSENTRY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETSTICKYKEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETTOGGLEKEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETTOOLTIPANIMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETTOOLTIPFADE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETUIEFFECTS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETWHEELSCROLLLINES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETWINDOWSEXTENSION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_GETWORKAREA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_ICONHORIZONTALSPACING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_ICONVERTICALSPACING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_LANGDRIVER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SCREENSAVERRUNNING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETACCESSTIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETACTIVEWINDOWTRACKING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETACTIVEWNDTRKTIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETACTIVEWNDTRKZORDER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETANIMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETBEEP: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETBORDER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETCARETWIDTH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETCOMBOBOXANIMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETCURSORS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETCURSORSHADOW: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETDEFAULTINPUTLANG: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETDESKPATTERN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETDESKWALLPAPER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETDOUBLECLICKTIME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETDOUBLECLKHEIGHT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETDOUBLECLKWIDTH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETDRAGFULLWINDOWS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETDRAGHEIGHT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETDRAGWIDTH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETFASTTASKSWITCH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETFILTERKEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETFONTSMOOTHING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETFOREGROUNDFLASHCOUNT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETFOREGROUNDLOCKTIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETGRADIENTCAPTIONS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETGRIDGRANULARITY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETHANDHELD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETHIGHCONTRAST: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETHOTTRACKING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETICONMETRICS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETICONS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETICONTITLELOGFONT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETICONTITLEWRAP: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETKEYBOARDCUES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETKEYBOARDDELAY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETKEYBOARDPREF: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETKEYBOARDSPEED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETLANGTOGGLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETLISTBOXSMOOTHSCROLLING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETLOWPOWERACTIVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETLOWPOWERTIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMENUANIMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMENUDROPALIGNMENT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMENUFADE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMENUSHOWDELAY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMENUUNDERLINES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMINIMIZEDMETRICS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMOUSE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMOUSEBUTTONSWAP: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMOUSEHOVERHEIGHT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMOUSEHOVERTIME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMOUSEHOVERWIDTH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMOUSEKEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMOUSESPEED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETMOUSETRAILS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETNONCLIENTMETRICS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETPENWINDOWS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETPOWEROFFACTIVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETPOWEROFFTIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSCREENREADER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSCREENSAVEACTIVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSCREENSAVERRUNNING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSCREENSAVETIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSELECTIONFADE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSERIALKEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSHOWIMEUI: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSHOWSOUNDS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSNAPTODEFBUTTON: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSOUNDSENTRY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETSTICKYKEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETTOGGLEKEYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETTOOLTIPANIMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETTOOLTIPFADE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETUIEFFECTS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETWHEELSCROLLLINES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SPI_SETWORKAREA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    STANDARD_RIGHTS_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    STANDARD_RIGHTS_REQUIRED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    STARTF_USESHOWWINDOW: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    STARTF_USESTDHANDLES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    STATUS_INFO_LENGTH_MISMATCH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    STD_ERROR_HANDLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    STD_INPUT_HANDLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    STD_OUTPUT_HANDLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    STILL_ACTIVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_HIDE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_MAX: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_MAXIMIZE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_MINIMIZE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_NORMAL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_RESTORE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_SHOW: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_SHOWDEFAULT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_SHOWMAXIMIZED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_SHOWMINIMIZED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_SHOWMINNOACTIVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_SHOWNA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_SHOWNOACTIVATE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SW_SHOWNORMAL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    SYNCHRONIZE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    S_OK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TH32CS_INHERIT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TH32CS_SNAPHEAPLIST: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TH32CS_SNAPMODULE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TH32CS_SNAPPROCESS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TH32CS_SNAPTHREAD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    THREAD_DIRECT_IMPERSONATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    THREAD_GET_CONTEXT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    THREAD_IMPERSONATE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    THREAD_QUERY_INFORMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    THREAD_SET_CONTEXT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    THREAD_SET_INFORMATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    THREAD_SET_THREAD_TOKEN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    THREAD_SUSPEND_RESUME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    THREAD_TERMINATE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TOKEN_ADJUST_PRIVILEGES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TOKEN_ALL_ACCESS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TOKEN_EXECUTE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TOKEN_IMPERSONATE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TOKEN_QUERY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TOKEN_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TOKEN_TYPE_TokenImpersonation: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TOKEN_TYPE_TokenPrimary: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    UISF_HIDEACCEL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    UISF_HIDEFOCUS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    UIS_CLEAR: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    UIS_SET: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    UOI_FLAGS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    UOI_NAME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    UOI_TYPE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    UOI_USER_SID: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    USERCLASSTYPE_FULL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VER_PLATFORM_WIN32_NT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_COMM: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_DISPLAY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_INPUTMETHOD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_INSTALLABLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_KEYBOARD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_LANGUAGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_MOUSE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_NETWORK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_PRINTER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_SOUND: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_DRV_SYSTEM: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_FONT_RASTER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_FONT_TRUETYPE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_FONT_VECTOR: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT2_UNKNOWN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT_APP: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT_DLL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT_DRV: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT_FONT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT_STATIC_LIB: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT_UNKNOWN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VFT_VXD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_FFI_FILEFLAGSMASK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_FFI_SIGNATURE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_FFI_STRUCVERSION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_FF_DEBUG: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_FF_INFOINFERRED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_FF_PATCHED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_FF_PRERELEASE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_FF_PRIVATEBUILD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_FF_SPECIALBUILD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_FILE_INFO: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_USER_DEFINED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    VS_VERSION_INFO: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WAIT_ABANDONED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WAIT_ABANDONED_0: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WAIT_FAILED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WAIT_OBJECT_0: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WAIT_TIMEOUT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WHITENESS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_CLOSE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_COMPACTING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_CREATETIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_DISPLAYCHANGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_ENDSESSION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_FONTCHANGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_KILLTIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_NULL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_PALETTECHANGED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_POWERBROADCAST: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_QUERYENDSESSION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_QUIT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_REFLECT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_SETTINGCHANGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_SYSCOLORCHANGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_THEMECHANGED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_TIMECHANGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_TIMER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_USER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WM_WTSSESSION_CHANGE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WSF_VISIBLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WS_DISABLED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WS_POPUP: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WS_VISIBLE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WTS_CONSOLE_CONNECT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WTS_CONSOLE_DISCONNECT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WTS_REMOTE_CONNECT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WTS_REMOTE_DISCONNECT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WTS_SESSION_LOCK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WTS_SESSION_LOGOFF: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WTS_SESSION_LOGON: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WTS_SESSION_REMOTE_CONTROL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    WTS_SESSION_UNLOCK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @classmethod
     def AdjustTokenPrivileges(
+        cls,
         TokenHandle: HandleRef,
-        DisableAllPrivileges: BooleanType,
-        NewState: TokenPrivileges,
-        BufferLength: IntType,
-        PreviousState: NIntType,
-        ReturnLength: NIntType,
-    ) -> BooleanType: ...
-    @staticmethod
+        DisableAllPrivileges: bool,
+        NewState: NativeMethods.TokenPrivileges,
+        BufferLength: int,
+        PreviousState: IntPtr,
+        ReturnLength: IntPtr,
+    ) -> bool:
+        """
+
+        :param TokenHandle:
+        :param DisableAllPrivileges:
+        :param NewState:
+        :param BufferLength:
+        :param PreviousState:
+        :param ReturnLength:
+        :return:
+        """
+    @classmethod
     def CreateFile(
-        lpFileName: StringType,
-        dwDesiredAccess: IntType,
-        dwShareMode: IntType,
-        lpSecurityAttributes: SECURITY_ATTRIBUTES,
-        dwCreationDisposition: IntType,
-        dwFlagsAndAttributes: IntType,
+        cls,
+        lpFileName: str,
+        dwDesiredAccess: int,
+        dwShareMode: int,
+        lpSecurityAttributes: NativeMethods.SECURITY_ATTRIBUTES,
+        dwCreationDisposition: int,
+        dwFlagsAndAttributes: int,
         hTemplateFile: SafeFileHandle,
-    ) -> SafeFileHandle: ...
-    @staticmethod
+    ) -> SafeFileHandle:
+        """
+
+        :param lpFileName:
+        :param dwDesiredAccess:
+        :param dwShareMode:
+        :param lpSecurityAttributes:
+        :param dwCreationDisposition:
+        :param dwFlagsAndAttributes:
+        :param hTemplateFile:
+        :return:
+        """
+    @classmethod
     def CreatePipe(
+        cls,
         hReadPipe: SafeFileHandle,
         hWritePipe: SafeFileHandle,
-        lpPipeAttributes: SECURITY_ATTRIBUTES,
-        nSize: IntType,
-    ) -> Tuple[BooleanType, SafeFileHandle, SafeFileHandle]: ...
-    @staticmethod
+        lpPipeAttributes: NativeMethods.SECURITY_ATTRIBUTES,
+        nSize: int,
+    ) -> Tuple[bool, SafeFileHandle, SafeFileHandle]:
+        """
+
+        :param hReadPipe:
+        :param hWritePipe:
+        :param lpPipeAttributes:
+        :param nSize:
+        :return:
+        """
+    @classmethod
     def CreateProcess(
-        lpApplicationName: StringType,
+        cls,
+        lpApplicationName: str,
         lpCommandLine: StringBuilder,
-        lpProcessAttributes: SECURITY_ATTRIBUTES,
-        lpThreadAttributes: SECURITY_ATTRIBUTES,
-        bInheritHandles: BooleanType,
-        dwCreationFlags: IntType,
-        lpEnvironment: NIntType,
-        lpCurrentDirectory: StringType,
-        lpStartupInfo: STARTUPINFO,
-        lpProcessInformation: PROCESS_INFORMATION,
-    ) -> BooleanType: ...
-    @staticmethod
+        lpProcessAttributes: NativeMethods.SECURITY_ATTRIBUTES,
+        lpThreadAttributes: NativeMethods.SECURITY_ATTRIBUTES,
+        bInheritHandles: bool,
+        dwCreationFlags: int,
+        lpEnvironment: IntPtr,
+        lpCurrentDirectory: str,
+        lpStartupInfo: NativeMethods.STARTUPINFO,
+        lpProcessInformation: SafeNativeMethods.PROCESS_INFORMATION,
+    ) -> bool:
+        """
+
+        :param lpApplicationName:
+        :param lpCommandLine:
+        :param lpProcessAttributes:
+        :param lpThreadAttributes:
+        :param bInheritHandles:
+        :param dwCreationFlags:
+        :param lpEnvironment:
+        :param lpCurrentDirectory:
+        :param lpStartupInfo:
+        :param lpProcessInformation:
+        :return:
+        """
+    @classmethod
     def CreateProcessAsUser(
+        cls,
         hToken: SafeHandle,
-        lpApplicationName: StringType,
-        lpCommandLine: StringType,
-        lpProcessAttributes: SECURITY_ATTRIBUTES,
-        lpThreadAttributes: SECURITY_ATTRIBUTES,
-        bInheritHandles: BooleanType,
-        dwCreationFlags: IntType,
+        lpApplicationName: str,
+        lpCommandLine: str,
+        lpProcessAttributes: NativeMethods.SECURITY_ATTRIBUTES,
+        lpThreadAttributes: NativeMethods.SECURITY_ATTRIBUTES,
+        bInheritHandles: bool,
+        dwCreationFlags: int,
         lpEnvironment: HandleRef,
-        lpCurrentDirectory: StringType,
-        lpStartupInfo: STARTUPINFO,
-        lpProcessInformation: PROCESS_INFORMATION,
-    ) -> BooleanType: ...
-    @staticmethod
-    def CreateToolhelp32Snapshot(flags: IntType, processId: IntType) -> NIntType: ...
-    @staticmethod
+        lpCurrentDirectory: str,
+        lpStartupInfo: NativeMethods.STARTUPINFO,
+        lpProcessInformation: SafeNativeMethods.PROCESS_INFORMATION,
+    ) -> bool:
+        """
+
+        :param hToken:
+        :param lpApplicationName:
+        :param lpCommandLine:
+        :param lpProcessAttributes:
+        :param lpThreadAttributes:
+        :param bInheritHandles:
+        :param dwCreationFlags:
+        :param lpEnvironment:
+        :param lpCurrentDirectory:
+        :param lpStartupInfo:
+        :param lpProcessInformation:
+        :return:
+        """
+    @classmethod
+    def CreateToolhelp32Snapshot(cls, flags: int, processId: int) -> IntPtr:
+        """
+
+        :param flags:
+        :param processId:
+        :return:
+        """
+    @classmethod
     @overload
     def DuplicateHandle(
-        hSourceProcessHandle: HandleRef,
-        hSourceHandle: SafeHandle,
-        hTargetProcess: HandleRef,
-        targetHandle: SafeWaitHandle,
-        dwDesiredAccess: IntType,
-        bInheritHandle: BooleanType,
-        dwOptions: IntType,
-    ) -> Tuple[BooleanType, SafeWaitHandle]: ...
-    @staticmethod
-    @overload
-    def DuplicateHandle(
+        cls,
         hSourceProcessHandle: HandleRef,
         hSourceHandle: SafeHandle,
         hTargetProcess: HandleRef,
         targetHandle: SafeFileHandle,
-        dwDesiredAccess: IntType,
-        bInheritHandle: BooleanType,
-        dwOptions: IntType,
-    ) -> Tuple[BooleanType, SafeFileHandle]: ...
-    @staticmethod
+        dwDesiredAccess: int,
+        bInheritHandle: bool,
+        dwOptions: int,
+    ) -> Tuple[bool, SafeFileHandle]:
+        """
+
+        :param hSourceProcessHandle:
+        :param hSourceHandle:
+        :param hTargetProcess:
+        :param targetHandle:
+        :param dwDesiredAccess:
+        :param bInheritHandle:
+        :param dwOptions:
+        :return:
+        """
+    @classmethod
+    @overload
+    def DuplicateHandle(
+        cls,
+        hSourceProcessHandle: HandleRef,
+        hSourceHandle: SafeHandle,
+        hTargetProcess: HandleRef,
+        targetHandle: SafeWaitHandle,
+        dwDesiredAccess: int,
+        bInheritHandle: bool,
+        dwOptions: int,
+    ) -> Tuple[bool, SafeWaitHandle]:
+        """
+
+        :param hSourceProcessHandle:
+        :param hSourceHandle:
+        :param hTargetProcess:
+        :param targetHandle:
+        :param dwDesiredAccess:
+        :param bInheritHandle:
+        :param dwOptions:
+        :return:
+        """
+    @classmethod
     def EnumProcessModules(
-        handle: SafeProcessHandle, modules: NIntType, size: IntType, needed: IntType
-    ) -> Tuple[BooleanType, IntType]: ...
-    @staticmethod
-    def EnumProcesses(
-        processIds: ArrayType[IntType], size: IntType, needed: IntType
-    ) -> Tuple[BooleanType, IntType]: ...
-    @staticmethod
-    def EnumWindows(callback: EnumThreadWindowsCallback, extraData: NIntType) -> BooleanType: ...
-    @staticmethod
-    def GetCurrentProcess() -> NIntType: ...
-    @staticmethod
-    def GetCurrentProcessId() -> IntType: ...
-    @staticmethod
+        cls, handle: SafeProcessHandle, modules: IntPtr, size: int, needed: int
+    ) -> bool:
+        """
+
+        :param handle:
+        :param modules:
+        :param size:
+        :param needed:
+        :return:
+        """
+    @classmethod
+    def EnumProcesses(cls, processIds: Array[int], size: int, needed: int) -> Tuple[bool, int]:
+        """
+
+        :param processIds:
+        :param size:
+        :param needed:
+        :return:
+        """
+    @classmethod
+    def EnumWindows(
+        cls, callback: NativeMethods.EnumThreadWindowsCallback, extraData: IntPtr
+    ) -> bool:
+        """
+
+        :param callback:
+        :param extraData:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetCurrentProcess(cls) -> IntPtr:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetCurrentProcessId(cls) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
     def GetExitCodeProcess(
-        processHandle: SafeProcessHandle, exitCode: IntType
-    ) -> Tuple[BooleanType, IntType]: ...
-    @staticmethod
+        cls, processHandle: SafeProcessHandle, exitCode: int
+    ) -> Tuple[bool, int]:
+        """
+
+        :param processHandle:
+        :param exitCode:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
     def GetModuleBaseName(
+        cls,
         processHandle: SafeProcessHandle,
         moduleHandle: HandleRef,
         baseName: StringBuilder,
-        size: IntType,
-    ) -> IntType: ...
-    @staticmethod
+        size: int,
+    ) -> int:
+        """
+
+        :param processHandle:
+        :param moduleHandle:
+        :param baseName:
+        :param size:
+        :return:
+        """
+    @classmethod
     @overload
     def GetModuleFileNameEx(
+        cls,
         processHandle: SafeProcessHandle,
         moduleHandle: HandleRef,
         baseName: StringBuilder,
-        size: IntType,
-    ) -> IntType: ...
-    @staticmethod
+        size: int,
+    ) -> int:
+        """
+
+        :param processHandle:
+        :param moduleHandle:
+        :param baseName:
+        :param size:
+        :return:
+        """
+    @classmethod
     @overload
     def GetModuleFileNameEx(
-        processHandle: HandleRef, moduleHandle: HandleRef, baseName: StringBuilder, size: IntType
-    ) -> IntType: ...
-    @staticmethod
+        cls, processHandle: HandleRef, moduleHandle: HandleRef, baseName: StringBuilder, size: int
+    ) -> int:
+        """
+
+        :param processHandle:
+        :param moduleHandle:
+        :param baseName:
+        :param size:
+        :return:
+        """
+    @classmethod
     def GetModuleInformation(
+        cls,
         processHandle: SafeProcessHandle,
         moduleHandle: HandleRef,
-        ntModuleInfo: NtModuleInfo,
-        size: IntType,
-    ) -> BooleanType: ...
-    @staticmethod
-    def GetPriorityClass(handle: SafeProcessHandle) -> IntType: ...
-    @staticmethod
+        ntModuleInfo: NativeMethods.NtModuleInfo,
+        size: int,
+    ) -> bool:
+        """
+
+        :param processHandle:
+        :param moduleHandle:
+        :param ntModuleInfo:
+        :param size:
+        :return:
+        """
+    @classmethod
+    def GetPriorityClass(cls, handle: SafeProcessHandle) -> int:
+        """
+
+        :param handle:
+        :return:
+        """
+    @classmethod
     def GetProcessAffinityMask(
-        handle: SafeProcessHandle, processMask: NIntType, systemMask: NIntType
-    ) -> Tuple[BooleanType, NIntType, NIntType]: ...
-    @staticmethod
+        cls, handle: SafeProcessHandle, processMask: IntPtr, systemMask: IntPtr
+    ) -> Tuple[bool, IntPtr, IntPtr]:
+        """
+
+        :param handle:
+        :param processMask:
+        :param systemMask:
+        :return:
+        """
+    @classmethod
     def GetProcessPriorityBoost(
-        handle: SafeProcessHandle, disabled: BooleanType
-    ) -> Tuple[BooleanType, BooleanType]: ...
-    @staticmethod
+        cls, handle: SafeProcessHandle, disabled: bool
+    ) -> Tuple[bool, bool]:
+        """
+
+        :param handle:
+        :param disabled:
+        :return:
+        """
+    @classmethod
     def GetProcessTimes(
-        handle: SafeProcessHandle,
-        creation: LongType,
-        exit: LongType,
-        kernel: LongType,
-        user: LongType,
-    ) -> Tuple[BooleanType, LongType, LongType, LongType, LongType]: ...
-    @staticmethod
+        cls, handle: SafeProcessHandle, creation: int, exit: int, kernel: int, user: int
+    ) -> Tuple[bool, int, int, int, int]:
+        """
+
+        :param handle:
+        :param creation:
+        :param exit:
+        :param kernel:
+        :param user:
+        :return:
+        """
+    @classmethod
     def GetProcessWorkingSetSize(
-        handle: SafeProcessHandle, min: NIntType, max: NIntType
-    ) -> Tuple[BooleanType, NIntType, NIntType]: ...
-    @staticmethod
-    def GetStdHandle(whichHandle: IntType) -> NIntType: ...
-    @staticmethod
-    def GetThreadPriority(handle: SafeThreadHandle) -> IntType: ...
-    @staticmethod
-    def GetThreadPriorityBoost(
-        handle: SafeThreadHandle, disabled: BooleanType
-    ) -> Tuple[BooleanType, BooleanType]: ...
-    @staticmethod
+        cls, handle: SafeProcessHandle, min: IntPtr, max: IntPtr
+    ) -> Tuple[bool, IntPtr, IntPtr]:
+        """
+
+        :param handle:
+        :param min:
+        :param max:
+        :return:
+        """
+    @classmethod
+    def GetStdHandle(cls, whichHandle: int) -> IntPtr:
+        """
+
+        :param whichHandle:
+        :return:
+        """
+    @classmethod
+    def GetThreadPriority(cls, handle: SafeThreadHandle) -> int:
+        """
+
+        :param handle:
+        :return:
+        """
+    @classmethod
+    def GetThreadPriorityBoost(cls, handle: SafeThreadHandle, disabled: bool) -> Tuple[bool, bool]:
+        """
+
+        :param handle:
+        :param disabled:
+        :return:
+        """
+    @classmethod
     def GetThreadTimes(
-        handle: SafeThreadHandle,
-        creation: LongType,
-        exit: LongType,
-        kernel: LongType,
-        user: LongType,
-    ) -> Tuple[BooleanType, LongType, LongType, LongType, LongType]: ...
-    @staticmethod
-    def GetWindow(hWnd: HandleRef, uCmd: IntType) -> NIntType: ...
-    @staticmethod
-    def GetWindowLong(hWnd: HandleRef, nIndex: IntType) -> IntType: ...
-    @staticmethod
-    def GetWindowText(hWnd: HandleRef, lpString: StringBuilder, nMaxCount: IntType) -> IntType: ...
-    @staticmethod
-    def GetWindowTextLength(hWnd: HandleRef) -> IntType: ...
-    @staticmethod
-    def GetWindowThreadProcessId(
-        handle: HandleRef, processId: IntType
-    ) -> Tuple[IntType, IntType]: ...
-    @staticmethod
-    def IsWindowVisible(hWnd: HandleRef) -> BooleanType: ...
-    @staticmethod
+        cls, handle: SafeThreadHandle, creation: int, exit: int, kernel: int, user: int
+    ) -> Tuple[bool, int, int, int, int]:
+        """
+
+        :param handle:
+        :param creation:
+        :param exit:
+        :param kernel:
+        :param user:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetWindow(cls, hWnd: HandleRef, uCmd: int) -> IntPtr:
+        """
+
+        :param hWnd:
+        :param uCmd:
+        :return:
+        """
+    @classmethod
+    def GetWindowLong(cls, hWnd: HandleRef, nIndex: int) -> int:
+        """
+
+        :param hWnd:
+        :param nIndex:
+        :return:
+        """
+    @classmethod
+    def GetWindowText(cls, hWnd: HandleRef, lpString: StringBuilder, nMaxCount: int) -> int:
+        """
+
+        :param hWnd:
+        :param lpString:
+        :param nMaxCount:
+        :return:
+        """
+    @classmethod
+    def GetWindowTextLength(cls, hWnd: HandleRef) -> int:
+        """
+
+        :param hWnd:
+        :return:
+        """
+    @classmethod
+    def GetWindowThreadProcessId(cls, handle: HandleRef, processId: int) -> Tuple[int, int]:
+        """
+
+        :param handle:
+        :param processId:
+        :return:
+        """
+    @classmethod
+    def IsWindowVisible(cls, hWnd: HandleRef) -> bool:
+        """
+
+        :param hWnd:
+        :return:
+        """
+    @classmethod
     def LookupPrivilegeValue(
-        lpSystemName: StringType, lpName: StringType, lpLuid: LUID
-    ) -> Tuple[BooleanType, LUID]: ...
-    @staticmethod
-    def Module32First(handle: HandleRef, entry: NIntType) -> BooleanType: ...
-    @staticmethod
-    def Module32Next(handle: HandleRef, entry: NIntType) -> BooleanType: ...
-    @staticmethod
+        cls, lpSystemName: str, lpName: str, lpLuid: LUID
+    ) -> Tuple[bool, LUID]:
+        """
+
+        :param lpSystemName:
+        :param lpName:
+        :param lpLuid:
+        :return:
+        """
+    @classmethod
+    def Module32First(cls, handle: HandleRef, entry: IntPtr) -> bool:
+        """
+
+        :param handle:
+        :param entry:
+        :return:
+        """
+    @classmethod
+    def Module32Next(cls, handle: HandleRef, entry: IntPtr) -> bool:
+        """
+
+        :param handle:
+        :param entry:
+        :return:
+        """
+    @classmethod
     def NtQueryInformationProcess(
+        cls,
         processHandle: SafeProcessHandle,
-        query: IntType,
-        info: NtProcessBasicInfo,
-        size: IntType,
-        returnedSize: ArrayType[IntType],
-    ) -> IntType: ...
-    @staticmethod
+        query: int,
+        info: NativeMethods.NtProcessBasicInfo,
+        size: int,
+        returnedSize: Array[int],
+    ) -> int:
+        """
+
+        :param processHandle:
+        :param query:
+        :param info:
+        :param size:
+        :param returnedSize:
+        :return:
+        """
+    @classmethod
     def NtQuerySystemInformation(
-        query: IntType, dataPtr: NIntType, size: IntType, returnedSize: IntType
-    ) -> Tuple[IntType, IntType]: ...
-    @staticmethod
-    def OpenProcess(
-        access: IntType, inherit: BooleanType, processId: IntType
-    ) -> SafeProcessHandle: ...
-    @staticmethod
+        cls, query: int, dataPtr: IntPtr, size: int, returnedSize: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param query:
+        :param dataPtr:
+        :param size:
+        :param returnedSize:
+        :return:
+        """
+    @classmethod
+    def OpenProcess(cls, access: int, inherit: bool, processId: int) -> SafeProcessHandle:
+        """
+
+        :param access:
+        :param inherit:
+        :param processId:
+        :return:
+        """
+    @classmethod
     def OpenProcessToken(
-        ProcessHandle: HandleRef, DesiredAccess: IntType, TokenHandle: NIntType
-    ) -> Tuple[BooleanType, NIntType]: ...
-    @staticmethod
-    def OpenThread(
-        access: IntType, inherit: BooleanType, threadId: IntType
-    ) -> SafeThreadHandle: ...
-    @staticmethod
-    def PostMessage(
-        hwnd: HandleRef, msg: IntType, wparam: NIntType, lparam: NIntType
-    ) -> IntType: ...
-    @staticmethod
-    def Process32First(handle: HandleRef, entry: NIntType) -> BooleanType: ...
-    @staticmethod
-    def Process32Next(handle: HandleRef, entry: NIntType) -> BooleanType: ...
-    @staticmethod
+        cls, ProcessHandle: HandleRef, DesiredAccess: int, TokenHandle: IntPtr
+    ) -> Tuple[bool, IntPtr]:
+        """
+
+        :param ProcessHandle:
+        :param DesiredAccess:
+        :param TokenHandle:
+        :return:
+        """
+    @classmethod
+    def OpenThread(cls, access: int, inherit: bool, threadId: int) -> SafeThreadHandle:
+        """
+
+        :param access:
+        :param inherit:
+        :param threadId:
+        :return:
+        """
+    @classmethod
+    def PostMessage(cls, hwnd: HandleRef, msg: int, wparam: IntPtr, lparam: IntPtr) -> int:
+        """
+
+        :param hwnd:
+        :param msg:
+        :param wparam:
+        :param lparam:
+        :return:
+        """
+    @classmethod
+    def Process32First(cls, handle: HandleRef, entry: IntPtr) -> bool:
+        """
+
+        :param handle:
+        :param entry:
+        :return:
+        """
+    @classmethod
+    def Process32Next(cls, handle: HandleRef, entry: IntPtr) -> bool:
+        """
+
+        :param handle:
+        :param entry:
+        :return:
+        """
+    @classmethod
     def RtlGetVersion(
-        lpVersionInformation: RTL_OSVERSIONINFOEX,
-    ) -> Tuple[IntType, RTL_OSVERSIONINFOEX]: ...
-    @staticmethod
+        cls, lpVersionInformation: RTL_OSVERSIONINFOEX
+    ) -> Tuple[int, RTL_OSVERSIONINFOEX]:
+        """
+
+        :param lpVersionInformation:
+        :return:
+        """
+    @classmethod
     def SendMessageTimeout(
+        cls,
         hWnd: HandleRef,
-        msg: IntType,
-        wParam: NIntType,
-        lParam: NIntType,
-        flags: IntType,
-        timeout: IntType,
-        pdwResult: NIntType,
-    ) -> Tuple[NIntType, NIntType]: ...
-    @staticmethod
-    def SetPriorityClass(handle: SafeProcessHandle, priorityClass: IntType) -> BooleanType: ...
-    @staticmethod
-    def SetProcessAffinityMask(handle: SafeProcessHandle, mask: NIntType) -> BooleanType: ...
-    @staticmethod
-    def SetProcessPriorityBoost(
-        handle: SafeProcessHandle, disabled: BooleanType
-    ) -> BooleanType: ...
-    @staticmethod
-    def SetProcessWorkingSetSize(
-        handle: SafeProcessHandle, min: NIntType, max: NIntType
-    ) -> BooleanType: ...
-    @staticmethod
-    def SetThreadAffinityMask(handle: SafeThreadHandle, mask: HandleRef) -> NIntType: ...
-    @staticmethod
-    def SetThreadIdealProcessor(handle: SafeThreadHandle, processor: IntType) -> IntType: ...
-    @staticmethod
-    def SetThreadPriority(handle: SafeThreadHandle, priority: IntType) -> BooleanType: ...
-    @staticmethod
-    def SetThreadPriorityBoost(handle: SafeThreadHandle, disabled: BooleanType) -> BooleanType: ...
-    @staticmethod
-    def ShellExecuteEx(info: ShellExecuteInfo) -> BooleanType: ...
-    @staticmethod
-    def TerminateProcess(processHandle: SafeProcessHandle, exitCode: IntType) -> BooleanType: ...
-    @staticmethod
-    def Thread32First(handle: HandleRef, entry: WinThreadEntry) -> BooleanType: ...
-    @staticmethod
-    def Thread32Next(handle: HandleRef, entry: WinThreadEntry) -> BooleanType: ...
-    @staticmethod
-    def WaitForInputIdle(handle: SafeProcessHandle, milliseconds: IntType) -> IntType: ...
+        msg: int,
+        wParam: IntPtr,
+        lParam: IntPtr,
+        flags: int,
+        timeout: int,
+        pdwResult: IntPtr,
+    ) -> Tuple[IntPtr, IntPtr]:
+        """
 
-    # No Events
+        :param hWnd:
+        :param msg:
+        :param wParam:
+        :param lParam:
+        :param flags:
+        :param timeout:
+        :param pdwResult:
+        :return:
+        """
+    @classmethod
+    def SetPriorityClass(cls, handle: SafeProcessHandle, priorityClass: int) -> bool:
+        """
 
-    # ---------- Sub Classes ---------- #
+        :param handle:
+        :param priorityClass:
+        :return:
+        """
+    @classmethod
+    def SetProcessAffinityMask(cls, handle: SafeProcessHandle, mask: IntPtr) -> bool:
+        """
 
-    class WndProc(MulticastDelegate, ICloneable, ISerializable):
-        # No Fields
+        :param handle:
+        :param mask:
+        :return:
+        """
+    @classmethod
+    def SetProcessPriorityBoost(cls, handle: SafeProcessHandle, disabled: bool) -> bool:
+        """
 
-        # ---------- Constructors ---------- #
+        :param handle:
+        :param disabled:
+        :return:
+        """
+    @classmethod
+    def SetProcessWorkingSetSize(cls, handle: SafeProcessHandle, min: IntPtr, max: IntPtr) -> bool:
+        """
 
-        def __init__(self, object: ObjectType, method: NIntType): ...
+        :param handle:
+        :param min:
+        :param max:
+        :return:
+        """
+    @classmethod
+    def SetThreadAffinityMask(cls, handle: SafeThreadHandle, mask: HandleRef) -> IntPtr:
+        """
 
-        # No Properties
+        :param handle:
+        :param mask:
+        :return:
+        """
+    @classmethod
+    def SetThreadIdealProcessor(cls, handle: SafeThreadHandle, processor: int) -> int:
+        """
 
-        # ---------- Methods ---------- #
+        :param handle:
+        :param processor:
+        :return:
+        """
+    @classmethod
+    def SetThreadPriority(cls, handle: SafeThreadHandle, priority: int) -> bool:
+        """
 
-        def BeginInvoke(
-            self,
-            hWnd: NIntType,
-            msg: IntType,
-            wParam: NIntType,
-            lParam: NIntType,
-            callback: AsyncCallback,
-            object: ObjectType,
-        ) -> IAsyncResult: ...
-        def EndInvoke(self, result: IAsyncResult) -> NIntType: ...
-        def Invoke(
-            self, hWnd: NIntType, msg: IntType, wParam: NIntType, lParam: NIntType
-        ) -> NIntType: ...
+        :param handle:
+        :param priority:
+        :return:
+        """
+    @classmethod
+    def SetThreadPriorityBoost(cls, handle: SafeThreadHandle, disabled: bool) -> bool:
+        """
 
-        # No Events
+        :param handle:
+        :param disabled:
+        :return:
+        """
+    @classmethod
+    def ShellExecuteEx(cls, info: NativeMethods.ShellExecuteInfo) -> bool:
+        """
 
-        # No Sub Classes
+        :param info:
+        :return:
+        """
+    @classmethod
+    def TerminateProcess(cls, processHandle: SafeProcessHandle, exitCode: int) -> bool:
+        """
 
-        # No Sub Structs
+        :param processHandle:
+        :param exitCode:
+        :return:
+        """
+    @classmethod
+    def Thread32First(cls, handle: HandleRef, entry: NativeMethods.WinThreadEntry) -> bool:
+        """
 
-        # No Sub Interfaces
+        :param handle:
+        :param entry:
+        :return:
+        """
+    @classmethod
+    def Thread32Next(cls, handle: HandleRef, entry: NativeMethods.WinThreadEntry) -> bool:
+        """
 
-        # No Sub Enums
+        :param handle:
+        :param entry:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    class ConHndlr(MulticastDelegate, ICloneable, ISerializable):
-        # No Fields
+        :return:
+        """
+    @classmethod
+    def WaitForInputIdle(cls, handle: SafeProcessHandle, milliseconds: int) -> int:
+        """
 
-        # ---------- Constructors ---------- #
-
-        def __init__(self, object: ObjectType, method: NIntType): ...
-
-        # No Properties
-
-        # ---------- Methods ---------- #
-
-        def BeginInvoke(
-            self, signalType: IntType, callback: AsyncCallback, object: ObjectType
-        ) -> IAsyncResult: ...
-        def EndInvoke(self, result: IAsyncResult) -> IntType: ...
-        def Invoke(self, signalType: IntType) -> IntType: ...
-
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-
-    class PDH_RAW_COUNTER(ObjectType):
-        # ---------- Fields ---------- #
-
-        @property
-        def CStatus(self) -> IntType: ...
-        @CStatus.setter
-        def CStatus(self, value: IntType) -> None: ...
-        @property
-        def FirstValue(self) -> LongType: ...
-        @FirstValue.setter
-        def FirstValue(self, value: LongType) -> None: ...
-        @property
-        def MultiCount(self) -> IntType: ...
-        @MultiCount.setter
-        def MultiCount(self, value: IntType) -> None: ...
-        @property
-        def SecondValue(self) -> LongType: ...
-        @SecondValue.setter
-        def SecondValue(self, value: LongType) -> None: ...
-        @property
-        def TimeStamp(self) -> LongType: ...
-        @TimeStamp.setter
-        def TimeStamp(self, value: LongType) -> None: ...
-
-        # ---------- Constructors ---------- #
-
-        def __init__(self): ...
-
-        # No Properties
-
-        # No Methods
-
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-
-    class PDH_FMT_COUNTERVALUE(ObjectType):
-        # ---------- Fields ---------- #
-
-        @property
-        def CStatus(self) -> IntType: ...
-        @CStatus.setter
-        def CStatus(self, value: IntType) -> None: ...
-        @property
-        def data(self) -> DoubleType: ...
-        @data.setter
-        def data(self, value: DoubleType) -> None: ...
-
-        # ---------- Constructors ---------- #
-
-        def __init__(self): ...
-
-        # No Properties
-
-        # No Methods
-
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-    # ---------- Sub Structs ---------- #
+        :param handle:
+        :param milliseconds:
+        :return:
+        """
+    ConHndlr: Callable[[int], int] = ...
+    """
+    
+    :param signalType: 
+    :return: 
+    """
 
     class MSG(ValueType):
-        # ---------- Fields ---------- #
+        """"""
 
-        @property
-        def hwnd(self) -> NIntType: ...
-        @hwnd.setter
-        def hwnd(self, value: NIntType) -> None: ...
-        @property
-        def lParam(self) -> NIntType: ...
-        @lParam.setter
-        def lParam(self, value: NIntType) -> None: ...
-        @property
-        def message(self) -> IntType: ...
-        @message.setter
-        def message(self, value: IntType) -> None: ...
-        @property
-        def pt_x(self) -> IntType: ...
-        @pt_x.setter
-        def pt_x(self, value: IntType) -> None: ...
-        @property
-        def pt_y(self) -> IntType: ...
-        @pt_y.setter
-        def pt_y(self, value: IntType) -> None: ...
-        @property
-        def time(self) -> IntType: ...
-        @time.setter
-        def time(self, value: IntType) -> None: ...
-        @property
-        def wParam(self) -> NIntType: ...
-        @wParam.setter
-        def wParam(self, value: NIntType) -> None: ...
+        hwnd: Final[IntPtr] = ...
+        """"""
+        lParam: Final[IntPtr] = ...
+        """"""
+        message: Final[int] = ...
+        """"""
+        pt_x: Final[int] = ...
+        """"""
+        pt_y: Final[int] = ...
+        """"""
+        time: Final[int] = ...
+        """"""
+        wParam: Final[IntPtr] = ...
+        """"""
+        def Equals(self, obj: object) -> bool:
+            """
 
-        # No Constructors
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
 
-        # No Properties
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
 
-        # No Methods
+            :return:
+            """
+        def ToString(self) -> str:
+            """
 
-        # No Events
+            :return:
+            """
 
-        # No Sub Classes
+    class PDH_FMT_COUNTERVALUE(Object):
+        """"""
 
-        # No Sub Structs
+        CStatus: Final[int] = ...
+        """"""
+        data: Final[float] = ...
+        """"""
+        def __init__(self):
+            """"""
+        def Equals(self, obj: object) -> bool:
+            """
 
-        # No Sub Interfaces
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
 
-        # No Sub Enums
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
+
+            :return:
+            """
+        def ToString(self) -> str:
+            """
+
+            :return:
+            """
+
+    class PDH_RAW_COUNTER(Object):
+        """"""
+
+        CStatus: Final[int] = ...
+        """"""
+        FirstValue: Final[int] = ...
+        """"""
+        MultiCount: Final[int] = ...
+        """"""
+        SecondValue: Final[int] = ...
+        """"""
+        TimeStamp: Final[int] = ...
+        """"""
+        def __init__(self):
+            """"""
+        def Equals(self, obj: object) -> bool:
+            """
+
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
+
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
+
+            :return:
+            """
+        def ToString(self) -> str:
+            """
+
+            :return:
+            """
 
     class RTL_OSVERSIONINFOEX(ValueType):
         """"""
 
-        # No Fields
+        def Equals(self, obj: object) -> bool:
+            """
 
-        # No Constructors
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
 
-        # No Properties
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
 
-        # No Methods
+            :return:
+            """
+        def ToString(self) -> str:
+            """
 
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class StructFormatEnum(Enum):
-        Ansi = 1
-        Unicode = 2
-        Auto = 3
+            :return:
+            """
 
     class StructFormat(Enum):
-        Ansi = 1
-        Unicode = 2
-        Auto = 3
+        """"""
 
-class OAVariantLib(ABC, ObjectType):
-    # ---------- Fields ---------- #
+        Ansi: StructFormat = ...
+        """"""
+        Unicode: StructFormat = ...
+        """"""
+        Auto: StructFormat = ...
+        """"""
 
-    @staticmethod
-    @property
-    def AlphaBool() -> IntType: ...
-    @staticmethod
-    @property
-    def CalendarHijri() -> IntType: ...
-    @staticmethod
-    @property
-    def LocalBool() -> IntType: ...
-    @staticmethod
-    @property
-    def NoUserOverride() -> IntType: ...
-    @staticmethod
-    @property
-    def NoValueProp() -> IntType: ...
+    class StructFormatEnum(Enum):
+        """"""
 
-    # No Constructors
+        Ansi: StructFormatEnum = ...
+        """"""
+        Unicode: StructFormatEnum = ...
+        """"""
+        Auto: StructFormatEnum = ...
+        """"""
+    WndProc: Callable[[IntPtr, int, IntPtr, IntPtr], IntPtr] = ...
+    """
+    
+    :param hWnd: 
+    :param msg: 
+    :param wParam: 
+    :param lParam: 
+    :return: 
+    """
 
-    # No Properties
+class OAVariantLib(ABC, Object):
+    """"""
 
-    # No Methods
+    AlphaBool: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    CalendarHijri: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    LocalBool: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NoUserOverride: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    NoValueProp: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class PowerModeChangedEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, mode: PowerModes):
+        """
 
-    def __init__(self, mode: PowerModes): ...
-
-    # ---------- Properties ---------- #
-
+        :param mode:
+        """
     @property
-    def Mode(self) -> PowerModes: ...
+    def Mode(self) -> PowerModes:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Mode(self) -> PowerModes: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+PowerModeChangedEventHandler: Callable[[object, PowerModeChangedEventArgs], None] = ...
+"""
 
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
-class PowerModeChangedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+class PowerModes(Enum):
+    """"""
 
-    # ---------- Constructors ---------- #
+    Resume: PowerModes = ...
+    """"""
+    StatusChange: PowerModes = ...
+    """"""
+    Suspend: PowerModes = ...
+    """"""
 
-    def __init__(self, object: ObjectType, method: NIntType): ...
+class Registry(ABC, Object):
+    """"""
 
-    # No Properties
+    ClassesRoot: Final[ClassVar[RegistryKey]] = ...
+    """
+    
+    :return: 
+    """
+    CurrentConfig: Final[ClassVar[RegistryKey]] = ...
+    """
+    
+    :return: 
+    """
+    CurrentUser: Final[ClassVar[RegistryKey]] = ...
+    """
+    
+    :return: 
+    """
+    DynData: Final[ClassVar[RegistryKey]] = ...
+    """
+    
+    :return: 
+    """
+    LocalMachine: Final[ClassVar[RegistryKey]] = ...
+    """
+    
+    :return: 
+    """
+    PerformanceData: Final[ClassVar[RegistryKey]] = ...
+    """
+    
+    :return: 
+    """
+    Users: Final[ClassVar[RegistryKey]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: PowerModeChangedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: PowerModeChangedEventArgs) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    @classmethod
+    def GetValue(cls, keyName: str, valueName: str, defaultValue: object) -> object:
+        """
 
-    # No Sub Classes
+        :param keyName:
+        :param valueName:
+        :param defaultValue:
+        :return:
+        """
+    @classmethod
+    @overload
+    def SetValue(cls, keyName: str, valueName: str, value: object) -> None:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Registry(ABC, ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def ClassesRoot() -> RegistryKey: ...
-    @staticmethod
-    @property
-    def CurrentConfig() -> RegistryKey: ...
-    @staticmethod
-    @property
-    def CurrentUser() -> RegistryKey: ...
-    @staticmethod
-    @property
-    def DynData() -> RegistryKey: ...
-    @staticmethod
-    @property
-    def LocalMachine() -> RegistryKey: ...
-    @staticmethod
-    @property
-    def PerformanceData() -> RegistryKey: ...
-    @staticmethod
-    @property
-    def Users() -> RegistryKey: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetValue(
-        keyName: StringType, valueName: StringType, defaultValue: ObjectType
-    ) -> ObjectType: ...
-    @staticmethod
+        :param keyName:
+        :param valueName:
+        :param value:
+        """
+    @classmethod
     @overload
     def SetValue(
-        keyName: StringType, valueName: StringType, value: ObjectType, valueKind: RegistryValueKind
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def SetValue(keyName: StringType, valueName: StringType, value: ObjectType) -> VoidType: ...
+        cls, keyName: str, valueName: str, value: object, valueKind: RegistryValueKind
+    ) -> None:
+        """
 
-    # No Events
+        :param keyName:
+        :param valueName:
+        :param value:
+        :param valueKind:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class RegistryHive(Enum):
+    """"""
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+    ClassesRoot: RegistryHive = ...
+    """"""
+    CurrentUser: RegistryHive = ...
+    """"""
+    LocalMachine: RegistryHive = ...
+    """"""
+    Users: RegistryHive = ...
+    """"""
+    PerformanceData: RegistryHive = ...
+    """"""
+    CurrentConfig: RegistryHive = ...
+    """"""
+    DynData: RegistryHive = ...
+    """"""
 
 class RegistryKey(MarshalByRefObject, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Handle(self) -> SafeRegistryHandle: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def SubKeyCount(self) -> IntType: ...
-    @property
-    def ValueCount(self) -> IntType: ...
-    @property
-    def View(self) -> RegistryView: ...
+    def Handle(self) -> SafeRegistryHandle:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def Close(self) -> VoidType: ...
+        :return:
+        """
+    @property
+    def SubKeyCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ValueCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def View(self) -> RegistryView:
+        """
+
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
     @overload
-    def CreateSubKey(self, subkey: StringType) -> RegistryKey: ...
+    def CreateSubKey(self, subkey: str) -> RegistryKey:
+        """
+
+        :param subkey:
+        :return:
+        """
+    @overload
+    def CreateSubKey(self, subkey: str, permissionCheck: RegistryKeyPermissionCheck) -> RegistryKey:
+        """
+
+        :param subkey:
+        :param permissionCheck:
+        :return:
+        """
+    @overload
+    def CreateSubKey(self, subkey: str, writable: bool) -> RegistryKey:
+        """
+
+        :param subkey:
+        :param writable:
+        :return:
+        """
     @overload
     def CreateSubKey(
-        self, subkey: StringType, permissionCheck: RegistryKeyPermissionCheck
-    ) -> RegistryKey: ...
+        self, subkey: str, permissionCheck: RegistryKeyPermissionCheck, options: RegistryOptions
+    ) -> RegistryKey:
+        """
+
+        :param subkey:
+        :param permissionCheck:
+        :param options:
+        :return:
+        """
     @overload
     def CreateSubKey(
         self,
-        subkey: StringType,
-        permissionCheck: RegistryKeyPermissionCheck,
-        options: RegistryOptions,
-    ) -> RegistryKey: ...
-    @overload
-    def CreateSubKey(self, subkey: StringType, writable: BooleanType) -> RegistryKey: ...
-    @overload
-    def CreateSubKey(
-        self, subkey: StringType, writable: BooleanType, options: RegistryOptions
-    ) -> RegistryKey: ...
-    @overload
-    def CreateSubKey(
-        self,
-        subkey: StringType,
+        subkey: str,
         permissionCheck: RegistryKeyPermissionCheck,
         registrySecurity: RegistrySecurity,
-    ) -> RegistryKey: ...
+    ) -> RegistryKey:
+        """
+
+        :param subkey:
+        :param permissionCheck:
+        :param registrySecurity:
+        :return:
+        """
+    @overload
+    def CreateSubKey(self, subkey: str, writable: bool, options: RegistryOptions) -> RegistryKey:
+        """
+
+        :param subkey:
+        :param writable:
+        :param options:
+        :return:
+        """
     @overload
     def CreateSubKey(
         self,
-        subkey: StringType,
+        subkey: str,
         permissionCheck: RegistryKeyPermissionCheck,
         registryOptions: RegistryOptions,
         registrySecurity: RegistrySecurity,
-    ) -> RegistryKey: ...
+    ) -> RegistryKey:
+        """
+
+        :param subkey:
+        :param permissionCheck:
+        :param registryOptions:
+        :param registrySecurity:
+        :return:
+        """
     @overload
-    def DeleteSubKey(self, subkey: StringType) -> VoidType: ...
+    def DeleteSubKey(self, subkey: str) -> None:
+        """
+
+        :param subkey:
+        """
     @overload
-    def DeleteSubKey(self, subkey: StringType, throwOnMissingSubKey: BooleanType) -> VoidType: ...
+    def DeleteSubKey(self, subkey: str, throwOnMissingSubKey: bool) -> None:
+        """
+
+        :param subkey:
+        :param throwOnMissingSubKey:
+        """
     @overload
-    def DeleteSubKeyTree(self, subkey: StringType) -> VoidType: ...
+    def DeleteSubKeyTree(self, subkey: str) -> None:
+        """
+
+        :param subkey:
+        """
     @overload
-    def DeleteSubKeyTree(
-        self, subkey: StringType, throwOnMissingSubKey: BooleanType
-    ) -> VoidType: ...
+    def DeleteSubKeyTree(self, subkey: str, throwOnMissingSubKey: bool) -> None:
+        """
+
+        :param subkey:
+        :param throwOnMissingSubKey:
+        """
     @overload
-    def DeleteValue(self, name: StringType) -> VoidType: ...
+    def DeleteValue(self, name: str) -> None:
+        """
+
+        :param name:
+        """
     @overload
-    def DeleteValue(self, name: StringType, throwOnMissingValue: BooleanType) -> VoidType: ...
-    def Dispose(self) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
-    @staticmethod
+    def DeleteValue(self, name: str, throwOnMissingValue: bool) -> None:
+        """
+
+        :param name:
+        :param throwOnMissingValue:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    @classmethod
     @overload
-    def FromHandle(handle: SafeRegistryHandle) -> RegistryKey: ...
-    @staticmethod
+    def FromHandle(cls, handle: SafeRegistryHandle) -> RegistryKey:
+        """
+
+        :param handle:
+        :return:
+        """
+    @classmethod
     @overload
-    def FromHandle(handle: SafeRegistryHandle, view: RegistryView) -> RegistryKey: ...
+    def FromHandle(cls, handle: SafeRegistryHandle, view: RegistryView) -> RegistryKey:
+        """
+
+        :param handle:
+        :param view:
+        :return:
+        """
     @overload
-    def GetAccessControl(self) -> RegistrySecurity: ...
+    def GetAccessControl(self) -> RegistrySecurity:
+        """
+
+        :return:
+        """
     @overload
-    def GetAccessControl(self, includeSections: AccessControlSections) -> RegistrySecurity: ...
-    def GetSubKeyNames(self) -> ArrayType[StringType]: ...
+    def GetAccessControl(self, includeSections: AccessControlSections) -> RegistrySecurity:
+        """
+
+        :param includeSections:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetSubKeyNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def GetValue(self, name: StringType) -> ObjectType: ...
+    def GetValue(self, name: str) -> object:
+        """
+
+        :param name:
+        :return:
+        """
     @overload
-    def GetValue(self, name: StringType, defaultValue: ObjectType) -> ObjectType: ...
+    def GetValue(self, name: str, defaultValue: object) -> object:
+        """
+
+        :param name:
+        :param defaultValue:
+        :return:
+        """
     @overload
-    def GetValue(
-        self, name: StringType, defaultValue: ObjectType, options: RegistryValueOptions
-    ) -> ObjectType: ...
-    def GetValueKind(self, name: StringType) -> RegistryValueKind: ...
-    def GetValueNames(self) -> ArrayType[StringType]: ...
-    @staticmethod
-    def OpenBaseKey(hKey: RegistryHive, view: RegistryView) -> RegistryKey: ...
-    @staticmethod
+    def GetValue(self, name: str, defaultValue: object, options: RegistryValueOptions) -> object:
+        """
+
+        :param name:
+        :param defaultValue:
+        :param options:
+        :return:
+        """
+    def GetValueKind(self, name: str) -> RegistryValueKind:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetValueNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    def OpenBaseKey(cls, hKey: RegistryHive, view: RegistryView) -> RegistryKey:
+        """
+
+        :param hKey:
+        :param view:
+        :return:
+        """
+    @classmethod
     @overload
-    def OpenRemoteBaseKey(hKey: RegistryHive, machineName: StringType) -> RegistryKey: ...
-    @staticmethod
+    def OpenRemoteBaseKey(cls, hKey: RegistryHive, machineName: str) -> RegistryKey:
+        """
+
+        :param hKey:
+        :param machineName:
+        :return:
+        """
+    @classmethod
     @overload
     def OpenRemoteBaseKey(
-        hKey: RegistryHive, machineName: StringType, view: RegistryView
-    ) -> RegistryKey: ...
+        cls, hKey: RegistryHive, machineName: str, view: RegistryView
+    ) -> RegistryKey:
+        """
+
+        :param hKey:
+        :param machineName:
+        :param view:
+        :return:
+        """
     @overload
-    def OpenSubKey(self, name: StringType, writable: BooleanType) -> RegistryKey: ...
+    def OpenSubKey(self, name: str) -> RegistryKey:
+        """
+
+        :param name:
+        :return:
+        """
+    @overload
+    def OpenSubKey(self, name: str, permissionCheck: RegistryKeyPermissionCheck) -> RegistryKey:
+        """
+
+        :param name:
+        :param permissionCheck:
+        :return:
+        """
+    @overload
+    def OpenSubKey(self, name: str, rights: RegistryRights) -> RegistryKey:
+        """
+
+        :param name:
+        :param rights:
+        :return:
+        """
+    @overload
+    def OpenSubKey(self, name: str, writable: bool) -> RegistryKey:
+        """
+
+        :param name:
+        :param writable:
+        :return:
+        """
     @overload
     def OpenSubKey(
-        self, name: StringType, permissionCheck: RegistryKeyPermissionCheck
-    ) -> RegistryKey: ...
+        self, name: str, permissionCheck: RegistryKeyPermissionCheck, rights: RegistryRights
+    ) -> RegistryKey:
+        """
+
+        :param name:
+        :param permissionCheck:
+        :param rights:
+        :return:
+        """
+    def SetAccessControl(self, registrySecurity: RegistrySecurity) -> None:
+        """
+
+        :param registrySecurity:
+        """
     @overload
-    def OpenSubKey(self, name: StringType, rights: RegistryRights) -> RegistryKey: ...
+    def SetValue(self, name: str, value: object) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
     @overload
-    def OpenSubKey(
-        self, name: StringType, permissionCheck: RegistryKeyPermissionCheck, rights: RegistryRights
-    ) -> RegistryKey: ...
-    @overload
-    def OpenSubKey(self, name: StringType) -> RegistryKey: ...
-    def SetAccessControl(self, registrySecurity: RegistrySecurity) -> VoidType: ...
-    @overload
-    def SetValue(self, name: StringType, value: ObjectType) -> VoidType: ...
-    @overload
-    def SetValue(
-        self, name: StringType, value: ObjectType, valueKind: RegistryValueKind
-    ) -> VoidType: ...
-    def ToString(self) -> StringType: ...
-    def get_Handle(self) -> SafeRegistryHandle: ...
-    def get_Name(self) -> StringType: ...
-    def get_SubKeyCount(self) -> IntType: ...
-    def get_ValueCount(self) -> IntType: ...
-    def get_View(self) -> RegistryView: ...
+    def SetValue(self, name: str, value: object, valueKind: RegistryValueKind) -> None:
+        """
 
-    # No Events
+        :param name:
+        :param value:
+        :param valueKind:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SafeCryptContextHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+class RegistryKeyPermissionCheck(Enum):
     """"""
 
-    # No Fields
+    Default: RegistryKeyPermissionCheck = ...
+    """"""
+    ReadSubTree: RegistryKeyPermissionCheck = ...
+    """"""
+    ReadWriteSubTree: RegistryKeyPermissionCheck = ...
+    """"""
 
-    # No Constructors
+class RegistryOptions(Enum):
+    """"""
 
-    # No Properties
+    _None: RegistryOptions = ...
+    """"""
+    Volatile: RegistryOptions = ...
+    """"""
 
-    # No Methods
+class RegistryValueKind(Enum):
+    """"""
 
-    # No Events
+    Unknown: RegistryValueKind = ...
+    """"""
+    String: RegistryValueKind = ...
+    """"""
+    ExpandString: RegistryValueKind = ...
+    """"""
+    Binary: RegistryValueKind = ...
+    """"""
+    DWord: RegistryValueKind = ...
+    """"""
+    MultiString: RegistryValueKind = ...
+    """"""
+    QWord: RegistryValueKind = ...
+    """"""
+    _None: RegistryValueKind = ...
+    """"""
 
-    # No Sub Classes
+class RegistryValueOptions(Enum):
+    """"""
 
-    # No Sub Structs
+    _None: RegistryValueOptions = ...
+    """"""
+    DoNotExpandEnvironmentNames: RegistryValueOptions = ...
+    """"""
 
-    # No Sub Interfaces
+class RegistryView(Enum):
+    """"""
 
-    # No Sub Enums
+    Default: RegistryView = ...
+    """"""
+    Registry64: RegistryView = ...
+    """"""
+    Registry32: RegistryView = ...
+    """"""
 
 class SafeLibraryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class SafeNativeMemoryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
+class SafeNativeMethods(ABC, Object):
     """"""
 
-    # No Fields
+    ERROR_INSUFFICIENT_BUFFER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_ALLOCATE_BUFFER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_ARGUMENT_ARRAY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_FROM_HMODULE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_FROM_STRING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_FROM_SYSTEM: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_IGNORE_INSERTS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FORMAT_MESSAGE_MAX_WIDTH_MASK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MB_RIGHT: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MB_RTLREADING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @classmethod
+    def CloseHandle(cls, handle: IntPtr) -> bool:
+        """
 
-    # No Constructors
+        :param handle:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SafeNativeMethods(ABC, ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def ERROR_INSUFFICIENT_BUFFER() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_ALLOCATE_BUFFER() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_ARGUMENT_ARRAY() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_FROM_HMODULE() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_FROM_STRING() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_FROM_SYSTEM() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_IGNORE_INSERTS() -> IntType: ...
-    @staticmethod
-    @property
-    def FORMAT_MESSAGE_MAX_WIDTH_MASK() -> IntType: ...
-    @staticmethod
-    @property
-    def MB_RIGHT() -> IntType: ...
-    @staticmethod
-    @property
-    def MB_RTLREADING() -> IntType: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def CloseHandle(handle: NIntType) -> BooleanType: ...
-    @staticmethod
+        :param obj:
+        :return:
+        """
+    @classmethod
     def FormatFromRawValue(
-        dwCounterType: UIntType,
-        dwFormat: UIntType,
-        pTimeBase: LongType,
-        pRawValue1: PDH_RAW_COUNTER,
-        pRawValue2: PDH_RAW_COUNTER,
-        pFmtValue: PDH_FMT_COUNTERVALUE,
-    ) -> Tuple[IntType, LongType]: ...
-    @staticmethod
+        cls,
+        dwCounterType: int,
+        dwFormat: int,
+        pTimeBase: int,
+        pRawValue1: NativeMethods.PDH_RAW_COUNTER,
+        pRawValue2: NativeMethods.PDH_RAW_COUNTER,
+        pFmtValue: NativeMethods.PDH_FMT_COUNTERVALUE,
+    ) -> int:
+        """
+
+        :param dwCounterType:
+        :param dwFormat:
+        :param pTimeBase:
+        :param pRawValue1:
+        :param pRawValue2:
+        :param pFmtValue:
+        :return:
+        """
+    @classmethod
     @overload
     def FormatMessage(
-        dwFlags: IntType,
-        lpSource_mustBeNull: NIntType,
-        dwMessageId: UIntType,
-        dwLanguageId: IntType,
-        lpBuffer: StringBuilder,
-        nSize: IntType,
-        arguments: ArrayType[NIntType],
-    ) -> IntType: ...
-    @staticmethod
-    @overload
-    def FormatMessage(
-        dwFlags: IntType,
+        cls,
+        dwFlags: int,
         lpSource: SafeLibraryHandle,
-        dwMessageId: UIntType,
-        dwLanguageId: IntType,
+        dwMessageId: int,
+        dwLanguageId: int,
         lpBuffer: StringBuilder,
-        nSize: IntType,
-        arguments: ArrayType[NIntType],
-    ) -> IntType: ...
-    @staticmethod
-    def FreeLibrary(hModule: HandleRef) -> BooleanType: ...
-    @staticmethod
-    def GetComputerName(lpBuffer: StringBuilder, nSize: ArrayType[IntType]) -> BooleanType: ...
-    @staticmethod
-    def GetStockObject(nIndex: IntType) -> NIntType: ...
-    @staticmethod
-    def GetTextMetrics(hDC: NIntType, tm: TEXTMETRIC) -> Tuple[BooleanType, TEXTMETRIC]: ...
-    @staticmethod
-    def InterlockedCompareExchange(
-        pDestination: NIntType, exchange: IntType, compare: IntType
-    ) -> IntType: ...
-    @staticmethod
-    def IsWow64Process(
-        hProcess: SafeProcessHandle, Wow64Process: BooleanType
-    ) -> Tuple[BooleanType, BooleanType]: ...
-    @staticmethod
-    def LoadLibrary(libFilename: StringType) -> NIntType: ...
-    @staticmethod
-    def MessageBox(
-        hWnd: NIntType, text: StringType, caption: StringType, type: IntType
-    ) -> IntType: ...
-    @staticmethod
-    def OutputDebugString(message: StringType) -> VoidType: ...
-    @staticmethod
-    def QueryPerformanceCounter(value: LongType) -> Tuple[BooleanType, LongType]: ...
-    @staticmethod
-    def QueryPerformanceFrequency(value: LongType) -> Tuple[BooleanType, LongType]: ...
-    @staticmethod
-    def RegisterWindowMessage(msg: StringType) -> IntType: ...
+        nSize: int,
+        arguments: Array[IntPtr],
+    ) -> int:
+        """
 
-    # No Events
+        :param dwFlags:
+        :param lpSource:
+        :param dwMessageId:
+        :param dwLanguageId:
+        :param lpBuffer:
+        :param nSize:
+        :param arguments:
+        :return:
+        """
+    @classmethod
+    @overload
+    def FormatMessage(
+        cls,
+        dwFlags: int,
+        lpSource_mustBeNull: IntPtr,
+        dwMessageId: int,
+        dwLanguageId: int,
+        lpBuffer: StringBuilder,
+        nSize: int,
+        arguments: Array[IntPtr],
+    ) -> int:
+        """
 
-    # No Sub Classes
+        :param dwFlags:
+        :param lpSource_mustBeNull:
+        :param dwMessageId:
+        :param dwLanguageId:
+        :param lpBuffer:
+        :param nSize:
+        :param arguments:
+        :return:
+        """
+    @classmethod
+    def FreeLibrary(cls, hModule: HandleRef) -> bool:
+        """
 
-    # No Sub Structs
+        :param hModule:
+        :return:
+        """
+    @classmethod
+    def GetComputerName(cls, lpBuffer: StringBuilder, nSize: Array[int]) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param lpBuffer:
+        :param nSize:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @classmethod
+    def GetStockObject(cls, nIndex: int) -> IntPtr:
+        """
+
+        :param nIndex:
+        :return:
+        """
+    @classmethod
+    def GetTextMetrics(
+        cls, hDC: IntPtr, tm: NativeMethods.TEXTMETRIC
+    ) -> Tuple[bool, NativeMethods.TEXTMETRIC]:
+        """
+
+        :param hDC:
+        :param tm:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def InterlockedCompareExchange(cls, pDestination: IntPtr, exchange: int, compare: int) -> int:
+        """
+
+        :param pDestination:
+        :param exchange:
+        :param compare:
+        :return:
+        """
+    @classmethod
+    def IsWow64Process(cls, hProcess: SafeProcessHandle, Wow64Process: bool) -> bool:
+        """
+
+        :param hProcess:
+        :param Wow64Process:
+        :return:
+        """
+    @classmethod
+    def LoadLibrary(cls, libFilename: str) -> IntPtr:
+        """
+
+        :param libFilename:
+        :return:
+        """
+    @classmethod
+    def MessageBox(cls, hWnd: IntPtr, text: str, caption: str, type: int) -> int:
+        """
+
+        :param hWnd:
+        :param text:
+        :param caption:
+        :param type:
+        :return:
+        """
+    @classmethod
+    def OutputDebugString(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    def QueryPerformanceCounter(cls, value: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :return:
+        """
+    @classmethod
+    def QueryPerformanceFrequency(cls, value: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :return:
+        """
+    @classmethod
+    def RegisterWindowMessage(cls, msg: str) -> int:
+        """
+
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SessionEndReasons(Enum):
+    """"""
+
+    Logoff: SessionEndReasons = ...
+    """"""
+    SystemShutdown: SessionEndReasons = ...
+    """"""
 
 class SessionEndedEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, reason: SessionEndReasons):
+        """
 
-    def __init__(self, reason: SessionEndReasons): ...
-
-    # ---------- Properties ---------- #
-
+        :param reason:
+        """
     @property
-    def Reason(self) -> SessionEndReasons: ...
+    def Reason(self) -> SessionEndReasons:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Reason(self) -> SessionEndReasons: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+SessionEndedEventHandler: Callable[[object, SessionEndedEventArgs], None] = ...
+"""
 
-    # No Sub Enums
-
-class SessionEndedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: SessionEndedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: SessionEndedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
 class SessionEndingEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, reason: SessionEndReasons):
+        """
 
-    def __init__(self, reason: SessionEndReasons): ...
-
-    # ---------- Properties ---------- #
-
+        :param reason:
+        """
     @property
-    def Cancel(self) -> BooleanType: ...
+    def Cancel(self) -> bool:
+        """
+
+        :return:
+        """
     @Cancel.setter
-    def Cancel(self, value: BooleanType) -> None: ...
+    def Cancel(self, value: bool) -> None: ...
     @property
-    def Reason(self) -> SessionEndReasons: ...
+    def Reason(self) -> SessionEndReasons:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Cancel(self) -> BooleanType: ...
-    def get_Reason(self) -> SessionEndReasons: ...
-    def set_Cancel(self, value: BooleanType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+SessionEndingEventHandler: Callable[[object, SessionEndingEventArgs], None] = ...
+"""
 
-    # No Sub Enums
-
-class SessionEndingEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: SessionEndingEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: SessionEndingEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
 class SessionSwitchEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, reason: SessionSwitchReason):
+        """
 
-    def __init__(self, reason: SessionSwitchReason): ...
-
-    # ---------- Properties ---------- #
-
+        :param reason:
+        """
     @property
-    def Reason(self) -> SessionSwitchReason: ...
+    def Reason(self) -> SessionSwitchReason:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Reason(self) -> SessionSwitchReason: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+SessionSwitchEventHandler: Callable[[object, SessionSwitchEventArgs], None] = ...
+"""
 
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
-class SessionSwitchEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+class SessionSwitchReason(Enum):
+    """"""
 
-    # ---------- Constructors ---------- #
+    ConsoleConnect: SessionSwitchReason = ...
+    """"""
+    ConsoleDisconnect: SessionSwitchReason = ...
+    """"""
+    RemoteConnect: SessionSwitchReason = ...
+    """"""
+    RemoteDisconnect: SessionSwitchReason = ...
+    """"""
+    SessionLogon: SessionSwitchReason = ...
+    """"""
+    SessionLogoff: SessionSwitchReason = ...
+    """"""
+    SessionLock: SessionSwitchReason = ...
+    """"""
+    SessionUnlock: SessionSwitchReason = ...
+    """"""
+    SessionRemoteControl: SessionSwitchReason = ...
+    """"""
 
-    def __init__(self, object: ObjectType, method: NIntType): ...
+class SystemEvents(Object):
+    """"""
 
-    # No Properties
+    @classmethod
+    def CreateTimer(cls, interval: int) -> IntPtr:
+        """
 
-    # ---------- Methods ---------- #
+        :param interval:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: SessionSwitchEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: SessionSwitchEventArgs) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @classmethod
+    def InvokeOnEventsThread(cls, method: Delegate) -> None:
+        """
 
-    # No Sub Structs
+        :param method:
+        """
+    @classmethod
+    def KillTimer(cls, timerId: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param timerId:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
-
-class SystemEvents(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def CreateTimer(interval: IntType) -> NIntType: ...
-    @staticmethod
-    def InvokeOnEventsThread(method: Delegate) -> VoidType: ...
-    @staticmethod
-    def KillTimer(timerId: NIntType) -> VoidType: ...
-    @staticmethod
-    def add_DisplaySettingsChanged(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def add_DisplaySettingsChanging(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def add_EventsThreadShutdown(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def add_InstalledFontsChanged(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def add_LowMemory(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def add_PaletteChanged(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def add_PowerModeChanged(value: PowerModeChangedEventHandler) -> VoidType: ...
-    @staticmethod
-    def add_SessionEnded(value: SessionEndedEventHandler) -> VoidType: ...
-    @staticmethod
-    def add_SessionEnding(value: SessionEndingEventHandler) -> VoidType: ...
-    @staticmethod
-    def add_SessionSwitch(value: SessionSwitchEventHandler) -> VoidType: ...
-    @staticmethod
-    def add_TimeChanged(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def add_TimerElapsed(value: TimerElapsedEventHandler) -> VoidType: ...
-    @staticmethod
-    def add_UserPreferenceChanged(value: UserPreferenceChangedEventHandler) -> VoidType: ...
-    @staticmethod
-    def add_UserPreferenceChanging(value: UserPreferenceChangingEventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_DisplaySettingsChanged(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_DisplaySettingsChanging(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_EventsThreadShutdown(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_InstalledFontsChanged(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_LowMemory(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_PaletteChanged(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_PowerModeChanged(value: PowerModeChangedEventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_SessionEnded(value: SessionEndedEventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_SessionEnding(value: SessionEndingEventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_SessionSwitch(value: SessionSwitchEventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_TimeChanged(value: EventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_TimerElapsed(value: TimerElapsedEventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_UserPreferenceChanged(value: UserPreferenceChangedEventHandler) -> VoidType: ...
-    @staticmethod
-    def remove_UserPreferenceChanging(value: UserPreferenceChangingEventHandler) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
+        :return:
+        """
     DisplaySettingsChanged: EventType[EventHandler] = ...
-
+    """"""
     DisplaySettingsChanging: EventType[EventHandler] = ...
-
+    """"""
     EventsThreadShutdown: EventType[EventHandler] = ...
-
+    """"""
     InstalledFontsChanged: EventType[EventHandler] = ...
-
+    """"""
     LowMemory: EventType[EventHandler] = ...
-
+    """"""
     PaletteChanged: EventType[EventHandler] = ...
-
+    """"""
     PowerModeChanged: EventType[PowerModeChangedEventHandler] = ...
-
+    """"""
     SessionEnded: EventType[SessionEndedEventHandler] = ...
-
+    """"""
     SessionEnding: EventType[SessionEndingEventHandler] = ...
-
+    """"""
     SessionSwitch: EventType[SessionSwitchEventHandler] = ...
-
+    """"""
     TimeChanged: EventType[EventHandler] = ...
-
+    """"""
     TimerElapsed: EventType[TimerElapsedEventHandler] = ...
-
+    """"""
     UserPreferenceChanged: EventType[UserPreferenceChangedEventHandler] = ...
-
+    """"""
     UserPreferenceChanging: EventType[UserPreferenceChangingEventHandler] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    """"""
 
 class TimerElapsedEventArgs(EventArgs):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, timerId: NIntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def TimerId(self) -> NIntType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_TimerId(self) -> NIntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TimerElapsedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: TimerElapsedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: TimerElapsedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UnsafeNativeMethods(ABC, ObjectType):
     """"""
 
-    # No Fields
+    def __init__(self, timerId: IntPtr):
+        """
 
-    # No Constructors
+        :param timerId:
+        """
+    @property
+    def TimerId(self) -> IntPtr:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+TimerElapsedEventHandler: Callable[[object, TimerElapsedEventArgs], None] = ...
+"""
 
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
+
+class UnsafeNativeMethods(ABC, Object):
+    """"""
+
+    FILE_ACTION_ADDED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ACTION_MODIFIED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ACTION_REMOVED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ACTION_RENAMED_NEW_NAME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ACTION_RENAMED_OLD_NAME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ADD_FILE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ADD_SUBDIRECTORY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_APPEND_DATA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ATTRIBUTE_ARCHIVE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ATTRIBUTE_COMPRESSED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ATTRIBUTE_DIRECTORY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ATTRIBUTE_HIDDEN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ATTRIBUTE_NORMAL: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ATTRIBUTE_OFFLINE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ATTRIBUTE_READONLY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ATTRIBUTE_SYSTEM: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_ATTRIBUTE_TEMPORARY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_CASE_PRESERVED_NAMES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_CASE_SENSITIVE_SEARCH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_CREATE_PIPE_INSTANCE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_DELETE_CHILD: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_EXECUTE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_FILE_COMPRESSION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_FLAG_BACKUP_SEMANTICS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_FLAG_DELETE_ON_CLOSE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_FLAG_NO_BUFFERING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_FLAG_OVERLAPPED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_FLAG_POSIX_SEMANTICS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_FLAG_RANDOM_ACCESS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_FLAG_SEQUENTIAL_SCAN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_FLAG_WRITE_THROUGH: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_LIST_DIRECTORY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_NOTIFY_CHANGE_ATTRIBUTES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_NOTIFY_CHANGE_CREATION: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_NOTIFY_CHANGE_DIR_NAME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_NOTIFY_CHANGE_FILE_NAME: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_NOTIFY_CHANGE_LAST_ACCESS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_NOTIFY_CHANGE_LAST_WRITE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_NOTIFY_CHANGE_SECURITY: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_NOTIFY_CHANGE_SIZE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_PERSISTENT_ACLS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_READ_ATTRIBUTES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_READ_DATA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_READ_EA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_SHARE_DELETE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_SHARE_READ: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_SHARE_WRITE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_TRAVERSE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_TYPE_CHAR: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_TYPE_DISK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_TYPE_PIPE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_TYPE_REMOTE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_TYPE_UNKNOWN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_UNICODE_ON_DISK: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_VOLUME_IS_COMPRESSED: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_WRITE_ATTRIBUTES: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_WRITE_DATA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    FILE_WRITE_EA: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    GetFileExInfoStandard: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    OPEN_ALWAYS: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    OPEN_EXISTING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @classmethod
+    def ClearEventLog(cls, hEventLog: SafeHandle, lpctstrBackupFileName: HandleRef) -> bool:
+        """
+
+        :param hEventLog:
+        :param lpctstrBackupFileName:
+        :return:
+        """
+    @classmethod
+    def CreateWindowEx(
+        cls,
+        exStyle: int,
+        lpszClassName: str,
+        lpszWindowName: str,
+        style: int,
+        x: int,
+        y: int,
+        width: int,
+        height: int,
+        hWndParent: HandleRef,
+        hMenu: HandleRef,
+        hInst: HandleRef,
+        pvParam: object,
+    ) -> IntPtr:
+        """
+
+        :param exStyle:
+        :param lpszClassName:
+        :param lpszWindowName:
+        :param style:
+        :param x:
+        :param y:
+        :param width:
+        :param height:
+        :param hWndParent:
+        :param hMenu:
+        :param hInst:
+        :param pvParam:
+        :return:
+        """
+    @classmethod
+    def DefWindowProc(cls, hWnd: IntPtr, msg: int, wParam: IntPtr, lParam: IntPtr) -> IntPtr:
+        """
+
+        :param hWnd:
+        :param msg:
+        :param wParam:
+        :param lParam:
+        :return:
+        """
+    @classmethod
+    def DestroyWindow(cls, hWnd: HandleRef) -> bool:
+        """
+
+        :param hWnd:
+        :return:
+        """
+    @classmethod
+    def DispatchMessage(cls, msg: MSG) -> int:
+        """
+
+        :param msg:
+        :return:
+        """
+    @classmethod
+    def GetClassInfo(
+        cls, hInst: HandleRef, lpszClass: str, wc: NativeMethods.WNDCLASS_I
+    ) -> Tuple[bool, NativeMethods.WNDCLASS_I]:
+        """
+
+        :param hInst:
+        :param lpszClass:
+        :param wc:
+        :return:
+        """
+    @classmethod
+    def GetDC(cls, hWnd: IntPtr) -> IntPtr:
+        """
+
+        :param hWnd:
+        :return:
+        """
+    @classmethod
+    def GetFileVersionInfo(
+        cls, lptstrFilename: str, dwHandle: int, dwLen: int, lpData: HandleRef
+    ) -> bool:
+        """
+
+        :param lptstrFilename:
+        :param dwHandle:
+        :param dwLen:
+        :param lpData:
+        :return:
+        """
+    @classmethod
+    def GetFileVersionInfoSize(cls, lptstrFilename: str, handle: int) -> Tuple[int, int]:
+        """
+
+        :param lptstrFilename:
+        :param handle:
+        :return:
+        """
+    @classmethod
+    def GetModuleFileName(cls, hModule: HandleRef, buffer: StringBuilder, length: int) -> int:
+        """
+
+        :param hModule:
+        :param buffer:
+        :param length:
+        :return:
+        """
+    @classmethod
+    def GetModuleHandle(cls, modName: str) -> IntPtr:
+        """
+
+        :param modName:
+        :return:
+        """
+    @classmethod
+    def GetNumberOfEventLogRecords(cls, hEventLog: SafeHandle, count: int) -> Tuple[bool, int]:
+        """
+
+        :param hEventLog:
+        :param count:
+        :return:
+        """
+    @classmethod
+    def GetOldestEventLogRecord(cls, hEventLog: SafeHandle, number: int) -> Tuple[bool, int]:
+        """
+
+        :param hEventLog:
+        :param number:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetProcAddress(cls, hModule: HandleRef, lpProcName: str) -> IntPtr:
+        """
+
+        :param hModule:
+        :param lpProcName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetProcAddress(cls, hModule: IntPtr, methodName: str) -> IntPtr:
+        """
+
+        :param hModule:
+        :param methodName:
+        :return:
+        """
+    @classmethod
+    def GetProcessWindowStation(cls) -> IntPtr:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetStdHandle(cls, type: int) -> IntPtr:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
+    def GetSystemMetrics(cls, nIndex: int) -> int:
+        """
+
+        :param nIndex:
+        :return:
+        """
+    @classmethod
+    def GetUserObjectInformation(
+        cls,
+        hObj: HandleRef,
+        nIndex: int,
+        pvBuffer: NativeMethods.USEROBJECTFLAGS,
+        nLength: int,
+        lpnLengthNeeded: int,
+    ) -> bool:
+        """
+
+        :param hObj:
+        :param nIndex:
+        :param pvBuffer:
+        :param nLength:
+        :param lpnLengthNeeded:
+        :return:
+        """
+    @classmethod
+    def IsWindow(cls, hWnd: HandleRef) -> bool:
+        """
+
+        :param hWnd:
+        :return:
+        """
+    @classmethod
+    def KillTimer(cls, hwnd: HandleRef, idEvent: HandleRef) -> bool:
+        """
+
+        :param hwnd:
+        :param idEvent:
+        :return:
+        """
+    @classmethod
+    def LookupAccountSid(
+        cls,
+        systemName: str,
+        pSid: Array[int],
+        szUserName: StringBuilder,
+        userNameSize: int,
+        szDomainName: StringBuilder,
+        domainNameSize: int,
+        eUse: int,
+    ) -> int:
+        """
+
+        :param systemName:
+        :param pSid:
+        :param szUserName:
+        :param userNameSize:
+        :param szDomainName:
+        :param domainNameSize:
+        :param eUse:
+        :return:
+        """
+    @classmethod
+    def MsgWaitForMultipleObjectsEx(
+        cls, nCount: int, pHandles: IntPtr, dwMilliseconds: int, dwWakeMask: int, dwFlags: int
+    ) -> int:
+        """
+
+        :param nCount:
+        :param pHandles:
+        :param dwMilliseconds:
+        :param dwWakeMask:
+        :param dwFlags:
+        :return:
+        """
+    @classmethod
+    def NotifyChangeEventLog(cls, hEventLog: SafeHandle, hEvent: SafeWaitHandle) -> bool:
+        """
+
+        :param hEventLog:
+        :param hEvent:
+        :return:
+        """
+    @classmethod
+    def PeekMessage(
+        cls, msg: MSG, hwnd: HandleRef, msgMin: int, msgMax: int, remove: int
+    ) -> Tuple[bool, MSG]:
+        """
+
+        :param msg:
+        :param hwnd:
+        :param msgMin:
+        :param msgMax:
+        :param remove:
+        :return:
+        """
+    @classmethod
+    def PostMessage(cls, hwnd: HandleRef, msg: int, wparam: IntPtr, lparam: IntPtr) -> bool:
+        """
+
+        :param hwnd:
+        :param msg:
+        :param wparam:
+        :param lparam:
+        :return:
+        """
+    @classmethod
+    def ReadDirectoryChangesW(
+        cls,
+        hDirectory: SafeFileHandle,
+        lpBuffer: HandleRef,
+        nBufferLength: int,
+        bWatchSubtree: int,
+        dwNotifyFilter: int,
+        lpBytesReturned: int,
+        overlappedPointer: NativeOverlapped,
+        lpCompletionRoutine: HandleRef,
+    ) -> Tuple[bool, int]:
+        """
+
+        :param hDirectory:
+        :param lpBuffer:
+        :param nBufferLength:
+        :param bWatchSubtree:
+        :param dwNotifyFilter:
+        :param lpBytesReturned:
+        :param overlappedPointer:
+        :param lpCompletionRoutine:
+        :return:
+        """
+    @classmethod
+    def ReadEventLog(
+        cls,
+        hEventLog: SafeHandle,
+        dwReadFlags: int,
+        dwRecordOffset: int,
+        buffer: Array[int],
+        numberOfBytesToRead: int,
+        bytesRead: int,
+        minNumOfBytesNeeded: int,
+    ) -> Tuple[bool, int, int]:
+        """
+
+        :param hEventLog:
+        :param dwReadFlags:
+        :param dwRecordOffset:
+        :param buffer:
+        :param numberOfBytesToRead:
+        :param bytesRead:
+        :param minNumOfBytesNeeded:
+        :return:
+        """
+    @classmethod
+    def RegisterClass(cls, wc: NativeMethods.WNDCLASS) -> int:
+        """
+
+        :param wc:
+        :return:
+        """
+    @classmethod
+    def ReleaseDC(cls, hWnd: IntPtr, hDC: IntPtr) -> int:
+        """
+
+        :param hWnd:
+        :param hDC:
+        :return:
+        """
+    @classmethod
+    def ReportEvent(
+        cls,
+        hEventLog: SafeHandle,
+        type: int,
+        category: int,
+        eventID: int,
+        userSID: Array[int],
+        numStrings: int,
+        dataLen: int,
+        strings: HandleRef,
+        rawData: Array[int],
+    ) -> bool:
+        """
+
+        :param hEventLog:
+        :param type:
+        :param category:
+        :param eventID:
+        :param userSID:
+        :param numStrings:
+        :param dataLen:
+        :param strings:
+        :param rawData:
+        :return:
+        """
+    @classmethod
+    def SelectObject(cls, hDC: IntPtr, hObject: IntPtr) -> IntPtr:
+        """
+
+        :param hDC:
+        :param hObject:
+        :return:
+        """
+    @classmethod
+    def SendMessage(cls, hWnd: HandleRef, msg: int, wParam: IntPtr, lParam: IntPtr) -> IntPtr:
+        """
+
+        :param hWnd:
+        :param msg:
+        :param wParam:
+        :param lParam:
+        :return:
+        """
+    @classmethod
+    def SetClassLong(cls, hWnd: HandleRef, nIndex: int, dwNewLong: IntPtr) -> IntPtr:
+        """
+
+        :param hWnd:
+        :param nIndex:
+        :param dwNewLong:
+        :return:
+        """
+    @classmethod
+    def SetClassLongPtr32(cls, hwnd: HandleRef, nIndex: int, dwNewLong: IntPtr) -> IntPtr:
+        """
+
+        :param hwnd:
+        :param nIndex:
+        :param dwNewLong:
+        :return:
+        """
+    @classmethod
+    def SetClassLongPtr64(cls, hwnd: HandleRef, nIndex: int, dwNewLong: IntPtr) -> IntPtr:
+        """
+
+        :param hwnd:
+        :param nIndex:
+        :param dwNewLong:
+        :return:
+        """
+    @classmethod
+    def SetConsoleCtrlHandler(cls, handler: NativeMethods.ConHndlr, add: int) -> bool:
+        """
+
+        :param handler:
+        :param add:
+        :return:
+        """
+    @classmethod
+    def SetTimer(
+        cls, hWnd: HandleRef, nIDEvent: HandleRef, uElapse: int, lpTimerProc: HandleRef
+    ) -> IntPtr:
+        """
+
+        :param hWnd:
+        :param nIDEvent:
+        :param uElapse:
+        :param lpTimerProc:
+        :return:
+        """
+    @classmethod
+    def SetWindowLong(cls, hWnd: HandleRef, nIndex: int, dwNewLong: HandleRef) -> IntPtr:
+        """
+
+        :param hWnd:
+        :param nIndex:
+        :param dwNewLong:
+        :return:
+        """
+    @classmethod
+    def SetWindowLongPtr32(cls, hWnd: HandleRef, nIndex: int, dwNewLong: HandleRef) -> IntPtr:
+        """
+
+        :param hWnd:
+        :param nIndex:
+        :param dwNewLong:
+        :return:
+        """
+    @classmethod
+    def SetWindowLongPtr64(cls, hWnd: HandleRef, nIndex: int, dwNewLong: HandleRef) -> IntPtr:
+        """
+
+        :param hWnd:
+        :param nIndex:
+        :param dwNewLong:
+        :return:
+        """
+    @classmethod
+    def TranslateMessage(cls, msg: MSG) -> Tuple[bool, MSG]:
+        """
+
+        :param msg:
+        :return:
+        """
+    @classmethod
+    def UnregisterClass(cls, lpClassName: str, hInstance: HandleRef) -> int:
+        """
+
+        :param lpClassName:
+        :param hInstance:
+        :return:
+        """
+    @classmethod
+    def VerLanguageName(cls, langID: int, lpBuffer: StringBuilder, nSize: int) -> int:
+        """
+
+        :param langID:
+        :param lpBuffer:
+        :param nSize:
+        :return:
+        """
+    @classmethod
+    def VerQueryValue(
+        cls, pBlock: HandleRef, lpSubBlock: str, lplpBuffer: IntPtr, len: int
+    ) -> Tuple[bool, IntPtr, int]:
+        """
+
+        :param pBlock:
+        :param lpSubBlock:
+        :param lplpBuffer:
+        :param len:
+        :return:
+        """
+    @classmethod
+    def WTSRegisterSessionNotification(cls, hWnd: HandleRef, dwFlags: int) -> bool:
+        """
+
+        :param hWnd:
+        :param dwFlags:
+        :return:
+        """
+    @classmethod
+    def WTSUnRegisterSessionNotification(cls, hWnd: HandleRef) -> bool:
+        """
+
+        :param hWnd:
+        :return:
+        """
+    @classmethod
+    def WaitNamedPipe(cls, name: str, timeout: int) -> bool:
+        """
+
+        :param name:
+        :param timeout:
+        :return:
+        """
+    @classmethod
+    def WldpIsDynamicCodePolicyEnabled(cls, enabled: int) -> Tuple[int, int]:
+        """
+
+        :param enabled:
+        :return:
+        """
+    @classmethod
+    def WldpQueryDynamicCodeTrust(
+        cls, fileHandle: SafeFileHandle, image: IntPtr, imageSize: int
+    ) -> int:
+        """
+
+        :param fileHandle:
+        :param image:
+        :param imageSize:
+        :return:
+        """
+    @classmethod
+    def WldpSetDynamicCodeTrust(cls, fileHandle: SafeFileHandle) -> int:
+        """
+
+        :param fileHandle:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class WIN32_FILE_ATTRIBUTE_DATA(ValueType):
+        """"""
+
+        def Equals(self, obj: object) -> bool:
+            """
+
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
+
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
+
+            :return:
+            """
+        def ToString(self) -> str:
+            """
+
+            :return:
+            """
+
+class UserPreferenceCategory(Enum):
+    """"""
+
+    Accessibility: UserPreferenceCategory = ...
+    """"""
+    Color: UserPreferenceCategory = ...
+    """"""
+    Desktop: UserPreferenceCategory = ...
+    """"""
+    General: UserPreferenceCategory = ...
+    """"""
+    Icon: UserPreferenceCategory = ...
+    """"""
+    Keyboard: UserPreferenceCategory = ...
+    """"""
+    Menu: UserPreferenceCategory = ...
+    """"""
+    Mouse: UserPreferenceCategory = ...
+    """"""
+    Policy: UserPreferenceCategory = ...
+    """"""
+    Power: UserPreferenceCategory = ...
+    """"""
+    Screensaver: UserPreferenceCategory = ...
+    """"""
+    Window: UserPreferenceCategory = ...
+    """"""
+    Locale: UserPreferenceCategory = ...
+    """"""
+    VisualStyle: UserPreferenceCategory = ...
+    """"""
 
 class UserPreferenceChangedEventArgs(EventArgs):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, category: UserPreferenceCategory): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Category(self) -> UserPreferenceCategory: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Category(self) -> UserPreferenceCategory: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UserPreferenceChangedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: UserPreferenceChangedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: UserPreferenceChangedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UserPreferenceChangingEventArgs(EventArgs):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, category: UserPreferenceCategory): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Category(self) -> UserPreferenceCategory: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Category(self) -> UserPreferenceCategory: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UserPreferenceChangingEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: UserPreferenceChangingEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: UserPreferenceChangingEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Win32Native(ABC, ObjectType):
     """"""
 
-    # No Fields
+    def __init__(self, category: UserPreferenceCategory):
+        """
 
-    # No Constructors
+        :param category:
+        """
+    @property
+    def Category(self) -> UserPreferenceCategory:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+UserPreferenceChangedEventHandler: Callable[[object, UserPreferenceChangedEventArgs], None] = ...
+"""
 
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
+
+class UserPreferenceChangingEventArgs(EventArgs):
+    """"""
+
+    def __init__(self, category: UserPreferenceCategory):
+        """
+
+        :param category:
+        """
+    @property
+    def Category(self) -> UserPreferenceCategory:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+UserPreferenceChangingEventHandler: Callable[[object, UserPreferenceChangingEventArgs], None] = ...
+"""
+
+:param sender: 
+:param e: 
+"""
+
+class Win32Native(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class WinInetCache(RequestCache):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IApplicationContext(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Get(
-        self, szName: StringType, pvValue: IntType, pcbValue: UIntType, dwFlags: UIntType
-    ) -> Tuple[VoidType, IntType, UIntType]: ...
-    def GetContextNameObject(self, ppName: IAssemblyName) -> Tuple[VoidType, IAssemblyName]: ...
-    def GetDynamicDirectory(
-        self, wzDynamicDir: IntType, pdwSize: UIntType
-    ) -> Tuple[VoidType, IntType, UIntType]: ...
-    def Set(
-        self, szName: StringType, pvValue: IntType, cbValue: UIntType, dwFlags: UIntType
-    ) -> VoidType: ...
-    def SetContextNameObject(self, pName: IAssemblyName) -> VoidType: ...
-
-    # No Events
-
-class IAssemblyEnum(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Clone(self, ppEnum: IAssemblyEnum) -> Tuple[IntType, IAssemblyEnum]: ...
-    def GetNextAssembly(
-        self, ppAppCtx: IApplicationContext, ppName: IAssemblyName, dwFlags: UIntType
-    ) -> Tuple[IntType, IApplicationContext, IAssemblyName]: ...
-    def Reset(self) -> IntType: ...
-
-    # No Events
-
-class IAssemblyName(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BindToObject(
-        self,
-        refIID: ObjectType,
-        pAsmBindSink: ObjectType,
-        pApplicationContext: IApplicationContext,
-        szCodeBase: StringType,
-        llFlags: LongType,
-        pvReserved: IntType,
-        cbReserved: UIntType,
-        ppv: IntType,
-    ) -> Tuple[IntType, IntType]: ...
-    def Clone(self, pName: IAssemblyName) -> Tuple[IntType, IAssemblyName]: ...
-    def Finalize(self) -> IntType: ...
-    def GetDisplayName(
-        self, szDisplayName: NIntType, pccDisplayName: UIntType, dwDisplayFlags: UIntType
-    ) -> Tuple[IntType, UIntType]: ...
-    def GetName(
-        self, lpcwBuffer: UIntType, pwzName: IntType
-    ) -> Tuple[IntType, UIntType, IntType]: ...
-    def GetProperty(
-        self, PropertyId: UIntType, pvProperty: NIntType, pcbProperty: UIntType
-    ) -> Tuple[IntType, UIntType]: ...
-    def GetVersion(
-        self, pdwVersionHi: UIntType, pdwVersionLow: UIntType
-    ) -> Tuple[IntType, UIntType, UIntType]: ...
-    def IsEqual(self, pName: IAssemblyName, dwCmpFlags: UIntType) -> IntType: ...
-    def SetProperty(
-        self, PropertyId: UIntType, pvProperty: NIntType, cbProperty: UIntType
-    ) -> IntType: ...
-
-    # No Events
-
-class IInternetSecurityManager(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetSecurityId(
-        self,
-        pwszUrl: StringType,
-        pbSecurityId: ByteType,
-        pcbSecurityId: IntType,
-        dwReserved: IntType,
-    ) -> VoidType: ...
-    def GetSecuritySite(self, ppSite: VoidType) -> VoidType: ...
-    def GetZoneMappings(
-        self, dwZone: IntType, ppenumString: VoidType, dwFlags: IntType
-    ) -> VoidType: ...
-    def MapUrlToZone(
-        self, pwszUrl: StringType, pdwZone: IntType, dwFlags: IntType
-    ) -> Tuple[VoidType, IntType]: ...
-    def ProcessUrlAction(
-        self,
-        pwszUrl: StringType,
-        dwAction: IntType,
-        pPolicy: ByteType,
-        cbPolicy: IntType,
-        pContext: ByteType,
-        cbContext: IntType,
-        dwFlags: IntType,
-        dwReserved: IntType,
-    ) -> VoidType: ...
-    def QueryCustomPolicy(
-        self,
-        pwszUrl: StringType,
-        guidKey: VoidType,
-        ppPolicy: ByteType,
-        pcbPolicy: IntType,
-        pContext: ByteType,
-        cbContext: IntType,
-        dwReserved: IntType,
-    ) -> VoidType: ...
-    def SetSecuritySite(self, pSite: VoidType) -> VoidType: ...
-    def SetZoneMapping(
-        self, dwZone: IntType, lpszPattern: StringType, dwFlags: IntType
-    ) -> VoidType: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class PowerModes(Enum):
-    Resume = 1
-    StatusChange = 2
-    Suspend = 3
-
-class RegistryHive(Enum):
-    ClassesRoot = -2147483648
-    CurrentUser = -2147483647
-    LocalMachine = -2147483646
-    Users = -2147483645
-    PerformanceData = -2147483644
-    CurrentConfig = -2147483643
-    DynData = -2147483642
-
-class RegistryKeyPermissionCheck(Enum):
-    Default = 0
-    ReadSubTree = 1
-    ReadWriteSubTree = 2
-
-class RegistryOptions(Enum):
-    # None = 0
-    Volatile = 1
-
-class RegistryValueKind(Enum):
-    # None = -1
-    Unknown = 0
-    String = 1
-    ExpandString = 2
-    Binary = 3
-    DWord = 4
-    MultiString = 7
-    QWord = 11
-
-class RegistryValueOptions(Enum):
-    # None = 0
-    DoNotExpandEnvironmentNames = 1
-
-class RegistryView(Enum):
-    Default = 0
-    Registry64 = 256
-    Registry32 = 512
-
-class SessionEndReasons(Enum):
-    Logoff = 1
-    SystemShutdown = 2
-
-class SessionSwitchReason(Enum):
-    ConsoleConnect = 1
-    ConsoleDisconnect = 2
-    RemoteConnect = 3
-    RemoteDisconnect = 4
-    SessionLogon = 5
-    SessionLogoff = 6
-    SessionLock = 7
-    SessionUnlock = 8
-    SessionRemoteControl = 9
-
-class UserPreferenceCategory(Enum):
-    Accessibility = 1
-    Color = 2
-    Desktop = 3
-    General = 4
-    Icon = 5
-    Keyboard = 6
-    Menu = 7
-    Mouse = 8
-    Policy = 9
-    Power = 10
-    Screensaver = 11
-    Window = 12
-    Locale = 13
-    VisualStyle = 14
-
-# ---------- Delegates ---------- #
-
-PowerModeChangedEventHandler = Callable[[ObjectType, PowerModeChangedEventArgs], VoidType]
-
-SessionEndedEventHandler = Callable[[ObjectType, SessionEndedEventArgs], VoidType]
-
-SessionEndingEventHandler = Callable[[ObjectType, SessionEndingEventArgs], VoidType]
-
-SessionSwitchEventHandler = Callable[[ObjectType, SessionSwitchEventArgs], VoidType]
-
-TimerElapsedEventHandler = Callable[[ObjectType, TimerElapsedEventArgs], VoidType]
-
-UserPreferenceChangedEventHandler = Callable[[ObjectType, UserPreferenceChangedEventArgs], VoidType]
-
-UserPreferenceChangingEventHandler = Callable[
-    [ObjectType, UserPreferenceChangingEventArgs], VoidType
-]
-
-__all__ = [
-    ASM_CACHE,
-    ASM_NAME,
-    CANOF,
-    Fusion,
-    InternetSecurityManager,
-    IntranetZoneCredentialPolicy,
-    NativeMethods,
-    OAVariantLib,
-    PowerModeChangedEventArgs,
-    PowerModeChangedEventHandler,
-    Registry,
-    RegistryKey,
-    SafeCryptContextHandle,
-    SafeLibraryHandle,
-    SafeNativeMemoryHandle,
-    SafeNativeMethods,
-    SessionEndedEventArgs,
-    SessionEndedEventHandler,
-    SessionEndingEventArgs,
-    SessionEndingEventHandler,
-    SessionSwitchEventArgs,
-    SessionSwitchEventHandler,
-    SystemEvents,
-    TimerElapsedEventArgs,
-    TimerElapsedEventHandler,
-    UnsafeNativeMethods,
-    UserPreferenceChangedEventArgs,
-    UserPreferenceChangedEventHandler,
-    UserPreferenceChangingEventArgs,
-    UserPreferenceChangingEventHandler,
-    Win32Native,
-    WinInetCache,
-    IApplicationContext,
-    IAssemblyEnum,
-    IAssemblyName,
-    IInternetSecurityManager,
-    PowerModes,
-    RegistryHive,
-    RegistryKeyPermissionCheck,
-    RegistryOptions,
-    RegistryValueKind,
-    RegistryValueOptions,
-    RegistryView,
-    SessionEndReasons,
-    SessionSwitchReason,
-    UserPreferenceCategory,
-    PowerModeChangedEventHandler,
-    SessionEndedEventHandler,
-    SessionEndingEventHandler,
-    SessionSwitchEventHandler,
-    TimerElapsedEventHandler,
-    UserPreferenceChangedEventHandler,
-    UserPreferenceChangingEventHandler,
-]
+        :return:
+        """

@@ -2,30 +2,21 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Callable
-from typing import List
-from typing import Union
+from typing import Tuple
 from typing import overload
 
 from System import Array
 from System import AsyncCallback
-from System import Boolean
-from System import Byte
 from System import Enum
 from System import IAsyncResult
-from System import ICloneable
 from System import IDisposable
-from System import Int32
-from System import Int64
-from System import IntPtr
-from System import MulticastDelegate
 from System import Object
-from System import String
-from System import Void
+from System import Type
 from System.IO import SeekOrigin
 from System.IO import Stream
 from System.Net import NetworkCredential
 from System.Net import TransportContext
-from System.Runtime.Serialization import ISerializable
+from System.Runtime.Remoting import ObjRef
 from System.Security.Authentication import CipherAlgorithmType
 from System.Security.Authentication import ExchangeAlgorithmType
 from System.Security.Authentication import HashAlgorithmType
@@ -37,278 +28,632 @@ from System.Security.Cryptography.X509Certificates import X509CertificateCollect
 from System.Security.Cryptography.X509Certificates import X509Chain
 from System.Security.Principal import IIdentity
 from System.Security.Principal import TokenImpersonationLevel
+from System.Threading import CancellationToken
 from System.Threading.Tasks import Task
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
 class AuthenticatedStream(ABC, Stream, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsAuthenticated(self) -> BooleanType: ...
-    @property
-    def IsEncrypted(self) -> BooleanType: ...
-    @property
-    def IsMutuallyAuthenticated(self) -> BooleanType: ...
-    @property
-    def IsServer(self) -> BooleanType: ...
-    @property
-    def IsSigned(self) -> BooleanType: ...
-    @property
-    def LeaveInnerStreamOpen(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_IsAuthenticated(self) -> BooleanType: ...
-    def get_IsEncrypted(self) -> BooleanType: ...
-    def get_IsMutuallyAuthenticated(self) -> BooleanType: ...
-    def get_IsServer(self) -> BooleanType: ...
-    def get_IsSigned(self) -> BooleanType: ...
-    def get_LeaveInnerStreamOpen(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LocalCertSelectionCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        targetHost: StringType,
-        localCertificates: X509CertificateCollection,
-        remoteCertificate: X509Certificate,
-        acceptableIssuers: ArrayType[StringType],
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> X509Certificate: ...
-    def Invoke(
-        self,
-        targetHost: StringType,
-        localCertificates: X509CertificateCollection,
-        remoteCertificate: X509Certificate,
-        acceptableIssuers: ArrayType[StringType],
-    ) -> X509Certificate: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LocalCertificateSelectionCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        targetHost: StringType,
-        localCertificates: X509CertificateCollection,
-        remoteCertificate: X509Certificate,
-        acceptableIssuers: ArrayType[StringType],
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> X509Certificate: ...
-    def Invoke(
-        self,
-        sender: ObjectType,
-        targetHost: StringType,
-        localCertificates: X509CertificateCollection,
-        remoteCertificate: X509Certificate,
-        acceptableIssuers: ArrayType[StringType],
-    ) -> X509Certificate: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NegoState(ObjectType):
     """"""
 
-    # No Fields
+    @property
+    def CanRead(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def CanSeek(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def CanTimeout(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def CanWrite(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def IsAuthenticated(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def IsEncrypted(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def IsMutuallyAuthenticated(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def IsServer(self) -> bool:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def IsSigned(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def LeaveInnerStreamOpen(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Position(self) -> int:
+        """
+
+        :return:
+        """
+    @Position.setter
+    def Position(self, value: int) -> None: ...
+    @property
+    def ReadTimeout(self) -> int:
+        """
+
+        :return:
+        """
+    @ReadTimeout.setter
+    def ReadTimeout(self, value: int) -> None: ...
+    @property
+    def WriteTimeout(self) -> int:
+        """
+
+        :return:
+        """
+    @WriteTimeout.setter
+    def WriteTimeout(self, value: int) -> None: ...
+    def BeginRead(
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def BeginWrite(
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    @overload
+    def CopyTo(self, destination: Stream) -> None:
+        """
+
+        :param destination:
+        """
+    @overload
+    def CopyTo(self, destination: Stream, bufferSize: int) -> None:
+        """
+
+        :param destination:
+        :param bufferSize:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream) -> Task:
+        """
+
+        :param destination:
+        :return:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
+        """
+
+        :param destination:
+        :param bufferSize:
+        :return:
+        """
+    @overload
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param destination:
+        :param bufferSize:
+        :param cancellationToken:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndRead(self, asyncResult: IAsyncResult) -> int:
+        """
+
+        :param asyncResult:
+        :return:
+        """
+    def EndWrite(self, asyncResult: IAsyncResult) -> None:
+        """
+
+        :param asyncResult:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    @overload
+    def FlushAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    @overload
+    def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
+        """
+
+        :param cancellationToken:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
+
+        :return:
+        """
+    def Seek(self, offset: int, origin: SeekOrigin) -> int:
+        """
+
+        :param offset:
+        :param origin:
+        :return:
+        """
+    def SetLength(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, buffer: Array[int], offset: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        """
+    @overload
+    def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def WriteAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def WriteByte(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+
+class AuthenticationLevel(Enum):
+    """"""
+
+    _None: AuthenticationLevel = ...
+    """"""
+    MutualAuthRequested: AuthenticationLevel = ...
+    """"""
+    MutualAuthRequired: AuthenticationLevel = ...
+    """"""
+
+class EncryptionPolicy(Enum):
+    """"""
+
+    RequireEncryption: EncryptionPolicy = ...
+    """"""
+    AllowNoEncryption: EncryptionPolicy = ...
+    """"""
+    NoEncryption: EncryptionPolicy = ...
+    """"""
+
+LocalCertSelectionCallback: Callable[
+    [str, X509CertificateCollection, X509Certificate, Array[str]], X509Certificate
+] = ...
+"""
+
+:param targetHost: 
+:param localCertificates: 
+:param remoteCertificate: 
+:param acceptableIssuers: 
+:return: 
+"""
+LocalCertificateSelectionCallback: Callable[
+    [object, str, X509CertificateCollection, X509Certificate, Array[str]], X509Certificate
+] = ...
+"""
+
+:param sender: 
+:param targetHost: 
+:param localCertificates: 
+:param remoteCertificate: 
+:param acceptableIssuers: 
+:return: 
+"""
+
+class NegoState(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class NegotiateStream(AuthenticatedStream, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, innerStream: Stream): ...
+    def __init__(self, innerStream: Stream):
+        """
+
+        :param innerStream:
+        """
     @overload
-    def __init__(self, innerStream: Stream, leaveInnerStreamOpen: BooleanType): ...
+    def __init__(self, innerStream: Stream, leaveInnerStreamOpen: bool):
+        """
 
-    # ---------- Properties ---------- #
+        :param innerStream:
+        :param leaveInnerStreamOpen:
+        """
+    @property
+    def CanRead(self) -> bool:
+        """
 
+        :return:
+        """
     @property
-    def CanRead(self) -> BooleanType: ...
+    def CanSeek(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanSeek(self) -> BooleanType: ...
+    def CanTimeout(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanTimeout(self) -> BooleanType: ...
+    def CanWrite(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanWrite(self) -> BooleanType: ...
+    def ImpersonationLevel(self) -> TokenImpersonationLevel:
+        """
+
+        :return:
+        """
     @property
-    def ImpersonationLevel(self) -> TokenImpersonationLevel: ...
+    def IsAuthenticated(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsAuthenticated(self) -> BooleanType: ...
+    def IsEncrypted(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsEncrypted(self) -> BooleanType: ...
+    def IsMutuallyAuthenticated(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsMutuallyAuthenticated(self) -> BooleanType: ...
+    def IsServer(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsServer(self) -> BooleanType: ...
+    def IsSigned(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsSigned(self) -> BooleanType: ...
+    def LeaveInnerStreamOpen(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Length(self) -> LongType: ...
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Position(self) -> LongType: ...
+    def Position(self) -> int:
+        """
+
+        :return:
+        """
     @Position.setter
-    def Position(self, value: LongType) -> None: ...
+    def Position(self, value: int) -> None: ...
     @property
-    def ReadTimeout(self) -> IntType: ...
+    def ReadTimeout(self) -> int:
+        """
+
+        :return:
+        """
     @ReadTimeout.setter
-    def ReadTimeout(self, value: IntType) -> None: ...
+    def ReadTimeout(self, value: int) -> None: ...
     @property
-    def RemoteIdentity(self) -> IIdentity: ...
+    def RemoteIdentity(self) -> IIdentity:
+        """
+
+        :return:
+        """
     @property
-    def WriteTimeout(self) -> IntType: ...
+    def WriteTimeout(self) -> int:
+        """
+
+        :return:
+        """
     @WriteTimeout.setter
-    def WriteTimeout(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
+    def WriteTimeout(self, value: int) -> None: ...
     @overload
-    def AuthenticateAsClient(self) -> VoidType: ...
+    def AuthenticateAsClient(self) -> None:
+        """"""
+    @overload
+    def AuthenticateAsClient(self, credential: NetworkCredential, targetName: str) -> None:
+        """
+
+        :param credential:
+        :param targetName:
+        """
     @overload
     def AuthenticateAsClient(
-        self, credential: NetworkCredential, targetName: StringType
-    ) -> VoidType: ...
-    @overload
-    def AuthenticateAsClient(
-        self, credential: NetworkCredential, binding: ChannelBinding, targetName: StringType
-    ) -> VoidType: ...
+        self, credential: NetworkCredential, binding: ChannelBinding, targetName: str
+    ) -> None:
+        """
+
+        :param credential:
+        :param binding:
+        :param targetName:
+        """
     @overload
     def AuthenticateAsClient(
         self,
         credential: NetworkCredential,
-        targetName: StringType,
+        targetName: str,
         requiredProtectionLevel: ProtectionLevel,
         allowedImpersonationLevel: TokenImpersonationLevel,
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param credential:
+        :param targetName:
+        :param requiredProtectionLevel:
+        :param allowedImpersonationLevel:
+        """
     @overload
     def AuthenticateAsClient(
         self,
         credential: NetworkCredential,
         binding: ChannelBinding,
-        targetName: StringType,
+        targetName: str,
         requiredProtectionLevel: ProtectionLevel,
         allowedImpersonationLevel: TokenImpersonationLevel,
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param credential:
+        :param binding:
+        :param targetName:
+        :param requiredProtectionLevel:
+        :param allowedImpersonationLevel:
+        """
     @overload
-    def AuthenticateAsClientAsync(self) -> Task: ...
+    def AuthenticateAsClientAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    @overload
+    def AuthenticateAsClientAsync(self, credential: NetworkCredential, targetName: str) -> Task:
+        """
+
+        :param credential:
+        :param targetName:
+        :return:
+        """
     @overload
     def AuthenticateAsClientAsync(
-        self, credential: NetworkCredential, targetName: StringType
-    ) -> Task: ...
+        self, credential: NetworkCredential, binding: ChannelBinding, targetName: str
+    ) -> Task:
+        """
+
+        :param credential:
+        :param binding:
+        :param targetName:
+        :return:
+        """
     @overload
     def AuthenticateAsClientAsync(
         self,
         credential: NetworkCredential,
-        targetName: StringType,
+        targetName: str,
         requiredProtectionLevel: ProtectionLevel,
         allowedImpersonationLevel: TokenImpersonationLevel,
-    ) -> Task: ...
-    @overload
-    def AuthenticateAsClientAsync(
-        self, credential: NetworkCredential, binding: ChannelBinding, targetName: StringType
-    ) -> Task: ...
+    ) -> Task:
+        """
+
+        :param credential:
+        :param targetName:
+        :param requiredProtectionLevel:
+        :param allowedImpersonationLevel:
+        :return:
+        """
     @overload
     def AuthenticateAsClientAsync(
         self,
         credential: NetworkCredential,
         binding: ChannelBinding,
-        targetName: StringType,
+        targetName: str,
         requiredProtectionLevel: ProtectionLevel,
         allowedImpersonationLevel: TokenImpersonationLevel,
-    ) -> Task: ...
+    ) -> Task:
+        """
+
+        :param credential:
+        :param binding:
+        :param targetName:
+        :param requiredProtectionLevel:
+        :param allowedImpersonationLevel:
+        :return:
+        """
     @overload
-    def AuthenticateAsServer(self) -> VoidType: ...
+    def AuthenticateAsServer(self) -> None:
+        """"""
     @overload
-    def AuthenticateAsServer(self, policy: ExtendedProtectionPolicy) -> VoidType: ...
+    def AuthenticateAsServer(self, policy: ExtendedProtectionPolicy) -> None:
+        """
+
+        :param policy:
+        """
     @overload
     def AuthenticateAsServer(
         self,
         credential: NetworkCredential,
         requiredProtectionLevel: ProtectionLevel,
         requiredImpersonationLevel: TokenImpersonationLevel,
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param credential:
+        :param requiredProtectionLevel:
+        :param requiredImpersonationLevel:
+        """
     @overload
     def AuthenticateAsServer(
         self,
@@ -316,18 +661,41 @@ class NegotiateStream(AuthenticatedStream, IDisposable):
         policy: ExtendedProtectionPolicy,
         requiredProtectionLevel: ProtectionLevel,
         requiredImpersonationLevel: TokenImpersonationLevel,
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param credential:
+        :param policy:
+        :param requiredProtectionLevel:
+        :param requiredImpersonationLevel:
+        """
     @overload
-    def AuthenticateAsServerAsync(self) -> Task: ...
+    def AuthenticateAsServerAsync(self) -> Task:
+        """
+
+        :return:
+        """
     @overload
-    def AuthenticateAsServerAsync(self, policy: ExtendedProtectionPolicy) -> Task: ...
+    def AuthenticateAsServerAsync(self, policy: ExtendedProtectionPolicy) -> Task:
+        """
+
+        :param policy:
+        :return:
+        """
     @overload
     def AuthenticateAsServerAsync(
         self,
         credential: NetworkCredential,
         requiredProtectionLevel: ProtectionLevel,
         requiredImpersonationLevel: TokenImpersonationLevel,
-    ) -> Task: ...
+    ) -> Task:
+        """
+
+        :param credential:
+        :param requiredProtectionLevel:
+        :param requiredImpersonationLevel:
+        :return:
+        """
     @overload
     def AuthenticateAsServerAsync(
         self,
@@ -335,57 +703,122 @@ class NegotiateStream(AuthenticatedStream, IDisposable):
         policy: ExtendedProtectionPolicy,
         requiredProtectionLevel: ProtectionLevel,
         requiredImpersonationLevel: TokenImpersonationLevel,
-    ) -> Task: ...
+    ) -> Task:
+        """
+
+        :param credential:
+        :param policy:
+        :param requiredProtectionLevel:
+        :param requiredImpersonationLevel:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsClient(
-        self, asyncCallback: AsyncCallback, asyncState: ObjectType
-    ) -> IAsyncResult: ...
+        self, asyncCallback: AsyncCallback, asyncState: object
+    ) -> IAsyncResult:
+        """
+
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsClient(
         self,
         credential: NetworkCredential,
-        targetName: StringType,
+        targetName: str,
         asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        asyncState: object,
+    ) -> IAsyncResult:
+        """
+
+        :param credential:
+        :param targetName:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsClient(
         self,
         credential: NetworkCredential,
         binding: ChannelBinding,
-        targetName: StringType,
+        targetName: str,
         asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        asyncState: object,
+    ) -> IAsyncResult:
+        """
+
+        :param credential:
+        :param binding:
+        :param targetName:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsClient(
         self,
         credential: NetworkCredential,
-        targetName: StringType,
+        targetName: str,
         requiredProtectionLevel: ProtectionLevel,
         allowedImpersonationLevel: TokenImpersonationLevel,
         asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        asyncState: object,
+    ) -> IAsyncResult:
+        """
+
+        :param credential:
+        :param targetName:
+        :param requiredProtectionLevel:
+        :param allowedImpersonationLevel:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsClient(
         self,
         credential: NetworkCredential,
         binding: ChannelBinding,
-        targetName: StringType,
+        targetName: str,
         requiredProtectionLevel: ProtectionLevel,
         allowedImpersonationLevel: TokenImpersonationLevel,
         asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        asyncState: object,
+    ) -> IAsyncResult:
+        """
+
+        :param credential:
+        :param binding:
+        :param targetName:
+        :param requiredProtectionLevel:
+        :param allowedImpersonationLevel:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsServer(
-        self, asyncCallback: AsyncCallback, asyncState: ObjectType
-    ) -> IAsyncResult: ...
+        self, asyncCallback: AsyncCallback, asyncState: object
+    ) -> IAsyncResult:
+        """
+
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsServer(
-        self, policy: ExtendedProtectionPolicy, asyncCallback: AsyncCallback, asyncState: ObjectType
-    ) -> IAsyncResult: ...
+        self, policy: ExtendedProtectionPolicy, asyncCallback: AsyncCallback, asyncState: object
+    ) -> IAsyncResult:
+        """
+
+        :param policy:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsServer(
         self,
@@ -393,8 +826,17 @@ class NegotiateStream(AuthenticatedStream, IDisposable):
         requiredProtectionLevel: ProtectionLevel,
         requiredImpersonationLevel: TokenImpersonationLevel,
         asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        asyncState: object,
+    ) -> IAsyncResult:
+        """
+
+        :param credential:
+        :param requiredProtectionLevel:
+        :param requiredImpersonationLevel:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsServer(
         self,
@@ -403,645 +845,1192 @@ class NegotiateStream(AuthenticatedStream, IDisposable):
         requiredProtectionLevel: ProtectionLevel,
         requiredImpersonationLevel: TokenImpersonationLevel,
         asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        asyncState: object,
+    ) -> IAsyncResult:
+        """
+
+        :param credential:
+        :param policy:
+        :param requiredProtectionLevel:
+        :param requiredImpersonationLevel:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     def BeginRead(
-        self,
-        buffer: ArrayType[ByteType],
-        offset: IntType,
-        count: IntType,
-        asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
     def BeginWrite(
-        self,
-        buffer: ArrayType[ByteType],
-        offset: IntType,
-        count: IntType,
-        asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndAuthenticateAsClient(self, asyncResult: IAsyncResult) -> VoidType: ...
-    def EndAuthenticateAsServer(self, asyncResult: IAsyncResult) -> VoidType: ...
-    def EndRead(self, asyncResult: IAsyncResult) -> IntType: ...
-    def EndWrite(self, asyncResult: IAsyncResult) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> IntType: ...
-    def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    def SetLength(self, value: LongType) -> VoidType: ...
-    def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    def get_CanRead(self) -> BooleanType: ...
-    def get_CanSeek(self) -> BooleanType: ...
-    def get_CanTimeout(self) -> BooleanType: ...
-    def get_CanWrite(self) -> BooleanType: ...
-    def get_ImpersonationLevel(self) -> TokenImpersonationLevel: ...
-    def get_IsAuthenticated(self) -> BooleanType: ...
-    def get_IsEncrypted(self) -> BooleanType: ...
-    def get_IsMutuallyAuthenticated(self) -> BooleanType: ...
-    def get_IsServer(self) -> BooleanType: ...
-    def get_IsSigned(self) -> BooleanType: ...
-    def get_Length(self) -> LongType: ...
-    def get_Position(self) -> LongType: ...
-    def get_ReadTimeout(self) -> IntType: ...
-    def get_RemoteIdentity(self) -> IIdentity: ...
-    def get_WriteTimeout(self) -> IntType: ...
-    def set_Position(self, value: LongType) -> VoidType: ...
-    def set_ReadTimeout(self, value: IntType) -> VoidType: ...
-    def set_WriteTimeout(self, value: IntType) -> VoidType: ...
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
 
-    # No Events
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    @overload
+    def CopyTo(self, destination: Stream) -> None:
+        """
 
-    # No Sub Classes
+        :param destination:
+        """
+    @overload
+    def CopyTo(self, destination: Stream, bufferSize: int) -> None:
+        """
 
-    # No Sub Structs
+        :param destination:
+        :param bufferSize:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream) -> Task:
+        """
 
-    # No Sub Interfaces
+        :param destination:
+        :return:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
+        """
 
-    # No Sub Enums
+        :param destination:
+        :param bufferSize:
+        :return:
+        """
+    @overload
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
 
-class ProtocolToken(ObjectType):
+        :param destination:
+        :param bufferSize:
+        :param cancellationToken:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndAuthenticateAsClient(self, asyncResult: IAsyncResult) -> None:
+        """
+
+        :param asyncResult:
+        """
+    def EndAuthenticateAsServer(self, asyncResult: IAsyncResult) -> None:
+        """
+
+        :param asyncResult:
+        """
+    def EndRead(self, asyncResult: IAsyncResult) -> int:
+        """
+
+        :param asyncResult:
+        :return:
+        """
+    def EndWrite(self, asyncResult: IAsyncResult) -> None:
+        """
+
+        :param asyncResult:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    @overload
+    def FlushAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    @overload
+    def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
+        """
+
+        :param cancellationToken:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
+
+        :return:
+        """
+    def Seek(self, offset: int, origin: SeekOrigin) -> int:
+        """
+
+        :param offset:
+        :param origin:
+        :return:
+        """
+    def SetLength(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, buffer: Array[int], offset: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        """
+    @overload
+    def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def WriteAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def WriteByte(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+
+class ProtectionLevel(Enum):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemoteCertValidationCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        host: StringType,
-        certificate: X509Certificate,
-        chain: X509Chain,
-        sslPolicyErrors: SslPolicyErrors,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> BooleanType: ...
-    def Invoke(
-        self,
-        host: StringType,
-        certificate: X509Certificate,
-        chain: X509Chain,
-        sslPolicyErrors: SslPolicyErrors,
-    ) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemoteCertificateValidationCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        certificate: X509Certificate,
-        chain: X509Chain,
-        sslPolicyErrors: SslPolicyErrors,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> BooleanType: ...
-    def Invoke(
-        self,
-        sender: ObjectType,
-        certificate: X509Certificate,
-        chain: X509Chain,
-        sslPolicyErrors: SslPolicyErrors,
-    ) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SSPIHandleCache(ABC, ObjectType):
+    _None: ProtectionLevel = ...
+    """"""
+    Sign: ProtectionLevel = ...
+    """"""
+    EncryptAndSign: ProtectionLevel = ...
     """"""
 
-    # No Fields
+class ProtocolToken(Object):
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+RemoteCertValidationCallback: Callable[
+    [str, X509Certificate, X509Chain, SslPolicyErrors], bool
+] = ...
+"""
 
-    # No Sub Interfaces
+:param host: 
+:param certificate: 
+:param chain: 
+:param sslPolicyErrors: 
+:return: 
+"""
+RemoteCertificateValidationCallback: Callable[
+    [object, X509Certificate, X509Chain, SslPolicyErrors], bool
+] = ...
+"""
 
-    # No Sub Enums
+:param sender: 
+:param certificate: 
+:param chain: 
+:param sslPolicyErrors: 
+:return: 
+"""
 
-class SecureChannel(ObjectType):
-    # No Fields
+class SSPIHandleCache(ABC, Object):
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SecureChannel(Object):
+    """"""
 
     def CreateFatalHandshakeAlertToken(
         self, sslPolicyErrors: SslPolicyErrors, chain: X509Chain
-    ) -> ProtocolToken: ...
-    def CreateShutdownToken(self) -> ProtocolToken: ...
+    ) -> ProtocolToken:
+        """
 
-    # No Events
+        :param sslPolicyErrors:
+        :param chain:
+        :return:
+        """
+    def CreateShutdownToken(self) -> ProtocolToken:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class SslSessionsCache(ABC, ObjectType):
+        :return:
+        """
+
+class SslPolicyErrors(Enum):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SslState(ObjectType):
+    _None: SslPolicyErrors = ...
+    """"""
+    RemoteCertificateNotAvailable: SslPolicyErrors = ...
+    """"""
+    RemoteCertificateNameMismatch: SslPolicyErrors = ...
+    """"""
+    RemoteCertificateChainErrors: SslPolicyErrors = ...
     """"""
 
-    # No Fields
+class SslSessionsCache(ABC, Object):
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class SslState(Object):
+    """"""
 
-    # No Sub Interfaces
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SslStream(AuthenticatedStream, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, innerStream: Stream): ...
+    def __init__(self, innerStream: Stream):
+        """
+
+        :param innerStream:
+        """
     @overload
-    def __init__(self, innerStream: Stream, leaveInnerStreamOpen: BooleanType): ...
+    def __init__(self, innerStream: Stream, leaveInnerStreamOpen: bool):
+        """
+
+        :param innerStream:
+        :param leaveInnerStreamOpen:
+        """
     @overload
     def __init__(
         self,
         innerStream: Stream,
-        leaveInnerStreamOpen: BooleanType,
+        leaveInnerStreamOpen: bool,
         userCertificateValidationCallback: RemoteCertificateValidationCallback,
-    ): ...
+    ):
+        """
+
+        :param innerStream:
+        :param leaveInnerStreamOpen:
+        :param userCertificateValidationCallback:
+        """
     @overload
     def __init__(
         self,
         innerStream: Stream,
-        leaveInnerStreamOpen: BooleanType,
+        leaveInnerStreamOpen: bool,
         userCertificateValidationCallback: RemoteCertificateValidationCallback,
         userCertificateSelectionCallback: LocalCertificateSelectionCallback,
-    ): ...
+    ):
+        """
+
+        :param innerStream:
+        :param leaveInnerStreamOpen:
+        :param userCertificateValidationCallback:
+        :param userCertificateSelectionCallback:
+        """
     @overload
     def __init__(
         self,
         innerStream: Stream,
-        leaveInnerStreamOpen: BooleanType,
+        leaveInnerStreamOpen: bool,
         userCertificateValidationCallback: RemoteCertificateValidationCallback,
         userCertificateSelectionCallback: LocalCertificateSelectionCallback,
         encryptionPolicy: EncryptionPolicy,
-    ): ...
+    ):
+        """
 
-    # ---------- Properties ---------- #
+        :param innerStream:
+        :param leaveInnerStreamOpen:
+        :param userCertificateValidationCallback:
+        :param userCertificateSelectionCallback:
+        :param encryptionPolicy:
+        """
+    @property
+    def CanRead(self) -> bool:
+        """
 
+        :return:
+        """
     @property
-    def CanRead(self) -> BooleanType: ...
+    def CanSeek(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanSeek(self) -> BooleanType: ...
+    def CanTimeout(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanTimeout(self) -> BooleanType: ...
+    def CanWrite(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanWrite(self) -> BooleanType: ...
+    def CheckCertRevocationStatus(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CheckCertRevocationStatus(self) -> BooleanType: ...
+    def CipherAlgorithm(self) -> CipherAlgorithmType:
+        """
+
+        :return:
+        """
     @property
-    def CipherAlgorithm(self) -> CipherAlgorithmType: ...
+    def CipherStrength(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def CipherStrength(self) -> IntType: ...
+    def HashAlgorithm(self) -> HashAlgorithmType:
+        """
+
+        :return:
+        """
     @property
-    def HashAlgorithm(self) -> HashAlgorithmType: ...
+    def HashStrength(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def HashStrength(self) -> IntType: ...
+    def IsAuthenticated(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsAuthenticated(self) -> BooleanType: ...
+    def IsEncrypted(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsEncrypted(self) -> BooleanType: ...
+    def IsMutuallyAuthenticated(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsMutuallyAuthenticated(self) -> BooleanType: ...
+    def IsServer(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsServer(self) -> BooleanType: ...
+    def IsSigned(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsSigned(self) -> BooleanType: ...
+    def KeyExchangeAlgorithm(self) -> ExchangeAlgorithmType:
+        """
+
+        :return:
+        """
     @property
-    def KeyExchangeAlgorithm(self) -> ExchangeAlgorithmType: ...
+    def KeyExchangeStrength(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def KeyExchangeStrength(self) -> IntType: ...
+    def LeaveInnerStreamOpen(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Length(self) -> LongType: ...
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def LocalCertificate(self) -> X509Certificate: ...
+    def LocalCertificate(self) -> X509Certificate:
+        """
+
+        :return:
+        """
     @property
-    def Position(self) -> LongType: ...
+    def Position(self) -> int:
+        """
+
+        :return:
+        """
     @Position.setter
-    def Position(self, value: LongType) -> None: ...
+    def Position(self, value: int) -> None: ...
     @property
-    def ReadTimeout(self) -> IntType: ...
+    def ReadTimeout(self) -> int:
+        """
+
+        :return:
+        """
     @ReadTimeout.setter
-    def ReadTimeout(self, value: IntType) -> None: ...
+    def ReadTimeout(self, value: int) -> None: ...
     @property
-    def RemoteCertificate(self) -> X509Certificate: ...
+    def RemoteCertificate(self) -> X509Certificate:
+        """
+
+        :return:
+        """
     @property
-    def SslProtocol(self) -> SslProtocols: ...
+    def SslProtocol(self) -> SslProtocols:
+        """
+
+        :return:
+        """
     @property
-    def TransportContext(self) -> TransportContext: ...
+    def TransportContext(self) -> TransportContext:
+        """
+
+        :return:
+        """
     @property
-    def WriteTimeout(self) -> IntType: ...
+    def WriteTimeout(self) -> int:
+        """
+
+        :return:
+        """
     @WriteTimeout.setter
-    def WriteTimeout(self, value: IntType) -> None: ...
+    def WriteTimeout(self, value: int) -> None: ...
+    @overload
+    def AuthenticateAsClient(self, targetHost: str) -> None:
+        """
 
-    # ---------- Methods ---------- #
-
+        :param targetHost:
+        """
     @overload
     def AuthenticateAsClient(
         self,
-        targetHost: StringType,
+        targetHost: str,
         clientCertificates: X509CertificateCollection,
-        enabledSslProtocols: SslProtocols,
-        checkCertificateRevocation: BooleanType,
-    ) -> VoidType: ...
-    @overload
-    def AuthenticateAsClient(self, targetHost: StringType) -> VoidType: ...
+        checkCertificateRevocation: bool,
+    ) -> None:
+        """
+
+        :param targetHost:
+        :param clientCertificates:
+        :param checkCertificateRevocation:
+        """
     @overload
     def AuthenticateAsClient(
         self,
-        targetHost: StringType,
-        clientCertificates: X509CertificateCollection,
-        checkCertificateRevocation: BooleanType,
-    ) -> VoidType: ...
-    @overload
-    def AuthenticateAsClientAsync(
-        self,
-        targetHost: StringType,
-        clientCertificates: X509CertificateCollection,
-        checkCertificateRevocation: BooleanType,
-    ) -> Task: ...
-    @overload
-    def AuthenticateAsClientAsync(self, targetHost: StringType) -> Task: ...
-    @overload
-    def AuthenticateAsClientAsync(
-        self,
-        targetHost: StringType,
+        targetHost: str,
         clientCertificates: X509CertificateCollection,
         enabledSslProtocols: SslProtocols,
-        checkCertificateRevocation: BooleanType,
-    ) -> Task: ...
+        checkCertificateRevocation: bool,
+    ) -> None:
+        """
+
+        :param targetHost:
+        :param clientCertificates:
+        :param enabledSslProtocols:
+        :param checkCertificateRevocation:
+        """
     @overload
-    def AuthenticateAsServer(self, serverCertificate: X509Certificate) -> VoidType: ...
+    def AuthenticateAsClientAsync(self, targetHost: str) -> Task:
+        """
+
+        :param targetHost:
+        :return:
+        """
+    @overload
+    def AuthenticateAsClientAsync(
+        self,
+        targetHost: str,
+        clientCertificates: X509CertificateCollection,
+        checkCertificateRevocation: bool,
+    ) -> Task:
+        """
+
+        :param targetHost:
+        :param clientCertificates:
+        :param checkCertificateRevocation:
+        :return:
+        """
+    @overload
+    def AuthenticateAsClientAsync(
+        self,
+        targetHost: str,
+        clientCertificates: X509CertificateCollection,
+        enabledSslProtocols: SslProtocols,
+        checkCertificateRevocation: bool,
+    ) -> Task:
+        """
+
+        :param targetHost:
+        :param clientCertificates:
+        :param enabledSslProtocols:
+        :param checkCertificateRevocation:
+        :return:
+        """
+    @overload
+    def AuthenticateAsServer(self, serverCertificate: X509Certificate) -> None:
+        """
+
+        :param serverCertificate:
+        """
     @overload
     def AuthenticateAsServer(
         self,
         serverCertificate: X509Certificate,
-        clientCertificateRequired: BooleanType,
-        checkCertificateRevocation: BooleanType,
-    ) -> VoidType: ...
+        clientCertificateRequired: bool,
+        checkCertificateRevocation: bool,
+    ) -> None:
+        """
+
+        :param serverCertificate:
+        :param clientCertificateRequired:
+        :param checkCertificateRevocation:
+        """
     @overload
     def AuthenticateAsServer(
         self,
         serverCertificate: X509Certificate,
-        clientCertificateRequired: BooleanType,
+        clientCertificateRequired: bool,
         enabledSslProtocols: SslProtocols,
-        checkCertificateRevocation: BooleanType,
-    ) -> VoidType: ...
+        checkCertificateRevocation: bool,
+    ) -> None:
+        """
+
+        :param serverCertificate:
+        :param clientCertificateRequired:
+        :param enabledSslProtocols:
+        :param checkCertificateRevocation:
+        """
+    @overload
+    def AuthenticateAsServerAsync(self, serverCertificate: X509Certificate) -> Task:
+        """
+
+        :param serverCertificate:
+        :return:
+        """
     @overload
     def AuthenticateAsServerAsync(
         self,
         serverCertificate: X509Certificate,
-        clientCertificateRequired: BooleanType,
-        checkCertificateRevocation: BooleanType,
-    ) -> Task: ...
-    @overload
-    def AuthenticateAsServerAsync(self, serverCertificate: X509Certificate) -> Task: ...
+        clientCertificateRequired: bool,
+        checkCertificateRevocation: bool,
+    ) -> Task:
+        """
+
+        :param serverCertificate:
+        :param clientCertificateRequired:
+        :param checkCertificateRevocation:
+        :return:
+        """
     @overload
     def AuthenticateAsServerAsync(
         self,
         serverCertificate: X509Certificate,
-        clientCertificateRequired: BooleanType,
+        clientCertificateRequired: bool,
         enabledSslProtocols: SslProtocols,
-        checkCertificateRevocation: BooleanType,
-    ) -> Task: ...
+        checkCertificateRevocation: bool,
+    ) -> Task:
+        """
+
+        :param serverCertificate:
+        :param clientCertificateRequired:
+        :param enabledSslProtocols:
+        :param checkCertificateRevocation:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsClient(
-        self, targetHost: StringType, asyncCallback: AsyncCallback, asyncState: ObjectType
-    ) -> IAsyncResult: ...
+        self, targetHost: str, asyncCallback: AsyncCallback, asyncState: object
+    ) -> IAsyncResult:
+        """
+
+        :param targetHost:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsClient(
         self,
-        targetHost: StringType,
+        targetHost: str,
         clientCertificates: X509CertificateCollection,
-        checkCertificateRevocation: BooleanType,
+        checkCertificateRevocation: bool,
         asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        asyncState: object,
+    ) -> IAsyncResult:
+        """
+
+        :param targetHost:
+        :param clientCertificates:
+        :param checkCertificateRevocation:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsClient(
         self,
-        targetHost: StringType,
+        targetHost: str,
         clientCertificates: X509CertificateCollection,
         enabledSslProtocols: SslProtocols,
-        checkCertificateRevocation: BooleanType,
+        checkCertificateRevocation: bool,
         asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        asyncState: object,
+    ) -> IAsyncResult:
+        """
+
+        :param targetHost:
+        :param clientCertificates:
+        :param enabledSslProtocols:
+        :param checkCertificateRevocation:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
+    @overload
+    def BeginAuthenticateAsServer(
+        self, serverCertificate: X509Certificate, asyncCallback: AsyncCallback, asyncState: object
+    ) -> IAsyncResult:
+        """
+
+        :param serverCertificate:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsServer(
         self,
         serverCertificate: X509Certificate,
+        clientCertificateRequired: bool,
+        checkCertificateRevocation: bool,
         asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        asyncState: object,
+    ) -> IAsyncResult:
+        """
+
+        :param serverCertificate:
+        :param clientCertificateRequired:
+        :param checkCertificateRevocation:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     @overload
     def BeginAuthenticateAsServer(
         self,
         serverCertificate: X509Certificate,
-        clientCertificateRequired: BooleanType,
-        checkCertificateRevocation: BooleanType,
-        asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
-    @overload
-    def BeginAuthenticateAsServer(
-        self,
-        serverCertificate: X509Certificate,
-        clientCertificateRequired: BooleanType,
+        clientCertificateRequired: bool,
         enabledSslProtocols: SslProtocols,
-        checkCertificateRevocation: BooleanType,
+        checkCertificateRevocation: bool,
         asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        asyncState: object,
+    ) -> IAsyncResult:
+        """
+
+        :param serverCertificate:
+        :param clientCertificateRequired:
+        :param enabledSslProtocols:
+        :param checkCertificateRevocation:
+        :param asyncCallback:
+        :param asyncState:
+        :return:
+        """
     def BeginRead(
-        self,
-        buffer: ArrayType[ByteType],
-        offset: IntType,
-        count: IntType,
-        asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
     def BeginWrite(
-        self,
-        buffer: ArrayType[ByteType],
-        offset: IntType,
-        count: IntType,
-        asyncCallback: AsyncCallback,
-        asyncState: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndAuthenticateAsClient(self, asyncResult: IAsyncResult) -> VoidType: ...
-    def EndAuthenticateAsServer(self, asyncResult: IAsyncResult) -> VoidType: ...
-    def EndRead(self, asyncResult: IAsyncResult) -> IntType: ...
-    def EndWrite(self, asyncResult: IAsyncResult) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> IntType: ...
-    def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    def SetLength(self, value: LongType) -> VoidType: ...
-    def ShutdownAsync(self) -> Task: ...
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
     @overload
-    def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
+    def CopyTo(self, destination: Stream) -> None:
+        """
+
+        :param destination:
+        """
     @overload
-    def Write(self, buffer: ArrayType[ByteType]) -> VoidType: ...
-    def get_CanRead(self) -> BooleanType: ...
-    def get_CanSeek(self) -> BooleanType: ...
-    def get_CanTimeout(self) -> BooleanType: ...
-    def get_CanWrite(self) -> BooleanType: ...
-    def get_CheckCertRevocationStatus(self) -> BooleanType: ...
-    def get_CipherAlgorithm(self) -> CipherAlgorithmType: ...
-    def get_CipherStrength(self) -> IntType: ...
-    def get_HashAlgorithm(self) -> HashAlgorithmType: ...
-    def get_HashStrength(self) -> IntType: ...
-    def get_IsAuthenticated(self) -> BooleanType: ...
-    def get_IsEncrypted(self) -> BooleanType: ...
-    def get_IsMutuallyAuthenticated(self) -> BooleanType: ...
-    def get_IsServer(self) -> BooleanType: ...
-    def get_IsSigned(self) -> BooleanType: ...
-    def get_KeyExchangeAlgorithm(self) -> ExchangeAlgorithmType: ...
-    def get_KeyExchangeStrength(self) -> IntType: ...
-    def get_Length(self) -> LongType: ...
-    def get_LocalCertificate(self) -> X509Certificate: ...
-    def get_Position(self) -> LongType: ...
-    def get_ReadTimeout(self) -> IntType: ...
-    def get_RemoteCertificate(self) -> X509Certificate: ...
-    def get_SslProtocol(self) -> SslProtocols: ...
-    def get_TransportContext(self) -> TransportContext: ...
-    def get_WriteTimeout(self) -> IntType: ...
-    def set_Position(self, value: LongType) -> VoidType: ...
-    def set_ReadTimeout(self, value: IntType) -> VoidType: ...
-    def set_WriteTimeout(self, value: IntType) -> VoidType: ...
+    def CopyTo(self, destination: Stream, bufferSize: int) -> None:
+        """
 
-    # No Events
+        :param destination:
+        :param bufferSize:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream) -> Task:
+        """
 
-    # No Sub Classes
+        :param destination:
+        :return:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
+        """
 
-    # No Sub Structs
+        :param destination:
+        :param bufferSize:
+        :return:
+        """
+    @overload
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
 
-    # No Sub Interfaces
+        :param destination:
+        :param bufferSize:
+        :param cancellationToken:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    # No Sub Enums
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndAuthenticateAsClient(self, asyncResult: IAsyncResult) -> None:
+        """
 
-class _SslStream(ObjectType):
-    """"""
+        :param asyncResult:
+        """
+    def EndAuthenticateAsServer(self, asyncResult: IAsyncResult) -> None:
+        """
 
-    # No Fields
+        :param asyncResult:
+        """
+    def EndRead(self, asyncResult: IAsyncResult) -> int:
+        """
 
-    # No Constructors
+        :param asyncResult:
+        :return:
+        """
+    def EndWrite(self, asyncResult: IAsyncResult) -> None:
+        """
 
-    # No Properties
+        :param asyncResult:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    @overload
+    def FlushAsync(self) -> Task:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
+        """
 
-    # No Sub Classes
+        :param cancellationToken:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
 
-# No Structs
+        :return:
+        """
+    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
+        """
 
-# No Interfaces
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
+        """
 
-# ---------- Enums ---------- #
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task[int]:
+        """
 
-class AuthenticationLevel(Enum):
-    # None = 0
-    MutualAuthRequested = 1
-    MutualAuthRequired = 2
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
 
-class EncryptionPolicy(Enum):
-    RequireEncryption = 0
-    AllowNoEncryption = 1
-    NoEncryption = 2
+        :return:
+        """
+    def Seek(self, offset: int, origin: SeekOrigin) -> int:
+        """
 
-class ProtectionLevel(Enum):
-    # None = 0
-    Sign = 1
-    EncryptAndSign = 2
+        :param offset:
+        :param origin:
+        :return:
+        """
+    def SetLength(self, value: int) -> None:
+        """
 
-class SslPolicyErrors(Enum):
-    # None = 0
-    RemoteCertificateNotAvailable = 1
-    RemoteCertificateNameMismatch = 2
-    RemoteCertificateChainErrors = 4
+        :param value:
+        """
+    def ShutdownAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Write(self, buffer: Array[int]) -> None:
+        """
+
+        :param buffer:
+        """
+    @overload
+    def Write(self, buffer: Array[int], offset: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        """
+    @overload
+    def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def WriteAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def WriteByte(self, value: int) -> None:
+        """
+
+        :param value:
+        """
 
 class TlsAlertMessage(Enum):
-    CloseNotify = 0
-    UnexpectedMessage = 10
-    BadRecordMac = 20
-    DecryptionFailed = 21
-    RecordOverflow = 22
-    DecompressionFail = 30
-    HandshakeFailure = 40
-    BadCertificate = 42
-    UnsupportedCert = 43
-    CertificateRevoked = 44
-    CertificateExpired = 45
-    CertificateUnknown = 46
-    IllegalParameter = 47
-    UnknownCA = 48
-    AccessDenied = 49
-    DecodeError = 50
-    DecryptError = 51
-    ExportRestriction = 60
-    ProtocolVersion = 70
-    InsuffientSecurity = 71
-    InternalError = 80
-    UserCanceled = 90
-    NoRenegotiation = 100
-    UnsupportedExt = 110
+    """"""
+
+    CloseNotify: TlsAlertMessage = ...
+    """"""
+    UnexpectedMessage: TlsAlertMessage = ...
+    """"""
+    BadRecordMac: TlsAlertMessage = ...
+    """"""
+    DecryptionFailed: TlsAlertMessage = ...
+    """"""
+    RecordOverflow: TlsAlertMessage = ...
+    """"""
+    DecompressionFail: TlsAlertMessage = ...
+    """"""
+    HandshakeFailure: TlsAlertMessage = ...
+    """"""
+    BadCertificate: TlsAlertMessage = ...
+    """"""
+    UnsupportedCert: TlsAlertMessage = ...
+    """"""
+    CertificateRevoked: TlsAlertMessage = ...
+    """"""
+    CertificateExpired: TlsAlertMessage = ...
+    """"""
+    CertificateUnknown: TlsAlertMessage = ...
+    """"""
+    IllegalParameter: TlsAlertMessage = ...
+    """"""
+    UnknownCA: TlsAlertMessage = ...
+    """"""
+    AccessDenied: TlsAlertMessage = ...
+    """"""
+    DecodeError: TlsAlertMessage = ...
+    """"""
+    DecryptError: TlsAlertMessage = ...
+    """"""
+    ExportRestriction: TlsAlertMessage = ...
+    """"""
+    ProtocolVersion: TlsAlertMessage = ...
+    """"""
+    InsuffientSecurity: TlsAlertMessage = ...
+    """"""
+    InternalError: TlsAlertMessage = ...
+    """"""
+    UserCanceled: TlsAlertMessage = ...
+    """"""
+    NoRenegotiation: TlsAlertMessage = ...
+    """"""
+    UnsupportedExt: TlsAlertMessage = ...
+    """"""
 
 class TlsAlertType(Enum):
-    Warning = 1
-    Fatal = 2
+    """"""
 
-# ---------- Delegates ---------- #
+    Warning: TlsAlertType = ...
+    """"""
+    Fatal: TlsAlertType = ...
+    """"""
 
-LocalCertSelectionCallback = Callable[
-    [StringType, X509CertificateCollection, X509Certificate, ArrayType[StringType]], X509Certificate
-]
+class _SslStream(Object):
+    """"""
 
-LocalCertificateSelectionCallback = Callable[
-    [ObjectType, StringType, X509CertificateCollection, X509Certificate, ArrayType[StringType]],
-    X509Certificate,
-]
+    def Equals(self, obj: object) -> bool:
+        """
 
-RemoteCertValidationCallback = Callable[
-    [StringType, X509Certificate, X509Chain, SslPolicyErrors], BooleanType
-]
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-RemoteCertificateValidationCallback = Callable[
-    [ObjectType, X509Certificate, X509Chain, SslPolicyErrors], BooleanType
-]
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-__all__ = [
-    AuthenticatedStream,
-    LocalCertSelectionCallback,
-    LocalCertificateSelectionCallback,
-    NegoState,
-    NegotiateStream,
-    ProtocolToken,
-    RemoteCertValidationCallback,
-    RemoteCertificateValidationCallback,
-    SSPIHandleCache,
-    SecureChannel,
-    SslSessionsCache,
-    SslState,
-    SslStream,
-    _SslStream,
-    AuthenticationLevel,
-    EncryptionPolicy,
-    ProtectionLevel,
-    SslPolicyErrors,
-    TlsAlertMessage,
-    TlsAlertType,
-    LocalCertSelectionCallback,
-    LocalCertificateSelectionCallback,
-    RemoteCertValidationCallback,
-    RemoteCertificateValidationCallback,
-]
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

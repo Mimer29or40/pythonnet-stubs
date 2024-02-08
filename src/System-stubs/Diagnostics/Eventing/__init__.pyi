@@ -1,259 +1,507 @@
 from __future__ import annotations
 
-from typing import List
-from typing import Tuple
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Enum
 from System import Guid
 from System import IDisposable
-from System import Int32
-from System import Int64
 from System import Object
-from System import String
+from System import Type
 from System import ValueType
-from System import Void
+from System.Collections.Specialized import StringDictionary
 from System.Diagnostics import TraceEventCache
 from System.Diagnostics import TraceEventType
+from System.Diagnostics import TraceFilter
 from System.Diagnostics import TraceListener
+from System.Diagnostics import TraceOptions
+from System.Diagnostics.Eventing.EventProvider import WriteEventErrorCode
+from System.Runtime.Remoting import ObjRef
 
-# ---------- Types ---------- #
+class EventDescriptor(ValueType):
+    """"""
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
+    def __init__(
+        self, id: int, version: int, channel: int, level: int, opcode: int, task: int, keywords: int
+    ):
+        """
 
-# ---------- Classes ---------- #
+        :param id:
+        :param version:
+        :param channel:
+        :param level:
+        :param opcode:
+        :param task:
+        :param keywords:
+        """
+    @property
+    def Channel(self) -> int:
+        """
 
-class EventProvider(ObjectType, IDisposable):
-    # No Fields
+        :return:
+        """
+    @property
+    def EventId(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Keywords(self) -> int:
+        """
 
-    def __init__(self, providerGuid: Guid): ...
+        :return:
+        """
+    @property
+    def Level(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Opcode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Task(self) -> int:
+        """
 
-    def Close(self) -> VoidType: ...
-    @staticmethod
-    def CreateActivityId() -> Guid: ...
-    def Dispose(self) -> VoidType: ...
-    @staticmethod
-    def GetLastWriteEventError() -> WriteEventErrorCode: ...
+        :return:
+        """
+    @property
+    def Version(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventProvider(Object, IDisposable):
+    """"""
+
+    def __init__(self, providerGuid: Guid):
+        """
+
+        :param providerGuid:
+        """
+    def Close(self) -> None:
+        """"""
+    @classmethod
+    def CreateActivityId(cls) -> Guid:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetLastWriteEventError(cls) -> EventProvider.WriteEventErrorCode:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def IsEnabled(self) -> BooleanType: ...
+    def IsEnabled(self) -> bool:
+        """
+
+        :return:
+        """
     @overload
-    def IsEnabled(self, level: ByteType, keywords: LongType) -> BooleanType: ...
-    @staticmethod
-    def SetActivityId(id: Guid) -> Tuple[VoidType, Guid]: ...
+    def IsEnabled(self, level: int, keywords: int) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :return:
+        """
+    @classmethod
+    def SetActivityId(cls, id: Guid) -> None:
+        """
+
+        :param id:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def WriteEvent(
-        self, eventDescriptor: EventDescriptor, eventPayload: ArrayType[ObjectType]
-    ) -> Tuple[BooleanType, EventDescriptor]: ...
+    def WriteEvent(self, eventDescriptor: EventDescriptor, eventPayload: Array[object]) -> bool:
+        """
+
+        :param eventDescriptor:
+        :param eventPayload:
+        :return:
+        """
     @overload
-    def WriteEvent(
-        self, eventDescriptor: EventDescriptor, data: StringType
-    ) -> Tuple[BooleanType, EventDescriptor]: ...
+    def WriteEvent(self, eventDescriptor: EventDescriptor, data: str) -> bool:
+        """
+
+        :param eventDescriptor:
+        :param data:
+        :return:
+        """
     @overload
-    def WriteMessageEvent(
-        self, eventMessage: StringType, eventLevel: ByteType, eventKeywords: LongType
-    ) -> BooleanType: ...
+    def WriteMessageEvent(self, eventMessage: str) -> bool:
+        """
+
+        :param eventMessage:
+        :return:
+        """
     @overload
-    def WriteMessageEvent(self, eventMessage: StringType) -> BooleanType: ...
+    def WriteMessageEvent(self, eventMessage: str, eventLevel: int, eventKeywords: int) -> bool:
+        """
+
+        :param eventMessage:
+        :param eventLevel:
+        :param eventKeywords:
+        :return:
+        """
     def WriteTransferEvent(
-        self,
-        eventDescriptor: EventDescriptor,
-        relatedActivityId: Guid,
-        eventPayload: ArrayType[ObjectType],
-    ) -> Tuple[BooleanType, EventDescriptor]: ...
+        self, eventDescriptor: EventDescriptor, relatedActivityId: Guid, eventPayload: Array[object]
+    ) -> bool:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
+        :param eventDescriptor:
+        :param relatedActivityId:
+        :param eventPayload:
+        :return:
+        """
 
     class WriteEventErrorCode(Enum):
-        NoError = 0
-        NoFreeBuffers = 1
-        EventTooBig = 2
+        """"""
+
+        NoError: WriteEventErrorCode = ...
+        """"""
+        NoFreeBuffers: WriteEventErrorCode = ...
+        """"""
+        EventTooBig: WriteEventErrorCode = ...
+        """"""
 
 class EventProviderTraceListener(TraceListener, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, providerId: StringType): ...
-    @overload
-    def __init__(self, providerId: StringType, name: StringType): ...
-    @overload
-    def __init__(self, providerId: StringType, name: StringType, delimiter: StringType): ...
+    def __init__(self, providerId: str):
+        """
 
-    # ---------- Properties ---------- #
+        :param providerId:
+        """
+    @overload
+    def __init__(self, providerId: str, name: str):
+        """
 
+        :param providerId:
+        :param name:
+        """
+    @overload
+    def __init__(self, providerId: str, name: str, delimiter: str):
+        """
+
+        :param providerId:
+        :param name:
+        :param delimiter:
+        """
     @property
-    def Delimiter(self) -> StringType: ...
+    def Attributes(self) -> StringDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Delimiter(self) -> str:
+        """
+
+        :return:
+        """
     @Delimiter.setter
-    def Delimiter(self, value: StringType) -> None: ...
+    def Delimiter(self, value: str) -> None: ...
     @property
-    def IsThreadSafe(self) -> BooleanType: ...
+    def Filter(self) -> TraceFilter:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @Filter.setter
+    def Filter(self, value: TraceFilter) -> None: ...
+    @property
+    def IndentLevel(self) -> int:
+        """
 
-    def Close(self) -> VoidType: ...
+        :return:
+        """
+    @IndentLevel.setter
+    def IndentLevel(self, value: int) -> None: ...
+    @property
+    def IndentSize(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentSize.setter
+    def IndentSize(self, value: int) -> None: ...
+    @property
+    def IsThreadSafe(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def TraceOutputOptions(self) -> TraceOptions:
+        """
+
+        :return:
+        """
+    @TraceOutputOptions.setter
+    def TraceOutputOptions(self, value: TraceOptions) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def Fail(self, message: StringType, detailMessage: StringType) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
+    def Fail(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Fail(self, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
     def TraceData(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        data: ObjectType,
-    ) -> VoidType: ...
+        id: int,
+        data: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
     @overload
     def TraceData(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        data: ArrayType[ObjectType],
-    ) -> VoidType: ...
+        id: int,
+        data: object,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceEvent(
+        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        """
     @overload
     def TraceEvent(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-    ) -> VoidType: ...
+        id: int,
+        message: str,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param message:
+        """
     @overload
     def TraceEvent(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        message: StringType,
-    ) -> VoidType: ...
-    @overload
-    def TraceEvent(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        format: StringType,
-        args: ArrayType[ObjectType],
-    ) -> VoidType: ...
+        id: int,
+        format: str,
+        args: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
     def TraceTransfer(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
-        id: IntType,
-        message: StringType,
+        source: str,
+        id: int,
+        message: str,
         relatedActivityId: Guid,
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param id:
+        :param message:
+        :param relatedActivityId:
+        """
     @overload
-    def Write(self, message: StringType) -> VoidType: ...
+    def Write(self, o: object) -> None:
+        """
+
+        :param o:
+        """
     @overload
-    def WriteLine(self, message: StringType) -> VoidType: ...
-    def get_Delimiter(self) -> StringType: ...
-    def get_IsThreadSafe(self) -> BooleanType: ...
-    def set_Delimiter(self, value: StringType) -> VoidType: ...
+    def Write(self, message: str) -> None:
+        """
 
-    # No Events
+        :param message:
+        """
+    @overload
+    def Write(self, o: object, category: str) -> None:
+        """
 
-    # No Sub Classes
+        :param o:
+        :param category:
+        """
+    @overload
+    def Write(self, message: str, category: str) -> None:
+        """
 
-    # No Sub Structs
+        :param message:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, o: object) -> None:
+        """
 
-    # No Sub Interfaces
+        :param o:
+        """
+    @overload
+    def WriteLine(self, message: str) -> None:
+        """
 
-    # No Sub Enums
+        :param message:
+        """
+    @overload
+    def WriteLine(self, o: object, category: str) -> None:
+        """
 
-# ---------- Structs ---------- #
+        :param o:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, message: str, category: str) -> None:
+        """
 
-class EventDescriptor(ValueType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(
-        self,
-        id: IntType,
-        version: ByteType,
-        channel: ByteType,
-        level: ByteType,
-        opcode: ByteType,
-        task: IntType,
-        keywords: LongType,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Channel(self) -> ByteType: ...
-    @property
-    def EventId(self) -> IntType: ...
-    @property
-    def Keywords(self) -> LongType: ...
-    @property
-    def Level(self) -> ByteType: ...
-    @property
-    def Opcode(self) -> ByteType: ...
-    @property
-    def Task(self) -> IntType: ...
-    @property
-    def Version(self) -> ByteType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Channel(self) -> ByteType: ...
-    def get_EventId(self) -> IntType: ...
-    def get_Keywords(self) -> LongType: ...
-    def get_Level(self) -> ByteType: ...
-    def get_Opcode(self) -> ByteType: ...
-    def get_Task(self) -> IntType: ...
-    def get_Version(self) -> ByteType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    EventProvider,
-    EventProviderTraceListener,
-    EventDescriptor,
-]
+        :param message:
+        :param category:
+        """

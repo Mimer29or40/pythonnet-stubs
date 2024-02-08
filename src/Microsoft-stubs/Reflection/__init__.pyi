@@ -1,64 +1,82 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
 
-from System import Boolean
 from System import Object
 from System import Type
 from System import TypeCode
 from System.Reflection import Assembly
 
-# ---------- Types ---------- #
+class ReflectionExtensions(ABC, Object):
+    """"""
 
-BooleanType = Union[bool, Boolean]
-ObjectType = Object
-TypeType = Union[type, Type]
+    @classmethod
+    def Assembly(cls, type: Type) -> Assembly:
+        """
 
-# ---------- Classes ---------- #
+        :param type:
+        :return:
+        """
+    @classmethod
+    def BaseType(cls, type: Type) -> Type:
+        """
 
-class ReflectionExtensions(ABC, ObjectType):
-    # No Fields
+        :param type:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    def GetTypeCode(cls, type: Type) -> TypeCode:
+        """
 
-    @staticmethod
-    def Assembly(type: TypeType) -> Assembly: ...
-    @staticmethod
-    def BaseType(type: TypeType) -> TypeType: ...
-    @staticmethod
-    def GetTypeCode(type: TypeType) -> TypeCode: ...
-    @staticmethod
-    def IsAbstract(type: TypeType) -> BooleanType: ...
-    @staticmethod
-    def IsEnum(type: TypeType) -> BooleanType: ...
-    @staticmethod
-    def IsSealed(type: TypeType) -> BooleanType: ...
-    @staticmethod
-    def ReflectionOnly(assm: Assembly) -> BooleanType: ...
+        :param type:
+        :return:
+        """
+    @classmethod
+    def IsAbstract(cls, type: Type) -> bool:
+        """
 
-    # No Events
+        :param type:
+        :return:
+        """
+    @classmethod
+    def IsEnum(cls, type: Type) -> bool:
+        """
 
-    # No Sub Classes
+        :param type:
+        :return:
+        """
+    @classmethod
+    def IsSealed(cls, type: Type) -> bool:
+        """
 
-    # No Sub Structs
+        :param type:
+        :return:
+        """
+    @classmethod
+    def ReflectionOnly(cls, assm: Assembly) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param assm:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    ReflectionExtensions,
-]
+        :return:
+        """

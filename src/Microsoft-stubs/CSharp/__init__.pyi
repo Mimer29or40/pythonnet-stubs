@@ -1,210 +1,1382 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
+from typing import Generic
+from typing import TypeVar
 from typing import overload
 
-from System import Boolean
+from System import Array
+from System import Attribute
+from System import EventHandler
 from System import IDisposable
 from System import Object
-from System import String
 from System import Type
-from System import Void
+from System.CodeDom import CodeCompileUnit
+from System.CodeDom import CodeExpression
+from System.CodeDom import CodeNamespace
+from System.CodeDom import CodeStatement
+from System.CodeDom import CodeTypeDeclaration
 from System.CodeDom import CodeTypeMember
 from System.CodeDom import CodeTypeReference
 from System.CodeDom.Compiler import CodeDomProvider
 from System.CodeDom.Compiler import CodeGeneratorOptions
+from System.CodeDom.Compiler import CompilerParameters
+from System.CodeDom.Compiler import CompilerResults
 from System.CodeDom.Compiler import GeneratorSupport
 from System.CodeDom.Compiler import ICodeCompiler
 from System.CodeDom.Compiler import ICodeGenerator
+from System.CodeDom.Compiler import ICodeParser
+from System.CodeDom.Compiler import LanguageOptions
+from System.Collections import ICollection
+from System.Collections import IDictionary
 from System.Collections.Generic import IDictionary
 from System.ComponentModel import IComponent
+from System.ComponentModel import IContainer
+from System.ComponentModel import ISite
 from System.ComponentModel import ITypeDescriptorContext
+from System.ComponentModel import PropertyDescriptorCollection
 from System.ComponentModel import TypeConverter
+from System.ComponentModel.TypeConverter import StandardValuesCollection
 from System.Globalization import CultureInfo
+from System.IO import TextReader
 from System.IO import TextWriter
+from System.Runtime.Remoting import ObjRef
 
-# ---------- Types ---------- #
+T = TypeVar("T")
 
-BooleanType = Union[bool, Boolean]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
+class EventType(Generic[T]):
+    def __iadd__(self, other: T): ...
+    def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
+class CSharpCodeGenerator(Object, ICodeCompiler, ICodeGenerator):
+    """"""
 
-class CSharpCodeGenerator(ObjectType, ICodeCompiler, ICodeGenerator):
-    # No Fields
+    def CompileAssemblyFromDom(
+        self, options: CompilerParameters, compilationUnit: CodeCompileUnit
+    ) -> CompilerResults:
+        """
 
-    # No Constructors
+        :param options:
+        :param compilationUnit:
+        :return:
+        """
+    def CompileAssemblyFromDomBatch(
+        self, options: CompilerParameters, compilationUnits: Array[CodeCompileUnit]
+    ) -> CompilerResults:
+        """
 
-    # No Properties
+        :param options:
+        :param compilationUnits:
+        :return:
+        """
+    def CompileAssemblyFromFile(
+        self, options: CompilerParameters, fileName: str
+    ) -> CompilerResults:
+        """
 
-    # ---------- Methods ---------- #
+        :param options:
+        :param fileName:
+        :return:
+        """
+    def CompileAssemblyFromFileBatch(
+        self, options: CompilerParameters, fileNames: Array[str]
+    ) -> CompilerResults:
+        """
 
-    def CreateEscapedIdentifier(self, name: StringType) -> StringType: ...
-    def CreateValidIdentifier(self, name: StringType) -> StringType: ...
+        :param options:
+        :param fileNames:
+        :return:
+        """
+    def CompileAssemblyFromSource(
+        self, options: CompilerParameters, source: str
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param source:
+        :return:
+        """
+    def CompileAssemblyFromSourceBatch(
+        self, options: CompilerParameters, sources: Array[str]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param sources:
+        :return:
+        """
+    def CreateEscapedIdentifier(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def CreateValidIdentifier(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GenerateCodeFromCompileUnit(
+        self, e: CodeCompileUnit, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromExpression(
+        self, e: CodeExpression, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
     def GenerateCodeFromMember(
         self, member: CodeTypeMember, writer: TextWriter, options: CodeGeneratorOptions
-    ) -> VoidType: ...
-    def GetTypeOutput(self, typeRef: CodeTypeReference) -> StringType: ...
-    def IsValidIdentifier(self, value: StringType) -> BooleanType: ...
-    def Supports(self, support: GeneratorSupport) -> BooleanType: ...
-    def ValidateIdentifier(self, value: StringType) -> VoidType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param member:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromNamespace(
+        self, e: CodeNamespace, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromStatement(
+        self, e: CodeStatement, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
 
-    # No Sub Structs
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromType(
+        self, e: CodeTypeDeclaration, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
 
-    # No Sub Interfaces
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeOutput(self, type: CodeTypeReference) -> str:
+        """
+
+        :param type:
+        :return:
+        """
+    def IsValidIdentifier(self, value: str) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def Supports(self, supports: GeneratorSupport) -> bool:
+        """
+
+        :param supports:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ValidateIdentifier(self, value: str) -> None:
+        """
+
+        :param value:
+        """
 
 class CSharpCodeProvider(CodeDomProvider, IComponent, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, providerOptions: IDictionary[StringType, StringType]): ...
+    def __init__(self, providerOptions: IDictionary[str, str]):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param providerOptions:
+        """
     @property
-    def FileExtension(self) -> StringType: ...
+    def Container(self) -> IContainer:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def FileExtension(self) -> str:
+        """
 
-    def CreateCompiler(self) -> ICodeCompiler: ...
+        :return:
+        """
+    @property
+    def LanguageOptions(self) -> LanguageOptions:
+        """
+
+        :return:
+        """
+    @property
+    def Site(self) -> ISite:
+        """
+
+        :return:
+        """
+    @Site.setter
+    def Site(self, value: ISite) -> None: ...
+    def CompileAssemblyFromDom(
+        self, options: CompilerParameters, compilationUnits: Array[CodeCompileUnit]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param compilationUnits:
+        :return:
+        """
+    def CompileAssemblyFromFile(
+        self, options: CompilerParameters, fileNames: Array[str]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param fileNames:
+        :return:
+        """
+    def CompileAssemblyFromSource(
+        self, options: CompilerParameters, sources: Array[str]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param sources:
+        :return:
+        """
+    def CreateCompiler(self) -> ICodeCompiler:
+        """
+
+        :return:
+        """
+    def CreateEscapedIdentifier(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def CreateGenerator(self) -> ICodeGenerator: ...
+    def CreateGenerator(self) -> ICodeGenerator:
+        """
+
+        :return:
+        """
+    @overload
+    def CreateGenerator(self, output: TextWriter) -> ICodeGenerator:
+        """
+
+        :param output:
+        :return:
+        """
+    @overload
+    def CreateGenerator(self, fileName: str) -> ICodeGenerator:
+        """
+
+        :param fileName:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def CreateParser(self) -> ICodeParser:
+        """
+
+        :return:
+        """
+    def CreateValidIdentifier(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GenerateCodeFromCompileUnit(
+        self, compileUnit: CodeCompileUnit, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param compileUnit:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromExpression(
+        self, expression: CodeExpression, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param expression:
+        :param writer:
+        :param options:
+        """
     def GenerateCodeFromMember(
         self, member: CodeTypeMember, writer: TextWriter, options: CodeGeneratorOptions
-    ) -> VoidType: ...
-    def GetConverter(self, type: TypeType) -> TypeConverter: ...
-    def get_FileExtension(self) -> StringType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param member:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromNamespace(
+        self, codeNamespace: CodeNamespace, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param codeNamespace:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromStatement(
+        self, statement: CodeStatement, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
 
-    # No Sub Structs
+        :param statement:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromType(
+        self, codeType: CodeTypeDeclaration, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
 
-    # No Sub Interfaces
+        :param codeType:
+        :param writer:
+        :param options:
+        """
+    def GetConverter(self, type: Type) -> TypeConverter:
+        """
 
-    # No Sub Enums
+        :param type:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeOutput(self, type: CodeTypeReference) -> str:
+        """
+
+        :param type:
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def IsValidIdentifier(self, value: str) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def Parse(self, codeStream: TextReader) -> CodeCompileUnit:
+        """
+
+        :param codeStream:
+        :return:
+        """
+    def Supports(self, generatorSupport: GeneratorSupport) -> bool:
+        """
+
+        :param generatorSupport:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    Disposed: EventType[EventHandler] = ...
+    """"""
 
 class CSharpMemberAttributeConverter(CSharpModifierAttributeConverter):
-    # No Fields
+    """"""
 
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+    @classmethod
     @property
-    def Default() -> CSharpMemberAttributeConverter: ...
+    def Default(cls) -> CSharpMemberAttributeConverter:
+        """
 
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def get_Default() -> CSharpMemberAttributeConverter: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CSharpModifierAttributeConverter(ABC, TypeConverter):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     @overload
-    def CanConvertFrom(
-        self, context: ITypeDescriptorContext, sourceType: TypeType
-    ) -> BooleanType: ...
+    def CanConvertFrom(self, sourceType: Type) -> bool:
+        """
+
+        :param sourceType:
+        :return:
+        """
+    @overload
+    def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
+        """
+
+        :param context:
+        :param sourceType:
+        :return:
+        """
+    @overload
+    def CanConvertTo(self, destinationType: Type) -> bool:
+        """
+
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
+        """
+
+        :param context:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertFrom(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
     def ConvertFrom(
-        self, context: ITypeDescriptorContext, culture: CultureInfo, value: ObjectType
-    ) -> ObjectType: ...
+        self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
+    ) -> object:
+        """
+
+        :param context:
+        :param culture:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertFromInvariantString(self, text: str) -> object:
+        """
+
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
+        """
+
+        :param context:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(self, text: str) -> object:
+        """
+
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
+        """
+
+        :param context:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
+    ) -> object:
+        """
+
+        :param context:
+        :param culture:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertTo(self, value: object, destinationType: Type) -> object:
+        """
+
+        :param value:
+        :param destinationType:
+        :return:
+        """
     @overload
     def ConvertTo(
         self,
         context: ITypeDescriptorContext,
         culture: CultureInfo,
-        value: ObjectType,
-        destinationType: TypeType,
-    ) -> ObjectType: ...
+        value: object,
+        destinationType: Type,
+    ) -> object:
+        """
+
+        :param context:
+        :param culture:
+        :param value:
+        :param destinationType:
+        :return:
+        """
     @overload
-    def GetStandardValues(self, context: ITypeDescriptorContext) -> StandardValuesCollection: ...
+    def ConvertToInvariantString(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> BooleanType: ...
+    def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
     @overload
-    def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> BooleanType: ...
+    def ConvertToString(self, value: object) -> str:
+        """
 
-    # No Events
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
+        """
 
-    # No Sub Classes
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
+    ) -> str:
+        """
 
-    # No Sub Structs
+        :param context:
+        :param culture:
+        :param value:
+        :return:
+        """
+    @overload
+    def CreateInstance(self, propertyValues: IDictionary) -> object:
+        """
 
-    # No Sub Interfaces
+        :param propertyValues:
+        :return:
+        """
+    @overload
+    def CreateInstance(
+        self, context: ITypeDescriptorContext, propertyValues: IDictionary
+    ) -> object:
+        """
 
-    # No Sub Enums
+        :param context:
+        :param propertyValues:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetCreateInstanceSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetProperties(self, value: object) -> PropertyDescriptorCollection:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def GetProperties(
+        self, context: ITypeDescriptorContext, value: object
+    ) -> PropertyDescriptorCollection:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def GetProperties(
+        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+    ) -> PropertyDescriptorCollection:
+        """
+
+        :param context:
+        :param value:
+        :param attributes:
+        :return:
+        """
+    @overload
+    def GetPropertiesSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValues(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValues(
+        self, context: ITypeDescriptorContext
+    ) -> TypeConverter.StandardValuesCollection:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValuesExclusive(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValuesSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsValid(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CSharpModifierAttributeConverter(ABC, TypeConverter):
+    """"""
+
+    @overload
+    def CanConvertFrom(self, sourceType: Type) -> bool:
+        """
+
+        :param sourceType:
+        :return:
+        """
+    @overload
+    def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
+        """
+
+        :param context:
+        :param sourceType:
+        :return:
+        """
+    @overload
+    def CanConvertTo(self, destinationType: Type) -> bool:
+        """
+
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
+        """
+
+        :param context:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertFrom(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertFrom(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
+    ) -> object:
+        """
+
+        :param context:
+        :param culture:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertFromInvariantString(self, text: str) -> object:
+        """
+
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
+        """
+
+        :param context:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(self, text: str) -> object:
+        """
+
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
+        """
+
+        :param context:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
+    ) -> object:
+        """
+
+        :param context:
+        :param culture:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertTo(self, value: object, destinationType: Type) -> object:
+        """
+
+        :param value:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertTo(
+        self,
+        context: ITypeDescriptorContext,
+        culture: CultureInfo,
+        value: object,
+        destinationType: Type,
+    ) -> object:
+        """
+
+        :param context:
+        :param culture:
+        :param value:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertToInvariantString(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
+    ) -> str:
+        """
+
+        :param context:
+        :param culture:
+        :param value:
+        :return:
+        """
+    @overload
+    def CreateInstance(self, propertyValues: IDictionary) -> object:
+        """
+
+        :param propertyValues:
+        :return:
+        """
+    @overload
+    def CreateInstance(
+        self, context: ITypeDescriptorContext, propertyValues: IDictionary
+    ) -> object:
+        """
+
+        :param context:
+        :param propertyValues:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetCreateInstanceSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetProperties(self, value: object) -> PropertyDescriptorCollection:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def GetProperties(
+        self, context: ITypeDescriptorContext, value: object
+    ) -> PropertyDescriptorCollection:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def GetProperties(
+        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+    ) -> PropertyDescriptorCollection:
+        """
+
+        :param context:
+        :param value:
+        :param attributes:
+        :return:
+        """
+    @overload
+    def GetPropertiesSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValues(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValues(
+        self, context: ITypeDescriptorContext
+    ) -> TypeConverter.StandardValuesCollection:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValuesExclusive(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValuesSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsValid(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class CSharpTypeAttributeConverter(CSharpModifierAttributeConverter):
-    # No Fields
+    """"""
 
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+    @classmethod
     @property
-    def Default() -> CSharpTypeAttributeConverter: ...
+    def Default(cls) -> CSharpTypeAttributeConverter:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def CanConvertFrom(self, sourceType: Type) -> bool:
+        """
 
-    @staticmethod
-    def get_Default() -> CSharpTypeAttributeConverter: ...
+        :param sourceType:
+        :return:
+        """
+    @overload
+    def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
+        """
 
-    # No Events
+        :param context:
+        :param sourceType:
+        :return:
+        """
+    @overload
+    def CanConvertTo(self, destinationType: Type) -> bool:
+        """
 
-    # No Sub Classes
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
+        """
 
-    # No Sub Structs
+        :param context:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertFrom(self, value: object) -> object:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertFrom(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
+    ) -> object:
+        """
 
-    # No Sub Enums
+        :param context:
+        :param culture:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertFromInvariantString(self, text: str) -> object:
+        """
 
-# No Structs
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
+        """
 
-# No Interfaces
+        :param context:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(self, text: str) -> object:
+        """
 
-# No Enums
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
+        """
 
-# No Delegates
+        :param context:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
+    ) -> object:
+        """
 
-__all__ = [
-    CSharpCodeGenerator,
-    CSharpCodeProvider,
-    CSharpMemberAttributeConverter,
-    CSharpModifierAttributeConverter,
-    CSharpTypeAttributeConverter,
-]
+        :param context:
+        :param culture:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertTo(self, value: object, destinationType: Type) -> object:
+        """
+
+        :param value:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertTo(
+        self,
+        context: ITypeDescriptorContext,
+        culture: CultureInfo,
+        value: object,
+        destinationType: Type,
+    ) -> object:
+        """
+
+        :param context:
+        :param culture:
+        :param value:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertToInvariantString(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
+    ) -> str:
+        """
+
+        :param context:
+        :param culture:
+        :param value:
+        :return:
+        """
+    @overload
+    def CreateInstance(self, propertyValues: IDictionary) -> object:
+        """
+
+        :param propertyValues:
+        :return:
+        """
+    @overload
+    def CreateInstance(
+        self, context: ITypeDescriptorContext, propertyValues: IDictionary
+    ) -> object:
+        """
+
+        :param context:
+        :param propertyValues:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetCreateInstanceSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetProperties(self, value: object) -> PropertyDescriptorCollection:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def GetProperties(
+        self, context: ITypeDescriptorContext, value: object
+    ) -> PropertyDescriptorCollection:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def GetProperties(
+        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+    ) -> PropertyDescriptorCollection:
+        """
+
+        :param context:
+        :param value:
+        :param attributes:
+        :return:
+        """
+    @overload
+    def GetPropertiesSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValues(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValues(
+        self, context: ITypeDescriptorContext
+    ) -> TypeConverter.StandardValuesCollection:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValuesExclusive(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValuesSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsValid(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

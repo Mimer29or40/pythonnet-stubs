@@ -1,199 +1,353 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
+from typing import Tuple
 
 from System import Attribute
-from System import Boolean
 from System import Enum
+from System import Guid
 from System import IDisposable
-from System import Int32
+from System import IntPtr
 from System import Object
-from System import String
-from System import Void
+from System import Type
 from System.Runtime.ConstrainedExecution import CriticalFinalizerObject
 from System.Runtime.InteropServices import _Attribute
 
-# ---------- Types ---------- #
-
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
 class AssemblyTargetedPatchBandAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, targetedPatchBand: str):
+        """
 
-    def __init__(self, targetedPatchBand: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param targetedPatchBand:
+        """
     @property
-    def TargetedPatchBand(self) -> StringType: ...
+    def TargetedPatchBand(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    def get_TargetedPatchBand(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GCSettings(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+        :return:
+        """
     @property
-    def IsServerGC() -> BooleanType: ...
-    @staticmethod
-    @property
-    def LargeObjectHeapCompactionMode() -> GCLargeObjectHeapCompactionMode: ...
-    @staticmethod
-    @LargeObjectHeapCompactionMode.setter
-    def LargeObjectHeapCompactionMode(value: GCLargeObjectHeapCompactionMode) -> None: ...
-    @staticmethod
-    @property
-    def LatencyMode() -> GCLatencyMode: ...
-    @staticmethod
-    @LatencyMode.setter
-    def LatencyMode(value: GCLatencyMode) -> None: ...
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @staticmethod
-    def get_IsServerGC() -> BooleanType: ...
-    @staticmethod
-    def get_LargeObjectHeapCompactionMode() -> GCLargeObjectHeapCompactionMode: ...
-    @staticmethod
-    def get_LatencyMode() -> GCLatencyMode: ...
-    @staticmethod
-    def set_LargeObjectHeapCompactionMode(value: GCLargeObjectHeapCompactionMode) -> VoidType: ...
-    @staticmethod
-    def set_LatencyMode(value: GCLatencyMode) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Enums
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-class MemoryFailPoint(CriticalFinalizerObject, IDisposable):
-    # No Fields
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-    def __init__(self, sizeInMegabytes: IntType): ...
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ProfileOptimization(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def SetProfileRoot(directoryPath: StringType) -> VoidType: ...
-    @staticmethod
-    def StartProfile(profile: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TargetedPatchingOptOutAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, reason: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Reason(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Reason(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# ---------- Enums ---------- #
+        :return:
+        """
 
 class GCLargeObjectHeapCompactionMode(Enum):
-    Default = 1
-    CompactOnce = 2
+    """"""
+
+    Default: GCLargeObjectHeapCompactionMode = ...
+    """"""
+    CompactOnce: GCLargeObjectHeapCompactionMode = ...
+    """"""
 
 class GCLatencyMode(Enum):
-    Batch = 0
-    Interactive = 1
-    LowLatency = 2
-    SustainedLowLatency = 3
-    NoGCRegion = 4
+    """"""
 
-# No Delegates
+    Batch: GCLatencyMode = ...
+    """"""
+    Interactive: GCLatencyMode = ...
+    """"""
+    LowLatency: GCLatencyMode = ...
+    """"""
+    SustainedLowLatency: GCLatencyMode = ...
+    """"""
+    NoGCRegion: GCLatencyMode = ...
+    """"""
 
-__all__ = [
-    AssemblyTargetedPatchBandAttribute,
-    GCSettings,
-    MemoryFailPoint,
-    ProfileOptimization,
-    TargetedPatchingOptOutAttribute,
-    GCLargeObjectHeapCompactionMode,
-    GCLatencyMode,
-]
+class GCSettings(ABC, Object):
+    """"""
+
+    @classmethod
+    @property
+    def IsServerGC(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def LargeObjectHeapCompactionMode(cls) -> GCLargeObjectHeapCompactionMode:
+        """
+
+        :return:
+        """
+    @classmethod
+    @LargeObjectHeapCompactionMode.setter
+    def LargeObjectHeapCompactionMode(cls, value: GCLargeObjectHeapCompactionMode) -> None: ...
+    @classmethod
+    @property
+    def LatencyMode(cls) -> GCLatencyMode:
+        """
+
+        :return:
+        """
+    @classmethod
+    @LatencyMode.setter
+    def LatencyMode(cls, value: GCLatencyMode) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MemoryFailPoint(CriticalFinalizerObject, IDisposable):
+    """"""
+
+    def __init__(self, sizeInMegabytes: int):
+        """
+
+        :param sizeInMegabytes:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ProfileOptimization(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def SetProfileRoot(cls, directoryPath: str) -> None:
+        """
+
+        :param directoryPath:
+        """
+    @classmethod
+    def StartProfile(cls, profile: str) -> None:
+        """
+
+        :param profile:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TargetedPatchingOptOutAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self, reason: str):
+        """
+
+        :param reason:
+        """
+    @property
+    def Reason(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

@@ -1,143 +1,173 @@
 from __future__ import annotations
 
 from abc import ABC
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import List
 from typing import TypeVar
-from typing import Union
 
 from System import Array
-from System import Boolean
 from System import Func
-from System import Int32
 from System import Object
+from System import Type
 from System import ValueType
-from System import Void
-
-# ---------- Types ---------- #
+from System.Collections.Immutable.ImmutableArray import Builder
 
 T = TypeVar("T")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-VoidType = Union[None, Void]
+class ImmutableArray(ABC, Object):
+    """"""
 
-# ---------- Classes ---------- #
+    @classmethod
+    def CreateBuilder(cls, capacity: int) -> ImmutableArray.Builder[T]:
+        """
 
-class ImmutableArray(ABC, ObjectType):
-    # No Fields
+        :param capacity:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    @staticmethod
-    def CreateBuilder(capacity: IntType) -> Builder[T]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
+        :return:
+        """
 
 class ImmutableArray(Generic[T], ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @staticmethod
+    Empty: Final[ClassVar[ImmutableArray[T]]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, array: Array[T]):
+        """
+
+        :param array:
+        """
     @property
-    def Empty() -> ImmutableArray[T]: ...
-    @staticmethod
-    @Empty.setter
-    def Empty(value: ImmutableArray[T]) -> None: ...
+    def IsDefault(self) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self, array: ArrayType[T]): ...
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
     @property
-    def IsDefault(self) -> BooleanType: ...
-    def __getitem__(self, key: IntType) -> T: ...
-    @property
-    def Length(self) -> IntType: ...
-    @property
-    def UnderlyingArray(self) -> ArrayType[T]: ...
+    def Item(self) -> T:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Length(self) -> int:
+        """
 
+        :return:
+        """
+    @property
+    def UnderlyingArray(self) -> Array[T]:
+        """
+
+        :return:
+        """
     def CopyTo(
-        self,
-        sourceIndex: IntType,
-        destination: ArrayType[T],
-        destinationIndex: IntType,
-        length: IntType,
-    ) -> VoidType: ...
-    def FirstOrDefault(self, predicate: Func[T, BooleanType]) -> T: ...
-    def get_IsDefault(self) -> BooleanType: ...
-    def get_Item(self, index: IntType) -> T: ...
-    def get_Length(self) -> IntType: ...
-    def get_UnderlyingArray(self) -> ArrayType[T]: ...
+        self, sourceIndex: int, destination: Array[T], destinationIndex: int, length: int
+    ) -> None:
+        """
 
-    # No Events
+        :param sourceIndex:
+        :param destination:
+        :param destinationIndex:
+        :param length:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Sub Classes ---------- #
+        :param obj:
+        :return:
+        """
+    def FirstOrDefault(self, predicate: Func[T, bool]) -> T:
+        """
 
-    class Builder(Generic[T], ObjectType):
-        # No Fields
+        :param predicate:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-        # No Constructors
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-        # ---------- Properties ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+
+    class Builder(Generic[T], Object):
+        """"""
 
         @property
-        def Capacity(self) -> IntType: ...
+        def Capacity(self) -> int:
+            """"""
         @property
-        def Count(self) -> IntType: ...
-        def __getitem__(self, key: IntType) -> T: ...
-        def __setitem__(self, key: IntType, value: T) -> None: ...
+        def Count(self) -> int:
+            """"""
+        @property
+        def Item(self) -> T:
+            """"""
+        @Item.setter
+        def Item(self, value: T) -> None: ...
+        def Add(self, item: T) -> None:
+            """"""
+        def Equals(self, obj: object) -> bool:
+            """
 
-        # ---------- Methods ---------- #
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
 
-        def Add(self, item: T) -> VoidType: ...
-        def MoveToImmutable(self) -> ImmutableArray[T]: ...
-        def get_Capacity(self) -> IntType: ...
-        def get_Count(self) -> IntType: ...
-        def get_Item(self, index: IntType) -> T: ...
-        def set_Item(self, index: IntType, value: T) -> VoidType: ...
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
 
-        # No Events
+            :return:
+            """
+        def MoveToImmutable(self) -> ImmutableArray[T]:
+            """"""
+        def ToString(self) -> str:
+            """
 
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    ImmutableArray,
-    ImmutableArray,
-]
+            :return:
+            """
+        def __getitem__(self, index: int) -> T:
+            """"""
+        def __setitem__(self, index: int, value: T) -> None:
+            """"""

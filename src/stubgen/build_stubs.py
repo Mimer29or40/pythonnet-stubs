@@ -88,7 +88,9 @@ def merge_mapping(
     return merged
 
 
-def merge_namespace(namespace1: CNamespace, namespace2: CNamespace, should_raise: bool = True) -> CNamespace:
+def merge_namespace(
+    namespace1: CNamespace, namespace2: CNamespace, should_raise: bool = True
+) -> CNamespace:
     logger.debug("Merging Namespaces: %s", namespace1)
 
     verify_attribute(namespace1, namespace2, "Namespaces", "name", should_raise)
@@ -122,7 +124,9 @@ def merge_type_def(
     if class1 == "CStruct":
         return merge_struct(cast(CStruct, type_def1), cast(CStruct, type_def2), should_raise)
     if class1 == "CInterface":
-        return merge_interface(cast(CInterface, type_def1), cast(CInterface, type_def2), should_raise)
+        return merge_interface(
+            cast(CInterface, type_def1), cast(CInterface, type_def2), should_raise
+        )
     if class1 == "CEnum":
         return merge_enum(cast(CEnum, type_def1), cast(CEnum, type_def2), should_raise)
     if class1 == "CDelegate":
@@ -249,7 +253,9 @@ def merge_struct(struct1: CStruct, struct2: CStruct, should_raise: bool = True) 
     )
 
 
-def merge_interface(interface1: CInterface, interface2: CInterface, should_raise: bool = True) -> CInterface:
+def merge_interface(
+    interface1: CInterface, interface2: CInterface, should_raise: bool = True
+) -> CInterface:
     verify_attribute(interface1, interface2, "Interfaces", "generic_args", should_raise)
 
     interfaces: Sequence[CType] = tuple(sorted({*interface1.interfaces, *interface2.interfaces}))
@@ -309,7 +315,9 @@ def merge_enum(enum1: CEnum, enum2: CEnum, should_raise: bool = True) -> CEnum:
     )
 
 
-def merge_delegate(delegate1: CDelegate, delegate2: CDelegate, should_raise: bool = True) -> CDelegate:
+def merge_delegate(
+    delegate1: CDelegate, delegate2: CDelegate, should_raise: bool = True
+) -> CDelegate:
     verify_attribute(delegate1, delegate2, "Delegates", "parameters", should_raise)
     verify_attribute(delegate1, delegate2, "Delegates", "return_type", should_raise)
 
@@ -322,7 +330,9 @@ def merge_delegate(delegate1: CDelegate, delegate2: CDelegate, should_raise: boo
     )
 
 
-def merge_parameter(parameter1: CParameter, parameter2: CParameter, should_raise: bool = True) -> CParameter:
+def merge_parameter(
+    parameter1: CParameter, parameter2: CParameter, should_raise: bool = True
+) -> CParameter:
     verify_attribute(parameter1, parameter2, "Parameters", "type", should_raise)
     verify_attribute(parameter1, parameter2, "Parameters", "default", should_raise)
     verify_attribute(parameter1, parameter2, "Parameters", "out", should_raise)
@@ -363,7 +373,9 @@ def merge_field(field1: CField, field2: CField, should_raise: bool = True) -> CF
     )
 
 
-def merge_constructor(constructor1: CConstructor, constructor2: CConstructor, should_raise: bool = True) -> CConstructor:
+def merge_constructor(
+    constructor1: CConstructor, constructor2: CConstructor, should_raise: bool = True
+) -> CConstructor:
     verify_attribute(constructor1, constructor2, "Constructors", "declaring_type", should_raise)
 
     parameters: Sequence[CParameter] = merge_parameters(
@@ -376,7 +388,9 @@ def merge_constructor(constructor1: CConstructor, constructor2: CConstructor, sh
     )
 
 
-def merge_property(property1: CProperty, property2: CProperty, should_raise: bool = True) -> CProperty:
+def merge_property(
+    property1: CProperty, property2: CProperty, should_raise: bool = True
+) -> CProperty:
     verify_attribute(property1, property2, "Properties", "name", should_raise)
     verify_attribute(property1, property2, "Properties", "declaring_type", should_raise)
     verify_attribute(property1, property2, "Properties", "type", should_raise)
@@ -1253,6 +1267,7 @@ def build_stubs(
     output_dir: Path,
     line_length: int,
     multi_threaded: bool,
+    format_files: bool,
 ) -> Union[int, str]:
     namespaces: Dict[str, CNamespace] = {}
     for skeleton_file in skeleton_files:
@@ -1284,33 +1299,47 @@ def build_stubs(
         for namespace in namespaces.values():
             build_stub(namespace, doc, output_dir, line_length)
 
-    logger.info("Formatting stub files")
-    isort_config = Config(
-        profile="black",
-        line_length=line_length,
-        force_single_line=True,
-    )
-    black_mode: Mode = Mode(
-        target_versions={
-            TargetVersion.PY38,
-            TargetVersion.PY39,
-            TargetVersion.PY310,
-            TargetVersion.PY311,
-            TargetVersion.PY312,
-        },
-        line_length=line_length,
-        is_pyi=True,
-    )
-    for file in output_dir.rglob("*.pyi"):
-        logger.debug("Formatting file: %s", file)
-        try:
-            isort.file(file, config=isort_config)
-        except Exception as e:
-            logger.warning('Unable to run isort on file "%s":', file, exc_info=e)
+    if format_files:
 
-        try:
-            black.format_file_in_place(file, fast=False, mode=black_mode, write_back=WriteBack.YES)
-        except Exception as e:
-            logger.warning('Unable to run black on file "%s":', file, exc_info=e)
+        def format_file(file: Path) -> None:
+            logger.debug("Formatting file: %s", file)
+            try:
+                isort.file(file, config=isort_config)
+            except Exception as e:
+                logger.warning('Unable to run isort on file "%s":', file, exc_info=e)
+
+            try:
+                black.format_file_in_place(
+                    file, fast=False, mode=black_mode, write_back=WriteBack.YES
+                )
+            except Exception as e:
+                logger.warning('Unable to run black on file "%s":', file, exc_info=e)
+
+        logger.info("Formatting stub files")
+        isort_config = Config(
+            profile="black",
+            line_length=line_length,
+            force_single_line=True,
+        )
+        black_mode: Mode = Mode(
+            target_versions={
+                TargetVersion.PY38,
+                TargetVersion.PY39,
+                TargetVersion.PY310,
+                TargetVersion.PY311,
+                TargetVersion.PY312,
+            },
+            line_length=line_length,
+            is_pyi=True,
+        )
+
+        if multi_threaded:
+            executor: Executor = ThreadPoolExecutor(max_workers=16, thread_name_prefix="Worker")
+            for file in output_dir.rglob("*.pyi"):
+                executor.submit(format_file, file)
+            executor.shutdown(wait=True)
+        else:
+            for file in output_dir.rglob("*.pyi"):
+                format_file(file)
 
     return 0

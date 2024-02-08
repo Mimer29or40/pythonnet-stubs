@@ -1,115 +1,253 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
+from typing import Tuple
 
 from System import Attribute
 from System import Enum
-from System import Int32
+from System import Guid
+from System import IntPtr
 from System import Object
+from System import Type
 from System.Runtime.InteropServices import _Attribute
 
-# ---------- Types ---------- #
-
-IntType = Union[int, Int32]
-ObjectType = Object
-
-# ---------- Classes ---------- #
-
-class CriticalFinalizerObject(ABC, ObjectType):
+class Cer(Enum):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PrePrepareMethodAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReliabilityContractAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, consistencyGuarantee: Consistency, cer: Cer): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Cer(self) -> Cer: ...
-    @property
-    def ConsistencyGuarantee(self) -> Consistency: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Cer(self) -> Cer: ...
-    def get_ConsistencyGuarantee(self) -> Consistency: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# ---------- Enums ---------- #
-
-class Cer(Enum):
-    # None = 0
-    MayFail = 1
-    Success = 2
+    _None: Cer = ...
+    """"""
+    MayFail: Cer = ...
+    """"""
+    Success: Cer = ...
+    """"""
 
 class Consistency(Enum):
-    MayCorruptProcess = 0
-    MayCorruptAppDomain = 1
-    MayCorruptInstance = 2
-    WillNotCorruptState = 3
+    """"""
 
-# No Delegates
+    MayCorruptProcess: Consistency = ...
+    """"""
+    MayCorruptAppDomain: Consistency = ...
+    """"""
+    MayCorruptInstance: Consistency = ...
+    """"""
+    WillNotCorruptState: Consistency = ...
+    """"""
 
-__all__ = [
-    CriticalFinalizerObject,
-    PrePrepareMethodAttribute,
-    ReliabilityContractAttribute,
-    Cer,
-    Consistency,
-]
+class CriticalFinalizerObject(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PrePrepareMethodAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReliabilityContractAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self, consistencyGuarantee: Consistency, cer: Cer):
+        """
+
+        :param consistencyGuarantee:
+        :param cer:
+        """
+    @property
+    def Cer(self) -> Cer:
+        """
+
+        :return:
+        """
+    @property
+    def ConsistencyGuarantee(self) -> Consistency:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

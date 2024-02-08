@@ -1,22 +1,20 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
-from typing import Union
+from typing import ClassVar
+from typing import Final
+from typing import Iterator
+from typing import Tuple
 from typing import overload
 
 from System import Array
 from System import Attribute
-from System import Boolean
-from System import Byte
 from System import Enum
-from System import Int32
-from System import Int64
+from System import Guid
+from System import IntPtr
 from System import Object
-from System import String
+from System import Type
 from System import Version
-from System import Void
 from System.Collections import ArrayList
 from System.Collections import ICollection
 from System.Collections import IEnumerable
@@ -34,2779 +32,6597 @@ from System.Security.Cryptography import CspParameters
 from System.Security.Cryptography.X509Certificates import X509Certificate
 from System.Security.Util import StringExpressionSet
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class BuiltInPermissionIndex(ABC, ObjectType):
+class BuiltInPermissionFlag(Enum):
     """"""
 
-    # No Fields
+    EnvironmentPermission: BuiltInPermissionFlag = ...
+    """"""
+    FileDialogPermission: BuiltInPermissionFlag = ...
+    """"""
+    FileIOPermission: BuiltInPermissionFlag = ...
+    """"""
+    IsolatedStorageFilePermission: BuiltInPermissionFlag = ...
+    """"""
+    ReflectionPermission: BuiltInPermissionFlag = ...
+    """"""
+    RegistryPermission: BuiltInPermissionFlag = ...
+    """"""
+    SecurityPermission: BuiltInPermissionFlag = ...
+    """"""
+    UIPermission: BuiltInPermissionFlag = ...
+    """"""
+    PrincipalPermission: BuiltInPermissionFlag = ...
+    """"""
+    PublisherIdentityPermission: BuiltInPermissionFlag = ...
+    """"""
+    SiteIdentityPermission: BuiltInPermissionFlag = ...
+    """"""
+    StrongNameIdentityPermission: BuiltInPermissionFlag = ...
+    """"""
+    UrlIdentityPermission: BuiltInPermissionFlag = ...
+    """"""
+    ZoneIdentityPermission: BuiltInPermissionFlag = ...
+    """"""
+    KeyContainerPermission: BuiltInPermissionFlag = ...
+    """"""
 
-    # No Constructors
+class BuiltInPermissionIndex(ABC, Object):
+    """"""
 
-    # No Properties
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeAccessSecurityAttribute(ABC, SecurityAttribute, _Attribute):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DataProtectionPermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IUnrestrictedPermission
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, flag: DataProtectionPermissionFlags): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Flags(self) -> DataProtectionPermissionFlags: ...
-    @Flags.setter
-    def Flags(self, value: DataProtectionPermissionFlags) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, securityElement: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Flags(self) -> DataProtectionPermissionFlags: ...
-    def set_Flags(self, value: DataProtectionPermissionFlags) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DataProtectionPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Flags(self) -> DataProtectionPermissionFlags: ...
-    @Flags.setter
-    def Flags(self, value: DataProtectionPermissionFlags) -> None: ...
-    @property
-    def ProtectData(self) -> BooleanType: ...
-    @ProtectData.setter
-    def ProtectData(self, value: BooleanType) -> None: ...
-    @property
-    def ProtectMemory(self) -> BooleanType: ...
-    @ProtectMemory.setter
-    def ProtectMemory(self, value: BooleanType) -> None: ...
-    @property
-    def UnprotectData(self) -> BooleanType: ...
-    @UnprotectData.setter
-    def UnprotectData(self, value: BooleanType) -> None: ...
-    @property
-    def UnprotectMemory(self) -> BooleanType: ...
-    @UnprotectMemory.setter
-    def UnprotectMemory(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_Flags(self) -> DataProtectionPermissionFlags: ...
-    def get_ProtectData(self) -> BooleanType: ...
-    def get_ProtectMemory(self) -> BooleanType: ...
-    def get_UnprotectData(self) -> BooleanType: ...
-    def get_UnprotectMemory(self) -> BooleanType: ...
-    def set_Flags(self, value: DataProtectionPermissionFlags) -> VoidType: ...
-    def set_ProtectData(self, value: BooleanType) -> VoidType: ...
-    def set_ProtectMemory(self, value: BooleanType) -> VoidType: ...
-    def set_UnprotectData(self, value: BooleanType) -> VoidType: ...
-    def set_UnprotectMemory(self, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EnvironmentPermission(
-    CodeAccessPermission,
-    IPermission,
-    ISecurityEncodable,
-    IStackWalk,
-    IUnrestrictedPermission,
-    IBuiltInPermission,
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, flag: EnvironmentPermissionAccess, pathList: StringType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def AddPathList(self, flag: EnvironmentPermissionAccess, pathList: StringType) -> VoidType: ...
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def GetPathList(self, flag: EnvironmentPermissionAccess) -> StringType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def SetPathList(self, flag: EnvironmentPermissionAccess, pathList: StringType) -> VoidType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, other: IPermission) -> IPermission: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EnvironmentPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def All(self) -> StringType: ...
-    @All.setter
-    def All(self, value: StringType) -> None: ...
-    @property
-    def Read(self) -> StringType: ...
-    @Read.setter
-    def Read(self, value: StringType) -> None: ...
-    @property
-    def Write(self) -> StringType: ...
-    @Write.setter
-    def Write(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_All(self) -> StringType: ...
-    def get_Read(self) -> StringType: ...
-    def get_Write(self) -> StringType: ...
-    def set_All(self, value: StringType) -> VoidType: ...
-    def set_Read(self, value: StringType) -> VoidType: ...
-    def set_Write(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EnvironmentStringExpressionSet(StringExpressionSet):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, str: StringType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def ToString(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FileDialogPermission(
-    CodeAccessPermission,
-    IPermission,
-    ISecurityEncodable,
-    IStackWalk,
-    IUnrestrictedPermission,
-    IBuiltInPermission,
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, access: FileDialogPermissionAccess): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Access(self) -> FileDialogPermissionAccess: ...
-    @Access.setter
-    def Access(self, value: FileDialogPermissionAccess) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Access(self) -> FileDialogPermissionAccess: ...
-    def set_Access(self, value: FileDialogPermissionAccess) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FileDialogPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Open(self) -> BooleanType: ...
-    @Open.setter
-    def Open(self, value: BooleanType) -> None: ...
-    @property
-    def Save(self) -> BooleanType: ...
-    @Save.setter
-    def Save(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_Open(self) -> BooleanType: ...
-    def get_Save(self) -> BooleanType: ...
-    def set_Open(self, value: BooleanType) -> VoidType: ...
-    def set_Save(self, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FileIOAccess(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, pathDiscovery: BooleanType): ...
-    @overload
-    def __init__(self, value: StringType): ...
-    @overload
-    def __init__(
-        self, allFiles: BooleanType, allLocalFiles: BooleanType, pathDiscovery: BooleanType
-    ): ...
-    @overload
-    def __init__(
-        self,
-        set: StringExpressionSet,
-        allFiles: BooleanType,
-        allLocalFiles: BooleanType,
-        pathDiscovery: BooleanType,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AllFiles(self) -> BooleanType: ...
-    @AllFiles.setter
-    def AllFiles(self, value: BooleanType) -> None: ...
-    @property
-    def AllLocalFiles(self) -> BooleanType: ...
-    @AllLocalFiles.setter
-    def AllLocalFiles(self, value: BooleanType) -> None: ...
-    @PathDiscovery.setter
-    def PathDiscovery(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def AddExpressions(self, values: ArrayList, checkForDuplicates: BooleanType) -> VoidType: ...
-    def Copy(self) -> FileIOAccess: ...
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def Intersect(self, operand: FileIOAccess) -> FileIOAccess: ...
-    def IsEmpty(self) -> BooleanType: ...
-    def IsSubsetOf(self, operand: FileIOAccess) -> BooleanType: ...
-    def ToString(self) -> StringType: ...
-    def ToStringArray(self) -> ArrayType[StringType]: ...
-    def Union(self, operand: FileIOAccess) -> FileIOAccess: ...
-    def get_AllFiles(self) -> BooleanType: ...
-    def get_AllLocalFiles(self) -> BooleanType: ...
-    def set_AllFiles(self, value: BooleanType) -> VoidType: ...
-    def set_AllLocalFiles(self, value: BooleanType) -> VoidType: ...
-    def set_PathDiscovery(self, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FileIOPermission(
-    CodeAccessPermission,
-    IPermission,
-    ISecurityEncodable,
-    IStackWalk,
-    IUnrestrictedPermission,
-    IBuiltInPermission,
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, access: FileIOPermissionAccess, path: StringType): ...
-    @overload
-    def __init__(self, access: FileIOPermissionAccess, pathList: ArrayType[StringType]): ...
-    @overload
-    def __init__(
-        self, access: FileIOPermissionAccess, control: AccessControlActions, path: StringType
-    ): ...
-    @overload
-    def __init__(
-        self,
-        access: FileIOPermissionAccess,
-        control: AccessControlActions,
-        pathList: ArrayType[StringType],
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AllFiles(self) -> FileIOPermissionAccess: ...
-    @AllFiles.setter
-    def AllFiles(self, value: FileIOPermissionAccess) -> None: ...
-    @property
-    def AllLocalFiles(self) -> FileIOPermissionAccess: ...
-    @AllLocalFiles.setter
-    def AllLocalFiles(self, value: FileIOPermissionAccess) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def AddPathList(self, access: FileIOPermissionAccess, path: StringType) -> VoidType: ...
-    @overload
-    def AddPathList(
-        self, access: FileIOPermissionAccess, pathList: ArrayType[StringType]
-    ) -> VoidType: ...
-    def Copy(self) -> IPermission: ...
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetPathList(self, access: FileIOPermissionAccess) -> ArrayType[StringType]: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    @overload
-    def SetPathList(self, access: FileIOPermissionAccess, path: StringType) -> VoidType: ...
-    @overload
-    def SetPathList(
-        self, access: FileIOPermissionAccess, pathList: ArrayType[StringType]
-    ) -> VoidType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, other: IPermission) -> IPermission: ...
-    def get_AllFiles(self) -> FileIOPermissionAccess: ...
-    def get_AllLocalFiles(self) -> FileIOPermissionAccess: ...
-    def set_AllFiles(self, value: FileIOPermissionAccess) -> VoidType: ...
-    def set_AllLocalFiles(self, value: FileIOPermissionAccess) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FileIOPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def All(self) -> StringType: ...
-    @All.setter
-    def All(self, value: StringType) -> None: ...
-    @property
-    def AllFiles(self) -> FileIOPermissionAccess: ...
-    @AllFiles.setter
-    def AllFiles(self, value: FileIOPermissionAccess) -> None: ...
-    @property
-    def AllLocalFiles(self) -> FileIOPermissionAccess: ...
-    @AllLocalFiles.setter
-    def AllLocalFiles(self, value: FileIOPermissionAccess) -> None: ...
-    @property
-    def Append(self) -> StringType: ...
-    @Append.setter
-    def Append(self, value: StringType) -> None: ...
-    @property
-    def ChangeAccessControl(self) -> StringType: ...
-    @ChangeAccessControl.setter
-    def ChangeAccessControl(self, value: StringType) -> None: ...
-    @property
-    def PathDiscovery(self) -> StringType: ...
-    @PathDiscovery.setter
-    def PathDiscovery(self, value: StringType) -> None: ...
-    @property
-    def Read(self) -> StringType: ...
-    @Read.setter
-    def Read(self, value: StringType) -> None: ...
-    @property
-    def ViewAccessControl(self) -> StringType: ...
-    @ViewAccessControl.setter
-    def ViewAccessControl(self, value: StringType) -> None: ...
-    @property
-    def ViewAndModify(self) -> StringType: ...
-    @ViewAndModify.setter
-    def ViewAndModify(self, value: StringType) -> None: ...
-    @property
-    def Write(self) -> StringType: ...
-    @Write.setter
-    def Write(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_All(self) -> StringType: ...
-    def get_AllFiles(self) -> FileIOPermissionAccess: ...
-    def get_AllLocalFiles(self) -> FileIOPermissionAccess: ...
-    def get_Append(self) -> StringType: ...
-    def get_ChangeAccessControl(self) -> StringType: ...
-    def get_PathDiscovery(self) -> StringType: ...
-    def get_Read(self) -> StringType: ...
-    def get_ViewAccessControl(self) -> StringType: ...
-    def get_ViewAndModify(self) -> StringType: ...
-    def get_Write(self) -> StringType: ...
-    def set_All(self, value: StringType) -> VoidType: ...
-    def set_AllFiles(self, value: FileIOPermissionAccess) -> VoidType: ...
-    def set_AllLocalFiles(self, value: FileIOPermissionAccess) -> VoidType: ...
-    def set_Append(self, value: StringType) -> VoidType: ...
-    def set_ChangeAccessControl(self, value: StringType) -> VoidType: ...
-    def set_PathDiscovery(self, value: StringType) -> VoidType: ...
-    def set_Read(self, value: StringType) -> VoidType: ...
-    def set_ViewAccessControl(self, value: StringType) -> VoidType: ...
-    def set_ViewAndModify(self, value: StringType) -> VoidType: ...
-    def set_Write(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GacIdentityPermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IBuiltInPermission
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, securityElement: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GacIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HostProtectionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ExternalProcessMgmt(self) -> BooleanType: ...
-    @ExternalProcessMgmt.setter
-    def ExternalProcessMgmt(self, value: BooleanType) -> None: ...
-    @property
-    def ExternalThreading(self) -> BooleanType: ...
-    @ExternalThreading.setter
-    def ExternalThreading(self, value: BooleanType) -> None: ...
-    @property
-    def MayLeakOnAbort(self) -> BooleanType: ...
-    @MayLeakOnAbort.setter
-    def MayLeakOnAbort(self, value: BooleanType) -> None: ...
-    @property
-    def Resources(self) -> HostProtectionResource: ...
-    @Resources.setter
-    def Resources(self, value: HostProtectionResource) -> None: ...
-    @property
-    def SecurityInfrastructure(self) -> BooleanType: ...
-    @SecurityInfrastructure.setter
-    def SecurityInfrastructure(self, value: BooleanType) -> None: ...
-    @property
-    def SelfAffectingProcessMgmt(self) -> BooleanType: ...
-    @SelfAffectingProcessMgmt.setter
-    def SelfAffectingProcessMgmt(self, value: BooleanType) -> None: ...
-    @property
-    def SelfAffectingThreading(self) -> BooleanType: ...
-    @SelfAffectingThreading.setter
-    def SelfAffectingThreading(self, value: BooleanType) -> None: ...
-    @property
-    def SharedState(self) -> BooleanType: ...
-    @SharedState.setter
-    def SharedState(self, value: BooleanType) -> None: ...
-    @property
-    def Synchronization(self) -> BooleanType: ...
-    @Synchronization.setter
-    def Synchronization(self, value: BooleanType) -> None: ...
-    @property
-    def UI(self) -> BooleanType: ...
-    @UI.setter
-    def UI(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_ExternalProcessMgmt(self) -> BooleanType: ...
-    def get_ExternalThreading(self) -> BooleanType: ...
-    def get_MayLeakOnAbort(self) -> BooleanType: ...
-    def get_Resources(self) -> HostProtectionResource: ...
-    def get_SecurityInfrastructure(self) -> BooleanType: ...
-    def get_SelfAffectingProcessMgmt(self) -> BooleanType: ...
-    def get_SelfAffectingThreading(self) -> BooleanType: ...
-    def get_SharedState(self) -> BooleanType: ...
-    def get_Synchronization(self) -> BooleanType: ...
-    def get_UI(self) -> BooleanType: ...
-    def set_ExternalProcessMgmt(self, value: BooleanType) -> VoidType: ...
-    def set_ExternalThreading(self, value: BooleanType) -> VoidType: ...
-    def set_MayLeakOnAbort(self, value: BooleanType) -> VoidType: ...
-    def set_Resources(self, value: HostProtectionResource) -> VoidType: ...
-    def set_SecurityInfrastructure(self, value: BooleanType) -> VoidType: ...
-    def set_SelfAffectingProcessMgmt(self, value: BooleanType) -> VoidType: ...
-    def set_SelfAffectingThreading(self, value: BooleanType) -> VoidType: ...
-    def set_SharedState(self, value: BooleanType) -> VoidType: ...
-    def set_Synchronization(self, value: BooleanType) -> VoidType: ...
-    def set_UI(self, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HostProtectionPermission(
-    CodeAccessPermission,
-    IPermission,
-    ISecurityEncodable,
-    IStackWalk,
-    IUnrestrictedPermission,
-    IBuiltInPermission,
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, resources: HostProtectionResource): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Resources(self) -> HostProtectionResource: ...
-    @Resources.setter
-    def Resources(self, value: HostProtectionResource) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Resources(self) -> HostProtectionResource: ...
-    def set_Resources(self, value: HostProtectionResource) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IDRole(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetHashCode(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IsolatedStorageFilePermission(
-    IsolatedStoragePermission,
-    IPermission,
-    ISecurityEncodable,
-    IStackWalk,
-    IUnrestrictedPermission,
-    IBuiltInPermission,
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, state: PermissionState): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IsolatedStorageFilePermissionAttribute(IsolatedStoragePermissionAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IsolatedStoragePermission(
-    ABC, CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IUnrestrictedPermission
-):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def UsageAllowed(self) -> IsolatedStorageContainment: ...
-    @UsageAllowed.setter
-    def UsageAllowed(self, value: IsolatedStorageContainment) -> None: ...
-    @property
-    def UserQuota(self) -> LongType: ...
-    @UserQuota.setter
-    def UserQuota(self, value: LongType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def get_UsageAllowed(self) -> IsolatedStorageContainment: ...
-    def get_UserQuota(self) -> LongType: ...
-    def set_UsageAllowed(self, value: IsolatedStorageContainment) -> VoidType: ...
-    def set_UserQuota(self, value: LongType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IsolatedStoragePermissionAttribute(ABC, CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def UsageAllowed(self) -> IsolatedStorageContainment: ...
-    @UsageAllowed.setter
-    def UsageAllowed(self, value: IsolatedStorageContainment) -> None: ...
-    @property
-    def UserQuota(self) -> LongType: ...
-    @UserQuota.setter
-    def UserQuota(self, value: LongType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_UsageAllowed(self) -> IsolatedStorageContainment: ...
-    def get_UserQuota(self) -> LongType: ...
-    def set_UsageAllowed(self, value: IsolatedStorageContainment) -> VoidType: ...
-    def set_UserQuota(self, value: LongType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class KeyContainerPermission(
-    CodeAccessPermission,
-    IPermission,
-    ISecurityEncodable,
-    IStackWalk,
-    IUnrestrictedPermission,
-    IBuiltInPermission,
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, flags: KeyContainerPermissionFlags): ...
-    @overload
-    def __init__(
-        self,
-        flags: KeyContainerPermissionFlags,
-        accessList: ArrayType[KeyContainerPermissionAccessEntry],
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AccessEntries(self) -> KeyContainerPermissionAccessEntryCollection: ...
-    @property
-    def Flags(self) -> KeyContainerPermissionFlags: ...
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, securityElement: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_AccessEntries(self) -> KeyContainerPermissionAccessEntryCollection: ...
-    def get_Flags(self) -> KeyContainerPermissionFlags: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class KeyContainerPermissionAccessEntry(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, keyContainerName: StringType, flags: KeyContainerPermissionFlags): ...
-    @overload
-    def __init__(self, parameters: CspParameters, flags: KeyContainerPermissionFlags): ...
-    @overload
-    def __init__(
-        self,
-        keyStore: StringType,
-        providerName: StringType,
-        providerType: IntType,
-        keyContainerName: StringType,
-        keySpec: IntType,
-        flags: KeyContainerPermissionFlags,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Flags(self) -> KeyContainerPermissionFlags: ...
-    @Flags.setter
-    def Flags(self, value: KeyContainerPermissionFlags) -> None: ...
-    @property
-    def KeyContainerName(self) -> StringType: ...
-    @KeyContainerName.setter
-    def KeyContainerName(self, value: StringType) -> None: ...
-    @property
-    def KeySpec(self) -> IntType: ...
-    @KeySpec.setter
-    def KeySpec(self, value: IntType) -> None: ...
-    @property
-    def KeyStore(self) -> StringType: ...
-    @KeyStore.setter
-    def KeyStore(self, value: StringType) -> None: ...
-    @property
-    def ProviderName(self) -> StringType: ...
-    @ProviderName.setter
-    def ProviderName(self, value: StringType) -> None: ...
-    @property
-    def ProviderType(self) -> IntType: ...
-    @ProviderType.setter
-    def ProviderType(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_Flags(self) -> KeyContainerPermissionFlags: ...
-    def get_KeyContainerName(self) -> StringType: ...
-    def get_KeySpec(self) -> IntType: ...
-    def get_KeyStore(self) -> StringType: ...
-    def get_ProviderName(self) -> StringType: ...
-    def get_ProviderType(self) -> IntType: ...
-    def set_Flags(self, value: KeyContainerPermissionFlags) -> VoidType: ...
-    def set_KeyContainerName(self, value: StringType) -> VoidType: ...
-    def set_KeySpec(self, value: IntType) -> VoidType: ...
-    def set_KeyStore(self, value: StringType) -> VoidType: ...
-    def set_ProviderName(self, value: StringType) -> VoidType: ...
-    def set_ProviderType(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class KeyContainerPermissionAccessEntryCollection(ObjectType, ICollection, IEnumerable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Count(self) -> IntType: ...
-    @property
-    def IsSynchronized(self) -> BooleanType: ...
-    def __getitem__(self, key: IntType) -> KeyContainerPermissionAccessEntry: ...
-    @property
-    def SyncRoot(self) -> ObjectType: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, accessEntry: KeyContainerPermissionAccessEntry) -> IntType: ...
-    def Clear(self) -> VoidType: ...
-    def CopyTo(
-        self, array: ArrayType[KeyContainerPermissionAccessEntry], index: IntType
-    ) -> VoidType: ...
-    def GetEnumerator(self) -> KeyContainerPermissionAccessEntryEnumerator: ...
-    def IndexOf(self, accessEntry: KeyContainerPermissionAccessEntry) -> IntType: ...
-    def Remove(self, accessEntry: KeyContainerPermissionAccessEntry) -> VoidType: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsSynchronized(self) -> BooleanType: ...
-    def get_Item(self, index: IntType) -> KeyContainerPermissionAccessEntry: ...
-    def get_SyncRoot(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class KeyContainerPermissionAccessEntryEnumerator(ObjectType, IEnumerator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> KeyContainerPermissionAccessEntry: ...
-
-    # ---------- Methods ---------- #
-
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> KeyContainerPermissionAccessEntry: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Flags(self) -> KeyContainerPermissionFlags: ...
-    @Flags.setter
-    def Flags(self, value: KeyContainerPermissionFlags) -> None: ...
-    @property
-    def KeyContainerName(self) -> StringType: ...
-    @KeyContainerName.setter
-    def KeyContainerName(self, value: StringType) -> None: ...
-    @property
-    def KeySpec(self) -> IntType: ...
-    @KeySpec.setter
-    def KeySpec(self, value: IntType) -> None: ...
-    @property
-    def KeyStore(self) -> StringType: ...
-    @KeyStore.setter
-    def KeyStore(self, value: StringType) -> None: ...
-    @property
-    def ProviderName(self) -> StringType: ...
-    @ProviderName.setter
-    def ProviderName(self, value: StringType) -> None: ...
-    @property
-    def ProviderType(self) -> IntType: ...
-    @ProviderType.setter
-    def ProviderType(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_Flags(self) -> KeyContainerPermissionFlags: ...
-    def get_KeyContainerName(self) -> StringType: ...
-    def get_KeySpec(self) -> IntType: ...
-    def get_KeyStore(self) -> StringType: ...
-    def get_ProviderName(self) -> StringType: ...
-    def get_ProviderType(self) -> IntType: ...
-    def set_Flags(self, value: KeyContainerPermissionFlags) -> VoidType: ...
-    def set_KeyContainerName(self, value: StringType) -> VoidType: ...
-    def set_KeySpec(self, value: IntType) -> VoidType: ...
-    def set_KeyStore(self, value: StringType) -> VoidType: ...
-    def set_ProviderName(self, value: StringType) -> VoidType: ...
-    def set_ProviderType(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PermissionSetAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def File(self) -> StringType: ...
-    @File.setter
-    def File(self, value: StringType) -> None: ...
-    @property
-    def Hex(self) -> StringType: ...
-    @Hex.setter
-    def Hex(self, value: StringType) -> None: ...
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def UnicodeEncoded(self) -> BooleanType: ...
-    @UnicodeEncoded.setter
-    def UnicodeEncoded(self, value: BooleanType) -> None: ...
-    @property
-    def XML(self) -> StringType: ...
-    @XML.setter
-    def XML(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def CreatePermissionSet(self) -> PermissionSet: ...
-    def get_File(self) -> StringType: ...
-    def get_Hex(self) -> StringType: ...
-    def get_Name(self) -> StringType: ...
-    def get_UnicodeEncoded(self) -> BooleanType: ...
-    def get_XML(self) -> StringType: ...
-    def set_File(self, value: StringType) -> VoidType: ...
-    def set_Hex(self, value: StringType) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_UnicodeEncoded(self, value: BooleanType) -> VoidType: ...
-    def set_XML(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PrincipalPermission(
-    ObjectType, IPermission, ISecurityEncodable, IUnrestrictedPermission, IBuiltInPermission
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, name: StringType, role: StringType): ...
-    @overload
-    def __init__(self, name: StringType, role: StringType, isAuthenticated: BooleanType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def Demand(self) -> VoidType: ...
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def FromXml(self, elem: SecurityElement) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToString(self) -> StringType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, other: IPermission) -> IPermission: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PrincipalPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Authenticated(self) -> BooleanType: ...
-    @Authenticated.setter
-    def Authenticated(self, value: BooleanType) -> None: ...
     @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def Role(self) -> StringType: ...
-    @Role.setter
-    def Role(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_Authenticated(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_Role(self) -> StringType: ...
-    def set_Authenticated(self, value: BooleanType) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_Role(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PublisherIdentityPermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IBuiltInPermission
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, certificate: X509Certificate): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Certificate(self) -> X509Certificate: ...
-    @Certificate.setter
-    def Certificate(self, value: X509Certificate) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Certificate(self) -> X509Certificate: ...
-    def set_Certificate(self, value: X509Certificate) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PublisherIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CertFile(self) -> StringType: ...
-    @CertFile.setter
-    def CertFile(self, value: StringType) -> None: ...
-    @property
-    def SignedFile(self) -> StringType: ...
-    @SignedFile.setter
-    def SignedFile(self, value: StringType) -> None: ...
-    @property
-    def X509Certificate(self) -> StringType: ...
-    @X509Certificate.setter
-    def X509Certificate(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_CertFile(self) -> StringType: ...
-    def get_SignedFile(self) -> StringType: ...
-    def get_X509Certificate(self) -> StringType: ...
-    def set_CertFile(self, value: StringType) -> VoidType: ...
-    def set_SignedFile(self, value: StringType) -> VoidType: ...
-    def set_X509Certificate(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReflectionPermission(
-    CodeAccessPermission,
-    IPermission,
-    ISecurityEncodable,
-    IStackWalk,
-    IUnrestrictedPermission,
-    IBuiltInPermission,
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, flag: ReflectionPermissionFlag): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Flags(self) -> ReflectionPermissionFlag: ...
-    @Flags.setter
-    def Flags(self, value: ReflectionPermissionFlag) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, other: IPermission) -> IPermission: ...
-    def get_Flags(self) -> ReflectionPermissionFlag: ...
-    def set_Flags(self, value: ReflectionPermissionFlag) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReflectionPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Flags(self) -> ReflectionPermissionFlag: ...
-    @Flags.setter
-    def Flags(self, value: ReflectionPermissionFlag) -> None: ...
-    @property
-    def MemberAccess(self) -> BooleanType: ...
-    @MemberAccess.setter
-    def MemberAccess(self, value: BooleanType) -> None: ...
-    @property
-    def ReflectionEmit(self) -> BooleanType: ...
-    @ReflectionEmit.setter
-    def ReflectionEmit(self, value: BooleanType) -> None: ...
-    @property
-    def RestrictedMemberAccess(self) -> BooleanType: ...
-    @RestrictedMemberAccess.setter
-    def RestrictedMemberAccess(self, value: BooleanType) -> None: ...
-    @property
-    def TypeInformation(self) -> BooleanType: ...
-    @TypeInformation.setter
-    def TypeInformation(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_Flags(self) -> ReflectionPermissionFlag: ...
-    def get_MemberAccess(self) -> BooleanType: ...
-    def get_ReflectionEmit(self) -> BooleanType: ...
-    def get_RestrictedMemberAccess(self) -> BooleanType: ...
-    def get_TypeInformation(self) -> BooleanType: ...
-    def set_Flags(self, value: ReflectionPermissionFlag) -> VoidType: ...
-    def set_MemberAccess(self, value: BooleanType) -> VoidType: ...
-    def set_ReflectionEmit(self, value: BooleanType) -> VoidType: ...
-    def set_RestrictedMemberAccess(self, value: BooleanType) -> VoidType: ...
-    def set_TypeInformation(self, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
+    def Action(self) -> SecurityAction:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegistryPermission(
-    CodeAccessPermission,
-    IPermission,
-    ISecurityEncodable,
-    IStackWalk,
-    IUnrestrictedPermission,
-    IBuiltInPermission,
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, access: RegistryPermissionAccess, pathList: StringType): ...
-    @overload
-    def __init__(
-        self, access: RegistryPermissionAccess, control: AccessControlActions, pathList: StringType
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def AddPathList(self, access: RegistryPermissionAccess, pathList: StringType) -> VoidType: ...
-    @overload
-    def AddPathList(
-        self, access: RegistryPermissionAccess, control: AccessControlActions, pathList: StringType
-    ) -> VoidType: ...
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def GetPathList(self, access: RegistryPermissionAccess) -> StringType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def SetPathList(self, access: RegistryPermissionAccess, pathList: StringType) -> VoidType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, other: IPermission) -> IPermission: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegistryPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def All(self) -> StringType: ...
-    @All.setter
-    def All(self, value: StringType) -> None: ...
-    @property
-    def ChangeAccessControl(self) -> StringType: ...
-    @ChangeAccessControl.setter
-    def ChangeAccessControl(self, value: StringType) -> None: ...
-    @property
-    def Create(self) -> StringType: ...
-    @Create.setter
-    def Create(self, value: StringType) -> None: ...
-    @property
-    def Read(self) -> StringType: ...
-    @Read.setter
-    def Read(self, value: StringType) -> None: ...
-    @property
-    def ViewAccessControl(self) -> StringType: ...
-    @ViewAccessControl.setter
-    def ViewAccessControl(self, value: StringType) -> None: ...
-    @property
-    def ViewAndModify(self) -> StringType: ...
-    @ViewAndModify.setter
-    def ViewAndModify(self, value: StringType) -> None: ...
-    @property
-    def Write(self) -> StringType: ...
-    @Write.setter
-    def Write(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_All(self) -> StringType: ...
-    def get_ChangeAccessControl(self) -> StringType: ...
-    def get_Create(self) -> StringType: ...
-    def get_Read(self) -> StringType: ...
-    def get_ViewAccessControl(self) -> StringType: ...
-    def get_ViewAndModify(self) -> StringType: ...
-    def get_Write(self) -> StringType: ...
-    def set_All(self, value: StringType) -> VoidType: ...
-    def set_ChangeAccessControl(self, value: StringType) -> VoidType: ...
-    def set_Create(self, value: StringType) -> VoidType: ...
-    def set_Read(self, value: StringType) -> VoidType: ...
-    def set_ViewAccessControl(self, value: StringType) -> VoidType: ...
-    def set_ViewAndModify(self, value: StringType) -> VoidType: ...
-    def set_Write(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ResourcePermissionBase(
-    ABC, CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IUnrestrictedPermission
-):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Any() -> StringType: ...
-    @staticmethod
-    @property
-    def Local() -> StringType: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, securityElement: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ResourcePermissionBaseEntry(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, permissionAccess: IntType, permissionAccessPath: ArrayType[StringType]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def PermissionAccess(self) -> IntType: ...
-    @property
-    def PermissionAccessPath(self) -> ArrayType[StringType]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_PermissionAccess(self) -> IntType: ...
-    def get_PermissionAccessPath(self) -> ArrayType[StringType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SecurityAttribute(ABC, Attribute, _Attribute):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Action(self) -> SecurityAction: ...
+        :return:
+        """
     @Action.setter
     def Action(self, value: SecurityAction) -> None: ...
     @property
-    def Unrestricted(self) -> BooleanType: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
     @Unrestricted.setter
-    def Unrestricted(self, value: BooleanType) -> None: ...
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def CreatePermission(self) -> IPermission: ...
-    def get_Action(self) -> SecurityAction: ...
-    def get_Unrestricted(self) -> BooleanType: ...
-    def set_Action(self, value: SecurityAction) -> VoidType: ...
-    def set_Unrestricted(self, value: BooleanType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Enums
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EnvironmentPermission(
+    CodeAccessPermission,
+    IBuiltInPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
+):
+    """"""
+
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(self, flag: EnvironmentPermissionAccess, pathList: str):
+        """
+
+        :param flag:
+        :param pathList:
+        """
+    def AddPathList(self, flag: EnvironmentPermissionAccess, pathList: str) -> None:
+        """
+
+        :param flag:
+        :param pathList:
+        """
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetPathList(self, flag: EnvironmentPermissionAccess) -> str:
+        """
+
+        :param flag:
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def SetPathList(self, flag: EnvironmentPermissionAccess, pathList: str) -> None:
+        """
+
+        :param flag:
+        :param pathList:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class EnvironmentPermissionAccess(Enum):
+    """"""
+
+    NoAccess: EnvironmentPermissionAccess = ...
+    """"""
+    Read: EnvironmentPermissionAccess = ...
+    """"""
+    Write: EnvironmentPermissionAccess = ...
+    """"""
+    AllAccess: EnvironmentPermissionAccess = ...
+    """"""
+
+class EnvironmentPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def All(self) -> str:
+        """
+
+        :return:
+        """
+    @All.setter
+    def All(self, value: str) -> None: ...
+    @property
+    def Read(self) -> str:
+        """
+
+        :return:
+        """
+    @Read.setter
+    def Read(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def Write(self) -> str:
+        """
+
+        :return:
+        """
+    @Write.setter
+    def Write(self, value: str) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EnvironmentStringExpressionSet(StringExpressionSet):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, str: str):
+        """
+
+        :param str:
+        """
+    @overload
+    def AddExpressions(self, str: str) -> None:
+        """
+
+        :param str:
+        """
+    @overload
+    def AddExpressions(self, exprArrayList: ArrayList, checkForDuplicates: bool) -> None:
+        """
+
+        :param exprArrayList:
+        :param checkForDuplicates:
+        """
+    @overload
+    def AddExpressions(self, str: Array[str], checkForDuplicates: bool, needFullPath: bool) -> None:
+        """
+
+        :param str:
+        :param checkForDuplicates:
+        :param needFullPath:
+        """
+    def Copy(self) -> StringExpressionSet:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, ses: StringExpressionSet) -> StringExpressionSet:
+        """
+
+        :param ses:
+        :return:
+        """
+    def IsEmpty(self) -> bool:
+        """
+
+        :return:
+        """
+    def IsSubsetOf(self, ses: StringExpressionSet) -> bool:
+        """
+
+        :param ses:
+        :return:
+        """
+    def IsSubsetOfPathDiscovery(self, ses: StringExpressionSet) -> bool:
+        """
+
+        :param ses:
+        :return:
+        """
+    def SetThrowOnRelative(self, throwOnRelative: bool) -> None:
+        """
+
+        :param throwOnRelative:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Union(self, ses: StringExpressionSet) -> StringExpressionSet:
+        """
+
+        :param ses:
+        :return:
+        """
+    def UnsafeToString(self) -> str:
+        """
+
+        :return:
+        """
+    def UnsafeToStringArray(self) -> Array[str]:
+        """
+
+        :return:
+        """
+
+class FileDialogPermission(
+    CodeAccessPermission,
+    IBuiltInPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
+):
+    """"""
+
+    @overload
+    def __init__(self, access: FileDialogPermissionAccess):
+        """
+
+        :param access:
+        """
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @property
+    def Access(self) -> FileDialogPermissionAccess:
+        """
+
+        :return:
+        """
+    @Access.setter
+    def Access(self, value: FileDialogPermissionAccess) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class FileDialogPermissionAccess(Enum):
+    """"""
+
+    _None: FileDialogPermissionAccess = ...
+    """"""
+    Open: FileDialogPermissionAccess = ...
+    """"""
+    Save: FileDialogPermissionAccess = ...
+    """"""
+    OpenSave: FileDialogPermissionAccess = ...
+    """"""
+
+class FileDialogPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def Open(self) -> bool:
+        """
+
+        :return:
+        """
+    @Open.setter
+    def Open(self, value: bool) -> None: ...
+    @property
+    def Save(self) -> bool:
+        """
+
+        :return:
+        """
+    @Save.setter
+    def Save(self, value: bool) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class FileIOAccess(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, pathDiscovery: bool):
+        """
+
+        :param pathDiscovery:
+        """
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, allFiles: bool, allLocalFiles: bool, pathDiscovery: bool):
+        """
+
+        :param allFiles:
+        :param allLocalFiles:
+        :param pathDiscovery:
+        """
+    @overload
+    def __init__(
+        self, set: StringExpressionSet, allFiles: bool, allLocalFiles: bool, pathDiscovery: bool
+    ):
+        """
+
+        :param set:
+        :param allFiles:
+        :param allLocalFiles:
+        :param pathDiscovery:
+        """
+    @property
+    def AllFiles(self) -> bool:
+        """
+
+        :return:
+        """
+    @AllFiles.setter
+    def AllFiles(self, value: bool) -> None: ...
+    @property
+    def AllLocalFiles(self) -> bool:
+        """
+
+        :return:
+        """
+    @AllLocalFiles.setter
+    def AllLocalFiles(self, value: bool) -> None: ...
+    @property
+    def PathDiscovery(self) -> bool:
+        """
+
+        :return:
+        """
+    @PathDiscovery.setter
+    def PathDiscovery(self, value: bool) -> None: ...
+    def AddExpressions(self, values: ArrayList, checkForDuplicates: bool) -> None:
+        """
+
+        :param values:
+        :param checkForDuplicates:
+        """
+    def Copy(self) -> FileIOAccess:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, operand: FileIOAccess) -> FileIOAccess:
+        """
+
+        :param operand:
+        :return:
+        """
+    def IsEmpty(self) -> bool:
+        """
+
+        :return:
+        """
+    def IsSubsetOf(self, operand: FileIOAccess) -> bool:
+        """
+
+        :param operand:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToStringArray(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def Union(self, operand: FileIOAccess) -> FileIOAccess:
+        """
+
+        :param operand:
+        :return:
+        """
+
+class FileIOPermission(
+    CodeAccessPermission,
+    IBuiltInPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
+):
+    """"""
+
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(self, access: FileIOPermissionAccess, pathList: Array[str]):
+        """
+
+        :param access:
+        :param pathList:
+        """
+    @overload
+    def __init__(self, access: FileIOPermissionAccess, path: str):
+        """
+
+        :param access:
+        :param path:
+        """
+    @overload
+    def __init__(
+        self, access: FileIOPermissionAccess, control: AccessControlActions, pathList: Array[str]
+    ):
+        """
+
+        :param access:
+        :param control:
+        :param pathList:
+        """
+    @overload
+    def __init__(self, access: FileIOPermissionAccess, control: AccessControlActions, path: str):
+        """
+
+        :param access:
+        :param control:
+        :param path:
+        """
+    @property
+    def AllFiles(self) -> FileIOPermissionAccess:
+        """
+
+        :return:
+        """
+    @AllFiles.setter
+    def AllFiles(self, value: FileIOPermissionAccess) -> None: ...
+    @property
+    def AllLocalFiles(self) -> FileIOPermissionAccess:
+        """
+
+        :return:
+        """
+    @AllLocalFiles.setter
+    def AllLocalFiles(self, value: FileIOPermissionAccess) -> None: ...
+    @overload
+    def AddPathList(self, access: FileIOPermissionAccess, pathList: Array[str]) -> None:
+        """
+
+        :param access:
+        :param pathList:
+        """
+    @overload
+    def AddPathList(self, access: FileIOPermissionAccess, path: str) -> None:
+        """
+
+        :param access:
+        :param path:
+        """
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetPathList(self, access: FileIOPermissionAccess) -> Array[str]:
+        """
+
+        :param access:
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    @overload
+    def SetPathList(self, access: FileIOPermissionAccess, pathList: Array[str]) -> None:
+        """
+
+        :param access:
+        :param pathList:
+        """
+    @overload
+    def SetPathList(self, access: FileIOPermissionAccess, path: str) -> None:
+        """
+
+        :param access:
+        :param path:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class FileIOPermissionAccess(Enum):
+    """"""
+
+    NoAccess: FileIOPermissionAccess = ...
+    """"""
+    Read: FileIOPermissionAccess = ...
+    """"""
+    Write: FileIOPermissionAccess = ...
+    """"""
+    Append: FileIOPermissionAccess = ...
+    """"""
+    PathDiscovery: FileIOPermissionAccess = ...
+    """"""
+    AllAccess: FileIOPermissionAccess = ...
+    """"""
+
+class FileIOPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def All(self) -> str:
+        """
+
+        :return:
+        """
+    @All.setter
+    def All(self, value: str) -> None: ...
+    @property
+    def AllFiles(self) -> FileIOPermissionAccess:
+        """
+
+        :return:
+        """
+    @AllFiles.setter
+    def AllFiles(self, value: FileIOPermissionAccess) -> None: ...
+    @property
+    def AllLocalFiles(self) -> FileIOPermissionAccess:
+        """
+
+        :return:
+        """
+    @AllLocalFiles.setter
+    def AllLocalFiles(self, value: FileIOPermissionAccess) -> None: ...
+    @property
+    def Append(self) -> str:
+        """
+
+        :return:
+        """
+    @Append.setter
+    def Append(self, value: str) -> None: ...
+    @property
+    def ChangeAccessControl(self) -> str:
+        """
+
+        :return:
+        """
+    @ChangeAccessControl.setter
+    def ChangeAccessControl(self, value: str) -> None: ...
+    @property
+    def PathDiscovery(self) -> str:
+        """
+
+        :return:
+        """
+    @PathDiscovery.setter
+    def PathDiscovery(self, value: str) -> None: ...
+    @property
+    def Read(self) -> str:
+        """
+
+        :return:
+        """
+    @Read.setter
+    def Read(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def ViewAccessControl(self) -> str:
+        """
+
+        :return:
+        """
+    @ViewAccessControl.setter
+    def ViewAccessControl(self, value: str) -> None: ...
+    @property
+    def ViewAndModify(self) -> str:
+        """
+
+        :return:
+        """
+    @ViewAndModify.setter
+    def ViewAndModify(self, value: str) -> None: ...
+    @property
+    def Write(self) -> str:
+        """
+
+        :return:
+        """
+    @Write.setter
+    def Write(self, value: str) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class GacIdentityPermission(
+    CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
+):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class GacIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class HostProtectionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def ExternalProcessMgmt(self) -> bool:
+        """
+
+        :return:
+        """
+    @ExternalProcessMgmt.setter
+    def ExternalProcessMgmt(self, value: bool) -> None: ...
+    @property
+    def ExternalThreading(self) -> bool:
+        """
+
+        :return:
+        """
+    @ExternalThreading.setter
+    def ExternalThreading(self, value: bool) -> None: ...
+    @property
+    def MayLeakOnAbort(self) -> bool:
+        """
+
+        :return:
+        """
+    @MayLeakOnAbort.setter
+    def MayLeakOnAbort(self, value: bool) -> None: ...
+    @property
+    def Resources(self) -> HostProtectionResource:
+        """
+
+        :return:
+        """
+    @Resources.setter
+    def Resources(self, value: HostProtectionResource) -> None: ...
+    @property
+    def SecurityInfrastructure(self) -> bool:
+        """
+
+        :return:
+        """
+    @SecurityInfrastructure.setter
+    def SecurityInfrastructure(self, value: bool) -> None: ...
+    @property
+    def SelfAffectingProcessMgmt(self) -> bool:
+        """
+
+        :return:
+        """
+    @SelfAffectingProcessMgmt.setter
+    def SelfAffectingProcessMgmt(self, value: bool) -> None: ...
+    @property
+    def SelfAffectingThreading(self) -> bool:
+        """
+
+        :return:
+        """
+    @SelfAffectingThreading.setter
+    def SelfAffectingThreading(self, value: bool) -> None: ...
+    @property
+    def SharedState(self) -> bool:
+        """
+
+        :return:
+        """
+    @SharedState.setter
+    def SharedState(self, value: bool) -> None: ...
+    @property
+    def Synchronization(self) -> bool:
+        """
+
+        :return:
+        """
+    @Synchronization.setter
+    def Synchronization(self, value: bool) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def UI(self) -> bool:
+        """
+
+        :return:
+        """
+    @UI.setter
+    def UI(self, value: bool) -> None: ...
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class HostProtectionPermission(
+    CodeAccessPermission,
+    IBuiltInPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
+):
+    """"""
+
+    @overload
+    def __init__(self, resources: HostProtectionResource):
+        """
+
+        :param resources:
+        """
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @property
+    def Resources(self) -> HostProtectionResource:
+        """
+
+        :return:
+        """
+    @Resources.setter
+    def Resources(self, value: HostProtectionResource) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class HostProtectionResource(Enum):
+    """"""
+
+    _None: HostProtectionResource = ...
+    """"""
+    Synchronization: HostProtectionResource = ...
+    """"""
+    SharedState: HostProtectionResource = ...
+    """"""
+    ExternalProcessMgmt: HostProtectionResource = ...
+    """"""
+    SelfAffectingProcessMgmt: HostProtectionResource = ...
+    """"""
+    ExternalThreading: HostProtectionResource = ...
+    """"""
+    SelfAffectingThreading: HostProtectionResource = ...
+    """"""
+    SecurityInfrastructure: HostProtectionResource = ...
+    """"""
+    UI: HostProtectionResource = ...
+    """"""
+    MayLeakOnAbort: HostProtectionResource = ...
+    """"""
+    All: HostProtectionResource = ...
+    """"""
+
+class IBuiltInPermission:
+    """"""
+
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+
+class IDRole(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IUnrestrictedPermission:
+    """"""
+
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+
+class IsolatedStorageContainment(Enum):
+    """"""
+
+    _None: IsolatedStorageContainment = ...
+    """"""
+    DomainIsolationByUser: IsolatedStorageContainment = ...
+    """"""
+    ApplicationIsolationByUser: IsolatedStorageContainment = ...
+    """"""
+    AssemblyIsolationByUser: IsolatedStorageContainment = ...
+    """"""
+    DomainIsolationByMachine: IsolatedStorageContainment = ...
+    """"""
+    AssemblyIsolationByMachine: IsolatedStorageContainment = ...
+    """"""
+    ApplicationIsolationByMachine: IsolatedStorageContainment = ...
+    """"""
+    DomainIsolationByRoamingUser: IsolatedStorageContainment = ...
+    """"""
+    AssemblyIsolationByRoamingUser: IsolatedStorageContainment = ...
+    """"""
+    ApplicationIsolationByRoamingUser: IsolatedStorageContainment = ...
+    """"""
+    AdministerIsolatedStorageByUser: IsolatedStorageContainment = ...
+    """"""
+    UnrestrictedIsolatedStorage: IsolatedStorageContainment = ...
+    """"""
+
+class IsolatedStorageFilePermission(
+    IsolatedStoragePermission,
+    IBuiltInPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
+):
+    """"""
+
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @property
+    def UsageAllowed(self) -> IsolatedStorageContainment:
+        """
+
+        :return:
+        """
+    @UsageAllowed.setter
+    def UsageAllowed(self, value: IsolatedStorageContainment) -> None: ...
+    @property
+    def UserQuota(self) -> int:
+        """
+
+        :return:
+        """
+    @UserQuota.setter
+    def UserQuota(self, value: int) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class IsolatedStorageFilePermissionAttribute(IsolatedStoragePermissionAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def UsageAllowed(self) -> IsolatedStorageContainment:
+        """
+
+        :return:
+        """
+    @UsageAllowed.setter
+    def UsageAllowed(self, value: IsolatedStorageContainment) -> None: ...
+    @property
+    def UserQuota(self) -> int:
+        """
+
+        :return:
+        """
+    @UserQuota.setter
+    def UserQuota(self, value: int) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IsolatedStoragePermission(
+    ABC, CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+):
+    """"""
+
+    @property
+    def UsageAllowed(self) -> IsolatedStorageContainment:
+        """
+
+        :return:
+        """
+    @UsageAllowed.setter
+    def UsageAllowed(self, value: IsolatedStorageContainment) -> None: ...
+    @property
+    def UserQuota(self) -> int:
+        """
+
+        :return:
+        """
+    @UserQuota.setter
+    def UserQuota(self, value: int) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class IsolatedStoragePermissionAttribute(ABC, CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def UsageAllowed(self) -> IsolatedStorageContainment:
+        """
+
+        :return:
+        """
+    @UsageAllowed.setter
+    def UsageAllowed(self, value: IsolatedStorageContainment) -> None: ...
+    @property
+    def UserQuota(self) -> int:
+        """
+
+        :return:
+        """
+    @UserQuota.setter
+    def UserQuota(self, value: int) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class KeyContainerPermission(
+    CodeAccessPermission,
+    IBuiltInPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
+):
+    """"""
+
+    @overload
+    def __init__(self, flags: KeyContainerPermissionFlags):
+        """
+
+        :param flags:
+        """
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(
+        self,
+        flags: KeyContainerPermissionFlags,
+        accessList: Array[KeyContainerPermissionAccessEntry],
+    ):
+        """
+
+        :param flags:
+        :param accessList:
+        """
+    @property
+    def AccessEntries(self) -> KeyContainerPermissionAccessEntryCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Flags(self) -> KeyContainerPermissionFlags:
+        """
+
+        :return:
+        """
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class KeyContainerPermissionAccessEntry(Object):
+    """"""
+
+    @overload
+    def __init__(self, parameters: CspParameters, flags: KeyContainerPermissionFlags):
+        """
+
+        :param parameters:
+        :param flags:
+        """
+    @overload
+    def __init__(self, keyContainerName: str, flags: KeyContainerPermissionFlags):
+        """
+
+        :param keyContainerName:
+        :param flags:
+        """
+    @overload
+    def __init__(
+        self,
+        keyStore: str,
+        providerName: str,
+        providerType: int,
+        keyContainerName: str,
+        keySpec: int,
+        flags: KeyContainerPermissionFlags,
+    ):
+        """
+
+        :param keyStore:
+        :param providerName:
+        :param providerType:
+        :param keyContainerName:
+        :param keySpec:
+        :param flags:
+        """
+    @property
+    def Flags(self) -> KeyContainerPermissionFlags:
+        """
+
+        :return:
+        """
+    @Flags.setter
+    def Flags(self, value: KeyContainerPermissionFlags) -> None: ...
+    @property
+    def KeyContainerName(self) -> str:
+        """
+
+        :return:
+        """
+    @KeyContainerName.setter
+    def KeyContainerName(self, value: str) -> None: ...
+    @property
+    def KeySpec(self) -> int:
+        """
+
+        :return:
+        """
+    @KeySpec.setter
+    def KeySpec(self, value: int) -> None: ...
+    @property
+    def KeyStore(self) -> str:
+        """
+
+        :return:
+        """
+    @KeyStore.setter
+    def KeyStore(self, value: str) -> None: ...
+    @property
+    def ProviderName(self) -> str:
+        """
+
+        :return:
+        """
+    @ProviderName.setter
+    def ProviderName(self, value: str) -> None: ...
+    @property
+    def ProviderType(self) -> int:
+        """
+
+        :return:
+        """
+    @ProviderType.setter
+    def ProviderType(self, value: int) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class KeyContainerPermissionAccessEntryCollection(Object, ICollection, IEnumerable):
+    """"""
+
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> KeyContainerPermissionAccessEntry:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    def Add(self, accessEntry: KeyContainerPermissionAccessEntry) -> int:
+        """
+
+        :param accessEntry:
+        :return:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[KeyContainerPermissionAccessEntry], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, accessEntry: KeyContainerPermissionAccessEntry) -> int:
+        """
+
+        :param accessEntry:
+        :return:
+        """
+    def Remove(self, accessEntry: KeyContainerPermissionAccessEntry) -> None:
+        """
+
+        :param accessEntry:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> KeyContainerPermissionAccessEntry:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+
+class KeyContainerPermissionAccessEntryEnumerator(Object, IEnumerator):
+    """"""
+
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class KeyContainerPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def Flags(self) -> KeyContainerPermissionFlags:
+        """
+
+        :return:
+        """
+    @Flags.setter
+    def Flags(self, value: KeyContainerPermissionFlags) -> None: ...
+    @property
+    def KeyContainerName(self) -> str:
+        """
+
+        :return:
+        """
+    @KeyContainerName.setter
+    def KeyContainerName(self, value: str) -> None: ...
+    @property
+    def KeySpec(self) -> int:
+        """
+
+        :return:
+        """
+    @KeySpec.setter
+    def KeySpec(self, value: int) -> None: ...
+    @property
+    def KeyStore(self) -> str:
+        """
+
+        :return:
+        """
+    @KeyStore.setter
+    def KeyStore(self, value: str) -> None: ...
+    @property
+    def ProviderName(self) -> str:
+        """
+
+        :return:
+        """
+    @ProviderName.setter
+    def ProviderName(self, value: str) -> None: ...
+    @property
+    def ProviderType(self) -> int:
+        """
+
+        :return:
+        """
+    @ProviderType.setter
+    def ProviderType(self, value: int) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class KeyContainerPermissionFlags(Enum):
+    """"""
+
+    NoFlags: KeyContainerPermissionFlags = ...
+    """"""
+    Create: KeyContainerPermissionFlags = ...
+    """"""
+    Open: KeyContainerPermissionFlags = ...
+    """"""
+    Delete: KeyContainerPermissionFlags = ...
+    """"""
+    Import: KeyContainerPermissionFlags = ...
+    """"""
+    Export: KeyContainerPermissionFlags = ...
+    """"""
+    Sign: KeyContainerPermissionFlags = ...
+    """"""
+    Decrypt: KeyContainerPermissionFlags = ...
+    """"""
+    ViewAcl: KeyContainerPermissionFlags = ...
+    """"""
+    ChangeAcl: KeyContainerPermissionFlags = ...
+    """"""
+    AllFlags: KeyContainerPermissionFlags = ...
+    """"""
+
+class PermissionSetAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def File(self) -> str:
+        """
+
+        :return:
+        """
+    @File.setter
+    def File(self, value: str) -> None: ...
+    @property
+    def Hex(self) -> str:
+        """
+
+        :return:
+        """
+    @Hex.setter
+    def Hex(self, value: str) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def UnicodeEncoded(self) -> bool:
+        """
+
+        :return:
+        """
+    @UnicodeEncoded.setter
+    def UnicodeEncoded(self, value: bool) -> None: ...
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def XML(self) -> str:
+        """
+
+        :return:
+        """
+    @XML.setter
+    def XML(self, value: str) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def CreatePermissionSet(self) -> PermissionSet:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PermissionState(Enum):
+    """"""
+
+    _None: PermissionState = ...
+    """"""
+    Unrestricted: PermissionState = ...
+    """"""
+
+class PrincipalPermission(
+    Object, IBuiltInPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable
+):
+    """"""
+
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(self, name: str, role: str):
+        """
+
+        :param name:
+        :param role:
+        """
+    @overload
+    def __init__(self, name: str, role: str, isAuthenticated: bool):
+        """
+
+        :param name:
+        :param role:
+        :param isAuthenticated:
+        """
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Demand(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class PrincipalPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def Authenticated(self) -> bool:
+        """
+
+        :return:
+        """
+    @Authenticated.setter
+    def Authenticated(self, value: bool) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Role(self) -> str:
+        """
+
+        :return:
+        """
+    @Role.setter
+    def Role(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PublisherIdentityPermission(
+    CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
+):
+    """"""
+
+    @overload
+    def __init__(self, certificate: X509Certificate):
+        """
+
+        :param certificate:
+        """
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @property
+    def Certificate(self) -> X509Certificate:
+        """
+
+        :return:
+        """
+    @Certificate.setter
+    def Certificate(self, value: X509Certificate) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class PublisherIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def CertFile(self) -> str:
+        """
+
+        :return:
+        """
+    @CertFile.setter
+    def CertFile(self, value: str) -> None: ...
+    @property
+    def SignedFile(self) -> str:
+        """
+
+        :return:
+        """
+    @SignedFile.setter
+    def SignedFile(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def X509Certificate(self) -> str:
+        """
+
+        :return:
+        """
+    @X509Certificate.setter
+    def X509Certificate(self, value: str) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReflectionPermission(
+    CodeAccessPermission,
+    IBuiltInPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
+):
+    """"""
+
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(self, flag: ReflectionPermissionFlag):
+        """
+
+        :param flag:
+        """
+    @property
+    def Flags(self) -> ReflectionPermissionFlag:
+        """
+
+        :return:
+        """
+    @Flags.setter
+    def Flags(self, value: ReflectionPermissionFlag) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class ReflectionPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def Flags(self) -> ReflectionPermissionFlag:
+        """
+
+        :return:
+        """
+    @Flags.setter
+    def Flags(self, value: ReflectionPermissionFlag) -> None: ...
+    @property
+    def MemberAccess(self) -> bool:
+        """
+
+        :return:
+        """
+    @MemberAccess.setter
+    def MemberAccess(self, value: bool) -> None: ...
+    @property
+    def ReflectionEmit(self) -> bool:
+        """
+
+        :return:
+        """
+    @ReflectionEmit.setter
+    def ReflectionEmit(self, value: bool) -> None: ...
+    @property
+    def RestrictedMemberAccess(self) -> bool:
+        """
+
+        :return:
+        """
+    @RestrictedMemberAccess.setter
+    def RestrictedMemberAccess(self, value: bool) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def TypeInformation(self) -> bool:
+        """
+
+        :return:
+        """
+    @TypeInformation.setter
+    def TypeInformation(self, value: bool) -> None: ...
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReflectionPermissionFlag(Enum):
+    """"""
+
+    NoFlags: ReflectionPermissionFlag = ...
+    """"""
+    TypeInformation: ReflectionPermissionFlag = ...
+    """"""
+    MemberAccess: ReflectionPermissionFlag = ...
+    """"""
+    ReflectionEmit: ReflectionPermissionFlag = ...
+    """"""
+    AllFlags: ReflectionPermissionFlag = ...
+    """"""
+    RestrictedMemberAccess: ReflectionPermissionFlag = ...
+    """"""
+
+class RegistryPermission(
+    CodeAccessPermission,
+    IBuiltInPermission,
+    IUnrestrictedPermission,
+    IPermission,
+    ISecurityEncodable,
+    IStackWalk,
+):
+    """"""
+
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(self, access: RegistryPermissionAccess, pathList: str):
+        """
+
+        :param access:
+        :param pathList:
+        """
+    @overload
+    def __init__(
+        self, access: RegistryPermissionAccess, control: AccessControlActions, pathList: str
+    ):
+        """
+
+        :param access:
+        :param control:
+        :param pathList:
+        """
+    @overload
+    def AddPathList(self, access: RegistryPermissionAccess, pathList: str) -> None:
+        """
+
+        :param access:
+        :param pathList:
+        """
+    @overload
+    def AddPathList(
+        self, access: RegistryPermissionAccess, control: AccessControlActions, pathList: str
+    ) -> None:
+        """
+
+        :param access:
+        :param control:
+        :param pathList:
+        """
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetPathList(self, access: RegistryPermissionAccess) -> str:
+        """
+
+        :param access:
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def SetPathList(self, access: RegistryPermissionAccess, pathList: str) -> None:
+        """
+
+        :param access:
+        :param pathList:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class RegistryPermissionAccess(Enum):
+    """"""
+
+    NoAccess: RegistryPermissionAccess = ...
+    """"""
+    Read: RegistryPermissionAccess = ...
+    """"""
+    Write: RegistryPermissionAccess = ...
+    """"""
+    Create: RegistryPermissionAccess = ...
+    """"""
+    AllAccess: RegistryPermissionAccess = ...
+    """"""
+
+class RegistryPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def All(self) -> str:
+        """
+
+        :return:
+        """
+    @All.setter
+    def All(self, value: str) -> None: ...
+    @property
+    def ChangeAccessControl(self) -> str:
+        """
+
+        :return:
+        """
+    @ChangeAccessControl.setter
+    def ChangeAccessControl(self, value: str) -> None: ...
+    @property
+    def Create(self) -> str:
+        """
+
+        :return:
+        """
+    @Create.setter
+    def Create(self, value: str) -> None: ...
+    @property
+    def Read(self) -> str:
+        """
+
+        :return:
+        """
+    @Read.setter
+    def Read(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def ViewAccessControl(self) -> str:
+        """
+
+        :return:
+        """
+    @ViewAccessControl.setter
+    def ViewAccessControl(self, value: str) -> None: ...
+    @property
+    def ViewAndModify(self) -> str:
+        """
+
+        :return:
+        """
+    @ViewAndModify.setter
+    def ViewAndModify(self, value: str) -> None: ...
+    @property
+    def Write(self) -> str:
+        """
+
+        :return:
+        """
+    @Write.setter
+    def Write(self, value: str) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ResourcePermissionBase(
+    ABC, CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+):
+    """"""
+
+    Any: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Local: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class ResourcePermissionBaseEntry(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, permissionAccess: int, permissionAccessPath: Array[str]):
+        """
+
+        :param permissionAccess:
+        :param permissionAccessPath:
+        """
+    @property
+    def PermissionAccess(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def PermissionAccessPath(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SecurityAction(Enum):
+    """"""
+
+    Demand: SecurityAction = ...
+    """"""
+    Assert: SecurityAction = ...
+    """"""
+    Deny: SecurityAction = ...
+    """"""
+    PermitOnly: SecurityAction = ...
+    """"""
+    LinkDemand: SecurityAction = ...
+    """"""
+    InheritanceDemand: SecurityAction = ...
+    """"""
+    RequestMinimum: SecurityAction = ...
+    """"""
+    RequestOptional: SecurityAction = ...
+    """"""
+    RequestRefuse: SecurityAction = ...
+    """"""
+
+class SecurityAttribute(ABC, Attribute, _Attribute):
+    """"""
+
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SecurityPermission(
     CodeAccessPermission,
+    IBuiltInPermission,
+    IUnrestrictedPermission,
     IPermission,
     ISecurityEncodable,
     IStackWalk,
-    IUnrestrictedPermission,
-    IBuiltInPermission,
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, state: PermissionState): ...
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
     @overload
-    def __init__(self, flag: SecurityPermissionFlag): ...
+    def __init__(self, flag: SecurityPermissionFlag):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param flag:
+        """
     @property
-    def Flags(self) -> SecurityPermissionFlag: ...
+    def Flags(self) -> SecurityPermissionFlag:
+        """
+
+        :return:
+        """
     @Flags.setter
     def Flags(self, value: SecurityPermissionFlag) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Flags(self) -> SecurityPermissionFlag: ...
-    def set_Flags(self, value: SecurityPermissionFlag) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Events
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
 
-    # No Sub Enums
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
 
 class SecurityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, action: SecurityAction):
+        """
 
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
+        :param action:
+        """
     @property
-    def Assertion(self) -> BooleanType: ...
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def Assertion(self) -> bool:
+        """
+
+        :return:
+        """
     @Assertion.setter
-    def Assertion(self, value: BooleanType) -> None: ...
+    def Assertion(self, value: bool) -> None: ...
     @property
-    def BindingRedirects(self) -> BooleanType: ...
+    def BindingRedirects(self) -> bool:
+        """
+
+        :return:
+        """
     @BindingRedirects.setter
-    def BindingRedirects(self, value: BooleanType) -> None: ...
+    def BindingRedirects(self, value: bool) -> None: ...
     @property
-    def ControlAppDomain(self) -> BooleanType: ...
+    def ControlAppDomain(self) -> bool:
+        """
+
+        :return:
+        """
     @ControlAppDomain.setter
-    def ControlAppDomain(self, value: BooleanType) -> None: ...
+    def ControlAppDomain(self, value: bool) -> None: ...
     @property
-    def ControlDomainPolicy(self) -> BooleanType: ...
+    def ControlDomainPolicy(self) -> bool:
+        """
+
+        :return:
+        """
     @ControlDomainPolicy.setter
-    def ControlDomainPolicy(self, value: BooleanType) -> None: ...
+    def ControlDomainPolicy(self, value: bool) -> None: ...
     @property
-    def ControlEvidence(self) -> BooleanType: ...
+    def ControlEvidence(self) -> bool:
+        """
+
+        :return:
+        """
     @ControlEvidence.setter
-    def ControlEvidence(self, value: BooleanType) -> None: ...
+    def ControlEvidence(self, value: bool) -> None: ...
     @property
-    def ControlPolicy(self) -> BooleanType: ...
+    def ControlPolicy(self) -> bool:
+        """
+
+        :return:
+        """
     @ControlPolicy.setter
-    def ControlPolicy(self, value: BooleanType) -> None: ...
+    def ControlPolicy(self, value: bool) -> None: ...
     @property
-    def ControlPrincipal(self) -> BooleanType: ...
+    def ControlPrincipal(self) -> bool:
+        """
+
+        :return:
+        """
     @ControlPrincipal.setter
-    def ControlPrincipal(self, value: BooleanType) -> None: ...
+    def ControlPrincipal(self, value: bool) -> None: ...
     @property
-    def ControlThread(self) -> BooleanType: ...
+    def ControlThread(self) -> bool:
+        """
+
+        :return:
+        """
     @ControlThread.setter
-    def ControlThread(self, value: BooleanType) -> None: ...
+    def ControlThread(self, value: bool) -> None: ...
     @property
-    def Execution(self) -> BooleanType: ...
+    def Execution(self) -> bool:
+        """
+
+        :return:
+        """
     @Execution.setter
-    def Execution(self, value: BooleanType) -> None: ...
+    def Execution(self, value: bool) -> None: ...
     @property
-    def Flags(self) -> SecurityPermissionFlag: ...
+    def Flags(self) -> SecurityPermissionFlag:
+        """
+
+        :return:
+        """
     @Flags.setter
     def Flags(self, value: SecurityPermissionFlag) -> None: ...
     @property
-    def Infrastructure(self) -> BooleanType: ...
+    def Infrastructure(self) -> bool:
+        """
+
+        :return:
+        """
     @Infrastructure.setter
-    def Infrastructure(self, value: BooleanType) -> None: ...
+    def Infrastructure(self, value: bool) -> None: ...
     @property
-    def RemotingConfiguration(self) -> BooleanType: ...
+    def RemotingConfiguration(self) -> bool:
+        """
+
+        :return:
+        """
     @RemotingConfiguration.setter
-    def RemotingConfiguration(self, value: BooleanType) -> None: ...
+    def RemotingConfiguration(self, value: bool) -> None: ...
     @property
-    def SerializationFormatter(self) -> BooleanType: ...
+    def SerializationFormatter(self) -> bool:
+        """
+
+        :return:
+        """
     @SerializationFormatter.setter
-    def SerializationFormatter(self, value: BooleanType) -> None: ...
+    def SerializationFormatter(self, value: bool) -> None: ...
     @property
-    def SkipVerification(self) -> BooleanType: ...
+    def SkipVerification(self) -> bool:
+        """
+
+        :return:
+        """
     @SkipVerification.setter
-    def SkipVerification(self, value: BooleanType) -> None: ...
+    def SkipVerification(self, value: bool) -> None: ...
     @property
-    def UnmanagedCode(self) -> BooleanType: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def UnmanagedCode(self) -> bool:
+        """
+
+        :return:
+        """
     @UnmanagedCode.setter
-    def UnmanagedCode(self, value: BooleanType) -> None: ...
+    def UnmanagedCode(self, value: bool) -> None: ...
+    @property
+    def Unrestricted(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
 
-    def CreatePermission(self) -> IPermission: ...
-    def get_Assertion(self) -> BooleanType: ...
-    def get_BindingRedirects(self) -> BooleanType: ...
-    def get_ControlAppDomain(self) -> BooleanType: ...
-    def get_ControlDomainPolicy(self) -> BooleanType: ...
-    def get_ControlEvidence(self) -> BooleanType: ...
-    def get_ControlPolicy(self) -> BooleanType: ...
-    def get_ControlPrincipal(self) -> BooleanType: ...
-    def get_ControlThread(self) -> BooleanType: ...
-    def get_Execution(self) -> BooleanType: ...
-    def get_Flags(self) -> SecurityPermissionFlag: ...
-    def get_Infrastructure(self) -> BooleanType: ...
-    def get_RemotingConfiguration(self) -> BooleanType: ...
-    def get_SerializationFormatter(self) -> BooleanType: ...
-    def get_SkipVerification(self) -> BooleanType: ...
-    def get_UnmanagedCode(self) -> BooleanType: ...
-    def set_Assertion(self, value: BooleanType) -> VoidType: ...
-    def set_BindingRedirects(self, value: BooleanType) -> VoidType: ...
-    def set_ControlAppDomain(self, value: BooleanType) -> VoidType: ...
-    def set_ControlDomainPolicy(self, value: BooleanType) -> VoidType: ...
-    def set_ControlEvidence(self, value: BooleanType) -> VoidType: ...
-    def set_ControlPolicy(self, value: BooleanType) -> VoidType: ...
-    def set_ControlPrincipal(self, value: BooleanType) -> VoidType: ...
-    def set_ControlThread(self, value: BooleanType) -> VoidType: ...
-    def set_Execution(self, value: BooleanType) -> VoidType: ...
-    def set_Flags(self, value: SecurityPermissionFlag) -> VoidType: ...
-    def set_Infrastructure(self, value: BooleanType) -> VoidType: ...
-    def set_RemotingConfiguration(self, value: BooleanType) -> VoidType: ...
-    def set_SerializationFormatter(self, value: BooleanType) -> VoidType: ...
-    def set_SkipVerification(self, value: BooleanType) -> VoidType: ...
-    def set_UnmanagedCode(self, value: BooleanType) -> VoidType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Structs
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Enums
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SecurityPermissionFlag(Enum):
+    """"""
+
+    NoFlags: SecurityPermissionFlag = ...
+    """"""
+    Assertion: SecurityPermissionFlag = ...
+    """"""
+    UnmanagedCode: SecurityPermissionFlag = ...
+    """"""
+    SkipVerification: SecurityPermissionFlag = ...
+    """"""
+    Execution: SecurityPermissionFlag = ...
+    """"""
+    ControlThread: SecurityPermissionFlag = ...
+    """"""
+    ControlEvidence: SecurityPermissionFlag = ...
+    """"""
+    ControlPolicy: SecurityPermissionFlag = ...
+    """"""
+    SerializationFormatter: SecurityPermissionFlag = ...
+    """"""
+    ControlDomainPolicy: SecurityPermissionFlag = ...
+    """"""
+    ControlPrincipal: SecurityPermissionFlag = ...
+    """"""
+    ControlAppDomain: SecurityPermissionFlag = ...
+    """"""
+    RemotingConfiguration: SecurityPermissionFlag = ...
+    """"""
+    Infrastructure: SecurityPermissionFlag = ...
+    """"""
+    BindingRedirects: SecurityPermissionFlag = ...
+    """"""
+    AllFlags: SecurityPermissionFlag = ...
+    """"""
 
 class SiteIdentityPermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IBuiltInPermission
+    CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, state: PermissionState): ...
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
     @overload
-    def __init__(self, site: StringType): ...
+    def __init__(self, site: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param site:
+        """
     @property
-    def Site(self) -> StringType: ...
+    def Site(self) -> str:
+        """
+
+        :return:
+        """
     @Site.setter
-    def Site(self, value: StringType) -> None: ...
+    def Site(self, value: str) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Site(self) -> StringType: ...
-    def set_Site(self, value: StringType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Events
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
 
-    # No Sub Enums
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
 
 class SiteIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, action: SecurityAction):
+        """
 
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
+        :param action:
+        """
     @property
-    def Site(self) -> StringType: ...
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def Site(self) -> str:
+        """
+
+        :return:
+        """
     @Site.setter
-    def Site(self, value: StringType) -> None: ...
+    def Site(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
 
-    def CreatePermission(self) -> IPermission: ...
-    def get_Site(self) -> StringType: ...
-    def set_Site(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Interfaces
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class StorePermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IUnrestrictedPermission
+    CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, state: PermissionState): ...
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
     @overload
-    def __init__(self, flag: StorePermissionFlags): ...
+    def __init__(self, flag: StorePermissionFlags):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param flag:
+        """
     @property
-    def Flags(self) -> StorePermissionFlags: ...
+    def Flags(self) -> StorePermissionFlags:
+        """
+
+        :return:
+        """
     @Flags.setter
     def Flags(self, value: StorePermissionFlags) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, securityElement: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Flags(self) -> StorePermissionFlags: ...
-    def set_Flags(self, value: StorePermissionFlags) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Events
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
 
-    # No Sub Interfaces
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
 
-    # No Sub Enums
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
 
 class StorePermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, action: SecurityAction):
+        """
 
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
+        :param action:
+        """
     @property
-    def AddToStore(self) -> BooleanType: ...
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def AddToStore(self) -> bool:
+        """
+
+        :return:
+        """
     @AddToStore.setter
-    def AddToStore(self, value: BooleanType) -> None: ...
+    def AddToStore(self, value: bool) -> None: ...
     @property
-    def CreateStore(self) -> BooleanType: ...
+    def CreateStore(self) -> bool:
+        """
+
+        :return:
+        """
     @CreateStore.setter
-    def CreateStore(self, value: BooleanType) -> None: ...
+    def CreateStore(self, value: bool) -> None: ...
     @property
-    def DeleteStore(self) -> BooleanType: ...
+    def DeleteStore(self) -> bool:
+        """
+
+        :return:
+        """
     @DeleteStore.setter
-    def DeleteStore(self, value: BooleanType) -> None: ...
+    def DeleteStore(self, value: bool) -> None: ...
     @property
-    def EnumerateCertificates(self) -> BooleanType: ...
+    def EnumerateCertificates(self) -> bool:
+        """
+
+        :return:
+        """
     @EnumerateCertificates.setter
-    def EnumerateCertificates(self, value: BooleanType) -> None: ...
+    def EnumerateCertificates(self, value: bool) -> None: ...
     @property
-    def EnumerateStores(self) -> BooleanType: ...
+    def EnumerateStores(self) -> bool:
+        """
+
+        :return:
+        """
     @EnumerateStores.setter
-    def EnumerateStores(self, value: BooleanType) -> None: ...
+    def EnumerateStores(self, value: bool) -> None: ...
     @property
-    def Flags(self) -> StorePermissionFlags: ...
+    def Flags(self) -> StorePermissionFlags:
+        """
+
+        :return:
+        """
     @Flags.setter
     def Flags(self, value: StorePermissionFlags) -> None: ...
     @property
-    def OpenStore(self) -> BooleanType: ...
+    def OpenStore(self) -> bool:
+        """
+
+        :return:
+        """
     @OpenStore.setter
-    def OpenStore(self, value: BooleanType) -> None: ...
+    def OpenStore(self, value: bool) -> None: ...
     @property
-    def RemoveFromStore(self) -> BooleanType: ...
+    def RemoveFromStore(self) -> bool:
+        """
+
+        :return:
+        """
     @RemoveFromStore.setter
-    def RemoveFromStore(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_AddToStore(self) -> BooleanType: ...
-    def get_CreateStore(self) -> BooleanType: ...
-    def get_DeleteStore(self) -> BooleanType: ...
-    def get_EnumerateCertificates(self) -> BooleanType: ...
-    def get_EnumerateStores(self) -> BooleanType: ...
-    def get_Flags(self) -> StorePermissionFlags: ...
-    def get_OpenStore(self) -> BooleanType: ...
-    def get_RemoveFromStore(self) -> BooleanType: ...
-    def set_AddToStore(self, value: BooleanType) -> VoidType: ...
-    def set_CreateStore(self, value: BooleanType) -> VoidType: ...
-    def set_DeleteStore(self, value: BooleanType) -> VoidType: ...
-    def set_EnumerateCertificates(self, value: BooleanType) -> VoidType: ...
-    def set_EnumerateStores(self, value: BooleanType) -> VoidType: ...
-    def set_Flags(self, value: StorePermissionFlags) -> VoidType: ...
-    def set_OpenStore(self, value: BooleanType) -> VoidType: ...
-    def set_RemoveFromStore(self, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StrongName2(ObjectType):
-    # ---------- Fields ---------- #
-
+    def RemoveFromStore(self, value: bool) -> None: ...
     @property
-    def m_name(self) -> StringType: ...
-    @m_name.setter
-    def m_name(self, value: StringType) -> None: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def m_publicKeyBlob(self) -> StrongNamePublicKeyBlob: ...
-    @m_publicKeyBlob.setter
-    def m_publicKeyBlob(self, value: StrongNamePublicKeyBlob) -> None: ...
-    @property
-    def m_version(self) -> Version: ...
-    @m_version.setter
-    def m_version(self, value: Version) -> None: ...
+    def Unrestricted(self) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
 
-    def __init__(
-        self, publicKeyBlob: StrongNamePublicKeyBlob, name: StringType, version: Version
-    ): ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    def Copy(self) -> StrongName2: ...
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StorePermissionFlags(Enum):
+    """"""
+
+    NoFlags: StorePermissionFlags = ...
+    """"""
+    CreateStore: StorePermissionFlags = ...
+    """"""
+    DeleteStore: StorePermissionFlags = ...
+    """"""
+    EnumerateStores: StorePermissionFlags = ...
+    """"""
+    OpenStore: StorePermissionFlags = ...
+    """"""
+    AddToStore: StorePermissionFlags = ...
+    """"""
+    RemoveFromStore: StorePermissionFlags = ...
+    """"""
+    EnumerateCertificates: StorePermissionFlags = ...
+    """"""
+    AllFlags: StorePermissionFlags = ...
+    """"""
+
+class StrongName2(Object):
+    """"""
+
+    m_name: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    m_publicKeyBlob: Final[StrongNamePublicKeyBlob] = ...
+    """
+    
+    :return: 
+    """
+    m_version: Final[Version] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, publicKeyBlob: StrongNamePublicKeyBlob, name: str, version: Version):
+        """
+
+        :param publicKeyBlob:
+        :param name:
+        :param version:
+        """
+    def Copy(self) -> StrongName2:
+        """
+
+        :return:
+        """
     @overload
-    def Equals(self, target: StrongName2) -> BooleanType: ...
-    def Intersect(self, target: StrongName2) -> StrongName2: ...
-    def IsSubsetOf(self, target: StrongName2) -> BooleanType: ...
+    def Equals(self, target: StrongName2) -> bool:
+        """
 
-    # No Events
+        :param target:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Intersect(self, target: StrongName2) -> StrongName2:
+        """
 
-    # No Sub Enums
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: StrongName2) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class StrongNameIdentityPermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IBuiltInPermission
+    CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, state: PermissionState): ...
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
     @overload
-    def __init__(self, blob: StrongNamePublicKeyBlob, name: StringType, version: Version): ...
+    def __init__(self, blob: StrongNamePublicKeyBlob, name: str, version: Version):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param blob:
+        :param name:
+        :param version:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
     @property
-    def PublicKey(self) -> StrongNamePublicKeyBlob: ...
+    def PublicKey(self) -> StrongNamePublicKeyBlob:
+        """
+
+        :return:
+        """
     @PublicKey.setter
     def PublicKey(self, value: StrongNamePublicKeyBlob) -> None: ...
     @property
-    def Version(self) -> Version: ...
+    def Version(self) -> Version:
+        """
+
+        :return:
+        """
     @Version.setter
     def Version(self, value: Version) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Name(self) -> StringType: ...
-    def get_PublicKey(self) -> StrongNamePublicKeyBlob: ...
-    def get_Version(self) -> Version: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_PublicKey(self, value: StrongNamePublicKeyBlob) -> VoidType: ...
-    def set_Version(self, value: Version) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Events
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
 
-    # No Sub Enums
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
 
 class StrongNameIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, action: SecurityAction):
+        """
 
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
+        :param action:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
     @property
-    def PublicKey(self) -> StringType: ...
+    def PublicKey(self) -> str:
+        """
+
+        :return:
+        """
     @PublicKey.setter
-    def PublicKey(self, value: StringType) -> None: ...
+    def PublicKey(self, value: str) -> None: ...
     @property
-    def Version(self) -> StringType: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def Version(self) -> str:
+        """
+
+        :return:
+        """
     @Version.setter
-    def Version(self, value: StringType) -> None: ...
+    def Version(self, value: str) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def CreatePermission(self) -> IPermission: ...
-    def get_Name(self) -> StringType: ...
-    def get_PublicKey(self) -> StringType: ...
-    def get_Version(self) -> StringType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_PublicKey(self, value: StringType) -> VoidType: ...
-    def set_Version(self, value: StringType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Enums
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-class StrongNamePublicKeyBlob(ObjectType):
-    # No Fields
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-    def __init__(self, publicKey: ArrayType[ByteType]): ...
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Properties
+        :return:
+        """
 
-    # ---------- Methods ---------- #
+class StrongNamePublicKeyBlob(Object):
+    """"""
 
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
+    def __init__(self, publicKey: Array[int]):
+        """
 
-    # No Events
+        :param publicKey:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class TypeDescriptorPermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IUnrestrictedPermission
+    CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, state: PermissionState): ...
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
     @overload
-    def __init__(self, flag: TypeDescriptorPermissionFlags): ...
+    def __init__(self, flag: TypeDescriptorPermissionFlags):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param flag:
+        """
     @property
-    def Flags(self) -> TypeDescriptorPermissionFlags: ...
+    def Flags(self) -> TypeDescriptorPermissionFlags:
+        """
+
+        :return:
+        """
     @Flags.setter
     def Flags(self, value: TypeDescriptorPermissionFlags) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, securityElement: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Flags(self) -> TypeDescriptorPermissionFlags: ...
-    def set_Flags(self, value: TypeDescriptorPermissionFlags) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Events
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
 
-    # No Sub Interfaces
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
 
-    # No Sub Enums
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
 
 class TypeDescriptorPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, action: SecurityAction):
+        """
 
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
+        :param action:
+        """
     @property
-    def Flags(self) -> TypeDescriptorPermissionFlags: ...
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def Flags(self) -> TypeDescriptorPermissionFlags:
+        """
+
+        :return:
+        """
     @Flags.setter
     def Flags(self, value: TypeDescriptorPermissionFlags) -> None: ...
     @property
-    def RestrictedRegistrationAccess(self) -> BooleanType: ...
+    def RestrictedRegistrationAccess(self) -> bool:
+        """
+
+        :return:
+        """
     @RestrictedRegistrationAccess.setter
-    def RestrictedRegistrationAccess(self, value: BooleanType) -> None: ...
+    def RestrictedRegistrationAccess(self, value: bool) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
 
-    def CreatePermission(self) -> IPermission: ...
-    def get_Flags(self) -> TypeDescriptorPermissionFlags: ...
-    def get_RestrictedRegistrationAccess(self) -> BooleanType: ...
-    def set_Flags(self, value: TypeDescriptorPermissionFlags) -> VoidType: ...
-    def set_RestrictedRegistrationAccess(self, value: BooleanType) -> VoidType: ...
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Interfaces
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TypeDescriptorPermissionFlags(Enum):
+    """"""
+
+    NoFlags: TypeDescriptorPermissionFlags = ...
+    """"""
+    RestrictedRegistrationAccess: TypeDescriptorPermissionFlags = ...
+    """"""
 
 class UIPermission(
     CodeAccessPermission,
+    IBuiltInPermission,
+    IUnrestrictedPermission,
     IPermission,
     ISecurityEncodable,
     IStackWalk,
-    IUnrestrictedPermission,
-    IBuiltInPermission,
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, windowFlag: UIPermissionWindow, clipboardFlag: UIPermissionClipboard): ...
-    @overload
-    def __init__(self, windowFlag: UIPermissionWindow): ...
-    @overload
-    def __init__(self, clipboardFlag: UIPermissionClipboard): ...
+    def __init__(self, state: PermissionState):
+        """
 
-    # ---------- Properties ---------- #
+        :param state:
+        """
+    @overload
+    def __init__(self, clipboardFlag: UIPermissionClipboard):
+        """
 
+        :param clipboardFlag:
+        """
+    @overload
+    def __init__(self, windowFlag: UIPermissionWindow):
+        """
+
+        :param windowFlag:
+        """
+    @overload
+    def __init__(self, windowFlag: UIPermissionWindow, clipboardFlag: UIPermissionClipboard):
+        """
+
+        :param windowFlag:
+        :param clipboardFlag:
+        """
     @property
-    def Clipboard(self) -> UIPermissionClipboard: ...
+    def Clipboard(self) -> UIPermissionClipboard:
+        """
+
+        :return:
+        """
     @Clipboard.setter
     def Clipboard(self, value: UIPermissionClipboard) -> None: ...
     @property
-    def Window(self) -> UIPermissionWindow: ...
+    def Window(self) -> UIPermissionWindow:
+        """
+
+        :return:
+        """
     @Window.setter
     def Window(self, value: UIPermissionWindow) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Clipboard(self) -> UIPermissionClipboard: ...
-    def get_Window(self) -> UIPermissionWindow: ...
-    def set_Clipboard(self, value: UIPermissionClipboard) -> VoidType: ...
-    def set_Window(self, value: UIPermissionWindow) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Events
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
 
-    # No Sub Enums
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
 
 class UIPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, action: SecurityAction):
+        """
 
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
+        :param action:
+        """
     @property
-    def Clipboard(self) -> UIPermissionClipboard: ...
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def Clipboard(self) -> UIPermissionClipboard:
+        """
+
+        :return:
+        """
     @Clipboard.setter
     def Clipboard(self, value: UIPermissionClipboard) -> None: ...
     @property
-    def Window(self) -> UIPermissionWindow: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def Window(self) -> UIPermissionWindow:
+        """
+
+        :return:
+        """
     @Window.setter
     def Window(self, value: UIPermissionWindow) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_Clipboard(self) -> UIPermissionClipboard: ...
-    def get_Window(self) -> UIPermissionWindow: ...
-    def set_Clipboard(self, value: UIPermissionClipboard) -> VoidType: ...
-    def set_Window(self, value: UIPermissionWindow) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UrlIdentityPermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IBuiltInPermission
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, site: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Url(self) -> StringType: ...
-    @Url.setter
-    def Url(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Url(self) -> StringType: ...
-    def set_Url(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UrlIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Url(self) -> StringType: ...
-    @Url.setter
-    def Url(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_Url(self) -> StringType: ...
-    def set_Url(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ZoneIdentityPermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IBuiltInPermission
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, zone: SecurityZone): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def SecurityZone(self) -> SecurityZone: ...
-    @SecurityZone.setter
-    def SecurityZone(self, value: SecurityZone) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, esd: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_SecurityZone(self) -> SecurityZone: ...
-    def set_SecurityZone(self, value: SecurityZone) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ZoneIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Zone(self) -> SecurityZone: ...
-    @Zone.setter
-    def Zone(self, value: SecurityZone) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_Zone(self) -> SecurityZone: ...
-    def set_Zone(self, value: SecurityZone) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IBuiltInPermission(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetTokenIndex(self) -> IntType: ...
-
-    # No Events
-
-class IUnrestrictedPermission(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def IsUnrestricted(self) -> BooleanType: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class BuiltInPermissionFlag(Enum):
-    EnvironmentPermission = 1
-    FileDialogPermission = 2
-    FileIOPermission = 4
-    IsolatedStorageFilePermission = 8
-    ReflectionPermission = 16
-    RegistryPermission = 32
-    SecurityPermission = 64
-    UIPermission = 128
-    PrincipalPermission = 256
-    PublisherIdentityPermission = 512
-    SiteIdentityPermission = 1024
-    StrongNameIdentityPermission = 2048
-    UrlIdentityPermission = 4096
-    ZoneIdentityPermission = 8192
-    KeyContainerPermission = 16384
-
-class DataProtectionPermissionFlags(Enum):
-    NoFlags = 0
-    ProtectData = 1
-    UnprotectData = 2
-    ProtectMemory = 4
-    UnprotectMemory = 8
-    AllFlags = 15
-
-class EnvironmentPermissionAccess(Enum):
-    NoAccess = 0
-    Read = 1
-    Write = 2
-    AllAccess = 3
-
-class FileDialogPermissionAccess(Enum):
-    # None = 0
-    Open = 1
-    Save = 2
-    OpenSave = 3
-
-class FileIOPermissionAccess(Enum):
-    NoAccess = 0
-    Read = 1
-    Write = 2
-    Append = 4
-    PathDiscovery = 8
-    AllAccess = 15
-
-class HostProtectionResource(Enum):
-    # None = 0
-    Synchronization = 1
-    SharedState = 2
-    ExternalProcessMgmt = 4
-    SelfAffectingProcessMgmt = 8
-    ExternalThreading = 16
-    SelfAffectingThreading = 32
-    SecurityInfrastructure = 64
-    UI = 128
-    MayLeakOnAbort = 256
-    All = 511
-
-class IsolatedStorageContainment(Enum):
-    # None = 0
-    DomainIsolationByUser = 16
-    ApplicationIsolationByUser = 21
-    AssemblyIsolationByUser = 32
-    DomainIsolationByMachine = 48
-    AssemblyIsolationByMachine = 64
-    ApplicationIsolationByMachine = 69
-    DomainIsolationByRoamingUser = 80
-    AssemblyIsolationByRoamingUser = 96
-    ApplicationIsolationByRoamingUser = 101
-    AdministerIsolatedStorageByUser = 112
-    UnrestrictedIsolatedStorage = 240
-
-class KeyContainerPermissionFlags(Enum):
-    NoFlags = 0
-    Create = 1
-    Open = 2
-    Delete = 4
-    Import = 16
-    Export = 32
-    Sign = 256
-    Decrypt = 512
-    ViewAcl = 4096
-    ChangeAcl = 8192
-    AllFlags = 13111
-
-class PermissionState(Enum):
-    # None = 0
-    Unrestricted = 1
-
-class ReflectionPermissionFlag(Enum):
-    NoFlags = 0
-    TypeInformation = 1
-    MemberAccess = 2
-    ReflectionEmit = 4
-    AllFlags = 7
-    RestrictedMemberAccess = 8
-
-class RegistryPermissionAccess(Enum):
-    NoAccess = 0
-    Read = 1
-    Write = 2
-    Create = 4
-    AllAccess = 7
-
-class SecurityAction(Enum):
-    Demand = 2
-    Assert = 3
-    Deny = 4
-    PermitOnly = 5
-    LinkDemand = 6
-    InheritanceDemand = 7
-    RequestMinimum = 8
-    RequestOptional = 9
-    RequestRefuse = 10
-
-class SecurityPermissionFlag(Enum):
-    NoFlags = 0
-    Assertion = 1
-    UnmanagedCode = 2
-    SkipVerification = 4
-    Execution = 8
-    ControlThread = 16
-    ControlEvidence = 32
-    ControlPolicy = 64
-    SerializationFormatter = 128
-    ControlDomainPolicy = 256
-    ControlPrincipal = 512
-    ControlAppDomain = 1024
-    RemotingConfiguration = 2048
-    Infrastructure = 4096
-    BindingRedirects = 8192
-    AllFlags = 16383
-
-class StorePermissionFlags(Enum):
-    NoFlags = 0
-    CreateStore = 1
-    DeleteStore = 2
-    EnumerateStores = 4
-    OpenStore = 16
-    AddToStore = 32
-    RemoveFromStore = 64
-    EnumerateCertificates = 128
-    AllFlags = 247
-
-class TypeDescriptorPermissionFlags(Enum):
-    NoFlags = 0
-    RestrictedRegistrationAccess = 1
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class UIPermissionClipboard(Enum):
-    NoClipboard = 0
-    OwnClipboard = 1
-    AllClipboard = 2
+    """"""
+
+    NoClipboard: UIPermissionClipboard = ...
+    """"""
+    OwnClipboard: UIPermissionClipboard = ...
+    """"""
+    AllClipboard: UIPermissionClipboard = ...
+    """"""
 
 class UIPermissionWindow(Enum):
-    NoWindows = 0
-    SafeSubWindows = 1
-    SafeTopLevelWindows = 2
-    AllWindows = 3
+    """"""
 
-# No Delegates
+    NoWindows: UIPermissionWindow = ...
+    """"""
+    SafeSubWindows: UIPermissionWindow = ...
+    """"""
+    SafeTopLevelWindows: UIPermissionWindow = ...
+    """"""
+    AllWindows: UIPermissionWindow = ...
+    """"""
 
-__all__ = [
-    BuiltInPermissionIndex,
-    CodeAccessSecurityAttribute,
-    DataProtectionPermission,
-    DataProtectionPermissionAttribute,
-    EnvironmentPermission,
-    EnvironmentPermissionAttribute,
-    EnvironmentStringExpressionSet,
-    FileDialogPermission,
-    FileDialogPermissionAttribute,
-    FileIOAccess,
-    FileIOPermission,
-    FileIOPermissionAttribute,
-    GacIdentityPermission,
-    GacIdentityPermissionAttribute,
-    HostProtectionAttribute,
-    HostProtectionPermission,
-    IDRole,
-    IsolatedStorageFilePermission,
-    IsolatedStorageFilePermissionAttribute,
-    IsolatedStoragePermission,
-    IsolatedStoragePermissionAttribute,
-    KeyContainerPermission,
-    KeyContainerPermissionAccessEntry,
-    KeyContainerPermissionAccessEntryCollection,
-    KeyContainerPermissionAccessEntryEnumerator,
-    KeyContainerPermissionAttribute,
-    PermissionSetAttribute,
-    PrincipalPermission,
-    PrincipalPermissionAttribute,
-    PublisherIdentityPermission,
-    PublisherIdentityPermissionAttribute,
-    ReflectionPermission,
-    ReflectionPermissionAttribute,
-    RegistryPermission,
-    RegistryPermissionAttribute,
-    ResourcePermissionBase,
-    ResourcePermissionBaseEntry,
-    SecurityAttribute,
-    SecurityPermission,
-    SecurityPermissionAttribute,
-    SiteIdentityPermission,
-    SiteIdentityPermissionAttribute,
-    StorePermission,
-    StorePermissionAttribute,
-    StrongName2,
-    StrongNameIdentityPermission,
-    StrongNameIdentityPermissionAttribute,
-    StrongNamePublicKeyBlob,
-    TypeDescriptorPermission,
-    TypeDescriptorPermissionAttribute,
-    UIPermission,
-    UIPermissionAttribute,
-    UrlIdentityPermission,
-    UrlIdentityPermissionAttribute,
-    ZoneIdentityPermission,
-    ZoneIdentityPermissionAttribute,
-    IBuiltInPermission,
-    IUnrestrictedPermission,
-    BuiltInPermissionFlag,
-    DataProtectionPermissionFlags,
-    EnvironmentPermissionAccess,
-    FileDialogPermissionAccess,
-    FileIOPermissionAccess,
-    HostProtectionResource,
-    IsolatedStorageContainment,
-    KeyContainerPermissionFlags,
-    PermissionState,
-    ReflectionPermissionFlag,
-    RegistryPermissionAccess,
-    SecurityAction,
-    SecurityPermissionFlag,
-    StorePermissionFlags,
-    TypeDescriptorPermissionFlags,
-    UIPermissionClipboard,
-    UIPermissionWindow,
-]
+class UrlIdentityPermission(
+    CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
+):
+    """"""
+
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(self, site: str):
+        """
+
+        :param site:
+        """
+    @property
+    def Url(self) -> str:
+        """
+
+        :return:
+        """
+    @Url.setter
+    def Url(self, value: str) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class UrlIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def Url(self) -> str:
+        """
+
+        :return:
+        """
+    @Url.setter
+    def Url(self, value: str) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ZoneIdentityPermission(
+    CodeAccessPermission, IBuiltInPermission, IPermission, ISecurityEncodable, IStackWalk
+):
+    """"""
+
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(self, zone: SecurityZone):
+        """
+
+        :param zone:
+        """
+    @property
+    def SecurityZone(self) -> SecurityZone:
+        """
+
+        :return:
+        """
+    @SecurityZone.setter
+    def SecurityZone(self, value: SecurityZone) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTokenIndex(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class ZoneIdentityPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    @property
+    def Zone(self) -> SecurityZone:
+        """
+
+        :return:
+        """
+    @Zone.setter
+    def Zone(self, value: SecurityZone) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

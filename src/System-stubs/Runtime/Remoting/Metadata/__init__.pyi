@@ -1,386 +1,821 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
+from typing import Tuple
 
 from System import Attribute
-from System import Boolean
 from System import Enum
-from System import Int32
+from System import Guid
+from System import IntPtr
 from System import Object
-from System import String
-from System import Void
+from System import Type
 from System.Runtime.InteropServices import _Attribute
 
-# ---------- Types ---------- #
-
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class RemotingCachedData(ABC, ObjectType):
+class RemotingCachedData(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class RemotingFieldCachedData(RemotingCachedData):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class RemotingMethodCachedData(RemotingCachedData):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class RemotingParameterCachedData(RemotingCachedData):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class RemotingTypeCachedData(RemotingCachedData):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class SoapAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Embedded(self) -> BooleanType: ...
+    def Embedded(self) -> bool:
+        """
+
+        :return:
+        """
     @Embedded.setter
-    def Embedded(self, value: BooleanType) -> None: ...
+    def Embedded(self, value: bool) -> None: ...
     @property
-    def UseAttribute(self) -> BooleanType: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def UseAttribute(self) -> bool:
+        """
+
+        :return:
+        """
     @UseAttribute.setter
-    def UseAttribute(self, value: BooleanType) -> None: ...
+    def UseAttribute(self, value: bool) -> None: ...
     @property
-    def XmlNamespace(self) -> StringType: ...
+    def XmlNamespace(self) -> str:
+        """
+
+        :return:
+        """
     @XmlNamespace.setter
-    def XmlNamespace(self, value: StringType) -> None: ...
+    def XmlNamespace(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_Embedded(self) -> BooleanType: ...
-    def get_UseAttribute(self) -> BooleanType: ...
-    def get_XmlNamespace(self) -> StringType: ...
-    def set_Embedded(self, value: BooleanType) -> VoidType: ...
-    def set_UseAttribute(self, value: BooleanType) -> VoidType: ...
-    def set_XmlNamespace(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Events
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Structs
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Interfaces
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Sub Enums
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SoapFieldAttribute(SoapAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Order(self) -> IntType: ...
+    def Embedded(self) -> bool:
+        """
+
+        :return:
+        """
+    @Embedded.setter
+    def Embedded(self, value: bool) -> None: ...
+    @property
+    def Order(self) -> int:
+        """
+
+        :return:
+        """
     @Order.setter
-    def Order(self, value: IntType) -> None: ...
+    def Order(self, value: int) -> None: ...
     @property
-    def XmlElementName(self) -> StringType: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def UseAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    @UseAttribute.setter
+    def UseAttribute(self, value: bool) -> None: ...
+    @property
+    def XmlElementName(self) -> str:
+        """
+
+        :return:
+        """
     @XmlElementName.setter
-    def XmlElementName(self, value: StringType) -> None: ...
+    def XmlElementName(self, value: str) -> None: ...
+    @property
+    def XmlNamespace(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @XmlNamespace.setter
+    def XmlNamespace(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def IsInteropXmlElement(self) -> BooleanType: ...
-    def get_Order(self) -> IntType: ...
-    def get_XmlElementName(self) -> StringType: ...
-    def set_Order(self, value: IntType) -> VoidType: ...
-    def set_XmlElementName(self, value: StringType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Enums
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def IsInteropXmlElement(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SoapMethodAttribute(SoapAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def ResponseXmlElementName(self) -> StringType: ...
+    def Embedded(self) -> bool:
+        """
+
+        :return:
+        """
+    @Embedded.setter
+    def Embedded(self, value: bool) -> None: ...
+    @property
+    def ResponseXmlElementName(self) -> str:
+        """
+
+        :return:
+        """
     @ResponseXmlElementName.setter
-    def ResponseXmlElementName(self, value: StringType) -> None: ...
+    def ResponseXmlElementName(self, value: str) -> None: ...
     @property
-    def ResponseXmlNamespace(self) -> StringType: ...
+    def ResponseXmlNamespace(self) -> str:
+        """
+
+        :return:
+        """
     @ResponseXmlNamespace.setter
-    def ResponseXmlNamespace(self, value: StringType) -> None: ...
+    def ResponseXmlNamespace(self, value: str) -> None: ...
     @property
-    def ReturnXmlElementName(self) -> StringType: ...
+    def ReturnXmlElementName(self) -> str:
+        """
+
+        :return:
+        """
     @ReturnXmlElementName.setter
-    def ReturnXmlElementName(self, value: StringType) -> None: ...
+    def ReturnXmlElementName(self, value: str) -> None: ...
     @property
-    def SoapAction(self) -> StringType: ...
+    def SoapAction(self) -> str:
+        """
+
+        :return:
+        """
     @SoapAction.setter
-    def SoapAction(self, value: StringType) -> None: ...
+    def SoapAction(self, value: str) -> None: ...
     @property
-    def UseAttribute(self) -> BooleanType: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def UseAttribute(self) -> bool:
+        """
+
+        :return:
+        """
     @UseAttribute.setter
-    def UseAttribute(self, value: BooleanType) -> None: ...
+    def UseAttribute(self, value: bool) -> None: ...
     @property
-    def XmlNamespace(self) -> StringType: ...
+    def XmlNamespace(self) -> str:
+        """
+
+        :return:
+        """
     @XmlNamespace.setter
-    def XmlNamespace(self, value: StringType) -> None: ...
+    def XmlNamespace(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_ResponseXmlElementName(self) -> StringType: ...
-    def get_ResponseXmlNamespace(self) -> StringType: ...
-    def get_ReturnXmlElementName(self) -> StringType: ...
-    def get_SoapAction(self) -> StringType: ...
-    def get_UseAttribute(self) -> BooleanType: ...
-    def get_XmlNamespace(self) -> StringType: ...
-    def set_ResponseXmlElementName(self, value: StringType) -> VoidType: ...
-    def set_ResponseXmlNamespace(self, value: StringType) -> VoidType: ...
-    def set_ReturnXmlElementName(self, value: StringType) -> VoidType: ...
-    def set_SoapAction(self, value: StringType) -> VoidType: ...
-    def set_UseAttribute(self, value: BooleanType) -> VoidType: ...
-    def set_XmlNamespace(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Events
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Structs
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Interfaces
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Sub Enums
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapOption(Enum):
+    """"""
+
+    _None: SoapOption = ...
+    """"""
+    AlwaysIncludeTypes: SoapOption = ...
+    """"""
+    XsdString: SoapOption = ...
+    """"""
+    EmbedAll: SoapOption = ...
+    """"""
+    Option1: SoapOption = ...
+    """"""
+    Option2: SoapOption = ...
+    """"""
 
 class SoapParameterAttribute(SoapAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def Embedded(self) -> bool:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @Embedded.setter
+    def Embedded(self, value: bool) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def UseAttribute(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    @UseAttribute.setter
+    def UseAttribute(self, value: bool) -> None: ...
+    @property
+    def XmlNamespace(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @XmlNamespace.setter
+    def XmlNamespace(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Interfaces
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SoapTypeAttribute(SoapAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def SoapOptions(self) -> SoapOption: ...
+    def Embedded(self) -> bool:
+        """
+
+        :return:
+        """
+    @Embedded.setter
+    def Embedded(self, value: bool) -> None: ...
+    @property
+    def SoapOptions(self) -> SoapOption:
+        """
+
+        :return:
+        """
     @SoapOptions.setter
     def SoapOptions(self, value: SoapOption) -> None: ...
     @property
-    def UseAttribute(self) -> BooleanType: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def UseAttribute(self) -> bool:
+        """
+
+        :return:
+        """
     @UseAttribute.setter
-    def UseAttribute(self, value: BooleanType) -> None: ...
+    def UseAttribute(self, value: bool) -> None: ...
     @property
-    def XmlElementName(self) -> StringType: ...
+    def XmlElementName(self) -> str:
+        """
+
+        :return:
+        """
     @XmlElementName.setter
-    def XmlElementName(self, value: StringType) -> None: ...
+    def XmlElementName(self, value: str) -> None: ...
     @property
-    def XmlFieldOrder(self) -> XmlFieldOrderOption: ...
+    def XmlFieldOrder(self) -> XmlFieldOrderOption:
+        """
+
+        :return:
+        """
     @XmlFieldOrder.setter
     def XmlFieldOrder(self, value: XmlFieldOrderOption) -> None: ...
     @property
-    def XmlNamespace(self) -> StringType: ...
+    def XmlNamespace(self) -> str:
+        """
+
+        :return:
+        """
     @XmlNamespace.setter
-    def XmlNamespace(self, value: StringType) -> None: ...
+    def XmlNamespace(self, value: str) -> None: ...
     @property
-    def XmlTypeName(self) -> StringType: ...
+    def XmlTypeName(self) -> str:
+        """
+
+        :return:
+        """
     @XmlTypeName.setter
-    def XmlTypeName(self, value: StringType) -> None: ...
+    def XmlTypeName(self, value: str) -> None: ...
     @property
-    def XmlTypeNamespace(self) -> StringType: ...
+    def XmlTypeNamespace(self) -> str:
+        """
+
+        :return:
+        """
     @XmlTypeNamespace.setter
-    def XmlTypeNamespace(self, value: StringType) -> None: ...
+    def XmlTypeNamespace(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_SoapOptions(self) -> SoapOption: ...
-    def get_UseAttribute(self) -> BooleanType: ...
-    def get_XmlElementName(self) -> StringType: ...
-    def get_XmlFieldOrder(self) -> XmlFieldOrderOption: ...
-    def get_XmlNamespace(self) -> StringType: ...
-    def get_XmlTypeName(self) -> StringType: ...
-    def get_XmlTypeNamespace(self) -> StringType: ...
-    def set_SoapOptions(self, value: SoapOption) -> VoidType: ...
-    def set_UseAttribute(self, value: BooleanType) -> VoidType: ...
-    def set_XmlElementName(self, value: StringType) -> VoidType: ...
-    def set_XmlFieldOrder(self, value: XmlFieldOrderOption) -> VoidType: ...
-    def set_XmlNamespace(self, value: StringType) -> VoidType: ...
-    def set_XmlTypeName(self, value: StringType) -> VoidType: ...
-    def set_XmlTypeNamespace(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Events
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Structs
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Interfaces
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Sub Enums
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-# No Structs
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-# No Interfaces
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-# ---------- Enums ---------- #
-
-class SoapOption(Enum):
-    # None = 0
-    AlwaysIncludeTypes = 1
-    XsdString = 2
-    EmbedAll = 4
-    Option1 = 8
-    Option2 = 16
+        :return:
+        """
 
 class XmlFieldOrderOption(Enum):
-    All = 0
-    Sequence = 1
-    Choice = 2
+    """"""
 
-# No Delegates
-
-__all__ = [
-    RemotingCachedData,
-    RemotingFieldCachedData,
-    RemotingMethodCachedData,
-    RemotingParameterCachedData,
-    RemotingTypeCachedData,
-    SoapAttribute,
-    SoapFieldAttribute,
-    SoapMethodAttribute,
-    SoapParameterAttribute,
-    SoapTypeAttribute,
-    SoapOption,
-    XmlFieldOrderOption,
-]
+    All: XmlFieldOrderOption = ...
+    """"""
+    Sequence: XmlFieldOrderOption = ...
+    """"""
+    Choice: XmlFieldOrderOption = ...
+    """"""

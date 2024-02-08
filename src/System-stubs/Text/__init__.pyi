@@ -1,2381 +1,8765 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
+from typing import ClassVar
+from typing import Final
 from typing import Tuple
-from typing import Union
 from typing import overload
 
 from System import ArgumentException
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Char
 from System import Decimal
-from System import Double
 from System import Enum
 from System import Exception
 from System import ICloneable
 from System import IFormatProvider
-from System import Int16
-from System import Int32
-from System import Int64
 from System import Object
-from System import SByte
-from System import Single
-from System import String
-from System import UInt16
-from System import UInt32
-from System import UInt64
-from System import Void
+from System import Type
+from System.Collections import IDictionary
+from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Serialization import IObjectReference
 from System.Runtime.Serialization import ISerializable
+from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-CharType = Union[str, Char]
-DecimalType = Union[float, Decimal]
-DoubleType = Union[float, Double]
-FloatType = Union[float, Single]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-ObjectType = Object
-SByteType = Union[int, SByte]
-ShortType = Union[int, Int16]
-StringType = Union[str, String]
-UIntType = Union[int, UInt32]
-ULongType = Union[int, UInt64]
-UShortType = Union[int, UInt16]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
 class ASCIIEncoding(Encoding, ICloneable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsSingleByte(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def GetByteCount(self, chars: StringType) -> IntType: ...
-    @overload
-    def GetByteCount(self, chars: CharType, count: IntType) -> IntType: ...
-    @overload
-    def GetByteCount(
-        self, chars: ArrayType[CharType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        chars: StringType,
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self, chars: CharType, charCount: IntType, bytes: ByteType, byteCount: IntType
-    ) -> IntType: ...
-    @overload
-    def GetCharCount(self, bytes: ByteType, count: IntType) -> IntType: ...
-    @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self, bytes: ByteType, byteCount: IntType, chars: CharType, charCount: IntType
-    ) -> IntType: ...
-    def GetDecoder(self) -> Decoder: ...
-    def GetEncoder(self) -> Encoder: ...
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-    @overload
-    def GetString(
-        self, bytes: ArrayType[ByteType], byteIndex: IntType, byteCount: IntType
-    ) -> StringType: ...
-    def get_IsSingleByte(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BaseCodePageEncoding(ABC, EncodingNLS, ICloneable, ISerializable):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodePageEncoding(ObjectType, ISerializable, IObjectReference):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetRealObject(self, context: StreamingContext) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DBCSCodePageEncoding(BaseCodePageEncoding, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, codePage: IntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetDecoder(self) -> Decoder: ...
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Decoder(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
+    @classmethod
     @property
-    def Fallback(self) -> DecoderFallback: ...
-    @Fallback.setter
-    def Fallback(self, value: DecoderFallback) -> None: ...
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def FallbackBuffer(self) -> DecoderFallbackBuffer: ...
+    def BigEndianUnicode(cls) -> Encoding:
+        """
 
-    # ---------- Methods ---------- #
-
-    @overload
-    def Convert(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        flush: BooleanType,
-        bytesUsed: IntType,
-        charsUsed: IntType,
-        completed: BooleanType,
-    ) -> Tuple[VoidType, IntType, IntType, BooleanType]: ...
-    @overload
-    def Convert(
-        self,
-        bytes: ByteType,
-        byteCount: IntType,
-        chars: CharType,
-        charCount: IntType,
-        flush: BooleanType,
-        bytesUsed: IntType,
-        charsUsed: IntType,
-        completed: BooleanType,
-    ) -> Tuple[VoidType, IntType, IntType, BooleanType]: ...
-    @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType, flush: BooleanType
-    ) -> IntType: ...
-    @overload
-    def GetCharCount(self, bytes: ByteType, count: IntType, flush: BooleanType) -> IntType: ...
-    @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        flush: BooleanType,
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ByteType,
-        byteCount: IntType,
-        chars: CharType,
-        charCount: IntType,
-        flush: BooleanType,
-    ) -> IntType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Fallback(self) -> DecoderFallback: ...
-    def get_FallbackBuffer(self) -> DecoderFallbackBuffer: ...
-    def set_Fallback(self, value: DecoderFallback) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DecoderExceptionFallback(DecoderFallback):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
     @property
-    def MaxCharCount(self) -> IntType: ...
+    def BodyName(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    def CreateFallbackBuffer(self) -> DecoderFallbackBuffer: ...
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_MaxCharCount(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DecoderExceptionFallbackBuffer(DecoderFallbackBuffer):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
     @property
-    def Remaining(self) -> IntType: ...
+    def CodePage(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
-
-    def Fallback(self, bytesUnknown: ArrayType[ByteType], index: IntType) -> BooleanType: ...
-    def GetNextChar(self) -> CharType: ...
-    def MovePrevious(self) -> BooleanType: ...
-    def get_Remaining(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DecoderFallback(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+        :return:
+        """
     @property
-    def ExceptionFallback() -> DecoderFallback: ...
-    @property
-    def MaxCharCount(self) -> IntType: ...
-    @staticmethod
-    @property
-    def ReplacementFallback() -> DecoderFallback: ...
-
-    # ---------- Methods ---------- #
-
-    def CreateFallbackBuffer(self) -> DecoderFallbackBuffer: ...
-    @staticmethod
-    def get_ExceptionFallback() -> DecoderFallback: ...
-    def get_MaxCharCount(self) -> IntType: ...
-    @staticmethod
-    def get_ReplacementFallback() -> DecoderFallback: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DecoderFallbackBuffer(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Remaining(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def Fallback(self, bytesUnknown: ArrayType[ByteType], index: IntType) -> BooleanType: ...
-    def GetNextChar(self) -> CharType: ...
-    def MovePrevious(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Remaining(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DecoderFallbackException(ArgumentException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-    @overload
-    def __init__(self, message: StringType, bytesUnknown: ArrayType[ByteType], index: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def BytesUnknown(self) -> ArrayType[ByteType]: ...
-    @property
-    def Index(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_BytesUnknown(self) -> ArrayType[ByteType]: ...
-    def get_Index(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DecoderNLS(Decoder, ISerializable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def MustFlush(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Convert(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        flush: BooleanType,
-        bytesUsed: IntType,
-        charsUsed: IntType,
-        completed: BooleanType,
-    ) -> Tuple[VoidType, IntType, IntType, BooleanType]: ...
-    @overload
-    def Convert(
-        self,
-        bytes: ByteType,
-        byteCount: IntType,
-        chars: CharType,
-        charCount: IntType,
-        flush: BooleanType,
-        bytesUsed: IntType,
-        charsUsed: IntType,
-        completed: BooleanType,
-    ) -> Tuple[VoidType, IntType, IntType, BooleanType]: ...
-    @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetCharCount(self, bytes: ByteType, count: IntType, flush: BooleanType) -> IntType: ...
-    @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType, flush: BooleanType
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        flush: BooleanType,
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ByteType,
-        byteCount: IntType,
-        chars: CharType,
-        charCount: IntType,
-        flush: BooleanType,
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-    ) -> IntType: ...
-    def Reset(self) -> VoidType: ...
-    def get_MustFlush(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DecoderReplacementFallback(DecoderFallback):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, replacement: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def DefaultString(self) -> StringType: ...
-    @property
-    def MaxCharCount(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def CreateFallbackBuffer(self) -> DecoderFallbackBuffer: ...
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_DefaultString(self) -> StringType: ...
-    def get_MaxCharCount(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DecoderReplacementFallbackBuffer(DecoderFallbackBuffer):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, fallback: DecoderReplacementFallback): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Remaining(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def Fallback(self, bytesUnknown: ArrayType[ByteType], index: IntType) -> BooleanType: ...
-    def GetNextChar(self) -> CharType: ...
-    def MovePrevious(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Remaining(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EUCJPEncoding(DBCSCodePageEncoding, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Encoder(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Fallback(self) -> EncoderFallback: ...
-    @Fallback.setter
-    def Fallback(self, value: EncoderFallback) -> None: ...
-    @property
-    def FallbackBuffer(self) -> EncoderFallbackBuffer: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Convert(
-        self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        flush: BooleanType,
-        charsUsed: IntType,
-        bytesUsed: IntType,
-        completed: BooleanType,
-    ) -> Tuple[VoidType, IntType, IntType, BooleanType]: ...
-    @overload
-    def Convert(
-        self,
-        chars: CharType,
-        charCount: IntType,
-        bytes: ByteType,
-        byteCount: IntType,
-        flush: BooleanType,
-        charsUsed: IntType,
-        bytesUsed: IntType,
-        completed: BooleanType,
-    ) -> Tuple[VoidType, IntType, IntType, BooleanType]: ...
-    @overload
-    def GetByteCount(self, chars: CharType, count: IntType, flush: BooleanType) -> IntType: ...
-    @overload
-    def GetByteCount(
-        self, chars: ArrayType[CharType], index: IntType, count: IntType, flush: BooleanType
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        flush: BooleanType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        chars: CharType,
-        charCount: IntType,
-        bytes: ByteType,
-        byteCount: IntType,
-        flush: BooleanType,
-    ) -> IntType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Fallback(self) -> EncoderFallback: ...
-    def get_FallbackBuffer(self) -> EncoderFallbackBuffer: ...
-    def set_Fallback(self, value: EncoderFallback) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EncoderExceptionFallback(EncoderFallback):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def MaxCharCount(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def CreateFallbackBuffer(self) -> EncoderFallbackBuffer: ...
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_MaxCharCount(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EncoderExceptionFallbackBuffer(EncoderFallbackBuffer):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Remaining(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Fallback(self, charUnknown: CharType, index: IntType) -> BooleanType: ...
-    @overload
-    def Fallback(
-        self, charUnknownHigh: CharType, charUnknownLow: CharType, index: IntType
-    ) -> BooleanType: ...
-    def GetNextChar(self) -> CharType: ...
-    def MovePrevious(self) -> BooleanType: ...
-    def get_Remaining(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EncoderFallback(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def ExceptionFallback() -> EncoderFallback: ...
-    @property
-    def MaxCharCount(self) -> IntType: ...
-    @staticmethod
-    @property
-    def ReplacementFallback() -> EncoderFallback: ...
-
-    # ---------- Methods ---------- #
-
-    def CreateFallbackBuffer(self) -> EncoderFallbackBuffer: ...
-    @staticmethod
-    def get_ExceptionFallback() -> EncoderFallback: ...
-    def get_MaxCharCount(self) -> IntType: ...
-    @staticmethod
-    def get_ReplacementFallback() -> EncoderFallback: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EncoderFallbackBuffer(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Remaining(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Fallback(self, charUnknown: CharType, index: IntType) -> BooleanType: ...
-    @overload
-    def Fallback(
-        self, charUnknownHigh: CharType, charUnknownLow: CharType, index: IntType
-    ) -> BooleanType: ...
-    def GetNextChar(self) -> CharType: ...
-    def MovePrevious(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Remaining(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EncoderFallbackException(ArgumentException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CharUnknown(self) -> CharType: ...
-    @property
-    def CharUnknownHigh(self) -> CharType: ...
-    @property
-    def CharUnknownLow(self) -> CharType: ...
-    @property
-    def Index(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def IsUnknownSurrogate(self) -> BooleanType: ...
-    def get_CharUnknown(self) -> CharType: ...
-    def get_CharUnknownHigh(self) -> CharType: ...
-    def get_CharUnknownLow(self) -> CharType: ...
-    def get_Index(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EncoderNLS(Encoder, ISerializable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Encoding(self) -> Encoding: ...
-    @property
-    def MustFlush(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Convert(
-        self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        flush: BooleanType,
-        charsUsed: IntType,
-        bytesUsed: IntType,
-        completed: BooleanType,
-    ) -> Tuple[VoidType, IntType, IntType, BooleanType]: ...
-    @overload
-    def Convert(
-        self,
-        chars: CharType,
-        charCount: IntType,
-        bytes: ByteType,
-        byteCount: IntType,
-        flush: BooleanType,
-        charsUsed: IntType,
-        bytesUsed: IntType,
-        completed: BooleanType,
-    ) -> Tuple[VoidType, IntType, IntType, BooleanType]: ...
-    @overload
-    def GetByteCount(self, chars: CharType, count: IntType, flush: BooleanType) -> IntType: ...
-    @overload
-    def GetByteCount(
-        self, chars: ArrayType[CharType], index: IntType, count: IntType, flush: BooleanType
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        flush: BooleanType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        chars: CharType,
-        charCount: IntType,
-        bytes: ByteType,
-        byteCount: IntType,
-        flush: BooleanType,
-    ) -> IntType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Encoding(self) -> Encoding: ...
-    def get_MustFlush(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EncoderReplacementFallback(EncoderFallback):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, replacement: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def DefaultString(self) -> StringType: ...
-    @property
-    def MaxCharCount(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def CreateFallbackBuffer(self) -> EncoderFallbackBuffer: ...
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_DefaultString(self) -> StringType: ...
-    def get_MaxCharCount(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EncoderReplacementFallbackBuffer(EncoderFallbackBuffer):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, fallback: EncoderReplacementFallback): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Remaining(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Fallback(self, charUnknown: CharType, index: IntType) -> BooleanType: ...
-    @overload
-    def Fallback(
-        self, charUnknownHigh: CharType, charUnknownLow: CharType, index: IntType
-    ) -> BooleanType: ...
-    def GetNextChar(self) -> CharType: ...
-    def MovePrevious(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Remaining(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Encoding(ABC, ObjectType, ICloneable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def ASCII() -> Encoding: ...
-    @staticmethod
-    @property
-    def BigEndianUnicode() -> Encoding: ...
-    @property
-    def BodyName(self) -> StringType: ...
-    @property
-    def CodePage(self) -> IntType: ...
-    @property
-    def DecoderFallback(self) -> DecoderFallback: ...
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
     @DecoderFallback.setter
     def DecoderFallback(self, value: DecoderFallback) -> None: ...
-    @staticmethod
+    @classmethod
     @property
-    def Default() -> Encoding: ...
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
     @property
-    def EncoderFallback(self) -> EncoderFallback: ...
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
     @EncoderFallback.setter
     def EncoderFallback(self, value: EncoderFallback) -> None: ...
     @property
-    def EncodingName(self) -> StringType: ...
-    @property
-    def HeaderName(self) -> StringType: ...
-    @property
-    def IsBrowserDisplay(self) -> BooleanType: ...
-    @property
-    def IsBrowserSave(self) -> BooleanType: ...
-    @property
-    def IsMailNewsDisplay(self) -> BooleanType: ...
-    @property
-    def IsMailNewsSave(self) -> BooleanType: ...
-    @property
-    def IsReadOnly(self) -> BooleanType: ...
-    @property
-    def IsSingleByte(self) -> BooleanType: ...
-    @staticmethod
-    @property
-    def UTF32() -> Encoding: ...
-    @staticmethod
-    @property
-    def UTF7() -> Encoding: ...
-    @staticmethod
-    @property
-    def UTF8() -> Encoding: ...
-    @staticmethod
-    @property
-    def Unicode() -> Encoding: ...
-    @property
-    def WebName(self) -> StringType: ...
-    @property
-    def WindowsCodePage(self) -> IntType: ...
+    def EncodingName(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
 
-    def Clone(self) -> ObjectType: ...
-    @staticmethod
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class BaseCodePageEncoding(ABC, EncodingNLS, ISerializable, ICloneable):
+    """"""
+
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodePageEncoding(Object, IObjectReference, ISerializable):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetRealObject(self, context: StreamingContext) -> object:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DBCSCodePageEncoding(BaseCodePageEncoding, ISerializable, ICloneable):
+    """"""
+
+    def __init__(self, codePage: int):
+        """
+
+        :param codePage:
+        """
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Decoder(ABC, Object):
+    """"""
+
+    @property
+    def Fallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @Fallback.setter
+    def Fallback(self, value: DecoderFallback) -> None: ...
+    @property
+    def FallbackBuffer(self) -> DecoderFallbackBuffer:
+        """
+
+        :return:
+        """
     @overload
     def Convert(
-        srcEncoding: Encoding, dstEncoding: Encoding, bytes: ArrayType[ByteType]
-    ) -> ArrayType[ByteType]: ...
-    @staticmethod
+        self,
+        bytes: int,
+        byteCount: int,
+        chars: Char,
+        charCount: int,
+        flush: bool,
+        bytesUsed: int,
+        charsUsed: int,
+        completed: bool,
+    ) -> Tuple[None, int, int, bool]:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :param flush:
+        :param bytesUsed:
+        :param charsUsed:
+        :param completed:
+        """
     @overload
     def Convert(
-        srcEncoding: Encoding,
-        dstEncoding: Encoding,
-        bytes: ArrayType[ByteType],
-        index: IntType,
-        count: IntType,
-    ) -> ArrayType[ByteType]: ...
-    def Equals(self, value: ObjectType) -> BooleanType: ...
+        self,
+        bytes: Array[int],
+        byteIndex: int,
+        byteCount: int,
+        chars: Array[Char],
+        charIndex: int,
+        charCount: int,
+        flush: bool,
+        bytesUsed: int,
+        charsUsed: int,
+        completed: bool,
+    ) -> Tuple[None, int, int, bool]:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param flush:
+        :param bytesUsed:
+        :param charsUsed:
+        :param completed:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def GetByteCount(self, chars: ArrayType[CharType]) -> IntType: ...
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
     @overload
-    def GetByteCount(self, s: StringType) -> IntType: ...
+    def GetCharCount(self, bytes: int, count: int, flush: bool) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :param flush:
+        :return:
+        """
     @overload
-    def GetByteCount(self, chars: CharType, count: IntType) -> IntType: ...
+    def GetCharCount(self, bytes: Array[int], index: int, count: int, flush: bool) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :param flush:
+        :return:
+        """
     @overload
-    def GetByteCount(
-        self, chars: ArrayType[CharType], index: IntType, count: IntType
-    ) -> IntType: ...
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
     @overload
-    def GetBytes(self, chars: ArrayType[CharType]) -> ArrayType[ByteType]: ...
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int, flush: bool) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :param flush:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self,
+        bytes: Array[int],
+        byteIndex: int,
+        byteCount: int,
+        chars: Array[Char],
+        charIndex: int,
+        flush: bool,
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :param flush:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DecoderExceptionFallback(DecoderFallback):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def ExceptionFallback(cls) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @property
+    def MaxCharCount(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ReplacementFallback(cls) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    def CreateFallbackBuffer(self) -> DecoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DecoderExceptionFallbackBuffer(DecoderFallbackBuffer):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Remaining(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Fallback(self, bytesUnknown: Array[int], index: int) -> bool:
+        """
+
+        :param bytesUnknown:
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNextChar(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MovePrevious(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DecoderFallback(ABC, Object):
+    """"""
+
+    @classmethod
+    @property
+    def ExceptionFallback(cls) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @property
+    def MaxCharCount(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ReplacementFallback(cls) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    def CreateFallbackBuffer(self) -> DecoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DecoderFallbackBuffer(ABC, Object):
+    """"""
+
+    @property
+    def Remaining(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Fallback(self, bytesUnknown: Array[int], index: int) -> bool:
+        """
+
+        :param bytesUnknown:
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNextChar(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MovePrevious(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DecoderFallbackException(ArgumentException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @overload
+    def __init__(self, message: str, bytesUnknown: Array[int], index: int):
+        """
+
+        :param message:
+        :param bytesUnknown:
+        :param index:
+        """
+    @property
+    def BytesUnknown(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def Index(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ParamName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DecoderNLS(Decoder, ISerializable):
+    """"""
+
+    @property
+    def Fallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @Fallback.setter
+    def Fallback(self, value: DecoderFallback) -> None: ...
+    @property
+    def FallbackBuffer(self) -> DecoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    @property
+    def MustFlush(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def Convert(
+        self,
+        bytes: int,
+        byteCount: int,
+        chars: Char,
+        charCount: int,
+        flush: bool,
+        bytesUsed: int,
+        charsUsed: int,
+        completed: bool,
+    ) -> Tuple[None, int, int, bool]:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :param flush:
+        :param bytesUsed:
+        :param charsUsed:
+        :param completed:
+        """
+    @overload
+    def Convert(
+        self,
+        bytes: Array[int],
+        byteIndex: int,
+        byteCount: int,
+        chars: Array[Char],
+        charIndex: int,
+        charCount: int,
+        flush: bool,
+        bytesUsed: int,
+        charsUsed: int,
+        completed: bool,
+    ) -> Tuple[None, int, int, bool]:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param flush:
+        :param bytesUsed:
+        :param charsUsed:
+        :param completed:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int, flush: bool) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :param flush:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int, flush: bool) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :param flush:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int, flush: bool) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :param flush:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self,
+        bytes: Array[int],
+        byteIndex: int,
+        byteCount: int,
+        chars: Array[Char],
+        charIndex: int,
+        flush: bool,
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :param flush:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DecoderReplacementFallback(DecoderFallback):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, replacement: str):
+        """
+
+        :param replacement:
+        """
+    @property
+    def DefaultString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ExceptionFallback(cls) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @property
+    def MaxCharCount(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ReplacementFallback(cls) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    def CreateFallbackBuffer(self) -> DecoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DecoderReplacementFallbackBuffer(DecoderFallbackBuffer):
+    """"""
+
+    def __init__(self, fallback: DecoderReplacementFallback):
+        """
+
+        :param fallback:
+        """
+    @property
+    def Remaining(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Fallback(self, bytesUnknown: Array[int], index: int) -> bool:
+        """
+
+        :param bytesUnknown:
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNextChar(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MovePrevious(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EUCJPEncoding(DBCSCodePageEncoding, ISerializable, ICloneable):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
     @overload
     def GetBytes(
-        self, chars: ArrayType[CharType], index: IntType, count: IntType
-    ) -> ArrayType[ByteType]: ...
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
     @overload
-    def GetBytes(self, s: StringType) -> ArrayType[ByteType]: ...
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Encoder(ABC, Object):
+    """"""
+
+    @property
+    def Fallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @Fallback.setter
+    def Fallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def FallbackBuffer(self) -> EncoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    @overload
+    def Convert(
+        self,
+        chars: Char,
+        charCount: int,
+        bytes: int,
+        byteCount: int,
+        flush: bool,
+        charsUsed: int,
+        bytesUsed: int,
+        completed: bool,
+    ) -> Tuple[None, int, int, bool]:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :param flush:
+        :param charsUsed:
+        :param bytesUsed:
+        :param completed:
+        """
+    @overload
+    def Convert(
+        self,
+        chars: Array[Char],
+        charIndex: int,
+        charCount: int,
+        bytes: Array[int],
+        byteIndex: int,
+        byteCount: int,
+        flush: bool,
+        charsUsed: int,
+        bytesUsed: int,
+        completed: bool,
+    ) -> Tuple[None, int, int, bool]:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param flush:
+        :param charsUsed:
+        :param bytesUsed:
+        :param completed:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int, flush: bool) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :param flush:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int, flush: bool) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :param flush:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int, flush: bool) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :param flush:
+        :return:
+        """
     @overload
     def GetBytes(
         self,
-        s: StringType,
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
+        chars: Array[Char],
+        charIndex: int,
+        charCount: int,
+        bytes: Array[int],
+        byteIndex: int,
+        flush: bool,
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :param flush:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EncoderExceptionFallback(EncoderFallback):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def ExceptionFallback(cls) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @property
+    def MaxCharCount(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ReplacementFallback(cls) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    def CreateFallbackBuffer(self) -> EncoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EncoderExceptionFallbackBuffer(EncoderFallbackBuffer):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Remaining(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Fallback(self, charUnknown: Char, index: int) -> bool:
+        """
+
+        :param charUnknown:
+        :param index:
+        :return:
+        """
+    @overload
+    def Fallback(self, charUnknownHigh: Char, charUnknownLow: Char, index: int) -> bool:
+        """
+
+        :param charUnknownHigh:
+        :param charUnknownLow:
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNextChar(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MovePrevious(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EncoderFallback(ABC, Object):
+    """"""
+
+    @classmethod
+    @property
+    def ExceptionFallback(cls) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @property
+    def MaxCharCount(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ReplacementFallback(cls) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    def CreateFallbackBuffer(self) -> EncoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EncoderFallbackBuffer(ABC, Object):
+    """"""
+
+    @property
+    def Remaining(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Fallback(self, charUnknown: Char, index: int) -> bool:
+        """
+
+        :param charUnknown:
+        :param index:
+        :return:
+        """
+    @overload
+    def Fallback(self, charUnknownHigh: Char, charUnknownLow: Char, index: int) -> bool:
+        """
+
+        :param charUnknownHigh:
+        :param charUnknownLow:
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNextChar(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MovePrevious(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EncoderFallbackException(ArgumentException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def CharUnknown(self) -> Char:
+        """
+
+        :return:
+        """
+    @property
+    def CharUnknownHigh(self) -> Char:
+        """
+
+        :return:
+        """
+    @property
+    def CharUnknownLow(self) -> Char:
+        """
+
+        :return:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def Index(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ParamName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsUnknownSurrogate(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EncoderNLS(Encoder, ISerializable):
+    """"""
+
+    @property
+    def Encoding(self) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def Fallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @Fallback.setter
+    def Fallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def FallbackBuffer(self) -> EncoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    @property
+    def MustFlush(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def Convert(
+        self,
+        chars: Char,
+        charCount: int,
+        bytes: int,
+        byteCount: int,
+        flush: bool,
+        charsUsed: int,
+        bytesUsed: int,
+        completed: bool,
+    ) -> Tuple[None, int, int, bool]:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :param flush:
+        :param charsUsed:
+        :param bytesUsed:
+        :param completed:
+        """
+    @overload
+    def Convert(
+        self,
+        chars: Array[Char],
+        charIndex: int,
+        charCount: int,
+        bytes: Array[int],
+        byteIndex: int,
+        byteCount: int,
+        flush: bool,
+        charsUsed: int,
+        bytesUsed: int,
+        completed: bool,
+    ) -> Tuple[None, int, int, bool]:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param flush:
+        :param charsUsed:
+        :param bytesUsed:
+        :param completed:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int, flush: bool) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :param flush:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int, flush: bool) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :param flush:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int, flush: bool) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :param flush:
+        :return:
+        """
     @overload
     def GetBytes(
         self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
+        chars: Array[Char],
+        charIndex: int,
+        charCount: int,
+        bytes: Array[int],
+        byteIndex: int,
+        flush: bool,
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :param flush:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EncoderReplacementFallback(EncoderFallback):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, replacement: str):
+        """
+
+        :param replacement:
+        """
+    @property
+    def DefaultString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ExceptionFallback(cls) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @property
+    def MaxCharCount(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ReplacementFallback(cls) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    def CreateFallbackBuffer(self) -> EncoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EncoderReplacementFallbackBuffer(EncoderFallbackBuffer):
+    """"""
+
+    def __init__(self, fallback: EncoderReplacementFallback):
+        """
+
+        :param fallback:
+        """
+    @property
+    def Remaining(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Fallback(self, charUnknown: Char, index: int) -> bool:
+        """
+
+        :param charUnknown:
+        :param index:
+        :return:
+        """
+    @overload
+    def Fallback(self, charUnknownHigh: Char, charUnknownLow: Char, index: int) -> bool:
+        """
+
+        :param charUnknownHigh:
+        :param charUnknownLow:
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNextChar(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MovePrevious(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Encoding(ABC, Object, ICloneable):
+    """"""
+
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def Convert(cls, srcEncoding: Encoding, dstEncoding: Encoding, bytes: Array[int]) -> Array[int]:
+        """
+
+        :param srcEncoding:
+        :param dstEncoding:
+        :param bytes:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Convert(
+        cls, srcEncoding: Encoding, dstEncoding: Encoding, bytes: Array[int], index: int, count: int
+    ) -> Array[int]:
+        """
+
+        :param srcEncoding:
+        :param dstEncoding:
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
     @overload
     def GetBytes(
-        self, chars: CharType, charCount: IntType, bytes: ByteType, byteCount: IntType
-    ) -> IntType: ...
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
     @overload
-    def GetCharCount(self, bytes: ArrayType[ByteType]) -> IntType: ...
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
     @overload
-    def GetCharCount(self, bytes: ByteType, count: IntType) -> IntType: ...
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
     @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> IntType: ...
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
     @overload
-    def GetChars(self, bytes: ArrayType[ByteType]) -> ArrayType[CharType]: ...
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
     @overload
     def GetChars(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> ArrayType[CharType]: ...
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-    ) -> IntType: ...
+    def GetEncoding(cls, codepage: int) -> Encoding:
+        """
+
+        :param codepage:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetChars(
-        self, bytes: ByteType, byteCount: IntType, chars: CharType, charCount: IntType
-    ) -> IntType: ...
-    def GetDecoder(self) -> Decoder: ...
-    def GetEncoder(self) -> Encoder: ...
-    @staticmethod
-    @overload
-    def GetEncoding(codepage: IntType) -> Encoding: ...
-    @staticmethod
+    def GetEncoding(cls, name: str) -> Encoding:
+        """
+
+        :param name:
+        :return:
+        """
+    @classmethod
     @overload
     def GetEncoding(
-        codepage: IntType, encoderFallback: EncoderFallback, decoderFallback: DecoderFallback
-    ) -> Encoding: ...
-    @staticmethod
-    @overload
-    def GetEncoding(name: StringType) -> Encoding: ...
-    @staticmethod
+        cls, codepage: int, encoderFallback: EncoderFallback, decoderFallback: DecoderFallback
+    ) -> Encoding:
+        """
+
+        :param codepage:
+        :param encoderFallback:
+        :param decoderFallback:
+        :return:
+        """
+    @classmethod
     @overload
     def GetEncoding(
-        name: StringType, encoderFallback: EncoderFallback, decoderFallback: DecoderFallback
-    ) -> Encoding: ...
-    @staticmethod
-    def GetEncodings() -> ArrayType[EncodingInfo]: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-    def GetPreamble(self) -> ArrayType[ByteType]: ...
+        cls, name: str, encoderFallback: EncoderFallback, decoderFallback: DecoderFallback
+    ) -> Encoding:
+        """
+
+        :param name:
+        :param encoderFallback:
+        :param decoderFallback:
+        :return:
+        """
+    @classmethod
+    def GetEncodings(cls) -> Array[EncodingInfo]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
     @overload
-    def GetString(self, bytes: ByteType, byteCount: IntType) -> StringType: ...
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
     @overload
-    def GetString(self, bytes: ArrayType[ByteType]) -> StringType: ...
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
     @overload
-    def GetString(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> StringType: ...
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def IsAlwaysNormalized(self) -> BooleanType: ...
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
     @overload
-    def IsAlwaysNormalized(self, form: NormalizationForm) -> BooleanType: ...
-    @staticmethod
-    def RegisterProvider(provider: EncodingProvider) -> VoidType: ...
-    @staticmethod
-    def get_ASCII() -> Encoding: ...
-    @staticmethod
-    def get_BigEndianUnicode() -> Encoding: ...
-    def get_BodyName(self) -> StringType: ...
-    def get_CodePage(self) -> IntType: ...
-    def get_DecoderFallback(self) -> DecoderFallback: ...
-    @staticmethod
-    def get_Default() -> Encoding: ...
-    def get_EncoderFallback(self) -> EncoderFallback: ...
-    def get_EncodingName(self) -> StringType: ...
-    def get_HeaderName(self) -> StringType: ...
-    def get_IsBrowserDisplay(self) -> BooleanType: ...
-    def get_IsBrowserSave(self) -> BooleanType: ...
-    def get_IsMailNewsDisplay(self) -> BooleanType: ...
-    def get_IsMailNewsSave(self) -> BooleanType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_IsSingleByte(self) -> BooleanType: ...
-    @staticmethod
-    def get_UTF32() -> Encoding: ...
-    @staticmethod
-    def get_UTF7() -> Encoding: ...
-    @staticmethod
-    def get_UTF8() -> Encoding: ...
-    @staticmethod
-    def get_Unicode() -> Encoding: ...
-    def get_WebName(self) -> StringType: ...
-    def get_WindowsCodePage(self) -> IntType: ...
-    def set_DecoderFallback(self, value: DecoderFallback) -> VoidType: ...
-    def set_EncoderFallback(self, value: EncoderFallback) -> VoidType: ...
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
 
-    # No Events
+        :param form:
+        :return:
+        """
+    @classmethod
+    def RegisterProvider(cls, provider: EncodingProvider) -> None:
+        """
 
-    # No Sub Classes
+        :param provider:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EncodingInfo(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class EncodingInfo(Object):
+    """"""
 
     @property
-    def CodePage(self) -> IntType: ...
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def DisplayName(self) -> StringType: ...
+    def DisplayName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetEncoding(self) -> Encoding: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_CodePage(self) -> IntType: ...
-    def get_DisplayName(self) -> StringType: ...
-    def get_Name(self) -> StringType: ...
+        :param obj:
+        :return:
+        """
+    def GetEncoding(self) -> Encoding:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class EncodingNLS(ABC, Encoding, ICloneable):
-    # No Fields
+    """"""
 
-    # No Constructors
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
 
-    # No Properties
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
 
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def GetByteCount(self, s: StringType) -> IntType: ...
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
     @overload
-    def GetByteCount(self, chars: CharType, count: IntType) -> IntType: ...
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
     @overload
-    def GetByteCount(
-        self, chars: ArrayType[CharType], index: IntType, count: IntType
-    ) -> IntType: ...
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
     @overload
     def GetBytes(
-        self,
-        s: StringType,
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
     @overload
     def GetBytes(
-        self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
     @overload
-    def GetBytes(
-        self, chars: CharType, charCount: IntType, bytes: ByteType, byteCount: IntType
-    ) -> IntType: ...
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
     @overload
-    def GetCharCount(self, bytes: ByteType, count: IntType) -> IntType: ...
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
     @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> IntType: ...
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
     @overload
     def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-    ) -> IntType: ...
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
     @overload
-    def GetChars(
-        self, bytes: ByteType, byteCount: IntType, chars: CharType, charCount: IntType
-    ) -> IntType: ...
-    def GetDecoder(self) -> Decoder: ...
-    def GetEncoder(self) -> Encoder: ...
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
     @overload
-    def GetString(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> StringType: ...
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
 
-    # No Events
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
 
-    # No Sub Classes
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
 
-    # No Sub Enums
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class EncodingProvider(ABC, ObjectType):
-    # No Fields
+        :return:
+        """
 
-    # ---------- Constructors ---------- #
+class EncodingProvider(ABC, Object):
+    """"""
 
-    def __init__(self): ...
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEncoding(self, codepage: int) -> Encoding:
+        """
 
-    # ---------- Methods ---------- #
+        :param codepage:
+        :return:
+        """
+    @overload
+    def GetEncoding(self, name: str) -> Encoding:
+        """
 
+        :param name:
+        :return:
+        """
     @overload
     def GetEncoding(
-        self, name: StringType, encoderFallback: EncoderFallback, decoderFallback: DecoderFallback
-    ) -> Encoding: ...
+        self, codepage: int, encoderFallback: EncoderFallback, decoderFallback: DecoderFallback
+    ) -> Encoding:
+        """
+
+        :param codepage:
+        :param encoderFallback:
+        :param decoderFallback:
+        :return:
+        """
     @overload
     def GetEncoding(
-        self, codepage: IntType, encoderFallback: EncoderFallback, decoderFallback: DecoderFallback
-    ) -> Encoding: ...
-    @overload
-    def GetEncoding(self, name: StringType) -> Encoding: ...
-    @overload
-    def GetEncoding(self, codepage: IntType) -> Encoding: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GB18030Encoding(DBCSCodePageEncoding, ICloneable, ISerializable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetDecoder(self) -> Decoder: ...
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ISCIIEncoding(EncodingNLS, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, codePage: IntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetDecoder(self) -> Decoder: ...
-    def GetEncoder(self) -> Encoder: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ISO2022Encoding(DBCSCodePageEncoding, ICloneable, ISerializable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetDecoder(self) -> Decoder: ...
-    def GetEncoder(self) -> Encoder: ...
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InternalDecoderBestFitFallback(DecoderFallback):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def MaxCharCount(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def CreateFallbackBuffer(self) -> DecoderFallbackBuffer: ...
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_MaxCharCount(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InternalDecoderBestFitFallbackBuffer(DecoderFallbackBuffer):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, fallback: InternalDecoderBestFitFallback): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Remaining(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def Fallback(self, bytesUnknown: ArrayType[ByteType], index: IntType) -> BooleanType: ...
-    def GetNextChar(self) -> CharType: ...
-    def MovePrevious(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Remaining(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InternalEncoderBestFitFallback(EncoderFallback):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def MaxCharCount(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def CreateFallbackBuffer(self) -> EncoderFallbackBuffer: ...
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_MaxCharCount(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InternalEncoderBestFitFallbackBuffer(EncoderFallbackBuffer):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, fallback: InternalEncoderBestFitFallback): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Remaining(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Fallback(self, charUnknown: CharType, index: IntType) -> BooleanType: ...
-    @overload
-    def Fallback(
-        self, charUnknownHigh: CharType, charUnknownLow: CharType, index: IntType
-    ) -> BooleanType: ...
-    def GetNextChar(self) -> CharType: ...
-    def MovePrevious(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Remaining(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Latin1Encoding(EncodingNLS, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsSingleByte(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-    @overload
-    def IsAlwaysNormalized(self, form: NormalizationForm) -> BooleanType: ...
-    def get_IsSingleByte(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MLangCodePageEncoding(ObjectType, ISerializable, IObjectReference):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetRealObject(self, context: StreamingContext) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Normalization(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SBCSCodePageEncoding(BaseCodePageEncoding, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, codePage: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsSingleByte(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-    @overload
-    def IsAlwaysNormalized(self, form: NormalizationForm) -> BooleanType: ...
-    def get_IsSingleByte(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StringBuilder(ObjectType, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, capacity: IntType): ...
-    @overload
-    def __init__(self, value: StringType): ...
-    @overload
-    def __init__(self, value: StringType, capacity: IntType): ...
-    @overload
-    def __init__(
-        self, value: StringType, startIndex: IntType, length: IntType, capacity: IntType
-    ): ...
-    @overload
-    def __init__(self, capacity: IntType, maxCapacity: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Capacity(self) -> IntType: ...
-    @Capacity.setter
-    def Capacity(self, value: IntType) -> None: ...
-    @property
-    def Chars(self) -> CharType: ...
-    @Chars.setter
-    def Chars(self, value: CharType) -> None: ...
-    @property
-    def Length(self) -> IntType: ...
-    @Length.setter
-    def Length(self, value: IntType) -> None: ...
-    @property
-    def MaxCapacity(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Append(self, value: CharType, repeatCount: IntType) -> StringBuilder: ...
-    @overload
-    def Append(
-        self, value: ArrayType[CharType], startIndex: IntType, charCount: IntType
-    ) -> StringBuilder: ...
-    @overload
-    def Append(self, value: StringType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: StringType, startIndex: IntType, count: IntType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: SByteType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: ByteType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: CharType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: ShortType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: IntType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: LongType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: FloatType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: DoubleType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: DecimalType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: UShortType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: UIntType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: ULongType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: ObjectType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: ArrayType[CharType]) -> StringBuilder: ...
-    @overload
-    def Append(self, value: CharType, valueCount: IntType) -> StringBuilder: ...
-    @overload
-    def Append(self, value: BooleanType) -> StringBuilder: ...
-    @overload
-    def AppendFormat(self, format: StringType, arg0: ObjectType) -> StringBuilder: ...
-    @overload
-    def AppendFormat(
-        self, format: StringType, arg0: ObjectType, arg1: ObjectType
-    ) -> StringBuilder: ...
-    @overload
-    def AppendFormat(
-        self, format: StringType, arg0: ObjectType, arg1: ObjectType, arg2: ObjectType
-    ) -> StringBuilder: ...
-    @overload
-    def AppendFormat(
-        self, provider: IFormatProvider, format: StringType, arg0: ObjectType
-    ) -> StringBuilder: ...
-    @overload
-    def AppendFormat(
-        self, provider: IFormatProvider, format: StringType, arg0: ObjectType, arg1: ObjectType
-    ) -> StringBuilder: ...
-    @overload
-    def AppendFormat(
-        self,
-        provider: IFormatProvider,
-        format: StringType,
-        arg0: ObjectType,
-        arg1: ObjectType,
-        arg2: ObjectType,
-    ) -> StringBuilder: ...
-    @overload
-    def AppendFormat(self, format: StringType, args: ArrayType[ObjectType]) -> StringBuilder: ...
-    @overload
-    def AppendFormat(
-        self, provider: IFormatProvider, format: StringType, args: ArrayType[ObjectType]
-    ) -> StringBuilder: ...
-    @overload
-    def AppendLine(self) -> StringBuilder: ...
-    @overload
-    def AppendLine(self, value: StringType) -> StringBuilder: ...
-    def Clear(self) -> StringBuilder: ...
-    def CopyTo(
-        self,
-        sourceIndex: IntType,
-        destination: ArrayType[CharType],
-        destinationIndex: IntType,
-        count: IntType,
-    ) -> VoidType: ...
-    def EnsureCapacity(self, capacity: IntType) -> IntType: ...
-    @overload
-    def Equals(self, sb: StringBuilder) -> BooleanType: ...
-    @overload
-    def Insert(self, index: IntType, value: StringType, count: IntType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: StringType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: SByteType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: ByteType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: ShortType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: CharType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: ArrayType[CharType]) -> StringBuilder: ...
-    @overload
-    def Insert(
-        self, index: IntType, value: ArrayType[CharType], startIndex: IntType, charCount: IntType
-    ) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: IntType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: LongType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: FloatType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: DoubleType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: DecimalType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: UShortType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: UIntType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: ULongType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: ObjectType) -> StringBuilder: ...
-    @overload
-    def Insert(self, index: IntType, value: BooleanType) -> StringBuilder: ...
-    def Remove(self, startIndex: IntType, length: IntType) -> StringBuilder: ...
-    @overload
-    def Replace(self, oldValue: StringType, newValue: StringType) -> StringBuilder: ...
-    @overload
-    def Replace(
-        self, oldValue: StringType, newValue: StringType, startIndex: IntType, count: IntType
-    ) -> StringBuilder: ...
-    @overload
-    def Replace(self, oldChar: CharType, newChar: CharType) -> StringBuilder: ...
-    @overload
-    def Replace(
-        self, oldChar: CharType, newChar: CharType, startIndex: IntType, count: IntType
-    ) -> StringBuilder: ...
-    @overload
-    def ToString(self) -> StringType: ...
-    @overload
-    def ToString(self, startIndex: IntType, length: IntType) -> StringType: ...
-    def get_Capacity(self) -> IntType: ...
-    def get_Chars(self, index: IntType) -> CharType: ...
-    def get_Length(self) -> IntType: ...
-    def get_MaxCapacity(self) -> IntType: ...
-    def set_Capacity(self, value: IntType) -> VoidType: ...
-    def set_Chars(self, index: IntType, value: CharType) -> VoidType: ...
-    def set_Length(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StringBuilderCache(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Acquire(capacity: IntType = 16) -> StringBuilder: ...
-    @staticmethod
-    def GetStringAndRelease(sb: StringBuilder) -> StringType: ...
-    @staticmethod
-    def Release(sb: StringBuilder) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SurrogateEncoder(ObjectType, ISerializable, IObjectReference):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetRealObject(self, context: StreamingContext) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UTF32Encoding(Encoding, ICloneable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, bigEndian: BooleanType, byteOrderMark: BooleanType): ...
-    @overload
-    def __init__(
-        self,
-        bigEndian: BooleanType,
-        byteOrderMark: BooleanType,
-        throwOnInvalidCharacters: BooleanType,
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    @overload
-    def GetByteCount(self, s: StringType) -> IntType: ...
-    @overload
-    def GetByteCount(self, chars: CharType, count: IntType) -> IntType: ...
-    @overload
-    def GetByteCount(
-        self, chars: ArrayType[CharType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        s: StringType,
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self, chars: CharType, charCount: IntType, bytes: ByteType, byteCount: IntType
-    ) -> IntType: ...
-    @overload
-    def GetCharCount(self, bytes: ByteType, count: IntType) -> IntType: ...
-    @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self, bytes: ByteType, byteCount: IntType, chars: CharType, charCount: IntType
-    ) -> IntType: ...
-    def GetDecoder(self) -> Decoder: ...
-    def GetEncoder(self) -> Encoder: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-    def GetPreamble(self) -> ArrayType[ByteType]: ...
-    @overload
-    def GetString(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UTF7Encoding(Encoding, ICloneable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, allowOptionals: BooleanType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    @overload
-    def GetByteCount(self, s: StringType) -> IntType: ...
-    @overload
-    def GetByteCount(self, chars: CharType, count: IntType) -> IntType: ...
-    @overload
-    def GetByteCount(
-        self, chars: ArrayType[CharType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        s: StringType,
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self, chars: CharType, charCount: IntType, bytes: ByteType, byteCount: IntType
-    ) -> IntType: ...
-    @overload
-    def GetCharCount(self, bytes: ByteType, count: IntType) -> IntType: ...
-    @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self, bytes: ByteType, byteCount: IntType, chars: CharType, charCount: IntType
-    ) -> IntType: ...
-    def GetDecoder(self) -> Decoder: ...
-    def GetEncoder(self) -> Encoder: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-    @overload
-    def GetString(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UTF8Encoding(Encoding, ICloneable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, encoderShouldEmitUTF8Identifier: BooleanType): ...
-    @overload
-    def __init__(
-        self, encoderShouldEmitUTF8Identifier: BooleanType, throwOnInvalidBytes: BooleanType
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    @overload
-    def GetByteCount(
-        self, chars: ArrayType[CharType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetByteCount(self, chars: StringType) -> IntType: ...
-    @overload
-    def GetByteCount(self, chars: CharType, count: IntType) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        s: StringType,
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self, chars: CharType, charCount: IntType, bytes: ByteType, byteCount: IntType
-    ) -> IntType: ...
-    @overload
-    def GetCharCount(self, bytes: ByteType, count: IntType) -> IntType: ...
-    @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self, bytes: ByteType, byteCount: IntType, chars: CharType, charCount: IntType
-    ) -> IntType: ...
-    def GetDecoder(self) -> Decoder: ...
-    def GetEncoder(self) -> Encoder: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-    def GetPreamble(self) -> ArrayType[ByteType]: ...
-    @overload
-    def GetString(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UnicodeEncoding(Encoding, ICloneable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def CharSize() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, bigEndian: BooleanType, byteOrderMark: BooleanType): ...
-    @overload
-    def __init__(
-        self, bigEndian: BooleanType, byteOrderMark: BooleanType, throwOnInvalidBytes: BooleanType
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    @overload
-    def GetByteCount(self, s: StringType) -> IntType: ...
-    @overload
-    def GetByteCount(self, chars: CharType, count: IntType) -> IntType: ...
-    @overload
-    def GetByteCount(
-        self, chars: ArrayType[CharType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        s: StringType,
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-        charCount: IntType,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetBytes(
-        self, chars: CharType, charCount: IntType, bytes: ByteType, byteCount: IntType
-    ) -> IntType: ...
-    @overload
-    def GetCharCount(self, bytes: ByteType, count: IntType) -> IntType: ...
-    @overload
-    def GetCharCount(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self,
-        bytes: ArrayType[ByteType],
-        byteIndex: IntType,
-        byteCount: IntType,
-        chars: ArrayType[CharType],
-        charIndex: IntType,
-    ) -> IntType: ...
-    @overload
-    def GetChars(
-        self, bytes: ByteType, byteCount: IntType, chars: CharType, charCount: IntType
-    ) -> IntType: ...
-    def GetDecoder(self) -> Decoder: ...
-    def GetEncoder(self) -> Encoder: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetMaxByteCount(self, charCount: IntType) -> IntType: ...
-    def GetMaxCharCount(self, byteCount: IntType) -> IntType: ...
-    def GetPreamble(self) -> ArrayType[ByteType]: ...
-    @overload
-    def GetString(
-        self, bytes: ArrayType[ByteType], index: IntType, count: IntType
-    ) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# ---------- Enums ---------- #
+        self, name: str, encoderFallback: EncoderFallback, decoderFallback: DecoderFallback
+    ) -> Encoding:
+        """
+
+        :param name:
+        :param encoderFallback:
+        :param decoderFallback:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ExtendedNormalizationForms(Enum):
-    FormC = 1
-    FormD = 2
-    FormKC = 5
-    FormKD = 6
-    FormIdna = 13
-    FormCDisallowUnassigned = 257
-    FormDDisallowUnassigned = 258
-    FormKCDisallowUnassigned = 261
-    FormKDDisallowUnassigned = 262
-    FormIdnaDisallowUnassigned = 269
+    """"""
+
+    FormC: ExtendedNormalizationForms = ...
+    """"""
+    FormD: ExtendedNormalizationForms = ...
+    """"""
+    FormKC: ExtendedNormalizationForms = ...
+    """"""
+    FormKD: ExtendedNormalizationForms = ...
+    """"""
+    FormIdna: ExtendedNormalizationForms = ...
+    """"""
+    FormCDisallowUnassigned: ExtendedNormalizationForms = ...
+    """"""
+    FormDDisallowUnassigned: ExtendedNormalizationForms = ...
+    """"""
+    FormKCDisallowUnassigned: ExtendedNormalizationForms = ...
+    """"""
+    FormKDDisallowUnassigned: ExtendedNormalizationForms = ...
+    """"""
+    FormIdnaDisallowUnassigned: ExtendedNormalizationForms = ...
+    """"""
+
+class GB18030Encoding(DBCSCodePageEncoding, ISerializable, ICloneable):
+    """"""
+
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ISCIIEncoding(EncodingNLS, ISerializable, ICloneable):
+    """"""
+
+    def __init__(self, codePage: int):
+        """
+
+        :param codePage:
+        """
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ISO2022Encoding(DBCSCodePageEncoding, ISerializable, ICloneable):
+    """"""
+
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class InternalDecoderBestFitFallback(DecoderFallback):
+    """"""
+
+    @classmethod
+    @property
+    def ExceptionFallback(cls) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @property
+    def MaxCharCount(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ReplacementFallback(cls) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    def CreateFallbackBuffer(self) -> DecoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class InternalDecoderBestFitFallbackBuffer(DecoderFallbackBuffer):
+    """"""
+
+    def __init__(self, fallback: InternalDecoderBestFitFallback):
+        """
+
+        :param fallback:
+        """
+    @property
+    def Remaining(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Fallback(self, bytesUnknown: Array[int], index: int) -> bool:
+        """
+
+        :param bytesUnknown:
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNextChar(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MovePrevious(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class InternalEncoderBestFitFallback(EncoderFallback):
+    """"""
+
+    @classmethod
+    @property
+    def ExceptionFallback(cls) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @property
+    def MaxCharCount(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ReplacementFallback(cls) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    def CreateFallbackBuffer(self) -> EncoderFallbackBuffer:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class InternalEncoderBestFitFallbackBuffer(EncoderFallbackBuffer):
+    """"""
+
+    def __init__(self, fallback: InternalEncoderBestFitFallback):
+        """
+
+        :param fallback:
+        """
+    @property
+    def Remaining(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Fallback(self, charUnknown: Char, index: int) -> bool:
+        """
+
+        :param charUnknown:
+        :param index:
+        :return:
+        """
+    @overload
+    def Fallback(self, charUnknownHigh: Char, charUnknownLow: Char, index: int) -> bool:
+        """
+
+        :param charUnknownHigh:
+        :param charUnknownLow:
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNextChar(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MovePrevious(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Latin1Encoding(EncodingNLS, ISerializable, ICloneable):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MLangCodePageEncoding(Object, IObjectReference, ISerializable):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetRealObject(self, context: StreamingContext) -> object:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Normalization(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class NormalizationForm(Enum):
-    FormC = 1
-    FormD = 2
-    FormKC = 5
-    FormKD = 6
+    """"""
 
-# No Delegates
+    FormC: NormalizationForm = ...
+    """"""
+    FormD: NormalizationForm = ...
+    """"""
+    FormKC: NormalizationForm = ...
+    """"""
+    FormKD: NormalizationForm = ...
+    """"""
 
-__all__ = [
-    ASCIIEncoding,
-    BaseCodePageEncoding,
-    CodePageEncoding,
-    DBCSCodePageEncoding,
-    Decoder,
-    DecoderExceptionFallback,
-    DecoderExceptionFallbackBuffer,
-    DecoderFallback,
-    DecoderFallbackBuffer,
-    DecoderFallbackException,
-    DecoderNLS,
-    DecoderReplacementFallback,
-    DecoderReplacementFallbackBuffer,
-    EUCJPEncoding,
-    Encoder,
-    EncoderExceptionFallback,
-    EncoderExceptionFallbackBuffer,
-    EncoderFallback,
-    EncoderFallbackBuffer,
-    EncoderFallbackException,
-    EncoderNLS,
-    EncoderReplacementFallback,
-    EncoderReplacementFallbackBuffer,
-    Encoding,
-    EncodingInfo,
-    EncodingNLS,
-    EncodingProvider,
-    GB18030Encoding,
-    ISCIIEncoding,
-    ISO2022Encoding,
-    InternalDecoderBestFitFallback,
-    InternalDecoderBestFitFallbackBuffer,
-    InternalEncoderBestFitFallback,
-    InternalEncoderBestFitFallbackBuffer,
-    Latin1Encoding,
-    MLangCodePageEncoding,
-    Normalization,
-    SBCSCodePageEncoding,
-    StringBuilder,
-    StringBuilderCache,
-    SurrogateEncoder,
-    UTF32Encoding,
-    UTF7Encoding,
-    UTF8Encoding,
-    UnicodeEncoding,
-    ExtendedNormalizationForms,
-    NormalizationForm,
-]
+class SBCSCodePageEncoding(BaseCodePageEncoding, ISerializable, ICloneable):
+    """"""
+
+    def __init__(self, codePage: int):
+        """
+
+        :param codePage:
+        """
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StringBuilder(Object, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, capacity: int):
+        """
+
+        :param capacity:
+        """
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, capacity: int, maxCapacity: int):
+        """
+
+        :param capacity:
+        :param maxCapacity:
+        """
+    @overload
+    def __init__(self, value: str, capacity: int):
+        """
+
+        :param value:
+        :param capacity:
+        """
+    @overload
+    def __init__(self, value: str, startIndex: int, length: int, capacity: int):
+        """
+
+        :param value:
+        :param startIndex:
+        :param length:
+        :param capacity:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Chars(self) -> Char:
+        """
+
+        :return:
+        """
+    @Chars.setter
+    def Chars(self, value: Char) -> None: ...
+    @property
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
+    @Length.setter
+    def Length(self, value: int) -> None: ...
+    @property
+    def MaxCapacity(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def Append(self, value: Array[Char]) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: bool) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: int) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: Char) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: Decimal) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: float) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: int) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: int) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: int) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: object) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: int) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: float) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: str) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: int) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: int) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: int) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Append(self, value: Char, valueCount: int) -> StringBuilder:
+        """
+
+        :param value:
+        :param valueCount:
+        :return:
+        """
+    @overload
+    def Append(self, value: Array[Char], startIndex: int, charCount: int) -> StringBuilder:
+        """
+
+        :param value:
+        :param startIndex:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def Append(self, value: str, startIndex: int, count: int) -> StringBuilder:
+        """
+
+        :param value:
+        :param startIndex:
+        :param count:
+        :return:
+        """
+    @overload
+    def AppendFormat(self, format: str, args: Array[object]) -> StringBuilder:
+        """
+
+        :param format:
+        :param args:
+        :return:
+        """
+    @overload
+    def AppendFormat(self, format: str, arg0: object) -> StringBuilder:
+        """
+
+        :param format:
+        :param arg0:
+        :return:
+        """
+    @overload
+    def AppendFormat(
+        self, provider: IFormatProvider, format: str, args: Array[object]
+    ) -> StringBuilder:
+        """
+
+        :param provider:
+        :param format:
+        :param args:
+        :return:
+        """
+    @overload
+    def AppendFormat(self, provider: IFormatProvider, format: str, arg0: object) -> StringBuilder:
+        """
+
+        :param provider:
+        :param format:
+        :param arg0:
+        :return:
+        """
+    @overload
+    def AppendFormat(self, format: str, arg0: object, arg1: object) -> StringBuilder:
+        """
+
+        :param format:
+        :param arg0:
+        :param arg1:
+        :return:
+        """
+    @overload
+    def AppendFormat(
+        self, provider: IFormatProvider, format: str, arg0: object, arg1: object
+    ) -> StringBuilder:
+        """
+
+        :param provider:
+        :param format:
+        :param arg0:
+        :param arg1:
+        :return:
+        """
+    @overload
+    def AppendFormat(self, format: str, arg0: object, arg1: object, arg2: object) -> StringBuilder:
+        """
+
+        :param format:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :return:
+        """
+    @overload
+    def AppendFormat(
+        self, provider: IFormatProvider, format: str, arg0: object, arg1: object, arg2: object
+    ) -> StringBuilder:
+        """
+
+        :param provider:
+        :param format:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        :return:
+        """
+    @overload
+    def AppendLine(self) -> StringBuilder:
+        """
+
+        :return:
+        """
+    @overload
+    def AppendLine(self, value: str) -> StringBuilder:
+        """
+
+        :param value:
+        :return:
+        """
+    def Clear(self) -> StringBuilder:
+        """
+
+        :return:
+        """
+    def CopyTo(
+        self, sourceIndex: int, destination: Array[Char], destinationIndex: int, count: int
+    ) -> None:
+        """
+
+        :param sourceIndex:
+        :param destination:
+        :param destinationIndex:
+        :param count:
+        """
+    def EnsureCapacity(self, capacity: int) -> int:
+        """
+
+        :param capacity:
+        :return:
+        """
+    @overload
+    def Equals(self, sb: StringBuilder) -> bool:
+        """
+
+        :param sb:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: Array[Char]) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: bool) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: int) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: Char) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: Decimal) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: float) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: int) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: int) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: int) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: int) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: float) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: str) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: int) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: int) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: int) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: str, count: int) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :param count:
+        :return:
+        """
+    @overload
+    def Insert(
+        self, index: int, value: Array[Char], startIndex: int, charCount: int
+    ) -> StringBuilder:
+        """
+
+        :param index:
+        :param value:
+        :param startIndex:
+        :param charCount:
+        :return:
+        """
+    def Remove(self, startIndex: int, length: int) -> StringBuilder:
+        """
+
+        :param startIndex:
+        :param length:
+        :return:
+        """
+    @overload
+    def Replace(self, oldChar: Char, newChar: Char) -> StringBuilder:
+        """
+
+        :param oldChar:
+        :param newChar:
+        :return:
+        """
+    @overload
+    def Replace(self, oldValue: str, newValue: str) -> StringBuilder:
+        """
+
+        :param oldValue:
+        :param newValue:
+        :return:
+        """
+    @overload
+    def Replace(self, oldChar: Char, newChar: Char, startIndex: int, count: int) -> StringBuilder:
+        """
+
+        :param oldChar:
+        :param newChar:
+        :param startIndex:
+        :param count:
+        :return:
+        """
+    @overload
+    def Replace(self, oldValue: str, newValue: str, startIndex: int, count: int) -> StringBuilder:
+        """
+
+        :param oldValue:
+        :param newValue:
+        :param startIndex:
+        :param count:
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self, startIndex: int, length: int) -> str:
+        """
+
+        :param startIndex:
+        :param length:
+        :return:
+        """
+
+class StringBuilderCache(ABC, Object):
+    """"""
+
+    @classmethod
+    def Acquire(cls, capacity: int = ...) -> StringBuilder:
+        """
+
+        :param capacity:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetStringAndRelease(cls, sb: StringBuilder) -> str:
+        """
+
+        :param sb:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Release(cls, sb: StringBuilder) -> None:
+        """
+
+        :param sb:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SurrogateEncoder(Object, IObjectReference, ISerializable):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetRealObject(self, context: StreamingContext) -> object:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class UTF32Encoding(Encoding, ICloneable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, bigEndian: bool, byteOrderMark: bool):
+        """
+
+        :param bigEndian:
+        :param byteOrderMark:
+        """
+    @overload
+    def __init__(self, bigEndian: bool, byteOrderMark: bool, throwOnInvalidCharacters: bool):
+        """
+
+        :param bigEndian:
+        :param byteOrderMark:
+        :param throwOnInvalidCharacters:
+        """
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class UTF7Encoding(Encoding, ICloneable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, allowOptionals: bool):
+        """
+
+        :param allowOptionals:
+        """
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class UTF8Encoding(Encoding, ICloneable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, encoderShouldEmitUTF8Identifier: bool):
+        """
+
+        :param encoderShouldEmitUTF8Identifier:
+        """
+    @overload
+    def __init__(self, encoderShouldEmitUTF8Identifier: bool, throwOnInvalidBytes: bool):
+        """
+
+        :param encoderShouldEmitUTF8Identifier:
+        :param throwOnInvalidBytes:
+        """
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class UnicodeEncoding(Encoding, ICloneable):
+    """"""
+
+    CharSize: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, bigEndian: bool, byteOrderMark: bool):
+        """
+
+        :param bigEndian:
+        :param byteOrderMark:
+        """
+    @overload
+    def __init__(self, bigEndian: bool, byteOrderMark: bool, throwOnInvalidBytes: bool):
+        """
+
+        :param bigEndian:
+        :param byteOrderMark:
+        :param throwOnInvalidBytes:
+        """
+    @classmethod
+    @property
+    def ASCII(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def BigEndianUnicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def BodyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CodePage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DecoderFallback(self) -> DecoderFallback:
+        """
+
+        :return:
+        """
+    @DecoderFallback.setter
+    def DecoderFallback(self, value: DecoderFallback) -> None: ...
+    @classmethod
+    @property
+    def Default(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def EncoderFallback(self) -> EncoderFallback:
+        """
+
+        :return:
+        """
+    @EncoderFallback.setter
+    def EncoderFallback(self, value: EncoderFallback) -> None: ...
+    @property
+    def EncodingName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HeaderName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBrowserSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsDisplay(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsMailNewsSave(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSingleByte(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF32(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF7(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UTF8(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def Unicode(cls) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def WebName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def WindowsCodePage(self) -> int:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char]) -> int:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Char, count: int) -> int:
+        """
+
+        :param chars:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetByteCount(self, chars: Array[Char], index: int, count: int) -> int:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char]) -> Array[int]:
+        """
+
+        :param chars:
+        :return:
+        """
+    @overload
+    def GetBytes(self, s: str) -> Array[int]:
+        """
+
+        :param s:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Array[Char], index: int, count: int) -> Array[int]:
+        """
+
+        :param chars:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetBytes(self, chars: Char, charCount: int, bytes: int, byteCount: int) -> int:
+        """
+
+        :param chars:
+        :param charCount:
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, chars: Array[Char], charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param chars:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetBytes(
+        self, s: str, charIndex: int, charCount: int, bytes: Array[int], byteIndex: int
+    ) -> int:
+        """
+
+        :param s:
+        :param charIndex:
+        :param charCount:
+        :param bytes:
+        :param byteIndex:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int]) -> int:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetCharCount(self, bytes: Array[int], index: int, count: int) -> int:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int]) -> Array[Char]:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: Array[int], index: int, count: int) -> Array[Char]:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def GetChars(self, bytes: int, byteCount: int, chars: Char, charCount: int) -> int:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :param chars:
+        :param charCount:
+        :return:
+        """
+    @overload
+    def GetChars(
+        self, bytes: Array[int], byteIndex: int, byteCount: int, chars: Array[Char], charIndex: int
+    ) -> int:
+        """
+
+        :param bytes:
+        :param byteIndex:
+        :param byteCount:
+        :param chars:
+        :param charIndex:
+        :return:
+        """
+    def GetDecoder(self) -> Decoder:
+        """
+
+        :return:
+        """
+    def GetEncoder(self) -> Encoder:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMaxByteCount(self, charCount: int) -> int:
+        """
+
+        :param charCount:
+        :return:
+        """
+    def GetMaxCharCount(self, byteCount: int) -> int:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def GetPreamble(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int]) -> str:
+        """
+
+        :param bytes:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: int, byteCount: int) -> str:
+        """
+
+        :param bytes:
+        :param byteCount:
+        :return:
+        """
+    @overload
+    def GetString(self, bytes: Array[int], index: int, count: int) -> str:
+        """
+
+        :param bytes:
+        :param index:
+        :param count:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsAlwaysNormalized(self, form: NormalizationForm) -> bool:
+        """
+
+        :param form:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

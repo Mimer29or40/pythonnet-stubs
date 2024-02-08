@@ -1,111 +1,129 @@
 from __future__ import annotations
 
-from typing import List
-from typing import Protocol
-from typing import Union
-
 from System import Array
 from System import IntPtr
 from System import MarshalByRefObject
 from System import Object
-from System import Void
+from System import Type
 from System.Runtime.Remoting import ObjRef
 from System.Runtime.Remoting.Activation import IConstructionCallMessage
 from System.Runtime.Remoting.Activation import IConstructionReturnMessage
 from System.Runtime.Remoting.Proxies import RealProxy
 
-# ---------- Types ---------- #
+class EnterpriseServicesHelper(Object):
+    """"""
 
-ArrayType = Union[List, Array]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class EnterpriseServicesHelper(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
+    def __init__(self):
+        """"""
+    @classmethod
     def CreateConstructionReturnMessage(
-        ctorMsg: IConstructionCallMessage, retObj: MarshalByRefObject
-    ) -> IConstructionReturnMessage: ...
-    @staticmethod
-    def SwitchWrappers(oldcp: RealProxy, newcp: RealProxy) -> VoidType: ...
-    @staticmethod
-    def WrapIUnknownWithComObject(punk: NIntType) -> ObjectType: ...
+        cls, ctorMsg: IConstructionCallMessage, retObj: MarshalByRefObject
+    ) -> IConstructionReturnMessage:
+        """
 
-    # No Events
+        :param ctorMsg:
+        :param retObj:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @classmethod
+    def SwitchWrappers(cls, oldcp: RealProxy, newcp: RealProxy) -> None:
+        """
 
-    # No Sub Enums
+        :param oldcp:
+        :param newcp:
+        """
+    def ToString(self) -> str:
+        """
 
-class TrackingServices(ObjectType):
-    # No Fields
+        :return:
+        """
+    @classmethod
+    def WrapIUnknownWithComObject(cls, punk: IntPtr) -> object:
+        """
 
-    # ---------- Constructors ---------- #
+        :param punk:
+        :return:
+        """
 
-    def __init__(self): ...
+class ITrackingHandler:
+    """"""
 
-    # ---------- Properties ---------- #
+    def DisconnectedObject(self, obj: object) -> None:
+        """
 
-    @staticmethod
+        :param obj:
+        """
+    def MarshaledObject(self, obj: object, _or: ObjRef) -> None:
+        """
+
+        :param obj:
+        :param _or:
+        """
+    def UnmarshaledObject(self, obj: object, _or: ObjRef) -> None:
+        """
+
+        :param obj:
+        :param _or:
+        """
+
+class TrackingServices(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
     @property
-    def RegisteredHandlers() -> ArrayType[ITrackingHandler]: ...
+    def RegisteredHandlers(cls) -> Array[ITrackingHandler]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @staticmethod
-    def RegisterTrackingHandler(handler: ITrackingHandler) -> VoidType: ...
-    @staticmethod
-    def UnregisterTrackingHandler(handler: ITrackingHandler) -> VoidType: ...
-    @staticmethod
-    def get_RegisteredHandlers() -> ArrayType[ITrackingHandler]: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @classmethod
+    def RegisterTrackingHandler(cls, handler: ITrackingHandler) -> None:
+        """
 
-    # No Sub Structs
+        :param handler:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @classmethod
+    def UnregisterTrackingHandler(cls, handler: ITrackingHandler) -> None:
+        """
 
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class ITrackingHandler(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def DisconnectedObject(self, obj: ObjectType) -> VoidType: ...
-    def MarshaledObject(self, obj: ObjectType, _or: ObjRef) -> VoidType: ...
-    def UnmarshaledObject(self, obj: ObjectType, _or: ObjRef) -> VoidType: ...
-
-    # No Events
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    EnterpriseServicesHelper,
-    TrackingServices,
-    ITrackingHandler,
-]
+        :param handler:
+        """

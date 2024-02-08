@@ -1,167 +1,216 @@
 from __future__ import annotations
 
-from typing import Protocol
-from typing import Union
-
-from System import Boolean
 from System import Enum
-from System import EventHandler
 from System import Guid
-from System import Int32
-from System import String
-from System import UInt64
-from System import Void
-from System.Runtime.InteropServices.WindowsRuntime import EventRegistrationToken
+from System import Type
 from System.Runtime.InteropServices.WindowsRuntime import RuntimeClass
+from System.Runtime.Remoting import ObjRef
 
-# ---------- Types ---------- #
+class AsyncCausalityStatus(Enum):
+    """"""
 
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-StringType = Union[str, String]
-ULongType = Union[int, UInt64]
-VoidType = Union[None, Void]
+    Started: AsyncCausalityStatus = ...
+    """"""
+    Completed: AsyncCausalityStatus = ...
+    """"""
+    Canceled: AsyncCausalityStatus = ...
+    """"""
+    Error: AsyncCausalityStatus = ...
+    """"""
 
-# ---------- Classes ---------- #
+class CausalityRelation(Enum):
+    """"""
 
-class TracingStatusChangedEventArgs(RuntimeClass, ITracingStatusChangedEventArgs):
-    # No Fields
+    AssignDelegate: CausalityRelation = ...
+    """"""
+    Join: CausalityRelation = ...
+    """"""
+    Choice: CausalityRelation = ...
+    """"""
+    Cancel: CausalityRelation = ...
+    """"""
+    Error: CausalityRelation = ...
+    """"""
 
-    # ---------- Constructors ---------- #
+class CausalitySource(Enum):
+    """"""
 
-    def __init__(self): ...
+    Application: CausalitySource = ...
+    """"""
+    Library: CausalitySource = ...
+    """"""
+    System: CausalitySource = ...
+    """"""
 
-    # ---------- Properties ---------- #
+class CausalitySynchronousWork(Enum):
+    """"""
 
-    @property
-    def Enabled(self) -> BooleanType: ...
-    @property
-    def TraceLevel(self) -> CausalityTraceLevel: ...
+    CompletionNotification: CausalitySynchronousWork = ...
+    """"""
+    ProgressNotification: CausalitySynchronousWork = ...
+    """"""
+    Execution: CausalitySynchronousWork = ...
+    """"""
 
-    # ---------- Methods ---------- #
+class CausalityTraceLevel(Enum):
+    """"""
 
-    def get_Enabled(self) -> BooleanType: ...
-    def get_TraceLevel(self) -> CausalityTraceLevel: ...
+    Required: CausalityTraceLevel = ...
+    """"""
+    Important: CausalityTraceLevel = ...
+    """"""
+    Verbose: CausalityTraceLevel = ...
+    """"""
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IAsyncCausalityTracerStatics(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
+class IAsyncCausalityTracerStatics:
+    """"""
 
     def TraceOperationCompletion(
         self,
         traceLevel: CausalityTraceLevel,
         source: CausalitySource,
         platformId: Guid,
-        operationId: ULongType,
+        operationId: int,
         status: AsyncCausalityStatus,
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param traceLevel:
+        :param source:
+        :param platformId:
+        :param operationId:
+        :param status:
+        """
     def TraceOperationCreation(
         self,
         traceLevel: CausalityTraceLevel,
         source: CausalitySource,
         platformId: Guid,
-        operationId: ULongType,
-        operationName: StringType,
-        relatedContext: ULongType,
-    ) -> VoidType: ...
+        operationId: int,
+        operationName: str,
+        relatedContext: int,
+    ) -> None:
+        """
+
+        :param traceLevel:
+        :param source:
+        :param platformId:
+        :param operationId:
+        :param operationName:
+        :param relatedContext:
+        """
     def TraceOperationRelation(
         self,
         traceLevel: CausalityTraceLevel,
         source: CausalitySource,
         platformId: Guid,
-        operationId: ULongType,
+        operationId: int,
         relation: CausalityRelation,
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param traceLevel:
+        :param source:
+        :param platformId:
+        :param operationId:
+        :param relation:
+        """
     def TraceSynchronousWorkCompletion(
         self,
         traceLevel: CausalityTraceLevel,
         source: CausalitySource,
         work: CausalitySynchronousWork,
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param traceLevel:
+        :param source:
+        :param work:
+        """
     def TraceSynchronousWorkStart(
         self,
         traceLevel: CausalityTraceLevel,
         source: CausalitySource,
         platformId: Guid,
-        operationId: ULongType,
+        operationId: int,
         work: CausalitySynchronousWork,
-    ) -> VoidType: ...
-    def add_TracingStatusChanged(
-        self, eventHandler: EventHandler[TracingStatusChangedEventArgs]
-    ) -> EventRegistrationToken: ...
-    def remove_TracingStatusChanged(self, token: EventRegistrationToken) -> VoidType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param traceLevel:
+        :param source:
+        :param platformId:
+        :param operationId:
+        :param work:
+        """
 
-class ITracingStatusChangedEventArgs(Protocol):
-    # ---------- Properties ---------- #
+class ITracingStatusChangedEventArgs:
+    """"""
 
     @property
-    def Enabled(self) -> BooleanType: ...
+    def Enabled(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def TraceLevel(self) -> CausalityTraceLevel: ...
+    def TraceLevel(self) -> CausalityTraceLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
 
-    def get_Enabled(self) -> BooleanType: ...
-    def get_TraceLevel(self) -> CausalityTraceLevel: ...
+class TracingStatusChangedEventArgs(RuntimeClass, ITracingStatusChangedEventArgs):
+    """"""
 
-    # No Events
+    def __init__(self):
+        """"""
+    @property
+    def Enabled(self) -> bool:
+        """
 
-# ---------- Enums ---------- #
+        :return:
+        """
+    @property
+    def TraceLevel(self) -> CausalityTraceLevel:
+        """
 
-class AsyncCausalityStatus(Enum):
-    Started = 0
-    Completed = 1
-    Canceled = 2
-    Error = 3
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-class CausalityRelation(Enum):
-    AssignDelegate = 0
-    Join = 1
-    Choice = 2
-    Cancel = 3
-    Error = 4
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class CausalitySource(Enum):
-    Application = 0
-    Library = 1
-    System = 2
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class CausalitySynchronousWork(Enum):
-    CompletionNotification = 0
-    ProgressNotification = 1
-    Execution = 2
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-class CausalityTraceLevel(Enum):
-    Required = 0
-    Important = 1
-    Verbose = 2
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-# No Delegates
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
 
-__all__ = [
-    TracingStatusChangedEventArgs,
-    IAsyncCausalityTracerStatics,
-    ITracingStatusChangedEventArgs,
-    AsyncCausalityStatus,
-    CausalityRelation,
-    CausalitySource,
-    CausalitySynchronousWork,
-    CausalityTraceLevel,
-]
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

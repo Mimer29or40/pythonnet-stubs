@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from abc import ABC
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import List
+from typing import Iterator
 from typing import Optional
-from typing import Protocol
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Array
@@ -30,7 +30,6 @@ from System import Int16
 from System import Int32
 from System import Int64
 from System import IntPtr
-from System import Nullable
 from System import Object
 from System import SByte
 from System import Single
@@ -43,33 +42,36 @@ from System import UInt32
 from System import UInt64
 from System import UIntPtr
 from System import ValueType
-from System import Void
+from System.Collections import IDictionary
 from System.Collections import IEnumerable
+from System.Collections import IEnumerator
 from System.Collections.Generic import ICollection
 from System.Collections.Generic import IDictionary
 from System.Collections.Generic import IEnumerable
-from System.Collections.Generic import IEnumerator
 from System.Collections.Generic import IList
 from System.Collections.Generic import KeyValuePair
 from System.Collections.Generic import List
 from System.Collections.ObjectModel import ReadOnlyCollection
+from System.Diagnostics.Tracing.EventProvider import WriteEventErrorCode
+from System.Diagnostics.Tracing.ManifestEnvelope import ManifestFormats
 from System.Reflection import Assembly
+from System.Reflection import MethodBase
 from System.Reflection import MethodInfo
 from System.Reflection import PropertyInfo
 from System.Resources import ResourceManager
 from System.Runtime.InteropServices import _Attribute
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Serialization import ISerializable
+from System.Runtime.Serialization import SerializationInfo
+from System.Runtime.Serialization import StreamingContext
 
-# ---------- Types ---------- #
-
-AttributeType = TypeVar("AttributeType", bound=Attribute)
+AttributeType = TypeVar("AttributeType")
 ContainerType = TypeVar("ContainerType")
 DataType = TypeVar("DataType")
 ElementType = TypeVar("ElementType")
 EnumType = TypeVar("EnumType")
-ItemType = TypeVar("ItemType", bound=ConcurrentSetItem[KeyType, ItemType])
-IterableType = TypeVar("IterableType", bound=IEnumerable[ElementType])
+ItemType = TypeVar("ItemType")
+IterableType = TypeVar("IterableType")
 K = TypeVar("K")
 KeyType = TypeVar("KeyType")
 T = TypeVar("T")
@@ -77,3979 +79,9304 @@ UnderlyingType = TypeVar("UnderlyingType")
 V = TypeVar("V")
 ValueType = TypeVar("ValueType")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-CharType = Union[str, Char]
-DecimalType = Union[float, Decimal]
-DoubleType = Union[float, Double]
-FloatType = Union[float, Single]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-NUIntType = Union[int, UIntPtr]
-NullableType = Union[Optional, Nullable]
-ObjectType = Object
-SByteType = Union[int, SByte]
-ShortType = Union[int, Int16]
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-UIntType = Union[int, UInt32]
-ULongType = Union[int, UInt64]
-UShortType = Union[int, UInt16]
-VoidType = Union[None, Void]
-
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
+class ActivityFilter(Object, IDisposable):
+    """"""
 
-class ActivityFilter(ObjectType, IDisposable):
-    # No Fields
+    @classmethod
+    def DisableFilter(cls, filterList: ActivityFilter, source: EventSource) -> None:
+        """
 
-    # No Constructors
+        :param filterList:
+        :param source:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def DisableFilter(
-        filterList: ActivityFilter, source: EventSource
-    ) -> Tuple[VoidType, ActivityFilter]: ...
-    def Dispose(self) -> VoidType: ...
-    @staticmethod
+        :param obj:
+        :return:
+        """
+    @classmethod
     def FlowActivityIfNeeded(
-        filterList: ActivityFilter, currentActivityId: Guid, childActivityID: Guid
-    ) -> VoidType: ...
-    @staticmethod
-    def GetFilter(filterList: ActivityFilter, source: EventSource) -> ActivityFilter: ...
-    def GetFilterAsTuple(self, sourceGuid: Guid) -> IEnumerable[Tuple[IntType, IntType]]: ...
-    @staticmethod
-    def IsCurrentActivityActive(filterList: ActivityFilter) -> BooleanType: ...
-    @staticmethod
+        cls, filterList: ActivityFilter, currentActivityId: Guid, childActivityID: Guid
+    ) -> None:
+        """
+
+        :param filterList:
+        :param currentActivityId:
+        :param childActivityID:
+        """
+    @classmethod
+    def GetFilter(cls, filterList: ActivityFilter, source: EventSource) -> ActivityFilter:
+        """
+
+        :param filterList:
+        :param source:
+        :return:
+        """
+    def GetFilterAsTuple(self, sourceGuid: Guid) -> IEnumerable[Tuple, int]:
+        """
+
+        :param sourceGuid:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsCurrentActivityActive(cls, filterList: ActivityFilter) -> bool:
+        """
+
+        :param filterList:
+        :return:
+        """
+    @classmethod
     def PassesActivityFilter(
+        cls,
         filterList: ActivityFilter,
         childActivityID: Guid,
-        triggeringEvent: BooleanType,
+        triggeringEvent: bool,
         source: EventSource,
-        eventId: IntType,
-    ) -> BooleanType: ...
-    @staticmethod
+        eventId: int,
+    ) -> bool:
+        """
+
+        :param filterList:
+        :param childActivityID:
+        :param triggeringEvent:
+        :param source:
+        :param eventId:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
     def UpdateFilter(
+        cls,
         filterList: ActivityFilter,
         source: EventSource,
-        perEventSourceSessionId: IntType,
-        startEvents: StringType,
-    ) -> Tuple[VoidType, ActivityFilter]: ...
-    @staticmethod
+        perEventSourceSessionId: int,
+        startEvents: str,
+    ) -> None:
+        """
+
+        :param filterList:
+        :param source:
+        :param perEventSourceSessionId:
+        :param startEvents:
+        """
+    @classmethod
     def UpdateKwdTriggers(
+        cls,
         activityFilter: ActivityFilter,
         sourceGuid: Guid,
         source: EventSource,
         sessKeywords: EventKeywords,
-    ) -> VoidType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param activityFilter:
+        :param sourceGuid:
+        :param source:
+        :param sessKeywords:
+        """
 
-    # No Sub Classes
+class ActivityTracker(Object):
+    """"""
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ActivityTracker(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+    def __init__(self):
+        """"""
+    @classmethod
     @property
-    def Instance() -> ActivityTracker: ...
+    def Instance(cls) -> ActivityTracker:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Enable(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Enable(self) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     def OnStart(
         self,
-        providerName: StringType,
-        activityName: StringType,
-        task: IntType,
+        providerName: str,
+        activityName: str,
+        task: int,
         activityId: Guid,
         relatedActivityId: Guid,
         options: EventActivityOptions,
-    ) -> Tuple[VoidType, Guid, Guid]: ...
-    def OnStop(
-        self, providerName: StringType, activityName: StringType, task: IntType, activityId: Guid
-    ) -> Tuple[VoidType, Guid]: ...
-    @staticmethod
-    def get_Instance() -> ActivityTracker: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param providerName:
+        :param activityName:
+        :param task:
+        :param activityId:
+        :param relatedActivityId:
+        :param options:
+        """
+    def OnStop(self, providerName: str, activityName: str, task: int, activityId: Guid) -> None:
+        """
 
-    # No Sub Classes
+        :param providerName:
+        :param activityName:
+        :param task:
+        :param activityId:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class ArrayTypeInfo(Generic[ElementType], TraceLoggingTypeInfo[Array[ElementType]]):
+    """"""
 
-    # No Sub Enums
+    def __init__(self, elementInfo: TraceLoggingTypeInfo[ElementType]):
+        """
 
-class ArrayTypeInfo(Generic[ElementType], TraceLoggingTypeInfo[ArrayType[ElementType]]):
-    # No Fields
+        :param elementInfo:
+        """
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[ElementType]]:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    def __init__(self, elementInfo: TraceLoggingTypeInfo[ElementType]): ...
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
 
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: ElementType
-    ) -> Tuple[VoidType, ElementType]: ...
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: ElementType) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class BooleanArrayTypeInfo(TraceLoggingTypeInfo[Array[Boolean]]):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[bool]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-class BooleanArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[BooleanType]]):
-    # No Fields
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: BooleanType
-    ) -> Tuple[VoidType, BooleanType]: ...
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: bool) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class BooleanTypeInfo(TraceLoggingTypeInfo[Boolean]):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[bool]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-class BooleanTypeInfo(TraceLoggingTypeInfo[BooleanType]):
-    # No Fields
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: BooleanType
-    ) -> Tuple[VoidType, BooleanType]: ...
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: bool) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class ByteArrayTypeInfo(TraceLoggingTypeInfo[Array[Byte]]):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[int]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-class ByteArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[ByteType]]):
-    # No Fields
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: ByteType
-    ) -> Tuple[VoidType, ByteType]: ...
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class ByteTypeInfo(TraceLoggingTypeInfo[Byte]):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-class ByteTypeInfo(TraceLoggingTypeInfo[ByteType]):
-    # No Fields
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: ByteType
-    ) -> Tuple[VoidType, ByteType]: ...
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class CharArrayTypeInfo(TraceLoggingTypeInfo[Array[Char]]):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[Char]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-class CharArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[CharType]]):
-    # No Fields
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: CharType
-    ) -> Tuple[VoidType, CharType]: ...
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: Char) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class CharTypeInfo(TraceLoggingTypeInfo[Char]):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Char]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-class CharTypeInfo(TraceLoggingTypeInfo[CharType]):
-    # No Fields
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: CharType
-    ) -> Tuple[VoidType, CharType]: ...
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: Char) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param collector:
+        :param value:
+        """
 
 class ClassPropertyWriter(Generic[ContainerType, ValueType], PropertyAccessor[ContainerType]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, property: PropertyAnalysis):
+        """
 
-    def __init__(self, property: PropertyAnalysis): ...
+        :param property:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: ContainerType) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def GetData(self, container: ContainerType) -> ObjectType: ...
-    def Write(
-        self, collector: TraceLoggingDataCollector, container: ContainerType
-    ) -> Tuple[VoidType, ContainerType]: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Write(self, collector: TraceLoggingDataCollector, value: ContainerType) -> None:
+        """
 
-    # No Sub Structs
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Interfaces
+class ConcurrentSet(Generic[KeyType, ItemType], ValueType):
+    """"""
 
-    # No Sub Enums
+    def Equals(self, obj: object) -> bool:
+        """
 
-class ConcurrentSetItem(Protocol[KeyType, ItemType], ObjectType):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def GetOrAdd(self, newItem: ItemType) -> ItemType:
+        """
 
-    # No Properties
+        :param newItem:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryGet(self, key: KeyType) -> ItemType:
+        """
+
+        :param key:
+        :return:
+        """
+
+class ConcurrentSetItem(ABC, Generic[KeyType, ItemType], Object):
+    """"""
 
     @overload
-    def Compare(self, other: ItemType) -> IntType: ...
+    def Compare(self, other: ItemType) -> int:
+        """
+
+        :param other:
+        :return:
+        """
     @overload
-    def Compare(self, key: KeyType) -> IntType: ...
+    def Compare(self, key: KeyType) -> int:
+        """
 
-    # No Events
+        :param key:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+
+class ControllerCommand(Enum):
+    """"""
+
+    Update: ControllerCommand = ...
+    """"""
+    Disable: ControllerCommand = ...
+    """"""
+    Enable: ControllerCommand = ...
+    """"""
+    SendManifest: ControllerCommand = ...
+    """"""
+
+class DataCollector(ValueType):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class DateTimeOffsetTypeInfo(TraceLoggingTypeInfo[DateTimeOffset]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[DateTimeOffset]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: DateTimeOffset
-    ) -> Tuple[VoidType, DateTimeOffset]: ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: DateTimeOffset) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param collector:
+        :param value:
+        """
 
 class DateTimeTypeInfo(TraceLoggingTypeInfo[DateTime]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[DateTime]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: DateTime
-    ) -> Tuple[VoidType, DateTime]: ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: DateTime) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class DecimalTypeInfo(TraceLoggingTypeInfo[Decimal]):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Decimal]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-class DecimalTypeInfo(TraceLoggingTypeInfo[DecimalType]):
-    # No Fields
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: DecimalType
-    ) -> Tuple[VoidType, DecimalType]: ...
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: Decimal) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class DoubleArrayTypeInfo(TraceLoggingTypeInfo[Array[Double]]):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[float]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-class DoubleArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[DoubleType]]):
-    # No Fields
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: DoubleType
-    ) -> Tuple[VoidType, DoubleType]: ...
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: float) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class DoubleTypeInfo(TraceLoggingTypeInfo[Double]):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[float]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-class DoubleTypeInfo(TraceLoggingTypeInfo[DoubleType]):
-    # No Fields
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: DoubleType
-    ) -> Tuple[VoidType, DoubleType]: ...
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: float) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class EmptyStruct(ValueType):
+    """"""
 
-    # No Sub Interfaces
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class EnumByteTypeInfo(Generic[EnumType], TraceLoggingTypeInfo[EnumType]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[EnumType]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: EnumType
-    ) -> Tuple[VoidType, EnumType]: ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: EnumType) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class EnumHelper(ABC, Generic[UnderlyingType], Object):
+    """"""
 
-    # No Sub Interfaces
+    @classmethod
+    def Cast(cls, value: ValueType) -> UnderlyingType:
+        """
 
-    # No Sub Enums
+        :param value:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class EnumHelper(Protocol[UnderlyingType], ObjectType):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Properties
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Cast(value: ValueType) -> UnderlyingType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class EnumInt16TypeInfo(Generic[EnumType], TraceLoggingTypeInfo[EnumType]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[EnumType]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: EnumType
-    ) -> Tuple[VoidType, EnumType]: ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: EnumType) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param collector:
+        :param value:
+        """
 
 class EnumInt32TypeInfo(Generic[EnumType], TraceLoggingTypeInfo[EnumType]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[EnumType]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: EnumType
-    ) -> Tuple[VoidType, EnumType]: ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: EnumType) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param collector:
+        :param value:
+        """
 
 class EnumInt64TypeInfo(Generic[EnumType], TraceLoggingTypeInfo[EnumType]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[EnumType]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: EnumType
-    ) -> Tuple[VoidType, EnumType]: ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: EnumType) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param collector:
+        :param value:
+        """
 
 class EnumSByteTypeInfo(Generic[EnumType], TraceLoggingTypeInfo[EnumType]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[EnumType]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: EnumType
-    ) -> Tuple[VoidType, EnumType]: ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: EnumType) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param collector:
+        :param value:
+        """
 
 class EnumUInt16TypeInfo(Generic[EnumType], TraceLoggingTypeInfo[EnumType]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[EnumType]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: EnumType
-    ) -> Tuple[VoidType, EnumType]: ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: EnumType) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param collector:
+        :param value:
+        """
 
 class EnumUInt32TypeInfo(Generic[EnumType], TraceLoggingTypeInfo[EnumType]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[EnumType]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: EnumType
-    ) -> Tuple[VoidType, EnumType]: ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: EnumType) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param collector:
+        :param value:
+        """
 
 class EnumUInt64TypeInfo(Generic[EnumType], TraceLoggingTypeInfo[EnumType]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[EnumType]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: EnumType
-    ) -> Tuple[VoidType, EnumType]: ...
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: EnumType) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param collector:
+        :param value:
+        """
 
 class EnumerableTypeInfo(Generic[IterableType, ElementType], TraceLoggingTypeInfo[IterableType]):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, elementInfo: TraceLoggingTypeInfo[ElementType]):
+        """
 
-    def __init__(self, elementInfo: TraceLoggingTypeInfo[ElementType]): ...
+        :param elementInfo:
+        """
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[IterableType]:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
 
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: IterableType
-    ) -> Tuple[VoidType, IterableType]: ...
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: IterableType) -> None:
+        """"""
     def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
 
-    # No Events
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param collector:
+        :param value:
+        """
 
-    # No Sub Structs
+class EtwSession(Object):
+    """"""
 
-    # No Sub Interfaces
+    m_activityFilter: Final[ActivityFilter] = ...
+    """
+    
+    :return: 
+    """
+    m_etwSessionId: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetEtwSession(cls, etwSessionId: int, bCreateIfNeeded: bool = ...) -> EtwSession:
+        """
 
-class EtwSession(ObjectType):
-    # ---------- Fields ---------- #
+        :param etwSessionId:
+        :param bCreateIfNeeded:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    @property
-    def m_activityFilter(self) -> ActivityFilter: ...
-    @m_activityFilter.setter
-    def m_activityFilter(self, value: ActivityFilter) -> None: ...
-    @property
-    def m_etwSessionId(self) -> IntType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @classmethod
+    def RemoveEtwSession(cls, etwSession: EtwSession) -> None:
+        """
 
-    # No Properties
+        :param etwSession:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
 
-    @staticmethod
-    def GetEtwSession(etwSessionId: IntType, bCreateIfNeeded: BooleanType) -> EtwSession: ...
-    @staticmethod
-    def RemoveEtwSession(etwSession: EtwSession) -> VoidType: ...
+class EventActivityOptions(Enum):
+    """"""
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    _None: EventActivityOptions = ...
+    """"""
+    Disable: EventActivityOptions = ...
+    """"""
+    Recursive: EventActivityOptions = ...
+    """"""
+    Detachable: EventActivityOptions = ...
+    """"""
 
 class EventAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, eventId: int):
+        """
 
-    def __init__(self, eventId: IntType): ...
-
-    # ---------- Properties ---------- #
-
+        :param eventId:
+        """
     @property
-    def ActivityOptions(self) -> EventActivityOptions: ...
+    def ActivityOptions(self) -> EventActivityOptions:
+        """
+
+        :return:
+        """
     @ActivityOptions.setter
     def ActivityOptions(self, value: EventActivityOptions) -> None: ...
     @property
-    def Channel(self) -> EventChannel: ...
+    def Channel(self) -> EventChannel:
+        """
+
+        :return:
+        """
     @Channel.setter
     def Channel(self, value: EventChannel) -> None: ...
     @property
-    def EventId(self) -> IntType: ...
+    def EventId(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Keywords(self) -> EventKeywords: ...
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
     @Keywords.setter
     def Keywords(self, value: EventKeywords) -> None: ...
     @property
-    def Level(self) -> EventLevel: ...
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
     @Level.setter
     def Level(self, value: EventLevel) -> None: ...
     @property
-    def Message(self) -> StringType: ...
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
     @Message.setter
-    def Message(self, value: StringType) -> None: ...
+    def Message(self, value: str) -> None: ...
     @property
-    def Opcode(self) -> EventOpcode: ...
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
     @Opcode.setter
     def Opcode(self, value: EventOpcode) -> None: ...
     @property
-    def Tags(self) -> EventTags: ...
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
     @Tags.setter
     def Tags(self, value: EventTags) -> None: ...
     @property
-    def Task(self) -> EventTask: ...
+    def Task(self) -> EventTask:
+        """
+
+        :return:
+        """
     @Task.setter
     def Task(self, value: EventTask) -> None: ...
     @property
-    def Version(self) -> ByteType: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Version(self) -> int:
+        """
+
+        :return:
+        """
     @Version.setter
-    def Version(self, value: ByteType) -> None: ...
+    def Version(self, value: int) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_ActivityOptions(self) -> EventActivityOptions: ...
-    def get_Channel(self) -> EventChannel: ...
-    def get_EventId(self) -> IntType: ...
-    def get_Keywords(self) -> EventKeywords: ...
-    def get_Level(self) -> EventLevel: ...
-    def get_Message(self) -> StringType: ...
-    def get_Opcode(self) -> EventOpcode: ...
-    def get_Tags(self) -> EventTags: ...
-    def get_Task(self) -> EventTask: ...
-    def get_Version(self) -> ByteType: ...
-    def set_ActivityOptions(self, value: EventActivityOptions) -> VoidType: ...
-    def set_Channel(self, value: EventChannel) -> VoidType: ...
-    def set_Keywords(self, value: EventKeywords) -> VoidType: ...
-    def set_Level(self, value: EventLevel) -> VoidType: ...
-    def set_Message(self, value: StringType) -> VoidType: ...
-    def set_Opcode(self, value: EventOpcode) -> VoidType: ...
-    def set_Tags(self, value: EventTags) -> VoidType: ...
-    def set_Task(self, value: EventTask) -> VoidType: ...
-    def set_Version(self, value: ByteType) -> VoidType: ...
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Events
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Structs
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Interfaces
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Sub Enums
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-class EventChannelAttribute(Attribute, _Attribute):
-    # No Fields
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
 
-    # ---------- Properties ---------- #
-
-    @property
-    def Enabled(self) -> BooleanType: ...
-    @Enabled.setter
-    def Enabled(self, value: BooleanType) -> None: ...
-    @property
-    def EventChannelType(self) -> EventChannelType: ...
-    @EventChannelType.setter
-    def EventChannelType(self, value: EventChannelType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Enabled(self) -> BooleanType: ...
-    def get_EventChannelType(self) -> EventChannelType: ...
-    def set_Enabled(self, value: BooleanType) -> VoidType: ...
-    def set_EventChannelType(self, value: EventChannelType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventCommandEventArgs(EventArgs):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Arguments(self) -> IDictionary[StringType, StringType]: ...
-    @property
-    def Command(self) -> EventCommand: ...
-
-    # ---------- Methods ---------- #
-
-    def DisableEvent(self, eventId: IntType) -> BooleanType: ...
-    def EnableEvent(self, eventId: IntType) -> BooleanType: ...
-    def get_Arguments(self) -> IDictionary[StringType, StringType]: ...
-    def get_Command(self) -> EventCommand: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventDataAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Name(self) -> StringType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventDispatcher(ObjectType):
+class EventChannel(Enum):
     """"""
 
-    # No Fields
+    _None: EventChannel = ...
+    """"""
+    Admin: EventChannel = ...
+    """"""
+    Operational: EventChannel = ...
+    """"""
+    Analytic: EventChannel = ...
+    """"""
+    Debug: EventChannel = ...
+    """"""
 
-    # No Constructors
+class EventChannelAttribute(Attribute, _Attribute):
+    """"""
 
-    # No Properties
+    def __init__(self):
+        """"""
+    @property
+    def Enabled(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    @Enabled.setter
+    def Enabled(self, value: bool) -> None: ...
+    @property
+    def EventChannelType(self) -> EventChannelType:
+        """
 
-    # No Events
+        :return:
+        """
+    @EventChannelType.setter
+    def EventChannelType(self, value: EventChannelType) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Enums
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-class EventFieldAttribute(Attribute, _Attribute):
-    # No Fields
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # ---------- Constructors ---------- #
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    def __init__(self): ...
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # ---------- Properties ---------- #
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventChannelType(Enum):
+    """"""
+
+    Admin: EventChannelType = ...
+    """"""
+    Operational: EventChannelType = ...
+    """"""
+    Analytic: EventChannelType = ...
+    """"""
+    Debug: EventChannelType = ...
+    """"""
+
+class EventCommand(Enum):
+    """"""
+
+    Update: EventCommand = ...
+    """"""
+    Disable: EventCommand = ...
+    """"""
+    Enable: EventCommand = ...
+    """"""
+    SendManifest: EventCommand = ...
+    """"""
+
+class EventCommandEventArgs(EventArgs):
+    """"""
 
     @property
-    def Format(self) -> EventFieldFormat: ...
+    def Arguments(self) -> IDictionary[str, str]:
+        """
+
+        :return:
+        """
+    @property
+    def Command(self) -> EventCommand:
+        """
+
+        :return:
+        """
+    def DisableEvent(self, eventId: int) -> bool:
+        """
+
+        :param eventId:
+        :return:
+        """
+    def EnableEvent(self, eventId: int) -> bool:
+        """
+
+        :param eventId:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventDataAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventDescriptor(ValueType):
+    """"""
+
+    @overload
+    def __init__(self, traceloggingId: int, level: int, opcode: int, keywords: int):
+        """
+
+        :param traceloggingId:
+        :param level:
+        :param opcode:
+        :param keywords:
+        """
+    @overload
+    def __init__(
+        self, id: int, version: int, channel: int, level: int, opcode: int, task: int, keywords: int
+    ):
+        """
+
+        :param id:
+        :param version:
+        :param channel:
+        :param level:
+        :param opcode:
+        :param task:
+        :param keywords:
+        """
+    @property
+    def Channel(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def EventId(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Task(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Version(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, other: EventDescriptor) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __eq__(self, other: EventDescriptor) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: EventDescriptor) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, event1: EventDescriptor, event2: EventDescriptor) -> bool:
+        """
+
+        :param event1:
+        :param event2:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, event1: EventDescriptor, event2: EventDescriptor) -> bool:
+        """
+
+        :param event1:
+        :param event2:
+        :return:
+        """
+
+class EventDispatcher(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventFieldAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Format(self) -> EventFieldFormat:
+        """
+
+        :return:
+        """
     @Format.setter
     def Format(self, value: EventFieldFormat) -> None: ...
     @property
-    def Tags(self) -> EventFieldTags: ...
+    def Tags(self) -> EventFieldTags:
+        """
+
+        :return:
+        """
     @Tags.setter
     def Tags(self, value: EventFieldTags) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Format(self) -> EventFieldFormat: ...
-    def get_Tags(self) -> EventFieldTags: ...
-    def set_Format(self, value: EventFieldFormat) -> VoidType: ...
-    def set_Tags(self, value: EventFieldTags) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Enums
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventFieldFormat(Enum):
+    """"""
+
+    Default: EventFieldFormat = ...
+    """"""
+    String: EventFieldFormat = ...
+    """"""
+    Boolean: EventFieldFormat = ...
+    """"""
+    Hexadecimal: EventFieldFormat = ...
+    """"""
+    Xml: EventFieldFormat = ...
+    """"""
+    Json: EventFieldFormat = ...
+    """"""
+    HResult: EventFieldFormat = ...
+    """"""
+
+class EventFieldTags(Enum):
+    """"""
+
+    _None: EventFieldTags = ...
+    """"""
 
 class EventIgnoreAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Events
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Structs
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Interfaces
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Sub Enums
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-class EventListener(ObjectType, IDisposable):
-    # No Fields
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
 
-    # No Properties
+class EventKeywords(Enum):
+    """"""
 
-    # ---------- Methods ---------- #
+    _None: EventKeywords = ...
+    """"""
+    MicrosoftTelemetry: EventKeywords = ...
+    """"""
+    WdiContext: EventKeywords = ...
+    """"""
+    WdiDiagnostic: EventKeywords = ...
+    """"""
+    Sqm: EventKeywords = ...
+    """"""
+    AuditFailure: EventKeywords = ...
+    """"""
+    CorrelationHint: EventKeywords = ...
+    """"""
+    AuditSuccess: EventKeywords = ...
+    """"""
+    EventLogClassic: EventKeywords = ...
+    """"""
+    All: EventKeywords = ...
+    """"""
 
-    def DisableEvents(self, eventSource: EventSource) -> VoidType: ...
-    def Dispose(self) -> VoidType: ...
+class EventLevel(Enum):
+    """"""
+
+    LogAlways: EventLevel = ...
+    """"""
+    Critical: EventLevel = ...
+    """"""
+    Error: EventLevel = ...
+    """"""
+    Warning: EventLevel = ...
+    """"""
+    Informational: EventLevel = ...
+    """"""
+    Verbose: EventLevel = ...
+    """"""
+
+class EventListener(Object, IDisposable):
+    """"""
+
+    def __init__(self):
+        """"""
+    def DisableEvents(self, eventSource: EventSource) -> None:
+        """
+
+        :param eventSource:
+        """
+    def Dispose(self) -> None:
+        """"""
     @overload
-    def EnableEvents(self, eventSource: EventSource, level: EventLevel) -> VoidType: ...
+    def EnableEvents(self, eventSource: EventSource, level: EventLevel) -> None:
+        """
+
+        :param eventSource:
+        :param level:
+        """
     @overload
     def EnableEvents(
         self, eventSource: EventSource, level: EventLevel, matchAnyKeyword: EventKeywords
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param eventSource:
+        :param level:
+        :param matchAnyKeyword:
+        """
     @overload
     def EnableEvents(
         self,
         eventSource: EventSource,
         level: EventLevel,
         matchAnyKeyword: EventKeywords,
-        arguments: IDictionary[StringType, StringType],
-    ) -> VoidType: ...
-    @staticmethod
-    def EventSourceIndex(eventSource: EventSource) -> IntType: ...
-    def add_EventSourceCreated(
-        self, value: EventHandler[EventSourceCreatedEventArgs]
-    ) -> VoidType: ...
-    def add_EventWritten(self, value: EventHandler[EventWrittenEventArgs]) -> VoidType: ...
-    def remove_EventSourceCreated(
-        self, value: EventHandler[EventSourceCreatedEventArgs]
-    ) -> VoidType: ...
-    def remove_EventWritten(self, value: EventHandler[EventWrittenEventArgs]) -> VoidType: ...
+        arguments: IDictionary[str, str],
+    ) -> None:
+        """
 
-    # ---------- Events ---------- #
+        :param eventSource:
+        :param level:
+        :param matchAnyKeyword:
+        :param arguments:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def EventSourceIndex(cls, eventSource: EventSource) -> int:
+        """
+
+        :param eventSource:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     EventSourceCreated: EventType[EventHandler[EventSourceCreatedEventArgs]] = ...
-
+    """"""
     EventWritten: EventType[EventHandler[EventWrittenEventArgs]] = ...
+    """"""
 
-    # No Sub Classes
+class EventManifestOptions(Enum):
+    """"""
 
-    # No Sub Structs
+    _None: EventManifestOptions = ...
+    """"""
+    Strict: EventManifestOptions = ...
+    """"""
+    AllCultures: EventManifestOptions = ...
+    """"""
+    OnlyIfNeededForRegistration: EventManifestOptions = ...
+    """"""
+    AllowEventSourceOverride: EventManifestOptions = ...
+    """"""
 
-    # No Sub Interfaces
+class EventOpcode(Enum):
+    """"""
 
-    # No Sub Enums
+    Info: EventOpcode = ...
+    """"""
+    Start: EventOpcode = ...
+    """"""
+    Stop: EventOpcode = ...
+    """"""
+    DataCollectionStart: EventOpcode = ...
+    """"""
+    DataCollectionStop: EventOpcode = ...
+    """"""
+    Extension: EventOpcode = ...
+    """"""
+    Reply: EventOpcode = ...
+    """"""
+    Resume: EventOpcode = ...
+    """"""
+    Suspend: EventOpcode = ...
+    """"""
+    Send: EventOpcode = ...
+    """"""
+    Receive: EventOpcode = ...
+    """"""
 
 class EventPayload(
-    ObjectType,
-    IDictionary[StringType, ObjectType],
-    ICollection[KeyValuePair[StringType, ObjectType]],
-    IEnumerable[KeyValuePair[StringType, ObjectType]],
+    Object,
+    ICollection[KeyValuePair, Object],
+    IDictionary[String, Object],
+    IEnumerable[KeyValuePair, Object],
     IEnumerable,
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsReadOnly(self) -> BooleanType: ...
-    def __getitem__(self, key: StringType) -> ObjectType: ...
-    def __setitem__(self, key: StringType, value: ObjectType) -> None: ...
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Keys(self) -> ICollection[StringType]: ...
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
     @property
-    def Values(self) -> ICollection[ObjectType]: ...
+    def Keys(self) -> ICollection[str]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection[object]:
+        """
 
+        :return:
+        """
     @overload
-    def Add(self, key: StringType, value: ObjectType) -> VoidType: ...
+    def Add(self, item: KeyValuePair[str, object]) -> None:
+        """
+
+        :param item:
+        """
     @overload
-    def Add(self, payloadEntry: KeyValuePair[StringType, ObjectType]) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Contains(self, entry: KeyValuePair[StringType, ObjectType]) -> BooleanType: ...
-    def ContainsKey(self, key: StringType) -> BooleanType: ...
-    def CopyTo(
-        self, payloadEntries: ArrayType[KeyValuePair[StringType, ObjectType]], count: IntType
-    ) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[KeyValuePair[StringType, ObjectType]]: ...
+    def Add(self, key: str, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: KeyValuePair[str, object]) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def ContainsKey(self, key: str) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    def CopyTo(self, array: Array[KeyValuePair, object], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def Remove(self, key: StringType) -> BooleanType: ...
+    def Remove(self, item: KeyValuePair[str, object]) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
     @overload
-    def Remove(self, entry: KeyValuePair[StringType, ObjectType]) -> BooleanType: ...
-    def TryGetValue(self, key: StringType, value: ObjectType) -> Tuple[BooleanType, ObjectType]: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_Item(self, key: StringType) -> ObjectType: ...
-    def get_Keys(self) -> ICollection[StringType]: ...
-    def get_Values(self) -> ICollection[ObjectType]: ...
-    def set_Item(self, key: StringType, value: ObjectType) -> VoidType: ...
+    def Remove(self, key: str) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    def TryGetValue(self, key: str, value: object) -> Tuple[bool, object]:
+        """"""
+    def __contains__(self, value: KeyValuePair[str, object]) -> bool:
+        """
 
-    # No Sub Classes
+        :param value:
+        :return:
+        """
+    def __getitem__(self, key: str) -> object:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventProvider(ObjectType, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-    def Dispose(self) -> VoidType: ...
-    @staticmethod
-    def GetLastWriteEventError() -> WriteEventErrorCode: ...
+        :param key:
+        :return:
+        """
     @overload
-    def IsEnabled(self) -> BooleanType: ...
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
     @overload
-    def IsEnabled(self, level: ByteType, keywords: LongType) -> BooleanType: ...
+    def __iter__(self) -> Iterator[KeyValuePair, object]:
+        """
 
-    # No Events
+        :return:
+        """
+    def __len__(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def __setitem__(self, key: str, value: object) -> None:
+        """
 
-    # ---------- Sub Structs ---------- #
+        :param key:
+        :param value:
+        """
+
+class EventProvider(Object, IDisposable):
+    """"""
+
+    def Close(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetLastWriteEventError(cls) -> EventProvider.WriteEventErrorCode:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsEnabled(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsEnabled(self, level: int, keywords: int) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
     class EventData(ValueType):
         """"""
 
-        # No Fields
+        def Equals(self, obj: object) -> bool:
+            """
 
-        # No Constructors
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
 
-        # No Properties
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
 
-        # No Methods
+            :return:
+            """
+        def ToString(self) -> str:
+            """
 
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
+            :return:
+            """
 
     class SessionInfo(ValueType):
         """"""
 
-        # No Fields
+        def Equals(self, obj: object) -> bool:
+            """
 
-        # No Constructors
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
 
-        # No Properties
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
 
-        # No Methods
+            :return:
+            """
+        def ToString(self) -> str:
+            """
 
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
+            :return:
+            """
 
     class WriteEventErrorCode(Enum):
-        NoError = 0
-        NoFreeBuffers = 1
-        EventTooBig = 2
-        NullInput = 3
-        TooManyArgs = 4
-        Other = 5
+        """"""
 
-class EventSource(ObjectType, IDisposable):
-    # No Fields
+        NoError: WriteEventErrorCode = ...
+        """"""
+        NoFreeBuffers: WriteEventErrorCode = ...
+        """"""
+        EventTooBig: WriteEventErrorCode = ...
+        """"""
+        NullInput: WriteEventErrorCode = ...
+        """"""
+        TooManyArgs: WriteEventErrorCode = ...
+        """"""
+        Other: WriteEventErrorCode = ...
+        """"""
 
-    # ---------- Constructors ---------- #
+class EventSource(Object, IDisposable):
+    """"""
 
     @overload
-    def __init__(self, eventSourceName: StringType): ...
+    def __init__(self, eventSourceName: str):
+        """
+
+        :param eventSourceName:
+        """
     @overload
-    def __init__(self, eventSourceName: StringType, config: EventSourceSettings): ...
+    def __init__(self, eventSourceName: str, config: EventSourceSettings):
+        """
+
+        :param eventSourceName:
+        :param config:
+        """
     @overload
-    def __init__(
-        self,
-        eventSourceName: StringType,
-        config: EventSourceSettings,
-        traits: ArrayType[StringType],
-    ): ...
+    def __init__(self, eventSourceName: str, config: EventSourceSettings, traits: Array[str]):
+        """
 
-    # ---------- Properties ---------- #
+        :param eventSourceName:
+        :param config:
+        :param traits:
+        """
+    @property
+    def ConstructionException(self) -> Exception:
+        """
 
+        :return:
+        """
+    @classmethod
     @property
-    def ConstructionException(self) -> Exception: ...
-    @staticmethod
-    @property
-    def CurrentThreadActivityId() -> Guid: ...
-    @property
-    def Guid(self) -> Guid: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def Settings(self) -> EventSourceSettings: ...
+    def CurrentThreadActivityId(cls) -> Guid:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Guid(self) -> Guid:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    @staticmethod
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Settings(self) -> EventSourceSettings:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GenerateManifest(cls, eventSourceType: Type, assemblyPathToIncludeInManifest: str) -> str:
+        """
+
+        :param eventSourceType:
+        :param assemblyPathToIncludeInManifest:
+        :return:
+        """
+    @classmethod
     @overload
     def GenerateManifest(
-        eventSourceType: TypeType, assemblyPathToIncludeInManifest: StringType
-    ) -> StringType: ...
-    @staticmethod
-    @overload
-    def GenerateManifest(
-        eventSourceType: TypeType,
-        assemblyPathToIncludeInManifest: StringType,
+        cls,
+        eventSourceType: Type,
+        assemblyPathToIncludeInManifest: str,
         flags: EventManifestOptions,
-    ) -> StringType: ...
-    @staticmethod
-    def GetGuid(eventSourceType: TypeType) -> Guid: ...
-    @staticmethod
-    def GetName(eventSourceType: TypeType) -> StringType: ...
-    @staticmethod
-    def GetSources() -> IEnumerable[EventSource]: ...
-    def GetTrait(self, key: StringType) -> StringType: ...
+    ) -> str:
+        """
+
+        :param eventSourceType:
+        :param assemblyPathToIncludeInManifest:
+        :param flags:
+        :return:
+        """
+    @classmethod
+    def GetGuid(cls, eventSourceType: Type) -> Guid:
+        """
+
+        :param eventSourceType:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetName(cls, eventSourceType: Type) -> str:
+        """
+
+        :param eventSourceType:
+        :return:
+        """
+    @classmethod
+    def GetSources(cls) -> IEnumerable[EventSource]:
+        """
+
+        :return:
+        """
+    def GetTrait(self, key: str) -> str:
+        """
+
+        :param key:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def IsEnabled(self) -> BooleanType: ...
+    def IsEnabled(self) -> bool:
+        """
+
+        :return:
+        """
     @overload
-    def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> BooleanType: ...
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :return:
+        """
     @overload
-    def IsEnabled(
-        self, level: EventLevel, keywords: EventKeywords, channel: EventChannel
-    ) -> BooleanType: ...
-    @staticmethod
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords, channel: EventChannel) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :param channel:
+        :return:
+        """
+    @classmethod
     def SendCommand(
+        cls,
         eventSource: EventSource,
         command: EventCommand,
-        commandArguments: IDictionary[StringType, StringType],
-    ) -> VoidType: ...
-    @staticmethod
+        commandArguments: IDictionary[str, str],
+    ) -> None:
+        """
+
+        :param eventSource:
+        :param command:
+        :param commandArguments:
+        """
+    @classmethod
     @overload
-    def SetCurrentThreadActivityId(activityId: Guid) -> VoidType: ...
-    @staticmethod
+    def SetCurrentThreadActivityId(cls, activityId: Guid) -> None:
+        """
+
+        :param activityId:
+        """
+    @classmethod
     @overload
     def SetCurrentThreadActivityId(
-        activityId: Guid, oldActivityThatWillContinue: Guid
-    ) -> Tuple[VoidType, Guid]: ...
-    def ToString(self) -> StringType: ...
+        cls, activityId: Guid, oldActivityThatWillContinue: Guid
+    ) -> Tuple[None, Guid]:
+        """
+
+        :param activityId:
+        :param oldActivityThatWillContinue:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def Write(self, eventName: StringType) -> VoidType: ...
+    def Write(self, eventName: str) -> None:
+        """
+
+        :param eventName:
+        """
     @overload
-    def Write(self, eventName: StringType, options: EventSourceOptions) -> VoidType: ...
+    def Write(self, eventName: str, data: T) -> None:
+        """
+
+        :param eventName:
+        :param data:
+        """
     @overload
-    def Write(self, eventName: StringType, data: T) -> VoidType: ...
+    def Write(self, eventName: str, options: EventSourceOptions) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        """
     @overload
-    def Write(self, eventName: StringType, options: EventSourceOptions, data: T) -> VoidType: ...
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
     @overload
-    def Write(
-        self, eventName: StringType, options: EventSourceOptions, data: T
-    ) -> Tuple[VoidType, EventSourceOptions, T]: ...
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
     @overload
     def Write(
         self,
-        eventName: StringType,
+        eventName: str,
         options: EventSourceOptions,
         activityId: Guid,
         relatedActivityId: Guid,
         data: T,
-    ) -> Tuple[VoidType, EventSourceOptions, Guid, Guid, T]: ...
-    def add_EventCommandExecuted(self, value: EventHandler[EventCommandEventArgs]) -> VoidType: ...
-    def get_ConstructionException(self) -> Exception: ...
-    @staticmethod
-    def get_CurrentThreadActivityId() -> Guid: ...
-    def get_Guid(self) -> Guid: ...
-    def get_Name(self) -> StringType: ...
-    def get_Settings(self) -> EventSourceSettings: ...
-    def remove_EventCommandExecuted(
-        self, value: EventHandler[EventCommandEventArgs]
-    ) -> VoidType: ...
+    ) -> None:
+        """
 
-    # ---------- Events ---------- #
-
+        :param eventName:
+        :param options:
+        :param activityId:
+        :param relatedActivityId:
+        :param data:
+        """
     EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
+    """"""
 
-    # No Sub Classes
+class EventSourceActivity(Object, IDisposable):
+    """"""
 
-    # No Sub Structs
+    def __init__(self, eventSource: EventSource):
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventSourceActivity(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, eventSource: EventSource): ...
-
-    # ---------- Properties ---------- #
-
+        :param eventSource:
+        """
     @property
-    def EventSource(self) -> EventSource: ...
+    def EventSource(self) -> EventSource:
+        """
+
+        :return:
+        """
     @property
-    def Id(self) -> Guid: ...
+    def Id(self) -> Guid:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Dispose(self) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def Start(self, eventName: StringType) -> EventSourceActivity: ...
+    def Start(self, eventName: str) -> EventSourceActivity:
+        """
+
+        :param eventName:
+        :return:
+        """
     @overload
-    def Start(self, eventName: StringType, options: EventSourceOptions) -> EventSourceActivity: ...
+    def Start(self, eventName: str, data: T) -> EventSourceActivity:
+        """
+
+        :param eventName:
+        :param data:
+        :return:
+        """
     @overload
-    def Start(
-        self, eventName: StringType, options: EventSourceOptions, data: T
-    ) -> EventSourceActivity: ...
+    def Start(self, eventName: str, options: EventSourceOptions) -> EventSourceActivity:
+        """
+
+        :param eventName:
+        :param options:
+        :return:
+        """
     @overload
-    def Start(self, eventName: StringType, data: T) -> EventSourceActivity: ...
+    def Start(self, eventName: str, options: EventSourceOptions, data: T) -> EventSourceActivity:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        :return:
+        """
     @overload
-    def Stop(self, data: T) -> VoidType: ...
+    def Stop(self, data: T) -> None:
+        """
+
+        :param data:
+        """
     @overload
-    def Stop(self, eventName: StringType) -> VoidType: ...
+    def Stop(self, eventName: str) -> None:
+        """
+
+        :param eventName:
+        """
     @overload
-    def Stop(self, eventName: StringType, data: T) -> VoidType: ...
+    def Stop(self, eventName: str, data: T) -> None:
+        """
+
+        :param eventName:
+        :param data:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def Write(self, eventName: StringType, options: EventSourceOptions) -> VoidType: ...
+    def Write(self, eventName: str) -> None:
+        """
+
+        :param eventName:
+        """
     @overload
-    def Write(self, eventName: StringType) -> VoidType: ...
+    def Write(self, eventName: str, data: T) -> None:
+        """
+
+        :param eventName:
+        :param data:
+        """
     @overload
-    def Write(self, eventName: StringType, options: EventSourceOptions, data: T) -> VoidType: ...
+    def Write(self, eventName: str, options: EventSourceOptions) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        """
     @overload
-    def Write(self, eventName: StringType, data: T) -> VoidType: ...
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
     @overload
     def Write(
-        self, source: EventSource, eventName: StringType, options: EventSourceOptions, data: T
-    ) -> VoidType: ...
-    def get_EventSource(self) -> EventSource: ...
-    def get_Id(self) -> Guid: ...
-    @staticmethod
-    def op_Implicit(eventSource: EventSource) -> EventSourceActivity: ...
+        self, source: EventSource, eventName: str, options: EventSourceOptions, data: T
+    ) -> None:
+        """
 
-    # No Events
+        :param source:
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @classmethod
+    def op_Implicit(cls, eventSource: EventSource) -> EventSourceActivity:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param eventSource:
+        :return:
+        """
 
 class EventSourceAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Guid(self) -> StringType: ...
+    def Guid(self) -> str:
+        """
+
+        :return:
+        """
     @Guid.setter
-    def Guid(self, value: StringType) -> None: ...
+    def Guid(self, value: str) -> None: ...
     @property
-    def LocalizationResources(self) -> StringType: ...
+    def LocalizationResources(self) -> str:
+        """
+
+        :return:
+        """
     @LocalizationResources.setter
-    def LocalizationResources(self, value: StringType) -> None: ...
+    def LocalizationResources(self, value: str) -> None: ...
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Guid(self) -> StringType: ...
-    def get_LocalizationResources(self) -> StringType: ...
-    def get_Name(self) -> StringType: ...
-    def set_Guid(self, value: StringType) -> VoidType: ...
-    def set_LocalizationResources(self, value: StringType) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Enums
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class EventSourceCreatedEventArgs(EventArgs):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def EventSource(self) -> EventSource: ...
-
-    # ---------- Methods ---------- #
-
-    def get_EventSource(self) -> EventSource: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventSourceException(Exception, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventWrittenEventArgs(EventArgs):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ActivityId(self) -> Guid: ...
-    @property
-    def Channel(self) -> EventChannel: ...
-    @property
-    def EventId(self) -> IntType: ...
-    @property
-    def EventName(self) -> StringType: ...
-    @property
-    def EventSource(self) -> EventSource: ...
-    @property
-    def Keywords(self) -> EventKeywords: ...
-    @property
-    def Level(self) -> EventLevel: ...
-    @property
-    def Message(self) -> StringType: ...
-    @property
-    def Opcode(self) -> EventOpcode: ...
-    @property
-    def Payload(self) -> ReadOnlyCollection[ObjectType]: ...
-    @property
-    def PayloadNames(self) -> ReadOnlyCollection[StringType]: ...
-    @property
-    def RelatedActivityId(self) -> Guid: ...
-    @property
-    def Tags(self) -> EventTags: ...
-    @property
-    def Task(self) -> EventTask: ...
-    @property
-    def Version(self) -> ByteType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_ActivityId(self) -> Guid: ...
-    def get_Channel(self) -> EventChannel: ...
-    def get_EventId(self) -> IntType: ...
-    def get_EventName(self) -> StringType: ...
-    def get_EventSource(self) -> EventSource: ...
-    def get_Keywords(self) -> EventKeywords: ...
-    def get_Level(self) -> EventLevel: ...
-    def get_Message(self) -> StringType: ...
-    def get_Opcode(self) -> EventOpcode: ...
-    def get_Payload(self) -> ReadOnlyCollection[ObjectType]: ...
-    def get_PayloadNames(self) -> ReadOnlyCollection[StringType]: ...
-    def get_RelatedActivityId(self) -> Guid: ...
-    def get_Tags(self) -> EventTags: ...
-    def get_Task(self) -> EventTask: ...
-    def get_Version(self) -> ByteType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FieldMetadata(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(
-        self,
-        name: StringType,
-        type: TraceLoggingDataType,
-        tags: EventFieldTags,
-        variableCount: BooleanType,
-    ): ...
-    @overload
-    def __init__(
-        self,
-        name: StringType,
-        type: TraceLoggingDataType,
-        tags: EventFieldTags,
-        fixedCount: UShortType,
-    ): ...
-    @overload
-    def __init__(
-        self,
-        name: StringType,
-        type: TraceLoggingDataType,
-        tags: EventFieldTags,
-        custom: ArrayType[ByteType],
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Encode(self, pos: IntType, metadata: ArrayType[ByteType]) -> Tuple[VoidType, IntType]: ...
-    def IncrementStructFieldCount(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FrameworkEventSource(EventSource, IDisposable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Log() -> FrameworkEventSource: ...
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def IsInitialized() -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def BeginGetRequestStream(
-        self, id: ObjectType, uri: StringType, success: BooleanType, synchronous: BooleanType
-    ) -> VoidType: ...
-    def BeginGetResponse(
-        self, id: ObjectType, uri: StringType, success: BooleanType, synchronous: BooleanType
-    ) -> VoidType: ...
-    def EndGetRequestStream(
-        self, id: ObjectType, success: BooleanType, synchronous: BooleanType
-    ) -> VoidType: ...
-    def EndGetResponse(
-        self, id: ObjectType, success: BooleanType, synchronous: BooleanType, statusCode: IntType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerAddingCultureFromConfigFile(
-        self, baseName: StringType, mainAssemblyName: StringType, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerAddingCultureFromConfigFile(
-        self, baseName: StringType, mainAssembly: Assembly, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerCaseInsensitiveResourceStreamLookupFailed(
-        self,
-        baseName: StringType,
-        mainAssemblyName: StringType,
-        assemblyName: StringType,
-        resourceFileName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerCaseInsensitiveResourceStreamLookupFailed(
-        self,
-        baseName: StringType,
-        mainAssembly: Assembly,
-        assemblyName: StringType,
-        resourceFileName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded(
-        self,
-        baseName: StringType,
-        mainAssemblyName: StringType,
-        assemblyName: StringType,
-        resourceFileName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded(
-        self,
-        baseName: StringType,
-        mainAssembly: Assembly,
-        assemblyName: StringType,
-        resourceFileName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerCreatingResourceSet(
-        self,
-        baseName: StringType,
-        mainAssemblyName: StringType,
-        cultureName: StringType,
-        fileName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerCreatingResourceSet(
-        self,
-        baseName: StringType,
-        mainAssembly: Assembly,
-        cultureName: StringType,
-        fileName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerCultureFoundInConfigFile(
-        self, baseName: StringType, mainAssemblyName: StringType, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerCultureFoundInConfigFile(
-        self, baseName: StringType, mainAssembly: Assembly, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerCultureNotFoundInConfigFile(
-        self, baseName: StringType, mainAssemblyName: StringType, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerCultureNotFoundInConfigFile(
-        self, baseName: StringType, mainAssembly: Assembly, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerFoundResourceSetInCache(
-        self, baseName: StringType, mainAssemblyName: StringType, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerFoundResourceSetInCache(
-        self, baseName: StringType, mainAssembly: Assembly, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerFoundResourceSetInCacheUnexpected(
-        self, baseName: StringType, mainAssemblyName: StringType, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerFoundResourceSetInCacheUnexpected(
-        self, baseName: StringType, mainAssembly: Assembly, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerGetSatelliteAssemblyFailed(
-        self,
-        baseName: StringType,
-        mainAssemblyName: StringType,
-        cultureName: StringType,
-        assemblyName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerGetSatelliteAssemblyFailed(
-        self,
-        baseName: StringType,
-        mainAssembly: Assembly,
-        cultureName: StringType,
-        assemblyName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerGetSatelliteAssemblySucceeded(
-        self,
-        baseName: StringType,
-        mainAssemblyName: StringType,
-        cultureName: StringType,
-        assemblyName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerGetSatelliteAssemblySucceeded(
-        self,
-        baseName: StringType,
-        mainAssembly: Assembly,
-        cultureName: StringType,
-        assemblyName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerLookingForResourceSet(
-        self, baseName: StringType, mainAssemblyName: StringType, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerLookingForResourceSet(
-        self, baseName: StringType, mainAssembly: Assembly, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerLookupFailed(
-        self, baseName: StringType, mainAssemblyName: StringType, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerLookupFailed(
-        self, baseName: StringType, mainAssembly: Assembly, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerLookupStarted(
-        self, baseName: StringType, mainAssemblyName: StringType, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerLookupStarted(
-        self, baseName: StringType, mainAssembly: Assembly, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerManifestResourceAccessDenied(
-        self,
-        baseName: StringType,
-        mainAssemblyName: StringType,
-        assemblyName: StringType,
-        canonicalName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerManifestResourceAccessDenied(
-        self,
-        baseName: StringType,
-        mainAssembly: Assembly,
-        assemblyName: StringType,
-        canonicalName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerNeutralResourceAttributeMissing(
-        self, mainAssemblyName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerNeutralResourceAttributeMissing(
-        self, mainAssembly: Assembly
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerNeutralResourcesFound(
-        self, baseName: StringType, mainAssemblyName: StringType, resName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerNeutralResourcesFound(
-        self, baseName: StringType, mainAssembly: Assembly, resName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerNeutralResourcesNotFound(
-        self, baseName: StringType, mainAssemblyName: StringType, resName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerNeutralResourcesNotFound(
-        self, baseName: StringType, mainAssembly: Assembly, resName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerNeutralResourcesSufficient(
-        self, baseName: StringType, mainAssemblyName: StringType, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerNeutralResourcesSufficient(
-        self, baseName: StringType, mainAssembly: Assembly, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerNotCreatingResourceSet(
-        self, baseName: StringType, mainAssemblyName: StringType, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerNotCreatingResourceSet(
-        self, baseName: StringType, mainAssembly: Assembly, cultureName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerReleasingResources(
-        self, baseName: StringType, mainAssemblyName: StringType
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerReleasingResources(
-        self, baseName: StringType, mainAssembly: Assembly
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerStreamFound(
-        self,
-        baseName: StringType,
-        mainAssemblyName: StringType,
-        cultureName: StringType,
-        loadedAssemblyName: StringType,
-        resourceFileName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerStreamFound(
-        self,
-        baseName: StringType,
-        mainAssembly: Assembly,
-        cultureName: StringType,
-        loadedAssembly: Assembly,
-        resourceFileName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerStreamNotFound(
-        self,
-        baseName: StringType,
-        mainAssemblyName: StringType,
-        cultureName: StringType,
-        loadedAssemblyName: StringType,
-        resourceFileName: StringType,
-    ) -> VoidType: ...
-    @overload
-    def ResourceManagerStreamNotFound(
-        self,
-        baseName: StringType,
-        mainAssembly: Assembly,
-        cultureName: StringType,
-        loadedAssembly: Assembly,
-        resourceFileName: StringType,
-    ) -> VoidType: ...
-    def ThreadPoolDequeueWork(self, workID: LongType) -> VoidType: ...
-    def ThreadPoolDequeueWorkObject(self, workID: ObjectType) -> VoidType: ...
-    def ThreadPoolEnqueueWork(self, workID: LongType) -> VoidType: ...
-    def ThreadPoolEnqueueWorkObject(self, workID: ObjectType) -> VoidType: ...
-    def ThreadTransferReceive(self, id: LongType, kind: IntType, info: StringType) -> VoidType: ...
-    def ThreadTransferReceiveHandled(
-        self, id: LongType, kind: IntType, info: StringType
-    ) -> VoidType: ...
-    def ThreadTransferReceiveHandledObj(
-        self, id: ObjectType, kind: IntType, info: StringType
-    ) -> VoidType: ...
-    def ThreadTransferReceiveObj(
-        self, id: ObjectType, kind: IntType, info: StringType
-    ) -> VoidType: ...
-    def ThreadTransferSend(
-        self, id: LongType, kind: IntType, info: StringType, multiDequeues: BooleanType
-    ) -> VoidType: ...
-    def ThreadTransferSendObj(
-        self, id: ObjectType, kind: IntType, info: StringType, multiDequeues: BooleanType
-    ) -> VoidType: ...
-    @staticmethod
-    def get_IsInitialized() -> BooleanType: ...
-
-    # No Events
-
-    # ---------- Sub Classes ---------- #
-
-    class Keywords(ABC, ObjectType):
-        # ---------- Fields ---------- #
-
-        @staticmethod
-        @property
-        def DynamicTypeUsage() -> EventKeywords: ...
-        @staticmethod
-        @property
-        def Loader() -> EventKeywords: ...
-        @staticmethod
-        @property
-        def NetClient() -> EventKeywords: ...
-        @staticmethod
-        @property
-        def ThreadPool() -> EventKeywords: ...
-        @staticmethod
-        @property
-        def ThreadTransfer() -> EventKeywords: ...
-
-        # No Constructors
-
-        # No Properties
-
-        # No Methods
-
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-
-    class Tasks(ABC, ObjectType):
-        # ---------- Fields ---------- #
-
-        @staticmethod
-        @property
-        def GetRequestStream() -> EventTask: ...
-        @staticmethod
-        @property
-        def GetResponse() -> EventTask: ...
-        @staticmethod
-        @property
-        def ThreadTransfer() -> EventTask: ...
-
-        # No Constructors
-
-        # No Properties
-
-        # No Methods
-
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-
-    class Opcodes(ABC, ObjectType):
-        # ---------- Fields ---------- #
-
-        @staticmethod
-        @property
-        def ReceiveHandled() -> EventOpcode: ...
-
-        # No Constructors
-
-        # No Properties
-
-        # No Methods
-
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GuidArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[Guid]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: Guid
-    ) -> Tuple[VoidType, Guid]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GuidTypeInfo(TraceLoggingTypeInfo[Guid]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: Guid
-    ) -> Tuple[VoidType, Guid]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Int16ArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[ShortType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: ShortType
-    ) -> Tuple[VoidType, ShortType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Int16TypeInfo(TraceLoggingTypeInfo[ShortType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: ShortType
-    ) -> Tuple[VoidType, ShortType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Int32ArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[IntType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: IntType
-    ) -> Tuple[VoidType, IntType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Int32TypeInfo(TraceLoggingTypeInfo[IntType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: IntType
-    ) -> Tuple[VoidType, IntType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Int64ArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[LongType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: LongType
-    ) -> Tuple[VoidType, LongType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Int64TypeInfo(TraceLoggingTypeInfo[LongType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: LongType
-    ) -> Tuple[VoidType, LongType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IntPtrArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[NIntType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: NIntType
-    ) -> Tuple[VoidType, NIntType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IntPtrTypeInfo(TraceLoggingTypeInfo[NIntType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: NIntType
-    ) -> Tuple[VoidType, NIntType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InvokeTypeInfo(Generic[ContainerType], TraceLoggingTypeInfo[ContainerType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, typeAnalysis: TypeAnalysis): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: ContainerType
-    ) -> Tuple[VoidType, ContainerType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-    def WriteObjectData(
-        self, collector: TraceLoggingDataCollector, valueObj: ObjectType
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class KeyValuePairTypeInfo(Generic[K, V], TraceLoggingTypeInfo[KeyValuePair[K, V]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, recursionCheck: List[TypeType]): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: KeyValuePair[K, V]
-    ) -> Tuple[VoidType, KeyValuePair[K, V]]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ManifestBuilder(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(
-        self,
-        providerName: StringType,
-        providerGuid: Guid,
-        dllName: StringType,
-        resources: ResourceManager,
-        flags: EventManifestOptions,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Errors(self) -> IList[StringType]: ...
-
-    # ---------- Methods ---------- #
-
-    def AddChannel(
-        self, name: StringType, value: IntType, channelAttribute: EventChannelAttribute
-    ) -> VoidType: ...
-    def AddEventParameter(self, type: TypeType, name: StringType) -> VoidType: ...
-    def AddKeyword(self, name: StringType, value: ULongType) -> VoidType: ...
-    def AddOpcode(self, name: StringType, value: IntType) -> VoidType: ...
-    def AddTask(self, name: StringType, value: IntType) -> VoidType: ...
-    def CreateManifest(self) -> ArrayType[ByteType]: ...
-    def EndEvent(self) -> VoidType: ...
-    def GetChannelData(self) -> ArrayType[ULongType]: ...
-    def GetChannelKeyword(self, channel: EventChannel) -> ULongType: ...
-    def ManifestError(self, msg: StringType, runtimeCritical: BooleanType) -> VoidType: ...
-    def StartEvent(self, eventName: StringType, eventAttribute: EventAttribute) -> VoidType: ...
-    def get_Errors(self) -> IList[StringType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NameInfo(ConcurrentSetItem[KeyValuePair[StringType, EventTags], NameInfo]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, name: StringType, tags: EventTags, typeMetadataSize: IntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Compare(self, other: NameInfo) -> IntType: ...
-    @overload
-    def Compare(self, key: KeyValuePair[StringType, EventTags]) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NonEventAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NonGenericProperytWriter(Generic[ContainerType], PropertyAccessor[ContainerType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, property: PropertyAnalysis): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetData(self, container: ContainerType) -> ObjectType: ...
-    def Write(
-        self, collector: TraceLoggingDataCollector, container: ContainerType
-    ) -> Tuple[VoidType, ContainerType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NullTypeInfo(Generic[DataType], TraceLoggingTypeInfo[DataType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: DataType
-    ) -> Tuple[VoidType, DataType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NullableTypeInfo(Generic[T], TraceLoggingTypeInfo[NullableType[Nullable[T]]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, recursionCheck: List[TypeType]): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: Nullable[T]
-    ) -> Tuple[VoidType, Nullable[T]]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PropertyAccessor(Protocol[ContainerType], ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Create(property: PropertyAnalysis) -> PropertyAccessor[ContainerType]: ...
-    def GetData(self, value: ContainerType) -> ObjectType: ...
-    def Write(
-        self, collector: TraceLoggingDataCollector, value: ContainerType
-    ) -> Tuple[VoidType, ContainerType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PropertyAnalysis(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(
-        self,
-        name: StringType,
-        getterInfo: MethodInfo,
-        typeInfo: TraceLoggingTypeInfo,
-        fieldAttribute: EventFieldAttribute,
-    ): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SByteArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[SByteType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: SByteType
-    ) -> Tuple[VoidType, SByteType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SByteTypeInfo(TraceLoggingTypeInfo[SByteType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: SByteType
-    ) -> Tuple[VoidType, SByteType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SimpleEventTypes(Generic[T], TraceLoggingEventTypes):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def Instance() -> SimpleEventTypes[T]: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def get_Instance() -> SimpleEventTypes[T]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SingleArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[FloatType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: FloatType
-    ) -> Tuple[VoidType, FloatType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SingleTypeInfo(TraceLoggingTypeInfo[FloatType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: FloatType
-    ) -> Tuple[VoidType, FloatType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Statics(ABC, ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def DefaultLevel() -> ByteType: ...
-    @staticmethod
-    @property
-    def EventTagsMask() -> EventTags: ...
-    @staticmethod
-    @property
-    def HexIntPtrType() -> TraceLoggingDataType: ...
-    @staticmethod
-    @property
-    def InTypeChainFlag() -> ByteType: ...
-    @staticmethod
-    @property
-    def InTypeCountMask() -> ByteType: ...
-    @staticmethod
-    @property
-    def InTypeCustomCountFlag() -> ByteType: ...
-    @staticmethod
-    @property
-    def InTypeFixedCountFlag() -> ByteType: ...
-    @staticmethod
-    @property
-    def InTypeMask() -> ByteType: ...
-    @staticmethod
-    @property
-    def InTypeVariableCountFlag() -> ByteType: ...
-    @staticmethod
-    @property
-    def IntPtrType() -> TraceLoggingDataType: ...
-    @staticmethod
-    @property
-    def OutTypeChainFlag() -> ByteType: ...
-    @staticmethod
-    @property
-    def OutTypeMask() -> ByteType: ...
-    @staticmethod
-    @property
-    def TraceLoggingChannel() -> ByteType: ...
-    @staticmethod
-    @property
-    def UIntPtrType() -> TraceLoggingDataType: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def CheckName(name: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Combine(settingValue: IntType, defaultValue: ByteType) -> ByteType: ...
-    @staticmethod
-    @overload
-    def Combine(
-        settingValue1: IntType, settingValue2: IntType, defaultValue: ByteType
-    ) -> ByteType: ...
-    @staticmethod
-    @overload
-    def Combine(settingValue1: IntType, settingValue2: IntType) -> IntType: ...
-    @staticmethod
-    def CreateDefaultTypeInfo(recursionCheck: List[TypeType]) -> TraceLoggingTypeInfo[DataType]: ...
-    @staticmethod
-    def CreateDelegate(delegateType: TypeType, methodInfo: MethodInfo) -> Delegate: ...
-    @staticmethod
-    def CreateInstance(type: TypeType, parameters: ArrayType[ObjectType]) -> ObjectType: ...
-    @staticmethod
-    def EncodeTags(
-        tags: IntType, pos: IntType, metadata: ArrayType[ByteType]
-    ) -> Tuple[VoidType, IntType]: ...
-    @staticmethod
-    def FindEnumerableElementType(type: TypeType) -> TypeType: ...
-    @staticmethod
-    def Format16(
-        format: EventFieldFormat, native: TraceLoggingDataType
-    ) -> TraceLoggingDataType: ...
-    @staticmethod
-    def Format32(
-        format: EventFieldFormat, native: TraceLoggingDataType
-    ) -> TraceLoggingDataType: ...
-    @staticmethod
-    def Format64(
-        format: EventFieldFormat, native: TraceLoggingDataType
-    ) -> TraceLoggingDataType: ...
-    @staticmethod
-    def Format8(format: EventFieldFormat, native: TraceLoggingDataType) -> TraceLoggingDataType: ...
-    @staticmethod
-    def FormatPtr(
-        format: EventFieldFormat, native: TraceLoggingDataType
-    ) -> TraceLoggingDataType: ...
-    @staticmethod
-    @overload
-    def GetCustomAttribute(propInfo: PropertyInfo) -> AttributeType: ...
-    @staticmethod
-    @overload
-    def GetCustomAttribute(type: TypeType) -> AttributeType: ...
-    @staticmethod
-    def GetDeclaredStaticMethod(declaringType: TypeType, name: StringType) -> MethodInfo: ...
-    @staticmethod
-    def GetGenericArguments(type: TypeType) -> ArrayType[TypeType]: ...
-    @staticmethod
-    def GetGetMethod(propInfo: PropertyInfo) -> MethodInfo: ...
-    @staticmethod
-    def GetProperties(type: TypeType) -> IEnumerable[PropertyInfo]: ...
-    @staticmethod
-    def GetTypeInfoInstance(
-        dataType: TypeType, recursionCheck: List[TypeType]
-    ) -> TraceLoggingTypeInfo: ...
-    @staticmethod
-    def HasCustomAttribute(propInfo: PropertyInfo, attributeType: TypeType) -> BooleanType: ...
-    @staticmethod
-    def IsEnum(type: TypeType) -> BooleanType: ...
-    @staticmethod
-    def IsGenericMatch(type: TypeType, openType: ObjectType) -> BooleanType: ...
-    @staticmethod
-    def IsValueType(type: TypeType) -> BooleanType: ...
-    @staticmethod
-    def MakeDataType(
-        baseType: TraceLoggingDataType, format: EventFieldFormat
-    ) -> TraceLoggingDataType: ...
-    @staticmethod
-    def MetadataForString(
-        name: StringType, prefixSize: IntType, suffixSize: IntType, additionalSize: IntType
-    ) -> ArrayType[ByteType]: ...
-    @staticmethod
-    def ShouldOverrideFieldName(fieldName: StringType) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StringTypeInfo(TraceLoggingTypeInfo[StringType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: StringType
-    ) -> Tuple[VoidType, StringType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StructPropertyWriter(Generic[ContainerType, ValueType], PropertyAccessor[ContainerType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, property: PropertyAnalysis): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetData(self, container: ContainerType) -> ObjectType: ...
-    def Write(
-        self, collector: TraceLoggingDataCollector, container: ContainerType
-    ) -> Tuple[VoidType, ContainerType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TimeSpanTypeInfo(TraceLoggingTypeInfo[TimeSpan]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: TimeSpan
-    ) -> Tuple[VoidType, TimeSpan]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceLoggingDataCollector(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def AddArray(self, value: ArrayType[BooleanType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[SByteType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[ShortType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[UShortType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[IntType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[UIntType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[LongType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[ULongType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[NIntType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[NUIntType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[FloatType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[DoubleType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[CharType]) -> VoidType: ...
-    @overload
-    def AddArray(self, value: ArrayType[Guid]) -> VoidType: ...
-    @overload
-    def AddBinary(self, value: StringType) -> VoidType: ...
-    @overload
-    def AddBinary(self, value: ArrayType[ByteType]) -> VoidType: ...
-    def AddCustom(self, value: ArrayType[ByteType]) -> VoidType: ...
-    def AddGroup(self) -> TraceLoggingDataCollector: ...
-    @overload
-    def AddScalar(self, value: BooleanType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: SByteType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: ByteType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: ShortType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: UShortType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: IntType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: UIntType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: LongType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: ULongType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: NIntType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: NUIntType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: FloatType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: DoubleType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: CharType) -> VoidType: ...
-    @overload
-    def AddScalar(self, value: Guid) -> VoidType: ...
-    def BeginBufferedArray(self) -> IntType: ...
-    def EndBufferedArray(self, bookmark: IntType, count: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceLoggingEventTypes(ObjectType):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceLoggingMetadataCollector(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def AddArray(self, name: StringType, type: TraceLoggingDataType) -> VoidType: ...
-    def AddBinary(self, name: StringType, type: TraceLoggingDataType) -> VoidType: ...
-    def AddCustom(
-        self, name: StringType, type: TraceLoggingDataType, metadata: ArrayType[ByteType]
-    ) -> VoidType: ...
-    def AddGroup(self, name: StringType) -> TraceLoggingMetadataCollector: ...
-    def AddScalar(self, name: StringType, type: TraceLoggingDataType) -> VoidType: ...
-    def BeginBufferedArray(self) -> VoidType: ...
-    def EndBufferedArray(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceLoggingTypeInfo(Protocol[DataType], TraceLoggingTypeInfo):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+    def __init__(self):
+        """"""
     @property
-    def Instance() -> TraceLoggingTypeInfo[DataType]: ...
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: DataType
-    ) -> Tuple[VoidType, DataType]: ...
-    def WriteObjectData(
-        self, collector: TraceLoggingDataCollector, value: ObjectType
-    ) -> VoidType: ...
-    @staticmethod
-    def get_Instance() -> TraceLoggingTypeInfo[DataType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceLoggingTypeInfo(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Keywords(self) -> EventKeywords: ...
-    @property
-    def Level(self) -> EventLevel: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def Opcode(self) -> EventOpcode: ...
-    @property
-    def Tags(self) -> EventTags: ...
-
-    # ---------- Methods ---------- #
-
-    def GetData(self, value: ObjectType) -> ObjectType: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-    def WriteObjectData(
-        self, collector: TraceLoggingDataCollector, value: ObjectType
-    ) -> VoidType: ...
-    def get_Keywords(self) -> EventKeywords: ...
-    def get_Level(self) -> EventLevel: ...
-    def get_Name(self) -> StringType: ...
-    def get_Opcode(self) -> EventOpcode: ...
-    def get_Tags(self) -> EventTags: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TypeAnalysis(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(
-        self, dataType: TypeType, eventAttrib: EventDataAttribute, recursionCheck: List[TypeType]
-    ): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UInt16ArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[UShortType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: UShortType
-    ) -> Tuple[VoidType, UShortType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UInt16TypeInfo(TraceLoggingTypeInfo[UShortType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: UShortType
-    ) -> Tuple[VoidType, UShortType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UInt32ArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[UIntType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: UIntType
-    ) -> Tuple[VoidType, UIntType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UInt32TypeInfo(TraceLoggingTypeInfo[UIntType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: UIntType
-    ) -> Tuple[VoidType, UIntType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UInt64ArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[ULongType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: ULongType
-    ) -> Tuple[VoidType, ULongType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UInt64TypeInfo(TraceLoggingTypeInfo[ULongType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: ULongType
-    ) -> Tuple[VoidType, ULongType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UIntPtrArrayTypeInfo(TraceLoggingTypeInfo[ArrayType[NUIntType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: NUIntType
-    ) -> Tuple[VoidType, NUIntType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UIntPtrTypeInfo(TraceLoggingTypeInfo[NUIntType]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WriteData(
-        self, collector: TraceLoggingDataCollector, value: NUIntType
-    ) -> Tuple[VoidType, NUIntType]: ...
-    def WriteMetadata(
-        self, collector: TraceLoggingMetadataCollector, name: StringType, format: EventFieldFormat
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
-
-class ConcurrentSet(Generic[KeyType, ItemType], ValueType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetOrAdd(self, newItem: ItemType) -> ItemType: ...
-    def TryGet(self, key: KeyType) -> ItemType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DataCollector(ValueType):
+    def EventSource(self) -> EventSource:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventSourceException(Exception, _Exception, ISerializable):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EmptyStruct(ValueType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventDescriptor(ValueType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
     @overload
-    def __init__(
-        self, traceloggingId: IntType, level: ByteType, opcode: ByteType, keywords: LongType
-    ): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(
-        self,
-        id: IntType,
-        version: ByteType,
-        channel: ByteType,
-        level: ByteType,
-        opcode: ByteType,
-        task: IntType,
-        keywords: LongType,
-    ): ...
+    def __init__(self, message: str):
+        """
 
-    # ---------- Properties ---------- #
-
-    @property
-    def Channel(self) -> ByteType: ...
-    @property
-    def EventId(self) -> IntType: ...
-    @property
-    def Keywords(self) -> LongType: ...
-    @property
-    def Level(self) -> ByteType: ...
-    @property
-    def Opcode(self) -> ByteType: ...
-    @property
-    def Task(self) -> IntType: ...
-    @property
-    def Version(self) -> ByteType: ...
-
-    # ---------- Methods ---------- #
-
+        :param message:
+        """
     @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
     @overload
-    def Equals(self, other: EventDescriptor) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_Channel(self) -> ByteType: ...
-    def get_EventId(self) -> IntType: ...
-    def get_Keywords(self) -> LongType: ...
-    def get_Level(self) -> ByteType: ...
-    def get_Opcode(self) -> ByteType: ...
-    def get_Task(self) -> IntType: ...
-    def get_Version(self) -> ByteType: ...
-    @staticmethod
-    def op_Equality(event1: EventDescriptor, event2: EventDescriptor) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(event1: EventDescriptor, event2: EventDescriptor) -> BooleanType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class EventSourceOptions(ValueType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def ActivityOptions(self) -> EventActivityOptions: ...
+    def ActivityOptions(self) -> EventActivityOptions:
+        """
+
+        :return:
+        """
     @ActivityOptions.setter
     def ActivityOptions(self, value: EventActivityOptions) -> None: ...
     @property
-    def Keywords(self) -> EventKeywords: ...
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
     @Keywords.setter
     def Keywords(self, value: EventKeywords) -> None: ...
     @property
-    def Level(self) -> EventLevel: ...
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
     @Level.setter
     def Level(self, value: EventLevel) -> None: ...
     @property
-    def Opcode(self) -> EventOpcode: ...
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
     @Opcode.setter
     def Opcode(self, value: EventOpcode) -> None: ...
     @property
-    def Tags(self) -> EventTags: ...
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
     @Tags.setter
     def Tags(self, value: EventTags) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_ActivityOptions(self) -> EventActivityOptions: ...
-    def get_Keywords(self) -> EventKeywords: ...
-    def get_Level(self) -> EventLevel: ...
-    def get_Opcode(self) -> EventOpcode: ...
-    def get_Tags(self) -> EventTags: ...
-    def set_ActivityOptions(self, value: EventActivityOptions) -> VoidType: ...
-    def set_Keywords(self, value: EventKeywords) -> VoidType: ...
-    def set_Level(self, value: EventLevel) -> VoidType: ...
-    def set_Opcode(self, value: EventOpcode) -> VoidType: ...
-    def set_Tags(self, value: EventTags) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ManifestEnvelope(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def ChunkNumber(self) -> UShortType: ...
-    @ChunkNumber.setter
-    def ChunkNumber(self, value: UShortType) -> None: ...
-    @property
-    def Format(self) -> ManifestFormats: ...
-    @Format.setter
-    def Format(self, value: ManifestFormats) -> None: ...
-    @property
-    def Magic(self) -> ByteType: ...
-    @Magic.setter
-    def Magic(self, value: ByteType) -> None: ...
-    @property
-    def MajorVersion(self) -> ByteType: ...
-    @MajorVersion.setter
-    def MajorVersion(self, value: ByteType) -> None: ...
-    @staticmethod
-    @property
-    def MaxChunkSize() -> IntType: ...
-    @property
-    def MinorVersion(self) -> ByteType: ...
-    @MinorVersion.setter
-    def MinorVersion(self, value: ByteType) -> None: ...
-    @property
-    def TotalChunks(self) -> UShortType: ...
-    @TotalChunks.setter
-    def TotalChunks(self, value: UShortType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class ManifestFormats(Enum):
-        SimpleXmlFormat = 1
-
-class SessionMask(ValueType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, m: SessionMask): ...
-    @overload
-    def __init__(self, mask: UIntType): ...
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def All() -> SessionMask: ...
-    def __getitem__(self, key: IntType) -> BooleanType: ...
-    def __setitem__(self, key: IntType, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def FromEventKeywords(m: ULongType) -> SessionMask: ...
-    @staticmethod
-    def FromId(perEventSourceSessionId: IntType) -> SessionMask: ...
-    def IsEqualOrSupersetOf(self, m: SessionMask) -> BooleanType: ...
-    def ToEventKeywords(self) -> ULongType: ...
-    @staticmethod
-    def get_All() -> SessionMask: ...
-    def get_Item(self, perEventSourceSessionId: IntType) -> BooleanType: ...
-    @staticmethod
-    def op_BitwiseAnd(m1: SessionMask, m2: SessionMask) -> SessionMask: ...
-    @staticmethod
-    def op_BitwiseOr(m1: SessionMask, m2: SessionMask) -> SessionMask: ...
-    @staticmethod
-    def op_ExclusiveOr(m1: SessionMask, m2: SessionMask) -> SessionMask: ...
-    @staticmethod
-    @overload
-    def op_Explicit(m: SessionMask) -> ULongType: ...
-    @staticmethod
-    @overload
-    def op_Explicit(m: SessionMask) -> UIntType: ...
-    @staticmethod
-    def op_OnesComplement(m: SessionMask) -> SessionMask: ...
-    def set_Item(self, perEventSourceSessionId: IntType, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Interfaces
-
-# ---------- Enums ---------- #
-
-class ControllerCommand(Enum):
-    Disable = -3
-    Enable = -2
-    SendManifest = -1
-    Update = 0
-
-class EventActivityOptions(Enum):
-    # None = 0
-    Disable = 2
-    Recursive = 4
-    Detachable = 8
-
-class EventChannel(Enum):
-    # None = 0
-    Admin = 16
-    Operational = 17
-    Analytic = 18
-    Debug = 19
-
-class EventChannelType(Enum):
-    Admin = 1
-    Operational = 2
-    Analytic = 3
-    Debug = 4
-
-class EventCommand(Enum):
-    Disable = -3
-    Enable = -2
-    SendManifest = -1
-    Update = 0
-
-class EventFieldFormat(Enum):
-    Default = 0
-    String = 2
-    Boolean = 3
-    Hexadecimal = 4
-    Xml = 11
-    Json = 12
-    HResult = 15
-
-class EventFieldTags(Enum):
-    # None = 0
-    pass
-
-class EventKeywords(Enum):
-    All = -1
-    # None = 0
-    MicrosoftTelemetry = 562949953421312
-    WdiContext = 562949953421312
-    WdiDiagnostic = 1125899906842624
-    Sqm = 2251799813685248
-    AuditFailure = 4503599627370496
-    CorrelationHint = 4503599627370496
-    AuditSuccess = 9007199254740992
-    EventLogClassic = 36028797018963968
-
-class EventLevel(Enum):
-    LogAlways = 0
-    Critical = 1
-    Error = 2
-    Warning = 3
-    Informational = 4
-    Verbose = 5
-
-class EventManifestOptions(Enum):
-    # None = 0
-    Strict = 1
-    AllCultures = 2
-    OnlyIfNeededForRegistration = 4
-    AllowEventSourceOverride = 8
-
-class EventOpcode(Enum):
-    Info = 0
-    Start = 1
-    Stop = 2
-    DataCollectionStart = 3
-    DataCollectionStop = 4
-    Extension = 5
-    Reply = 6
-    Resume = 7
-    Suspend = 8
-    Send = 9
-    Receive = 240
+        :return:
+        """
 
 class EventSourceSettings(Enum):
-    Default = 0
-    ThrowOnEventWriteErrors = 1
-    EtwManifestEventFormat = 4
-    EtwSelfDescribingEventFormat = 8
+    """"""
+
+    Default: EventSourceSettings = ...
+    """"""
+    ThrowOnEventWriteErrors: EventSourceSettings = ...
+    """"""
+    EtwManifestEventFormat: EventSourceSettings = ...
+    """"""
+    EtwSelfDescribingEventFormat: EventSourceSettings = ...
+    """"""
 
 class EventTags(Enum):
-    # None = 0
-    pass
+    """"""
+
+    _None: EventTags = ...
+    """"""
 
 class EventTask(Enum):
-    # None = 0
-    pass
+    """"""
+
+    _None: EventTask = ...
+    """"""
+
+class EventWrittenEventArgs(EventArgs):
+    """"""
+
+    @property
+    def ActivityId(self) -> Guid:
+        """
+
+        :return:
+        """
+    @property
+    def Channel(self) -> EventChannel:
+        """
+
+        :return:
+        """
+    @property
+    def EventId(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def EventName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def EventSource(self) -> EventSource:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Payload(self) -> ReadOnlyCollection[object]:
+        """
+
+        :return:
+        """
+    @property
+    def PayloadNames(self) -> ReadOnlyCollection[str]:
+        """
+
+        :return:
+        """
+    @property
+    def RelatedActivityId(self) -> Guid:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    @property
+    def Task(self) -> EventTask:
+        """
+
+        :return:
+        """
+    @property
+    def Version(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class FieldMetadata(Object):
+    """"""
+
+    @overload
+    def __init__(
+        self, name: str, type: TraceLoggingDataType, tags: EventFieldTags, custom: Array[int]
+    ):
+        """
+
+        :param name:
+        :param type:
+        :param tags:
+        :param custom:
+        """
+    @overload
+    def __init__(
+        self, name: str, type: TraceLoggingDataType, tags: EventFieldTags, variableCount: bool
+    ):
+        """
+
+        :param name:
+        :param type:
+        :param tags:
+        :param variableCount:
+        """
+    @overload
+    def __init__(
+        self, name: str, type: TraceLoggingDataType, tags: EventFieldTags, fixedCount: int
+    ):
+        """
+
+        :param name:
+        :param type:
+        :param tags:
+        :param fixedCount:
+        """
+    def Encode(self, pos: int, metadata: Array[int]) -> None:
+        """
+
+        :param pos:
+        :param metadata:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IncrementStructFieldCount(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class FrameworkEventSource(EventSource, IDisposable):
+    """"""
+
+    Log: Final[ClassVar[FrameworkEventSource]] = ...
+    """
+    
+    :return: 
+    """
+    @property
+    def ConstructionException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def CurrentThreadActivityId(cls) -> Guid:
+        """
+
+        :return:
+        """
+    @property
+    def Guid(self) -> Guid:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def IsInitialized(cls) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Settings(self) -> EventSourceSettings:
+        """
+
+        :return:
+        """
+    def BeginGetRequestStream(self, id: object, uri: str, success: bool, synchronous: bool) -> None:
+        """
+
+        :param id:
+        :param uri:
+        :param success:
+        :param synchronous:
+        """
+    def BeginGetResponse(self, id: object, uri: str, success: bool, synchronous: bool) -> None:
+        """
+
+        :param id:
+        :param uri:
+        :param success:
+        :param synchronous:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndGetRequestStream(self, id: object, success: bool, synchronous: bool) -> None:
+        """
+
+        :param id:
+        :param success:
+        :param synchronous:
+        """
+    def EndGetResponse(self, id: object, success: bool, synchronous: bool, statusCode: int) -> None:
+        """
+
+        :param id:
+        :param success:
+        :param synchronous:
+        :param statusCode:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTrait(self, key: str) -> str:
+        """
+
+        :param key:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsEnabled(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :return:
+        """
+    @overload
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords, channel: EventChannel) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :param channel:
+        :return:
+        """
+    @overload
+    def ResourceManagerAddingCultureFromConfigFile(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerAddingCultureFromConfigFile(
+        self, baseName: str, mainAssemblyName: str, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerCaseInsensitiveResourceStreamLookupFailed(
+        self, baseName: str, mainAssembly: Assembly, assemblyName: str, resourceFileName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param assemblyName:
+        :param resourceFileName:
+        """
+    @overload
+    def ResourceManagerCaseInsensitiveResourceStreamLookupFailed(
+        self, baseName: str, mainAssemblyName: str, assemblyName: str, resourceFileName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param assemblyName:
+        :param resourceFileName:
+        """
+    @overload
+    def ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded(
+        self, baseName: str, mainAssembly: Assembly, assemblyName: str, resourceFileName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param assemblyName:
+        :param resourceFileName:
+        """
+    @overload
+    def ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded(
+        self, baseName: str, mainAssemblyName: str, assemblyName: str, resourceFileName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param assemblyName:
+        :param resourceFileName:
+        """
+    @overload
+    def ResourceManagerCreatingResourceSet(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str, fileName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        :param fileName:
+        """
+    @overload
+    def ResourceManagerCreatingResourceSet(
+        self, baseName: str, mainAssemblyName: str, cultureName: str, fileName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        :param fileName:
+        """
+    @overload
+    def ResourceManagerCultureFoundInConfigFile(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerCultureFoundInConfigFile(
+        self, baseName: str, mainAssemblyName: str, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerCultureNotFoundInConfigFile(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerCultureNotFoundInConfigFile(
+        self, baseName: str, mainAssemblyName: str, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerFoundResourceSetInCache(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerFoundResourceSetInCache(
+        self, baseName: str, mainAssemblyName: str, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerFoundResourceSetInCacheUnexpected(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerFoundResourceSetInCacheUnexpected(
+        self, baseName: str, mainAssemblyName: str, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerGetSatelliteAssemblyFailed(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str, assemblyName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        :param assemblyName:
+        """
+    @overload
+    def ResourceManagerGetSatelliteAssemblyFailed(
+        self, baseName: str, mainAssemblyName: str, cultureName: str, assemblyName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        :param assemblyName:
+        """
+    @overload
+    def ResourceManagerGetSatelliteAssemblySucceeded(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str, assemblyName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        :param assemblyName:
+        """
+    @overload
+    def ResourceManagerGetSatelliteAssemblySucceeded(
+        self, baseName: str, mainAssemblyName: str, cultureName: str, assemblyName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        :param assemblyName:
+        """
+    @overload
+    def ResourceManagerLookingForResourceSet(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerLookingForResourceSet(
+        self, baseName: str, mainAssemblyName: str, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerLookupFailed(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerLookupFailed(
+        self, baseName: str, mainAssemblyName: str, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerLookupStarted(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerLookupStarted(
+        self, baseName: str, mainAssemblyName: str, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerManifestResourceAccessDenied(
+        self, baseName: str, mainAssembly: Assembly, assemblyName: str, canonicalName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param assemblyName:
+        :param canonicalName:
+        """
+    @overload
+    def ResourceManagerManifestResourceAccessDenied(
+        self, baseName: str, mainAssemblyName: str, assemblyName: str, canonicalName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param assemblyName:
+        :param canonicalName:
+        """
+    @overload
+    def ResourceManagerNeutralResourceAttributeMissing(self, mainAssembly: Assembly) -> None:
+        """
+
+        :param mainAssembly:
+        """
+    @overload
+    def ResourceManagerNeutralResourceAttributeMissing(self, mainAssemblyName: str) -> None:
+        """
+
+        :param mainAssemblyName:
+        """
+    @overload
+    def ResourceManagerNeutralResourcesFound(
+        self, baseName: str, mainAssembly: Assembly, resName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param resName:
+        """
+    @overload
+    def ResourceManagerNeutralResourcesFound(
+        self, baseName: str, mainAssemblyName: str, resName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param resName:
+        """
+    @overload
+    def ResourceManagerNeutralResourcesNotFound(
+        self, baseName: str, mainAssembly: Assembly, resName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param resName:
+        """
+    @overload
+    def ResourceManagerNeutralResourcesNotFound(
+        self, baseName: str, mainAssemblyName: str, resName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param resName:
+        """
+    @overload
+    def ResourceManagerNeutralResourcesSufficient(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerNeutralResourcesSufficient(
+        self, baseName: str, mainAssemblyName: str, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerNotCreatingResourceSet(
+        self, baseName: str, mainAssembly: Assembly, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerNotCreatingResourceSet(
+        self, baseName: str, mainAssemblyName: str, cultureName: str
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        """
+    @overload
+    def ResourceManagerReleasingResources(self, baseName: str, mainAssembly: Assembly) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        """
+    @overload
+    def ResourceManagerReleasingResources(self, baseName: str, mainAssemblyName: str) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        """
+    @overload
+    def ResourceManagerStreamFound(
+        self,
+        baseName: str,
+        mainAssembly: Assembly,
+        cultureName: str,
+        loadedAssembly: Assembly,
+        resourceFileName: str,
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        :param loadedAssembly:
+        :param resourceFileName:
+        """
+    @overload
+    def ResourceManagerStreamFound(
+        self,
+        baseName: str,
+        mainAssemblyName: str,
+        cultureName: str,
+        loadedAssemblyName: str,
+        resourceFileName: str,
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        :param loadedAssemblyName:
+        :param resourceFileName:
+        """
+    @overload
+    def ResourceManagerStreamNotFound(
+        self,
+        baseName: str,
+        mainAssembly: Assembly,
+        cultureName: str,
+        loadedAssembly: Assembly,
+        resourceFileName: str,
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssembly:
+        :param cultureName:
+        :param loadedAssembly:
+        :param resourceFileName:
+        """
+    @overload
+    def ResourceManagerStreamNotFound(
+        self,
+        baseName: str,
+        mainAssemblyName: str,
+        cultureName: str,
+        loadedAssemblyName: str,
+        resourceFileName: str,
+    ) -> None:
+        """
+
+        :param baseName:
+        :param mainAssemblyName:
+        :param cultureName:
+        :param loadedAssemblyName:
+        :param resourceFileName:
+        """
+    def ThreadPoolDequeueWork(self, workID: int) -> None:
+        """
+
+        :param workID:
+        """
+    def ThreadPoolDequeueWorkObject(self, workID: object) -> None:
+        """
+
+        :param workID:
+        """
+    def ThreadPoolEnqueueWork(self, workID: int) -> None:
+        """
+
+        :param workID:
+        """
+    def ThreadPoolEnqueueWorkObject(self, workID: object) -> None:
+        """
+
+        :param workID:
+        """
+    def ThreadTransferReceive(self, id: int, kind: int, info: str) -> None:
+        """
+
+        :param id:
+        :param kind:
+        :param info:
+        """
+    def ThreadTransferReceiveHandled(self, id: int, kind: int, info: str) -> None:
+        """
+
+        :param id:
+        :param kind:
+        :param info:
+        """
+    def ThreadTransferReceiveHandledObj(self, id: object, kind: int, info: str) -> None:
+        """
+
+        :param id:
+        :param kind:
+        :param info:
+        """
+    def ThreadTransferReceiveObj(self, id: object, kind: int, info: str) -> None:
+        """
+
+        :param id:
+        :param kind:
+        :param info:
+        """
+    def ThreadTransferSend(self, id: int, kind: int, info: str, multiDequeues: bool) -> None:
+        """
+
+        :param id:
+        :param kind:
+        :param info:
+        :param multiDequeues:
+        """
+    def ThreadTransferSendObj(self, id: object, kind: int, info: str, multiDequeues: bool) -> None:
+        """
+
+        :param id:
+        :param kind:
+        :param info:
+        :param multiDequeues:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Write(self, eventName: str) -> None:
+        """
+
+        :param eventName:
+        """
+    @overload
+    def Write(self, eventName: str, data: T) -> None:
+        """
+
+        :param eventName:
+        :param data:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @overload
+    def Write(
+        self,
+        eventName: str,
+        options: EventSourceOptions,
+        activityId: Guid,
+        relatedActivityId: Guid,
+        data: T,
+    ) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param activityId:
+        :param relatedActivityId:
+        :param data:
+        """
+    EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
+    """"""
+
+    class Keywords(ABC, Object):
+        """"""
+
+        DynamicTypeUsage: Final[ClassVar[EventKeywords]] = ...
+        """"""
+        Loader: Final[ClassVar[EventKeywords]] = ...
+        """"""
+        NetClient: Final[ClassVar[EventKeywords]] = ...
+        """"""
+        ThreadPool: Final[ClassVar[EventKeywords]] = ...
+        """"""
+        ThreadTransfer: Final[ClassVar[EventKeywords]] = ...
+        """"""
+        def Equals(self, obj: object) -> bool:
+            """
+
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
+
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
+
+            :return:
+            """
+        def ToString(self) -> str:
+            """
+
+            :return:
+            """
+
+    class Opcodes(ABC, Object):
+        """"""
+
+        ReceiveHandled: Final[ClassVar[EventOpcode]] = ...
+        """"""
+        def Equals(self, obj: object) -> bool:
+            """
+
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
+
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
+
+            :return:
+            """
+        def ToString(self) -> str:
+            """
+
+            :return:
+            """
+
+    class Tasks(ABC, Object):
+        """"""
+
+        GetRequestStream: Final[ClassVar[EventTask]] = ...
+        """"""
+        GetResponse: Final[ClassVar[EventTask]] = ...
+        """"""
+        ThreadTransfer: Final[ClassVar[EventTask]] = ...
+        """"""
+        def Equals(self, obj: object) -> bool:
+            """
+
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
+
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
+
+            :return:
+            """
+        def ToString(self) -> str:
+            """
+
+            :return:
+            """
+
+class GuidArrayTypeInfo(TraceLoggingTypeInfo[Array[Guid]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[Guid]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: Guid) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class GuidTypeInfo(TraceLoggingTypeInfo[Guid]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Guid]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: Guid) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class Int16ArrayTypeInfo(TraceLoggingTypeInfo[Array[Int16]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[int]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class Int16TypeInfo(TraceLoggingTypeInfo[Int16]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[int]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class Int32ArrayTypeInfo(TraceLoggingTypeInfo[Array[Int32]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[int]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class Int32TypeInfo(TraceLoggingTypeInfo[Int32]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[int]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class Int64ArrayTypeInfo(TraceLoggingTypeInfo[Array[Int64]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[int]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class Int64TypeInfo(TraceLoggingTypeInfo[Int64]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[int]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class IntPtrArrayTypeInfo(TraceLoggingTypeInfo[Array[IntPtr]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[IntPtr]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: IntPtr) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class IntPtrTypeInfo(TraceLoggingTypeInfo[IntPtr]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[IntPtr]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: IntPtr) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class InvokeTypeInfo(Generic[ContainerType], TraceLoggingTypeInfo[ContainerType]):
+    """"""
+
+    def __init__(self, typeAnalysis: TypeAnalysis):
+        """
+
+        :param typeAnalysis:
+        """
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[ContainerType]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: ContainerType) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class KeyValuePairTypeInfo(Generic[K, V], TraceLoggingTypeInfo[KeyValuePair, V]):
+    """"""
+
+    def __init__(self, recursionCheck: List[Type]):
+        """
+
+        :param recursionCheck:
+        """
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[KeyValuePair, V]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: KeyValuePair[K, V]) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class ManifestBuilder(Object):
+    """"""
+
+    def __init__(
+        self,
+        providerName: str,
+        providerGuid: Guid,
+        dllName: str,
+        resources: ResourceManager,
+        flags: EventManifestOptions,
+    ):
+        """
+
+        :param providerName:
+        :param providerGuid:
+        :param dllName:
+        :param resources:
+        :param flags:
+        """
+    @property
+    def Errors(self) -> IList[str]:
+        """
+
+        :return:
+        """
+    def AddChannel(self, name: str, value: int, channelAttribute: EventChannelAttribute) -> None:
+        """
+
+        :param name:
+        :param value:
+        :param channelAttribute:
+        """
+    def AddEventParameter(self, type: Type, name: str) -> None:
+        """
+
+        :param type:
+        :param name:
+        """
+    def AddKeyword(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    def AddOpcode(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    def AddTask(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    def CreateManifest(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def EndEvent(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetChannelData(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetChannelKeyword(self, channel: EventChannel) -> int:
+        """
+
+        :param channel:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ManifestError(self, msg: str, runtimeCritical: bool = ...) -> None:
+        """
+
+        :param msg:
+        :param runtimeCritical:
+        """
+    def StartEvent(self, eventName: str, eventAttribute: EventAttribute) -> None:
+        """
+
+        :param eventName:
+        :param eventAttribute:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ManifestEnvelope(ValueType):
+    """"""
+
+    ChunkNumber: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Format: Final[ManifestEnvelope.ManifestFormats] = ...
+    """
+    
+    :return: 
+    """
+    Magic: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    MajorVersion: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    MaxChunkSize: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MinorVersion: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    TotalChunks: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class ManifestFormats(Enum):
+        """"""
+
+        SimpleXmlFormat: ManifestFormats = ...
+        """"""
+
+class NameInfo(ConcurrentSetItem[KeyValuePair, EventTags, NameInfo]):
+    """"""
+
+    def __init__(self, name: str, tags: EventTags, typeMetadataSize: int):
+        """
+
+        :param name:
+        :param tags:
+        :param typeMetadataSize:
+        """
+    @overload
+    def Compare(self, key: KeyValuePair[str, EventTags]) -> int:
+        """
+
+        :param other:
+        :return:
+        """
+    @overload
+    def Compare(self, other: NameInfo) -> int:
+        """
+
+        :param other:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class NonEventAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class NonGenericProperytWriter(Generic[ContainerType], PropertyAccessor[ContainerType]):
+    """"""
+
+    def __init__(self, property: PropertyAnalysis):
+        """
+
+        :param property:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: ContainerType) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, collector: TraceLoggingDataCollector, value: ContainerType) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class NullTypeInfo(Generic[DataType], TraceLoggingTypeInfo[DataType]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[DataType]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: DataType) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class NullableTypeInfo(Generic[T], TraceLoggingTypeInfo[T]):
+    """"""
+
+    def __init__(self, recursionCheck: List[Type]):
+        """
+
+        :param recursionCheck:
+        """
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Optional[T]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: Optional[T]) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class PropertyAccessor(ABC, Generic[ContainerType], Object):
+    """"""
+
+    @classmethod
+    def Create(cls, property: PropertyAnalysis) -> PropertyAccessor[ContainerType]:
+        """
+
+        :param property:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: ContainerType) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, collector: TraceLoggingDataCollector, value: ContainerType) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class PropertyAnalysis(Object):
+    """"""
+
+    def __init__(
+        self,
+        name: str,
+        getterInfo: MethodInfo,
+        typeInfo: TraceLoggingTypeInfo,
+        fieldAttribute: EventFieldAttribute,
+    ):
+        """
+
+        :param name:
+        :param getterInfo:
+        :param typeInfo:
+        :param fieldAttribute:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SByteArrayTypeInfo(TraceLoggingTypeInfo[Array[SByte]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[int]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class SByteTypeInfo(TraceLoggingTypeInfo[SByte]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[int]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class SessionMask(ValueType):
+    """"""
+
+    @overload
+    def __init__(self, m: SessionMask):
+        """
+
+        :param m:
+        """
+    @overload
+    def __init__(self, mask: int = ...):
+        """
+
+        :param mask:
+        """
+    @classmethod
+    @property
+    def All(cls) -> SessionMask:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> bool:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: bool) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def FromEventKeywords(cls, m: int) -> SessionMask:
+        """
+
+        :param m:
+        :return:
+        """
+    @classmethod
+    def FromId(cls, perEventSourceSessionId: int) -> SessionMask:
+        """
+
+        :param perEventSourceSessionId:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsEqualOrSupersetOf(self, m: SessionMask) -> bool:
+        """
+
+        :param m:
+        :return:
+        """
+    def ToEventKeywords(self) -> int:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __and__(self, other: SessionMask) -> SessionMask:
+        """
+
+        :param other:
+        :return:
+        """
+    def __getitem__(self, perEventSourceSessionId: int) -> bool:
+        """
+
+        :param perEventSourceSessionId:
+        :return:
+        """
+    def __invert__(self) -> SessionMask:
+        """
+
+        :return:
+        """
+    def __or__(self, other: SessionMask) -> SessionMask:
+        """
+
+        :param other:
+        :return:
+        """
+    def __setitem__(self, perEventSourceSessionId: int, value: bool) -> None:
+        """
+
+        :param perEventSourceSessionId:
+        :param value:
+        """
+    def __xor__(self, other: SessionMask) -> SessionMask:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_BitwiseAnd(cls, m1: SessionMask, m2: SessionMask) -> SessionMask:
+        """
+
+        :param m1:
+        :param m2:
+        :return:
+        """
+    @classmethod
+    def op_BitwiseOr(cls, m1: SessionMask, m2: SessionMask) -> SessionMask:
+        """
+
+        :param m1:
+        :param m2:
+        :return:
+        """
+    @classmethod
+    def op_ExclusiveOr(cls, m1: SessionMask, m2: SessionMask) -> SessionMask:
+        """
+
+        :param m1:
+        :param m2:
+        :return:
+        """
+    @classmethod
+    def op_Explicit(cls, m: SessionMask) -> int:
+        """
+
+        :param m:
+        :return:
+        """
+    @classmethod
+    def op_OnesComplement(cls, m: SessionMask) -> SessionMask:
+        """
+
+        :param m:
+        :return:
+        """
+
+class SimpleEventTypes(Generic[T], TraceLoggingEventTypes):
+    """"""
+
+    @classmethod
+    @property
+    def Instance(cls) -> SimpleEventTypes[T]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SingleArrayTypeInfo(TraceLoggingTypeInfo[Array[Single]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[float]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: float) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class SingleTypeInfo(TraceLoggingTypeInfo[Single]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[float]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: float) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class Statics(ABC, Object):
+    """"""
+
+    DefaultLevel: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    EventTagsMask: Final[ClassVar[EventTags]] = ...
+    """
+    
+    :return: 
+    """
+    HexIntPtrType: Final[ClassVar[TraceLoggingDataType]] = ...
+    """
+    
+    :return: 
+    """
+    InTypeChainFlag: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    InTypeCountMask: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    InTypeCustomCountFlag: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    InTypeFixedCountFlag: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    InTypeMask: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    InTypeVariableCountFlag: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    IntPtrType: Final[ClassVar[TraceLoggingDataType]] = ...
+    """
+    
+    :return: 
+    """
+    OutTypeChainFlag: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    OutTypeMask: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    TraceLoggingChannel: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    UIntPtrType: Final[ClassVar[TraceLoggingDataType]] = ...
+    """
+    
+    :return: 
+    """
+    @classmethod
+    def CheckName(cls, name: str) -> None:
+        """
+
+        :param name:
+        """
+    @classmethod
+    @overload
+    def Combine(cls, settingValue: int, defaultValue: int) -> int:
+        """
+
+        :param settingValue:
+        :param defaultValue:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Combine(cls, settingValue1: int, settingValue2: int) -> int:
+        """
+
+        :param settingValue1:
+        :param settingValue2:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Combine(cls, settingValue1: int, settingValue2: int, defaultValue: int) -> int:
+        """
+
+        :param settingValue1:
+        :param settingValue2:
+        :param defaultValue:
+        :return:
+        """
+    @classmethod
+    def CreateDefaultTypeInfo(cls, recursionCheck: List[Type]) -> TraceLoggingTypeInfo[DataType]:
+        """
+
+        :param recursionCheck:
+        :return:
+        """
+    @classmethod
+    def CreateDelegate(cls, delegateType: Type, methodInfo: MethodInfo) -> Delegate:
+        """
+
+        :param delegateType:
+        :param methodInfo:
+        :return:
+        """
+    @classmethod
+    def CreateInstance(cls, type: Type, parameters: Array[object]) -> object:
+        """
+
+        :param type:
+        :param parameters:
+        :return:
+        """
+    @classmethod
+    def EncodeTags(cls, tags: int, pos: int, metadata: Array[int]) -> None:
+        """
+
+        :param tags:
+        :param pos:
+        :param metadata:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def FindEnumerableElementType(cls, type: Type) -> Type:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
+    def Format16(
+        cls, format: EventFieldFormat, native: TraceLoggingDataType
+    ) -> TraceLoggingDataType:
+        """
+
+        :param format:
+        :param native:
+        :return:
+        """
+    @classmethod
+    def Format32(
+        cls, format: EventFieldFormat, native: TraceLoggingDataType
+    ) -> TraceLoggingDataType:
+        """
+
+        :param format:
+        :param native:
+        :return:
+        """
+    @classmethod
+    def Format64(
+        cls, format: EventFieldFormat, native: TraceLoggingDataType
+    ) -> TraceLoggingDataType:
+        """
+
+        :param format:
+        :param native:
+        :return:
+        """
+    @classmethod
+    def Format8(
+        cls, format: EventFieldFormat, native: TraceLoggingDataType
+    ) -> TraceLoggingDataType:
+        """
+
+        :param format:
+        :param native:
+        :return:
+        """
+    @classmethod
+    def FormatPtr(
+        cls, format: EventFieldFormat, native: TraceLoggingDataType
+    ) -> TraceLoggingDataType:
+        """
+
+        :param format:
+        :param native:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetCustomAttribute(cls, propInfo: PropertyInfo) -> AttributeType:
+        """
+
+        :param propInfo:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetCustomAttribute(cls, type: Type) -> AttributeType:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
+    def GetDeclaredStaticMethod(cls, declaringType: Type, name: str) -> MethodInfo:
+        """
+
+        :param declaringType:
+        :param name:
+        :return:
+        """
+    @classmethod
+    def GetGenericArguments(cls, type: Type) -> Array[Type]:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
+    def GetGetMethod(cls, propInfo: PropertyInfo) -> MethodInfo:
+        """
+
+        :param propInfo:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetProperties(cls, type: Type) -> IEnumerable[PropertyInfo]:
+        """
+
+        :param type:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetTypeInfoInstance(
+        cls, dataType: Type, recursionCheck: List[Type]
+    ) -> TraceLoggingTypeInfo:
+        """
+
+        :param dataType:
+        :param recursionCheck:
+        :return:
+        """
+    @classmethod
+    def HasCustomAttribute(cls, propInfo: PropertyInfo, attributeType: Type) -> bool:
+        """
+
+        :param propInfo:
+        :param attributeType:
+        :return:
+        """
+    @classmethod
+    def IsEnum(cls, type: Type) -> bool:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
+    def IsGenericMatch(cls, type: Type, openType: object) -> bool:
+        """
+
+        :param type:
+        :param openType:
+        :return:
+        """
+    @classmethod
+    def IsValueType(cls, type: Type) -> bool:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
+    def MakeDataType(
+        cls, baseType: TraceLoggingDataType, format: EventFieldFormat
+    ) -> TraceLoggingDataType:
+        """
+
+        :param baseType:
+        :param format:
+        :return:
+        """
+    @classmethod
+    def MetadataForString(
+        cls, name: str, prefixSize: int, suffixSize: int, additionalSize: int
+    ) -> Array[int]:
+        """
+
+        :param name:
+        :param prefixSize:
+        :param suffixSize:
+        :param additionalSize:
+        :return:
+        """
+    @classmethod
+    def ShouldOverrideFieldName(cls, fieldName: str) -> bool:
+        """
+
+        :param fieldName:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StringTypeInfo(TraceLoggingTypeInfo[String]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[str]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: str) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class StructPropertyWriter(Generic[ContainerType, ValueType], PropertyAccessor[ContainerType]):
+    """"""
+
+    def __init__(self, property: PropertyAnalysis):
+        """
+
+        :param property:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: ContainerType) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, collector: TraceLoggingDataCollector, value: ContainerType) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class TimeSpanTypeInfo(TraceLoggingTypeInfo[TimeSpan]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[TimeSpan]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: TimeSpan) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class TraceLoggingDataCollector(Object):
+    """"""
+
+    @overload
+    def AddArray(self, value: Array[bool]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[Char]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[float]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[Guid]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[int]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[int]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[int]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[IntPtr]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[int]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[float]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[int]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[int]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[int]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddArray(self, value: Array[UIntPtr]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddBinary(self, value: Array[int]) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddBinary(self, value: str) -> None:
+        """
+
+        :param value:
+        """
+    def AddCustom(self, value: Array[int]) -> None:
+        """
+
+        :param value:
+        """
+    def AddGroup(self) -> TraceLoggingDataCollector:
+        """
+
+        :return:
+        """
+    @overload
+    def AddScalar(self, value: bool) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: Char) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: float) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: Guid) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: IntPtr) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: float) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddScalar(self, value: UIntPtr) -> None:
+        """
+
+        :param value:
+        """
+    def BeginBufferedArray(self) -> int:
+        """
+
+        :return:
+        """
+    def EndBufferedArray(self, bookmark: int, count: int) -> None:
+        """
+
+        :param bookmark:
+        :param count:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class TraceLoggingDataType(Enum):
-    Nil = 0
-    Utf16String = 1
-    MbcsString = 2
-    Int8 = 3
-    UInt8 = 4
-    Int16 = 5
-    UInt16 = 6
-    Int32 = 7
-    UInt32 = 8
-    Int64 = 9
-    UInt64 = 10
-    Float = 11
-    Double = 12
-    Boolean32 = 13
-    Binary = 14
-    Guid = 15
-    FileTime = 17
-    SystemTime = 18
-    HexInt32 = 20
-    HexInt64 = 21
-    CountedUtf16String = 22
-    CountedMbcsString = 23
-    Struct = 24
-    Char8 = 516
-    Char16 = 518
-    Boolean8 = 772
-    HexInt8 = 1028
-    HexInt16 = 1030
-    Utf16Xml = 2817
-    MbcsXml = 2818
-    CountedUtf16Xml = 2838
-    CountedMbcsXml = 2839
-    Utf16Json = 3073
-    MbcsJson = 3074
-    CountedUtf16Json = 3094
-    CountedMbcsJson = 3095
-    HResult = 3847
+    """"""
 
-# No Delegates
+    Nil: TraceLoggingDataType = ...
+    """"""
+    Utf16String: TraceLoggingDataType = ...
+    """"""
+    MbcsString: TraceLoggingDataType = ...
+    """"""
+    Int8: TraceLoggingDataType = ...
+    """"""
+    UInt8: TraceLoggingDataType = ...
+    """"""
+    Int16: TraceLoggingDataType = ...
+    """"""
+    UInt16: TraceLoggingDataType = ...
+    """"""
+    Int32: TraceLoggingDataType = ...
+    """"""
+    UInt32: TraceLoggingDataType = ...
+    """"""
+    Int64: TraceLoggingDataType = ...
+    """"""
+    UInt64: TraceLoggingDataType = ...
+    """"""
+    Float: TraceLoggingDataType = ...
+    """"""
+    Double: TraceLoggingDataType = ...
+    """"""
+    Boolean32: TraceLoggingDataType = ...
+    """"""
+    Binary: TraceLoggingDataType = ...
+    """"""
+    Guid: TraceLoggingDataType = ...
+    """"""
+    FileTime: TraceLoggingDataType = ...
+    """"""
+    SystemTime: TraceLoggingDataType = ...
+    """"""
+    HexInt32: TraceLoggingDataType = ...
+    """"""
+    HexInt64: TraceLoggingDataType = ...
+    """"""
+    CountedUtf16String: TraceLoggingDataType = ...
+    """"""
+    CountedMbcsString: TraceLoggingDataType = ...
+    """"""
+    Struct: TraceLoggingDataType = ...
+    """"""
+    Char8: TraceLoggingDataType = ...
+    """"""
+    Char16: TraceLoggingDataType = ...
+    """"""
+    Boolean8: TraceLoggingDataType = ...
+    """"""
+    HexInt8: TraceLoggingDataType = ...
+    """"""
+    HexInt16: TraceLoggingDataType = ...
+    """"""
+    Utf16Xml: TraceLoggingDataType = ...
+    """"""
+    MbcsXml: TraceLoggingDataType = ...
+    """"""
+    CountedUtf16Xml: TraceLoggingDataType = ...
+    """"""
+    CountedMbcsXml: TraceLoggingDataType = ...
+    """"""
+    Utf16Json: TraceLoggingDataType = ...
+    """"""
+    MbcsJson: TraceLoggingDataType = ...
+    """"""
+    CountedUtf16Json: TraceLoggingDataType = ...
+    """"""
+    CountedMbcsJson: TraceLoggingDataType = ...
+    """"""
+    HResult: TraceLoggingDataType = ...
+    """"""
 
-__all__ = [
-    ActivityFilter,
-    ActivityTracker,
-    ArrayTypeInfo,
-    BooleanArrayTypeInfo,
-    BooleanTypeInfo,
-    ByteArrayTypeInfo,
-    ByteTypeInfo,
-    CharArrayTypeInfo,
-    CharTypeInfo,
-    ClassPropertyWriter,
-    ConcurrentSetItem,
-    DateTimeOffsetTypeInfo,
-    DateTimeTypeInfo,
-    DecimalTypeInfo,
-    DoubleArrayTypeInfo,
-    DoubleTypeInfo,
-    EnumByteTypeInfo,
-    EnumHelper,
-    EnumInt16TypeInfo,
-    EnumInt32TypeInfo,
-    EnumInt64TypeInfo,
-    EnumSByteTypeInfo,
-    EnumUInt16TypeInfo,
-    EnumUInt32TypeInfo,
-    EnumUInt64TypeInfo,
-    EnumerableTypeInfo,
-    EtwSession,
-    EventAttribute,
-    EventChannelAttribute,
-    EventCommandEventArgs,
-    EventDataAttribute,
-    EventDispatcher,
-    EventFieldAttribute,
-    EventIgnoreAttribute,
-    EventListener,
-    EventPayload,
-    EventProvider,
-    EventSource,
-    EventSourceActivity,
-    EventSourceAttribute,
-    EventSourceCreatedEventArgs,
-    EventSourceException,
-    EventWrittenEventArgs,
-    FieldMetadata,
-    FrameworkEventSource,
-    GuidArrayTypeInfo,
-    GuidTypeInfo,
-    Int16ArrayTypeInfo,
-    Int16TypeInfo,
-    Int32ArrayTypeInfo,
-    Int32TypeInfo,
-    Int64ArrayTypeInfo,
-    Int64TypeInfo,
-    IntPtrArrayTypeInfo,
-    IntPtrTypeInfo,
-    InvokeTypeInfo,
-    KeyValuePairTypeInfo,
-    ManifestBuilder,
-    NameInfo,
-    NonEventAttribute,
-    NonGenericProperytWriter,
-    NullTypeInfo,
-    NullableTypeInfo,
-    PropertyAccessor,
-    PropertyAnalysis,
-    SByteArrayTypeInfo,
-    SByteTypeInfo,
-    SimpleEventTypes,
-    SingleArrayTypeInfo,
-    SingleTypeInfo,
-    Statics,
-    StringTypeInfo,
-    StructPropertyWriter,
-    TimeSpanTypeInfo,
-    TraceLoggingDataCollector,
-    TraceLoggingEventTypes,
-    TraceLoggingMetadataCollector,
-    TraceLoggingTypeInfo,
-    TypeAnalysis,
-    UInt16ArrayTypeInfo,
-    UInt16TypeInfo,
-    UInt32ArrayTypeInfo,
-    UInt32TypeInfo,
-    UInt64ArrayTypeInfo,
-    UInt64TypeInfo,
-    UIntPtrArrayTypeInfo,
-    UIntPtrTypeInfo,
-    ConcurrentSet,
-    DataCollector,
-    EmptyStruct,
-    EventDescriptor,
-    EventSourceOptions,
-    ManifestEnvelope,
-    SessionMask,
-    ControllerCommand,
-    EventActivityOptions,
-    EventChannel,
-    EventChannelType,
-    EventCommand,
-    EventFieldFormat,
-    EventFieldTags,
-    EventKeywords,
-    EventLevel,
-    EventManifestOptions,
-    EventOpcode,
-    EventSourceSettings,
-    EventTags,
-    EventTask,
-    TraceLoggingDataType,
-]
+class TraceLoggingEventTypes(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TraceLoggingMetadataCollector(Object):
+    """"""
+
+    def AddArray(self, name: str, type: TraceLoggingDataType) -> None:
+        """
+
+        :param name:
+        :param type:
+        """
+    def AddBinary(self, name: str, type: TraceLoggingDataType) -> None:
+        """
+
+        :param name:
+        :param type:
+        """
+    def AddCustom(self, name: str, type: TraceLoggingDataType, metadata: Array[int]) -> None:
+        """
+
+        :param name:
+        :param type:
+        :param metadata:
+        """
+    def AddGroup(self, name: str) -> TraceLoggingMetadataCollector:
+        """
+
+        :param name:
+        :return:
+        """
+    def AddScalar(self, name: str, type: TraceLoggingDataType) -> None:
+        """
+
+        :param name:
+        :param type:
+        """
+    def BeginBufferedArray(self) -> None:
+        """"""
+    def EndBufferedArray(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TraceLoggingTypeInfo(ABC, Object):
+    """"""
+
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class TraceLoggingTypeInfo(ABC, Generic[DataType], TraceLoggingTypeInfo):
+    """"""
+
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[DataType]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: DataType) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class TypeAnalysis(Object):
+    """"""
+
+    def __init__(self, dataType: Type, eventAttrib: EventDataAttribute, recursionCheck: List[Type]):
+        """
+
+        :param dataType:
+        :param eventAttrib:
+        :param recursionCheck:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class UInt16ArrayTypeInfo(TraceLoggingTypeInfo[Array[UInt16]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[int]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class UInt16TypeInfo(TraceLoggingTypeInfo[UInt16]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[int]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class UInt32ArrayTypeInfo(TraceLoggingTypeInfo[Array[UInt32]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[int]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class UInt32TypeInfo(TraceLoggingTypeInfo[UInt32]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[int]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class UInt64ArrayTypeInfo(TraceLoggingTypeInfo[Array[UInt64]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[int]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class UInt64TypeInfo(TraceLoggingTypeInfo[UInt64]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[int]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: int) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class UIntPtrArrayTypeInfo(TraceLoggingTypeInfo[Array[UIntPtr]]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[Array[UIntPtr]]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: UIntPtr) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """
+
+class UIntPtrTypeInfo(TraceLoggingTypeInfo[UIntPtr]):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Instance(cls) -> TraceLoggingTypeInfo[UIntPtr]:
+        """
+
+        :return:
+        """
+    @property
+    def Keywords(self) -> EventKeywords:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> EventLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Opcode(self) -> EventOpcode:
+        """
+
+        :return:
+        """
+    @property
+    def Tags(self) -> EventTags:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetData(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteData(self, collector: TraceLoggingDataCollector, value: UIntPtr) -> None:
+        """"""
+    def WriteMetadata(
+        self, collector: TraceLoggingMetadataCollector, name: str, format: EventFieldFormat
+    ) -> None:
+        """
+
+        :param collector:
+        :param name:
+        :param format:
+        """
+    def WriteObjectData(self, collector: TraceLoggingDataCollector, value: object) -> None:
+        """
+
+        :param collector:
+        :param value:
+        """

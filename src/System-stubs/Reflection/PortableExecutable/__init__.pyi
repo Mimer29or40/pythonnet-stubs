@@ -1,860 +1,1477 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
+from typing import Final
 from typing import Tuple
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Enum
 from System import Func
 from System import Guid
 from System import IDisposable
-from System import Int16
-from System import Int32
 from System import Object
-from System import String
-from System import UInt16
-from System import UInt32
-from System import UInt64
+from System import Type
 from System import ValueType
-from System import Void
 from System.Collections.Immutable import ImmutableArray
 from System.IO import Stream
 from System.Reflection.Metadata import BlobReader
 from System.Reflection.Metadata import MetadataReaderProvider
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-ObjectType = Object
-ShortType = Union[int, Int16]
-StringType = Union[str, String]
-UIntType = Union[int, UInt32]
-ULongType = Union[int, UInt64]
-UShortType = Union[int, UInt16]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class CoffHeader(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Characteristics(self) -> Characteristics: ...
-    @property
-    def Machine(self) -> Machine: ...
-    @property
-    def NumberOfSections(self) -> ShortType: ...
-    @property
-    def NumberOfSymbols(self) -> IntType: ...
-    @property
-    def PointerToSymbolTable(self) -> IntType: ...
-    @property
-    def SizeOfOptionalHeader(self) -> ShortType: ...
-    @property
-    def TimeDateStamp(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Characteristics(self) -> Characteristics: ...
-    def get_Machine(self) -> Machine: ...
-    def get_NumberOfSections(self) -> ShortType: ...
-    def get_NumberOfSymbols(self) -> IntType: ...
-    def get_PointerToSymbolTable(self) -> IntType: ...
-    def get_SizeOfOptionalHeader(self) -> ShortType: ...
-    def get_TimeDateStamp(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CorHeader(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CodeManagerTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def EntryPointTokenOrRelativeVirtualAddress(self) -> IntType: ...
-    @property
-    def ExportAddressTableJumpsDirectory(self) -> DirectoryEntry: ...
-    @property
-    def Flags(self) -> CorFlags: ...
-    @property
-    def MajorRuntimeVersion(self) -> UShortType: ...
-    @property
-    def ManagedNativeHeaderDirectory(self) -> DirectoryEntry: ...
-    @property
-    def MetadataDirectory(self) -> DirectoryEntry: ...
-    @property
-    def MinorRuntimeVersion(self) -> UShortType: ...
-    @property
-    def ResourcesDirectory(self) -> DirectoryEntry: ...
-    @property
-    def StrongNameSignatureDirectory(self) -> DirectoryEntry: ...
-    @property
-    def VtableFixupsDirectory(self) -> DirectoryEntry: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CodeManagerTableDirectory(self) -> DirectoryEntry: ...
-    def get_EntryPointTokenOrRelativeVirtualAddress(self) -> IntType: ...
-    def get_ExportAddressTableJumpsDirectory(self) -> DirectoryEntry: ...
-    def get_Flags(self) -> CorFlags: ...
-    def get_MajorRuntimeVersion(self) -> UShortType: ...
-    def get_ManagedNativeHeaderDirectory(self) -> DirectoryEntry: ...
-    def get_MetadataDirectory(self) -> DirectoryEntry: ...
-    def get_MinorRuntimeVersion(self) -> UShortType: ...
-    def get_ResourcesDirectory(self) -> DirectoryEntry: ...
-    def get_StrongNameSignatureDirectory(self) -> DirectoryEntry: ...
-    def get_VtableFixupsDirectory(self) -> DirectoryEntry: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PEHeader(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AddressOfEntryPoint(self) -> IntType: ...
-    @property
-    def BaseOfCode(self) -> IntType: ...
-    @property
-    def BaseOfData(self) -> IntType: ...
-    @property
-    def BaseRelocationTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def BoundImportTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def CertificateTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def CheckSum(self) -> UIntType: ...
-    @property
-    def CopyrightTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def CorHeaderTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def DebugTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def DelayImportTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def DllCharacteristics(self) -> DllCharacteristics: ...
-    @property
-    def ExceptionTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def ExportTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def FileAlignment(self) -> IntType: ...
-    @property
-    def GlobalPointerTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def ImageBase(self) -> ULongType: ...
-    @property
-    def ImportAddressTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def ImportTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def LoadConfigTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def Magic(self) -> PEMagic: ...
-    @property
-    def MajorImageVersion(self) -> UShortType: ...
-    @property
-    def MajorLinkerVersion(self) -> ByteType: ...
-    @property
-    def MajorOperatingSystemVersion(self) -> UShortType: ...
-    @property
-    def MajorSubsystemVersion(self) -> UShortType: ...
-    @property
-    def MinorImageVersion(self) -> UShortType: ...
-    @property
-    def MinorLinkerVersion(self) -> ByteType: ...
-    @property
-    def MinorOperatingSystemVersion(self) -> UShortType: ...
-    @property
-    def MinorSubsystemVersion(self) -> UShortType: ...
-    @property
-    def NumberOfRvaAndSizes(self) -> IntType: ...
-    @property
-    def ResourceTableDirectory(self) -> DirectoryEntry: ...
-    @property
-    def SectionAlignment(self) -> IntType: ...
-    @property
-    def SizeOfCode(self) -> IntType: ...
-    @property
-    def SizeOfHeaders(self) -> IntType: ...
-    @property
-    def SizeOfHeapCommit(self) -> ULongType: ...
-    @property
-    def SizeOfHeapReserve(self) -> ULongType: ...
-    @property
-    def SizeOfImage(self) -> IntType: ...
-    @property
-    def SizeOfInitializedData(self) -> IntType: ...
-    @property
-    def SizeOfStackCommit(self) -> ULongType: ...
-    @property
-    def SizeOfStackReserve(self) -> ULongType: ...
-    @property
-    def SizeOfUninitializedData(self) -> IntType: ...
-    @property
-    def Subsystem(self) -> Subsystem: ...
-    @property
-    def ThreadLocalStorageTableDirectory(self) -> DirectoryEntry: ...
-
-    # ---------- Methods ---------- #
-
-    def get_AddressOfEntryPoint(self) -> IntType: ...
-    def get_BaseOfCode(self) -> IntType: ...
-    def get_BaseOfData(self) -> IntType: ...
-    def get_BaseRelocationTableDirectory(self) -> DirectoryEntry: ...
-    def get_BoundImportTableDirectory(self) -> DirectoryEntry: ...
-    def get_CertificateTableDirectory(self) -> DirectoryEntry: ...
-    def get_CheckSum(self) -> UIntType: ...
-    def get_CopyrightTableDirectory(self) -> DirectoryEntry: ...
-    def get_CorHeaderTableDirectory(self) -> DirectoryEntry: ...
-    def get_DebugTableDirectory(self) -> DirectoryEntry: ...
-    def get_DelayImportTableDirectory(self) -> DirectoryEntry: ...
-    def get_DllCharacteristics(self) -> DllCharacteristics: ...
-    def get_ExceptionTableDirectory(self) -> DirectoryEntry: ...
-    def get_ExportTableDirectory(self) -> DirectoryEntry: ...
-    def get_FileAlignment(self) -> IntType: ...
-    def get_GlobalPointerTableDirectory(self) -> DirectoryEntry: ...
-    def get_ImageBase(self) -> ULongType: ...
-    def get_ImportAddressTableDirectory(self) -> DirectoryEntry: ...
-    def get_ImportTableDirectory(self) -> DirectoryEntry: ...
-    def get_LoadConfigTableDirectory(self) -> DirectoryEntry: ...
-    def get_Magic(self) -> PEMagic: ...
-    def get_MajorImageVersion(self) -> UShortType: ...
-    def get_MajorLinkerVersion(self) -> ByteType: ...
-    def get_MajorOperatingSystemVersion(self) -> UShortType: ...
-    def get_MajorSubsystemVersion(self) -> UShortType: ...
-    def get_MinorImageVersion(self) -> UShortType: ...
-    def get_MinorLinkerVersion(self) -> ByteType: ...
-    def get_MinorOperatingSystemVersion(self) -> UShortType: ...
-    def get_MinorSubsystemVersion(self) -> UShortType: ...
-    def get_NumberOfRvaAndSizes(self) -> IntType: ...
-    def get_ResourceTableDirectory(self) -> DirectoryEntry: ...
-    def get_SectionAlignment(self) -> IntType: ...
-    def get_SizeOfCode(self) -> IntType: ...
-    def get_SizeOfHeaders(self) -> IntType: ...
-    def get_SizeOfHeapCommit(self) -> ULongType: ...
-    def get_SizeOfHeapReserve(self) -> ULongType: ...
-    def get_SizeOfImage(self) -> IntType: ...
-    def get_SizeOfInitializedData(self) -> IntType: ...
-    def get_SizeOfStackCommit(self) -> ULongType: ...
-    def get_SizeOfStackReserve(self) -> ULongType: ...
-    def get_SizeOfUninitializedData(self) -> IntType: ...
-    def get_Subsystem(self) -> Subsystem: ...
-    def get_ThreadLocalStorageTableDirectory(self) -> DirectoryEntry: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PEHeaders(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, peStream: Stream): ...
-    @overload
-    def __init__(self, peStream: Stream, size: IntType): ...
-    @overload
-    def __init__(self, peStream: Stream, size: IntType, isLoadedImage: BooleanType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CoffHeader(self) -> CoffHeader: ...
-    @property
-    def CoffHeaderStartOffset(self) -> IntType: ...
-    @property
-    def CorHeader(self) -> CorHeader: ...
-    @property
-    def CorHeaderStartOffset(self) -> IntType: ...
-    @property
-    def IsCoffOnly(self) -> BooleanType: ...
-    @property
-    def IsConsoleApplication(self) -> BooleanType: ...
-    @property
-    def IsDll(self) -> BooleanType: ...
-    @property
-    def IsExe(self) -> BooleanType: ...
-    @property
-    def MetadataSize(self) -> IntType: ...
-    @property
-    def MetadataStartOffset(self) -> IntType: ...
-    @property
-    def PEHeader(self) -> PEHeader: ...
-    @property
-    def PEHeaderStartOffset(self) -> IntType: ...
-    @property
-    def SectionHeaders(self) -> ImmutableArray[SectionHeader]: ...
-
-    # ---------- Methods ---------- #
-
-    def GetContainingSectionIndex(self, relativeVirtualAddress: IntType) -> IntType: ...
-    def TryGetDirectoryOffset(
-        self, directory: DirectoryEntry, offset: IntType
-    ) -> Tuple[BooleanType, IntType]: ...
-    def get_CoffHeader(self) -> CoffHeader: ...
-    def get_CoffHeaderStartOffset(self) -> IntType: ...
-    def get_CorHeader(self) -> CorHeader: ...
-    def get_CorHeaderStartOffset(self) -> IntType: ...
-    def get_IsCoffOnly(self) -> BooleanType: ...
-    def get_IsConsoleApplication(self) -> BooleanType: ...
-    def get_IsDll(self) -> BooleanType: ...
-    def get_IsExe(self) -> BooleanType: ...
-    def get_MetadataSize(self) -> IntType: ...
-    def get_MetadataStartOffset(self) -> IntType: ...
-    def get_PEHeader(self) -> PEHeader: ...
-    def get_PEHeaderStartOffset(self) -> IntType: ...
-    def get_SectionHeaders(self) -> ImmutableArray[SectionHeader]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PEReader(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, peImage: ByteType, size: IntType): ...
-    @overload
-    def __init__(self, peImage: ByteType, size: IntType, isLoadedImage: BooleanType): ...
-    @overload
-    def __init__(self, peStream: Stream): ...
-    @overload
-    def __init__(self, peStream: Stream, options: PEStreamOptions): ...
-    @overload
-    def __init__(self, peStream: Stream, options: PEStreamOptions, size: IntType): ...
-    @overload
-    def __init__(self, peImage: ImmutableArray[ByteType]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def HasMetadata(self) -> BooleanType: ...
-    @property
-    def IsEntireImageAvailable(self) -> BooleanType: ...
-    @property
-    def IsLoadedImage(self) -> BooleanType: ...
-    @property
-    def PEHeaders(self) -> PEHeaders: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    def GetEntireImage(self) -> PEMemoryBlock: ...
-    def GetMetadata(self) -> PEMemoryBlock: ...
-    @overload
-    def GetSectionData(self, relativeVirtualAddress: IntType) -> PEMemoryBlock: ...
-    @overload
-    def GetSectionData(self, sectionName: StringType) -> PEMemoryBlock: ...
-    def ReadCodeViewDebugDirectoryData(
-        self, entry: DebugDirectoryEntry
-    ) -> CodeViewDebugDirectoryData: ...
-    def ReadDebugDirectory(self) -> ImmutableArray[DebugDirectoryEntry]: ...
-    def ReadEmbeddedPortablePdbDebugDirectoryData(
-        self, entry: DebugDirectoryEntry
-    ) -> MetadataReaderProvider: ...
-    def TryOpenAssociatedPortablePdb(
-        self,
-        peImagePath: StringType,
-        pdbFileStreamProvider: Func[StringType, Stream],
-        pdbReaderProvider: MetadataReaderProvider,
-        pdbPath: StringType,
-    ) -> Tuple[BooleanType, MetadataReaderProvider, StringType]: ...
-    def get_HasMetadata(self) -> BooleanType: ...
-    def get_IsEntireImageAvailable(self) -> BooleanType: ...
-    def get_IsLoadedImage(self) -> BooleanType: ...
-    def get_PEHeaders(self) -> PEHeaders: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PEStreamOptionsExtensions(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def IsValid(options: PEStreamOptions) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
+class Characteristics(Enum):
+    """"""
+
+    RelocsStripped: Characteristics = ...
+    """"""
+    ExecutableImage: Characteristics = ...
+    """"""
+    LineNumsStripped: Characteristics = ...
+    """"""
+    LocalSymsStripped: Characteristics = ...
+    """"""
+    AggressiveWSTrim: Characteristics = ...
+    """"""
+    LargeAddressAware: Characteristics = ...
+    """"""
+    BytesReversedLo: Characteristics = ...
+    """"""
+    Bit32Machine: Characteristics = ...
+    """"""
+    DebugStripped: Characteristics = ...
+    """"""
+    RemovableRunFromSwap: Characteristics = ...
+    """"""
+    NetRunFromSwap: Characteristics = ...
+    """"""
+    System: Characteristics = ...
+    """"""
+    Dll: Characteristics = ...
+    """"""
+    UpSystemOnly: Characteristics = ...
+    """"""
+    BytesReversedHi: Characteristics = ...
+    """"""
 
 class CodeViewDebugDirectoryData(ValueType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Age(self) -> IntType: ...
+    def Age(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Guid(self) -> Guid: ...
+    def Guid(self) -> Guid:
+        """
+
+        :return:
+        """
     @property
-    def Path(self) -> StringType: ...
+    def Path(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Age(self) -> IntType: ...
-    def get_Guid(self) -> Guid: ...
-    def get_Path(self) -> StringType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class CoffHeader(Object):
+    """"""
 
-    # No Sub Enums
+    @property
+    def Characteristics(self) -> Characteristics:
+        """
+
+        :return:
+        """
+    @property
+    def Machine(self) -> Machine:
+        """
+
+        :return:
+        """
+    @property
+    def NumberOfSections(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def NumberOfSymbols(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def PointerToSymbolTable(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfOptionalHeader(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def TimeDateStamp(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CorFlags(Enum):
+    """"""
+
+    ILOnly: CorFlags = ...
+    """"""
+    Requires32Bit: CorFlags = ...
+    """"""
+    ILLibrary: CorFlags = ...
+    """"""
+    StrongNameSigned: CorFlags = ...
+    """"""
+    NativeEntryPoint: CorFlags = ...
+    """"""
+    TrackDebugData: CorFlags = ...
+    """"""
+    Prefers32Bit: CorFlags = ...
+    """"""
+
+class CorHeader(Object):
+    """"""
+
+    @property
+    def CodeManagerTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def EntryPointTokenOrRelativeVirtualAddress(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ExportAddressTableJumpsDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def Flags(self) -> CorFlags:
+        """
+
+        :return:
+        """
+    @property
+    def MajorRuntimeVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ManagedNativeHeaderDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def MetadataDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def MinorRuntimeVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ResourcesDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def StrongNameSignatureDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def VtableFixupsDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class DebugDirectoryEntry(ValueType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     def __init__(
         self,
-        stamp: UIntType,
-        majorVersion: UShortType,
-        minorVersion: UShortType,
+        stamp: int,
+        majorVersion: int,
+        minorVersion: int,
         type: DebugDirectoryEntryType,
-        dataSize: IntType,
-        dataRelativeVirtualAddress: IntType,
-        dataPointer: IntType,
-    ): ...
+        dataSize: int,
+        dataRelativeVirtualAddress: int,
+        dataPointer: int,
+    ):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param stamp:
+        :param majorVersion:
+        :param minorVersion:
+        :param type:
+        :param dataSize:
+        :param dataRelativeVirtualAddress:
+        :param dataPointer:
+        """
     @property
-    def DataPointer(self) -> IntType: ...
+    def DataPointer(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def DataRelativeVirtualAddress(self) -> IntType: ...
+    def DataRelativeVirtualAddress(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def DataSize(self) -> IntType: ...
+    def DataSize(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsPortableCodeView(self) -> BooleanType: ...
+    def IsPortableCodeView(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def MajorVersion(self) -> UShortType: ...
+    def MajorVersion(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def MinorVersion(self) -> UShortType: ...
+    def MinorVersion(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Stamp(self) -> UIntType: ...
+    def Stamp(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> DebugDirectoryEntryType: ...
+    def Type(self) -> DebugDirectoryEntryType:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_DataPointer(self) -> IntType: ...
-    def get_DataRelativeVirtualAddress(self) -> IntType: ...
-    def get_DataSize(self) -> IntType: ...
-    def get_IsPortableCodeView(self) -> BooleanType: ...
-    def get_MajorVersion(self) -> UShortType: ...
-    def get_MinorVersion(self) -> UShortType: ...
-    def get_Stamp(self) -> UIntType: ...
-    def get_Type(self) -> DebugDirectoryEntryType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DirectoryEntry(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def RelativeVirtualAddress(self) -> IntType: ...
-    @property
-    def Size(self) -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, relativeVirtualAddress: IntType, size: IntType): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PEBinaryReader(ValueType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, stream: Stream, size: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CurrentOffset(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def ReadByte(self) -> ByteType: ...
-    def ReadBytes(self, count: IntType) -> ArrayType[ByteType]: ...
-    def ReadInt16(self) -> ShortType: ...
-    def ReadInt32(self) -> IntType: ...
-    def ReadNullPaddedUTF8(self, byteCount: IntType) -> StringType: ...
-    def ReadUInt16(self) -> UShortType: ...
-    def ReadUInt32(self) -> UIntType: ...
-    def ReadUInt64(self) -> ULongType: ...
-    def Seek(self, offset: IntType) -> VoidType: ...
-    def get_CurrentOffset(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PEMemoryBlock(ValueType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Length(self) -> IntType: ...
-    @property
-    def Pointer(self) -> ByteType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def GetReader(self) -> BlobReader: ...
-    @overload
-    def GetReader(self, start: IntType, length: IntType) -> BlobReader: ...
-    def get_Length(self) -> IntType: ...
-    def get_Pointer(self) -> ByteType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SectionHeader(ValueType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def NumberOfLineNumbers(self) -> UShortType: ...
-    @property
-    def NumberOfRelocations(self) -> UShortType: ...
-    @property
-    def PointerToLineNumbers(self) -> IntType: ...
-    @property
-    def PointerToRawData(self) -> IntType: ...
-    @property
-    def PointerToRelocations(self) -> IntType: ...
-    @property
-    def SectionCharacteristics(self) -> SectionCharacteristics: ...
-    @property
-    def SizeOfRawData(self) -> IntType: ...
-    @property
-    def VirtualAddress(self) -> IntType: ...
-    @property
-    def VirtualSize(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Name(self) -> StringType: ...
-    def get_NumberOfLineNumbers(self) -> UShortType: ...
-    def get_NumberOfRelocations(self) -> UShortType: ...
-    def get_PointerToLineNumbers(self) -> IntType: ...
-    def get_PointerToRawData(self) -> IntType: ...
-    def get_PointerToRelocations(self) -> IntType: ...
-    def get_SectionCharacteristics(self) -> SectionCharacteristics: ...
-    def get_SizeOfRawData(self) -> IntType: ...
-    def get_VirtualAddress(self) -> IntType: ...
-    def get_VirtualSize(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Interfaces
-
-# ---------- Enums ---------- #
-
-class Characteristics(Enum):
-    RelocsStripped = 1
-    ExecutableImage = 2
-    LineNumsStripped = 4
-    LocalSymsStripped = 8
-    AggressiveWSTrim = 16
-    LargeAddressAware = 32
-    BytesReversedLo = 128
-    Bit32Machine = 256
-    DebugStripped = 512
-    RemovableRunFromSwap = 1024
-    NetRunFromSwap = 2048
-    System = 4096
-    Dll = 8192
-    UpSystemOnly = 16384
-    BytesReversedHi = 32768
-
-class CorFlags(Enum):
-    ILOnly = 1
-    Requires32Bit = 2
-    ILLibrary = 4
-    StrongNameSigned = 8
-    NativeEntryPoint = 16
-    TrackDebugData = 65536
-    Prefers32Bit = 131072
+        :return:
+        """
 
 class DebugDirectoryEntryType(Enum):
-    Unknown = 0
-    Coff = 1
-    CodeView = 2
-    Reproducible = 16
-    EmbeddedPortablePdb = 17
+    """"""
+
+    Unknown: DebugDirectoryEntryType = ...
+    """"""
+    Coff: DebugDirectoryEntryType = ...
+    """"""
+    CodeView: DebugDirectoryEntryType = ...
+    """"""
+    Reproducible: DebugDirectoryEntryType = ...
+    """"""
+    EmbeddedPortablePdb: DebugDirectoryEntryType = ...
+    """"""
+
+class DirectoryEntry(ValueType):
+    """"""
+
+    RelativeVirtualAddress: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, relativeVirtualAddress: int, size: int):
+        """
+
+        :param relativeVirtualAddress:
+        :param size:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class DllCharacteristics(Enum):
-    ProcessInit = 1
-    ProcessTerm = 2
-    ThreadInit = 4
-    ThreadTerm = 8
-    HighEntropyVirtualAddressSpace = 32
-    DynamicBase = 64
-    NxCompatible = 256
-    NoIsolation = 512
-    NoSeh = 1024
-    NoBind = 2048
-    AppContainer = 4096
-    WdmDriver = 8192
-    TerminalServerAware = 32768
+    """"""
+
+    ProcessInit: DllCharacteristics = ...
+    """"""
+    ProcessTerm: DllCharacteristics = ...
+    """"""
+    ThreadInit: DllCharacteristics = ...
+    """"""
+    ThreadTerm: DllCharacteristics = ...
+    """"""
+    HighEntropyVirtualAddressSpace: DllCharacteristics = ...
+    """"""
+    DynamicBase: DllCharacteristics = ...
+    """"""
+    NxCompatible: DllCharacteristics = ...
+    """"""
+    NoIsolation: DllCharacteristics = ...
+    """"""
+    NoSeh: DllCharacteristics = ...
+    """"""
+    NoBind: DllCharacteristics = ...
+    """"""
+    AppContainer: DllCharacteristics = ...
+    """"""
+    WdmDriver: DllCharacteristics = ...
+    """"""
+    TerminalServerAware: DllCharacteristics = ...
+    """"""
 
 class Machine(Enum):
-    Unknown = 0
-    I386 = 332
-    WceMipsV2 = 361
-    Alpha = 388
-    SH3 = 418
-    SH3Dsp = 419
-    SH3E = 420
-    SH4 = 422
-    SH5 = 424
-    Arm = 448
-    Thumb = 450
-    ArmThumb2 = 452
-    AM33 = 467
-    PowerPC = 496
-    PowerPCFP = 497
-    IA64 = 512
-    MIPS16 = 614
-    Alpha64 = 644
-    MipsFpu = 870
-    MipsFpu16 = 1126
-    Tricore = 1312
-    Ebc = 3772
-    Amd64 = 34404
-    M32R = 36929
+    """"""
+
+    Unknown: Machine = ...
+    """"""
+    I386: Machine = ...
+    """"""
+    WceMipsV2: Machine = ...
+    """"""
+    Alpha: Machine = ...
+    """"""
+    SH3: Machine = ...
+    """"""
+    SH3Dsp: Machine = ...
+    """"""
+    SH3E: Machine = ...
+    """"""
+    SH4: Machine = ...
+    """"""
+    SH5: Machine = ...
+    """"""
+    Arm: Machine = ...
+    """"""
+    Thumb: Machine = ...
+    """"""
+    ArmThumb2: Machine = ...
+    """"""
+    AM33: Machine = ...
+    """"""
+    PowerPC: Machine = ...
+    """"""
+    PowerPCFP: Machine = ...
+    """"""
+    IA64: Machine = ...
+    """"""
+    MIPS16: Machine = ...
+    """"""
+    Alpha64: Machine = ...
+    """"""
+    MipsFpu: Machine = ...
+    """"""
+    MipsFpu16: Machine = ...
+    """"""
+    Tricore: Machine = ...
+    """"""
+    Ebc: Machine = ...
+    """"""
+    Amd64: Machine = ...
+    """"""
+    M32R: Machine = ...
+    """"""
+
+class PEBinaryReader(ValueType):
+    """"""
+
+    def __init__(self, stream: Stream, size: int):
+        """
+
+        :param stream:
+        :param size:
+        """
+    @property
+    def CurrentOffset(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadBytes(self, count: int) -> Array[int]:
+        """
+
+        :param count:
+        :return:
+        """
+    def ReadInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadNullPaddedUTF8(self, byteCount: int) -> str:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def ReadUInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadUInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadUInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def Seek(self, offset: int) -> None:
+        """
+
+        :param offset:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PEHeader(Object):
+    """"""
+
+    @property
+    def AddressOfEntryPoint(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def BaseOfCode(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def BaseOfData(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def BaseRelocationTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def BoundImportTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def CertificateTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def CheckSum(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def CopyrightTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def CorHeaderTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def DebugTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def DelayImportTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def DllCharacteristics(self) -> DllCharacteristics:
+        """
+
+        :return:
+        """
+    @property
+    def ExceptionTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def ExportTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def FileAlignment(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def GlobalPointerTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def ImageBase(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ImportAddressTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def ImportTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def LoadConfigTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def Magic(self) -> PEMagic:
+        """
+
+        :return:
+        """
+    @property
+    def MajorImageVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MajorLinkerVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MajorOperatingSystemVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MajorSubsystemVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MinorImageVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MinorLinkerVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MinorOperatingSystemVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MinorSubsystemVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def NumberOfRvaAndSizes(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ResourceTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def SectionAlignment(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfCode(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfHeaders(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfHeapCommit(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfHeapReserve(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfImage(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfInitializedData(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfStackCommit(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfStackReserve(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfUninitializedData(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Subsystem(self) -> Subsystem:
+        """
+
+        :return:
+        """
+    @property
+    def ThreadLocalStorageTableDirectory(self) -> DirectoryEntry:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PEHeaders(Object):
+    """"""
+
+    @overload
+    def __init__(self, peStream: Stream):
+        """
+
+        :param peStream:
+        """
+    @overload
+    def __init__(self, peStream: Stream, size: int):
+        """
+
+        :param peStream:
+        :param size:
+        """
+    @overload
+    def __init__(self, peStream: Stream, size: int, isLoadedImage: bool):
+        """
+
+        :param peStream:
+        :param size:
+        :param isLoadedImage:
+        """
+    @property
+    def CoffHeader(self) -> CoffHeader:
+        """
+
+        :return:
+        """
+    @property
+    def CoffHeaderStartOffset(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def CorHeader(self) -> CorHeader:
+        """
+
+        :return:
+        """
+    @property
+    def CorHeaderStartOffset(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsCoffOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsConsoleApplication(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsDll(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsExe(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MetadataSize(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MetadataStartOffset(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def PEHeader(self) -> PEHeader:
+        """
+
+        :return:
+        """
+    @property
+    def PEHeaderStartOffset(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SectionHeaders(self) -> ImmutableArray[SectionHeader]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetContainingSectionIndex(self, relativeVirtualAddress: int) -> int:
+        """
+
+        :param relativeVirtualAddress:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryGetDirectoryOffset(self, directory: DirectoryEntry, offset: int) -> Tuple[bool, int]:
+        """
+
+        :param directory:
+        :param offset:
+        :return:
+        """
 
 class PEMagic(Enum):
-    PE32 = 267
-    PE32Plus = 523
+    """"""
+
+    PE32: PEMagic = ...
+    """"""
+    PE32Plus: PEMagic = ...
+    """"""
+
+class PEMemoryBlock(ValueType):
+    """"""
+
+    @property
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Pointer(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetReader(self) -> BlobReader:
+        """
+
+        :return:
+        """
+    @overload
+    def GetReader(self, start: int, length: int) -> BlobReader:
+        """
+
+        :param start:
+        :param length:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PEReader(Object, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self, peImage: ImmutableArray[int]):
+        """
+
+        :param peImage:
+        """
+    @overload
+    def __init__(self, peStream: Stream):
+        """
+
+        :param peStream:
+        """
+    @overload
+    def __init__(self, peStream: Stream, options: PEStreamOptions):
+        """
+
+        :param peStream:
+        :param options:
+        """
+    @overload
+    def __init__(self, peImage: int, size: int):
+        """
+
+        :param peImage:
+        :param size:
+        """
+    @overload
+    def __init__(self, peStream: Stream, options: PEStreamOptions, size: int):
+        """
+
+        :param peStream:
+        :param options:
+        :param size:
+        """
+    @overload
+    def __init__(self, peImage: int, size: int, isLoadedImage: bool):
+        """
+
+        :param peImage:
+        :param size:
+        :param isLoadedImage:
+        """
+    @property
+    def HasMetadata(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsEntireImageAvailable(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsLoadedImage(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def PEHeaders(self) -> PEHeaders:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEntireImage(self) -> PEMemoryBlock:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMetadata(self) -> PEMemoryBlock:
+        """
+
+        :return:
+        """
+    @overload
+    def GetSectionData(self, relativeVirtualAddress: int) -> PEMemoryBlock:
+        """
+
+        :param relativeVirtualAddress:
+        :return:
+        """
+    @overload
+    def GetSectionData(self, sectionName: str) -> PEMemoryBlock:
+        """
+
+        :param sectionName:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ReadCodeViewDebugDirectoryData(
+        self, entry: DebugDirectoryEntry
+    ) -> CodeViewDebugDirectoryData:
+        """
+
+        :param entry:
+        :return:
+        """
+    def ReadDebugDirectory(self) -> ImmutableArray[DebugDirectoryEntry]:
+        """
+
+        :return:
+        """
+    def ReadEmbeddedPortablePdbDebugDirectoryData(
+        self, entry: DebugDirectoryEntry
+    ) -> MetadataReaderProvider:
+        """
+
+        :param entry:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryOpenAssociatedPortablePdb(
+        self,
+        peImagePath: str,
+        pdbFileStreamProvider: Func[str, Stream],
+        pdbReaderProvider: MetadataReaderProvider,
+        pdbPath: str,
+    ) -> Tuple[bool, MetadataReaderProvider, str]:
+        """
+
+        :param peImagePath:
+        :param pdbFileStreamProvider:
+        :param pdbReaderProvider:
+        :param pdbPath:
+        :return:
+        """
 
 class PEStreamOptions(Enum):
-    Default = 0
-    LeaveOpen = 1
-    PrefetchMetadata = 2
-    PrefetchEntireImage = 4
-    IsLoadedImage = 8
+    """"""
+
+    Default: PEStreamOptions = ...
+    """"""
+    LeaveOpen: PEStreamOptions = ...
+    """"""
+    PrefetchMetadata: PEStreamOptions = ...
+    """"""
+    PrefetchEntireImage: PEStreamOptions = ...
+    """"""
+    IsLoadedImage: PEStreamOptions = ...
+    """"""
+
+class PEStreamOptionsExtensions(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsValid(cls, options: PEStreamOptions) -> bool:
+        """
+
+        :param options:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SectionCharacteristics(Enum):
-    TypeReg = 0
-    TypeDSect = 1
-    TypeNoLoad = 2
-    TypeGroup = 4
-    TypeNoPad = 8
-    TypeCopy = 16
-    ContainsCode = 32
-    ContainsInitializedData = 64
-    ContainsUninitializedData = 128
-    LinkerOther = 256
-    LinkerInfo = 512
-    TypeOver = 1024
-    LinkerRemove = 2048
-    LinkerComdat = 4096
-    MemProtected = 16384
-    NoDeferSpecExc = 16384
-    GPRel = 32768
-    MemFardata = 32768
-    MemSysheap = 65536
-    MemPurgeable = 131072
-    Mem16Bit = 131072
-    MemLocked = 262144
-    MemPreload = 524288
-    Align1Bytes = 1048576
-    Align2Bytes = 2097152
-    Align4Bytes = 3145728
-    Align8Bytes = 4194304
-    Align16Bytes = 5242880
-    Align32Bytes = 6291456
-    Align64Bytes = 7340032
-    Align128Bytes = 8388608
-    Align256Bytes = 9437184
-    Align512Bytes = 10485760
-    Align1024Bytes = 11534336
-    Align2048Bytes = 12582912
-    Align4096Bytes = 13631488
-    Align8192Bytes = 14680064
-    AlignMask = 15728640
-    LinkerNRelocOvfl = 16777216
-    MemDiscardable = 33554432
-    MemNotCached = 67108864
-    MemNotPaged = 134217728
-    MemShared = 268435456
-    MemExecute = 536870912
-    MemRead = 1073741824
-    MemWrite = 2147483648
+    """"""
+
+    TypeReg: SectionCharacteristics = ...
+    """"""
+    TypeDSect: SectionCharacteristics = ...
+    """"""
+    TypeNoLoad: SectionCharacteristics = ...
+    """"""
+    TypeGroup: SectionCharacteristics = ...
+    """"""
+    TypeNoPad: SectionCharacteristics = ...
+    """"""
+    TypeCopy: SectionCharacteristics = ...
+    """"""
+    ContainsCode: SectionCharacteristics = ...
+    """"""
+    ContainsInitializedData: SectionCharacteristics = ...
+    """"""
+    ContainsUninitializedData: SectionCharacteristics = ...
+    """"""
+    LinkerOther: SectionCharacteristics = ...
+    """"""
+    LinkerInfo: SectionCharacteristics = ...
+    """"""
+    TypeOver: SectionCharacteristics = ...
+    """"""
+    LinkerRemove: SectionCharacteristics = ...
+    """"""
+    LinkerComdat: SectionCharacteristics = ...
+    """"""
+    MemProtected: SectionCharacteristics = ...
+    """"""
+    NoDeferSpecExc: SectionCharacteristics = ...
+    """"""
+    GPRel: SectionCharacteristics = ...
+    """"""
+    MemFardata: SectionCharacteristics = ...
+    """"""
+    MemSysheap: SectionCharacteristics = ...
+    """"""
+    MemPurgeable: SectionCharacteristics = ...
+    """"""
+    Mem16Bit: SectionCharacteristics = ...
+    """"""
+    MemLocked: SectionCharacteristics = ...
+    """"""
+    MemPreload: SectionCharacteristics = ...
+    """"""
+    Align1Bytes: SectionCharacteristics = ...
+    """"""
+    Align2Bytes: SectionCharacteristics = ...
+    """"""
+    Align4Bytes: SectionCharacteristics = ...
+    """"""
+    Align8Bytes: SectionCharacteristics = ...
+    """"""
+    Align16Bytes: SectionCharacteristics = ...
+    """"""
+    Align32Bytes: SectionCharacteristics = ...
+    """"""
+    Align64Bytes: SectionCharacteristics = ...
+    """"""
+    Align128Bytes: SectionCharacteristics = ...
+    """"""
+    Align256Bytes: SectionCharacteristics = ...
+    """"""
+    Align512Bytes: SectionCharacteristics = ...
+    """"""
+    Align1024Bytes: SectionCharacteristics = ...
+    """"""
+    Align2048Bytes: SectionCharacteristics = ...
+    """"""
+    Align4096Bytes: SectionCharacteristics = ...
+    """"""
+    Align8192Bytes: SectionCharacteristics = ...
+    """"""
+    AlignMask: SectionCharacteristics = ...
+    """"""
+    LinkerNRelocOvfl: SectionCharacteristics = ...
+    """"""
+    MemDiscardable: SectionCharacteristics = ...
+    """"""
+    MemNotCached: SectionCharacteristics = ...
+    """"""
+    MemNotPaged: SectionCharacteristics = ...
+    """"""
+    MemShared: SectionCharacteristics = ...
+    """"""
+    MemExecute: SectionCharacteristics = ...
+    """"""
+    MemRead: SectionCharacteristics = ...
+    """"""
+    MemWrite: SectionCharacteristics = ...
+    """"""
+
+class SectionHeader(ValueType):
+    """"""
+
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def NumberOfLineNumbers(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def NumberOfRelocations(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def PointerToLineNumbers(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def PointerToRawData(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def PointerToRelocations(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SectionCharacteristics(self) -> SectionCharacteristics:
+        """
+
+        :return:
+        """
+    @property
+    def SizeOfRawData(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def VirtualAddress(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def VirtualSize(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class Subsystem(Enum):
-    Unknown = 0
-    Native = 1
-    WindowsGui = 2
-    WindowsCui = 3
-    OS2Cui = 5
-    PosixCui = 7
-    NativeWindows = 8
-    WindowsCEGui = 9
-    EfiApplication = 10
-    EfiBootServiceDriver = 11
-    EfiRuntimeDriver = 12
-    EfiRom = 13
-    Xbox = 14
-    WindowsBootApplication = 16
+    """"""
 
-# No Delegates
-
-__all__ = [
-    CoffHeader,
-    CorHeader,
-    PEHeader,
-    PEHeaders,
-    PEReader,
-    PEStreamOptionsExtensions,
-    CodeViewDebugDirectoryData,
-    DebugDirectoryEntry,
-    DirectoryEntry,
-    PEBinaryReader,
-    PEMemoryBlock,
-    SectionHeader,
-    Characteristics,
-    CorFlags,
-    DebugDirectoryEntryType,
-    DllCharacteristics,
-    Machine,
-    PEMagic,
-    PEStreamOptions,
-    SectionCharacteristics,
-    Subsystem,
-]
+    Unknown: Subsystem = ...
+    """"""
+    Native: Subsystem = ...
+    """"""
+    WindowsGui: Subsystem = ...
+    """"""
+    WindowsCui: Subsystem = ...
+    """"""
+    OS2Cui: Subsystem = ...
+    """"""
+    PosixCui: Subsystem = ...
+    """"""
+    NativeWindows: Subsystem = ...
+    """"""
+    WindowsCEGui: Subsystem = ...
+    """"""
+    EfiApplication: Subsystem = ...
+    """"""
+    EfiBootServiceDriver: Subsystem = ...
+    """"""
+    EfiRuntimeDriver: Subsystem = ...
+    """"""
+    EfiRom: Subsystem = ...
+    """"""
+    Xbox: Subsystem = ...
+    """"""
+    WindowsBootApplication: Subsystem = ...
+    """"""

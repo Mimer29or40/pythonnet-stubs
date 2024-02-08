@@ -1,48 +1,39 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
 
-from System import Int32
 from System import Object
+from System import Type
 
-# ---------- Types ---------- #
+class HashHelpers(ABC, Object):
+    """"""
 
-IntType = Union[int, Int32]
-ObjectType = Object
+    @classmethod
+    def Combine(cls, h1: int, h2: int) -> int:
+        """
 
-# ---------- Classes ---------- #
+        :param h1:
+        :param h2:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class HashHelpers(ABC, ObjectType):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Properties
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Combine(h1: IntType, h2: IntType) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    HashHelpers,
-]
+        :return:
+        """

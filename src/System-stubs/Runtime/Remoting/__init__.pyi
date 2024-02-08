@@ -1,24 +1,20 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
+from typing import ClassVar
+from typing import Final
 from typing import Tuple
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
 from System import Enum
 from System import Exception
-from System import Int32
 from System import MarshalByRefObject
 from System import Object
-from System import String
 from System import SystemException
 from System import Type
 from System import ValueType
-from System import Void
+from System.Collections import IDictionary
 from System.Reflection import Assembly
 from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Exception
@@ -32,1205 +28,2248 @@ from System.Runtime.Remoting.Messaging import IMethodReturnMessage
 from System.Runtime.Remoting.Messaging import MethodCall
 from System.Runtime.Remoting.Metadata import SoapAttribute
 from System.Runtime.Remoting.Proxies import RealProxy
+from System.Runtime.Remoting.RemotingConfigHandler import RemotingConfigInfo
 from System.Runtime.Serialization import IObjectReference
 from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
 class ActivatedClientTypeEntry(TypeEntry):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, typeName: StringType, assemblyName: StringType, appUrl: StringType): ...
+    def __init__(self, type: Type, appUrl: str):
+        """
+
+        :param type:
+        :param appUrl:
+        """
     @overload
-    def __init__(self, type: TypeType, appUrl: StringType): ...
+    def __init__(self, typeName: str, assemblyName: str, appUrl: str):
+        """
 
-    # ---------- Properties ---------- #
+        :param typeName:
+        :param assemblyName:
+        :param appUrl:
+        """
+    @property
+    def ApplicationUrl(self) -> str:
+        """
 
+        :return:
+        """
     @property
-    def ApplicationUrl(self) -> StringType: ...
+    def AssemblyName(self) -> str:
+        """
+
+        :return:
+        """
+    @AssemblyName.setter
+    def AssemblyName(self, value: str) -> None: ...
     @property
-    def ContextAttributes(self) -> ArrayType[IContextAttribute]: ...
+    def ContextAttributes(self) -> Array[IContextAttribute]:
+        """
+
+        :return:
+        """
     @ContextAttributes.setter
-    def ContextAttributes(self, value: ArrayType[IContextAttribute]) -> None: ...
+    def ContextAttributes(self, value: Array[IContextAttribute]) -> None: ...
     @property
-    def ObjectType(self) -> TypeType: ...
+    def ObjectType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_ApplicationUrl(self) -> StringType: ...
-    def get_ContextAttributes(self) -> ArrayType[IContextAttribute]: ...
-    def get_ObjectType(self) -> TypeType: ...
-    def set_ContextAttributes(self, value: ArrayType[IContextAttribute]) -> VoidType: ...
+        :return:
+        """
+    @TypeName.setter
+    def TypeName(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ActivatedServiceTypeEntry(TypeEntry):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, typeName: StringType, assemblyName: StringType): ...
+    def __init__(self, type: Type):
+        """
+
+        :param type:
+        """
     @overload
-    def __init__(self, type: TypeType): ...
+    def __init__(self, typeName: str, assemblyName: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param typeName:
+        :param assemblyName:
+        """
     @property
-    def ContextAttributes(self) -> ArrayType[IContextAttribute]: ...
+    def AssemblyName(self) -> str:
+        """
+
+        :return:
+        """
+    @AssemblyName.setter
+    def AssemblyName(self, value: str) -> None: ...
+    @property
+    def ContextAttributes(self) -> Array[IContextAttribute]:
+        """
+
+        :return:
+        """
     @ContextAttributes.setter
-    def ContextAttributes(self, value: ArrayType[IContextAttribute]) -> None: ...
+    def ContextAttributes(self, value: Array[IContextAttribute]) -> None: ...
     @property
-    def ObjectType(self) -> TypeType: ...
+    def ObjectType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_ContextAttributes(self) -> ArrayType[IContextAttribute]: ...
-    def get_ObjectType(self) -> TypeType: ...
-    def set_ContextAttributes(self, value: ArrayType[IContextAttribute]) -> VoidType: ...
+        :return:
+        """
+    @TypeName.setter
+    def TypeName(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
-
-class ChannelInfo(ObjectType, IChannelInfo):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class ChannelInfo(Object, IChannelInfo):
+    """"""
 
     @property
-    def ChannelData(self) -> ArrayType[ObjectType]: ...
+    def ChannelData(self) -> Array[object]:
+        """
+
+        :return:
+        """
     @ChannelData.setter
-    def ChannelData(self, value: ArrayType[ObjectType]) -> None: ...
+    def ChannelData(self, value: Array[object]) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_ChannelData(self) -> ArrayType[ObjectType]: ...
-    def set_ChannelData(self, value: ArrayType[ObjectType]) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ComRedirectionProxy(MarshalByRefObject, IMessageSink):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def NextSink(self) -> IMessageSink: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def SyncProcessMessage(self, msg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    # No Events
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
 
-class DelayLoadClientChannelEntry(ObjectType):
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
+
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CustomErrorsModes(Enum):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DomainSpecificRemotingData(ObjectType):
+    On: CustomErrorsModes = ...
+    """"""
+    Off: CustomErrorsModes = ...
+    """"""
+    RemoteOnly: CustomErrorsModes = ...
     """"""
 
-    # No Fields
+class DelayLoadClientChannelEntry(Object):
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class DomainSpecificRemotingData(Object):
+    """"""
 
-    # No Sub Interfaces
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DuplicateIdentityOption(Enum):
+    """"""
+
+    Unique: DuplicateIdentityOption = ...
+    """"""
+    UseExisting: DuplicateIdentityOption = ...
+    """"""
 
 class DynamicTypeInfo(TypeInfo, IRemotingTypeInfo):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CanCastTo(self, castType: TypeType, o: ObjectType) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EnvoyInfo(ObjectType, IEnvoyInfo):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def EnvoySinks(self) -> IMessageSink: ...
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @TypeName.setter
+    def TypeName(self, value: str) -> None: ...
+    def CanCastTo(self, fromType: Type, o: object) -> bool:
+        """
+
+        :param fromType:
+        :param o:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EnvoyInfo(Object, IEnvoyInfo):
+    """"""
+
+    @property
+    def EnvoySinks(self) -> IMessageSink:
+        """
+
+        :return:
+        """
+    @EnvoySinks.setter
+    def EnvoySinks(self, value: IMessageSink) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IChannelInfo:
+    """"""
+
+    @property
+    def ChannelData(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @ChannelData.setter
+    def ChannelData(self, value: Array[object]) -> None: ...
+
+class IEnvoyInfo:
+    """"""
+
+    @property
+    def EnvoySinks(self) -> IMessageSink:
+        """
+
+        :return:
+        """
     @EnvoySinks.setter
     def EnvoySinks(self, value: IMessageSink) -> None: ...
 
-    # ---------- Methods ---------- #
-
-    def get_EnvoySinks(self) -> IMessageSink: ...
-    def set_EnvoySinks(self, value: IMessageSink) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Identity(ObjectType):
+class IObjectHandle:
     """"""
 
-    # No Fields
+    def Unwrap(self) -> object:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IdentityHolder(ObjectType):
+class IRemotingTypeInfo:
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InternalRemotingServices(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def DebugOutChnl(s: StringType) -> VoidType: ...
-    @staticmethod
-    def GetCachedSoapAttribute(reflectionObject: ObjectType) -> SoapAttribute: ...
-    @staticmethod
-    def RemotingAssert(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    def RemotingTrace(messages: ArrayType[ObjectType]) -> VoidType: ...
-    @staticmethod
-    def SetServerIdentity(m: MethodCall, srvID: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjRef(ObjectType, IObjectReference, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, o: MarshalByRefObject, requestedType: TypeType): ...
-    @overload
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
     @property
-    def ChannelInfo(self) -> IChannelInfo: ...
-    @ChannelInfo.setter
-    def ChannelInfo(self, value: IChannelInfo) -> None: ...
-    @property
-    def EnvoyInfo(self) -> IEnvoyInfo: ...
-    @EnvoyInfo.setter
-    def EnvoyInfo(self, value: IEnvoyInfo) -> None: ...
-    @property
-    def TypeInfo(self) -> IRemotingTypeInfo: ...
-    @TypeInfo.setter
-    def TypeInfo(self, value: IRemotingTypeInfo) -> None: ...
-    @property
-    def URI(self) -> StringType: ...
-    @URI.setter
-    def URI(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def GetRealObject(self, context: StreamingContext) -> ObjectType: ...
-    def IsFromThisAppDomain(self) -> BooleanType: ...
-    def IsFromThisProcess(self) -> BooleanType: ...
-    def get_ChannelInfo(self) -> IChannelInfo: ...
-    def get_EnvoyInfo(self) -> IEnvoyInfo: ...
-    def get_TypeInfo(self) -> IRemotingTypeInfo: ...
-    def get_URI(self) -> StringType: ...
-    def set_ChannelInfo(self, value: IChannelInfo) -> VoidType: ...
-    def set_EnvoyInfo(self, value: IEnvoyInfo) -> VoidType: ...
-    def set_TypeInfo(self, value: IRemotingTypeInfo) -> VoidType: ...
-    def set_URI(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectHandle(MarshalByRefObject, IObjectHandle):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, o: ObjectType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def InitializeLifetimeService(self) -> ObjectType: ...
-    def Unwrap(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RedirectionProxy(MarshalByRefObject, IMessageSink):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def NextSink(self) -> IMessageSink: ...
-    @ObjectMode.setter
-    def ObjectMode(self, value: WellKnownObjectMode) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def SyncProcessMessage(self, msg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
-    def set_ObjectMode(self, value: WellKnownObjectMode) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemoteAppEntry(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemotingConfigHandler(ABC, ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Info() -> RemotingConfigInfo: ...
-    @staticmethod
-    @Info.setter
-    def Info(value: RemotingConfigInfo) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemotingConfiguration(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def ApplicationId() -> StringType: ...
-    @staticmethod
-    @property
-    def ApplicationName() -> StringType: ...
-    @staticmethod
-    @ApplicationName.setter
-    def ApplicationName(value: StringType) -> None: ...
-    @staticmethod
-    @property
-    def CustomErrorsMode() -> CustomErrorsModes: ...
-    @staticmethod
-    @CustomErrorsMode.setter
-    def CustomErrorsMode(value: CustomErrorsModes) -> None: ...
-    @staticmethod
-    @property
-    def ProcessId() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def Configure(filename: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Configure(filename: StringType, ensureSecurity: BooleanType) -> VoidType: ...
-    @staticmethod
-    def CustomErrorsEnabled(isLocalRequest: BooleanType) -> BooleanType: ...
-    @staticmethod
-    def GetRegisteredActivatedClientTypes() -> ArrayType[ActivatedClientTypeEntry]: ...
-    @staticmethod
-    def GetRegisteredActivatedServiceTypes() -> ArrayType[ActivatedServiceTypeEntry]: ...
-    @staticmethod
-    def GetRegisteredWellKnownClientTypes() -> ArrayType[WellKnownClientTypeEntry]: ...
-    @staticmethod
-    def GetRegisteredWellKnownServiceTypes() -> ArrayType[WellKnownServiceTypeEntry]: ...
-    @staticmethod
-    def IsActivationAllowed(svrType: TypeType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def IsRemotelyActivatedClientType(svrType: TypeType) -> ActivatedClientTypeEntry: ...
-    @staticmethod
-    @overload
-    def IsRemotelyActivatedClientType(
-        typeName: StringType, assemblyName: StringType
-    ) -> ActivatedClientTypeEntry: ...
-    @staticmethod
-    @overload
-    def IsWellKnownClientType(svrType: TypeType) -> WellKnownClientTypeEntry: ...
-    @staticmethod
-    @overload
-    def IsWellKnownClientType(
-        typeName: StringType, assemblyName: StringType
-    ) -> WellKnownClientTypeEntry: ...
-    @staticmethod
-    @overload
-    def RegisterActivatedClientType(type: TypeType, appUrl: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def RegisterActivatedClientType(entry: ActivatedClientTypeEntry) -> VoidType: ...
-    @staticmethod
-    @overload
-    def RegisterActivatedServiceType(type: TypeType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def RegisterActivatedServiceType(entry: ActivatedServiceTypeEntry) -> VoidType: ...
-    @staticmethod
-    @overload
-    def RegisterWellKnownClientType(type: TypeType, objectUrl: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def RegisterWellKnownClientType(entry: WellKnownClientTypeEntry) -> VoidType: ...
-    @staticmethod
-    @overload
-    def RegisterWellKnownServiceType(
-        type: TypeType, objectUri: StringType, mode: WellKnownObjectMode
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def RegisterWellKnownServiceType(entry: WellKnownServiceTypeEntry) -> VoidType: ...
-    @staticmethod
-    def get_ApplicationId() -> StringType: ...
-    @staticmethod
-    def get_ApplicationName() -> StringType: ...
-    @staticmethod
-    def get_CustomErrorsMode() -> CustomErrorsModes: ...
-    @staticmethod
-    def get_ProcessId() -> StringType: ...
-    @staticmethod
-    def set_ApplicationName(value: StringType) -> VoidType: ...
-    @staticmethod
-    def set_CustomErrorsMode(value: CustomErrorsModes) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemotingException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, InnerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemotingServices(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def Connect(classToProxy: TypeType, url: StringType) -> ObjectType: ...
-    @staticmethod
-    @overload
-    def Connect(classToProxy: TypeType, url: StringType, data: ObjectType) -> ObjectType: ...
-    @staticmethod
-    def Disconnect(obj: MarshalByRefObject) -> BooleanType: ...
-    @staticmethod
-    def ExecuteMessage(
-        target: MarshalByRefObject, reqMsg: IMethodCallMessage
-    ) -> IMethodReturnMessage: ...
-    @staticmethod
-    def GetEnvoyChainForProxy(obj: MarshalByRefObject) -> IMessageSink: ...
-    @staticmethod
-    def GetLifetimeService(obj: MarshalByRefObject) -> ObjectType: ...
-    @staticmethod
-    def GetMethodBaseFromMethodMessage(msg: IMethodMessage) -> MethodBase: ...
-    @staticmethod
-    def GetObjRefForProxy(obj: MarshalByRefObject) -> ObjRef: ...
-    @staticmethod
-    def GetObjectData(
-        obj: ObjectType, info: SerializationInfo, context: StreamingContext
-    ) -> VoidType: ...
-    @staticmethod
-    def GetObjectUri(obj: MarshalByRefObject) -> StringType: ...
-    @staticmethod
-    def GetRealProxy(proxy: ObjectType) -> RealProxy: ...
-    @staticmethod
-    def GetServerTypeForUri(URI: StringType) -> TypeType: ...
-    @staticmethod
-    def GetSessionIdForMethodMessage(msg: IMethodMessage) -> StringType: ...
-    @staticmethod
-    def IsMethodOverloaded(msg: IMethodMessage) -> BooleanType: ...
-    @staticmethod
-    def IsObjectOutOfAppDomain(tp: ObjectType) -> BooleanType: ...
-    @staticmethod
-    def IsObjectOutOfContext(tp: ObjectType) -> BooleanType: ...
-    @staticmethod
-    def IsOneWay(method: MethodBase) -> BooleanType: ...
-    @staticmethod
-    def IsTransparentProxy(proxy: ObjectType) -> BooleanType: ...
-    @staticmethod
-    def LogRemotingStage(stage: IntType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Marshal(Obj: MarshalByRefObject) -> ObjRef: ...
-    @staticmethod
-    @overload
-    def Marshal(Obj: MarshalByRefObject, URI: StringType) -> ObjRef: ...
-    @staticmethod
-    @overload
-    def Marshal(Obj: MarshalByRefObject, ObjURI: StringType, RequestedType: TypeType) -> ObjRef: ...
-    @staticmethod
-    def SetObjectUriForMarshal(obj: MarshalByRefObject, uri: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Unmarshal(objectRef: ObjRef) -> ObjectType: ...
-    @staticmethod
-    @overload
-    def Unmarshal(objectRef: ObjRef, fRefine: BooleanType) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemotingTimeoutException(RemotingException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, InnerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ServerException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, InnerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ServerIdentity(Identity):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapServices(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def XmlNsForClrType() -> StringType: ...
-    @staticmethod
-    @property
-    def XmlNsForClrTypeWithAssembly() -> StringType: ...
-    @staticmethod
-    @property
-    def XmlNsForClrTypeWithNs() -> StringType: ...
-    @staticmethod
-    @property
-    def XmlNsForClrTypeWithNsAndAssembly() -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def CodeXmlNamespaceForClrTypeNamespace(
-        typeNamespace: StringType, assemblyName: StringType
-    ) -> StringType: ...
-    @staticmethod
-    def DecodeXmlNamespaceForClrTypeNamespace(
-        inNamespace: StringType, typeNamespace: StringType, assemblyName: StringType
-    ) -> Tuple[BooleanType, StringType, StringType]: ...
-    @staticmethod
-    def GetInteropFieldTypeAndNameFromXmlAttribute(
-        containingType: TypeType,
-        xmlAttribute: StringType,
-        xmlNamespace: StringType,
-        type: TypeType,
-        name: StringType,
-    ) -> Tuple[VoidType, TypeType, StringType]: ...
-    @staticmethod
-    def GetInteropFieldTypeAndNameFromXmlElement(
-        containingType: TypeType,
-        xmlElement: StringType,
-        xmlNamespace: StringType,
-        type: TypeType,
-        name: StringType,
-    ) -> Tuple[VoidType, TypeType, StringType]: ...
-    @staticmethod
-    def GetInteropTypeFromXmlElement(
-        xmlElement: StringType, xmlNamespace: StringType
-    ) -> TypeType: ...
-    @staticmethod
-    def GetInteropTypeFromXmlType(
-        xmlType: StringType, xmlTypeNamespace: StringType
-    ) -> TypeType: ...
-    @staticmethod
-    def GetSoapActionFromMethodBase(mb: MethodBase) -> StringType: ...
-    @staticmethod
-    def GetTypeAndMethodNameFromSoapAction(
-        soapAction: StringType, typeName: StringType, methodName: StringType
-    ) -> Tuple[BooleanType, StringType, StringType]: ...
-    @staticmethod
-    def GetXmlElementForInteropType(
-        type: TypeType, xmlElement: StringType, xmlNamespace: StringType
-    ) -> Tuple[BooleanType, StringType, StringType]: ...
-    @staticmethod
-    def GetXmlNamespaceForMethodCall(mb: MethodBase) -> StringType: ...
-    @staticmethod
-    def GetXmlNamespaceForMethodResponse(mb: MethodBase) -> StringType: ...
-    @staticmethod
-    def GetXmlTypeForInteropType(
-        type: TypeType, xmlType: StringType, xmlTypeNamespace: StringType
-    ) -> Tuple[BooleanType, StringType, StringType]: ...
-    @staticmethod
-    def IsClrTypeNamespace(namespaceString: StringType) -> BooleanType: ...
-    @staticmethod
-    def IsSoapActionValidForMethodBase(soapAction: StringType, mb: MethodBase) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def PreLoad(assembly: Assembly) -> VoidType: ...
-    @staticmethod
-    @overload
-    def PreLoad(type: TypeType) -> VoidType: ...
-    @staticmethod
-    def RegisterInteropXmlElement(
-        xmlElement: StringType, xmlNamespace: StringType, type: TypeType
-    ) -> VoidType: ...
-    @staticmethod
-    def RegisterInteropXmlType(
-        xmlType: StringType, xmlTypeNamespace: StringType, type: TypeType
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def RegisterSoapActionForMethodBase(mb: MethodBase) -> VoidType: ...
-    @staticmethod
-    @overload
-    def RegisterSoapActionForMethodBase(mb: MethodBase, soapAction: StringType) -> VoidType: ...
-    @staticmethod
-    def get_XmlNsForClrType() -> StringType: ...
-    @staticmethod
-    def get_XmlNsForClrTypeWithAssembly() -> StringType: ...
-    @staticmethod
-    def get_XmlNsForClrTypeWithNs() -> StringType: ...
-    @staticmethod
-    def get_XmlNsForClrTypeWithNsAndAssembly() -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TypeEntry(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AssemblyName(self) -> StringType: ...
-    @AssemblyName.setter
-    def AssemblyName(self, value: StringType) -> None: ...
-    @property
-    def TypeName(self) -> StringType: ...
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
     @TypeName.setter
-    def TypeName(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_AssemblyName(self) -> StringType: ...
-    def get_TypeName(self) -> StringType: ...
-    def set_AssemblyName(self, value: StringType) -> VoidType: ...
-    def set_TypeName(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TypeInfo(ObjectType, IRemotingTypeInfo):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def TypeName(self) -> StringType: ...
-    @TypeName.setter
-    def TypeName(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CanCastTo(self, castType: TypeType, o: ObjectType) -> BooleanType: ...
-    def get_TypeName(self) -> StringType: ...
-    def set_TypeName(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WellKnownClientTypeEntry(TypeEntry):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, typeName: StringType, assemblyName: StringType, objectUrl: StringType): ...
-    @overload
-    def __init__(self, type: TypeType, objectUrl: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ApplicationUrl(self) -> StringType: ...
-    @ApplicationUrl.setter
-    def ApplicationUrl(self, value: StringType) -> None: ...
-    @property
-    def ObjectType(self) -> TypeType: ...
-    @property
-    def ObjectUrl(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def ToString(self) -> StringType: ...
-    def get_ApplicationUrl(self) -> StringType: ...
-    def get_ObjectType(self) -> TypeType: ...
-    def get_ObjectUrl(self) -> StringType: ...
-    def set_ApplicationUrl(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WellKnownServiceTypeEntry(TypeEntry):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(
-        self,
-        typeName: StringType,
-        assemblyName: StringType,
-        objectUri: StringType,
-        mode: WellKnownObjectMode,
-    ): ...
-    @overload
-    def __init__(self, type: TypeType, objectUri: StringType, mode: WellKnownObjectMode): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ContextAttributes(self) -> ArrayType[IContextAttribute]: ...
-    @ContextAttributes.setter
-    def ContextAttributes(self, value: ArrayType[IContextAttribute]) -> None: ...
-    @property
-    def Mode(self) -> WellKnownObjectMode: ...
-    @property
-    def ObjectType(self) -> TypeType: ...
-    @property
-    def ObjectUri(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def ToString(self) -> StringType: ...
-    def get_ContextAttributes(self) -> ArrayType[IContextAttribute]: ...
-    def get_Mode(self) -> WellKnownObjectMode: ...
-    def get_ObjectType(self) -> TypeType: ...
-    def get_ObjectUri(self) -> StringType: ...
-    def set_ContextAttributes(self, value: ArrayType[IContextAttribute]) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class XmlNamespaceEncoder(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class __HResults(ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def COR_E_REMOTING() -> IntType: ...
-    @staticmethod
-    @property
-    def COR_E_SERVER() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
+    def TypeName(self, value: str) -> None: ...
+    def CanCastTo(self, fromType: Type, o: object) -> bool:
+        """
+
+        :param fromType:
+        :param o:
+        :return:
+        """
 
 class IdOps(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class Identity(Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-# ---------- Interfaces ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class IChannelInfo(Protocol):
-    # ---------- Properties ---------- #
+        :return:
+        """
+
+class IdentityHolder(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class InternalRemotingServices(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    def DebugOutChnl(cls, s: str) -> None:
+        """
+
+        :param s:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetCachedSoapAttribute(cls, reflectionObject: object) -> SoapAttribute:
+        """
+
+        :param reflectionObject:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def RemotingAssert(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    def RemotingTrace(cls, messages: Array[object]) -> None:
+        """
+
+        :param messages:
+        """
+    @classmethod
+    def SetServerIdentity(cls, m: MethodCall, srvID: object) -> None:
+        """
+
+        :param m:
+        :param srvID:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjRef(Object, IObjectReference, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, o: MarshalByRefObject, requestedType: Type):
+        """
+
+        :param o:
+        :param requestedType:
+        """
+    @property
+    def ChannelInfo(self) -> IChannelInfo:
+        """
+
+        :return:
+        """
+    @ChannelInfo.setter
+    def ChannelInfo(self, value: IChannelInfo) -> None: ...
+    @property
+    def EnvoyInfo(self) -> IEnvoyInfo:
+        """
+
+        :return:
+        """
+    @EnvoyInfo.setter
+    def EnvoyInfo(self, value: IEnvoyInfo) -> None: ...
+    @property
+    def TypeInfo(self) -> IRemotingTypeInfo:
+        """
+
+        :return:
+        """
+    @TypeInfo.setter
+    def TypeInfo(self, value: IRemotingTypeInfo) -> None: ...
+    @property
+    def URI(self) -> str:
+        """
+
+        :return:
+        """
+    @URI.setter
+    def URI(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetRealObject(self, context: StreamingContext) -> object:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsFromThisAppDomain(self) -> bool:
+        """
+
+        :return:
+        """
+    def IsFromThisProcess(self) -> bool:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectHandle(MarshalByRefObject, IObjectHandle):
+    """"""
+
+    def __init__(self, o: object):
+        """
+
+        :param o:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Unwrap(self) -> object:
+        """
+
+        :return:
+        """
+
+class RedirectionProxy(MarshalByRefObject, IMessageSink):
+    """"""
 
     @property
-    def ChannelData(self) -> ArrayType[ObjectType]: ...
-    @ChannelData.setter
-    def ChannelData(self, value: ArrayType[ObjectType]) -> None: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def ObjectMode(self) -> WellKnownObjectMode:
+        """
 
-    def get_ChannelData(self) -> ArrayType[ObjectType]: ...
-    def set_ChannelData(self, value: ArrayType[ObjectType]) -> VoidType: ...
+        :return:
+        """
+    @ObjectMode.setter
+    def ObjectMode(self, value: WellKnownObjectMode) -> None: ...
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    # No Events
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-class IEnvoyInfo(Protocol):
-    # ---------- Properties ---------- #
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
+
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RemoteAppEntry(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RemotingConfigHandler(ABC, Object):
+    """"""
+
+    Info: Final[ClassVar[RemotingConfigHandler.RemotingConfigInfo]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RemotingConfiguration(ABC, Object):
+    """"""
+
+    @classmethod
+    @property
+    def ApplicationId(cls) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ApplicationName(cls) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @ApplicationName.setter
+    def ApplicationName(cls, value: str) -> None: ...
+    @classmethod
+    @property
+    def CustomErrorsMode(cls) -> CustomErrorsModes:
+        """
+
+        :return:
+        """
+    @classmethod
+    @CustomErrorsMode.setter
+    def CustomErrorsMode(cls, value: CustomErrorsModes) -> None: ...
+    @classmethod
+    @property
+    def ProcessId(cls) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def Configure(cls, filename: str) -> None:
+        """
+
+        :param filename:
+        """
+    @classmethod
+    @overload
+    def Configure(cls, filename: str, ensureSecurity: bool) -> None:
+        """
+
+        :param filename:
+        :param ensureSecurity:
+        """
+    @classmethod
+    def CustomErrorsEnabled(cls, isLocalRequest: bool) -> bool:
+        """
+
+        :param isLocalRequest:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetRegisteredActivatedClientTypes(cls) -> Array[ActivatedClientTypeEntry]:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetRegisteredActivatedServiceTypes(cls) -> Array[ActivatedServiceTypeEntry]:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetRegisteredWellKnownClientTypes(cls) -> Array[WellKnownClientTypeEntry]:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetRegisteredWellKnownServiceTypes(cls) -> Array[WellKnownServiceTypeEntry]:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsActivationAllowed(cls, svrType: Type) -> bool:
+        """
+
+        :param svrType:
+        :return:
+        """
+    @classmethod
+    @overload
+    def IsRemotelyActivatedClientType(cls, svrType: Type) -> ActivatedClientTypeEntry:
+        """
+
+        :param svrType:
+        :return:
+        """
+    @classmethod
+    @overload
+    def IsRemotelyActivatedClientType(
+        cls, typeName: str, assemblyName: str
+    ) -> ActivatedClientTypeEntry:
+        """
+
+        :param typeName:
+        :param assemblyName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def IsWellKnownClientType(cls, svrType: Type) -> WellKnownClientTypeEntry:
+        """
+
+        :param svrType:
+        :return:
+        """
+    @classmethod
+    @overload
+    def IsWellKnownClientType(cls, typeName: str, assemblyName: str) -> WellKnownClientTypeEntry:
+        """
+
+        :param typeName:
+        :param assemblyName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def RegisterActivatedClientType(cls, entry: ActivatedClientTypeEntry) -> None:
+        """
+
+        :param entry:
+        """
+    @classmethod
+    @overload
+    def RegisterActivatedClientType(cls, type: Type, appUrl: str) -> None:
+        """
+
+        :param type:
+        :param appUrl:
+        """
+    @classmethod
+    @overload
+    def RegisterActivatedServiceType(cls, entry: ActivatedServiceTypeEntry) -> None:
+        """
+
+        :param entry:
+        """
+    @classmethod
+    @overload
+    def RegisterActivatedServiceType(cls, type: Type) -> None:
+        """
+
+        :param type:
+        """
+    @classmethod
+    @overload
+    def RegisterWellKnownClientType(cls, entry: WellKnownClientTypeEntry) -> None:
+        """
+
+        :param entry:
+        """
+    @classmethod
+    @overload
+    def RegisterWellKnownClientType(cls, type: Type, objectUrl: str) -> None:
+        """
+
+        :param type:
+        :param objectUrl:
+        """
+    @classmethod
+    @overload
+    def RegisterWellKnownServiceType(cls, entry: WellKnownServiceTypeEntry) -> None:
+        """
+
+        :param entry:
+        """
+    @classmethod
+    @overload
+    def RegisterWellKnownServiceType(
+        cls, type: Type, objectUri: str, mode: WellKnownObjectMode
+    ) -> None:
+        """
+
+        :param type:
+        :param objectUri:
+        :param mode:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RemotingException(SystemException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, InnerException: Exception):
+        """
+
+        :param message:
+        :param InnerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RemotingServices(ABC, Object):
+    """"""
+
+    @classmethod
+    @overload
+    def Connect(cls, classToProxy: Type, url: str) -> object:
+        """
+
+        :param classToProxy:
+        :param url:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Connect(cls, classToProxy: Type, url: str, data: object) -> object:
+        """
+
+        :param classToProxy:
+        :param url:
+        :param data:
+        :return:
+        """
+    @classmethod
+    def Disconnect(cls, obj: MarshalByRefObject) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def ExecuteMessage(
+        cls, target: MarshalByRefObject, reqMsg: IMethodCallMessage
+    ) -> IMethodReturnMessage:
+        """
+
+        :param target:
+        :param reqMsg:
+        :return:
+        """
+    @classmethod
+    def GetEnvoyChainForProxy(cls, obj: MarshalByRefObject) -> IMessageSink:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetLifetimeService(cls, obj: MarshalByRefObject) -> object:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetMethodBaseFromMethodMessage(cls, msg: IMethodMessage) -> MethodBase:
+        """
+
+        :param msg:
+        :return:
+        """
+    @classmethod
+    def GetObjRefForProxy(cls, obj: MarshalByRefObject) -> ObjRef:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetObjectData(cls, obj: object, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param obj:
+        :param info:
+        :param context:
+        """
+    @classmethod
+    def GetObjectUri(cls, obj: MarshalByRefObject) -> str:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetRealProxy(cls, proxy: object) -> RealProxy:
+        """
+
+        :param proxy:
+        :return:
+        """
+    @classmethod
+    def GetServerTypeForUri(cls, URI: str) -> Type:
+        """
+
+        :param URI:
+        :return:
+        """
+    @classmethod
+    def GetSessionIdForMethodMessage(cls, msg: IMethodMessage) -> str:
+        """
+
+        :param msg:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsMethodOverloaded(cls, msg: IMethodMessage) -> bool:
+        """
+
+        :param msg:
+        :return:
+        """
+    @classmethod
+    def IsObjectOutOfAppDomain(cls, tp: object) -> bool:
+        """
+
+        :param tp:
+        :return:
+        """
+    @classmethod
+    def IsObjectOutOfContext(cls, tp: object) -> bool:
+        """
+
+        :param tp:
+        :return:
+        """
+    @classmethod
+    def IsOneWay(cls, method: MethodBase) -> bool:
+        """
+
+        :param method:
+        :return:
+        """
+    @classmethod
+    def IsTransparentProxy(cls, proxy: object) -> bool:
+        """
+
+        :param proxy:
+        :return:
+        """
+    @classmethod
+    def LogRemotingStage(cls, stage: int) -> None:
+        """
+
+        :param stage:
+        """
+    @classmethod
+    @overload
+    def Marshal(cls, Obj: MarshalByRefObject) -> ObjRef:
+        """
+
+        :param Obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Marshal(cls, Obj: MarshalByRefObject, URI: str) -> ObjRef:
+        """
+
+        :param Obj:
+        :param URI:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Marshal(cls, Obj: MarshalByRefObject, ObjURI: str, RequestedType: Type) -> ObjRef:
+        """
+
+        :param Obj:
+        :param ObjURI:
+        :param RequestedType:
+        :return:
+        """
+    @classmethod
+    def SetObjectUriForMarshal(cls, obj: MarshalByRefObject, uri: str) -> None:
+        """
+
+        :param obj:
+        :param uri:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def Unmarshal(cls, objectRef: ObjRef) -> object:
+        """
+
+        :param objectRef:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Unmarshal(cls, objectRef: ObjRef, fRefine: bool) -> object:
+        """
+
+        :param objectRef:
+        :param fRefine:
+        :return:
+        """
+
+class RemotingTimeoutException(RemotingException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, InnerException: Exception):
+        """
+
+        :param message:
+        :param InnerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ServerException(SystemException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, InnerException: Exception):
+        """
+
+        :param message:
+        :param InnerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ServerIdentity(Identity):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapServices(Object):
+    """"""
+
+    @classmethod
+    @property
+    def XmlNsForClrType(cls) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def XmlNsForClrTypeWithAssembly(cls) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def XmlNsForClrTypeWithNs(cls) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def XmlNsForClrTypeWithNsAndAssembly(cls) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def CodeXmlNamespaceForClrTypeNamespace(cls, typeNamespace: str, assemblyName: str) -> str:
+        """
+
+        :param typeNamespace:
+        :param assemblyName:
+        :return:
+        """
+    @classmethod
+    def DecodeXmlNamespaceForClrTypeNamespace(
+        cls, inNamespace: str, typeNamespace: str, assemblyName: str
+    ) -> Tuple[bool, str, str]:
+        """
+
+        :param inNamespace:
+        :param typeNamespace:
+        :param assemblyName:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetInteropFieldTypeAndNameFromXmlAttribute(
+        cls, containingType: Type, xmlAttribute: str, xmlNamespace: str, type: Type, name: str
+    ) -> Tuple[None, Type, str]:
+        """
+
+        :param containingType:
+        :param xmlAttribute:
+        :param xmlNamespace:
+        :param type:
+        :param name:
+        """
+    @classmethod
+    def GetInteropFieldTypeAndNameFromXmlElement(
+        cls, containingType: Type, xmlElement: str, xmlNamespace: str, type: Type, name: str
+    ) -> Tuple[None, Type, str]:
+        """
+
+        :param containingType:
+        :param xmlElement:
+        :param xmlNamespace:
+        :param type:
+        :param name:
+        """
+    @classmethod
+    def GetInteropTypeFromXmlElement(cls, xmlElement: str, xmlNamespace: str) -> Type:
+        """
+
+        :param xmlElement:
+        :param xmlNamespace:
+        :return:
+        """
+    @classmethod
+    def GetInteropTypeFromXmlType(cls, xmlType: str, xmlTypeNamespace: str) -> Type:
+        """
+
+        :param xmlType:
+        :param xmlTypeNamespace:
+        :return:
+        """
+    @classmethod
+    def GetSoapActionFromMethodBase(cls, mb: MethodBase) -> str:
+        """
+
+        :param mb:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetTypeAndMethodNameFromSoapAction(
+        cls, soapAction: str, typeName: str, methodName: str
+    ) -> Tuple[bool, str, str]:
+        """
+
+        :param soapAction:
+        :param typeName:
+        :param methodName:
+        :return:
+        """
+    @classmethod
+    def GetXmlElementForInteropType(
+        cls, type: Type, xmlElement: str, xmlNamespace: str
+    ) -> Tuple[bool, str, str]:
+        """
+
+        :param type:
+        :param xmlElement:
+        :param xmlNamespace:
+        :return:
+        """
+    @classmethod
+    def GetXmlNamespaceForMethodCall(cls, mb: MethodBase) -> str:
+        """
+
+        :param mb:
+        :return:
+        """
+    @classmethod
+    def GetXmlNamespaceForMethodResponse(cls, mb: MethodBase) -> str:
+        """
+
+        :param mb:
+        :return:
+        """
+    @classmethod
+    def GetXmlTypeForInteropType(
+        cls, type: Type, xmlType: str, xmlTypeNamespace: str
+    ) -> Tuple[bool, str, str]:
+        """
+
+        :param type:
+        :param xmlType:
+        :param xmlTypeNamespace:
+        :return:
+        """
+    @classmethod
+    def IsClrTypeNamespace(cls, namespaceString: str) -> bool:
+        """
+
+        :param namespaceString:
+        :return:
+        """
+    @classmethod
+    def IsSoapActionValidForMethodBase(cls, soapAction: str, mb: MethodBase) -> bool:
+        """
+
+        :param soapAction:
+        :param mb:
+        :return:
+        """
+    @classmethod
+    @overload
+    def PreLoad(cls, assembly: Assembly) -> None:
+        """
+
+        :param assembly:
+        """
+    @classmethod
+    @overload
+    def PreLoad(cls, type: Type) -> None:
+        """
+
+        :param type:
+        """
+    @classmethod
+    def RegisterInteropXmlElement(cls, xmlElement: str, xmlNamespace: str, type: Type) -> None:
+        """
+
+        :param xmlElement:
+        :param xmlNamespace:
+        :param type:
+        """
+    @classmethod
+    def RegisterInteropXmlType(cls, xmlType: str, xmlTypeNamespace: str, type: Type) -> None:
+        """
+
+        :param xmlType:
+        :param xmlTypeNamespace:
+        :param type:
+        """
+    @classmethod
+    @overload
+    def RegisterSoapActionForMethodBase(cls, mb: MethodBase) -> None:
+        """
+
+        :param mb:
+        """
+    @classmethod
+    @overload
+    def RegisterSoapActionForMethodBase(cls, mb: MethodBase, soapAction: str) -> None:
+        """
+
+        :param mb:
+        :param soapAction:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TypeEntry(Object):
+    """"""
 
     @property
-    def EnvoySinks(self) -> IMessageSink: ...
-    @EnvoySinks.setter
-    def EnvoySinks(self, value: IMessageSink) -> None: ...
+    def AssemblyName(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    def get_EnvoySinks(self) -> IMessageSink: ...
-    def set_EnvoySinks(self, value: IMessageSink) -> VoidType: ...
-
-    # No Events
-
-class IObjectHandle(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Unwrap(self) -> ObjectType: ...
-
-    # No Events
-
-class IRemotingTypeInfo(Protocol):
-    # ---------- Properties ---------- #
-
+        :return:
+        """
+    @AssemblyName.setter
+    def AssemblyName(self, value: str) -> None: ...
     @property
-    def TypeName(self) -> StringType: ...
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
     @TypeName.setter
-    def TypeName(self, value: StringType) -> None: ...
+    def TypeName(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def CanCastTo(self, fromType: TypeType, o: ObjectType) -> BooleanType: ...
-    def get_TypeName(self) -> StringType: ...
-    def set_TypeName(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-# ---------- Enums ---------- #
+        :return:
+        """
 
-class CustomErrorsModes(Enum):
-    On = 0
-    Off = 1
-    RemoteOnly = 2
+class TypeInfo(Object, IRemotingTypeInfo):
+    """"""
 
-class DuplicateIdentityOption(Enum):
-    Unique = 0
-    UseExisting = 1
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @TypeName.setter
+    def TypeName(self, value: str) -> None: ...
+    def CanCastTo(self, fromType: Type, o: object) -> bool:
+        """
+
+        :param fromType:
+        :param o:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class WellKnownClientTypeEntry(TypeEntry):
+    """"""
+
+    @overload
+    def __init__(self, type: Type, objectUrl: str):
+        """
+
+        :param type:
+        :param objectUrl:
+        """
+    @overload
+    def __init__(self, typeName: str, assemblyName: str, objectUrl: str):
+        """
+
+        :param typeName:
+        :param assemblyName:
+        :param objectUrl:
+        """
+    @property
+    def ApplicationUrl(self) -> str:
+        """
+
+        :return:
+        """
+    @ApplicationUrl.setter
+    def ApplicationUrl(self, value: str) -> None: ...
+    @property
+    def AssemblyName(self) -> str:
+        """
+
+        :return:
+        """
+    @AssemblyName.setter
+    def AssemblyName(self, value: str) -> None: ...
+    @property
+    def ObjectType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def ObjectUrl(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @TypeName.setter
+    def TypeName(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class WellKnownObjectMode(Enum):
-    Singleton = 1
-    SingleCall = 2
+    """"""
 
-# No Delegates
+    Singleton: WellKnownObjectMode = ...
+    """"""
+    SingleCall: WellKnownObjectMode = ...
+    """"""
 
-__all__ = [
-    ActivatedClientTypeEntry,
-    ActivatedServiceTypeEntry,
-    ChannelInfo,
-    ComRedirectionProxy,
-    DelayLoadClientChannelEntry,
-    DomainSpecificRemotingData,
-    DynamicTypeInfo,
-    EnvoyInfo,
-    Identity,
-    IdentityHolder,
-    InternalRemotingServices,
-    ObjRef,
-    ObjectHandle,
-    RedirectionProxy,
-    RemoteAppEntry,
-    RemotingConfigHandler,
-    RemotingConfiguration,
-    RemotingException,
-    RemotingServices,
-    RemotingTimeoutException,
-    ServerException,
-    ServerIdentity,
-    SoapServices,
-    TypeEntry,
-    TypeInfo,
-    WellKnownClientTypeEntry,
-    WellKnownServiceTypeEntry,
-    XmlNamespaceEncoder,
-    __HResults,
-    IdOps,
-    IChannelInfo,
-    IEnvoyInfo,
-    IObjectHandle,
-    IRemotingTypeInfo,
-    CustomErrorsModes,
-    DuplicateIdentityOption,
-    WellKnownObjectMode,
-]
+class WellKnownServiceTypeEntry(TypeEntry):
+    """"""
+
+    @overload
+    def __init__(self, type: Type, objectUri: str, mode: WellKnownObjectMode):
+        """
+
+        :param type:
+        :param objectUri:
+        :param mode:
+        """
+    @overload
+    def __init__(self, typeName: str, assemblyName: str, objectUri: str, mode: WellKnownObjectMode):
+        """
+
+        :param typeName:
+        :param assemblyName:
+        :param objectUri:
+        :param mode:
+        """
+    @property
+    def AssemblyName(self) -> str:
+        """
+
+        :return:
+        """
+    @AssemblyName.setter
+    def AssemblyName(self, value: str) -> None: ...
+    @property
+    def ContextAttributes(self) -> Array[IContextAttribute]:
+        """
+
+        :return:
+        """
+    @ContextAttributes.setter
+    def ContextAttributes(self, value: Array[IContextAttribute]) -> None: ...
+    @property
+    def Mode(self) -> WellKnownObjectMode:
+        """
+
+        :return:
+        """
+    @property
+    def ObjectType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def ObjectUri(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @TypeName.setter
+    def TypeName(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class XmlNamespaceEncoder(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class __HResults(Object):
+    """"""
+
+    COR_E_REMOTING: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    COR_E_SERVER: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

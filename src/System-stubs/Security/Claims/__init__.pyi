@@ -1,17 +1,15 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Union
+from typing import ClassVar
+from typing import Final
 from typing import overload
 
 from System import Array
-from System import Boolean
 from System import Func
 from System import Object
 from System import Predicate
-from System import String
-from System import Void
+from System import Type
 from System.Collections.Generic import IDictionary
 from System.Collections.Generic import IEnumerable
 from System.IO import BinaryReader
@@ -19,653 +17,1099 @@ from System.IO import BinaryWriter
 from System.Security.Principal import IIdentity
 from System.Security.Principal import IPrincipal
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class Claim(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class Claim(Object):
+    """"""
 
     @overload
-    def __init__(self, reader: BinaryReader): ...
+    def __init__(self, reader: BinaryReader):
+        """
+
+        :param reader:
+        """
     @overload
-    def __init__(self, reader: BinaryReader, subject: ClaimsIdentity): ...
+    def __init__(self, reader: BinaryReader, subject: ClaimsIdentity):
+        """
+
+        :param reader:
+        :param subject:
+        """
     @overload
-    def __init__(self, type: StringType, value: StringType): ...
+    def __init__(self, type: str, value: str):
+        """
+
+        :param type:
+        :param value:
+        """
     @overload
-    def __init__(self, type: StringType, value: StringType, valueType: StringType): ...
+    def __init__(self, type: str, value: str, valueType: str):
+        """
+
+        :param type:
+        :param value:
+        :param valueType:
+        """
     @overload
-    def __init__(
-        self, type: StringType, value: StringType, valueType: StringType, issuer: StringType
-    ): ...
+    def __init__(self, type: str, value: str, valueType: str, issuer: str):
+        """
+
+        :param type:
+        :param value:
+        :param valueType:
+        :param issuer:
+        """
+    @overload
+    def __init__(self, type: str, value: str, valueType: str, issuer: str, originalIssuer: str):
+        """
+
+        :param type:
+        :param value:
+        :param valueType:
+        :param issuer:
+        :param originalIssuer:
+        """
     @overload
     def __init__(
         self,
-        type: StringType,
-        value: StringType,
-        valueType: StringType,
-        issuer: StringType,
-        originalIssuer: StringType,
-    ): ...
-    @overload
-    def __init__(
-        self,
-        type: StringType,
-        value: StringType,
-        valueType: StringType,
-        issuer: StringType,
-        originalIssuer: StringType,
+        type: str,
+        value: str,
+        valueType: str,
+        issuer: str,
+        originalIssuer: str,
         subject: ClaimsIdentity,
-    ): ...
+    ):
+        """
 
-    # ---------- Properties ---------- #
+        :param type:
+        :param value:
+        :param valueType:
+        :param issuer:
+        :param originalIssuer:
+        :param subject:
+        """
+    @property
+    def Issuer(self) -> str:
+        """
 
+        :return:
+        """
     @property
-    def Issuer(self) -> StringType: ...
-    @property
-    def OriginalIssuer(self) -> StringType: ...
-    @property
-    def Properties(self) -> IDictionary[StringType, StringType]: ...
-    @property
-    def Subject(self) -> ClaimsIdentity: ...
-    @property
-    def Type(self) -> StringType: ...
-    @property
-    def Value(self) -> StringType: ...
-    @property
-    def ValueType(self) -> StringType: ...
+    def OriginalIssuer(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary[str, str]:
+        """
 
+        :return:
+        """
+    @property
+    def Subject(self) -> ClaimsIdentity:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ValueType(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def Clone(self) -> Claim: ...
+    def Clone(self) -> Claim:
+        """
+
+        :return:
+        """
     @overload
-    def Clone(self, identity: ClaimsIdentity) -> Claim: ...
-    def ToString(self) -> StringType: ...
-    def WriteTo(self, writer: BinaryWriter) -> VoidType: ...
-    def get_Issuer(self) -> StringType: ...
-    def get_OriginalIssuer(self) -> StringType: ...
-    def get_Properties(self) -> IDictionary[StringType, StringType]: ...
-    def get_Subject(self) -> ClaimsIdentity: ...
-    def get_Type(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    def get_ValueType(self) -> StringType: ...
+    def Clone(self, identity: ClaimsIdentity) -> Claim:
+        """
 
-    # No Events
+        :param identity:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def WriteTo(self, writer: BinaryWriter) -> None:
+        """
 
-class ClaimTypes(ABC, ObjectType):
-    # ---------- Fields ---------- #
+        :param writer:
+        """
 
-    @staticmethod
-    @property
-    def Actor() -> StringType: ...
-    @staticmethod
-    @property
-    def Anonymous() -> StringType: ...
-    @staticmethod
-    @property
-    def Authentication() -> StringType: ...
-    @staticmethod
-    @property
-    def AuthenticationInstant() -> StringType: ...
-    @staticmethod
-    @property
-    def AuthenticationMethod() -> StringType: ...
-    @staticmethod
-    @property
-    def AuthorizationDecision() -> StringType: ...
-    @staticmethod
-    @property
-    def CookiePath() -> StringType: ...
-    @staticmethod
-    @property
-    def Country() -> StringType: ...
-    @staticmethod
-    @property
-    def DateOfBirth() -> StringType: ...
-    @staticmethod
-    @property
-    def DenyOnlyPrimaryGroupSid() -> StringType: ...
-    @staticmethod
-    @property
-    def DenyOnlyPrimarySid() -> StringType: ...
-    @staticmethod
-    @property
-    def DenyOnlySid() -> StringType: ...
-    @staticmethod
-    @property
-    def DenyOnlyWindowsDeviceGroup() -> StringType: ...
-    @staticmethod
-    @property
-    def Dns() -> StringType: ...
-    @staticmethod
-    @property
-    def Dsa() -> StringType: ...
-    @staticmethod
-    @property
-    def Email() -> StringType: ...
-    @staticmethod
-    @property
-    def Expiration() -> StringType: ...
-    @staticmethod
-    @property
-    def Expired() -> StringType: ...
-    @staticmethod
-    @property
-    def Gender() -> StringType: ...
-    @staticmethod
-    @property
-    def GivenName() -> StringType: ...
-    @staticmethod
-    @property
-    def GroupSid() -> StringType: ...
-    @staticmethod
-    @property
-    def Hash() -> StringType: ...
-    @staticmethod
-    @property
-    def HomePhone() -> StringType: ...
-    @staticmethod
-    @property
-    def IsPersistent() -> StringType: ...
-    @staticmethod
-    @property
-    def Locality() -> StringType: ...
-    @staticmethod
-    @property
-    def MobilePhone() -> StringType: ...
-    @staticmethod
-    @property
-    def Name() -> StringType: ...
-    @staticmethod
-    @property
-    def NameIdentifier() -> StringType: ...
-    @staticmethod
-    @property
-    def OtherPhone() -> StringType: ...
-    @staticmethod
-    @property
-    def PostalCode() -> StringType: ...
-    @staticmethod
-    @property
-    def PrimaryGroupSid() -> StringType: ...
-    @staticmethod
-    @property
-    def PrimarySid() -> StringType: ...
-    @staticmethod
-    @property
-    def Role() -> StringType: ...
-    @staticmethod
-    @property
-    def Rsa() -> StringType: ...
-    @staticmethod
-    @property
-    def SerialNumber() -> StringType: ...
-    @staticmethod
-    @property
-    def Sid() -> StringType: ...
-    @staticmethod
-    @property
-    def Spn() -> StringType: ...
-    @staticmethod
-    @property
-    def StateOrProvince() -> StringType: ...
-    @staticmethod
-    @property
-    def StreetAddress() -> StringType: ...
-    @staticmethod
-    @property
-    def Surname() -> StringType: ...
-    @staticmethod
-    @property
-    def System() -> StringType: ...
-    @staticmethod
-    @property
-    def Thumbprint() -> StringType: ...
-    @staticmethod
-    @property
-    def Upn() -> StringType: ...
-    @staticmethod
-    @property
-    def Uri() -> StringType: ...
-    @staticmethod
-    @property
-    def UserData() -> StringType: ...
-    @staticmethod
-    @property
-    def Version() -> StringType: ...
-    @staticmethod
-    @property
-    def Webpage() -> StringType: ...
-    @staticmethod
-    @property
-    def WindowsAccountName() -> StringType: ...
-    @staticmethod
-    @property
-    def WindowsDeviceClaim() -> StringType: ...
-    @staticmethod
-    @property
-    def WindowsDeviceGroup() -> StringType: ...
-    @staticmethod
-    @property
-    def WindowsFqbnVersion() -> StringType: ...
-    @staticmethod
-    @property
-    def WindowsSubAuthority() -> StringType: ...
-    @staticmethod
-    @property
-    def WindowsUserClaim() -> StringType: ...
-    @staticmethod
-    @property
-    def X500DistinguishedName() -> StringType: ...
+class ClaimTypes(ABC, Object):
+    """"""
 
-    # No Constructors
+    Actor: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Anonymous: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Authentication: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    AuthenticationInstant: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    AuthenticationMethod: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    AuthorizationDecision: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    CookiePath: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Country: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DateOfBirth: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DenyOnlyPrimaryGroupSid: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DenyOnlyPrimarySid: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DenyOnlySid: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DenyOnlyWindowsDeviceGroup: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Dns: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Dsa: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Email: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Expiration: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Expired: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Gender: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    GivenName: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    GroupSid: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Hash: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    HomePhone: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    IsPersistent: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Locality: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    MobilePhone: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Name: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    NameIdentifier: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    OtherPhone: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    PostalCode: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    PrimaryGroupSid: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    PrimarySid: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Role: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Rsa: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    SerialNumber: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Sid: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Spn: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    StateOrProvince: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    StreetAddress: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Surname: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    System: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Thumbprint: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Upn: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Uri: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    UserData: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Version: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Webpage: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    WindowsAccountName: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    WindowsDeviceClaim: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    WindowsDeviceGroup: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    WindowsFqbnVersion: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    WindowsSubAuthority: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    WindowsUserClaim: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    X500DistinguishedName: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class ClaimValueTypes(ABC, Object):
+    """"""
 
-    # No Sub Interfaces
+    Base64Binary: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Base64Octet: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Boolean: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Date: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DateTime: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DaytimeDuration: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DnsName: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Double: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DsaKeyValue: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Email: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Fqbn: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    HexBinary: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Integer: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Integer32: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Integer64: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    KeyInfo: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Rfc822Name: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Rsa: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    RsaKeyValue: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Sid: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    String: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    Time: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    UInteger32: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    UInteger64: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    UpnName: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    X500Name: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    YearMonthDuration: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class ClaimValueTypes(ABC, ObjectType):
-    # ---------- Fields ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    @staticmethod
-    @property
-    def Base64Binary() -> StringType: ...
-    @staticmethod
-    @property
-    def Base64Octet() -> StringType: ...
-    @staticmethod
-    @property
-    def Boolean() -> StringType: ...
-    @staticmethod
-    @property
-    def Date() -> StringType: ...
-    @staticmethod
-    @property
-    def DateTime() -> StringType: ...
-    @staticmethod
-    @property
-    def DaytimeDuration() -> StringType: ...
-    @staticmethod
-    @property
-    def DnsName() -> StringType: ...
-    @staticmethod
-    @property
-    def Double() -> StringType: ...
-    @staticmethod
-    @property
-    def DsaKeyValue() -> StringType: ...
-    @staticmethod
-    @property
-    def Email() -> StringType: ...
-    @staticmethod
-    @property
-    def Fqbn() -> StringType: ...
-    @staticmethod
-    @property
-    def HexBinary() -> StringType: ...
-    @staticmethod
-    @property
-    def Integer() -> StringType: ...
-    @staticmethod
-    @property
-    def Integer32() -> StringType: ...
-    @staticmethod
-    @property
-    def Integer64() -> StringType: ...
-    @staticmethod
-    @property
-    def KeyInfo() -> StringType: ...
-    @staticmethod
-    @property
-    def Rfc822Name() -> StringType: ...
-    @staticmethod
-    @property
-    def Rsa() -> StringType: ...
-    @staticmethod
-    @property
-    def RsaKeyValue() -> StringType: ...
-    @staticmethod
-    @property
-    def Sid() -> StringType: ...
-    @staticmethod
-    @property
-    def String() -> StringType: ...
-    @staticmethod
-    @property
-    def Time() -> StringType: ...
-    @staticmethod
-    @property
-    def UInteger32() -> StringType: ...
-    @staticmethod
-    @property
-    def UInteger64() -> StringType: ...
-    @staticmethod
-    @property
-    def UpnName() -> StringType: ...
-    @staticmethod
-    @property
-    def X500Name() -> StringType: ...
-    @staticmethod
-    @property
-    def YearMonthDuration() -> StringType: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # No Properties
+class ClaimsIdentity(Object, IIdentity):
+    """"""
 
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ClaimsIdentity(ObjectType, IIdentity):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def DefaultIssuer() -> StringType: ...
-    @staticmethod
-    @property
-    def DefaultNameClaimType() -> StringType: ...
-    @staticmethod
-    @property
-    def DefaultRoleClaimType() -> StringType: ...
-
-    # ---------- Constructors ---------- #
-
+    DefaultIssuer: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DefaultNameClaimType: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DefaultRoleClaimType: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, identity: IIdentity): ...
+    def __init__(self, claims: IEnumerable[Claim]):
+        """
+
+        :param claims:
+        """
     @overload
-    def __init__(self, claims: IEnumerable[Claim]): ...
+    def __init__(self, reader: BinaryReader):
+        """
+
+        :param reader:
+        """
     @overload
-    def __init__(self, authenticationType: StringType): ...
+    def __init__(self, identity: IIdentity):
+        """
+
+        :param identity:
+        """
     @overload
-    def __init__(self, claims: IEnumerable[Claim], authenticationType: StringType): ...
+    def __init__(self, authenticationType: str):
+        """
+
+        :param authenticationType:
+        """
     @overload
-    def __init__(self, identity: IIdentity, claims: IEnumerable[Claim]): ...
+    def __init__(self, claims: IEnumerable[Claim], authenticationType: str):
+        """
+
+        :param claims:
+        :param authenticationType:
+        """
+    @overload
+    def __init__(self, identity: IIdentity, claims: IEnumerable[Claim]):
+        """
+
+        :param identity:
+        :param claims:
+        """
+    @overload
+    def __init__(self, authenticationType: str, nameType: str, roleType: str):
+        """
+
+        :param authenticationType:
+        :param nameType:
+        :param roleType:
+        """
     @overload
     def __init__(
-        self, authenticationType: StringType, nameType: StringType, roleType: StringType
-    ): ...
-    @overload
-    def __init__(
-        self,
-        claims: IEnumerable[Claim],
-        authenticationType: StringType,
-        nameType: StringType,
-        roleType: StringType,
-    ): ...
+        self, claims: IEnumerable[Claim], authenticationType: str, nameType: str, roleType: str
+    ):
+        """
+
+        :param claims:
+        :param authenticationType:
+        :param nameType:
+        :param roleType:
+        """
     @overload
     def __init__(
         self,
         identity: IIdentity,
         claims: IEnumerable[Claim],
-        authenticationType: StringType,
-        nameType: StringType,
-        roleType: StringType,
-    ): ...
-    @overload
-    def __init__(self, reader: BinaryReader): ...
+        authenticationType: str,
+        nameType: str,
+        roleType: str,
+    ):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param identity:
+        :param claims:
+        :param authenticationType:
+        :param nameType:
+        :param roleType:
+        """
     @property
-    def Actor(self) -> ClaimsIdentity: ...
+    def Actor(self) -> ClaimsIdentity:
+        """
+
+        :return:
+        """
     @Actor.setter
     def Actor(self, value: ClaimsIdentity) -> None: ...
     @property
-    def AuthenticationType(self) -> StringType: ...
+    def AuthenticationType(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def BootstrapContext(self) -> ObjectType: ...
+    def BootstrapContext(self) -> object:
+        """
+
+        :return:
+        """
     @BootstrapContext.setter
-    def BootstrapContext(self, value: ObjectType) -> None: ...
+    def BootstrapContext(self, value: object) -> None: ...
     @property
-    def Claims(self) -> IEnumerable[Claim]: ...
+    def Claims(self) -> IEnumerable[Claim]:
+        """
+
+        :return:
+        """
     @property
-    def IsAuthenticated(self) -> BooleanType: ...
+    def IsAuthenticated(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Label(self) -> StringType: ...
+    def Label(self) -> str:
+        """
+
+        :return:
+        """
     @Label.setter
-    def Label(self, value: StringType) -> None: ...
+    def Label(self, value: str) -> None: ...
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def NameClaimType(self) -> StringType: ...
+    def NameClaimType(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def RoleClaimType(self) -> StringType: ...
+    def RoleClaimType(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AddClaim(self, claim: Claim) -> None:
+        """
 
-    def AddClaim(self, claim: Claim) -> VoidType: ...
-    def AddClaims(self, claims: IEnumerable[Claim]) -> VoidType: ...
-    def Clone(self) -> ClaimsIdentity: ...
+        :param claim:
+        """
+    def AddClaims(self, claims: IEnumerable[Claim]) -> None:
+        """
+
+        :param claims:
+        """
+    def Clone(self) -> ClaimsIdentity:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]: ...
-    @overload
-    def FindAll(self, type: StringType) -> IEnumerable[Claim]: ...
-    @overload
-    def FindFirst(self, match: Predicate[Claim]) -> Claim: ...
-    @overload
-    def FindFirst(self, type: StringType) -> Claim: ...
-    @overload
-    def HasClaim(self, match: Predicate[Claim]) -> BooleanType: ...
-    @overload
-    def HasClaim(self, type: StringType, value: StringType) -> BooleanType: ...
-    def RemoveClaim(self, claim: Claim) -> VoidType: ...
-    def TryRemoveClaim(self, claim: Claim) -> BooleanType: ...
-    def WriteTo(self, writer: BinaryWriter) -> VoidType: ...
-    def get_Actor(self) -> ClaimsIdentity: ...
-    def get_AuthenticationType(self) -> StringType: ...
-    def get_BootstrapContext(self) -> ObjectType: ...
-    def get_Claims(self) -> IEnumerable[Claim]: ...
-    def get_IsAuthenticated(self) -> BooleanType: ...
-    def get_Label(self) -> StringType: ...
-    def get_Name(self) -> StringType: ...
-    def get_NameClaimType(self) -> StringType: ...
-    def get_RoleClaimType(self) -> StringType: ...
-    def set_Actor(self, value: ClaimsIdentity) -> VoidType: ...
-    def set_BootstrapContext(self, value: ObjectType) -> VoidType: ...
-    def set_Label(self, value: StringType) -> VoidType: ...
+    def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
+        """
 
-    # No Events
+        :param match:
+        :return:
+        """
+    @overload
+    def FindAll(self, type: str) -> IEnumerable[Claim]:
+        """
 
-    # No Sub Classes
+        :param type:
+        :return:
+        """
+    @overload
+    def FindFirst(self, match: Predicate[Claim]) -> Claim:
+        """
 
-    # No Sub Structs
+        :param match:
+        :return:
+        """
+    @overload
+    def FindFirst(self, type: str) -> Claim:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class ClaimsPrincipal(ObjectType, IPrincipal):
-    # No Fields
+        :return:
+        """
+    @overload
+    def HasClaim(self, match: Predicate[Claim]) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :param match:
+        :return:
+        """
+    @overload
+    def HasClaim(self, type: str, value: str) -> bool:
+        """
+
+        :param type:
+        :param value:
+        :return:
+        """
+    def RemoveClaim(self, claim: Claim) -> None:
+        """
+
+        :param claim:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryRemoveClaim(self, claim: Claim) -> bool:
+        """
+
+        :param claim:
+        :return:
+        """
+    def WriteTo(self, writer: BinaryWriter) -> None:
+        """
+
+        :param writer:
+        """
+
+class ClaimsPrincipal(Object, IPrincipal):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, identities: IEnumerable[ClaimsIdentity]): ...
-    @overload
-    def __init__(self, identity: IIdentity): ...
-    @overload
-    def __init__(self, principal: IPrincipal): ...
-    @overload
-    def __init__(self, reader: BinaryReader): ...
+    def __init__(self, identities: IEnumerable[ClaimsIdentity]):
+        """
 
-    # ---------- Properties ---------- #
+        :param identities:
+        """
+    @overload
+    def __init__(self, reader: BinaryReader):
+        """
 
+        :param reader:
+        """
+    @overload
+    def __init__(self, identity: IIdentity):
+        """
+
+        :param identity:
+        """
+    @overload
+    def __init__(self, principal: IPrincipal):
+        """
+
+        :param principal:
+        """
     @property
-    def Claims(self) -> IEnumerable[Claim]: ...
-    @staticmethod
+    def Claims(self) -> IEnumerable[Claim]:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def ClaimsPrincipalSelector() -> Func[ClaimsPrincipal]: ...
-    @staticmethod
+    def ClaimsPrincipalSelector(cls) -> Func[ClaimsPrincipal]:
+        """
+
+        :return:
+        """
+    @classmethod
     @ClaimsPrincipalSelector.setter
-    def ClaimsPrincipalSelector(value: Func[ClaimsPrincipal]) -> None: ...
-    @staticmethod
+    def ClaimsPrincipalSelector(cls, value: Func[ClaimsPrincipal]) -> None: ...
+    @classmethod
     @property
-    def Current() -> ClaimsPrincipal: ...
+    def Current(cls) -> ClaimsPrincipal:
+        """
+
+        :return:
+        """
     @property
-    def Identities(self) -> IEnumerable[ClaimsIdentity]: ...
+    def Identities(self) -> IEnumerable[ClaimsIdentity]:
+        """
+
+        :return:
+        """
     @property
-    def Identity(self) -> IIdentity: ...
-    @staticmethod
+    def Identity(self) -> IIdentity:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def PrimaryIdentitySelector() -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]: ...
-    @staticmethod
+    def PrimaryIdentitySelector(cls) -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]:
+        """
+
+        :return:
+        """
+    @classmethod
     @PrimaryIdentitySelector.setter
     def PrimaryIdentitySelector(
-        value: Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]
+        cls, value: Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]
     ) -> None: ...
+    def AddIdentities(self, identities: IEnumerable[ClaimsIdentity]) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param identities:
+        """
+    def AddIdentity(self, identity: ClaimsIdentity) -> None:
+        """
 
-    def AddIdentities(self, identities: IEnumerable[ClaimsIdentity]) -> VoidType: ...
-    def AddIdentity(self, identity: ClaimsIdentity) -> VoidType: ...
-    def Clone(self) -> ClaimsPrincipal: ...
+        :param identity:
+        """
+    def Clone(self) -> ClaimsPrincipal:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]: ...
+    def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
+        """
+
+        :param match:
+        :return:
+        """
     @overload
-    def FindAll(self, type: StringType) -> IEnumerable[Claim]: ...
+    def FindAll(self, type: str) -> IEnumerable[Claim]:
+        """
+
+        :param type:
+        :return:
+        """
     @overload
-    def FindFirst(self, match: Predicate[Claim]) -> Claim: ...
+    def FindFirst(self, match: Predicate[Claim]) -> Claim:
+        """
+
+        :param match:
+        :return:
+        """
     @overload
-    def FindFirst(self, type: StringType) -> Claim: ...
+    def FindFirst(self, type: str) -> Claim:
+        """
+
+        :param type:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def HasClaim(self, match: Predicate[Claim]) -> BooleanType: ...
+    def HasClaim(self, match: Predicate[Claim]) -> bool:
+        """
+
+        :param match:
+        :return:
+        """
     @overload
-    def HasClaim(self, type: StringType, value: StringType) -> BooleanType: ...
-    def IsInRole(self, role: StringType) -> BooleanType: ...
-    def WriteTo(self, writer: BinaryWriter) -> VoidType: ...
-    def get_Claims(self) -> IEnumerable[Claim]: ...
-    @staticmethod
-    def get_ClaimsPrincipalSelector() -> Func[ClaimsPrincipal]: ...
-    @staticmethod
-    def get_Current() -> ClaimsPrincipal: ...
-    def get_Identities(self) -> IEnumerable[ClaimsIdentity]: ...
-    def get_Identity(self) -> IIdentity: ...
-    @staticmethod
-    def get_PrimaryIdentitySelector() -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]: ...
-    @staticmethod
-    def set_ClaimsPrincipalSelector(value: Func[ClaimsPrincipal]) -> VoidType: ...
-    @staticmethod
-    def set_PrimaryIdentitySelector(
-        value: Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]
-    ) -> VoidType: ...
+    def HasClaim(self, type: str, value: str) -> bool:
+        """
 
-    # No Events
+        :param type:
+        :param value:
+        :return:
+        """
+    def IsInRole(self, role: str) -> bool:
+        """
 
-    # No Sub Classes
+        :param role:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def WriteTo(self, writer: BinaryWriter) -> None:
+        """
 
-    # No Sub Interfaces
+        :param writer:
+        """
 
-    # No Sub Enums
+class DynamicRoleClaimProvider(ABC, Object):
+    """"""
 
-class DynamicRoleClaimProvider(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
+    @classmethod
     def AddDynamicRoleClaims(
-        claimsIdentity: ClaimsIdentity, claims: IEnumerable[Claim]
-    ) -> VoidType: ...
+        cls, claimsIdentity: ClaimsIdentity, claims: IEnumerable[Claim]
+    ) -> None:
+        """
 
-    # No Events
+        :param claimsIdentity:
+        :param claims:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class RoleClaimProvider(ObjectType):
-    # No Fields
+class RoleClaimProvider(Object):
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, issuer: str, roles: Array[str], subject: ClaimsIdentity):
+        """
 
-    def __init__(
-        self, issuer: StringType, roles: ArrayType[StringType], subject: ClaimsIdentity
-    ): ...
-
-    # ---------- Properties ---------- #
-
+        :param issuer:
+        :param roles:
+        :param subject:
+        """
     @property
-    def Claims(self) -> IEnumerable[Claim]: ...
+    def Claims(self) -> IEnumerable[Claim]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Claims(self) -> IEnumerable[Claim]: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    Claim,
-    ClaimTypes,
-    ClaimValueTypes,
-    ClaimsIdentity,
-    ClaimsPrincipal,
-    DynamicRoleClaimProvider,
-    RoleClaimProvider,
-]
+        :return:
+        """

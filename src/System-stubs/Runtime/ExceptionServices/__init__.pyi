@@ -1,105 +1,177 @@
 from __future__ import annotations
 
-from typing import Union
+from typing import Tuple
 
 from System import Attribute
 from System import EventArgs
 from System import Exception
+from System import Guid
+from System import IntPtr
 from System import Object
-from System import Void
+from System import Type
 from System.Runtime.InteropServices import _Attribute
 
-# ---------- Types ---------- #
-
-ObjectType = Object
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class ExceptionDispatchInfo(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class ExceptionDispatchInfo(Object):
+    """"""
 
     @property
-    def SourceException(self) -> Exception: ...
+    def SourceException(self) -> Exception:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    def Capture(cls, source: Exception) -> ExceptionDispatchInfo:
+        """
 
-    @staticmethod
-    def Capture(source: Exception) -> ExceptionDispatchInfo: ...
-    def Throw(self) -> VoidType: ...
-    def get_SourceException(self) -> Exception: ...
+        :param source:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Throw(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class FirstChanceExceptionEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, exception: Exception):
+        """
 
-    def __init__(self, exception: Exception): ...
-
-    # ---------- Properties ---------- #
-
+        :param exception:
+        """
     @property
-    def Exception(self) -> Exception: ...
+    def Exception(self) -> Exception:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Exception(self) -> Exception: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class HandleProcessCorruptedStateExceptionsAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Events
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Structs
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Interfaces
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Sub Enums
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-# No Structs
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-# No Interfaces
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    ExceptionDispatchInfo,
-    FirstChanceExceptionEventArgs,
-    HandleProcessCorruptedStateExceptionsAttribute,
-]
+        :return:
+        """

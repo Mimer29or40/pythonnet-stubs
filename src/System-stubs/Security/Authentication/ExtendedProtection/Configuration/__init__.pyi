@@ -1,173 +1,360 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
+from typing import Iterator
 from typing import overload
 
-from System import Int32
+from System import Array
 from System import Object
-from System import String
-from System import Void
+from System import Type
 from System.Collections import ICollection
 from System.Collections import IEnumerable
+from System.Collections import IEnumerator
+from System.Configuration import Configuration
 from System.Configuration import ConfigurationElement
 from System.Configuration import ConfigurationElementCollection
+from System.Configuration import ConfigurationElementCollectionType
+from System.Configuration import ConfigurationLockCollection
+from System.Configuration import ElementInformation
 from System.Security.Authentication.ExtendedProtection import ExtendedProtectionPolicy
 from System.Security.Authentication.ExtendedProtection import PolicyEnforcement
 from System.Security.Authentication.ExtendedProtection import ProtectionScenario
 
-# ---------- Types ---------- #
-
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class ExtendedProtectionConfigurationStrings(ABC, ObjectType):
+class ExtendedProtectionConfigurationStrings(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ExtendedProtectionPolicyElement(ConfigurationElement):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def CustomServiceNames(self) -> ServiceNameElementCollection: ...
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
     @property
-    def PolicyEnforcement(self) -> PolicyEnforcement: ...
+    def CustomServiceNames(self) -> ServiceNameElementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def PolicyEnforcement(self) -> PolicyEnforcement:
+        """
+
+        :return:
+        """
     @PolicyEnforcement.setter
     def PolicyEnforcement(self, value: PolicyEnforcement) -> None: ...
     @property
-    def ProtectionScenario(self) -> ProtectionScenario: ...
+    def ProtectionScenario(self) -> ProtectionScenario:
+        """
+
+        :return:
+        """
     @ProtectionScenario.setter
     def ProtectionScenario(self, value: ProtectionScenario) -> None: ...
+    def BuildPolicy(self) -> ExtendedProtectionPolicy:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def BuildPolicy(self) -> ExtendedProtectionPolicy: ...
-    def get_CustomServiceNames(self) -> ServiceNameElementCollection: ...
-    def get_PolicyEnforcement(self) -> PolicyEnforcement: ...
-    def get_ProtectionScenario(self) -> ProtectionScenario: ...
-    def set_PolicyEnforcement(self, value: PolicyEnforcement) -> VoidType: ...
-    def set_ProtectionScenario(self, value: ProtectionScenario) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ServiceNameElement(ConfigurationElement):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Name(self) -> StringType: ...
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_Name(self) -> StringType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ServiceNameElementCollection(ConfigurationElementCollection, ICollection, IEnumerable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def CollectionType(self) -> ConfigurationElementCollectionType:
+        """"""
+    @property
+    def Count(self) -> int:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def EmitClear(self) -> bool:
+        """"""
+    @EmitClear.setter
+    def EmitClear(self, value: bool) -> None: ...
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    @property
+    def Item(self) -> ServiceNameElement:
+        """
 
-    def __getitem__(self, key: IntType) -> ServiceNameElement: ...
-    def __setitem__(self, key: IntType, value: ServiceNameElement) -> None: ...
-    def __getitem__(self, key: StringType) -> ServiceNameElement: ...
-    def __setitem__(self, key: StringType, value: ServiceNameElement) -> None: ...
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: ServiceNameElement) -> None: ...
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Add(self, element: ServiceNameElement) -> None:
+        """
 
-    def Add(self, element: ServiceNameElement) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def IndexOf(self, element: ServiceNameElement) -> IntType: ...
+        :param element:
+        """
+    def Clear(self) -> None:
+        """"""
     @overload
-    def Remove(self, element: ServiceNameElement) -> VoidType: ...
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
     @overload
-    def Remove(self, name: StringType) -> VoidType: ...
-    def RemoveAt(self, index: IntType) -> VoidType: ...
+    def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, element: ServiceNameElement) -> int:
+        """
+
+        :param element:
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
     @overload
-    def get_Item(self, index: IntType) -> ServiceNameElement: ...
+    def Remove(self, element: ServiceNameElement) -> None:
+        """
+
+        :param element:
+        """
     @overload
-    def get_Item(self, name: StringType) -> ServiceNameElement: ...
+    def Remove(self, name: str) -> None:
+        """
+
+        :param name:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def set_Item(self, index: IntType, value: ServiceNameElement) -> VoidType: ...
+    def __getitem__(self, index: int) -> ServiceNameElement:
+        """
+
+        :param index:
+        :return:
+        """
     @overload
-    def set_Item(self, name: StringType, value: ServiceNameElement) -> VoidType: ...
+    def __getitem__(self, name: str) -> ServiceNameElement:
+        """
 
-    # No Events
+        :param name:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def __len__(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: ServiceNameElement) -> None:
+        """
 
-    # No Sub Interfaces
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, name: str, value: ServiceNameElement) -> None:
+        """
 
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    ExtendedProtectionConfigurationStrings,
-    ExtendedProtectionPolicyElement,
-    ServiceNameElement,
-    ServiceNameElementCollection,
-]
+        :param name:
+        :param value:
+        """

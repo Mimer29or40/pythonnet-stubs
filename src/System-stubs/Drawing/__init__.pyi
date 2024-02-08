@@ -1,39 +1,98 @@
 from __future__ import annotations
 
+from typing import Tuple
+
 from System import Attribute
+from System import Guid
+from System import IntPtr
+from System import Type
 from System.Runtime.InteropServices import _Attribute
 
-# ---------- Classes ---------- #
-
 class BitmapSuffixInSatelliteAssemblyAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Events
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Structs
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Interfaces
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Sub Enums
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-# No Structs
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-# No Interfaces
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    BitmapSuffixInSatelliteAssemblyAttribute,
-]
+        :return:
+        """

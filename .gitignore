@@ -218,3 +218,4 @@ logs/
 /src/TestLibSrc/bin/
 /src/TestLibSrc/obj/
 /test/output/
+/src/stubs/raw/

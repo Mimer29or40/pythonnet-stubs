@@ -1,90 +1,103 @@
 from __future__ import annotations
 
-from typing import List
-from typing import Union
+from typing import ClassVar
+from typing import Final
 from typing import overload
 
 from System import Array
-from System import Byte
 from System import Enum
 from System import ICloneable
-from System import Int32
-from System import Object
+from System import Type
 from System import ValueType
-from System import Void
-
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-ObjectType = Object
-VoidType = Union[None, Void]
-
-# No Classes
-
-# ---------- Structs ---------- #
 
 class AssemblyHash(ValueType, ICloneable):
-    # ---------- Fields ---------- #
+    """"""
 
-    @staticmethod
-    @property
-    def Empty() -> AssemblyHash: ...
-
-    # ---------- Constructors ---------- #
-
+    Empty: Final[ClassVar[AssemblyHash]] = ...
+    """
+    
+    :return: 
+    """
     @overload
-    def __init__(self, value: ArrayType[ByteType]): ...
+    def __init__(self, value: Array[int]):
+        """
+
+        :param value:
+        """
     @overload
-    def __init__(self, algorithm: AssemblyHashAlgorithm, value: ArrayType[ByteType]): ...
+    def __init__(self, algorithm: AssemblyHashAlgorithm, value: Array[int]):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param algorithm:
+        :param value:
+        """
     @property
-    def Algorithm(self) -> AssemblyHashAlgorithm: ...
+    def Algorithm(self) -> AssemblyHashAlgorithm:
+        """
+
+        :return:
+        """
     @Algorithm.setter
     def Algorithm(self, value: AssemblyHashAlgorithm) -> None: ...
+    def Clone(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Clone(self) -> ObjectType: ...
-    def GetValue(self) -> ArrayType[ByteType]: ...
-    def SetValue(self, value: ArrayType[ByteType]) -> VoidType: ...
-    def get_Algorithm(self) -> AssemblyHashAlgorithm: ...
-    def set_Algorithm(self, value: AssemblyHashAlgorithm) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetValue(self) -> Array[int]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def SetValue(self, value: Array[int]) -> None:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
-
-# No Interfaces
-
-# ---------- Enums ---------- #
+        :return:
+        """
 
 class AssemblyHashAlgorithm(Enum):
-    # None = 0
-    MD5 = 32771
-    SHA1 = 32772
-    SHA256 = 32780
-    SHA384 = 32781
-    SHA512 = 32782
+    """"""
+
+    _None: AssemblyHashAlgorithm = ...
+    """"""
+    MD5: AssemblyHashAlgorithm = ...
+    """"""
+    SHA1: AssemblyHashAlgorithm = ...
+    """"""
+    SHA256: AssemblyHashAlgorithm = ...
+    """"""
+    SHA384: AssemblyHashAlgorithm = ...
+    """"""
+    SHA512: AssemblyHashAlgorithm = ...
+    """"""
 
 class AssemblyVersionCompatibility(Enum):
-    SameMachine = 1
-    SameProcess = 2
-    SameDomain = 3
+    """"""
 
-# No Delegates
-
-__all__ = [
-    AssemblyHash,
-    AssemblyHashAlgorithm,
-    AssemblyVersionCompatibility,
-]
+    SameMachine: AssemblyVersionCompatibility = ...
+    """"""
+    SameProcess: AssemblyVersionCompatibility = ...
+    """"""
+    SameDomain: AssemblyVersionCompatibility = ...
+    """"""

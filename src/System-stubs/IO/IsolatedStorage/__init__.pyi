@@ -1,587 +1,1350 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
-from typing import Union
+from typing import ClassVar
+from typing import Final
+from typing import Tuple
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeFileHandle
 from Microsoft.Win32.SafeHandles import SafeHandleZeroOrMinusOneIsInvalid
 from System import Array
 from System import AsyncCallback
-from System import Boolean
-from System import Byte
 from System import DateTimeOffset
 from System import Enum
 from System import Exception
 from System import IAsyncResult
 from System import IDisposable
-from System import Int32
-from System import Int64
 from System import IntPtr
 from System import MarshalByRefObject
 from System import Object
-from System import String
 from System import Type
-from System import UInt64
-from System import Void
+from System.Collections import IDictionary
 from System.Collections import IEnumerator
 from System.IO import FileAccess
 from System.IO import FileMode
 from System.IO import FileShare
 from System.IO import FileStream
 from System.IO import SeekOrigin
+from System.IO import Stream
+from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Exception
+from System.Runtime.Remoting import ObjRef
 from System.Runtime.Serialization import ISerializable
+from System.Runtime.Serialization import SerializationInfo
+from System.Runtime.Serialization import StreamingContext
 from System.Security import SecurityState
+from System.Security.AccessControl import FileSecurity
 from System.Security.Policy import Evidence
+from System.Threading import CancellationToken
+from System.Threading.Tasks import Task
 
-# ---------- Types ---------- #
+class INormalizeForIsolatedStorage:
+    """"""
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-ULongType = Union[int, UInt64]
-VoidType = Union[None, Void]
+    def Normalize(self) -> object:
+        """
 
-# ---------- Classes ---------- #
+        :return:
+        """
 
 class IsolatedStorage(ABC, MarshalByRefObject):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def ApplicationIdentity(self) -> ObjectType: ...
+    def ApplicationIdentity(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def AssemblyIdentity(self) -> ObjectType: ...
+    def AssemblyIdentity(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def AvailableFreeSpace(self) -> LongType: ...
+    def AvailableFreeSpace(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def CurrentSize(self) -> ULongType: ...
+    def CurrentSize(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def DomainIdentity(self) -> ObjectType: ...
+    def DomainIdentity(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def MaximumSize(self) -> ULongType: ...
+    def MaximumSize(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Quota(self) -> LongType: ...
+    def Quota(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Scope(self) -> IsolatedStorageScope: ...
+    def Scope(self) -> IsolatedStorageScope:
+        """
+
+        :return:
+        """
     @property
-    def UsedSize(self) -> LongType: ...
+    def UsedSize(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    def IncreaseQuotaTo(self, newQuotaSize: LongType) -> BooleanType: ...
-    def Remove(self) -> VoidType: ...
-    def get_ApplicationIdentity(self) -> ObjectType: ...
-    def get_AssemblyIdentity(self) -> ObjectType: ...
-    def get_AvailableFreeSpace(self) -> LongType: ...
-    def get_CurrentSize(self) -> ULongType: ...
-    def get_DomainIdentity(self) -> ObjectType: ...
-    def get_MaximumSize(self) -> ULongType: ...
-    def get_Quota(self) -> LongType: ...
-    def get_Scope(self) -> IsolatedStorageScope: ...
-    def get_UsedSize(self) -> LongType: ...
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def IncreaseQuotaTo(self, newQuotaSize: int) -> bool:
+        """
 
-    # No Sub Enums
+        :param newQuotaSize:
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
 
-class IsolatedStorageException(Exception, ISerializable, _Exception):
-    # No Fields
+        :return:
+        """
+    def Remove(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+
+class IsolatedStorageException(Exception, _Exception, ISerializable):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, message: StringType): ...
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
     @overload
-    def __init__(self, message: StringType, inner: Exception): ...
+    def __init__(self, message: str, inner: Exception):
+        """
 
-    # No Properties
+        :param message:
+        :param inner:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class IsolatedStorageFile(IsolatedStorage, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def AvailableFreeSpace(self) -> LongType: ...
-    @property
-    def CurrentSize(self) -> ULongType: ...
-    @staticmethod
-    @property
-    def IsEnabled() -> BooleanType: ...
-    @property
-    def MaximumSize(self) -> ULongType: ...
-    @property
-    def Quota(self) -> LongType: ...
-    @property
-    def UsedSize(self) -> LongType: ...
+    def ApplicationIdentity(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def AssemblyIdentity(self) -> object:
+        """
 
-    def Close(self) -> VoidType: ...
+        :return:
+        """
+    @property
+    def AvailableFreeSpace(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def CurrentSize(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def DomainIdentity(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def IsEnabled(cls) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaximumSize(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Quota(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Scope(self) -> IsolatedStorageScope:
+        """
+
+        :return:
+        """
+    @property
+    def UsedSize(self) -> int:
+        """
+
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
     @overload
-    def CopyFile(self, sourceFileName: StringType, destinationFileName: StringType) -> VoidType: ...
+    def CopyFile(self, sourceFileName: str, destinationFileName: str) -> None:
+        """
+
+        :param sourceFileName:
+        :param destinationFileName:
+        """
     @overload
-    def CopyFile(
-        self, sourceFileName: StringType, destinationFileName: StringType, overwrite: BooleanType
-    ) -> VoidType: ...
-    def CreateDirectory(self, dir: StringType) -> VoidType: ...
-    def CreateFile(self, path: StringType) -> IsolatedStorageFileStream: ...
-    def DeleteDirectory(self, dir: StringType) -> VoidType: ...
-    def DeleteFile(self, file: StringType) -> VoidType: ...
-    def DirectoryExists(self, path: StringType) -> BooleanType: ...
-    def Dispose(self) -> VoidType: ...
-    def FileExists(self, path: StringType) -> BooleanType: ...
-    def GetCreationTime(self, path: StringType) -> DateTimeOffset: ...
+    def CopyFile(self, sourceFileName: str, destinationFileName: str, overwrite: bool) -> None:
+        """
+
+        :param sourceFileName:
+        :param destinationFileName:
+        :param overwrite:
+        """
+    def CreateDirectory(self, dir: str) -> None:
+        """
+
+        :param dir:
+        """
+    def CreateFile(self, path: str) -> IsolatedStorageFileStream:
+        """
+
+        :param path:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def DeleteDirectory(self, dir: str) -> None:
+        """
+
+        :param dir:
+        """
+    def DeleteFile(self, file: str) -> None:
+        """
+
+        :param file:
+        """
+    def DirectoryExists(self, path: str) -> bool:
+        """
+
+        :param path:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FileExists(self, path: str) -> bool:
+        """
+
+        :param path:
+        :return:
+        """
+    def GetCreationTime(self, path: str) -> DateTimeOffset:
+        """
+
+        :param path:
+        :return:
+        """
     @overload
-    def GetDirectoryNames(self) -> ArrayType[StringType]: ...
+    def GetDirectoryNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @overload
-    def GetDirectoryNames(self, searchPattern: StringType) -> ArrayType[StringType]: ...
-    @staticmethod
-    def GetEnumerator(scope: IsolatedStorageScope) -> IEnumerator: ...
+    def GetDirectoryNames(self, searchPattern: str) -> Array[str]:
+        """
+
+        :param searchPattern:
+        :return:
+        """
+    @classmethod
+    def GetEnumerator(cls, scope: IsolatedStorageScope) -> IEnumerator:
+        """
+
+        :param scope:
+        :return:
+        """
     @overload
-    def GetFileNames(self) -> ArrayType[StringType]: ...
+    def GetFileNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @overload
-    def GetFileNames(self, searchPattern: StringType) -> ArrayType[StringType]: ...
-    def GetLastAccessTime(self, path: StringType) -> DateTimeOffset: ...
-    def GetLastWriteTime(self, path: StringType) -> DateTimeOffset: ...
-    @staticmethod
-    def GetMachineStoreForApplication() -> IsolatedStorageFile: ...
-    @staticmethod
-    def GetMachineStoreForAssembly() -> IsolatedStorageFile: ...
-    @staticmethod
-    def GetMachineStoreForDomain() -> IsolatedStorageFile: ...
-    @staticmethod
+    def GetFileNames(self, searchPattern: str) -> Array[str]:
+        """
+
+        :param searchPattern:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLastAccessTime(self, path: str) -> DateTimeOffset:
+        """
+
+        :param path:
+        :return:
+        """
+    def GetLastWriteTime(self, path: str) -> DateTimeOffset:
+        """
+
+        :param path:
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetMachineStoreForApplication(cls) -> IsolatedStorageFile:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetMachineStoreForAssembly(cls) -> IsolatedStorageFile:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetMachineStoreForDomain(cls) -> IsolatedStorageFile:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
     def GetStore(
-        scope: IsolatedStorageScope, domainEvidenceType: TypeType, assemblyEvidenceType: TypeType
-    ) -> IsolatedStorageFile: ...
-    @staticmethod
+        cls, scope: IsolatedStorageScope, applicationIdentity: object
+    ) -> IsolatedStorageFile:
+        """
+
+        :param scope:
+        :param applicationIdentity:
+        :return:
+        """
+    @classmethod
     @overload
     def GetStore(
-        scope: IsolatedStorageScope, domainIdentity: ObjectType, assemblyIdentity: ObjectType
-    ) -> IsolatedStorageFile: ...
-    @staticmethod
+        cls, scope: IsolatedStorageScope, applicationEvidenceType: Type
+    ) -> IsolatedStorageFile:
+        """
+
+        :param scope:
+        :param applicationEvidenceType:
+        :return:
+        """
+    @classmethod
     @overload
     def GetStore(
+        cls, scope: IsolatedStorageScope, domainIdentity: object, assemblyIdentity: object
+    ) -> IsolatedStorageFile:
+        """
+
+        :param scope:
+        :param domainIdentity:
+        :param assemblyIdentity:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetStore(
+        cls, scope: IsolatedStorageScope, domainEvidenceType: Type, assemblyEvidenceType: Type
+    ) -> IsolatedStorageFile:
+        """
+
+        :param scope:
+        :param domainEvidenceType:
+        :param assemblyEvidenceType:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetStore(
+        cls,
         scope: IsolatedStorageScope,
         domainEvidence: Evidence,
-        domainEvidenceType: TypeType,
+        domainEvidenceType: Type,
         assemblyEvidence: Evidence,
-        assemblyEvidenceType: TypeType,
-    ) -> IsolatedStorageFile: ...
-    @staticmethod
+        assemblyEvidenceType: Type,
+    ) -> IsolatedStorageFile:
+        """
+
+        :param scope:
+        :param domainEvidence:
+        :param domainEvidenceType:
+        :param assemblyEvidence:
+        :param assemblyEvidenceType:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetUserStoreForApplication(cls) -> IsolatedStorageFile:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetUserStoreForAssembly(cls) -> IsolatedStorageFile:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetUserStoreForDomain(cls) -> IsolatedStorageFile:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetUserStoreForSite(cls) -> IsolatedStorageFile:
+        """
+
+        :return:
+        """
+    def IncreaseQuotaTo(self, newQuotaSize: int) -> bool:
+        """
+
+        :param newQuotaSize:
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def MoveDirectory(self, sourceDirectoryName: str, destinationDirectoryName: str) -> None:
+        """
+
+        :param sourceDirectoryName:
+        :param destinationDirectoryName:
+        """
+    def MoveFile(self, sourceFileName: str, destinationFileName: str) -> None:
+        """
+
+        :param sourceFileName:
+        :param destinationFileName:
+        """
     @overload
-    def GetStore(
-        scope: IsolatedStorageScope, applicationEvidenceType: TypeType
-    ) -> IsolatedStorageFile: ...
-    @staticmethod
+    def OpenFile(self, path: str, mode: FileMode) -> IsolatedStorageFileStream:
+        """
+
+        :param path:
+        :param mode:
+        :return:
+        """
     @overload
-    def GetStore(
-        scope: IsolatedStorageScope, applicationIdentity: ObjectType
-    ) -> IsolatedStorageFile: ...
-    @staticmethod
-    def GetUserStoreForApplication() -> IsolatedStorageFile: ...
-    @staticmethod
-    def GetUserStoreForAssembly() -> IsolatedStorageFile: ...
-    @staticmethod
-    def GetUserStoreForDomain() -> IsolatedStorageFile: ...
-    @staticmethod
-    def GetUserStoreForSite() -> IsolatedStorageFile: ...
-    def IncreaseQuotaTo(self, newQuotaSize: LongType) -> BooleanType: ...
-    def MoveDirectory(
-        self, sourceDirectoryName: StringType, destinationDirectoryName: StringType
-    ) -> VoidType: ...
-    def MoveFile(self, sourceFileName: StringType, destinationFileName: StringType) -> VoidType: ...
-    @overload
-    def OpenFile(self, path: StringType, mode: FileMode) -> IsolatedStorageFileStream: ...
+    def OpenFile(self, path: str, mode: FileMode, access: FileAccess) -> IsolatedStorageFileStream:
+        """
+
+        :param path:
+        :param mode:
+        :param access:
+        :return:
+        """
     @overload
     def OpenFile(
-        self, path: StringType, mode: FileMode, access: FileAccess
-    ) -> IsolatedStorageFileStream: ...
+        self, path: str, mode: FileMode, access: FileAccess, share: FileShare
+    ) -> IsolatedStorageFileStream:
+        """
+
+        :param path:
+        :param mode:
+        :param access:
+        :param share:
+        :return:
+        """
     @overload
-    def OpenFile(
-        self, path: StringType, mode: FileMode, access: FileAccess, share: FileShare
-    ) -> IsolatedStorageFileStream: ...
+    def Remove(self) -> None:
+        """"""
+    @classmethod
     @overload
-    def Remove(self) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Remove(scope: IsolatedStorageScope) -> VoidType: ...
-    def get_AvailableFreeSpace(self) -> LongType: ...
-    def get_CurrentSize(self) -> ULongType: ...
-    @staticmethod
-    def get_IsEnabled() -> BooleanType: ...
-    def get_MaximumSize(self) -> ULongType: ...
-    def get_Quota(self) -> LongType: ...
-    def get_UsedSize(self) -> LongType: ...
+    def Remove(cls, scope: IsolatedStorageScope) -> None:
+        """
 
-    # No Events
+        :param scope:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IsolatedStorageFileEnumerator(ObjectType, IEnumerator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class IsolatedStorageFileEnumerator(Object, IEnumerator):
+    """"""
 
     @property
-    def Current(self) -> ObjectType: ...
+    def Current(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> ObjectType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class IsolatedStorageFileStream(FileStream, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, path: StringType, mode: FileMode): ...
+    def __init__(self, path: str, mode: FileMode):
+        """
+
+        :param path:
+        :param mode:
+        """
     @overload
-    def __init__(self, path: StringType, mode: FileMode, isf: IsolatedStorageFile): ...
+    def __init__(self, path: str, mode: FileMode, isf: IsolatedStorageFile):
+        """
+
+        :param path:
+        :param mode:
+        :param isf:
+        """
     @overload
-    def __init__(self, path: StringType, mode: FileMode, access: FileAccess): ...
+    def __init__(self, path: str, mode: FileMode, access: FileAccess):
+        """
+
+        :param path:
+        :param mode:
+        :param access:
+        """
     @overload
-    def __init__(
-        self, path: StringType, mode: FileMode, access: FileAccess, isf: IsolatedStorageFile
-    ): ...
+    def __init__(self, path: str, mode: FileMode, access: FileAccess, isf: IsolatedStorageFile):
+        """
+
+        :param path:
+        :param mode:
+        :param access:
+        :param isf:
+        """
     @overload
-    def __init__(self, path: StringType, mode: FileMode, access: FileAccess, share: FileShare): ...
+    def __init__(self, path: str, mode: FileMode, access: FileAccess, share: FileShare):
+        """
+
+        :param path:
+        :param mode:
+        :param access:
+        :param share:
+        """
     @overload
     def __init__(
         self,
-        path: StringType,
+        path: str,
         mode: FileMode,
         access: FileAccess,
         share: FileShare,
         isf: IsolatedStorageFile,
-    ): ...
+    ):
+        """
+
+        :param path:
+        :param mode:
+        :param access:
+        :param share:
+        :param isf:
+        """
+    @overload
+    def __init__(
+        self, path: str, mode: FileMode, access: FileAccess, share: FileShare, bufferSize: int
+    ):
+        """
+
+        :param path:
+        :param mode:
+        :param access:
+        :param share:
+        :param bufferSize:
+        """
     @overload
     def __init__(
         self,
-        path: StringType,
+        path: str,
         mode: FileMode,
         access: FileAccess,
         share: FileShare,
-        bufferSize: IntType,
-    ): ...
-    @overload
-    def __init__(
-        self,
-        path: StringType,
-        mode: FileMode,
-        access: FileAccess,
-        share: FileShare,
-        bufferSize: IntType,
+        bufferSize: int,
         isf: IsolatedStorageFile,
-    ): ...
+    ):
+        """
 
-    # ---------- Properties ---------- #
+        :param path:
+        :param mode:
+        :param access:
+        :param share:
+        :param bufferSize:
+        :param isf:
+        """
+    @property
+    def CanRead(self) -> bool:
+        """
 
+        :return:
+        """
     @property
-    def CanRead(self) -> BooleanType: ...
+    def CanSeek(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanSeek(self) -> BooleanType: ...
+    def CanTimeout(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanWrite(self) -> BooleanType: ...
+    def CanWrite(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Handle(self) -> NIntType: ...
+    def Handle(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @property
-    def IsAsync(self) -> BooleanType: ...
+    def IsAsync(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Length(self) -> LongType: ...
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Position(self) -> LongType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Position(self) -> int:
+        """
+
+        :return:
+        """
     @Position.setter
-    def Position(self, value: LongType) -> None: ...
+    def Position(self, value: int) -> None: ...
     @property
-    def SafeFileHandle(self) -> SafeFileHandle: ...
+    def ReadTimeout(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @ReadTimeout.setter
+    def ReadTimeout(self, value: int) -> None: ...
+    @property
+    def SafeFileHandle(self) -> SafeFileHandle:
+        """
 
+        :return:
+        """
+    @property
+    def WriteTimeout(self) -> int:
+        """
+
+        :return:
+        """
+    @WriteTimeout.setter
+    def WriteTimeout(self, value: int) -> None: ...
     def BeginRead(
-        self,
-        buffer: ArrayType[ByteType],
-        offset: IntType,
-        numBytes: IntType,
-        userCallback: AsyncCallback,
-        stateObject: ObjectType,
-    ) -> IAsyncResult: ...
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
     def BeginWrite(
-        self,
-        buffer: ArrayType[ByteType],
-        offset: IntType,
-        numBytes: IntType,
-        userCallback: AsyncCallback,
-        stateObject: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndRead(self, asyncResult: IAsyncResult) -> IntType: ...
-    def EndWrite(self, asyncResult: IAsyncResult) -> VoidType: ...
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
     @overload
-    def Flush(self) -> VoidType: ...
+    def CopyTo(self, destination: Stream) -> None:
+        """
+
+        :param destination:
+        """
     @overload
-    def Flush(self, flushToDisk: BooleanType) -> VoidType: ...
-    def Lock(self, position: LongType, length: LongType) -> VoidType: ...
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> IntType: ...
-    def ReadByte(self) -> IntType: ...
-    def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    def SetLength(self, value: LongType) -> VoidType: ...
-    def Unlock(self, position: LongType, length: LongType) -> VoidType: ...
-    def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    def WriteByte(self, value: ByteType) -> VoidType: ...
-    def get_CanRead(self) -> BooleanType: ...
-    def get_CanSeek(self) -> BooleanType: ...
-    def get_CanWrite(self) -> BooleanType: ...
-    def get_Handle(self) -> NIntType: ...
-    def get_IsAsync(self) -> BooleanType: ...
-    def get_Length(self) -> LongType: ...
-    def get_Position(self) -> LongType: ...
-    def get_SafeFileHandle(self) -> SafeFileHandle: ...
-    def set_Position(self, value: LongType) -> VoidType: ...
+    def CopyTo(self, destination: Stream, bufferSize: int) -> None:
+        """
 
-    # No Events
+        :param destination:
+        :param bufferSize:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream) -> Task:
+        """
 
-    # No Sub Classes
+        :param destination:
+        :return:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
+        """
 
-    # No Sub Structs
+        :param destination:
+        :param bufferSize:
+        :return:
+        """
+    @overload
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
 
-    # No Sub Interfaces
+        :param destination:
+        :param bufferSize:
+        :param cancellationToken:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    # No Sub Enums
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndRead(self, asyncResult: IAsyncResult) -> int:
+        """
+
+        :param asyncResult:
+        :return:
+        """
+    def EndWrite(self, asyncResult: IAsyncResult) -> None:
+        """
+
+        :param asyncResult:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Flush(self) -> None:
+        """"""
+    @overload
+    def Flush(self, flushToDisk: bool) -> None:
+        """
+
+        :param flushToDisk:
+        """
+    @overload
+    def FlushAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    @overload
+    def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
+        """
+
+        :param cancellationToken:
+        :return:
+        """
+    def GetAccessControl(self) -> FileSecurity:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Lock(self, position: int, length: int) -> None:
+        """
+
+        :param position:
+        :param length:
+        """
+    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
+
+        :return:
+        """
+    def Seek(self, offset: int, origin: SeekOrigin) -> int:
+        """
+
+        :param offset:
+        :param origin:
+        :return:
+        """
+    def SetAccessControl(self, fileSecurity: FileSecurity) -> None:
+        """
+
+        :param fileSecurity:
+        """
+    def SetLength(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Unlock(self, position: int, length: int) -> None:
+        """
+
+        :param position:
+        :param length:
+        """
+    def Write(self, buffer: Array[int], offset: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        """
+    @overload
+    def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def WriteAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def WriteByte(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+
+class IsolatedStorageScope(Enum):
+    """"""
+
+    _None: IsolatedStorageScope = ...
+    """"""
+    User: IsolatedStorageScope = ...
+    """"""
+    Domain: IsolatedStorageScope = ...
+    """"""
+    Assembly: IsolatedStorageScope = ...
+    """"""
+    Roaming: IsolatedStorageScope = ...
+    """"""
+    Machine: IsolatedStorageScope = ...
+    """"""
+    Application: IsolatedStorageScope = ...
+    """"""
+
+class IsolatedStorageSecurityOptions(Enum):
+    """"""
+
+    IncreaseQuotaForApplication: IsolatedStorageSecurityOptions = ...
+    """"""
 
 class IsolatedStorageSecurityState(SecurityState):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Options(self) -> IsolatedStorageSecurityOptions: ...
+    def Options(self) -> IsolatedStorageSecurityOptions:
+        """
+
+        :return:
+        """
     @property
-    def Quota(self) -> LongType: ...
+    def Quota(self) -> int:
+        """
+
+        :return:
+        """
     @Quota.setter
-    def Quota(self, value: LongType) -> None: ...
+    def Quota(self, value: int) -> None: ...
     @property
-    def UsedSize(self) -> LongType: ...
+    def UsedSize(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def EnsureState(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def EnsureState(self) -> VoidType: ...
-    def get_Options(self) -> IsolatedStorageSecurityOptions: ...
-    def get_Quota(self) -> LongType: ...
-    def get_UsedSize(self) -> LongType: ...
-    def set_Quota(self, value: LongType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def IsStateAvailable(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class SafeIsolatedStorageFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TwoLevelFileEnumerator(ObjectType, IEnumerator):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, root: StringType): ...
-
-    # ---------- Properties ---------- #
-
     @property
-    def Current(self) -> ObjectType: ...
+    def IsClosed(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
-
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TwoPaths(ObjectType):
-    # ---------- Fields ---------- #
-
+        :return:
+        """
     @property
-    def Path1(self) -> StringType: ...
-    @Path1.setter
-    def Path1(self, value: StringType) -> None: ...
+    def IsInvalid(self) -> bool:
+        """
+
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
+
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TwoLevelFileEnumerator(Object, IEnumerator):
+    """"""
+
+    def __init__(self, root: str):
+        """
+
+        :param root:
+        """
     @property
-    def Path2(self) -> StringType: ...
-    @Path2.setter
-    def Path2(self, value: StringType) -> None: ...
+    def Current(self) -> object:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def __init__(self): ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class TwoPaths(Object):
+    """"""
 
-    # No Sub Interfaces
+    Path1: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    Path2: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class __HResults(ABC, ObjectType):
-    # ---------- Fields ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    @staticmethod
-    @property
-    def COR_E_ISOSTORE() -> IntType: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # No Properties
+class __HResults(ABC, Object):
+    """"""
 
-    # No Methods
+    COR_E_ISOSTORE: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class INormalizeForIsolatedStorage(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Normalize(self) -> ObjectType: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class IsolatedStorageScope(Enum):
-    # None = 0
-    User = 1
-    Domain = 2
-    Assembly = 4
-    Roaming = 8
-    Machine = 16
-    Application = 32
-
-class IsolatedStorageSecurityOptions(Enum):
-    IncreaseQuotaForApplication = 4
-
-# No Delegates
-
-__all__ = [
-    IsolatedStorage,
-    IsolatedStorageException,
-    IsolatedStorageFile,
-    IsolatedStorageFileEnumerator,
-    IsolatedStorageFileStream,
-    IsolatedStorageSecurityState,
-    SafeIsolatedStorageFileHandle,
-    TwoLevelFileEnumerator,
-    TwoPaths,
-    __HResults,
-    INormalizeForIsolatedStorage,
-    IsolatedStorageScope,
-    IsolatedStorageSecurityOptions,
-]
+        :return:
+        """

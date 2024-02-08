@@ -2,1325 +2,2090 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Callable
-from typing import List
-from typing import Union
+from typing import ClassVar
+from typing import Final
+from typing import Iterator
 from typing import overload
 
 from System import Array
-from System import AsyncCallback
-from System import Boolean
 from System import Enum
 from System import Exception
-from System import IAsyncResult
-from System import ICloneable
-from System import Int32
-from System import IntPtr
-from System import MulticastDelegate
 from System import Object
-from System import String
 from System import TimeoutException
 from System import TimeSpan
-from System import Void
+from System import Type
 from System.Collections import ICollection
+from System.Collections import IDictionary
 from System.Collections import IEnumerable
 from System.Collections import IEnumerator
 from System.Reflection import AssemblyName
+from System.Reflection import MethodBase
 from System.Reflection.Emit import CustomAttributeBuilder
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Serialization import ISerializable
+from System.Runtime.Serialization import SerializationInfo
+from System.Runtime.Serialization import StreamingContext
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class CachedCodeEntry(ObjectType):
+class CachedCodeEntry(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Capture(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Index(self) -> IntType: ...
-    @property
-    def Length(self) -> IntType: ...
-    @property
-    def Value(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def ToString(self) -> StringType: ...
-    def get_Index(self) -> IntType: ...
-    def get_Length(self) -> IntType: ...
-    def get_Value(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CaptureCollection(ObjectType, ICollection, IEnumerable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class Capture(Object):
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
+    def Index(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsReadOnly(self) -> BooleanType: ...
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsSynchronized(self) -> BooleanType: ...
-    def __getitem__(self, key: IntType) -> Capture: ...
-    @property
-    def SyncRoot(self) -> ObjectType: ...
+    def Value(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def CopyTo(self, array: Array, arrayIndex: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_IsSynchronized(self) -> BooleanType: ...
-    def get_Item(self, i: IntType) -> Capture: ...
-    def get_SyncRoot(self) -> ObjectType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CaptureEnumerator(ObjectType, IEnumerator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class CaptureCollection(Object, ICollection, IEnumerable):
+    """"""
 
     @property
-    def Capture(self) -> Capture: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Current(self) -> ObjectType: ...
+    def IsReadOnly(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Capture(self) -> Capture: ...
-    def get_Current(self) -> ObjectType: ...
+        :return:
+        """
+    @property
+    def Item(self) -> Capture:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Sub Structs
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, i: int) -> Capture:
+        """
+
+        :param i:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+
+class CaptureEnumerator(Object, IEnumerator):
+    """"""
+
+    @property
+    def Capture(self) -> Capture:
+        """
+
+        :return:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class CompiledRegexRunner(RegexRunner):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CompiledRegexRunnerFactory(RegexRunnerFactory):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+CreateInstanceDelegate: Callable[[], RegexRunner] = ...
+"""
 
-    # No Sub Structs
+:return: 
+"""
 
-    # No Sub Interfaces
+class ExclusiveReference(Object):
+    """"""
 
-    # No Sub Enums
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-class CreateInstanceDelegate(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def __init__(self, object: ObjectType, method: NIntType): ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Properties
+        :return:
+        """
 
-    # ---------- Methods ---------- #
+FindFirstCharDelegate: Callable[[RegexRunner], bool] = ...
+"""
 
-    def BeginInvoke(self, callback: AsyncCallback, object: ObjectType) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> RegexRunner: ...
-    def Invoke(self) -> RegexRunner: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ExclusiveReference(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FindFirstCharDelegate(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, r: RegexRunner, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> BooleanType: ...
-    def Invoke(self, r: RegexRunner) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+:param r: 
+:return: 
+"""
 
 class Group(Capture):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Captures(self) -> CaptureCollection: ...
+    def Captures(self) -> CaptureCollection:
+        """
+
+        :return:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def Index(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Success(self) -> BooleanType: ...
+    def Length(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    @staticmethod
-    def Synchronized(inner: Group) -> Group: ...
-    def get_Captures(self) -> CaptureCollection: ...
-    def get_Name(self) -> StringType: ...
-    def get_Success(self) -> BooleanType: ...
+        :return:
+        """
+    @property
+    def Success(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Value(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @classmethod
+    def Synchronized(cls, inner: Group) -> Group:
+        """
 
-class GroupCollection(ObjectType, ICollection, IEnumerable):
-    # No Fields
+        :param inner:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # ---------- Properties ---------- #
+class GroupCollection(Object, ICollection, IEnumerable):
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
-    @property
-    def IsReadOnly(self) -> BooleanType: ...
-    @property
-    def IsSynchronized(self) -> BooleanType: ...
-    def __getitem__(self, key: IntType) -> Group: ...
-    def __getitem__(self, key: StringType) -> Group: ...
-    @property
-    def SyncRoot(self) -> ObjectType: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    def CopyTo(self, array: Array, arrayIndex: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_IsSynchronized(self) -> BooleanType: ...
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> Group:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def get_Item(self, groupnum: IntType) -> Group: ...
+    def __getitem__(self, groupnum: int) -> Group:
+        """
+
+        :param groupnum:
+        :return:
+        """
     @overload
-    def get_Item(self, groupname: StringType) -> Group: ...
-    def get_SyncRoot(self) -> ObjectType: ...
+    def __getitem__(self, groupname: str) -> Group:
+        """
 
-    # No Events
+        :param groupname:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def __len__(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GroupEnumerator(ObjectType, IEnumerator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class GroupEnumerator(Object, IEnumerator):
+    """"""
 
     @property
-    def Capture(self) -> Capture: ...
+    def Capture(self) -> Capture:
+        """
+
+        :return:
+        """
     @property
-    def Current(self) -> ObjectType: ...
+    def Current(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Capture(self) -> Capture: ...
-    def get_Current(self) -> ObjectType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class Match(Group):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def Empty() -> Match: ...
-    @property
-    def Groups(self) -> GroupCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def NextMatch(self) -> Match: ...
-    def Result(self, replacement: StringType) -> StringType: ...
-    @staticmethod
-    def Synchronized(inner: Match) -> Match: ...
-    @staticmethod
-    def get_Empty() -> Match: ...
-    def get_Groups(self) -> GroupCollection: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MatchCollection(ObjectType, ICollection, IEnumerable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
+    def Captures(self) -> CaptureCollection:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def IsReadOnly(self) -> BooleanType: ...
+    def Empty(cls) -> Match:
+        """
+
+        :return:
+        """
     @property
-    def IsSynchronized(self) -> BooleanType: ...
-    def __getitem__(self, key: IntType) -> Match: ...
+    def Groups(self) -> GroupCollection:
+        """
+
+        :return:
+        """
     @property
-    def SyncRoot(self) -> ObjectType: ...
+    def Index(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Length(self) -> int:
+        """
 
-    def CopyTo(self, array: Array, arrayIndex: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_IsSynchronized(self) -> BooleanType: ...
-    def get_Item(self, i: IntType) -> Match: ...
-    def get_SyncRoot(self) -> ObjectType: ...
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Success(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Value(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class MatchEnumerator(ObjectType, IEnumerator):
-    # No Fields
+        :return:
+        """
+    def NextMatch(self) -> Match:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def Result(self, replacement: str) -> str:
+        """
 
-    # ---------- Properties ---------- #
+        :param replacement:
+        :return:
+        """
+    @classmethod
+    def Synchronized(cls, inner: Match) -> Match:
+        """
+
+        :param inner:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MatchCollection(Object, ICollection, IEnumerable):
+    """"""
 
     @property
-    def Current(self) -> ObjectType: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> ObjectType: ...
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Item(self) -> Match:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Sub Interfaces
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-class MatchEvaluator(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def __init__(self, object: ObjectType, method: NIntType): ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Properties
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param value:
+        :return:
+        """
+    def __getitem__(self, i: int) -> Match:
+        """
 
-    def BeginInvoke(
-        self, match: Match, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> StringType: ...
-    def Invoke(self, match: Match) -> StringType: ...
+        :param i:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Events
+        :return:
+        """
+    def __len__(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class MatchEnumerator(Object, IEnumerator):
+    """"""
 
-    # No Sub Interfaces
+    @property
+    def Current(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+MatchEvaluator: Callable[[Match], str] = ...
+"""
+
+:param match: 
+:return: 
+"""
 
 class MatchSparse(Match):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Groups(self) -> GroupCollection: ...
+    def Captures(self) -> CaptureCollection:
+        """
 
-    # ---------- Methods ---------- #
-
-    def get_Groups(self) -> GroupCollection: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NoParamDelegate(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, r: RegexRunner, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, r: RegexRunner) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Regex(ObjectType, ISerializable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
+        :return:
+        """
+    @classmethod
     @property
-    def InfiniteMatchTimeout() -> TimeSpan: ...
+    def Empty(cls) -> Match:
+        """
 
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, pattern: StringType): ...
-    @overload
-    def __init__(self, pattern: StringType, options: RegexOptions): ...
-    @overload
-    def __init__(self, pattern: StringType, options: RegexOptions, matchTimeout: TimeSpan): ...
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+        :return:
+        """
     @property
-    def CacheSize() -> IntType: ...
-    @staticmethod
+    def Groups(self) -> GroupCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Index(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Success(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def NextMatch(self) -> Match:
+        """
+
+        :return:
+        """
+    def Result(self, replacement: str) -> str:
+        """
+
+        :param replacement:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+NoParamDelegate: Callable[[RegexRunner], None] = ...
+"""
+
+:param r: 
+"""
+
+class Regex(Object, ISerializable):
+    """"""
+
+    InfiniteMatchTimeout: Final[ClassVar[TimeSpan]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, pattern: str):
+        """
+
+        :param pattern:
+        """
+    @overload
+    def __init__(self, pattern: str, options: RegexOptions):
+        """
+
+        :param pattern:
+        :param options:
+        """
+    @overload
+    def __init__(self, pattern: str, options: RegexOptions, matchTimeout: TimeSpan):
+        """
+
+        :param pattern:
+        :param options:
+        :param matchTimeout:
+        """
+    @classmethod
+    @property
+    def CacheSize(cls) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
     @CacheSize.setter
-    def CacheSize(value: IntType) -> None: ...
+    def CacheSize(cls, value: int) -> None: ...
     @property
-    def MatchTimeout(self) -> TimeSpan: ...
-    @property
-    def Options(self) -> RegexOptions: ...
-    @property
-    def RightToLeft(self) -> BooleanType: ...
+    def MatchTimeout(self) -> TimeSpan:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Options(self) -> RegexOptions:
+        """
 
-    @staticmethod
+        :return:
+        """
+    @property
+    def RightToLeft(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
     def CompileToAssembly(
-        regexinfos: ArrayType[RegexCompilationInfo], assemblyname: AssemblyName
-    ) -> VoidType: ...
-    @staticmethod
+        cls, regexinfos: Array[RegexCompilationInfo], assemblyname: AssemblyName
+    ) -> None:
+        """
+
+        :param regexinfos:
+        :param assemblyname:
+        """
+    @classmethod
     @overload
     def CompileToAssembly(
-        regexinfos: ArrayType[RegexCompilationInfo],
+        cls,
+        regexinfos: Array[RegexCompilationInfo],
         assemblyname: AssemblyName,
-        attributes: ArrayType[CustomAttributeBuilder],
-    ) -> VoidType: ...
-    @staticmethod
+        attributes: Array[CustomAttributeBuilder],
+    ) -> None:
+        """
+
+        :param regexinfos:
+        :param assemblyname:
+        :param attributes:
+        """
+    @classmethod
     @overload
     def CompileToAssembly(
-        regexinfos: ArrayType[RegexCompilationInfo],
+        cls,
+        regexinfos: Array[RegexCompilationInfo],
         assemblyname: AssemblyName,
-        attributes: ArrayType[CustomAttributeBuilder],
-        resourceFile: StringType,
-    ) -> VoidType: ...
-    @staticmethod
-    def Escape(str: StringType) -> StringType: ...
-    def GetGroupNames(self) -> ArrayType[StringType]: ...
-    def GetGroupNumbers(self) -> ArrayType[IntType]: ...
-    def GroupNameFromNumber(self, i: IntType) -> StringType: ...
-    def GroupNumberFromName(self, name: StringType) -> IntType: ...
-    @staticmethod
+        attributes: Array[CustomAttributeBuilder],
+        resourceFile: str,
+    ) -> None:
+        """
+
+        :param regexinfos:
+        :param assemblyname:
+        :param attributes:
+        :param resourceFile:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def Escape(cls, str: str) -> str:
+        """
+
+        :param str:
+        :return:
+        """
+    def GetGroupNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetGroupNumbers(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GroupNameFromNumber(self, i: int) -> str:
+        """
+
+        :param i:
+        :return:
+        """
+    def GroupNumberFromName(self, name: str) -> int:
+        """
+
+        :param name:
+        :return:
+        """
+    @overload
+    def IsMatch(self, input: str) -> bool:
+        """
+
+        :param input:
+        :return:
+        """
+    @overload
+    def IsMatch(self, input: str, startat: int) -> bool:
+        """
+
+        :param input:
+        :param startat:
+        :return:
+        """
+    @classmethod
+    @overload
+    def IsMatch(cls, input: str, pattern: str) -> bool:
+        """
+
+        :param input:
+        :param pattern:
+        :return:
+        """
+    @classmethod
+    @overload
+    def IsMatch(cls, input: str, pattern: str, options: RegexOptions) -> bool:
+        """
+
+        :param input:
+        :param pattern:
+        :param options:
+        :return:
+        """
+    @classmethod
     @overload
     def IsMatch(
-        input: StringType, pattern: StringType, options: RegexOptions, matchTimeout: TimeSpan
-    ) -> BooleanType: ...
+        cls, input: str, pattern: str, options: RegexOptions, matchTimeout: TimeSpan
+    ) -> bool:
+        """
+
+        :param input:
+        :param pattern:
+        :param options:
+        :param matchTimeout:
+        :return:
+        """
     @overload
-    def IsMatch(self, input: StringType) -> BooleanType: ...
+    def Match(self, input: str) -> Match:
+        """
+
+        :param input:
+        :return:
+        """
     @overload
-    def IsMatch(self, input: StringType, startat: IntType) -> BooleanType: ...
-    @staticmethod
+    def Match(self, input: str, startat: int) -> Match:
+        """
+
+        :param input:
+        :param startat:
+        :return:
+        """
+    @classmethod
     @overload
-    def IsMatch(input: StringType, pattern: StringType) -> BooleanType: ...
-    @staticmethod
+    def Match(cls, input: str, pattern: str) -> Match:
+        """
+
+        :param input:
+        :param pattern:
+        :return:
+        """
     @overload
-    def IsMatch(input: StringType, pattern: StringType, options: RegexOptions) -> BooleanType: ...
-    @staticmethod
+    def Match(self, input: str, beginning: int, length: int) -> Match:
+        """
+
+        :param input:
+        :param beginning:
+        :param length:
+        :return:
+        """
+    @classmethod
     @overload
-    def Match(input: StringType, pattern: StringType, options: RegexOptions) -> Match: ...
-    @staticmethod
+    def Match(cls, input: str, pattern: str, options: RegexOptions) -> Match:
+        """
+
+        :param input:
+        :param pattern:
+        :param options:
+        :return:
+        """
+    @classmethod
     @overload
     def Match(
-        input: StringType, pattern: StringType, options: RegexOptions, matchTimeout: TimeSpan
-    ) -> Match: ...
+        cls, input: str, pattern: str, options: RegexOptions, matchTimeout: TimeSpan
+    ) -> Match:
+        """
+
+        :param input:
+        :param pattern:
+        :param options:
+        :param matchTimeout:
+        :return:
+        """
     @overload
-    def Match(self, input: StringType) -> Match: ...
+    def Matches(self, input: str) -> MatchCollection:
+        """
+
+        :param input:
+        :return:
+        """
     @overload
-    def Match(self, input: StringType, startat: IntType) -> Match: ...
+    def Matches(self, input: str, startat: int) -> MatchCollection:
+        """
+
+        :param input:
+        :param startat:
+        :return:
+        """
+    @classmethod
     @overload
-    def Match(self, input: StringType, beginning: IntType, length: IntType) -> Match: ...
-    @staticmethod
+    def Matches(cls, input: str, pattern: str) -> MatchCollection:
+        """
+
+        :param input:
+        :param pattern:
+        :return:
+        """
+    @classmethod
     @overload
-    def Match(input: StringType, pattern: StringType) -> Match: ...
-    @staticmethod
+    def Matches(cls, input: str, pattern: str, options: RegexOptions) -> MatchCollection:
+        """
+
+        :param input:
+        :param pattern:
+        :param options:
+        :return:
+        """
+    @classmethod
     @overload
     def Matches(
-        input: StringType, pattern: StringType, options: RegexOptions
-    ) -> MatchCollection: ...
-    @staticmethod
+        cls, input: str, pattern: str, options: RegexOptions, matchTimeout: TimeSpan
+    ) -> MatchCollection:
+        """
+
+        :param input:
+        :param pattern:
+        :param options:
+        :param matchTimeout:
+        :return:
+        """
     @overload
-    def Matches(
-        input: StringType, pattern: StringType, options: RegexOptions, matchTimeout: TimeSpan
-    ) -> MatchCollection: ...
+    def Replace(self, input: str, evaluator: MatchEvaluator) -> str:
+        """
+
+        :param input:
+        :param evaluator:
+        :return:
+        """
     @overload
-    def Matches(self, input: StringType) -> MatchCollection: ...
+    def Replace(self, input: str, replacement: str) -> str:
+        """
+
+        :param input:
+        :param replacement:
+        :return:
+        """
     @overload
-    def Matches(self, input: StringType, startat: IntType) -> MatchCollection: ...
-    @staticmethod
+    def Replace(self, input: str, evaluator: MatchEvaluator, count: int) -> str:
+        """
+
+        :param input:
+        :param evaluator:
+        :param count:
+        :return:
+        """
+    @classmethod
     @overload
-    def Matches(input: StringType, pattern: StringType) -> MatchCollection: ...
-    @staticmethod
+    def Replace(cls, input: str, pattern: str, evaluator: MatchEvaluator) -> str:
+        """
+
+        :param input:
+        :param pattern:
+        :param evaluator:
+        :return:
+        """
     @overload
-    def Replace(input: StringType, pattern: StringType, replacement: StringType) -> StringType: ...
-    @staticmethod
+    def Replace(self, input: str, replacement: str, count: int) -> str:
+        """
+
+        :param input:
+        :param replacement:
+        :param count:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Replace(cls, input: str, pattern: str, replacement: str) -> str:
+        """
+
+        :param input:
+        :param pattern:
+        :param replacement:
+        :return:
+        """
+    @overload
+    def Replace(self, input: str, evaluator: MatchEvaluator, count: int, startat: int) -> str:
+        """
+
+        :param input:
+        :param evaluator:
+        :param count:
+        :param startat:
+        :return:
+        """
+    @classmethod
     @overload
     def Replace(
-        input: StringType, pattern: StringType, replacement: StringType, options: RegexOptions
-    ) -> StringType: ...
-    @staticmethod
+        cls, input: str, pattern: str, evaluator: MatchEvaluator, options: RegexOptions
+    ) -> str:
+        """
+
+        :param input:
+        :param pattern:
+        :param evaluator:
+        :param options:
+        :return:
+        """
+    @overload
+    def Replace(self, input: str, replacement: str, count: int, startat: int) -> str:
+        """
+
+        :param input:
+        :param replacement:
+        :param count:
+        :param startat:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Replace(cls, input: str, pattern: str, replacement: str, options: RegexOptions) -> str:
+        """
+
+        :param input:
+        :param pattern:
+        :param replacement:
+        :param options:
+        :return:
+        """
+    @classmethod
     @overload
     def Replace(
-        input: StringType,
-        pattern: StringType,
-        replacement: StringType,
-        options: RegexOptions,
-        matchTimeout: TimeSpan,
-    ) -> StringType: ...
-    @overload
-    def Replace(self, input: StringType, replacement: StringType) -> StringType: ...
-    @overload
-    def Replace(self, input: StringType, replacement: StringType, count: IntType) -> StringType: ...
-    @overload
-    def Replace(
-        self, input: StringType, replacement: StringType, count: IntType, startat: IntType
-    ) -> StringType: ...
-    @staticmethod
-    @overload
-    def Replace(
-        input: StringType, pattern: StringType, evaluator: MatchEvaluator
-    ) -> StringType: ...
-    @staticmethod
-    @overload
-    def Replace(
-        input: StringType, pattern: StringType, evaluator: MatchEvaluator, options: RegexOptions
-    ) -> StringType: ...
-    @staticmethod
-    @overload
-    def Replace(
-        input: StringType,
-        pattern: StringType,
+        cls,
+        input: str,
+        pattern: str,
         evaluator: MatchEvaluator,
         options: RegexOptions,
         matchTimeout: TimeSpan,
-    ) -> StringType: ...
-    @overload
-    def Replace(self, input: StringType, evaluator: MatchEvaluator) -> StringType: ...
+    ) -> str:
+        """
+
+        :param input:
+        :param pattern:
+        :param evaluator:
+        :param options:
+        :param matchTimeout:
+        :return:
+        """
+    @classmethod
     @overload
     def Replace(
-        self, input: StringType, evaluator: MatchEvaluator, count: IntType
-    ) -> StringType: ...
-    @overload
-    def Replace(
-        self, input: StringType, evaluator: MatchEvaluator, count: IntType, startat: IntType
-    ) -> StringType: ...
-    @staticmethod
-    @overload
-    def Split(input: StringType, pattern: StringType) -> ArrayType[StringType]: ...
-    @staticmethod
-    @overload
-    def Split(
-        input: StringType, pattern: StringType, options: RegexOptions
-    ) -> ArrayType[StringType]: ...
-    @staticmethod
-    @overload
-    def Split(
-        input: StringType, pattern: StringType, options: RegexOptions, matchTimeout: TimeSpan
-    ) -> ArrayType[StringType]: ...
-    @overload
-    def Split(self, input: StringType) -> ArrayType[StringType]: ...
-    @overload
-    def Split(self, input: StringType, count: IntType) -> ArrayType[StringType]: ...
-    @overload
-    def Split(
-        self, input: StringType, count: IntType, startat: IntType
-    ) -> ArrayType[StringType]: ...
-    def ToString(self) -> StringType: ...
-    @staticmethod
-    def Unescape(str: StringType) -> StringType: ...
-    @staticmethod
-    def get_CacheSize() -> IntType: ...
-    def get_MatchTimeout(self) -> TimeSpan: ...
-    def get_Options(self) -> RegexOptions: ...
-    def get_RightToLeft(self) -> BooleanType: ...
-    @staticmethod
-    def set_CacheSize(value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexBoyerMoore(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def ToString(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexCharClass(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexCode(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexCompilationInfo(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(
-        self,
-        pattern: StringType,
+        cls,
+        input: str,
+        pattern: str,
+        replacement: str,
         options: RegexOptions,
-        name: StringType,
-        fullnamespace: StringType,
-        ispublic: BooleanType,
-    ): ...
-    @overload
-    def __init__(
-        self,
-        pattern: StringType,
-        options: RegexOptions,
-        name: StringType,
-        fullnamespace: StringType,
-        ispublic: BooleanType,
         matchTimeout: TimeSpan,
-    ): ...
+    ) -> str:
+        """
 
-    # ---------- Properties ---------- #
+        :param input:
+        :param pattern:
+        :param replacement:
+        :param options:
+        :param matchTimeout:
+        :return:
+        """
+    @overload
+    def Split(self, input: str) -> Array[str]:
+        """
 
+        :param input:
+        :return:
+        """
+    @overload
+    def Split(self, input: str, count: int) -> Array[str]:
+        """
+
+        :param input:
+        :param count:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Split(cls, input: str, pattern: str) -> Array[str]:
+        """
+
+        :param input:
+        :param pattern:
+        :return:
+        """
+    @overload
+    def Split(self, input: str, count: int, startat: int) -> Array[str]:
+        """
+
+        :param input:
+        :param count:
+        :param startat:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Split(cls, input: str, pattern: str, options: RegexOptions) -> Array[str]:
+        """
+
+        :param input:
+        :param pattern:
+        :param options:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Split(
+        cls, input: str, pattern: str, options: RegexOptions, matchTimeout: TimeSpan
+    ) -> Array[str]:
+        """
+
+        :param input:
+        :param pattern:
+        :param options:
+        :param matchTimeout:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Unescape(cls, str: str) -> str:
+        """
+
+        :param str:
+        :return:
+        """
+
+class RegexBoyerMoore(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RegexCharClass(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RegexCode(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RegexCompilationInfo(Object):
+    """"""
+
+    @overload
+    def __init__(
+        self, pattern: str, options: RegexOptions, name: str, fullnamespace: str, ispublic: bool
+    ):
+        """
+
+        :param pattern:
+        :param options:
+        :param name:
+        :param fullnamespace:
+        :param ispublic:
+        """
+    @overload
+    def __init__(
+        self,
+        pattern: str,
+        options: RegexOptions,
+        name: str,
+        fullnamespace: str,
+        ispublic: bool,
+        matchTimeout: TimeSpan,
+    ):
+        """
+
+        :param pattern:
+        :param options:
+        :param name:
+        :param fullnamespace:
+        :param ispublic:
+        :param matchTimeout:
+        """
     @property
-    def IsPublic(self) -> BooleanType: ...
+    def IsPublic(self) -> bool:
+        """
+
+        :return:
+        """
     @IsPublic.setter
-    def IsPublic(self, value: BooleanType) -> None: ...
+    def IsPublic(self, value: bool) -> None: ...
     @property
-    def MatchTimeout(self) -> TimeSpan: ...
+    def MatchTimeout(self) -> TimeSpan:
+        """
+
+        :return:
+        """
     @MatchTimeout.setter
     def MatchTimeout(self, value: TimeSpan) -> None: ...
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
     @property
-    def Namespace(self) -> StringType: ...
+    def Namespace(self) -> str:
+        """
+
+        :return:
+        """
     @Namespace.setter
-    def Namespace(self, value: StringType) -> None: ...
+    def Namespace(self, value: str) -> None: ...
     @property
-    def Options(self) -> RegexOptions: ...
+    def Options(self) -> RegexOptions:
+        """
+
+        :return:
+        """
     @Options.setter
     def Options(self, value: RegexOptions) -> None: ...
     @property
-    def Pattern(self) -> StringType: ...
+    def Pattern(self) -> str:
+        """
+
+        :return:
+        """
     @Pattern.setter
-    def Pattern(self, value: StringType) -> None: ...
+    def Pattern(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_IsPublic(self) -> BooleanType: ...
-    def get_MatchTimeout(self) -> TimeSpan: ...
-    def get_Name(self) -> StringType: ...
-    def get_Namespace(self) -> StringType: ...
-    def get_Options(self) -> RegexOptions: ...
-    def get_Pattern(self) -> StringType: ...
-    def set_IsPublic(self, value: BooleanType) -> VoidType: ...
-    def set_MatchTimeout(self, value: TimeSpan) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_Namespace(self, value: StringType) -> VoidType: ...
-    def set_Options(self, value: RegexOptions) -> VoidType: ...
-    def set_Pattern(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexCompiler(ABC, ObjectType):
+class RegexCompiler(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexFC(ObjectType):
+class RegexFC(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexFCD(ObjectType):
+class RegexFCD(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class RegexInterpreter(RegexRunner):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class RegexLWCGCompiler(RegexCompiler):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexMatchTimeoutException(TimeoutException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class RegexMatchTimeoutException(TimeoutException, _Exception, ISerializable):
+    """"""
 
     @overload
-    def __init__(
-        self, regexInput: StringType, regexPattern: StringType, matchTimeout: TimeSpan
-    ): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, inner: Exception): ...
+    def __init__(self, message: str):
+        """
 
-    # ---------- Properties ---------- #
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, inner: Exception):
+        """
 
+        :param message:
+        :param inner:
+        """
+    @overload
+    def __init__(self, regexInput: str, regexPattern: str, matchTimeout: TimeSpan):
+        """
+
+        :param regexInput:
+        :param regexPattern:
+        :param matchTimeout:
+        """
     @property
-    def Input(self) -> StringType: ...
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
     @property
-    def MatchTimeout(self) -> TimeSpan: ...
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Pattern(self) -> StringType: ...
+    def HelpLink(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
 
-    def get_Input(self) -> StringType: ...
-    def get_MatchTimeout(self) -> TimeSpan: ...
-    def get_Pattern(self) -> StringType: ...
+        :return:
+        """
+    @property
+    def Input(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def MatchTimeout(self) -> TimeSpan:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Pattern(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
 
-class RegexNode(ObjectType):
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RegexNode(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexParser(ObjectType):
+class RegexOptions(Enum):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexPrefix(ObjectType):
+    _None: RegexOptions = ...
+    """"""
+    IgnoreCase: RegexOptions = ...
+    """"""
+    Multiline: RegexOptions = ...
+    """"""
+    ExplicitCapture: RegexOptions = ...
+    """"""
+    Compiled: RegexOptions = ...
+    """"""
+    Singleline: RegexOptions = ...
+    """"""
+    IgnorePatternWhitespace: RegexOptions = ...
+    """"""
+    RightToLeft: RegexOptions = ...
+    """"""
+    ECMAScript: RegexOptions = ...
+    """"""
+    CultureInvariant: RegexOptions = ...
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexReplacement(ObjectType):
+class RegexParser(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexRunner(ABC, ObjectType):
+class RegexPrefix(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexRunnerFactory(ABC, ObjectType):
+class RegexReplacement(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexTree(ObjectType):
+class RegexRunner(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class RegexRunnerFactory(ABC, Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RegexTree(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class RegexTypeCompiler(RegexCompiler):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegexWriter(ObjectType):
+class RegexWriter(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class SharedReference(Object):
+    """"""
 
-    # No Sub Structs
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class SharedReference(ObjectType):
-    # No Fields
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# ---------- Enums ---------- #
-
-class RegexOptions(Enum):
-    # None = 0
-    IgnoreCase = 1
-    Multiline = 2
-    ExplicitCapture = 4
-    Compiled = 8
-    Singleline = 16
-    IgnorePatternWhitespace = 32
-    RightToLeft = 64
-    ECMAScript = 256
-    CultureInvariant = 512
-
-# ---------- Delegates ---------- #
-
-CreateInstanceDelegate = Callable[[], RegexRunner]
-
-FindFirstCharDelegate = Callable[[RegexRunner], BooleanType]
-
-MatchEvaluator = Callable[[Match], StringType]
-
-NoParamDelegate = Callable[[RegexRunner], VoidType]
-
-__all__ = [
-    CachedCodeEntry,
-    Capture,
-    CaptureCollection,
-    CaptureEnumerator,
-    CompiledRegexRunner,
-    CompiledRegexRunnerFactory,
-    CreateInstanceDelegate,
-    ExclusiveReference,
-    FindFirstCharDelegate,
-    Group,
-    GroupCollection,
-    GroupEnumerator,
-    Match,
-    MatchCollection,
-    MatchEnumerator,
-    MatchEvaluator,
-    MatchSparse,
-    NoParamDelegate,
-    Regex,
-    RegexBoyerMoore,
-    RegexCharClass,
-    RegexCode,
-    RegexCompilationInfo,
-    RegexCompiler,
-    RegexFC,
-    RegexFCD,
-    RegexInterpreter,
-    RegexLWCGCompiler,
-    RegexMatchTimeoutException,
-    RegexNode,
-    RegexParser,
-    RegexPrefix,
-    RegexReplacement,
-    RegexRunner,
-    RegexRunnerFactory,
-    RegexTree,
-    RegexTypeCompiler,
-    RegexWriter,
-    SharedReference,
-    RegexOptions,
-    CreateInstanceDelegate,
-    FindFirstCharDelegate,
-    MatchEvaluator,
-    NoParamDelegate,
-]
+        :return:
+        """

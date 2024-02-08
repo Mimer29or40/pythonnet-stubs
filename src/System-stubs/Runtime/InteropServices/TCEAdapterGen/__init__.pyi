@@ -1,173 +1,220 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
+from typing import ClassVar
+from typing import Final
 
 from System import Object
-from System import String
 from System import Type
-from System import Void
 from System.Collections import ArrayList
 from System.Reflection import RuntimeAssembly
 from System.Reflection.Emit import ModuleBuilder
 
-# ---------- Types ---------- #
-
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class EventItfInfo(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class EventItfInfo(Object):
+    """"""
 
     def __init__(
         self,
-        strEventItfName: StringType,
-        strSrcItfName: StringType,
-        strEventProviderName: StringType,
+        strEventItfName: str,
+        strSrcItfName: str,
+        strEventProviderName: str,
         asmImport: RuntimeAssembly,
         asmSrcItf: RuntimeAssembly,
-    ): ...
+    ):
+        """
 
-    # No Properties
+        :param strEventItfName:
+        :param strSrcItfName:
+        :param strEventProviderName:
+        :param asmImport:
+        :param asmSrcItf:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetEventItfType(self) -> Type:
+        """
 
-    def GetEventItfType(self) -> TypeType: ...
-    def GetEventProviderName(self) -> StringType: ...
-    def GetSrcItfType(self) -> TypeType: ...
+        :return:
+        """
+    def GetEventProviderName(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetSrcItfType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class EventProviderWriter(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class EventProviderWriter(Object):
+    """"""
 
     def __init__(
         self,
         OutputModule: ModuleBuilder,
-        strDestTypeName: StringType,
-        EventItfType: TypeType,
-        SrcItfType: TypeType,
-        SinkHelperType: TypeType,
-    ): ...
+        strDestTypeName: str,
+        EventItfType: Type,
+        SrcItfType: Type,
+        SinkHelperType: Type,
+    ):
+        """
 
-    # No Properties
+        :param OutputModule:
+        :param strDestTypeName:
+        :param EventItfType:
+        :param SrcItfType:
+        :param SinkHelperType:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def Perform(self) -> TypeType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def Perform(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class EventSinkHelperWriter(Object):
+    """"""
 
-    # No Sub Enums
+    GeneratedTypeNamePostfix: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, OutputModule: ModuleBuilder, InputType: Type, EventItfType: Type):
+        """
 
-class EventSinkHelperWriter(ObjectType):
-    # ---------- Fields ---------- #
+        :param OutputModule:
+        :param InputType:
+        :param EventItfType:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @staticmethod
-    @property
-    def GeneratedTypeNamePostfix() -> StringType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def __init__(
-        self, OutputModule: ModuleBuilder, InputType: TypeType, EventItfType: TypeType
-    ): ...
+        :return:
+        """
+    def Perform(self) -> Type:
+        """
 
-    # No Properties
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
 
-    def Perform(self) -> TypeType: ...
+class NameSpaceExtractor(ABC, Object):
+    """"""
 
-    # No Events
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def ExtractNameSpace(cls, FullyQualifiedTypeName: str) -> str:
+        """
 
-    # No Sub Structs
+        :param FullyQualifiedTypeName:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class NameSpaceExtractor(ABC, ObjectType):
-    # No Fields
+        :return:
+        """
 
-    # No Constructors
+class TCEAdapterGenerator(Object):
+    """"""
 
-    # No Properties
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    @staticmethod
-    def ExtractNameSpace(FullyQualifiedTypeName: StringType) -> StringType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def Process(self, ModBldr: ModuleBuilder, EventItfList: ArrayList) -> None:
+        """
 
-    # No Sub Classes
+        :param ModBldr:
+        :param EventItfList:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TCEAdapterGenerator(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Process(self, ModBldr: ModuleBuilder, EventItfList: ArrayList) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    EventItfInfo,
-    EventProviderWriter,
-    EventSinkHelperWriter,
-    NameSpaceExtractor,
-    TCEAdapterGenerator,
-]
+        :return:
+        """

@@ -1,244 +1,664 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Union
+from typing import Iterator
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeHandleZeroOrMinusOneIsInvalid
 from System import Array
-from System import Boolean
-from System import Byte
+from System import Attribute
 from System import Enum
 from System import IDisposable
-from System import Int32
+from System import IntPtr
 from System import Object
-from System import String
 from System import Type
 from System.Collections import ICollection
+from System.Collections import IDictionary
 from System.Collections import IEnumerable
+from System.Collections import IEnumerator
 from System.Collections import ReadOnlyCollectionBase
 from System.ComponentModel import ITypeDescriptorContext
+from System.ComponentModel import PropertyDescriptorCollection
 from System.ComponentModel import TypeConverter
+from System.ComponentModel.TypeConverter import StandardValuesCollection
 from System.Globalization import CultureInfo
 from System.Runtime.Serialization import ISerializable
-
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-
-# ---------- Classes ---------- #
+from System.Runtime.Serialization import SerializationInfo
+from System.Runtime.Serialization import StreamingContext
 
 class ChannelBinding(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Size(self) -> IntType: ...
+    def IsClosed(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    def get_Size(self) -> IntType: ...
+        :return:
+        """
+    @property
+    def Size(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Sub Classes
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class ExtendedProtectionPolicy(ObjectType, ISerializable):
-    # No Fields
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+
+class ChannelBindingKind(Enum):
+    """"""
+
+    Unknown: ChannelBindingKind = ...
+    """"""
+    Unique: ChannelBindingKind = ...
+    """"""
+    Endpoint: ChannelBindingKind = ...
+    """"""
+
+class ExtendedProtectionPolicy(Object, ISerializable):
+    """"""
 
     @overload
-    def __init__(
-        self,
-        policyEnforcement: PolicyEnforcement,
-        protectionScenario: ProtectionScenario,
-        customServiceNames: ServiceNameCollection,
-    ): ...
+    def __init__(self, policyEnforcement: PolicyEnforcement):
+        """
+
+        :param policyEnforcement:
+        """
+    @overload
+    def __init__(self, policyEnforcement: PolicyEnforcement, customChannelBinding: ChannelBinding):
+        """
+
+        :param policyEnforcement:
+        :param customChannelBinding:
+        """
     @overload
     def __init__(
         self,
         policyEnforcement: PolicyEnforcement,
         protectionScenario: ProtectionScenario,
         customServiceNames: ICollection,
-    ): ...
+    ):
+        """
+
+        :param policyEnforcement:
+        :param protectionScenario:
+        :param customServiceNames:
+        """
     @overload
     def __init__(
-        self, policyEnforcement: PolicyEnforcement, customChannelBinding: ChannelBinding
-    ): ...
-    @overload
-    def __init__(self, policyEnforcement: PolicyEnforcement): ...
+        self,
+        policyEnforcement: PolicyEnforcement,
+        protectionScenario: ProtectionScenario,
+        customServiceNames: ServiceNameCollection,
+    ):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param policyEnforcement:
+        :param protectionScenario:
+        :param customServiceNames:
+        """
     @property
-    def CustomChannelBinding(self) -> ChannelBinding: ...
+    def CustomChannelBinding(self) -> ChannelBinding:
+        """
+
+        :return:
+        """
     @property
-    def CustomServiceNames(self) -> ServiceNameCollection: ...
-    @staticmethod
+    def CustomServiceNames(self) -> ServiceNameCollection:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def OSSupportsExtendedProtection() -> BooleanType: ...
+    def OSSupportsExtendedProtection(cls) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def PolicyEnforcement(self) -> PolicyEnforcement: ...
+    def PolicyEnforcement(self) -> PolicyEnforcement:
+        """
+
+        :return:
+        """
     @property
-    def ProtectionScenario(self) -> ProtectionScenario: ...
+    def ProtectionScenario(self) -> ProtectionScenario:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_CustomChannelBinding(self) -> ChannelBinding: ...
-    def get_CustomServiceNames(self) -> ServiceNameCollection: ...
-    @staticmethod
-    def get_OSSupportsExtendedProtection() -> BooleanType: ...
-    def get_PolicyEnforcement(self) -> PolicyEnforcement: ...
-    def get_ProtectionScenario(self) -> ProtectionScenario: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-    # No Sub Classes
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ExtendedProtectionPolicyTypeConverter(TypeConverter):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
+    def __init__(self):
+        """"""
     @overload
-    def CanConvertTo(
-        self, context: ITypeDescriptorContext, destinationType: TypeType
-    ) -> BooleanType: ...
+    def CanConvertFrom(self, sourceType: Type) -> bool:
+        """
+
+        :param sourceType:
+        :return:
+        """
+    @overload
+    def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
+        """
+
+        :param context:
+        :param sourceType:
+        :return:
+        """
+    @overload
+    def CanConvertTo(self, destinationType: Type) -> bool:
+        """
+
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
+        """
+
+        :param context:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertFrom(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertFrom(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
+    ) -> object:
+        """
+
+        :param context:
+        :param culture:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertFromInvariantString(self, text: str) -> object:
+        """
+
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
+        """
+
+        :param context:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(self, text: str) -> object:
+        """
+
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
+        """
+
+        :param context:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
+    ) -> object:
+        """
+
+        :param context:
+        :param culture:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertTo(self, value: object, destinationType: Type) -> object:
+        """
+
+        :param value:
+        :param destinationType:
+        :return:
+        """
     @overload
     def ConvertTo(
         self,
         context: ITypeDescriptorContext,
         culture: CultureInfo,
-        value: ObjectType,
-        destinationType: TypeType,
-    ) -> ObjectType: ...
+        value: object,
+        destinationType: Type,
+    ) -> object:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ServiceNameCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, items: ICollection): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Contains(self, searchServiceName: StringType) -> BooleanType: ...
+        :param context:
+        :param culture:
+        :param value:
+        :param destinationType:
+        :return:
+        """
     @overload
-    def Merge(self, serviceName: StringType) -> ServiceNameCollection: ...
+    def ConvertToInvariantString(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def Merge(self, serviceNames: IEnumerable) -> ServiceNameCollection: ...
+    def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
+        """
 
-    # No Events
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(self, value: object) -> str:
+        """
 
-    # No Sub Classes
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
+        """
 
-    # No Sub Structs
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
+    ) -> str:
+        """
 
-    # No Sub Interfaces
+        :param context:
+        :param culture:
+        :param value:
+        :return:
+        """
+    @overload
+    def CreateInstance(self, propertyValues: IDictionary) -> object:
+        """
 
-    # No Sub Enums
+        :param propertyValues:
+        :return:
+        """
+    @overload
+    def CreateInstance(
+        self, context: ITypeDescriptorContext, propertyValues: IDictionary
+    ) -> object:
+        """
 
-class TokenBinding(ObjectType):
-    # No Fields
+        :param context:
+        :param propertyValues:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetCreateInstanceSupported(self) -> bool:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    @overload
+    def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
 
-    @property
-    def BindingType(self) -> TokenBindingType: ...
+        :param context:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def GetProperties(self, value: object) -> PropertyDescriptorCollection:
+        """
 
-    def GetRawTokenBindingId(self) -> ArrayType[ByteType]: ...
-    def get_BindingType(self) -> TokenBindingType: ...
+        :param value:
+        :return:
+        """
+    @overload
+    def GetProperties(
+        self, context: ITypeDescriptorContext, value: object
+    ) -> PropertyDescriptorCollection:
+        """
 
-    # No Events
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def GetProperties(
+        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+    ) -> PropertyDescriptorCollection:
+        """
 
-    # No Sub Classes
+        :param context:
+        :param value:
+        :param attributes:
+        :return:
+        """
+    @overload
+    def GetPropertiesSupported(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValues(self) -> ICollection:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def GetStandardValues(
+        self, context: ITypeDescriptorContext
+    ) -> TypeConverter.StandardValuesCollection:
+        """
 
-# No Structs
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValuesExclusive(self) -> bool:
+        """
 
-# No Interfaces
+        :return:
+        """
+    @overload
+    def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
+        """
 
-# ---------- Enums ---------- #
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValuesSupported(self) -> bool:
+        """
 
-class ChannelBindingKind(Enum):
-    Unknown = 0
-    Unique = 25
-    Endpoint = 26
+        :return:
+        """
+    @overload
+    def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsValid(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class PolicyEnforcement(Enum):
-    Never = 0
-    WhenSupported = 1
-    Always = 2
+    """"""
+
+    Never: PolicyEnforcement = ...
+    """"""
+    WhenSupported: PolicyEnforcement = ...
+    """"""
+    Always: PolicyEnforcement = ...
+    """"""
 
 class ProtectionScenario(Enum):
-    TransportSelected = 0
-    TrustedProxy = 1
+    """"""
+
+    TransportSelected: ProtectionScenario = ...
+    """"""
+    TrustedProxy: ProtectionScenario = ...
+    """"""
+
+class ServiceNameCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
+    """"""
+
+    def __init__(self, items: ICollection):
+        """
+
+        :param items:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    def Contains(self, searchServiceName: str) -> bool:
+        """
+
+        :param searchServiceName:
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Merge(self, serviceNames: IEnumerable) -> ServiceNameCollection:
+        """
+
+        :param serviceNames:
+        :return:
+        """
+    @overload
+    def Merge(self, serviceName: str) -> ServiceNameCollection:
+        """
+
+        :param serviceName:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+
+class TokenBinding(Object):
+    """"""
+
+    @property
+    def BindingType(self) -> TokenBindingType:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetRawTokenBindingId(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class TokenBindingType(Enum):
-    Provided = 0
-    Referred = 1
+    """"""
 
-# No Delegates
-
-__all__ = [
-    ChannelBinding,
-    ExtendedProtectionPolicy,
-    ExtendedProtectionPolicyTypeConverter,
-    ServiceNameCollection,
-    TokenBinding,
-    ChannelBindingKind,
-    PolicyEnforcement,
-    ProtectionScenario,
-    TokenBindingType,
-]
+    Provided: TokenBindingType = ...
+    """"""
+    Referred: TokenBindingType = ...
+    """"""

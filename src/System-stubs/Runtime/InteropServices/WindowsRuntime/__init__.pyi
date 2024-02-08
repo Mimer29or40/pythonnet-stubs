@@ -3,46 +3,28 @@ from __future__ import annotations
 from abc import ABC
 from typing import Callable
 from typing import Generic
-from typing import List
-from typing import Protocol
+from typing import Iterator
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Action
 from System import Array
-from System import AsyncCallback
 from System import Attribute
-from System import Boolean
-from System import Byte
 from System import Char
 from System import DateTimeOffset
-from System import Double
 from System import Enum
 from System import EventArgs
 from System import EventHandler
 from System import Func
 from System import Guid
-from System import IAsyncResult
-from System import ICloneable
 from System import IDisposable
-from System import Int16
-from System import Int32
-from System import Int64
 from System import IntPtr
 from System import MarshalByRefObject
-from System import MulticastDelegate
 from System import Object
-from System import Single
-from System import String
 from System import TimeSpan
 from System import Type
-from System import UInt16
-from System import UInt32
-from System import UInt64
 from System import ValueType
-from System import Void
 from System import __ComObject
 from System.Collections import ICollection
 from System.Collections import IEnumerable
@@ -58,17 +40,13 @@ from System.Collections.Generic import KeyValuePair
 from System.Collections.ObjectModel import Collection
 from System.Collections.Specialized import NotifyCollectionChangedAction
 from System.Collections.Specialized import NotifyCollectionChangedEventArgs
-from System.Collections.Specialized import NotifyCollectionChangedEventHandler
 from System.ComponentModel import PropertyChangedEventArgs
-from System.ComponentModel import PropertyChangedEventHandler
 from System.Reflection import Assembly
 from System.Reflection import PropertyInfo
 from System.Runtime.InteropServices import CustomQueryInterfaceResult
 from System.Runtime.InteropServices import ICustomQueryInterface
 from System.Runtime.InteropServices import _Attribute
-from System.Runtime.Serialization import ISerializable
-
-# ---------- Types ---------- #
+from System.Runtime.Remoting import ObjRef
 
 K = TypeVar("K")
 T = TypeVar("T")
@@ -78,2703 +56,5469 @@ TKey = TypeVar("TKey")
 TValue = TypeVar("TValue")
 V = TypeVar("V")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-CharType = Union[str, Char]
-DoubleType = Union[float, Double]
-FloatType = Union[float, Single]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-ShortType = Union[int, Int16]
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-UIntType = Union[int, UInt32]
-ULongType = Union[int, UInt64]
-UShortType = Union[int, UInt16]
-VoidType = Union[None, Void]
-
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
-
-class BindableIterableToEnumerableAdapter(ObjectType):
+class BindableIterableToEnumerableAdapter(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BindableVectorToCollectionAdapter(ObjectType):
+class BindableVectorToCollectionAdapter(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BindableVectorToListAdapter(ObjectType):
+class BindableVectorToListAdapter(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class CLRIKeyValuePairImpl(Generic[K, V], Object, IKeyValuePair[K, V]):
+    """"""
 
-    # No Sub Structs
+    def __init__(self, pair: KeyValuePair[K, V]):
+        """
 
-    # No Sub Interfaces
+        :param pair:
+        """
+    @property
+    def Key(self) -> K:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Value(self) -> V:
+        """
 
-class CLRIKeyValuePairImpl(Generic[K, V], ObjectType, IKeyValuePair[K, V]):
-    # No Fields
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def __init__(self, pair: KeyValuePair[K, V]): ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CLRIPropertyValueImpl(Object, IPropertyValue):
+    """"""
 
     @property
-    def Key(self) -> K: ...
+    def IsNumericScalar(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Value(self) -> V: ...
+    def Type(self) -> PropertyType:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_Key(self) -> K: ...
-    def get_Value(self) -> V: ...
+        :param obj:
+        :return:
+        """
+    def GetBoolean(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetBooleanArray(self) -> Array[bool]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetChar16(self) -> Char:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetChar16Array(self) -> Array[Char]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetDateTime(self) -> DateTimeOffset:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetDateTimeArray(self) -> Array[DateTimeOffset]:
+        """
 
-class CLRIPropertyValueImpl(ObjectType, IPropertyValue):
-    # No Fields
+        :return:
+        """
+    def GetDouble(self) -> float:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def GetDoubleArray(self) -> Array[float]:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def GetGuid(self) -> Guid:
+        """
 
-    @property
-    def IsNumericScalar(self) -> BooleanType: ...
-    @property
-    def Type(self) -> PropertyType: ...
+        :return:
+        """
+    def GetGuidArray(self) -> Array[Guid]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def GetBoolean(self) -> BooleanType: ...
-    def GetBooleanArray(self) -> ArrayType[BooleanType]: ...
-    def GetChar16(self) -> CharType: ...
-    def GetChar16Array(self) -> ArrayType[CharType]: ...
-    def GetDateTime(self) -> DateTimeOffset: ...
-    def GetDateTimeArray(self) -> ArrayType[DateTimeOffset]: ...
-    def GetDouble(self) -> DoubleType: ...
-    def GetDoubleArray(self) -> ArrayType[DoubleType]: ...
-    def GetGuid(self) -> Guid: ...
-    def GetGuidArray(self) -> ArrayType[Guid]: ...
-    def GetInspectable(self) -> ObjectType: ...
-    def GetInspectableArray(self) -> ArrayType[ObjectType]: ...
-    def GetInt16(self) -> ShortType: ...
-    def GetInt16Array(self) -> ArrayType[ShortType]: ...
-    def GetInt32(self) -> IntType: ...
-    def GetInt32Array(self) -> ArrayType[IntType]: ...
-    def GetInt64(self) -> LongType: ...
-    def GetInt64Array(self) -> ArrayType[LongType]: ...
-    def GetPoint(self) -> Point: ...
-    def GetPointArray(self) -> ArrayType[Point]: ...
-    def GetRect(self) -> Rect: ...
-    def GetRectArray(self) -> ArrayType[Rect]: ...
-    def GetSingle(self) -> FloatType: ...
-    def GetSingleArray(self) -> ArrayType[FloatType]: ...
-    def GetSize(self) -> Size: ...
-    def GetSizeArray(self) -> ArrayType[Size]: ...
-    def GetString(self) -> StringType: ...
-    def GetStringArray(self) -> ArrayType[StringType]: ...
-    def GetTimeSpan(self) -> TimeSpan: ...
-    def GetTimeSpanArray(self) -> ArrayType[TimeSpan]: ...
-    def GetUInt16(self) -> UShortType: ...
-    def GetUInt16Array(self) -> ArrayType[UShortType]: ...
-    def GetUInt32(self) -> UIntType: ...
-    def GetUInt32Array(self) -> ArrayType[UIntType]: ...
-    def GetUInt64(self) -> ULongType: ...
-    def GetUInt64Array(self) -> ArrayType[ULongType]: ...
-    def GetUInt8(self) -> ByteType: ...
-    def GetUInt8Array(self) -> ArrayType[ByteType]: ...
-    def ToString(self) -> StringType: ...
-    def get_IsNumericScalar(self) -> BooleanType: ...
-    def get_Type(self) -> PropertyType: ...
+        :return:
+        """
+    def GetInspectable(self) -> object:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetInspectableArray(self) -> Array[object]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetInt16(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetInt16Array(self) -> Array[int]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetInt32(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetPoint(self) -> Point:
+        """
+
+        :return:
+        """
+    def GetPointArray(self) -> Array[Point]:
+        """
+
+        :return:
+        """
+    def GetRect(self) -> Rect:
+        """
+
+        :return:
+        """
+    def GetRectArray(self) -> Array[Rect]:
+        """
+
+        :return:
+        """
+    def GetSingle(self) -> float:
+        """
+
+        :return:
+        """
+    def GetSingleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetSize(self) -> Size:
+        """
+
+        :return:
+        """
+    def GetSizeArray(self) -> Array[Size]:
+        """
+
+        :return:
+        """
+    def GetString(self) -> str:
+        """
+
+        :return:
+        """
+    def GetStringArray(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetTimeSpan(self) -> TimeSpan:
+        """
+
+        :return:
+        """
+    def GetTimeSpanArray(self) -> Array[TimeSpan]:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetUInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt8(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt8Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class CLRIReferenceArrayImpl(
     Generic[T],
     CLRIPropertyValueImpl,
-    IPropertyValue,
-    IReferenceArray[T],
-    ICustomPropertyProvider,
-    IList,
     ICollection,
     IEnumerable,
+    IList,
+    ICustomPropertyProvider,
+    IPropertyValue,
+    IReferenceArray[T],
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, type: PropertyType, obj: Array[T]):
+        """
 
-    def __init__(self, type: PropertyType, obj: ArrayType[T]): ...
-
-    # ---------- Properties ---------- #
-
+        :param type:
+        :param obj:
+        """
     @property
-    def Value(self) -> ArrayType[T]: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> ArrayType[T]: ...
+        :return:
+        """
+    @property
+    def IsNumericScalar(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Type(self) -> PropertyType:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> Array[T]:
+        """
+
+        :return:
+        """
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBoolean(self) -> bool:
+        """
+
+        :return:
+        """
+    def GetBooleanArray(self) -> Array[bool]:
+        """
+
+        :return:
+        """
+    def GetChar16(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetChar16Array(self) -> Array[Char]:
+        """
+
+        :return:
+        """
+    def GetCustomProperty(self, name: str) -> ICustomProperty:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetDateTime(self) -> DateTimeOffset:
+        """
+
+        :return:
+        """
+    def GetDateTimeArray(self) -> Array[DateTimeOffset]:
+        """
+
+        :return:
+        """
+    def GetDouble(self) -> float:
+        """
+
+        :return:
+        """
+    def GetDoubleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetGuid(self) -> Guid:
+        """
+
+        :return:
+        """
+    def GetGuidArray(self) -> Array[Guid]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIndexedProperty(self, name: str, indexParameterType: Type) -> ICustomProperty:
+        """
+
+        :param name:
+        :param indexParameterType:
+        :return:
+        """
+    def GetInspectable(self) -> object:
+        """
+
+        :return:
+        """
+    def GetInspectableArray(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    def GetInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetPoint(self) -> Point:
+        """
+
+        :return:
+        """
+    def GetPointArray(self) -> Array[Point]:
+        """
+
+        :return:
+        """
+    def GetRect(self) -> Rect:
+        """
+
+        :return:
+        """
+    def GetRectArray(self) -> Array[Rect]:
+        """
+
+        :return:
+        """
+    def GetSingle(self) -> float:
+        """
+
+        :return:
+        """
+    def GetSingleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetSize(self) -> Size:
+        """
+
+        :return:
+        """
+    def GetSizeArray(self) -> Array[Size]:
+        """
+
+        :return:
+        """
+    def GetString(self) -> str:
+        """
+
+        :return:
+        """
+    def GetStringArray(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetStringRepresentation(self) -> str:
+        """
+
+        :return:
+        """
+    def GetTimeSpan(self) -> TimeSpan:
+        """
+
+        :return:
+        """
+    def GetTimeSpanArray(self) -> Array[TimeSpan]:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetUInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt8(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt8Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class CLRIReferenceImpl(
-    Generic[T], CLRIPropertyValueImpl, IPropertyValue, IReference[T], ICustomPropertyProvider
+    Generic[T], CLRIPropertyValueImpl, ICustomPropertyProvider, IPropertyValue, IReference[T]
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, type: PropertyType, obj: T):
+        """
 
-    def __init__(self, type: PropertyType, obj: T): ...
-
-    # ---------- Properties ---------- #
-
+        :param type:
+        :param obj:
+        """
     @property
-    def Value(self) -> T: ...
+    def IsNumericScalar(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> T: ...
+        :return:
+        """
+    @property
+    def Type(self) -> PropertyType:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Value(self) -> T:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetBoolean(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetBooleanArray(self) -> Array[bool]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetChar16(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetChar16Array(self) -> Array[Char]:
+        """
+
+        :return:
+        """
+    def GetCustomProperty(self, name: str) -> ICustomProperty:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetDateTime(self) -> DateTimeOffset:
+        """
+
+        :return:
+        """
+    def GetDateTimeArray(self) -> Array[DateTimeOffset]:
+        """
+
+        :return:
+        """
+    def GetDouble(self) -> float:
+        """
+
+        :return:
+        """
+    def GetDoubleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetGuid(self) -> Guid:
+        """
+
+        :return:
+        """
+    def GetGuidArray(self) -> Array[Guid]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIndexedProperty(self, name: str, indexParameterType: Type) -> ICustomProperty:
+        """
+
+        :param name:
+        :param indexParameterType:
+        :return:
+        """
+    def GetInspectable(self) -> object:
+        """
+
+        :return:
+        """
+    def GetInspectableArray(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    def GetInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetPoint(self) -> Point:
+        """
+
+        :return:
+        """
+    def GetPointArray(self) -> Array[Point]:
+        """
+
+        :return:
+        """
+    def GetRect(self) -> Rect:
+        """
+
+        :return:
+        """
+    def GetRectArray(self) -> Array[Rect]:
+        """
+
+        :return:
+        """
+    def GetSingle(self) -> float:
+        """
+
+        :return:
+        """
+    def GetSingleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetSize(self) -> Size:
+        """
+
+        :return:
+        """
+    def GetSizeArray(self) -> Array[Size]:
+        """
+
+        :return:
+        """
+    def GetString(self) -> str:
+        """
+
+        :return:
+        """
+    def GetStringArray(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetStringRepresentation(self) -> str:
+        """
+
+        :return:
+        """
+    def GetTimeSpan(self) -> TimeSpan:
+        """
+
+        :return:
+        """
+    def GetTimeSpanArray(self) -> Array[TimeSpan]:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetUInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt8(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt8Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ConstantSplittableMap(
     Generic[TKey, TValue],
-    ObjectType,
-    IMapView[TKey, TValue],
-    IIterable[IKeyValuePair[TKey, TValue]],
-    IEnumerable[IKeyValuePair[TKey, TValue]],
+    Object,
+    IEnumerable[IKeyValuePair, TValue],
     IEnumerable,
+    IIterable[IKeyValuePair, TValue],
+    IMapView[TKey, TValue],
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
-    def __getitem__(self, key: TKey) -> TValue: ...
-    @property
-    def Keys(self) -> IEnumerable[TKey]: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @property
-    def Values(self) -> IEnumerable[TValue]: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Item(self) -> TValue:
+        """
 
-    def ContainsKey(self, key: TKey) -> BooleanType: ...
-    def First(self) -> IIterator[IKeyValuePair[TKey, TValue]]: ...
-    def GetEnumerator(self) -> IEnumerator[IKeyValuePair[TKey, TValue]]: ...
-    def HasKey(self, key: TKey) -> BooleanType: ...
-    def Lookup(self, key: TKey) -> TValue: ...
+        :return:
+        """
+    @property
+    def Keys(self) -> IEnumerable[TKey]:
+        """
+
+        :return:
+        """
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> IEnumerable[TValue]:
+        """
+
+        :return:
+        """
+    def ContainsKey(self, key: TKey) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def First(self) -> IIterator[IKeyValuePair, TValue]:
+        """
+
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def HasKey(self, key: TKey) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    def Lookup(self, key: TKey) -> TValue:
+        """
+
+        :param key:
+        :return:
+        """
     def Split(
-        self, firstPartition: IMapView[TKey, TValue], secondPartition: IMapView[TKey, TValue]
-    ) -> Tuple[VoidType, IMapView[TKey, TValue], IMapView[TKey, TValue]]: ...
-    def TryGetValue(self, key: TKey, value: TValue) -> Tuple[BooleanType, TValue]: ...
-    def get_Count(self) -> IntType: ...
-    def get_Item(self, key: TKey) -> TValue: ...
-    def get_Keys(self) -> IEnumerable[TKey]: ...
-    def get_Size(self) -> UIntType: ...
-    def get_Values(self) -> IEnumerable[TValue]: ...
+        self, first: IMapView[TKey, TValue], second: IMapView[TKey, TValue]
+    ) -> Tuple[None, IMapView[TKey, TValue], IMapView[TKey, TValue]]:
+        """
 
-    # No Events
+        :param first:
+        :param second:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def TryGetValue(self, key: TKey, value: TValue) -> Tuple[bool, TValue]:
+        """
 
-    # No Sub Structs
+        :param key:
+        :param value:
+        :return:
+        """
+    def __getitem__(self, key: TKey) -> TValue:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CustomPropertyImpl(ObjectType, ICustomProperty):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, propertyInfo: PropertyInfo): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CanRead(self) -> BooleanType: ...
-    @property
-    def CanWrite(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
+        :param key:
+        :return:
+        """
     @overload
-    def GetValue(self, target: ObjectType) -> ObjectType: ...
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
     @overload
-    def GetValue(self, target: ObjectType, indexValue: ObjectType) -> ObjectType: ...
+    def __iter__(self) -> Iterator[IKeyValuePair, TValue]:
+        """
+
+        :return:
+        """
+
+class CustomPropertyImpl(Object, ICustomProperty):
+    """"""
+
+    def __init__(self, propertyInfo: PropertyInfo):
+        """
+
+        :param propertyInfo:
+        """
+    @property
+    def CanRead(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def CanWrite(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def SetValue(self, target: ObjectType, value: ObjectType) -> VoidType: ...
+    def GetValue(self, target: object) -> object:
+        """
+
+        :param target:
+        :return:
+        """
     @overload
-    def SetValue(
-        self, target: ObjectType, value: ObjectType, indexValue: ObjectType
-    ) -> VoidType: ...
-    def get_CanRead(self) -> BooleanType: ...
-    def get_CanWrite(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_Type(self) -> TypeType: ...
+    def GetValue(self, target: object, indexValue: object) -> object:
+        """
 
-    # No Events
+        :param target:
+        :param indexValue:
+        :return:
+        """
+    @overload
+    def SetValue(self, target: object, value: object) -> None:
+        """
 
-    # No Sub Classes
+        :param target:
+        :param value:
+        """
+    @overload
+    def SetValue(self, target: object, value: object, indexValue: object) -> None:
+        """
 
-    # No Sub Structs
+        :param target:
+        :param value:
+        :param indexValue:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class DefaultInterfaceAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, defaultInterface: Type):
+        """
 
-    def __init__(self, defaultInterface: TypeType): ...
-
-    # ---------- Properties ---------- #
-
+        :param defaultInterface:
+        """
     @property
-    def DefaultInterface(self) -> TypeType: ...
+    def DefaultInterface(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
 
-    def get_DefaultInterface(self) -> TypeType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Structs
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Enums
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class DesignerNamespaceResolveEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, namespaceName: str):
+        """
 
-    def __init__(self, namespaceName: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param namespaceName:
+        """
     @property
-    def NamespaceName(self) -> StringType: ...
+    def NamespaceName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def ResolvedAssemblyFiles(self) -> Collection[StringType]: ...
+    def ResolvedAssemblyFiles(self) -> Collection[str]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_NamespaceName(self) -> StringType: ...
-    def get_ResolvedAssemblyFiles(self) -> Collection[StringType]: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class DictionaryKeyCollection(
-    Generic[TKey, TValue], ObjectType, ICollection[TKey], IEnumerable[TKey], IEnumerable
+    Generic[TKey, TValue], Object, ICollection[TKey], IEnumerable[TKey], IEnumerable
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, dictionary: IDictionary[TKey, TValue]):
+        """
 
-    def __init__(self, dictionary: IDictionary[TKey, TValue]): ...
-
-    # ---------- Properties ---------- #
-
+        :param dictionary:
+        """
     @property
-    def Count(self) -> IntType: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    def Contains(self, item: TKey) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[TKey], index: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[TKey]: ...
-    def get_Count(self) -> IntType: ...
+        :return:
+        """
+    def Add(self, item: TKey) -> None:
+        """
 
-    # No Events
+        :param item:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: TKey) -> bool:
+        """
 
-    # No Sub Classes
+        :param item:
+        :return:
+        """
+    def CopyTo(self, array: Array[TKey], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Remove(self, item: TKey) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: TKey) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TKey]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
 
 class DictionaryKeyEnumerator(
-    Generic[TKey, TValue], ObjectType, IEnumerator[TKey], IDisposable, IEnumerator
+    Generic[TKey, TValue], Object, IEnumerator[TKey], IEnumerator, IDisposable
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, dictionary: IDictionary[TKey, TValue]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> TKey: ...
-
-    # ---------- Methods ---------- #
-
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> TKey: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DictionaryToMapAdapter(ObjectType):
     """"""
 
-    # No Fields
+    def __init__(self, dictionary: IDictionary[TKey, TValue]):
+        """
 
-    # No Constructors
+        :param dictionary:
+        """
+    @property
+    def Current(self) -> object:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
+class DictionaryToMapAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class DictionaryValueCollection(
-    Generic[TKey, TValue], ObjectType, ICollection[TValue], IEnumerable[TValue], IEnumerable
+    Generic[TKey, TValue], Object, ICollection[TValue], IEnumerable[TValue], IEnumerable
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, dictionary: IDictionary[TKey, TValue]):
+        """
 
-    def __init__(self, dictionary: IDictionary[TKey, TValue]): ...
-
-    # ---------- Properties ---------- #
-
+        :param dictionary:
+        """
     @property
-    def Count(self) -> IntType: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    def Contains(self, item: TValue) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[TValue], index: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[TValue]: ...
-    def get_Count(self) -> IntType: ...
+        :return:
+        """
+    def Add(self, item: TValue) -> None:
+        """
 
-    # No Events
+        :param item:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: TValue) -> bool:
+        """
 
-    # No Sub Classes
+        :param item:
+        :return:
+        """
+    def CopyTo(self, array: Array[TValue], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Remove(self, item: TValue) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: TValue) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TValue]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
 
 class DictionaryValueEnumerator(
-    Generic[TKey, TValue], ObjectType, IEnumerator[TValue], IDisposable, IEnumerator
+    Generic[TKey, TValue], Object, IEnumerator[TValue], IEnumerator, IDisposable
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, dictionary: IDictionary[TKey, TValue]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> TValue: ...
-
-    # ---------- Methods ---------- #
-
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> TValue: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EnumerableToBindableIterableAdapter(ObjectType):
     """"""
 
-    # No Fields
+    def __init__(self, dictionary: IDictionary[TKey, TValue]):
+        """
 
-    # No Constructors
+        :param dictionary:
+        """
+    @property
+    def Current(self) -> object:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
-
-class EnumerableToIterableAdapter(ObjectType):
+class EnumerableToBindableIterableAdapter(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class EnumerableToIterableAdapter(Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class EnumeratorToIteratorAdapter(Generic[T], ObjectType, IIterator[T], IBindableIterator):
-    # No Fields
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> T: ...
-    @property
-    def HasCurrent(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetMany(self, items: ArrayType[T]) -> IntType: ...
-    def MoveNext(self) -> BooleanType: ...
-    def get_Current(self) -> T: ...
-    def get_HasCurrent(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventRegistrationTokenTable(Generic[T], ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
+class EnumeratorToIteratorAdapter(Generic[T], Object, IBindableIterator, IIterator[T]):
+    """"""
 
     @property
-    def InvocationList(self) -> T: ...
-    @InvocationList.setter
-    def InvocationList(self, value: T) -> None: ...
+    def Current(self) -> T:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Current(self) -> object:
+        """
 
-    def AddEventHandler(self, handler: T) -> EventRegistrationToken: ...
-    @staticmethod
-    def GetOrCreateEventRegistrationTokenTable(
-        refEventTable: EventRegistrationTokenTable[T],
-    ) -> Tuple[EventRegistrationTokenTable[T], EventRegistrationTokenTable[T]]: ...
+        :return:
+        """
+    @property
+    def HasCurrent(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def HasCurrent(self) -> bool:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMany(self, items: Array[T]) -> Tuple[int, Array[T]]:
+        """
+
+        :param items:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def RemoveEventHandler(self, token: EventRegistrationToken) -> VoidType: ...
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
     @overload
-    def RemoveEventHandler(self, handler: T) -> VoidType: ...
-    def get_InvocationList(self) -> T: ...
-    def set_InvocationList(self, value: T) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GetEnumerator_Delegate(Generic[T], MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(self, callback: AsyncCallback, object: ObjectType) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> IEnumerator[T]: ...
-    def Invoke(self) -> IEnumerator[T]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IClosableToIDisposableAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ICommandAdapterHelpers(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ICommandToManagedAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ICommandToWinRTAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ICustomPropertyProviderImpl(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ICustomPropertyProviderProxy(
-    Generic[T1, T2],
-    ObjectType,
-    IGetProxyTarget,
-    ICustomPropertyProvider,
-    ICustomQueryInterface,
-    IEnumerable,
-    IBindableVector,
-    IBindableIterable,
-    IBindableVectorView,
-):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator: ...
-    def GetInterface(
-        self, iid: Guid, ppv: NIntType
-    ) -> Tuple[CustomQueryInterfaceResult, Guid, NIntType]: ...
-    def ToString(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IDisposableToIClosableAdapter(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IMapViewToIReadOnlyDictionaryAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IReadOnlyDictionaryToIMapViewAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IReadOnlyListToIVectorViewAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IReferenceFactory(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IStringableHelper(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IVectorViewToIReadOnlyListAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Indexer_Get_Delegate(Generic[T], MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, index: IntType, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> T: ...
-    def Invoke(self, index: IntType) -> T: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InterfaceImplementedInVersionAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(
-        self,
-        interfaceType: TypeType,
-        majorVersion: ByteType,
-        minorVersion: ByteType,
-        buildVersion: ByteType,
-        revisionVersion: ByteType,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def BuildVersion(self) -> ByteType: ...
-    @property
-    def InterfaceType(self) -> TypeType: ...
-    @property
-    def MajorVersion(self) -> ByteType: ...
-    @property
-    def MinorVersion(self) -> ByteType: ...
-    @property
-    def RevisionVersion(self) -> ByteType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_BuildVersion(self) -> ByteType: ...
-    def get_InterfaceType(self) -> TypeType: ...
-    def get_MajorVersion(self) -> ByteType: ...
-    def get_MinorVersion(self) -> ByteType: ...
-    def get_RevisionVersion(self) -> ByteType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IterableToEnumerableAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IteratorToEnumeratorAdapter(Generic[T], ObjectType, IEnumerator[T], IDisposable, IEnumerator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> T: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> T: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ListToBindableVectorAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ListToBindableVectorViewAdapter(ObjectType, IBindableVectorView, IBindableIterable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Size(self) -> UIntType: ...
-
-    # ---------- Methods ---------- #
-
-    def First(self) -> IBindableIterator: ...
-    def GetAt(self, index: UIntType) -> ObjectType: ...
-    def IndexOf(self, value: ObjectType, index: UIntType) -> Tuple[BooleanType, UIntType]: ...
-    def get_Size(self) -> UIntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ListToVectorAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ManagedActivationFactory(ObjectType, IActivationFactory, IManagedActivationFactory):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def ActivateInstance(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MapToCollectionAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MapToDictionaryAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MapViewToReadOnlyCollectionAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NamespaceResolveEventArgs(EventArgs):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, namespaceName: StringType, requestingAssembly: Assembly): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def NamespaceName(self) -> StringType: ...
-    @property
-    def RequestingAssembly(self) -> Assembly: ...
-    @property
-    def ResolvedAssemblies(self) -> Collection[Assembly]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_NamespaceName(self) -> StringType: ...
-    def get_RequestingAssembly(self) -> Assembly: ...
-    def get_ResolvedAssemblies(self) -> Collection[Assembly]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NotifyCollectionChangedEventArgsMarshaler(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NotifyCollectionChangedEventHandler_WinRT(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: NotifyCollectionChangedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: NotifyCollectionChangedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NotifyCollectionChangedToManagedAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NotifyCollectionChangedToWinRTAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NotifyPropertyChangedToManagedAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NotifyPropertyChangedToWinRTAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PropertyChangedEventArgsMarshaler(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PropertyChangedEventHandler_WinRT(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: PropertyChangedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: PropertyChangedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReadOnlyArrayAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReadOnlyDictionaryKeyCollection(
-    Generic[TKey, TValue], ObjectType, IEnumerable[TKey], IEnumerable
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, dictionary: IReadOnlyDictionary[TKey, TValue]): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator[TKey]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReadOnlyDictionaryKeyEnumerator(
-    Generic[TKey, TValue], ObjectType, IEnumerator[TKey], IDisposable, IEnumerator
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, dictionary: IReadOnlyDictionary[TKey, TValue]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> TKey: ...
-
-    # ---------- Methods ---------- #
-
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> TKey: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReadOnlyDictionaryValueCollection(
-    Generic[TKey, TValue], ObjectType, IEnumerable[TValue], IEnumerable
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, dictionary: IReadOnlyDictionary[TKey, TValue]): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator[TValue]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReadOnlyDictionaryValueEnumerator(
-    Generic[TKey, TValue], ObjectType, IEnumerator[TValue], IDisposable, IEnumerator
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, dictionary: IReadOnlyDictionary[TKey, TValue]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> TValue: ...
-
-    # ---------- Methods ---------- #
-
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> TValue: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReturnValueNameAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Name(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Name(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RuntimeClass(ABC, __ComObject):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UnsafeNativeMethods(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class VectorToCollectionAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class VectorToListAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class VectorViewToReadOnlyCollectionAdapter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WinRTClassActivator(MarshalByRefObject, IWinRTClassActivator):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def ActivateInstance(self, activatableClassId: StringType) -> ObjectType: ...
-    def GetActivationFactory(
-        self, activatableClassId: StringType, iid: Guid
-    ) -> Tuple[NIntType, Guid]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WindowsFoundationEventHandler(Generic[T], MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, sender: ObjectType, args: T, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, args: T) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WindowsRuntimeBufferHelper(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WindowsRuntimeImportAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WindowsRuntimeMarshal(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def AddEventHandler(
-        addMethod: Func[T, EventRegistrationToken],
-        removeMethod: Action[EventRegistrationToken],
-        handler: T,
-    ) -> VoidType: ...
-    @staticmethod
-    def FreeHString(ptr: NIntType) -> VoidType: ...
-    @staticmethod
-    def GetActivationFactory(type: TypeType) -> IActivationFactory: ...
-    @staticmethod
-    def PtrToStringHString(ptr: NIntType) -> StringType: ...
-    @staticmethod
-    def RemoveAllEventHandlers(removeMethod: Action[EventRegistrationToken]) -> VoidType: ...
-    @staticmethod
-    def RemoveEventHandler(
-        removeMethod: Action[EventRegistrationToken], handler: T
-    ) -> VoidType: ...
-    @staticmethod
-    def StringToHString(s: StringType) -> NIntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WindowsRuntimeMetadata(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def ResolveNamespace(
-        namespaceName: StringType, packageGraphFilePaths: IEnumerable[StringType]
-    ) -> IEnumerable[StringType]: ...
-    @staticmethod
-    @overload
-    def ResolveNamespace(
-        namespaceName: StringType,
-        windowsSdkFilePath: StringType,
-        packageGraphFilePaths: IEnumerable[StringType],
-    ) -> IEnumerable[StringType]: ...
-    @staticmethod
-    def add_DesignerNamespaceResolve(
-        value: EventHandler[DesignerNamespaceResolveEventArgs],
-    ) -> VoidType: ...
-    @staticmethod
-    def add_ReflectionOnlyNamespaceResolve(
-        value: EventHandler[NamespaceResolveEventArgs],
-    ) -> VoidType: ...
-    @staticmethod
-    def remove_DesignerNamespaceResolve(
-        value: EventHandler[DesignerNamespaceResolveEventArgs],
-    ) -> VoidType: ...
-    @staticmethod
-    def remove_ReflectionOnlyNamespaceResolve(
-        value: EventHandler[NamespaceResolveEventArgs],
-    ) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    DesignerNamespaceResolve: EventType[EventHandler[DesignerNamespaceResolveEventArgs]] = ...
-
-    ReflectionOnlyNamespaceResolve: EventType[EventHandler[NamespaceResolveEventArgs]] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WriteOnlyArrayAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class EventRegistrationToken(ValueType):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    @staticmethod
-    def op_Equality(left: EventRegistrationToken, right: EventRegistrationToken) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(
-        left: EventRegistrationToken, right: EventRegistrationToken
-    ) -> BooleanType: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    def __eq__(self, other: EventRegistrationToken) -> bool:
+        """
 
-    # No Sub Classes
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: EventRegistrationToken) -> bool:
+        """
 
-    # No Sub Structs
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: EventRegistrationToken, right: EventRegistrationToken) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: EventRegistrationToken, right: EventRegistrationToken) -> bool:
+        """
 
-    # No Sub Enums
+        :param left:
+        :param right:
+        :return:
+        """
+
+class EventRegistrationTokenTable(Generic[T], Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def InvocationList(self) -> T:
+        """
+
+        :return:
+        """
+    @InvocationList.setter
+    def InvocationList(self, value: T) -> None: ...
+    def AddEventHandler(self, handler: T) -> EventRegistrationToken:
+        """
+
+        :param handler:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetOrCreateEventRegistrationTokenTable(
+        cls, refEventTable: EventRegistrationTokenTable[T]
+    ) -> EventRegistrationTokenTable[T]:
+        """
+
+        :param refEventTable:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def RemoveEventHandler(self, handler: T) -> None:
+        """
+
+        :param handler:
+        """
+    @overload
+    def RemoveEventHandler(self, token: EventRegistrationToken) -> None:
+        """
+
+        :param token:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+GetEnumerator_Delegate: Callable[[], IEnumerator[T]] = ...
+"""
+
+:return: 
+"""
 
 class HSTRING_HEADER(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class IActivationFactory:
+    """"""
 
-    # No Sub Structs
+    def ActivateInstance(self) -> object:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
+class IBindableIterable:
+    """"""
+
+    def First(self) -> IBindableIterator:
+        """
+
+        :return:
+        """
+
+class IBindableIterator:
+    """"""
+
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def HasCurrent(self) -> bool:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+
+class IBindableVector(IBindableIterable):
+    """"""
+
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    def Append(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def First(self) -> IBindableIterator:
+        """
+
+        :return:
+        """
+    def GetAt(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetView(self) -> IBindableVectorView:
+        """
+
+        :return:
+        """
+    def IndexOf(self, value: object, index: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :param index:
+        :return:
+        """
+    def InsertAt(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def RemoveAtEnd(self) -> None:
+        """"""
+    def SetAt(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class IBindableVectorView(IBindableIterable):
+    """"""
+
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    def First(self) -> IBindableIterator:
+        """
+
+        :return:
+        """
+    def GetAt(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def IndexOf(self, value: object, index: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :param index:
+        :return:
+        """
+
+class IClosable:
+    """"""
+
+    def Close(self) -> None:
+        """"""
+
+class IClosableToIDisposableAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ICommandAdapterHelpers(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ICommandToManagedAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ICommandToWinRTAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ICommand_WinRT:
+    """"""
+
+    def CanExecute(self, parameter: object) -> bool:
+        """
+
+        :param parameter:
+        :return:
+        """
+    def Execute(self, parameter: object) -> None:
+        """
+
+        :param parameter:
+        """
+
+class ICustomProperty:
+    """"""
+
+    @property
+    def CanRead(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def CanWrite(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetValue(self, target: object) -> object:
+        """
+
+        :param target:
+        :return:
+        """
+    @overload
+    def GetValue(self, target: object, indexValue: object) -> object:
+        """
+
+        :param target:
+        :param indexValue:
+        :return:
+        """
+    @overload
+    def SetValue(self, target: object, value: object) -> None:
+        """
+
+        :param target:
+        :param value:
+        """
+    @overload
+    def SetValue(self, target: object, value: object, indexValue: object) -> None:
+        """
+
+        :param target:
+        :param value:
+        :param indexValue:
+        """
+
+class ICustomPropertyProvider:
+    """"""
+
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetCustomProperty(self, name: str) -> ICustomProperty:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetIndexedProperty(self, name: str, indexParameterType: Type) -> ICustomProperty:
+        """
+
+        :param name:
+        :param indexParameterType:
+        :return:
+        """
+    def GetStringRepresentation(self) -> str:
+        """
+
+        :return:
+        """
+
+class ICustomPropertyProviderImpl(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ICustomPropertyProviderProxy(
+    Generic[T1, T2],
+    Object,
+    IEnumerable,
+    IBindableIterable,
+    IBindableVector,
+    IBindableVectorView,
+    ICustomPropertyProvider,
+    IGetProxyTarget,
+    ICustomQueryInterface,
+):
+    """"""
+
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    def Append(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def First(self) -> IBindableIterator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetAt(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def GetAt(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetCustomProperty(self, name: str) -> ICustomProperty:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIndexedProperty(self, name: str, indexParameterType: Type) -> ICustomProperty:
+        """
+
+        :param name:
+        :param indexParameterType:
+        :return:
+        """
+    def GetInterface(self, iid: Guid, ppv: IntPtr) -> Tuple[CustomQueryInterfaceResult, IntPtr]:
+        """
+
+        :param iid:
+        :param ppv:
+        :return:
+        """
+    def GetStringRepresentation(self) -> str:
+        """
+
+        :return:
+        """
+    def GetTarget(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetView(self) -> IBindableVectorView:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object, index: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :param index:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object, index: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :param index:
+        :return:
+        """
+    def InsertAt(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def RemoveAtEnd(self) -> None:
+        """"""
+    def SetAt(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+
+class IDisposableToIClosableAdapter(Object):
+    """"""
+
+    def Close(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IGetProxyTarget:
+    """"""
+
+    def GetTarget(self) -> object:
+        """
+
+        :return:
+        """
+
+class IIterable(Generic[T], IEnumerable[T], IEnumerable):
+    """"""
+
+    def First(self) -> IIterator[T]:
+        """
+
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+
+class IIterator(Generic[T]):
+    """"""
+
+    @property
+    def Current(self) -> T:
+        """
+
+        :return:
+        """
+    @property
+    def HasCurrent(self) -> bool:
+        """
+
+        :return:
+        """
+    def GetMany(self, items: Array[T]) -> Tuple[int, Array[T]]:
+        """
+
+        :param items:
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+
+class IKeyValuePair(Generic[K, V]):
+    """"""
+
+    @property
+    def Key(self) -> K:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> V:
+        """
+
+        :return:
+        """
+
+class IManagedActivationFactory:
+    """"""
+
+    def RunClassConstructor(self) -> None:
+        """"""
+
+class IMapViewToIReadOnlyDictionaryAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IMapView(
+    Generic[K, V], IEnumerable[IKeyValuePair, V], IEnumerable, IIterable[IKeyValuePair, V]
+):
+    """"""
+
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    def First(self) -> IIterator[IKeyValuePair, V]:
+        """
+
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def HasKey(self, key: K) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    def Lookup(self, key: K) -> V:
+        """
+
+        :param key:
+        :return:
+        """
+    def Split(
+        self, first: IMapView[K, V], second: IMapView[K, V]
+    ) -> Tuple[None, IMapView[K, V], IMapView[K, V]]:
+        """
+
+        :param first:
+        :param second:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[IKeyValuePair, V]:
+        """
+
+        :return:
+        """
+
+class IMap(Generic[K, V], IEnumerable[IKeyValuePair, V], IEnumerable, IIterable[IKeyValuePair, V]):
+    """"""
+
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    def Clear(self) -> None:
+        """"""
+    def First(self) -> IIterator[IKeyValuePair, V]:
+        """
+
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetView(self) -> IReadOnlyDictionary[K, V]:
+        """
+
+        :return:
+        """
+    def HasKey(self, key: K) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    def Insert(self, key: K, value: V) -> bool:
+        """
+
+        :param key:
+        :param value:
+        :return:
+        """
+    def Lookup(self, key: K) -> V:
+        """
+
+        :param key:
+        :return:
+        """
+    def Remove(self, key: K) -> None:
+        """
+
+        :param key:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[IKeyValuePair, V]:
+        """
+
+        :return:
+        """
+
+class INotifyCollectionChangedEventArgs:
+    """"""
+
+    @property
+    def Action(self) -> NotifyCollectionChangedAction:
+        """
+
+        :return:
+        """
+    @property
+    def NewItems(self) -> IList:
+        """
+
+        :return:
+        """
+    @property
+    def NewStartingIndex(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OldItems(self) -> IList:
+        """
+
+        :return:
+        """
+    @property
+    def OldStartingIndex(self) -> int:
+        """
+
+        :return:
+        """
+
+class INotifyCollectionChanged_WinRT:
+    """"""
+
+class INotifyPropertyChanged_WinRT:
+    """"""
+
+class IPropertyChangedEventArgs:
+    """"""
+
+    @property
+    def PropertyName(self) -> str:
+        """
+
+        :return:
+        """
+
+class IPropertyValue:
+    """"""
+
+    @property
+    def IsNumericScalar(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> PropertyType:
+        """
+
+        :return:
+        """
+    def GetBoolean(self) -> bool:
+        """
+
+        :return:
+        """
+    def GetBooleanArray(self) -> Array[bool]:
+        """
+
+        :return:
+        """
+    def GetChar16(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetChar16Array(self) -> Array[Char]:
+        """
+
+        :return:
+        """
+    def GetDateTime(self) -> DateTimeOffset:
+        """
+
+        :return:
+        """
+    def GetDateTimeArray(self) -> Array[DateTimeOffset]:
+        """
+
+        :return:
+        """
+    def GetDouble(self) -> float:
+        """
+
+        :return:
+        """
+    def GetDoubleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetGuid(self) -> Guid:
+        """
+
+        :return:
+        """
+    def GetGuidArray(self) -> Array[Guid]:
+        """
+
+        :return:
+        """
+    def GetInspectableArray(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    def GetInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetPoint(self) -> Point:
+        """
+
+        :return:
+        """
+    def GetPointArray(self) -> Array[Point]:
+        """
+
+        :return:
+        """
+    def GetRect(self) -> Rect:
+        """
+
+        :return:
+        """
+    def GetRectArray(self) -> Array[Rect]:
+        """
+
+        :return:
+        """
+    def GetSingle(self) -> float:
+        """
+
+        :return:
+        """
+    def GetSingleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetSize(self) -> Size:
+        """
+
+        :return:
+        """
+    def GetSizeArray(self) -> Array[Size]:
+        """
+
+        :return:
+        """
+    def GetString(self) -> str:
+        """
+
+        :return:
+        """
+    def GetStringArray(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetTimeSpan(self) -> TimeSpan:
+        """
+
+        :return:
+        """
+    def GetTimeSpanArray(self) -> Array[TimeSpan]:
+        """
+
+        :return:
+        """
+    def GetUInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt8(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt8Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+
+class IReadOnlyDictionaryToIMapViewAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IReadOnlyListToIVectorViewAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IReferenceArray(Generic[T], IPropertyValue):
+    """"""
+
+    @property
+    def IsNumericScalar(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> PropertyType:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> Array[T]:
+        """
+
+        :return:
+        """
+    def GetBoolean(self) -> bool:
+        """
+
+        :return:
+        """
+    def GetBooleanArray(self) -> Array[bool]:
+        """
+
+        :return:
+        """
+    def GetChar16(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetChar16Array(self) -> Array[Char]:
+        """
+
+        :return:
+        """
+    def GetDateTime(self) -> DateTimeOffset:
+        """
+
+        :return:
+        """
+    def GetDateTimeArray(self) -> Array[DateTimeOffset]:
+        """
+
+        :return:
+        """
+    def GetDouble(self) -> float:
+        """
+
+        :return:
+        """
+    def GetDoubleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetGuid(self) -> Guid:
+        """
+
+        :return:
+        """
+    def GetGuidArray(self) -> Array[Guid]:
+        """
+
+        :return:
+        """
+    def GetInspectableArray(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    def GetInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetPoint(self) -> Point:
+        """
+
+        :return:
+        """
+    def GetPointArray(self) -> Array[Point]:
+        """
+
+        :return:
+        """
+    def GetRect(self) -> Rect:
+        """
+
+        :return:
+        """
+    def GetRectArray(self) -> Array[Rect]:
+        """
+
+        :return:
+        """
+    def GetSingle(self) -> float:
+        """
+
+        :return:
+        """
+    def GetSingleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetSize(self) -> Size:
+        """
+
+        :return:
+        """
+    def GetSizeArray(self) -> Array[Size]:
+        """
+
+        :return:
+        """
+    def GetString(self) -> str:
+        """
+
+        :return:
+        """
+    def GetStringArray(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetTimeSpan(self) -> TimeSpan:
+        """
+
+        :return:
+        """
+    def GetTimeSpanArray(self) -> Array[TimeSpan]:
+        """
+
+        :return:
+        """
+    def GetUInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt8(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt8Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+
+class IReferenceFactory(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IReference(Generic[T], IPropertyValue):
+    """"""
+
+    @property
+    def IsNumericScalar(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> PropertyType:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> T:
+        """
+
+        :return:
+        """
+    def GetBoolean(self) -> bool:
+        """
+
+        :return:
+        """
+    def GetBooleanArray(self) -> Array[bool]:
+        """
+
+        :return:
+        """
+    def GetChar16(self) -> Char:
+        """
+
+        :return:
+        """
+    def GetChar16Array(self) -> Array[Char]:
+        """
+
+        :return:
+        """
+    def GetDateTime(self) -> DateTimeOffset:
+        """
+
+        :return:
+        """
+    def GetDateTimeArray(self) -> Array[DateTimeOffset]:
+        """
+
+        :return:
+        """
+    def GetDouble(self) -> float:
+        """
+
+        :return:
+        """
+    def GetDoubleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetGuid(self) -> Guid:
+        """
+
+        :return:
+        """
+    def GetGuidArray(self) -> Array[Guid]:
+        """
+
+        :return:
+        """
+    def GetInspectableArray(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    def GetInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetPoint(self) -> Point:
+        """
+
+        :return:
+        """
+    def GetPointArray(self) -> Array[Point]:
+        """
+
+        :return:
+        """
+    def GetRect(self) -> Rect:
+        """
+
+        :return:
+        """
+    def GetRectArray(self) -> Array[Rect]:
+        """
+
+        :return:
+        """
+    def GetSingle(self) -> float:
+        """
+
+        :return:
+        """
+    def GetSingleArray(self) -> Array[float]:
+        """
+
+        :return:
+        """
+    def GetSize(self) -> Size:
+        """
+
+        :return:
+        """
+    def GetSizeArray(self) -> Array[Size]:
+        """
+
+        :return:
+        """
+    def GetString(self) -> str:
+        """
+
+        :return:
+        """
+    def GetStringArray(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetTimeSpan(self) -> TimeSpan:
+        """
+
+        :return:
+        """
+    def GetTimeSpanArray(self) -> Array[TimeSpan]:
+        """
+
+        :return:
+        """
+    def GetUInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt16Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt32Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt64Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def GetUInt8(self) -> int:
+        """
+
+        :return:
+        """
+    def GetUInt8Array(self) -> Array[int]:
+        """
+
+        :return:
+        """
+
+class IRestrictedErrorInfo:
+    """"""
+
+    def GetErrorDetails(
+        self, description: str, error: int, restrictedDescription: str, capabilitySid: str
+    ) -> Tuple[None, str, int, str, str]:
+        """
+
+        :param description:
+        :param error:
+        :param restrictedDescription:
+        :param capabilitySid:
+        """
+    def GetReference(self, reference: str) -> Tuple[None, str]:
+        """
+
+        :param reference:
+        """
+
+class IStringable:
+    """"""
+
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IStringableHelper(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IVectorViewToIReadOnlyListAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IVectorView(Generic[T], IEnumerable[T], IEnumerable, IIterable[T]):
+    """"""
+
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    def First(self) -> IIterator[T]:
+        """
+
+        :return:
+        """
+    def GetAt(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetMany(self, startIndex: int, items: Array[T]) -> Tuple[int, Array[T]]:
+        """
+
+        :param startIndex:
+        :param items:
+        :return:
+        """
+    def IndexOf(self, value: T, index: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+
+class IVector(Generic[T], IEnumerable[T], IEnumerable, IIterable[T]):
+    """"""
+
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    def Append(self, value: T) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def First(self) -> IIterator[T]:
+        """
+
+        :return:
+        """
+    def GetAt(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetMany(self, startIndex: int, items: Array[T]) -> Tuple[int, Array[T]]:
+        """
+
+        :param startIndex:
+        :param items:
+        :return:
+        """
+    def GetView(self) -> IReadOnlyList[T]:
+        """
+
+        :return:
+        """
+    def IndexOf(self, value: T, index: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :param index:
+        :return:
+        """
+    def InsertAt(self, index: int, value: T) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def RemoveAtEnd(self) -> None:
+        """"""
+    def ReplaceAll(self, items: Array[T]) -> None:
+        """
+
+        :param items:
+        """
+    def SetAt(self, index: int, value: T) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+
+class IVector_Raw(Generic[T], IEnumerable[T], IEnumerable, IIterable[T]):
+    """"""
+
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    def Append(self, value: T) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def First(self) -> IIterator[T]:
+        """
+
+        :return:
+        """
+    def GetAt(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetMany(self, startIndex: int, items: Array[T]) -> Tuple[int, Array[T]]:
+        """
+
+        :param startIndex:
+        :param items:
+        :return:
+        """
+    def GetView(self) -> IVectorView[T]:
+        """
+
+        :return:
+        """
+    def IndexOf(self, value: T, index: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :param index:
+        :return:
+        """
+    def InsertAt(self, index: int, value: T) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def RemoveAtEnd(self) -> None:
+        """"""
+    def ReplaceAll(self, items: Array[T]) -> None:
+        """
+
+        :param items:
+        """
+    def SetAt(self, index: int, value: T) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+
+class IWinRTClassActivator:
+    """"""
+
+    def ActivateInstance(self, activatableClassId: str) -> object:
+        """
+
+        :param activatableClassId:
+        :return:
+        """
+    def GetActivationFactory(self, activatableClassId: str, iid: Guid) -> IntPtr:
+        """
+
+        :param activatableClassId:
+        :param iid:
+        :return:
+        """
+
+Indexer_Get_Delegate: Callable[[int], T] = ...
+"""
+
+:param index: 
+:return: 
+"""
+
+class InterfaceForwardingSupport(Enum):
+    """"""
+
+    _None: InterfaceForwardingSupport = ...
+    """"""
+    IBindableVector: InterfaceForwardingSupport = ...
+    """"""
+    IVector: InterfaceForwardingSupport = ...
+    """"""
+    IBindableVectorView: InterfaceForwardingSupport = ...
+    """"""
+    IVectorView: InterfaceForwardingSupport = ...
+    """"""
+    IBindableIterableOrIIterable: InterfaceForwardingSupport = ...
+    """"""
+
+class InterfaceImplementedInVersionAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(
+        self,
+        interfaceType: Type,
+        majorVersion: int,
+        minorVersion: int,
+        buildVersion: int,
+        revisionVersion: int,
+    ):
+        """
+
+        :param interfaceType:
+        :param majorVersion:
+        :param minorVersion:
+        :param buildVersion:
+        :param revisionVersion:
+        """
+    @property
+    def BuildVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def InterfaceType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def MajorVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MinorVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def RevisionVersion(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IterableToEnumerableAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IteratorToEnumeratorAdapter(Generic[T], Object, IEnumerator[T], IEnumerator, IDisposable):
+    """"""
+
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ListToBindableVectorAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ListToBindableVectorViewAdapter(Object, IBindableIterable, IBindableVectorView):
+    """"""
+
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def First(self) -> IBindableIterator:
+        """
+
+        :return:
+        """
+    def GetAt(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, value: object, index: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :param index:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ListToVectorAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ManagedActivationFactory(Object, IActivationFactory, IManagedActivationFactory):
+    """"""
+
+    def ActivateInstance(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def RunClassConstructor(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MapToCollectionAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MapToDictionaryAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MapViewToReadOnlyCollectionAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class NamespaceResolveEventArgs(EventArgs):
+    """"""
+
+    def __init__(self, namespaceName: str, requestingAssembly: Assembly):
+        """
+
+        :param namespaceName:
+        :param requestingAssembly:
+        """
+    @property
+    def NamespaceName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def RequestingAssembly(self) -> Assembly:
+        """
+
+        :return:
+        """
+    @property
+    def ResolvedAssemblies(self) -> Collection[Assembly]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class NotifyCollectionChangedEventArgsMarshaler(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+NotifyCollectionChangedEventHandler_WinRT: Callable[
+    [object, NotifyCollectionChangedEventArgs], None
+] = ...
+"""
+
+:param sender: 
+:param e: 
+"""
+
+class NotifyCollectionChangedToManagedAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class NotifyCollectionChangedToWinRTAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class NotifyPropertyChangedToManagedAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class NotifyPropertyChangedToWinRTAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class Point(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class PropertyChangedEventArgsMarshaler(ABC, Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+PropertyChangedEventHandler_WinRT: Callable[[object, PropertyChangedEventArgs], None] = ...
+"""
+
+:param sender: 
+:param e: 
+"""
+
+class PropertyType(Enum):
+    """"""
+
+    Empty: PropertyType = ...
+    """"""
+    UInt8: PropertyType = ...
+    """"""
+    Int16: PropertyType = ...
+    """"""
+    UInt16: PropertyType = ...
+    """"""
+    Int32: PropertyType = ...
+    """"""
+    UInt32: PropertyType = ...
+    """"""
+    Int64: PropertyType = ...
+    """"""
+    UInt64: PropertyType = ...
+    """"""
+    Single: PropertyType = ...
+    """"""
+    Double: PropertyType = ...
+    """"""
+    Char16: PropertyType = ...
+    """"""
+    Boolean: PropertyType = ...
+    """"""
+    String: PropertyType = ...
+    """"""
+    Inspectable: PropertyType = ...
+    """"""
+    DateTime: PropertyType = ...
+    """"""
+    TimeSpan: PropertyType = ...
+    """"""
+    Guid: PropertyType = ...
+    """"""
+    Point: PropertyType = ...
+    """"""
+    Size: PropertyType = ...
+    """"""
+    Rect: PropertyType = ...
+    """"""
+    Other: PropertyType = ...
+    """"""
+    UInt8Array: PropertyType = ...
+    """"""
+    Int16Array: PropertyType = ...
+    """"""
+    UInt16Array: PropertyType = ...
+    """"""
+    Int32Array: PropertyType = ...
+    """"""
+    UInt32Array: PropertyType = ...
+    """"""
+    Int64Array: PropertyType = ...
+    """"""
+    UInt64Array: PropertyType = ...
+    """"""
+    SingleArray: PropertyType = ...
+    """"""
+    DoubleArray: PropertyType = ...
+    """"""
+    Char16Array: PropertyType = ...
+    """"""
+    BooleanArray: PropertyType = ...
+    """"""
+    StringArray: PropertyType = ...
+    """"""
+    InspectableArray: PropertyType = ...
+    """"""
+    DateTimeArray: PropertyType = ...
+    """"""
+    TimeSpanArray: PropertyType = ...
+    """"""
+    GuidArray: PropertyType = ...
+    """"""
+    PointArray: PropertyType = ...
+    """"""
+    SizeArray: PropertyType = ...
+    """"""
+    RectArray: PropertyType = ...
+    """"""
+    OtherArray: PropertyType = ...
+    """"""
+
+class ReadOnlyArrayAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReadOnlyDictionaryKeyCollection(
+    Generic[TKey, TValue], Object, IEnumerable[TKey], IEnumerable
+):
+    """"""
+
+    def __init__(self, dictionary: IReadOnlyDictionary[TKey, TValue]):
+        """
+
+        :param dictionary:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TKey]:
+        """
+
+        :return:
+        """
+
+class ReadOnlyDictionaryKeyEnumerator(
+    Generic[TKey, TValue], Object, IEnumerator[TKey], IEnumerator, IDisposable
+):
+    """"""
+
+    def __init__(self, dictionary: IReadOnlyDictionary[TKey, TValue]):
+        """
+
+        :param dictionary:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReadOnlyDictionaryValueCollection(
+    Generic[TKey, TValue], Object, IEnumerable[TValue], IEnumerable
+):
+    """"""
+
+    def __init__(self, dictionary: IReadOnlyDictionary[TKey, TValue]):
+        """
+
+        :param dictionary:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TValue]:
+        """
+
+        :return:
+        """
+
+class ReadOnlyDictionaryValueEnumerator(
+    Generic[TKey, TValue], Object, IEnumerator[TValue], IEnumerator, IDisposable
+):
+    """"""
+
+    def __init__(self, dictionary: IReadOnlyDictionary[TKey, TValue]):
+        """
+
+        :param dictionary:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class Rect(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class ReturnValueNameAttribute(Attribute, _Attribute):
+    """"""
 
-    # No Sub Structs
+    def __init__(self, name: str):
+        """
 
-    # No Sub Interfaces
+        :param name:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RuntimeClass(ABC, __ComObject):
+    """"""
+
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class Size(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class UnsafeNativeMethods(ABC, Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-# ---------- Interfaces ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class IActivationFactory(Protocol):
-    # No Properties
+        :return:
+        """
 
-    # ---------- Methods ---------- #
+class VectorToCollectionAdapter(Object):
+    """"""
 
-    def ActivateInstance(self) -> ObjectType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class IBindableIterable(Protocol):
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    def First(self) -> IBindableIterator: ...
+        :return:
+        """
 
-    # No Events
+class VectorToListAdapter(Object):
+    """"""
 
-class IBindableIterator(Protocol):
-    # ---------- Properties ---------- #
+    def Equals(self, obj: object) -> bool:
+        """
 
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class VectorViewToReadOnlyCollectionAdapter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class WinRTClassActivator(MarshalByRefObject, IWinRTClassActivator):
+    """"""
+
+    def __init__(self):
+        """"""
+    def ActivateInstance(self, activatableClassId: str) -> object:
+        """
+
+        :param activatableClassId:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetActivationFactory(self, activatableClassId: str, iid: Guid) -> IntPtr:
+        """
+
+        :param activatableClassId:
+        :param iid:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+WindowsFoundationEventHandler: Callable[[object, T], None] = ...
+"""
+
+:param sender: 
+:param args: 
+"""
+
+class WindowsRuntimeBufferHelper(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class WindowsRuntimeImportAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
     @property
-    def Current(self) -> ObjectType: ...
-    @property
-    def HasCurrent(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def MoveNext(self) -> BooleanType: ...
-    def get_Current(self) -> ObjectType: ...
-    def get_HasCurrent(self) -> BooleanType: ...
-
-    # No Events
-
-class IBindableVector(Protocol, IBindableIterable):
-    # ---------- Properties ---------- #
-
-    @property
-    def Size(self) -> UIntType: ...
-
-    # ---------- Methods ---------- #
-
-    def Append(self, value: ObjectType) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def GetAt(self, index: UIntType) -> ObjectType: ...
-    def GetView(self) -> IBindableVectorView: ...
-    def IndexOf(self, value: ObjectType, index: UIntType) -> Tuple[BooleanType, UIntType]: ...
-    def InsertAt(self, index: UIntType, value: ObjectType) -> VoidType: ...
-    def RemoveAt(self, index: UIntType) -> VoidType: ...
-    def RemoveAtEnd(self) -> VoidType: ...
-    def SetAt(self, index: UIntType, value: ObjectType) -> VoidType: ...
-    def get_Size(self) -> UIntType: ...
-
-    # No Events
-
-class IBindableVectorView(Protocol, IBindableIterable):
-    # ---------- Properties ---------- #
-
-    @property
-    def Size(self) -> UIntType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetAt(self, index: UIntType) -> ObjectType: ...
-    def IndexOf(self, value: ObjectType, index: UIntType) -> Tuple[BooleanType, UIntType]: ...
-    def get_Size(self) -> UIntType: ...
-
-    # No Events
-
-class IClosable(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-
-    # No Events
-
-class ICommand_WinRT(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CanExecute(self, parameter: ObjectType) -> BooleanType: ...
-    def Execute(self, parameter: ObjectType) -> VoidType: ...
-    def add_CanExecuteChanged(self, value: EventHandler[ObjectType]) -> EventRegistrationToken: ...
-    def remove_CanExecuteChanged(self, token: EventRegistrationToken) -> VoidType: ...
-
-    # No Events
-
-class ICustomProperty(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def CanRead(self) -> BooleanType: ...
-    @property
-    def CanWrite(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def GetValue(self, target: ObjectType) -> ObjectType: ...
-    @overload
-    def GetValue(self, target: ObjectType, indexValue: ObjectType) -> ObjectType: ...
-    @overload
-    def SetValue(self, target: ObjectType, value: ObjectType) -> VoidType: ...
-    @overload
-    def SetValue(
-        self, target: ObjectType, value: ObjectType, indexValue: ObjectType
-    ) -> VoidType: ...
-    def get_CanRead(self) -> BooleanType: ...
-    def get_CanWrite(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-class ICustomPropertyProvider(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def Type(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetCustomProperty(self, name: StringType) -> ICustomProperty: ...
-    def GetIndexedProperty(
-        self, name: StringType, indexParameterType: TypeType
-    ) -> ICustomProperty: ...
-    def GetStringRepresentation(self) -> StringType: ...
-    def get_Type(self) -> TypeType: ...
-
-    # No Events
-
-class IGetProxyTarget(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetTarget(self) -> ObjectType: ...
-
-    # No Events
-
-class IIterable(Protocol[T], IEnumerable[T], IEnumerable):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def First(self) -> IIterator[T]: ...
-
-    # No Events
-
-class IIterator(Protocol[T]):
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> T: ...
-    @property
-    def HasCurrent(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetMany(self, items: ArrayType[T]) -> Tuple[IntType, ArrayType[T]]: ...
-    def MoveNext(self) -> BooleanType: ...
-    def get_Current(self) -> T: ...
-    def get_HasCurrent(self) -> BooleanType: ...
-
-    # No Events
-
-class IKeyValuePair(Protocol[K, V]):
-    # ---------- Properties ---------- #
-
-    @property
-    def Key(self) -> K: ...
-    @property
-    def Value(self) -> V: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Key(self) -> K: ...
-    def get_Value(self) -> V: ...
-
-    # No Events
-
-class IManagedActivationFactory(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def RunClassConstructor(self) -> VoidType: ...
-
-    # No Events
-
-class IMap(
-    Protocol[K, V], IIterable[IKeyValuePair[K, V]], IEnumerable[IKeyValuePair[K, V]], IEnumerable
-):
-    # ---------- Properties ---------- #
-
-    @property
-    def Size(self) -> UIntType: ...
-
-    # ---------- Methods ---------- #
-
-    def Clear(self) -> VoidType: ...
-    def GetView(self) -> IReadOnlyDictionary[K, V]: ...
-    def HasKey(self, key: K) -> BooleanType: ...
-    def Insert(self, key: K, value: V) -> BooleanType: ...
-    def Lookup(self, key: K) -> V: ...
-    def Remove(self, key: K) -> VoidType: ...
-    def get_Size(self) -> UIntType: ...
-
-    # No Events
-
-class IMapView(
-    Protocol[K, V], IIterable[IKeyValuePair[K, V]], IEnumerable[IKeyValuePair[K, V]], IEnumerable
-):
-    # ---------- Properties ---------- #
-
-    @property
-    def Size(self) -> UIntType: ...
-
-    # ---------- Methods ---------- #
-
-    def HasKey(self, key: K) -> BooleanType: ...
-    def Lookup(self, key: K) -> V: ...
-    def Split(
-        self, first: IMapView[K, V], second: IMapView[K, V]
-    ) -> Tuple[VoidType, IMapView[K, V], IMapView[K, V]]: ...
-    def get_Size(self) -> UIntType: ...
-
-    # No Events
-
-class INotifyCollectionChangedEventArgs(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def Action(self) -> NotifyCollectionChangedAction: ...
-    @property
-    def NewItems(self) -> IList: ...
-    @property
-    def NewStartingIndex(self) -> IntType: ...
-    @property
-    def OldItems(self) -> IList: ...
-    @property
-    def OldStartingIndex(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Action(self) -> NotifyCollectionChangedAction: ...
-    def get_NewItems(self) -> IList: ...
-    def get_NewStartingIndex(self) -> IntType: ...
-    def get_OldItems(self) -> IList: ...
-    def get_OldStartingIndex(self) -> IntType: ...
-
-    # No Events
-
-class INotifyCollectionChanged_WinRT(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def add_CollectionChanged(
-        self, value: NotifyCollectionChangedEventHandler
-    ) -> EventRegistrationToken: ...
-    def remove_CollectionChanged(self, token: EventRegistrationToken) -> VoidType: ...
-
-    # No Events
-
-class INotifyPropertyChanged_WinRT(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def add_PropertyChanged(self, value: PropertyChangedEventHandler) -> EventRegistrationToken: ...
-    def remove_PropertyChanged(self, token: EventRegistrationToken) -> VoidType: ...
-
-    # No Events
-
-class IPropertyChangedEventArgs(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def PropertyName(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_PropertyName(self) -> StringType: ...
-
-    # No Events
-
-class IPropertyValue(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def IsNumericScalar(self) -> BooleanType: ...
-    @property
-    def Type(self) -> PropertyType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetBoolean(self) -> BooleanType: ...
-    def GetBooleanArray(self) -> ArrayType[BooleanType]: ...
-    def GetChar16(self) -> CharType: ...
-    def GetChar16Array(self) -> ArrayType[CharType]: ...
-    def GetDateTime(self) -> DateTimeOffset: ...
-    def GetDateTimeArray(self) -> ArrayType[DateTimeOffset]: ...
-    def GetDouble(self) -> DoubleType: ...
-    def GetDoubleArray(self) -> ArrayType[DoubleType]: ...
-    def GetGuid(self) -> Guid: ...
-    def GetGuidArray(self) -> ArrayType[Guid]: ...
-    def GetInspectableArray(self) -> ArrayType[ObjectType]: ...
-    def GetInt16(self) -> ShortType: ...
-    def GetInt16Array(self) -> ArrayType[ShortType]: ...
-    def GetInt32(self) -> IntType: ...
-    def GetInt32Array(self) -> ArrayType[IntType]: ...
-    def GetInt64(self) -> LongType: ...
-    def GetInt64Array(self) -> ArrayType[LongType]: ...
-    def GetPoint(self) -> Point: ...
-    def GetPointArray(self) -> ArrayType[Point]: ...
-    def GetRect(self) -> Rect: ...
-    def GetRectArray(self) -> ArrayType[Rect]: ...
-    def GetSingle(self) -> FloatType: ...
-    def GetSingleArray(self) -> ArrayType[FloatType]: ...
-    def GetSize(self) -> Size: ...
-    def GetSizeArray(self) -> ArrayType[Size]: ...
-    def GetString(self) -> StringType: ...
-    def GetStringArray(self) -> ArrayType[StringType]: ...
-    def GetTimeSpan(self) -> TimeSpan: ...
-    def GetTimeSpanArray(self) -> ArrayType[TimeSpan]: ...
-    def GetUInt16(self) -> UShortType: ...
-    def GetUInt16Array(self) -> ArrayType[UShortType]: ...
-    def GetUInt32(self) -> UIntType: ...
-    def GetUInt32Array(self) -> ArrayType[UIntType]: ...
-    def GetUInt64(self) -> ULongType: ...
-    def GetUInt64Array(self) -> ArrayType[ULongType]: ...
-    def GetUInt8(self) -> ByteType: ...
-    def GetUInt8Array(self) -> ArrayType[ByteType]: ...
-    def get_IsNumericScalar(self) -> BooleanType: ...
-    def get_Type(self) -> PropertyType: ...
-
-    # No Events
-
-class IReference(Protocol[T], IPropertyValue):
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> T: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Value(self) -> T: ...
-
-    # No Events
-
-class IReferenceArray(Protocol[T], IPropertyValue):
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> ArrayType[T]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Value(self) -> ArrayType[T]: ...
-
-    # No Events
-
-class IRestrictedErrorInfo(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetErrorDetails(
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
         self,
-        description: StringType,
-        error: IntType,
-        restrictedDescription: StringType,
-        capabilitySid: StringType,
-    ) -> Tuple[VoidType, StringType, IntType, StringType, StringType]: ...
-    def GetReference(self, reference: StringType) -> Tuple[VoidType, StringType]: ...
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Events
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-class IStringable(Protocol):
-    # No Properties
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    def ToString(self) -> StringType: ...
+        :return:
+        """
 
-    # No Events
+class WindowsRuntimeMarshal(ABC, Object):
+    """"""
 
-class IVector(Protocol[T], IIterable[T], IEnumerable[T], IEnumerable):
-    # ---------- Properties ---------- #
+    @classmethod
+    def AddEventHandler(
+        cls,
+        addMethod: Func[T, EventRegistrationToken],
+        removeMethod: Action[EventRegistrationToken],
+        handler: T,
+    ) -> None:
+        """
 
+        :param addMethod:
+        :param removeMethod:
+        :param handler:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def FreeHString(cls, ptr: IntPtr) -> None:
+        """
+
+        :param ptr:
+        """
+    @classmethod
+    def GetActivationFactory(cls, type: Type) -> IActivationFactory:
+        """
+
+        :param type:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def PtrToStringHString(cls, ptr: IntPtr) -> str:
+        """
+
+        :param ptr:
+        :return:
+        """
+    @classmethod
+    def RemoveAllEventHandlers(cls, removeMethod: Action[EventRegistrationToken]) -> None:
+        """
+
+        :param removeMethod:
+        """
+    @classmethod
+    def RemoveEventHandler(cls, removeMethod: Action[EventRegistrationToken], handler: T) -> None:
+        """
+
+        :param removeMethod:
+        :param handler:
+        """
+    @classmethod
+    def StringToHString(cls, s: str) -> IntPtr:
+        """
+
+        :param s:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class WindowsRuntimeMetadata(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def ResolveNamespace(
+        cls, namespaceName: str, packageGraphFilePaths: IEnumerable[str]
+    ) -> IEnumerable[str]:
+        """
+
+        :param namespaceName:
+        :param packageGraphFilePaths:
+        :return:
+        """
+    @classmethod
+    @overload
+    def ResolveNamespace(
+        cls, namespaceName: str, windowsSdkFilePath: str, packageGraphFilePaths: IEnumerable[str]
+    ) -> IEnumerable[str]:
+        """
+
+        :param namespaceName:
+        :param windowsSdkFilePath:
+        :param packageGraphFilePaths:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    DesignerNamespaceResolve: EventType[EventHandler[DesignerNamespaceResolveEventArgs]] = ...
+    """"""
+    ReflectionOnlyNamespaceResolve: EventType[EventHandler[NamespaceResolveEventArgs]] = ...
+    """"""
+
+class WriteOnlyArrayAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
     @property
-    def Size(self) -> UIntType: ...
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Append(self, value: T) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def GetAt(self, index: UIntType) -> T: ...
-    def GetMany(
-        self, startIndex: UIntType, items: ArrayType[T]
-    ) -> Tuple[UIntType, ArrayType[T]]: ...
-    def GetView(self) -> IReadOnlyList[T]: ...
-    def IndexOf(self, value: T, index: UIntType) -> Tuple[BooleanType, UIntType]: ...
-    def InsertAt(self, index: UIntType, value: T) -> VoidType: ...
-    def RemoveAt(self, index: UIntType) -> VoidType: ...
-    def RemoveAtEnd(self) -> VoidType: ...
-    def ReplaceAll(self, items: ArrayType[T]) -> VoidType: ...
-    def SetAt(self, index: UIntType, value: T) -> VoidType: ...
-    def get_Size(self) -> UIntType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-class IVectorView(Protocol[T], IIterable[T], IEnumerable[T], IEnumerable):
-    # ---------- Properties ---------- #
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    @property
-    def Size(self) -> UIntType: ...
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    def GetAt(self, index: UIntType) -> T: ...
-    def GetMany(
-        self, startIndex: UIntType, items: ArrayType[T]
-    ) -> Tuple[UIntType, ArrayType[T]]: ...
-    def IndexOf(self, value: T, index: UIntType) -> Tuple[BooleanType, UIntType]: ...
-    def get_Size(self) -> UIntType: ...
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Events
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-class IVector_Raw(Protocol[T], IIterable[T], IEnumerable[T], IEnumerable):
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-    @property
-    def Size(self) -> UIntType: ...
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    def Append(self, value: T) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def GetAt(self, index: UIntType) -> T: ...
-    def GetMany(
-        self, startIndex: UIntType, items: ArrayType[T]
-    ) -> Tuple[UIntType, ArrayType[T]]: ...
-    def GetView(self) -> IVectorView[T]: ...
-    def IndexOf(self, value: T, index: UIntType) -> Tuple[BooleanType, UIntType]: ...
-    def InsertAt(self, index: UIntType, value: T) -> VoidType: ...
-    def RemoveAt(self, index: UIntType) -> VoidType: ...
-    def RemoveAtEnd(self) -> VoidType: ...
-    def ReplaceAll(self, items: ArrayType[T]) -> VoidType: ...
-    def SetAt(self, index: UIntType, value: T) -> VoidType: ...
-    def get_Size(self) -> UIntType: ...
-
-    # No Events
-
-class IWinRTClassActivator(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def ActivateInstance(self, activatableClassId: StringType) -> ObjectType: ...
-    def GetActivationFactory(
-        self, activatableClassId: StringType, iid: Guid
-    ) -> Tuple[NIntType, Guid]: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class InterfaceForwardingSupport(Enum):
-    # None = 0
-    IBindableVector = 1
-    IVector = 2
-    IBindableVectorView = 4
-    IVectorView = 8
-    IBindableIterableOrIIterable = 16
-
-class PropertyType(Enum):
-    Empty = 0
-    UInt8 = 1
-    Int16 = 2
-    UInt16 = 3
-    Int32 = 4
-    UInt32 = 5
-    Int64 = 6
-    UInt64 = 7
-    Single = 8
-    Double = 9
-    Char16 = 10
-    Boolean = 11
-    String = 12
-    Inspectable = 13
-    DateTime = 14
-    TimeSpan = 15
-    Guid = 16
-    Point = 17
-    Size = 18
-    Rect = 19
-    Other = 20
-    UInt8Array = 1025
-    Int16Array = 1026
-    UInt16Array = 1027
-    Int32Array = 1028
-    UInt32Array = 1029
-    Int64Array = 1030
-    UInt64Array = 1031
-    SingleArray = 1032
-    DoubleArray = 1033
-    Char16Array = 1034
-    BooleanArray = 1035
-    StringArray = 1036
-    InspectableArray = 1037
-    DateTimeArray = 1038
-    TimeSpanArray = 1039
-    GuidArray = 1040
-    PointArray = 1041
-    SizeArray = 1042
-    RectArray = 1043
-    OtherArray = 1044
-
-# ---------- Delegates ---------- #
-
-GetEnumerator_Delegate = Callable[[], IEnumerator[T]]
-
-Indexer_Get_Delegate = Callable[[IntType], T]
-
-NotifyCollectionChangedEventHandler_WinRT = Callable[
-    [ObjectType, NotifyCollectionChangedEventArgs], VoidType
-]
-
-PropertyChangedEventHandler_WinRT = Callable[[ObjectType, PropertyChangedEventArgs], VoidType]
-
-WindowsFoundationEventHandler = Callable[[ObjectType, T], VoidType]
-
-__all__ = [
-    BindableIterableToEnumerableAdapter,
-    BindableVectorToCollectionAdapter,
-    BindableVectorToListAdapter,
-    CLRIKeyValuePairImpl,
-    CLRIPropertyValueImpl,
-    CLRIReferenceArrayImpl,
-    CLRIReferenceImpl,
-    ConstantSplittableMap,
-    CustomPropertyImpl,
-    DefaultInterfaceAttribute,
-    DesignerNamespaceResolveEventArgs,
-    DictionaryKeyCollection,
-    DictionaryKeyEnumerator,
-    DictionaryToMapAdapter,
-    DictionaryValueCollection,
-    DictionaryValueEnumerator,
-    EnumerableToBindableIterableAdapter,
-    EnumerableToIterableAdapter,
-    EnumeratorToIteratorAdapter,
-    EventRegistrationTokenTable,
-    GetEnumerator_Delegate,
-    IClosableToIDisposableAdapter,
-    ICommandAdapterHelpers,
-    ICommandToManagedAdapter,
-    ICommandToWinRTAdapter,
-    ICustomPropertyProviderImpl,
-    ICustomPropertyProviderProxy,
-    IDisposableToIClosableAdapter,
-    IMapViewToIReadOnlyDictionaryAdapter,
-    IReadOnlyDictionaryToIMapViewAdapter,
-    IReadOnlyListToIVectorViewAdapter,
-    IReferenceFactory,
-    IStringableHelper,
-    IVectorViewToIReadOnlyListAdapter,
-    Indexer_Get_Delegate,
-    InterfaceImplementedInVersionAttribute,
-    IterableToEnumerableAdapter,
-    IteratorToEnumeratorAdapter,
-    ListToBindableVectorAdapter,
-    ListToBindableVectorViewAdapter,
-    ListToVectorAdapter,
-    ManagedActivationFactory,
-    MapToCollectionAdapter,
-    MapToDictionaryAdapter,
-    MapViewToReadOnlyCollectionAdapter,
-    NamespaceResolveEventArgs,
-    NotifyCollectionChangedEventArgsMarshaler,
-    NotifyCollectionChangedEventHandler_WinRT,
-    NotifyCollectionChangedToManagedAdapter,
-    NotifyCollectionChangedToWinRTAdapter,
-    NotifyPropertyChangedToManagedAdapter,
-    NotifyPropertyChangedToWinRTAdapter,
-    PropertyChangedEventArgsMarshaler,
-    PropertyChangedEventHandler_WinRT,
-    ReadOnlyArrayAttribute,
-    ReadOnlyDictionaryKeyCollection,
-    ReadOnlyDictionaryKeyEnumerator,
-    ReadOnlyDictionaryValueCollection,
-    ReadOnlyDictionaryValueEnumerator,
-    ReturnValueNameAttribute,
-    RuntimeClass,
-    UnsafeNativeMethods,
-    VectorToCollectionAdapter,
-    VectorToListAdapter,
-    VectorViewToReadOnlyCollectionAdapter,
-    WinRTClassActivator,
-    WindowsFoundationEventHandler,
-    WindowsRuntimeBufferHelper,
-    WindowsRuntimeImportAttribute,
-    WindowsRuntimeMarshal,
-    WindowsRuntimeMetadata,
-    WriteOnlyArrayAttribute,
-    EventRegistrationToken,
-    HSTRING_HEADER,
-    Point,
-    Rect,
-    Size,
-    IActivationFactory,
-    IBindableIterable,
-    IBindableIterator,
-    IBindableVector,
-    IBindableVectorView,
-    IClosable,
-    ICommand_WinRT,
-    ICustomProperty,
-    ICustomPropertyProvider,
-    IGetProxyTarget,
-    IIterable,
-    IIterator,
-    IKeyValuePair,
-    IManagedActivationFactory,
-    IMap,
-    IMapView,
-    INotifyCollectionChangedEventArgs,
-    INotifyCollectionChanged_WinRT,
-    INotifyPropertyChanged_WinRT,
-    IPropertyChangedEventArgs,
-    IPropertyValue,
-    IReference,
-    IReferenceArray,
-    IRestrictedErrorInfo,
-    IStringable,
-    IVector,
-    IVectorView,
-    IVector_Raw,
-    IWinRTClassActivator,
-    InterfaceForwardingSupport,
-    PropertyType,
-    GetEnumerator_Delegate,
-    Indexer_Get_Delegate,
-    NotifyCollectionChangedEventHandler_WinRT,
-    PropertyChangedEventHandler_WinRT,
-    WindowsFoundationEventHandler,
-]
+        :return:
+        """

@@ -1,124 +1,368 @@
 from __future__ import annotations
 
-from typing import Union
 from typing import overload
 
 from System import Enum
 from System import Exception
-from System import Int32
-from System import String
 from System import SystemException
+from System import Type
+from System.Collections import IDictionary
+from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Serialization import ISerializable
+from System.Runtime.Serialization import SerializationInfo
+from System.Runtime.Serialization import StreamingContext
 
-# ---------- Types ---------- #
-
-IntType = Union[int, Int32]
-StringType = Union[str, String]
-
-# ---------- Classes ---------- #
-
-class AuthenticationException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class AuthenticationException(SystemException, _Exception, ISerializable):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, message: StringType): ...
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
     @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
+    def __init__(self, message: str, innerException: Exception):
+        """
 
-    # No Properties
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
 
-class InvalidCredentialException(AuthenticationException, ISerializable, _Exception):
-    # No Fields
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
 
-    # ---------- Constructors ---------- #
-
+        :return:
+        """
     @overload
-    def __init__(self): ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def __init__(self, message: StringType): ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
     @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-    # No Events
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-    # No Sub Classes
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-# No Structs
-
-# No Interfaces
-
-# ---------- Enums ---------- #
+        :return:
+        """
 
 class CipherAlgorithmType(Enum):
-    # None = 0
-    Null = 24576
-    Des = 26113
-    Rc2 = 26114
-    TripleDes = 26115
-    Aes128 = 26126
-    Aes192 = 26127
-    Aes256 = 26128
-    Aes = 26129
-    Rc4 = 26625
+    """"""
+
+    _None: CipherAlgorithmType = ...
+    """"""
+    Null: CipherAlgorithmType = ...
+    """"""
+    Des: CipherAlgorithmType = ...
+    """"""
+    Rc2: CipherAlgorithmType = ...
+    """"""
+    TripleDes: CipherAlgorithmType = ...
+    """"""
+    Aes128: CipherAlgorithmType = ...
+    """"""
+    Aes192: CipherAlgorithmType = ...
+    """"""
+    Aes256: CipherAlgorithmType = ...
+    """"""
+    Aes: CipherAlgorithmType = ...
+    """"""
+    Rc4: CipherAlgorithmType = ...
+    """"""
 
 class ExchangeAlgorithmType(Enum):
-    # None = 0
-    RsaSign = 9216
-    RsaKeyX = 41984
-    DiffieHellman = 43522
+    """"""
+
+    _None: ExchangeAlgorithmType = ...
+    """"""
+    RsaSign: ExchangeAlgorithmType = ...
+    """"""
+    RsaKeyX: ExchangeAlgorithmType = ...
+    """"""
+    DiffieHellman: ExchangeAlgorithmType = ...
+    """"""
 
 class HashAlgorithmType(Enum):
-    # None = 0
-    Md5 = 32771
-    Sha1 = 32772
-    Sha256 = 32780
-    Sha384 = 32781
-    Sha512 = 32782
+    """"""
+
+    _None: HashAlgorithmType = ...
+    """"""
+    Md5: HashAlgorithmType = ...
+    """"""
+    Sha1: HashAlgorithmType = ...
+    """"""
+    Sha256: HashAlgorithmType = ...
+    """"""
+    Sha384: HashAlgorithmType = ...
+    """"""
+    Sha512: HashAlgorithmType = ...
+    """"""
+
+class InvalidCredentialException(AuthenticationException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SslProtocols(Enum):
-    # None = 0
-    Ssl2 = 12
-    Ssl3 = 48
-    Tls = 192
-    Default = 240
-    Tls11 = 768
-    Tls12 = 3072
-    Tls13 = 12288
+    """"""
 
-# No Delegates
-
-__all__ = [
-    AuthenticationException,
-    InvalidCredentialException,
-    CipherAlgorithmType,
-    ExchangeAlgorithmType,
-    HashAlgorithmType,
-    SslProtocols,
-]
+    _None: SslProtocols = ...
+    """"""
+    Ssl2: SslProtocols = ...
+    """"""
+    Ssl3: SslProtocols = ...
+    """"""
+    Tls: SslProtocols = ...
+    """"""
+    Default: SslProtocols = ...
+    """"""
+    Tls11: SslProtocols = ...
+    """"""
+    Tls12: SslProtocols = ...
+    """"""
+    Tls13: SslProtocols = ...
+    """"""

@@ -1,60 +1,121 @@
 from __future__ import annotations
 
-from typing import Union
+from typing import Tuple
 from typing import overload
 
 from System import Attribute
-from System import String
+from System import Guid
+from System import IntPtr
 from System import Type
 from System.Runtime.InteropServices import _Attribute
 
-# ---------- Types ---------- #
-
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-
-# ---------- Classes ---------- #
-
 class ValueSerializerAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, valueSerializerType: TypeType): ...
+    def __init__(self, valueSerializerTypeName: str):
+        """
+
+        :param valueSerializerTypeName:
+        """
     @overload
-    def __init__(self, valueSerializerTypeName: StringType): ...
+    def __init__(self, valueSerializerType: Type):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param valueSerializerType:
+        """
     @property
-    def ValueSerializerType(self) -> TypeType: ...
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def ValueSerializerTypeName(self) -> StringType: ...
+    def ValueSerializerType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def ValueSerializerTypeName(self) -> str:
+        """
 
-    def get_ValueSerializerType(self) -> TypeType: ...
-    def get_ValueSerializerTypeName(self) -> StringType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Structs
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Enums
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-# No Structs
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-# No Interfaces
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-# No Enums
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-# No Delegates
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-__all__ = [
-    ValueSerializerAttribute,
-]
+        :return:
+        """

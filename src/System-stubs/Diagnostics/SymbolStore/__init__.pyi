@@ -1,505 +1,839 @@
 from __future__ import annotations
 
-from typing import List
-from typing import Protocol
-from typing import Union
+from typing import ClassVar
+from typing import Final
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Enum
 from System import Guid
-from System import Int32
 from System import IntPtr
 from System import Object
-from System import String
+from System import Type
 from System import ValueType
-from System import Void
 from System.Reflection import FieldAttributes
 from System.Reflection import ParameterAttributes
 
-# ---------- Types ---------- #
+class ISymbolBinder:
+    """"""
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
+    def GetReader(self, importer: int, filename: str, searchPath: str) -> ISymbolReader:
+        """
 
-# ---------- Classes ---------- #
+        :param importer:
+        :param filename:
+        :param searchPath:
+        :return:
+        """
 
-class SymDocumentType(ObjectType):
-    # ---------- Fields ---------- #
+class ISymbolBinder1:
+    """"""
 
-    @staticmethod
-    @property
-    def Text() -> Guid: ...
+    def GetReader(self, importer: IntPtr, filename: str, searchPath: str) -> ISymbolReader:
+        """
 
-    # ---------- Constructors ---------- #
+        :param importer:
+        :param filename:
+        :param searchPath:
+        :return:
+        """
 
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SymLanguageType(ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Basic() -> Guid: ...
-    @staticmethod
-    @property
-    def C() -> Guid: ...
-    @staticmethod
-    @property
-    def CPlusPlus() -> Guid: ...
-    @staticmethod
-    @property
-    def CSharp() -> Guid: ...
-    @staticmethod
-    @property
-    def Cobol() -> Guid: ...
-    @staticmethod
-    @property
-    def ILAssembly() -> Guid: ...
-    @staticmethod
-    @property
-    def JScript() -> Guid: ...
-    @staticmethod
-    @property
-    def Java() -> Guid: ...
-    @staticmethod
-    @property
-    def MCPlusPlus() -> Guid: ...
-    @staticmethod
-    @property
-    def Pascal() -> Guid: ...
-    @staticmethod
-    @property
-    def SMC() -> Guid: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SymLanguageVendor(ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Microsoft() -> Guid: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
-
-class SymbolToken(ValueType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, val: IntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    @overload
-    def Equals(self, obj: SymbolToken) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetToken(self) -> IntType: ...
-    @staticmethod
-    def op_Equality(a: SymbolToken, b: SymbolToken) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(a: SymbolToken, b: SymbolToken) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Interfaces ---------- #
-
-class ISymbolBinder(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetReader(
-        self, importer: IntType, filename: StringType, searchPath: StringType
-    ) -> ISymbolReader: ...
-
-    # No Events
-
-class ISymbolBinder1(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetReader(
-        self, importer: NIntType, filename: StringType, searchPath: StringType
-    ) -> ISymbolReader: ...
-
-    # No Events
-
-class ISymbolDocument(Protocol):
-    # ---------- Properties ---------- #
+class ISymbolDocument:
+    """"""
 
     @property
-    def CheckSumAlgorithmId(self) -> Guid: ...
-    @property
-    def DocumentType(self) -> Guid: ...
-    @property
-    def HasEmbeddedSource(self) -> BooleanType: ...
-    @property
-    def Language(self) -> Guid: ...
-    @property
-    def LanguageVendor(self) -> Guid: ...
-    @property
-    def SourceLength(self) -> IntType: ...
-    @property
-    def URL(self) -> StringType: ...
+    def CheckSumAlgorithmId(self) -> Guid:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def DocumentType(self) -> Guid:
+        """
 
-    def FindClosestLine(self, line: IntType) -> IntType: ...
-    def GetCheckSum(self) -> ArrayType[ByteType]: ...
+        :return:
+        """
+    @property
+    def HasEmbeddedSource(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Language(self) -> Guid:
+        """
+
+        :return:
+        """
+    @property
+    def LanguageVendor(self) -> Guid:
+        """
+
+        :return:
+        """
+    @property
+    def SourceLength(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def URL(self) -> str:
+        """
+
+        :return:
+        """
+    def FindClosestLine(self, line: int) -> int:
+        """
+
+        :param line:
+        :return:
+        """
+    def GetCheckSum(self) -> Array[int]:
+        """
+
+        :return:
+        """
     def GetSourceRange(
-        self, startLine: IntType, startColumn: IntType, endLine: IntType, endColumn: IntType
-    ) -> ArrayType[ByteType]: ...
-    def get_CheckSumAlgorithmId(self) -> Guid: ...
-    def get_DocumentType(self) -> Guid: ...
-    def get_HasEmbeddedSource(self) -> BooleanType: ...
-    def get_Language(self) -> Guid: ...
-    def get_LanguageVendor(self) -> Guid: ...
-    def get_SourceLength(self) -> IntType: ...
-    def get_URL(self) -> StringType: ...
+        self, startLine: int, startColumn: int, endLine: int, endColumn: int
+    ) -> Array[int]:
+        """
 
-    # No Events
+        :param startLine:
+        :param startColumn:
+        :param endLine:
+        :param endColumn:
+        :return:
+        """
 
-class ISymbolDocumentWriter(Protocol):
-    # No Properties
+class ISymbolDocumentWriter:
+    """"""
 
-    # ---------- Methods ---------- #
+    def SetCheckSum(self, algorithmId: Guid, checkSum: Array[int]) -> None:
+        """
 
-    def SetCheckSum(self, algorithmId: Guid, checkSum: ArrayType[ByteType]) -> VoidType: ...
-    def SetSource(self, source: ArrayType[ByteType]) -> VoidType: ...
+        :param algorithmId:
+        :param checkSum:
+        """
+    def SetSource(self, source: Array[int]) -> None:
+        """
 
-    # No Events
+        :param source:
+        """
 
-class ISymbolMethod(Protocol):
-    # ---------- Properties ---------- #
+class ISymbolMethod:
+    """"""
 
     @property
-    def RootScope(self) -> ISymbolScope: ...
-    @property
-    def SequencePointCount(self) -> IntType: ...
-    @property
-    def Token(self) -> SymbolToken: ...
+    def RootScope(self) -> ISymbolScope:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def SequencePointCount(self) -> int:
+        """
 
-    def GetNamespace(self) -> ISymbolNamespace: ...
-    def GetOffset(self, document: ISymbolDocument, line: IntType, column: IntType) -> IntType: ...
-    def GetParameters(self) -> ArrayType[ISymbolVariable]: ...
-    def GetRanges(
-        self, document: ISymbolDocument, line: IntType, column: IntType
-    ) -> ArrayType[IntType]: ...
-    def GetScope(self, offset: IntType) -> ISymbolScope: ...
+        :return:
+        """
+    @property
+    def Token(self) -> SymbolToken:
+        """
+
+        :return:
+        """
+    def GetNamespace(self) -> ISymbolNamespace:
+        """
+
+        :return:
+        """
+    def GetOffset(self, document: ISymbolDocument, line: int, column: int) -> int:
+        """
+
+        :param document:
+        :param line:
+        :param column:
+        :return:
+        """
+    def GetParameters(self) -> Array[ISymbolVariable]:
+        """
+
+        :return:
+        """
+    def GetRanges(self, document: ISymbolDocument, line: int, column: int) -> Array[int]:
+        """
+
+        :param document:
+        :param line:
+        :param column:
+        :return:
+        """
+    def GetScope(self, offset: int) -> ISymbolScope:
+        """
+
+        :param offset:
+        :return:
+        """
     def GetSequencePoints(
         self,
-        offsets: ArrayType[IntType],
-        documents: ArrayType[ISymbolDocument],
-        lines: ArrayType[IntType],
-        columns: ArrayType[IntType],
-        endLines: ArrayType[IntType],
-        endColumns: ArrayType[IntType],
-    ) -> VoidType: ...
+        offsets: Array[int],
+        documents: Array[ISymbolDocument],
+        lines: Array[int],
+        columns: Array[int],
+        endLines: Array[int],
+        endColumns: Array[int],
+    ) -> None:
+        """
+
+        :param offsets:
+        :param documents:
+        :param lines:
+        :param columns:
+        :param endLines:
+        :param endColumns:
+        """
     def GetSourceStartEnd(
-        self,
-        docs: ArrayType[ISymbolDocument],
-        lines: ArrayType[IntType],
-        columns: ArrayType[IntType],
-    ) -> BooleanType: ...
-    def get_RootScope(self) -> ISymbolScope: ...
-    def get_SequencePointCount(self) -> IntType: ...
-    def get_Token(self) -> SymbolToken: ...
+        self, docs: Array[ISymbolDocument], lines: Array[int], columns: Array[int]
+    ) -> bool:
+        """
 
-    # No Events
+        :param docs:
+        :param lines:
+        :param columns:
+        :return:
+        """
 
-class ISymbolNamespace(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def Name(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetNamespaces(self) -> ArrayType[ISymbolNamespace]: ...
-    def GetVariables(self) -> ArrayType[ISymbolVariable]: ...
-    def get_Name(self) -> StringType: ...
-
-    # No Events
-
-class ISymbolReader(Protocol):
-    # ---------- Properties ---------- #
+class ISymbolNamespace:
+    """"""
 
     @property
-    def UserEntryPoint(self) -> SymbolToken: ...
+    def Name(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetNamespaces(self) -> Array[ISymbolNamespace]:
+        """
 
+        :return:
+        """
+    def GetVariables(self) -> Array[ISymbolVariable]:
+        """
+
+        :return:
+        """
+
+class ISymbolReader:
+    """"""
+
+    @property
+    def UserEntryPoint(self) -> SymbolToken:
+        """
+
+        :return:
+        """
     def GetDocument(
-        self, url: StringType, language: Guid, languageVendor: Guid, documentType: Guid
-    ) -> ISymbolDocument: ...
-    def GetDocuments(self) -> ArrayType[ISymbolDocument]: ...
-    def GetGlobalVariables(self) -> ArrayType[ISymbolVariable]: ...
+        self, url: str, language: Guid, languageVendor: Guid, documentType: Guid
+    ) -> ISymbolDocument:
+        """
+
+        :param url:
+        :param language:
+        :param languageVendor:
+        :param documentType:
+        :return:
+        """
+    def GetDocuments(self) -> Array[ISymbolDocument]:
+        """
+
+        :return:
+        """
+    def GetGlobalVariables(self) -> Array[ISymbolVariable]:
+        """
+
+        :return:
+        """
     @overload
-    def GetMethod(self, method: SymbolToken) -> ISymbolMethod: ...
+    def GetMethod(self, method: SymbolToken) -> ISymbolMethod:
+        """
+
+        :param method:
+        :return:
+        """
     @overload
-    def GetMethod(self, method: SymbolToken, version: IntType) -> ISymbolMethod: ...
+    def GetMethod(self, method: SymbolToken, version: int) -> ISymbolMethod:
+        """
+
+        :param method:
+        :param version:
+        :return:
+        """
     def GetMethodFromDocumentPosition(
-        self, document: ISymbolDocument, line: IntType, column: IntType
-    ) -> ISymbolMethod: ...
-    def GetNamespaces(self) -> ArrayType[ISymbolNamespace]: ...
-    def GetSymAttribute(self, parent: SymbolToken, name: StringType) -> ArrayType[ByteType]: ...
-    def GetVariables(self, parent: SymbolToken) -> ArrayType[ISymbolVariable]: ...
-    def get_UserEntryPoint(self) -> SymbolToken: ...
+        self, document: ISymbolDocument, line: int, column: int
+    ) -> ISymbolMethod:
+        """
 
-    # No Events
+        :param document:
+        :param line:
+        :param column:
+        :return:
+        """
+    def GetNamespaces(self) -> Array[ISymbolNamespace]:
+        """
 
-class ISymbolScope(Protocol):
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def GetSymAttribute(self, parent: SymbolToken, name: str) -> Array[int]:
+        """
 
-    @property
-    def EndOffset(self) -> IntType: ...
-    @property
-    def Method(self) -> ISymbolMethod: ...
-    @property
-    def Parent(self) -> ISymbolScope: ...
-    @property
-    def StartOffset(self) -> IntType: ...
+        :param parent:
+        :param name:
+        :return:
+        """
+    def GetVariables(self, parent: SymbolToken) -> Array[ISymbolVariable]:
+        """
 
-    # ---------- Methods ---------- #
+        :param parent:
+        :return:
+        """
 
-    def GetChildren(self) -> ArrayType[ISymbolScope]: ...
-    def GetLocals(self) -> ArrayType[ISymbolVariable]: ...
-    def GetNamespaces(self) -> ArrayType[ISymbolNamespace]: ...
-    def get_EndOffset(self) -> IntType: ...
-    def get_Method(self) -> ISymbolMethod: ...
-    def get_Parent(self) -> ISymbolScope: ...
-    def get_StartOffset(self) -> IntType: ...
-
-    # No Events
-
-class ISymbolVariable(Protocol):
-    # ---------- Properties ---------- #
+class ISymbolScope:
+    """"""
 
     @property
-    def AddressField1(self) -> IntType: ...
-    @property
-    def AddressField2(self) -> IntType: ...
-    @property
-    def AddressField3(self) -> IntType: ...
-    @property
-    def AddressKind(self) -> SymAddressKind: ...
-    @property
-    def Attributes(self) -> ObjectType: ...
-    @property
-    def EndOffset(self) -> IntType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def StartOffset(self) -> IntType: ...
+    def EndOffset(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Method(self) -> ISymbolMethod:
+        """
 
-    def GetSignature(self) -> ArrayType[ByteType]: ...
-    def get_AddressField1(self) -> IntType: ...
-    def get_AddressField2(self) -> IntType: ...
-    def get_AddressField3(self) -> IntType: ...
-    def get_AddressKind(self) -> SymAddressKind: ...
-    def get_Attributes(self) -> ObjectType: ...
-    def get_EndOffset(self) -> IntType: ...
-    def get_Name(self) -> StringType: ...
-    def get_StartOffset(self) -> IntType: ...
+        :return:
+        """
+    @property
+    def Parent(self) -> ISymbolScope:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def StartOffset(self) -> int:
+        """
 
-class ISymbolWriter(Protocol):
-    # No Properties
+        :return:
+        """
+    def GetChildren(self) -> Array[ISymbolScope]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetLocals(self) -> Array[ISymbolVariable]:
+        """
 
-    def Close(self) -> VoidType: ...
-    def CloseMethod(self) -> VoidType: ...
-    def CloseNamespace(self) -> VoidType: ...
-    def CloseScope(self, endOffset: IntType) -> VoidType: ...
+        :return:
+        """
+    def GetNamespaces(self) -> Array[ISymbolNamespace]:
+        """
+
+        :return:
+        """
+
+class ISymbolVariable:
+    """"""
+
+    @property
+    def AddressField1(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def AddressField2(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def AddressField3(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def AddressKind(self) -> SymAddressKind:
+        """
+
+        :return:
+        """
+    @property
+    def Attributes(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def EndOffset(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def StartOffset(self) -> int:
+        """
+
+        :return:
+        """
+    def GetSignature(self) -> Array[int]:
+        """
+
+        :return:
+        """
+
+class ISymbolWriter:
+    """"""
+
+    def Close(self) -> None:
+        """"""
+    def CloseMethod(self) -> None:
+        """"""
+    def CloseNamespace(self) -> None:
+        """"""
+    def CloseScope(self, endOffset: int) -> None:
+        """
+
+        :param endOffset:
+        """
     def DefineDocument(
-        self, url: StringType, language: Guid, languageVendor: Guid, documentType: Guid
-    ) -> ISymbolDocumentWriter: ...
+        self, url: str, language: Guid, languageVendor: Guid, documentType: Guid
+    ) -> ISymbolDocumentWriter:
+        """
+
+        :param url:
+        :param language:
+        :param languageVendor:
+        :param documentType:
+        :return:
+        """
     def DefineField(
         self,
         parent: SymbolToken,
-        name: StringType,
+        name: str,
         attributes: FieldAttributes,
-        signature: ArrayType[ByteType],
+        signature: Array[int],
         addrKind: SymAddressKind,
-        addr1: IntType,
-        addr2: IntType,
-        addr3: IntType,
-    ) -> VoidType: ...
+        addr1: int,
+        addr2: int,
+        addr3: int,
+    ) -> None:
+        """
+
+        :param parent:
+        :param name:
+        :param attributes:
+        :param signature:
+        :param addrKind:
+        :param addr1:
+        :param addr2:
+        :param addr3:
+        """
     def DefineGlobalVariable(
         self,
-        name: StringType,
+        name: str,
         attributes: FieldAttributes,
-        signature: ArrayType[ByteType],
+        signature: Array[int],
         addrKind: SymAddressKind,
-        addr1: IntType,
-        addr2: IntType,
-        addr3: IntType,
-    ) -> VoidType: ...
+        addr1: int,
+        addr2: int,
+        addr3: int,
+    ) -> None:
+        """
+
+        :param name:
+        :param attributes:
+        :param signature:
+        :param addrKind:
+        :param addr1:
+        :param addr2:
+        :param addr3:
+        """
     def DefineLocalVariable(
         self,
-        name: StringType,
+        name: str,
         attributes: FieldAttributes,
-        signature: ArrayType[ByteType],
+        signature: Array[int],
         addrKind: SymAddressKind,
-        addr1: IntType,
-        addr2: IntType,
-        addr3: IntType,
-        startOffset: IntType,
-        endOffset: IntType,
-    ) -> VoidType: ...
+        addr1: int,
+        addr2: int,
+        addr3: int,
+        startOffset: int,
+        endOffset: int,
+    ) -> None:
+        """
+
+        :param name:
+        :param attributes:
+        :param signature:
+        :param addrKind:
+        :param addr1:
+        :param addr2:
+        :param addr3:
+        :param startOffset:
+        :param endOffset:
+        """
     def DefineParameter(
         self,
-        name: StringType,
+        name: str,
         attributes: ParameterAttributes,
-        sequence: IntType,
+        sequence: int,
         addrKind: SymAddressKind,
-        addr1: IntType,
-        addr2: IntType,
-        addr3: IntType,
-    ) -> VoidType: ...
+        addr1: int,
+        addr2: int,
+        addr3: int,
+    ) -> None:
+        """
+
+        :param name:
+        :param attributes:
+        :param sequence:
+        :param addrKind:
+        :param addr1:
+        :param addr2:
+        :param addr3:
+        """
     def DefineSequencePoints(
         self,
         document: ISymbolDocumentWriter,
-        offsets: ArrayType[IntType],
-        lines: ArrayType[IntType],
-        columns: ArrayType[IntType],
-        endLines: ArrayType[IntType],
-        endColumns: ArrayType[IntType],
-    ) -> VoidType: ...
-    def Initialize(
-        self, emitter: NIntType, filename: StringType, fFullBuild: BooleanType
-    ) -> VoidType: ...
-    def OpenMethod(self, method: SymbolToken) -> VoidType: ...
-    def OpenNamespace(self, name: StringType) -> VoidType: ...
-    def OpenScope(self, startOffset: IntType) -> IntType: ...
+        offsets: Array[int],
+        lines: Array[int],
+        columns: Array[int],
+        endLines: Array[int],
+        endColumns: Array[int],
+    ) -> None:
+        """
+
+        :param document:
+        :param offsets:
+        :param lines:
+        :param columns:
+        :param endLines:
+        :param endColumns:
+        """
+    def Initialize(self, emitter: IntPtr, filename: str, fFullBuild: bool) -> None:
+        """
+
+        :param emitter:
+        :param filename:
+        :param fFullBuild:
+        """
+    def OpenMethod(self, method: SymbolToken) -> None:
+        """
+
+        :param method:
+        """
+    def OpenNamespace(self, name: str) -> None:
+        """
+
+        :param name:
+        """
+    def OpenScope(self, startOffset: int) -> int:
+        """
+
+        :param startOffset:
+        :return:
+        """
     def SetMethodSourceRange(
         self,
         startDoc: ISymbolDocumentWriter,
-        startLine: IntType,
-        startColumn: IntType,
+        startLine: int,
+        startColumn: int,
         endDoc: ISymbolDocumentWriter,
-        endLine: IntType,
-        endColumn: IntType,
-    ) -> VoidType: ...
-    def SetScopeRange(
-        self, scopeID: IntType, startOffset: IntType, endOffset: IntType
-    ) -> VoidType: ...
-    def SetSymAttribute(
-        self, parent: SymbolToken, name: StringType, data: ArrayType[ByteType]
-    ) -> VoidType: ...
-    def SetUnderlyingWriter(self, underlyingWriter: NIntType) -> VoidType: ...
-    def SetUserEntryPoint(self, entryMethod: SymbolToken) -> VoidType: ...
-    def UsingNamespace(self, fullName: StringType) -> VoidType: ...
+        endLine: int,
+        endColumn: int,
+    ) -> None:
+        """
 
-    # No Events
+        :param startDoc:
+        :param startLine:
+        :param startColumn:
+        :param endDoc:
+        :param endLine:
+        :param endColumn:
+        """
+    def SetScopeRange(self, scopeID: int, startOffset: int, endOffset: int) -> None:
+        """
 
-# ---------- Enums ---------- #
+        :param scopeID:
+        :param startOffset:
+        :param endOffset:
+        """
+    def SetSymAttribute(self, parent: SymbolToken, name: str, data: Array[int]) -> None:
+        """
+
+        :param parent:
+        :param name:
+        :param data:
+        """
+    def SetUnderlyingWriter(self, underlyingWriter: IntPtr) -> None:
+        """
+
+        :param underlyingWriter:
+        """
+    def SetUserEntryPoint(self, entryMethod: SymbolToken) -> None:
+        """
+
+        :param entryMethod:
+        """
+    def UsingNamespace(self, fullName: str) -> None:
+        """
+
+        :param fullName:
+        """
 
 class SymAddressKind(Enum):
-    ILOffset = 1
-    NativeRVA = 2
-    NativeRegister = 3
-    NativeRegisterRelative = 4
-    NativeOffset = 5
-    NativeRegisterRegister = 6
-    NativeRegisterStack = 7
-    NativeStackRegister = 8
-    BitField = 9
-    NativeSectionOffset = 10
+    """"""
 
-# No Delegates
+    ILOffset: SymAddressKind = ...
+    """"""
+    NativeRVA: SymAddressKind = ...
+    """"""
+    NativeRegister: SymAddressKind = ...
+    """"""
+    NativeRegisterRelative: SymAddressKind = ...
+    """"""
+    NativeOffset: SymAddressKind = ...
+    """"""
+    NativeRegisterRegister: SymAddressKind = ...
+    """"""
+    NativeRegisterStack: SymAddressKind = ...
+    """"""
+    NativeStackRegister: SymAddressKind = ...
+    """"""
+    BitField: SymAddressKind = ...
+    """"""
+    NativeSectionOffset: SymAddressKind = ...
+    """"""
 
-__all__ = [
-    SymDocumentType,
-    SymLanguageType,
-    SymLanguageVendor,
-    SymbolToken,
-    ISymbolBinder,
-    ISymbolBinder1,
-    ISymbolDocument,
-    ISymbolDocumentWriter,
-    ISymbolMethod,
-    ISymbolNamespace,
-    ISymbolReader,
-    ISymbolScope,
-    ISymbolVariable,
-    ISymbolWriter,
-    SymAddressKind,
-]
+class SymDocumentType(Object):
+    """"""
+
+    Text: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SymLanguageType(Object):
+    """"""
+
+    Basic: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    C: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    CPlusPlus: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    CSharp: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    Cobol: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    ILAssembly: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    JScript: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    Java: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    MCPlusPlus: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    Pascal: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    SMC: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SymLanguageVendor(Object):
+    """"""
+
+    Microsoft: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SymbolToken(ValueType):
+    """"""
+
+    def __init__(self, val: int):
+        """
+
+        :param val:
+        """
+    @overload
+    def Equals(self, obj: SymbolToken) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetToken(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __eq__(self, other: SymbolToken) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: SymbolToken) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, a: SymbolToken, b: SymbolToken) -> bool:
+        """
+
+        :param a:
+        :param b:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, a: SymbolToken, b: SymbolToken) -> bool:
+        """
+
+        :param a:
+        :param b:
+        :return:
+        """

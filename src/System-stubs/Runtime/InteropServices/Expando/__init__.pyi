@@ -1,44 +1,165 @@
 from __future__ import annotations
 
-from typing import Protocol
-from typing import Union
+from typing import overload
 
+from System import Array
 from System import Delegate
-from System import String
-from System import Void
+from System import Type
+from System.Globalization import CultureInfo
+from System.Reflection import Binder
+from System.Reflection import BindingFlags
 from System.Reflection import FieldInfo
 from System.Reflection import IReflect
 from System.Reflection import MemberInfo
 from System.Reflection import MethodInfo
+from System.Reflection import ParameterModifier
 from System.Reflection import PropertyInfo
 
-# ---------- Types ---------- #
+class IExpando(IReflect):
+    """"""
 
-StringType = Union[str, String]
-VoidType = Union[None, Void]
+    @property
+    def UnderlyingSystemType(self) -> Type:
+        """
 
-# No Classes
+        :return:
+        """
+    def AddField(self, name: str) -> FieldInfo:
+        """
 
-# No Structs
+        :param name:
+        :return:
+        """
+    def AddMethod(self, name: str, method: Delegate) -> MethodInfo:
+        """
 
-# ---------- Interfaces ---------- #
+        :param name:
+        :param method:
+        :return:
+        """
+    def AddProperty(self, name: str) -> PropertyInfo:
+        """
 
-class IExpando(Protocol, IReflect):
-    # No Properties
+        :param name:
+        :return:
+        """
+    def GetField(self, name: str, bindingAttr: BindingFlags) -> FieldInfo:
+        """
 
-    # ---------- Methods ---------- #
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
+    def GetFields(self, bindingAttr: BindingFlags) -> Array[FieldInfo]:
+        """
 
-    def AddField(self, name: StringType) -> FieldInfo: ...
-    def AddMethod(self, name: StringType, method: Delegate) -> MethodInfo: ...
-    def AddProperty(self, name: StringType) -> PropertyInfo: ...
-    def RemoveMember(self, m: MemberInfo) -> VoidType: ...
+        :param bindingAttr:
+        :return:
+        """
+    def GetMember(self, name: str, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """
 
-    # No Events
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
+    def GetMembers(self, bindingAttr: BindingFlags) -> Array[MemberInfo]:
+        """
 
-# No Enums
+        :param bindingAttr:
+        :return:
+        """
+    @overload
+    def GetMethod(self, name: str, bindingAttr: BindingFlags) -> MethodInfo:
+        """
 
-# No Delegates
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
+    @overload
+    def GetMethod(
+        self,
+        name: str,
+        bindingAttr: BindingFlags,
+        binder: Binder,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
+    ) -> MethodInfo:
+        """
 
-__all__ = [
-    IExpando,
-]
+        :param name:
+        :param bindingAttr:
+        :param binder:
+        :param types:
+        :param modifiers:
+        :return:
+        """
+    def GetMethods(self, bindingAttr: BindingFlags) -> Array[MethodInfo]:
+        """
+
+        :param bindingAttr:
+        :return:
+        """
+    def GetProperties(self, bindingAttr: BindingFlags) -> Array[PropertyInfo]:
+        """
+
+        :param bindingAttr:
+        :return:
+        """
+    @overload
+    def GetProperty(self, name: str, bindingAttr: BindingFlags) -> PropertyInfo:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :return:
+        """
+    @overload
+    def GetProperty(
+        self,
+        name: str,
+        bindingAttr: BindingFlags,
+        binder: Binder,
+        returnType: Type,
+        types: Array[Type],
+        modifiers: Array[ParameterModifier],
+    ) -> PropertyInfo:
+        """
+
+        :param name:
+        :param bindingAttr:
+        :param binder:
+        :param returnType:
+        :param types:
+        :param modifiers:
+        :return:
+        """
+    def InvokeMember(
+        self,
+        name: str,
+        invokeAttr: BindingFlags,
+        binder: Binder,
+        target: object,
+        args: Array[object],
+        modifiers: Array[ParameterModifier],
+        culture: CultureInfo,
+        namedParameters: Array[str],
+    ) -> object:
+        """
+
+        :param name:
+        :param invokeAttr:
+        :param binder:
+        :param target:
+        :param args:
+        :param modifiers:
+        :param culture:
+        :param namedParameters:
+        :return:
+        """
+    def RemoveMember(self, m: MemberInfo) -> None:
+        """
+
+        :param m:
+        """

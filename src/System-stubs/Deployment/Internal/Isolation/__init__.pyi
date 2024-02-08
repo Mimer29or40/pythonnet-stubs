@@ -1,2396 +1,3721 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
+from typing import ClassVar
+from typing import Final
 from typing import Tuple
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Char
 from System import DateTime
 from System import Enum
 from System import Guid
 from System import IDisposable
-from System import Int32
-from System import Int64
 from System import IntPtr
 from System import Object
-from System import String
-from System import UInt16
-from System import UInt32
-from System import UInt64
+from System import Type
 from System import UIntPtr
 from System import ValueType
-from System import Void
 from System.Collections import IEnumerator
 from System.Deployment.Internal.Isolation.Manifest import ICMS
-
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-CharType = Union[str, Char]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-NUIntType = Union[int, UIntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-UIntType = Union[int, UInt32]
-ULongType = Union[int, UInt64]
-UShortType = Union[int, UInt16]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class IsolationInterop(ABC, ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING() -> Guid: ...
-    @staticmethod
-    @GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING.setter
-    def GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IID_ICMS() -> Guid: ...
-    @staticmethod
-    @IID_ICMS.setter
-    def IID_ICMS(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IID_IDefinitionIdentity() -> Guid: ...
-    @staticmethod
-    @IID_IDefinitionIdentity.setter
-    def IID_IDefinitionIdentity(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IID_IEnumSTORE_ASSEMBLY() -> Guid: ...
-    @staticmethod
-    @IID_IEnumSTORE_ASSEMBLY.setter
-    def IID_IEnumSTORE_ASSEMBLY(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IID_IEnumSTORE_ASSEMBLY_FILE() -> Guid: ...
-    @staticmethod
-    @IID_IEnumSTORE_ASSEMBLY_FILE.setter
-    def IID_IEnumSTORE_ASSEMBLY_FILE(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IID_IEnumSTORE_CATEGORY() -> Guid: ...
-    @staticmethod
-    @IID_IEnumSTORE_CATEGORY.setter
-    def IID_IEnumSTORE_CATEGORY(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IID_IEnumSTORE_CATEGORY_INSTANCE() -> Guid: ...
-    @staticmethod
-    @IID_IEnumSTORE_CATEGORY_INSTANCE.setter
-    def IID_IEnumSTORE_CATEGORY_INSTANCE(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IID_IEnumSTORE_DEPLOYMENT_METADATA() -> Guid: ...
-    @staticmethod
-    @IID_IEnumSTORE_DEPLOYMENT_METADATA.setter
-    def IID_IEnumSTORE_DEPLOYMENT_METADATA(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IID_IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY() -> Guid: ...
-    @staticmethod
-    @IID_IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY.setter
-    def IID_IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IID_IManifestInformation() -> Guid: ...
-    @staticmethod
-    @IID_IManifestInformation.setter
-    def IID_IManifestInformation(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IID_IStore() -> Guid: ...
-    @staticmethod
-    @IID_IStore.setter
-    def IID_IStore(value: Guid) -> None: ...
-    @staticmethod
-    @property
-    def IsolationDllName() -> StringType: ...
-    @staticmethod
-    @property
-    def SXS_INSTALL_REFERENCE_SCHEME_SXS_STRONGNAME_SIGNED_PRIVATE_ASSEMBLY() -> Guid: ...
-    @staticmethod
-    @SXS_INSTALL_REFERENCE_SCHEME_SXS_STRONGNAME_SIGNED_PRIVATE_ASSEMBLY.setter
-    def SXS_INSTALL_REFERENCE_SCHEME_SXS_STRONGNAME_SIGNED_PRIVATE_ASSEMBLY(
-        value: Guid,
-    ) -> None: ...
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def AppIdAuthority() -> IAppIdAuthority: ...
-    @staticmethod
-    @property
-    def IdentityAuthority() -> IIdentityAuthority: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetUserStore() -> Store: ...
-    @staticmethod
-    def get_AppIdAuthority() -> IAppIdAuthority: ...
-    @staticmethod
-    def get_IdentityAuthority() -> IIdentityAuthority: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Store(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, pStore: IStore): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def InternalStore(self) -> IStore: ...
-
-    # ---------- Methods ---------- #
-
-    def BindReferenceToAssemblyIdentity(
-        self,
-        Flags: UIntType,
-        ReferenceIdentity: IReferenceIdentity,
-        cDeploymentsToIgnore: UIntType,
-        DefinitionIdentity_DeploymentsToIgnore: ArrayType[IDefinitionIdentity],
-    ) -> IDefinitionIdentity: ...
-    def BindReferenceToAssemblyManifest(
-        self,
-        Flags: UIntType,
-        ReferenceIdentity: IReferenceIdentity,
-        cDeploymentsToIgnore: UIntType,
-        DefinitionIdentity_DeploymentsToIgnore: ArrayType[IDefinitionIdentity],
-    ) -> ICMS: ...
-    def CalculateDelimiterOfDeploymentsBasedOnQuota(
-        self,
-        dwFlags: UIntType,
-        cDeployments: UIntType,
-        rgpIDefinitionAppId_Deployments: ArrayType[IDefinitionAppId],
-        InstallerReference: StoreApplicationReference,
-        ulonglongQuota: ULongType,
-        Delimiter: UIntType,
-        SizeSharedWithExternalDeployment: ULongType,
-        SizeConsumedByInputDeploymentArray: ULongType,
-    ) -> Tuple[VoidType, StoreApplicationReference, UIntType, ULongType, ULongType]: ...
-    @overload
-    def EnumAssemblies(self, Flags: EnumAssembliesFlags) -> StoreAssemblyEnumeration: ...
-    @overload
-    def EnumAssemblies(
-        self, Flags: EnumAssembliesFlags, refToMatch: IReferenceIdentity
-    ) -> StoreAssemblyEnumeration: ...
-    def EnumCategories(
-        self, Flags: EnumCategoriesFlags, CategoryMatch: IReferenceIdentity
-    ) -> StoreCategoryEnumeration: ...
-    def EnumCategoryInstances(
-        self, Flags: EnumCategoryInstancesFlags, Category: IDefinitionIdentity, SubCat: StringType
-    ) -> StoreCategoryInstanceEnumeration: ...
-    def EnumFiles(
-        self, Flags: EnumAssemblyFilesFlags, Assembly: IDefinitionIdentity
-    ) -> StoreAssemblyFileEnumeration: ...
-    def EnumInstallationReferences(
-        self, Flags: EnumAssemblyInstallReferenceFlags, Assembly: IDefinitionIdentity
-    ) -> IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE: ...
-    def EnumInstallerDeploymentProperties(
-        self,
-        InstallerId: Guid,
-        InstallerName: StringType,
-        InstallerMetadata: StringType,
-        Deployment: IDefinitionAppId,
-    ) -> StoreDeploymentMetadataPropertyEnumeration: ...
-    def EnumInstallerDeployments(
-        self,
-        InstallerId: Guid,
-        InstallerName: StringType,
-        InstallerMetadata: StringType,
-        DeploymentFilter: IReferenceAppId,
-    ) -> StoreDeploymentMetadataEnumeration: ...
-    def EnumPrivateFiles(
-        self,
-        Flags: EnumApplicationPrivateFiles,
-        Application: IDefinitionAppId,
-        Assembly: IDefinitionIdentity,
-    ) -> StoreAssemblyFileEnumeration: ...
-    @overload
-    def EnumSubcategories(
-        self, Flags: EnumSubcategoriesFlags, CategoryMatch: IDefinitionIdentity
-    ) -> StoreSubcategoryEnumeration: ...
-    @overload
-    def EnumSubcategories(
-        self,
-        Flags: EnumSubcategoriesFlags,
-        Category: IDefinitionIdentity,
-        SearchPattern: StringType,
-    ) -> StoreSubcategoryEnumeration: ...
-    def GetAssemblyIdentity(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionIdentity
-    ) -> IDefinitionIdentity: ...
-    def GetAssemblyManifest(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionIdentity
-    ) -> ICMS: ...
-    def GetDeploymentProperty(
-        self,
-        Flags: GetPackagePropertyFlags,
-        Deployment: IDefinitionAppId,
-        Reference: StoreApplicationReference,
-        PropertySet: Guid,
-        PropertyName: StringType,
-    ) -> ArrayType[ByteType]: ...
-    def LockApplicationPath(self, app: IDefinitionAppId) -> IPathLock: ...
-    def LockAssemblyPath(self, asm: IDefinitionIdentity) -> IPathLock: ...
-    def QueryChangeID(self, asm: IDefinitionIdentity) -> ULongType: ...
-    def Transact(self, operations: ArrayType[StoreTransactionOperation]) -> ArrayType[UIntType]: ...
-    def get_InternalStore(self) -> IStore: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # ---------- Sub Interfaces ---------- #
-
-    # ---------- Sub Enums ---------- #
-
-    class EnumAssembliesFlags(Enum):
-        Nothing = 0
-        VisibleOnly = 1
-        MatchServicing = 2
-        ForceLibrarySemantics = 4
-
-    class EnumAssemblyFilesFlags(Enum):
-        Nothing = 0
-        IncludeInstalled = 1
-        IncludeMissing = 2
-
-    class EnumApplicationPrivateFiles(Enum):
-        Nothing = 0
-        IncludeInstalled = 1
-        IncludeMissing = 2
-
-    class EnumAssemblyInstallReferenceFlags(Enum):
-        Nothing = 0
-
-    class EnumCategoriesFlags(Enum):
-        Nothing = 0
-
-    class EnumSubcategoriesFlags(Enum):
-        Nothing = 0
-
-    class EnumCategoryInstancesFlags(Enum):
-        Nothing = 0
-
-    class GetPackagePropertyFlags(Enum):
-        Nothing = 0
-
-class StoreAssemblyEnumeration(ObjectType, IEnumerator):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, pI: IEnumSTORE_ASSEMBLY): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> STORE_ASSEMBLY: ...
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> STORE_ASSEMBLY: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StoreAssemblyFileEnumeration(ObjectType, IEnumerator):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, pI: IEnumSTORE_ASSEMBLY_FILE): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> STORE_ASSEMBLY_FILE: ...
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> STORE_ASSEMBLY_FILE: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StoreCategoryEnumeration(ObjectType, IEnumerator):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, pI: IEnumSTORE_CATEGORY): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> STORE_CATEGORY: ...
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> STORE_CATEGORY: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StoreCategoryInstanceEnumeration(ObjectType, IEnumerator):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, pI: IEnumSTORE_CATEGORY_INSTANCE): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> STORE_CATEGORY_INSTANCE: ...
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> STORE_CATEGORY_INSTANCE: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StoreDeploymentMetadataEnumeration(ObjectType, IEnumerator):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, pI: IEnumSTORE_DEPLOYMENT_METADATA): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> IDefinitionAppId: ...
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> IDefinitionAppId: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StoreDeploymentMetadataPropertyEnumeration(ObjectType, IEnumerator):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, pI: IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> StoreOperationMetadataProperty: ...
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> StoreOperationMetadataProperty: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StoreSubcategoryEnumeration(ObjectType, IEnumerator):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, pI: IEnumSTORE_CATEGORY_SUBCATEGORY): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> STORE_CATEGORY_SUBCATEGORY: ...
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> STORE_CATEGORY_SUBCATEGORY: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StoreTransaction(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Operations(self) -> ArrayType[StoreTransactionOperation]: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Add(self, o: StoreOperationInstallDeployment) -> VoidType: ...
-    @overload
-    def Add(self, o: StoreOperationPinDeployment) -> VoidType: ...
-    @overload
-    def Add(self, o: StoreOperationSetCanonicalizationContext) -> VoidType: ...
-    @overload
-    def Add(self, o: StoreOperationSetDeploymentMetadata) -> VoidType: ...
-    @overload
-    def Add(self, o: StoreOperationStageComponent) -> VoidType: ...
-    @overload
-    def Add(self, o: StoreOperationStageComponentFile) -> VoidType: ...
-    @overload
-    def Add(self, o: StoreOperationUninstallDeployment) -> VoidType: ...
-    @overload
-    def Add(self, o: StoreOperationUnpinDeployment) -> VoidType: ...
-    @overload
-    def Add(self, o: StoreOperationScavenge) -> VoidType: ...
-    def get_Operations(self) -> ArrayType[StoreTransactionOperation]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
+from System.Deployment.Internal.Isolation.Store import EnumApplicationPrivateFiles
+from System.Deployment.Internal.Isolation.Store import EnumAssembliesFlags
+from System.Deployment.Internal.Isolation.Store import EnumAssemblyFilesFlags
+from System.Deployment.Internal.Isolation.Store import EnumAssemblyInstallReferenceFlags
+from System.Deployment.Internal.Isolation.Store import EnumCategoriesFlags
+from System.Deployment.Internal.Isolation.Store import EnumCategoryInstancesFlags
+from System.Deployment.Internal.Isolation.Store import EnumSubcategoriesFlags
+from System.Deployment.Internal.Isolation.Store import GetPackagePropertyFlags
+from System.Deployment.Internal.Isolation.Store import IPathLock
+from System.Deployment.Internal.Isolation.StoreApplicationReference import RefFlags
+from System.Deployment.Internal.Isolation.StoreOperationInstallDeployment import OpFlags
+from System.Deployment.Internal.Isolation.StoreOperationPinDeployment import OpFlags
+from System.Deployment.Internal.Isolation.StoreOperationScavenge import OpFlags
+from System.Deployment.Internal.Isolation.StoreOperationSetCanonicalizationContext import OpFlags
+from System.Deployment.Internal.Isolation.StoreOperationSetDeploymentMetadata import OpFlags
+from System.Deployment.Internal.Isolation.StoreOperationStageComponent import OpFlags
+from System.Deployment.Internal.Isolation.StoreOperationStageComponentFile import OpFlags
+from System.Deployment.Internal.Isolation.StoreOperationUninstallDeployment import OpFlags
+from System.Deployment.Internal.Isolation.StoreOperationUnpinDeployment import OpFlags
 
 class BLOB(ValueType, IDisposable):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def BlobData(self) -> NIntType: ...
-    @BlobData.setter
-    def BlobData(self, value: NIntType) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
+    BlobData: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    def Dispose(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CATEGORY(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def DefinitionIdentity(self) -> IDefinitionIdentity: ...
-    @DefinitionIdentity.setter
-    def DefinitionIdentity(self, value: IDefinitionIdentity) -> None: ...
+    DefinitionIdentity: Final[IDefinitionIdentity] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CATEGORY_INSTANCE(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
-    @property
-    def DefinitionAppId_Application(self) -> IDefinitionAppId: ...
-    @DefinitionAppId_Application.setter
-    def DefinitionAppId_Application(self, value: IDefinitionAppId) -> None: ...
-    @property
-    def XMLSnippet(self) -> StringType: ...
-    @XMLSnippet.setter
-    def XMLSnippet(self, value: StringType) -> None: ...
+    DefinitionAppId_Application: Final[IDefinitionAppId] = ...
+    """
+    
+    :return: 
+    """
+    XMLSnippet: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CATEGORY_SUBCATEGORY(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Subcategory(self) -> StringType: ...
-    @Subcategory.setter
-    def Subcategory(self, value: StringType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IDENTITY_ATTRIBUTE(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def Namespace(self) -> StringType: ...
-    @Namespace.setter
-    def Namespace(self, value: StringType) -> None: ...
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IStore_BindingResult(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def CacheCoherencyGuid(self) -> Guid: ...
-    @CacheCoherencyGuid.setter
-    def CacheCoherencyGuid(self, value: Guid) -> None: ...
-    @property
-    def Component(self) -> IStore_BindingResult_BoundVersion: ...
-    @Component.setter
-    def Component(self, value: IStore_BindingResult_BoundVersion) -> None: ...
-    @property
-    def Disposition(self) -> UIntType: ...
-    @Disposition.setter
-    def Disposition(self, value: UIntType) -> None: ...
-    @property
-    def Flags(self) -> UIntType: ...
-    @Flags.setter
-    def Flags(self, value: UIntType) -> None: ...
-    @property
-    def Reserved(self) -> NIntType: ...
-    @Reserved.setter
-    def Reserved(self, value: NIntType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IStore_BindingResult_BoundVersion(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Build(self) -> UShortType: ...
-    @Build.setter
-    def Build(self, value: UShortType) -> None: ...
-    @property
-    def Major(self) -> UShortType: ...
-    @Major.setter
-    def Major(self, value: UShortType) -> None: ...
-    @property
-    def Minor(self) -> UShortType: ...
-    @Minor.setter
-    def Minor(self, value: UShortType) -> None: ...
-    @property
-    def Revision(self) -> UShortType: ...
-    @Revision.setter
-    def Revision(self, value: UShortType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class STORE_ASSEMBLY(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def AssemblySize(self) -> ULongType: ...
-    @AssemblySize.setter
-    def AssemblySize(self, value: ULongType) -> None: ...
-    @property
-    def ChangeId(self) -> ULongType: ...
-    @ChangeId.setter
-    def ChangeId(self, value: ULongType) -> None: ...
-    @property
-    def DefinitionIdentity(self) -> IDefinitionIdentity: ...
-    @DefinitionIdentity.setter
-    def DefinitionIdentity(self, value: IDefinitionIdentity) -> None: ...
-    @property
-    def ManifestPath(self) -> StringType: ...
-    @ManifestPath.setter
-    def ManifestPath(self, value: StringType) -> None: ...
-    @property
-    def Status(self) -> UIntType: ...
-    @Status.setter
-    def Status(self, value: UIntType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class STORE_ASSEMBLY_FILE(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def FileName(self) -> StringType: ...
-    @FileName.setter
-    def FileName(self, value: StringType) -> None: ...
-    @property
-    def FileStatusFlags(self) -> UIntType: ...
-    @FileStatusFlags.setter
-    def FileStatusFlags(self, value: UIntType) -> None: ...
-    @property
-    def Flags(self) -> UIntType: ...
-    @Flags.setter
-    def Flags(self, value: UIntType) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class STORE_CATEGORY(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def DefinitionIdentity(self) -> IDefinitionIdentity: ...
-    @DefinitionIdentity.setter
-    def DefinitionIdentity(self, value: IDefinitionIdentity) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class STORE_CATEGORY_INSTANCE(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def DefinitionAppId_Application(self) -> IDefinitionAppId: ...
-    @DefinitionAppId_Application.setter
-    def DefinitionAppId_Application(self, value: IDefinitionAppId) -> None: ...
-    @property
-    def XMLSnippet(self) -> StringType: ...
-    @XMLSnippet.setter
-    def XMLSnippet(self, value: StringType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class STORE_CATEGORY_SUBCATEGORY(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Subcategory(self) -> StringType: ...
-    @Subcategory.setter
-    def Subcategory(self, value: StringType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StoreApplicationReference(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Flags(self) -> RefFlags: ...
-    @Flags.setter
-    def Flags(self, value: RefFlags) -> None: ...
-    @property
-    def GuidScheme(self) -> Guid: ...
-    @GuidScheme.setter
-    def GuidScheme(self, value: Guid) -> None: ...
-    @property
-    def Identifier(self) -> StringType: ...
-    @Identifier.setter
-    def Identifier(self, value: StringType) -> None: ...
-    @property
-    def NonCanonicalData(self) -> StringType: ...
-    @NonCanonicalData.setter
-    def NonCanonicalData(self, value: StringType) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, RefScheme: Guid, Id: StringType, NcData: StringType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Destroy(ip: NIntType) -> VoidType: ...
-    def ToIntPtr(self) -> NIntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class RefFlags(Enum):
-        Nothing = 0
-
-class StoreOperationInstallDeployment(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Application(self) -> IDefinitionAppId: ...
-    @Application.setter
-    def Application(self, value: IDefinitionAppId) -> None: ...
-    @property
-    def Flags(self) -> OpFlags: ...
-    @Flags.setter
-    def Flags(self, value: OpFlags) -> None: ...
-    @property
-    def Reference(self) -> NIntType: ...
-    @Reference.setter
-    def Reference(self, value: NIntType) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, App: IDefinitionAppId, reference: StoreApplicationReference): ...
-    @overload
-    def __init__(
-        self,
-        App: IDefinitionAppId,
-        UninstallOthers: BooleanType,
-        reference: StoreApplicationReference,
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Destroy(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class OpFlags(Enum):
-        Nothing = 0
-        UninstallOthers = 1
-
-    class Disposition(Enum):
-        Failed = 0
-        AlreadyInstalled = 1
-        Installed = 2
-
-class StoreOperationMetadataProperty(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def GuidPropertySet(self) -> Guid: ...
-    @GuidPropertySet.setter
-    def GuidPropertySet(self, value: Guid) -> None: ...
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-    @property
-    def ValueSize(self) -> NIntType: ...
-    @ValueSize.setter
-    def ValueSize(self, value: NIntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, PropertySet: Guid, Name: StringType): ...
-    @overload
-    def __init__(self, PropertySet: Guid, Name: StringType, Value: StringType): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StoreOperationPinDeployment(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Application(self) -> IDefinitionAppId: ...
-    @Application.setter
-    def Application(self, value: IDefinitionAppId) -> None: ...
-    @property
-    def ExpirationTime(self) -> LongType: ...
-    @ExpirationTime.setter
-    def ExpirationTime(self, value: LongType) -> None: ...
-    @property
-    def Flags(self) -> OpFlags: ...
-    @Flags.setter
-    def Flags(self, value: OpFlags) -> None: ...
-    @property
-    def Reference(self) -> NIntType: ...
-    @Reference.setter
-    def Reference(self, value: NIntType) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, AppId: IDefinitionAppId, Ref: StoreApplicationReference): ...
-    @overload
-    def __init__(
-        self, AppId: IDefinitionAppId, Expiry: DateTime, Ref: StoreApplicationReference
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Destroy(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class OpFlags(Enum):
-        Nothing = 0
-        NeverExpires = 1
-
-    class Disposition(Enum):
-        Failed = 0
-        Pinned = 1
-
-class StoreOperationScavenge(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def ComponentCountLimit(self) -> UIntType: ...
-    @ComponentCountLimit.setter
-    def ComponentCountLimit(self, value: UIntType) -> None: ...
-    @property
-    def Flags(self) -> OpFlags: ...
-    @Flags.setter
-    def Flags(self, value: OpFlags) -> None: ...
-    @property
-    def RuntimeLimit(self) -> ULongType: ...
-    @RuntimeLimit.setter
-    def RuntimeLimit(self, value: ULongType) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-    @property
-    def SizeReclaimationLimit(self) -> ULongType: ...
-    @SizeReclaimationLimit.setter
-    def SizeReclaimationLimit(self, value: ULongType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(
-        self,
-        Light: BooleanType,
-        SizeLimit: ULongType,
-        RunLimit: ULongType,
-        ComponentLimit: UIntType,
-    ): ...
-    @overload
-    def __init__(self, Light: BooleanType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Destroy(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class OpFlags(Enum):
-        Nothing = 0
-        Light = 1
-        LimitSize = 2
-        LimitTime = 4
-        LimitCount = 8
-
-class StoreOperationSetCanonicalizationContext(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def BaseAddressFilePath(self) -> StringType: ...
-    @BaseAddressFilePath.setter
-    def BaseAddressFilePath(self, value: StringType) -> None: ...
-    @property
-    def ExportsFilePath(self) -> StringType: ...
-    @ExportsFilePath.setter
-    def ExportsFilePath(self, value: StringType) -> None: ...
-    @property
-    def Flags(self) -> OpFlags: ...
-    @Flags.setter
-    def Flags(self, value: OpFlags) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, Bases: StringType, Exports: StringType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Destroy(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class OpFlags(Enum):
-        Nothing = 0
-
-class StoreOperationSetDeploymentMetadata(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Deployment(self) -> IDefinitionAppId: ...
-    @Deployment.setter
-    def Deployment(self, value: IDefinitionAppId) -> None: ...
-    @property
-    def Flags(self) -> OpFlags: ...
-    @Flags.setter
-    def Flags(self, value: OpFlags) -> None: ...
-    @property
-    def InstallerReference(self) -> NIntType: ...
-    @InstallerReference.setter
-    def InstallerReference(self, value: NIntType) -> None: ...
-    @property
-    def PropertiesToSet(self) -> NIntType: ...
-    @PropertiesToSet.setter
-    def PropertiesToSet(self, value: NIntType) -> None: ...
-    @property
-    def PropertiesToTest(self) -> NIntType: ...
-    @PropertiesToTest.setter
-    def PropertiesToTest(self, value: NIntType) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-    @property
-    def cPropertiesToSet(self) -> NIntType: ...
-    @cPropertiesToSet.setter
-    def cPropertiesToSet(self, value: NIntType) -> None: ...
-    @property
-    def cPropertiesToTest(self) -> NIntType: ...
-    @cPropertiesToTest.setter
-    def cPropertiesToTest(self, value: NIntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(
-        self,
-        Deployment: IDefinitionAppId,
-        Reference: StoreApplicationReference,
-        SetProperties: ArrayType[StoreOperationMetadataProperty],
-    ): ...
-    @overload
-    def __init__(
-        self,
-        Deployment: IDefinitionAppId,
-        Reference: StoreApplicationReference,
-        SetProperties: ArrayType[StoreOperationMetadataProperty],
-        TestProperties: ArrayType[StoreOperationMetadataProperty],
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Destroy(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class OpFlags(Enum):
-        Nothing = 0
-
-    class Disposition(Enum):
-        Failed = 0
-        Set = 2
-
-class StoreOperationStageComponent(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Application(self) -> IDefinitionAppId: ...
-    @Application.setter
-    def Application(self, value: IDefinitionAppId) -> None: ...
-    @property
-    def Component(self) -> IDefinitionIdentity: ...
-    @Component.setter
-    def Component(self, value: IDefinitionIdentity) -> None: ...
-    @property
-    def Flags(self) -> OpFlags: ...
-    @Flags.setter
-    def Flags(self, value: OpFlags) -> None: ...
-    @property
-    def ManifestPath(self) -> StringType: ...
-    @ManifestPath.setter
-    def ManifestPath(self, value: StringType) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, app: IDefinitionAppId, Manifest: StringType): ...
-    @overload
-    def __init__(self, app: IDefinitionAppId, comp: IDefinitionIdentity, Manifest: StringType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Destroy(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class OpFlags(Enum):
-        Nothing = 0
-
-    class Disposition(Enum):
-        Failed = 0
-        Installed = 1
-        Refreshed = 2
-        AlreadyInstalled = 3
-
-class StoreOperationStageComponentFile(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Application(self) -> IDefinitionAppId: ...
-    @Application.setter
-    def Application(self, value: IDefinitionAppId) -> None: ...
-    @property
-    def Component(self) -> IDefinitionIdentity: ...
-    @Component.setter
-    def Component(self, value: IDefinitionIdentity) -> None: ...
-    @property
-    def ComponentRelativePath(self) -> StringType: ...
-    @ComponentRelativePath.setter
-    def ComponentRelativePath(self, value: StringType) -> None: ...
-    @property
-    def Flags(self) -> OpFlags: ...
-    @Flags.setter
-    def Flags(self, value: OpFlags) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-    @property
-    def SourceFilePath(self) -> StringType: ...
-    @SourceFilePath.setter
-    def SourceFilePath(self, value: StringType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, App: IDefinitionAppId, CompRelPath: StringType, SrcFile: StringType): ...
-    @overload
-    def __init__(
-        self,
-        App: IDefinitionAppId,
-        Component: IDefinitionIdentity,
-        CompRelPath: StringType,
-        SrcFile: StringType,
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Destroy(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class OpFlags(Enum):
-        Nothing = 0
-
-    class Disposition(Enum):
-        Failed = 0
-        Installed = 1
-        Refreshed = 2
-        AlreadyInstalled = 3
-
-class StoreOperationUninstallDeployment(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Application(self) -> IDefinitionAppId: ...
-    @Application.setter
-    def Application(self, value: IDefinitionAppId) -> None: ...
-    @property
-    def Flags(self) -> OpFlags: ...
-    @Flags.setter
-    def Flags(self, value: OpFlags) -> None: ...
-    @property
-    def Reference(self) -> NIntType: ...
-    @Reference.setter
-    def Reference(self, value: NIntType) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, appid: IDefinitionAppId, AppRef: StoreApplicationReference): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Destroy(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class OpFlags(Enum):
-        Nothing = 0
-
-    class Disposition(Enum):
-        Failed = 0
-        DidNotExist = 1
-        Uninstalled = 2
-
-class StoreOperationUnpinDeployment(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Application(self) -> IDefinitionAppId: ...
-    @Application.setter
-    def Application(self, value: IDefinitionAppId) -> None: ...
-    @property
-    def Flags(self) -> OpFlags: ...
-    @Flags.setter
-    def Flags(self, value: OpFlags) -> None: ...
-    @property
-    def Reference(self) -> NIntType: ...
-    @Reference.setter
-    def Reference(self, value: NIntType) -> None: ...
-    @property
-    def Size(self) -> UIntType: ...
-    @Size.setter
-    def Size(self, value: UIntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, app: IDefinitionAppId, reference: StoreApplicationReference): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Destroy(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class OpFlags(Enum):
-        Nothing = 0
-
-    class Disposition(Enum):
-        Failed = 0
-        Unpinned = 1
-
-class StoreTransactionData(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def DataPtr(self) -> NIntType: ...
-    @DataPtr.setter
-    def DataPtr(self, value: NIntType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StoreTransactionOperation(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Data(self) -> StoreTransactionData: ...
-    @Data.setter
-    def Data(self, value: StoreTransactionData) -> None: ...
-    @property
-    def Operation(self) -> StoreTransactionOperationType: ...
-    @Operation.setter
-    def Operation(self, value: StoreTransactionOperationType) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Interfaces ---------- #
-
-class IActContext(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def ApplicationBasePath(
-        self, Flags: UIntType, ApplicationPath: StringType
-    ) -> Tuple[VoidType, StringType]: ...
+    """"""
+
+    Subcategory: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAGS(Enum):
+    """"""
+
+    IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAG_IGNORE_VERSION: IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAGS = (
+        ...
+    )
+    """"""
+
+class IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS(Enum):
+    """"""
+
+    IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAG_IGNORE_VERSION: IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS = (
+        ...
+    )
+    """"""
+
+class IActContext:
+    """"""
+
+    def ApplicationBasePath(self, Flags: int, ApplicationPath: str) -> Tuple[None, str]:
+        """
+
+        :param Flags:
+        :param ApplicationPath:
+        """
     def CreateActContextFromCategoryInstance(
-        self,
-        dwFlags: UIntType,
-        CategoryInstance: CATEGORY_INSTANCE,
-        ppCreatedAppContext: ObjectType,
-    ) -> Tuple[VoidType, CATEGORY_INSTANCE, ObjectType]: ...
+        self, dwFlags: int, CategoryInstance: CATEGORY_INSTANCE, ppCreatedAppContext: object
+    ) -> Tuple[None, object]:
+        """
+
+        :param dwFlags:
+        :param CategoryInstance:
+        :param ppCreatedAppContext:
+        """
     def EnumCategories(
-        self, Flags: UIntType, CategoryToMatch: IReferenceIdentity, riid: Guid, EnumOut: ObjectType
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
+        self, Flags: int, CategoryToMatch: IReferenceIdentity, riid: Guid, EnumOut: object
+    ) -> Tuple[None, object]:
+        """
+
+        :param Flags:
+        :param CategoryToMatch:
+        :param riid:
+        :param EnumOut:
+        """
     def EnumCategoryInstances(
         self,
-        Flags: UIntType,
+        Flags: int,
         CategoryId: IDefinitionIdentity,
-        Subcategory: StringType,
+        Subcategory: str,
         riid: Guid,
-        EnumOut: ObjectType,
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
-    def EnumComponents(
-        self, dwFlags: UIntType, ppIdentityEnum: ObjectType
-    ) -> Tuple[VoidType, ObjectType]: ...
+        EnumOut: object,
+    ) -> Tuple[None, object]:
+        """
+
+        :param Flags:
+        :param CategoryId:
+        :param Subcategory:
+        :param riid:
+        :param EnumOut:
+        """
+    def EnumComponents(self, dwFlags: int, ppIdentityEnum: object) -> Tuple[None, object]:
+        """
+
+        :param dwFlags:
+        :param ppIdentityEnum:
+        """
     def EnumSubcategories(
         self,
-        Flags: UIntType,
+        Flags: int,
         CategoryId: IDefinitionIdentity,
-        SubcategoryPattern: StringType,
+        SubcategoryPattern: str,
         riid: Guid,
-        EnumOut: ObjectType,
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
+        EnumOut: object,
+    ) -> Tuple[None, object]:
+        """
+
+        :param Flags:
+        :param CategoryId:
+        :param SubcategoryPattern:
+        :param riid:
+        :param EnumOut:
+        """
     def FindComponentsByDefinition(
         self,
-        dwFlags: UIntType,
-        ComponentCount: NUIntType,
-        Components: ArrayType[IDefinitionIdentity],
-        Indicies: ArrayType[NUIntType],
-        Dispositions: ArrayType[UIntType],
-    ) -> Tuple[VoidType, ArrayType[NUIntType], ArrayType[UIntType]]: ...
+        dwFlags: int,
+        ComponentCount: UIntPtr,
+        Components: Array[IDefinitionIdentity],
+        Indicies: Array[UIntPtr],
+        Dispositions: Array[int],
+    ) -> Tuple[None, Array[UIntPtr], Array[int]]:
+        """
+
+        :param dwFlags:
+        :param ComponentCount:
+        :param Components:
+        :param Indicies:
+        :param Dispositions:
+        """
     def FindComponentsByReference(
         self,
-        dwFlags: UIntType,
-        Components: NUIntType,
-        References: ArrayType[IReferenceIdentity],
-        Indicies: ArrayType[NUIntType],
-        Dispositions: ArrayType[UIntType],
-    ) -> Tuple[VoidType, ArrayType[NUIntType], ArrayType[UIntType]]: ...
+        dwFlags: int,
+        Components: UIntPtr,
+        References: Array[IReferenceIdentity],
+        Indicies: Array[UIntPtr],
+        Dispositions: Array[int],
+    ) -> Tuple[None, Array[UIntPtr], Array[int]]:
+        """
+
+        :param dwFlags:
+        :param Components:
+        :param References:
+        :param Indicies:
+        :param Dispositions:
+        """
     def FindReferenceInContext(
-        self, dwFlags: UIntType, Reference: IReferenceIdentity, MatchedDefinition: ObjectType
-    ) -> Tuple[VoidType, ObjectType]: ...
-    def GetAppId(self, AppId: ObjectType) -> Tuple[VoidType, ObjectType]: ...
+        self, dwFlags: int, Reference: IReferenceIdentity, MatchedDefinition: object
+    ) -> Tuple[None, object]:
+        """
+
+        :param dwFlags:
+        :param Reference:
+        :param MatchedDefinition:
+        """
+    def GetAppId(self, AppId: object) -> Tuple[None, object]:
+        """
+
+        :param AppId:
+        """
     def GetApplicationProperties(
         self,
-        Flags: UIntType,
-        cProperties: NUIntType,
-        PropertyNames: ArrayType[StringType],
-        PropertyValues: StringType,
-        ComponentIndicies: NUIntType,
-    ) -> Tuple[VoidType, StringType, NUIntType]: ...
+        Flags: int,
+        cProperties: UIntPtr,
+        PropertyNames: Array[str],
+        PropertyValues: str,
+        ComponentIndicies: UIntPtr,
+    ) -> Tuple[None, str, UIntPtr]:
+        """
+
+        :param Flags:
+        :param cProperties:
+        :param PropertyNames:
+        :param PropertyValues:
+        :param ComponentIndicies:
+        """
     def GetApplicationStateFilesystemLocation(
-        self,
-        dwFlags: UIntType,
-        Component: NUIntType,
-        pCoordinateList: NIntType,
-        ppszPath: StringType,
-    ) -> Tuple[VoidType, StringType]: ...
+        self, dwFlags: int, Component: UIntPtr, pCoordinateList: IntPtr, ppszPath: str
+    ) -> Tuple[None, str]:
+        """
+
+        :param dwFlags:
+        :param Component:
+        :param pCoordinateList:
+        :param ppszPath:
+        """
     def GetComponentManifest(
-        self,
-        Flags: UIntType,
-        ComponentId: IDefinitionIdentity,
-        riid: Guid,
-        ManifestInteface: ObjectType,
-    ) -> Tuple[VoidType, Guid, ObjectType]: ...
+        self, Flags: int, ComponentId: IDefinitionIdentity, riid: Guid, ManifestInteface: object
+    ) -> Tuple[None, object]:
+        """
+
+        :param Flags:
+        :param ComponentId:
+        :param riid:
+        :param ManifestInteface:
+        """
     def GetComponentPayloadPath(
-        self, Flags: UIntType, ComponentId: IDefinitionIdentity, PayloadPath: StringType
-    ) -> Tuple[VoidType, StringType]: ...
+        self, Flags: int, ComponentId: IDefinitionIdentity, PayloadPath: str
+    ) -> Tuple[None, str]:
+        """
+
+        :param Flags:
+        :param ComponentId:
+        :param PayloadPath:
+        """
     def GetComponentStringTableStrings(
         self,
-        Flags: UIntType,
-        ComponentIndex: NIntType,
-        StringCount: NIntType,
-        SourceStrings: ArrayType[StringType],
-        DestinationStrings: StringType,
-        CultureFallbacks: NIntType,
-    ) -> Tuple[VoidType, ArrayType[StringType], StringType]: ...
-    def PrepareForExecution(self, Inputs: NIntType, Outputs: NIntType) -> VoidType: ...
+        Flags: int,
+        ComponentIndex: IntPtr,
+        StringCount: IntPtr,
+        SourceStrings: Array[str],
+        DestinationStrings: str,
+        CultureFallbacks: IntPtr,
+    ) -> Tuple[None, Array[str], str]:
+        """
+
+        :param Flags:
+        :param ComponentIndex:
+        :param StringCount:
+        :param SourceStrings:
+        :param DestinationStrings:
+        :param CultureFallbacks:
+        """
+    def PrepareForExecution(self, Inputs: IntPtr, Outputs: IntPtr) -> None:
+        """
+
+        :param Inputs:
+        :param Outputs:
+        """
     def ReplaceStringMacros(
-        self,
-        Flags: UIntType,
-        Culture: StringType,
-        ReplacementPattern: StringType,
-        Replaced: StringType,
-    ) -> Tuple[VoidType, StringType]: ...
+        self, Flags: int, Culture: str, ReplacementPattern: str, Replaced: str
+    ) -> Tuple[None, str]:
+        """
+
+        :param Flags:
+        :param Culture:
+        :param ReplacementPattern:
+        :param Replaced:
+        """
     def SetApplicationRunningState(
-        self, dwFlags: UIntType, ulState: UIntType, ulDisposition: UIntType
-    ) -> Tuple[VoidType, UIntType]: ...
+        self, dwFlags: int, ulState: int, ulDisposition: int
+    ) -> Tuple[None, int]:
+        """
 
-    # No Events
+        :param dwFlags:
+        :param ulState:
+        :param ulDisposition:
+        """
 
-class IAppIdAuthority(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
+class IAppIdAuthority:
+    """"""
 
     def AreDefinitionsEqual(
-        self, Flags: UIntType, Definition1: IDefinitionAppId, Definition2: IDefinitionAppId
-    ) -> BooleanType: ...
+        self, Flags: int, Definition1: IDefinitionAppId, Definition2: IDefinitionAppId
+    ) -> bool:
+        """
+
+        :param Flags:
+        :param Definition1:
+        :param Definition2:
+        :return:
+        """
     def AreReferencesEqual(
-        self, Flags: UIntType, Reference1: IReferenceAppId, Reference2: IReferenceAppId
-    ) -> BooleanType: ...
-    def AreTextualDefinitionsEqual(
-        self, Flags: UIntType, AppIdLeft: StringType, AppIdRight: StringType
-    ) -> BooleanType: ...
-    def AreTextualReferencesEqual(
-        self, Flags: UIntType, AppIdLeft: StringType, AppIdRight: StringType
-    ) -> BooleanType: ...
-    def CreateDefinition(self) -> IDefinitionAppId: ...
-    def CreateReference(self) -> IReferenceAppId: ...
-    def DefinitionToText(
-        self, Flags: UIntType, DefinitionAppId: IDefinitionAppId
-    ) -> StringType: ...
+        self, Flags: int, Reference1: IReferenceAppId, Reference2: IReferenceAppId
+    ) -> bool:
+        """
+
+        :param Flags:
+        :param Reference1:
+        :param Reference2:
+        :return:
+        """
+    def AreTextualDefinitionsEqual(self, Flags: int, AppIdLeft: str, AppIdRight: str) -> bool:
+        """
+
+        :param Flags:
+        :param AppIdLeft:
+        :param AppIdRight:
+        :return:
+        """
+    def AreTextualReferencesEqual(self, Flags: int, AppIdLeft: str, AppIdRight: str) -> bool:
+        """
+
+        :param Flags:
+        :param AppIdLeft:
+        :param AppIdRight:
+        :return:
+        """
+    def CreateDefinition(self) -> IDefinitionAppId:
+        """
+
+        :return:
+        """
+    def CreateReference(self) -> IReferenceAppId:
+        """
+
+        :return:
+        """
+    def DefinitionToText(self, Flags: int, DefinitionAppId: IDefinitionAppId) -> str:
+        """
+
+        :param Flags:
+        :param DefinitionAppId:
+        :return:
+        """
     def DoesDefinitionMatchReference(
-        self,
-        Flags: UIntType,
-        DefinitionIdentity: IDefinitionAppId,
-        ReferenceIdentity: IReferenceAppId,
-    ) -> BooleanType: ...
+        self, Flags: int, DefinitionIdentity: IDefinitionAppId, ReferenceIdentity: IReferenceAppId
+    ) -> bool:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :param ReferenceIdentity:
+        :return:
+        """
     def DoesTextualDefinitionMatchTextualReference(
-        self, Flags: UIntType, Definition: StringType, Reference: StringType
-    ) -> BooleanType: ...
-    def GenerateDefinitionKey(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionAppId
-    ) -> StringType: ...
-    def GenerateReferenceKey(
-        self, Flags: UIntType, ReferenceIdentity: IReferenceAppId
-    ) -> StringType: ...
-    def HashDefinition(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionAppId
-    ) -> ULongType: ...
-    def HashReference(self, Flags: UIntType, ReferenceIdentity: IReferenceAppId) -> ULongType: ...
-    def ReferenceToText(self, Flags: UIntType, ReferenceAppId: IReferenceAppId) -> StringType: ...
-    def TextToDefinition(self, Flags: UIntType, Identity: StringType) -> IDefinitionAppId: ...
-    def TextToReference(self, Flags: UIntType, Identity: StringType) -> IReferenceAppId: ...
+        self, Flags: int, Definition: str, Reference: str
+    ) -> bool:
+        """
 
-    # No Events
+        :param Flags:
+        :param Definition:
+        :param Reference:
+        :return:
+        """
+    def GenerateDefinitionKey(self, Flags: int, DefinitionIdentity: IDefinitionAppId) -> str:
+        """
 
-class ICDF(Protocol):
-    # ---------- Properties ---------- #
+        :param Flags:
+        :param DefinitionIdentity:
+        :return:
+        """
+    def GenerateReferenceKey(self, Flags: int, ReferenceIdentity: IReferenceAppId) -> str:
+        """
+
+        :param Flags:
+        :param ReferenceIdentity:
+        :return:
+        """
+    def HashDefinition(self, Flags: int, DefinitionIdentity: IDefinitionAppId) -> int:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :return:
+        """
+    def HashReference(self, Flags: int, ReferenceIdentity: IReferenceAppId) -> int:
+        """
+
+        :param Flags:
+        :param ReferenceIdentity:
+        :return:
+        """
+    def ReferenceToText(self, Flags: int, ReferenceAppId: IReferenceAppId) -> str:
+        """
+
+        :param Flags:
+        :param ReferenceAppId:
+        :return:
+        """
+    def TextToDefinition(self, Flags: int, Identity: str) -> IDefinitionAppId:
+        """
+
+        :param Flags:
+        :param Identity:
+        :return:
+        """
+    def TextToReference(self, Flags: int, Identity: str) -> IReferenceAppId:
+        """
+
+        :param Flags:
+        :param Identity:
+        :return:
+        """
+
+class ICDF:
+    """"""
 
     @property
-    def Count(self) -> UIntType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def _NewEnum(self) -> ObjectType: ...
+    def _NewEnum(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetItem(self, SectionId: int) -> object:
+        """
 
-    def GetItem(self, SectionId: UIntType) -> ObjectType: ...
-    def GetRootSection(self, SectionId: UIntType) -> ISection: ...
-    def GetRootSectionEntry(self, SectionId: UIntType) -> ISectionEntry: ...
-    def get_Count(self) -> UIntType: ...
-    def get__NewEnum(self) -> ObjectType: ...
+        :param SectionId:
+        :return:
+        """
+    def GetRootSection(self, SectionId: int) -> ISection:
+        """
 
-    # No Events
+        :param SectionId:
+        :return:
+        """
+    def GetRootSectionEntry(self, SectionId: int) -> ISectionEntry:
+        """
 
-class IDefinitionAppId(Protocol):
-    # No Properties
+        :param SectionId:
+        :return:
+        """
 
-    # ---------- Methods ---------- #
+class IDENTITY_ATTRIBUTE(ValueType):
+    """"""
 
-    def EnumAppPath(self) -> IEnumDefinitionIdentity: ...
+    Name: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    Namespace: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    Value: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IDefinitionAppId:
+    """"""
+
+    def EnumAppPath(self) -> IEnumDefinitionIdentity:
+        """
+
+        :return:
+        """
     def SetAppPath(
-        self, cIDefinitionIdentity: UIntType, DefinitionIdentity: ArrayType[IDefinitionIdentity]
-    ) -> VoidType: ...
-    def get_Codebase(self) -> StringType: ...
-    def get_SubscriptionId(self) -> StringType: ...
-    def put_Codebase(self, CodeBase: StringType) -> VoidType: ...
-    def put_SubscriptionId(self, Subscription: StringType) -> VoidType: ...
+        self, cIDefinitionIdentity: int, DefinitionIdentity: Array[IDefinitionIdentity]
+    ) -> None:
+        """
 
-    # No Events
+        :param cIDefinitionIdentity:
+        :param DefinitionIdentity:
+        """
+    def put_Codebase(self, CodeBase: str) -> None:
+        """
 
-class IDefinitionIdentity(Protocol):
-    # No Properties
+        :param CodeBase:
+        """
+    def put_SubscriptionId(self, Subscription: str) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param Subscription:
+        """
 
-    def Clone(
-        self, cDeltas: NIntType, Deltas: ArrayType[IDENTITY_ATTRIBUTE]
-    ) -> IDefinitionIdentity: ...
-    def EnumAttributes(self) -> IEnumIDENTITY_ATTRIBUTE: ...
-    def GetAttribute(self, Namespace: StringType, Name: StringType) -> StringType: ...
-    def SetAttribute(
-        self, Namespace: StringType, Name: StringType, Value: StringType
-    ) -> VoidType: ...
+class IDefinitionIdentity:
+    """"""
 
-    # No Events
+    def Clone(self, cDeltas: IntPtr, Deltas: Array[IDENTITY_ATTRIBUTE]) -> IDefinitionIdentity:
+        """
 
-class IEnumDefinitionIdentity(Protocol):
-    # No Properties
+        :param cDeltas:
+        :param Deltas:
+        :return:
+        """
+    def EnumAttributes(self) -> IEnumIDENTITY_ATTRIBUTE:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetAttribute(self, Namespace: str, Name: str) -> str:
+        """
 
-    def Clone(self) -> IEnumDefinitionIdentity: ...
+        :param Namespace:
+        :param Name:
+        :return:
+        """
+    def SetAttribute(self, Namespace: str, Name: str, Value: str) -> None:
+        """
+
+        :param Namespace:
+        :param Name:
+        :param Value:
+        """
+
+class IEnumDefinitionIdentity:
+    """"""
+
+    def Clone(self) -> IEnumDefinitionIdentity:
+        """
+
+        :return:
+        """
     def Next(
-        self, celt: UIntType, DefinitionIdentity: ArrayType[IDefinitionIdentity]
-    ) -> Tuple[UIntType, ArrayType[IDefinitionIdentity]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: UIntType) -> VoidType: ...
+        self, celt: int, DefinitionIdentity: Array[IDefinitionIdentity]
+    ) -> Tuple[int, Array[IDefinitionIdentity]]:
+        """
 
-    # No Events
+        :param celt:
+        :param DefinitionIdentity:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> None:
+        """
 
-class IEnumIDENTITY_ATTRIBUTE(Protocol):
-    # No Properties
+        :param celt:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumIDENTITY_ATTRIBUTE:
+    """"""
 
-    def Clone(self) -> IEnumIDENTITY_ATTRIBUTE: ...
-    def CurrentIntoBuffer(
-        self, Available: NIntType, Data: ArrayType[ByteType]
-    ) -> Tuple[NIntType, ArrayType[ByteType]]: ...
+    def Clone(self) -> IEnumIDENTITY_ATTRIBUTE:
+        """
+
+        :return:
+        """
+    def CurrentIntoBuffer(self, Available: IntPtr, Data: Array[int]) -> Tuple[IntPtr, Array[int]]:
+        """
+
+        :param Available:
+        :param Data:
+        :return:
+        """
     def Next(
-        self, celt: UIntType, rgAttributes: ArrayType[IDENTITY_ATTRIBUTE]
-    ) -> Tuple[UIntType, ArrayType[IDENTITY_ATTRIBUTE]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: UIntType) -> VoidType: ...
+        self, celt: int, rgAttributes: Array[IDENTITY_ATTRIBUTE]
+    ) -> Tuple[int, Array[IDENTITY_ATTRIBUTE]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgAttributes:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> None:
+        """
 
-class IEnumReferenceIdentity(Protocol):
-    # No Properties
+        :param celt:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumReferenceIdentity:
+    """"""
 
-    def Clone(self) -> IEnumReferenceIdentity: ...
+    def Clone(self) -> IEnumReferenceIdentity:
+        """
+
+        :return:
+        """
     def Next(
-        self, celt: UIntType, ReferenceIdentity: ArrayType[IReferenceIdentity]
-    ) -> Tuple[UIntType, ArrayType[IReferenceIdentity]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: UIntType) -> VoidType: ...
+        self, celt: int, ReferenceIdentity: Array[IReferenceIdentity]
+    ) -> Tuple[int, Array[IReferenceIdentity]]:
+        """
 
-    # No Events
+        :param celt:
+        :param ReferenceIdentity:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> None:
+        """
 
-class IEnumSTORE_ASSEMBLY(Protocol):
-    # No Properties
+        :param celt:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumSTORE_ASSEMBLY:
+    """"""
 
-    def Clone(self) -> IEnumSTORE_ASSEMBLY: ...
+    def Clone(self) -> IEnumSTORE_ASSEMBLY:
+        """
+
+        :return:
+        """
+    def Next(self, celt: int, rgelt: Array[STORE_ASSEMBLY]) -> Tuple[int, Array[STORE_ASSEMBLY]]:
+        """
+
+        :param celt:
+        :param rgelt:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> None:
+        """
+
+        :param celt:
+        """
+
+class IEnumSTORE_ASSEMBLY_FILE:
+    """"""
+
+    def Clone(self) -> IEnumSTORE_ASSEMBLY_FILE:
+        """
+
+        :return:
+        """
     def Next(
-        self, celt: UIntType, rgelt: ArrayType[STORE_ASSEMBLY]
-    ) -> Tuple[UIntType, ArrayType[STORE_ASSEMBLY]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: UIntType) -> VoidType: ...
+        self, celt: int, rgelt: Array[STORE_ASSEMBLY_FILE]
+    ) -> Tuple[int, Array[STORE_ASSEMBLY_FILE]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgelt:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> None:
+        """
 
-class IEnumSTORE_ASSEMBLY_FILE(Protocol):
-    # No Properties
+        :param celt:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE:
+    """"""
 
-    def Clone(self) -> IEnumSTORE_ASSEMBLY_FILE: ...
+    def Clone(self) -> IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE:
+        """
+
+        :return:
+        """
     def Next(
-        self, celt: UIntType, rgelt: ArrayType[STORE_ASSEMBLY_FILE]
-    ) -> Tuple[UIntType, ArrayType[STORE_ASSEMBLY_FILE]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: UIntType) -> VoidType: ...
+        self, celt: int, rgelt: Array[StoreApplicationReference]
+    ) -> Tuple[int, Array[StoreApplicationReference]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgelt:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> None:
+        """
 
-class IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE(Protocol):
-    # No Properties
+        :param celt:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumSTORE_CATEGORY:
+    """"""
 
-    def Clone(self) -> IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE: ...
+    def Clone(self) -> IEnumSTORE_CATEGORY:
+        """
+
+        :return:
+        """
     def Next(
-        self, celt: UIntType, rgelt: ArrayType[StoreApplicationReference]
-    ) -> Tuple[UIntType, ArrayType[StoreApplicationReference]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: UIntType) -> VoidType: ...
+        self, celt: int, rgElements: Array[STORE_CATEGORY]
+    ) -> Tuple[int, Array[STORE_CATEGORY]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgElements:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, ulElements: int) -> None:
+        """
 
-class IEnumSTORE_CATEGORY(Protocol):
-    # No Properties
+        :param ulElements:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumSTORE_CATEGORY_INSTANCE:
+    """"""
 
-    def Clone(self) -> IEnumSTORE_CATEGORY: ...
+    def Clone(self) -> IEnumSTORE_CATEGORY_INSTANCE:
+        """
+
+        :return:
+        """
     def Next(
-        self, celt: UIntType, rgElements: ArrayType[STORE_CATEGORY]
-    ) -> Tuple[UIntType, ArrayType[STORE_CATEGORY]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, ulElements: UIntType) -> VoidType: ...
+        self, ulElements: int, rgInstances: Array[STORE_CATEGORY_INSTANCE]
+    ) -> Tuple[int, Array[STORE_CATEGORY_INSTANCE]]:
+        """
 
-    # No Events
+        :param ulElements:
+        :param rgInstances:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, ulElements: int) -> None:
+        """
 
-class IEnumSTORE_CATEGORY_INSTANCE(Protocol):
-    # No Properties
+        :param ulElements:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumSTORE_CATEGORY_SUBCATEGORY:
+    """"""
 
-    def Clone(self) -> IEnumSTORE_CATEGORY_INSTANCE: ...
+    def Clone(self) -> IEnumSTORE_CATEGORY_SUBCATEGORY:
+        """
+
+        :return:
+        """
     def Next(
-        self, ulElements: UIntType, rgInstances: ArrayType[STORE_CATEGORY_INSTANCE]
-    ) -> Tuple[UIntType, ArrayType[STORE_CATEGORY_INSTANCE]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, ulElements: UIntType) -> VoidType: ...
+        self, celt: int, rgElements: Array[STORE_CATEGORY_SUBCATEGORY]
+    ) -> Tuple[int, Array[STORE_CATEGORY_SUBCATEGORY]]:
+        """
 
-    # No Events
+        :param celt:
+        :param rgElements:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, ulElements: int) -> None:
+        """
 
-class IEnumSTORE_CATEGORY_SUBCATEGORY(Protocol):
-    # No Properties
+        :param ulElements:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumSTORE_DEPLOYMENT_METADATA:
+    """"""
 
-    def Clone(self) -> IEnumSTORE_CATEGORY_SUBCATEGORY: ...
+    def Clone(self) -> IEnumSTORE_DEPLOYMENT_METADATA:
+        """
+
+        :return:
+        """
     def Next(
-        self, celt: UIntType, rgElements: ArrayType[STORE_CATEGORY_SUBCATEGORY]
-    ) -> Tuple[UIntType, ArrayType[STORE_CATEGORY_SUBCATEGORY]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, ulElements: UIntType) -> VoidType: ...
+        self, celt: int, AppIds: Array[IDefinitionAppId]
+    ) -> Tuple[int, Array[IDefinitionAppId]]:
+        """
 
-    # No Events
+        :param celt:
+        :param AppIds:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> None:
+        """
 
-class IEnumSTORE_DEPLOYMENT_METADATA(Protocol):
-    # No Properties
+        :param celt:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY:
+    """"""
 
-    def Clone(self) -> IEnumSTORE_DEPLOYMENT_METADATA: ...
+    def Clone(self) -> IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY:
+        """
+
+        :return:
+        """
     def Next(
-        self, celt: UIntType, AppIds: ArrayType[IDefinitionAppId]
-    ) -> Tuple[UIntType, ArrayType[IDefinitionAppId]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: UIntType) -> VoidType: ...
+        self, celt: int, AppIds: Array[StoreOperationMetadataProperty]
+    ) -> Tuple[int, Array[StoreOperationMetadataProperty]]:
+        """
 
-    # No Events
+        :param celt:
+        :param AppIds:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Skip(self, celt: int) -> None:
+        """
 
-class IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY(Protocol):
-    # No Properties
+        :param celt:
+        """
 
-    # ---------- Methods ---------- #
+class IEnumUnknown:
+    """"""
 
-    def Clone(self) -> IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY: ...
-    def Next(
-        self, celt: UIntType, AppIds: ArrayType[StoreOperationMetadataProperty]
-    ) -> Tuple[UIntType, ArrayType[StoreOperationMetadataProperty]]: ...
-    def Reset(self) -> VoidType: ...
-    def Skip(self, celt: UIntType) -> VoidType: ...
+    def Clone(self, enumUnknown: IEnumUnknown) -> Tuple[int, IEnumUnknown]:
+        """
 
-    # No Events
+        :param enumUnknown:
+        :return:
+        """
+    def Next(self, celt: int, rgelt: Array[object], celtFetched: int) -> Tuple[int, Array[object]]:
+        """
 
-class IEnumUnknown(Protocol):
-    # No Properties
+        :param celt:
+        :param rgelt:
+        :param celtFetched:
+        :return:
+        """
+    def Reset(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Skip(self, celt: int) -> int:
+        """
 
-    def Clone(self, enumUnknown: IEnumUnknown) -> Tuple[IntType, IEnumUnknown]: ...
-    def Next(
-        self, celt: UIntType, rgelt: ArrayType[ObjectType], celtFetched: UIntType
-    ) -> Tuple[IntType, ArrayType[ObjectType], UIntType]: ...
-    def Reset(self) -> IntType: ...
-    def Skip(self, celt: UIntType) -> IntType: ...
+        :param celt:
+        :return:
+        """
 
-    # No Events
+class IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAGS(Enum):
+    """"""
 
-class IIdentityAuthority(Protocol):
-    # No Properties
+    IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAG_CANONICAL: IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAGS = (
+        ...
+    )
+    """"""
 
-    # ---------- Methods ---------- #
+class IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAGS(Enum):
+    """"""
+
+    IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAG_EXACT_MATCH_REQUIRED: IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAGS = (
+        ...
+    )
+    """"""
+
+class IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS(Enum):
+    """"""
+
+    IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAG_CANONICAL: IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS = (
+        ...
+    )
+    """"""
+
+class IIdentityAuthority:
+    """"""
 
     def AreDefinitionsEqual(
-        self, Flags: UIntType, Definition1: IDefinitionIdentity, Definition2: IDefinitionIdentity
-    ) -> BooleanType: ...
+        self, Flags: int, Definition1: IDefinitionIdentity, Definition2: IDefinitionIdentity
+    ) -> bool:
+        """
+
+        :param Flags:
+        :param Definition1:
+        :param Definition2:
+        :return:
+        """
     def AreReferencesEqual(
-        self, Flags: UIntType, Reference1: IReferenceIdentity, Reference2: IReferenceIdentity
-    ) -> BooleanType: ...
-    def AreTextualDefinitionsEqual(
-        self, Flags: UIntType, IdentityLeft: StringType, IdentityRight: StringType
-    ) -> BooleanType: ...
-    def AreTextualReferencesEqual(
-        self, Flags: UIntType, IdentityLeft: StringType, IdentityRight: StringType
-    ) -> BooleanType: ...
-    def CreateDefinition(self) -> IDefinitionIdentity: ...
-    def CreateReference(self) -> IReferenceIdentity: ...
-    def DefinitionToText(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionIdentity
-    ) -> StringType: ...
+        self, Flags: int, Reference1: IReferenceIdentity, Reference2: IReferenceIdentity
+    ) -> bool:
+        """
+
+        :param Flags:
+        :param Reference1:
+        :param Reference2:
+        :return:
+        """
+    def AreTextualDefinitionsEqual(self, Flags: int, IdentityLeft: str, IdentityRight: str) -> bool:
+        """
+
+        :param Flags:
+        :param IdentityLeft:
+        :param IdentityRight:
+        :return:
+        """
+    def AreTextualReferencesEqual(self, Flags: int, IdentityLeft: str, IdentityRight: str) -> bool:
+        """
+
+        :param Flags:
+        :param IdentityLeft:
+        :param IdentityRight:
+        :return:
+        """
+    def CreateDefinition(self) -> IDefinitionIdentity:
+        """
+
+        :return:
+        """
+    def CreateReference(self) -> IReferenceIdentity:
+        """
+
+        :return:
+        """
+    def DefinitionToText(self, Flags: int, DefinitionIdentity: IDefinitionIdentity) -> str:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :return:
+        """
     def DefinitionToTextBuffer(
         self,
-        Flags: UIntType,
+        Flags: int,
         DefinitionIdentity: IDefinitionIdentity,
-        BufferSize: UIntType,
-        Buffer: ArrayType[CharType],
-    ) -> Tuple[UIntType, ArrayType[CharType]]: ...
+        BufferSize: int,
+        Buffer: Array[Char],
+    ) -> Tuple[int, Array[Char]]:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :param BufferSize:
+        :param Buffer:
+        :return:
+        """
     def DoesDefinitionMatchReference(
         self,
-        Flags: UIntType,
+        Flags: int,
         DefinitionIdentity: IDefinitionIdentity,
         ReferenceIdentity: IReferenceIdentity,
-    ) -> BooleanType: ...
+    ) -> bool:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :param ReferenceIdentity:
+        :return:
+        """
     def DoesTextualDefinitionMatchTextualReference(
-        self, Flags: UIntType, Definition: StringType, Reference: StringType
-    ) -> BooleanType: ...
-    def GenerateDefinitionKey(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionIdentity
-    ) -> StringType: ...
-    def GenerateReferenceKey(
-        self, Flags: UIntType, ReferenceIdentity: IReferenceIdentity
-    ) -> StringType: ...
-    def HashDefinition(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionIdentity
-    ) -> ULongType: ...
-    def HashReference(
-        self, Flags: UIntType, ReferenceIdentity: IReferenceIdentity
-    ) -> ULongType: ...
-    def ReferenceToText(
-        self, Flags: UIntType, ReferenceIdentity: IReferenceIdentity
-    ) -> StringType: ...
+        self, Flags: int, Definition: str, Reference: str
+    ) -> bool:
+        """
+
+        :param Flags:
+        :param Definition:
+        :param Reference:
+        :return:
+        """
+    def GenerateDefinitionKey(self, Flags: int, DefinitionIdentity: IDefinitionIdentity) -> str:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :return:
+        """
+    def GenerateReferenceKey(self, Flags: int, ReferenceIdentity: IReferenceIdentity) -> str:
+        """
+
+        :param Flags:
+        :param ReferenceIdentity:
+        :return:
+        """
+    def HashDefinition(self, Flags: int, DefinitionIdentity: IDefinitionIdentity) -> int:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :return:
+        """
+    def HashReference(self, Flags: int, ReferenceIdentity: IReferenceIdentity) -> int:
+        """
+
+        :param Flags:
+        :param ReferenceIdentity:
+        :return:
+        """
+    def ReferenceToText(self, Flags: int, ReferenceIdentity: IReferenceIdentity) -> str:
+        """
+
+        :param Flags:
+        :param ReferenceIdentity:
+        :return:
+        """
     def ReferenceToTextBuffer(
         self,
-        Flags: UIntType,
+        Flags: int,
         ReferenceIdentity: IReferenceIdentity,
-        BufferSize: UIntType,
-        Buffer: ArrayType[CharType],
-    ) -> Tuple[UIntType, ArrayType[CharType]]: ...
-    def TextToDefinition(self, Flags: UIntType, Identity: StringType) -> IDefinitionIdentity: ...
-    def TextToReference(self, Flags: UIntType, Identity: StringType) -> IReferenceIdentity: ...
+        BufferSize: int,
+        Buffer: Array[Char],
+    ) -> Tuple[int, Array[Char]]:
+        """
 
-    # No Events
+        :param Flags:
+        :param ReferenceIdentity:
+        :param BufferSize:
+        :param Buffer:
+        :return:
+        """
+    def TextToDefinition(self, Flags: int, Identity: str) -> IDefinitionIdentity:
+        """
 
-class IManifestInformation(Protocol):
-    # No Properties
+        :param Flags:
+        :param Identity:
+        :return:
+        """
+    def TextToReference(self, Flags: int, Identity: str) -> IReferenceIdentity:
+        """
 
-    # ---------- Methods ---------- #
+        :param Flags:
+        :param Identity:
+        :return:
+        """
 
-    def get_FullPath(self, FullPath: StringType) -> Tuple[VoidType, StringType]: ...
+class IManifestInformation:
+    """"""
 
-    # No Events
-
-class IManifestParseErrorCallback(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
+class IManifestParseErrorCallback:
+    """"""
 
     def OnError(
         self,
-        StartLine: UIntType,
-        nStartColumn: UIntType,
-        cCharacterCount: UIntType,
-        hr: IntType,
-        ErrorStatusHostFile: StringType,
-        ParameterCount: UIntType,
-        Parameters: ArrayType[StringType],
-    ) -> VoidType: ...
+        StartLine: int,
+        nStartColumn: int,
+        cCharacterCount: int,
+        hr: int,
+        ErrorStatusHostFile: str,
+        ParameterCount: int,
+        Parameters: Array[str],
+    ) -> None:
+        """
 
-    # No Events
+        :param StartLine:
+        :param nStartColumn:
+        :param cCharacterCount:
+        :param hr:
+        :param ErrorStatusHostFile:
+        :param ParameterCount:
+        :param Parameters:
+        """
 
-class IReferenceAppId(Protocol):
-    # No Properties
+class IReferenceAppId:
+    """"""
 
-    # ---------- Methods ---------- #
+    def EnumAppPath(self) -> IEnumReferenceIdentity:
+        """
 
-    def EnumAppPath(self) -> IEnumReferenceIdentity: ...
-    def get_Codebase(self) -> StringType: ...
-    def get_SubscriptionId(self) -> StringType: ...
-    def put_Codebase(self, CodeBase: StringType) -> VoidType: ...
-    def put_SubscriptionId(self, Subscription: StringType) -> VoidType: ...
+        :return:
+        """
+    def put_Codebase(self, CodeBase: str) -> None:
+        """
 
-    # No Events
+        :param CodeBase:
+        """
+    def put_SubscriptionId(self, Subscription: str) -> None:
+        """
 
-class IReferenceIdentity(Protocol):
-    # No Properties
+        :param Subscription:
+        """
 
-    # ---------- Methods ---------- #
+class IReferenceIdentity:
+    """"""
 
-    def Clone(
-        self, cDeltas: NIntType, Deltas: ArrayType[IDENTITY_ATTRIBUTE]
-    ) -> IReferenceIdentity: ...
-    def EnumAttributes(self) -> IEnumIDENTITY_ATTRIBUTE: ...
-    def GetAttribute(self, Namespace: StringType, Name: StringType) -> StringType: ...
-    def SetAttribute(
-        self, Namespace: StringType, Name: StringType, Value: StringType
-    ) -> VoidType: ...
+    def Clone(self, cDeltas: IntPtr, Deltas: Array[IDENTITY_ATTRIBUTE]) -> IReferenceIdentity:
+        """
 
-    # No Events
+        :param cDeltas:
+        :param Deltas:
+        :return:
+        """
+    def EnumAttributes(self) -> IEnumIDENTITY_ATTRIBUTE:
+        """
 
-class ISection(Protocol):
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def GetAttribute(self, Namespace: str, Name: str) -> str:
+        """
+
+        :param Namespace:
+        :param Name:
+        :return:
+        """
+    def SetAttribute(self, Namespace: str, Name: str, Value: str) -> None:
+        """
+
+        :param Namespace:
+        :param Name:
+        :param Value:
+        """
+
+class ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAGS(Enum):
+    """"""
+
+    ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAG_FORCE_LIBRARY_SEMANTICS: ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAGS = (
+        ...
+    )
+    """"""
+
+class ISTORE_ENUM_ASSEMBLIES_FLAGS(Enum):
+    """"""
+
+    ISTORE_ENUM_ASSEMBLIES_FLAG_LIMIT_TO_VISIBLE_ONLY: ISTORE_ENUM_ASSEMBLIES_FLAGS = ...
+    """"""
+    ISTORE_ENUM_ASSEMBLIES_FLAG_MATCH_SERVICING: ISTORE_ENUM_ASSEMBLIES_FLAGS = ...
+    """"""
+    ISTORE_ENUM_ASSEMBLIES_FLAG_FORCE_LIBRARY_SEMANTICS: ISTORE_ENUM_ASSEMBLIES_FLAGS = ...
+    """"""
+
+class ISTORE_ENUM_FILES_FLAGS(Enum):
+    """"""
+
+    ISTORE_ENUM_FILES_FLAG_INCLUDE_INSTALLED_FILES: ISTORE_ENUM_FILES_FLAGS = ...
+    """"""
+    ISTORE_ENUM_FILES_FLAG_INCLUDE_MISSING_FILES: ISTORE_ENUM_FILES_FLAGS = ...
+    """"""
+
+class ISection:
+    """"""
 
     @property
-    def Count(self) -> UIntType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def SectionID(self) -> UIntType: ...
+    def SectionID(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def SectionName(self) -> StringType: ...
+    def SectionName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def _NewEnum(self) -> ObjectType: ...
+    def _NewEnum(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
 
-    def get_Count(self) -> UIntType: ...
-    def get_SectionID(self) -> UIntType: ...
-    def get_SectionName(self) -> StringType: ...
-    def get__NewEnum(self) -> ObjectType: ...
+class ISectionEntry:
+    """"""
 
-    # No Events
+    def GetField(self, fieldId: int) -> object:
+        """
 
-class ISectionEntry(Protocol):
-    # No Properties
+        :param fieldId:
+        :return:
+        """
+    def GetFieldName(self, fieldId: int) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :param fieldId:
+        :return:
+        """
 
-    def GetField(self, fieldId: UIntType) -> ObjectType: ...
-    def GetFieldName(self, fieldId: UIntType) -> StringType: ...
-
-    # No Events
-
-class ISectionWithReferenceIdentityKey(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
+class ISectionWithReferenceIdentityKey:
+    """"""
 
     def Lookup(
-        self, ReferenceIdentityKey: IReferenceIdentity, ppUnknown: ObjectType
-    ) -> Tuple[VoidType, ObjectType]: ...
+        self, ReferenceIdentityKey: IReferenceIdentity, ppUnknown: object
+    ) -> Tuple[None, object]:
+        """
 
-    # No Events
+        :param ReferenceIdentityKey:
+        :param ppUnknown:
+        """
 
-class ISectionWithStringKey(Protocol):
-    # ---------- Properties ---------- #
+class ISectionWithStringKey:
+    """"""
 
     @property
-    def IsCaseInsensitive(self) -> BooleanType: ...
+    def IsCaseInsensitive(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Lookup(self, wzStringKey: str, ppUnknown: object) -> Tuple[None, object]:
+        """
 
-    def Lookup(
-        self, wzStringKey: StringType, ppUnknown: ObjectType
-    ) -> Tuple[VoidType, ObjectType]: ...
-    def get_IsCaseInsensitive(self) -> BooleanType: ...
+        :param wzStringKey:
+        :param ppUnknown:
+        """
 
-    # No Events
-
-class IStateManager(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
+class IStateManager:
+    """"""
 
     def GetApplicationStateFilesystemLocation(
         self,
-        Flags: UIntType,
+        Flags: int,
         Appidentity: IDefinitionAppId,
         ComponentIdentity: IDefinitionIdentity,
-        Coordinates: NUIntType,
-        Path: StringType,
-    ) -> Tuple[VoidType, StringType]: ...
-    def PrepareApplicationState(
-        self, Inputs: NUIntType, Outputs: NUIntType
-    ) -> Tuple[VoidType, NUIntType]: ...
-    def Scavenge(self, Flags: UIntType, Disposition: UIntType) -> Tuple[VoidType, UIntType]: ...
+        Coordinates: UIntPtr,
+        Path: str,
+    ) -> Tuple[None, str]:
+        """
+
+        :param Flags:
+        :param Appidentity:
+        :param ComponentIdentity:
+        :param Coordinates:
+        :param Path:
+        """
+    def PrepareApplicationState(self, Inputs: UIntPtr, Outputs: UIntPtr) -> None:
+        """
+
+        :param Inputs:
+        :param Outputs:
+        """
+    def Scavenge(self, Flags: int, Disposition: int) -> Tuple[None, int]:
+        """
+
+        :param Flags:
+        :param Disposition:
+        """
     def SetApplicationRunningState(
-        self, Flags: UIntType, Context: IActContext, RunningState: UIntType, Disposition: UIntType
-    ) -> Tuple[VoidType, UIntType]: ...
+        self, Flags: int, Context: IActContext, RunningState: int, Disposition: int
+    ) -> Tuple[None, int]:
+        """
 
-    # No Events
+        :param Flags:
+        :param Context:
+        :param RunningState:
+        :param Disposition:
+        """
 
-class IStore(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
+class IStore:
+    """"""
 
     def BindDefinitions(
         self,
-        Flags: UIntType,
-        Count: NIntType,
-        DefsToBind: ArrayType[IDefinitionIdentity],
-        DeploymentsToIgnore: UIntType,
-        DefsToIgnore: ArrayType[IDefinitionIdentity],
-    ) -> NIntType: ...
+        Flags: int,
+        Count: IntPtr,
+        DefsToBind: Array[IDefinitionIdentity],
+        DeploymentsToIgnore: int,
+        DefsToIgnore: Array[IDefinitionIdentity],
+    ) -> IntPtr:
+        """
+
+        :param Flags:
+        :param Count:
+        :param DefsToBind:
+        :param DeploymentsToIgnore:
+        :param DefsToIgnore:
+        :return:
+        """
     def BindReferenceToAssembly(
         self,
-        Flags: UIntType,
+        Flags: int,
         ReferenceIdentity: IReferenceIdentity,
-        cDeploymentsToIgnore: UIntType,
-        DefinitionIdentity_DeploymentsToIgnore: ArrayType[IDefinitionIdentity],
+        cDeploymentsToIgnore: int,
+        DefinitionIdentity_DeploymentsToIgnore: Array[IDefinitionIdentity],
         riid: Guid,
-    ) -> Tuple[ObjectType, Guid]: ...
+    ) -> object:
+        """
+
+        :param Flags:
+        :param ReferenceIdentity:
+        :param cDeploymentsToIgnore:
+        :param DefinitionIdentity_DeploymentsToIgnore:
+        :param riid:
+        :return:
+        """
     def CalculateDelimiterOfDeploymentsBasedOnQuota(
         self,
-        dwFlags: UIntType,
-        cDeployments: NIntType,
-        rgpIDefinitionAppId_Deployments: ArrayType[IDefinitionAppId],
+        dwFlags: int,
+        cDeployments: IntPtr,
+        rgpIDefinitionAppId_Deployments: Array[IDefinitionAppId],
         InstallerReference: StoreApplicationReference,
-        ulonglongQuota: ULongType,
-        Delimiter: NIntType,
-        SizeSharedWithExternalDeployment: ULongType,
-        SizeConsumedByInputDeploymentArray: ULongType,
-    ) -> Tuple[VoidType, StoreApplicationReference, NIntType, ULongType, ULongType]: ...
+        ulonglongQuota: int,
+        Delimiter: IntPtr,
+        SizeSharedWithExternalDeployment: int,
+        SizeConsumedByInputDeploymentArray: int,
+    ) -> Tuple[None, IntPtr, int, int]:
+        """
+
+        :param dwFlags:
+        :param cDeployments:
+        :param rgpIDefinitionAppId_Deployments:
+        :param InstallerReference:
+        :param ulonglongQuota:
+        :param Delimiter:
+        :param SizeSharedWithExternalDeployment:
+        :param SizeConsumedByInputDeploymentArray:
+        """
     def EnumAssemblies(
-        self, Flags: UIntType, ReferenceIdentity_ToMatch: IReferenceIdentity, riid: Guid
-    ) -> Tuple[ObjectType, Guid]: ...
+        self, Flags: int, ReferenceIdentity_ToMatch: IReferenceIdentity, riid: Guid
+    ) -> object:
+        """
+
+        :param Flags:
+        :param ReferenceIdentity_ToMatch:
+        :param riid:
+        :return:
+        """
     def EnumCategories(
-        self, Flags: UIntType, ReferenceIdentity_ToMatch: IReferenceIdentity, riid: Guid
-    ) -> Tuple[ObjectType, Guid]: ...
+        self, Flags: int, ReferenceIdentity_ToMatch: IReferenceIdentity, riid: Guid
+    ) -> object:
+        """
+
+        :param Flags:
+        :param ReferenceIdentity_ToMatch:
+        :param riid:
+        :return:
+        """
     def EnumCategoryInstances(
-        self,
-        Flags: UIntType,
-        CategoryId: IDefinitionIdentity,
-        SubcategoryPath: StringType,
-        riid: Guid,
-    ) -> Tuple[ObjectType, Guid]: ...
-    def EnumFiles(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionIdentity, riid: Guid
-    ) -> Tuple[ObjectType, Guid]: ...
+        self, Flags: int, CategoryId: IDefinitionIdentity, SubcategoryPath: str, riid: Guid
+    ) -> object:
+        """
+
+        :param Flags:
+        :param CategoryId:
+        :param SubcategoryPath:
+        :param riid:
+        :return:
+        """
+    def EnumFiles(self, Flags: int, DefinitionIdentity: IDefinitionIdentity, riid: Guid) -> object:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :param riid:
+        :return:
+        """
     def EnumInstallationReferences(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionIdentity, riid: Guid
-    ) -> Tuple[ObjectType, Guid]: ...
+        self, Flags: int, DefinitionIdentity: IDefinitionIdentity, riid: Guid
+    ) -> object:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :param riid:
+        :return:
+        """
     def EnumInstallerDeploymentMetadata(
-        self,
-        Flags: UIntType,
-        Reference: StoreApplicationReference,
-        Filter: IReferenceAppId,
-        riid: Guid,
-    ) -> Tuple[ObjectType, StoreApplicationReference, Guid]: ...
+        self, Flags: int, Reference: StoreApplicationReference, Filter: IReferenceAppId, riid: Guid
+    ) -> object:
+        """
+
+        :param Flags:
+        :param Reference:
+        :param Filter:
+        :param riid:
+        :return:
+        """
     def EnumInstallerDeploymentMetadataProperties(
-        self,
-        Flags: UIntType,
-        Reference: StoreApplicationReference,
-        Filter: IDefinitionAppId,
-        riid: Guid,
-    ) -> Tuple[ObjectType, StoreApplicationReference, Guid]: ...
+        self, Flags: int, Reference: StoreApplicationReference, Filter: IDefinitionAppId, riid: Guid
+    ) -> object:
+        """
+
+        :param Flags:
+        :param Reference:
+        :param Filter:
+        :param riid:
+        :return:
+        """
     def EnumPrivateFiles(
         self,
-        Flags: UIntType,
+        Flags: int,
         Application: IDefinitionAppId,
         DefinitionIdentity: IDefinitionIdentity,
         riid: Guid,
-    ) -> Tuple[ObjectType, Guid]: ...
+    ) -> object:
+        """
+
+        :param Flags:
+        :param Application:
+        :param DefinitionIdentity:
+        :param riid:
+        :return:
+        """
     def EnumSubcategories(
-        self,
-        Flags: UIntType,
-        CategoryId: IDefinitionIdentity,
-        SubcategoryPathPattern: StringType,
-        riid: Guid,
-    ) -> Tuple[ObjectType, Guid]: ...
+        self, Flags: int, CategoryId: IDefinitionIdentity, SubcategoryPathPattern: str, riid: Guid
+    ) -> object:
+        """
+
+        :param Flags:
+        :param CategoryId:
+        :param SubcategoryPathPattern:
+        :param riid:
+        :return:
+        """
     def GetAssemblyInformation(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionIdentity, riid: Guid
-    ) -> Tuple[ObjectType, Guid]: ...
+        self, Flags: int, DefinitionIdentity: IDefinitionIdentity, riid: Guid
+    ) -> object:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :param riid:
+        :return:
+        """
     def GetDeploymentProperty(
         self,
-        Flags: UIntType,
+        Flags: int,
         DeploymentInPackage: IDefinitionAppId,
         Reference: StoreApplicationReference,
         PropertySet: Guid,
-        pcwszPropertyName: StringType,
+        pcwszPropertyName: str,
         blob: BLOB,
-    ) -> Tuple[VoidType, StoreApplicationReference, Guid, BLOB]: ...
+    ) -> Tuple[None, BLOB]:
+        """
+
+        :param Flags:
+        :param DeploymentInPackage:
+        :param Reference:
+        :param PropertySet:
+        :param pcwszPropertyName:
+        :param blob:
+        """
     def LockApplicationPath(
-        self, Flags: UIntType, ApId: IDefinitionAppId, Cookie: NIntType
-    ) -> Tuple[StringType, NIntType]: ...
+        self, Flags: int, ApId: IDefinitionAppId, Cookie: IntPtr
+    ) -> Tuple[str, IntPtr]:
+        """
+
+        :param Flags:
+        :param ApId:
+        :param Cookie:
+        :return:
+        """
     def LockAssemblyPath(
-        self, Flags: UIntType, DefinitionIdentity: IDefinitionIdentity, Cookie: NIntType
-    ) -> Tuple[StringType, NIntType]: ...
-    def QueryChangeID(self, DefinitionIdentity: IDefinitionIdentity) -> ULongType: ...
-    def ReleaseApplicationPath(self, Cookie: NIntType) -> VoidType: ...
-    def ReleaseAssemblyPath(self, Cookie: NIntType) -> VoidType: ...
+        self, Flags: int, DefinitionIdentity: IDefinitionIdentity, Cookie: IntPtr
+    ) -> Tuple[str, IntPtr]:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :param Cookie:
+        :return:
+        """
+    def QueryChangeID(self, DefinitionIdentity: IDefinitionIdentity) -> int:
+        """
+
+        :param DefinitionIdentity:
+        :return:
+        """
+    def ReleaseApplicationPath(self, Cookie: IntPtr) -> None:
+        """
+
+        :param Cookie:
+        """
+    def ReleaseAssemblyPath(self, Cookie: IntPtr) -> None:
+        """
+
+        :param Cookie:
+        """
     def Transact(
         self,
-        cOperation: NIntType,
-        rgOperations: ArrayType[StoreTransactionOperation],
-        rgDispositions: ArrayType[UIntType],
-        rgResults: ArrayType[IntType],
-    ) -> Tuple[VoidType, ArrayType[UIntType], ArrayType[IntType]]: ...
+        cOperation: IntPtr,
+        rgOperations: Array[StoreTransactionOperation],
+        rgDispositions: Array[int],
+        rgResults: Array[int],
+    ) -> Tuple[None, Array[int], Array[int]]:
+        """
 
-    # No Events
+        :param cOperation:
+        :param rgOperations:
+        :param rgDispositions:
+        :param rgResults:
+        """
 
-# ---------- Enums ---------- #
+class IStore_BindingResult(ValueType):
+    """"""
 
-class IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAGS(Enum):
-    IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAG_IGNORE_VERSION = 1
+    CacheCoherencyGuid: Final[Guid] = ...
+    """
+    
+    :return: 
+    """
+    Component: Final[IStore_BindingResult_BoundVersion] = ...
+    """
+    
+    :return: 
+    """
+    Disposition: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Reserved: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS(Enum):
-    IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAG_IGNORE_VERSION = 1
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAGS(Enum):
-    IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAG_CANONICAL = 1
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAGS(Enum):
-    IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAG_EXACT_MATCH_REQUIRED = 1
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS(Enum):
-    IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAG_CANONICAL = 1
+        :return:
+        """
 
-class ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAGS(Enum):
-    ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAG_FORCE_LIBRARY_SEMANTICS = 1
+class IStore_BindingResult_BoundVersion(ValueType):
+    """"""
 
-class ISTORE_ENUM_ASSEMBLIES_FLAGS(Enum):
-    ISTORE_ENUM_ASSEMBLIES_FLAG_LIMIT_TO_VISIBLE_ONLY = 1
-    ISTORE_ENUM_ASSEMBLIES_FLAG_MATCH_SERVICING = 2
-    ISTORE_ENUM_ASSEMBLIES_FLAG_FORCE_LIBRARY_SEMANTICS = 4
+    Build: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Major: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Minor: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Revision: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class ISTORE_ENUM_FILES_FLAGS(Enum):
-    ISTORE_ENUM_FILES_FLAG_INCLUDE_INSTALLED_FILES = 1
-    ISTORE_ENUM_FILES_FLAG_INCLUDE_MISSING_FILES = 2
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IsolationInterop(ABC, Object):
+    """"""
+
+    GUID_SXS_INSTALL_REFERENCE_SCHEME_OPAQUESTRING: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IID_ICMS: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IID_IDefinitionIdentity: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IID_IEnumSTORE_ASSEMBLY: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IID_IEnumSTORE_ASSEMBLY_FILE: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IID_IEnumSTORE_CATEGORY: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IID_IEnumSTORE_CATEGORY_INSTANCE: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IID_IEnumSTORE_DEPLOYMENT_METADATA: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IID_IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IID_IManifestInformation: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IID_IStore: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    IsolationDllName: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    SXS_INSTALL_REFERENCE_SCHEME_SXS_STRONGNAME_SIGNED_PRIVATE_ASSEMBLY: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    @classmethod
+    @property
+    def AppIdAuthority(cls) -> IAppIdAuthority:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def IdentityAuthority(cls) -> IIdentityAuthority:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetUserStore(cls) -> Store:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class STORE_ASSEMBLY(ValueType):
+    """"""
+
+    AssemblySize: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    ChangeId: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    DefinitionIdentity: Final[IDefinitionIdentity] = ...
+    """
+    
+    :return: 
+    """
+    ManifestPath: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    Status: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class STORE_ASSEMBLY_FILE(ValueType):
+    """"""
+
+    FileName: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    FileStatusFlags: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class STORE_ASSEMBLY_FILE_STATUS_FLAGS(Enum):
-    STORE_ASSEMBLY_FILE_STATUS_FLAG_PRESENT = 1
+    """"""
+
+    STORE_ASSEMBLY_FILE_STATUS_FLAG_PRESENT: STORE_ASSEMBLY_FILE_STATUS_FLAGS = ...
+    """"""
 
 class STORE_ASSEMBLY_STATUS_FLAGS(Enum):
-    STORE_ASSEMBLY_STATUS_MANIFEST_ONLY = 1
-    STORE_ASSEMBLY_STATUS_PAYLOAD_RESIDENT = 2
-    STORE_ASSEMBLY_STATUS_PARTIAL_INSTALL = 4
+    """"""
+
+    STORE_ASSEMBLY_STATUS_MANIFEST_ONLY: STORE_ASSEMBLY_STATUS_FLAGS = ...
+    """"""
+    STORE_ASSEMBLY_STATUS_PAYLOAD_RESIDENT: STORE_ASSEMBLY_STATUS_FLAGS = ...
+    """"""
+    STORE_ASSEMBLY_STATUS_PARTIAL_INSTALL: STORE_ASSEMBLY_STATUS_FLAGS = ...
+    """"""
+
+class STORE_CATEGORY(ValueType):
+    """"""
+
+    DefinitionIdentity: Final[IDefinitionIdentity] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class STORE_CATEGORY_INSTANCE(ValueType):
+    """"""
+
+    DefinitionAppId_Application: Final[IDefinitionAppId] = ...
+    """
+    
+    :return: 
+    """
+    XMLSnippet: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class STORE_CATEGORY_SUBCATEGORY(ValueType):
+    """"""
+
+    Subcategory: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class StateManager_RunningState(Enum):
-    Undefined = 0
-    Starting = 1
-    Running = 2
+    """"""
+
+    Undefined: StateManager_RunningState = ...
+    """"""
+    Starting: StateManager_RunningState = ...
+    """"""
+    Running: StateManager_RunningState = ...
+    """"""
+
+class Store(Object):
+    """"""
+
+    def __init__(self, pStore: IStore):
+        """
+
+        :param pStore:
+        """
+    @property
+    def InternalStore(self) -> IStore:
+        """
+
+        :return:
+        """
+    def BindReferenceToAssemblyIdentity(
+        self,
+        Flags: int,
+        ReferenceIdentity: IReferenceIdentity,
+        cDeploymentsToIgnore: int,
+        DefinitionIdentity_DeploymentsToIgnore: Array[IDefinitionIdentity],
+    ) -> IDefinitionIdentity:
+        """
+
+        :param Flags:
+        :param ReferenceIdentity:
+        :param cDeploymentsToIgnore:
+        :param DefinitionIdentity_DeploymentsToIgnore:
+        :return:
+        """
+    def BindReferenceToAssemblyManifest(
+        self,
+        Flags: int,
+        ReferenceIdentity: IReferenceIdentity,
+        cDeploymentsToIgnore: int,
+        DefinitionIdentity_DeploymentsToIgnore: Array[IDefinitionIdentity],
+    ) -> ICMS:
+        """
+
+        :param Flags:
+        :param ReferenceIdentity:
+        :param cDeploymentsToIgnore:
+        :param DefinitionIdentity_DeploymentsToIgnore:
+        :return:
+        """
+    def CalculateDelimiterOfDeploymentsBasedOnQuota(
+        self,
+        dwFlags: int,
+        cDeployments: int,
+        rgpIDefinitionAppId_Deployments: Array[IDefinitionAppId],
+        InstallerReference: StoreApplicationReference,
+        ulonglongQuota: int,
+        Delimiter: int,
+        SizeSharedWithExternalDeployment: int,
+        SizeConsumedByInputDeploymentArray: int,
+    ) -> None:
+        """
+
+        :param dwFlags:
+        :param cDeployments:
+        :param rgpIDefinitionAppId_Deployments:
+        :param InstallerReference:
+        :param ulonglongQuota:
+        :param Delimiter:
+        :param SizeSharedWithExternalDeployment:
+        :param SizeConsumedByInputDeploymentArray:
+        """
+    @overload
+    def EnumAssemblies(self, Flags: Store.EnumAssembliesFlags) -> StoreAssemblyEnumeration:
+        """
+
+        :param Flags:
+        :return:
+        """
+    @overload
+    def EnumAssemblies(
+        self, Flags: Store.EnumAssembliesFlags, refToMatch: IReferenceIdentity
+    ) -> StoreAssemblyEnumeration:
+        """
+
+        :param Flags:
+        :param refToMatch:
+        :return:
+        """
+    def EnumCategories(
+        self, Flags: Store.EnumCategoriesFlags, CategoryMatch: IReferenceIdentity
+    ) -> StoreCategoryEnumeration:
+        """
+
+        :param Flags:
+        :param CategoryMatch:
+        :return:
+        """
+    def EnumCategoryInstances(
+        self, Flags: Store.EnumCategoryInstancesFlags, Category: IDefinitionIdentity, SubCat: str
+    ) -> StoreCategoryInstanceEnumeration:
+        """
+
+        :param Flags:
+        :param Category:
+        :param SubCat:
+        :return:
+        """
+    def EnumFiles(
+        self, Flags: Store.EnumAssemblyFilesFlags, Assembly: IDefinitionIdentity
+    ) -> StoreAssemblyFileEnumeration:
+        """
+
+        :param Flags:
+        :param Assembly:
+        :return:
+        """
+    def EnumInstallationReferences(
+        self, Flags: Store.EnumAssemblyInstallReferenceFlags, Assembly: IDefinitionIdentity
+    ) -> IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE:
+        """
+
+        :param Flags:
+        :param Assembly:
+        :return:
+        """
+    def EnumInstallerDeploymentProperties(
+        self,
+        InstallerId: Guid,
+        InstallerName: str,
+        InstallerMetadata: str,
+        Deployment: IDefinitionAppId,
+    ) -> StoreDeploymentMetadataPropertyEnumeration:
+        """
+
+        :param InstallerId:
+        :param InstallerName:
+        :param InstallerMetadata:
+        :param Deployment:
+        :return:
+        """
+    def EnumInstallerDeployments(
+        self,
+        InstallerId: Guid,
+        InstallerName: str,
+        InstallerMetadata: str,
+        DeploymentFilter: IReferenceAppId,
+    ) -> StoreDeploymentMetadataEnumeration:
+        """
+
+        :param InstallerId:
+        :param InstallerName:
+        :param InstallerMetadata:
+        :param DeploymentFilter:
+        :return:
+        """
+    def EnumPrivateFiles(
+        self,
+        Flags: Store.EnumApplicationPrivateFiles,
+        Application: IDefinitionAppId,
+        Assembly: IDefinitionIdentity,
+    ) -> StoreAssemblyFileEnumeration:
+        """
+
+        :param Flags:
+        :param Application:
+        :param Assembly:
+        :return:
+        """
+    @overload
+    def EnumSubcategories(
+        self, Flags: Store.EnumSubcategoriesFlags, CategoryMatch: IDefinitionIdentity
+    ) -> StoreSubcategoryEnumeration:
+        """
+
+        :param Flags:
+        :param CategoryMatch:
+        :return:
+        """
+    @overload
+    def EnumSubcategories(
+        self, Flags: Store.EnumSubcategoriesFlags, Category: IDefinitionIdentity, SearchPattern: str
+    ) -> StoreSubcategoryEnumeration:
+        """
+
+        :param Flags:
+        :param Category:
+        :param SearchPattern:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetAssemblyIdentity(
+        self, Flags: int, DefinitionIdentity: IDefinitionIdentity
+    ) -> IDefinitionIdentity:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :return:
+        """
+    def GetAssemblyManifest(self, Flags: int, DefinitionIdentity: IDefinitionIdentity) -> ICMS:
+        """
+
+        :param Flags:
+        :param DefinitionIdentity:
+        :return:
+        """
+    def GetDeploymentProperty(
+        self,
+        Flags: Store.GetPackagePropertyFlags,
+        Deployment: IDefinitionAppId,
+        Reference: StoreApplicationReference,
+        PropertySet: Guid,
+        PropertyName: str,
+    ) -> Array[int]:
+        """
+
+        :param Flags:
+        :param Deployment:
+        :param Reference:
+        :param PropertySet:
+        :param PropertyName:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def LockApplicationPath(self, app: IDefinitionAppId) -> Store.IPathLock:
+        """
+
+        :param app:
+        :return:
+        """
+    def LockAssemblyPath(self, asm: IDefinitionIdentity) -> Store.IPathLock:
+        """
+
+        :param asm:
+        :return:
+        """
+    def QueryChangeID(self, asm: IDefinitionIdentity) -> int:
+        """
+
+        :param asm:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Transact(self, operations: Array[StoreTransactionOperation]) -> Array[int]:
+        """
+
+        :param operations:
+        :return:
+        """
+
+    class EnumApplicationPrivateFiles(Enum):
+        """"""
+
+        Nothing: EnumApplicationPrivateFiles = ...
+        """"""
+        IncludeInstalled: EnumApplicationPrivateFiles = ...
+        """"""
+        IncludeMissing: EnumApplicationPrivateFiles = ...
+        """"""
+
+    class EnumAssembliesFlags(Enum):
+        """"""
+
+        Nothing: EnumAssembliesFlags = ...
+        """"""
+        VisibleOnly: EnumAssembliesFlags = ...
+        """"""
+        MatchServicing: EnumAssembliesFlags = ...
+        """"""
+        ForceLibrarySemantics: EnumAssembliesFlags = ...
+        """"""
+
+    class EnumAssemblyFilesFlags(Enum):
+        """"""
+
+        Nothing: EnumAssemblyFilesFlags = ...
+        """"""
+        IncludeInstalled: EnumAssemblyFilesFlags = ...
+        """"""
+        IncludeMissing: EnumAssemblyFilesFlags = ...
+        """"""
+
+    class EnumAssemblyInstallReferenceFlags(Enum):
+        """"""
+
+        Nothing: EnumAssemblyInstallReferenceFlags = ...
+        """"""
+
+    class EnumCategoriesFlags(Enum):
+        """"""
+
+        Nothing: EnumCategoriesFlags = ...
+        """"""
+
+    class EnumCategoryInstancesFlags(Enum):
+        """"""
+
+        Nothing: EnumCategoryInstancesFlags = ...
+        """"""
+
+    class EnumSubcategoriesFlags(Enum):
+        """"""
+
+        Nothing: EnumSubcategoriesFlags = ...
+        """"""
+
+    class GetPackagePropertyFlags(Enum):
+        """"""
+
+        Nothing: GetPackagePropertyFlags = ...
+        """"""
+
+    class IPathLock(IDisposable):
+        """"""
+
+        @property
+        def Path(self) -> str:
+            """"""
+        def Dispose(self) -> None:
+            """"""
+
+class StoreApplicationReference(ValueType):
+    """"""
+
+    Flags: Final[StoreApplicationReference.RefFlags] = ...
+    """
+    
+    :return: 
+    """
+    GuidScheme: Final[Guid] = ...
+    """
+    
+    :return: 
+    """
+    Identifier: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    NonCanonicalData: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, RefScheme: Guid, Id: str, NcData: str):
+        """
+
+        :param RefScheme:
+        :param Id:
+        :param NcData:
+        """
+    @classmethod
+    def Destroy(cls, ip: IntPtr) -> None:
+        """
+
+        :param ip:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToIntPtr(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class RefFlags(Enum):
+        """"""
+
+        Nothing: RefFlags = ...
+        """"""
+
+class StoreAssemblyEnumeration(Object, IEnumerator):
+    """"""
+
+    def __init__(self, pI: IEnumSTORE_ASSEMBLY):
+        """
+
+        :param pI:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StoreAssemblyFileEnumeration(Object, IEnumerator):
+    """"""
+
+    def __init__(self, pI: IEnumSTORE_ASSEMBLY_FILE):
+        """
+
+        :param pI:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StoreCategoryEnumeration(Object, IEnumerator):
+    """"""
+
+    def __init__(self, pI: IEnumSTORE_CATEGORY):
+        """
+
+        :param pI:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StoreCategoryInstanceEnumeration(Object, IEnumerator):
+    """"""
+
+    def __init__(self, pI: IEnumSTORE_CATEGORY_INSTANCE):
+        """
+
+        :param pI:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StoreDeploymentMetadataEnumeration(Object, IEnumerator):
+    """"""
+
+    def __init__(self, pI: IEnumSTORE_DEPLOYMENT_METADATA):
+        """
+
+        :param pI:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StoreDeploymentMetadataPropertyEnumeration(Object, IEnumerator):
+    """"""
+
+    def __init__(self, pI: IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY):
+        """
+
+        :param pI:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StoreOperationInstallDeployment(ValueType):
+    """"""
+
+    Application: Final[IDefinitionAppId] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[StoreOperationInstallDeployment.OpFlags] = ...
+    """
+    
+    :return: 
+    """
+    Reference: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, App: IDefinitionAppId, reference: StoreApplicationReference):
+        """
+
+        :param App:
+        :param reference:
+        """
+    @overload
+    def __init__(
+        self, App: IDefinitionAppId, UninstallOthers: bool, reference: StoreApplicationReference
+    ):
+        """
+
+        :param App:
+        :param UninstallOthers:
+        :param reference:
+        """
+    def Destroy(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class Disposition(Enum):
+        """"""
+
+        Failed: Disposition = ...
+        """"""
+        AlreadyInstalled: Disposition = ...
+        """"""
+        Installed: Disposition = ...
+        """"""
+
+    class OpFlags(Enum):
+        """"""
+
+        Nothing: OpFlags = ...
+        """"""
+        UninstallOthers: OpFlags = ...
+        """"""
+
+class StoreOperationMetadataProperty(ValueType):
+    """"""
+
+    GuidPropertySet: Final[Guid] = ...
+    """
+    
+    :return: 
+    """
+    Name: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    Value: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    ValueSize: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, PropertySet: Guid, Name: str):
+        """
+
+        :param PropertySet:
+        :param Name:
+        """
+    @overload
+    def __init__(self, PropertySet: Guid, Name: str, Value: str):
+        """
+
+        :param PropertySet:
+        :param Name:
+        :param Value:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StoreOperationPinDeployment(ValueType):
+    """"""
+
+    Application: Final[IDefinitionAppId] = ...
+    """
+    
+    :return: 
+    """
+    ExpirationTime: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[StoreOperationPinDeployment.OpFlags] = ...
+    """
+    
+    :return: 
+    """
+    Reference: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, AppId: IDefinitionAppId, Ref: StoreApplicationReference):
+        """
+
+        :param AppId:
+        :param Ref:
+        """
+    @overload
+    def __init__(self, AppId: IDefinitionAppId, Expiry: DateTime, Ref: StoreApplicationReference):
+        """
+
+        :param AppId:
+        :param Expiry:
+        :param Ref:
+        """
+    def Destroy(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class Disposition(Enum):
+        """"""
+
+        Failed: Disposition = ...
+        """"""
+        Pinned: Disposition = ...
+        """"""
+
+    class OpFlags(Enum):
+        """"""
+
+        Nothing: OpFlags = ...
+        """"""
+        NeverExpires: OpFlags = ...
+        """"""
+
+class StoreOperationScavenge(ValueType):
+    """"""
+
+    ComponentCountLimit: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[StoreOperationScavenge.OpFlags] = ...
+    """
+    
+    :return: 
+    """
+    RuntimeLimit: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    SizeReclaimationLimit: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, Light: bool):
+        """
+
+        :param Light:
+        """
+    @overload
+    def __init__(self, Light: bool, SizeLimit: int, RunLimit: int, ComponentLimit: int):
+        """
+
+        :param Light:
+        :param SizeLimit:
+        :param RunLimit:
+        :param ComponentLimit:
+        """
+    def Destroy(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class OpFlags(Enum):
+        """"""
+
+        Nothing: OpFlags = ...
+        """"""
+        Light: OpFlags = ...
+        """"""
+        LimitSize: OpFlags = ...
+        """"""
+        LimitTime: OpFlags = ...
+        """"""
+        LimitCount: OpFlags = ...
+        """"""
+
+class StoreOperationSetCanonicalizationContext(ValueType):
+    """"""
+
+    BaseAddressFilePath: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    ExportsFilePath: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[StoreOperationSetCanonicalizationContext.OpFlags] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, Bases: str, Exports: str):
+        """
+
+        :param Bases:
+        :param Exports:
+        """
+    def Destroy(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class OpFlags(Enum):
+        """"""
+
+        Nothing: OpFlags = ...
+        """"""
+
+class StoreOperationSetDeploymentMetadata(ValueType):
+    """"""
+
+    Deployment: Final[IDefinitionAppId] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[StoreOperationSetDeploymentMetadata.OpFlags] = ...
+    """
+    
+    :return: 
+    """
+    InstallerReference: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    PropertiesToSet: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    PropertiesToTest: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    cPropertiesToSet: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    cPropertiesToTest: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(
+        self,
+        Deployment: IDefinitionAppId,
+        Reference: StoreApplicationReference,
+        SetProperties: Array[StoreOperationMetadataProperty],
+    ):
+        """
+
+        :param Deployment:
+        :param Reference:
+        :param SetProperties:
+        """
+    @overload
+    def __init__(
+        self,
+        Deployment: IDefinitionAppId,
+        Reference: StoreApplicationReference,
+        SetProperties: Array[StoreOperationMetadataProperty],
+        TestProperties: Array[StoreOperationMetadataProperty],
+    ):
+        """
+
+        :param Deployment:
+        :param Reference:
+        :param SetProperties:
+        :param TestProperties:
+        """
+    def Destroy(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class Disposition(Enum):
+        """"""
+
+        Failed: Disposition = ...
+        """"""
+        Set: Disposition = ...
+        """"""
+
+    class OpFlags(Enum):
+        """"""
+
+        Nothing: OpFlags = ...
+        """"""
+
+class StoreOperationStageComponent(ValueType):
+    """"""
+
+    Application: Final[IDefinitionAppId] = ...
+    """
+    
+    :return: 
+    """
+    Component: Final[IDefinitionIdentity] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[StoreOperationStageComponent.OpFlags] = ...
+    """
+    
+    :return: 
+    """
+    ManifestPath: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, app: IDefinitionAppId, Manifest: str):
+        """
+
+        :param app:
+        :param Manifest:
+        """
+    @overload
+    def __init__(self, app: IDefinitionAppId, comp: IDefinitionIdentity, Manifest: str):
+        """
+
+        :param app:
+        :param comp:
+        :param Manifest:
+        """
+    def Destroy(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class Disposition(Enum):
+        """"""
+
+        Failed: Disposition = ...
+        """"""
+        Installed: Disposition = ...
+        """"""
+        Refreshed: Disposition = ...
+        """"""
+        AlreadyInstalled: Disposition = ...
+        """"""
+
+    class OpFlags(Enum):
+        """"""
+
+        Nothing: OpFlags = ...
+        """"""
+
+class StoreOperationStageComponentFile(ValueType):
+    """"""
+
+    Application: Final[IDefinitionAppId] = ...
+    """
+    
+    :return: 
+    """
+    Component: Final[IDefinitionIdentity] = ...
+    """
+    
+    :return: 
+    """
+    ComponentRelativePath: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[StoreOperationStageComponentFile.OpFlags] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    SourceFilePath: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, App: IDefinitionAppId, CompRelPath: str, SrcFile: str):
+        """
+
+        :param App:
+        :param CompRelPath:
+        :param SrcFile:
+        """
+    @overload
+    def __init__(
+        self, App: IDefinitionAppId, Component: IDefinitionIdentity, CompRelPath: str, SrcFile: str
+    ):
+        """
+
+        :param App:
+        :param Component:
+        :param CompRelPath:
+        :param SrcFile:
+        """
+    def Destroy(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class Disposition(Enum):
+        """"""
+
+        Failed: Disposition = ...
+        """"""
+        Installed: Disposition = ...
+        """"""
+        Refreshed: Disposition = ...
+        """"""
+        AlreadyInstalled: Disposition = ...
+        """"""
+
+    class OpFlags(Enum):
+        """"""
+
+        Nothing: OpFlags = ...
+        """"""
+
+class StoreOperationUninstallDeployment(ValueType):
+    """"""
+
+    Application: Final[IDefinitionAppId] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[StoreOperationUninstallDeployment.OpFlags] = ...
+    """
+    
+    :return: 
+    """
+    Reference: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, appid: IDefinitionAppId, AppRef: StoreApplicationReference):
+        """
+
+        :param appid:
+        :param AppRef:
+        """
+    def Destroy(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class Disposition(Enum):
+        """"""
+
+        Failed: Disposition = ...
+        """"""
+        DidNotExist: Disposition = ...
+        """"""
+        Uninstalled: Disposition = ...
+        """"""
+
+    class OpFlags(Enum):
+        """"""
+
+        Nothing: OpFlags = ...
+        """"""
+
+class StoreOperationUnpinDeployment(ValueType):
+    """"""
+
+    Application: Final[IDefinitionAppId] = ...
+    """
+    
+    :return: 
+    """
+    Flags: Final[StoreOperationUnpinDeployment.OpFlags] = ...
+    """
+    
+    :return: 
+    """
+    Reference: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    Size: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, app: IDefinitionAppId, reference: StoreApplicationReference):
+        """
+
+        :param app:
+        :param reference:
+        """
+    def Destroy(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class Disposition(Enum):
+        """"""
+
+        Failed: Disposition = ...
+        """"""
+        Unpinned: Disposition = ...
+        """"""
+
+    class OpFlags(Enum):
+        """"""
+
+        Nothing: OpFlags = ...
+        """"""
+
+class StoreSubcategoryEnumeration(Object, IEnumerator):
+    """"""
+
+    def __init__(self, pI: IEnumSTORE_CATEGORY_SUBCATEGORY):
+        """
+
+        :param pI:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StoreTransaction(Object, IDisposable):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Operations(self) -> Array[StoreTransactionOperation]:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, o: StoreOperationInstallDeployment) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Add(self, o: StoreOperationPinDeployment) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Add(self, o: StoreOperationScavenge) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Add(self, o: StoreOperationSetCanonicalizationContext) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Add(self, o: StoreOperationSetDeploymentMetadata) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Add(self, o: StoreOperationStageComponent) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Add(self, o: StoreOperationStageComponentFile) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Add(self, o: StoreOperationUninstallDeployment) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Add(self, o: StoreOperationUnpinDeployment) -> None:
+        """
+
+        :param o:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StoreTransactionData(ValueType):
+    """"""
+
+    DataPtr: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StoreTransactionOperation(ValueType):
+    """"""
+
+    Data: Final[StoreTransactionData] = ...
+    """
+    
+    :return: 
+    """
+    Operation: Final[StoreTransactionOperationType] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class StoreTransactionOperationType(Enum):
-    Invalid = 0
-    SetCanonicalizationContext = 14
-    StageComponent = 20
-    PinDeployment = 21
-    UnpinDeployment = 22
-    StageComponentFile = 23
-    InstallDeployment = 24
-    UninstallDeployment = 25
-    SetDeploymentMetadata = 26
-    Scavenge = 27
+    """"""
 
-# No Delegates
-
-__all__ = [
-    IsolationInterop,
-    Store,
-    StoreAssemblyEnumeration,
-    StoreAssemblyFileEnumeration,
-    StoreCategoryEnumeration,
-    StoreCategoryInstanceEnumeration,
-    StoreDeploymentMetadataEnumeration,
-    StoreDeploymentMetadataPropertyEnumeration,
-    StoreSubcategoryEnumeration,
-    StoreTransaction,
-    BLOB,
-    CATEGORY,
-    CATEGORY_INSTANCE,
-    CATEGORY_SUBCATEGORY,
-    IDENTITY_ATTRIBUTE,
-    IStore_BindingResult,
-    IStore_BindingResult_BoundVersion,
-    STORE_ASSEMBLY,
-    STORE_ASSEMBLY_FILE,
-    STORE_CATEGORY,
-    STORE_CATEGORY_INSTANCE,
-    STORE_CATEGORY_SUBCATEGORY,
-    StoreApplicationReference,
-    StoreOperationInstallDeployment,
-    StoreOperationMetadataProperty,
-    StoreOperationPinDeployment,
-    StoreOperationScavenge,
-    StoreOperationSetCanonicalizationContext,
-    StoreOperationSetDeploymentMetadata,
-    StoreOperationStageComponent,
-    StoreOperationStageComponentFile,
-    StoreOperationUninstallDeployment,
-    StoreOperationUnpinDeployment,
-    StoreTransactionData,
-    StoreTransactionOperation,
-    IActContext,
-    IAppIdAuthority,
-    ICDF,
-    IDefinitionAppId,
-    IDefinitionIdentity,
-    IEnumDefinitionIdentity,
-    IEnumIDENTITY_ATTRIBUTE,
-    IEnumReferenceIdentity,
-    IEnumSTORE_ASSEMBLY,
-    IEnumSTORE_ASSEMBLY_FILE,
-    IEnumSTORE_ASSEMBLY_INSTALLATION_REFERENCE,
-    IEnumSTORE_CATEGORY,
-    IEnumSTORE_CATEGORY_INSTANCE,
-    IEnumSTORE_CATEGORY_SUBCATEGORY,
-    IEnumSTORE_DEPLOYMENT_METADATA,
-    IEnumSTORE_DEPLOYMENT_METADATA_PROPERTY,
-    IEnumUnknown,
-    IIdentityAuthority,
-    IManifestInformation,
-    IManifestParseErrorCallback,
-    IReferenceAppId,
-    IReferenceIdentity,
-    ISection,
-    ISectionEntry,
-    ISectionWithReferenceIdentityKey,
-    ISectionWithStringKey,
-    IStateManager,
-    IStore,
-    IAPPIDAUTHORITY_ARE_DEFINITIONS_EQUAL_FLAGS,
-    IAPPIDAUTHORITY_ARE_REFERENCES_EQUAL_FLAGS,
-    IIDENTITYAUTHORITY_DEFINITION_IDENTITY_TO_TEXT_FLAGS,
-    IIDENTITYAUTHORITY_DOES_DEFINITION_MATCH_REFERENCE_FLAGS,
-    IIDENTITYAUTHORITY_REFERENCE_IDENTITY_TO_TEXT_FLAGS,
-    ISTORE_BIND_REFERENCE_TO_ASSEMBLY_FLAGS,
-    ISTORE_ENUM_ASSEMBLIES_FLAGS,
-    ISTORE_ENUM_FILES_FLAGS,
-    STORE_ASSEMBLY_FILE_STATUS_FLAGS,
-    STORE_ASSEMBLY_STATUS_FLAGS,
-    StateManager_RunningState,
-    StoreTransactionOperationType,
-]
+    Invalid: StoreTransactionOperationType = ...
+    """"""
+    SetCanonicalizationContext: StoreTransactionOperationType = ...
+    """"""
+    StageComponent: StoreTransactionOperationType = ...
+    """"""
+    PinDeployment: StoreTransactionOperationType = ...
+    """"""
+    UnpinDeployment: StoreTransactionOperationType = ...
+    """"""
+    StageComponentFile: StoreTransactionOperationType = ...
+    """"""
+    InstallDeployment: StoreTransactionOperationType = ...
+    """"""
+    UninstallDeployment: StoreTransactionOperationType = ...
+    """"""
+    SetDeploymentMetadata: StoreTransactionOperationType = ...
+    """"""
+    Scavenge: StoreTransactionOperationType = ...
+    """"""

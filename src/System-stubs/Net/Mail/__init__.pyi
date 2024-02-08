@@ -3,35 +3,29 @@ from __future__ import annotations
 from abc import ABC
 from typing import Callable
 from typing import Generic
-from typing import List
-from typing import Protocol
+from typing import Iterator
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Array
 from System import AsyncCallback
-from System import Boolean
-from System import Byte
 from System import Char
 from System import Enum
 from System import Exception
+from System import Guid
 from System import IAsyncResult
-from System import ICloneable
 from System import IDisposable
-from System import Int32
 from System import IntPtr
-from System import MulticastDelegate
 from System import Object
-from System import String
-from System import UInt32
+from System import Type
 from System import Uri
 from System import ValueType
-from System import Void
 from System import __ComObject
 from System.Collections import ICollection
+from System.Collections import IDictionary
 from System.Collections import IEnumerable
+from System.Collections import IEnumerator
 from System.Collections import IList
 from System.Collections.Generic import ICollection
 from System.Collections.Generic import IEnumerable
@@ -41,6 +35,7 @@ from System.Collections.Generic import IReadOnlyList
 from System.Collections.ObjectModel import Collection
 from System.Collections.Specialized import NameValueCollection
 from System.ComponentModel import AsyncCompletedEventArgs
+from System.IO import SeekOrigin
 from System.IO import Stream
 from System.Net import Authorization
 from System.Net import ICredentialsByHost
@@ -52,9 +47,11 @@ from System.Net.Mime import BaseWriter
 from System.Net.Mime import ContentDisposition
 from System.Net.Mime import ContentType
 from System.Net.Mime import TransferEncoding
+from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Attribute
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.InteropServices.ComTypes import FILETIME
+from System.Runtime.Remoting import ObjRef
 from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
@@ -71,2088 +68,4795 @@ from System.Security.Permissions import PermissionState
 from System.Security.Permissions import SecurityAction
 from System.Text import Encoding
 from System.Text import StringBuilder
+from System.Threading import CancellationToken
+from System.Threading import WaitHandle
 from System.Threading.Tasks import Task
 
-# ---------- Types ---------- #
-
 T = TypeVar("T")
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-CharType = Union[str, Char]
-IntType = Union[int, Int32]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-UIntType = Union[int, UInt32]
-VoidType = Union[None, Void]
 
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
-
 class AlternateView(AttachmentBase, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, fileName: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, mediaType: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, contentType: ContentType): ...
-    @overload
-    def __init__(self, contentStream: Stream): ...
-    @overload
-    def __init__(self, contentStream: Stream, mediaType: StringType): ...
-    @overload
-    def __init__(self, contentStream: Stream, contentType: ContentType): ...
+    def __init__(self, contentStream: Stream):
+        """
 
-    # ---------- Properties ---------- #
+        :param contentStream:
+        """
+    @overload
+    def __init__(self, fileName: str):
+        """
 
+        :param fileName:
+        """
+    @overload
+    def __init__(self, contentStream: Stream, contentType: ContentType):
+        """
+
+        :param contentStream:
+        :param contentType:
+        """
+    @overload
+    def __init__(self, contentStream: Stream, mediaType: str):
+        """
+
+        :param contentStream:
+        :param mediaType:
+        """
+    @overload
+    def __init__(self, fileName: str, contentType: ContentType):
+        """
+
+        :param fileName:
+        :param contentType:
+        """
+    @overload
+    def __init__(self, fileName: str, mediaType: str):
+        """
+
+        :param fileName:
+        :param mediaType:
+        """
     @property
-    def BaseUri(self) -> Uri: ...
+    def BaseUri(self) -> Uri:
+        """
+
+        :return:
+        """
     @BaseUri.setter
     def BaseUri(self, value: Uri) -> None: ...
     @property
-    def LinkedResources(self) -> LinkedResourceCollection: ...
+    def ContentId(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def CreateAlternateViewFromString(content: StringType) -> AlternateView: ...
-    @staticmethod
-    @overload
-    def CreateAlternateViewFromString(
-        content: StringType, contentEncoding: Encoding, mediaType: StringType
-    ) -> AlternateView: ...
-    @staticmethod
-    @overload
-    def CreateAlternateViewFromString(
-        content: StringType, contentType: ContentType
-    ) -> AlternateView: ...
-    def get_BaseUri(self) -> Uri: ...
-    def get_LinkedResources(self) -> LinkedResourceCollection: ...
-    def set_BaseUri(self, value: Uri) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AlternateViewCollection(
-    Collection[AlternateView],
-    IList[AlternateView],
-    ICollection[AlternateView],
-    IEnumerable[AlternateView],
-    IEnumerable,
-    IList,
-    ICollection,
-    IReadOnlyList[AlternateView],
-    IReadOnlyCollection[AlternateView],
-    IDisposable,
-):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Attachment(AttachmentBase, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, fileName: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, mediaType: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, contentType: ContentType): ...
-    @overload
-    def __init__(self, contentStream: Stream, name: StringType): ...
-    @overload
-    def __init__(self, contentStream: Stream, name: StringType, mediaType: StringType): ...
-    @overload
-    def __init__(self, contentStream: Stream, contentType: ContentType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ContentDisposition(self) -> ContentDisposition: ...
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def NameEncoding(self) -> Encoding: ...
-    @NameEncoding.setter
-    def NameEncoding(self, value: Encoding) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def CreateAttachmentFromString(content: StringType, name: StringType) -> Attachment: ...
-    @staticmethod
-    @overload
-    def CreateAttachmentFromString(
-        content: StringType, name: StringType, contentEncoding: Encoding, mediaType: StringType
-    ) -> Attachment: ...
-    @staticmethod
-    @overload
-    def CreateAttachmentFromString(content: StringType, contentType: ContentType) -> Attachment: ...
-    def get_ContentDisposition(self) -> ContentDisposition: ...
-    def get_Name(self) -> StringType: ...
-    def get_NameEncoding(self) -> Encoding: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_NameEncoding(self, value: Encoding) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AttachmentBase(ABC, ObjectType, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ContentId(self) -> StringType: ...
+        :return:
+        """
     @ContentId.setter
-    def ContentId(self, value: StringType) -> None: ...
+    def ContentId(self, value: str) -> None: ...
     @property
-    def ContentStream(self) -> Stream: ...
+    def ContentStream(self) -> Stream:
+        """
+
+        :return:
+        """
     @property
-    def ContentType(self) -> ContentType: ...
+    def ContentType(self) -> ContentType:
+        """
+
+        :return:
+        """
     @ContentType.setter
     def ContentType(self, value: ContentType) -> None: ...
     @property
-    def TransferEncoding(self) -> TransferEncoding: ...
+    def LinkedResources(self) -> LinkedResourceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def TransferEncoding(self) -> TransferEncoding:
+        """
+
+        :return:
+        """
     @TransferEncoding.setter
     def TransferEncoding(self, value: TransferEncoding) -> None: ...
+    @classmethod
+    @overload
+    def CreateAlternateViewFromString(cls, content: str) -> AlternateView:
+        """
 
-    # ---------- Methods ---------- #
+        :param content:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CreateAlternateViewFromString(cls, content: str, contentType: ContentType) -> AlternateView:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    def get_ContentId(self) -> StringType: ...
-    def get_ContentStream(self) -> Stream: ...
-    def get_ContentType(self) -> ContentType: ...
-    def get_TransferEncoding(self) -> TransferEncoding: ...
-    def set_ContentId(self, value: StringType) -> VoidType: ...
-    def set_ContentType(self, value: ContentType) -> VoidType: ...
-    def set_TransferEncoding(self, value: TransferEncoding) -> VoidType: ...
+        :param content:
+        :param contentType:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CreateAlternateViewFromString(
+        cls, content: str, contentEncoding: Encoding, mediaType: str
+    ) -> AlternateView:
+        """
 
-    # No Events
+        :param content:
+        :param contentEncoding:
+        :param mediaType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+
+class AlternateViewCollection(
+    Collection[AlternateView],
+    ICollection[AlternateView],
+    IEnumerable[AlternateView],
+    IList[AlternateView],
+    IReadOnlyCollection[AlternateView],
+    IReadOnlyList[AlternateView],
+    ICollection,
+    IEnumerable,
+    IList,
+    IDisposable,
+):
+    """"""
+
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> AlternateView:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: AlternateView) -> None: ...
+    @property
+    def Item(self) -> AlternateView:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, item: AlternateView) -> None:
+        """
+
+        :param item:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, item: AlternateView) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[AlternateView], arrayIndex: int) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, item: AlternateView) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, item: AlternateView) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, item: AlternateView) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __contains__(self, value: AlternateView) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> AlternateView:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> AlternateView:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[AlternateView]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: AlternateView) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class Attachment(AttachmentBase, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self, fileName: str):
+        """
+
+        :param fileName:
+        """
+    @overload
+    def __init__(self, contentStream: Stream, contentType: ContentType):
+        """
+
+        :param contentStream:
+        :param contentType:
+        """
+    @overload
+    def __init__(self, contentStream: Stream, name: str):
+        """
+
+        :param contentStream:
+        :param name:
+        """
+    @overload
+    def __init__(self, fileName: str, contentType: ContentType):
+        """
+
+        :param fileName:
+        :param contentType:
+        """
+    @overload
+    def __init__(self, fileName: str, mediaType: str):
+        """
+
+        :param fileName:
+        :param mediaType:
+        """
+    @overload
+    def __init__(self, contentStream: Stream, name: str, mediaType: str):
+        """
+
+        :param contentStream:
+        :param name:
+        :param mediaType:
+        """
+    @property
+    def ContentDisposition(self) -> ContentDisposition:
+        """
+
+        :return:
+        """
+    @property
+    def ContentId(self) -> str:
+        """
+
+        :return:
+        """
+    @ContentId.setter
+    def ContentId(self, value: str) -> None: ...
+    @property
+    def ContentStream(self) -> Stream:
+        """
+
+        :return:
+        """
+    @property
+    def ContentType(self) -> ContentType:
+        """
+
+        :return:
+        """
+    @ContentType.setter
+    def ContentType(self, value: ContentType) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def NameEncoding(self) -> Encoding:
+        """
+
+        :return:
+        """
+    @NameEncoding.setter
+    def NameEncoding(self, value: Encoding) -> None: ...
+    @property
+    def TransferEncoding(self) -> TransferEncoding:
+        """
+
+        :return:
+        """
+    @TransferEncoding.setter
+    def TransferEncoding(self, value: TransferEncoding) -> None: ...
+    @classmethod
+    @overload
+    def CreateAttachmentFromString(cls, content: str, contentType: ContentType) -> Attachment:
+        """
+
+        :param content:
+        :param contentType:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CreateAttachmentFromString(cls, content: str, name: str) -> Attachment:
+        """
+
+        :param content:
+        :param name:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CreateAttachmentFromString(
+        cls, content: str, name: str, contentEncoding: Encoding, mediaType: str
+    ) -> Attachment:
+        """
+
+        :param content:
+        :param name:
+        :param contentEncoding:
+        :param mediaType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class AttachmentBase(ABC, Object, IDisposable):
+    """"""
+
+    @property
+    def ContentId(self) -> str:
+        """
+
+        :return:
+        """
+    @ContentId.setter
+    def ContentId(self, value: str) -> None: ...
+    @property
+    def ContentStream(self) -> Stream:
+        """
+
+        :return:
+        """
+    @property
+    def ContentType(self) -> ContentType:
+        """
+
+        :return:
+        """
+    @ContentType.setter
+    def ContentType(self, value: ContentType) -> None: ...
+    @property
+    def TransferEncoding(self) -> TransferEncoding:
+        """
+
+        :return:
+        """
+    @TransferEncoding.setter
+    def TransferEncoding(self, value: TransferEncoding) -> None: ...
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class AttachmentCollection(
     Collection[Attachment],
-    IList[Attachment],
     ICollection[Attachment],
     IEnumerable[Attachment],
-    IEnumerable,
-    IList,
-    ICollection,
-    IReadOnlyList[Attachment],
+    IList[Attachment],
     IReadOnlyCollection[Attachment],
-    IDisposable,
-):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AuthCommand(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BufferBuilder(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CheckCommand(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DataCommand(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DataStopCommand(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DomainLiteralReader(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DotAtomReader(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EHelloCommand(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HelloCommand(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IisPickupDirectory(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LinkedResource(AttachmentBase, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, fileName: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, mediaType: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, contentType: ContentType): ...
-    @overload
-    def __init__(self, contentStream: Stream): ...
-    @overload
-    def __init__(self, contentStream: Stream, mediaType: StringType): ...
-    @overload
-    def __init__(self, contentStream: Stream, contentType: ContentType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ContentLink(self) -> Uri: ...
-    @ContentLink.setter
-    def ContentLink(self, value: Uri) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def CreateLinkedResourceFromString(content: StringType) -> LinkedResource: ...
-    @staticmethod
-    @overload
-    def CreateLinkedResourceFromString(
-        content: StringType, contentEncoding: Encoding, mediaType: StringType
-    ) -> LinkedResource: ...
-    @staticmethod
-    @overload
-    def CreateLinkedResourceFromString(
-        content: StringType, contentType: ContentType
-    ) -> LinkedResource: ...
-    def get_ContentLink(self) -> Uri: ...
-    def set_ContentLink(self, value: Uri) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LinkedResourceCollection(
-    Collection[LinkedResource],
-    IList[LinkedResource],
-    ICollection[LinkedResource],
-    IEnumerable[LinkedResource],
+    IReadOnlyList[Attachment],
+    ICollection,
     IEnumerable,
     IList,
-    ICollection,
-    IReadOnlyList[LinkedResource],
-    IReadOnlyCollection[LinkedResource],
     IDisposable,
 ):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MSAdminBase(__ComObject):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MailAddress(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, address: StringType): ...
-    @overload
-    def __init__(self, address: StringType, displayName: StringType): ...
-    @overload
-    def __init__(
-        self, address: StringType, displayName: StringType, displayNameEncoding: Encoding
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Address(self) -> StringType: ...
-    @property
-    def DisplayName(self) -> StringType: ...
-    @property
-    def Host(self) -> StringType: ...
-    @property
-    def User(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, value: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_Address(self) -> StringType: ...
-    def get_DisplayName(self) -> StringType: ...
-    def get_Host(self) -> StringType: ...
-    def get_User(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MailAddressCollection(
-    Collection[MailAddress],
-    IList[MailAddress],
-    ICollection[MailAddress],
-    IEnumerable[MailAddress],
-    IEnumerable,
-    IList,
-    ICollection,
-    IReadOnlyList[MailAddress],
-    IReadOnlyCollection[MailAddress],
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Add(self, addresses: StringType) -> VoidType: ...
-    def ToString(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MailAddressParser(ABC, ObjectType):
     """"""
 
-    # No Fields
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Item(self) -> Attachment:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: Attachment) -> None: ...
+    @property
+    def Item(self) -> Attachment:
+        """
 
-class MailCommand(ABC, ObjectType):
-    """"""
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
 
-    # No Fields
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MailHeaderInfo(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MailMessage(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
+        :return:
+        """
     @overload
-    def __init__(self): ...
+    def Add(self, item: Attachment) -> None:
+        """
+
+        :param item:
+        """
     @overload
-    def __init__(self, _from: StringType, to: StringType): ...
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def __init__(
-        self, _from: StringType, to: StringType, subject: StringType, body: StringType
-    ): ...
+    def Clear(self) -> None:
+        """"""
     @overload
-    def __init__(self, _from: MailAddress, to: MailAddress): ...
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, item: Attachment) -> bool:
+        """
 
-    # ---------- Properties ---------- #
+        :param item:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
 
-    @property
-    def AlternateViews(self) -> AlternateViewCollection: ...
-    @property
-    def Attachments(self) -> AttachmentCollection: ...
-    @property
-    def Bcc(self) -> MailAddressCollection: ...
-    @property
-    def Body(self) -> StringType: ...
-    @Body.setter
-    def Body(self, value: StringType) -> None: ...
-    @property
-    def BodyEncoding(self) -> Encoding: ...
-    @BodyEncoding.setter
-    def BodyEncoding(self, value: Encoding) -> None: ...
-    @property
-    def BodyTransferEncoding(self) -> TransferEncoding: ...
-    @BodyTransferEncoding.setter
-    def BodyTransferEncoding(self, value: TransferEncoding) -> None: ...
-    @property
-    def CC(self) -> MailAddressCollection: ...
-    @property
-    def DeliveryNotificationOptions(self) -> DeliveryNotificationOptions: ...
-    @DeliveryNotificationOptions.setter
-    def DeliveryNotificationOptions(self, value: DeliveryNotificationOptions) -> None: ...
-    @property
-    def From(self) -> MailAddress: ...
-    @From.setter
-    def From(self, value: MailAddress) -> None: ...
-    @property
-    def Headers(self) -> NameValueCollection: ...
-    @property
-    def HeadersEncoding(self) -> Encoding: ...
-    @HeadersEncoding.setter
-    def HeadersEncoding(self, value: Encoding) -> None: ...
-    @property
-    def IsBodyHtml(self) -> BooleanType: ...
-    @IsBodyHtml.setter
-    def IsBodyHtml(self, value: BooleanType) -> None: ...
-    @property
-    def Priority(self) -> MailPriority: ...
-    @Priority.setter
-    def Priority(self, value: MailPriority) -> None: ...
-    @property
-    def ReplyTo(self) -> MailAddress: ...
-    @ReplyTo.setter
-    def ReplyTo(self, value: MailAddress) -> None: ...
-    @property
-    def ReplyToList(self) -> MailAddressCollection: ...
-    @property
-    def Sender(self) -> MailAddress: ...
-    @Sender.setter
-    def Sender(self, value: MailAddress) -> None: ...
-    @property
-    def Subject(self) -> StringType: ...
-    @Subject.setter
-    def Subject(self, value: StringType) -> None: ...
-    @property
-    def SubjectEncoding(self) -> Encoding: ...
-    @SubjectEncoding.setter
-    def SubjectEncoding(self, value: Encoding) -> None: ...
-    @property
-    def To(self) -> MailAddressCollection: ...
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[Attachment], arrayIndex: int) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    def get_AlternateViews(self) -> AlternateViewCollection: ...
-    def get_Attachments(self) -> AttachmentCollection: ...
-    def get_Bcc(self) -> MailAddressCollection: ...
-    def get_Body(self) -> StringType: ...
-    def get_BodyEncoding(self) -> Encoding: ...
-    def get_BodyTransferEncoding(self) -> TransferEncoding: ...
-    def get_CC(self) -> MailAddressCollection: ...
-    def get_DeliveryNotificationOptions(self) -> DeliveryNotificationOptions: ...
-    def get_From(self) -> MailAddress: ...
-    def get_Headers(self) -> NameValueCollection: ...
-    def get_HeadersEncoding(self) -> Encoding: ...
-    def get_IsBodyHtml(self) -> BooleanType: ...
-    def get_Priority(self) -> MailPriority: ...
-    def get_ReplyTo(self) -> MailAddress: ...
-    def get_ReplyToList(self) -> MailAddressCollection: ...
-    def get_Sender(self) -> MailAddress: ...
-    def get_Subject(self) -> StringType: ...
-    def get_SubjectEncoding(self) -> Encoding: ...
-    def get_To(self) -> MailAddressCollection: ...
-    def set_Body(self, value: StringType) -> VoidType: ...
-    def set_BodyEncoding(self, value: Encoding) -> VoidType: ...
-    def set_BodyTransferEncoding(self, value: TransferEncoding) -> VoidType: ...
-    def set_DeliveryNotificationOptions(self, value: DeliveryNotificationOptions) -> VoidType: ...
-    def set_From(self, value: MailAddress) -> VoidType: ...
-    def set_HeadersEncoding(self, value: Encoding) -> VoidType: ...
-    def set_IsBodyHtml(self, value: BooleanType) -> VoidType: ...
-    def set_Priority(self, value: MailPriority) -> VoidType: ...
-    def set_ReplyTo(self, value: MailAddress) -> VoidType: ...
-    def set_Sender(self, value: MailAddress) -> VoidType: ...
-    def set_Subject(self, value: StringType) -> VoidType: ...
-    def set_SubjectEncoding(self, value: Encoding) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def IndexOf(self, item: Attachment) -> int:
+        """
 
-    # No Sub Interfaces
+        :param item:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
 
-    # No Sub Enums
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, item: Attachment) -> None:
+        """
 
-class MailWriter(BaseWriter):
+        :param index:
+        :param item:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, item: Attachment) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __contains__(self, value: Attachment) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> Attachment:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> Attachment:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Attachment]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: Attachment) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class AuthCommand(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Message(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Priority(self) -> MailPriority: ...
-    @Priority.setter
-    def Priority(self, value: MailPriority) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Priority(self) -> MailPriority: ...
-    def set_Priority(self, value: MailPriority) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class QuotedPairReader(ABC, ObjectType):
+class BufferBuilder(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class QuotedStringFormatReader(ABC, ObjectType):
+class CheckCommand(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReadLinesCommand(ABC, ObjectType):
+class DataCommand(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RecipientCommand(ABC, ObjectType):
+class DataStopCommand(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class DeliveryNotificationOptions(Enum):
+    """"""
 
-    # No Sub Structs
+    _None: DeliveryNotificationOptions = ...
+    """"""
+    OnSuccess: DeliveryNotificationOptions = ...
+    """"""
+    OnFailure: DeliveryNotificationOptions = ...
+    """"""
+    Delay: DeliveryNotificationOptions = ...
+    """"""
+    Never: DeliveryNotificationOptions = ...
+    """"""
 
-    # No Sub Interfaces
+class DomainLiteralReader(ABC, Object):
+    """"""
 
-    # No Sub Enums
+    def Equals(self, obj: object) -> bool:
+        """
 
-class SendCompletedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def __init__(self, object: ObjectType, method: NIntType): ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Properties
+        :return:
+        """
 
-    # ---------- Methods ---------- #
+class DotAtomReader(ABC, Object):
+    """"""
 
-    def BeginInvoke(
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EHelloCommand(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class HelloCommand(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IMSAdminBase:
+    """"""
+
+    def AddKey(self, handle: IntPtr, Path: str) -> int:
+        """
+
+        :param handle:
+        :param Path:
+        :return:
+        """
+    def Backup(self, Location: str, Version: int, Flags: int) -> int:
+        """
+
+        :param Location:
+        :param Version:
+        :param Flags:
+        :return:
+        """
+    def ChangePermissions(self, handle: IntPtr, TimeOut: int, AccessRequested: MBKeyAccess) -> None:
+        """
+
+        :param handle:
+        :param TimeOut:
+        :param AccessRequested:
+        """
+    def CloseKey(self, handle: IntPtr) -> int:
+        """
+
+        :param handle:
+        :return:
+        """
+    def CopyData(
         self,
-        sender: ObjectType,
-        e: AsyncCompletedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: AsyncCompletedEventArgs) -> VoidType: ...
+        sourcehandle: IntPtr,
+        SourcePath: str,
+        desthandle: IntPtr,
+        DestPath: str,
+        Attributes: int,
+        UserType: int,
+        DataType: int,
+        CopyFlag: bool,
+    ) -> int:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SendMailAsyncResult(LazyAsyncResult, IAsyncResult):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpAuthenticationManager(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpClient(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, host: StringType): ...
-    @overload
-    def __init__(self, host: StringType, port: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ClientCertificates(self) -> X509CertificateCollection: ...
-    @property
-    def Credentials(self) -> ICredentialsByHost: ...
-    @Credentials.setter
-    def Credentials(self, value: ICredentialsByHost) -> None: ...
-    @property
-    def DeliveryFormat(self) -> SmtpDeliveryFormat: ...
-    @DeliveryFormat.setter
-    def DeliveryFormat(self, value: SmtpDeliveryFormat) -> None: ...
-    @property
-    def DeliveryMethod(self) -> SmtpDeliveryMethod: ...
-    @DeliveryMethod.setter
-    def DeliveryMethod(self, value: SmtpDeliveryMethod) -> None: ...
-    @property
-    def EnableSsl(self) -> BooleanType: ...
-    @EnableSsl.setter
-    def EnableSsl(self, value: BooleanType) -> None: ...
-    @property
-    def Host(self) -> StringType: ...
-    @Host.setter
-    def Host(self, value: StringType) -> None: ...
-    @property
-    def PickupDirectoryLocation(self) -> StringType: ...
-    @PickupDirectoryLocation.setter
-    def PickupDirectoryLocation(self, value: StringType) -> None: ...
-    @property
-    def Port(self) -> IntType: ...
-    @Port.setter
-    def Port(self, value: IntType) -> None: ...
-    @property
-    def ServicePoint(self) -> ServicePoint: ...
-    @property
-    def TargetName(self) -> StringType: ...
-    @TargetName.setter
-    def TargetName(self, value: StringType) -> None: ...
-    @property
-    def Timeout(self) -> IntType: ...
-    @Timeout.setter
-    def Timeout(self, value: IntType) -> None: ...
-    @property
-    def UseDefaultCredentials(self) -> BooleanType: ...
-    @UseDefaultCredentials.setter
-    def UseDefaultCredentials(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    @overload
-    def Send(
-        self, _from: StringType, recipients: StringType, subject: StringType, body: StringType
-    ) -> VoidType: ...
-    @overload
-    def Send(self, message: MailMessage) -> VoidType: ...
-    @overload
-    def SendAsync(
+        :param sourcehandle:
+        :param SourcePath:
+        :param desthandle:
+        :param DestPath:
+        :param Attributes:
+        :param UserType:
+        :param DataType:
+        :param CopyFlag:
+        :return:
+        """
+    def CopyKey(
         self,
-        _from: StringType,
-        recipients: StringType,
-        subject: StringType,
-        body: StringType,
-        userToken: ObjectType,
-    ) -> VoidType: ...
-    @overload
-    def SendAsync(self, message: MailMessage, userToken: ObjectType) -> VoidType: ...
-    def SendAsyncCancel(self) -> VoidType: ...
-    @overload
-    def SendMailAsync(
-        self, _from: StringType, recipients: StringType, subject: StringType, body: StringType
-    ) -> Task: ...
-    @overload
-    def SendMailAsync(self, message: MailMessage) -> Task: ...
-    def add_SendCompleted(self, value: SendCompletedEventHandler) -> VoidType: ...
-    def get_ClientCertificates(self) -> X509CertificateCollection: ...
-    def get_Credentials(self) -> ICredentialsByHost: ...
-    def get_DeliveryFormat(self) -> SmtpDeliveryFormat: ...
-    def get_DeliveryMethod(self) -> SmtpDeliveryMethod: ...
-    def get_EnableSsl(self) -> BooleanType: ...
-    def get_Host(self) -> StringType: ...
-    def get_PickupDirectoryLocation(self) -> StringType: ...
-    def get_Port(self) -> IntType: ...
-    def get_ServicePoint(self) -> ServicePoint: ...
-    def get_TargetName(self) -> StringType: ...
-    def get_Timeout(self) -> IntType: ...
-    def get_UseDefaultCredentials(self) -> BooleanType: ...
-    def remove_SendCompleted(self, value: SendCompletedEventHandler) -> VoidType: ...
-    def set_Credentials(self, value: ICredentialsByHost) -> VoidType: ...
-    def set_DeliveryFormat(self, value: SmtpDeliveryFormat) -> VoidType: ...
-    def set_DeliveryMethod(self, value: SmtpDeliveryMethod) -> VoidType: ...
-    def set_EnableSsl(self, value: BooleanType) -> VoidType: ...
-    def set_Host(self, value: StringType) -> VoidType: ...
-    def set_PickupDirectoryLocation(self, value: StringType) -> VoidType: ...
-    def set_Port(self, value: IntType) -> VoidType: ...
-    def set_TargetName(self, value: StringType) -> VoidType: ...
-    def set_Timeout(self, value: IntType) -> VoidType: ...
-    def set_UseDefaultCredentials(self, value: BooleanType) -> VoidType: ...
+        source: IntPtr,
+        SourcePath: str,
+        dest: IntPtr,
+        DestPath: str,
+        OverwriteFlag: bool,
+        CopyFlag: bool,
+    ) -> None:
+        """
 
-    # ---------- Events ---------- #
+        :param source:
+        :param SourcePath:
+        :param dest:
+        :param DestPath:
+        :param OverwriteFlag:
+        :param CopyFlag:
+        """
+    def DeleteAllData(self, handle: IntPtr, Path: str, UserType: int, DataType: int) -> None:
+        """
 
-    SendCompleted: EventType[SendCompletedEventHandler] = ...
+        :param handle:
+        :param Path:
+        :param UserType:
+        :param DataType:
+        """
+    def DeleteBackup(self, Location: str, Version: int) -> None:
+        """
 
-    # No Sub Classes
+        :param Location:
+        :param Version:
+        """
+    def DeleteChildKeys(self, handle: IntPtr, Path: str) -> None:
+        """
 
-    # No Sub Structs
+        :param handle:
+        :param Path:
+        """
+    def DeleteData(self, key: IntPtr, path: str, Identifier: int, DataType: int) -> int:
+        """
 
-    # No Sub Interfaces
+        :param key:
+        :param path:
+        :param Identifier:
+        :param DataType:
+        :return:
+        """
+    def DeleteKey(self, handle: IntPtr, Path: str) -> int:
+        """
 
-    # No Sub Enums
+        :param handle:
+        :param Path:
+        :return:
+        """
+    def EnumBackups(
+        self, Location: str, Version: int, BackupTime: FILETIME, EnumIndex: int
+    ) -> Tuple[None, str, int, FILETIME]:
+        """
 
-class SmtpCommands(ABC, ObjectType):
+        :param Location:
+        :param Version:
+        :param BackupTime:
+        :param EnumIndex:
+        """
+    def EnumData(
+        self, key: IntPtr, path: str, data: MetadataRecord, EnumDataIndex: int, RequiredDataLen: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param key:
+        :param path:
+        :param data:
+        :param EnumDataIndex:
+        :param RequiredDataLen:
+        :return:
+        """
+    def EnumKeys(self, handle: IntPtr, Path: str, Buffer: StringBuilder, EnumKeyIndex: int) -> int:
+        """
+
+        :param handle:
+        :param Path:
+        :param Buffer:
+        :param EnumKeyIndex:
+        :return:
+        """
+    def GetAllData(
+        self,
+        handle: IntPtr,
+        Path: str,
+        Attributes: int,
+        UserType: int,
+        DataType: int,
+        NumDataEntries: int,
+        DataSetNumber: int,
+        BufferSize: int,
+        buffer: IntPtr,
+        RequiredBufferSize: int,
+    ) -> Tuple[int, int, int, int]:
+        """
+
+        :param handle:
+        :param Path:
+        :param Attributes:
+        :param UserType:
+        :param DataType:
+        :param NumDataEntries:
+        :param DataSetNumber:
+        :param BufferSize:
+        :param buffer:
+        :param RequiredBufferSize:
+        :return:
+        """
+    def GetData(
+        self, key: IntPtr, path: str, data: MetadataRecord, RequiredDataLen: int
+    ) -> Tuple[int, int]:
+        """
+
+        :param key:
+        :param path:
+        :param data:
+        :param RequiredDataLen:
+        :return:
+        """
+    def GetDataPaths(
+        self,
+        handle: IntPtr,
+        Path: str,
+        Identifier: int,
+        DataType: int,
+        BufferSize: int,
+        Buffer: Char,
+        RequiredBufferSize: int,
+    ) -> Tuple[None, Char, int]:
+        """
+
+        :param handle:
+        :param Path:
+        :param Identifier:
+        :param DataType:
+        :param BufferSize:
+        :param Buffer:
+        :param RequiredBufferSize:
+        """
+    def GetDataSetNumber(self, handle: IntPtr, Path: str, DataSetNumber: int) -> Tuple[None, int]:
+        """
+
+        :param handle:
+        :param Path:
+        :param DataSetNumber:
+        """
+    def GetHandleInfo(
+        self, handle: IntPtr, Info: _METADATA_HANDLE_INFO
+    ) -> Tuple[None, _METADATA_HANDLE_INFO]:
+        """
+
+        :param handle:
+        :param Info:
+        """
+    def GetLastChangeTime(
+        self, handle: IntPtr, Path: str, LastChangeTime: FILETIME, LocalTime: bool
+    ) -> Tuple[int, FILETIME]:
+        """
+
+        :param handle:
+        :param Path:
+        :param LastChangeTime:
+        :param LocalTime:
+        :return:
+        """
+    def GetServerGuid(self) -> int:
+        """
+
+        :return:
+        """
+    def GetSystemChangeNumber(self, SystemChangeNumber: int) -> Tuple[None, int]:
+        """
+
+        :param SystemChangeNumber:
+        """
+    def KeyExchangePhase1(self) -> int:
+        """
+
+        :return:
+        """
+    def KeyExchangePhase2(self) -> int:
+        """
+
+        :return:
+        """
+    def OpenKey(
+        self,
+        handle: IntPtr,
+        Path: str,
+        AccessRequested: MBKeyAccess,
+        TimeOut: int,
+        NewHandle: IntPtr,
+    ) -> Tuple[int, IntPtr]:
+        """
+
+        :param handle:
+        :param Path:
+        :param AccessRequested:
+        :param TimeOut:
+        :param NewHandle:
+        :return:
+        """
+    def RenameKey(self, key: IntPtr, path: str, newName: str) -> None:
+        """
+
+        :param key:
+        :param path:
+        :param newName:
+        """
+    def Restore(self, Location: str, Version: int, Flags: int) -> int:
+        """
+
+        :param Location:
+        :param Version:
+        :param Flags:
+        :return:
+        """
+    def SaveData(self) -> None:
+        """"""
+    def SetData(self, key: IntPtr, path: str, data: MetadataRecord) -> int:
+        """
+
+        :param key:
+        :param path:
+        :param data:
+        :return:
+        """
+    def SetLastChangeTime(
+        self, handle: IntPtr, Path: str, LastChangeTime: FILETIME, LocalTime: bool
+    ) -> Tuple[None, FILETIME]:
+        """
+
+        :param handle:
+        :param Path:
+        :param LastChangeTime:
+        :param LocalTime:
+        """
+    def UnmarshalInterface(self, interf: IMSAdminBase) -> Tuple[int, IMSAdminBase]:
+        """
+
+        :param interf:
+        :return:
+        """
+
+class ISmtpAuthenticationModule:
     """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpConnection(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpDigestAuthenticationModule(ObjectType, ISmtpAuthenticationModule):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
 
     @property
-    def AuthenticationType(self) -> StringType: ...
+    def AuthenticationType(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     def Authenticate(
         self,
-        challenge: StringType,
-        credential: NetworkCredential,
-        sessionCookie: ObjectType,
-        spn: StringType,
+        challenge: str,
+        credentials: NetworkCredential,
+        sessionCookie: object,
+        spn: str,
         channelBindingToken: ChannelBinding,
-    ) -> Authorization: ...
-    def CloseContext(self, sessionCookie: ObjectType) -> VoidType: ...
-    def get_AuthenticationType(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpException(Exception, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, statusCode: SmtpStatusCode): ...
-    @overload
-    def __init__(self, statusCode: SmtpStatusCode, message: StringType): ...
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def StatusCode(self) -> SmtpStatusCode: ...
-    @StatusCode.setter
-    def StatusCode(self, value: SmtpStatusCode) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def GetObjectData(
-        self, serializationInfo: SerializationInfo, streamingContext: StreamingContext
-    ) -> VoidType: ...
-    def get_StatusCode(self) -> SmtpStatusCode: ...
-    def set_StatusCode(self, value: SmtpStatusCode) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpFailedRecipientException(SmtpException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-    @overload
-    def __init__(self, statusCode: SmtpStatusCode, failedRecipient: StringType): ...
-    @overload
-    def __init__(
-        self, statusCode: SmtpStatusCode, failedRecipient: StringType, serverResponse: StringType
-    ): ...
-    @overload
-    def __init__(
-        self, message: StringType, failedRecipient: StringType, innerException: Exception
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def FailedRecipient(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetObjectData(
-        self, serializationInfo: SerializationInfo, streamingContext: StreamingContext
-    ) -> VoidType: ...
-    def get_FailedRecipient(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpFailedRecipientsException(SmtpFailedRecipientException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-    @overload
-    def __init__(
-        self, message: StringType, innerExceptions: ArrayType[SmtpFailedRecipientException]
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def InnerExceptions(self) -> ArrayType[SmtpFailedRecipientException]: ...
-
-    # ---------- Methods ---------- #
-
-    def GetObjectData(
-        self, serializationInfo: SerializationInfo, streamingContext: StreamingContext
-    ) -> VoidType: ...
-    def get_InnerExceptions(self) -> ArrayType[SmtpFailedRecipientException]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpLoginAuthenticationModule(ObjectType, ISmtpAuthenticationModule):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AuthenticationType(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Authenticate(
-        self,
-        challenge: StringType,
-        credential: NetworkCredential,
-        sessionCookie: ObjectType,
-        spn: StringType,
-        channelBindingToken: ChannelBinding,
-    ) -> Authorization: ...
-    def CloseContext(self, sessionCookie: ObjectType) -> VoidType: ...
-    def get_AuthenticationType(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpNegotiateAuthenticationModule(ObjectType, ISmtpAuthenticationModule):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AuthenticationType(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Authenticate(
-        self,
-        challenge: StringType,
-        credential: NetworkCredential,
-        sessionCookie: ObjectType,
-        spn: StringType,
-        channelBindingToken: ChannelBinding,
-    ) -> Authorization: ...
-    def CloseContext(self, sessionCookie: ObjectType) -> VoidType: ...
-    def get_AuthenticationType(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpNtlmAuthenticationModule(ObjectType, ISmtpAuthenticationModule):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AuthenticationType(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Authenticate(
-        self,
-        challenge: StringType,
-        credential: NetworkCredential,
-        sessionCookie: ObjectType,
-        spn: StringType,
-        channelBindingToken: ChannelBinding,
-    ) -> Authorization: ...
-    def CloseContext(self, sessionCookie: ObjectType) -> VoidType: ...
-    def get_AuthenticationType(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpPermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IUnrestrictedPermission
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, unrestricted: BooleanType): ...
-    @overload
-    def __init__(self, access: SmtpAccess): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Access(self) -> SmtpAccess: ...
-
-    # ---------- Methods ---------- #
-
-    def AddPermission(self, access: SmtpAccess) -> VoidType: ...
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, securityElement: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Access(self) -> SmtpAccess: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Access(self) -> StringType: ...
-    @Access.setter
-    def Access(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_Access(self) -> StringType: ...
-    def set_Access(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpPooledStream(PooledStream, IDisposable):
+    ) -> Authorization:
+        """
+
+        :param challenge:
+        :param credentials:
+        :param sessionCookie:
+        :param spn:
+        :param channelBindingToken:
+        :return:
+        """
+    def CloseContext(self, sessionCookie: object) -> None:
+        """
+
+        :param sessionCookie:
+        """
+
+class IisPickupDirectory(ABC, Object):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpReplyReader(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpReplyReaderFactory(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmtpTransport(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StartTlsCommand(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WhitespaceReader(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class _METADATA_HANDLE_INFO(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class LineInfo(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class LinkedResource(AttachmentBase, IDisposable):
+    """"""
 
-    # No Sub Structs
+    @overload
+    def __init__(self, contentStream: Stream):
+        """
 
-    # No Sub Interfaces
+        :param contentStream:
+        """
+    @overload
+    def __init__(self, fileName: str):
+        """
 
-    # No Sub Enums
+        :param fileName:
+        """
+    @overload
+    def __init__(self, contentStream: Stream, contentType: ContentType):
+        """
+
+        :param contentStream:
+        :param contentType:
+        """
+    @overload
+    def __init__(self, contentStream: Stream, mediaType: str):
+        """
+
+        :param contentStream:
+        :param mediaType:
+        """
+    @overload
+    def __init__(self, fileName: str, contentType: ContentType):
+        """
+
+        :param fileName:
+        :param contentType:
+        """
+    @overload
+    def __init__(self, fileName: str, mediaType: str):
+        """
+
+        :param fileName:
+        :param mediaType:
+        """
+    @property
+    def ContentId(self) -> str:
+        """
+
+        :return:
+        """
+    @ContentId.setter
+    def ContentId(self, value: str) -> None: ...
+    @property
+    def ContentLink(self) -> Uri:
+        """
+
+        :return:
+        """
+    @ContentLink.setter
+    def ContentLink(self, value: Uri) -> None: ...
+    @property
+    def ContentStream(self) -> Stream:
+        """
+
+        :return:
+        """
+    @property
+    def ContentType(self) -> ContentType:
+        """
+
+        :return:
+        """
+    @ContentType.setter
+    def ContentType(self, value: ContentType) -> None: ...
+    @property
+    def TransferEncoding(self) -> TransferEncoding:
+        """
+
+        :return:
+        """
+    @TransferEncoding.setter
+    def TransferEncoding(self, value: TransferEncoding) -> None: ...
+    @classmethod
+    @overload
+    def CreateLinkedResourceFromString(cls, content: str) -> LinkedResource:
+        """
+
+        :param content:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CreateLinkedResourceFromString(
+        cls, content: str, contentType: ContentType
+    ) -> LinkedResource:
+        """
+
+        :param content:
+        :param contentType:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CreateLinkedResourceFromString(
+        cls, content: str, contentEncoding: Encoding, mediaType: str
+    ) -> LinkedResource:
+        """
+
+        :param content:
+        :param contentEncoding:
+        :param mediaType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class LinkedResourceCollection(
+    Collection[LinkedResource],
+    ICollection[LinkedResource],
+    IEnumerable[LinkedResource],
+    IList[LinkedResource],
+    IReadOnlyCollection[LinkedResource],
+    IReadOnlyList[LinkedResource],
+    ICollection,
+    IEnumerable,
+    IList,
+    IDisposable,
+):
+    """"""
+
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> LinkedResource:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: LinkedResource) -> None: ...
+    @property
+    def Item(self) -> LinkedResource:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, item: LinkedResource) -> None:
+        """
+
+        :param item:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, item: LinkedResource) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[LinkedResource], arrayIndex: int) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, item: LinkedResource) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, item: LinkedResource) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, item: LinkedResource) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __contains__(self, value: LinkedResource) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> LinkedResource:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> LinkedResource:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[LinkedResource]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: LinkedResource) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class MBDataType(Enum):
+    """"""
+
+    All: MBDataType = ...
+    """"""
+    Dword: MBDataType = ...
+    """"""
+    String: MBDataType = ...
+    """"""
+    Binary: MBDataType = ...
+    """"""
+    StringExpand: MBDataType = ...
+    """"""
+    MultiString: MBDataType = ...
+    """"""
+
+class MBErrors(Enum):
+    """"""
+
+    DuplicateNameWarning: MBErrors = ...
+    """"""
+    InvalidDataWarning: MBErrors = ...
+    """"""
+    PathNotFound: MBErrors = ...
+    """"""
+    AccessDenied: MBErrors = ...
+    """"""
+    InvalidParameter: MBErrors = ...
+    """"""
+    InsufficientBuffer: MBErrors = ...
+    """"""
+    PathBusy: MBErrors = ...
+    """"""
+    AlreadyExists: MBErrors = ...
+    """"""
+    NoMoreItems: MBErrors = ...
+    """"""
+    DataNotFound: MBErrors = ...
+    """"""
+    InvalidVersion: MBErrors = ...
+    """"""
+
+class MBKeyAccess(Enum):
+    """"""
+
+    Read: MBKeyAccess = ...
+    """"""
+    Write: MBKeyAccess = ...
+    """"""
+
+class MBUserType(Enum):
+    """"""
+
+    Other: MBUserType = ...
+    """"""
+    Server: MBUserType = ...
+    """"""
+    File: MBUserType = ...
+    """"""
+    Wam: MBUserType = ...
+    """"""
+    Asp: MBUserType = ...
+    """"""
+
+class MSAdminBase(__ComObject):
+    """"""
+
+    def __init__(self):
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MailAddress(Object):
+    """"""
+
+    @overload
+    def __init__(self, address: str):
+        """
+
+        :param address:
+        """
+    @overload
+    def __init__(self, address: str, displayName: str):
+        """
+
+        :param address:
+        :param displayName:
+        """
+    @overload
+    def __init__(self, address: str, displayName: str, displayNameEncoding: Encoding):
+        """
+
+        :param address:
+        :param displayName:
+        :param displayNameEncoding:
+        """
+    @property
+    def Address(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def DisplayName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Host(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def User(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MailAddressCollection(
+    Collection[MailAddress],
+    ICollection[MailAddress],
+    IEnumerable[MailAddress],
+    IList[MailAddress],
+    IReadOnlyCollection[MailAddress],
+    IReadOnlyList[MailAddress],
+    ICollection,
+    IEnumerable,
+    IList,
+):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> MailAddress:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: MailAddress) -> None: ...
+    @property
+    def Item(self) -> MailAddress:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, item: MailAddress) -> None:
+        """
+
+        :param item:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, addresses: str) -> None:
+        """
+
+        :param addresses:
+        """
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, item: MailAddress) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[MailAddress], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, item: MailAddress) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, item: MailAddress) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, item: MailAddress) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __contains__(self, value: MailAddress) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> MailAddress:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> MailAddress:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[MailAddress]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: MailAddress) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class MailAddressParser(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MailCommand(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MailHeaderID(Enum):
+    """"""
+
+    Bcc: MailHeaderID = ...
+    """"""
+    Cc: MailHeaderID = ...
+    """"""
+    Comments: MailHeaderID = ...
+    """"""
+    ContentDescription: MailHeaderID = ...
+    """"""
+    ContentDisposition: MailHeaderID = ...
+    """"""
+    ContentID: MailHeaderID = ...
+    """"""
+    ContentLocation: MailHeaderID = ...
+    """"""
+    ContentTransferEncoding: MailHeaderID = ...
+    """"""
+    ContentType: MailHeaderID = ...
+    """"""
+    Date: MailHeaderID = ...
+    """"""
+    From: MailHeaderID = ...
+    """"""
+    Importance: MailHeaderID = ...
+    """"""
+    InReplyTo: MailHeaderID = ...
+    """"""
+    Keywords: MailHeaderID = ...
+    """"""
+    Max: MailHeaderID = ...
+    """"""
+    MessageID: MailHeaderID = ...
+    """"""
+    MimeVersion: MailHeaderID = ...
+    """"""
+    Priority: MailHeaderID = ...
+    """"""
+    References: MailHeaderID = ...
+    """"""
+    ReplyTo: MailHeaderID = ...
+    """"""
+    ResentBcc: MailHeaderID = ...
+    """"""
+    ResentCc: MailHeaderID = ...
+    """"""
+    ResentDate: MailHeaderID = ...
+    """"""
+    ResentFrom: MailHeaderID = ...
+    """"""
+    ResentMessageID: MailHeaderID = ...
+    """"""
+    ResentSender: MailHeaderID = ...
+    """"""
+    ResentTo: MailHeaderID = ...
+    """"""
+    Sender: MailHeaderID = ...
+    """"""
+    Subject: MailHeaderID = ...
+    """"""
+    To: MailHeaderID = ...
+    """"""
+    XPriority: MailHeaderID = ...
+    """"""
+    XReceiver: MailHeaderID = ...
+    """"""
+    XSender: MailHeaderID = ...
+    """"""
+    ZMaxEnumValue: MailHeaderID = ...
+    """"""
+    Unknown: MailHeaderID = ...
+    """"""
+
+class MailHeaderInfo(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MailMessage(Object, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, _from: MailAddress, to: MailAddress):
+        """
+
+        :param _from:
+        :param to:
+        """
+    @overload
+    def __init__(self, _from: str, to: str):
+        """
+
+        :param _from:
+        :param to:
+        """
+    @overload
+    def __init__(self, _from: str, to: str, subject: str, body: str):
+        """
+
+        :param _from:
+        :param to:
+        :param subject:
+        :param body:
+        """
+    @property
+    def AlternateViews(self) -> AlternateViewCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Attachments(self) -> AttachmentCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Bcc(self) -> MailAddressCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Body(self) -> str:
+        """
+
+        :return:
+        """
+    @Body.setter
+    def Body(self, value: str) -> None: ...
+    @property
+    def BodyEncoding(self) -> Encoding:
+        """
+
+        :return:
+        """
+    @BodyEncoding.setter
+    def BodyEncoding(self, value: Encoding) -> None: ...
+    @property
+    def BodyTransferEncoding(self) -> TransferEncoding:
+        """
+
+        :return:
+        """
+    @BodyTransferEncoding.setter
+    def BodyTransferEncoding(self, value: TransferEncoding) -> None: ...
+    @property
+    def CC(self) -> MailAddressCollection:
+        """
+
+        :return:
+        """
+    @property
+    def DeliveryNotificationOptions(self) -> DeliveryNotificationOptions:
+        """
+
+        :return:
+        """
+    @DeliveryNotificationOptions.setter
+    def DeliveryNotificationOptions(self, value: DeliveryNotificationOptions) -> None: ...
+    @property
+    def From(self) -> MailAddress:
+        """
+
+        :return:
+        """
+    @From.setter
+    def From(self, value: MailAddress) -> None: ...
+    @property
+    def Headers(self) -> NameValueCollection:
+        """
+
+        :return:
+        """
+    @property
+    def HeadersEncoding(self) -> Encoding:
+        """
+
+        :return:
+        """
+    @HeadersEncoding.setter
+    def HeadersEncoding(self, value: Encoding) -> None: ...
+    @property
+    def IsBodyHtml(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsBodyHtml.setter
+    def IsBodyHtml(self, value: bool) -> None: ...
+    @property
+    def Priority(self) -> MailPriority:
+        """
+
+        :return:
+        """
+    @Priority.setter
+    def Priority(self, value: MailPriority) -> None: ...
+    @property
+    def ReplyTo(self) -> MailAddress:
+        """
+
+        :return:
+        """
+    @ReplyTo.setter
+    def ReplyTo(self, value: MailAddress) -> None: ...
+    @property
+    def ReplyToList(self) -> MailAddressCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Sender(self) -> MailAddress:
+        """
+
+        :return:
+        """
+    @Sender.setter
+    def Sender(self, value: MailAddress) -> None: ...
+    @property
+    def Subject(self) -> str:
+        """
+
+        :return:
+        """
+    @Subject.setter
+    def Subject(self, value: str) -> None: ...
+    @property
+    def SubjectEncoding(self) -> Encoding:
+        """
+
+        :return:
+        """
+    @SubjectEncoding.setter
+    def SubjectEncoding(self, value: Encoding) -> None: ...
+    @property
+    def To(self) -> MailAddressCollection:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MailPriority(Enum):
+    """"""
+
+    Normal: MailPriority = ...
+    """"""
+    Low: MailPriority = ...
+    """"""
+    High: MailPriority = ...
+    """"""
+
+class MailWriter(BaseWriter):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Message(Object):
+    """"""
+
+    @property
+    def Priority(self) -> MailPriority:
+        """
+
+        :return:
+        """
+    @Priority.setter
+    def Priority(self, value: MailPriority) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class MetadataRecord(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Interfaces ---------- #
-
-class IMSAdminBase(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def AddKey(self, handle: NIntType, Path: StringType) -> IntType: ...
-    def Backup(self, Location: StringType, Version: IntType, Flags: IntType) -> IntType: ...
-    def ChangePermissions(
-        self, handle: NIntType, TimeOut: IntType, AccessRequested: MBKeyAccess
-    ) -> VoidType: ...
-    def CloseKey(self, handle: NIntType) -> IntType: ...
-    def CopyData(
-        self,
-        sourcehandle: NIntType,
-        SourcePath: StringType,
-        desthandle: NIntType,
-        DestPath: StringType,
-        Attributes: IntType,
-        UserType: IntType,
-        DataType: IntType,
-        CopyFlag: BooleanType,
-    ) -> IntType: ...
-    def CopyKey(
-        self,
-        source: NIntType,
-        SourcePath: StringType,
-        dest: NIntType,
-        DestPath: StringType,
-        OverwriteFlag: BooleanType,
-        CopyFlag: BooleanType,
-    ) -> VoidType: ...
-    def DeleteAllData(
-        self, handle: NIntType, Path: StringType, UserType: UIntType, DataType: UIntType
-    ) -> VoidType: ...
-    def DeleteBackup(self, Location: StringType, Version: IntType) -> VoidType: ...
-    def DeleteChildKeys(self, handle: NIntType, Path: StringType) -> VoidType: ...
-    def DeleteData(
-        self, key: NIntType, path: StringType, Identifier: UIntType, DataType: UIntType
-    ) -> IntType: ...
-    def DeleteKey(self, handle: NIntType, Path: StringType) -> IntType: ...
-    def EnumBackups(
-        self, Location: StringType, Version: UIntType, BackupTime: FILETIME, EnumIndex: UIntType
-    ) -> Tuple[VoidType, StringType, UIntType, FILETIME]: ...
-    def EnumData(
-        self,
-        key: NIntType,
-        path: StringType,
-        data: MetadataRecord,
-        EnumDataIndex: IntType,
-        RequiredDataLen: UIntType,
-    ) -> Tuple[IntType, MetadataRecord, UIntType]: ...
-    def EnumKeys(
-        self, handle: NIntType, Path: StringType, Buffer: StringBuilder, EnumKeyIndex: IntType
-    ) -> IntType: ...
-    def GetAllData(
-        self,
-        handle: NIntType,
-        Path: StringType,
-        Attributes: UIntType,
-        UserType: UIntType,
-        DataType: UIntType,
-        NumDataEntries: UIntType,
-        DataSetNumber: UIntType,
-        BufferSize: UIntType,
-        buffer: NIntType,
-        RequiredBufferSize: UIntType,
-    ) -> Tuple[IntType, UIntType, UIntType, UIntType]: ...
-    def GetData(
-        self, key: NIntType, path: StringType, data: MetadataRecord, RequiredDataLen: UIntType
-    ) -> Tuple[IntType, MetadataRecord, UIntType]: ...
-    def GetDataPaths(
-        self,
-        handle: NIntType,
-        Path: StringType,
-        Identifier: IntType,
-        DataType: IntType,
-        BufferSize: IntType,
-        Buffer: CharType,
-        RequiredBufferSize: IntType,
-    ) -> Tuple[VoidType, CharType, IntType]: ...
-    def GetDataSetNumber(
-        self, handle: NIntType, Path: StringType, DataSetNumber: UIntType
-    ) -> Tuple[VoidType, UIntType]: ...
-    def GetHandleInfo(
-        self, handle: NIntType, Info: _METADATA_HANDLE_INFO
-    ) -> Tuple[VoidType, _METADATA_HANDLE_INFO]: ...
-    def GetLastChangeTime(
-        self, handle: NIntType, Path: StringType, LastChangeTime: FILETIME, LocalTime: BooleanType
-    ) -> Tuple[IntType, FILETIME]: ...
-    def GetServerGuid(self) -> IntType: ...
-    def GetSystemChangeNumber(self, SystemChangeNumber: UIntType) -> Tuple[VoidType, UIntType]: ...
-    def KeyExchangePhase1(self) -> IntType: ...
-    def KeyExchangePhase2(self) -> IntType: ...
-    def OpenKey(
-        self,
-        handle: NIntType,
-        Path: StringType,
-        AccessRequested: MBKeyAccess,
-        TimeOut: IntType,
-        NewHandle: NIntType,
-    ) -> Tuple[IntType, NIntType]: ...
-    def RenameKey(self, key: NIntType, path: StringType, newName: StringType) -> VoidType: ...
-    def Restore(self, Location: StringType, Version: IntType, Flags: IntType) -> IntType: ...
-    def SaveData(self) -> VoidType: ...
-    def SetData(
-        self, key: NIntType, path: StringType, data: MetadataRecord
-    ) -> Tuple[IntType, MetadataRecord]: ...
-    def SetLastChangeTime(
-        self, handle: NIntType, Path: StringType, LastChangeTime: FILETIME, LocalTime: BooleanType
-    ) -> Tuple[VoidType, FILETIME]: ...
-    def UnmarshalInterface(self, interf: IMSAdminBase) -> Tuple[IntType, IMSAdminBase]: ...
-
-    # No Events
-
-class ISmtpAuthenticationModule(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def AuthenticationType(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Authenticate(
-        self,
-        challenge: StringType,
-        credentials: NetworkCredential,
-        sessionCookie: ObjectType,
-        spn: StringType,
-        channelBindingToken: ChannelBinding,
-    ) -> Authorization: ...
-    def CloseContext(self, sessionCookie: ObjectType) -> VoidType: ...
-    def get_AuthenticationType(self) -> StringType: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class DeliveryNotificationOptions(Enum):
-    # None = 0
-    OnSuccess = 1
-    OnFailure = 2
-    Delay = 4
-    Never = 134217728
-
-class MBDataType(Enum):
-    All = 0
-    Dword = 1
-    String = 2
-    Binary = 3
-    StringExpand = 4
-    MultiString = 5
-
-class MBErrors(Enum):
-    PathNotFound = -2147024893
-    AccessDenied = -2147024891
-    InvalidParameter = -2147024809
-    InsufficientBuffer = -2147024774
-    PathBusy = -2147024748
-    AlreadyExists = -2147024713
-    NoMoreItems = -2147024637
-    DataNotFound = -2146646015
-    InvalidVersion = -2146646014
-    DuplicateNameWarning = 837636
-    InvalidDataWarning = 837637
-
-class MBKeyAccess(Enum):
-    Read = 1
-    Write = 2
-
-class MBUserType(Enum):
-    Other = 0
-    Server = 1
-    File = 2
-    Wam = 100
-    Asp = 101
-
-class MailHeaderID(Enum):
-    Unknown = -1
-    Bcc = 0
-    Cc = 1
-    Comments = 2
-    ContentDescription = 3
-    ContentDisposition = 4
-    ContentID = 5
-    ContentLocation = 6
-    ContentTransferEncoding = 7
-    ContentType = 8
-    Date = 9
-    From = 10
-    Importance = 11
-    InReplyTo = 12
-    Keywords = 13
-    Max = 14
-    MessageID = 15
-    MimeVersion = 16
-    Priority = 17
-    References = 18
-    ReplyTo = 19
-    ResentBcc = 20
-    ResentCc = 21
-    ResentDate = 22
-    ResentFrom = 23
-    ResentMessageID = 24
-    ResentSender = 25
-    ResentTo = 26
-    Sender = 27
-    Subject = 28
-    To = 29
-    XPriority = 30
-    XReceiver = 31
-    XSender = 32
-    ZMaxEnumValue = 32
-
-class MailPriority(Enum):
-    Normal = 0
-    Low = 1
-    High = 2
+        :return:
+        """
 
 class PropertyName(Enum):
-    Invalid = 0
-    ServerState = 1016
-    PickupDirectory = 36880
+    """"""
+
+    Invalid: PropertyName = ...
+    """"""
+    ServerState: PropertyName = ...
+    """"""
+    PickupDirectory: PropertyName = ...
+    """"""
+
+class QuotedPairReader(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class QuotedStringFormatReader(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReadLinesCommand(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RecipientCommand(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class RecipientLocationType(Enum):
-    Local = 0
-    Unknown = 1
-    NotLocal = 2
-    WillForward = 3
-    Ambiguous = 4
+    """"""
+
+    Local: RecipientLocationType = ...
+    """"""
+    Unknown: RecipientLocationType = ...
+    """"""
+    NotLocal: RecipientLocationType = ...
+    """"""
+    WillForward: RecipientLocationType = ...
+    """"""
+    Ambiguous: RecipientLocationType = ...
+    """"""
+
+SendCompletedEventHandler: Callable[[object, AsyncCompletedEventArgs], None] = ...
+"""
+
+:param sender: 
+:param e: 
+"""
+
+class SendMailAsyncResult(LazyAsyncResult, IAsyncResult):
+    """"""
+
+    @property
+    def AsyncState(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def AsyncWaitHandle(self) -> WaitHandle:
+        """
+
+        :return:
+        """
+    @property
+    def CompletedSynchronously(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsCompleted(self) -> bool:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ServerState(Enum):
-    Starting = 1
-    Started = 2
-    Stopping = 3
-    Stopped = 4
-    Pausing = 5
-    Paused = 6
-    Continuing = 7
+    """"""
+
+    Starting: ServerState = ...
+    """"""
+    Started: ServerState = ...
+    """"""
+    Stopping: ServerState = ...
+    """"""
+    Stopped: ServerState = ...
+    """"""
+    Pausing: ServerState = ...
+    """"""
+    Paused: ServerState = ...
+    """"""
+    Continuing: ServerState = ...
+    """"""
 
 class SmtpAccess(Enum):
-    # None = 0
-    Connect = 1
-    ConnectToUnrestrictedPort = 2
+    """"""
+
+    _None: SmtpAccess = ...
+    """"""
+    Connect: SmtpAccess = ...
+    """"""
+    ConnectToUnrestrictedPort: SmtpAccess = ...
+    """"""
+
+class SmtpAuthenticationManager(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpClient(Object, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, host: str):
+        """
+
+        :param host:
+        """
+    @overload
+    def __init__(self, host: str, port: int):
+        """
+
+        :param host:
+        :param port:
+        """
+    @property
+    def ClientCertificates(self) -> X509CertificateCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Credentials(self) -> ICredentialsByHost:
+        """
+
+        :return:
+        """
+    @Credentials.setter
+    def Credentials(self, value: ICredentialsByHost) -> None: ...
+    @property
+    def DeliveryFormat(self) -> SmtpDeliveryFormat:
+        """
+
+        :return:
+        """
+    @DeliveryFormat.setter
+    def DeliveryFormat(self, value: SmtpDeliveryFormat) -> None: ...
+    @property
+    def DeliveryMethod(self) -> SmtpDeliveryMethod:
+        """
+
+        :return:
+        """
+    @DeliveryMethod.setter
+    def DeliveryMethod(self, value: SmtpDeliveryMethod) -> None: ...
+    @property
+    def EnableSsl(self) -> bool:
+        """
+
+        :return:
+        """
+    @EnableSsl.setter
+    def EnableSsl(self, value: bool) -> None: ...
+    @property
+    def Host(self) -> str:
+        """
+
+        :return:
+        """
+    @Host.setter
+    def Host(self, value: str) -> None: ...
+    @property
+    def PickupDirectoryLocation(self) -> str:
+        """
+
+        :return:
+        """
+    @PickupDirectoryLocation.setter
+    def PickupDirectoryLocation(self, value: str) -> None: ...
+    @property
+    def Port(self) -> int:
+        """
+
+        :return:
+        """
+    @Port.setter
+    def Port(self, value: int) -> None: ...
+    @property
+    def ServicePoint(self) -> ServicePoint:
+        """
+
+        :return:
+        """
+    @property
+    def TargetName(self) -> str:
+        """
+
+        :return:
+        """
+    @TargetName.setter
+    def TargetName(self, value: str) -> None: ...
+    @property
+    def Timeout(self) -> int:
+        """
+
+        :return:
+        """
+    @Timeout.setter
+    def Timeout(self, value: int) -> None: ...
+    @property
+    def UseDefaultCredentials(self) -> bool:
+        """
+
+        :return:
+        """
+    @UseDefaultCredentials.setter
+    def UseDefaultCredentials(self, value: bool) -> None: ...
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Send(self, message: MailMessage) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Send(self, _from: str, recipients: str, subject: str, body: str) -> None:
+        """
+
+        :param _from:
+        :param recipients:
+        :param subject:
+        :param body:
+        """
+    @overload
+    def SendAsync(self, message: MailMessage, userToken: object) -> None:
+        """
+
+        :param message:
+        :param userToken:
+        """
+    @overload
+    def SendAsync(
+        self, _from: str, recipients: str, subject: str, body: str, userToken: object
+    ) -> None:
+        """
+
+        :param _from:
+        :param recipients:
+        :param subject:
+        :param body:
+        :param userToken:
+        """
+    def SendAsyncCancel(self) -> None:
+        """"""
+    @overload
+    def SendMailAsync(self, message: MailMessage) -> Task:
+        """
+
+        :param message:
+        :return:
+        """
+    @overload
+    def SendMailAsync(self, _from: str, recipients: str, subject: str, body: str) -> Task:
+        """
+
+        :param _from:
+        :param recipients:
+        :param subject:
+        :param body:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    SendCompleted: EventType[SendCompletedEventHandler] = ...
+    """"""
+
+class SmtpCommands(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpConnection(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SmtpDeliveryFormat(Enum):
-    SevenBit = 0
-    International = 1
+    """"""
+
+    SevenBit: SmtpDeliveryFormat = ...
+    """"""
+    International: SmtpDeliveryFormat = ...
+    """"""
 
 class SmtpDeliveryMethod(Enum):
-    Network = 0
-    SpecifiedPickupDirectory = 1
-    PickupDirectoryFromIis = 2
+    """"""
+
+    Network: SmtpDeliveryMethod = ...
+    """"""
+    SpecifiedPickupDirectory: SmtpDeliveryMethod = ...
+    """"""
+    PickupDirectoryFromIis: SmtpDeliveryMethod = ...
+    """"""
+
+class SmtpDigestAuthenticationModule(Object, ISmtpAuthenticationModule):
+    """"""
+
+    @property
+    def AuthenticationType(self) -> str:
+        """
+
+        :return:
+        """
+    def Authenticate(
+        self,
+        challenge: str,
+        credentials: NetworkCredential,
+        sessionCookie: object,
+        spn: str,
+        channelBindingToken: ChannelBinding,
+    ) -> Authorization:
+        """
+
+        :param challenge:
+        :param credentials:
+        :param sessionCookie:
+        :param spn:
+        :param channelBindingToken:
+        :return:
+        """
+    def CloseContext(self, sessionCookie: object) -> None:
+        """
+
+        :param sessionCookie:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpException(Exception, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, statusCode: SmtpStatusCode):
+        """
+
+        :param statusCode:
+        """
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, statusCode: SmtpStatusCode, message: str):
+        """
+
+        :param statusCode:
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def StatusCode(self) -> SmtpStatusCode:
+        """
+
+        :return:
+        """
+    @StatusCode.setter
+    def StatusCode(self, value: SmtpStatusCode) -> None: ...
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpFailedRecipientException(SmtpException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, statusCode: SmtpStatusCode, failedRecipient: str):
+        """
+
+        :param statusCode:
+        :param failedRecipient:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @overload
+    def __init__(self, statusCode: SmtpStatusCode, failedRecipient: str, serverResponse: str):
+        """
+
+        :param statusCode:
+        :param failedRecipient:
+        :param serverResponse:
+        """
+    @overload
+    def __init__(self, message: str, failedRecipient: str, innerException: Exception):
+        """
+
+        :param message:
+        :param failedRecipient:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def FailedRecipient(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def StatusCode(self) -> SmtpStatusCode:
+        """
+
+        :return:
+        """
+    @StatusCode.setter
+    def StatusCode(self, value: SmtpStatusCode) -> None: ...
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpFailedRecipientsException(SmtpFailedRecipientException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerExceptions: Array[SmtpFailedRecipientException]):
+        """
+
+        :param message:
+        :param innerExceptions:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def FailedRecipient(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def InnerExceptions(self) -> Array[SmtpFailedRecipientException]:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def StatusCode(self) -> SmtpStatusCode:
+        """
+
+        :return:
+        """
+    @StatusCode.setter
+    def StatusCode(self, value: SmtpStatusCode) -> None: ...
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpLoginAuthenticationModule(Object, ISmtpAuthenticationModule):
+    """"""
+
+    @property
+    def AuthenticationType(self) -> str:
+        """
+
+        :return:
+        """
+    def Authenticate(
+        self,
+        challenge: str,
+        credentials: NetworkCredential,
+        sessionCookie: object,
+        spn: str,
+        channelBindingToken: ChannelBinding,
+    ) -> Authorization:
+        """
+
+        :param challenge:
+        :param credentials:
+        :param sessionCookie:
+        :param spn:
+        :param channelBindingToken:
+        :return:
+        """
+    def CloseContext(self, sessionCookie: object) -> None:
+        """
+
+        :param sessionCookie:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpNegotiateAuthenticationModule(Object, ISmtpAuthenticationModule):
+    """"""
+
+    @property
+    def AuthenticationType(self) -> str:
+        """
+
+        :return:
+        """
+    def Authenticate(
+        self,
+        challenge: str,
+        credentials: NetworkCredential,
+        sessionCookie: object,
+        spn: str,
+        channelBindingToken: ChannelBinding,
+    ) -> Authorization:
+        """
+
+        :param challenge:
+        :param credentials:
+        :param sessionCookie:
+        :param spn:
+        :param channelBindingToken:
+        :return:
+        """
+    def CloseContext(self, sessionCookie: object) -> None:
+        """
+
+        :param sessionCookie:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpNtlmAuthenticationModule(Object, ISmtpAuthenticationModule):
+    """"""
+
+    @property
+    def AuthenticationType(self) -> str:
+        """
+
+        :return:
+        """
+    def Authenticate(
+        self,
+        challenge: str,
+        credentials: NetworkCredential,
+        sessionCookie: object,
+        spn: str,
+        channelBindingToken: ChannelBinding,
+    ) -> Authorization:
+        """
+
+        :param challenge:
+        :param credentials:
+        :param sessionCookie:
+        :param spn:
+        :param channelBindingToken:
+        :return:
+        """
+    def CloseContext(self, sessionCookie: object) -> None:
+        """
+
+        :param sessionCookie:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpPermission(
+    CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+):
+    """"""
+
+    @overload
+    def __init__(self, access: SmtpAccess):
+        """
+
+        :param access:
+        """
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(self, unrestricted: bool):
+        """
+
+        :param unrestricted:
+        """
+    @property
+    def Access(self) -> SmtpAccess:
+        """
+
+        :return:
+        """
+    def AddPermission(self, access: SmtpAccess) -> None:
+        """
+
+        :param access:
+        """
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class SmtpPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Access(self) -> str:
+        """
+
+        :return:
+        """
+    @Access.setter
+    def Access(self, value: str) -> None: ...
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpPooledStream(PooledStream, IDisposable):
+    """"""
+
+    @property
+    def CanRead(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def CanSeek(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def CanTimeout(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def CanWrite(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Position(self) -> int:
+        """
+
+        :return:
+        """
+    @Position.setter
+    def Position(self, value: int) -> None: ...
+    @property
+    def ReadTimeout(self) -> int:
+        """
+
+        :return:
+        """
+    @ReadTimeout.setter
+    def ReadTimeout(self, value: int) -> None: ...
+    @property
+    def WriteTimeout(self) -> int:
+        """
+
+        :return:
+        """
+    @WriteTimeout.setter
+    def WriteTimeout(self, value: int) -> None: ...
+    def BeginRead(
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def BeginWrite(
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    @overload
+    def Close(self) -> None:
+        """"""
+    @overload
+    def Close(self, timeout: int) -> None:
+        """
+
+        :param timeout:
+        """
+    @overload
+    def CopyTo(self, destination: Stream) -> None:
+        """
+
+        :param destination:
+        """
+    @overload
+    def CopyTo(self, destination: Stream, bufferSize: int) -> None:
+        """
+
+        :param destination:
+        :param bufferSize:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream) -> Task:
+        """
+
+        :param destination:
+        :return:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
+        """
+
+        :param destination:
+        :param bufferSize:
+        :return:
+        """
+    @overload
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param destination:
+        :param bufferSize:
+        :param cancellationToken:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndRead(self, asyncResult: IAsyncResult) -> int:
+        """
+
+        :param asyncResult:
+        :return:
+        """
+    def EndWrite(self, asyncResult: IAsyncResult) -> None:
+        """
+
+        :param asyncResult:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    @overload
+    def FlushAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    @overload
+    def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
+        """
+
+        :param cancellationToken:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
+
+        :return:
+        """
+    def Seek(self, offset: int, origin: SeekOrigin) -> int:
+        """
+
+        :param offset:
+        :param origin:
+        :return:
+        """
+    def SetLength(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, buffer: Array[int], offset: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        """
+    @overload
+    def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def WriteAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def WriteByte(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+
+class SmtpReplyReader(Object):
+    """"""
+
+    def Close(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SmtpReplyReaderFactory(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SmtpStatusCode(Enum):
-    GeneralFailure = -1
-    SystemStatus = 211
-    HelpMessage = 214
-    ServiceReady = 220
-    ServiceClosingTransmissionChannel = 221
-    Ok = 250
-    UserNotLocalWillForward = 251
-    CannotVerifyUserWillAttemptDelivery = 252
-    StartMailInput = 354
-    ServiceNotAvailable = 421
-    MailboxBusy = 450
-    LocalErrorInProcessing = 451
-    InsufficientStorage = 452
-    ClientNotPermitted = 454
-    CommandUnrecognized = 500
-    SyntaxError = 501
-    CommandNotImplemented = 502
-    BadCommandSequence = 503
-    CommandParameterNotImplemented = 504
-    MustIssueStartTlsFirst = 530
-    MailboxUnavailable = 550
-    UserNotLocalTryAlternatePath = 551
-    ExceededStorageAllocation = 552
-    MailboxNameNotAllowed = 553
-    TransactionFailed = 554
+    """"""
+
+    SystemStatus: SmtpStatusCode = ...
+    """"""
+    HelpMessage: SmtpStatusCode = ...
+    """"""
+    ServiceReady: SmtpStatusCode = ...
+    """"""
+    ServiceClosingTransmissionChannel: SmtpStatusCode = ...
+    """"""
+    Ok: SmtpStatusCode = ...
+    """"""
+    UserNotLocalWillForward: SmtpStatusCode = ...
+    """"""
+    CannotVerifyUserWillAttemptDelivery: SmtpStatusCode = ...
+    """"""
+    StartMailInput: SmtpStatusCode = ...
+    """"""
+    ServiceNotAvailable: SmtpStatusCode = ...
+    """"""
+    MailboxBusy: SmtpStatusCode = ...
+    """"""
+    LocalErrorInProcessing: SmtpStatusCode = ...
+    """"""
+    InsufficientStorage: SmtpStatusCode = ...
+    """"""
+    ClientNotPermitted: SmtpStatusCode = ...
+    """"""
+    CommandUnrecognized: SmtpStatusCode = ...
+    """"""
+    SyntaxError: SmtpStatusCode = ...
+    """"""
+    CommandNotImplemented: SmtpStatusCode = ...
+    """"""
+    BadCommandSequence: SmtpStatusCode = ...
+    """"""
+    CommandParameterNotImplemented: SmtpStatusCode = ...
+    """"""
+    MustIssueStartTlsFirst: SmtpStatusCode = ...
+    """"""
+    MailboxUnavailable: SmtpStatusCode = ...
+    """"""
+    UserNotLocalTryAlternatePath: SmtpStatusCode = ...
+    """"""
+    ExceededStorageAllocation: SmtpStatusCode = ...
+    """"""
+    MailboxNameNotAllowed: SmtpStatusCode = ...
+    """"""
+    TransactionFailed: SmtpStatusCode = ...
+    """"""
+    GeneralFailure: SmtpStatusCode = ...
+    """"""
+
+class SmtpTransport(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StartTlsCommand(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SupportedAuth(Enum):
-    # None = 0
-    Login = 1
-    NTLM = 2
-    GSSAPI = 4
-    WDigest = 8
+    """"""
 
-# ---------- Delegates ---------- #
+    _None: SupportedAuth = ...
+    """"""
+    Login: SupportedAuth = ...
+    """"""
+    NTLM: SupportedAuth = ...
+    """"""
+    GSSAPI: SupportedAuth = ...
+    """"""
+    WDigest: SupportedAuth = ...
+    """"""
 
-SendCompletedEventHandler = Callable[[ObjectType, AsyncCompletedEventArgs], VoidType]
+class WhitespaceReader(ABC, Object):
+    """"""
 
-__all__ = [
-    AlternateView,
-    AlternateViewCollection,
-    Attachment,
-    AttachmentBase,
-    AttachmentCollection,
-    AuthCommand,
-    BufferBuilder,
-    CheckCommand,
-    DataCommand,
-    DataStopCommand,
-    DomainLiteralReader,
-    DotAtomReader,
-    EHelloCommand,
-    HelloCommand,
-    IisPickupDirectory,
-    LinkedResource,
-    LinkedResourceCollection,
-    MSAdminBase,
-    MailAddress,
-    MailAddressCollection,
-    MailAddressParser,
-    MailCommand,
-    MailHeaderInfo,
-    MailMessage,
-    MailWriter,
-    Message,
-    QuotedPairReader,
-    QuotedStringFormatReader,
-    ReadLinesCommand,
-    RecipientCommand,
-    SendCompletedEventHandler,
-    SendMailAsyncResult,
-    SmtpAuthenticationManager,
-    SmtpClient,
-    SmtpCommands,
-    SmtpConnection,
-    SmtpDigestAuthenticationModule,
-    SmtpException,
-    SmtpFailedRecipientException,
-    SmtpFailedRecipientsException,
-    SmtpLoginAuthenticationModule,
-    SmtpNegotiateAuthenticationModule,
-    SmtpNtlmAuthenticationModule,
-    SmtpPermission,
-    SmtpPermissionAttribute,
-    SmtpPooledStream,
-    SmtpReplyReader,
-    SmtpReplyReaderFactory,
-    SmtpTransport,
-    StartTlsCommand,
-    WhitespaceReader,
-    _METADATA_HANDLE_INFO,
-    LineInfo,
-    MetadataRecord,
-    IMSAdminBase,
-    ISmtpAuthenticationModule,
-    DeliveryNotificationOptions,
-    MBDataType,
-    MBErrors,
-    MBKeyAccess,
-    MBUserType,
-    MailHeaderID,
-    MailPriority,
-    PropertyName,
-    RecipientLocationType,
-    ServerState,
-    SmtpAccess,
-    SmtpDeliveryFormat,
-    SmtpDeliveryMethod,
-    SmtpStatusCode,
-    SupportedAuth,
-    SendCompletedEventHandler,
-]
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class _METADATA_HANDLE_INFO(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

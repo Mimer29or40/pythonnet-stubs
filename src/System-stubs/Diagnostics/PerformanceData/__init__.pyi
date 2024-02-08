@@ -1,252 +1,339 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
 from typing import overload
 
 from System import Enum
 from System import Guid
 from System import IDisposable
-from System import Int32
-from System import Int64
 from System import Object
-from System import String
-from System import Void
+from System import Type
 
-# ---------- Types ---------- #
-
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class CounterData(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class CounterData(Object):
+    """"""
 
     @property
-    def RawValue(self) -> LongType: ...
+    def RawValue(self) -> int:
+        """
+
+        :return:
+        """
     @RawValue.setter
-    def RawValue(self, value: LongType) -> None: ...
+    def RawValue(self, value: int) -> None: ...
     @property
-    def Value(self) -> LongType: ...
+    def Value(self) -> int:
+        """
+
+        :return:
+        """
     @Value.setter
-    def Value(self, value: LongType) -> None: ...
+    def Value(self, value: int) -> None: ...
+    def Decrement(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def Decrement(self) -> VoidType: ...
-    def Increment(self) -> VoidType: ...
-    def IncrementBy(self, value: LongType) -> VoidType: ...
-    def get_RawValue(self) -> LongType: ...
-    def get_Value(self) -> LongType: ...
-    def set_RawValue(self, value: LongType) -> VoidType: ...
-    def set_Value(self, value: LongType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def Increment(self) -> None:
+        """"""
+    def IncrementBy(self, value: int) -> None:
+        """
 
-    # No Sub Classes
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CounterSet(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class CounterSet(Object, IDisposable):
+    """"""
 
     def __init__(
         self, providerGuid: Guid, counterSetGuid: Guid, instanceType: CounterSetInstanceType
-    ): ...
+    ):
+        """
 
-    # No Properties
-
-    # ---------- Methods ---------- #
-
+        :param providerGuid:
+        :param counterSetGuid:
+        :param instanceType:
+        """
     @overload
-    def AddCounter(self, counterId: IntType, counterType: CounterType) -> VoidType: ...
+    def AddCounter(self, counterId: int, counterType: CounterType) -> None:
+        """
+
+        :param counterId:
+        :param counterType:
+        """
     @overload
-    def AddCounter(
-        self, counterId: IntType, counterType: CounterType, counterName: StringType
-    ) -> VoidType: ...
-    def CreateCounterSetInstance(self, instanceName: StringType) -> CounterSetInstance: ...
-    def Dispose(self) -> VoidType: ...
+    def AddCounter(self, counterId: int, counterType: CounterType, counterName: str) -> None:
+        """
 
-    # No Events
+        :param counterId:
+        :param counterType:
+        :param counterName:
+        """
+    def CreateCounterSetInstance(self, instanceName: str) -> CounterSetInstance:
+        """
 
-    # No Sub Classes
+        :param instanceName:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class CounterSetInstance(ObjectType, IDisposable):
-    # No Fields
+        :return:
+        """
 
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class CounterSetInstance(Object, IDisposable):
+    """"""
 
     @property
-    def Counters(self) -> CounterSetInstanceCounterDataSet: ...
+    def Counters(self) -> CounterSetInstanceCounterDataSet:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    def get_Counters(self) -> CounterSetInstanceCounterDataSet: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CounterSetInstanceCounterDataSet(ObjectType, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> CounterData: ...
-    def __getitem__(self, key: StringType) -> CounterData: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    @overload
-    def get_Item(self, counterId: IntType) -> CounterData: ...
-    @overload
-    def get_Item(self, counterName: StringType) -> CounterData: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PerfProvider(ObjectType):
+class CounterSetInstanceCounterDataSet(Object, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def Item(self) -> CounterData:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def __getitem__(self, counterId: int) -> CounterData:
+        """
 
-    # No Sub Structs
+        :param counterId:
+        :return:
+        """
+    @overload
+    def __getitem__(self, counterName: str) -> CounterData:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PerfProviderCollection(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# ---------- Enums ---------- #
+        :param counterName:
+        :return:
+        """
 
 class CounterSetInstanceType(Enum):
-    Single = 0
-    Multiple = 2
-    GlobalAggregate = 4
-    MultipleAggregate = 6
-    GlobalAggregateWithHistory = 11
-    InstanceAggregate = 22
+    """"""
+
+    Single: CounterSetInstanceType = ...
+    """"""
+    Multiple: CounterSetInstanceType = ...
+    """"""
+    GlobalAggregate: CounterSetInstanceType = ...
+    """"""
+    MultipleAggregate: CounterSetInstanceType = ...
+    """"""
+    GlobalAggregateWithHistory: CounterSetInstanceType = ...
+    """"""
+    InstanceAggregate: CounterSetInstanceType = ...
+    """"""
 
 class CounterType(Enum):
-    RawDataHex32 = 0
-    RawDataHex64 = 256
-    RawData32 = 65536
-    RawData64 = 65792
-    Delta32 = 4195328
-    Delta64 = 4195584
-    SampleCounter = 4260864
-    QueueLength = 4523008
-    LargeQueueLength = 4523264
-    QueueLength100Ns = 5571840
-    QueueLengthObjectTime = 6620416
-    RateOfCountPerSecond32 = 272696320
-    RateOfCountPerSecond64 = 272696576
-    RawFraction32 = 537003008
-    RawFraction64 = 537003264
-    PercentageActive = 541132032
-    PrecisionSystemTimer = 541525248
-    PercentageActive100Ns = 542180608
-    PrecisionTimer100Ns = 542573824
-    ObjectSpecificTimer = 543229184
-    PrecisionObjectSpecificTimer = 543622400
-    SampleFraction = 549585920
-    PercentageNotActive = 557909248
-    PercentageNotActive100Ns = 558957824
-    MultiTimerPercentageActive = 574686464
-    MultiTimerPercentageActive100Ns = 575735040
-    MultiTimerPercentageNotActive = 591463680
-    MultiTimerPercentageNotActive100Ns = 592512256
-    AverageTimer32 = 805438464
-    ElapsedTime = 807666944
-    AverageCount64 = 1073874176
-    SampleBase = 1073939457
-    AverageBase = 1073939458
-    RawBase32 = 1073939459
-    RawBase64 = 1073939712
-    MultiTimerBase = 1107494144
+    """"""
 
-# No Delegates
+    RawDataHex32: CounterType = ...
+    """"""
+    RawDataHex64: CounterType = ...
+    """"""
+    RawData32: CounterType = ...
+    """"""
+    RawData64: CounterType = ...
+    """"""
+    Delta32: CounterType = ...
+    """"""
+    Delta64: CounterType = ...
+    """"""
+    SampleCounter: CounterType = ...
+    """"""
+    QueueLength: CounterType = ...
+    """"""
+    LargeQueueLength: CounterType = ...
+    """"""
+    QueueLength100Ns: CounterType = ...
+    """"""
+    QueueLengthObjectTime: CounterType = ...
+    """"""
+    RateOfCountPerSecond32: CounterType = ...
+    """"""
+    RateOfCountPerSecond64: CounterType = ...
+    """"""
+    RawFraction32: CounterType = ...
+    """"""
+    RawFraction64: CounterType = ...
+    """"""
+    PercentageActive: CounterType = ...
+    """"""
+    PrecisionSystemTimer: CounterType = ...
+    """"""
+    PercentageActive100Ns: CounterType = ...
+    """"""
+    PrecisionTimer100Ns: CounterType = ...
+    """"""
+    ObjectSpecificTimer: CounterType = ...
+    """"""
+    PrecisionObjectSpecificTimer: CounterType = ...
+    """"""
+    SampleFraction: CounterType = ...
+    """"""
+    PercentageNotActive: CounterType = ...
+    """"""
+    PercentageNotActive100Ns: CounterType = ...
+    """"""
+    MultiTimerPercentageActive: CounterType = ...
+    """"""
+    MultiTimerPercentageActive100Ns: CounterType = ...
+    """"""
+    MultiTimerPercentageNotActive: CounterType = ...
+    """"""
+    MultiTimerPercentageNotActive100Ns: CounterType = ...
+    """"""
+    AverageTimer32: CounterType = ...
+    """"""
+    ElapsedTime: CounterType = ...
+    """"""
+    AverageCount64: CounterType = ...
+    """"""
+    SampleBase: CounterType = ...
+    """"""
+    AverageBase: CounterType = ...
+    """"""
+    RawBase32: CounterType = ...
+    """"""
+    RawBase64: CounterType = ...
+    """"""
+    MultiTimerBase: CounterType = ...
+    """"""
 
-__all__ = [
-    CounterData,
-    CounterSet,
-    CounterSetInstance,
-    CounterSetInstanceCounterDataSet,
-    PerfProvider,
-    PerfProviderCollection,
-    CounterSetInstanceType,
-    CounterType,
-]
+class PerfProvider(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PerfProviderCollection(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

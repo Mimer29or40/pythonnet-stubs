@@ -1,21 +1,21 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
-from typing import Union
+from typing import Tuple
 
 from System import Array
-from System import Boolean
 from System import Enum
-from System import Int32
+from System import Exception
+from System import Guid
+from System import IntPtr
 from System import MarshalByRefObject
 from System import Object
-from System import String
 from System import Type
-from System import Void
+from System.Collections import IDictionary
 from System.Collections import IList
+from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Attribute
+from System.Runtime.Remoting import ObjRef
 from System.Runtime.Remoting.Contexts import Context
 from System.Runtime.Remoting.Contexts import ContextAttribute
 from System.Runtime.Remoting.Contexts import IContextAttribute
@@ -24,402 +24,899 @@ from System.Runtime.Remoting.Messaging import IMessage
 from System.Runtime.Remoting.Messaging import IMethodCallMessage
 from System.Runtime.Remoting.Messaging import IMethodMessage
 from System.Runtime.Remoting.Messaging import IMethodReturnMessage
+from System.Runtime.Remoting.Messaging import LogicalCallContext
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class ActivationAttributeStack(ObjectType):
+class ActivationAttributeStack(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ActivationListener(MarshalByRefObject, IActivator):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Level(self) -> ActivatorLevel: ...
-    @property
-    def NextActivator(self) -> IActivator: ...
-    @NextActivator.setter
-    def NextActivator(self, value: IActivator) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Activate(self, ctorMsg: IConstructionCallMessage) -> IConstructionReturnMessage: ...
-    def InitializeLifetimeService(self) -> ObjectType: ...
-    def get_Level(self) -> ActivatorLevel: ...
-    def get_NextActivator(self) -> IActivator: ...
-    def set_NextActivator(self, value: IActivator) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ActivationServices(ABC, ObjectType):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AppDomainLevelActivator(ObjectType, IActivator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Level(self) -> ActivatorLevel: ...
+    def Level(self) -> ActivatorLevel:
+        """
+
+        :return:
+        """
     @property
-    def NextActivator(self) -> IActivator: ...
+    def NextActivator(self) -> IActivator:
+        """
+
+        :return:
+        """
     @NextActivator.setter
     def NextActivator(self, value: IActivator) -> None: ...
+    def Activate(self, msg: IConstructionCallMessage) -> IConstructionReturnMessage:
+        """
 
-    # ---------- Methods ---------- #
+        :param msg:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    def Activate(self, ctorMsg: IConstructionCallMessage) -> IConstructionReturnMessage: ...
-    def get_Level(self) -> ActivatorLevel: ...
-    def get_NextActivator(self) -> IActivator: ...
-    def set_NextActivator(self, value: IActivator) -> VoidType: ...
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class ConstructionLevelActivator(ObjectType, IActivator):
-    # No Fields
+        :return:
+        """
 
-    # No Constructors
+class ActivationServices(ABC, Object):
+    """"""
 
-    # ---------- Properties ---------- #
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ActivatorLevel(Enum):
+    """"""
+
+    Construction: ActivatorLevel = ...
+    """"""
+    Context: ActivatorLevel = ...
+    """"""
+    AppDomain: ActivatorLevel = ...
+    """"""
+    Process: ActivatorLevel = ...
+    """"""
+    Machine: ActivatorLevel = ...
+    """"""
+
+class AppDomainLevelActivator(Object, IActivator):
+    """"""
 
     @property
-    def Level(self) -> ActivatorLevel: ...
+    def Level(self) -> ActivatorLevel:
+        """
+
+        :return:
+        """
     @property
-    def NextActivator(self) -> IActivator: ...
+    def NextActivator(self) -> IActivator:
+        """
+
+        :return:
+        """
     @NextActivator.setter
     def NextActivator(self, value: IActivator) -> None: ...
+    def Activate(self, msg: IConstructionCallMessage) -> IConstructionReturnMessage:
+        """
 
-    # ---------- Methods ---------- #
+        :param msg:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Activate(self, ctorMsg: IConstructionCallMessage) -> IConstructionReturnMessage: ...
-    def get_Level(self) -> ActivatorLevel: ...
-    def get_NextActivator(self) -> IActivator: ...
-    def set_NextActivator(self, value: IActivator) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ContextLevelActivator(ObjectType, IActivator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class ConstructionLevelActivator(Object, IActivator):
+    """"""
 
     @property
-    def Level(self) -> ActivatorLevel: ...
+    def Level(self) -> ActivatorLevel:
+        """
+
+        :return:
+        """
     @property
-    def NextActivator(self) -> IActivator: ...
+    def NextActivator(self) -> IActivator:
+        """
+
+        :return:
+        """
     @NextActivator.setter
     def NextActivator(self, value: IActivator) -> None: ...
+    def Activate(self, msg: IConstructionCallMessage) -> IConstructionReturnMessage:
+        """
 
-    # ---------- Methods ---------- #
+        :param msg:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Activate(self, ctorMsg: IConstructionCallMessage) -> IConstructionReturnMessage: ...
-    def get_Level(self) -> ActivatorLevel: ...
-    def get_NextActivator(self) -> IActivator: ...
-    def set_NextActivator(self, value: IActivator) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LocalActivator(ContextAttribute, _Attribute, IContextAttribute, IContextProperty, IActivator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class ContextLevelActivator(Object, IActivator):
+    """"""
 
     @property
-    def Level(self) -> ActivatorLevel: ...
+    def Level(self) -> ActivatorLevel:
+        """
+
+        :return:
+        """
     @property
-    def NextActivator(self) -> IActivator: ...
+    def NextActivator(self) -> IActivator:
+        """
+
+        :return:
+        """
     @NextActivator.setter
     def NextActivator(self, value: IActivator) -> None: ...
+    def Activate(self, msg: IConstructionCallMessage) -> IConstructionReturnMessage:
+        """
 
-    # ---------- Methods ---------- #
+        :param msg:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Activate(self, ctorMsg: IConstructionCallMessage) -> IConstructionReturnMessage: ...
-    def GetPropertiesForNewContext(self, ctorMsg: IConstructionCallMessage) -> VoidType: ...
-    def IsContextOK(self, ctx: Context, ctorMsg: IConstructionCallMessage) -> BooleanType: ...
-    def get_Level(self) -> ActivatorLevel: ...
-    def get_NextActivator(self) -> IActivator: ...
-    def set_NextActivator(self, value: IActivator) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemotePropertyHolderAttribute(ObjectType, IContextAttribute):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetPropertiesForNewContext(self, ctorMsg: IConstructionCallMessage) -> VoidType: ...
-    def IsContextOK(self, ctx: Context, msg: IConstructionCallMessage) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemotingXmlConfigFileData(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemotingXmlConfigFileParser(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def ParseConfigFile(filename: StringType) -> RemotingXmlConfigFileData: ...
-    @staticmethod
-    def ParseDefaultConfiguration() -> RemotingXmlConfigFileData: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UrlAttribute(ContextAttribute, _Attribute, IContextAttribute, IContextProperty):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, callsiteURL: StringType): ...
-
-    # ---------- Properties ---------- #
+class IActivator:
+    """"""
 
     @property
-    def UrlValue(self) -> StringType: ...
+    def Level(self) -> ActivatorLevel:
+        """
 
-    # ---------- Methods ---------- #
-
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetPropertiesForNewContext(self, ctorMsg: IConstructionCallMessage) -> VoidType: ...
-    def IsContextOK(self, ctx: Context, msg: IConstructionCallMessage) -> BooleanType: ...
-    def get_UrlValue(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IActivator(Protocol):
-    # ---------- Properties ---------- #
-
+        :return:
+        """
     @property
-    def Level(self) -> ActivatorLevel: ...
-    @property
-    def NextActivator(self) -> IActivator: ...
+    def NextActivator(self) -> IActivator:
+        """
+
+        :return:
+        """
     @NextActivator.setter
     def NextActivator(self, value: IActivator) -> None: ...
+    def Activate(self, msg: IConstructionCallMessage) -> IConstructionReturnMessage:
+        """
 
-    # ---------- Methods ---------- #
+        :param msg:
+        :return:
+        """
 
-    def Activate(self, msg: IConstructionCallMessage) -> IConstructionReturnMessage: ...
-    def get_Level(self) -> ActivatorLevel: ...
-    def get_NextActivator(self) -> IActivator: ...
-    def set_NextActivator(self, value: IActivator) -> VoidType: ...
-
-    # No Events
-
-class IConstructionCallMessage(Protocol, IMethodCallMessage, IMethodMessage, IMessage):
-    # ---------- Properties ---------- #
+class IConstructionCallMessage(IMessage, IMethodCallMessage, IMethodMessage):
+    """"""
 
     @property
-    def ActivationType(self) -> TypeType: ...
+    def ActivationType(self) -> Type:
+        """
+
+        :return:
+        """
     @property
-    def ActivationTypeName(self) -> StringType: ...
+    def ActivationTypeName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Activator(self) -> IActivator: ...
+    def Activator(self) -> IActivator:
+        """
+
+        :return:
+        """
     @Activator.setter
     def Activator(self, value: IActivator) -> None: ...
     @property
-    def CallSiteActivationAttributes(self) -> ArrayType[ObjectType]: ...
+    def ArgCount(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def ContextProperties(self) -> IList: ...
+    def Args(self) -> Array[object]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def CallSiteActivationAttributes(self) -> Array[object]:
+        """
 
-    def get_ActivationType(self) -> TypeType: ...
-    def get_ActivationTypeName(self) -> StringType: ...
-    def get_Activator(self) -> IActivator: ...
-    def get_CallSiteActivationAttributes(self) -> ArrayType[ObjectType]: ...
-    def get_ContextProperties(self) -> IList: ...
-    def set_Activator(self, value: IActivator) -> VoidType: ...
+        :return:
+        """
+    @property
+    def ContextProperties(self) -> IList:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
 
-class IConstructionReturnMessage(Protocol, IMethodReturnMessage, IMethodMessage, IMessage):
+        :return:
+        """
+    @property
+    def InArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def InArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetInArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetInArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+
+class IConstructionReturnMessage(IMessage, IMethodMessage, IMethodReturnMessage):
     """"""
 
-    # No Properties
+    @property
+    def ArgCount(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Exception(self) -> Exception:
+        """
 
-# ---------- Enums ---------- #
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
 
-class ActivatorLevel(Enum):
-    Construction = 4
-    Context = 8
-    AppDomain = 12
-    Process = 16
-    Machine = 20
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
 
-# No Delegates
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
 
-__all__ = [
-    ActivationAttributeStack,
-    ActivationListener,
-    ActivationServices,
-    AppDomainLevelActivator,
-    ConstructionLevelActivator,
-    ContextLevelActivator,
-    LocalActivator,
-    RemotePropertyHolderAttribute,
-    RemotingXmlConfigFileData,
-    RemotingXmlConfigFileParser,
-    UrlAttribute,
-    IActivator,
-    IConstructionCallMessage,
-    IConstructionReturnMessage,
-    ActivatorLevel,
-]
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnValue(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetOutArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetOutArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+
+class LocalActivator(ContextAttribute, _Attribute, IActivator, IContextAttribute, IContextProperty):
+    """"""
+
+    @property
+    def Level(self) -> ActivatorLevel:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def NextActivator(self) -> IActivator:
+        """
+
+        :return:
+        """
+    @NextActivator.setter
+    def NextActivator(self, value: IActivator) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Activate(self, msg: IConstructionCallMessage) -> IConstructionReturnMessage:
+        """
+
+        :param msg:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Freeze(self, newContext: Context) -> None:
+        """
+
+        :param newContext:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetPropertiesForNewContext(self, msg: IConstructionCallMessage) -> None:
+        """
+
+        :param msg:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsContextOK(self, ctx: Context, msg: IConstructionCallMessage) -> bool:
+        """
+
+        :param ctx:
+        :param msg:
+        :return:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def IsNewContextOK(self, newCtx: Context) -> bool:
+        """
+
+        :param newCtx:
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RemotePropertyHolderAttribute(Object, IContextAttribute):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetPropertiesForNewContext(self, msg: IConstructionCallMessage) -> None:
+        """
+
+        :param msg:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsContextOK(self, ctx: Context, msg: IConstructionCallMessage) -> bool:
+        """
+
+        :param ctx:
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RemotingXmlConfigFileData(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RemotingXmlConfigFileParser(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def ParseConfigFile(cls, filename: str) -> RemotingXmlConfigFileData:
+        """
+
+        :param filename:
+        :return:
+        """
+    @classmethod
+    def ParseDefaultConfiguration(cls) -> RemotingXmlConfigFileData:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class UrlAttribute(ContextAttribute, _Attribute, IContextAttribute, IContextProperty):
+    """"""
+
+    def __init__(self, callsiteURL: str):
+        """
+
+        :param callsiteURL:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def UrlValue(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Freeze(self, newContext: Context) -> None:
+        """
+
+        :param newContext:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetPropertiesForNewContext(self, msg: IConstructionCallMessage) -> None:
+        """
+
+        :param msg:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsContextOK(self, ctx: Context, msg: IConstructionCallMessage) -> bool:
+        """
+
+        :param ctx:
+        :param msg:
+        :return:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def IsNewContextOK(self, newCtx: Context) -> bool:
+        """
+
+        :param newCtx:
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

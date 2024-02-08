@@ -1,29 +1,30 @@
 from __future__ import annotations
 
 from abc import ABC
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import List
-from typing import Protocol
+from typing import Iterator
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
 from System import Enum
+from System import EventHandler
+from System import Exception
 from System import Func
+from System import Guid
 from System import IDisposable
-from System import Int32
-from System import Int64
 from System import Object
 from System import TimeSpan
 from System import Tuple
+from System import Type
 from System import ValueType
-from System import Void
 from System.Collections import ICollection
 from System.Collections import IDictionary
 from System.Collections import IEnumerable
+from System.Collections import IEnumerator
 from System.Collections.Generic import ICollection
 from System.Collections.Generic import IDictionary
 from System.Collections.Generic import IEnumerable
@@ -33,10 +34,15 @@ from System.Collections.Generic import IList
 from System.Collections.Generic import IReadOnlyCollection
 from System.Collections.Generic import IReadOnlyDictionary
 from System.Collections.Generic import KeyValuePair
+from System.Diagnostics.Tracing import EventChannel
+from System.Diagnostics.Tracing import EventCommandEventArgs
+from System.Diagnostics.Tracing import EventKeywords
+from System.Diagnostics.Tracing import EventLevel
 from System.Diagnostics.Tracing import EventSource
+from System.Diagnostics.Tracing import EventSourceOptions
+from System.Diagnostics.Tracing import EventSourceSettings
+from System.Diagnostics.Tracing import T
 from System.Threading import CancellationToken
-
-# ---------- Types ---------- #
 
 T = TypeVar("T")
 TArg = TypeVar("TArg")
@@ -44,296 +50,932 @@ TKey = TypeVar("TKey")
 TSource = TypeVar("TSource")
 TValue = TypeVar("TValue")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-ObjectType = Object
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
+class EventType(Generic[T]):
+    def __iadd__(self, other: T): ...
+    def __isub__(self, other: T): ...
 
 class BlockingCollection(
     Generic[T],
-    ObjectType,
+    Object,
     IEnumerable[T],
-    IEnumerable,
-    ICollection,
-    IDisposable,
     IReadOnlyCollection[T],
+    ICollection,
+    IEnumerable,
+    IDisposable,
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, boundedCapacity: IntType): ...
-    @overload
-    def __init__(self, collection: IProducerConsumerCollection[T], boundedCapacity: IntType): ...
-    @overload
-    def __init__(self, collection: IProducerConsumerCollection[T]): ...
+    def __init__(self, collection: IProducerConsumerCollection[T]):
+        """
 
-    # ---------- Properties ---------- #
+        :param collection:
+        """
+    @overload
+    def __init__(self, boundedCapacity: int):
+        """
 
+        :param boundedCapacity:
+        """
+    @overload
+    def __init__(self, collection: IProducerConsumerCollection[T], boundedCapacity: int):
+        """
+
+        :param collection:
+        :param boundedCapacity:
+        """
     @property
-    def BoundedCapacity(self) -> IntType: ...
-    @property
-    def Count(self) -> IntType: ...
-    @property
-    def IsAddingCompleted(self) -> BooleanType: ...
-    @property
-    def IsCompleted(self) -> BooleanType: ...
+    def BoundedCapacity(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsAddingCompleted(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsCompleted(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
     @overload
-    def Add(self, item: T) -> VoidType: ...
+    def Add(self, item: T) -> None:
+        """
+
+        :param item:
+        """
     @overload
-    def Add(self, item: T, cancellationToken: CancellationToken) -> VoidType: ...
-    @staticmethod
+    def Add(self, item: T, cancellationToken: CancellationToken) -> None:
+        """
+
+        :param item:
+        :param cancellationToken:
+        """
+    @classmethod
     @overload
-    def AddToAny(collections: ArrayType[BlockingCollection[T]], item: T) -> IntType: ...
-    @staticmethod
+    def AddToAny(cls, collections: Array[BlockingCollection[T]], item: T) -> int:
+        """
+
+        :param collections:
+        :param item:
+        :return:
+        """
+    @classmethod
     @overload
     def AddToAny(
-        collections: ArrayType[BlockingCollection[T]], item: T, cancellationToken: CancellationToken
-    ) -> IntType: ...
-    def CompleteAdding(self) -> VoidType: ...
-    def CopyTo(self, array: ArrayType[T], index: IntType) -> VoidType: ...
-    def Dispose(self) -> VoidType: ...
+        cls,
+        collections: Array[BlockingCollection[T]],
+        item: T,
+        cancellationToken: CancellationToken,
+    ) -> int:
+        """
+
+        :param collections:
+        :param item:
+        :param cancellationToken:
+        :return:
+        """
+    def CompleteAdding(self) -> None:
+        """"""
     @overload
-    def GetConsumingEnumerable(self) -> IEnumerable[T]: ...
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
     @overload
-    def GetConsumingEnumerable(self, cancellationToken: CancellationToken) -> IEnumerable[T]: ...
+    def CopyTo(self, array: Array[T], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def Take(self) -> T: ...
+    def GetConsumingEnumerable(self) -> IEnumerable[T]:
+        """
+
+        :return:
+        """
     @overload
-    def Take(self, cancellationToken: CancellationToken) -> T: ...
-    @staticmethod
+    def GetConsumingEnumerable(self, cancellationToken: CancellationToken) -> IEnumerable[T]:
+        """
+
+        :param cancellationToken:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Take(self) -> T:
+        """
+
+        :return:
+        """
+    @overload
+    def Take(self, cancellationToken: CancellationToken) -> T:
+        """
+
+        :param cancellationToken:
+        :return:
+        """
+    @classmethod
+    @overload
+    def TakeFromAny(cls, collections: Array[BlockingCollection[T]], item: T) -> Tuple[int, T]:
+        """
+
+        :param collections:
+        :param item:
+        :return:
+        """
+    @classmethod
     @overload
     def TakeFromAny(
-        collections: ArrayType[BlockingCollection[T]], item: T
-    ) -> Tuple[IntType, T]: ...
-    @staticmethod
+        cls,
+        collections: Array[BlockingCollection[T]],
+        item: T,
+        cancellationToken: CancellationToken,
+    ) -> Tuple[int, T]:
+        """
+
+        :param collections:
+        :param item:
+        :param cancellationToken:
+        :return:
+        """
+    def ToArray(self) -> Array[T]:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def TakeFromAny(
-        collections: ArrayType[BlockingCollection[T]], item: T, cancellationToken: CancellationToken
-    ) -> Tuple[IntType, T]: ...
-    def ToArray(self) -> ArrayType[T]: ...
+    def TryAdd(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
     @overload
-    def TryAdd(self, item: T) -> BooleanType: ...
+    def TryAdd(self, item: T, millisecondsTimeout: int) -> bool:
+        """
+
+        :param item:
+        :param millisecondsTimeout:
+        :return:
+        """
     @overload
-    def TryAdd(self, item: T, timeout: TimeSpan) -> BooleanType: ...
-    @overload
-    def TryAdd(self, item: T, millisecondsTimeout: IntType) -> BooleanType: ...
+    def TryAdd(self, item: T, timeout: TimeSpan) -> bool:
+        """
+
+        :param item:
+        :param timeout:
+        :return:
+        """
     @overload
     def TryAdd(
-        self, item: T, millisecondsTimeout: IntType, cancellationToken: CancellationToken
-    ) -> BooleanType: ...
-    @staticmethod
+        self, item: T, millisecondsTimeout: int, cancellationToken: CancellationToken
+    ) -> bool:
+        """
+
+        :param item:
+        :param millisecondsTimeout:
+        :param cancellationToken:
+        :return:
+        """
+    @classmethod
     @overload
-    def TryAddToAny(collections: ArrayType[BlockingCollection[T]], item: T) -> IntType: ...
-    @staticmethod
+    def TryAddToAny(cls, collections: Array[BlockingCollection[T]], item: T) -> int:
+        """
+
+        :param collections:
+        :param item:
+        :return:
+        """
+    @classmethod
     @overload
     def TryAddToAny(
-        collections: ArrayType[BlockingCollection[T]], item: T, timeout: TimeSpan
-    ) -> IntType: ...
-    @staticmethod
+        cls, collections: Array[BlockingCollection[T]], item: T, millisecondsTimeout: int
+    ) -> int:
+        """
+
+        :param collections:
+        :param item:
+        :param millisecondsTimeout:
+        :return:
+        """
+    @classmethod
     @overload
     def TryAddToAny(
-        collections: ArrayType[BlockingCollection[T]], item: T, millisecondsTimeout: IntType
-    ) -> IntType: ...
-    @staticmethod
+        cls, collections: Array[BlockingCollection[T]], item: T, timeout: TimeSpan
+    ) -> int:
+        """
+
+        :param collections:
+        :param item:
+        :param timeout:
+        :return:
+        """
+    @classmethod
     @overload
     def TryAddToAny(
-        collections: ArrayType[BlockingCollection[T]],
+        cls,
+        collections: Array[BlockingCollection[T]],
         item: T,
-        millisecondsTimeout: IntType,
+        millisecondsTimeout: int,
         cancellationToken: CancellationToken,
-    ) -> IntType: ...
+    ) -> int:
+        """
+
+        :param collections:
+        :param item:
+        :param millisecondsTimeout:
+        :param cancellationToken:
+        :return:
+        """
     @overload
-    def TryTake(self, item: T) -> Tuple[BooleanType, T]: ...
+    def TryTake(self, item: T) -> Tuple[bool, T]:
+        """
+
+        :param item:
+        :return:
+        """
     @overload
-    def TryTake(self, item: T, timeout: TimeSpan) -> Tuple[BooleanType, T]: ...
+    def TryTake(self, item: T, millisecondsTimeout: int) -> Tuple[bool, T]:
+        """
+
+        :param item:
+        :param millisecondsTimeout:
+        :return:
+        """
     @overload
-    def TryTake(self, item: T, millisecondsTimeout: IntType) -> Tuple[BooleanType, T]: ...
+    def TryTake(self, item: T, timeout: TimeSpan) -> Tuple[bool, T]:
+        """
+
+        :param item:
+        :param timeout:
+        :return:
+        """
     @overload
     def TryTake(
-        self, item: T, millisecondsTimeout: IntType, cancellationToken: CancellationToken
-    ) -> Tuple[BooleanType, T]: ...
-    @staticmethod
+        self, item: T, millisecondsTimeout: int, cancellationToken: CancellationToken
+    ) -> Tuple[bool, T]:
+        """
+
+        :param item:
+        :param millisecondsTimeout:
+        :param cancellationToken:
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryTakeFromAny(cls, collections: Array[BlockingCollection[T]], item: T) -> Tuple[int, T]:
+        """
+
+        :param collections:
+        :param item:
+        :return:
+        """
+    @classmethod
     @overload
     def TryTakeFromAny(
-        collections: ArrayType[BlockingCollection[T]], item: T
-    ) -> Tuple[IntType, T]: ...
-    @staticmethod
+        cls, collections: Array[BlockingCollection[T]], item: T, millisecondsTimeout: int
+    ) -> Tuple[int, T]:
+        """
+
+        :param collections:
+        :param item:
+        :param millisecondsTimeout:
+        :return:
+        """
+    @classmethod
     @overload
     def TryTakeFromAny(
-        collections: ArrayType[BlockingCollection[T]], item: T, timeout: TimeSpan
-    ) -> Tuple[IntType, T]: ...
-    @staticmethod
+        cls, collections: Array[BlockingCollection[T]], item: T, timeout: TimeSpan
+    ) -> Tuple[int, T]:
+        """
+
+        :param collections:
+        :param item:
+        :param timeout:
+        :return:
+        """
+    @classmethod
     @overload
     def TryTakeFromAny(
-        collections: ArrayType[BlockingCollection[T]], item: T, millisecondsTimeout: IntType
-    ) -> Tuple[IntType, T]: ...
-    @staticmethod
-    @overload
-    def TryTakeFromAny(
-        collections: ArrayType[BlockingCollection[T]],
+        cls,
+        collections: Array[BlockingCollection[T]],
         item: T,
-        millisecondsTimeout: IntType,
+        millisecondsTimeout: int,
         cancellationToken: CancellationToken,
-    ) -> Tuple[IntType, T]: ...
-    def get_BoundedCapacity(self) -> IntType: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsAddingCompleted(self) -> BooleanType: ...
-    def get_IsCompleted(self) -> BooleanType: ...
+    ) -> Tuple[int, T]:
+        """
 
-    # No Events
+        :param collections:
+        :param item:
+        :param millisecondsTimeout:
+        :param cancellationToken:
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param value:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def __len__(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class CDSCollectionETWBCLProvider(EventSource, IDisposable):
-    # ---------- Fields ---------- #
+    """"""
 
-    @staticmethod
+    Log: Final[ClassVar[CDSCollectionETWBCLProvider]] = ...
+    """
+    
+    :return: 
+    """
     @property
-    def Log() -> CDSCollectionETWBCLProvider: ...
-    @staticmethod
-    @Log.setter
-    def Log(value: CDSCollectionETWBCLProvider) -> None: ...
+    def ConstructionException(self) -> Exception:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @classmethod
+    @property
+    def CurrentThreadActivityId(cls) -> Guid:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Guid(self) -> Guid:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    def ConcurrentBag_TryPeekSteals(self) -> VoidType: ...
-    def ConcurrentBag_TryTakeSteals(self) -> VoidType: ...
-    def ConcurrentDictionary_AcquiringAllLocks(self, numOfBuckets: IntType) -> VoidType: ...
-    def ConcurrentStack_FastPopFailed(self, spinCount: IntType) -> VoidType: ...
-    def ConcurrentStack_FastPushFailed(self, spinCount: IntType) -> VoidType: ...
+        :return:
+        """
+    @property
+    def Settings(self) -> EventSourceSettings:
+        """
 
-    # No Events
+        :return:
+        """
+    def ConcurrentBag_TryPeekSteals(self) -> None:
+        """"""
+    def ConcurrentBag_TryTakeSteals(self) -> None:
+        """"""
+    def ConcurrentDictionary_AcquiringAllLocks(self, numOfBuckets: int) -> None:
+        """
 
-    # No Sub Classes
+        :param numOfBuckets:
+        """
+    def ConcurrentStack_FastPopFailed(self, spinCount: int) -> None:
+        """
 
-    # No Sub Structs
+        :param spinCount:
+        """
+    def ConcurrentStack_FastPushFailed(self, spinCount: int) -> None:
+        """
 
-    # No Sub Interfaces
+        :param spinCount:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTrait(self, key: str) -> str:
+        """
+
+        :param key:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsEnabled(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :return:
+        """
+    @overload
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords, channel: EventChannel) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :param channel:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Write(self, eventName: str) -> None:
+        """
+
+        :param eventName:
+        """
+    @overload
+    def Write(self, eventName: str, data: T) -> None:
+        """
+
+        :param eventName:
+        :param data:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @overload
+    def Write(
+        self,
+        eventName: str,
+        options: EventSourceOptions,
+        activityId: Guid,
+        relatedActivityId: Guid,
+        data: T,
+    ) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param activityId:
+        :param relatedActivityId:
+        :param data:
+        """
+    EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
+    """"""
 
 class ConcurrentBag(
     Generic[T],
-    ObjectType,
+    Object,
     IProducerConsumerCollection[T],
     IEnumerable[T],
-    IEnumerable,
-    ICollection,
     IReadOnlyCollection[T],
+    ICollection,
+    IEnumerable,
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, collection: IEnumerable[T]): ...
+    def __init__(self, collection: IEnumerable[T]):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param collection:
+        """
     @property
-    def Count(self) -> IntType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsEmpty(self) -> BooleanType: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsEmpty(self) -> bool:
+        """
 
-    def Add(self, item: T) -> VoidType: ...
-    def CopyTo(self, array: ArrayType[T], index: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[T]: ...
-    def ToArray(self) -> ArrayType[T]: ...
-    def TryPeek(self, result: T) -> Tuple[BooleanType, T]: ...
-    def TryTake(self, result: T) -> Tuple[BooleanType, T]: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsEmpty(self) -> BooleanType: ...
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Add(self, item: T) -> None:
+        """
 
-    # No Sub Structs
+        :param item:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Sub Interfaces
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[T], index: int) -> None:
+        """
 
-    # No Sub Enums
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToArray(self) -> Array[T]:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryAdd(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def TryPeek(self, result: T) -> Tuple[bool, T]:
+        """
+
+        :param result:
+        :return:
+        """
+    def TryTake(self, item: T) -> Tuple[bool, T]:
+        """
+
+        :param item:
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
 
 class ConcurrentDictionary(
     Generic[TKey, TValue],
-    ObjectType,
+    Object,
+    ICollection[KeyValuePair, TValue],
     IDictionary[TKey, TValue],
-    ICollection[KeyValuePair[TKey, TValue]],
-    IEnumerable[KeyValuePair[TKey, TValue]],
-    IEnumerable,
-    IDictionary,
-    ICollection,
+    IEnumerable[KeyValuePair, TValue],
+    IReadOnlyCollection[KeyValuePair, TValue],
     IReadOnlyDictionary[TKey, TValue],
-    IReadOnlyCollection[KeyValuePair[TKey, TValue]],
+    ICollection,
+    IDictionary,
+    IEnumerable,
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, concurrencyLevel: IntType, capacity: IntType): ...
+    def __init__(self, collection: IEnumerable[KeyValuePair, TValue]):
+        """"""
     @overload
-    def __init__(self, collection: IEnumerable[KeyValuePair[TKey, TValue]]): ...
-    @overload
-    def __init__(self, comparer: IEqualityComparer[TKey]): ...
+    def __init__(self, comparer: IEqualityComparer[TKey]):
+        """
+
+        :param comparer:
+        """
     @overload
     def __init__(
-        self, collection: IEnumerable[KeyValuePair[TKey, TValue]], comparer: IEqualityComparer[TKey]
-    ): ...
+        self, collection: IEnumerable[KeyValuePair, TValue], comparer: IEqualityComparer[TKey]
+    ):
+        """"""
+    @overload
+    def __init__(self, concurrencyLevel: int, capacity: int):
+        """
+
+        :param concurrencyLevel:
+        :param capacity:
+        """
     @overload
     def __init__(
         self,
-        concurrencyLevel: IntType,
-        collection: IEnumerable[KeyValuePair[TKey, TValue]],
+        concurrencyLevel: int,
+        collection: IEnumerable[KeyValuePair, TValue],
         comparer: IEqualityComparer[TKey],
-    ): ...
+    ):
+        """"""
     @overload
-    def __init__(
-        self, concurrencyLevel: IntType, capacity: IntType, comparer: IEqualityComparer[TKey]
-    ): ...
+    def __init__(self, concurrencyLevel: int, capacity: int, comparer: IEqualityComparer[TKey]):
+        """
 
-    # ---------- Properties ---------- #
+        :param concurrencyLevel:
+        :param capacity:
+        :param comparer:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
+        :return:
+        """
     @property
-    def Count(self) -> IntType: ...
-    @property
-    def IsEmpty(self) -> BooleanType: ...
-    def __getitem__(self, key: TKey) -> TValue: ...
-    def __setitem__(self, key: TKey, value: TValue) -> None: ...
-    @property
-    def Keys(self) -> ICollection[TKey]: ...
-    @property
-    def Values(self) -> ICollection[TValue]: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
+        :return:
+        """
+    @property
+    def IsEmpty(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Item(self) -> TValue:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: TValue) -> None: ...
+    @property
+    def Item(self) -> TValue:
+        """
+
+        :return:
+        """
+    @property
+    def Keys(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def Keys(self) -> ICollection[TKey]:
+        """
+
+        :return:
+        """
+    @property
+    def Keys(self) -> IEnumerable[TKey]:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection[TValue]:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> IEnumerable[TValue]:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, item: KeyValuePair[TKey, TValue]) -> None:
+        """
+
+        :param item:
+        """
+    @overload
+    def Add(self, key: TKey, value: TValue) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    @overload
+    def Add(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    @overload
+    def AddOrUpdate(
+        self, key: TKey, addValue: TValue, updateValueFactory: Func[TKey, TValue, TValue]
+    ) -> TValue:
+        """
+
+        :param key:
+        :param addValue:
+        :param updateValueFactory:
+        :return:
+        """
+    @overload
+    def AddOrUpdate(
+        self,
+        key: TKey,
+        addValueFactory: Func[TKey, TValue],
+        updateValueFactory: Func[TKey, TValue, TValue],
+    ) -> TValue:
+        """
+
+        :param key:
+        :param addValueFactory:
+        :param updateValueFactory:
+        :return:
+        """
     @overload
     def AddOrUpdate(
         self,
@@ -341,411 +983,1005 @@ class ConcurrentDictionary(
         addValueFactory: Func[TKey, TArg, TValue],
         updateValueFactory: Func[TKey, TValue, TArg, TValue],
         factoryArgument: TArg,
-    ) -> TValue: ...
+    ) -> TValue:
+        """
+
+        :param key:
+        :param addValueFactory:
+        :param updateValueFactory:
+        :param factoryArgument:
+        :return:
+        """
     @overload
-    def AddOrUpdate(
-        self,
-        key: TKey,
-        addValueFactory: Func[TKey, TValue],
-        updateValueFactory: Func[TKey, TValue, TValue],
-    ) -> TValue: ...
+    def Clear(self) -> None:
+        """"""
     @overload
-    def AddOrUpdate(
-        self, key: TKey, addValue: TValue, updateValueFactory: Func[TKey, TValue, TValue]
-    ) -> TValue: ...
-    def Clear(self) -> VoidType: ...
-    def ContainsKey(self, key: TKey) -> BooleanType: ...
-    def GetEnumerator(self) -> IEnumerator[KeyValuePair[TKey, TValue]]: ...
+    def Clear(self) -> None:
+        """"""
     @overload
-    def GetOrAdd(self, key: TKey, valueFactory: Func[TKey, TValue]) -> TValue: ...
+    def Contains(self, item: KeyValuePair[TKey, TValue]) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
     @overload
-    def GetOrAdd(self, key: TKey, value: TValue) -> TValue: ...
+    def Contains(self, key: object) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def ContainsKey(self, key: TKey) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def ContainsKey(self, key: TKey) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[KeyValuePair, TValue], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetOrAdd(self, key: TKey, value: TValue) -> TValue:
+        """
+
+        :param key:
+        :param value:
+        :return:
+        """
+    @overload
+    def GetOrAdd(self, key: TKey, valueFactory: Func[TKey, TValue]) -> TValue:
+        """
+
+        :param key:
+        :param valueFactory:
+        :return:
+        """
     @overload
     def GetOrAdd(
         self, key: TKey, valueFactory: Func[TKey, TArg, TValue], factoryArgument: TArg
-    ) -> TValue: ...
-    def ToArray(self) -> ArrayType[KeyValuePair[TKey, TValue]]: ...
-    def TryAdd(self, key: TKey, value: TValue) -> BooleanType: ...
-    def TryGetValue(self, key: TKey, value: TValue) -> Tuple[BooleanType, TValue]: ...
-    def TryRemove(self, key: TKey, value: TValue) -> Tuple[BooleanType, TValue]: ...
-    def TryUpdate(self, key: TKey, newValue: TValue, comparisonValue: TValue) -> BooleanType: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsEmpty(self) -> BooleanType: ...
-    def get_Item(self, key: TKey) -> TValue: ...
-    def get_Keys(self) -> ICollection[TKey]: ...
-    def get_Values(self) -> ICollection[TValue]: ...
-    def set_Item(self, key: TKey, value: TValue) -> VoidType: ...
+    ) -> TValue:
+        """
 
-    # No Events
+        :param key:
+        :param valueFactory:
+        :param factoryArgument:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def Remove(self, item: KeyValuePair[TKey, TValue]) -> bool:
+        """
 
-    # No Sub Structs
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, key: object) -> None:
+        """
 
-    # No Sub Interfaces
+        :param key:
+        """
+    def ToArray(self) -> Array[KeyValuePair, TValue]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryAdd(self, key: TKey, value: TValue) -> bool:
+        """
+
+        :param key:
+        :param value:
+        :return:
+        """
+    @overload
+    def TryGetValue(self, key: TKey, value: TValue) -> Tuple[bool, TValue]:
+        """"""
+    @overload
+    def TryGetValue(self, key: TKey, value: TValue) -> Tuple[bool, TValue]:
+        """"""
+    def TryRemove(self, key: TKey, value: TValue) -> Tuple[bool, TValue]:
+        """
+
+        :param key:
+        :param value:
+        :return:
+        """
+    def TryUpdate(self, key: TKey, newValue: TValue, comparisonValue: TValue) -> bool:
+        """
+
+        :param key:
+        :param newValue:
+        :param comparisonValue:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: KeyValuePair[TKey, TValue]) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, key: TKey) -> TValue:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __getitem__(self, key: TKey) -> TValue:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __getitem__(self, key: object) -> object:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[KeyValuePair, TValue]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, key: TKey, value: TValue) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
 
 class ConcurrentQueue(
     Generic[T],
-    ObjectType,
+    Object,
     IProducerConsumerCollection[T],
     IEnumerable[T],
-    IEnumerable,
-    ICollection,
     IReadOnlyCollection[T],
+    ICollection,
+    IEnumerable,
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, collection: IEnumerable[T]): ...
+    def __init__(self, collection: IEnumerable[T]):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param collection:
+        """
     @property
-    def Count(self) -> IntType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsEmpty(self) -> BooleanType: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsEmpty(self) -> bool:
+        """
 
-    def CopyTo(self, array: ArrayType[T], index: IntType) -> VoidType: ...
-    def Enqueue(self, item: T) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[T]: ...
-    def ToArray(self) -> ArrayType[T]: ...
-    def TryDequeue(self, result: T) -> Tuple[BooleanType, T]: ...
-    def TryPeek(self, result: T) -> Tuple[BooleanType, T]: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsEmpty(self) -> BooleanType: ...
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Sub Structs
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[T], index: int) -> None:
+        """
 
-    # No Sub Interfaces
+        :param array:
+        :param index:
+        """
+    def Enqueue(self, item: T) -> None:
+        """
 
-    # No Sub Enums
+        :param item:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToArray(self) -> Array[T]:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryAdd(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def TryDequeue(self, result: T) -> Tuple[bool, T]:
+        """
+
+        :param result:
+        :return:
+        """
+    def TryPeek(self, result: T) -> Tuple[bool, T]:
+        """
+
+        :param result:
+        :return:
+        """
+    def TryTake(self, item: T) -> Tuple[bool, T]:
+        """
+
+        :param item:
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
 
 class ConcurrentStack(
     Generic[T],
-    ObjectType,
+    Object,
     IProducerConsumerCollection[T],
     IEnumerable[T],
-    IEnumerable,
-    ICollection,
     IReadOnlyCollection[T],
+    ICollection,
+    IEnumerable,
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, collection: IEnumerable[T]): ...
+    def __init__(self, collection: IEnumerable[T]):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param collection:
+        """
     @property
-    def Count(self) -> IntType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsEmpty(self) -> BooleanType: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
-
-    def Clear(self) -> VoidType: ...
-    def CopyTo(self, array: ArrayType[T], index: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[T]: ...
-    def Push(self, item: T) -> VoidType: ...
-    @overload
-    def PushRange(self, items: ArrayType[T]) -> VoidType: ...
-    @overload
-    def PushRange(self, items: ArrayType[T], startIndex: IntType, count: IntType) -> VoidType: ...
-    def ToArray(self) -> ArrayType[T]: ...
-    def TryPeek(self, result: T) -> Tuple[BooleanType, T]: ...
-    def TryPop(self, result: T) -> Tuple[BooleanType, T]: ...
-    @overload
-    def TryPopRange(self, items: ArrayType[T]) -> IntType: ...
-    @overload
-    def TryPopRange(self, items: ArrayType[T], startIndex: IntType, count: IntType) -> IntType: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsEmpty(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class OrderablePartitioner(Protocol[TSource], Partitioner[TSource]):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
     @property
-    def KeysNormalized(self) -> BooleanType: ...
+    def IsEmpty(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def KeysOrderedAcrossPartitions(self) -> BooleanType: ...
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def KeysOrderedInEachPartition(self) -> BooleanType: ...
+    def SyncRoot(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
-
-    def GetDynamicPartitions(self) -> IEnumerable[TSource]: ...
-    def GetOrderableDynamicPartitions(self) -> IEnumerable[KeyValuePair[LongType, TSource]]: ...
-    def GetOrderablePartitions(
-        self, partitionCount: IntType
-    ) -> IList[IEnumerator[KeyValuePair[LongType, TSource]]]: ...
-    def GetPartitions(self, partitionCount: IntType) -> IList[IEnumerator[TSource]]: ...
-    def get_KeysNormalized(self) -> BooleanType: ...
-    def get_KeysOrderedAcrossPartitions(self) -> BooleanType: ...
-    def get_KeysOrderedInEachPartition(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Partitioner(Protocol[TSource], ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def SupportsDynamicPartitions(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetDynamicPartitions(self) -> IEnumerable[TSource]: ...
-    def GetPartitions(self, partitionCount: IntType) -> IList[IEnumerator[TSource]]: ...
-    def get_SupportsDynamicPartitions(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Partitioner(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
+        :return:
+        """
+    def Clear(self) -> None:
+        """"""
     @overload
-    def Create(
-        fromInclusive: LongType, toExclusive: LongType
-    ) -> OrderablePartitioner[Tuple[LongType, LongType]]: ...
-    @staticmethod
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
     @overload
-    def Create(
-        fromInclusive: LongType, toExclusive: LongType, rangeSize: LongType
-    ) -> OrderablePartitioner[Tuple[LongType, LongType]]: ...
-    @staticmethod
+    def CopyTo(self, array: Array[T], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Push(self, item: T) -> None:
+        """
+
+        :param item:
+        """
     @overload
-    def Create(
-        fromInclusive: IntType, toExclusive: IntType
-    ) -> OrderablePartitioner[Tuple[IntType, IntType]]: ...
-    @staticmethod
+    def PushRange(self, items: Array[T]) -> None:
+        """
+
+        :param items:
+        """
     @overload
-    def Create(
-        fromInclusive: IntType, toExclusive: IntType, rangeSize: IntType
-    ) -> OrderablePartitioner[Tuple[IntType, IntType]]: ...
-    @staticmethod
+    def PushRange(self, items: Array[T], startIndex: int, count: int) -> None:
+        """
+
+        :param items:
+        :param startIndex:
+        :param count:
+        """
+    def ToArray(self) -> Array[T]:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryAdd(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def TryPeek(self, result: T) -> Tuple[bool, T]:
+        """
+
+        :param result:
+        :return:
+        """
+    def TryPop(self, result: T) -> Tuple[bool, T]:
+        """
+
+        :param result:
+        :return:
+        """
     @overload
-    def Create(list: IList[TSource], loadBalance: BooleanType) -> OrderablePartitioner[TSource]: ...
-    @staticmethod
+    def TryPopRange(self, items: Array[T]) -> int:
+        """
+
+        :param items:
+        :return:
+        """
     @overload
-    def Create(
-        array: ArrayType[TSource], loadBalance: BooleanType
-    ) -> OrderablePartitioner[TSource]: ...
-    @staticmethod
+    def TryPopRange(self, items: Array[T], startIndex: int, count: int) -> int:
+        """
+
+        :param items:
+        :param startIndex:
+        :param count:
+        :return:
+        """
+    def TryTake(self, item: T) -> Tuple[bool, T]:
+        """
+
+        :param item:
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def Create(source: IEnumerable[TSource]) -> OrderablePartitioner[TSource]: ...
-    @staticmethod
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
     @overload
-    def Create(
-        source: IEnumerable[TSource], partitionerOptions: EnumerablePartitionerOptions
-    ) -> OrderablePartitioner[TSource]: ...
+    def __iter__(self) -> Iterator[T]:
+        """
 
-    # No Events
+        :return:
+        """
+    def __len__(self) -> int:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView(Generic[T], ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, collection: IProducerConsumerCollection[T]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Items(self) -> ArrayType[T]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Items(self) -> ArrayType[T]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SystemThreadingCollection_IProducerConsumerCollectionDebugView(Generic[T], ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, collection: IProducerConsumerCollection[T]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Items(self) -> ArrayType[T]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Items(self) -> ArrayType[T]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SystemThreadingCollections_BlockingCollectionDebugView(Generic[T], ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, collection: BlockingCollection[T]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Items(self) -> ArrayType[T]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Items(self) -> ArrayType[T]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
-
-class VolatileBool(ValueType):
-    # ---------- Fields ---------- #
-
-    @property
-    def m_value(self) -> BooleanType: ...
-    @m_value.setter
-    def m_value(self, value: BooleanType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, value: BooleanType): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Interfaces ---------- #
-
-class IProducerConsumerCollection(Protocol[T], IEnumerable[T], IEnumerable, ICollection):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CopyTo(self, array: ArrayType[T], index: IntType) -> VoidType: ...
-    def ToArray(self) -> ArrayType[T]: ...
-    def TryAdd(self, item: T) -> BooleanType: ...
-    def TryTake(self, item: T) -> Tuple[BooleanType, T]: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
+        :return:
+        """
 
 class EnumerablePartitionerOptions(Enum):
-    # None = 0
-    NoBuffering = 1
+    """"""
 
-# No Delegates
+    _None: EnumerablePartitionerOptions = ...
+    """"""
+    NoBuffering: EnumerablePartitionerOptions = ...
+    """"""
 
-__all__ = [
-    BlockingCollection,
-    CDSCollectionETWBCLProvider,
-    ConcurrentBag,
-    ConcurrentDictionary,
-    ConcurrentQueue,
-    ConcurrentStack,
-    OrderablePartitioner,
-    Partitioner,
-    SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView,
-    SystemThreadingCollection_IProducerConsumerCollectionDebugView,
-    SystemThreadingCollections_BlockingCollectionDebugView,
-    VolatileBool,
-    IProducerConsumerCollection,
-    EnumerablePartitionerOptions,
-]
+class IProducerConsumerCollection(Generic[T], IEnumerable[T], ICollection, IEnumerable):
+    """"""
+
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[T], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def ToArray(self) -> Array[T]:
+        """
+
+        :return:
+        """
+    def TryAdd(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def TryTake(self, item: T) -> Tuple[bool, T]:
+        """
+
+        :param item:
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+
+class OrderablePartitioner(ABC, Generic[TSource], Partitioner[TSource]):
+    """"""
+
+    @property
+    def KeysNormalized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def KeysOrderedAcrossPartitions(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def KeysOrderedInEachPartition(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def SupportsDynamicPartitions(self) -> bool:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDynamicPartitions(self) -> IEnumerable[TSource]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetOrderableDynamicPartitions(self) -> IEnumerable[KeyValuePair, TSource]:
+        """
+
+        :return:
+        """
+    def GetOrderablePartitions(self, partitionCount: int) -> IList[IEnumerator, TSource]:
+        """
+
+        :param partitionCount:
+        :return:
+        """
+    def GetPartitions(self, partitionCount: int) -> IList[IEnumerator[TSource]]:
+        """
+
+        :param partitionCount:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Partitioner(ABC, Object):
+    """"""
+
+    @classmethod
+    @overload
+    def Create(cls, source: IEnumerable[TSource]) -> OrderablePartitioner[TSource]:
+        """
+
+        :param source:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(
+        cls, source: IEnumerable[TSource], partitionerOptions: EnumerablePartitionerOptions
+    ) -> OrderablePartitioner[TSource]:
+        """
+
+        :param source:
+        :param partitionerOptions:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(cls, list: IList[TSource], loadBalance: bool) -> OrderablePartitioner[TSource]:
+        """
+
+        :param list:
+        :param loadBalance:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(cls, array: Array[TSource], loadBalance: bool) -> OrderablePartitioner[TSource]:
+        """
+
+        :param array:
+        :param loadBalance:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(cls, fromInclusive: int, toExclusive: int) -> OrderablePartitioner[Tuple, int]:
+        """
+
+        :param fromInclusive:
+        :param toExclusive:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(cls, fromInclusive: int, toExclusive: int) -> OrderablePartitioner[Tuple, int]:
+        """
+
+        :param fromInclusive:
+        :param toExclusive:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(
+        cls, fromInclusive: int, toExclusive: int, rangeSize: int
+    ) -> OrderablePartitioner[Tuple, int]:
+        """
+
+        :param fromInclusive:
+        :param toExclusive:
+        :param rangeSize:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(
+        cls, fromInclusive: int, toExclusive: int, rangeSize: int
+    ) -> OrderablePartitioner[Tuple, int]:
+        """
+
+        :param fromInclusive:
+        :param toExclusive:
+        :param rangeSize:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Partitioner(ABC, Generic[TSource], Object):
+    """"""
+
+    @property
+    def SupportsDynamicPartitions(self) -> bool:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDynamicPartitions(self) -> IEnumerable[TSource]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetPartitions(self, partitionCount: int) -> IList[IEnumerator[TSource]]:
+        """
+
+        :param partitionCount:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SystemCollectionsConcurrent_ProducerConsumerCollectionDebugView(Generic[T], Object):
+    """"""
+
+    def __init__(self, collection: IProducerConsumerCollection[T]):
+        """
+
+        :param collection:
+        """
+    @property
+    def Items(self) -> Array[T]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SystemThreadingCollection_IProducerConsumerCollectionDebugView(Generic[T], Object):
+    """"""
+
+    def __init__(self, collection: IProducerConsumerCollection[T]):
+        """
+
+        :param collection:
+        """
+    @property
+    def Items(self) -> Array[T]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SystemThreadingCollections_BlockingCollectionDebugView(Generic[T], Object):
+    """"""
+
+    def __init__(self, collection: BlockingCollection[T]):
+        """
+
+        :param collection:
+        """
+    @property
+    def Items(self) -> Array[T]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class VolatileBool(ValueType):
+    """"""
+
+    m_value: Final[bool] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, value: bool):
+        """
+
+        :param value:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

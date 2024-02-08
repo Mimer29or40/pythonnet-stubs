@@ -1,37 +1,33 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
+from typing import ClassVar
+from typing import Final
+from typing import Iterator
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import ActivationContext
 from System import ApplicationId
 from System import ApplicationIdentity
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Enum
 from System import Exception
-from System import Int32
 from System import Object
-from System import String
 from System import SystemException
 from System import Type
 from System import Version
-from System import Void
 from System.Collections import DictionaryEntry
 from System.Collections import ICollection
+from System.Collections import IDictionary
 from System.Collections import IEnumerable
 from System.Collections import IEnumerator
 from System.Collections import IList
 from System.Collections.Generic import IEnumerable
-from System.Collections.Generic import IEnumerator
 from System.Collections.Generic import IList
 from System.Reflection import Assembly
+from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Serialization import IDeserializationCallback
 from System.Runtime.Serialization import ISerializable
@@ -51,2023 +47,4090 @@ from System.Security.Cryptography.X509Certificates import X509Certificate
 from System.Security.Permissions import FileIOPermissionAccess
 from System.Security.Permissions import StrongNamePublicKeyBlob
 
-# ---------- Types ---------- #
-
-T = TypeVar("T", bound=EvidenceBase)
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
+T = TypeVar("T")
 
 class AllMembershipCondition(
-    ObjectType,
+    Object,
+    IConstantMembershipCondition,
     IMembershipCondition,
+    IReportMatchMembershipCondition,
     ISecurityEncodable,
     ISecurityPolicyEncodable,
-    IConstantMembershipCondition,
-    IReportMatchMembershipCondition,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Check(self, evidence: Evidence) -> BooleanType: ...
-    def Copy(self) -> IMembershipCondition: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
+    def __init__(self):
+        """"""
     @overload
-    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> VoidType: ...
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
     @overload
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
+    def Check(self, evidence: Evidence, usedEvidence: object) -> Tuple[bool, object]:
+        """
+
+        :param evidence:
+        :param usedEvidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def ToXml(self) -> SecurityElement: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Sub Classes
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
 
-    # No Sub Structs
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-class AppDomainEvidenceFactory(ObjectType, IRuntimeEvidenceFactory):
-    # No Fields
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
+
+class AppDomainEvidenceFactory(Object, IRuntimeEvidenceFactory):
+    """"""
 
     @property
-    def Target(self) -> IEvidenceFactory: ...
+    def Target(self) -> IEvidenceFactory:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def GenerateEvidence(self, evidenceType: TypeType) -> EvidenceBase: ...
-    def GetFactorySuppliedEvidence(self) -> IEnumerable[EvidenceBase]: ...
-    def get_Target(self) -> IEvidenceFactory: ...
+        :param obj:
+        :return:
+        """
+    def GenerateEvidence(self, evidenceType: Type) -> EvidenceBase:
+        """
 
-    # No Events
+        :param evidenceType:
+        :return:
+        """
+    def GetFactorySuppliedEvidence(self) -> IEnumerable[EvidenceBase]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class ApplicationDirectory(EvidenceBase):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, name: str):
+        """
 
-    def __init__(self, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param name:
+        """
     @property
-    def Directory(self) -> StringType: ...
+    def Directory(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
 
-    def Clone(self) -> EvidenceBase: ...
-    def Copy(self) -> ObjectType: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_Directory(self) -> StringType: ...
+        :return:
+        """
+    def Copy(self) -> object:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class ApplicationDirectoryMembershipCondition(
-    ObjectType,
+    Object,
+    IConstantMembershipCondition,
     IMembershipCondition,
+    IReportMatchMembershipCondition,
     ISecurityEncodable,
     ISecurityPolicyEncodable,
-    IConstantMembershipCondition,
-    IReportMatchMembershipCondition,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Check(self, evidence: Evidence) -> BooleanType: ...
-    def Copy(self) -> IMembershipCondition: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
+    def __init__(self):
+        """"""
     @overload
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
     @overload
-    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
+    def Check(self, evidence: Evidence, usedEvidence: object) -> Tuple[bool, object]:
+        """
+
+        :param evidence:
+        :param usedEvidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self) -> SecurityElement: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Sub Classes
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
 
-    # No Sub Structs
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-class ApplicationSecurityInfo(ObjectType):
-    # No Fields
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
 
-    def __init__(self, activationContext: ActivationContext): ...
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
 
-    # ---------- Properties ---------- #
+        :param level:
+        :return:
+        """
 
+class ApplicationSecurityInfo(Object):
+    """"""
+
+    def __init__(self, activationContext: ActivationContext):
+        """
+
+        :param activationContext:
+        """
     @property
-    def ApplicationEvidence(self) -> Evidence: ...
+    def ApplicationEvidence(self) -> Evidence:
+        """
+
+        :return:
+        """
     @ApplicationEvidence.setter
     def ApplicationEvidence(self, value: Evidence) -> None: ...
     @property
-    def ApplicationId(self) -> ApplicationId: ...
+    def ApplicationId(self) -> ApplicationId:
+        """
+
+        :return:
+        """
     @ApplicationId.setter
     def ApplicationId(self, value: ApplicationId) -> None: ...
     @property
-    def DefaultRequestSet(self) -> PermissionSet: ...
+    def DefaultRequestSet(self) -> PermissionSet:
+        """
+
+        :return:
+        """
     @DefaultRequestSet.setter
     def DefaultRequestSet(self, value: PermissionSet) -> None: ...
     @property
-    def DeploymentId(self) -> ApplicationId: ...
+    def DeploymentId(self) -> ApplicationId:
+        """
+
+        :return:
+        """
     @DeploymentId.setter
     def DeploymentId(self, value: ApplicationId) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_ApplicationEvidence(self) -> Evidence: ...
-    def get_ApplicationId(self) -> ApplicationId: ...
-    def get_DefaultRequestSet(self) -> PermissionSet: ...
-    def get_DeploymentId(self) -> ApplicationId: ...
-    def set_ApplicationEvidence(self, value: Evidence) -> VoidType: ...
-    def set_ApplicationId(self, value: ApplicationId) -> VoidType: ...
-    def set_DefaultRequestSet(self, value: PermissionSet) -> VoidType: ...
-    def set_DeploymentId(self, value: ApplicationId) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class ApplicationSecurityManager(ABC, Object):
+    """"""
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ApplicationSecurityManager(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+    @classmethod
     @property
-    def ApplicationTrustManager() -> IApplicationTrustManager: ...
-    @staticmethod
+    def ApplicationTrustManager(cls) -> IApplicationTrustManager:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def UserApplicationTrusts() -> ApplicationTrustCollection: ...
+    def UserApplicationTrusts(cls) -> ApplicationTrustCollection:
+        """
 
-    # ---------- Methods ---------- #
-
-    @staticmethod
+        :return:
+        """
+    @classmethod
     def DetermineApplicationTrust(
-        activationContext: ActivationContext, context: TrustManagerContext
-    ) -> BooleanType: ...
-    @staticmethod
-    def get_ApplicationTrustManager() -> IApplicationTrustManager: ...
-    @staticmethod
-    def get_UserApplicationTrusts() -> ApplicationTrustCollection: ...
+        cls, activationContext: ActivationContext, context: TrustManagerContext
+    ) -> bool:
+        """
 
-    # No Events
+        :param activationContext:
+        :param context:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class ApplicationTrust(EvidenceBase, ISecurityEncodable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, applicationIdentity: ApplicationIdentity): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self): ...
+    def __init__(self, applicationIdentity: ApplicationIdentity):
+        """
+
+        :param applicationIdentity:
+        """
     @overload
     def __init__(
         self, defaultGrantSet: PermissionSet, fullTrustAssemblies: IEnumerable[StrongName]
-    ): ...
+    ):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param defaultGrantSet:
+        :param fullTrustAssemblies:
+        """
     @property
-    def ApplicationIdentity(self) -> ApplicationIdentity: ...
+    def ApplicationIdentity(self) -> ApplicationIdentity:
+        """
+
+        :return:
+        """
     @ApplicationIdentity.setter
     def ApplicationIdentity(self, value: ApplicationIdentity) -> None: ...
     @property
-    def DefaultGrantSet(self) -> PolicyStatement: ...
+    def DefaultGrantSet(self) -> PolicyStatement:
+        """
+
+        :return:
+        """
     @DefaultGrantSet.setter
     def DefaultGrantSet(self, value: PolicyStatement) -> None: ...
     @property
-    def ExtraInfo(self) -> ObjectType: ...
+    def ExtraInfo(self) -> object:
+        """
+
+        :return:
+        """
     @ExtraInfo.setter
-    def ExtraInfo(self, value: ObjectType) -> None: ...
+    def ExtraInfo(self, value: object) -> None: ...
     @property
-    def FullTrustAssemblies(self) -> IList[StrongName]: ...
+    def FullTrustAssemblies(self) -> IList[StrongName]:
+        """
+
+        :return:
+        """
     @property
-    def IsApplicationTrustedToRun(self) -> BooleanType: ...
+    def IsApplicationTrustedToRun(self) -> bool:
+        """
+
+        :return:
+        """
     @IsApplicationTrustedToRun.setter
-    def IsApplicationTrustedToRun(self, value: BooleanType) -> None: ...
+    def IsApplicationTrustedToRun(self, value: bool) -> None: ...
     @property
-    def Persist(self) -> BooleanType: ...
+    def Persist(self) -> bool:
+        """
+
+        :return:
+        """
     @Persist.setter
-    def Persist(self, value: BooleanType) -> None: ...
+    def Persist(self, value: bool) -> None: ...
+    def Clone(self) -> EvidenceBase:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Clone(self) -> EvidenceBase: ...
-    def FromXml(self, element: SecurityElement) -> VoidType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def get_ApplicationIdentity(self) -> ApplicationIdentity: ...
-    def get_DefaultGrantSet(self) -> PolicyStatement: ...
-    def get_ExtraInfo(self) -> ObjectType: ...
-    def get_FullTrustAssemblies(self) -> IList[StrongName]: ...
-    def get_IsApplicationTrustedToRun(self) -> BooleanType: ...
-    def get_Persist(self) -> BooleanType: ...
-    def set_ApplicationIdentity(self, value: ApplicationIdentity) -> VoidType: ...
-    def set_DefaultGrantSet(self, value: PolicyStatement) -> VoidType: ...
-    def set_ExtraInfo(self, value: ObjectType) -> VoidType: ...
-    def set_IsApplicationTrustedToRun(self, value: BooleanType) -> VoidType: ...
-    def set_Persist(self, value: BooleanType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Events
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class ApplicationTrustCollection(ObjectType, ICollection, IEnumerable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class ApplicationTrustCollection(Object, ICollection, IEnumerable):
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
-    @property
-    def IsSynchronized(self) -> BooleanType: ...
-    def __getitem__(self, key: IntType) -> ApplicationTrust: ...
-    def __getitem__(self, key: StringType) -> ApplicationTrust: ...
-    @property
-    def SyncRoot(self) -> ObjectType: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    def Add(self, trust: ApplicationTrust) -> IntType: ...
+        :return:
+        """
+    @property
+    def Item(self) -> ApplicationTrust:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    def Add(self, trust: ApplicationTrust) -> int:
+        """
+
+        :param trust:
+        :return:
+        """
     @overload
-    def AddRange(self, trusts: ArrayType[ApplicationTrust]) -> VoidType: ...
+    def AddRange(self, trusts: ApplicationTrustCollection) -> None:
+        """
+
+        :param trusts:
+        """
     @overload
-    def AddRange(self, trusts: ApplicationTrustCollection) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def CopyTo(self, array: ArrayType[ApplicationTrust], index: IntType) -> VoidType: ...
+    def AddRange(self, trusts: Array[ApplicationTrust]) -> None:
+        """
+
+        :param trusts:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[ApplicationTrust], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     def Find(
         self, applicationIdentity: ApplicationIdentity, versionMatch: ApplicationVersionMatch
-    ) -> ApplicationTrustCollection: ...
-    def GetEnumerator(self) -> ApplicationTrustEnumerator: ...
+    ) -> ApplicationTrustCollection:
+        """
+
+        :param applicationIdentity:
+        :param versionMatch:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Remove(self, trust: ApplicationTrust) -> None:
+        """
+
+        :param trust:
+        """
     @overload
     def Remove(
         self, applicationIdentity: ApplicationIdentity, versionMatch: ApplicationVersionMatch
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param applicationIdentity:
+        :param versionMatch:
+        """
     @overload
-    def Remove(self, trust: ApplicationTrust) -> VoidType: ...
+    def RemoveRange(self, trusts: ApplicationTrustCollection) -> None:
+        """
+
+        :param trusts:
+        """
     @overload
-    def RemoveRange(self, trusts: ArrayType[ApplicationTrust]) -> VoidType: ...
+    def RemoveRange(self, trusts: Array[ApplicationTrust]) -> None:
+        """
+
+        :param trusts:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def RemoveRange(self, trusts: ApplicationTrustCollection) -> VoidType: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsSynchronized(self) -> BooleanType: ...
+    def __getitem__(self, index: int) -> ApplicationTrust:
+        """
+
+        :param index:
+        :return:
+        """
     @overload
-    def get_Item(self, index: IntType) -> ApplicationTrust: ...
-    @overload
-    def get_Item(self, appFullName: StringType) -> ApplicationTrust: ...
-    def get_SyncRoot(self) -> ObjectType: ...
+    def __getitem__(self, appFullName: str) -> ApplicationTrust:
+        """
 
-    # No Events
+        :param appFullName:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def __len__(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ApplicationTrustEnumerator(ObjectType, IEnumerator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class ApplicationTrustEnumerator(Object, IEnumerator):
+    """"""
 
     @property
-    def Current(self) -> ApplicationTrust: ...
+    def Current(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> ApplicationTrust: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
+class ApplicationVersionMatch(Enum):
+    """"""
 
-class AssemblyEvidenceFactory(ObjectType, IRuntimeEvidenceFactory):
-    # No Fields
+    MatchExactVersion: ApplicationVersionMatch = ...
+    """"""
+    MatchAllVersions: ApplicationVersionMatch = ...
+    """"""
 
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Target(self) -> IEvidenceFactory: ...
-
-    # ---------- Methods ---------- #
-
-    def GenerateEvidence(self, evidenceType: TypeType) -> EvidenceBase: ...
-    def GetFactorySuppliedEvidence(self) -> IEnumerable[EvidenceBase]: ...
-    def get_Target(self) -> IEvidenceFactory: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeConnectAccess(ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def AnyScheme() -> StringType: ...
-    @staticmethod
-    @property
-    def DefaultPort() -> IntType: ...
-    @staticmethod
-    @property
-    def OriginPort() -> IntType: ...
-    @staticmethod
-    @property
-    def OriginScheme() -> StringType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, allowScheme: StringType, allowPort: IntType): ...
-
-    # ---------- Properties ---------- #
+class AssemblyEvidenceFactory(Object, IRuntimeEvidenceFactory):
+    """"""
 
     @property
-    def Port(self) -> IntType: ...
+    def Target(self) -> IEvidenceFactory:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GenerateEvidence(self, evidenceType: Type) -> EvidenceBase:
+        """
+
+        :param evidenceType:
+        :return:
+        """
+    def GetFactorySuppliedEvidence(self) -> IEnumerable[EvidenceBase]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeConnectAccess(Object):
+    """"""
+
+    AnyScheme: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    DefaultPort: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    OriginPort: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    OriginScheme: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, allowScheme: str, allowPort: int):
+        """
+
+        :param allowScheme:
+        :param allowPort:
+        """
     @property
-    def Scheme(self) -> StringType: ...
+    def Port(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Scheme(self) -> str:
+        """
 
-    @staticmethod
-    def CreateAnySchemeAccess(allowPort: IntType) -> CodeConnectAccess: ...
-    @staticmethod
-    def CreateOriginSchemeAccess(allowPort: IntType) -> CodeConnectAccess: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_Port(self) -> IntType: ...
-    def get_Scheme(self) -> StringType: ...
+        :return:
+        """
+    @classmethod
+    def CreateAnySchemeAccess(cls, allowPort: int) -> CodeConnectAccess:
+        """
 
-    # No Events
+        :param allowPort:
+        :return:
+        """
+    @classmethod
+    def CreateOriginSchemeAccess(cls, allowPort: int) -> CodeConnectAccess:
+        """
 
-    # No Sub Classes
+        :param allowPort:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class CodeGroup(ABC, ObjectType):
-    # No Fields
+        :return:
+        """
 
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class CodeGroup(ABC, Object):
+    """"""
 
     @property
-    def AttributeString(self) -> StringType: ...
+    def AttributeString(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Children(self) -> IList: ...
+    def Children(self) -> IList:
+        """
+
+        :return:
+        """
     @Children.setter
     def Children(self, value: IList) -> None: ...
     @property
-    def Description(self) -> StringType: ...
+    def Description(self) -> str:
+        """
+
+        :return:
+        """
     @Description.setter
-    def Description(self, value: StringType) -> None: ...
+    def Description(self, value: str) -> None: ...
     @property
-    def MembershipCondition(self) -> IMembershipCondition: ...
+    def MembershipCondition(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
     @MembershipCondition.setter
     def MembershipCondition(self, value: IMembershipCondition) -> None: ...
     @property
-    def MergeLogic(self) -> StringType: ...
+    def MergeLogic(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
     @property
-    def PermissionSetName(self) -> StringType: ...
+    def PermissionSetName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def PolicyStatement(self) -> PolicyStatement: ...
+    def PolicyStatement(self) -> PolicyStatement:
+        """
+
+        :return:
+        """
     @PolicyStatement.setter
     def PolicyStatement(self, value: PolicyStatement) -> None: ...
+    def AddChild(self, group: CodeGroup) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param group:
+        """
+    def Copy(self) -> CodeGroup:
+        """
 
-    def AddChild(self, group: CodeGroup) -> VoidType: ...
-    def Copy(self) -> CodeGroup: ...
+        :return:
+        """
     @overload
-    def Equals(self, o: ObjectType) -> BooleanType: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def Equals(self, cg: CodeGroup, compareChildren: BooleanType) -> BooleanType: ...
+    def Equals(self, cg: CodeGroup, compareChildren: bool) -> bool:
+        """
+
+        :param cg:
+        :param compareChildren:
+        :return:
+        """
     @overload
-    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> VoidType: ...
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
     @overload
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def RemoveChild(self, group: CodeGroup) -> VoidType: ...
-    def Resolve(self, evidence: Evidence) -> PolicyStatement: ...
-    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup: ...
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
+
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def RemoveChild(self, group: CodeGroup) -> None:
+        """
+
+        :param group:
+        """
+    def Resolve(self, evidence: Evidence) -> PolicyStatement:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self) -> SecurityElement: ...
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
-    def get_AttributeString(self) -> StringType: ...
-    def get_Children(self) -> IList: ...
-    def get_Description(self) -> StringType: ...
-    def get_MembershipCondition(self) -> IMembershipCondition: ...
-    def get_MergeLogic(self) -> StringType: ...
-    def get_Name(self) -> StringType: ...
-    def get_PermissionSetName(self) -> StringType: ...
-    def get_PolicyStatement(self) -> PolicyStatement: ...
-    def set_Children(self, value: IList) -> VoidType: ...
-    def set_Description(self, value: StringType) -> VoidType: ...
-    def set_MembershipCondition(self, value: IMembershipCondition) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_PolicyStatement(self, value: PolicyStatement) -> VoidType: ...
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
 
-    # No Events
+        :param level:
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeGroupPositionMarker(ObjectType):
+class CodeGroupPositionMarker(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeGroupStack(ObjectType):
+class CodeGroupStack(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class CodeGroupStackFrame(Object):
+    """"""
 
-    # No Sub Structs
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class CodeGroupStackFrame(ObjectType):
-    # No Fields
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
 
-    def __init__(self): ...
+class ConfigId(Enum):
+    """"""
 
-    # No Properties
+    _None: ConfigId = ...
+    """"""
+    MachinePolicyLevel: ConfigId = ...
+    """"""
+    UserPolicyLevel: ConfigId = ...
+    """"""
+    EnterprisePolicyLevel: ConfigId = ...
+    """"""
 
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Evidence(ObjectType, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class Evidence(Object, ICollection, IEnumerable):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, evidence: Evidence): ...
-    @overload
-    def __init__(
-        self, hostEvidence: ArrayType[ObjectType], assemblyEvidence: ArrayType[ObjectType]
-    ): ...
-    @overload
-    def __init__(
-        self, hostEvidence: ArrayType[EvidenceBase], assemblyEvidence: ArrayType[EvidenceBase]
-    ): ...
+    def __init__(self, evidence: Evidence):
+        """
 
-    # ---------- Properties ---------- #
+        :param evidence:
+        """
+    @overload
+    def __init__(self, hostEvidence: Array[EvidenceBase], assemblyEvidence: Array[EvidenceBase]):
+        """
 
+        :param hostEvidence:
+        :param assemblyEvidence:
+        """
+    @overload
+    def __init__(self, hostEvidence: Array[object], assemblyEvidence: Array[object]):
+        """
+
+        :param hostEvidence:
+        :param assemblyEvidence:
+        """
     @property
-    def Count(self) -> IntType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsReadOnly(self) -> BooleanType: ...
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsSynchronized(self) -> BooleanType: ...
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Locked(self) -> BooleanType: ...
+    def Locked(self) -> bool:
+        """
+
+        :return:
+        """
     @Locked.setter
-    def Locked(self, value: BooleanType) -> None: ...
+    def Locked(self, value: bool) -> None: ...
     @property
-    def SyncRoot(self) -> ObjectType: ...
+    def SyncRoot(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AddAssembly(self, id: object) -> None:
+        """
 
-    def AddAssembly(self, id: ObjectType) -> VoidType: ...
-    def AddAssemblyEvidence(self, evidence: T) -> VoidType: ...
-    def AddHost(self, id: ObjectType) -> VoidType: ...
-    def AddHostEvidence(self, evidence: T) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Clone(self) -> Evidence: ...
-    def CopyTo(self, array: Array, index: IntType) -> VoidType: ...
-    def GetAssemblyEnumerator(self) -> IEnumerator: ...
-    def GetAssemblyEvidence(self) -> T: ...
-    def GetEnumerator(self) -> IEnumerator: ...
-    def GetHostEnumerator(self) -> IEnumerator: ...
-    def GetHostEvidence(self) -> T: ...
-    def Merge(self, evidence: Evidence) -> VoidType: ...
-    def RemoveType(self, t: TypeType) -> VoidType: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_IsSynchronized(self) -> BooleanType: ...
-    def get_Locked(self) -> BooleanType: ...
-    def get_SyncRoot(self) -> ObjectType: ...
-    def set_Locked(self, value: BooleanType) -> VoidType: ...
+        :param id:
+        """
+    def AddAssemblyEvidence(self, evidence: T) -> None:
+        """
 
-    # No Events
+        :param evidence:
+        """
+    def AddHost(self, id: object) -> None:
+        """
 
-    # No Sub Classes
+        :param id:
+        """
+    def AddHostEvidence(self, evidence: T) -> None:
+        """
 
-    # No Sub Structs
+        :param evidence:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Clone(self) -> Evidence:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Sub Enums
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-class EvidenceBase(ABC, ObjectType):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetAssemblyEnumerator(self) -> IEnumerator:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def GetAssemblyEvidence(self) -> T:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def Clone(self) -> EvidenceBase: ...
+        :return:
+        """
+    def GetHostEnumerator(self) -> IEnumerator:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetHostEvidence(self) -> T:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Merge(self, evidence: Evidence) -> None:
+        """
 
-    # No Sub Interfaces
+        :param evidence:
+        """
+    def RemoveType(self, t: Type) -> None:
+        """
 
-    # No Sub Enums
+        :param t:
+        """
+    def ToString(self) -> str:
+        """
 
-class EvidenceTypeDescriptor(ObjectType):
-    # No Fields
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :param value:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def __len__(self) -> int:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
 
+class EvidenceBase(ABC, Object):
+    """"""
+
+    def Clone(self) -> EvidenceBase:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EvidenceTypeDescriptor(Object):
+    """"""
+
+    def __init__(self):
+        """"""
     @property
-    def AssemblyEvidence(self) -> EvidenceBase: ...
+    def AssemblyEvidence(self) -> EvidenceBase:
+        """
+
+        :return:
+        """
     @AssemblyEvidence.setter
     def AssemblyEvidence(self, value: EvidenceBase) -> None: ...
     @property
-    def Generated(self) -> BooleanType: ...
+    def Generated(self) -> bool:
+        """
+
+        :return:
+        """
     @Generated.setter
-    def Generated(self, value: BooleanType) -> None: ...
+    def Generated(self, value: bool) -> None: ...
     @property
-    def HostCanGenerate(self) -> BooleanType: ...
+    def HostCanGenerate(self) -> bool:
+        """
+
+        :return:
+        """
     @HostCanGenerate.setter
-    def HostCanGenerate(self, value: BooleanType) -> None: ...
+    def HostCanGenerate(self, value: bool) -> None: ...
     @property
-    def HostEvidence(self) -> EvidenceBase: ...
+    def HostEvidence(self) -> EvidenceBase:
+        """
+
+        :return:
+        """
     @HostEvidence.setter
     def HostEvidence(self, value: EvidenceBase) -> None: ...
+    def Clone(self) -> EvidenceTypeDescriptor:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Clone(self) -> EvidenceTypeDescriptor: ...
-    def get_AssemblyEvidence(self) -> EvidenceBase: ...
-    def get_Generated(self) -> BooleanType: ...
-    def get_HostCanGenerate(self) -> BooleanType: ...
-    def get_HostEvidence(self) -> EvidenceBase: ...
-    def set_AssemblyEvidence(self, value: EvidenceBase) -> VoidType: ...
-    def set_Generated(self, value: BooleanType) -> VoidType: ...
-    def set_HostCanGenerate(self, value: BooleanType) -> VoidType: ...
-    def set_HostEvidence(self, value: EvidenceBase) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class EvidenceTypeGenerated(Enum):
+    """"""
 
-    # No Sub Enums
+    AssemblySupplied: EvidenceTypeGenerated = ...
+    """"""
+    Gac: EvidenceTypeGenerated = ...
+    """"""
+    Hash: EvidenceTypeGenerated = ...
+    """"""
+    PermissionRequest: EvidenceTypeGenerated = ...
+    """"""
+    Publisher: EvidenceTypeGenerated = ...
+    """"""
+    Site: EvidenceTypeGenerated = ...
+    """"""
+    StrongName: EvidenceTypeGenerated = ...
+    """"""
+    Url: EvidenceTypeGenerated = ...
+    """"""
+    Zone: EvidenceTypeGenerated = ...
+    """"""
 
 class FileCodeGroup(CodeGroup, IUnionSemanticCodeGroup):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, membershipCondition: IMembershipCondition, access: FileIOPermissionAccess):
+        """
 
-    def __init__(
-        self, membershipCondition: IMembershipCondition, access: FileIOPermissionAccess
-    ): ...
-
-    # ---------- Properties ---------- #
-
+        :param membershipCondition:
+        :param access:
+        """
     @property
-    def AttributeString(self) -> StringType: ...
-    @property
-    def MergeLogic(self) -> StringType: ...
-    @property
-    def PermissionSetName(self) -> StringType: ...
+    def AttributeString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Children(self) -> IList:
+        """
 
-    def Copy(self) -> CodeGroup: ...
+        :return:
+        """
+    @Children.setter
+    def Children(self, value: IList) -> None: ...
+    @property
+    def Description(self) -> str:
+        """
+
+        :return:
+        """
+    @Description.setter
+    def Description(self, value: str) -> None: ...
+    @property
+    def MembershipCondition(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
+    @MembershipCondition.setter
+    def MembershipCondition(self, value: IMembershipCondition) -> None: ...
+    @property
+    def MergeLogic(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def PermissionSetName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def PolicyStatement(self) -> PolicyStatement:
+        """
+
+        :return:
+        """
+    @PolicyStatement.setter
+    def PolicyStatement(self, value: PolicyStatement) -> None: ...
+    def AddChild(self, group: CodeGroup) -> None:
+        """
+
+        :param group:
+        """
+    def Copy(self) -> CodeGroup:
+        """
+
+        :return:
+        """
     @overload
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def Resolve(self, evidence: Evidence) -> PolicyStatement: ...
-    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup: ...
-    def get_AttributeString(self) -> StringType: ...
-    def get_MergeLogic(self) -> StringType: ...
-    def get_PermissionSetName(self) -> StringType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, cg: CodeGroup, compareChildren: bool) -> bool:
+        """
 
-    # No Sub Classes
+        :param cg:
+        :param compareChildren:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Sub Structs
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
 
-    # No Sub Interfaces
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InternalResolve(self, evidence: Evidence) -> PolicyStatement:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def RemoveChild(self, group: CodeGroup) -> None:
+        """
+
+        :param group:
+        """
+    def Resolve(self, evidence: Evidence) -> PolicyStatement:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
 
 class FirstMatchCodeGroup(CodeGroup):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, membershipCondition: IMembershipCondition, policy: PolicyStatement):
+        """
 
-    def __init__(self, membershipCondition: IMembershipCondition, policy: PolicyStatement): ...
-
-    # ---------- Properties ---------- #
-
+        :param membershipCondition:
+        :param policy:
+        """
     @property
-    def MergeLogic(self) -> StringType: ...
+    def AttributeString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Children(self) -> IList:
+        """
 
-    def Copy(self) -> CodeGroup: ...
-    def Resolve(self, evidence: Evidence) -> PolicyStatement: ...
-    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup: ...
-    def get_MergeLogic(self) -> StringType: ...
+        :return:
+        """
+    @Children.setter
+    def Children(self, value: IList) -> None: ...
+    @property
+    def Description(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @Description.setter
+    def Description(self, value: str) -> None: ...
+    @property
+    def MembershipCondition(self) -> IMembershipCondition:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @MembershipCondition.setter
+    def MembershipCondition(self, value: IMembershipCondition) -> None: ...
+    @property
+    def MergeLogic(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def PermissionSetName(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def PolicyStatement(self) -> PolicyStatement:
+        """
+
+        :return:
+        """
+    @PolicyStatement.setter
+    def PolicyStatement(self, value: PolicyStatement) -> None: ...
+    def AddChild(self, group: CodeGroup) -> None:
+        """
+
+        :param group:
+        """
+    def Copy(self) -> CodeGroup:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, cg: CodeGroup, compareChildren: bool) -> bool:
+        """
+
+        :param cg:
+        :param compareChildren:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
+
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def RemoveChild(self, group: CodeGroup) -> None:
+        """
+
+        :param group:
+        """
+    def Resolve(self, evidence: Evidence) -> PolicyStatement:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
 
 class GacInstalled(EvidenceBase, IIdentityPermissionFactory):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    def Clone(self) -> EvidenceBase:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def Copy(self) -> object:
+        """
 
-    # No Properties
+        :return:
+        """
+    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission:
+        """
 
-    # ---------- Methods ---------- #
+        :param evidence:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Clone(self) -> EvidenceBase: ...
-    def Copy(self) -> ObjectType: ...
-    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class GacMembershipCondition(
-    ObjectType,
+    Object,
+    IConstantMembershipCondition,
     IMembershipCondition,
+    IReportMatchMembershipCondition,
     ISecurityEncodable,
     ISecurityPolicyEncodable,
-    IConstantMembershipCondition,
-    IReportMatchMembershipCondition,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Check(self, evidence: Evidence) -> BooleanType: ...
-    def Copy(self) -> IMembershipCondition: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
+    def __init__(self):
+        """"""
     @overload
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
     @overload
-    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
+    def Check(self, evidence: Evidence, usedEvidence: object) -> Tuple[bool, object]:
+        """
+
+        :param evidence:
+        :param usedEvidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self) -> SecurityElement: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Sub Classes
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
 
-    # No Sub Structs
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
 
 class Hash(EvidenceBase, ISerializable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, assembly: Assembly):
+        """
 
-    def __init__(self, assembly: Assembly): ...
-
-    # ---------- Properties ---------- #
-
+        :param assembly:
+        """
     @property
-    def MD5(self) -> ArrayType[ByteType]: ...
+    def MD5(self) -> Array[int]:
+        """
+
+        :return:
+        """
     @property
-    def SHA1(self) -> ArrayType[ByteType]: ...
+    def SHA1(self) -> Array[int]:
+        """
+
+        :return:
+        """
     @property
-    def SHA256(self) -> ArrayType[ByteType]: ...
+    def SHA256(self) -> Array[int]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
 
-    def Clone(self) -> EvidenceBase: ...
-    @staticmethod
-    def CreateMD5(md5: ArrayType[ByteType]) -> Hash: ...
-    @staticmethod
-    def CreateSHA1(sha1: ArrayType[ByteType]) -> Hash: ...
-    @staticmethod
-    def CreateSHA256(sha256: ArrayType[ByteType]) -> Hash: ...
-    def GenerateHash(self, hashAlg: HashAlgorithm) -> ArrayType[ByteType]: ...
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def ToString(self) -> StringType: ...
-    def get_MD5(self) -> ArrayType[ByteType]: ...
-    def get_SHA1(self) -> ArrayType[ByteType]: ...
-    def get_SHA256(self) -> ArrayType[ByteType]: ...
+        :return:
+        """
+    @classmethod
+    def CreateMD5(cls, md5: Array[int]) -> Hash:
+        """
 
-    # No Events
+        :param md5:
+        :return:
+        """
+    @classmethod
+    def CreateSHA1(cls, sha1: Array[int]) -> Hash:
+        """
 
-    # No Sub Classes
+        :param sha1:
+        :return:
+        """
+    @classmethod
+    def CreateSHA256(cls, sha256: Array[int]) -> Hash:
+        """
 
-    # No Sub Structs
+        :param sha256:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GenerateHash(self, hashAlg: HashAlgorithm) -> Array[int]:
+        """
 
-    # No Sub Enums
+        :param hashAlg:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class HashMembershipCondition(
-    ObjectType,
-    ISerializable,
+    Object,
     IDeserializationCallback,
+    ISerializable,
     IMembershipCondition,
+    IReportMatchMembershipCondition,
     ISecurityEncodable,
     ISecurityPolicyEncodable,
-    IReportMatchMembershipCondition,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, hashAlg: HashAlgorithm, value: Array[int]):
+        """
 
-    def __init__(self, hashAlg: HashAlgorithm, value: ArrayType[ByteType]): ...
-
-    # ---------- Properties ---------- #
-
+        :param hashAlg:
+        :param value:
+        """
     @property
-    def HashAlgorithm(self) -> HashAlgorithm: ...
+    def HashAlgorithm(self) -> HashAlgorithm:
+        """
+
+        :return:
+        """
     @HashAlgorithm.setter
     def HashAlgorithm(self, value: HashAlgorithm) -> None: ...
     @property
-    def HashValue(self) -> ArrayType[ByteType]: ...
+    def HashValue(self) -> Array[int]:
+        """
+
+        :return:
+        """
     @HashValue.setter
-    def HashValue(self, value: ArrayType[ByteType]) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Check(self, evidence: Evidence) -> BooleanType: ...
-    def Copy(self) -> IMembershipCondition: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
+    def HashValue(self, value: Array[int]) -> None: ...
     @overload
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
     @overload
-    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
+    def Check(self, evidence: Evidence, usedEvidence: object) -> Tuple[bool, object]:
+        """
+
+        :param evidence:
+        :param usedEvidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self) -> SecurityElement: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
-    def get_HashAlgorithm(self) -> HashAlgorithm: ...
-    def get_HashValue(self) -> ArrayType[ByteType]: ...
-    def set_HashAlgorithm(self, value: HashAlgorithm) -> VoidType: ...
-    def set_HashValue(self, value: ArrayType[ByteType]) -> VoidType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Sub Classes
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
 
-    # No Sub Structs
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-    # No Sub Enums
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def OnDeserialization(self, sender: object) -> None:
+        """
+
+        :param sender:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
+
+class IApplicationTrustManager(ISecurityEncodable):
+    """"""
+
+    def DetermineApplicationTrust(
+        self, activationContext: ActivationContext, context: TrustManagerContext
+    ) -> ApplicationTrust:
+        """
+
+        :param activationContext:
+        :param context:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+
+class IConstantMembershipCondition:
+    """"""
+
+class IDelayEvaluatedEvidence:
+    """"""
+
+    @property
+    def IsVerified(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def WasUsed(self) -> bool:
+        """
+
+        :return:
+        """
+    def MarkUsed(self) -> None:
+        """"""
+
+class IIdentityPermissionFactory:
+    """"""
+
+    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission:
+        """
+
+        :param evidence:
+        :return:
+        """
+
+class ILegacyEvidenceAdapter:
+    """"""
+
+    @property
+    def EvidenceObject(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def EvidenceType(self) -> Type:
+        """
+
+        :return:
+        """
+
+class IMembershipCondition(ISecurityEncodable, ISecurityPolicyEncodable):
+    """"""
+
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
+
+        :param e:
+        :param level:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
+
+class IReportMatchMembershipCondition(
+    IMembershipCondition, ISecurityEncodable, ISecurityPolicyEncodable
+):
+    """"""
+
+    @overload
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
+    @overload
+    def Check(self, evidence: Evidence, usedEvidence: object) -> Tuple[bool, object]:
+        """
+
+        :param evidence:
+        :param usedEvidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
+
+        :param e:
+        :param level:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
+
+class IRuntimeEvidenceFactory:
+    """"""
+
+    @property
+    def Target(self) -> IEvidenceFactory:
+        """
+
+        :return:
+        """
+    def GenerateEvidence(self, evidenceType: Type) -> EvidenceBase:
+        """
+
+        :param evidenceType:
+        :return:
+        """
+    def GetFactorySuppliedEvidence(self) -> IEnumerable[EvidenceBase]:
+        """
+
+        :return:
+        """
+
+class IUnionSemanticCodeGroup:
+    """"""
+
+    def InternalResolve(self, evidence: Evidence) -> PolicyStatement:
+        """
+
+        :param evidence:
+        :return:
+        """
 
 class LegacyEvidenceList(
     EvidenceBase, IEnumerable[EvidenceBase], IEnumerable, ILegacyEvidenceAdapter
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def EvidenceObject(self) -> ObjectType: ...
+    def EvidenceObject(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def EvidenceType(self) -> TypeType: ...
+    def EvidenceType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Add(self, evidence: EvidenceBase) -> None:
+        """
 
-    def Add(self, evidence: EvidenceBase) -> VoidType: ...
-    def Clone(self) -> EvidenceBase: ...
-    def GetEnumerator(self) -> IEnumerator[EvidenceBase]: ...
-    def get_EvidenceObject(self) -> ObjectType: ...
-    def get_EvidenceType(self) -> TypeType: ...
+        :param evidence:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[EvidenceBase]:
+        """
+
+        :return:
+        """
 
 class LegacyEvidenceWrapper(EvidenceBase, ILegacyEvidenceAdapter):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def EvidenceObject(self) -> ObjectType: ...
+    def EvidenceObject(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def EvidenceType(self) -> TypeType: ...
+    def EvidenceType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
 
-    def Clone(self) -> EvidenceBase: ...
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_EvidenceObject(self) -> ObjectType: ...
-    def get_EvidenceType(self) -> TypeType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class NetCodeGroup(CodeGroup, IUnionSemanticCodeGroup):
-    # ---------- Fields ---------- #
+    """"""
 
-    @staticmethod
+    AbsentOriginScheme: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    AnyOtherOriginScheme: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, membershipCondition: IMembershipCondition):
+        """
+
+        :param membershipCondition:
+        """
     @property
-    def AbsentOriginScheme() -> StringType: ...
-    @staticmethod
+    def AttributeString(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def AnyOtherOriginScheme() -> StringType: ...
+    def Children(self) -> IList:
+        """
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self, membershipCondition: IMembershipCondition): ...
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
+    @Children.setter
+    def Children(self, value: IList) -> None: ...
     @property
-    def AttributeString(self) -> StringType: ...
-    @property
-    def MergeLogic(self) -> StringType: ...
-    @property
-    def PermissionSetName(self) -> StringType: ...
+    def Description(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @Description.setter
+    def Description(self, value: str) -> None: ...
+    @property
+    def MembershipCondition(self) -> IMembershipCondition:
+        """
 
-    def AddConnectAccess(
-        self, originScheme: StringType, connectAccess: CodeConnectAccess
-    ) -> VoidType: ...
-    def Copy(self) -> CodeGroup: ...
+        :return:
+        """
+    @MembershipCondition.setter
+    def MembershipCondition(self, value: IMembershipCondition) -> None: ...
+    @property
+    def MergeLogic(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def PermissionSetName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def PolicyStatement(self) -> PolicyStatement:
+        """
+
+        :return:
+        """
+    @PolicyStatement.setter
+    def PolicyStatement(self, value: PolicyStatement) -> None: ...
+    def AddChild(self, group: CodeGroup) -> None:
+        """
+
+        :param group:
+        """
+    def AddConnectAccess(self, originScheme: str, connectAccess: CodeConnectAccess) -> None:
+        """
+
+        :param originScheme:
+        :param connectAccess:
+        """
+    def Copy(self) -> CodeGroup:
+        """
+
+        :return:
+        """
     @overload
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetConnectAccessRules(self) -> ArrayType[DictionaryEntry]: ...
-    def GetHashCode(self) -> IntType: ...
-    def ResetConnectAccess(self) -> VoidType: ...
-    def Resolve(self, evidence: Evidence) -> PolicyStatement: ...
-    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup: ...
-    def get_AttributeString(self) -> StringType: ...
-    def get_MergeLogic(self) -> StringType: ...
-    def get_PermissionSetName(self) -> StringType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, cg: CodeGroup, compareChildren: bool) -> bool:
+        """
 
-    # No Sub Classes
+        :param cg:
+        :param compareChildren:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Sub Structs
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
 
-    # No Sub Interfaces
+        :param e:
+        :param level:
+        """
+    def GetConnectAccessRules(self) -> Array[DictionaryEntry]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class PEFileEvidenceFactory(ObjectType, IRuntimeEvidenceFactory):
-    # No Fields
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def InternalResolve(self, evidence: Evidence) -> PolicyStatement:
+        """
 
-    # ---------- Properties ---------- #
+        :param evidence:
+        :return:
+        """
+    def RemoveChild(self, group: CodeGroup) -> None:
+        """
+
+        :param group:
+        """
+    def ResetConnectAccess(self) -> None:
+        """"""
+    def Resolve(self, evidence: Evidence) -> PolicyStatement:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
+
+class PEFileEvidenceFactory(Object, IRuntimeEvidenceFactory):
+    """"""
 
     @property
-    def Target(self) -> IEvidenceFactory: ...
+    def Target(self) -> IEvidenceFactory:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def GenerateEvidence(self, evidenceType: TypeType) -> EvidenceBase: ...
-    def GetFactorySuppliedEvidence(self) -> IEnumerable[EvidenceBase]: ...
-    def get_Target(self) -> IEvidenceFactory: ...
+        :param obj:
+        :return:
+        """
+    def GenerateEvidence(self, evidenceType: Type) -> EvidenceBase:
+        """
 
-    # No Events
+        :param evidenceType:
+        :return:
+        """
+    def GetFactorySuppliedEvidence(self) -> IEnumerable[EvidenceBase]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class PermissionRequestEvidence(EvidenceBase):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, request: PermissionSet, optional: PermissionSet, denied: PermissionSet):
+        """
 
-    def __init__(self, request: PermissionSet, optional: PermissionSet, denied: PermissionSet): ...
-
-    # ---------- Properties ---------- #
-
+        :param request:
+        :param optional:
+        :param denied:
+        """
     @property
-    def DeniedPermissions(self) -> PermissionSet: ...
+    def DeniedPermissions(self) -> PermissionSet:
+        """
+
+        :return:
+        """
     @property
-    def OptionalPermissions(self) -> PermissionSet: ...
+    def OptionalPermissions(self) -> PermissionSet:
+        """
+
+        :return:
+        """
     @property
-    def RequestedPermissions(self) -> PermissionSet: ...
+    def RequestedPermissions(self) -> PermissionSet:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
 
-    def Clone(self) -> EvidenceBase: ...
-    def Copy(self) -> PermissionRequestEvidence: ...
-    def ToString(self) -> StringType: ...
-    def get_DeniedPermissions(self) -> PermissionSet: ...
-    def get_OptionalPermissions(self) -> PermissionSet: ...
-    def get_RequestedPermissions(self) -> PermissionSet: ...
+        :return:
+        """
+    def Copy(self) -> PermissionRequestEvidence:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class PolicyException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class PolicyException(SystemException, _Exception, ISerializable):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, message: StringType): ...
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
     @overload
-    def __init__(self, message: StringType, exception: Exception): ...
+    def __init__(self, message: str, exception: Exception):
+        """
 
-    # No Properties
+        :param message:
+        :param exception:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
 
-class PolicyLevel(ObjectType):
-    # No Fields
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Properties ---------- #
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PolicyLevel(Object):
+    """"""
 
     @property
-    def FullTrustAssemblies(self) -> IList: ...
+    def FullTrustAssemblies(self) -> IList:
+        """
+
+        :return:
+        """
     @property
-    def Label(self) -> StringType: ...
+    def Label(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def NamedPermissionSets(self) -> IList: ...
+    def NamedPermissionSets(self) -> IList:
+        """
+
+        :return:
+        """
     @property
-    def RootCodeGroup(self) -> CodeGroup: ...
+    def RootCodeGroup(self) -> CodeGroup:
+        """
+
+        :return:
+        """
     @RootCodeGroup.setter
     def RootCodeGroup(self, value: CodeGroup) -> None: ...
     @property
-    def StoreLocation(self) -> StringType: ...
+    def StoreLocation(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Type(self) -> PolicyLevelType: ...
+    def Type(self) -> PolicyLevelType:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def AddFullTrustAssembly(self, sn: StrongName) -> None:
+        """
+
+        :param sn:
+        """
+    @overload
+    def AddFullTrustAssembly(self, snMC: StrongNameMembershipCondition) -> None:
+        """
+
+        :param snMC:
+        """
+    def AddNamedPermissionSet(self, permSet: NamedPermissionSet) -> None:
+        """
+
+        :param permSet:
+        """
+    def ChangeNamedPermissionSet(self, name: str, pSet: PermissionSet) -> NamedPermissionSet:
+        """
+
+        :param name:
+        :param pSet:
+        :return:
+        """
+    @classmethod
+    def CreateAppDomainLevel(cls) -> PolicyLevel:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNamedPermissionSet(self, name: str) -> NamedPermissionSet:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Recover(self) -> None:
+        """"""
+    @overload
+    def RemoveFullTrustAssembly(self, sn: StrongName) -> None:
+        """
+
+        :param sn:
+        """
+    @overload
+    def RemoveFullTrustAssembly(self, snMC: StrongNameMembershipCondition) -> None:
+        """
+
+        :param snMC:
+        """
+    @overload
+    def RemoveNamedPermissionSet(self, permSet: NamedPermissionSet) -> NamedPermissionSet:
+        """
+
+        :param permSet:
+        :return:
+        """
+    @overload
+    def RemoveNamedPermissionSet(self, name: str) -> NamedPermissionSet:
+        """
+
+        :param name:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Resolve(self, evidence: Evidence) -> PolicyStatement:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+
+class PolicyStatement(Object, ISecurityEncodable, ISecurityPolicyEncodable):
+    """"""
 
     @overload
-    def AddFullTrustAssembly(self, sn: StrongName) -> VoidType: ...
+    def __init__(self, permSet: PermissionSet):
+        """
+
+        :param permSet:
+        """
     @overload
-    def AddFullTrustAssembly(self, snMC: StrongNameMembershipCondition) -> VoidType: ...
-    def AddNamedPermissionSet(self, permSet: NamedPermissionSet) -> VoidType: ...
-    def ChangeNamedPermissionSet(
-        self, name: StringType, pSet: PermissionSet
-    ) -> NamedPermissionSet: ...
-    @staticmethod
-    def CreateAppDomainLevel() -> PolicyLevel: ...
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
-    def GetNamedPermissionSet(self, name: StringType) -> NamedPermissionSet: ...
-    def Recover(self) -> VoidType: ...
-    @overload
-    def RemoveFullTrustAssembly(self, sn: StrongName) -> VoidType: ...
-    @overload
-    def RemoveFullTrustAssembly(self, snMC: StrongNameMembershipCondition) -> VoidType: ...
-    @overload
-    def RemoveNamedPermissionSet(self, permSet: NamedPermissionSet) -> NamedPermissionSet: ...
-    @overload
-    def RemoveNamedPermissionSet(self, name: StringType) -> NamedPermissionSet: ...
-    def Reset(self) -> VoidType: ...
-    def Resolve(self, evidence: Evidence) -> PolicyStatement: ...
-    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup: ...
-    def ToXml(self) -> SecurityElement: ...
-    def get_FullTrustAssemblies(self) -> IList: ...
-    def get_Label(self) -> StringType: ...
-    def get_NamedPermissionSets(self) -> IList: ...
-    def get_RootCodeGroup(self) -> CodeGroup: ...
-    def get_StoreLocation(self) -> StringType: ...
-    def get_Type(self) -> PolicyLevelType: ...
-    def set_RootCodeGroup(self, value: CodeGroup) -> VoidType: ...
+    def __init__(self, permSet: PermissionSet, attributes: PolicyStatementAttribute):
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PolicyStatement(ObjectType, ISecurityPolicyEncodable, ISecurityEncodable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, permSet: PermissionSet): ...
-    @overload
-    def __init__(self, permSet: PermissionSet, attributes: PolicyStatementAttribute): ...
-
-    # ---------- Properties ---------- #
-
+        :param permSet:
+        :param attributes:
+        """
     @property
-    def AttributeString(self) -> StringType: ...
+    def AttributeString(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Attributes(self) -> PolicyStatementAttribute: ...
+    def Attributes(self) -> PolicyStatementAttribute:
+        """
+
+        :return:
+        """
     @Attributes.setter
     def Attributes(self, value: PolicyStatementAttribute) -> None: ...
     @property
-    def PermissionSet(self) -> PermissionSet: ...
+    def PermissionSet(self) -> PermissionSet:
+        """
+
+        :return:
+        """
     @PermissionSet.setter
     def PermissionSet(self, value: PermissionSet) -> None: ...
+    def Copy(self) -> PolicyStatement:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Copy(self) -> PolicyStatement: ...
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
+        :param obj:
+        :return:
+        """
     @overload
-    def FromXml(self, et: SecurityElement) -> VoidType: ...
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
     @overload
-    def FromXml(self, et: SecurityElement, level: PolicyLevel) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
+
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self) -> SecurityElement: ...
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
-    def get_AttributeString(self) -> StringType: ...
-    def get_Attributes(self) -> PolicyStatementAttribute: ...
-    def get_PermissionSet(self) -> PermissionSet: ...
-    def set_Attributes(self, value: PolicyStatementAttribute) -> VoidType: ...
-    def set_PermissionSet(self, value: PermissionSet) -> VoidType: ...
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
 
-    # No Events
+        :param level:
+        :return:
+        """
 
-    # No Sub Classes
+class PolicyStatementAttribute(Enum):
+    """"""
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    Nothing: PolicyStatementAttribute = ...
+    """"""
+    Exclusive: PolicyStatementAttribute = ...
+    """"""
+    LevelFinal: PolicyStatementAttribute = ...
+    """"""
+    All: PolicyStatementAttribute = ...
+    """"""
 
 class Publisher(EvidenceBase, IIdentityPermissionFactory):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, cert: X509Certificate):
+        """
 
-    def __init__(self, cert: X509Certificate): ...
-
-    # ---------- Properties ---------- #
-
+        :param cert:
+        """
     @property
-    def Certificate(self) -> X509Certificate: ...
+    def Certificate(self) -> X509Certificate:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
 
-    def Clone(self) -> EvidenceBase: ...
-    def Copy(self) -> ObjectType: ...
-    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_Certificate(self) -> X509Certificate: ...
+        :return:
+        """
+    def Copy(self) -> object:
+        """
 
-    # No Events
+        :return:
+        """
+    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission:
+        """
 
-    # No Sub Classes
+        :param evidence:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class PublisherMembershipCondition(
-    ObjectType,
+    Object,
+    IConstantMembershipCondition,
     IMembershipCondition,
+    IReportMatchMembershipCondition,
     ISecurityEncodable,
     ISecurityPolicyEncodable,
-    IConstantMembershipCondition,
-    IReportMatchMembershipCondition,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, certificate: X509Certificate):
+        """
 
-    def __init__(self, certificate: X509Certificate): ...
-
-    # ---------- Properties ---------- #
-
+        :param certificate:
+        """
     @property
-    def Certificate(self) -> X509Certificate: ...
+    def Certificate(self) -> X509Certificate:
+        """
+
+        :return:
+        """
     @Certificate.setter
     def Certificate(self, value: X509Certificate) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Check(self, evidence: Evidence) -> BooleanType: ...
-    def Copy(self) -> IMembershipCondition: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
     @overload
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
     @overload
-    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
+    def Check(self, evidence: Evidence, usedEvidence: object) -> Tuple[bool, object]:
+        """
+
+        :param evidence:
+        :param usedEvidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self) -> SecurityElement: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
-    def get_Certificate(self) -> X509Certificate: ...
-    def set_Certificate(self, value: X509Certificate) -> VoidType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Sub Classes
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
 
-    # No Sub Structs
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
 
 class Site(EvidenceBase, IIdentityPermissionFactory):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, name: str):
+        """
 
-    def __init__(self, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param name:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
 
-    def Clone(self) -> EvidenceBase: ...
-    def Copy(self) -> ObjectType: ...
-    @staticmethod
-    def CreateFromUrl(url: StringType) -> Site: ...
-    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_Name(self) -> StringType: ...
+        :return:
+        """
+    def Copy(self) -> object:
+        """
 
-    # No Events
+        :return:
+        """
+    @classmethod
+    def CreateFromUrl(cls, url: str) -> Site:
+        """
 
-    # No Sub Classes
+        :param url:
+        :return:
+        """
+    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission:
+        """
 
-    # No Sub Structs
+        :param evidence:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SiteMembershipCondition(
-    ObjectType,
+    Object,
+    IConstantMembershipCondition,
     IMembershipCondition,
+    IReportMatchMembershipCondition,
     ISecurityEncodable,
     ISecurityPolicyEncodable,
-    IConstantMembershipCondition,
-    IReportMatchMembershipCondition,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, site: str):
+        """
 
-    def __init__(self, site: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param site:
+        """
     @property
-    def Site(self) -> StringType: ...
+    def Site(self) -> str:
+        """
+
+        :return:
+        """
     @Site.setter
-    def Site(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Check(self, evidence: Evidence) -> BooleanType: ...
-    def Copy(self) -> IMembershipCondition: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
+    def Site(self, value: str) -> None: ...
     @overload
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
     @overload
-    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
+    def Check(self, evidence: Evidence, usedEvidence: object) -> Tuple[bool, object]:
+        """
+
+        :param evidence:
+        :param usedEvidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self) -> SecurityElement: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
-    def get_Site(self) -> StringType: ...
-    def set_Site(self, value: StringType) -> VoidType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Sub Classes
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
 
-    # No Sub Structs
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-class StrongName(EvidenceBase, IIdentityPermissionFactory, IDelayEvaluatedEvidence):
-    # No Fields
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
 
-    def __init__(self, blob: StrongNamePublicKeyBlob, name: StringType, version: Version): ...
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
 
-    # ---------- Properties ---------- #
+        :param level:
+        :return:
+        """
 
+class StrongName(EvidenceBase, IDelayEvaluatedEvidence, IIdentityPermissionFactory):
+    """"""
+
+    def __init__(self, blob: StrongNamePublicKeyBlob, name: str, version: Version):
+        """
+
+        :param blob:
+        :param name:
+        :param version:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def IsVerified(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def PublicKey(self) -> StrongNamePublicKeyBlob: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Version(self) -> Version: ...
+    def PublicKey(self) -> StrongNamePublicKeyBlob:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Version(self) -> Version:
+        """
 
-    def Clone(self) -> EvidenceBase: ...
-    def Copy(self) -> ObjectType: ...
-    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_Name(self) -> StringType: ...
-    def get_PublicKey(self) -> StrongNamePublicKeyBlob: ...
-    def get_Version(self) -> Version: ...
+        :return:
+        """
+    @property
+    def WasUsed(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Copy(self) -> object:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission:
+        """
 
-    # No Sub Interfaces
+        :param evidence:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MarkUsed(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class StrongNameMembershipCondition(
-    ObjectType,
+    Object,
+    IConstantMembershipCondition,
     IMembershipCondition,
+    IReportMatchMembershipCondition,
     ISecurityEncodable,
     ISecurityPolicyEncodable,
-    IConstantMembershipCondition,
-    IReportMatchMembershipCondition,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, blob: StrongNamePublicKeyBlob, name: str, version: Version):
+        """
 
-    def __init__(self, blob: StrongNamePublicKeyBlob, name: StringType, version: Version): ...
-
-    # ---------- Properties ---------- #
-
+        :param blob:
+        :param name:
+        :param version:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
     @property
-    def PublicKey(self) -> StrongNamePublicKeyBlob: ...
+    def PublicKey(self) -> StrongNamePublicKeyBlob:
+        """
+
+        :return:
+        """
     @PublicKey.setter
     def PublicKey(self, value: StrongNamePublicKeyBlob) -> None: ...
     @property
-    def Version(self) -> Version: ...
+    def Version(self) -> Version:
+        """
+
+        :return:
+        """
     @Version.setter
     def Version(self, value: Version) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Check(self, evidence: Evidence) -> BooleanType: ...
-    def Copy(self) -> IMembershipCondition: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
     @overload
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
     @overload
-    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
+    def Check(self, evidence: Evidence, usedEvidence: object) -> Tuple[bool, object]:
+        """
+
+        :param evidence:
+        :param usedEvidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
     @overload
-    def ToXml(self) -> SecurityElement: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
-    def get_Name(self) -> StringType: ...
-    def get_PublicKey(self) -> StrongNamePublicKeyBlob: ...
-    def get_Version(self) -> Version: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_PublicKey(self, value: StrongNamePublicKeyBlob) -> VoidType: ...
-    def set_Version(self, value: Version) -> VoidType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Sub Classes
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
 
-    # No Sub Structs
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-class TrustManagerContext(ObjectType):
-    # No Fields
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
+
+class TrustManagerContext(Object):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, uiContext: TrustManagerUIContext): ...
+    def __init__(self, uiContext: TrustManagerUIContext):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param uiContext:
+        """
     @property
-    def IgnorePersistedDecision(self) -> BooleanType: ...
+    def IgnorePersistedDecision(self) -> bool:
+        """
+
+        :return:
+        """
     @IgnorePersistedDecision.setter
-    def IgnorePersistedDecision(self, value: BooleanType) -> None: ...
+    def IgnorePersistedDecision(self, value: bool) -> None: ...
     @property
-    def KeepAlive(self) -> BooleanType: ...
+    def KeepAlive(self) -> bool:
+        """
+
+        :return:
+        """
     @KeepAlive.setter
-    def KeepAlive(self, value: BooleanType) -> None: ...
+    def KeepAlive(self, value: bool) -> None: ...
     @property
-    def NoPrompt(self) -> BooleanType: ...
+    def NoPrompt(self) -> bool:
+        """
+
+        :return:
+        """
     @NoPrompt.setter
-    def NoPrompt(self, value: BooleanType) -> None: ...
+    def NoPrompt(self, value: bool) -> None: ...
     @property
-    def Persist(self) -> BooleanType: ...
+    def Persist(self) -> bool:
+        """
+
+        :return:
+        """
     @Persist.setter
-    def Persist(self, value: BooleanType) -> None: ...
+    def Persist(self, value: bool) -> None: ...
     @property
-    def PreviousApplicationIdentity(self) -> ApplicationIdentity: ...
+    def PreviousApplicationIdentity(self) -> ApplicationIdentity:
+        """
+
+        :return:
+        """
     @PreviousApplicationIdentity.setter
     def PreviousApplicationIdentity(self, value: ApplicationIdentity) -> None: ...
     @property
-    def UIContext(self) -> TrustManagerUIContext: ...
+    def UIContext(self) -> TrustManagerUIContext:
+        """
+
+        :return:
+        """
     @UIContext.setter
     def UIContext(self, value: TrustManagerUIContext) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_IgnorePersistedDecision(self) -> BooleanType: ...
-    def get_KeepAlive(self) -> BooleanType: ...
-    def get_NoPrompt(self) -> BooleanType: ...
-    def get_Persist(self) -> BooleanType: ...
-    def get_PreviousApplicationIdentity(self) -> ApplicationIdentity: ...
-    def get_UIContext(self) -> TrustManagerUIContext: ...
-    def set_IgnorePersistedDecision(self, value: BooleanType) -> VoidType: ...
-    def set_KeepAlive(self, value: BooleanType) -> VoidType: ...
-    def set_NoPrompt(self, value: BooleanType) -> VoidType: ...
-    def set_Persist(self, value: BooleanType) -> VoidType: ...
-    def set_PreviousApplicationIdentity(self, value: ApplicationIdentity) -> VoidType: ...
-    def set_UIContext(self, value: TrustManagerUIContext) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UnionCodeGroup(CodeGroup, IUnionSemanticCodeGroup):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, membershipCondition: IMembershipCondition, policy: PolicyStatement): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def MergeLogic(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Copy(self) -> CodeGroup: ...
-    def Resolve(self, evidence: Evidence) -> PolicyStatement: ...
-    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup: ...
-    def get_MergeLogic(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Url(EvidenceBase, IIdentityPermissionFactory):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Clone(self) -> EvidenceBase: ...
-    def Copy(self) -> ObjectType: ...
-    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UrlMembershipCondition(
-    ObjectType,
-    IMembershipCondition,
-    ISecurityEncodable,
-    ISecurityPolicyEncodable,
-    IConstantMembershipCondition,
-    IReportMatchMembershipCondition,
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, url: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Url(self) -> StringType: ...
-    @Url.setter
-    def Url(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Check(self, evidence: Evidence) -> BooleanType: ...
-    def Copy(self) -> IMembershipCondition: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    @overload
-    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> VoidType: ...
-    @overload
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    @overload
-    def ToXml(self) -> SecurityElement: ...
-    @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
-    def get_Url(self) -> StringType: ...
-    def set_Url(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Zone(EvidenceBase, IIdentityPermissionFactory):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, zone: SecurityZone): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def SecurityZone(self) -> SecurityZone: ...
-
-    # ---------- Methods ---------- #
-
-    def Clone(self) -> EvidenceBase: ...
-    def Copy(self) -> ObjectType: ...
-    @staticmethod
-    def CreateFromUrl(url: StringType) -> Zone: ...
-    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_SecurityZone(self) -> SecurityZone: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ZoneMembershipCondition(
-    ObjectType,
-    IMembershipCondition,
-    ISecurityEncodable,
-    ISecurityPolicyEncodable,
-    IConstantMembershipCondition,
-    IReportMatchMembershipCondition,
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, zone: SecurityZone): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def SecurityZone(self) -> SecurityZone: ...
-    @SecurityZone.setter
-    def SecurityZone(self, value: SecurityZone) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Check(self, evidence: Evidence) -> BooleanType: ...
-    def Copy(self) -> IMembershipCondition: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    @overload
-    def FromXml(self, e: SecurityElement) -> VoidType: ...
-    @overload
-    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    @overload
-    def ToXml(self) -> SecurityElement: ...
-    @overload
-    def ToXml(self, level: PolicyLevel) -> SecurityElement: ...
-    def get_SecurityZone(self) -> SecurityZone: ...
-    def set_SecurityZone(self, value: SecurityZone) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IApplicationTrustManager(Protocol, ISecurityEncodable):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def DetermineApplicationTrust(
-        self, activationContext: ActivationContext, context: TrustManagerContext
-    ) -> ApplicationTrust: ...
-
-    # No Events
-
-class IConstantMembershipCondition(Protocol):
-    """"""
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-class IDelayEvaluatedEvidence(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def IsVerified(self) -> BooleanType: ...
-    @property
-    def WasUsed(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def MarkUsed(self) -> VoidType: ...
-    def get_IsVerified(self) -> BooleanType: ...
-    def get_WasUsed(self) -> BooleanType: ...
-
-    # No Events
-
-class IIdentityPermissionFactory(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission: ...
-
-    # No Events
-
-class ILegacyEvidenceAdapter(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def EvidenceObject(self) -> ObjectType: ...
-    @property
-    def EvidenceType(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_EvidenceObject(self) -> ObjectType: ...
-    def get_EvidenceType(self) -> TypeType: ...
-
-    # No Events
-
-class IMembershipCondition(Protocol, ISecurityEncodable, ISecurityPolicyEncodable):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Check(self, evidence: Evidence) -> BooleanType: ...
-    def Copy(self) -> IMembershipCondition: ...
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def ToString(self) -> StringType: ...
-
-    # No Events
-
-class IReportMatchMembershipCondition(
-    Protocol, IMembershipCondition, ISecurityEncodable, ISecurityPolicyEncodable
-):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Check(
-        self, evidence: Evidence, usedEvidence: ObjectType
-    ) -> Tuple[BooleanType, ObjectType]: ...
-
-    # No Events
-
-class IRuntimeEvidenceFactory(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def Target(self) -> IEvidenceFactory: ...
-
-    # ---------- Methods ---------- #
-
-    def GenerateEvidence(self, evidenceType: TypeType) -> EvidenceBase: ...
-    def GetFactorySuppliedEvidence(self) -> IEnumerable[EvidenceBase]: ...
-    def get_Target(self) -> IEvidenceFactory: ...
-
-    # No Events
-
-class IUnionSemanticCodeGroup(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def InternalResolve(self, evidence: Evidence) -> PolicyStatement: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class ApplicationVersionMatch(Enum):
-    MatchExactVersion = 0
-    MatchAllVersions = 1
-
-class ConfigId(Enum):
-    # None = 0
-    MachinePolicyLevel = 1
-    UserPolicyLevel = 2
-    EnterprisePolicyLevel = 3
-
-class EvidenceTypeGenerated(Enum):
-    AssemblySupplied = 0
-    Gac = 1
-    Hash = 2
-    PermissionRequest = 3
-    Publisher = 4
-    Site = 5
-    StrongName = 6
-    Url = 7
-    Zone = 8
-
-class PolicyStatementAttribute(Enum):
-    Nothing = 0
-    Exclusive = 1
-    LevelFinal = 2
-    All = 3
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class TrustManagerUIContext(Enum):
-    Install = 0
-    Upgrade = 1
-    Run = 2
+    """"""
 
-# No Delegates
+    Install: TrustManagerUIContext = ...
+    """"""
+    Upgrade: TrustManagerUIContext = ...
+    """"""
+    Run: TrustManagerUIContext = ...
+    """"""
 
-__all__ = [
-    AllMembershipCondition,
-    AppDomainEvidenceFactory,
-    ApplicationDirectory,
-    ApplicationDirectoryMembershipCondition,
-    ApplicationSecurityInfo,
-    ApplicationSecurityManager,
-    ApplicationTrust,
-    ApplicationTrustCollection,
-    ApplicationTrustEnumerator,
-    AssemblyEvidenceFactory,
-    CodeConnectAccess,
-    CodeGroup,
-    CodeGroupPositionMarker,
-    CodeGroupStack,
-    CodeGroupStackFrame,
-    Evidence,
-    EvidenceBase,
-    EvidenceTypeDescriptor,
-    FileCodeGroup,
-    FirstMatchCodeGroup,
-    GacInstalled,
-    GacMembershipCondition,
-    Hash,
-    HashMembershipCondition,
-    LegacyEvidenceList,
-    LegacyEvidenceWrapper,
-    NetCodeGroup,
-    PEFileEvidenceFactory,
-    PermissionRequestEvidence,
-    PolicyException,
-    PolicyLevel,
-    PolicyStatement,
-    Publisher,
-    PublisherMembershipCondition,
-    Site,
-    SiteMembershipCondition,
-    StrongName,
-    StrongNameMembershipCondition,
-    TrustManagerContext,
-    UnionCodeGroup,
-    Url,
-    UrlMembershipCondition,
-    Zone,
-    ZoneMembershipCondition,
-    IApplicationTrustManager,
+class UnionCodeGroup(CodeGroup, IUnionSemanticCodeGroup):
+    """"""
+
+    def __init__(self, membershipCondition: IMembershipCondition, policy: PolicyStatement):
+        """
+
+        :param membershipCondition:
+        :param policy:
+        """
+    @property
+    def AttributeString(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Children(self) -> IList:
+        """
+
+        :return:
+        """
+    @Children.setter
+    def Children(self, value: IList) -> None: ...
+    @property
+    def Description(self) -> str:
+        """
+
+        :return:
+        """
+    @Description.setter
+    def Description(self, value: str) -> None: ...
+    @property
+    def MembershipCondition(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
+    @MembershipCondition.setter
+    def MembershipCondition(self, value: IMembershipCondition) -> None: ...
+    @property
+    def MergeLogic(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def PermissionSetName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def PolicyStatement(self) -> PolicyStatement:
+        """
+
+        :return:
+        """
+    @PolicyStatement.setter
+    def PolicyStatement(self, value: PolicyStatement) -> None: ...
+    def AddChild(self, group: CodeGroup) -> None:
+        """
+
+        :param group:
+        """
+    def Copy(self) -> CodeGroup:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, cg: CodeGroup, compareChildren: bool) -> bool:
+        """
+
+        :param cg:
+        :param compareChildren:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
+
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InternalResolve(self, evidence: Evidence) -> PolicyStatement:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def RemoveChild(self, group: CodeGroup) -> None:
+        """
+
+        :param group:
+        """
+    def Resolve(self, evidence: Evidence) -> PolicyStatement:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ResolveMatchingCodeGroups(self, evidence: Evidence) -> CodeGroup:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
+
+class Url(EvidenceBase, IIdentityPermissionFactory):
+    """"""
+
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
+
+        :return:
+        """
+    def Copy(self) -> object:
+        """
+
+        :return:
+        """
+    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class UrlMembershipCondition(
+    Object,
     IConstantMembershipCondition,
-    IDelayEvaluatedEvidence,
-    IIdentityPermissionFactory,
-    ILegacyEvidenceAdapter,
     IMembershipCondition,
     IReportMatchMembershipCondition,
-    IRuntimeEvidenceFactory,
-    IUnionSemanticCodeGroup,
-    ApplicationVersionMatch,
-    ConfigId,
-    EvidenceTypeGenerated,
-    PolicyStatementAttribute,
-    TrustManagerUIContext,
-]
+    ISecurityEncodable,
+    ISecurityPolicyEncodable,
+):
+    """"""
+
+    def __init__(self, url: str):
+        """
+
+        :param url:
+        """
+    @property
+    def Url(self) -> str:
+        """
+
+        :return:
+        """
+    @Url.setter
+    def Url(self, value: str) -> None: ...
+    @overload
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
+    @overload
+    def Check(self, evidence: Evidence, usedEvidence: object) -> Tuple[bool, object]:
+        """
+
+        :param evidence:
+        :param usedEvidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
+
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """
+
+class Zone(EvidenceBase, IIdentityPermissionFactory):
+    """"""
+
+    def __init__(self, zone: SecurityZone):
+        """
+
+        :param zone:
+        """
+    @property
+    def SecurityZone(self) -> SecurityZone:
+        """
+
+        :return:
+        """
+    def Clone(self) -> EvidenceBase:
+        """
+
+        :return:
+        """
+    def Copy(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    def CreateFromUrl(cls, url: str) -> Zone:
+        """
+
+        :param url:
+        :return:
+        """
+    def CreateIdentityPermission(self, evidence: Evidence) -> IPermission:
+        """
+
+        :param evidence:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ZoneMembershipCondition(
+    Object,
+    IConstantMembershipCondition,
+    IMembershipCondition,
+    IReportMatchMembershipCondition,
+    ISecurityEncodable,
+    ISecurityPolicyEncodable,
+):
+    """"""
+
+    def __init__(self, zone: SecurityZone):
+        """
+
+        :param zone:
+        """
+    @property
+    def SecurityZone(self) -> SecurityZone:
+        """
+
+        :return:
+        """
+    @SecurityZone.setter
+    def SecurityZone(self, value: SecurityZone) -> None: ...
+    @overload
+    def Check(self, evidence: Evidence) -> bool:
+        """
+
+        :param evidence:
+        :return:
+        """
+    @overload
+    def Check(self, evidence: Evidence, usedEvidence: object) -> Tuple[bool, object]:
+        """
+
+        :param evidence:
+        :param usedEvidence:
+        :return:
+        """
+    def Copy(self) -> IMembershipCondition:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    @overload
+    def FromXml(self, e: SecurityElement, level: PolicyLevel) -> None:
+        """
+
+        :param e:
+        :param level:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    @overload
+    def ToXml(self, level: PolicyLevel) -> SecurityElement:
+        """
+
+        :param level:
+        :return:
+        """

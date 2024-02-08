@@ -2,12 +2,11 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Callable
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import List
-from typing import Protocol
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeWaitHandle
@@ -15,46 +14,43 @@ from System import Action
 from System import AppDomain
 from System import ApplicationException
 from System import Array
-from System import AsyncCallback
-from System import Boolean
-from System import Byte
-from System import Double
 from System import Enum
 from System import EventArgs
+from System import EventHandler
 from System import Exception
 from System import Func
+from System import Guid
 from System import IAsyncResult
-from System import ICloneable
 from System import IDisposable
 from System import IEquatable
-from System import Int16
-from System import Int32
-from System import Int64
 from System import IntPtr
 from System import LocalDataStoreSlot
 from System import MarshalByRefObject
-from System import MulticastDelegate
 from System import Object
 from System import Random
-from System import SByte
-from System import Single
-from System import String
 from System import SystemException
 from System import TimeSpan
-from System import UInt16
-from System import UInt32
-from System import UInt64
+from System import Type
 from System import UIntPtr
 from System import ValueType
-from System import Void
+from System.Collections import IDictionary
 from System.Collections.Generic import IList
 from System.Collections.Generic import List
+from System.Diagnostics.Tracing import EventChannel
+from System.Diagnostics.Tracing import EventCommandEventArgs
+from System.Diagnostics.Tracing import EventKeywords
+from System.Diagnostics.Tracing import EventLevel
 from System.Diagnostics.Tracing import EventSource
+from System.Diagnostics.Tracing import EventSourceOptions
+from System.Diagnostics.Tracing import EventSourceSettings
+from System.Diagnostics.Tracing import T
 from System.Globalization import CultureInfo
+from System.Reflection import MethodBase
 from System.Runtime.ConstrainedExecution import CriticalFinalizerObject
 from System.Runtime.InteropServices import SafeHandle
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.InteropServices import _Thread
+from System.Runtime.Remoting import ObjRef
 from System.Runtime.Remoting.Contexts import Context
 from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
@@ -67,4121 +63,8432 @@ from System.Security.AccessControl import SemaphoreRights
 from System.Security.AccessControl import SemaphoreSecurity
 from System.Security.Principal import IPrincipal
 from System.Threading.Tasks import Task
-
-# ---------- Types ---------- #
+from System.Threading.ThreadPoolWorkQueue import WorkStealingQueue
 
 T = TypeVar("T")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-DoubleType = Union[float, Double]
-FloatType = Union[float, Single]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-NUIntType = Union[int, UIntPtr]
-ObjectType = Object
-SByteType = Union[int, SByte]
-ShortType = Union[int, Int16]
-StringType = Union[str, String]
-UIntType = Union[int, UInt32]
-ULongType = Union[int, UInt64]
-UShortType = Union[int, UInt16]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class AbandonedMutexException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, inner: Exception): ...
-    @overload
-    def __init__(self, location: IntType, handle: WaitHandle): ...
-    @overload
-    def __init__(self, message: StringType, location: IntType, handle: WaitHandle): ...
-    @overload
-    def __init__(
-        self, message: StringType, inner: Exception, location: IntType, handle: WaitHandle
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Mutex(self) -> Mutex: ...
-    @property
-    def MutexIndex(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Mutex(self) -> Mutex: ...
-    def get_MutexIndex(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AsyncLocal(Generic[T], ObjectType, IAsyncLocal):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, valueChangedHandler: Action[AsyncLocalValueChangedArgs[T]]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> T: ...
-    @Value.setter
-    def Value(self, value: T) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Value(self) -> T: ...
-    def set_Value(self, value: T) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AsyncLocalValueMap(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def Empty() -> IAsyncLocalValueMap: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Create(
-        key: IAsyncLocal, value: ObjectType, treatNullValueAsNonexistent: BooleanType
-    ) -> IAsyncLocalValueMap: ...
-    @staticmethod
-    def IsEmpty(asyncLocalValueMap: IAsyncLocalValueMap) -> BooleanType: ...
-    @staticmethod
-    def get_Empty() -> IAsyncLocalValueMap: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AutoResetEvent(EventWaitHandle, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, initialState: BooleanType): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Barrier(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, participantCount: IntType): ...
-    @overload
-    def __init__(self, participantCount: IntType, postPhaseAction: Action[Barrier]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CurrentPhaseNumber(self) -> LongType: ...
-    @property
-    def ParticipantCount(self) -> IntType: ...
-    @property
-    def ParticipantsRemaining(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def AddParticipant(self) -> LongType: ...
-    def AddParticipants(self, participantCount: IntType) -> LongType: ...
-    def Dispose(self) -> VoidType: ...
-    def RemoveParticipant(self) -> VoidType: ...
-    def RemoveParticipants(self, participantCount: IntType) -> VoidType: ...
-    @overload
-    def SignalAndWait(self) -> VoidType: ...
-    @overload
-    def SignalAndWait(self, cancellationToken: CancellationToken) -> VoidType: ...
-    @overload
-    def SignalAndWait(self, timeout: TimeSpan) -> BooleanType: ...
-    @overload
-    def SignalAndWait(
-        self, timeout: TimeSpan, cancellationToken: CancellationToken
-    ) -> BooleanType: ...
-    @overload
-    def SignalAndWait(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    @overload
-    def SignalAndWait(
-        self, millisecondsTimeout: IntType, cancellationToken: CancellationToken
-    ) -> BooleanType: ...
-    def get_CurrentPhaseNumber(self) -> LongType: ...
-    def get_ParticipantCount(self) -> IntType: ...
-    def get_ParticipantsRemaining(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BarrierPostPhaseException(Exception, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, innerException: Exception): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CancellationCallbackInfo(ObjectType):
+class EventType(Generic[T]):
+    def __iadd__(self, other: T): ...
+    def __isub__(self, other: T): ...
+
+class AbandonedMutexException(SystemException, _Exception, ISerializable):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CancellationTokenSource(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, delay: TimeSpan): ...
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
     @overload
-    def __init__(self, millisecondsDelay: IntType): ...
+    def __init__(self, location: int, handle: WaitHandle):
+        """
 
-    # ---------- Properties ---------- #
+        :param location:
+        :param handle:
+        """
+    @overload
+    def __init__(self, message: str, inner: Exception):
+        """
 
+        :param message:
+        :param inner:
+        """
+    @overload
+    def __init__(self, message: str, location: int, handle: WaitHandle):
+        """
+
+        :param message:
+        :param location:
+        :param handle:
+        """
+    @overload
+    def __init__(self, message: str, inner: Exception, location: int, handle: WaitHandle):
+        """
+
+        :param message:
+        :param inner:
+        :param location:
+        :param handle:
+        """
     @property
-    def IsCancellationRequested(self) -> BooleanType: ...
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
     @property
-    def Token(self) -> CancellationToken: ...
+    def HResult(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
-
-    @overload
-    def Cancel(self, throwOnFirstException: BooleanType) -> VoidType: ...
-    @overload
-    def Cancel(self) -> VoidType: ...
-    @overload
-    def CancelAfter(self, delay: TimeSpan) -> VoidType: ...
-    @overload
-    def CancelAfter(self, millisecondsDelay: IntType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def CreateLinkedTokenSource(
-        token1: CancellationToken, token2: CancellationToken
-    ) -> CancellationTokenSource: ...
-    @staticmethod
-    @overload
-    def CreateLinkedTokenSource(
-        tokens: ArrayType[CancellationToken],
-    ) -> CancellationTokenSource: ...
-    def Dispose(self) -> VoidType: ...
-    def get_IsCancellationRequested(self) -> BooleanType: ...
-    def get_Token(self) -> CancellationToken: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CdsSyncEtwBCLProvider(EventSource, IDisposable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
+        :return:
+        """
     @property
-    def Log() -> CdsSyncEtwBCLProvider: ...
-    @staticmethod
-    @Log.setter
-    def Log(value: CdsSyncEtwBCLProvider) -> None: ...
+    def HelpLink(self) -> str:
+        """
 
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Barrier_PhaseFinished(self, currentSense: BooleanType, phaseNum: LongType) -> VoidType: ...
-    def SpinLock_FastPathFailed(self, ownerID: IntType) -> VoidType: ...
-    def SpinWait_NextSpinWillYield(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CompressedStack(ObjectType, ISerializable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Capture() -> CompressedStack: ...
-    def CreateCopy(self) -> CompressedStack: ...
-    @staticmethod
-    def GetCompressedStack() -> CompressedStack: ...
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    @staticmethod
-    def Run(
-        compressedStack: CompressedStack, callback: ContextCallback, state: ObjectType
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ContextCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, state: ObjectType, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, state: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CountdownEvent(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, initialCount: IntType): ...
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
     @property
-    def CurrentCount(self) -> IntType: ...
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
     @property
-    def InitialCount(self) -> IntType: ...
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def IsSet(self) -> BooleanType: ...
+    def Mutex(self) -> Mutex:
+        """
+
+        :return:
+        """
     @property
-    def WaitHandle(self) -> WaitHandle: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def AddCount(self) -> VoidType: ...
-    @overload
-    def AddCount(self, signalCount: IntType) -> VoidType: ...
-    def Dispose(self) -> VoidType: ...
-    @overload
-    def Reset(self) -> VoidType: ...
-    @overload
-    def Reset(self, count: IntType) -> VoidType: ...
-    @overload
-    def Signal(self) -> BooleanType: ...
-    @overload
-    def Signal(self, signalCount: IntType) -> BooleanType: ...
-    @overload
-    def TryAddCount(self) -> BooleanType: ...
-    @overload
-    def TryAddCount(self, signalCount: IntType) -> BooleanType: ...
-    @overload
-    def Wait(self) -> VoidType: ...
-    @overload
-    def Wait(self, cancellationToken: CancellationToken) -> VoidType: ...
-    @overload
-    def Wait(self, timeout: TimeSpan) -> BooleanType: ...
-    @overload
-    def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> BooleanType: ...
-    @overload
-    def Wait(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    @overload
-    def Wait(
-        self, millisecondsTimeout: IntType, cancellationToken: CancellationToken
-    ) -> BooleanType: ...
-    def get_CurrentCount(self) -> IntType: ...
-    def get_InitialCount(self) -> IntType: ...
-    def get_IsSet(self) -> BooleanType: ...
-    def get_WaitHandle(self) -> WaitHandle: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DomainCompressedStack(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventWaitHandle(WaitHandle, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, initialState: BooleanType, mode: EventResetMode): ...
-    @overload
-    def __init__(self, initialState: BooleanType, mode: EventResetMode, name: StringType): ...
-    @overload
-    def __init__(
-        self,
-        initialState: BooleanType,
-        mode: EventResetMode,
-        name: StringType,
-        createdNew: BooleanType,
-    ): ...
-    @overload
-    def __init__(
-        self,
-        initialState: BooleanType,
-        mode: EventResetMode,
-        name: StringType,
-        createdNew: BooleanType,
-        eventSecurity: EventWaitHandleSecurity,
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetAccessControl(self) -> EventWaitHandleSecurity: ...
-    @staticmethod
-    @overload
-    def OpenExisting(name: StringType) -> EventWaitHandle: ...
-    @staticmethod
-    @overload
-    def OpenExisting(name: StringType, rights: EventWaitHandleRights) -> EventWaitHandle: ...
-    def Reset(self) -> BooleanType: ...
-    def Set(self) -> BooleanType: ...
-    def SetAccessControl(self, eventSecurity: EventWaitHandleSecurity) -> VoidType: ...
-    @staticmethod
-    @overload
-    def TryOpenExisting(
-        name: StringType, result: EventWaitHandle
-    ) -> Tuple[BooleanType, EventWaitHandle]: ...
-    @staticmethod
-    @overload
-    def TryOpenExisting(
-        name: StringType, rights: EventWaitHandleRights, result: EventWaitHandle
-    ) -> Tuple[BooleanType, EventWaitHandle]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ExecutionContext(ObjectType, IDisposable, ISerializable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Capture() -> ExecutionContext: ...
-    def CreateCopy(self) -> ExecutionContext: ...
-    def Dispose(self) -> VoidType: ...
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    @staticmethod
-    def IsFlowSuppressed() -> BooleanType: ...
-    @staticmethod
-    def RestoreFlow() -> VoidType: ...
-    @staticmethod
-    def Run(
-        executionContext: ExecutionContext, callback: ContextCallback, state: ObjectType
-    ) -> VoidType: ...
-    @staticmethod
-    def SuppressFlow() -> AsyncFlowControl: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Gen2GcCallback(CriticalFinalizerObject):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Register(callback: Func[ObjectType, BooleanType], targetObj: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HostExecutionContext(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, state: ObjectType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CreateCopy(self) -> HostExecutionContext: ...
-    @overload
-    def Dispose(self) -> VoidType: ...
-    @overload
-    def Dispose(self, disposing: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HostExecutionContextManager(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Capture(self) -> HostExecutionContext: ...
-    def Revert(self, previousState: ObjectType) -> VoidType: ...
-    def SetHostExecutionContext(self, hostExecutionContext: HostExecutionContext) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HostExecutionContextSwitcher(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Undo(switcherObject: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IOCompletionCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        errorCode: UIntType,
-        numBytes: UIntType,
-        pOVERLAP: NativeOverlapped,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(
-        self, errorCode: UIntType, numBytes: UIntType, pOVERLAP: NativeOverlapped
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IUnknownSafeHandle(SafeHandle, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def MutexIndex(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def IsInvalid(self) -> BooleanType: ...
+    def Source(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
 
-    def get_IsInvalid(self) -> BooleanType: ...
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Interlocked(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
+        :return:
+        """
     @overload
-    def Add(location1: IntType, value: IntType) -> Tuple[IntType, IntType]: ...
-    @staticmethod
-    @overload
-    def Add(location1: LongType, value: LongType) -> Tuple[LongType, LongType]: ...
-    @staticmethod
-    @overload
-    def CompareExchange(
-        location1: LongType, value: LongType, comparand: LongType
-    ) -> Tuple[LongType, LongType]: ...
-    @staticmethod
-    @overload
-    def CompareExchange(
-        location1: FloatType, value: FloatType, comparand: FloatType
-    ) -> Tuple[FloatType, FloatType]: ...
-    @staticmethod
-    @overload
-    def CompareExchange(
-        location1: DoubleType, value: DoubleType, comparand: DoubleType
-    ) -> Tuple[DoubleType, DoubleType]: ...
-    @staticmethod
-    @overload
-    def CompareExchange(location1: T, value: T, comparand: T) -> Tuple[T, T]: ...
-    @staticmethod
-    @overload
-    def CompareExchange(
-        location1: IntType, value: IntType, comparand: IntType
-    ) -> Tuple[IntType, IntType]: ...
-    @staticmethod
-    @overload
-    def CompareExchange(
-        location1: ObjectType, value: ObjectType, comparand: ObjectType
-    ) -> Tuple[ObjectType, ObjectType]: ...
-    @staticmethod
-    @overload
-    def CompareExchange(
-        location1: NIntType, value: NIntType, comparand: NIntType
-    ) -> Tuple[NIntType, NIntType]: ...
-    @staticmethod
-    @overload
-    def Decrement(location: IntType) -> Tuple[IntType, IntType]: ...
-    @staticmethod
-    @overload
-    def Decrement(location: LongType) -> Tuple[LongType, LongType]: ...
-    @staticmethod
-    @overload
-    def Exchange(location1: LongType, value: LongType) -> Tuple[LongType, LongType]: ...
-    @staticmethod
-    @overload
-    def Exchange(location1: FloatType, value: FloatType) -> Tuple[FloatType, FloatType]: ...
-    @staticmethod
-    @overload
-    def Exchange(location1: DoubleType, value: DoubleType) -> Tuple[DoubleType, DoubleType]: ...
-    @staticmethod
-    @overload
-    def Exchange(location1: T, value: T) -> Tuple[T, T]: ...
-    @staticmethod
-    @overload
-    def Exchange(location1: IntType, value: IntType) -> Tuple[IntType, IntType]: ...
-    @staticmethod
-    @overload
-    def Exchange(location1: ObjectType, value: ObjectType) -> Tuple[ObjectType, ObjectType]: ...
-    @staticmethod
-    @overload
-    def Exchange(location1: NIntType, value: NIntType) -> Tuple[NIntType, NIntType]: ...
-    @staticmethod
-    @overload
-    def Increment(location: IntType) -> Tuple[IntType, IntType]: ...
-    @staticmethod
-    @overload
-    def Increment(location: LongType) -> Tuple[LongType, LongType]: ...
-    @staticmethod
-    def MemoryBarrier() -> VoidType: ...
-    @staticmethod
-    def Read(location: LongType) -> Tuple[LongType, LongType]: ...
-    @staticmethod
-    def SpeculationBarrier() -> VoidType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-class InternalCrossContextDelegate(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-    # ---------- Constructors ---------- #
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
 
-    def __init__(self, object: ObjectType, method: NIntType): ...
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-    def BeginInvoke(
-        self, args: ArrayType[ObjectType], callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> ObjectType: ...
-    def Invoke(self, args: ArrayType[ObjectType]) -> ObjectType: ...
+        :return:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LazyHelpers(Protocol[T], ObjectType):
+class ApartmentState(Enum):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LazyInitializer(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def EnsureInitialized(target: T, valueFactory: Func[T]) -> Tuple[T, T]: ...
-    @staticmethod
-    @overload
-    def EnsureInitialized(target: T) -> Tuple[T, T]: ...
-    @staticmethod
-    @overload
-    def EnsureInitialized(
-        target: T, initialized: BooleanType, syncLock: ObjectType
-    ) -> Tuple[T, T, BooleanType, ObjectType]: ...
-    @staticmethod
-    @overload
-    def EnsureInitialized(
-        target: T, initialized: BooleanType, syncLock: ObjectType, valueFactory: Func[T]
-    ) -> Tuple[T, T, BooleanType, ObjectType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LockRecursionException(Exception, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ManualResetEvent(EventWaitHandle, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, initialState: BooleanType): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ManualResetEventSlim(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, initialState: BooleanType): ...
-    @overload
-    def __init__(self, initialState: BooleanType, spinCount: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsSet(self) -> BooleanType: ...
-    @property
-    def SpinCount(self) -> IntType: ...
-    @property
-    def WaitHandle(self) -> WaitHandle: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    def Reset(self) -> VoidType: ...
-    def Set(self) -> VoidType: ...
-    @overload
-    def Wait(self) -> VoidType: ...
-    @overload
-    def Wait(self, cancellationToken: CancellationToken) -> VoidType: ...
-    @overload
-    def Wait(self, timeout: TimeSpan) -> BooleanType: ...
-    @overload
-    def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> BooleanType: ...
-    @overload
-    def Wait(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    @overload
-    def Wait(
-        self, millisecondsTimeout: IntType, cancellationToken: CancellationToken
-    ) -> BooleanType: ...
-    def get_IsSet(self) -> BooleanType: ...
-    def get_SpinCount(self) -> IntType: ...
-    def get_WaitHandle(self) -> WaitHandle: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Monitor(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def Enter(obj: ObjectType, lockTaken: BooleanType) -> Tuple[VoidType, BooleanType]: ...
-    @staticmethod
-    @overload
-    def Enter(obj: ObjectType) -> VoidType: ...
-    @staticmethod
-    def Exit(obj: ObjectType) -> VoidType: ...
-    @staticmethod
-    def IsEntered(obj: ObjectType) -> BooleanType: ...
-    @staticmethod
-    def Pulse(obj: ObjectType) -> VoidType: ...
-    @staticmethod
-    def PulseAll(obj: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def TryEnter(obj: ObjectType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def TryEnter(obj: ObjectType, lockTaken: BooleanType) -> Tuple[VoidType, BooleanType]: ...
-    @staticmethod
-    @overload
-    def TryEnter(obj: ObjectType, millisecondsTimeout: IntType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def TryEnter(obj: ObjectType, timeout: TimeSpan) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def TryEnter(
-        obj: ObjectType, millisecondsTimeout: IntType, lockTaken: BooleanType
-    ) -> Tuple[VoidType, BooleanType]: ...
-    @staticmethod
-    @overload
-    def TryEnter(
-        obj: ObjectType, timeout: TimeSpan, lockTaken: BooleanType
-    ) -> Tuple[VoidType, BooleanType]: ...
-    @staticmethod
-    @overload
-    def Wait(
-        obj: ObjectType, millisecondsTimeout: IntType, exitContext: BooleanType
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def Wait(obj: ObjectType, timeout: TimeSpan, exitContext: BooleanType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def Wait(obj: ObjectType, millisecondsTimeout: IntType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def Wait(obj: ObjectType, timeout: TimeSpan) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def Wait(obj: ObjectType) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Mutex(WaitHandle, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, initiallyOwned: BooleanType, name: StringType, createdNew: BooleanType): ...
-    @overload
-    def __init__(
-        self,
-        initiallyOwned: BooleanType,
-        name: StringType,
-        createdNew: BooleanType,
-        mutexSecurity: MutexSecurity,
-    ): ...
-    @overload
-    def __init__(self, initiallyOwned: BooleanType, name: StringType): ...
-    @overload
-    def __init__(self, initiallyOwned: BooleanType): ...
-    @overload
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetAccessControl(self) -> MutexSecurity: ...
-    @staticmethod
-    @overload
-    def OpenExisting(name: StringType) -> Mutex: ...
-    @staticmethod
-    @overload
-    def OpenExisting(name: StringType, rights: MutexRights) -> Mutex: ...
-    def ReleaseMutex(self) -> VoidType: ...
-    def SetAccessControl(self, mutexSecurity: MutexSecurity) -> VoidType: ...
-    @staticmethod
-    @overload
-    def TryOpenExisting(name: StringType, result: Mutex) -> Tuple[BooleanType, Mutex]: ...
-    @staticmethod
-    @overload
-    def TryOpenExisting(
-        name: StringType, rights: MutexRights, result: Mutex
-    ) -> Tuple[BooleanType, Mutex]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Overlapped(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(
-        self, offsetLo: IntType, offsetHi: IntType, hEvent: NIntType, ar: IAsyncResult
-    ): ...
-    @overload
-    def __init__(self, offsetLo: IntType, offsetHi: IntType, hEvent: IntType, ar: IAsyncResult): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AsyncResult(self) -> IAsyncResult: ...
-    @AsyncResult.setter
-    def AsyncResult(self, value: IAsyncResult) -> None: ...
-    @property
-    def EventHandle(self) -> IntType: ...
-    @EventHandle.setter
-    def EventHandle(self, value: IntType) -> None: ...
-    @property
-    def EventHandleIntPtr(self) -> NIntType: ...
-    @EventHandleIntPtr.setter
-    def EventHandleIntPtr(self, value: NIntType) -> None: ...
-    @property
-    def OffsetHigh(self) -> IntType: ...
-    @OffsetHigh.setter
-    def OffsetHigh(self, value: IntType) -> None: ...
-    @property
-    def OffsetLow(self) -> IntType: ...
-    @OffsetLow.setter
-    def OffsetLow(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Free(nativeOverlappedPtr: NativeOverlapped) -> VoidType: ...
-    @overload
-    def Pack(self, iocb: IOCompletionCallback, userData: ObjectType) -> NativeOverlapped: ...
-    @overload
-    def Pack(self, iocb: IOCompletionCallback) -> NativeOverlapped: ...
-    @staticmethod
-    def Unpack(nativeOverlappedPtr: NativeOverlapped) -> Overlapped: ...
-    @overload
-    def UnsafePack(self, iocb: IOCompletionCallback, userData: ObjectType) -> NativeOverlapped: ...
-    @overload
-    def UnsafePack(self, iocb: IOCompletionCallback) -> NativeOverlapped: ...
-    def get_AsyncResult(self) -> IAsyncResult: ...
-    def get_EventHandle(self) -> IntType: ...
-    def get_EventHandleIntPtr(self) -> NIntType: ...
-    def get_OffsetHigh(self) -> IntType: ...
-    def get_OffsetLow(self) -> IntType: ...
-    def set_AsyncResult(self, value: IAsyncResult) -> VoidType: ...
-    def set_EventHandle(self, value: IntType) -> VoidType: ...
-    def set_EventHandleIntPtr(self, value: NIntType) -> VoidType: ...
-    def set_OffsetHigh(self, value: IntType) -> VoidType: ...
-    def set_OffsetLow(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class OverlappedData(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ParameterizedThreadStart(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, obj: ObjectType, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, obj: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PinnableBufferCache(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, cacheName: StringType, numberOfElements: IntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def AllocateBuffer(self) -> ArrayType[ByteType]: ...
-    def FreeBuffer(self, buffer: ArrayType[ByteType]) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PinnableBufferCacheEventSource(EventSource, IDisposable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Log() -> PinnableBufferCacheEventSource: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def AgePendingBuffersResults(
-        self, cacheName: StringType, promotedToFreeListCount: IntType, heldBackCount: IntType
-    ) -> VoidType: ...
-    def AllocateBuffer(
-        self,
-        cacheName: StringType,
-        objectId: ULongType,
-        objectHash: IntType,
-        objectGen: IntType,
-        freeCountAfter: IntType,
-    ) -> VoidType: ...
-    def AllocateBufferAged(self, cacheName: StringType, agedCount: IntType) -> VoidType: ...
-    def AllocateBufferCreatingNewBuffers(
-        self, cacheName: StringType, totalBuffsBefore: IntType, objectCount: IntType
-    ) -> VoidType: ...
-    def AllocateBufferFreeListEmpty(
-        self, cacheName: StringType, notGen2CountBefore: IntType
-    ) -> VoidType: ...
-    def AllocateBufferFromNotGen2(
-        self, cacheName: StringType, notGen2CountAfter: IntType
-    ) -> VoidType: ...
-    def Create(self, cacheName: StringType) -> VoidType: ...
-    def DebugMessage(self, message: StringType) -> VoidType: ...
-    def DebugMessage1(self, message: StringType, value: LongType) -> VoidType: ...
-    def DebugMessage2(
-        self, message: StringType, value1: LongType, value2: LongType
-    ) -> VoidType: ...
-    def DebugMessage3(
-        self, message: StringType, value1: LongType, value2: LongType, value3: LongType
-    ) -> VoidType: ...
-    def FreeBuffer(
-        self,
-        cacheName: StringType,
-        objectId: ULongType,
-        objectHash: IntType,
-        freeCountBefore: IntType,
-    ) -> VoidType: ...
-    def FreeBufferNull(self, cacheName: StringType, freeCountBefore: IntType) -> VoidType: ...
-    def FreeBufferStillTooYoung(
-        self, cacheName: StringType, notGen2CountBefore: IntType
-    ) -> VoidType: ...
-    def TrimCheck(
-        self,
-        cacheName: StringType,
-        totalBuffs: IntType,
-        neededMoreThanFreeList: BooleanType,
-        deltaMSec: IntType,
-    ) -> VoidType: ...
-    def TrimExperiment(
-        self,
-        cacheName: StringType,
-        totalBuffs: IntType,
-        freeListCount: IntType,
-        numTrimTrial: IntType,
-    ) -> VoidType: ...
-    def TrimFlush(
-        self,
-        cacheName: StringType,
-        totalBuffs: IntType,
-        freeListCount: IntType,
-        notGen2CountBefore: IntType,
-    ) -> VoidType: ...
-    def TrimFree(
-        self, cacheName: StringType, totalBuffs: IntType, freeListCount: IntType, toBeFreed: IntType
-    ) -> VoidType: ...
-    def TrimFreeSizeOK(
-        self, cacheName: StringType, totalBuffs: IntType, freeListCount: IntType
-    ) -> VoidType: ...
-    def WalkFreeListResult(
-        self, cacheName: StringType, freeListCount: IntType, gen0BuffersInFreeList: IntType
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PlatformHelper(ABC, ObjectType):
+    STA: ApartmentState = ...
     """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PreAllocatedOverlapped(ObjectType, IDisposable, IDeferredDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, callback: IOCompletionCallback, state: ObjectType, pinData: ObjectType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class QueueUserWorkItemCallback(ObjectType, IThreadPoolWorkItem):
+    MTA: ApartmentState = ...
     """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReaderWriterCount(ObjectType):
-    # ---------- Fields ---------- #
-
-    @property
-    def lockID(self) -> LongType: ...
-    @lockID.setter
-    def lockID(self, value: LongType) -> None: ...
-    @property
-    def next(self) -> ReaderWriterCount: ...
-    @next.setter
-    def next(self, value: ReaderWriterCount) -> None: ...
-    @property
-    def readercount(self) -> IntType: ...
-    @readercount.setter
-    def readercount(self, value: IntType) -> None: ...
-    @property
-    def upgradecount(self) -> IntType: ...
-    @upgradecount.setter
-    def upgradecount(self, value: IntType) -> None: ...
-    @property
-    def writercount(self) -> IntType: ...
-    @writercount.setter
-    def writercount(self, value: IntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReaderWriterLock(CriticalFinalizerObject):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsReaderLockHeld(self) -> BooleanType: ...
-    @property
-    def IsWriterLockHeld(self) -> BooleanType: ...
-    @property
-    def WriterSeqNum(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def AcquireReaderLock(self, millisecondsTimeout: IntType) -> VoidType: ...
-    @overload
-    def AcquireReaderLock(self, timeout: TimeSpan) -> VoidType: ...
-    @overload
-    def AcquireWriterLock(self, millisecondsTimeout: IntType) -> VoidType: ...
-    @overload
-    def AcquireWriterLock(self, timeout: TimeSpan) -> VoidType: ...
-    def AnyWritersSince(self, seqNum: IntType) -> BooleanType: ...
-    def DowngradeFromWriterLock(self, lockCookie: LockCookie) -> Tuple[VoidType, LockCookie]: ...
-    def ReleaseLock(self) -> LockCookie: ...
-    def ReleaseReaderLock(self) -> VoidType: ...
-    def ReleaseWriterLock(self) -> VoidType: ...
-    def RestoreLock(self, lockCookie: LockCookie) -> Tuple[VoidType, LockCookie]: ...
-    @overload
-    def UpgradeToWriterLock(self, millisecondsTimeout: IntType) -> LockCookie: ...
-    @overload
-    def UpgradeToWriterLock(self, timeout: TimeSpan) -> LockCookie: ...
-    def get_IsReaderLockHeld(self) -> BooleanType: ...
-    def get_IsWriterLockHeld(self) -> BooleanType: ...
-    def get_WriterSeqNum(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReaderWriterLockSlim(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, recursionPolicy: LockRecursionPolicy): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CurrentReadCount(self) -> IntType: ...
-    @property
-    def IsReadLockHeld(self) -> BooleanType: ...
-    @property
-    def IsUpgradeableReadLockHeld(self) -> BooleanType: ...
-    @property
-    def IsWriteLockHeld(self) -> BooleanType: ...
-    @property
-    def RecursionPolicy(self) -> LockRecursionPolicy: ...
-    @property
-    def RecursiveReadCount(self) -> IntType: ...
-    @property
-    def RecursiveUpgradeCount(self) -> IntType: ...
-    @property
-    def RecursiveWriteCount(self) -> IntType: ...
-    @property
-    def WaitingReadCount(self) -> IntType: ...
-    @property
-    def WaitingUpgradeCount(self) -> IntType: ...
-    @property
-    def WaitingWriteCount(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    def EnterReadLock(self) -> VoidType: ...
-    def EnterUpgradeableReadLock(self) -> VoidType: ...
-    def EnterWriteLock(self) -> VoidType: ...
-    def ExitReadLock(self) -> VoidType: ...
-    def ExitUpgradeableReadLock(self) -> VoidType: ...
-    def ExitWriteLock(self) -> VoidType: ...
-    @overload
-    def TryEnterReadLock(self, timeout: TimeSpan) -> BooleanType: ...
-    @overload
-    def TryEnterReadLock(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    @overload
-    def TryEnterUpgradeableReadLock(self, timeout: TimeSpan) -> BooleanType: ...
-    @overload
-    def TryEnterUpgradeableReadLock(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    @overload
-    def TryEnterWriteLock(self, timeout: TimeSpan) -> BooleanType: ...
-    @overload
-    def TryEnterWriteLock(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    def get_CurrentReadCount(self) -> IntType: ...
-    def get_IsReadLockHeld(self) -> BooleanType: ...
-    def get_IsUpgradeableReadLockHeld(self) -> BooleanType: ...
-    def get_IsWriteLockHeld(self) -> BooleanType: ...
-    def get_RecursionPolicy(self) -> LockRecursionPolicy: ...
-    def get_RecursiveReadCount(self) -> IntType: ...
-    def get_RecursiveUpgradeCount(self) -> IntType: ...
-    def get_RecursiveWriteCount(self) -> IntType: ...
-    def get_WaitingReadCount(self) -> IntType: ...
-    def get_WaitingUpgradeCount(self) -> IntType: ...
-    def get_WaitingWriteCount(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegisteredWaitHandle(MarshalByRefObject):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Unregister(self, waitObject: WaitHandle) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RegisteredWaitHandleSafe(CriticalFinalizerObject):
+    Unknown: ApartmentState = ...
     """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SafeCompressedStackHandle(SafeHandle, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsInvalid(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_IsInvalid(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Semaphore(WaitHandle, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, initialCount: IntType, maximumCount: IntType): ...
-    @overload
-    def __init__(self, initialCount: IntType, maximumCount: IntType, name: StringType): ...
-    @overload
-    def __init__(
-        self,
-        initialCount: IntType,
-        maximumCount: IntType,
-        name: StringType,
-        createdNew: BooleanType,
-    ): ...
-    @overload
-    def __init__(
-        self,
-        initialCount: IntType,
-        maximumCount: IntType,
-        name: StringType,
-        createdNew: BooleanType,
-        semaphoreSecurity: SemaphoreSecurity,
-    ): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetAccessControl(self) -> SemaphoreSecurity: ...
-    @staticmethod
-    @overload
-    def OpenExisting(name: StringType) -> Semaphore: ...
-    @staticmethod
-    @overload
-    def OpenExisting(name: StringType, rights: SemaphoreRights) -> Semaphore: ...
-    @overload
-    def Release(self) -> IntType: ...
-    @overload
-    def Release(self, releaseCount: IntType) -> IntType: ...
-    def SetAccessControl(self, semaphoreSecurity: SemaphoreSecurity) -> VoidType: ...
-    @staticmethod
-    @overload
-    def TryOpenExisting(name: StringType, result: Semaphore) -> Tuple[BooleanType, Semaphore]: ...
-    @staticmethod
-    @overload
-    def TryOpenExisting(
-        name: StringType, rights: SemaphoreRights, result: Semaphore
-    ) -> Tuple[BooleanType, Semaphore]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SemaphoreFullException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SemaphoreSlim(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, initialCount: IntType): ...
-    @overload
-    def __init__(self, initialCount: IntType, maxCount: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AvailableWaitHandle(self) -> WaitHandle: ...
-    @property
-    def CurrentCount(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    @overload
-    def Release(self) -> IntType: ...
-    @overload
-    def Release(self, releaseCount: IntType) -> IntType: ...
-    @overload
-    def Wait(self) -> VoidType: ...
-    @overload
-    def Wait(self, cancellationToken: CancellationToken) -> VoidType: ...
-    @overload
-    def Wait(self, timeout: TimeSpan) -> BooleanType: ...
-    @overload
-    def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> BooleanType: ...
-    @overload
-    def Wait(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    @overload
-    def Wait(
-        self, millisecondsTimeout: IntType, cancellationToken: CancellationToken
-    ) -> BooleanType: ...
-    @overload
-    def WaitAsync(self) -> Task: ...
-    @overload
-    def WaitAsync(self, cancellationToken: CancellationToken) -> Task: ...
-    @overload
-    def WaitAsync(self, millisecondsTimeout: IntType) -> Task[BooleanType]: ...
-    @overload
-    def WaitAsync(self, timeout: TimeSpan) -> Task[BooleanType]: ...
-    @overload
-    def WaitAsync(
-        self, timeout: TimeSpan, cancellationToken: CancellationToken
-    ) -> Task[BooleanType]: ...
-    @overload
-    def WaitAsync(
-        self, millisecondsTimeout: IntType, cancellationToken: CancellationToken
-    ) -> Task[BooleanType]: ...
-    def get_AvailableWaitHandle(self) -> WaitHandle: ...
-    def get_CurrentCount(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SendOrPostCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, state: ObjectType, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, state: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SparselyPopulatedArray(Generic[T], ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SparselyPopulatedArrayFragment(Generic[T], ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SynchronizationContext(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def Current() -> SynchronizationContext: ...
-
-    # ---------- Methods ---------- #
-
-    def CreateCopy(self) -> SynchronizationContext: ...
-    def IsWaitNotificationRequired(self) -> BooleanType: ...
-    def OperationCompleted(self) -> VoidType: ...
-    def OperationStarted(self) -> VoidType: ...
-    def Post(self, d: SendOrPostCallback, state: ObjectType) -> VoidType: ...
-    def Send(self, d: SendOrPostCallback, state: ObjectType) -> VoidType: ...
-    @staticmethod
-    def SetSynchronizationContext(syncContext: SynchronizationContext) -> VoidType: ...
-    def Wait(
-        self, waitHandles: ArrayType[NIntType], waitAll: BooleanType, millisecondsTimeout: IntType
-    ) -> IntType: ...
-    @staticmethod
-    def get_Current() -> SynchronizationContext: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SynchronizationLockException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SystemThreading_ThreadLocalDebugView(Generic[T], ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, tlocal: ThreadLocal[T]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsValueCreated(self) -> BooleanType: ...
-    @property
-    def Value(self) -> T: ...
-    @property
-    def Values(self) -> List[T]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_IsValueCreated(self) -> BooleanType: ...
-    def get_Value(self) -> T: ...
-    def get_Values(self) -> List[T]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Thread(CriticalFinalizerObject, _Thread):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, start: ThreadStart): ...
-    @overload
-    def __init__(self, start: ThreadStart, maxStackSize: IntType): ...
-    @overload
-    def __init__(self, start: ParameterizedThreadStart): ...
-    @overload
-    def __init__(self, start: ParameterizedThreadStart, maxStackSize: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ApartmentState(self) -> ApartmentState: ...
-    @ApartmentState.setter
-    def ApartmentState(self, value: ApartmentState) -> None: ...
-    @staticmethod
-    @property
-    def CurrentContext() -> Context: ...
-    @property
-    def CurrentCulture(self) -> CultureInfo: ...
-    @CurrentCulture.setter
-    def CurrentCulture(self, value: CultureInfo) -> None: ...
-    @staticmethod
-    @property
-    def CurrentPrincipal() -> IPrincipal: ...
-    @staticmethod
-    @CurrentPrincipal.setter
-    def CurrentPrincipal(value: IPrincipal) -> None: ...
-    @staticmethod
-    @property
-    def CurrentThread() -> Thread: ...
-    @property
-    def CurrentUICulture(self) -> CultureInfo: ...
-    @CurrentUICulture.setter
-    def CurrentUICulture(self, value: CultureInfo) -> None: ...
-    @property
-    def ExecutionContext(self) -> ExecutionContext: ...
-    @property
-    def IsAlive(self) -> BooleanType: ...
-    @property
-    def IsBackground(self) -> BooleanType: ...
-    @IsBackground.setter
-    def IsBackground(self, value: BooleanType) -> None: ...
-    @property
-    def IsThreadPoolThread(self) -> BooleanType: ...
-    @property
-    def ManagedThreadId(self) -> IntType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def Priority(self) -> ThreadPriority: ...
-    @Priority.setter
-    def Priority(self, value: ThreadPriority) -> None: ...
-    @property
-    def ThreadState(self) -> ThreadState: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Abort(self, stateInfo: ObjectType) -> VoidType: ...
-    @overload
-    def Abort(self) -> VoidType: ...
-    @staticmethod
-    def AllocateDataSlot() -> LocalDataStoreSlot: ...
-    @staticmethod
-    def AllocateNamedDataSlot(name: StringType) -> LocalDataStoreSlot: ...
-    @staticmethod
-    def BeginCriticalRegion() -> VoidType: ...
-    @staticmethod
-    def BeginThreadAffinity() -> VoidType: ...
-    def DisableComObjectEagerCleanup(self) -> VoidType: ...
-    @staticmethod
-    def EndCriticalRegion() -> VoidType: ...
-    @staticmethod
-    def EndThreadAffinity() -> VoidType: ...
-    @staticmethod
-    def FreeNamedDataSlot(name: StringType) -> VoidType: ...
-    def GetApartmentState(self) -> ApartmentState: ...
-    def GetCompressedStack(self) -> CompressedStack: ...
-    @staticmethod
-    def GetData(slot: LocalDataStoreSlot) -> ObjectType: ...
-    @staticmethod
-    def GetDomain() -> AppDomain: ...
-    @staticmethod
-    def GetDomainID() -> IntType: ...
-    def GetHashCode(self) -> IntType: ...
-    @staticmethod
-    def GetNamedDataSlot(name: StringType) -> LocalDataStoreSlot: ...
-    def Interrupt(self) -> VoidType: ...
-    @overload
-    def Join(self) -> VoidType: ...
-    @overload
-    def Join(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    @overload
-    def Join(self, timeout: TimeSpan) -> BooleanType: ...
-    @staticmethod
-    def MemoryBarrier() -> VoidType: ...
-    @staticmethod
-    def ResetAbort() -> VoidType: ...
-    def Resume(self) -> VoidType: ...
-    def SetApartmentState(self, state: ApartmentState) -> VoidType: ...
-    def SetCompressedStack(self, stack: CompressedStack) -> VoidType: ...
-    @staticmethod
-    def SetData(slot: LocalDataStoreSlot, data: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Sleep(millisecondsTimeout: IntType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Sleep(timeout: TimeSpan) -> VoidType: ...
-    @staticmethod
-    def SpinWait(iterations: IntType) -> VoidType: ...
-    @overload
-    def Start(self) -> VoidType: ...
-    @overload
-    def Start(self, parameter: ObjectType) -> VoidType: ...
-    def Suspend(self) -> VoidType: ...
-    def TrySetApartmentState(self, state: ApartmentState) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: ByteType) -> Tuple[ByteType, ByteType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: ShortType) -> Tuple[ShortType, ShortType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: IntType) -> Tuple[IntType, IntType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: LongType) -> Tuple[LongType, LongType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: SByteType) -> Tuple[SByteType, SByteType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: UShortType) -> Tuple[UShortType, UShortType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: UIntType) -> Tuple[UIntType, UIntType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: NIntType) -> Tuple[NIntType, NIntType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: NUIntType) -> Tuple[NUIntType, NUIntType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: ULongType) -> Tuple[ULongType, ULongType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: FloatType) -> Tuple[FloatType, FloatType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: DoubleType) -> Tuple[DoubleType, DoubleType]: ...
-    @staticmethod
-    @overload
-    def VolatileRead(address: ObjectType) -> Tuple[ObjectType, ObjectType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: ByteType, value: ByteType) -> Tuple[VoidType, ByteType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: ShortType, value: ShortType) -> Tuple[VoidType, ShortType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: IntType, value: IntType) -> Tuple[VoidType, IntType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: LongType, value: LongType) -> Tuple[VoidType, LongType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: SByteType, value: SByteType) -> Tuple[VoidType, SByteType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: UShortType, value: UShortType) -> Tuple[VoidType, UShortType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: UIntType, value: UIntType) -> Tuple[VoidType, UIntType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: NIntType, value: NIntType) -> Tuple[VoidType, NIntType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: NUIntType, value: NUIntType) -> Tuple[VoidType, NUIntType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: ULongType, value: ULongType) -> Tuple[VoidType, ULongType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: FloatType, value: FloatType) -> Tuple[VoidType, FloatType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: DoubleType, value: DoubleType) -> Tuple[VoidType, DoubleType]: ...
-    @staticmethod
-    @overload
-    def VolatileWrite(address: ObjectType, value: ObjectType) -> Tuple[VoidType, ObjectType]: ...
-    @staticmethod
-    def Yield() -> BooleanType: ...
-    def get_ApartmentState(self) -> ApartmentState: ...
-    @staticmethod
-    def get_CurrentContext() -> Context: ...
-    def get_CurrentCulture(self) -> CultureInfo: ...
-    @staticmethod
-    def get_CurrentPrincipal() -> IPrincipal: ...
-    @staticmethod
-    def get_CurrentThread() -> Thread: ...
-    def get_CurrentUICulture(self) -> CultureInfo: ...
-    def get_ExecutionContext(self) -> ExecutionContext: ...
-    def get_IsAlive(self) -> BooleanType: ...
-    def get_IsBackground(self) -> BooleanType: ...
-    def get_IsThreadPoolThread(self) -> BooleanType: ...
-    def get_ManagedThreadId(self) -> IntType: ...
-    def get_Name(self) -> StringType: ...
-    def get_Priority(self) -> ThreadPriority: ...
-    def get_ThreadState(self) -> ThreadState: ...
-    def set_ApartmentState(self, value: ApartmentState) -> VoidType: ...
-    def set_CurrentCulture(self, value: CultureInfo) -> VoidType: ...
-    @staticmethod
-    def set_CurrentPrincipal(value: IPrincipal) -> VoidType: ...
-    def set_CurrentUICulture(self, value: CultureInfo) -> VoidType: ...
-    def set_IsBackground(self, value: BooleanType) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_Priority(self, value: ThreadPriority) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadAbortException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ExceptionState(self) -> ObjectType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_ExceptionState(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadExceptionEventArgs(EventArgs):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, t: Exception): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Exception(self) -> Exception: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Exception(self) -> Exception: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadExceptionEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: ThreadExceptionEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: ThreadExceptionEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadHelper(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadInterruptedException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadLocal(Generic[T], ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, trackAllValues: BooleanType): ...
-    @overload
-    def __init__(self, valueFactory: Func[T]): ...
-    @overload
-    def __init__(self, valueFactory: Func[T], trackAllValues: BooleanType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsValueCreated(self) -> BooleanType: ...
-    @property
-    def Value(self) -> T: ...
-    @Value.setter
-    def Value(self, value: T) -> None: ...
-    @property
-    def Values(self) -> IList[T]: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    def ToString(self) -> StringType: ...
-    def get_IsValueCreated(self) -> BooleanType: ...
-    def get_Value(self) -> T: ...
-    def get_Values(self) -> IList[T]: ...
-    def set_Value(self, value: T) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadPool(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def BindHandle(osHandle: NIntType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def BindHandle(osHandle: SafeHandle) -> BooleanType: ...
-    @staticmethod
-    def GetAvailableThreads(
-        workerThreads: IntType, completionPortThreads: IntType
-    ) -> Tuple[VoidType, IntType, IntType]: ...
-    @staticmethod
-    def GetMaxThreads(
-        workerThreads: IntType, completionPortThreads: IntType
-    ) -> Tuple[VoidType, IntType, IntType]: ...
-    @staticmethod
-    def GetMinThreads(
-        workerThreads: IntType, completionPortThreads: IntType
-    ) -> Tuple[VoidType, IntType, IntType]: ...
-    @staticmethod
-    @overload
-    def QueueUserWorkItem(callBack: WaitCallback, state: ObjectType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def QueueUserWorkItem(callBack: WaitCallback) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def RegisterWaitForSingleObject(
-        waitObject: WaitHandle,
-        callBack: WaitOrTimerCallback,
-        state: ObjectType,
-        millisecondsTimeOutInterval: UIntType,
-        executeOnlyOnce: BooleanType,
-    ) -> RegisteredWaitHandle: ...
-    @staticmethod
-    @overload
-    def RegisterWaitForSingleObject(
-        waitObject: WaitHandle,
-        callBack: WaitOrTimerCallback,
-        state: ObjectType,
-        millisecondsTimeOutInterval: IntType,
-        executeOnlyOnce: BooleanType,
-    ) -> RegisteredWaitHandle: ...
-    @staticmethod
-    @overload
-    def RegisterWaitForSingleObject(
-        waitObject: WaitHandle,
-        callBack: WaitOrTimerCallback,
-        state: ObjectType,
-        millisecondsTimeOutInterval: LongType,
-        executeOnlyOnce: BooleanType,
-    ) -> RegisteredWaitHandle: ...
-    @staticmethod
-    @overload
-    def RegisterWaitForSingleObject(
-        waitObject: WaitHandle,
-        callBack: WaitOrTimerCallback,
-        state: ObjectType,
-        timeout: TimeSpan,
-        executeOnlyOnce: BooleanType,
-    ) -> RegisteredWaitHandle: ...
-    @staticmethod
-    def SetMaxThreads(workerThreads: IntType, completionPortThreads: IntType) -> BooleanType: ...
-    @staticmethod
-    def SetMinThreads(workerThreads: IntType, completionPortThreads: IntType) -> BooleanType: ...
-    @staticmethod
-    def UnsafeQueueNativeOverlapped(overlapped: NativeOverlapped) -> BooleanType: ...
-    @staticmethod
-    def UnsafeQueueUserWorkItem(callBack: WaitCallback, state: ObjectType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def UnsafeRegisterWaitForSingleObject(
-        waitObject: WaitHandle,
-        callBack: WaitOrTimerCallback,
-        state: ObjectType,
-        millisecondsTimeOutInterval: UIntType,
-        executeOnlyOnce: BooleanType,
-    ) -> RegisteredWaitHandle: ...
-    @staticmethod
-    @overload
-    def UnsafeRegisterWaitForSingleObject(
-        waitObject: WaitHandle,
-        callBack: WaitOrTimerCallback,
-        state: ObjectType,
-        millisecondsTimeOutInterval: IntType,
-        executeOnlyOnce: BooleanType,
-    ) -> RegisteredWaitHandle: ...
-    @staticmethod
-    @overload
-    def UnsafeRegisterWaitForSingleObject(
-        waitObject: WaitHandle,
-        callBack: WaitOrTimerCallback,
-        state: ObjectType,
-        millisecondsTimeOutInterval: LongType,
-        executeOnlyOnce: BooleanType,
-    ) -> RegisteredWaitHandle: ...
-    @staticmethod
-    @overload
-    def UnsafeRegisterWaitForSingleObject(
-        waitObject: WaitHandle,
-        callBack: WaitOrTimerCallback,
-        state: ObjectType,
-        timeout: TimeSpan,
-        executeOnlyOnce: BooleanType,
-    ) -> RegisteredWaitHandle: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadPoolBoundHandle(ObjectType, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Handle(self) -> SafeHandle: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def AllocateNativeOverlapped(
-        self, callback: IOCompletionCallback, state: ObjectType, pinData: ObjectType
-    ) -> NativeOverlapped: ...
-    @overload
-    def AllocateNativeOverlapped(
-        self, preAllocated: PreAllocatedOverlapped
-    ) -> NativeOverlapped: ...
-    @staticmethod
-    def BindHandle(handle: SafeHandle) -> ThreadPoolBoundHandle: ...
-    def Dispose(self) -> VoidType: ...
-    def FreeNativeOverlapped(self, overlapped: NativeOverlapped) -> VoidType: ...
-    @staticmethod
-    def GetNativeOverlappedState(overlapped: NativeOverlapped) -> ObjectType: ...
-    def get_Handle(self) -> SafeHandle: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadPoolBoundHandleOverlapped(Overlapped):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(
-        self,
-        callback: IOCompletionCallback,
-        state: ObjectType,
-        pinData: ObjectType,
-        preAllocated: PreAllocatedOverlapped,
-    ): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadPoolGlobals(ABC, ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def enableWorkerTracking() -> BooleanType: ...
-    @staticmethod
-    @enableWorkerTracking.setter
-    def enableWorkerTracking(value: BooleanType) -> None: ...
-    @staticmethod
-    @property
-    def processorCount() -> IntType: ...
-    @staticmethod
-    @processorCount.setter
-    def processorCount(value: IntType) -> None: ...
-    @staticmethod
-    @property
-    def tpHosted() -> BooleanType: ...
-    @staticmethod
-    @tpHosted.setter
-    def tpHosted(value: BooleanType) -> None: ...
-    @staticmethod
-    @property
-    def tpQuantum() -> UIntType: ...
-    @staticmethod
-    @tpQuantum.setter
-    def tpQuantum(value: UIntType) -> None: ...
-    @staticmethod
-    @property
-    def vmTpInitialized() -> BooleanType: ...
-    @staticmethod
-    @vmTpInitialized.setter
-    def vmTpInitialized(value: BooleanType) -> None: ...
-    @staticmethod
-    @property
-    def workQueue() -> ThreadPoolWorkQueue: ...
-    @staticmethod
-    @workQueue.setter
-    def workQueue(value: ThreadPoolWorkQueue) -> None: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadPoolWorkQueue(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dequeue(
-        self,
-        tl: ThreadPoolWorkQueueThreadLocals,
-        callback: IThreadPoolWorkItem,
-        missedSteal: BooleanType,
-    ) -> Tuple[VoidType, IThreadPoolWorkItem, BooleanType]: ...
-    def Enqueue(self, callback: IThreadPoolWorkItem, forceGlobal: BooleanType) -> VoidType: ...
-    def EnsureCurrentThreadHasQueue(self) -> ThreadPoolWorkQueueThreadLocals: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadPoolWorkQueueThreadLocals(ObjectType):
-    # ---------- Fields ---------- #
-
-    @property
-    def random(self) -> Random: ...
-    @staticmethod
-    @property
-    def threadLocals() -> ThreadPoolWorkQueueThreadLocals: ...
-    @staticmethod
-    @threadLocals.setter
-    def threadLocals(value: ThreadPoolWorkQueueThreadLocals) -> None: ...
-    @property
-    def workQueue(self) -> ThreadPoolWorkQueue: ...
-    @property
-    def workStealingQueue(self) -> WorkStealingQueue: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, tpq: ThreadPoolWorkQueue): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadStart(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(self, callback: AsyncCallback, object: ObjectType) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadStartException(SystemException, ISerializable, _Exception):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadStateException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Timeout(ABC, ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Infinite() -> IntType: ...
-    @staticmethod
-    @property
-    def InfiniteTimeSpan() -> TimeSpan: ...
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TimeoutHelper(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetTime() -> UIntType: ...
-    @staticmethod
-    def UpdateTimeOut(startTime: UIntType, originalWaitMillisecondsTimeout: IntType) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Timer(MarshalByRefObject, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(
-        self, callback: TimerCallback, state: ObjectType, dueTime: IntType, period: IntType
-    ): ...
-    @overload
-    def __init__(
-        self, callback: TimerCallback, state: ObjectType, dueTime: TimeSpan, period: TimeSpan
-    ): ...
-    @overload
-    def __init__(
-        self, callback: TimerCallback, state: ObjectType, dueTime: UIntType, period: UIntType
-    ): ...
-    @overload
-    def __init__(
-        self, callback: TimerCallback, state: ObjectType, dueTime: LongType, period: LongType
-    ): ...
-    @overload
-    def __init__(self, callback: TimerCallback): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Change(self, dueTime: IntType, period: IntType) -> BooleanType: ...
-    @overload
-    def Change(self, dueTime: TimeSpan, period: TimeSpan) -> BooleanType: ...
-    @overload
-    def Change(self, dueTime: UIntType, period: UIntType) -> BooleanType: ...
-    @overload
-    def Change(self, dueTime: LongType, period: LongType) -> BooleanType: ...
-    @overload
-    def Dispose(self) -> VoidType: ...
-    @overload
-    def Dispose(self, notifyObject: WaitHandle) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TimerCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, state: ObjectType, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, state: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TimerHolder(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, timer: ObjectType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Change(self, dueTime: UIntType, period: UIntType) -> BooleanType: ...
-    @overload
-    def Close(self) -> VoidType: ...
-    @overload
-    def Close(self, notifyObject: WaitHandle) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TimerQueue(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def Instance() -> TimerQueue: ...
-
-    # ---------- Methods ---------- #
-
-    def DeleteTimer(self, timer: TimerQueueTimer) -> VoidType: ...
-    def UpdateTimer(
-        self, timer: TimerQueueTimer, dueTime: UIntType, period: UIntType
-    ) -> BooleanType: ...
-    @staticmethod
-    def get_Instance() -> TimerQueue: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TimerQueueTimer(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Close(self) -> VoidType: ...
-    @overload
-    def Close(self, toSignal: WaitHandle) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Volatile(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def Read(location: LongType) -> Tuple[LongType, LongType]: ...
-    @staticmethod
-    @overload
-    def Read(location: T) -> Tuple[T, T]: ...
-    @staticmethod
-    @overload
-    def Read(location: BooleanType) -> Tuple[BooleanType, BooleanType]: ...
-    @staticmethod
-    @overload
-    def Read(location: SByteType) -> Tuple[SByteType, SByteType]: ...
-    @staticmethod
-    @overload
-    def Read(location: ByteType) -> Tuple[ByteType, ByteType]: ...
-    @staticmethod
-    @overload
-    def Read(location: ShortType) -> Tuple[ShortType, ShortType]: ...
-    @staticmethod
-    @overload
-    def Read(location: UShortType) -> Tuple[UShortType, UShortType]: ...
-    @staticmethod
-    @overload
-    def Read(location: IntType) -> Tuple[IntType, IntType]: ...
-    @staticmethod
-    @overload
-    def Read(location: UIntType) -> Tuple[UIntType, UIntType]: ...
-    @staticmethod
-    @overload
-    def Read(location: ULongType) -> Tuple[ULongType, ULongType]: ...
-    @staticmethod
-    @overload
-    def Read(location: NIntType) -> Tuple[NIntType, NIntType]: ...
-    @staticmethod
-    @overload
-    def Read(location: NUIntType) -> Tuple[NUIntType, NUIntType]: ...
-    @staticmethod
-    @overload
-    def Read(location: FloatType) -> Tuple[FloatType, FloatType]: ...
-    @staticmethod
-    @overload
-    def Read(location: DoubleType) -> Tuple[DoubleType, DoubleType]: ...
-    @staticmethod
-    @overload
-    def Write(location: LongType, value: LongType) -> Tuple[VoidType, LongType]: ...
-    @staticmethod
-    @overload
-    def Write(location: T, value: T) -> Tuple[VoidType, T]: ...
-    @staticmethod
-    @overload
-    def Write(location: BooleanType, value: BooleanType) -> Tuple[VoidType, BooleanType]: ...
-    @staticmethod
-    @overload
-    def Write(location: SByteType, value: SByteType) -> Tuple[VoidType, SByteType]: ...
-    @staticmethod
-    @overload
-    def Write(location: ByteType, value: ByteType) -> Tuple[VoidType, ByteType]: ...
-    @staticmethod
-    @overload
-    def Write(location: ShortType, value: ShortType) -> Tuple[VoidType, ShortType]: ...
-    @staticmethod
-    @overload
-    def Write(location: UShortType, value: UShortType) -> Tuple[VoidType, UShortType]: ...
-    @staticmethod
-    @overload
-    def Write(location: IntType, value: IntType) -> Tuple[VoidType, IntType]: ...
-    @staticmethod
-    @overload
-    def Write(location: UIntType, value: UIntType) -> Tuple[VoidType, UIntType]: ...
-    @staticmethod
-    @overload
-    def Write(location: ULongType, value: ULongType) -> Tuple[VoidType, ULongType]: ...
-    @staticmethod
-    @overload
-    def Write(location: NIntType, value: NIntType) -> Tuple[VoidType, NIntType]: ...
-    @staticmethod
-    @overload
-    def Write(location: NUIntType, value: NUIntType) -> Tuple[VoidType, NUIntType]: ...
-    @staticmethod
-    @overload
-    def Write(location: FloatType, value: FloatType) -> Tuple[VoidType, FloatType]: ...
-    @staticmethod
-    @overload
-    def Write(location: DoubleType, value: DoubleType) -> Tuple[VoidType, DoubleType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WaitCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, state: ObjectType, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, state: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WaitHandle(ABC, MarshalByRefObject, IDisposable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def WaitTimeout() -> IntType: ...
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Handle(self) -> NIntType: ...
-    @Handle.setter
-    def Handle(self, value: NIntType) -> None: ...
-    @property
-    def SafeWaitHandle(self) -> SafeWaitHandle: ...
-    @SafeWaitHandle.setter
-    def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-    def Dispose(self) -> VoidType: ...
-    @staticmethod
-    @overload
-    def SignalAndWait(toSignal: WaitHandle, toWaitOn: WaitHandle) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def SignalAndWait(
-        toSignal: WaitHandle, toWaitOn: WaitHandle, timeout: TimeSpan, exitContext: BooleanType
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def SignalAndWait(
-        toSignal: WaitHandle,
-        toWaitOn: WaitHandle,
-        millisecondsTimeout: IntType,
-        exitContext: BooleanType,
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def WaitAll(
-        waitHandles: ArrayType[WaitHandle], millisecondsTimeout: IntType, exitContext: BooleanType
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def WaitAll(
-        waitHandles: ArrayType[WaitHandle], timeout: TimeSpan, exitContext: BooleanType
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def WaitAll(waitHandles: ArrayType[WaitHandle]) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def WaitAll(
-        waitHandles: ArrayType[WaitHandle], millisecondsTimeout: IntType
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def WaitAll(waitHandles: ArrayType[WaitHandle], timeout: TimeSpan) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def WaitAny(
-        waitHandles: ArrayType[WaitHandle], millisecondsTimeout: IntType, exitContext: BooleanType
-    ) -> IntType: ...
-    @staticmethod
-    @overload
-    def WaitAny(
-        waitHandles: ArrayType[WaitHandle], timeout: TimeSpan, exitContext: BooleanType
-    ) -> IntType: ...
-    @staticmethod
-    @overload
-    def WaitAny(waitHandles: ArrayType[WaitHandle], timeout: TimeSpan) -> IntType: ...
-    @staticmethod
-    @overload
-    def WaitAny(waitHandles: ArrayType[WaitHandle]) -> IntType: ...
-    @staticmethod
-    @overload
-    def WaitAny(waitHandles: ArrayType[WaitHandle], millisecondsTimeout: IntType) -> IntType: ...
-    @overload
-    def WaitOne(self, millisecondsTimeout: IntType, exitContext: BooleanType) -> BooleanType: ...
-    @overload
-    def WaitOne(self, timeout: TimeSpan, exitContext: BooleanType) -> BooleanType: ...
-    @overload
-    def WaitOne(self) -> BooleanType: ...
-    @overload
-    def WaitOne(self, millisecondsTimeout: IntType) -> BooleanType: ...
-    @overload
-    def WaitOne(self, timeout: TimeSpan) -> BooleanType: ...
-    def get_Handle(self) -> NIntType: ...
-    def get_SafeWaitHandle(self) -> SafeWaitHandle: ...
-    def set_Handle(self, value: NIntType) -> VoidType: ...
-    def set_SafeWaitHandle(self, value: SafeWaitHandle) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WaitHandleCannotBeOpenedException(ApplicationException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WaitHandleExtensions(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetSafeWaitHandle(waitHandle: WaitHandle) -> SafeWaitHandle: ...
-    @staticmethod
-    def SetSafeWaitHandle(waitHandle: WaitHandle, value: SafeWaitHandle) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WaitOrTimerCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, state: ObjectType, timedOut: BooleanType, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, state: ObjectType, timedOut: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WinRTSynchronizationContextFactoryBase(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Create(self, coreDispatcher: ObjectType) -> SynchronizationContext: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class _IOCompletionCallback(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class _ThreadPoolWaitCallback(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class _ThreadPoolWaitOrTimerCallback(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
 
 class AsyncFlowControl(ValueType, IDisposable):
-    # No Fields
+    """"""
 
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
+    def Dispose(self) -> None:
+        """"""
     @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
+    def Equals(self, obj: AsyncFlowControl) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def Equals(self, obj: AsyncFlowControl) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def Undo(self) -> VoidType: ...
-    @staticmethod
-    def op_Equality(a: AsyncFlowControl, b: AsyncFlowControl) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(a: AsyncFlowControl, b: AsyncFlowControl) -> BooleanType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Undo(self) -> None:
+        """"""
+    def __eq__(self, other: AsyncFlowControl) -> bool:
+        """
 
-    # No Sub Enums
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: AsyncFlowControl) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, a: AsyncFlowControl, b: AsyncFlowControl) -> bool:
+        """
+
+        :param a:
+        :param b:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, a: AsyncFlowControl, b: AsyncFlowControl) -> bool:
+        """
+
+        :param a:
+        :param b:
+        :return:
+        """
 
 class AsyncLocalValueChangedArgs(Generic[T], ValueType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def CurrentValue(self) -> T: ...
+    def CurrentValue(self) -> T:
+        """
+
+        :return:
+        """
     @property
-    def PreviousValue(self) -> T: ...
+    def PreviousValue(self) -> T:
+        """
+
+        :return:
+        """
     @property
-    def ThreadContextChanged(self) -> BooleanType: ...
+    def ThreadContextChanged(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_CurrentValue(self) -> T: ...
-    def get_PreviousValue(self) -> T: ...
-    def get_ThreadContextChanged(self) -> BooleanType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class AsyncLocalValueMap(ABC, Object):
+    """"""
 
-    # No Sub Enums
+    @classmethod
+    @property
+    def Empty(cls) -> IAsyncLocalValueMap:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Create(
+        cls, key: IAsyncLocal, value: object, treatNullValueAsNonexistent: bool
+    ) -> IAsyncLocalValueMap:
+        """
+
+        :param key:
+        :param value:
+        :param treatNullValueAsNonexistent:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsEmpty(cls, asyncLocalValueMap: IAsyncLocalValueMap) -> bool:
+        """
+
+        :param asyncLocalValueMap:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class AsyncLocal(Generic[T], Object, IAsyncLocal):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, valueChangedHandler: Action[AsyncLocalValueChangedArgs[T]]):
+        """
+
+        :param valueChangedHandler:
+        """
+    @property
+    def Value(self) -> T:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: T) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def OnValueChanged(
+        self, previousValue: object, currentValue: object, contextChanged: bool
+    ) -> None:
+        """
+
+        :param previousValue:
+        :param currentValue:
+        :param contextChanged:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class AutoResetEvent(EventWaitHandle, IDisposable):
+    """"""
+
+    def __init__(self, initialState: bool):
+        """
+
+        :param initialState:
+        """
+    @property
+    def Handle(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    @Handle.setter
+    def Handle(self, value: IntPtr) -> None: ...
+    @property
+    def SafeWaitHandle(self) -> SafeWaitHandle:
+        """
+
+        :return:
+        """
+    @SafeWaitHandle.setter
+    def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetAccessControl(self) -> EventWaitHandleSecurity:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Reset(self) -> bool:
+        """
+
+        :return:
+        """
+    def Set(self) -> bool:
+        """
+
+        :return:
+        """
+    def SetAccessControl(self, eventSecurity: EventWaitHandleSecurity) -> None:
+        """
+
+        :param eventSecurity:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitOne(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
+        """
+
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
+
+class Barrier(Object, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self, participantCount: int):
+        """
+
+        :param participantCount:
+        """
+    @overload
+    def __init__(self, participantCount: int, postPhaseAction: Action[Barrier]):
+        """
+
+        :param participantCount:
+        :param postPhaseAction:
+        """
+    @property
+    def CurrentPhaseNumber(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ParticipantCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ParticipantsRemaining(self) -> int:
+        """
+
+        :return:
+        """
+    def AddParticipant(self) -> int:
+        """
+
+        :return:
+        """
+    def AddParticipants(self, participantCount: int) -> int:
+        """
+
+        :param participantCount:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def RemoveParticipant(self) -> None:
+        """"""
+    def RemoveParticipants(self, participantCount: int) -> None:
+        """
+
+        :param participantCount:
+        """
+    @overload
+    def SignalAndWait(self) -> None:
+        """"""
+    @overload
+    def SignalAndWait(self, cancellationToken: CancellationToken) -> None:
+        """
+
+        :param cancellationToken:
+        """
+    @overload
+    def SignalAndWait(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def SignalAndWait(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def SignalAndWait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param cancellationToken:
+        :return:
+        """
+    @overload
+    def SignalAndWait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
+        """
+
+        :param timeout:
+        :param cancellationToken:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class BarrierPostPhaseException(Exception, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, innerException: Exception):
+        """
+
+        :param innerException:
+        """
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class CancellationCallbackCoreWorkArguments(ValueType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     def __init__(
         self,
         currArrayFragment: SparselyPopulatedArrayFragment[CancellationCallbackInfo],
-        currArrayIndex: IntType,
-    ): ...
+        currArrayIndex: int,
+    ):
+        """
 
-    # No Properties
+        :param currArrayFragment:
+        :param currArrayIndex:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class CancellationCallbackInfo(Object):
+    """"""
 
-    # No Sub Enums
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class CancellationToken(ValueType):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, canceled: bool):
+        """
 
-    def __init__(self, canceled: BooleanType): ...
-
-    # ---------- Properties ---------- #
-
+        :param canceled:
+        """
     @property
-    def CanBeCanceled(self) -> BooleanType: ...
-    @property
-    def IsCancellationRequested(self) -> BooleanType: ...
-    @property
-    def WaitHandle(self) -> WaitHandle: ...
-    @staticmethod
-    @property
-    def _None() -> CancellationToken: ...
+    def CanBeCanceled(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsCancellationRequested(self) -> bool:
+        """
 
+        :return:
+        """
+    @property
+    def WaitHandle(self) -> WaitHandle:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def _None(cls) -> CancellationToken:
+        """
+
+        :return:
+        """
     @overload
-    def Equals(self, other: CancellationToken) -> BooleanType: ...
+    def Equals(self, other: CancellationToken) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
     @overload
-    def Equals(self, other: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def Register(self, callback: Action) -> CancellationTokenRegistration: ...
+    def Register(self, callback: Action) -> CancellationTokenRegistration:
+        """
+
+        :param callback:
+        :return:
+        """
     @overload
     def Register(
-        self, callback: Action, useSynchronizationContext: BooleanType
-    ) -> CancellationTokenRegistration: ...
+        self, callback: Action, useSynchronizationContext: bool
+    ) -> CancellationTokenRegistration:
+        """
+
+        :param callback:
+        :param useSynchronizationContext:
+        :return:
+        """
+    @overload
+    def Register(self, callback: Action[object], state: object) -> CancellationTokenRegistration:
+        """
+
+        :param callback:
+        :param state:
+        :return:
+        """
     @overload
     def Register(
-        self, callback: Action[ObjectType], state: ObjectType
-    ) -> CancellationTokenRegistration: ...
-    @overload
-    def Register(
-        self,
-        callback: Action[ObjectType],
-        state: ObjectType,
-        useSynchronizationContext: BooleanType,
-    ) -> CancellationTokenRegistration: ...
-    def ThrowIfCancellationRequested(self) -> VoidType: ...
-    def get_CanBeCanceled(self) -> BooleanType: ...
-    def get_IsCancellationRequested(self) -> BooleanType: ...
-    @staticmethod
-    def get_None() -> CancellationToken: ...
-    def get_WaitHandle(self) -> WaitHandle: ...
-    @staticmethod
-    def op_Equality(left: CancellationToken, right: CancellationToken) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(left: CancellationToken, right: CancellationToken) -> BooleanType: ...
+        self, callback: Action[object], state: object, useSynchronizationContext: bool
+    ) -> CancellationTokenRegistration:
+        """
 
-    # No Events
+        :param callback:
+        :param state:
+        :param useSynchronizationContext:
+        :return:
+        """
+    def ThrowIfCancellationRequested(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def __eq__(self, other: CancellationToken) -> bool:
+        """
 
-    # No Sub Structs
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: CancellationToken) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: CancellationToken, right: CancellationToken) -> bool:
+        """
 
-    # No Sub Enums
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: CancellationToken, right: CancellationToken) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
 
 class CancellationTokenRegistration(
-    ValueType, IEquatable[CancellationTokenRegistration], IDisposable
+    ValueType, IDisposable, IEquatable[CancellationTokenRegistration]
 ):
-    # No Fields
+    """"""
 
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
+    def Dispose(self) -> None:
+        """"""
     @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
+    def Equals(self, other: CancellationTokenRegistration) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
     @overload
-    def Equals(self, other: CancellationTokenRegistration) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    @staticmethod
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __eq__(self, other: CancellationTokenRegistration) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: CancellationTokenRegistration) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
     def op_Equality(
-        left: CancellationTokenRegistration, right: CancellationTokenRegistration
-    ) -> BooleanType: ...
-    @staticmethod
+        cls, left: CancellationTokenRegistration, right: CancellationTokenRegistration
+    ) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
     def op_Inequality(
-        left: CancellationTokenRegistration, right: CancellationTokenRegistration
-    ) -> BooleanType: ...
+        cls, left: CancellationTokenRegistration, right: CancellationTokenRegistration
+    ) -> bool:
+        """
 
-    # No Events
+        :param left:
+        :param right:
+        :return:
+        """
 
-    # No Sub Classes
+class CancellationTokenSource(Object, IDisposable):
+    """"""
 
-    # No Sub Structs
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, millisecondsDelay: int):
+        """
 
-    # No Sub Interfaces
+        :param millisecondsDelay:
+        """
+    @overload
+    def __init__(self, delay: TimeSpan):
+        """
 
-    # No Sub Enums
+        :param delay:
+        """
+    @property
+    def IsCancellationRequested(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Token(self) -> CancellationToken:
+        """
+
+        :return:
+        """
+    @overload
+    def Cancel(self) -> None:
+        """"""
+    @overload
+    def Cancel(self, throwOnFirstException: bool) -> None:
+        """
+
+        :param throwOnFirstException:
+        """
+    @overload
+    def CancelAfter(self, millisecondsDelay: int) -> None:
+        """
+
+        :param millisecondsDelay:
+        """
+    @overload
+    def CancelAfter(self, delay: TimeSpan) -> None:
+        """
+
+        :param delay:
+        """
+    @classmethod
+    @overload
+    def CreateLinkedTokenSource(cls, tokens: Array[CancellationToken]) -> CancellationTokenSource:
+        """
+
+        :param tokens:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CreateLinkedTokenSource(
+        cls, token1: CancellationToken, token2: CancellationToken
+    ) -> CancellationTokenSource:
+        """
+
+        :param token1:
+        :param token2:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CdsSyncEtwBCLProvider(EventSource, IDisposable):
+    """"""
+
+    Log: Final[ClassVar[CdsSyncEtwBCLProvider]] = ...
+    """
+    
+    :return: 
+    """
+    @property
+    def ConstructionException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def CurrentThreadActivityId(cls) -> Guid:
+        """
+
+        :return:
+        """
+    @property
+    def Guid(self) -> Guid:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Settings(self) -> EventSourceSettings:
+        """
+
+        :return:
+        """
+    def Barrier_PhaseFinished(self, currentSense: bool, phaseNum: int) -> None:
+        """
+
+        :param currentSense:
+        :param phaseNum:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTrait(self, key: str) -> str:
+        """
+
+        :param key:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsEnabled(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :return:
+        """
+    @overload
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords, channel: EventChannel) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :param channel:
+        :return:
+        """
+    def SpinLock_FastPathFailed(self, ownerID: int) -> None:
+        """
+
+        :param ownerID:
+        """
+    def SpinWait_NextSpinWillYield(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Write(self, eventName: str) -> None:
+        """
+
+        :param eventName:
+        """
+    @overload
+    def Write(self, eventName: str, data: T) -> None:
+        """
+
+        :param eventName:
+        :param data:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @overload
+    def Write(
+        self,
+        eventName: str,
+        options: EventSourceOptions,
+        activityId: Guid,
+        relatedActivityId: Guid,
+        data: T,
+    ) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param activityId:
+        :param relatedActivityId:
+        :param data:
+        """
+    EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
+    """"""
+
+class CompressedStack(Object, ISerializable):
+    """"""
+
+    @classmethod
+    def Capture(cls) -> CompressedStack:
+        """
+
+        :return:
+        """
+    def CreateCopy(self) -> CompressedStack:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetCompressedStack(cls) -> CompressedStack:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Run(
+        cls, compressedStack: CompressedStack, callback: ContextCallback, state: object
+    ) -> None:
+        """
+
+        :param compressedStack:
+        :param callback:
+        :param state:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class CompressedStackSwitcher(ValueType, IDisposable):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def Undo(self) -> VoidType: ...
-    @staticmethod
-    def op_Equality(c1: CompressedStackSwitcher, c2: CompressedStackSwitcher) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(c1: CompressedStackSwitcher, c2: CompressedStackSwitcher) -> BooleanType: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    def Undo(self) -> None:
+        """"""
+    def __eq__(self, other: CompressedStackSwitcher) -> bool:
+        """
 
-    # No Sub Classes
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: CompressedStackSwitcher) -> bool:
+        """
 
-    # No Sub Structs
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, c1: CompressedStackSwitcher, c2: CompressedStackSwitcher) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param c1:
+        :param c2:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, c1: CompressedStackSwitcher, c2: CompressedStackSwitcher) -> bool:
+        """
 
-    # No Sub Enums
+        :param c1:
+        :param c2:
+        :return:
+        """
+
+ContextCallback: Callable[[object], None] = ...
+"""
+
+:param state: 
+"""
+
+class CountdownEvent(Object, IDisposable):
+    """"""
+
+    def __init__(self, initialCount: int):
+        """
+
+        :param initialCount:
+        """
+    @property
+    def CurrentCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def InitialCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsSet(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def WaitHandle(self) -> WaitHandle:
+        """
+
+        :return:
+        """
+    @overload
+    def AddCount(self) -> None:
+        """"""
+    @overload
+    def AddCount(self, signalCount: int) -> None:
+        """
+
+        :param signalCount:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Reset(self) -> None:
+        """"""
+    @overload
+    def Reset(self, count: int) -> None:
+        """
+
+        :param count:
+        """
+    @overload
+    def Signal(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def Signal(self, signalCount: int) -> bool:
+        """
+
+        :param signalCount:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def TryAddCount(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def TryAddCount(self, signalCount: int) -> bool:
+        """
+
+        :param signalCount:
+        :return:
+        """
+    @overload
+    def Wait(self) -> None:
+        """"""
+    @overload
+    def Wait(self, cancellationToken: CancellationToken) -> None:
+        """
+
+        :param cancellationToken:
+        """
+    @overload
+    def Wait(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def Wait(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param cancellationToken:
+        :return:
+        """
+    @overload
+    def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
+        """
+
+        :param timeout:
+        :param cancellationToken:
+        :return:
+        """
 
 class DeferredDisposableLifetime(Generic[T], ValueType):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def AddRef(self, obj: T) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def Dispose(self, obj: T) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def AddRef(self, obj: T) -> BooleanType: ...
-    def Dispose(self, obj: T) -> VoidType: ...
-    def Release(self, obj: T) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Release(self, obj: T) -> None:
+        """
 
-    # No Sub Structs
+        :param obj:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
+class DomainCompressedStack(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventResetMode(Enum):
+    """"""
+
+    AutoReset: EventResetMode = ...
+    """"""
+    ManualReset: EventResetMode = ...
+    """"""
+
+class EventWaitHandle(WaitHandle, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self, initialState: bool, mode: EventResetMode):
+        """
+
+        :param initialState:
+        :param mode:
+        """
+    @overload
+    def __init__(self, initialState: bool, mode: EventResetMode, name: str):
+        """
+
+        :param initialState:
+        :param mode:
+        :param name:
+        """
+    @overload
+    def __init__(self, initialState: bool, mode: EventResetMode, name: str, createdNew: bool):
+        """
+
+        :param initialState:
+        :param mode:
+        :param name:
+        :param createdNew:
+        """
+    @overload
+    def __init__(
+        self,
+        initialState: bool,
+        mode: EventResetMode,
+        name: str,
+        createdNew: bool,
+        eventSecurity: EventWaitHandleSecurity,
+    ):
+        """
+
+        :param initialState:
+        :param mode:
+        :param name:
+        :param createdNew:
+        :param eventSecurity:
+        """
+    @property
+    def Handle(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    @Handle.setter
+    def Handle(self, value: IntPtr) -> None: ...
+    @property
+    def SafeWaitHandle(self) -> SafeWaitHandle:
+        """
+
+        :return:
+        """
+    @SafeWaitHandle.setter
+    def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetAccessControl(self) -> EventWaitHandleSecurity:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def OpenExisting(cls, name: str) -> EventWaitHandle:
+        """
+
+        :param name:
+        :return:
+        """
+    @classmethod
+    @overload
+    def OpenExisting(cls, name: str, rights: EventWaitHandleRights) -> EventWaitHandle:
+        """
+
+        :param name:
+        :param rights:
+        :return:
+        """
+    def Reset(self) -> bool:
+        """
+
+        :return:
+        """
+    def Set(self) -> bool:
+        """
+
+        :return:
+        """
+    def SetAccessControl(self, eventSecurity: EventWaitHandleSecurity) -> None:
+        """
+
+        :param eventSecurity:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryOpenExisting(cls, name: str, result: EventWaitHandle) -> Tuple[bool, EventWaitHandle]:
+        """
+
+        :param name:
+        :param result:
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryOpenExisting(
+        cls, name: str, rights: EventWaitHandleRights, result: EventWaitHandle
+    ) -> Tuple[bool, EventWaitHandle]:
+        """
+
+        :param name:
+        :param rights:
+        :param result:
+        :return:
+        """
+    @overload
+    def WaitOne(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
+        """
+
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
+
+class ExecutionContext(Object, ISerializable, IDisposable):
+    """"""
+
+    @classmethod
+    def Capture(cls) -> ExecutionContext:
+        """
+
+        :return:
+        """
+    def CreateCopy(self) -> ExecutionContext:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsFlowSuppressed(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    def RestoreFlow(cls) -> None:
+        """"""
+    @classmethod
+    def Run(
+        cls, executionContext: ExecutionContext, callback: ContextCallback, state: object
+    ) -> None:
+        """
+
+        :param executionContext:
+        :param callback:
+        :param state:
+        """
+    @classmethod
+    def SuppressFlow(cls) -> AsyncFlowControl:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ExecutionContextSwitcher(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class Gen2GcCallback(CriticalFinalizerObject):
+    """"""
 
-    # No Sub Structs
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Register(cls, callback: Func[object, bool], targetObj: object) -> None:
+        """
+
+        :param callback:
+        :param targetObj:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class HostExecutionContext(Object, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, state: object):
+        """
+
+        :param state:
+        """
+    def CreateCopy(self) -> HostExecutionContext:
+        """
+
+        :return:
+        """
+    @overload
+    def Dispose(self) -> None:
+        """"""
+    @overload
+    def Dispose(self, disposing: bool) -> None:
+        """
+
+        :param disposing:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class HostExecutionContextManager(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Capture(self) -> HostExecutionContext:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Revert(self, previousState: object) -> None:
+        """
+
+        :param previousState:
+        """
+    def SetHostExecutionContext(self, hostExecutionContext: HostExecutionContext) -> object:
+        """
+
+        :param hostExecutionContext:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class HostExecutionContextSwitcher(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Undo(cls, switcherObject: object) -> None:
+        """
+
+        :param switcherObject:
+        """
+
+class IAsyncLocal:
+    """"""
+
+    def OnValueChanged(
+        self, previousValue: object, currentValue: object, contextChanged: bool
+    ) -> None:
+        """
+
+        :param previousValue:
+        :param currentValue:
+        :param contextChanged:
+        """
+
+class IAsyncLocalValueMap:
+    """"""
+
+    def Set(
+        self, key: IAsyncLocal, value: object, treatNullValueAsNonexistent: bool
+    ) -> IAsyncLocalValueMap:
+        """
+
+        :param key:
+        :param value:
+        :param treatNullValueAsNonexistent:
+        :return:
+        """
+    def TryGetValue(self, key: IAsyncLocal, value: object) -> Tuple[bool, object]:
+        """
+
+        :param key:
+        :param value:
+        :return:
+        """
+
+class IDeferredDisposable:
+    """"""
+
+    def OnFinalRelease(self, disposed: bool) -> None:
+        """
+
+        :param disposed:
+        """
+
+IOCompletionCallback: Callable[[int, int, NativeOverlapped], None] = ...
+"""
+
+:param errorCode: 
+:param numBytes: 
+:param pOVERLAP: 
+"""
+
+class IThreadPoolWorkItem:
+    """"""
+
+    def ExecuteWorkItem(self) -> None:
+        """"""
+    def MarkAborted(self, tae: ThreadAbortException) -> None:
+        """
+
+        :param tae:
+        """
+
+class IUnknownSafeHandle(SafeHandle, IDisposable):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def IsClosed(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
+
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
+
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Interlocked(ABC, Object):
+    """"""
+
+    @classmethod
+    @overload
+    def Add(cls, location1: int, value: int) -> int:
+        """
+
+        :param location1:
+        :param value:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Add(cls, location1: int, value: int) -> int:
+        """
+
+        :param location1:
+        :param value:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CompareExchange(cls, location1: T, value: T, comparand: T) -> T:
+        """
+
+        :param location1:
+        :param value:
+        :param comparand:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CompareExchange(cls, location1: float, value: float, comparand: float) -> float:
+        """
+
+        :param location1:
+        :param value:
+        :param comparand:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CompareExchange(cls, location1: int, value: int, comparand: int) -> int:
+        """
+
+        :param location1:
+        :param value:
+        :param comparand:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CompareExchange(cls, location1: int, value: int, comparand: int) -> int:
+        """
+
+        :param location1:
+        :param value:
+        :param comparand:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CompareExchange(cls, location1: IntPtr, value: IntPtr, comparand: IntPtr) -> IntPtr:
+        """
+
+        :param location1:
+        :param value:
+        :param comparand:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CompareExchange(cls, location1: object, value: object, comparand: object) -> object:
+        """
+
+        :param location1:
+        :param value:
+        :param comparand:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CompareExchange(cls, location1: float, value: float, comparand: float) -> float:
+        """
+
+        :param location1:
+        :param value:
+        :param comparand:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Decrement(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Decrement(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exchange(cls, location1: T, value: T) -> T:
+        """
+
+        :param location1:
+        :param value:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exchange(cls, location1: float, value: float) -> float:
+        """
+
+        :param location1:
+        :param value:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exchange(cls, location1: int, value: int) -> int:
+        """
+
+        :param location1:
+        :param value:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exchange(cls, location1: int, value: int) -> int:
+        """
+
+        :param location1:
+        :param value:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exchange(cls, location1: IntPtr, value: IntPtr) -> IntPtr:
+        """
+
+        :param location1:
+        :param value:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exchange(cls, location1: object, value: object) -> object:
+        """
+
+        :param location1:
+        :param value:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exchange(cls, location1: float, value: float) -> float:
+        """
+
+        :param location1:
+        :param value:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def Increment(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Increment(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    def MemoryBarrier(cls) -> None:
+        """"""
+    @classmethod
+    def Read(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    def SpeculationBarrier(cls) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+InternalCrossContextDelegate: Callable[[Array[object]], object] = ...
+"""
+
+:param args: 
+:return: 
+"""
+
+class LazyHelpers(ABC, Generic[T], Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class LazyInitializer(ABC, Object):
+    """"""
+
+    @classmethod
+    @overload
+    def EnsureInitialized(cls, target: T) -> T:
+        """
+
+        :param target:
+        :return:
+        """
+    @classmethod
+    @overload
+    def EnsureInitialized(cls, target: T, valueFactory: Func[T]) -> T:
+        """
+
+        :param target:
+        :param valueFactory:
+        :return:
+        """
+    @classmethod
+    @overload
+    def EnsureInitialized(cls, target: T, initialized: bool, syncLock: object) -> T:
+        """
+
+        :param target:
+        :param initialized:
+        :param syncLock:
+        :return:
+        """
+    @classmethod
+    @overload
+    def EnsureInitialized(
+        cls, target: T, initialized: bool, syncLock: object, valueFactory: Func[T]
+    ) -> T:
+        """
+
+        :param target:
+        :param initialized:
+        :param syncLock:
+        :param valueFactory:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class LazyThreadSafetyMode(Enum):
+    """"""
+
+    _None: LazyThreadSafetyMode = ...
+    """"""
+    PublicationOnly: LazyThreadSafetyMode = ...
+    """"""
+    ExecutionAndPublication: LazyThreadSafetyMode = ...
+    """"""
 
 class LockCookie(ValueType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
+    """"""
 
     @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
+    def Equals(self, obj: LockCookie) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def Equals(self, obj: LockCookie) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    @staticmethod
-    def op_Equality(a: LockCookie, b: LockCookie) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(a: LockCookie, b: LockCookie) -> BooleanType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def __eq__(self, other: LockCookie) -> bool:
+        """
 
-    # No Sub Enums
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: LockCookie) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, a: LockCookie, b: LockCookie) -> bool:
+        """
+
+        :param a:
+        :param b:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, a: LockCookie, b: LockCookie) -> bool:
+        """
+
+        :param a:
+        :param b:
+        :return:
+        """
+
+class LockRecursionException(Exception, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class LockRecursionPolicy(Enum):
+    """"""
+
+    NoRecursion: LockRecursionPolicy = ...
+    """"""
+    SupportsRecursion: LockRecursionPolicy = ...
+    """"""
+
+class ManualResetEvent(EventWaitHandle, IDisposable):
+    """"""
+
+    def __init__(self, initialState: bool):
+        """
+
+        :param initialState:
+        """
+    @property
+    def Handle(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    @Handle.setter
+    def Handle(self, value: IntPtr) -> None: ...
+    @property
+    def SafeWaitHandle(self) -> SafeWaitHandle:
+        """
+
+        :return:
+        """
+    @SafeWaitHandle.setter
+    def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetAccessControl(self) -> EventWaitHandleSecurity:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Reset(self) -> bool:
+        """
+
+        :return:
+        """
+    def Set(self) -> bool:
+        """
+
+        :return:
+        """
+    def SetAccessControl(self, eventSecurity: EventWaitHandleSecurity) -> None:
+        """
+
+        :param eventSecurity:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitOne(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
+        """
+
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
+
+class ManualResetEventSlim(Object, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, initialState: bool):
+        """
+
+        :param initialState:
+        """
+    @overload
+    def __init__(self, initialState: bool, spinCount: int):
+        """
+
+        :param initialState:
+        :param spinCount:
+        """
+    @property
+    def IsSet(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def SpinCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def WaitHandle(self) -> WaitHandle:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Set(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Wait(self) -> None:
+        """"""
+    @overload
+    def Wait(self, cancellationToken: CancellationToken) -> None:
+        """
+
+        :param cancellationToken:
+        """
+    @overload
+    def Wait(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def Wait(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param cancellationToken:
+        :return:
+        """
+    @overload
+    def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
+        """
+
+        :param timeout:
+        :param cancellationToken:
+        :return:
+        """
+
+class Monitor(ABC, Object):
+    """"""
+
+    @classmethod
+    @overload
+    def Enter(cls, obj: object) -> None:
+        """
+
+        :param obj:
+        """
+    @classmethod
+    @overload
+    def Enter(cls, obj: object, lockTaken: bool) -> None:
+        """
+
+        :param obj:
+        :param lockTaken:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def Exit(cls, obj: object) -> None:
+        """
+
+        :param obj:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsEntered(cls, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def Pulse(cls, obj: object) -> None:
+        """
+
+        :param obj:
+        """
+    @classmethod
+    def PulseAll(cls, obj: object) -> None:
+        """
+
+        :param obj:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryEnter(cls, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryEnter(cls, obj: object, lockTaken: bool) -> None:
+        """
+
+        :param obj:
+        :param lockTaken:
+        """
+    @classmethod
+    @overload
+    def TryEnter(cls, obj: object, millisecondsTimeout: int) -> bool:
+        """
+
+        :param obj:
+        :param millisecondsTimeout:
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryEnter(cls, obj: object, timeout: TimeSpan) -> bool:
+        """
+
+        :param obj:
+        :param timeout:
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryEnter(cls, obj: object, millisecondsTimeout: int, lockTaken: bool) -> None:
+        """
+
+        :param obj:
+        :param millisecondsTimeout:
+        :param lockTaken:
+        """
+    @classmethod
+    @overload
+    def TryEnter(cls, obj: object, timeout: TimeSpan, lockTaken: bool) -> None:
+        """
+
+        :param obj:
+        :param timeout:
+        :param lockTaken:
+        """
+    @classmethod
+    @overload
+    def Wait(cls, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Wait(cls, obj: object, millisecondsTimeout: int) -> bool:
+        """
+
+        :param obj:
+        :param millisecondsTimeout:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Wait(cls, obj: object, timeout: TimeSpan) -> bool:
+        """
+
+        :param obj:
+        :param timeout:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Wait(cls, obj: object, millisecondsTimeout: int, exitContext: bool) -> bool:
+        """
+
+        :param obj:
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Wait(cls, obj: object, timeout: TimeSpan, exitContext: bool) -> bool:
+        """
+
+        :param obj:
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
+
+class Mutex(WaitHandle, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, initiallyOwned: bool):
+        """
+
+        :param initiallyOwned:
+        """
+    @overload
+    def __init__(self, initiallyOwned: bool, name: str):
+        """
+
+        :param initiallyOwned:
+        :param name:
+        """
+    @overload
+    def __init__(self, initiallyOwned: bool, name: str, createdNew: bool):
+        """
+
+        :param initiallyOwned:
+        :param name:
+        :param createdNew:
+        """
+    @overload
+    def __init__(
+        self, initiallyOwned: bool, name: str, createdNew: bool, mutexSecurity: MutexSecurity
+    ):
+        """
+
+        :param initiallyOwned:
+        :param name:
+        :param createdNew:
+        :param mutexSecurity:
+        """
+    @property
+    def Handle(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    @Handle.setter
+    def Handle(self, value: IntPtr) -> None: ...
+    @property
+    def SafeWaitHandle(self) -> SafeWaitHandle:
+        """
+
+        :return:
+        """
+    @SafeWaitHandle.setter
+    def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetAccessControl(self) -> MutexSecurity:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def OpenExisting(cls, name: str) -> Mutex:
+        """
+
+        :param name:
+        :return:
+        """
+    @classmethod
+    @overload
+    def OpenExisting(cls, name: str, rights: MutexRights) -> Mutex:
+        """
+
+        :param name:
+        :param rights:
+        :return:
+        """
+    def ReleaseMutex(self) -> None:
+        """"""
+    def SetAccessControl(self, mutexSecurity: MutexSecurity) -> None:
+        """
+
+        :param mutexSecurity:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryOpenExisting(cls, name: str, result: Mutex) -> Tuple[bool, Mutex]:
+        """
+
+        :param name:
+        :param result:
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryOpenExisting(cls, name: str, rights: MutexRights, result: Mutex) -> Tuple[bool, Mutex]:
+        """
+
+        :param name:
+        :param rights:
+        :param result:
+        :return:
+        """
+    @overload
+    def WaitOne(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
+        """
+
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
 
 class NativeOverlapped(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
+    EventHandle: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    InternalHigh: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    InternalLow: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    OffsetHigh: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    OffsetLow: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Overlapped(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, offsetLo: int, offsetHi: int, hEvent: int, ar: IAsyncResult):
+        """
+
+        :param offsetLo:
+        :param offsetHi:
+        :param hEvent:
+        :param ar:
+        """
+    @overload
+    def __init__(self, offsetLo: int, offsetHi: int, hEvent: IntPtr, ar: IAsyncResult):
+        """
+
+        :param offsetLo:
+        :param offsetHi:
+        :param hEvent:
+        :param ar:
+        """
     @property
-    def EventHandle(self) -> NIntType: ...
+    def AsyncResult(self) -> IAsyncResult:
+        """
+
+        :return:
+        """
+    @AsyncResult.setter
+    def AsyncResult(self, value: IAsyncResult) -> None: ...
+    @property
+    def EventHandle(self) -> int:
+        """
+
+        :return:
+        """
     @EventHandle.setter
-    def EventHandle(self, value: NIntType) -> None: ...
+    def EventHandle(self, value: int) -> None: ...
     @property
-    def InternalHigh(self) -> NIntType: ...
-    @InternalHigh.setter
-    def InternalHigh(self, value: NIntType) -> None: ...
+    def EventHandleIntPtr(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    @EventHandleIntPtr.setter
+    def EventHandleIntPtr(self, value: IntPtr) -> None: ...
     @property
-    def InternalLow(self) -> NIntType: ...
-    @InternalLow.setter
-    def InternalLow(self, value: NIntType) -> None: ...
-    @property
-    def OffsetHigh(self) -> IntType: ...
+    def OffsetHigh(self) -> int:
+        """
+
+        :return:
+        """
     @OffsetHigh.setter
-    def OffsetHigh(self, value: IntType) -> None: ...
+    def OffsetHigh(self, value: int) -> None: ...
     @property
-    def OffsetLow(self) -> IntType: ...
+    def OffsetLow(self) -> int:
+        """
+
+        :return:
+        """
     @OffsetLow.setter
-    def OffsetLow(self, value: IntType) -> None: ...
+    def OffsetLow(self, value: int) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def Free(cls, nativeOverlappedPtr: NativeOverlapped) -> None:
+        """
 
-    # No Properties
+        :param nativeOverlappedPtr:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def Pack(self, iocb: IOCompletionCallback) -> NativeOverlapped:
+        """
 
-    # No Sub Classes
+        :param iocb:
+        :return:
+        """
+    @overload
+    def Pack(self, iocb: IOCompletionCallback, userData: object) -> NativeOverlapped:
+        """
 
-    # No Sub Structs
+        :param iocb:
+        :param userData:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @classmethod
+    def Unpack(cls, nativeOverlappedPtr: NativeOverlapped) -> Overlapped:
+        """
 
-    # No Sub Enums
+        :param nativeOverlappedPtr:
+        :return:
+        """
+    @overload
+    def UnsafePack(self, iocb: IOCompletionCallback) -> NativeOverlapped:
+        """
+
+        :param iocb:
+        :return:
+        """
+    @overload
+    def UnsafePack(self, iocb: IOCompletionCallback, userData: object) -> NativeOverlapped:
+        """
+
+        :param iocb:
+        :param userData:
+        :return:
+        """
+
+class OverlappedData(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+ParameterizedThreadStart: Callable[[object], None] = ...
+"""
+
+:param obj: 
+"""
+
+class PinnableBufferCache(Object):
+    """"""
+
+    def __init__(self, cacheName: str, numberOfElements: int):
+        """
+
+        :param cacheName:
+        :param numberOfElements:
+        """
+    def AllocateBuffer(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FreeBuffer(self, buffer: Array[int]) -> None:
+        """
+
+        :param buffer:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PinnableBufferCacheEventSource(EventSource, IDisposable):
+    """"""
+
+    Log: Final[ClassVar[PinnableBufferCacheEventSource]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    @property
+    def ConstructionException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def CurrentThreadActivityId(cls) -> Guid:
+        """
+
+        :return:
+        """
+    @property
+    def Guid(self) -> Guid:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Settings(self) -> EventSourceSettings:
+        """
+
+        :return:
+        """
+    def AgePendingBuffersResults(
+        self, cacheName: str, promotedToFreeListCount: int, heldBackCount: int
+    ) -> None:
+        """
+
+        :param cacheName:
+        :param promotedToFreeListCount:
+        :param heldBackCount:
+        """
+    def AllocateBuffer(
+        self, cacheName: str, objectId: int, objectHash: int, objectGen: int, freeCountAfter: int
+    ) -> None:
+        """
+
+        :param cacheName:
+        :param objectId:
+        :param objectHash:
+        :param objectGen:
+        :param freeCountAfter:
+        """
+    def AllocateBufferAged(self, cacheName: str, agedCount: int) -> None:
+        """
+
+        :param cacheName:
+        :param agedCount:
+        """
+    def AllocateBufferCreatingNewBuffers(
+        self, cacheName: str, totalBuffsBefore: int, objectCount: int
+    ) -> None:
+        """
+
+        :param cacheName:
+        :param totalBuffsBefore:
+        :param objectCount:
+        """
+    def AllocateBufferFreeListEmpty(self, cacheName: str, notGen2CountBefore: int) -> None:
+        """
+
+        :param cacheName:
+        :param notGen2CountBefore:
+        """
+    def AllocateBufferFromNotGen2(self, cacheName: str, notGen2CountAfter: int) -> None:
+        """
+
+        :param cacheName:
+        :param notGen2CountAfter:
+        """
+    def Create(self, cacheName: str) -> None:
+        """
+
+        :param cacheName:
+        """
+    def DebugMessage(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    def DebugMessage1(self, message: str, value: int) -> None:
+        """
+
+        :param message:
+        :param value:
+        """
+    def DebugMessage2(self, message: str, value1: int, value2: int) -> None:
+        """
+
+        :param message:
+        :param value1:
+        :param value2:
+        """
+    def DebugMessage3(self, message: str, value1: int, value2: int, value3: int) -> None:
+        """
+
+        :param message:
+        :param value1:
+        :param value2:
+        :param value3:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FreeBuffer(
+        self, cacheName: str, objectId: int, objectHash: int, freeCountBefore: int
+    ) -> None:
+        """
+
+        :param cacheName:
+        :param objectId:
+        :param objectHash:
+        :param freeCountBefore:
+        """
+    def FreeBufferNull(self, cacheName: str, freeCountBefore: int) -> None:
+        """
+
+        :param cacheName:
+        :param freeCountBefore:
+        """
+    def FreeBufferStillTooYoung(self, cacheName: str, notGen2CountBefore: int) -> None:
+        """
+
+        :param cacheName:
+        :param notGen2CountBefore:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetTrait(self, key: str) -> str:
+        """
+
+        :param key:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsEnabled(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :return:
+        """
+    @overload
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords, channel: EventChannel) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :param channel:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TrimCheck(
+        self, cacheName: str, totalBuffs: int, neededMoreThanFreeList: bool, deltaMSec: int
+    ) -> None:
+        """
+
+        :param cacheName:
+        :param totalBuffs:
+        :param neededMoreThanFreeList:
+        :param deltaMSec:
+        """
+    def TrimExperiment(
+        self, cacheName: str, totalBuffs: int, freeListCount: int, numTrimTrial: int
+    ) -> None:
+        """
+
+        :param cacheName:
+        :param totalBuffs:
+        :param freeListCount:
+        :param numTrimTrial:
+        """
+    def TrimFlush(
+        self, cacheName: str, totalBuffs: int, freeListCount: int, notGen2CountBefore: int
+    ) -> None:
+        """
+
+        :param cacheName:
+        :param totalBuffs:
+        :param freeListCount:
+        :param notGen2CountBefore:
+        """
+    def TrimFree(self, cacheName: str, totalBuffs: int, freeListCount: int, toBeFreed: int) -> None:
+        """
+
+        :param cacheName:
+        :param totalBuffs:
+        :param freeListCount:
+        :param toBeFreed:
+        """
+    def TrimFreeSizeOK(self, cacheName: str, totalBuffs: int, freeListCount: int) -> None:
+        """
+
+        :param cacheName:
+        :param totalBuffs:
+        :param freeListCount:
+        """
+    def WalkFreeListResult(
+        self, cacheName: str, freeListCount: int, gen0BuffersInFreeList: int
+    ) -> None:
+        """
+
+        :param cacheName:
+        :param freeListCount:
+        :param gen0BuffersInFreeList:
+        """
+    @overload
+    def Write(self, eventName: str) -> None:
+        """
+
+        :param eventName:
+        """
+    @overload
+    def Write(self, eventName: str, data: T) -> None:
+        """
+
+        :param eventName:
+        :param data:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @overload
+    def Write(
+        self,
+        eventName: str,
+        options: EventSourceOptions,
+        activityId: Guid,
+        relatedActivityId: Guid,
+        data: T,
+    ) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param activityId:
+        :param relatedActivityId:
+        :param data:
+        """
+    EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
+    """"""
+
+class PlatformHelper(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PreAllocatedOverlapped(Object, IDeferredDisposable, IDisposable):
+    """"""
+
+    def __init__(self, callback: IOCompletionCallback, state: object, pinData: object):
+        """
+
+        :param callback:
+        :param state:
+        :param pinData:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def OnFinalRelease(self, disposed: bool) -> None:
+        """
+
+        :param disposed:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class QueueUserWorkItemCallback(Object, IThreadPoolWorkItem):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ExecuteWorkItem(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MarkAborted(self, tae: ThreadAbortException) -> None:
+        """
+
+        :param tae:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReaderWriterCount(Object):
+    """"""
+
+    lockID: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    next: Final[ReaderWriterCount] = ...
+    """
+    
+    :return: 
+    """
+    readercount: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    upgradecount: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    writercount: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReaderWriterLock(CriticalFinalizerObject):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def IsReaderLockHeld(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsWriterLockHeld(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def WriterSeqNum(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def AcquireReaderLock(self, millisecondsTimeout: int) -> None:
+        """
+
+        :param millisecondsTimeout:
+        """
+    @overload
+    def AcquireReaderLock(self, timeout: TimeSpan) -> None:
+        """
+
+        :param timeout:
+        """
+    @overload
+    def AcquireWriterLock(self, millisecondsTimeout: int) -> None:
+        """
+
+        :param millisecondsTimeout:
+        """
+    @overload
+    def AcquireWriterLock(self, timeout: TimeSpan) -> None:
+        """
+
+        :param timeout:
+        """
+    def AnyWritersSince(self, seqNum: int) -> bool:
+        """
+
+        :param seqNum:
+        :return:
+        """
+    def DowngradeFromWriterLock(self, lockCookie: LockCookie) -> None:
+        """
+
+        :param lockCookie:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ReleaseLock(self) -> LockCookie:
+        """
+
+        :return:
+        """
+    def ReleaseReaderLock(self) -> None:
+        """"""
+    def ReleaseWriterLock(self) -> None:
+        """"""
+    def RestoreLock(self, lockCookie: LockCookie) -> None:
+        """
+
+        :param lockCookie:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def UpgradeToWriterLock(self, millisecondsTimeout: int) -> LockCookie:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def UpgradeToWriterLock(self, timeout: TimeSpan) -> LockCookie:
+        """
+
+        :param timeout:
+        :return:
+        """
+
+class ReaderWriterLockSlim(Object, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, recursionPolicy: LockRecursionPolicy):
+        """
+
+        :param recursionPolicy:
+        """
+    @property
+    def CurrentReadCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadLockHeld(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsUpgradeableReadLockHeld(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsWriteLockHeld(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def RecursionPolicy(self) -> LockRecursionPolicy:
+        """
+
+        :return:
+        """
+    @property
+    def RecursiveReadCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def RecursiveUpgradeCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def RecursiveWriteCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def WaitingReadCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def WaitingUpgradeCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def WaitingWriteCount(self) -> int:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EnterReadLock(self) -> None:
+        """"""
+    def EnterUpgradeableReadLock(self) -> None:
+        """"""
+    def EnterWriteLock(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ExitReadLock(self) -> None:
+        """"""
+    def ExitUpgradeableReadLock(self) -> None:
+        """"""
+    def ExitWriteLock(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def TryEnterReadLock(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def TryEnterReadLock(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def TryEnterUpgradeableReadLock(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def TryEnterUpgradeableReadLock(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def TryEnterWriteLock(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def TryEnterWriteLock(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+
+class RegisteredWaitHandle(MarshalByRefObject):
+    """"""
+
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Unregister(self, waitObject: WaitHandle) -> bool:
+        """
+
+        :param waitObject:
+        :return:
+        """
+
+class RegisteredWaitHandleSafe(CriticalFinalizerObject):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SafeCompressedStackHandle(SafeHandle, IDisposable):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def IsClosed(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
+
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
+
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Semaphore(WaitHandle, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self, initialCount: int, maximumCount: int):
+        """
+
+        :param initialCount:
+        :param maximumCount:
+        """
+    @overload
+    def __init__(self, initialCount: int, maximumCount: int, name: str):
+        """
+
+        :param initialCount:
+        :param maximumCount:
+        :param name:
+        """
+    @overload
+    def __init__(self, initialCount: int, maximumCount: int, name: str, createdNew: bool):
+        """
+
+        :param initialCount:
+        :param maximumCount:
+        :param name:
+        :param createdNew:
+        """
+    @overload
+    def __init__(
+        self,
+        initialCount: int,
+        maximumCount: int,
+        name: str,
+        createdNew: bool,
+        semaphoreSecurity: SemaphoreSecurity,
+    ):
+        """
+
+        :param initialCount:
+        :param maximumCount:
+        :param name:
+        :param createdNew:
+        :param semaphoreSecurity:
+        """
+    @property
+    def Handle(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    @Handle.setter
+    def Handle(self, value: IntPtr) -> None: ...
+    @property
+    def SafeWaitHandle(self) -> SafeWaitHandle:
+        """
+
+        :return:
+        """
+    @SafeWaitHandle.setter
+    def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetAccessControl(self) -> SemaphoreSecurity:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def OpenExisting(cls, name: str) -> Semaphore:
+        """
+
+        :param name:
+        :return:
+        """
+    @classmethod
+    @overload
+    def OpenExisting(cls, name: str, rights: SemaphoreRights) -> Semaphore:
+        """
+
+        :param name:
+        :param rights:
+        :return:
+        """
+    @overload
+    def Release(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def Release(self, releaseCount: int) -> int:
+        """
+
+        :param releaseCount:
+        :return:
+        """
+    def SetAccessControl(self, semaphoreSecurity: SemaphoreSecurity) -> None:
+        """
+
+        :param semaphoreSecurity:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryOpenExisting(cls, name: str, result: Semaphore) -> Tuple[bool, Semaphore]:
+        """
+
+        :param name:
+        :param result:
+        :return:
+        """
+    @classmethod
+    @overload
+    def TryOpenExisting(
+        cls, name: str, rights: SemaphoreRights, result: Semaphore
+    ) -> Tuple[bool, Semaphore]:
+        """
+
+        :param name:
+        :param rights:
+        :param result:
+        :return:
+        """
+    @overload
+    def WaitOne(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
+        """
+
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
+
+class SemaphoreFullException(SystemException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SemaphoreSlim(Object, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self, initialCount: int):
+        """
+
+        :param initialCount:
+        """
+    @overload
+    def __init__(self, initialCount: int, maxCount: int):
+        """
+
+        :param initialCount:
+        :param maxCount:
+        """
+    @property
+    def AvailableWaitHandle(self) -> WaitHandle:
+        """
+
+        :return:
+        """
+    @property
+    def CurrentCount(self) -> int:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Release(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def Release(self, releaseCount: int) -> int:
+        """
+
+        :param releaseCount:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Wait(self) -> None:
+        """"""
+    @overload
+    def Wait(self, cancellationToken: CancellationToken) -> None:
+        """
+
+        :param cancellationToken:
+        """
+    @overload
+    def Wait(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def Wait(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param cancellationToken:
+        :return:
+        """
+    @overload
+    def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
+        """
+
+        :param timeout:
+        :param cancellationToken:
+        :return:
+        """
+    @overload
+    def WaitAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitAsync(self, cancellationToken: CancellationToken) -> Task:
+        """
+
+        :param cancellationToken:
+        :return:
+        """
+    @overload
+    def WaitAsync(self, millisecondsTimeout: int) -> Task[bool]:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def WaitAsync(self, timeout: TimeSpan) -> Task[bool]:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def WaitAsync(
+        self, millisecondsTimeout: int, cancellationToken: CancellationToken
+    ) -> Task[bool]:
+        """
+
+        :param millisecondsTimeout:
+        :param cancellationToken:
+        :return:
+        """
+    @overload
+    def WaitAsync(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> Task[bool]:
+        """
+
+        :param timeout:
+        :param cancellationToken:
+        :return:
+        """
+
+SendOrPostCallback: Callable[[object], None] = ...
+"""
+
+:param state: 
+"""
 
 class SparselyPopulatedArrayAddInfo(Generic[T], ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class SparselyPopulatedArrayFragment(Generic[T], Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SparselyPopulatedArray(Generic[T], Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SpinLock(ValueType):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, enableThreadOwnerTracking: bool):
+        """
 
-    def __init__(self, enableThreadOwnerTracking: BooleanType): ...
-
-    # ---------- Properties ---------- #
-
+        :param enableThreadOwnerTracking:
+        """
     @property
-    def IsHeld(self) -> BooleanType: ...
+    def IsHeld(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsHeldByCurrentThread(self) -> BooleanType: ...
+    def IsHeldByCurrentThread(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IsThreadOwnerTrackingEnabled(self) -> BooleanType: ...
+    def IsThreadOwnerTrackingEnabled(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Enter(self, lockTaken: bool) -> None:
+        """
 
-    def Enter(self, lockTaken: BooleanType) -> Tuple[VoidType, BooleanType]: ...
+        :param lockTaken:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def Exit(self) -> VoidType: ...
+    def Exit(self) -> None:
+        """"""
     @overload
-    def Exit(self, useMemoryBarrier: BooleanType) -> VoidType: ...
+    def Exit(self, useMemoryBarrier: bool) -> None:
+        """
+
+        :param useMemoryBarrier:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def TryEnter(self, lockTaken: BooleanType) -> Tuple[VoidType, BooleanType]: ...
+    def TryEnter(self, lockTaken: bool) -> None:
+        """
+
+        :param lockTaken:
+        """
     @overload
-    def TryEnter(
-        self, timeout: TimeSpan, lockTaken: BooleanType
-    ) -> Tuple[VoidType, BooleanType]: ...
+    def TryEnter(self, millisecondsTimeout: int, lockTaken: bool) -> None:
+        """
+
+        :param millisecondsTimeout:
+        :param lockTaken:
+        """
     @overload
-    def TryEnter(
-        self, millisecondsTimeout: IntType, lockTaken: BooleanType
-    ) -> Tuple[VoidType, BooleanType]: ...
-    def get_IsHeld(self) -> BooleanType: ...
-    def get_IsHeldByCurrentThread(self) -> BooleanType: ...
-    def get_IsThreadOwnerTrackingEnabled(self) -> BooleanType: ...
+    def TryEnter(self, timeout: TimeSpan, lockTaken: bool) -> None:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param timeout:
+        :param lockTaken:
+        """
 
 class SpinWait(ValueType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def NextSpinWillYield(self) -> BooleanType: ...
+    def NextSpinWillYield(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Reset(self) -> VoidType: ...
-    def SpinOnce(self) -> VoidType: ...
-    @staticmethod
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def SpinOnce(self) -> None:
+        """"""
+    @classmethod
     @overload
-    def SpinUntil(condition: Func[BooleanType]) -> VoidType: ...
-    @staticmethod
+    def SpinUntil(cls, condition: Func[bool]) -> None:
+        """
+
+        :param condition:
+        """
+    @classmethod
     @overload
-    def SpinUntil(condition: Func[BooleanType], timeout: TimeSpan) -> BooleanType: ...
-    @staticmethod
+    def SpinUntil(cls, condition: Func[bool], millisecondsTimeout: int) -> bool:
+        """
+
+        :param condition:
+        :param millisecondsTimeout:
+        :return:
+        """
+    @classmethod
     @overload
-    def SpinUntil(condition: Func[BooleanType], millisecondsTimeout: IntType) -> BooleanType: ...
-    def get_Count(self) -> IntType: ...
-    def get_NextSpinWillYield(self) -> BooleanType: ...
+    def SpinUntil(cls, condition: Func[bool], timeout: TimeSpan) -> bool:
+        """
 
-    # No Events
+        :param condition:
+        :param timeout:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class StackCrawlMark(Enum):
+    """"""
 
-    # No Sub Interfaces
+    LookForMe: StackCrawlMark = ...
+    """"""
+    LookForMyCaller: StackCrawlMark = ...
+    """"""
+    LookForMyCallersCaller: StackCrawlMark = ...
+    """"""
+    LookForThread: StackCrawlMark = ...
+    """"""
 
-    # No Sub Enums
+class SynchronizationContext(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def Current(cls) -> SynchronizationContext:
+        """
+
+        :return:
+        """
+    def CreateCopy(self) -> SynchronizationContext:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsWaitNotificationRequired(self) -> bool:
+        """
+
+        :return:
+        """
+    def OperationCompleted(self) -> None:
+        """"""
+    def OperationStarted(self) -> None:
+        """"""
+    def Post(self, d: SendOrPostCallback, state: object) -> None:
+        """
+
+        :param d:
+        :param state:
+        """
+    def Send(self, d: SendOrPostCallback, state: object) -> None:
+        """
+
+        :param d:
+        :param state:
+        """
+    @classmethod
+    def SetSynchronizationContext(cls, syncContext: SynchronizationContext) -> None:
+        """
+
+        :param syncContext:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Wait(self, waitHandles: Array[IntPtr], waitAll: bool, millisecondsTimeout: int) -> int:
+        """
+
+        :param waitHandles:
+        :param waitAll:
+        :param millisecondsTimeout:
+        :return:
+        """
+
+class SynchronizationContextProperties(Enum):
+    """"""
+
+    _None: SynchronizationContextProperties = ...
+    """"""
+    RequireWaitNotification: SynchronizationContextProperties = ...
+    """"""
+
+class SynchronizationLockException(SystemException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SystemThreading_ThreadLocalDebugView(Generic[T], Object):
+    """"""
+
+    def __init__(self, tlocal: ThreadLocal[T]):
+        """
+
+        :param tlocal:
+        """
+    @property
+    def IsValueCreated(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> T:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> List[T]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Thread(CriticalFinalizerObject, _Thread):
+    """"""
+
+    @overload
+    def __init__(self, start: ParameterizedThreadStart):
+        """
+
+        :param start:
+        """
+    @overload
+    def __init__(self, start: ThreadStart):
+        """
+
+        :param start:
+        """
+    @overload
+    def __init__(self, start: ParameterizedThreadStart, maxStackSize: int):
+        """
+
+        :param start:
+        :param maxStackSize:
+        """
+    @overload
+    def __init__(self, start: ThreadStart, maxStackSize: int):
+        """
+
+        :param start:
+        :param maxStackSize:
+        """
+    @property
+    def ApartmentState(self) -> ApartmentState:
+        """
+
+        :return:
+        """
+    @ApartmentState.setter
+    def ApartmentState(self, value: ApartmentState) -> None: ...
+    @classmethod
+    @property
+    def CurrentContext(cls) -> Context:
+        """
+
+        :return:
+        """
+    @property
+    def CurrentCulture(self) -> CultureInfo:
+        """
+
+        :return:
+        """
+    @CurrentCulture.setter
+    def CurrentCulture(self, value: CultureInfo) -> None: ...
+    @classmethod
+    @property
+    def CurrentPrincipal(cls) -> IPrincipal:
+        """
+
+        :return:
+        """
+    @classmethod
+    @CurrentPrincipal.setter
+    def CurrentPrincipal(cls, value: IPrincipal) -> None: ...
+    @classmethod
+    @property
+    def CurrentThread(cls) -> Thread:
+        """
+
+        :return:
+        """
+    @property
+    def CurrentUICulture(self) -> CultureInfo:
+        """
+
+        :return:
+        """
+    @CurrentUICulture.setter
+    def CurrentUICulture(self, value: CultureInfo) -> None: ...
+    @property
+    def ExecutionContext(self) -> ExecutionContext:
+        """
+
+        :return:
+        """
+    @property
+    def IsAlive(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsBackground(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsBackground.setter
+    def IsBackground(self, value: bool) -> None: ...
+    @property
+    def IsThreadPoolThread(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def ManagedThreadId(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Priority(self) -> ThreadPriority:
+        """
+
+        :return:
+        """
+    @Priority.setter
+    def Priority(self, value: ThreadPriority) -> None: ...
+    @property
+    def ThreadState(self) -> ThreadState:
+        """
+
+        :return:
+        """
+    @overload
+    def Abort(self) -> None:
+        """"""
+    @overload
+    def Abort(self, stateInfo: object) -> None:
+        """
+
+        :param stateInfo:
+        """
+    @classmethod
+    def AllocateDataSlot(cls) -> LocalDataStoreSlot:
+        """
+
+        :return:
+        """
+    @classmethod
+    def AllocateNamedDataSlot(cls, name: str) -> LocalDataStoreSlot:
+        """
+
+        :param name:
+        :return:
+        """
+    @classmethod
+    def BeginCriticalRegion(cls) -> None:
+        """"""
+    @classmethod
+    def BeginThreadAffinity(cls) -> None:
+        """"""
+    def DisableComObjectEagerCleanup(self) -> None:
+        """"""
+    @classmethod
+    def EndCriticalRegion(cls) -> None:
+        """"""
+    @classmethod
+    def EndThreadAffinity(cls) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def FreeNamedDataSlot(cls, name: str) -> None:
+        """
+
+        :param name:
+        """
+    def GetApartmentState(self) -> ApartmentState:
+        """
+
+        :return:
+        """
+    def GetCompressedStack(self) -> CompressedStack:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetData(cls, slot: LocalDataStoreSlot) -> object:
+        """
+
+        :param slot:
+        :return:
+        """
+    @classmethod
+    def GetDomain(cls) -> AppDomain:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetDomainID(cls) -> int:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    @classmethod
+    def GetNamedDataSlot(cls, name: str) -> LocalDataStoreSlot:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Interrupt(self) -> None:
+        """"""
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    @overload
+    def Join(self) -> None:
+        """"""
+    @overload
+    def Join(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def Join(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @classmethod
+    def MemoryBarrier(cls) -> None:
+        """"""
+    @classmethod
+    def ResetAbort(cls) -> None:
+        """"""
+    def Resume(self) -> None:
+        """"""
+    def SetApartmentState(self, state: ApartmentState) -> None:
+        """
+
+        :param state:
+        """
+    def SetCompressedStack(self, stack: CompressedStack) -> None:
+        """
+
+        :param stack:
+        """
+    @classmethod
+    def SetData(cls, slot: LocalDataStoreSlot, data: object) -> None:
+        """
+
+        :param slot:
+        :param data:
+        """
+    @classmethod
+    @overload
+    def Sleep(cls, millisecondsTimeout: int) -> None:
+        """
+
+        :param millisecondsTimeout:
+        """
+    @classmethod
+    @overload
+    def Sleep(cls, timeout: TimeSpan) -> None:
+        """
+
+        :param timeout:
+        """
+    @classmethod
+    def SpinWait(cls, iterations: int) -> None:
+        """
+
+        :param iterations:
+        """
+    @overload
+    def Start(self) -> None:
+        """"""
+    @overload
+    def Start(self, parameter: object) -> None:
+        """
+
+        :param parameter:
+        """
+    def Suspend(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TrySetApartmentState(self, state: ApartmentState) -> bool:
+        """
+
+        :param state:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: int) -> int:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: float) -> float:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: int) -> int:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: int) -> int:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: int) -> int:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: IntPtr) -> IntPtr:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: object) -> object:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: int) -> int:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: float) -> float:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: int) -> int:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: int) -> int:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: int) -> int:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileRead(cls, address: UIntPtr) -> UIntPtr:
+        """
+
+        :param address:
+        :return:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: int, value: int) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: float, value: float) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: int, value: int) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: int, value: int) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: int, value: int) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: IntPtr, value: IntPtr) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: object, value: object) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: int, value: int) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: float, value: float) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: int, value: int) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: int, value: int) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: int, value: int) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def VolatileWrite(cls, address: UIntPtr, value: UIntPtr) -> None:
+        """
+
+        :param address:
+        :param value:
+        """
+    @classmethod
+    def Yield(cls) -> bool:
+        """
+
+        :return:
+        """
+
+class ThreadAbortException(SystemException, _Exception, ISerializable):
+    """"""
+
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ExceptionState(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ThreadExceptionEventArgs(EventArgs):
+    """"""
+
+    def __init__(self, t: Exception):
+        """
+
+        :param t:
+        """
+    @property
+    def Exception(self) -> Exception:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+ThreadExceptionEventHandler: Callable[[object, ThreadExceptionEventArgs], None] = ...
+"""
+
+:param sender: 
+:param e: 
+"""
 
 class ThreadHandle(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class ThreadHelper(Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-# ---------- Interfaces ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class IAsyncLocal(Protocol):
-    # No Properties
+        :return:
+        """
 
-    # ---------- Methods ---------- #
+class ThreadInterruptedException(SystemException, _Exception, ISerializable):
+    """"""
 
-    def OnValueChanged(
-        self, previousValue: ObjectType, currentValue: ObjectType, contextChanged: BooleanType
-    ) -> VoidType: ...
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
 
-    # No Events
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
 
-class IAsyncLocalValueMap(Protocol):
-    # No Properties
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
 
-    def Set(
-        self, key: IAsyncLocal, value: ObjectType, treatNullValueAsNonexistent: BooleanType
-    ) -> IAsyncLocalValueMap: ...
-    def TryGetValue(
-        self, key: IAsyncLocal, value: ObjectType
-    ) -> Tuple[BooleanType, ObjectType]: ...
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
 
-class IDeferredDisposable(Protocol):
-    # No Properties
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
 
-    def OnFinalRelease(self, disposed: BooleanType) -> VoidType: ...
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
 
-class IThreadPoolWorkItem(Protocol):
-    # No Properties
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def ExecuteWorkItem(self) -> VoidType: ...
-    def MarkAborted(self, tae: ThreadAbortException) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
 
-# ---------- Enums ---------- #
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
 
-class ApartmentState(Enum):
-    STA = 0
-    MTA = 1
-    Unknown = 2
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-class EventResetMode(Enum):
-    AutoReset = 0
-    ManualReset = 1
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-class LazyThreadSafetyMode(Enum):
-    # None = 0
-    PublicationOnly = 1
-    ExecutionAndPublication = 2
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
 
-class LockRecursionPolicy(Enum):
-    NoRecursion = 0
-    SupportsRecursion = 1
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
 
-class StackCrawlMark(Enum):
-    LookForMe = 0
-    LookForMyCaller = 1
-    LookForMyCallersCaller = 2
-    LookForThread = 3
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
 
-class SynchronizationContextProperties(Enum):
-    # None = 0
-    RequireWaitNotification = 1
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ThreadLocal(Generic[T], Object, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, trackAllValues: bool):
+        """
+
+        :param trackAllValues:
+        """
+    @overload
+    def __init__(self, valueFactory: Func[T]):
+        """
+
+        :param valueFactory:
+        """
+    @overload
+    def __init__(self, valueFactory: Func[T], trackAllValues: bool):
+        """
+
+        :param valueFactory:
+        :param trackAllValues:
+        """
+    @property
+    def IsValueCreated(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> T:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: T) -> None: ...
+    @property
+    def Values(self) -> IList[T]:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ThreadPool(ABC, Object):
+    """"""
+
+    @classmethod
+    @overload
+    def BindHandle(cls, osHandle: SafeHandle) -> bool:
+        """
+
+        :param osHandle:
+        :return:
+        """
+    @classmethod
+    @overload
+    def BindHandle(cls, osHandle: IntPtr) -> bool:
+        """
+
+        :param osHandle:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetAvailableThreads(
+        cls, workerThreads: int, completionPortThreads: int
+    ) -> Tuple[None, int, int]:
+        """
+
+        :param workerThreads:
+        :param completionPortThreads:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetMaxThreads(cls, workerThreads: int, completionPortThreads: int) -> Tuple[None, int, int]:
+        """
+
+        :param workerThreads:
+        :param completionPortThreads:
+        """
+    @classmethod
+    def GetMinThreads(cls, workerThreads: int, completionPortThreads: int) -> Tuple[None, int, int]:
+        """
+
+        :param workerThreads:
+        :param completionPortThreads:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def QueueUserWorkItem(cls, callBack: WaitCallback) -> bool:
+        """
+
+        :param callBack:
+        :return:
+        """
+    @classmethod
+    @overload
+    def QueueUserWorkItem(cls, callBack: WaitCallback, state: object) -> bool:
+        """
+
+        :param callBack:
+        :param state:
+        :return:
+        """
+    @classmethod
+    @overload
+    def RegisterWaitForSingleObject(
+        cls,
+        waitObject: WaitHandle,
+        callBack: WaitOrTimerCallback,
+        state: object,
+        millisecondsTimeOutInterval: int,
+        executeOnlyOnce: bool,
+    ) -> RegisteredWaitHandle:
+        """
+
+        :param waitObject:
+        :param callBack:
+        :param state:
+        :param millisecondsTimeOutInterval:
+        :param executeOnlyOnce:
+        :return:
+        """
+    @classmethod
+    @overload
+    def RegisterWaitForSingleObject(
+        cls,
+        waitObject: WaitHandle,
+        callBack: WaitOrTimerCallback,
+        state: object,
+        millisecondsTimeOutInterval: int,
+        executeOnlyOnce: bool,
+    ) -> RegisteredWaitHandle:
+        """
+
+        :param waitObject:
+        :param callBack:
+        :param state:
+        :param millisecondsTimeOutInterval:
+        :param executeOnlyOnce:
+        :return:
+        """
+    @classmethod
+    @overload
+    def RegisterWaitForSingleObject(
+        cls,
+        waitObject: WaitHandle,
+        callBack: WaitOrTimerCallback,
+        state: object,
+        timeout: TimeSpan,
+        executeOnlyOnce: bool,
+    ) -> RegisteredWaitHandle:
+        """
+
+        :param waitObject:
+        :param callBack:
+        :param state:
+        :param timeout:
+        :param executeOnlyOnce:
+        :return:
+        """
+    @classmethod
+    @overload
+    def RegisterWaitForSingleObject(
+        cls,
+        waitObject: WaitHandle,
+        callBack: WaitOrTimerCallback,
+        state: object,
+        millisecondsTimeOutInterval: int,
+        executeOnlyOnce: bool,
+    ) -> RegisteredWaitHandle:
+        """
+
+        :param waitObject:
+        :param callBack:
+        :param state:
+        :param millisecondsTimeOutInterval:
+        :param executeOnlyOnce:
+        :return:
+        """
+    @classmethod
+    def SetMaxThreads(cls, workerThreads: int, completionPortThreads: int) -> bool:
+        """
+
+        :param workerThreads:
+        :param completionPortThreads:
+        :return:
+        """
+    @classmethod
+    def SetMinThreads(cls, workerThreads: int, completionPortThreads: int) -> bool:
+        """
+
+        :param workerThreads:
+        :param completionPortThreads:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def UnsafeQueueNativeOverlapped(cls, overlapped: NativeOverlapped) -> bool:
+        """
+
+        :param overlapped:
+        :return:
+        """
+    @classmethod
+    def UnsafeQueueUserWorkItem(cls, callBack: WaitCallback, state: object) -> bool:
+        """
+
+        :param callBack:
+        :param state:
+        :return:
+        """
+    @classmethod
+    @overload
+    def UnsafeRegisterWaitForSingleObject(
+        cls,
+        waitObject: WaitHandle,
+        callBack: WaitOrTimerCallback,
+        state: object,
+        millisecondsTimeOutInterval: int,
+        executeOnlyOnce: bool,
+    ) -> RegisteredWaitHandle:
+        """
+
+        :param waitObject:
+        :param callBack:
+        :param state:
+        :param millisecondsTimeOutInterval:
+        :param executeOnlyOnce:
+        :return:
+        """
+    @classmethod
+    @overload
+    def UnsafeRegisterWaitForSingleObject(
+        cls,
+        waitObject: WaitHandle,
+        callBack: WaitOrTimerCallback,
+        state: object,
+        millisecondsTimeOutInterval: int,
+        executeOnlyOnce: bool,
+    ) -> RegisteredWaitHandle:
+        """
+
+        :param waitObject:
+        :param callBack:
+        :param state:
+        :param millisecondsTimeOutInterval:
+        :param executeOnlyOnce:
+        :return:
+        """
+    @classmethod
+    @overload
+    def UnsafeRegisterWaitForSingleObject(
+        cls,
+        waitObject: WaitHandle,
+        callBack: WaitOrTimerCallback,
+        state: object,
+        timeout: TimeSpan,
+        executeOnlyOnce: bool,
+    ) -> RegisteredWaitHandle:
+        """
+
+        :param waitObject:
+        :param callBack:
+        :param state:
+        :param timeout:
+        :param executeOnlyOnce:
+        :return:
+        """
+    @classmethod
+    @overload
+    def UnsafeRegisterWaitForSingleObject(
+        cls,
+        waitObject: WaitHandle,
+        callBack: WaitOrTimerCallback,
+        state: object,
+        millisecondsTimeOutInterval: int,
+        executeOnlyOnce: bool,
+    ) -> RegisteredWaitHandle:
+        """
+
+        :param waitObject:
+        :param callBack:
+        :param state:
+        :param millisecondsTimeOutInterval:
+        :param executeOnlyOnce:
+        :return:
+        """
+
+class ThreadPoolBoundHandle(Object, IDisposable):
+    """"""
+
+    @property
+    def Handle(self) -> SafeHandle:
+        """
+
+        :return:
+        """
+    @overload
+    def AllocateNativeOverlapped(self, preAllocated: PreAllocatedOverlapped) -> NativeOverlapped:
+        """
+
+        :param preAllocated:
+        :return:
+        """
+    @overload
+    def AllocateNativeOverlapped(
+        self, callback: IOCompletionCallback, state: object, pinData: object
+    ) -> NativeOverlapped:
+        """
+
+        :param callback:
+        :param state:
+        :param pinData:
+        :return:
+        """
+    @classmethod
+    def BindHandle(cls, handle: SafeHandle) -> ThreadPoolBoundHandle:
+        """
+
+        :param handle:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FreeNativeOverlapped(self, overlapped: NativeOverlapped) -> None:
+        """
+
+        :param overlapped:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetNativeOverlappedState(cls, overlapped: NativeOverlapped) -> object:
+        """
+
+        :param overlapped:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ThreadPoolBoundHandleOverlapped(Overlapped):
+    """"""
+
+    def __init__(
+        self,
+        callback: IOCompletionCallback,
+        state: object,
+        pinData: object,
+        preAllocated: PreAllocatedOverlapped,
+    ):
+        """
+
+        :param callback:
+        :param state:
+        :param pinData:
+        :param preAllocated:
+        """
+    @property
+    def AsyncResult(self) -> IAsyncResult:
+        """
+
+        :return:
+        """
+    @AsyncResult.setter
+    def AsyncResult(self, value: IAsyncResult) -> None: ...
+    @property
+    def EventHandle(self) -> int:
+        """
+
+        :return:
+        """
+    @EventHandle.setter
+    def EventHandle(self, value: int) -> None: ...
+    @property
+    def EventHandleIntPtr(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    @EventHandleIntPtr.setter
+    def EventHandleIntPtr(self, value: IntPtr) -> None: ...
+    @property
+    def OffsetHigh(self) -> int:
+        """
+
+        :return:
+        """
+    @OffsetHigh.setter
+    def OffsetHigh(self, value: int) -> None: ...
+    @property
+    def OffsetLow(self) -> int:
+        """
+
+        :return:
+        """
+    @OffsetLow.setter
+    def OffsetLow(self, value: int) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Pack(self, iocb: IOCompletionCallback) -> NativeOverlapped:
+        """
+
+        :param iocb:
+        :return:
+        """
+    @overload
+    def Pack(self, iocb: IOCompletionCallback, userData: object) -> NativeOverlapped:
+        """
+
+        :param iocb:
+        :param userData:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def UnsafePack(self, iocb: IOCompletionCallback) -> NativeOverlapped:
+        """
+
+        :param iocb:
+        :return:
+        """
+    @overload
+    def UnsafePack(self, iocb: IOCompletionCallback, userData: object) -> NativeOverlapped:
+        """
+
+        :param iocb:
+        :param userData:
+        :return:
+        """
+
+class ThreadPoolGlobals(ABC, Object):
+    """"""
+
+    enableWorkerTracking: Final[ClassVar[bool]] = ...
+    """
+    
+    :return: 
+    """
+    processorCount: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    tpHosted: Final[ClassVar[bool]] = ...
+    """
+    
+    :return: 
+    """
+    tpQuantum: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    vmTpInitialized: Final[ClassVar[bool]] = ...
+    """
+    
+    :return: 
+    """
+    workQueue: Final[ClassVar[ThreadPoolWorkQueue]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ThreadPoolWorkQueue(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Dequeue(
+        self, tl: ThreadPoolWorkQueueThreadLocals, callback: IThreadPoolWorkItem, missedSteal: bool
+    ) -> Tuple[None, IThreadPoolWorkItem, bool]:
+        """
+
+        :param tl:
+        :param callback:
+        :param missedSteal:
+        """
+    def Enqueue(self, callback: IThreadPoolWorkItem, forceGlobal: bool) -> None:
+        """
+
+        :param callback:
+        :param forceGlobal:
+        """
+    def EnsureCurrentThreadHasQueue(self) -> ThreadPoolWorkQueueThreadLocals:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ThreadPoolWorkQueueThreadLocals(Object):
+    """"""
+
+    random: Final[Random] = ...
+    """
+    
+    :return: 
+    """
+    threadLocals: Final[ClassVar[ThreadPoolWorkQueueThreadLocals]] = ...
+    """
+    
+    :return: 
+    """
+    workQueue: Final[ThreadPoolWorkQueue] = ...
+    """
+    
+    :return: 
+    """
+    workStealingQueue: Final[ThreadPoolWorkQueue.WorkStealingQueue] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, tpq: ThreadPoolWorkQueue):
+        """
+
+        :param tpq:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ThreadPriority(Enum):
-    Lowest = 0
-    BelowNormal = 1
-    Normal = 2
-    AboveNormal = 3
-    Highest = 4
+    """"""
+
+    Lowest: ThreadPriority = ...
+    """"""
+    BelowNormal: ThreadPriority = ...
+    """"""
+    Normal: ThreadPriority = ...
+    """"""
+    AboveNormal: ThreadPriority = ...
+    """"""
+    Highest: ThreadPriority = ...
+    """"""
+
+ThreadStart: Callable[[], None] = ...
+""""""
+
+class ThreadStartException(SystemException, _Exception, ISerializable):
+    """"""
+
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ThreadState(Enum):
-    Running = 0
-    StopRequested = 1
-    SuspendRequested = 2
-    Background = 4
-    Unstarted = 8
-    Stopped = 16
-    WaitSleepJoin = 32
-    Suspended = 64
-    AbortRequested = 128
-    Aborted = 256
+    """"""
 
-# ---------- Delegates ---------- #
+    Running: ThreadState = ...
+    """"""
+    StopRequested: ThreadState = ...
+    """"""
+    SuspendRequested: ThreadState = ...
+    """"""
+    Background: ThreadState = ...
+    """"""
+    Unstarted: ThreadState = ...
+    """"""
+    Stopped: ThreadState = ...
+    """"""
+    WaitSleepJoin: ThreadState = ...
+    """"""
+    Suspended: ThreadState = ...
+    """"""
+    AbortRequested: ThreadState = ...
+    """"""
+    Aborted: ThreadState = ...
+    """"""
 
-ContextCallback = Callable[[ObjectType], VoidType]
+class ThreadStateException(SystemException, _Exception, ISerializable):
+    """"""
 
-IOCompletionCallback = Callable[[UIntType, UIntType, NativeOverlapped], VoidType]
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
 
-InternalCrossContextDelegate = Callable[[ArrayType[ObjectType]], ObjectType]
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
 
-ParameterizedThreadStart = Callable[[ObjectType], VoidType]
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
 
-SendOrPostCallback = Callable[[ObjectType], VoidType]
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
 
-ThreadExceptionEventHandler = Callable[[ObjectType, ThreadExceptionEventArgs], VoidType]
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
 
-ThreadStart = Callable[[], VoidType]
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
 
-TimerCallback = Callable[[ObjectType], VoidType]
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
 
-WaitCallback = Callable[[ObjectType], VoidType]
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
 
-WaitOrTimerCallback = Callable[[ObjectType, BooleanType], VoidType]
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
 
-__all__ = [
-    AbandonedMutexException,
-    AsyncLocal,
-    AsyncLocalValueMap,
-    AutoResetEvent,
-    Barrier,
-    BarrierPostPhaseException,
-    CancellationCallbackInfo,
-    CancellationTokenSource,
-    CdsSyncEtwBCLProvider,
-    CompressedStack,
-    ContextCallback,
-    CountdownEvent,
-    DomainCompressedStack,
-    EventWaitHandle,
-    ExecutionContext,
-    Gen2GcCallback,
-    HostExecutionContext,
-    HostExecutionContextManager,
-    HostExecutionContextSwitcher,
-    IOCompletionCallback,
-    IUnknownSafeHandle,
-    Interlocked,
-    InternalCrossContextDelegate,
-    LazyHelpers,
-    LazyInitializer,
-    LockRecursionException,
-    ManualResetEvent,
-    ManualResetEventSlim,
-    Monitor,
-    Mutex,
-    Overlapped,
-    OverlappedData,
-    ParameterizedThreadStart,
-    PinnableBufferCache,
-    PinnableBufferCacheEventSource,
-    PlatformHelper,
-    PreAllocatedOverlapped,
-    QueueUserWorkItemCallback,
-    ReaderWriterCount,
-    ReaderWriterLock,
-    ReaderWriterLockSlim,
-    RegisteredWaitHandle,
-    RegisteredWaitHandleSafe,
-    SafeCompressedStackHandle,
-    Semaphore,
-    SemaphoreFullException,
-    SemaphoreSlim,
-    SendOrPostCallback,
-    SparselyPopulatedArray,
-    SparselyPopulatedArrayFragment,
-    SynchronizationContext,
-    SynchronizationLockException,
-    SystemThreading_ThreadLocalDebugView,
-    Thread,
-    ThreadAbortException,
-    ThreadExceptionEventArgs,
-    ThreadExceptionEventHandler,
-    ThreadHelper,
-    ThreadInterruptedException,
-    ThreadLocal,
-    ThreadPool,
-    ThreadPoolBoundHandle,
-    ThreadPoolBoundHandleOverlapped,
-    ThreadPoolGlobals,
-    ThreadPoolWorkQueue,
-    ThreadPoolWorkQueueThreadLocals,
-    ThreadStart,
-    ThreadStartException,
-    ThreadStateException,
-    Timeout,
-    TimeoutHelper,
-    Timer,
-    TimerCallback,
-    TimerHolder,
-    TimerQueue,
-    TimerQueueTimer,
-    Volatile,
-    WaitCallback,
-    WaitHandle,
-    WaitHandleCannotBeOpenedException,
-    WaitHandleExtensions,
-    WaitOrTimerCallback,
-    WinRTSynchronizationContextFactoryBase,
-    _IOCompletionCallback,
-    _ThreadPoolWaitCallback,
-    _ThreadPoolWaitOrTimerCallback,
-    AsyncFlowControl,
-    AsyncLocalValueChangedArgs,
-    CancellationCallbackCoreWorkArguments,
-    CancellationToken,
-    CancellationTokenRegistration,
-    CompressedStackSwitcher,
-    DeferredDisposableLifetime,
-    ExecutionContextSwitcher,
-    LockCookie,
-    NativeOverlapped,
-    SparselyPopulatedArrayAddInfo,
-    SpinLock,
-    SpinWait,
-    ThreadHandle,
-    IAsyncLocal,
-    IAsyncLocalValueMap,
-    IDeferredDisposable,
-    IThreadPoolWorkItem,
-    ApartmentState,
-    EventResetMode,
-    LazyThreadSafetyMode,
-    LockRecursionPolicy,
-    StackCrawlMark,
-    SynchronizationContextProperties,
-    ThreadPriority,
-    ThreadState,
-    ContextCallback,
-    IOCompletionCallback,
-    InternalCrossContextDelegate,
-    ParameterizedThreadStart,
-    SendOrPostCallback,
-    ThreadExceptionEventHandler,
-    ThreadStart,
-    TimerCallback,
-    WaitCallback,
-    WaitOrTimerCallback,
-]
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Timeout(ABC, Object):
+    """"""
+
+    Infinite: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    InfiniteTimeSpan: Final[ClassVar[TimeSpan]] = ...
+    """
+    
+    :return: 
+    """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TimeoutHelper(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetTime(cls) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def UpdateTimeOut(cls, startTime: int, originalWaitMillisecondsTimeout: int) -> int:
+        """
+
+        :param startTime:
+        :param originalWaitMillisecondsTimeout:
+        :return:
+        """
+
+class Timer(MarshalByRefObject, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self, callback: TimerCallback):
+        """
+
+        :param callback:
+        """
+    @overload
+    def __init__(self, callback: TimerCallback, state: object, dueTime: int, period: int):
+        """
+
+        :param callback:
+        :param state:
+        :param dueTime:
+        :param period:
+        """
+    @overload
+    def __init__(self, callback: TimerCallback, state: object, dueTime: int, period: int):
+        """
+
+        :param callback:
+        :param state:
+        :param dueTime:
+        :param period:
+        """
+    @overload
+    def __init__(self, callback: TimerCallback, state: object, dueTime: TimeSpan, period: TimeSpan):
+        """
+
+        :param callback:
+        :param state:
+        :param dueTime:
+        :param period:
+        """
+    @overload
+    def __init__(self, callback: TimerCallback, state: object, dueTime: int, period: int):
+        """
+
+        :param callback:
+        :param state:
+        :param dueTime:
+        :param period:
+        """
+    @overload
+    def Change(self, dueTime: int, period: int) -> bool:
+        """
+
+        :param dueTime:
+        :param period:
+        :return:
+        """
+    @overload
+    def Change(self, dueTime: int, period: int) -> bool:
+        """
+
+        :param dueTime:
+        :param period:
+        :return:
+        """
+    @overload
+    def Change(self, dueTime: TimeSpan, period: TimeSpan) -> bool:
+        """
+
+        :param dueTime:
+        :param period:
+        :return:
+        """
+    @overload
+    def Change(self, dueTime: int, period: int) -> bool:
+        """
+
+        :param dueTime:
+        :param period:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    @overload
+    def Dispose(self) -> None:
+        """"""
+    @overload
+    def Dispose(self, notifyObject: WaitHandle) -> bool:
+        """
+
+        :param notifyObject:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+TimerCallback: Callable[[object], None] = ...
+"""
+
+:param state: 
+"""
+
+class TimerHolder(Object):
+    """"""
+
+    def __init__(self, timer: object):
+        """
+
+        :param timer:
+        """
+    def Change(self, dueTime: int, period: int) -> bool:
+        """
+
+        :param dueTime:
+        :param period:
+        :return:
+        """
+    @overload
+    def Close(self) -> None:
+        """"""
+    @overload
+    def Close(self, notifyObject: WaitHandle) -> bool:
+        """
+
+        :param notifyObject:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TimerQueue(Object):
+    """"""
+
+    @classmethod
+    @property
+    def Instance(cls) -> TimerQueue:
+        """
+
+        :return:
+        """
+    def DeleteTimer(self, timer: TimerQueueTimer) -> None:
+        """
+
+        :param timer:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def UpdateTimer(self, timer: TimerQueueTimer, dueTime: int, period: int) -> bool:
+        """
+
+        :param timer:
+        :param dueTime:
+        :param period:
+        :return:
+        """
+
+class TimerQueueTimer(Object):
+    """"""
+
+    @overload
+    def Close(self) -> None:
+        """"""
+    @overload
+    def Close(self, toSignal: WaitHandle) -> bool:
+        """
+
+        :param toSignal:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Volatile(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: T) -> T:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: bool) -> bool:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: float) -> float:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: IntPtr) -> IntPtr:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: float) -> float:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: int) -> int:
+        """
+
+        :param location:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Read(cls, location: UIntPtr) -> UIntPtr:
+        """
+
+        :param location:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: T, value: T) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: bool, value: bool) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: int, value: int) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: float, value: float) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: int, value: int) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: int, value: int) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: int, value: int) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: IntPtr, value: IntPtr) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: int, value: int) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: float, value: float) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: int, value: int) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: int, value: int) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: int, value: int) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, location: UIntPtr, value: UIntPtr) -> None:
+        """
+
+        :param location:
+        :param value:
+        """
+
+WaitCallback: Callable[[object], None] = ...
+"""
+
+:param state: 
+"""
+
+class WaitHandle(ABC, MarshalByRefObject, IDisposable):
+    """"""
+
+    WaitTimeout: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @property
+    def Handle(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    @Handle.setter
+    def Handle(self, value: IntPtr) -> None: ...
+    @property
+    def SafeWaitHandle(self) -> SafeWaitHandle:
+        """
+
+        :return:
+        """
+    @SafeWaitHandle.setter
+    def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def SignalAndWait(cls, toSignal: WaitHandle, toWaitOn: WaitHandle) -> bool:
+        """
+
+        :param toSignal:
+        :param toWaitOn:
+        :return:
+        """
+    @classmethod
+    @overload
+    def SignalAndWait(
+        cls, toSignal: WaitHandle, toWaitOn: WaitHandle, millisecondsTimeout: int, exitContext: bool
+    ) -> bool:
+        """
+
+        :param toSignal:
+        :param toWaitOn:
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @classmethod
+    @overload
+    def SignalAndWait(
+        cls, toSignal: WaitHandle, toWaitOn: WaitHandle, timeout: TimeSpan, exitContext: bool
+    ) -> bool:
+        """
+
+        :param toSignal:
+        :param toWaitOn:
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def WaitAll(cls, waitHandles: Array[WaitHandle]) -> bool:
+        """
+
+        :param waitHandles:
+        :return:
+        """
+    @classmethod
+    @overload
+    def WaitAll(cls, waitHandles: Array[WaitHandle], millisecondsTimeout: int) -> bool:
+        """
+
+        :param waitHandles:
+        :param millisecondsTimeout:
+        :return:
+        """
+    @classmethod
+    @overload
+    def WaitAll(cls, waitHandles: Array[WaitHandle], timeout: TimeSpan) -> bool:
+        """
+
+        :param waitHandles:
+        :param timeout:
+        :return:
+        """
+    @classmethod
+    @overload
+    def WaitAll(
+        cls, waitHandles: Array[WaitHandle], millisecondsTimeout: int, exitContext: bool
+    ) -> bool:
+        """
+
+        :param waitHandles:
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @classmethod
+    @overload
+    def WaitAll(cls, waitHandles: Array[WaitHandle], timeout: TimeSpan, exitContext: bool) -> bool:
+        """
+
+        :param waitHandles:
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
+    @classmethod
+    @overload
+    def WaitAny(cls, waitHandles: Array[WaitHandle]) -> int:
+        """
+
+        :param waitHandles:
+        :return:
+        """
+    @classmethod
+    @overload
+    def WaitAny(cls, waitHandles: Array[WaitHandle], millisecondsTimeout: int) -> int:
+        """
+
+        :param waitHandles:
+        :param millisecondsTimeout:
+        :return:
+        """
+    @classmethod
+    @overload
+    def WaitAny(cls, waitHandles: Array[WaitHandle], timeout: TimeSpan) -> int:
+        """
+
+        :param waitHandles:
+        :param timeout:
+        :return:
+        """
+    @classmethod
+    @overload
+    def WaitAny(
+        cls, waitHandles: Array[WaitHandle], millisecondsTimeout: int, exitContext: bool
+    ) -> int:
+        """
+
+        :param waitHandles:
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @classmethod
+    @overload
+    def WaitAny(cls, waitHandles: Array[WaitHandle], timeout: TimeSpan, exitContext: bool) -> int:
+        """
+
+        :param waitHandles:
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
+    @overload
+    def WaitOne(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
+        """
+
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
+
+class WaitHandleCannotBeOpenedException(ApplicationException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class WaitHandleExtensions(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetSafeWaitHandle(cls, waitHandle: WaitHandle) -> SafeWaitHandle:
+        """
+
+        :param waitHandle:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def SetSafeWaitHandle(cls, waitHandle: WaitHandle, value: SafeWaitHandle) -> None:
+        """
+
+        :param waitHandle:
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+WaitOrTimerCallback: Callable[[object, bool], None] = ...
+"""
+
+:param state: 
+:param timedOut: 
+"""
+
+class WinRTSynchronizationContextFactoryBase(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Create(self, coreDispatcher: object) -> SynchronizationContext:
+        """
+
+        :param coreDispatcher:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class _IOCompletionCallback(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class _ThreadPoolWaitCallback(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class _ThreadPoolWaitOrTimerCallback(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

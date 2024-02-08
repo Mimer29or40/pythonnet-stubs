@@ -96,10 +96,16 @@ def main(*args: Any) -> Union[int, str]:
     build_command = commands.add_parser("build", help="build stub file tree")
     build_command.add_argument(
         "-l",
-        "--line_length",
+        "--line-length",
         type=int,
         default=100,
         help="process core assemblies",
+    )
+    build_command.add_argument(
+        "-f",
+        "--format-files",
+        action="store_true",
+        help="format generated stub files",
     )
     build_command.add_argument(
         "skeletons",
@@ -178,6 +184,9 @@ def main(*args: Any) -> Union[int, str]:
             line_length: int = parsed_args.line_length
             logger.debug("Using line length: %s", line_length)
 
+            format_files: bool = parsed_args.format_files
+            logger.debug("Using format files flag: %s", format_files)
+
             skeleton_glob: str = parsed_args.skeletons
             skeleton_files: List[Path] = []
             for file_path in Path().glob(skeleton_glob):
@@ -196,6 +205,7 @@ def main(*args: Any) -> Union[int, str]:
                 output_dir=output_dir,
                 line_length=line_length,
                 multi_threaded=multi_threaded,
+                format_files=format_files,
             )
 
     except Exception as e:

@@ -2,26 +2,22 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Generic
-from typing import List
-from typing import Protocol
+from typing import Iterator
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Int32
 from System import Object
-from System import Void
+from System import Type
 from System.Collections import ICollection
 from System.Collections import IDictionary
 from System.Collections import IEnumerable
+from System.Collections import IEnumerator
 from System.Collections import IList
 from System.Collections.Generic import ICollection
 from System.Collections.Generic import IDictionary
 from System.Collections.Generic import IEnumerable
-from System.Collections.Generic import IEnumerator
 from System.Collections.Generic import IEqualityComparer
 from System.Collections.Generic import IList
 from System.Collections.Generic import IReadOnlyCollection
@@ -32,393 +28,2094 @@ from System.Collections.Generic import List
 from System.Collections.Specialized import INotifyCollectionChanged
 from System.Collections.Specialized import NotifyCollectionChangedEventHandler
 from System.ComponentModel import INotifyPropertyChanged
-
-# ---------- Types ---------- #
+from System.ComponentModel import PropertyChangedEventHandler
 
 T = TypeVar("T")
 TItem = TypeVar("TItem")
 TKey = TypeVar("TKey")
 TValue = TypeVar("TValue")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-VoidType = Union[None, Void]
-
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
-
 class Collection(
     Generic[T],
-    ObjectType,
-    IList[T],
+    Object,
     ICollection[T],
     IEnumerable[T],
+    IList[T],
+    IReadOnlyCollection[T],
+    IReadOnlyList[T],
+    ICollection,
     IEnumerable,
     IList,
-    ICollection,
-    IReadOnlyList[T],
-    IReadOnlyCollection[T],
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, list: IList[T]): ...
+    def __init__(self, list: IList[T]):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param list:
+        """
     @property
-    def Count(self) -> IntType: ...
-    def __getitem__(self, key: IntType) -> T: ...
-    def __setitem__(self, key: IntType, value: T) -> None: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    def Add(self, item: T) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Contains(self, item: T) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[T], index: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[T]: ...
-    def IndexOf(self, item: T) -> IntType: ...
-    def Insert(self, index: IntType, item: T) -> VoidType: ...
-    def Remove(self, item: T) -> BooleanType: ...
-    def RemoveAt(self, index: IntType) -> VoidType: ...
-    def get_Count(self) -> IntType: ...
-    def get_Item(self, index: IntType) -> T: ...
-    def set_Item(self, index: IntType, value: T) -> VoidType: ...
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Item(self) -> T:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> T:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: T) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, item: T) -> None:
+        """
+
+        :param item:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, item: T) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, item: T) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __contains__(self, value: T) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: T) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class KeyedCollection(
-    Protocol[TKey, TItem],
+    ABC,
+    Generic[TKey, TItem],
     Collection[TItem],
-    IList[TItem],
     ICollection[TItem],
     IEnumerable[TItem],
+    IList[TItem],
+    IReadOnlyCollection[TItem],
+    IReadOnlyList[TItem],
+    ICollection,
     IEnumerable,
     IList,
-    ICollection,
-    IReadOnlyList[TItem],
-    IReadOnlyCollection[TItem],
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Comparer(self) -> IEqualityComparer[TKey]: ...
-    def __getitem__(self, key: TKey) -> TItem: ...
+    def Comparer(self) -> IEqualityComparer[TKey]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Item(self) -> TItem:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: TItem) -> None: ...
+    @property
+    def Item(self) -> TItem:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
     @overload
-    def Contains(self, key: TKey) -> BooleanType: ...
+    def Add(self, item: TItem) -> None:
+        """
+
+        :param item:
+        """
     @overload
-    def Remove(self, key: TKey) -> BooleanType: ...
-    def get_Comparer(self) -> IEqualityComparer[TKey]: ...
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def get_Item(self, key: TKey) -> TItem: ...
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, item: TItem) -> bool:
+        """
 
-    # No Events
+        :param item:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Sub Structs
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[TItem], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, item: TItem) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, item: TItem) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, item: TItem) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __contains__(self, value: TItem) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, key: TKey) -> TItem:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> TItem:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> TItem:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TItem]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: TItem) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class ObservableCollection(
     Generic[T],
     Collection[T],
-    IList[T],
     ICollection[T],
     IEnumerable[T],
+    IList[T],
+    IReadOnlyCollection[T],
+    IReadOnlyList[T],
+    INotifyCollectionChanged,
+    ICollection,
     IEnumerable,
     IList,
-    ICollection,
-    IReadOnlyList[T],
-    IReadOnlyCollection[T],
-    INotifyCollectionChanged,
     INotifyPropertyChanged,
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, list: List[T]): ...
+    def __init__(self, collection: IEnumerable[T]):
+        """
+
+        :param collection:
+        """
     @overload
-    def __init__(self, collection: IEnumerable[T]): ...
+    def __init__(self, list: List[T]):
+        """
 
-    # No Properties
+        :param list:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    def Move(self, oldIndex: IntType, newIndex: IntType) -> VoidType: ...
-    def add_CollectionChanged(self, value: NotifyCollectionChangedEventHandler) -> VoidType: ...
-    def remove_CollectionChanged(self, value: NotifyCollectionChangedEventHandler) -> VoidType: ...
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    # ---------- Events ---------- #
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> T:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> T:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: T) -> None: ...
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, item: T) -> None:
+        """
+
+        :param item:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, item: T) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, item: T) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    def Move(self, oldIndex: int, newIndex: int) -> None:
+        """
+
+        :param oldIndex:
+        :param newIndex:
+        """
+    @overload
+    def Remove(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __contains__(self, value: T) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: T) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
     CollectionChanged: EventType[NotifyCollectionChangedEventHandler] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    """"""
+    PropertyChanged: EventType[PropertyChangedEventHandler] = ...
+    """"""
 
 class ReadOnlyCollection(
     Generic[T],
-    ObjectType,
-    IList[T],
+    Object,
     ICollection[T],
     IEnumerable[T],
+    IList[T],
+    IReadOnlyCollection[T],
+    IReadOnlyList[T],
+    ICollection,
     IEnumerable,
     IList,
-    ICollection,
-    IReadOnlyList[T],
-    IReadOnlyCollection[T],
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, list: IList[T]):
+        """
 
-    def __init__(self, list: IList[T]): ...
-
-    # ---------- Properties ---------- #
-
+        :param list:
+        """
     @property
-    def Count(self) -> IntType: ...
-    def __getitem__(self, key: IntType) -> T: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    def Contains(self, value: T) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[T], index: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[T]: ...
-    def IndexOf(self, value: T) -> IntType: ...
-    def get_Count(self) -> IntType: ...
-    def get_Item(self, index: IntType) -> T: ...
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Item(self) -> T:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: T) -> None: ...
+    @property
+    def Item(self) -> T:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, item: T) -> None:
+        """
+
+        :param item:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, item: T) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, item: T) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __contains__(self, value: T) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: T) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class ReadOnlyDictionaryHelpers(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ReadOnlyDictionary(
     Generic[TKey, TValue],
-    ObjectType,
+    Object,
+    ICollection[KeyValuePair, TValue],
     IDictionary[TKey, TValue],
-    ICollection[KeyValuePair[TKey, TValue]],
-    IEnumerable[KeyValuePair[TKey, TValue]],
-    IEnumerable,
-    IDictionary,
-    ICollection,
+    IEnumerable[KeyValuePair, TValue],
+    IReadOnlyCollection[KeyValuePair, TValue],
     IReadOnlyDictionary[TKey, TValue],
-    IReadOnlyCollection[KeyValuePair[TKey, TValue]],
+    ICollection,
+    IDictionary,
+    IEnumerable,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, dictionary: IDictionary[TKey, TValue]):
+        """
 
-    def __init__(self, dictionary: IDictionary[TKey, TValue]): ...
-
-    # ---------- Properties ---------- #
-
+        :param dictionary:
+        """
     @property
-    def Count(self) -> IntType: ...
-    def __getitem__(self, key: TKey) -> TValue: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Keys(self) -> KeyCollection[TKey, TValue]: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Values(self) -> ValueCollection[TKey, TValue]: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    def ContainsKey(self, key: TKey) -> BooleanType: ...
-    def GetEnumerator(self) -> IEnumerator[KeyValuePair[TKey, TValue]]: ...
-    def TryGetValue(self, key: TKey, value: TValue) -> Tuple[BooleanType, TValue]: ...
-    def get_Count(self) -> IntType: ...
-    def get_Item(self, key: TKey) -> TValue: ...
-    def get_Keys(self) -> KeyCollection[TKey, TValue]: ...
-    def get_Values(self) -> ValueCollection[TKey, TValue]: ...
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # ---------- Sub Classes ---------- #
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Item(self) -> TValue:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> TValue:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: TValue) -> None: ...
+    @property
+    def Keys(self) -> ICollection[TKey]:
+        """
+
+        :return:
+        """
+    @property
+    def Keys(self) -> IEnumerable[TKey]:
+        """
+
+        :return:
+        """
+    @property
+    def Keys(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> IEnumerable[TValue]:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection[TValue]:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, item: KeyValuePair[TKey, TValue]) -> None:
+        """
+
+        :param item:
+        """
+    @overload
+    def Add(self, key: TKey, value: TValue) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    @overload
+    def Add(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, item: KeyValuePair[TKey, TValue]) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Contains(self, key: object) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def ContainsKey(self, key: TKey) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def ContainsKey(self, key: TKey) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[KeyValuePair, TValue], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Remove(self, item: KeyValuePair[TKey, TValue]) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, key: object) -> None:
+        """
+
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def TryGetValue(self, key: TKey, value: TValue) -> Tuple[bool, TValue]:
+        """"""
+    @overload
+    def TryGetValue(self, key: TKey, value: TValue) -> Tuple[bool, TValue]:
+        """"""
+    @overload
+    def __contains__(self, value: KeyValuePair[TKey, TValue]) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, key: TKey) -> TValue:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __getitem__(self, key: TKey) -> TValue:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __getitem__(self, key: object) -> object:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[KeyValuePair, TValue]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, key: TKey, value: TValue) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
 
     class KeyCollection(
         Generic[TKey, TValue],
-        ObjectType,
+        Object,
         ICollection[TKey],
         IEnumerable[TKey],
-        IEnumerable,
-        ICollection,
         IReadOnlyCollection[TKey],
+        ICollection,
+        IEnumerable,
     ):
-        # No Fields
-
-        # No Constructors
-
-        # ---------- Properties ---------- #
+        """"""
 
         @property
-        def Count(self) -> IntType: ...
+        def Count(self) -> int:
+            """
 
-        # ---------- Methods ---------- #
+            :return:
+            """
+        @property
+        def Count(self) -> int:
+            """
 
-        def CopyTo(self, array: ArrayType[TKey], arrayIndex: IntType) -> VoidType: ...
-        def GetEnumerator(self) -> IEnumerator[TKey]: ...
-        def get_Count(self) -> IntType: ...
+            :return:
+            """
+        @property
+        def Count(self) -> int:
+            """
 
-        # No Events
+            :return:
+            """
+        @property
+        def IsReadOnly(self) -> bool:
+            """
 
-        # No Sub Classes
+            :return:
+            """
+        @property
+        def IsSynchronized(self) -> bool:
+            """
 
-        # No Sub Structs
+            :return:
+            """
+        @property
+        def SyncRoot(self) -> object:
+            """
 
-        # No Sub Interfaces
+            :return:
+            """
+        def Add(self, item: TKey) -> None:
+            """
 
-        # No Sub Enums
+            :param item:
+            """
+        def Clear(self) -> None:
+            """"""
+        def Contains(self, item: TKey) -> bool:
+            """
+
+            :param item:
+            :return:
+            """
+        @overload
+        def CopyTo(self, array: Array, index: int) -> None:
+            """
+
+            :param array:
+            :param index:
+            """
+        @overload
+        def CopyTo(self, array: Array[TKey], arrayIndex: int) -> None:
+            """"""
+        def Equals(self, obj: object) -> bool:
+            """
+
+            :param obj:
+            :return:
+            """
+        def GetEnumerator(self) -> IEnumerator:
+            """
+
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
+
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
+
+            :return:
+            """
+        def Remove(self, item: TKey) -> bool:
+            """
+
+            :param item:
+            :return:
+            """
+        def ToString(self) -> str:
+            """
+
+            :return:
+            """
+        @overload
+        def __contains__(self, value: TKey) -> bool:
+            """
+
+            :param value:
+            :return:
+            """
+        @overload
+        def __contains__(self, value: object) -> bool:
+            """
+
+            :param value:
+            :return:
+            """
+        @overload
+        def __iter__(self) -> Iterator[object]:
+            """
+
+            :return:
+            """
+        @overload
+        def __iter__(self) -> Iterator[TKey]:
+            """
+
+            :return:
+            """
+        @overload
+        def __len__(self) -> int:
+            """
+
+            :return:
+            """
+        @overload
+        def __len__(self) -> int:
+            """
+
+            :return:
+            """
 
     class ValueCollection(
         Generic[TKey, TValue],
-        ObjectType,
+        Object,
         ICollection[TValue],
         IEnumerable[TValue],
-        IEnumerable,
-        ICollection,
         IReadOnlyCollection[TValue],
+        ICollection,
+        IEnumerable,
     ):
-        # No Fields
-
-        # No Constructors
-
-        # ---------- Properties ---------- #
+        """"""
 
         @property
-        def Count(self) -> IntType: ...
+        def Count(self) -> int:
+            """
 
-        # ---------- Methods ---------- #
+            :return:
+            """
+        @property
+        def Count(self) -> int:
+            """
 
-        def CopyTo(self, array: ArrayType[TValue], arrayIndex: IntType) -> VoidType: ...
-        def GetEnumerator(self) -> IEnumerator[TValue]: ...
-        def get_Count(self) -> IntType: ...
+            :return:
+            """
+        @property
+        def Count(self) -> int:
+            """
 
-        # No Events
+            :return:
+            """
+        @property
+        def IsReadOnly(self) -> bool:
+            """
 
-        # No Sub Classes
+            :return:
+            """
+        @property
+        def IsSynchronized(self) -> bool:
+            """
 
-        # No Sub Structs
+            :return:
+            """
+        @property
+        def SyncRoot(self) -> object:
+            """
 
-        # No Sub Interfaces
+            :return:
+            """
+        def Add(self, item: TValue) -> None:
+            """
 
-        # No Sub Enums
-    # No Sub Structs
+            :param item:
+            """
+        def Clear(self) -> None:
+            """"""
+        def Contains(self, item: TValue) -> bool:
+            """
 
-    # No Sub Interfaces
+            :param item:
+            :return:
+            """
+        @overload
+        def CopyTo(self, array: Array, index: int) -> None:
+            """
 
-    # No Sub Enums
+            :param array:
+            :param index:
+            """
+        @overload
+        def CopyTo(self, array: Array[TValue], arrayIndex: int) -> None:
+            """"""
+        def Equals(self, obj: object) -> bool:
+            """
 
-class ReadOnlyDictionaryHelpers(ABC, ObjectType):
-    """"""
+            :param obj:
+            :return:
+            """
+        def GetEnumerator(self) -> IEnumerator:
+            """
 
-    # No Fields
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
 
-    # No Constructors
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
 
-    # No Properties
+            :return:
+            """
+        def Remove(self, item: TValue) -> bool:
+            """
 
-    # No Methods
+            :param item:
+            :return:
+            """
+        def ToString(self) -> str:
+            """
 
-    # No Events
+            :return:
+            """
+        @overload
+        def __contains__(self, value: TValue) -> bool:
+            """
 
-    # No Sub Classes
+            :param value:
+            :return:
+            """
+        @overload
+        def __contains__(self, value: object) -> bool:
+            """
 
-    # No Sub Structs
+            :param value:
+            :return:
+            """
+        @overload
+        def __iter__(self) -> Iterator[object]:
+            """
 
-    # No Sub Interfaces
+            :return:
+            """
+        @overload
+        def __iter__(self) -> Iterator[TValue]:
+            """
 
-    # No Sub Enums
+            :return:
+            """
+        @overload
+        def __len__(self) -> int:
+            """
+
+            :return:
+            """
+        @overload
+        def __len__(self) -> int:
+            """
+
+            :return:
+            """
 
 class ReadOnlyObservableCollection(
     Generic[T],
     ReadOnlyCollection[T],
-    IList[T],
     ICollection[T],
     IEnumerable[T],
+    IList[T],
+    IReadOnlyCollection[T],
+    IReadOnlyList[T],
+    INotifyCollectionChanged,
+    ICollection,
     IEnumerable,
     IList,
-    ICollection,
-    IReadOnlyList[T],
-    IReadOnlyCollection[T],
-    INotifyCollectionChanged,
     INotifyPropertyChanged,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, list: ObservableCollection[T]):
+        """
 
-    def __init__(self, list: ObservableCollection[T]): ...
+        :param list:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Item(self) -> T:
+        """
 
-# No Structs
+        :return:
+        """
+    @property
+    def Item(self) -> T:
+        """
 
-# No Interfaces
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: T) -> None: ...
+    @property
+    def Item(self) -> object:
+        """
 
-# No Enums
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-# No Delegates
+        :return:
+        """
+    @overload
+    def Add(self, item: T) -> None:
+        """
 
-__all__ = [
-    Collection,
-    KeyedCollection,
-    ObservableCollection,
-    ReadOnlyCollection,
-    ReadOnlyDictionary,
-    ReadOnlyDictionaryHelpers,
-    ReadOnlyObservableCollection,
-]
+        :param item:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, item: T) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, item: T) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    @overload
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __contains__(self, value: T) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: T) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    CollectionChanged: EventType[NotifyCollectionChangedEventHandler] = ...
+    """"""
+    PropertyChanged: EventType[PropertyChangedEventHandler] = ...
+    """"""

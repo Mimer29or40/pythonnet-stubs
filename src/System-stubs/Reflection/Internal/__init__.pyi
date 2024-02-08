@@ -1,666 +1,1362 @@
 from __future__ import annotations
 
 from abc import ABC
+from typing import Final
 from typing import Generic
-from typing import List
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Byte
+from System import AsyncCallback
+from System import IAsyncResult
 from System import IDisposable
-from System import Int32
-from System import Int64
 from System import Object
-from System import String
+from System import Type
 from System import ValueType
-from System import Void
 from System.Collections.Immutable import ImmutableArray
 from System.IO import SeekOrigin
 from System.IO import Stream
 from System.Reflection.Metadata import BlobReader
 from System.Runtime.ConstrainedExecution import CriticalFinalizerObject
+from System.Runtime.Remoting import ObjRef
 from System.Text import StringBuilder
-
-# ---------- Types ---------- #
+from System.Threading import CancellationToken
+from System.Threading.Tasks import Task
 
 T = TypeVar("T")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class AbstractMemoryBlock(ABC, ObjectType, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class AbstractMemoryBlock(ABC, Object, IDisposable):
+    """"""
 
     @property
-    def Pointer(self) -> ByteType: ...
+    def Pointer(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Size(self) -> IntType: ...
+    def Size(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    def GetReader(self) -> BlobReader: ...
-    def get_Pointer(self) -> ByteType: ...
-    def get_Size(self) -> IntType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetReader(self) -> BlobReader:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ByteArrayMemoryBlock(AbstractMemoryBlock, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Pointer(self) -> ByteType: ...
+    def Pointer(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Size(self) -> IntType: ...
+    def Size(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    def get_Pointer(self) -> ByteType: ...
-    def get_Size(self) -> IntType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetReader(self) -> BlobReader:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ByteArrayMemoryProvider(MemoryBlockProvider, IDisposable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, array: ImmutableArray[int]):
+        """
 
-    def __init__(self, array: ImmutableArray[ByteType]): ...
-
-    # ---------- Properties ---------- #
-
+        :param array:
+        """
     @property
-    def Array(self) -> ImmutableArray[ByteType]: ...
+    def Array(self) -> ImmutableArray[int]:
+        """
+
+        :return:
+        """
     @property
-    def Size(self) -> IntType: ...
+    def Size(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def GetStream(self, constraints: StreamConstraints) -> Tuple[Stream, StreamConstraints]: ...
-    def get_Array(self) -> ImmutableArray[ByteType]: ...
-    def get_Size(self) -> IntType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def GetMemoryBlock(self) -> AbstractMemoryBlock:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def GetMemoryBlock(self, start: int, size: int) -> AbstractMemoryBlock:
+        """
 
-    # No Sub Structs
+        :param start:
+        :param size:
+        :return:
+        """
+    def GetStream(self, constraints: StreamConstraints) -> Tuple[Stream, StreamConstraints]:
+        """
 
-    # No Sub Interfaces
+        :param constraints:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class CriticalDisposableObject(ABC, CriticalFinalizerObject, IDisposable):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def Dispose(self) -> VoidType: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ExternalMemoryBlock(AbstractMemoryBlock, IDisposable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, memoryOwner: object, buffer: int, size: int):
+        """
 
-    def __init__(self, memoryOwner: ObjectType, buffer: ByteType, size: IntType): ...
-
-    # ---------- Properties ---------- #
-
+        :param memoryOwner:
+        :param buffer:
+        :param size:
+        """
     @property
-    def Pointer(self) -> ByteType: ...
+    def Pointer(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Size(self) -> IntType: ...
+    def Size(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    def get_Pointer(self) -> ByteType: ...
-    def get_Size(self) -> IntType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetReader(self) -> BlobReader:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ExternalMemoryBlockProvider(MemoryBlockProvider, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, memory: ByteType, size: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Pointer(self) -> ByteType: ...
-    @property
-    def Size(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetStream(self, constraints: StreamConstraints) -> Tuple[Stream, StreamConstraints]: ...
-    def get_Pointer(self) -> ByteType: ...
-    def get_Size(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Hash(ABC, ObjectType):
     """"""
 
-    # No Fields
+    def __init__(self, memory: int, size: int):
+        """
 
-    # No Constructors
+        :param memory:
+        :param size:
+        """
+    @property
+    def Pointer(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Size(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def GetMemoryBlock(self) -> AbstractMemoryBlock:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def GetMemoryBlock(self, start: int, size: int) -> AbstractMemoryBlock:
+        """
 
-    # No Sub Interfaces
+        :param start:
+        :param size:
+        :return:
+        """
+    def GetStream(self, constraints: StreamConstraints) -> Tuple[Stream, StreamConstraints]:
+        """
 
-    # No Sub Enums
+        :param constraints:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Hash(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ImmutableMemoryStream(Stream, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def CanRead(self) -> BooleanType: ...
+    def CanRead(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanSeek(self) -> BooleanType: ...
+    def CanSeek(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CanWrite(self) -> BooleanType: ...
+    def CanTimeout(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Length(self) -> LongType: ...
+    def CanWrite(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Position(self) -> LongType: ...
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Position(self) -> int:
+        """
+
+        :return:
+        """
     @Position.setter
-    def Position(self, value: LongType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Flush(self) -> VoidType: ...
-    def GetBuffer(self) -> ImmutableArray[ByteType]: ...
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> IntType: ...
-    def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    def SetLength(self, value: LongType) -> VoidType: ...
-    def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    def get_CanRead(self) -> BooleanType: ...
-    def get_CanSeek(self) -> BooleanType: ...
-    def get_CanWrite(self) -> BooleanType: ...
-    def get_Length(self) -> LongType: ...
-    def get_Position(self) -> LongType: ...
-    def set_Position(self, value: LongType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LightUpHelper(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MemoryBlockProvider(ABC, ObjectType, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
+    def Position(self, value: int) -> None: ...
     @property
-    def Size(self) -> IntType: ...
+    def ReadTimeout(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @ReadTimeout.setter
+    def ReadTimeout(self, value: int) -> None: ...
+    @property
+    def WriteTimeout(self) -> int:
+        """
 
-    def Dispose(self) -> VoidType: ...
+        :return:
+        """
+    @WriteTimeout.setter
+    def WriteTimeout(self, value: int) -> None: ...
+    def BeginRead(
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def BeginWrite(
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
     @overload
-    def GetMemoryBlock(self) -> AbstractMemoryBlock: ...
+    def CopyTo(self, destination: Stream) -> None:
+        """
+
+        :param destination:
+        """
     @overload
-    def GetMemoryBlock(self, start: IntType, size: IntType) -> AbstractMemoryBlock: ...
-    def GetStream(self, constraints: StreamConstraints) -> Tuple[Stream, StreamConstraints]: ...
-    def get_Size(self) -> IntType: ...
+    def CopyTo(self, destination: Stream, bufferSize: int) -> None:
+        """
 
-    # No Events
+        :param destination:
+        :param bufferSize:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream) -> Task:
+        """
 
-    # No Sub Classes
+        :param destination:
+        :return:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
+        """
 
-    # No Sub Structs
+        :param destination:
+        :param bufferSize:
+        :return:
+        """
+    @overload
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
 
-    # No Sub Interfaces
+        :param destination:
+        :param bufferSize:
+        :param cancellationToken:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    # No Sub Enums
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndRead(self, asyncResult: IAsyncResult) -> int:
+        """
 
-class MemoryMapLightUp(ABC, ObjectType):
+        :param asyncResult:
+        :return:
+        """
+    def EndWrite(self, asyncResult: IAsyncResult) -> None:
+        """
+
+        :param asyncResult:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    @overload
+    def FlushAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    @overload
+    def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
+        """
+
+        :param cancellationToken:
+        :return:
+        """
+    def GetBuffer(self) -> ImmutableArray[int]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
+
+        :return:
+        """
+    def Seek(self, offset: int, origin: SeekOrigin) -> int:
+        """
+
+        :param offset:
+        :param origin:
+        :return:
+        """
+    def SetLength(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, buffer: Array[int], offset: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        """
+    @overload
+    def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def WriteAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def WriteByte(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+
+class LightUpHelper(ABC, Object):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MemoryMappedFileBlock(AbstractMemoryBlock, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Pointer(self) -> ByteType: ...
-    @property
-    def Size(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    def get_Pointer(self) -> ByteType: ...
-    def get_Size(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NativeHeapMemoryBlock(AbstractMemoryBlock, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Pointer(self) -> ByteType: ...
-    @property
-    def Size(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    def get_Pointer(self) -> ByteType: ...
-    def get_Size(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectPool(Generic[T], ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PinnedObject(CriticalDisposableObject, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, obj: ObjectType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Pointer(self) -> ByteType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Pointer(self) -> ByteType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PooledStringBuilder(ObjectType):
-    # ---------- Fields ---------- #
-
-    @property
-    def Builder(self) -> StringBuilder: ...
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Length(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def CreatePool() -> ObjectPool[PooledStringBuilder]: ...
-    def Free(self) -> VoidType: ...
-    @staticmethod
-    def GetInstance() -> PooledStringBuilder: ...
-    def ToStringAndFree(self) -> StringType: ...
-    def get_Length(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReadOnlyUnmanagedMemoryStream(Stream, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, data: ByteType, length: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CanRead(self) -> BooleanType: ...
-    @property
-    def CanSeek(self) -> BooleanType: ...
-    @property
-    def CanWrite(self) -> BooleanType: ...
-    @property
-    def Length(self) -> LongType: ...
-    @property
-    def Position(self) -> LongType: ...
-    @Position.setter
-    def Position(self, value: LongType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Flush(self) -> VoidType: ...
-    def Read(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> IntType: ...
-    def ReadByte(self) -> IntType: ...
-    def Seek(self, offset: LongType, origin: SeekOrigin) -> LongType: ...
-    def SetLength(self, value: LongType) -> VoidType: ...
-    def Write(self, buffer: ArrayType[ByteType], offset: IntType, count: IntType) -> VoidType: ...
-    def get_CanRead(self) -> BooleanType: ...
-    def get_CanSeek(self) -> BooleanType: ...
-    def get_CanWrite(self) -> BooleanType: ...
-    def get_Length(self) -> LongType: ...
-    def get_Position(self) -> LongType: ...
-    def set_Position(self, value: LongType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StreamExtensions(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StreamMemoryBlockProvider(MemoryBlockProvider, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(
-        self,
-        stream: Stream,
-        imageStart: LongType,
-        imageSize: IntType,
-        isFileStream: BooleanType,
-        leaveOpen: BooleanType,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Size(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetStream(self, constraints: StreamConstraints) -> Tuple[Stream, StreamConstraints]: ...
-    def get_Size(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class MemoryBlock(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class MemoryBlockProvider(ABC, Object, IDisposable):
+    """"""
 
-    # No Sub Structs
+    @property
+    def Size(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetMemoryBlock(self) -> AbstractMemoryBlock:
+        """
+
+        :return:
+        """
+    @overload
+    def GetMemoryBlock(self, start: int, size: int) -> AbstractMemoryBlock:
+        """
+
+        :param start:
+        :param size:
+        :return:
+        """
+    def GetStream(self, constraints: StreamConstraints) -> Tuple[Stream, StreamConstraints]:
+        """
+
+        :param constraints:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MemoryMapLightUp(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MemoryMappedFileBlock(AbstractMemoryBlock, IDisposable):
+    """"""
+
+    @property
+    def Pointer(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetReader(self) -> BlobReader:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class NativeHeapMemoryBlock(AbstractMemoryBlock, IDisposable):
+    """"""
+
+    @property
+    def Pointer(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetReader(self) -> BlobReader:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectPool(Generic[T], Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PinnedObject(CriticalDisposableObject, IDisposable):
+    """"""
+
+    def __init__(self, obj: object):
+        """
+
+        :param obj:
+        """
+    @property
+    def Pointer(self) -> int:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PooledStringBuilder(Object):
+    """"""
+
+    Builder: Final[StringBuilder] = ...
+    """
+    
+    :return: 
+    """
+    @property
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def CreatePool(cls) -> ObjectPool[PooledStringBuilder]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Free(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetInstance(cls) -> PooledStringBuilder:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToStringAndFree(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReadOnlyUnmanagedMemoryStream(Stream, IDisposable):
+    """"""
+
+    def __init__(self, data: int, length: int):
+        """
+
+        :param data:
+        :param length:
+        """
+    @property
+    def CanRead(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def CanSeek(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def CanTimeout(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def CanWrite(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Position(self) -> int:
+        """
+
+        :return:
+        """
+    @Position.setter
+    def Position(self, value: int) -> None: ...
+    @property
+    def ReadTimeout(self) -> int:
+        """
+
+        :return:
+        """
+    @ReadTimeout.setter
+    def ReadTimeout(self, value: int) -> None: ...
+    @property
+    def WriteTimeout(self) -> int:
+        """
+
+        :return:
+        """
+    @WriteTimeout.setter
+    def WriteTimeout(self, value: int) -> None: ...
+    def BeginRead(
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def BeginWrite(
+        self, buffer: Array[int], offset: int, count: int, callback: AsyncCallback, state: object
+    ) -> IAsyncResult:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param callback:
+        :param state:
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    @overload
+    def CopyTo(self, destination: Stream) -> None:
+        """
+
+        :param destination:
+        """
+    @overload
+    def CopyTo(self, destination: Stream, bufferSize: int) -> None:
+        """
+
+        :param destination:
+        :param bufferSize:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream) -> Task:
+        """
+
+        :param destination:
+        :return:
+        """
+    @overload
+    def CopyToAsync(self, destination: Stream, bufferSize: int) -> Task:
+        """
+
+        :param destination:
+        :param bufferSize:
+        :return:
+        """
+    @overload
+    def CopyToAsync(
+        self, destination: Stream, bufferSize: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param destination:
+        :param bufferSize:
+        :param cancellationToken:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndRead(self, asyncResult: IAsyncResult) -> int:
+        """
+
+        :param asyncResult:
+        :return:
+        """
+    def EndWrite(self, asyncResult: IAsyncResult) -> None:
+        """
+
+        :param asyncResult:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    @overload
+    def FlushAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    @overload
+    def FlushAsync(self, cancellationToken: CancellationToken) -> Task:
+        """
+
+        :param cancellationToken:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Read(self, buffer: Array[int], offset: int, count: int) -> Tuple[int, Array[int]]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(self, buffer: Array[int], offset: int, count: int) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def ReadAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task[int]:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
+
+        :return:
+        """
+    def Seek(self, offset: int, origin: SeekOrigin) -> int:
+        """
+
+        :param offset:
+        :param origin:
+        :return:
+        """
+    def SetLength(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, buffer: Array[int], offset: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        """
+    @overload
+    def WriteAsync(self, buffer: Array[int], offset: int, count: int) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :return:
+        """
+    @overload
+    def WriteAsync(
+        self, buffer: Array[int], offset: int, count: int, cancellationToken: CancellationToken
+    ) -> Task:
+        """
+
+        :param buffer:
+        :param offset:
+        :param count:
+        :param cancellationToken:
+        :return:
+        """
+    def WriteByte(self, value: int) -> None:
+        """
+
+        :param value:
+        """
 
 class StreamConstraints(ValueType):
-    # ---------- Fields ---------- #
+    """"""
 
+    GuardOpt: Final[object] = ...
+    """
+    
+    :return: 
+    """
+    ImageSize: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    ImageStart: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, guardOpt: object, startPosition: int, imageSize: int):
+        """
+
+        :param guardOpt:
+        :param startPosition:
+        :param imageSize:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StreamExtensions(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StreamMemoryBlockProvider(MemoryBlockProvider, IDisposable):
+    """"""
+
+    def __init__(
+        self, stream: Stream, imageStart: int, imageSize: int, isFileStream: bool, leaveOpen: bool
+    ):
+        """
+
+        :param stream:
+        :param imageStart:
+        :param imageSize:
+        :param isFileStream:
+        :param leaveOpen:
+        """
     @property
-    def GuardOpt(self) -> ObjectType: ...
-    @property
-    def ImageSize(self) -> IntType: ...
-    @property
-    def ImageStart(self) -> LongType: ...
+    def Size(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def __init__(self, guardOpt: ObjectType, startPosition: LongType, imageSize: IntType): ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetMemoryBlock(self) -> AbstractMemoryBlock:
+        """
 
-    # No Methods
+        :return:
+        """
+    @overload
+    def GetMemoryBlock(self, start: int, size: int) -> AbstractMemoryBlock:
+        """
 
-    # No Events
+        :param start:
+        :param size:
+        :return:
+        """
+    def GetStream(self, constraints: StreamConstraints) -> Tuple[Stream, StreamConstraints]:
+        """
 
-    # No Sub Classes
+        :param constraints:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    AbstractMemoryBlock,
-    ByteArrayMemoryBlock,
-    ByteArrayMemoryProvider,
-    CriticalDisposableObject,
-    ExternalMemoryBlock,
-    ExternalMemoryBlockProvider,
-    Hash,
-    ImmutableMemoryStream,
-    LightUpHelper,
-    MemoryBlockProvider,
-    MemoryMapLightUp,
-    MemoryMappedFileBlock,
-    NativeHeapMemoryBlock,
-    ObjectPool,
-    PinnedObject,
-    PooledStringBuilder,
-    ReadOnlyUnmanagedMemoryStream,
-    StreamExtensions,
-    StreamMemoryBlockProvider,
-    MemoryBlock,
-    StreamConstraints,
-]
+        :return:
+        """

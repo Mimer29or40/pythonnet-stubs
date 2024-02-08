@@ -1,19 +1,20 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
+from typing import ClassVar
+from typing import Final
+from typing import Generic
+from typing import Iterator
 from typing import Tuple
-from typing import Union
+from typing import TypeVar
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Int32
 from System import Object
 from System import String
 from System import Type
 from System.Collections import IEnumerable
+from System.Collections import IEnumerator
 from System.Collections.Generic import ICollection
 from System.Collections.Generic import IDictionary
 from System.Collections.Generic import IEnumerable
@@ -21,903 +22,2215 @@ from System.Collections.Generic import IList
 from System.Collections.Generic import KeyValuePair
 from System.Collections.ObjectModel import ReadOnlyCollection
 from System.ComponentModel import INotifyPropertyChanged
+from System.ComponentModel import PropertyChangedEventHandler
 from System.Linq.Expressions import Expression
 from System.Linq.Expressions import ExpressionType
 from System.Linq.Expressions import LabelTarget
 from System.Linq.Expressions import ParameterExpression
+from System.Runtime.CompilerServices import CallSite
 from System.Runtime.CompilerServices import CallSiteBinder
 
-# ---------- Types ---------- #
+T = TypeVar("T")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-
-# ---------- Classes ---------- #
+class EventType(Generic[T]):
+    def __iadd__(self, other: T): ...
+    def __isub__(self, other: T): ...
 
 class BinaryOperationBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Operation(self) -> ExpressionType: ...
+    def Operation(self) -> ExpressionType:
+        """
+
+        :return:
+        """
     @property
-    def ReturnType(self) -> TypeType: ...
+    def ReturnType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
 
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
     def FallbackBinaryOperation(
         self, target: DynamicMetaObject, arg: DynamicMetaObject
-    ) -> DynamicMetaObject: ...
+    ) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param arg:
+        :return:
+        """
     @overload
     def FallbackBinaryOperation(
         self, target: DynamicMetaObject, arg: DynamicMetaObject, errorSuggestion: DynamicMetaObject
-    ) -> DynamicMetaObject: ...
-    def get_Operation(self) -> ExpressionType: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param arg:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class BindingRestrictions(ABC, ObjectType):
-    # ---------- Fields ---------- #
+class BindingRestrictions(ABC, Object):
+    """"""
 
-    @staticmethod
-    @property
-    def Empty() -> BindingRestrictions: ...
+    Empty: Final[ClassVar[BindingRestrictions]] = ...
+    """
+    
+    :return: 
+    """
+    @classmethod
+    def Combine(cls, contributingObjects: IList[DynamicMetaObject]) -> BindingRestrictions:
+        """
 
-    # No Constructors
+        :param contributingObjects:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetExpressionRestriction(cls, expression: Expression) -> BindingRestrictions:
+        """
 
-    # ---------- Methods ---------- #
+        :param expression:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    @staticmethod
-    def Combine(contributingObjects: IList[DynamicMetaObject]) -> BindingRestrictions: ...
-    @staticmethod
-    def GetExpressionRestriction(expression: Expression) -> BindingRestrictions: ...
-    @staticmethod
+        :return:
+        """
+    @classmethod
     def GetInstanceRestriction(
-        expression: Expression, instance: ObjectType
-    ) -> BindingRestrictions: ...
-    @staticmethod
-    def GetTypeRestriction(expression: Expression, type: TypeType) -> BindingRestrictions: ...
-    def Merge(self, restrictions: BindingRestrictions) -> BindingRestrictions: ...
-    def ToExpression(self) -> Expression: ...
+        cls, expression: Expression, instance: object
+    ) -> BindingRestrictions:
+        """
 
-    # No Events
+        :param expression:
+        :param instance:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @classmethod
+    def GetTypeRestriction(cls, expression: Expression, type: Type) -> BindingRestrictions:
+        """
 
-    # No Sub Structs
+        :param expression:
+        :param type:
+        :return:
+        """
+    def Merge(self, restrictions: BindingRestrictions) -> BindingRestrictions:
+        """
 
-    # No Sub Interfaces
+        :param restrictions:
+        :return:
+        """
+    def ToExpression(self) -> Expression:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class CallInfo(ObjectType):
-    # No Fields
+        :return:
+        """
 
-    # ---------- Constructors ---------- #
+class CallInfo(Object):
+    """"""
 
     @overload
-    def __init__(self, argCount: IntType, argNames: ArrayType[StringType]): ...
+    def __init__(self, argCount: int, argNames: IEnumerable[str]):
+        """
+
+        :param argCount:
+        :param argNames:
+        """
     @overload
-    def __init__(self, argCount: IntType, argNames: IEnumerable[StringType]): ...
+    def __init__(self, argCount: int, argNames: Array[str]):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param argCount:
+        :param argNames:
+        """
     @property
-    def ArgumentCount(self) -> IntType: ...
+    def ArgumentCount(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def ArgumentNames(self) -> ReadOnlyCollection[StringType]: ...
+    def ArgumentNames(self) -> ReadOnlyCollection[str]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_ArgumentCount(self) -> IntType: ...
-    def get_ArgumentNames(self) -> ReadOnlyCollection[StringType]: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ConvertBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Explicit(self) -> BooleanType: ...
-    @property
-    def ReturnType(self) -> TypeType: ...
-    @property
-    def Type(self) -> TypeType: ...
+    def Explicit(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def ReturnType(self) -> Type:
+        """
 
+        :return:
+        """
+    @property
+    def Type(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
+
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
     @overload
-    def FallbackConvert(self, target: DynamicMetaObject) -> DynamicMetaObject: ...
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FallbackConvert(self, target: DynamicMetaObject) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :return:
+        """
     @overload
     def FallbackConvert(
         self, target: DynamicMetaObject, errorSuggestion: DynamicMetaObject
-    ) -> DynamicMetaObject: ...
-    def get_Explicit(self) -> BooleanType: ...
-    def get_ReturnType(self) -> TypeType: ...
-    def get_Type(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class CreateInstanceBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def CallInfo(self) -> CallInfo: ...
+    def CallInfo(self) -> CallInfo:
+        """
+
+        :return:
+        """
     @property
-    def ReturnType(self) -> TypeType: ...
+    def ReturnType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
 
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
     def FallbackCreateInstance(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self, target: DynamicMetaObject, args: Array[DynamicMetaObject]
+    ) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def FallbackCreateInstance(
         self,
         target: DynamicMetaObject,
-        args: ArrayType[DynamicMetaObject],
+        args: Array[DynamicMetaObject],
         errorSuggestion: DynamicMetaObject,
-    ) -> DynamicMetaObject: ...
-    def get_CallInfo(self) -> CallInfo: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param args:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class DeleteIndexBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def CallInfo(self) -> CallInfo: ...
+    def CallInfo(self) -> CallInfo:
+        """
+
+        :return:
+        """
     @property
-    def ReturnType(self) -> TypeType: ...
+    def ReturnType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
 
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
     def FallbackDeleteIndex(
-        self, target: DynamicMetaObject, indexes: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self, target: DynamicMetaObject, indexes: Array[DynamicMetaObject]
+    ) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param indexes:
+        :return:
+        """
     @overload
     def FallbackDeleteIndex(
         self,
         target: DynamicMetaObject,
-        indexes: ArrayType[DynamicMetaObject],
+        indexes: Array[DynamicMetaObject],
         errorSuggestion: DynamicMetaObject,
-    ) -> DynamicMetaObject: ...
-    def get_CallInfo(self) -> CallInfo: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param indexes:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class DeleteMemberBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IgnoreCase(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def ReturnType(self) -> TypeType: ...
+    def IgnoreCase(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
+        :return:
+        """
+    @property
+    def ReturnType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
+
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
     @overload
-    def FallbackDeleteMember(self, target: DynamicMetaObject) -> DynamicMetaObject: ...
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FallbackDeleteMember(self, target: DynamicMetaObject) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :return:
+        """
     @overload
     def FallbackDeleteMember(
         self, target: DynamicMetaObject, errorSuggestion: DynamicMetaObject
-    ) -> DynamicMetaObject: ...
-    def get_IgnoreCase(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class DynamicMetaObject(ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def EmptyMetaObjects() -> ArrayType[DynamicMetaObject]: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, expression: Expression, restrictions: BindingRestrictions): ...
-    @overload
-    def __init__(
-        self, expression: Expression, restrictions: BindingRestrictions, value: ObjectType
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Expression(self) -> Expression: ...
-    @property
-    def HasValue(self) -> BooleanType: ...
-    @property
-    def LimitType(self) -> TypeType: ...
-    @property
-    def Restrictions(self) -> BindingRestrictions: ...
-    @property
-    def RuntimeType(self) -> TypeType: ...
-    @property
-    def Value(self) -> ObjectType: ...
-
-    # ---------- Methods ---------- #
-
-    def BindBinaryOperation(
-        self, binder: BinaryOperationBinder, arg: DynamicMetaObject
-    ) -> DynamicMetaObject: ...
-    def BindConvert(self, binder: ConvertBinder) -> DynamicMetaObject: ...
-    def BindCreateInstance(
-        self, binder: CreateInstanceBinder, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
-    def BindDeleteIndex(
-        self, binder: DeleteIndexBinder, indexes: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
-    def BindDeleteMember(self, binder: DeleteMemberBinder) -> DynamicMetaObject: ...
-    def BindGetIndex(
-        self, binder: GetIndexBinder, indexes: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
-    def BindGetMember(self, binder: GetMemberBinder) -> DynamicMetaObject: ...
-    def BindInvoke(
-        self, binder: InvokeBinder, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
-    def BindInvokeMember(
-        self, binder: InvokeMemberBinder, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
-    def BindSetIndex(
-        self,
-        binder: SetIndexBinder,
-        indexes: ArrayType[DynamicMetaObject],
-        value: DynamicMetaObject,
-    ) -> DynamicMetaObject: ...
-    def BindSetMember(
-        self, binder: SetMemberBinder, value: DynamicMetaObject
-    ) -> DynamicMetaObject: ...
-    def BindUnaryOperation(self, binder: UnaryOperationBinder) -> DynamicMetaObject: ...
-    @staticmethod
-    def Create(value: ObjectType, expression: Expression) -> DynamicMetaObject: ...
-    def GetDynamicMemberNames(self) -> IEnumerable[StringType]: ...
-    def get_Expression(self) -> Expression: ...
-    def get_HasValue(self) -> BooleanType: ...
-    def get_LimitType(self) -> TypeType: ...
-    def get_Restrictions(self) -> BindingRestrictions: ...
-    def get_RuntimeType(self) -> TypeType: ...
-    def get_Value(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DynamicMetaObjectBinder(ABC, CallSiteBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ReturnType(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Bind(
-        self,
-        args: ArrayType[ObjectType],
-        parameters: ReadOnlyCollection[ParameterExpression],
-        returnLabel: LabelTarget,
-    ) -> Expression: ...
-    @overload
-    def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
-    @overload
-    def Defer(self, args: ArrayType[DynamicMetaObject]) -> DynamicMetaObject: ...
-    @overload
-    def Defer(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
-    def GetUpdateExpression(self, type: TypeType) -> Expression: ...
-    def get_ReturnType(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DynamicObject(ObjectType, IDynamicMetaObjectProvider):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetDynamicMemberNames(self) -> IEnumerable[StringType]: ...
-    def GetMetaObject(self, parameter: Expression) -> DynamicMetaObject: ...
-    def TryBinaryOperation(
-        self, binder: BinaryOperationBinder, arg: ObjectType, result: ObjectType
-    ) -> Tuple[BooleanType, ObjectType]: ...
-    def TryConvert(
-        self, binder: ConvertBinder, result: ObjectType
-    ) -> Tuple[BooleanType, ObjectType]: ...
-    def TryCreateInstance(
-        self, binder: CreateInstanceBinder, args: ArrayType[ObjectType], result: ObjectType
-    ) -> Tuple[BooleanType, ObjectType]: ...
-    def TryDeleteIndex(
-        self, binder: DeleteIndexBinder, indexes: ArrayType[ObjectType]
-    ) -> BooleanType: ...
-    def TryDeleteMember(self, binder: DeleteMemberBinder) -> BooleanType: ...
-    def TryGetIndex(
-        self, binder: GetIndexBinder, indexes: ArrayType[ObjectType], result: ObjectType
-    ) -> Tuple[BooleanType, ObjectType]: ...
-    def TryGetMember(
-        self, binder: GetMemberBinder, result: ObjectType
-    ) -> Tuple[BooleanType, ObjectType]: ...
-    def TryInvoke(
-        self, binder: InvokeBinder, args: ArrayType[ObjectType], result: ObjectType
-    ) -> Tuple[BooleanType, ObjectType]: ...
-    def TryInvokeMember(
-        self, binder: InvokeMemberBinder, args: ArrayType[ObjectType], result: ObjectType
-    ) -> Tuple[BooleanType, ObjectType]: ...
-    def TrySetIndex(
-        self, binder: SetIndexBinder, indexes: ArrayType[ObjectType], value: ObjectType
-    ) -> BooleanType: ...
-    def TrySetMember(self, binder: SetMemberBinder, value: ObjectType) -> BooleanType: ...
-    def TryUnaryOperation(
-        self, binder: UnaryOperationBinder, result: ObjectType
-    ) -> Tuple[BooleanType, ObjectType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ExpandoClass(ObjectType):
+class DynamicMetaObject(Object):
     """"""
 
-    # No Fields
+    EmptyMetaObjects: Final[ClassVar[Array[DynamicMetaObject]]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, expression: Expression, restrictions: BindingRestrictions):
+        """
 
-    # No Constructors
+        :param expression:
+        :param restrictions:
+        """
+    @overload
+    def __init__(self, expression: Expression, restrictions: BindingRestrictions, value: object):
+        """
 
-    # No Properties
+        :param expression:
+        :param restrictions:
+        :param value:
+        """
+    @property
+    def Expression(self) -> Expression:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def HasValue(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def LimitType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Restrictions(self) -> BindingRestrictions:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def RuntimeType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Value(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def BindBinaryOperation(
+        self, binder: BinaryOperationBinder, arg: DynamicMetaObject
+    ) -> DynamicMetaObject:
+        """
 
-class ExpandoObject(
-    ObjectType,
-    IDynamicMetaObjectProvider,
-    IDictionary[StringType, ObjectType],
-    ICollection[KeyValuePair[StringType, ObjectType]],
-    IEnumerable[KeyValuePair[StringType, ObjectType]],
-    IEnumerable,
-    INotifyPropertyChanged,
-):
-    # No Fields
+        :param binder:
+        :param arg:
+        :return:
+        """
+    def BindConvert(self, binder: ConvertBinder) -> DynamicMetaObject:
+        """
 
-    # ---------- Constructors ---------- #
+        :param binder:
+        :return:
+        """
+    def BindCreateInstance(
+        self, binder: CreateInstanceBinder, args: Array[DynamicMetaObject]
+    ) -> DynamicMetaObject:
+        """
 
-    def __init__(self): ...
+        :param binder:
+        :param args:
+        :return:
+        """
+    def BindDeleteIndex(
+        self, binder: DeleteIndexBinder, indexes: Array[DynamicMetaObject]
+    ) -> DynamicMetaObject:
+        """
 
-    # No Properties
+        :param binder:
+        :param indexes:
+        :return:
+        """
+    def BindDeleteMember(self, binder: DeleteMemberBinder) -> DynamicMetaObject:
+        """
 
-    # No Methods
+        :param binder:
+        :return:
+        """
+    def BindGetIndex(
+        self, binder: GetIndexBinder, indexes: Array[DynamicMetaObject]
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param binder:
+        :param indexes:
+        :return:
+        """
+    def BindGetMember(self, binder: GetMemberBinder) -> DynamicMetaObject:
+        """
 
-    # No Sub Classes
+        :param binder:
+        :return:
+        """
+    def BindInvoke(self, binder: InvokeBinder, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
 
-    # No Sub Structs
+        :param binder:
+        :param args:
+        :return:
+        """
+    def BindInvokeMember(
+        self, binder: InvokeMemberBinder, args: Array[DynamicMetaObject]
+    ) -> DynamicMetaObject:
+        """
 
-    # No Sub Interfaces
+        :param binder:
+        :param args:
+        :return:
+        """
+    def BindSetIndex(
+        self, binder: SetIndexBinder, indexes: Array[DynamicMetaObject], value: DynamicMetaObject
+    ) -> DynamicMetaObject:
+        """
 
-    # No Sub Enums
+        :param binder:
+        :param indexes:
+        :param value:
+        :return:
+        """
+    def BindSetMember(self, binder: SetMemberBinder, value: DynamicMetaObject) -> DynamicMetaObject:
+        """
 
-class GetIndexBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
+        :param binder:
+        :param value:
+        :return:
+        """
+    def BindUnaryOperation(self, binder: UnaryOperationBinder) -> DynamicMetaObject:
+        """
 
-    # No Constructors
+        :param binder:
+        :return:
+        """
+    @classmethod
+    def Create(cls, value: object, expression: Expression) -> DynamicMetaObject:
+        """
 
-    # ---------- Properties ---------- #
+        :param value:
+        :param expression:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDynamicMemberNames(self) -> IEnumerable[str]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DynamicMetaObjectBinder(ABC, CallSiteBinder):
+    """"""
 
     @property
-    def CallInfo(self) -> CallInfo: ...
+    def ReturnType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def ReturnType(self) -> TypeType: ...
+    def UpdateLabel(cls) -> LabelTarget:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
 
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
+
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DynamicObject(Object, IDynamicMetaObjectProvider):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDynamicMemberNames(self) -> IEnumerable[str]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMetaObject(self, parameter: Expression) -> DynamicMetaObject:
+        """
+
+        :param parameter:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryBinaryOperation(
+        self, binder: BinaryOperationBinder, arg: object, result: object
+    ) -> Tuple[bool, object]:
+        """
+
+        :param binder:
+        :param arg:
+        :param result:
+        :return:
+        """
+    def TryConvert(self, binder: ConvertBinder, result: object) -> Tuple[bool, object]:
+        """
+
+        :param binder:
+        :param result:
+        :return:
+        """
+    def TryCreateInstance(
+        self, binder: CreateInstanceBinder, args: Array[object], result: object
+    ) -> Tuple[bool, object]:
+        """
+
+        :param binder:
+        :param args:
+        :param result:
+        :return:
+        """
+    def TryDeleteIndex(self, binder: DeleteIndexBinder, indexes: Array[object]) -> bool:
+        """
+
+        :param binder:
+        :param indexes:
+        :return:
+        """
+    def TryDeleteMember(self, binder: DeleteMemberBinder) -> bool:
+        """
+
+        :param binder:
+        :return:
+        """
+    def TryGetIndex(
+        self, binder: GetIndexBinder, indexes: Array[object], result: object
+    ) -> Tuple[bool, object]:
+        """
+
+        :param binder:
+        :param indexes:
+        :param result:
+        :return:
+        """
+    def TryGetMember(self, binder: GetMemberBinder, result: object) -> Tuple[bool, object]:
+        """
+
+        :param binder:
+        :param result:
+        :return:
+        """
+    def TryInvoke(
+        self, binder: InvokeBinder, args: Array[object], result: object
+    ) -> Tuple[bool, object]:
+        """
+
+        :param binder:
+        :param args:
+        :param result:
+        :return:
+        """
+    def TryInvokeMember(
+        self, binder: InvokeMemberBinder, args: Array[object], result: object
+    ) -> Tuple[bool, object]:
+        """
+
+        :param binder:
+        :param args:
+        :param result:
+        :return:
+        """
+    def TrySetIndex(self, binder: SetIndexBinder, indexes: Array[object], value: object) -> bool:
+        """
+
+        :param binder:
+        :param indexes:
+        :param value:
+        :return:
+        """
+    def TrySetMember(self, binder: SetMemberBinder, value: object) -> bool:
+        """
+
+        :param binder:
+        :param value:
+        :return:
+        """
+    def TryUnaryOperation(
+        self, binder: UnaryOperationBinder, result: object
+    ) -> Tuple[bool, object]:
+        """
+
+        :param binder:
+        :param result:
+        :return:
+        """
+
+class ExpandoClass(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ExpandoObject(
+    Object,
+    ICollection[KeyValuePair, Object],
+    IDictionary[String, Object],
+    IEnumerable[KeyValuePair, Object],
+    IEnumerable,
+    INotifyPropertyChanged,
+    IDynamicMetaObjectProvider,
+):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Keys(self) -> ICollection[str]:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, item: KeyValuePair[str, object]) -> None:
+        """
+
+        :param item:
+        """
+    @overload
+    def Add(self, key: str, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: KeyValuePair[str, object]) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def ContainsKey(self, key: str) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    def CopyTo(self, array: Array[KeyValuePair, object], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMetaObject(self, parameter: Expression) -> DynamicMetaObject:
+        """
+
+        :param parameter:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Remove(self, item: KeyValuePair[str, object]) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    @overload
+    def Remove(self, key: str) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryGetValue(self, key: str, value: object) -> Tuple[bool, object]:
+        """"""
+    def __contains__(self, value: KeyValuePair[str, object]) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, key: str) -> object:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[KeyValuePair, object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, key: str, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    PropertyChanged: EventType[PropertyChangedEventHandler] = ...
+    """"""
+
+class GetIndexBinder(ABC, DynamicMetaObjectBinder):
+    """"""
+
+    @property
+    def CallInfo(self) -> CallInfo:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
+
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    @overload
+    def Bind(
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
     def FallbackGetIndex(
-        self, target: DynamicMetaObject, indexes: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self, target: DynamicMetaObject, indexes: Array[DynamicMetaObject]
+    ) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param indexes:
+        :return:
+        """
     @overload
     def FallbackGetIndex(
         self,
         target: DynamicMetaObject,
-        indexes: ArrayType[DynamicMetaObject],
+        indexes: Array[DynamicMetaObject],
         errorSuggestion: DynamicMetaObject,
-    ) -> DynamicMetaObject: ...
-    def get_CallInfo(self) -> CallInfo: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param indexes:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class GetMemberBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IgnoreCase(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def ReturnType(self) -> TypeType: ...
+    def IgnoreCase(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
+        :return:
+        """
+    @property
+    def ReturnType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
+
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
     @overload
-    def FallbackGetMember(self, target: DynamicMetaObject) -> DynamicMetaObject: ...
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FallbackGetMember(self, target: DynamicMetaObject) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :return:
+        """
     @overload
     def FallbackGetMember(
         self, target: DynamicMetaObject, errorSuggestion: DynamicMetaObject
-    ) -> DynamicMetaObject: ...
-    def get_IgnoreCase(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+
+class IDynamicMetaObjectProvider:
+    """"""
+
+    def GetMetaObject(self, parameter: Expression) -> DynamicMetaObject:
+        """
+
+        :param parameter:
+        :return:
+        """
+
+class IInvokeOnGetBinder:
+    """"""
+
+    @property
+    def InvokeOnGet(self) -> bool:
+        """
+
+        :return:
+        """
 
 class InvokeBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def CallInfo(self) -> CallInfo: ...
+    def CallInfo(self) -> CallInfo:
+        """
+
+        :return:
+        """
     @property
-    def ReturnType(self) -> TypeType: ...
+    def ReturnType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
 
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
     def FallbackInvoke(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self, target: DynamicMetaObject, args: Array[DynamicMetaObject]
+    ) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def FallbackInvoke(
         self,
         target: DynamicMetaObject,
-        args: ArrayType[DynamicMetaObject],
+        args: Array[DynamicMetaObject],
         errorSuggestion: DynamicMetaObject,
-    ) -> DynamicMetaObject: ...
-    def get_CallInfo(self) -> CallInfo: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param args:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class InvokeMemberBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def CallInfo(self) -> CallInfo: ...
-    @property
-    def IgnoreCase(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def ReturnType(self) -> TypeType: ...
+    def CallInfo(self) -> CallInfo:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IgnoreCase(self) -> bool:
+        """
 
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
+
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     def FallbackInvoke(
         self,
         target: DynamicMetaObject,
-        args: ArrayType[DynamicMetaObject],
+        args: Array[DynamicMetaObject],
         errorSuggestion: DynamicMetaObject,
-    ) -> DynamicMetaObject: ...
+    ) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :param errorSuggestion:
+        :return:
+        """
     @overload
     def FallbackInvokeMember(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self, target: DynamicMetaObject, args: Array[DynamicMetaObject]
+    ) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def FallbackInvokeMember(
         self,
         target: DynamicMetaObject,
-        args: ArrayType[DynamicMetaObject],
+        args: Array[DynamicMetaObject],
         errorSuggestion: DynamicMetaObject,
-    ) -> DynamicMetaObject: ...
-    def get_CallInfo(self) -> CallInfo: ...
-    def get_IgnoreCase(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param args:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SetIndexBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def CallInfo(self) -> CallInfo: ...
+    def CallInfo(self) -> CallInfo:
+        """
+
+        :return:
+        """
     @property
-    def ReturnType(self) -> TypeType: ...
+    def ReturnType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
 
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FallbackSetIndex(
+        self, target: DynamicMetaObject, indexes: Array[DynamicMetaObject], value: DynamicMetaObject
+    ) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param indexes:
+        :param value:
+        :return:
+        """
     @overload
     def FallbackSetIndex(
         self,
         target: DynamicMetaObject,
-        indexes: ArrayType[DynamicMetaObject],
-        value: DynamicMetaObject,
-    ) -> DynamicMetaObject: ...
-    @overload
-    def FallbackSetIndex(
-        self,
-        target: DynamicMetaObject,
-        indexes: ArrayType[DynamicMetaObject],
+        indexes: Array[DynamicMetaObject],
         value: DynamicMetaObject,
         errorSuggestion: DynamicMetaObject,
-    ) -> DynamicMetaObject: ...
-    def get_CallInfo(self) -> CallInfo: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param indexes:
+        :param value:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SetMemberBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IgnoreCase(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def ReturnType(self) -> TypeType: ...
+    def IgnoreCase(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
+        :return:
+        """
+    @property
+    def ReturnType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
+
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
     def FallbackSetMember(
         self, target: DynamicMetaObject, value: DynamicMetaObject
-    ) -> DynamicMetaObject: ...
+    ) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param value:
+        :return:
+        """
     @overload
     def FallbackSetMember(
         self,
         target: DynamicMetaObject,
         value: DynamicMetaObject,
         errorSuggestion: DynamicMetaObject,
-    ) -> DynamicMetaObject: ...
-    def get_IgnoreCase(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param value:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class UnaryOperationBinder(ABC, DynamicMetaObjectBinder):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Operation(self) -> ExpressionType: ...
+    def Operation(self) -> ExpressionType:
+        """
+
+        :return:
+        """
     @property
-    def ReturnType(self) -> TypeType: ...
+    def ReturnType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    @property
+    def UpdateLabel(cls) -> LabelTarget:
+        """
 
+        :return:
+        """
+    @overload
+    def Bind(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
     @overload
     def Bind(
-        self, target: DynamicMetaObject, args: ArrayType[DynamicMetaObject]
-    ) -> DynamicMetaObject: ...
+        self,
+        args: Array[object],
+        parameters: ReadOnlyCollection[ParameterExpression],
+        returnLabel: LabelTarget,
+    ) -> Expression:
+        """
+
+        :param args:
+        :param parameters:
+        :param returnLabel:
+        :return:
+        """
+    def BindDelegate(self, site: CallSite[T], args: Array[object]) -> T:
+        """
+
+        :param site:
+        :param args:
+        :return:
+        """
     @overload
-    def FallbackUnaryOperation(self, target: DynamicMetaObject) -> DynamicMetaObject: ...
+    def Defer(self, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param args:
+        :return:
+        """
+    @overload
+    def Defer(self, target: DynamicMetaObject, args: Array[DynamicMetaObject]) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :param args:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FallbackUnaryOperation(self, target: DynamicMetaObject) -> DynamicMetaObject:
+        """
+
+        :param target:
+        :return:
+        """
     @overload
     def FallbackUnaryOperation(
         self, target: DynamicMetaObject, errorSuggestion: DynamicMetaObject
-    ) -> DynamicMetaObject: ...
-    def get_Operation(self) -> ExpressionType: ...
-    def get_ReturnType(self) -> TypeType: ...
+    ) -> DynamicMetaObject:
+        """
 
-    # No Events
+        :param target:
+        :param errorSuggestion:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetUpdateExpression(self, type: Type) -> Expression:
+        """
 
-    # No Sub Interfaces
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class UpdateDelegates(ABC, ObjectType):
+class UpdateDelegates(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IDynamicMetaObjectProvider(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetMetaObject(self, parameter: Expression) -> DynamicMetaObject: ...
-
-    # No Events
-
-class IInvokeOnGetBinder(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def InvokeOnGet(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_InvokeOnGet(self) -> BooleanType: ...
-
-    # No Events
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    BinaryOperationBinder,
-    BindingRestrictions,
-    CallInfo,
-    ConvertBinder,
-    CreateInstanceBinder,
-    DeleteIndexBinder,
-    DeleteMemberBinder,
-    DynamicMetaObject,
-    DynamicMetaObjectBinder,
-    DynamicObject,
-    ExpandoClass,
-    ExpandoObject,
-    GetIndexBinder,
-    GetMemberBinder,
-    InvokeBinder,
-    InvokeMemberBinder,
-    SetIndexBinder,
-    SetMemberBinder,
-    UnaryOperationBinder,
-    UpdateDelegates,
-    IDynamicMetaObjectProvider,
-    IInvokeOnGetBinder,
-]
+        :return:
+        """

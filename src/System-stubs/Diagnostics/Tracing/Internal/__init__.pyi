@@ -1,65 +1,62 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Union
+from typing import ClassVar
+from typing import Final
 
 from System import Array
-from System import Int32
 from System import Object
-from System import String
+from System import Type
 
-# ---------- Types ---------- #
+class Environment(ABC, Object):
+    """"""
 
-ArrayType = Union[List, Array]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-
-# ---------- Classes ---------- #
-
-class Environment(ABC, ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
+    NewLine: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    @classmethod
     @property
-    def NewLine() -> StringType: ...
+    def TickCount(cls) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Properties ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    @staticmethod
-    @property
-    def TickCount() -> IntType: ...
+        :return:
+        """
+    @classmethod
+    def GetResourceString(cls, key: str, args: Array[object]) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :param key:
+        :param args:
+        :return:
+        """
+    @classmethod
+    def GetRuntimeResourceString(cls, key: str, args: Array[object]) -> str:
+        """
 
-    @staticmethod
-    def GetResourceString(key: StringType, args: ArrayType[ObjectType]) -> StringType: ...
-    @staticmethod
-    def GetRuntimeResourceString(key: StringType, args: ArrayType[ObjectType]) -> StringType: ...
-    @staticmethod
-    def get_TickCount() -> IntType: ...
+        :param key:
+        :param args:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    Environment,
-]
+        :return:
+        """

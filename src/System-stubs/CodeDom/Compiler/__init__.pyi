@@ -1,29 +1,27 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
+from typing import ClassVar
+from typing import Final
+from typing import Generic
+from typing import Iterator
 from typing import Tuple
-from typing import Union
+from typing import TypeVar
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeFileHandle
 from System import Array
 from System import Attribute
-from System import Boolean
 from System import Char
-from System import Double
+from System import Decimal
 from System import Enum
+from System import EventHandler
+from System import Guid
 from System import IDisposable
-from System import Int32
-from System import Int64
+from System import IFormatProvider
 from System import IntPtr
 from System import Object
-from System import Single
-from System import String
 from System import Type
-from System import UInt32
-from System import Void
 from System.CodeDom import CodeCompileUnit
 from System.CodeDom import CodeExpression
 from System.CodeDom import CodeNamespace
@@ -41,1121 +39,2533 @@ from System.Collections.Generic import IDictionary
 from System.Collections.Specialized import StringCollection
 from System.ComponentModel import Component
 from System.ComponentModel import IComponent
+from System.ComponentModel import IContainer
+from System.ComponentModel import ISite
 from System.ComponentModel import TypeConverter
 from System.Configuration import IConfigurationSectionHandler
 from System.IO import TextReader
 from System.IO import TextWriter
 from System.Reflection import Assembly
 from System.Runtime.InteropServices import _Attribute
+from System.Runtime.Remoting import ObjRef
 from System.Security.Policy import Evidence
 from System.Text import Encoding
+from System.Threading.Tasks import Task
 from System.Xml import XmlNode
 
-# ---------- Types ---------- #
+T = TypeVar("T")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-CharType = Union[str, Char]
-DoubleType = Union[float, Double]
-FloatType = Union[float, Single]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-UIntType = Union[int, UInt32]
-VoidType = Union[None, Void]
+class EventType(Generic[T]):
+    def __iadd__(self, other: T): ...
+    def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
-
-class CodeCompiler(ABC, CodeGenerator, ICodeGenerator, ICodeCompiler):
+class CodeCompiler(ABC, CodeGenerator, ICodeCompiler, ICodeGenerator):
     """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeDomCompilationConfiguration(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeDomConfigurationHandler(ObjectType, IConfigurationSectionHandler):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Create(
-        self, inheritedObject: ObjectType, configContextObj: ObjectType, node: XmlNode
-    ) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeDomProvider(ABC, Component, IComponent, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def FileExtension(self) -> StringType: ...
-    @property
-    def LanguageOptions(self) -> LanguageOptions: ...
-
-    # ---------- Methods ---------- #
-
-    def CompileAssemblyFromDom(
-        self, options: CompilerParameters, compilationUnits: ArrayType[CodeCompileUnit]
-    ) -> CompilerResults: ...
-    def CompileAssemblyFromFile(
-        self, options: CompilerParameters, fileNames: ArrayType[StringType]
-    ) -> CompilerResults: ...
-    def CompileAssemblyFromSource(
-        self, options: CompilerParameters, sources: ArrayType[StringType]
-    ) -> CompilerResults: ...
-    def CreateCompiler(self) -> ICodeCompiler: ...
-    def CreateEscapedIdentifier(self, value: StringType) -> StringType: ...
-    @overload
-    def CreateGenerator(self, output: TextWriter) -> ICodeGenerator: ...
-    @overload
-    def CreateGenerator(self, fileName: StringType) -> ICodeGenerator: ...
-    @overload
-    def CreateGenerator(self) -> ICodeGenerator: ...
-    def CreateParser(self) -> ICodeParser: ...
-    @staticmethod
-    @overload
-    def CreateProvider(
-        language: StringType, providerOptions: IDictionary[StringType, StringType]
-    ) -> CodeDomProvider: ...
-    @staticmethod
-    @overload
-    def CreateProvider(language: StringType) -> CodeDomProvider: ...
-    def CreateValidIdentifier(self, value: StringType) -> StringType: ...
-    def GenerateCodeFromCompileUnit(
-        self, compileUnit: CodeCompileUnit, writer: TextWriter, options: CodeGeneratorOptions
-    ) -> VoidType: ...
-    def GenerateCodeFromExpression(
-        self, expression: CodeExpression, writer: TextWriter, options: CodeGeneratorOptions
-    ) -> VoidType: ...
-    def GenerateCodeFromMember(
-        self, member: CodeTypeMember, writer: TextWriter, options: CodeGeneratorOptions
-    ) -> VoidType: ...
-    def GenerateCodeFromNamespace(
-        self, codeNamespace: CodeNamespace, writer: TextWriter, options: CodeGeneratorOptions
-    ) -> VoidType: ...
-    def GenerateCodeFromStatement(
-        self, statement: CodeStatement, writer: TextWriter, options: CodeGeneratorOptions
-    ) -> VoidType: ...
-    def GenerateCodeFromType(
-        self, codeType: CodeTypeDeclaration, writer: TextWriter, options: CodeGeneratorOptions
-    ) -> VoidType: ...
-    @staticmethod
-    def GetAllCompilerInfo() -> ArrayType[CompilerInfo]: ...
-    @staticmethod
-    def GetCompilerInfo(language: StringType) -> CompilerInfo: ...
-    def GetConverter(self, type: TypeType) -> TypeConverter: ...
-    @staticmethod
-    def GetLanguageFromExtension(extension: StringType) -> StringType: ...
-    def GetTypeOutput(self, type: CodeTypeReference) -> StringType: ...
-    @staticmethod
-    def IsDefinedExtension(extension: StringType) -> BooleanType: ...
-    @staticmethod
-    def IsDefinedLanguage(language: StringType) -> BooleanType: ...
-    def IsValidIdentifier(self, value: StringType) -> BooleanType: ...
-    def Parse(self, codeStream: TextReader) -> CodeCompileUnit: ...
-    def Supports(self, generatorSupport: GeneratorSupport) -> BooleanType: ...
-    def get_FileExtension(self) -> StringType: ...
-    def get_LanguageOptions(self) -> LanguageOptions: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeGenerator(ABC, ObjectType, ICodeGenerator):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GenerateCodeFromMember(
-        self, member: CodeTypeMember, writer: TextWriter, options: CodeGeneratorOptions
-    ) -> VoidType: ...
-    @staticmethod
-    def IsValidLanguageIndependentIdentifier(value: StringType) -> BooleanType: ...
-    @staticmethod
-    def ValidateIdentifiers(e: CodeObject) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeGeneratorOptions(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def BlankLinesBetweenMembers(self) -> BooleanType: ...
-    @BlankLinesBetweenMembers.setter
-    def BlankLinesBetweenMembers(self, value: BooleanType) -> None: ...
-    @property
-    def BracingStyle(self) -> StringType: ...
-    @BracingStyle.setter
-    def BracingStyle(self, value: StringType) -> None: ...
-    @property
-    def ElseOnClosing(self) -> BooleanType: ...
-    @ElseOnClosing.setter
-    def ElseOnClosing(self, value: BooleanType) -> None: ...
-    @property
-    def IndentString(self) -> StringType: ...
-    @IndentString.setter
-    def IndentString(self, value: StringType) -> None: ...
-    def __getitem__(self, key: StringType) -> ObjectType: ...
-    def __setitem__(self, key: StringType, value: ObjectType) -> None: ...
-    @property
-    def VerbatimOrder(self) -> BooleanType: ...
-    @VerbatimOrder.setter
-    def VerbatimOrder(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_BlankLinesBetweenMembers(self) -> BooleanType: ...
-    def get_BracingStyle(self) -> StringType: ...
-    def get_ElseOnClosing(self) -> BooleanType: ...
-    def get_IndentString(self) -> StringType: ...
-    def get_Item(self, index: StringType) -> ObjectType: ...
-    def get_VerbatimOrder(self) -> BooleanType: ...
-    def set_BlankLinesBetweenMembers(self, value: BooleanType) -> VoidType: ...
-    def set_BracingStyle(self, value: StringType) -> VoidType: ...
-    def set_ElseOnClosing(self, value: BooleanType) -> VoidType: ...
-    def set_IndentString(self, value: StringType) -> VoidType: ...
-    def set_Item(self, index: StringType, value: ObjectType) -> VoidType: ...
-    def set_VerbatimOrder(self, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeParser(ABC, ObjectType, ICodeParser):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Parse(self, codeStream: TextReader) -> CodeCompileUnit: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeValidator(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CompilerError(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(
-        self,
-        fileName: StringType,
-        line: IntType,
-        column: IntType,
-        errorNumber: StringType,
-        errorText: StringType,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Column(self) -> IntType: ...
-    @Column.setter
-    def Column(self, value: IntType) -> None: ...
-    @property
-    def ErrorNumber(self) -> StringType: ...
-    @ErrorNumber.setter
-    def ErrorNumber(self, value: StringType) -> None: ...
-    @property
-    def ErrorText(self) -> StringType: ...
-    @ErrorText.setter
-    def ErrorText(self, value: StringType) -> None: ...
-    @property
-    def FileName(self) -> StringType: ...
-    @FileName.setter
-    def FileName(self, value: StringType) -> None: ...
-    @property
-    def IsWarning(self) -> BooleanType: ...
-    @IsWarning.setter
-    def IsWarning(self, value: BooleanType) -> None: ...
-    @property
-    def Line(self) -> IntType: ...
-    @Line.setter
-    def Line(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def ToString(self) -> StringType: ...
-    def get_Column(self) -> IntType: ...
-    def get_ErrorNumber(self) -> StringType: ...
-    def get_ErrorText(self) -> StringType: ...
-    def get_FileName(self) -> StringType: ...
-    def get_IsWarning(self) -> BooleanType: ...
-    def get_Line(self) -> IntType: ...
-    def set_Column(self, value: IntType) -> VoidType: ...
-    def set_ErrorNumber(self, value: StringType) -> VoidType: ...
-    def set_ErrorText(self, value: StringType) -> VoidType: ...
-    def set_FileName(self, value: StringType) -> VoidType: ...
-    def set_IsWarning(self, value: BooleanType) -> VoidType: ...
-    def set_Line(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CompilerErrorCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CompilerErrorCollection): ...
-    @overload
-    def __init__(self, value: ArrayType[CompilerError]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def HasErrors(self) -> BooleanType: ...
-    @property
-    def HasWarnings(self) -> BooleanType: ...
-    def __getitem__(self, key: IntType) -> CompilerError: ...
-    def __setitem__(self, key: IntType, value: CompilerError) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, value: CompilerError) -> IntType: ...
-    @overload
-    def AddRange(self, value: ArrayType[CompilerError]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: CompilerErrorCollection) -> VoidType: ...
-    def Contains(self, value: CompilerError) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CompilerError], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CompilerError) -> IntType: ...
-    def Insert(self, index: IntType, value: CompilerError) -> VoidType: ...
-    def Remove(self, value: CompilerError) -> VoidType: ...
-    def get_HasErrors(self) -> BooleanType: ...
-    def get_HasWarnings(self) -> BooleanType: ...
-    def get_Item(self, index: IntType) -> CompilerError: ...
-    def set_Item(self, index: IntType, value: CompilerError) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CompilerInfo(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CodeDomProviderType(self) -> TypeType: ...
-    @property
-    def IsCodeDomProviderTypeValid(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def CreateDefaultCompilerParameters(self) -> CompilerParameters: ...
-    @overload
-    def CreateProvider(
-        self, providerOptions: IDictionary[StringType, StringType]
-    ) -> CodeDomProvider: ...
-    @overload
-    def CreateProvider(self) -> CodeDomProvider: ...
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetExtensions(self) -> ArrayType[StringType]: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetLanguages(self) -> ArrayType[StringType]: ...
-    def get_CodeDomProviderType(self) -> TypeType: ...
-    def get_IsCodeDomProviderTypeValid(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CompilerParameters(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, assemblyNames: ArrayType[StringType]): ...
-    @overload
-    def __init__(self, assemblyNames: ArrayType[StringType], outputName: StringType): ...
-    @overload
-    def __init__(
-        self,
-        assemblyNames: ArrayType[StringType],
-        outputName: StringType,
-        includeDebugInformation: BooleanType,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CompilerOptions(self) -> StringType: ...
-    @CompilerOptions.setter
-    def CompilerOptions(self, value: StringType) -> None: ...
-    @property
-    def CoreAssemblyFileName(self) -> StringType: ...
-    @CoreAssemblyFileName.setter
-    def CoreAssemblyFileName(self, value: StringType) -> None: ...
-    @property
-    def EmbeddedResources(self) -> StringCollection: ...
-    @property
-    def Evidence(self) -> Evidence: ...
-    @Evidence.setter
-    def Evidence(self, value: Evidence) -> None: ...
-    @property
-    def GenerateExecutable(self) -> BooleanType: ...
-    @GenerateExecutable.setter
-    def GenerateExecutable(self, value: BooleanType) -> None: ...
-    @property
-    def GenerateInMemory(self) -> BooleanType: ...
-    @GenerateInMemory.setter
-    def GenerateInMemory(self, value: BooleanType) -> None: ...
-    @property
-    def IncludeDebugInformation(self) -> BooleanType: ...
-    @IncludeDebugInformation.setter
-    def IncludeDebugInformation(self, value: BooleanType) -> None: ...
-    @property
-    def LinkedResources(self) -> StringCollection: ...
-    @property
-    def MainClass(self) -> StringType: ...
-    @MainClass.setter
-    def MainClass(self, value: StringType) -> None: ...
-    @property
-    def OutputAssembly(self) -> StringType: ...
-    @OutputAssembly.setter
-    def OutputAssembly(self, value: StringType) -> None: ...
-    @property
-    def ReferencedAssemblies(self) -> StringCollection: ...
-    @property
-    def TempFiles(self) -> TempFileCollection: ...
-    @TempFiles.setter
-    def TempFiles(self, value: TempFileCollection) -> None: ...
-    @property
-    def TreatWarningsAsErrors(self) -> BooleanType: ...
-    @TreatWarningsAsErrors.setter
-    def TreatWarningsAsErrors(self, value: BooleanType) -> None: ...
-    @property
-    def UserToken(self) -> NIntType: ...
-    @UserToken.setter
-    def UserToken(self, value: NIntType) -> None: ...
-    @property
-    def WarningLevel(self) -> IntType: ...
-    @WarningLevel.setter
-    def WarningLevel(self, value: IntType) -> None: ...
-    @property
-    def Win32Resource(self) -> StringType: ...
-    @Win32Resource.setter
-    def Win32Resource(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CompilerOptions(self) -> StringType: ...
-    def get_CoreAssemblyFileName(self) -> StringType: ...
-    def get_EmbeddedResources(self) -> StringCollection: ...
-    def get_Evidence(self) -> Evidence: ...
-    def get_GenerateExecutable(self) -> BooleanType: ...
-    def get_GenerateInMemory(self) -> BooleanType: ...
-    def get_IncludeDebugInformation(self) -> BooleanType: ...
-    def get_LinkedResources(self) -> StringCollection: ...
-    def get_MainClass(self) -> StringType: ...
-    def get_OutputAssembly(self) -> StringType: ...
-    def get_ReferencedAssemblies(self) -> StringCollection: ...
-    def get_TempFiles(self) -> TempFileCollection: ...
-    def get_TreatWarningsAsErrors(self) -> BooleanType: ...
-    def get_UserToken(self) -> NIntType: ...
-    def get_WarningLevel(self) -> IntType: ...
-    def get_Win32Resource(self) -> StringType: ...
-    def set_CompilerOptions(self, value: StringType) -> VoidType: ...
-    def set_CoreAssemblyFileName(self, value: StringType) -> VoidType: ...
-    def set_Evidence(self, value: Evidence) -> VoidType: ...
-    def set_GenerateExecutable(self, value: BooleanType) -> VoidType: ...
-    def set_GenerateInMemory(self, value: BooleanType) -> VoidType: ...
-    def set_IncludeDebugInformation(self, value: BooleanType) -> VoidType: ...
-    def set_MainClass(self, value: StringType) -> VoidType: ...
-    def set_OutputAssembly(self, value: StringType) -> VoidType: ...
-    def set_TempFiles(self, value: TempFileCollection) -> VoidType: ...
-    def set_TreatWarningsAsErrors(self, value: BooleanType) -> VoidType: ...
-    def set_UserToken(self, value: NIntType) -> VoidType: ...
-    def set_WarningLevel(self, value: IntType) -> VoidType: ...
-    def set_Win32Resource(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CompilerResults(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, tempFiles: TempFileCollection): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CompiledAssembly(self) -> Assembly: ...
-    @CompiledAssembly.setter
-    def CompiledAssembly(self, value: Assembly) -> None: ...
-    @property
-    def Errors(self) -> CompilerErrorCollection: ...
-    @property
-    def Evidence(self) -> Evidence: ...
-    @Evidence.setter
-    def Evidence(self, value: Evidence) -> None: ...
-    @property
-    def NativeCompilerReturnValue(self) -> IntType: ...
-    @NativeCompilerReturnValue.setter
-    def NativeCompilerReturnValue(self, value: IntType) -> None: ...
-    @property
-    def Output(self) -> StringCollection: ...
-    @property
-    def PathToAssembly(self) -> StringType: ...
-    @PathToAssembly.setter
-    def PathToAssembly(self, value: StringType) -> None: ...
-    @property
-    def TempFiles(self) -> TempFileCollection: ...
-    @TempFiles.setter
-    def TempFiles(self, value: TempFileCollection) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CompiledAssembly(self) -> Assembly: ...
-    def get_Errors(self) -> CompilerErrorCollection: ...
-    def get_Evidence(self) -> Evidence: ...
-    def get_NativeCompilerReturnValue(self) -> IntType: ...
-    def get_Output(self) -> StringCollection: ...
-    def get_PathToAssembly(self) -> StringType: ...
-    def get_TempFiles(self) -> TempFileCollection: ...
-    def set_CompiledAssembly(self, value: Assembly) -> VoidType: ...
-    def set_Evidence(self, value: Evidence) -> VoidType: ...
-    def set_NativeCompilerReturnValue(self, value: IntType) -> VoidType: ...
-    def set_PathToAssembly(self, value: StringType) -> VoidType: ...
-    def set_TempFiles(self, value: TempFileCollection) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Executor(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def ExecWait(cmd: StringType, tempFiles: TempFileCollection) -> VoidType: ...
-    @staticmethod
-    @overload
-    def ExecWaitWithCapture(
-        cmd: StringType,
-        tempFiles: TempFileCollection,
-        outputName: StringType,
-        errorName: StringType,
-    ) -> Tuple[IntType, StringType, StringType]: ...
-    @staticmethod
-    @overload
-    def ExecWaitWithCapture(
-        cmd: StringType,
-        currentDir: StringType,
-        tempFiles: TempFileCollection,
-        outputName: StringType,
-        errorName: StringType,
-    ) -> Tuple[IntType, StringType, StringType]: ...
-    @staticmethod
-    @overload
-    def ExecWaitWithCapture(
-        userToken: NIntType,
-        cmd: StringType,
-        tempFiles: TempFileCollection,
-        outputName: StringType,
-        errorName: StringType,
-    ) -> Tuple[IntType, StringType, StringType]: ...
-    @staticmethod
-    @overload
-    def ExecWaitWithCapture(
-        userToken: NIntType,
-        cmd: StringType,
-        currentDir: StringType,
-        tempFiles: TempFileCollection,
-        outputName: StringType,
-        errorName: StringType,
-    ) -> Tuple[IntType, StringType, StringType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FileIntegrity(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def IsEnabled() -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def IsTrusted(safeFileHandle: SafeFileHandle) -> BooleanType: ...
-    @staticmethod
-    def MarkAsTrusted(safeFileHandle: SafeFileHandle) -> VoidType: ...
-    @staticmethod
-    def get_IsEnabled() -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GeneratedCodeAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, tool: StringType, version: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Tool(self) -> StringType: ...
-    @property
-    def Version(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Tool(self) -> StringType: ...
-    def get_Version(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HandlerBase(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Indentation(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IndentedTextWriter(TextWriter, IDisposable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def DefaultTabString() -> StringType: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, writer: TextWriter): ...
-    @overload
-    def __init__(self, writer: TextWriter, tabString: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Encoding(self) -> Encoding: ...
-    @property
-    def Indent(self) -> IntType: ...
-    @Indent.setter
-    def Indent(self, value: IntType) -> None: ...
-    @property
-    def InnerWriter(self) -> TextWriter: ...
-    @property
-    def NewLine(self) -> StringType: ...
-    @NewLine.setter
-    def NewLine(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
-    @overload
-    def Write(self, s: StringType) -> VoidType: ...
-    @overload
-    def Write(self, value: BooleanType) -> VoidType: ...
-    @overload
-    def Write(self, value: CharType) -> VoidType: ...
-    @overload
-    def Write(self, buffer: ArrayType[CharType]) -> VoidType: ...
-    @overload
-    def Write(self, buffer: ArrayType[CharType], index: IntType, count: IntType) -> VoidType: ...
-    @overload
-    def Write(self, value: DoubleType) -> VoidType: ...
-    @overload
-    def Write(self, value: FloatType) -> VoidType: ...
-    @overload
-    def Write(self, value: IntType) -> VoidType: ...
-    @overload
-    def Write(self, value: LongType) -> VoidType: ...
-    @overload
-    def Write(self, value: ObjectType) -> VoidType: ...
-    @overload
-    def Write(self, format: StringType, arg0: ObjectType) -> VoidType: ...
-    @overload
-    def Write(self, format: StringType, arg0: ObjectType, arg1: ObjectType) -> VoidType: ...
-    @overload
-    def Write(self, format: StringType, arg: ArrayType[ObjectType]) -> VoidType: ...
-    @overload
-    def WriteLine(self, s: StringType) -> VoidType: ...
-    @overload
-    def WriteLine(self) -> VoidType: ...
-    @overload
-    def WriteLine(self, value: BooleanType) -> VoidType: ...
-    @overload
-    def WriteLine(self, value: CharType) -> VoidType: ...
-    @overload
-    def WriteLine(self, buffer: ArrayType[CharType]) -> VoidType: ...
-    @overload
-    def WriteLine(
-        self, buffer: ArrayType[CharType], index: IntType, count: IntType
-    ) -> VoidType: ...
-    @overload
-    def WriteLine(self, value: DoubleType) -> VoidType: ...
-    @overload
-    def WriteLine(self, value: FloatType) -> VoidType: ...
-    @overload
-    def WriteLine(self, value: IntType) -> VoidType: ...
-    @overload
-    def WriteLine(self, value: LongType) -> VoidType: ...
-    @overload
-    def WriteLine(self, value: ObjectType) -> VoidType: ...
-    @overload
-    def WriteLine(self, format: StringType, arg0: ObjectType) -> VoidType: ...
-    @overload
-    def WriteLine(self, format: StringType, arg0: ObjectType, arg1: ObjectType) -> VoidType: ...
-    @overload
-    def WriteLine(self, format: StringType, arg: ArrayType[ObjectType]) -> VoidType: ...
-    @overload
-    def WriteLine(self, value: UIntType) -> VoidType: ...
-    def WriteLineNoTabs(self, s: StringType) -> VoidType: ...
-    def get_Encoding(self) -> Encoding: ...
-    def get_Indent(self) -> IntType: ...
-    def get_InnerWriter(self) -> TextWriter: ...
-    def get_NewLine(self) -> StringType: ...
-    def set_Indent(self, value: IntType) -> VoidType: ...
-    def set_NewLine(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RedistVersionInfo(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetCompilerPath(
-        provOptions: IDictionary[StringType, StringType], compilerExecutable: StringType
-    ) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TempFileCollection(ObjectType, ICollection, IEnumerable, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, tempDir: StringType): ...
-    @overload
-    def __init__(self, tempDir: StringType, keepFiles: BooleanType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def BasePath(self) -> StringType: ...
-    @property
-    def Count(self) -> IntType: ...
-    @property
-    def KeepFiles(self) -> BooleanType: ...
-    @KeepFiles.setter
-    def KeepFiles(self, value: BooleanType) -> None: ...
-    @property
-    def TempDir(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def AddExtension(self, fileExtension: StringType, keepFile: BooleanType) -> StringType: ...
-    @overload
-    def AddExtension(self, fileExtension: StringType) -> StringType: ...
-    def AddFile(self, fileName: StringType, keepFile: BooleanType) -> VoidType: ...
-    def CopyTo(self, fileNames: ArrayType[StringType], start: IntType) -> VoidType: ...
-    def Delete(self) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator: ...
-    def get_BasePath(self) -> StringType: ...
-    def get_Count(self) -> IntType: ...
-    def get_KeepFiles(self) -> BooleanType: ...
-    def get_TempDir(self) -> StringType: ...
-    def set_KeepFiles(self, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class ICodeCompiler(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
 
     def CompileAssemblyFromDom(
         self, options: CompilerParameters, compilationUnit: CodeCompileUnit
-    ) -> CompilerResults: ...
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param compilationUnit:
+        :return:
+        """
     def CompileAssemblyFromDomBatch(
-        self, options: CompilerParameters, compilationUnits: ArrayType[CodeCompileUnit]
-    ) -> CompilerResults: ...
+        self, options: CompilerParameters, compilationUnits: Array[CodeCompileUnit]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param compilationUnits:
+        :return:
+        """
     def CompileAssemblyFromFile(
-        self, options: CompilerParameters, fileName: StringType
-    ) -> CompilerResults: ...
+        self, options: CompilerParameters, fileName: str
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param fileName:
+        :return:
+        """
     def CompileAssemblyFromFileBatch(
-        self, options: CompilerParameters, fileNames: ArrayType[StringType]
-    ) -> CompilerResults: ...
+        self, options: CompilerParameters, fileNames: Array[str]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param fileNames:
+        :return:
+        """
     def CompileAssemblyFromSource(
-        self, options: CompilerParameters, source: StringType
-    ) -> CompilerResults: ...
+        self, options: CompilerParameters, source: str
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param source:
+        :return:
+        """
     def CompileAssemblyFromSourceBatch(
-        self, options: CompilerParameters, sources: ArrayType[StringType]
-    ) -> CompilerResults: ...
+        self, options: CompilerParameters, sources: Array[str]
+    ) -> CompilerResults:
+        """
 
-    # No Events
+        :param options:
+        :param sources:
+        :return:
+        """
+    def CreateEscapedIdentifier(self, value: str) -> str:
+        """
 
-class ICodeGenerator(Protocol):
-    # No Properties
+        :param value:
+        :return:
+        """
+    def CreateValidIdentifier(self, value: str) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :param value:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def CreateEscapedIdentifier(self, value: StringType) -> StringType: ...
-    def CreateValidIdentifier(self, value: StringType) -> StringType: ...
+        :param obj:
+        :return:
+        """
     def GenerateCodeFromCompileUnit(
         self, e: CodeCompileUnit, w: TextWriter, o: CodeGeneratorOptions
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
     def GenerateCodeFromExpression(
         self, e: CodeExpression, w: TextWriter, o: CodeGeneratorOptions
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromMember(
+        self, member: CodeTypeMember, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param member:
+        :param writer:
+        :param options:
+        """
     def GenerateCodeFromNamespace(
         self, e: CodeNamespace, w: TextWriter, o: CodeGeneratorOptions
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
     def GenerateCodeFromStatement(
         self, e: CodeStatement, w: TextWriter, o: CodeGeneratorOptions
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
     def GenerateCodeFromType(
         self, e: CodeTypeDeclaration, w: TextWriter, o: CodeGeneratorOptions
-    ) -> VoidType: ...
-    def GetTypeOutput(self, type: CodeTypeReference) -> StringType: ...
-    def IsValidIdentifier(self, value: StringType) -> BooleanType: ...
-    def Supports(self, supports: GeneratorSupport) -> BooleanType: ...
-    def ValidateIdentifier(self, value: StringType) -> VoidType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class ICodeParser(Protocol):
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetTypeOutput(self, type: CodeTypeReference) -> str:
+        """
 
-    def Parse(self, codeStream: TextReader) -> CodeCompileUnit: ...
+        :param type:
+        :return:
+        """
+    def IsValidIdentifier(self, value: str) -> bool:
+        """
 
-    # No Events
+        :param value:
+        :return:
+        """
+    def Supports(self, supports: GeneratorSupport) -> bool:
+        """
 
-# ---------- Enums ---------- #
+        :param supports:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ValidateIdentifier(self, value: str) -> None:
+        """
+
+        :param value:
+        """
+
+class CodeDomCompilationConfiguration(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeDomConfigurationHandler(Object, IConfigurationSectionHandler):
+    """"""
+
+    def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
+        """
+
+        :param parent:
+        :param configContext:
+        :param section:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeDomProvider(ABC, Component, IComponent, IDisposable):
+    """"""
+
+    @property
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
+    @property
+    def FileExtension(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def LanguageOptions(self) -> LanguageOptions:
+        """
+
+        :return:
+        """
+    @property
+    def Site(self) -> ISite:
+        """
+
+        :return:
+        """
+    @Site.setter
+    def Site(self, value: ISite) -> None: ...
+    def CompileAssemblyFromDom(
+        self, options: CompilerParameters, compilationUnits: Array[CodeCompileUnit]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param compilationUnits:
+        :return:
+        """
+    def CompileAssemblyFromFile(
+        self, options: CompilerParameters, fileNames: Array[str]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param fileNames:
+        :return:
+        """
+    def CompileAssemblyFromSource(
+        self, options: CompilerParameters, sources: Array[str]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param sources:
+        :return:
+        """
+    def CreateCompiler(self) -> ICodeCompiler:
+        """
+
+        :return:
+        """
+    def CreateEscapedIdentifier(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CreateGenerator(self) -> ICodeGenerator:
+        """
+
+        :return:
+        """
+    @overload
+    def CreateGenerator(self, output: TextWriter) -> ICodeGenerator:
+        """
+
+        :param output:
+        :return:
+        """
+    @overload
+    def CreateGenerator(self, fileName: str) -> ICodeGenerator:
+        """
+
+        :param fileName:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def CreateParser(self) -> ICodeParser:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def CreateProvider(cls, language: str) -> CodeDomProvider:
+        """
+
+        :param language:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CreateProvider(
+        cls, language: str, providerOptions: IDictionary[str, str]
+    ) -> CodeDomProvider:
+        """
+
+        :param language:
+        :param providerOptions:
+        :return:
+        """
+    def CreateValidIdentifier(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GenerateCodeFromCompileUnit(
+        self, compileUnit: CodeCompileUnit, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param compileUnit:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromExpression(
+        self, expression: CodeExpression, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param expression:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromMember(
+        self, member: CodeTypeMember, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param member:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromNamespace(
+        self, codeNamespace: CodeNamespace, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param codeNamespace:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromStatement(
+        self, statement: CodeStatement, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param statement:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromType(
+        self, codeType: CodeTypeDeclaration, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param codeType:
+        :param writer:
+        :param options:
+        """
+    @classmethod
+    def GetAllCompilerInfo(cls) -> Array[CompilerInfo]:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetCompilerInfo(cls, language: str) -> CompilerInfo:
+        """
+
+        :param language:
+        :return:
+        """
+    def GetConverter(self, type: Type) -> TypeConverter:
+        """
+
+        :param type:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetLanguageFromExtension(cls, extension: str) -> str:
+        """
+
+        :param extension:
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeOutput(self, type: CodeTypeReference) -> str:
+        """
+
+        :param type:
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsDefinedExtension(cls, extension: str) -> bool:
+        """
+
+        :param extension:
+        :return:
+        """
+    @classmethod
+    def IsDefinedLanguage(cls, language: str) -> bool:
+        """
+
+        :param language:
+        :return:
+        """
+    def IsValidIdentifier(self, value: str) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def Parse(self, codeStream: TextReader) -> CodeCompileUnit:
+        """
+
+        :param codeStream:
+        :return:
+        """
+    def Supports(self, generatorSupport: GeneratorSupport) -> bool:
+        """
+
+        :param generatorSupport:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    Disposed: EventType[EventHandler] = ...
+    """"""
+
+class CodeGenerator(ABC, Object, ICodeGenerator):
+    """"""
+
+    def CreateEscapedIdentifier(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def CreateValidIdentifier(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GenerateCodeFromCompileUnit(
+        self, e: CodeCompileUnit, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromExpression(
+        self, e: CodeExpression, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromMember(
+        self, member: CodeTypeMember, writer: TextWriter, options: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param member:
+        :param writer:
+        :param options:
+        """
+    def GenerateCodeFromNamespace(
+        self, e: CodeNamespace, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromStatement(
+        self, e: CodeStatement, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromType(
+        self, e: CodeTypeDeclaration, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeOutput(self, type: CodeTypeReference) -> str:
+        """
+
+        :param type:
+        :return:
+        """
+    def IsValidIdentifier(self, value: str) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @classmethod
+    def IsValidLanguageIndependentIdentifier(cls, value: str) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def Supports(self, supports: GeneratorSupport) -> bool:
+        """
+
+        :param supports:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ValidateIdentifier(self, value: str) -> None:
+        """
+
+        :param value:
+        """
+    @classmethod
+    def ValidateIdentifiers(cls, e: CodeObject) -> None:
+        """
+
+        :param e:
+        """
+
+class CodeGeneratorOptions(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def BlankLinesBetweenMembers(self) -> bool:
+        """
+
+        :return:
+        """
+    @BlankLinesBetweenMembers.setter
+    def BlankLinesBetweenMembers(self, value: bool) -> None: ...
+    @property
+    def BracingStyle(self) -> str:
+        """
+
+        :return:
+        """
+    @BracingStyle.setter
+    def BracingStyle(self, value: str) -> None: ...
+    @property
+    def ElseOnClosing(self) -> bool:
+        """
+
+        :return:
+        """
+    @ElseOnClosing.setter
+    def ElseOnClosing(self, value: bool) -> None: ...
+    @property
+    def IndentString(self) -> str:
+        """
+
+        :return:
+        """
+    @IndentString.setter
+    def IndentString(self, value: str) -> None: ...
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def VerbatimOrder(self) -> bool:
+        """
+
+        :return:
+        """
+    @VerbatimOrder.setter
+    def VerbatimOrder(self, value: bool) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __getitem__(self, index: str) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __setitem__(self, index: str, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CodeParser(ABC, Object, ICodeParser):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Parse(self, codeStream: TextReader) -> CodeCompileUnit:
+        """
+
+        :param codeStream:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeValidator(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CompilerError(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, fileName: str, line: int, column: int, errorNumber: str, errorText: str):
+        """
+
+        :param fileName:
+        :param line:
+        :param column:
+        :param errorNumber:
+        :param errorText:
+        """
+    @property
+    def Column(self) -> int:
+        """
+
+        :return:
+        """
+    @Column.setter
+    def Column(self, value: int) -> None: ...
+    @property
+    def ErrorNumber(self) -> str:
+        """
+
+        :return:
+        """
+    @ErrorNumber.setter
+    def ErrorNumber(self, value: str) -> None: ...
+    @property
+    def ErrorText(self) -> str:
+        """
+
+        :return:
+        """
+    @ErrorText.setter
+    def ErrorText(self, value: str) -> None: ...
+    @property
+    def FileName(self) -> str:
+        """
+
+        :return:
+        """
+    @FileName.setter
+    def FileName(self, value: str) -> None: ...
+    @property
+    def IsWarning(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsWarning.setter
+    def IsWarning(self, value: bool) -> None: ...
+    @property
+    def Line(self) -> int:
+        """
+
+        :return:
+        """
+    @Line.setter
+    def Line(self, value: int) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CompilerErrorCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: CompilerErrorCollection):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: Array[CompilerError]):
+        """
+
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HasErrors(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def HasWarnings(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CompilerError) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CompilerErrorCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CompilerError]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CompilerError) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CompilerError], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CompilerError) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CompilerError) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CompilerError) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CompilerError) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CompilerInfo(Object):
+    """"""
+
+    @property
+    def CodeDomProviderType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def IsCodeDomProviderTypeValid(self) -> bool:
+        """
+
+        :return:
+        """
+    def CreateDefaultCompilerParameters(self) -> CompilerParameters:
+        """
+
+        :return:
+        """
+    @overload
+    def CreateProvider(self) -> CodeDomProvider:
+        """
+
+        :return:
+        """
+    @overload
+    def CreateProvider(self, providerOptions: IDictionary[str, str]) -> CodeDomProvider:
+        """
+
+        :param providerOptions:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetExtensions(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLanguages(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CompilerParameters(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, assemblyNames: Array[str]):
+        """
+
+        :param assemblyNames:
+        """
+    @overload
+    def __init__(self, assemblyNames: Array[str], outputName: str):
+        """
+
+        :param assemblyNames:
+        :param outputName:
+        """
+    @overload
+    def __init__(self, assemblyNames: Array[str], outputName: str, includeDebugInformation: bool):
+        """
+
+        :param assemblyNames:
+        :param outputName:
+        :param includeDebugInformation:
+        """
+    @property
+    def CompilerOptions(self) -> str:
+        """
+
+        :return:
+        """
+    @CompilerOptions.setter
+    def CompilerOptions(self, value: str) -> None: ...
+    @property
+    def CoreAssemblyFileName(self) -> str:
+        """
+
+        :return:
+        """
+    @CoreAssemblyFileName.setter
+    def CoreAssemblyFileName(self, value: str) -> None: ...
+    @property
+    def EmbeddedResources(self) -> StringCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Evidence(self) -> Evidence:
+        """
+
+        :return:
+        """
+    @Evidence.setter
+    def Evidence(self, value: Evidence) -> None: ...
+    @property
+    def GenerateExecutable(self) -> bool:
+        """
+
+        :return:
+        """
+    @GenerateExecutable.setter
+    def GenerateExecutable(self, value: bool) -> None: ...
+    @property
+    def GenerateInMemory(self) -> bool:
+        """
+
+        :return:
+        """
+    @GenerateInMemory.setter
+    def GenerateInMemory(self, value: bool) -> None: ...
+    @property
+    def IncludeDebugInformation(self) -> bool:
+        """
+
+        :return:
+        """
+    @IncludeDebugInformation.setter
+    def IncludeDebugInformation(self, value: bool) -> None: ...
+    @property
+    def LinkedResources(self) -> StringCollection:
+        """
+
+        :return:
+        """
+    @property
+    def MainClass(self) -> str:
+        """
+
+        :return:
+        """
+    @MainClass.setter
+    def MainClass(self, value: str) -> None: ...
+    @property
+    def OutputAssembly(self) -> str:
+        """
+
+        :return:
+        """
+    @OutputAssembly.setter
+    def OutputAssembly(self, value: str) -> None: ...
+    @property
+    def ReferencedAssemblies(self) -> StringCollection:
+        """
+
+        :return:
+        """
+    @property
+    def TempFiles(self) -> TempFileCollection:
+        """
+
+        :return:
+        """
+    @TempFiles.setter
+    def TempFiles(self, value: TempFileCollection) -> None: ...
+    @property
+    def TreatWarningsAsErrors(self) -> bool:
+        """
+
+        :return:
+        """
+    @TreatWarningsAsErrors.setter
+    def TreatWarningsAsErrors(self, value: bool) -> None: ...
+    @property
+    def UserToken(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    @UserToken.setter
+    def UserToken(self, value: IntPtr) -> None: ...
+    @property
+    def WarningLevel(self) -> int:
+        """
+
+        :return:
+        """
+    @WarningLevel.setter
+    def WarningLevel(self, value: int) -> None: ...
+    @property
+    def Win32Resource(self) -> str:
+        """
+
+        :return:
+        """
+    @Win32Resource.setter
+    def Win32Resource(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CompilerResults(Object):
+    """"""
+
+    def __init__(self, tempFiles: TempFileCollection):
+        """
+
+        :param tempFiles:
+        """
+    @property
+    def CompiledAssembly(self) -> Assembly:
+        """
+
+        :return:
+        """
+    @CompiledAssembly.setter
+    def CompiledAssembly(self, value: Assembly) -> None: ...
+    @property
+    def Errors(self) -> CompilerErrorCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Evidence(self) -> Evidence:
+        """
+
+        :return:
+        """
+    @Evidence.setter
+    def Evidence(self, value: Evidence) -> None: ...
+    @property
+    def NativeCompilerReturnValue(self) -> int:
+        """
+
+        :return:
+        """
+    @NativeCompilerReturnValue.setter
+    def NativeCompilerReturnValue(self, value: int) -> None: ...
+    @property
+    def Output(self) -> StringCollection:
+        """
+
+        :return:
+        """
+    @property
+    def PathToAssembly(self) -> str:
+        """
+
+        :return:
+        """
+    @PathToAssembly.setter
+    def PathToAssembly(self, value: str) -> None: ...
+    @property
+    def TempFiles(self) -> TempFileCollection:
+        """
+
+        :return:
+        """
+    @TempFiles.setter
+    def TempFiles(self, value: TempFileCollection) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Executor(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def ExecWait(cls, cmd: str, tempFiles: TempFileCollection) -> None:
+        """
+
+        :param cmd:
+        :param tempFiles:
+        """
+    @classmethod
+    @overload
+    def ExecWaitWithCapture(
+        cls, cmd: str, tempFiles: TempFileCollection, outputName: str, errorName: str
+    ) -> int:
+        """
+
+        :param cmd:
+        :param tempFiles:
+        :param outputName:
+        :param errorName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def ExecWaitWithCapture(
+        cls,
+        userToken: IntPtr,
+        cmd: str,
+        tempFiles: TempFileCollection,
+        outputName: str,
+        errorName: str,
+    ) -> int:
+        """
+
+        :param userToken:
+        :param cmd:
+        :param tempFiles:
+        :param outputName:
+        :param errorName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def ExecWaitWithCapture(
+        cls,
+        cmd: str,
+        currentDir: str,
+        tempFiles: TempFileCollection,
+        outputName: str,
+        errorName: str,
+    ) -> int:
+        """
+
+        :param cmd:
+        :param currentDir:
+        :param tempFiles:
+        :param outputName:
+        :param errorName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def ExecWaitWithCapture(
+        cls,
+        userToken: IntPtr,
+        cmd: str,
+        currentDir: str,
+        tempFiles: TempFileCollection,
+        outputName: str,
+        errorName: str,
+    ) -> int:
+        """
+
+        :param userToken:
+        :param cmd:
+        :param currentDir:
+        :param tempFiles:
+        :param outputName:
+        :param errorName:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class FileIntegrity(ABC, Object):
+    """"""
+
+    @classmethod
+    @property
+    def IsEnabled(cls) -> bool:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsTrusted(cls, safeFileHandle: SafeFileHandle) -> bool:
+        """
+
+        :param safeFileHandle:
+        :return:
+        """
+    @classmethod
+    def MarkAsTrusted(cls, safeFileHandle: SafeFileHandle) -> None:
+        """
+
+        :param safeFileHandle:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class GeneratedCodeAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self, tool: str, version: str):
+        """
+
+        :param tool:
+        :param version:
+        """
+    @property
+    def Tool(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Version(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class GeneratorSupport(Enum):
-    ArraysOfArrays = 1
-    EntryPointMethod = 2
-    GotoStatements = 4
-    MultidimensionalArrays = 8
-    StaticConstructors = 16
-    TryCatchStatements = 32
-    ReturnTypeAttributes = 64
-    DeclareValueTypes = 128
-    DeclareEnums = 256
-    DeclareDelegates = 512
-    DeclareInterfaces = 1024
-    DeclareEvents = 2048
-    AssemblyAttributes = 4096
-    ParameterAttributes = 8192
-    ReferenceParameters = 16384
-    ChainedConstructorArguments = 32768
-    NestedTypes = 65536
-    MultipleInterfaceMembers = 131072
-    PublicStaticMembers = 262144
-    ComplexExpressions = 524288
-    Win32Resources = 1048576
-    Resources = 2097152
-    PartialTypes = 4194304
-    GenericTypeReference = 8388608
-    GenericTypeDeclaration = 16777216
-    DeclareIndexerProperties = 33554432
+    """"""
+
+    ArraysOfArrays: GeneratorSupport = ...
+    """"""
+    EntryPointMethod: GeneratorSupport = ...
+    """"""
+    GotoStatements: GeneratorSupport = ...
+    """"""
+    MultidimensionalArrays: GeneratorSupport = ...
+    """"""
+    StaticConstructors: GeneratorSupport = ...
+    """"""
+    TryCatchStatements: GeneratorSupport = ...
+    """"""
+    ReturnTypeAttributes: GeneratorSupport = ...
+    """"""
+    DeclareValueTypes: GeneratorSupport = ...
+    """"""
+    DeclareEnums: GeneratorSupport = ...
+    """"""
+    DeclareDelegates: GeneratorSupport = ...
+    """"""
+    DeclareInterfaces: GeneratorSupport = ...
+    """"""
+    DeclareEvents: GeneratorSupport = ...
+    """"""
+    AssemblyAttributes: GeneratorSupport = ...
+    """"""
+    ParameterAttributes: GeneratorSupport = ...
+    """"""
+    ReferenceParameters: GeneratorSupport = ...
+    """"""
+    ChainedConstructorArguments: GeneratorSupport = ...
+    """"""
+    NestedTypes: GeneratorSupport = ...
+    """"""
+    MultipleInterfaceMembers: GeneratorSupport = ...
+    """"""
+    PublicStaticMembers: GeneratorSupport = ...
+    """"""
+    ComplexExpressions: GeneratorSupport = ...
+    """"""
+    Win32Resources: GeneratorSupport = ...
+    """"""
+    Resources: GeneratorSupport = ...
+    """"""
+    PartialTypes: GeneratorSupport = ...
+    """"""
+    GenericTypeReference: GeneratorSupport = ...
+    """"""
+    GenericTypeDeclaration: GeneratorSupport = ...
+    """"""
+    DeclareIndexerProperties: GeneratorSupport = ...
+    """"""
+
+class HandlerBase(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ICodeCompiler:
+    """"""
+
+    def CompileAssemblyFromDom(
+        self, options: CompilerParameters, compilationUnit: CodeCompileUnit
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param compilationUnit:
+        :return:
+        """
+    def CompileAssemblyFromDomBatch(
+        self, options: CompilerParameters, compilationUnits: Array[CodeCompileUnit]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param compilationUnits:
+        :return:
+        """
+    def CompileAssemblyFromFile(
+        self, options: CompilerParameters, fileName: str
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param fileName:
+        :return:
+        """
+    def CompileAssemblyFromFileBatch(
+        self, options: CompilerParameters, fileNames: Array[str]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param fileNames:
+        :return:
+        """
+    def CompileAssemblyFromSource(
+        self, options: CompilerParameters, source: str
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param source:
+        :return:
+        """
+    def CompileAssemblyFromSourceBatch(
+        self, options: CompilerParameters, sources: Array[str]
+    ) -> CompilerResults:
+        """
+
+        :param options:
+        :param sources:
+        :return:
+        """
+
+class ICodeGenerator:
+    """"""
+
+    def CreateEscapedIdentifier(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def CreateValidIdentifier(self, value: str) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def GenerateCodeFromCompileUnit(
+        self, e: CodeCompileUnit, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromExpression(
+        self, e: CodeExpression, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromNamespace(
+        self, e: CodeNamespace, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromStatement(
+        self, e: CodeStatement, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GenerateCodeFromType(
+        self, e: CodeTypeDeclaration, w: TextWriter, o: CodeGeneratorOptions
+    ) -> None:
+        """
+
+        :param e:
+        :param w:
+        :param o:
+        """
+    def GetTypeOutput(self, type: CodeTypeReference) -> str:
+        """
+
+        :param type:
+        :return:
+        """
+    def IsValidIdentifier(self, value: str) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def Supports(self, supports: GeneratorSupport) -> bool:
+        """
+
+        :param supports:
+        :return:
+        """
+    def ValidateIdentifier(self, value: str) -> None:
+        """
+
+        :param value:
+        """
+
+class ICodeParser:
+    """"""
+
+    def Parse(self, codeStream: TextReader) -> CodeCompileUnit:
+        """
+
+        :param codeStream:
+        :return:
+        """
+
+class Indentation(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IndentedTextWriter(TextWriter, IDisposable):
+    """"""
+
+    DefaultTabString: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, writer: TextWriter):
+        """
+
+        :param writer:
+        """
+    @overload
+    def __init__(self, writer: TextWriter, tabString: str):
+        """
+
+        :param writer:
+        :param tabString:
+        """
+    @property
+    def Encoding(self) -> Encoding:
+        """
+
+        :return:
+        """
+    @property
+    def FormatProvider(self) -> IFormatProvider:
+        """
+
+        :return:
+        """
+    @property
+    def Indent(self) -> int:
+        """
+
+        :return:
+        """
+    @Indent.setter
+    def Indent(self, value: int) -> None: ...
+    @property
+    def InnerWriter(self) -> TextWriter:
+        """
+
+        :return:
+        """
+    @property
+    def NewLine(self) -> str:
+        """
+
+        :return:
+        """
+    @NewLine.setter
+    def NewLine(self, value: str) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    def FlushAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Write(self, buffer: Array[Char]) -> None:
+        """
+
+        :param buffer:
+        """
+    @overload
+    def Write(self, value: bool) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, value: Char) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, value: Decimal) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, value: float) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, value: float) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, value: str) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Write(self, format: str, arg: Array[object]) -> None:
+        """
+
+        :param format:
+        :param arg:
+        """
+    @overload
+    def Write(self, format: str, arg0: object) -> None:
+        """
+
+        :param format:
+        :param arg0:
+        """
+    @overload
+    def Write(self, buffer: Array[Char], index: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param index:
+        :param count:
+        """
+    @overload
+    def Write(self, format: str, arg0: object, arg1: object) -> None:
+        """
+
+        :param format:
+        :param arg0:
+        :param arg1:
+        """
+    @overload
+    def Write(self, format: str, arg0: object, arg1: object, arg2: object) -> None:
+        """
+
+        :param format:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        """
+    @overload
+    def WriteAsync(self, buffer: Array[Char]) -> Task:
+        """
+
+        :param buffer:
+        :return:
+        """
+    @overload
+    def WriteAsync(self, value: Char) -> Task:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def WriteAsync(self, value: str) -> Task:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def WriteAsync(self, buffer: Array[Char], index: int, count: int) -> Task:
+        """
+
+        :param buffer:
+        :param index:
+        :param count:
+        :return:
+        """
+    @overload
+    def WriteLine(self) -> None:
+        """"""
+    @overload
+    def WriteLine(self, buffer: Array[Char]) -> None:
+        """
+
+        :param buffer:
+        """
+    @overload
+    def WriteLine(self, value: bool) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, value: Char) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, value: Decimal) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, value: float) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, value: float) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, value: str) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, value: int) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def WriteLine(self, format: str, arg: Array[object]) -> None:
+        """
+
+        :param format:
+        :param arg:
+        """
+    @overload
+    def WriteLine(self, format: str, arg0: object) -> None:
+        """
+
+        :param format:
+        :param arg0:
+        """
+    @overload
+    def WriteLine(self, buffer: Array[Char], index: int, count: int) -> None:
+        """
+
+        :param buffer:
+        :param index:
+        :param count:
+        """
+    @overload
+    def WriteLine(self, format: str, arg0: object, arg1: object) -> None:
+        """
+
+        :param format:
+        :param arg0:
+        :param arg1:
+        """
+    @overload
+    def WriteLine(self, format: str, arg0: object, arg1: object, arg2: object) -> None:
+        """
+
+        :param format:
+        :param arg0:
+        :param arg1:
+        :param arg2:
+        """
+    @overload
+    def WriteLineAsync(self) -> Task:
+        """
+
+        :return:
+        """
+    @overload
+    def WriteLineAsync(self, buffer: Array[Char]) -> Task:
+        """
+
+        :param buffer:
+        :return:
+        """
+    @overload
+    def WriteLineAsync(self, value: Char) -> Task:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def WriteLineAsync(self, value: str) -> Task:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def WriteLineAsync(self, buffer: Array[Char], index: int, count: int) -> Task:
+        """
+
+        :param buffer:
+        :param index:
+        :param count:
+        :return:
+        """
+    def WriteLineNoTabs(self, s: str) -> None:
+        """
+
+        :param s:
+        """
 
 class LanguageOptions(Enum):
-    # None = 0
-    CaseInsensitive = 1
+    """"""
 
-# No Delegates
+    _None: LanguageOptions = ...
+    """"""
+    CaseInsensitive: LanguageOptions = ...
+    """"""
 
-__all__ = [
-    CodeCompiler,
-    CodeDomCompilationConfiguration,
-    CodeDomConfigurationHandler,
-    CodeDomProvider,
-    CodeGenerator,
-    CodeGeneratorOptions,
-    CodeParser,
-    CodeValidator,
-    CompilerError,
-    CompilerErrorCollection,
-    CompilerInfo,
-    CompilerParameters,
-    CompilerResults,
-    Executor,
-    FileIntegrity,
-    GeneratedCodeAttribute,
-    HandlerBase,
-    Indentation,
-    IndentedTextWriter,
-    RedistVersionInfo,
-    TempFileCollection,
-    ICodeCompiler,
-    ICodeGenerator,
-    ICodeParser,
-    GeneratorSupport,
-    LanguageOptions,
-]
+class RedistVersionInfo(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetCompilerPath(cls, provOptions: IDictionary[str, str], compilerExecutable: str) -> str:
+        """
+
+        :param provOptions:
+        :param compilerExecutable:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TempFileCollection(Object, ICollection, IEnumerable, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, tempDir: str):
+        """
+
+        :param tempDir:
+        """
+    @overload
+    def __init__(self, tempDir: str, keepFiles: bool):
+        """
+
+        :param tempDir:
+        :param keepFiles:
+        """
+    @property
+    def BasePath(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def KeepFiles(self) -> bool:
+        """
+
+        :return:
+        """
+    @KeepFiles.setter
+    def KeepFiles(self, value: bool) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def TempDir(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def AddExtension(self, fileExtension: str) -> str:
+        """
+
+        :param fileExtension:
+        :return:
+        """
+    @overload
+    def AddExtension(self, fileExtension: str, keepFile: bool) -> str:
+        """
+
+        :param fileExtension:
+        :param keepFile:
+        :return:
+        """
+    def AddFile(self, fileName: str, keepFile: bool) -> None:
+        """
+
+        :param fileName:
+        :param keepFile:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, fileNames: Array[str], start: int) -> None:
+        """
+
+        :param fileNames:
+        :param start:
+        """
+    def Delete(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """

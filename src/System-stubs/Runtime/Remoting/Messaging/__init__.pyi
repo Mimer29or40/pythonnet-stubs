@@ -2,28 +2,24 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Callable
-from typing import List
-from typing import Protocol
+from typing import ClassVar
+from typing import Final
+from typing import Iterator
 from typing import Tuple
-from typing import Union
 from typing import overload
 
 from System import Array
 from System import AsyncCallback
 from System import Attribute
-from System import Boolean
 from System import Exception
+from System import Guid
 from System import IAsyncResult
 from System import ICloneable
-from System import Int32
 from System import IntPtr
 from System import MarshalByRefObject
-from System import MulticastDelegate
 from System import Object
 from System import RuntimeMethodHandle
-from System import String
 from System import Type
-from System import Void
 from System.Collections import DictionaryEntry
 from System.Collections import ICollection
 from System.Collections import IDictionary
@@ -44,2231 +40,4785 @@ from System.Runtime.Serialization import IFormatter
 from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import ISerializationSurrogate
 from System.Runtime.Serialization import ISurrogateSelector
+from System.Runtime.Serialization import SerializationBinder
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 from System.Runtime.Serialization.Formatters import IFieldInfo
 from System.Threading import WaitHandle
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class ArgMapper(ObjectType):
+class ArgMapper(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AsyncReplySink(ObjectType, IMessageSink):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def NextSink(self) -> IMessageSink: ...
-
-    # ---------- Methods ---------- #
-
-    def AsyncProcessMessage(self, reqMsg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def SyncProcessMessage(self, reqMsg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AsyncResult(ObjectType, IAsyncResult, IMessageSink):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class AsyncReplySink(Object, IMessageSink):
+    """"""
 
     @property
-    def AsyncDelegate(self) -> ObjectType: ...
+    def NextSink(self) -> IMessageSink:
+        """
+
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
+
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
+
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class AsyncResult(Object, IMessageSink, IAsyncResult):
+    """"""
+
     @property
-    def AsyncState(self) -> ObjectType: ...
+    def AsyncDelegate(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def AsyncWaitHandle(self) -> WaitHandle: ...
+    def AsyncState(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def CompletedSynchronously(self) -> BooleanType: ...
+    def AsyncWaitHandle(self) -> WaitHandle:
+        """
+
+        :return:
+        """
     @property
-    def EndInvokeCalled(self) -> BooleanType: ...
+    def CompletedSynchronously(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def EndInvokeCalled(self) -> bool:
+        """
+
+        :return:
+        """
     @EndInvokeCalled.setter
-    def EndInvokeCalled(self, value: BooleanType) -> None: ...
+    def EndInvokeCalled(self, value: bool) -> None: ...
     @property
-    def IsCompleted(self) -> BooleanType: ...
+    def IsCompleted(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def NextSink(self) -> IMessageSink: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def GetReplyMessage(self) -> IMessage: ...
-    def SetMessageCtrl(self, mc: IMessageCtrl) -> VoidType: ...
-    def SyncProcessMessage(self, msg: IMessage) -> IMessage: ...
-    def get_AsyncDelegate(self) -> ObjectType: ...
-    def get_AsyncState(self) -> ObjectType: ...
-    def get_AsyncWaitHandle(self) -> WaitHandle: ...
-    def get_CompletedSynchronously(self) -> BooleanType: ...
-    def get_EndInvokeCalled(self) -> BooleanType: ...
-    def get_IsCompleted(self) -> BooleanType: ...
-    def get_NextSink(self) -> IMessageSink: ...
-    def set_EndInvokeCalled(self, value: BooleanType) -> VoidType: ...
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetReplyMessage(self) -> IMessage:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetMessageCtrl(self, mc: IMessageCtrl) -> None:
+        """
 
-    # No Sub Enums
+        :param mc:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
 
-class CCMDictionary(MessageDictionary, IDictionary, ICollection, IEnumerable):
-    # ---------- Fields ---------- #
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    @staticmethod
+        :return:
+        """
+
+class CCMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
+    """"""
+
+    CCMkeys: Final[ClassVar[Array[str]]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, msg: IConstructionCallMessage, idict: IDictionary):
+        """
+
+        :param msg:
+        :param idict:
+        """
     @property
-    def CCMkeys() -> ArrayType[StringType]: ...
-    @staticmethod
-    @CCMkeys.setter
-    def CCMkeys(value: ArrayType[StringType]) -> None: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self, msg: IConstructionCallMessage, idict: IDictionary): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CRMDictionary(MessageDictionary, IDictionary, ICollection, IEnumerable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
+        :return:
+        """
     @property
-    def CRMkeysFault() -> ArrayType[StringType]: ...
-    @staticmethod
-    @CRMkeysFault.setter
-    def CRMkeysFault(value: ArrayType[StringType]) -> None: ...
-    @staticmethod
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def CRMkeysNoFault() -> ArrayType[StringType]: ...
-    @staticmethod
-    @CRMkeysNoFault.setter
-    def CRMkeysNoFault(value: ArrayType[StringType]) -> None: ...
+    def IsReadOnly(self) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self, msg: IConstructionReturnMessage, idict: IDictionary): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CallContext(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+        :return:
+        """
     @property
-    def HostContext() -> ObjectType: ...
-    @staticmethod
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Keys(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection:
+        """
+
+        :return:
+        """
+    def Add(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, key: object) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Remove(self, key: object) -> None:
+        """
+
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, key: object) -> object:
+        """
+
+        :param key:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+
+class CRMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
+    """"""
+
+    CRMkeysFault: Final[ClassVar[Array[str]]] = ...
+    """
+    
+    :return: 
+    """
+    CRMkeysNoFault: Final[ClassVar[Array[str]]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, msg: IConstructionReturnMessage, idict: IDictionary):
+        """
+
+        :param msg:
+        :param idict:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Keys(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection:
+        """
+
+        :return:
+        """
+    def Add(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, key: object) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Remove(self, key: object) -> None:
+        """
+
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, key: object) -> object:
+        """
+
+        :param key:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+
+class CallContext(Object):
+    """"""
+
+    @classmethod
+    @property
+    def HostContext(cls) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
     @HostContext.setter
-    def HostContext(value: ObjectType) -> None: ...
+    def HostContext(cls, value: object) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def FreeNamedDataSlot(cls, name: str) -> None:
+        """
 
-    @staticmethod
-    def FreeNamedDataSlot(name: StringType) -> VoidType: ...
-    @staticmethod
-    def GetData(name: StringType) -> ObjectType: ...
-    @staticmethod
-    def GetHeaders() -> ArrayType[Header]: ...
-    @staticmethod
-    def LogicalGetData(name: StringType) -> ObjectType: ...
-    @staticmethod
-    def LogicalSetData(name: StringType, data: ObjectType) -> VoidType: ...
-    @staticmethod
-    def SetData(name: StringType, data: ObjectType) -> VoidType: ...
-    @staticmethod
-    def SetHeaders(headers: ArrayType[Header]) -> VoidType: ...
-    @staticmethod
-    def get_HostContext() -> ObjectType: ...
-    @staticmethod
-    def set_HostContext(value: ObjectType) -> VoidType: ...
+        :param name:
+        """
+    @classmethod
+    def GetData(cls, name: str) -> object:
+        """
 
-    # No Events
+        :param name:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @classmethod
+    def GetHeaders(cls) -> Array[Header]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @classmethod
+    def LogicalGetData(cls, name: str) -> object:
+        """
 
-    # No Sub Enums
+        :param name:
+        :return:
+        """
+    @classmethod
+    def LogicalSetData(cls, name: str, data: object) -> None:
+        """
 
-class CallContextRemotingData(ObjectType, ICloneable):
-    # No Fields
+        :param name:
+        :param data:
+        """
+    @classmethod
+    def SetData(cls, name: str, data: object) -> None:
+        """
 
-    # ---------- Constructors ---------- #
+        :param name:
+        :param data:
+        """
+    @classmethod
+    def SetHeaders(cls, headers: Array[Header]) -> None:
+        """
 
-    def __init__(self): ...
+        :param headers:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Properties
+        :return:
+        """
 
-    # ---------- Methods ---------- #
+class CallContextRemotingData(Object, ICloneable):
+    """"""
 
-    def Clone(self) -> ObjectType: ...
+    def __init__(self):
+        """"""
+    def Clone(self) -> object:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class CallContextSecurityData(ObjectType, ICloneable):
-    # No Fields
+class CallContextSecurityData(Object, ICloneable):
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    def Clone(self) -> object:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def Clone(self) -> ObjectType: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ClientAsyncReplyTerminatorSink(ObjectType, IMessageSink):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class ClientAsyncReplyTerminatorSink(Object, IMessageSink):
+    """"""
 
     @property
-    def NextSink(self) -> IMessageSink: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    def AsyncProcessMessage(self, replyMsg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def SyncProcessMessage(self, replyMsg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
 
-    # No Sub Interfaces
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class ClientContextTerminatorSink(InternalSink, IMessageSink):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def NextSink(self) -> IMessageSink: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    def AsyncProcessMessage(self, reqMsg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def SyncProcessMessage(self, reqMsg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
 
-    # No Sub Interfaces
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class ConstructionCall(
     MethodCall,
+    IConstructionCallMessage,
+    IInternalMessage,
+    IMessage,
     IMethodCallMessage,
     IMethodMessage,
-    IMessage,
-    ISerializable,
-    IInternalMessage,
     ISerializationRootObject,
-    IConstructionCallMessage,
+    ISerializable,
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, headers: ArrayType[Header]): ...
+    def __init__(self, m: IMessage):
+        """
+
+        :param m:
+        """
     @overload
-    def __init__(self, m: IMessage): ...
+    def __init__(self, headers: Array[Header]):
+        """
 
-    # ---------- Properties ---------- #
+        :param headers:
+        """
+    @property
+    def ActivationType(self) -> Type:
+        """
 
+        :return:
+        """
     @property
-    def ActivationType(self) -> TypeType: ...
+    def ActivationTypeName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def ActivationTypeName(self) -> StringType: ...
-    @property
-    def Activator(self) -> IActivator: ...
+    def Activator(self) -> IActivator:
+        """
+
+        :return:
+        """
     @Activator.setter
     def Activator(self, value: IActivator) -> None: ...
     @property
-    def CallSiteActivationAttributes(self) -> ArrayType[ObjectType]: ...
+    def ArgCount(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def ContextProperties(self) -> IList: ...
+    def Args(self) -> Array[object]:
+        """
+
+        :return:
+        """
     @property
-    def Properties(self) -> IDictionary: ...
+    def CallSiteActivationAttributes(self) -> Array[object]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def ContextProperties(self) -> IList:
+        """
 
-    def get_ActivationType(self) -> TypeType: ...
-    def get_ActivationTypeName(self) -> StringType: ...
-    def get_Activator(self) -> IActivator: ...
-    def get_CallSiteActivationAttributes(self) -> ArrayType[ObjectType]: ...
-    def get_ContextProperties(self) -> IList: ...
-    def get_Properties(self) -> IDictionary: ...
-    def set_Activator(self, value: IActivator) -> VoidType: ...
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def IdentityObject(self) -> Identity:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @IdentityObject.setter
+    def IdentityObject(self, value: Identity) -> None: ...
+    @property
+    def InArgCount(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def InArgs(self) -> Array[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ServerIdentityObject(self) -> ServerIdentity:
+        """
+
+        :return:
+        """
+    @ServerIdentityObject.setter
+    def ServerIdentityObject(self, value: ServerIdentity) -> None: ...
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetInArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def HasProperties(self) -> bool:
+        """
+
+        :return:
+        """
+    def HeaderHandler(self, h: Array[Header]) -> object:
+        """
+
+        :param h:
+        :return:
+        """
+    def Init(self) -> None:
+        """"""
+    def ResolveMethod(self) -> None:
+        """"""
+    def RootSetObjectData(self, info: SerializationInfo, ctx: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param ctx:
+        """
+    def SetCallContext(self, callContext: LogicalCallContext) -> None:
+        """
+
+        :param callContext:
+        """
+    def SetURI(self, uri: str) -> None:
+        """
+
+        :param uri:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ConstructionResponse(
     MethodResponse,
-    IMethodReturnMessage,
-    IMethodMessage,
-    IMessage,
-    ISerializable,
-    ISerializationRootObject,
-    IInternalMessage,
     IConstructionReturnMessage,
+    IInternalMessage,
+    IMessage,
+    IMethodMessage,
+    IMethodReturnMessage,
+    ISerializationRootObject,
+    ISerializable,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, h: Array[Header], mcm: IMethodCallMessage):
+        """
 
-    def __init__(self, h: ArrayType[Header], mcm: IMethodCallMessage): ...
-
-    # ---------- Properties ---------- #
-
+        :param h:
+        :param mcm:
+        """
     @property
-    def Properties(self) -> IDictionary: ...
+    def ArgCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
 
-    def get_Properties(self) -> IDictionary: ...
+        :return:
+        """
+    @property
+    def Exception(self) -> Exception:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def IdentityObject(self) -> Identity:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @IdentityObject.setter
+    def IdentityObject(self, value: Identity) -> None: ...
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnValue(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def ServerIdentityObject(self) -> ServerIdentity:
+        """
+
+        :return:
+        """
+    @ServerIdentityObject.setter
+    def ServerIdentityObject(self, value: ServerIdentity) -> None: ...
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetOutArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetOutArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def HasProperties(self) -> bool:
+        """
+
+        :return:
+        """
+    def HeaderHandler(self, h: Array[Header]) -> object:
+        """
+
+        :param h:
+        :return:
+        """
+    def RootSetObjectData(self, info: SerializationInfo, ctx: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param ctx:
+        """
+    def SetCallContext(self, callContext: LogicalCallContext) -> None:
+        """
+
+        :param callContext:
+        """
+    def SetURI(self, uri: str) -> None:
+        """
+
+        :param uri:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ConstructorCallMessage(
-    ObjectType, IConstructionCallMessage, IMethodCallMessage, IMethodMessage, IMessage
+    Object, IConstructionCallMessage, IMessage, IMethodCallMessage, IMethodMessage
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def ActivationType(self) -> TypeType: ...
+    def ActivationType(self) -> Type:
+        """
+
+        :return:
+        """
     @property
-    def ActivationTypeName(self) -> StringType: ...
+    def ActivationTypeName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Activator(self) -> IActivator: ...
+    def Activator(self) -> IActivator:
+        """
+
+        :return:
+        """
     @Activator.setter
     def Activator(self, value: IActivator) -> None: ...
     @property
-    def ArgCount(self) -> IntType: ...
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @property
-    def CallSiteActivationAttributes(self) -> ArrayType[ObjectType]: ...
-    @property
-    def ContextProperties(self) -> IList: ...
-    @property
-    def HasVarArgs(self) -> BooleanType: ...
-    @property
-    def InArgCount(self) -> IntType: ...
-    @property
-    def InArgs(self) -> ArrayType[ObjectType]: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodBase(self) -> MethodBase: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def TypeName(self) -> StringType: ...
-    @property
-    def Uri(self) -> StringType: ...
-    @Uri.setter
-    def Uri(self, value: StringType) -> None: ...
+    def ArgCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
 
-    def GetArg(self, argNum: IntType) -> ObjectType: ...
-    def GetArgName(self, index: IntType) -> StringType: ...
-    def GetInArg(self, argNum: IntType) -> ObjectType: ...
-    def GetInArgName(self, index: IntType) -> StringType: ...
-    def GetThisPtr(self) -> ObjectType: ...
-    def get_ActivationType(self) -> TypeType: ...
-    def get_ActivationTypeName(self) -> StringType: ...
-    def get_Activator(self) -> IActivator: ...
-    def get_ArgCount(self) -> IntType: ...
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_CallSiteActivationAttributes(self) -> ArrayType[ObjectType]: ...
-    def get_ContextProperties(self) -> IList: ...
-    def get_HasVarArgs(self) -> BooleanType: ...
-    def get_InArgCount(self) -> IntType: ...
-    def get_InArgs(self) -> ArrayType[ObjectType]: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodBase(self) -> MethodBase: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_Properties(self) -> IDictionary: ...
-    def get_TypeName(self) -> StringType: ...
-    def get_Uri(self) -> StringType: ...
-    def set_Activator(self, value: IActivator) -> VoidType: ...
-    def set_Uri(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    @property
+    def CallSiteActivationAttributes(self) -> Array[object]:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def ContextProperties(self) -> IList:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def InArgCount(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def InArgs(self) -> Array[object]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetInArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetThisPtr(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ConstructorReturnMessage(
-    ReturnMessage, IMethodReturnMessage, IMethodMessage, IMessage, IConstructionReturnMessage
+    ReturnMessage, IConstructionReturnMessage, IMessage, IMethodMessage, IMethodReturnMessage
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    @overload
+    def __init__(self, e: Exception, ccm: IConstructionCallMessage):
+        """
 
+        :param e:
+        :param ccm:
+        """
     @overload
     def __init__(
         self,
         o: MarshalByRefObject,
-        outArgs: ArrayType[ObjectType],
-        outArgsCount: IntType,
+        outArgs: Array[object],
+        outArgsCount: int,
         callCtx: LogicalCallContext,
         ccm: IConstructionCallMessage,
-    ): ...
-    @overload
-    def __init__(self, e: Exception, ccm: IConstructionCallMessage): ...
+    ):
+        """
 
-    # ---------- Properties ---------- #
+        :param o:
+        :param outArgs:
+        :param outArgsCount:
+        :param callCtx:
+        :param ccm:
+        """
+    @property
+    def ArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Exception(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnValue(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetOutArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetOutArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DisposeSink(Object, IMessageSink):
+    """"""
 
     @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def ReturnValue(self) -> ObjectType: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    def get_Properties(self) -> IDictionary: ...
-    def get_ReturnValue(self) -> ObjectType: ...
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
 
-    # No Sub Interfaces
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
-
-class DisposeSink(ObjectType, IMessageSink):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def NextSink(self) -> IMessageSink: ...
-
-    # ---------- Methods ---------- #
-
-    def AsyncProcessMessage(self, reqMsg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def SyncProcessMessage(self, reqMsg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class EnvoyTerminatorSink(InternalSink, IMessageSink):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def NextSink(self) -> IMessageSink: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    def AsyncProcessMessage(self, reqMsg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def SyncProcessMessage(self, reqMsg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
 
-    # No Sub Interfaces
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class ErrorMessage(ObjectType, IMethodCallMessage, IMethodMessage, IMessage):
-    # No Fields
+class ErrorMessage(Object, IMessage, IMethodCallMessage, IMethodMessage):
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def ArgCount(self) -> IntType: ...
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @property
-    def HasVarArgs(self) -> BooleanType: ...
-    @property
-    def InArgCount(self) -> IntType: ...
-    @property
-    def InArgs(self) -> ArrayType[ObjectType]: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodBase(self) -> MethodBase: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def TypeName(self) -> StringType: ...
-    @property
-    def Uri(self) -> StringType: ...
+    def ArgCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
-
-    def GetArg(self, argNum: IntType) -> ObjectType: ...
-    def GetArgName(self, index: IntType) -> StringType: ...
-    def GetInArg(self, argNum: IntType) -> ObjectType: ...
-    def GetInArgName(self, index: IntType) -> StringType: ...
-    def get_ArgCount(self) -> IntType: ...
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_HasVarArgs(self) -> BooleanType: ...
-    def get_InArgCount(self) -> IntType: ...
-    def get_InArgs(self) -> ArrayType[ObjectType]: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodBase(self) -> MethodBase: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_Properties(self) -> IDictionary: ...
-    def get_TypeName(self) -> StringType: ...
-    def get_Uri(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Header(ObjectType):
-    # ---------- Fields ---------- #
-
+        :return:
+        """
     @property
-    def HeaderNamespace(self) -> StringType: ...
-    @HeaderNamespace.setter
-    def HeaderNamespace(self, value: StringType) -> None: ...
-    @property
-    def MustUnderstand(self) -> BooleanType: ...
-    @MustUnderstand.setter
-    def MustUnderstand(self, value: BooleanType) -> None: ...
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def Value(self) -> ObjectType: ...
-    @Value.setter
-    def Value(self, value: ObjectType) -> None: ...
+    def Args(self) -> Array[object]:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
 
+        :return:
+        """
+    @property
+    def InArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def InArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetInArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Header(Object):
+    """"""
+
+    HeaderNamespace: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    MustUnderstand: Final[bool] = ...
+    """
+    
+    :return: 
+    """
+    Name: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    Value: Final[object] = ...
+    """
+    
+    :return: 
+    """
     @overload
-    def __init__(self, _Name: StringType, _Value: ObjectType): ...
+    def __init__(self, _Name: str, _Value: object):
+        """
+
+        :param _Name:
+        :param _Value:
+        """
     @overload
-    def __init__(self, _Name: StringType, _Value: ObjectType, _MustUnderstand: BooleanType): ...
+    def __init__(self, _Name: str, _Value: object, _MustUnderstand: bool):
+        """
+
+        :param _Name:
+        :param _Value:
+        :param _MustUnderstand:
+        """
     @overload
-    def __init__(
-        self,
-        _Name: StringType,
-        _Value: ObjectType,
-        _MustUnderstand: BooleanType,
-        _HeaderNamespace: StringType,
-    ): ...
+    def __init__(self, _Name: str, _Value: object, _MustUnderstand: bool, _HeaderNamespace: str):
+        """
 
-    # No Properties
+        :param _Name:
+        :param _Value:
+        :param _MustUnderstand:
+        :param _HeaderNamespace:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+HeaderHandler: Callable[[Array[Header]], object] = ...
+"""
 
-    # No Sub Enums
+:param headers: 
+:return: 
+"""
 
-class HeaderHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, headers: ArrayType[Header], callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> ObjectType: ...
-    def Invoke(self, headers: ArrayType[Header]) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IllogicalCallContext(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CreateCopy(self) -> IllogicalCallContext: ...
-    def FreeNamedDataSlot(self, name: StringType) -> VoidType: ...
-    def GetData(self, name: StringType) -> ObjectType: ...
-    def SetData(self, name: StringType, data: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InternalMessageWrapper(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, msg: IMessage): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InternalSink(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LogicalCallContext(ObjectType, ISerializable, ICloneable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class IInternalMessage:
+    """"""
 
     @property
-    def HasInfo(self) -> BooleanType: ...
+    def IdentityObject(self) -> Identity:
+        """
 
-    # ---------- Methods ---------- #
-
-    def Clone(self) -> ObjectType: ...
-    def FreeNamedDataSlot(self, name: StringType) -> VoidType: ...
-    def GetData(self, name: StringType) -> ObjectType: ...
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def SetData(self, name: StringType, data: ObjectType) -> VoidType: ...
-    def get_HasInfo(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MCMDictionary(MessageDictionary, IDictionary, ICollection, IEnumerable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
+        :return:
+        """
+    @IdentityObject.setter
+    def IdentityObject(self, value: Identity) -> None: ...
     @property
-    def MCMkeys() -> ArrayType[StringType]: ...
-    @staticmethod
-    @MCMkeys.setter
-    def MCMkeys(value: ArrayType[StringType]) -> None: ...
+    def ServerIdentityObject(self) -> ServerIdentity:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @ServerIdentityObject.setter
+    def ServerIdentityObject(self, value: ServerIdentity) -> None: ...
+    def HasProperties(self) -> bool:
+        """
 
-    def __init__(self, msg: IMethodCallMessage, idict: IDictionary): ...
+        :return:
+        """
+    def SetCallContext(self, callContext: LogicalCallContext) -> None:
+        """
 
-    # No Properties
+        :param callContext:
+        """
+    def SetURI(self, uri: str) -> None:
+        """
 
-    # No Methods
+        :param uri:
+        """
 
-    # No Events
+class ILogicalThreadAffinative:
+    """"""
 
-    # No Sub Classes
+class IMessage:
+    """"""
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MRMDictionary(MessageDictionary, IDictionary, ICollection, IEnumerable):
-    # ---------- Fields ---------- #
-
-    @staticmethod
     @property
-    def MCMkeysFault() -> ArrayType[StringType]: ...
-    @staticmethod
-    @MCMkeysFault.setter
-    def MCMkeysFault(value: ArrayType[StringType]) -> None: ...
-    @staticmethod
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+
+class IMessageCtrl:
+    """"""
+
+    def Cancel(self, msToCancel: int) -> None:
+        """
+
+        :param msToCancel:
+        """
+
+class IMessageSink:
+    """"""
+
     @property
-    def MCMkeysNoFault() -> ArrayType[StringType]: ...
-    @staticmethod
-    @MCMkeysNoFault.setter
-    def MCMkeysNoFault(value: ArrayType[StringType]) -> None: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    def __init__(self, msg: IMethodReturnMessage, idict: IDictionary): ...
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
 
-    # No Properties
+        :param msg:
+        :return:
+        """
 
-    # No Methods
+class IMethodCallMessage(IMessage, IMethodMessage):
+    """"""
 
-    # No Events
+    @property
+    def ArgCount(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def InArgCount(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def InArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetInArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetInArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+
+class IMethodMessage(IMessage):
+    """"""
+
+    @property
+    def ArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+
+class IMethodReturnMessage(IMessage, IMethodMessage):
+    """"""
+
+    @property
+    def ArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Exception(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnValue(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetOutArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetOutArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+
+class IRemotingFormatter(IFormatter):
+    """"""
+
+    @property
+    def Binder(self) -> SerializationBinder:
+        """
+
+        :return:
+        """
+    @Binder.setter
+    def Binder(self, value: SerializationBinder) -> None: ...
+    @property
+    def Context(self) -> StreamingContext:
+        """
+
+        :return:
+        """
+    @Context.setter
+    def Context(self, value: StreamingContext) -> None: ...
+    @property
+    def SurrogateSelector(self) -> ISurrogateSelector:
+        """
+
+        :return:
+        """
+    @SurrogateSelector.setter
+    def SurrogateSelector(self, value: ISurrogateSelector) -> None: ...
+    @overload
+    def Deserialize(self, serializationStream: Stream) -> object:
+        """
+
+        :param serializationStream:
+        :return:
+        """
+    @overload
+    def Deserialize(self, serializationStream: Stream, handler: HeaderHandler) -> object:
+        """
+
+        :param serializationStream:
+        :param handler:
+        :return:
+        """
+    @overload
+    def Serialize(self, serializationStream: Stream, graph: object) -> None:
+        """
+
+        :param serializationStream:
+        :param graph:
+        """
+    @overload
+    def Serialize(self, serializationStream: Stream, graph: object, headers: Array[Header]) -> None:
+        """
+
+        :param serializationStream:
+        :param graph:
+        :param headers:
+        """
+
+class ISerializationRootObject:
+    """"""
+
+    def RootSetObjectData(self, info: SerializationInfo, ctx: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param ctx:
+        """
+
+class IllogicalCallContext(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def CreateCopy(self) -> IllogicalCallContext:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FreeNamedDataSlot(self, name: str) -> None:
+        """
+
+        :param name:
+        """
+    def GetData(self, name: str) -> object:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SetData(self, name: str, data: object) -> None:
+        """
+
+        :param name:
+        :param data:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class InternalMessageWrapper(Object):
+    """"""
+
+    def __init__(self, msg: IMessage):
+        """
+
+        :param msg:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class InternalSink(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class LogicalCallContext(Object, ISerializable, ICloneable):
+    """"""
+
+    @property
+    def HasInfo(self) -> bool:
+        """
+
+        :return:
+        """
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FreeNamedDataSlot(self, name: str) -> None:
+        """
+
+        :param name:
+        """
+    def GetData(self, name: str) -> object:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SetData(self, name: str, data: object) -> None:
+        """
+
+        :param name:
+        :param data:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MCMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
+    """"""
+
+    MCMkeys: Final[ClassVar[Array[str]]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, msg: IMethodCallMessage, idict: IDictionary):
+        """
+
+        :param msg:
+        :param idict:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Keys(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection:
+        """
+
+        :return:
+        """
+    def Add(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, key: object) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Remove(self, key: object) -> None:
+        """
+
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, key: object) -> object:
+        """
+
+        :param key:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+
+class MRMDictionary(MessageDictionary, ICollection, IDictionary, IEnumerable):
+    """"""
+
+    MCMkeysFault: Final[ClassVar[Array[str]]] = ...
+    """
+    
+    :return: 
+    """
+    MCMkeysNoFault: Final[ClassVar[Array[str]]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, msg: IMethodReturnMessage, idict: IDictionary):
+        """
+
+        :param msg:
+        :param idict:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Keys(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection:
+        """
+
+        :return:
+        """
+    def Add(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, key: object) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Remove(self, key: object) -> None:
+        """
+
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, key: object) -> object:
+        """
+
+        :param key:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
 
 class Message(
-    ObjectType, IMethodCallMessage, IMethodMessage, IMessage, IInternalMessage, ISerializable
+    Object, IInternalMessage, IMessage, IMethodCallMessage, IMethodMessage, ISerializable
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def ArgCount(self) -> IntType: ...
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @property
-    def HasVarArgs(self) -> BooleanType: ...
-    @property
-    def InArgCount(self) -> IntType: ...
-    @property
-    def InArgs(self) -> ArrayType[ObjectType]: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodBase(self) -> MethodBase: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def TypeName(self) -> StringType: ...
-    @property
-    def Uri(self) -> StringType: ...
-    @Uri.setter
-    def Uri(self, value: StringType) -> None: ...
+    def ArgCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
 
-    @staticmethod
-    def DebugOut(s: StringType) -> VoidType: ...
-    def Dispatch(self, target: ObjectType) -> BooleanType: ...
-    def GetArg(self, argNum: IntType) -> ObjectType: ...
-    def GetArgName(self, index: IntType) -> StringType: ...
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IdentityObject(self) -> Identity:
+        """
+
+        :return:
+        """
+    @IdentityObject.setter
+    def IdentityObject(self, value: Identity) -> None: ...
+    @property
+    def InArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def InArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ServerIdentityObject(self) -> ServerIdentity:
+        """
+
+        :return:
+        """
+    @ServerIdentityObject.setter
+    def ServerIdentityObject(self, value: ServerIdentity) -> None: ...
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def DebugOut(cls, s: str) -> None:
+        """
+
+        :param s:
+        """
+    def Dispatch(self, target: object) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
     def GetAsyncBeginInfo(
-        self, acbd: AsyncCallback, state: ObjectType
-    ) -> Tuple[VoidType, AsyncCallback, ObjectType]: ...
-    def GetAsyncResult(self) -> IAsyncResult: ...
-    def GetCallType(self) -> IntType: ...
-    def GetFault(self) -> Exception: ...
-    def GetInArg(self, argNum: IntType) -> ObjectType: ...
-    def GetInArgName(self, index: IntType) -> StringType: ...
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def GetReturnValue(self) -> ObjectType: ...
-    def GetThisPtr(self) -> ObjectType: ...
-    def Init(self) -> VoidType: ...
-    def PropagateOutParameters(
-        self, OutArgs: ArrayType[ObjectType], retVal: ObjectType
-    ) -> VoidType: ...
-    def SetFault(self, e: Exception) -> VoidType: ...
-    def get_ArgCount(self) -> IntType: ...
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_HasVarArgs(self) -> BooleanType: ...
-    def get_InArgCount(self) -> IntType: ...
-    def get_InArgs(self) -> ArrayType[ObjectType]: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodBase(self) -> MethodBase: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_Properties(self) -> IDictionary: ...
-    def get_TypeName(self) -> StringType: ...
-    def get_Uri(self) -> StringType: ...
-    def set_Uri(self, value: StringType) -> VoidType: ...
+        self, acbd: AsyncCallback, state: object
+    ) -> Tuple[None, AsyncCallback, object]:
+        """
 
-    # No Events
+        :param acbd:
+        :param state:
+        """
+    def GetAsyncResult(self) -> IAsyncResult:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetCallType(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetFault(self) -> Exception:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetInArg(self, argNum: int) -> object:
+        """
 
-class MessageDictionary(ABC, ObjectType, IDictionary, ICollection, IEnumerable):
-    # No Fields
+        :param argNum:
+        :return:
+        """
+    def GetInArgName(self, index: int) -> str:
+        """
 
-    # No Constructors
+        :param index:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-    # ---------- Properties ---------- #
+        :param info:
+        :param context:
+        """
+    def GetReturnValue(self) -> object:
+        """
 
-    @property
-    def Count(self) -> IntType: ...
-    @property
-    def IsFixedSize(self) -> BooleanType: ...
-    @property
-    def IsReadOnly(self) -> BooleanType: ...
-    @property
-    def IsSynchronized(self) -> BooleanType: ...
-    def __getitem__(self, key: ObjectType) -> ObjectType: ...
-    def __setitem__(self, key: ObjectType, value: ObjectType) -> None: ...
-    @property
-    def Keys(self) -> ICollection: ...
-    @property
-    def SyncRoot(self) -> ObjectType: ...
-    @property
-    def Values(self) -> ICollection: ...
+        :return:
+        """
+    def GetThisPtr(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def Add(self, key: ObjectType, value: ObjectType) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Contains(self, key: ObjectType) -> BooleanType: ...
-    def CopyTo(self, array: Array, index: IntType) -> VoidType: ...
-    def Remove(self, key: ObjectType) -> VoidType: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsFixedSize(self) -> BooleanType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_IsSynchronized(self) -> BooleanType: ...
-    def get_Item(self, key: ObjectType) -> ObjectType: ...
-    def get_Keys(self) -> ICollection: ...
-    def get_SyncRoot(self) -> ObjectType: ...
-    def get_Values(self) -> ICollection: ...
-    def set_Item(self, key: ObjectType, value: ObjectType) -> VoidType: ...
+        :return:
+        """
+    def HasProperties(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    def Init(self) -> None:
+        """"""
+    def PropagateOutParameters(self, OutArgs: Array[object], retVal: object) -> None:
+        """
 
-    # No Sub Classes
+        :param OutArgs:
+        :param retVal:
+        """
+    def SetCallContext(self, callContext: LogicalCallContext) -> None:
+        """
 
-    # No Sub Structs
+        :param callContext:
+        """
+    def SetFault(self, e: Exception) -> None:
+        """
 
-    # No Sub Interfaces
+        :param e:
+        """
+    def SetURI(self, uri: str) -> None:
+        """
 
-    # No Sub Enums
+        :param uri:
+        """
+    def ToString(self) -> str:
+        """
 
-class MessageDictionaryEnumerator(ObjectType, IDictionaryEnumerator, IEnumerator):
-    # No Fields
+        :return:
+        """
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self, md: MessageDictionary, hashtable: IDictionary): ...
-
-    # ---------- Properties ---------- #
+class MessageDictionary(ABC, Object, ICollection, IDictionary, IEnumerable):
+    """"""
 
     @property
-    def Current(self) -> ObjectType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Entry(self) -> DictionaryEntry: ...
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Key(self) -> ObjectType: ...
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Value(self) -> ObjectType: ...
+    def IsSynchronized(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
 
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> ObjectType: ...
-    def get_Entry(self) -> DictionaryEntry: ...
-    def get_Key(self) -> ObjectType: ...
-    def get_Value(self) -> ObjectType: ...
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Keys(self) -> ICollection:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Add(self, key: object, value: object) -> None:
+        """
 
-    # No Sub Interfaces
+        :param key:
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, key: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param key:
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-class MessageSmuggler(ObjectType):
-    # No Fields
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def Remove(self, key: object) -> None:
+        """
 
-    # No Events
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param value:
+        :return:
+        """
+    def __getitem__(self, key: object) -> object:
+        """
 
-    # No Sub Interfaces
+        :param key:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def __len__(self) -> int:
+        """
 
-class MessageSurrogate(ObjectType, ISerializationSurrogate):
-    # No Fields
+        :return:
+        """
+    def __setitem__(self, key: object, value: object) -> None:
+        """
 
-    # No Constructors
+        :param key:
+        :param value:
+        """
 
-    # No Properties
+class MessageDictionaryEnumerator(Object, IDictionaryEnumerator, IEnumerator):
+    """"""
 
-    # ---------- Methods ---------- #
+    def __init__(self, md: MessageDictionary, hashtable: IDictionary):
+        """
 
+        :param md:
+        :param hashtable:
+        """
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Entry(self) -> DictionaryEntry:
+        """
+
+        :return:
+        """
+    @property
+    def Key(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MessageSmuggler(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MessageSurrogate(Object, ISerializationSurrogate):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
     def GetObjectData(
-        self, obj: ObjectType, info: SerializationInfo, context: StreamingContext
-    ) -> VoidType: ...
+        self, obj: object, info: SerializationInfo, context: StreamingContext
+    ) -> None:
+        """
+
+        :param obj:
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     def SetObjectData(
         self,
-        obj: ObjectType,
+        obj: object,
         info: SerializationInfo,
         context: StreamingContext,
         selector: ISurrogateSelector,
-    ) -> ObjectType: ...
+    ) -> object:
+        """
 
-    # No Events
+        :param obj:
+        :param info:
+        :param context:
+        :param selector:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+MessageSurrogateFilter: Callable[[str, object], bool] = ...
+"""
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MessageSurrogateFilter(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, key: StringType, value: ObjectType, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> BooleanType: ...
-    def Invoke(self, key: StringType, value: ObjectType) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+:param key: 
+:param value: 
+:return: 
+"""
 
 class MethodCall(
-    ObjectType,
+    Object,
+    IInternalMessage,
+    IMessage,
     IMethodCallMessage,
     IMethodMessage,
-    IMessage,
-    ISerializable,
-    IInternalMessage,
     ISerializationRootObject,
+    ISerializable,
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, h1: ArrayType[Header]): ...
+    def __init__(self, msg: IMessage):
+        """
+
+        :param msg:
+        """
     @overload
-    def __init__(self, msg: IMessage): ...
+    def __init__(self, h1: Array[Header]):
+        """
 
-    # ---------- Properties ---------- #
+        :param h1:
+        """
+    @property
+    def ArgCount(self) -> int:
+        """
 
+        :return:
+        """
     @property
-    def ArgCount(self) -> IntType: ...
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @property
-    def HasVarArgs(self) -> BooleanType: ...
-    @property
-    def InArgCount(self) -> IntType: ...
-    @property
-    def InArgs(self) -> ArrayType[ObjectType]: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodBase(self) -> MethodBase: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def TypeName(self) -> StringType: ...
-    @property
-    def Uri(self) -> StringType: ...
-    @Uri.setter
-    def Uri(self, value: StringType) -> None: ...
+    def Args(self) -> Array[object]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
 
-    def GetArg(self, argNum: IntType) -> ObjectType: ...
-    def GetArgName(self, index: IntType) -> StringType: ...
-    def GetInArg(self, argNum: IntType) -> ObjectType: ...
-    def GetInArgName(self, index: IntType) -> StringType: ...
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def HeaderHandler(self, h: ArrayType[Header]) -> ObjectType: ...
-    def Init(self) -> VoidType: ...
-    def ResolveMethod(self) -> VoidType: ...
-    def RootSetObjectData(self, info: SerializationInfo, ctx: StreamingContext) -> VoidType: ...
-    def get_ArgCount(self) -> IntType: ...
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_HasVarArgs(self) -> BooleanType: ...
-    def get_InArgCount(self) -> IntType: ...
-    def get_InArgs(self) -> ArrayType[ObjectType]: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodBase(self) -> MethodBase: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_Properties(self) -> IDictionary: ...
-    def get_TypeName(self) -> StringType: ...
-    def get_Uri(self) -> StringType: ...
-    def set_Uri(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    @property
+    def IdentityObject(self) -> Identity:
+        """
 
-    # No Events
+        :return:
+        """
+    @IdentityObject.setter
+    def IdentityObject(self, value: Identity) -> None: ...
+    @property
+    def InArgCount(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def InArgs(self) -> Array[object]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ServerIdentityObject(self) -> ServerIdentity:
+        """
+
+        :return:
+        """
+    @ServerIdentityObject.setter
+    def ServerIdentityObject(self, value: ServerIdentity) -> None: ...
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetInArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def HasProperties(self) -> bool:
+        """
+
+        :return:
+        """
+    def HeaderHandler(self, h: Array[Header]) -> object:
+        """
+
+        :param h:
+        :return:
+        """
+    def Init(self) -> None:
+        """"""
+    def ResolveMethod(self) -> None:
+        """"""
+    def RootSetObjectData(self, info: SerializationInfo, ctx: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param ctx:
+        """
+    def SetCallContext(self, callContext: LogicalCallContext) -> None:
+        """
+
+        :param callContext:
+        """
+    def SetURI(self, uri: str) -> None:
+        """
+
+        :param uri:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class MethodCallMessageWrapper(
-    InternalMessageWrapper, IMethodCallMessage, IMethodMessage, IMessage
+    InternalMessageWrapper, IMessage, IMethodCallMessage, IMethodMessage
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, msg: IMethodCallMessage):
+        """
 
-    def __init__(self, msg: IMethodCallMessage): ...
+        :param msg:
+        """
+    @property
+    def ArgCount(self) -> int:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
 
+        :return:
+        """
     @property
-    def ArgCount(self) -> IntType: ...
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @Args.setter
-    def Args(self, value: ArrayType[ObjectType]) -> None: ...
-    @property
-    def HasVarArgs(self) -> BooleanType: ...
-    @property
-    def InArgCount(self) -> IntType: ...
-    @property
-    def InArgs(self) -> ArrayType[ObjectType]: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodBase(self) -> MethodBase: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def TypeName(self) -> StringType: ...
-    @property
-    def Uri(self) -> StringType: ...
-    @Uri.setter
-    def Uri(self, value: StringType) -> None: ...
+    def HasVarArgs(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def InArgCount(self) -> int:
+        """
 
-    def GetArg(self, argNum: IntType) -> ObjectType: ...
-    def GetArgName(self, index: IntType) -> StringType: ...
-    def GetInArg(self, argNum: IntType) -> ObjectType: ...
-    def GetInArgName(self, index: IntType) -> StringType: ...
-    def get_ArgCount(self) -> IntType: ...
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_HasVarArgs(self) -> BooleanType: ...
-    def get_InArgCount(self) -> IntType: ...
-    def get_InArgs(self) -> ArrayType[ObjectType]: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodBase(self) -> MethodBase: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_Properties(self) -> IDictionary: ...
-    def get_TypeName(self) -> StringType: ...
-    def get_Uri(self) -> StringType: ...
-    def set_Args(self, value: ArrayType[ObjectType]) -> VoidType: ...
-    def set_Uri(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    @property
+    def InArgs(self) -> Array[object]:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetInArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class MethodResponse(
-    ObjectType,
-    IMethodReturnMessage,
-    IMethodMessage,
-    IMessage,
-    ISerializable,
-    ISerializationRootObject,
+    Object,
     IInternalMessage,
+    IMessage,
+    IMethodMessage,
+    IMethodReturnMessage,
+    ISerializationRootObject,
+    ISerializable,
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, h1: Array[Header], mcm: IMethodCallMessage):
+        """
 
-    def __init__(self, h1: ArrayType[Header], mcm: IMethodCallMessage): ...
+        :param h1:
+        :param mcm:
+        """
+    @property
+    def ArgCount(self) -> int:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
 
+        :return:
+        """
     @property
-    def ArgCount(self) -> IntType: ...
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @property
-    def Exception(self) -> Exception: ...
-    @property
-    def HasVarArgs(self) -> BooleanType: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodBase(self) -> MethodBase: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def OutArgCount(self) -> IntType: ...
-    @property
-    def OutArgs(self) -> ArrayType[ObjectType]: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def ReturnValue(self) -> ObjectType: ...
-    @property
-    def TypeName(self) -> StringType: ...
-    @property
-    def Uri(self) -> StringType: ...
-    @Uri.setter
-    def Uri(self, value: StringType) -> None: ...
+    def Exception(self) -> Exception:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
 
-    def GetArg(self, argNum: IntType) -> ObjectType: ...
-    def GetArgName(self, index: IntType) -> StringType: ...
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def GetOutArg(self, argNum: IntType) -> ObjectType: ...
-    def GetOutArgName(self, index: IntType) -> StringType: ...
-    def HeaderHandler(self, h: ArrayType[Header]) -> ObjectType: ...
-    def RootSetObjectData(self, info: SerializationInfo, ctx: StreamingContext) -> VoidType: ...
-    def get_ArgCount(self) -> IntType: ...
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_Exception(self) -> Exception: ...
-    def get_HasVarArgs(self) -> BooleanType: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodBase(self) -> MethodBase: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_OutArgCount(self) -> IntType: ...
-    def get_OutArgs(self) -> ArrayType[ObjectType]: ...
-    def get_Properties(self) -> IDictionary: ...
-    def get_ReturnValue(self) -> ObjectType: ...
-    def get_TypeName(self) -> StringType: ...
-    def get_Uri(self) -> StringType: ...
-    def set_Uri(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    @property
+    def IdentityObject(self) -> Identity:
+        """
 
-    # No Events
+        :return:
+        """
+    @IdentityObject.setter
+    def IdentityObject(self, value: Identity) -> None: ...
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def OutArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnValue(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def ServerIdentityObject(self) -> ServerIdentity:
+        """
+
+        :return:
+        """
+    @ServerIdentityObject.setter
+    def ServerIdentityObject(self, value: ServerIdentity) -> None: ...
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetOutArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetOutArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def HasProperties(self) -> bool:
+        """
+
+        :return:
+        """
+    def HeaderHandler(self, h: Array[Header]) -> object:
+        """
+
+        :param h:
+        :return:
+        """
+    def RootSetObjectData(self, info: SerializationInfo, ctx: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param ctx:
+        """
+    def SetCallContext(self, callContext: LogicalCallContext) -> None:
+        """
+
+        :param callContext:
+        """
+    def SetURI(self, uri: str) -> None:
+        """
+
+        :param uri:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class MethodReturnMessageWrapper(
-    InternalMessageWrapper, IMethodReturnMessage, IMethodMessage, IMessage
+    InternalMessageWrapper, IMessage, IMethodMessage, IMethodReturnMessage
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, msg: IMethodReturnMessage):
+        """
 
-    def __init__(self, msg: IMethodReturnMessage): ...
-
-    # ---------- Properties ---------- #
-
+        :param msg:
+        """
     @property
-    def ArgCount(self) -> IntType: ...
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @Args.setter
-    def Args(self, value: ArrayType[ObjectType]) -> None: ...
-    @property
-    def Exception(self) -> Exception: ...
-    @Exception.setter
-    def Exception(self, value: Exception) -> None: ...
-    @property
-    def HasVarArgs(self) -> BooleanType: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodBase(self) -> MethodBase: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def OutArgCount(self) -> IntType: ...
-    @property
-    def OutArgs(self) -> ArrayType[ObjectType]: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def ReturnValue(self) -> ObjectType: ...
-    @ReturnValue.setter
-    def ReturnValue(self, value: ObjectType) -> None: ...
-    @property
-    def TypeName(self) -> StringType: ...
-    @property
-    def Uri(self) -> StringType: ...
-    @Uri.setter
-    def Uri(self, value: StringType) -> None: ...
+    def ArgCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
 
-    def GetArg(self, argNum: IntType) -> ObjectType: ...
-    def GetArgName(self, index: IntType) -> StringType: ...
-    def GetOutArg(self, argNum: IntType) -> ObjectType: ...
-    def GetOutArgName(self, index: IntType) -> StringType: ...
-    def get_ArgCount(self) -> IntType: ...
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_Exception(self) -> Exception: ...
-    def get_HasVarArgs(self) -> BooleanType: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodBase(self) -> MethodBase: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_OutArgCount(self) -> IntType: ...
-    def get_OutArgs(self) -> ArrayType[ObjectType]: ...
-    def get_Properties(self) -> IDictionary: ...
-    def get_ReturnValue(self) -> ObjectType: ...
-    def get_TypeName(self) -> StringType: ...
-    def get_Uri(self) -> StringType: ...
-    def set_Args(self, value: ArrayType[ObjectType]) -> VoidType: ...
-    def set_Exception(self, value: Exception) -> VoidType: ...
-    def set_ReturnValue(self, value: ObjectType) -> VoidType: ...
-    def set_Uri(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    @property
+    def Exception(self) -> Exception:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
 
-class ObjRefSurrogate(ObjectType, ISerializationSurrogate):
-    # No Fields
+        :return:
+        """
+    @property
+    def OutArgCount(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def OutArgs(self) -> Array[object]:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def ReturnValue(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
 
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetOutArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetOutArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjRefSurrogate(Object, ISerializationSurrogate):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
     def GetObjectData(
-        self, obj: ObjectType, info: SerializationInfo, context: StreamingContext
-    ) -> VoidType: ...
+        self, obj: object, info: SerializationInfo, context: StreamingContext
+    ) -> None:
+        """
+
+        :param obj:
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     def SetObjectData(
         self,
-        obj: ObjectType,
+        obj: object,
         info: SerializationInfo,
         context: StreamingContext,
         selector: ISurrogateSelector,
-    ) -> ObjectType: ...
+    ) -> object:
+        """
 
-    # No Events
+        :param obj:
+        :param info:
+        :param context:
+        :param selector:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class OneWayAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Events
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Structs
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Interfaces
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Sub Enums
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-class RemotingSurrogate(ObjectType, ISerializationSurrogate):
-    # No Fields
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
 
-    # No Properties
+class RemotingSurrogate(Object, ISerializationSurrogate):
+    """"""
 
-    # ---------- Methods ---------- #
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
     def GetObjectData(
-        self, obj: ObjectType, info: SerializationInfo, context: StreamingContext
-    ) -> VoidType: ...
+        self, obj: object, info: SerializationInfo, context: StreamingContext
+    ) -> None:
+        """
+
+        :param obj:
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     def SetObjectData(
         self,
-        obj: ObjectType,
+        obj: object,
         info: SerializationInfo,
         context: StreamingContext,
         selector: ISurrogateSelector,
-    ) -> ObjectType: ...
+    ) -> object:
+        """
 
-    # No Events
+        :param obj:
+        :param info:
+        :param context:
+        :param selector:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class RemotingSurrogateSelector(Object, ISurrogateSelector):
+    """"""
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemotingSurrogateSelector(ObjectType, ISurrogateSelector):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Filter(self) -> MessageSurrogateFilter: ...
+    def Filter(self) -> MessageSurrogateFilter:
+        """
+
+        :return:
+        """
     @Filter.setter
     def Filter(self, value: MessageSurrogateFilter) -> None: ...
+    def ChainSelector(self, selector: ISurrogateSelector) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param selector:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def ChainSelector(self, selector: ISurrogateSelector) -> VoidType: ...
-    def GetNextSelector(self) -> ISurrogateSelector: ...
-    def GetRootObject(self) -> ObjectType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNextSelector(self) -> ISurrogateSelector:
+        """
+
+        :return:
+        """
+    def GetRootObject(self) -> object:
+        """
+
+        :return:
+        """
     def GetSurrogate(
-        self, type: TypeType, context: StreamingContext, ssout: ISurrogateSelector
-    ) -> Tuple[ISerializationSurrogate, ISurrogateSelector]: ...
-    def SetRootObject(self, obj: ObjectType) -> VoidType: ...
-    def UseSoapFormat(self) -> VoidType: ...
-    def get_Filter(self) -> MessageSurrogateFilter: ...
-    def set_Filter(self, value: MessageSurrogateFilter) -> VoidType: ...
+        self, type: Type, context: StreamingContext, selector: ISurrogateSelector
+    ) -> Tuple[ISerializationSurrogate, ISurrogateSelector]:
+        """
 
-    # No Events
+        :param type:
+        :param context:
+        :param selector:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def SetRootObject(self, obj: object) -> None:
+        """
 
-    # No Sub Structs
+        :param obj:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def UseSoapFormat(self) -> None:
+        """"""
 
-    # No Sub Enums
+class ReturnMessage(Object, IMessage, IMethodMessage, IMethodReturnMessage):
+    """"""
 
-class ReturnMessage(ObjectType, IMethodReturnMessage, IMethodMessage, IMessage):
-    # No Fields
+    @overload
+    def __init__(self, e: Exception, mcm: IMethodCallMessage):
+        """
 
-    # ---------- Constructors ---------- #
-
+        :param e:
+        :param mcm:
+        """
     @overload
     def __init__(
         self,
-        ret: ObjectType,
-        outArgs: ArrayType[ObjectType],
-        outArgsCount: IntType,
+        ret: object,
+        outArgs: Array[object],
+        outArgsCount: int,
         callCtx: LogicalCallContext,
         mcm: IMethodCallMessage,
-    ): ...
-    @overload
-    def __init__(self, e: Exception, mcm: IMethodCallMessage): ...
+    ):
+        """
 
-    # ---------- Properties ---------- #
+        :param ret:
+        :param outArgs:
+        :param outArgsCount:
+        :param callCtx:
+        :param mcm:
+        """
+    @property
+    def ArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Args(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Exception(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def HasVarArgs(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnValue(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetOutArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetOutArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationMonkey(Object, IFieldInfo, ISerializable):
+    """"""
 
     @property
-    def ArgCount(self) -> IntType: ...
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @property
-    def Exception(self) -> Exception: ...
-    @property
-    def HasVarArgs(self) -> BooleanType: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodBase(self) -> MethodBase: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def OutArgCount(self) -> IntType: ...
-    @property
-    def OutArgs(self) -> ArrayType[ObjectType]: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def ReturnValue(self) -> ObjectType: ...
-    @property
-    def TypeName(self) -> StringType: ...
-    @property
-    def Uri(self) -> StringType: ...
-    @Uri.setter
-    def Uri(self, value: StringType) -> None: ...
+    def FieldNames(self) -> Array[str]:
+        """
 
-    # ---------- Methods ---------- #
-
-    def GetArg(self, argNum: IntType) -> ObjectType: ...
-    def GetArgName(self, index: IntType) -> StringType: ...
-    def GetOutArg(self, argNum: IntType) -> ObjectType: ...
-    def GetOutArgName(self, index: IntType) -> StringType: ...
-    def get_ArgCount(self) -> IntType: ...
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_Exception(self) -> Exception: ...
-    def get_HasVarArgs(self) -> BooleanType: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodBase(self) -> MethodBase: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_OutArgCount(self) -> IntType: ...
-    def get_OutArgs(self) -> ArrayType[ObjectType]: ...
-    def get_Properties(self) -> IDictionary: ...
-    def get_ReturnValue(self) -> ObjectType: ...
-    def get_TypeName(self) -> StringType: ...
-    def get_Uri(self) -> StringType: ...
-    def set_Uri(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationMonkey(ObjectType, ISerializable, IFieldInfo):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def FieldNames(self) -> ArrayType[StringType]: ...
+        :return:
+        """
     @FieldNames.setter
-    def FieldNames(self, value: ArrayType[StringType]) -> None: ...
+    def FieldNames(self, value: Array[str]) -> None: ...
     @property
-    def FieldTypes(self) -> ArrayType[TypeType]: ...
+    def FieldTypes(self) -> Array[Type]:
+        """
+
+        :return:
+        """
     @FieldTypes.setter
-    def FieldTypes(self, value: ArrayType[TypeType]) -> None: ...
+    def FieldTypes(self, value: Array[Type]) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def get_FieldNames(self) -> ArrayType[StringType]: ...
-    def get_FieldTypes(self) -> ArrayType[TypeType]: ...
-    def set_FieldNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_FieldTypes(self, value: ArrayType[TypeType]) -> VoidType: ...
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-    # No Events
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ServerContextTerminatorSink(InternalSink, IMessageSink):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def NextSink(self) -> IMessageSink: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    def AsyncProcessMessage(self, reqMsg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def SyncProcessMessage(self, reqMsg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
 
-    # No Sub Interfaces
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class ServerObjectTerminatorSink(InternalSink, IMessageSink):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def NextSink(self) -> IMessageSink: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    def AsyncProcessMessage(self, reqMsg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def SyncProcessMessage(self, reqMsg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
 
-    # No Sub Interfaces
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SmuggledMethodCallMessage(MessageSmuggler):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class SmuggledMethodReturnMessage(MessageSmuggler):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class SmuggledObjRef(Object):
+    """"""
 
-    # No Sub Structs
+    def __init__(self, objRef: ObjRef):
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SmuggledObjRef(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, objRef: ObjRef): ...
-
-    # ---------- Properties ---------- #
-
+        :param objRef:
+        """
     @property
-    def ObjRef(self) -> ObjRef: ...
+    def ObjRef(self) -> ObjRef:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_ObjRef(self) -> ObjRef: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class SoapMessageSurrogate(Object, ISerializationSurrogate):
+    """"""
 
-    # No Sub Enums
+    def Equals(self, obj: object) -> bool:
+        """
 
-class SoapMessageSurrogate(ObjectType, ISerializationSurrogate):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     def GetObjectData(
-        self, obj: ObjectType, info: SerializationInfo, context: StreamingContext
-    ) -> VoidType: ...
+        self, obj: object, info: SerializationInfo, context: StreamingContext
+    ) -> None:
+        """
+
+        :param obj:
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     def SetObjectData(
         self,
-        obj: ObjectType,
+        obj: object,
         info: SerializationInfo,
         context: StreamingContext,
         selector: ISurrogateSelector,
-    ) -> ObjectType: ...
+    ) -> object:
+        """
 
-    # No Events
+        :param obj:
+        :param info:
+        :param context:
+        :param selector:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class StackBasedReturnMessage(
-    ObjectType, IMethodReturnMessage, IMethodMessage, IMessage, IInternalMessage
+    Object, IInternalMessage, IMessage, IMethodMessage, IMethodReturnMessage
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def ArgCount(self) -> IntType: ...
+    def ArgCount(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Args(self) -> ArrayType[ObjectType]: ...
+    def Args(self) -> Array[object]:
+        """
+
+        :return:
+        """
     @property
-    def Exception(self) -> Exception: ...
+    def Exception(self) -> Exception:
+        """
+
+        :return:
+        """
     @property
-    def HasVarArgs(self) -> BooleanType: ...
+    def HasVarArgs(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodBase(self) -> MethodBase: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def OutArgCount(self) -> IntType: ...
-    @property
-    def OutArgs(self) -> ArrayType[ObjectType]: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def ReturnValue(self) -> ObjectType: ...
-    @property
-    def TypeName(self) -> StringType: ...
-    @property
-    def Uri(self) -> StringType: ...
+    def IdentityObject(self) -> Identity:
+        """
 
-    # ---------- Methods ---------- #
-
-    def GetArg(self, argNum: IntType) -> ObjectType: ...
-    def GetArgName(self, index: IntType) -> StringType: ...
-    def GetOutArg(self, argNum: IntType) -> ObjectType: ...
-    def GetOutArgName(self, index: IntType) -> StringType: ...
-    def get_ArgCount(self) -> IntType: ...
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_Exception(self) -> Exception: ...
-    def get_HasVarArgs(self) -> BooleanType: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodBase(self) -> MethodBase: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_OutArgCount(self) -> IntType: ...
-    def get_OutArgs(self) -> ArrayType[ObjectType]: ...
-    def get_Properties(self) -> IDictionary: ...
-    def get_ReturnValue(self) -> ObjectType: ...
-    def get_TypeName(self) -> StringType: ...
-    def get_Uri(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StackBuilderSink(ObjectType, IMessageSink):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, server: MarshalByRefObject): ...
-    @overload
-    def __init__(self, server: ObjectType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def NextSink(self) -> IMessageSink: ...
-
-    # ---------- Methods ---------- #
-
-    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def PrivateProcessMessage(
-        self,
-        md: RuntimeMethodHandle,
-        args: ArrayType[ObjectType],
-        server: ObjectType,
-        outArgs: ObjectType,
-    ) -> Tuple[ObjectType, ObjectType]: ...
-    def SyncProcessMessage(self, msg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TransitionCall(ObjectType, IMessage, IInternalMessage, IMessageSink, ISerializable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def NextSink(self) -> IMessageSink: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-
-    # ---------- Methods ---------- #
-
-    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def SyncProcessMessage(self, msg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
-    def get_Properties(self) -> IDictionary: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IInternalMessage(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def IdentityObject(self) -> Identity: ...
+        :return:
+        """
     @IdentityObject.setter
     def IdentityObject(self, value: Identity) -> None: ...
     @property
-    def ServerIdentityObject(self) -> ServerIdentity: ...
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodBase(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OutArgs(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnValue(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def ServerIdentityObject(self) -> ServerIdentity:
+        """
+
+        :return:
+        """
     @ServerIdentityObject.setter
     def ServerIdentityObject(self, value: ServerIdentity) -> None: ...
+    @property
+    def TypeName(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Uri(self) -> str:
+        """
 
-    def HasProperties(self) -> BooleanType: ...
-    def SetCallContext(self, callContext: LogicalCallContext) -> VoidType: ...
-    def SetURI(self, uri: StringType) -> VoidType: ...
-    def get_IdentityObject(self) -> Identity: ...
-    def get_ServerIdentityObject(self) -> ServerIdentity: ...
-    def set_IdentityObject(self, value: Identity) -> VoidType: ...
-    def set_ServerIdentityObject(self, value: ServerIdentity) -> VoidType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetArg(self, argNum: int) -> object:
+        """
 
-class ILogicalThreadAffinative(Protocol):
+        :param argNum:
+        :return:
+        """
+    def GetArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetOutArg(self, argNum: int) -> object:
+        """
+
+        :param argNum:
+        :return:
+        """
+    def GetOutArgName(self, index: int) -> str:
+        """
+
+        :param index:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def HasProperties(self) -> bool:
+        """
+
+        :return:
+        """
+    def SetCallContext(self, callContext: LogicalCallContext) -> None:
+        """
+
+        :param callContext:
+        """
+    def SetURI(self, uri: str) -> None:
+        """
+
+        :param uri:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StackBuilderSink(Object, IMessageSink):
     """"""
 
-    # No Properties
+    @overload
+    def __init__(self, server: MarshalByRefObject):
+        """
 
-    # No Methods
+        :param server:
+        """
+    @overload
+    def __init__(self, server: object):
+        """
 
-    # No Events
+        :param server:
+        """
+    @property
+    def NextSink(self) -> IMessageSink:
+        """
 
-class IMessage(Protocol):
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
+
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def PrivateProcessMessage(
+        self, md: RuntimeMethodHandle, args: Array[object], server: object, outArgs: object
+    ) -> Tuple[object, object]:
+        """
+
+        :param md:
+        :param args:
+        :param server:
+        :param outArgs:
+        :return:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
+
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TransitionCall(Object, IInternalMessage, IMessage, IMessageSink, ISerializable):
+    """"""
 
     @property
-    def Properties(self) -> IDictionary: ...
+    def IdentityObject(self) -> Identity:
+        """
 
-    # ---------- Methods ---------- #
-
-    def get_Properties(self) -> IDictionary: ...
-
-    # No Events
-
-class IMessageCtrl(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Cancel(self, msToCancel: IntType) -> VoidType: ...
-
-    # No Events
-
-class IMessageSink(Protocol):
-    # ---------- Properties ---------- #
-
+        :return:
+        """
+    @IdentityObject.setter
+    def IdentityObject(self, value: Identity) -> None: ...
     @property
-    def NextSink(self) -> IMessageSink: ...
+    def NextSink(self) -> IMessageSink:
+        """
 
-    # ---------- Methods ---------- #
-
-    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl: ...
-    def SyncProcessMessage(self, msg: IMessage) -> IMessage: ...
-    def get_NextSink(self) -> IMessageSink: ...
-
-    # No Events
-
-class IMethodCallMessage(Protocol, IMethodMessage, IMessage):
-    # ---------- Properties ---------- #
-
+        :return:
+        """
     @property
-    def InArgCount(self) -> IntType: ...
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
     @property
-    def InArgs(self) -> ArrayType[ObjectType]: ...
+    def ServerIdentityObject(self) -> ServerIdentity:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @ServerIdentityObject.setter
+    def ServerIdentityObject(self, value: ServerIdentity) -> None: ...
+    def AsyncProcessMessage(self, msg: IMessage, replySink: IMessageSink) -> IMessageCtrl:
+        """
 
-    def GetInArg(self, argNum: IntType) -> ObjectType: ...
-    def GetInArgName(self, index: IntType) -> StringType: ...
-    def get_InArgCount(self) -> IntType: ...
-    def get_InArgs(self) -> ArrayType[ObjectType]: ...
+        :param msg:
+        :param replySink:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class IMethodMessage(Protocol, IMessage):
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-    @property
-    def ArgCount(self) -> IntType: ...
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @property
-    def HasVarArgs(self) -> BooleanType: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodBase(self) -> MethodBase: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def TypeName(self) -> StringType: ...
-    @property
-    def Uri(self) -> StringType: ...
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def HasProperties(self) -> bool:
+        """
 
-    def GetArg(self, argNum: IntType) -> ObjectType: ...
-    def GetArgName(self, index: IntType) -> StringType: ...
-    def get_ArgCount(self) -> IntType: ...
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_HasVarArgs(self) -> BooleanType: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodBase(self) -> MethodBase: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_TypeName(self) -> StringType: ...
-    def get_Uri(self) -> StringType: ...
+        :return:
+        """
+    def SetCallContext(self, callContext: LogicalCallContext) -> None:
+        """
 
-    # No Events
+        :param callContext:
+        """
+    def SetURI(self, uri: str) -> None:
+        """
 
-class IMethodReturnMessage(Protocol, IMethodMessage, IMessage):
-    # ---------- Properties ---------- #
+        :param uri:
+        """
+    def SyncProcessMessage(self, msg: IMessage) -> IMessage:
+        """
 
-    @property
-    def Exception(self) -> Exception: ...
-    @property
-    def OutArgCount(self) -> IntType: ...
-    @property
-    def OutArgs(self) -> ArrayType[ObjectType]: ...
-    @property
-    def ReturnValue(self) -> ObjectType: ...
+        :param msg:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    def GetOutArg(self, argNum: IntType) -> ObjectType: ...
-    def GetOutArgName(self, index: IntType) -> StringType: ...
-    def get_Exception(self) -> Exception: ...
-    def get_OutArgCount(self) -> IntType: ...
-    def get_OutArgs(self) -> ArrayType[ObjectType]: ...
-    def get_ReturnValue(self) -> ObjectType: ...
-
-    # No Events
-
-class IRemotingFormatter(Protocol, IFormatter):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Deserialize(self, serializationStream: Stream, handler: HeaderHandler) -> ObjectType: ...
-    def Serialize(
-        self, serializationStream: Stream, graph: ObjectType, headers: ArrayType[Header]
-    ) -> VoidType: ...
-
-    # No Events
-
-class ISerializationRootObject(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def RootSetObjectData(self, info: SerializationInfo, ctx: StreamingContext) -> VoidType: ...
-
-    # No Events
-
-# No Enums
-
-# ---------- Delegates ---------- #
-
-HeaderHandler = Callable[[ArrayType[Header]], ObjectType]
-
-MessageSurrogateFilter = Callable[[StringType, ObjectType], BooleanType]
-
-__all__ = [
-    ArgMapper,
-    AsyncReplySink,
-    AsyncResult,
-    CCMDictionary,
-    CRMDictionary,
-    CallContext,
-    CallContextRemotingData,
-    CallContextSecurityData,
-    ClientAsyncReplyTerminatorSink,
-    ClientContextTerminatorSink,
-    ConstructionCall,
-    ConstructionResponse,
-    ConstructorCallMessage,
-    ConstructorReturnMessage,
-    DisposeSink,
-    EnvoyTerminatorSink,
-    ErrorMessage,
-    Header,
-    HeaderHandler,
-    IllogicalCallContext,
-    InternalMessageWrapper,
-    InternalSink,
-    LogicalCallContext,
-    MCMDictionary,
-    MRMDictionary,
-    Message,
-    MessageDictionary,
-    MessageDictionaryEnumerator,
-    MessageSmuggler,
-    MessageSurrogate,
-    MessageSurrogateFilter,
-    MethodCall,
-    MethodCallMessageWrapper,
-    MethodResponse,
-    MethodReturnMessageWrapper,
-    ObjRefSurrogate,
-    OneWayAttribute,
-    RemotingSurrogate,
-    RemotingSurrogateSelector,
-    ReturnMessage,
-    SerializationMonkey,
-    ServerContextTerminatorSink,
-    ServerObjectTerminatorSink,
-    SmuggledMethodCallMessage,
-    SmuggledMethodReturnMessage,
-    SmuggledObjRef,
-    SoapMessageSurrogate,
-    StackBasedReturnMessage,
-    StackBuilderSink,
-    TransitionCall,
-    IInternalMessage,
-    ILogicalThreadAffinative,
-    IMessage,
-    IMessageCtrl,
-    IMessageSink,
-    IMethodCallMessage,
-    IMethodMessage,
-    IMethodReturnMessage,
-    IRemotingFormatter,
-    ISerializationRootObject,
-    HeaderHandler,
-    MessageSurrogateFilter,
-]
+        :return:
+        """

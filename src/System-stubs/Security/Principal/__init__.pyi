@@ -1,35 +1,33 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
+from typing import ClassVar
+from typing import Final
+from typing import Iterator
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from Microsoft.Win32.SafeHandles import SafeAccessTokenHandle
 from System import Action
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Enum
 from System import Exception
 from System import Func
 from System import IComparable
 from System import IDisposable
-from System import Int32
-from System import Int64
 from System import IntPtr
 from System import Object
-from System import String
+from System import Predicate
 from System import SystemException
 from System import Type
-from System import Void
+from System.Collections import IDictionary
 from System.Collections import IEnumerable
 from System.Collections import IEnumerator
 from System.Collections.Generic import ICollection
 from System.Collections.Generic import IEnumerable
 from System.Collections.Generic import IEnumerator
+from System.IO import BinaryWriter
+from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Serialization import IDeserializationCallback
 from System.Runtime.Serialization import ISerializable
@@ -39,824 +37,2020 @@ from System.Security.Claims import Claim
 from System.Security.Claims import ClaimsIdentity
 from System.Security.Claims import ClaimsPrincipal
 
-# ---------- Types ---------- #
-
 T = TypeVar("T")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
 class GenericIdentity(ClaimsIdentity, IIdentity):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, name: StringType): ...
-    @overload
-    def __init__(self, name: StringType, type: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AuthenticationType(self) -> StringType: ...
-    @property
-    def Claims(self) -> IEnumerable[Claim]: ...
-    @property
-    def IsAuthenticated(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Clone(self) -> ClaimsIdentity: ...
-    def get_AuthenticationType(self) -> StringType: ...
-    def get_Claims(self) -> IEnumerable[Claim]: ...
-    def get_IsAuthenticated(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GenericPrincipal(ClaimsPrincipal, IPrincipal):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, identity: IIdentity, roles: ArrayType[StringType]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Identity(self) -> IIdentity: ...
-
-    # ---------- Methods ---------- #
-
-    def IsInRole(self, role: StringType) -> BooleanType: ...
-    def get_Identity(self) -> IIdentity: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IdentityNotMappedException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, inner: Exception): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def UnmappedIdentities(self) -> IdentityReferenceCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def GetObjectData(
-        self, serializationInfo: SerializationInfo, streamingContext: StreamingContext
-    ) -> VoidType: ...
-    def get_UnmappedIdentities(self) -> IdentityReferenceCollection: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IdentityReference(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def IsValidTargetType(self, targetType: TypeType) -> BooleanType: ...
-    def ToString(self) -> StringType: ...
-    def Translate(self, targetType: TypeType) -> IdentityReference: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def op_Equality(left: IdentityReference, right: IdentityReference) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(left: IdentityReference, right: IdentityReference) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IdentityReferenceCollection(
-    ObjectType, ICollection[IdentityReference], IEnumerable[IdentityReference], IEnumerable
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, capacity: IntType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Count(self) -> IntType: ...
-    @property
-    def IsReadOnly(self) -> BooleanType: ...
-    def __getitem__(self, key: IntType) -> IdentityReference: ...
-    def __setitem__(self, key: IntType, value: IdentityReference) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, identity: IdentityReference) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Contains(self, identity: IdentityReference) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[IdentityReference], offset: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[IdentityReference]: ...
-    def Remove(self, identity: IdentityReference) -> BooleanType: ...
-    @overload
-    def Translate(self, targetType: TypeType) -> IdentityReferenceCollection: ...
-    @overload
-    def Translate(
-        self, targetType: TypeType, forceSuccess: BooleanType
-    ) -> IdentityReferenceCollection: ...
-    def get_Count(self) -> IntType: ...
-    def get_IsReadOnly(self) -> BooleanType: ...
-    def get_Item(self, index: IntType) -> IdentityReference: ...
-    def set_Item(self, index: IntType, value: IdentityReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IdentityReferenceEnumerator(
-    ObjectType, IEnumerator[IdentityReference], IDisposable, IEnumerator
-):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> IdentityReference: ...
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> IdentityReference: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NTAccount(IdentityReference):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, domainName: StringType, accountName: StringType): ...
-    @overload
-    def __init__(self, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def IsValidTargetType(self, targetType: TypeType) -> BooleanType: ...
-    def ToString(self) -> StringType: ...
-    def Translate(self, targetType: TypeType) -> IdentityReference: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def op_Equality(left: NTAccount, right: NTAccount) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(left: NTAccount, right: NTAccount) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SecurityIdentifier(IdentityReference, IComparable[SecurityIdentifier]):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def MaxBinaryLength() -> IntType: ...
-    @staticmethod
-    @property
-    def MinBinaryLength() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, sddlForm: StringType): ...
-    @overload
-    def __init__(self, binaryForm: ArrayType[ByteType], offset: IntType): ...
-    @overload
-    def __init__(self, binaryForm: NIntType): ...
-    @overload
-    def __init__(self, sidType: WellKnownSidType, domainSid: SecurityIdentifier): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AccountDomainSid(self) -> SecurityIdentifier: ...
-    @property
-    def BinaryLength(self) -> IntType: ...
-    @property
-    def Value(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def CompareTo(self, sid: SecurityIdentifier) -> IntType: ...
-    @overload
-    def Equals(self, o: ObjectType) -> BooleanType: ...
-    @overload
-    def Equals(self, sid: SecurityIdentifier) -> BooleanType: ...
-    def GetBinaryForm(self, binaryForm: ArrayType[ByteType], offset: IntType) -> VoidType: ...
-    def GetHashCode(self) -> IntType: ...
-    def IsAccountSid(self) -> BooleanType: ...
-    def IsEqualDomainSid(self, sid: SecurityIdentifier) -> BooleanType: ...
-    def IsValidTargetType(self, targetType: TypeType) -> BooleanType: ...
-    def IsWellKnown(self, type: WellKnownSidType) -> BooleanType: ...
-    def ToString(self) -> StringType: ...
-    def Translate(self, targetType: TypeType) -> IdentityReference: ...
-    def get_AccountDomainSid(self) -> SecurityIdentifier: ...
-    def get_BinaryLength(self) -> IntType: ...
-    def get_Value(self) -> StringType: ...
-    @staticmethod
-    def op_Equality(left: SecurityIdentifier, right: SecurityIdentifier) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(left: SecurityIdentifier, right: SecurityIdentifier) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Win32(ABC, ObjectType):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WindowsIdentity(
-    ClaimsIdentity, IIdentity, ISerializable, IDeserializationCallback, IDisposable
-):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def DefaultIssuer() -> StringType: ...
-
-    # ---------- Constructors ---------- #
-
     @overload
-    def __init__(self, userToken: NIntType): ...
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
     @overload
-    def __init__(self, userToken: NIntType, type: StringType): ...
+    def __init__(self, name: str, type: str):
+        """
+
+        :param name:
+        :param type:
+        """
+    @property
+    def Actor(self) -> ClaimsIdentity:
+        """
+
+        :return:
+        """
+    @Actor.setter
+    def Actor(self, value: ClaimsIdentity) -> None: ...
+    @property
+    def AuthenticationType(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def BootstrapContext(self) -> object:
+        """
+
+        :return:
+        """
+    @BootstrapContext.setter
+    def BootstrapContext(self, value: object) -> None: ...
+    @property
+    def Claims(self) -> IEnumerable[Claim]:
+        """
+
+        :return:
+        """
+    @property
+    def IsAuthenticated(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Label(self) -> str:
+        """
+
+        :return:
+        """
+    @Label.setter
+    def Label(self, value: str) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def NameClaimType(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def RoleClaimType(self) -> str:
+        """
+
+        :return:
+        """
+    def AddClaim(self, claim: Claim) -> None:
+        """
+
+        :param claim:
+        """
+    def AddClaims(self, claims: IEnumerable[Claim]) -> None:
+        """
+
+        :param claims:
+        """
+    def Clone(self) -> ClaimsIdentity:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def __init__(self, userToken: NIntType, type: StringType, acctType: WindowsAccountType): ...
+    def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
+        """
+
+        :param match:
+        :return:
+        """
     @overload
-    def __init__(
-        self,
-        userToken: NIntType,
-        type: StringType,
-        acctType: WindowsAccountType,
-        isAuthenticated: BooleanType,
-    ): ...
+    def FindAll(self, type: str) -> IEnumerable[Claim]:
+        """
+
+        :param type:
+        :return:
+        """
     @overload
-    def __init__(self, sUserPrincipalName: StringType): ...
+    def FindFirst(self, match: Predicate[Claim]) -> Claim:
+        """
+
+        :param match:
+        :return:
+        """
     @overload
-    def __init__(self, sUserPrincipalName: StringType, type: StringType): ...
+    def FindFirst(self, type: str) -> Claim:
+        """
+
+        :param type:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def __init__(self, info: SerializationInfo, context: StreamingContext): ...
+    def HasClaim(self, match: Predicate[Claim]) -> bool:
+        """
 
-    # ---------- Properties ---------- #
-
-    @property
-    def AccessToken(self) -> SafeAccessTokenHandle: ...
-    @property
-    def AuthenticationType(self) -> StringType: ...
-    @property
-    def Claims(self) -> IEnumerable[Claim]: ...
-    @property
-    def DeviceClaims(self) -> IEnumerable[Claim]: ...
-    @property
-    def Groups(self) -> IdentityReferenceCollection: ...
-    @property
-    def ImpersonationLevel(self) -> TokenImpersonationLevel: ...
-    @property
-    def IsAnonymous(self) -> BooleanType: ...
-    @property
-    def IsAuthenticated(self) -> BooleanType: ...
-    @property
-    def IsGuest(self) -> BooleanType: ...
-    @property
-    def IsSystem(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def Owner(self) -> SecurityIdentifier: ...
-    @property
-    def Token(self) -> NIntType: ...
-    @property
-    def User(self) -> SecurityIdentifier: ...
-    @property
-    def UserClaims(self) -> IEnumerable[Claim]: ...
-
-    # ---------- Methods ---------- #
-
-    def Clone(self) -> ClaimsIdentity: ...
-    def Dispose(self) -> VoidType: ...
-    @staticmethod
-    def GetAnonymous() -> WindowsIdentity: ...
-    @staticmethod
+        :param match:
+        :return:
+        """
     @overload
-    def GetCurrent() -> WindowsIdentity: ...
-    @staticmethod
+    def HasClaim(self, type: str, value: str) -> bool:
+        """
+
+        :param type:
+        :param value:
+        :return:
+        """
+    def RemoveClaim(self, claim: Claim) -> None:
+        """
+
+        :param claim:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryRemoveClaim(self, claim: Claim) -> bool:
+        """
+
+        :param claim:
+        :return:
+        """
+    def WriteTo(self, writer: BinaryWriter) -> None:
+        """
+
+        :param writer:
+        """
+
+class GenericPrincipal(ClaimsPrincipal, IPrincipal):
+    """"""
+
+    def __init__(self, identity: IIdentity, roles: Array[str]):
+        """
+
+        :param identity:
+        :param roles:
+        """
+    @property
+    def Claims(self) -> IEnumerable[Claim]:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ClaimsPrincipalSelector(cls) -> Func[ClaimsPrincipal]:
+        """
+
+        :return:
+        """
+    @classmethod
+    @ClaimsPrincipalSelector.setter
+    def ClaimsPrincipalSelector(cls, value: Func[ClaimsPrincipal]) -> None: ...
+    @classmethod
+    @property
+    def Current(cls) -> ClaimsPrincipal:
+        """
+
+        :return:
+        """
+    @property
+    def Identities(self) -> IEnumerable[ClaimsIdentity]:
+        """
+
+        :return:
+        """
+    @property
+    def Identity(self) -> IIdentity:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def PrimaryIdentitySelector(cls) -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]:
+        """
+
+        :return:
+        """
+    @classmethod
+    @PrimaryIdentitySelector.setter
+    def PrimaryIdentitySelector(
+        cls, value: Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]
+    ) -> None: ...
+    def AddIdentities(self, identities: IEnumerable[ClaimsIdentity]) -> None:
+        """
+
+        :param identities:
+        """
+    def AddIdentity(self, identity: ClaimsIdentity) -> None:
+        """
+
+        :param identity:
+        """
+    def Clone(self) -> ClaimsPrincipal:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def GetCurrent(ifImpersonating: BooleanType) -> WindowsIdentity: ...
-    @staticmethod
+    def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
+        """
+
+        :param match:
+        :return:
+        """
     @overload
-    def GetCurrent(desiredAccess: TokenAccessLevels) -> WindowsIdentity: ...
+    def FindAll(self, type: str) -> IEnumerable[Claim]:
+        """
+
+        :param type:
+        :return:
+        """
     @overload
-    def Impersonate(self) -> WindowsImpersonationContext: ...
-    @staticmethod
+    def FindFirst(self, match: Predicate[Claim]) -> Claim:
+        """
+
+        :param match:
+        :return:
+        """
     @overload
-    def Impersonate(userToken: NIntType) -> WindowsImpersonationContext: ...
-    @staticmethod
+    def FindFirst(self, type: str) -> Claim:
+        """
+
+        :param type:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def RunImpersonated(
-        safeAccessTokenHandle: SafeAccessTokenHandle, action: Action
-    ) -> VoidType: ...
-    @staticmethod
+    def HasClaim(self, match: Predicate[Claim]) -> bool:
+        """
+
+        :param match:
+        :return:
+        """
     @overload
-    def RunImpersonated(safeAccessTokenHandle: SafeAccessTokenHandle, func: Func[T]) -> T: ...
-    def get_AccessToken(self) -> SafeAccessTokenHandle: ...
-    def get_AuthenticationType(self) -> StringType: ...
-    def get_Claims(self) -> IEnumerable[Claim]: ...
-    def get_DeviceClaims(self) -> IEnumerable[Claim]: ...
-    def get_Groups(self) -> IdentityReferenceCollection: ...
-    def get_ImpersonationLevel(self) -> TokenImpersonationLevel: ...
-    def get_IsAnonymous(self) -> BooleanType: ...
-    def get_IsAuthenticated(self) -> BooleanType: ...
-    def get_IsGuest(self) -> BooleanType: ...
-    def get_IsSystem(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_Owner(self) -> SecurityIdentifier: ...
-    def get_Token(self) -> NIntType: ...
-    def get_User(self) -> SecurityIdentifier: ...
-    def get_UserClaims(self) -> IEnumerable[Claim]: ...
+    def HasClaim(self, type: str, value: str) -> bool:
+        """
 
-    # No Events
+        :param type:
+        :param value:
+        :return:
+        """
+    def IsInRole(self, role: str) -> bool:
+        """
 
-    # No Sub Classes
+        :param role:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def WriteTo(self, writer: BinaryWriter) -> None:
+        """
 
-    # No Sub Interfaces
+        :param writer:
+        """
 
-    # No Sub Enums
-
-class WindowsImpersonationContext(ObjectType, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    def Undo(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WindowsPrincipal(ClaimsPrincipal, IPrincipal):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, ntIdentity: WindowsIdentity): ...
-
-    # ---------- Properties ---------- #
+class IIdentity:
+    """"""
 
     @property
-    def DeviceClaims(self) -> IEnumerable[Claim]: ...
+    def AuthenticationType(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Identity(self) -> IIdentity: ...
+    def IsAuthenticated(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def UserClaims(self) -> IEnumerable[Claim]: ...
+    def Name(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
 
-    @overload
-    def IsInRole(self, role: StringType) -> BooleanType: ...
-    @overload
-    def IsInRole(self, role: WindowsBuiltInRole) -> BooleanType: ...
-    @overload
-    def IsInRole(self, rid: IntType) -> BooleanType: ...
-    @overload
-    def IsInRole(self, sid: SecurityIdentifier) -> BooleanType: ...
-    def get_DeviceClaims(self) -> IEnumerable[Claim]: ...
-    def get_Identity(self) -> IIdentity: ...
-    def get_UserClaims(self) -> IEnumerable[Claim]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IIdentity(Protocol):
-    # ---------- Properties ---------- #
+class IPrincipal:
+    """"""
 
     @property
-    def AuthenticationType(self) -> StringType: ...
-    @property
-    def IsAuthenticated(self) -> BooleanType: ...
-    @property
-    def Name(self) -> StringType: ...
+    def Identity(self) -> IIdentity:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def IsInRole(self, role: str) -> bool:
+        """
 
-    def get_AuthenticationType(self) -> StringType: ...
-    def get_IsAuthenticated(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-
-    # No Events
-
-class IPrincipal(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def Identity(self) -> IIdentity: ...
-
-    # ---------- Methods ---------- #
-
-    def IsInRole(self, role: StringType) -> BooleanType: ...
-    def get_Identity(self) -> IIdentity: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
+        :param role:
+        :return:
+        """
 
 class IdentifierAuthority(Enum):
-    NullAuthority = 0
-    WorldAuthority = 1
-    LocalAuthority = 2
-    CreatorAuthority = 3
-    NonUniqueAuthority = 4
-    NTAuthority = 5
-    SiteServerAuthority = 6
-    InternetSiteAuthority = 7
-    ExchangeAuthority = 8
-    ResourceManagerAuthority = 9
+    """"""
+
+    NullAuthority: IdentifierAuthority = ...
+    """"""
+    WorldAuthority: IdentifierAuthority = ...
+    """"""
+    LocalAuthority: IdentifierAuthority = ...
+    """"""
+    CreatorAuthority: IdentifierAuthority = ...
+    """"""
+    NonUniqueAuthority: IdentifierAuthority = ...
+    """"""
+    NTAuthority: IdentifierAuthority = ...
+    """"""
+    SiteServerAuthority: IdentifierAuthority = ...
+    """"""
+    InternetSiteAuthority: IdentifierAuthority = ...
+    """"""
+    ExchangeAuthority: IdentifierAuthority = ...
+    """"""
+    ResourceManagerAuthority: IdentifierAuthority = ...
+    """"""
+
+class IdentityNotMappedException(SystemException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, inner: Exception):
+        """
+
+        :param message:
+        :param inner:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @property
+    def UnmappedIdentities(self) -> IdentityReferenceCollection:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IdentityReference(ABC, Object):
+    """"""
+
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsValidTargetType(self, targetType: Type) -> bool:
+        """
+
+        :param targetType:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Translate(self, targetType: Type) -> IdentityReference:
+        """
+
+        :param targetType:
+        :return:
+        """
+    def __eq__(self, other: IdentityReference) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: IdentityReference) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: IdentityReference, right: IdentityReference) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: IdentityReference, right: IdentityReference) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+
+class IdentityReferenceCollection(
+    Object, ICollection[IdentityReference], IEnumerable[IdentityReference], IEnumerable
+):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, capacity: int):
+        """
+
+        :param capacity:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> IdentityReference:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: IdentityReference) -> None: ...
+    def Add(self, item: IdentityReference) -> None:
+        """
+
+        :param item:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: IdentityReference) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def CopyTo(self, array: Array[IdentityReference], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Remove(self, item: IdentityReference) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Translate(self, targetType: Type) -> IdentityReferenceCollection:
+        """
+
+        :param targetType:
+        :return:
+        """
+    @overload
+    def Translate(self, targetType: Type, forceSuccess: bool) -> IdentityReferenceCollection:
+        """
+
+        :param targetType:
+        :param forceSuccess:
+        :return:
+        """
+    def __contains__(self, value: IdentityReference) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> IdentityReference:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[IdentityReference]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, index: int, value: IdentityReference) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class IdentityReferenceEnumerator(Object, IEnumerator[IdentityReference], IEnumerator, IDisposable):
+    """"""
+
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ImpersonationQueryResult(Enum):
-    Impersonated = 0
-    NotImpersonated = 1
-    Failed = 2
+    """"""
+
+    Impersonated: ImpersonationQueryResult = ...
+    """"""
+    NotImpersonated: ImpersonationQueryResult = ...
+    """"""
+    Failed: ImpersonationQueryResult = ...
+    """"""
 
 class KerbLogonSubmitType(Enum):
-    KerbInteractiveLogon = 2
-    KerbSmartCardLogon = 6
-    KerbWorkstationUnlockLogon = 7
-    KerbSmartCardUnlockLogon = 8
-    KerbProxyLogon = 9
-    KerbTicketLogon = 10
-    KerbTicketUnlockLogon = 11
-    KerbS4ULogon = 12
+    """"""
+
+    KerbInteractiveLogon: KerbLogonSubmitType = ...
+    """"""
+    KerbSmartCardLogon: KerbLogonSubmitType = ...
+    """"""
+    KerbWorkstationUnlockLogon: KerbLogonSubmitType = ...
+    """"""
+    KerbSmartCardUnlockLogon: KerbLogonSubmitType = ...
+    """"""
+    KerbProxyLogon: KerbLogonSubmitType = ...
+    """"""
+    KerbTicketLogon: KerbLogonSubmitType = ...
+    """"""
+    KerbTicketUnlockLogon: KerbLogonSubmitType = ...
+    """"""
+    KerbS4ULogon: KerbLogonSubmitType = ...
+    """"""
+
+class NTAccount(IdentityReference):
+    """"""
+
+    @overload
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
+    @overload
+    def __init__(self, domainName: str, accountName: str):
+        """
+
+        :param domainName:
+        :param accountName:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsValidTargetType(self, targetType: Type) -> bool:
+        """
+
+        :param targetType:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Translate(self, targetType: Type) -> IdentityReference:
+        """
+
+        :param targetType:
+        :return:
+        """
+    def __eq__(self, other: NTAccount) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: NTAccount) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: NTAccount, right: NTAccount) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: NTAccount, right: NTAccount) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
 
 class PolicyRights(Enum):
-    POLICY_VIEW_LOCAL_INFORMATION = 1
-    POLICY_VIEW_AUDIT_INFORMATION = 2
-    POLICY_GET_PRIVATE_INFORMATION = 4
-    POLICY_TRUST_ADMIN = 8
-    POLICY_CREATE_ACCOUNT = 16
-    POLICY_CREATE_SECRET = 32
-    POLICY_CREATE_PRIVILEGE = 64
-    POLICY_SET_DEFAULT_QUOTA_LIMITS = 128
-    POLICY_SET_AUDIT_REQUIREMENTS = 256
-    POLICY_AUDIT_LOG_ADMIN = 512
-    POLICY_SERVER_ADMIN = 1024
-    POLICY_LOOKUP_NAMES = 2048
-    POLICY_NOTIFICATION = 4096
+    """"""
+
+    POLICY_VIEW_LOCAL_INFORMATION: PolicyRights = ...
+    """"""
+    POLICY_VIEW_AUDIT_INFORMATION: PolicyRights = ...
+    """"""
+    POLICY_GET_PRIVATE_INFORMATION: PolicyRights = ...
+    """"""
+    POLICY_TRUST_ADMIN: PolicyRights = ...
+    """"""
+    POLICY_CREATE_ACCOUNT: PolicyRights = ...
+    """"""
+    POLICY_CREATE_SECRET: PolicyRights = ...
+    """"""
+    POLICY_CREATE_PRIVILEGE: PolicyRights = ...
+    """"""
+    POLICY_SET_DEFAULT_QUOTA_LIMITS: PolicyRights = ...
+    """"""
+    POLICY_SET_AUDIT_REQUIREMENTS: PolicyRights = ...
+    """"""
+    POLICY_AUDIT_LOG_ADMIN: PolicyRights = ...
+    """"""
+    POLICY_SERVER_ADMIN: PolicyRights = ...
+    """"""
+    POLICY_LOOKUP_NAMES: PolicyRights = ...
+    """"""
+    POLICY_NOTIFICATION: PolicyRights = ...
+    """"""
 
 class PrincipalPolicy(Enum):
-    UnauthenticatedPrincipal = 0
-    NoPrincipal = 1
-    WindowsPrincipal = 2
+    """"""
+
+    UnauthenticatedPrincipal: PrincipalPolicy = ...
+    """"""
+    NoPrincipal: PrincipalPolicy = ...
+    """"""
+    WindowsPrincipal: PrincipalPolicy = ...
+    """"""
+
+class SecurityIdentifier(IdentityReference, IComparable[SecurityIdentifier]):
+    """"""
+
+    MaxBinaryLength: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    MinBinaryLength: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, binaryForm: IntPtr):
+        """
+
+        :param binaryForm:
+        """
+    @overload
+    def __init__(self, sddlForm: str):
+        """
+
+        :param sddlForm:
+        """
+    @overload
+    def __init__(self, sidType: WellKnownSidType, domainSid: SecurityIdentifier):
+        """
+
+        :param sidType:
+        :param domainSid:
+        """
+    @overload
+    def __init__(self, binaryForm: Array[int], offset: int):
+        """
+
+        :param binaryForm:
+        :param offset:
+        """
+    @property
+    def AccountDomainSid(self) -> SecurityIdentifier:
+        """
+
+        :return:
+        """
+    @property
+    def BinaryLength(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    def CompareTo(self, other: SecurityIdentifier) -> int:
+        """
+
+        :param other:
+        :return:
+        """
+    @overload
+    def Equals(self, sid: SecurityIdentifier) -> bool:
+        """
+
+        :param sid:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBinaryForm(self, binaryForm: Array[int], offset: int) -> None:
+        """
+
+        :param binaryForm:
+        :param offset:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsAccountSid(self) -> bool:
+        """
+
+        :return:
+        """
+    def IsEqualDomainSid(self, sid: SecurityIdentifier) -> bool:
+        """
+
+        :param sid:
+        :return:
+        """
+    def IsValidTargetType(self, targetType: Type) -> bool:
+        """
+
+        :param targetType:
+        :return:
+        """
+    def IsWellKnown(self, type: WellKnownSidType) -> bool:
+        """
+
+        :param type:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Translate(self, targetType: Type) -> IdentityReference:
+        """
+
+        :param targetType:
+        :return:
+        """
+    def __eq__(self, other: SecurityIdentifier) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: SecurityIdentifier) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: SecurityIdentifier, right: SecurityIdentifier) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: SecurityIdentifier, right: SecurityIdentifier) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
 
 class SecurityLogonType(Enum):
-    Interactive = 2
-    Network = 3
-    Batch = 4
-    Service = 5
-    Proxy = 6
-    Unlock = 7
+    """"""
+
+    Interactive: SecurityLogonType = ...
+    """"""
+    Network: SecurityLogonType = ...
+    """"""
+    Batch: SecurityLogonType = ...
+    """"""
+    Service: SecurityLogonType = ...
+    """"""
+    Proxy: SecurityLogonType = ...
+    """"""
+    Unlock: SecurityLogonType = ...
+    """"""
 
 class SidNameUse(Enum):
-    User = 1
-    Group = 2
-    Domain = 3
-    Alias = 4
-    WellKnownGroup = 5
-    DeletedAccount = 6
-    Invalid = 7
-    Unknown = 8
-    Computer = 9
+    """"""
+
+    User: SidNameUse = ...
+    """"""
+    Group: SidNameUse = ...
+    """"""
+    Domain: SidNameUse = ...
+    """"""
+    Alias: SidNameUse = ...
+    """"""
+    WellKnownGroup: SidNameUse = ...
+    """"""
+    DeletedAccount: SidNameUse = ...
+    """"""
+    Invalid: SidNameUse = ...
+    """"""
+    Unknown: SidNameUse = ...
+    """"""
+    Computer: SidNameUse = ...
+    """"""
 
 class TokenAccessLevels(Enum):
-    AssignPrimary = 1
-    Duplicate = 2
-    Impersonate = 4
-    Query = 8
-    QuerySource = 16
-    AdjustPrivileges = 32
-    AdjustGroups = 64
-    AdjustDefault = 128
-    AdjustSessionId = 256
-    Read = 131080
-    Write = 131296
-    AllAccess = 983551
-    MaximumAllowed = 33554432
+    """"""
+
+    AssignPrimary: TokenAccessLevels = ...
+    """"""
+    Duplicate: TokenAccessLevels = ...
+    """"""
+    Impersonate: TokenAccessLevels = ...
+    """"""
+    Query: TokenAccessLevels = ...
+    """"""
+    QuerySource: TokenAccessLevels = ...
+    """"""
+    AdjustPrivileges: TokenAccessLevels = ...
+    """"""
+    AdjustGroups: TokenAccessLevels = ...
+    """"""
+    AdjustDefault: TokenAccessLevels = ...
+    """"""
+    AdjustSessionId: TokenAccessLevels = ...
+    """"""
+    Read: TokenAccessLevels = ...
+    """"""
+    Write: TokenAccessLevels = ...
+    """"""
+    AllAccess: TokenAccessLevels = ...
+    """"""
+    MaximumAllowed: TokenAccessLevels = ...
+    """"""
 
 class TokenImpersonationLevel(Enum):
-    # None = 0
-    Anonymous = 1
-    Identification = 2
-    Impersonation = 3
-    Delegation = 4
+    """"""
+
+    _None: TokenImpersonationLevel = ...
+    """"""
+    Anonymous: TokenImpersonationLevel = ...
+    """"""
+    Identification: TokenImpersonationLevel = ...
+    """"""
+    Impersonation: TokenImpersonationLevel = ...
+    """"""
+    Delegation: TokenImpersonationLevel = ...
+    """"""
 
 class TokenInformationClass(Enum):
-    TokenUser = 1
-    TokenGroups = 2
-    TokenPrivileges = 3
-    TokenOwner = 4
-    TokenPrimaryGroup = 5
-    TokenDefaultDacl = 6
-    TokenSource = 7
-    TokenType = 8
-    TokenImpersonationLevel = 9
-    TokenStatistics = 10
-    TokenRestrictedSids = 11
-    TokenSessionId = 12
-    TokenGroupsAndPrivileges = 13
-    TokenSessionReference = 14
-    TokenSandBoxInert = 15
-    TokenAuditPolicy = 16
-    TokenOrigin = 17
-    TokenElevationType = 18
-    TokenLinkedToken = 19
-    TokenElevation = 20
-    TokenHasRestrictions = 21
-    TokenAccessInformation = 22
-    TokenVirtualizationAllowed = 23
-    TokenVirtualizationEnabled = 24
-    TokenIntegrityLevel = 25
-    TokenUIAccess = 26
-    TokenMandatoryPolicy = 27
-    TokenLogonSid = 28
-    TokenIsAppContainer = 29
-    TokenCapabilities = 30
-    TokenAppContainerSid = 31
-    TokenAppContainerNumber = 32
-    TokenUserClaimAttributes = 33
-    TokenDeviceClaimAttributes = 34
-    TokenRestrictedUserClaimAttributes = 35
-    TokenRestrictedDeviceClaimAttributes = 36
-    TokenDeviceGroups = 37
-    TokenRestrictedDeviceGroups = 38
-    MaxTokenInfoClass = 39
+    """"""
+
+    TokenUser: TokenInformationClass = ...
+    """"""
+    TokenGroups: TokenInformationClass = ...
+    """"""
+    TokenPrivileges: TokenInformationClass = ...
+    """"""
+    TokenOwner: TokenInformationClass = ...
+    """"""
+    TokenPrimaryGroup: TokenInformationClass = ...
+    """"""
+    TokenDefaultDacl: TokenInformationClass = ...
+    """"""
+    TokenSource: TokenInformationClass = ...
+    """"""
+    TokenType: TokenInformationClass = ...
+    """"""
+    TokenImpersonationLevel: TokenInformationClass = ...
+    """"""
+    TokenStatistics: TokenInformationClass = ...
+    """"""
+    TokenRestrictedSids: TokenInformationClass = ...
+    """"""
+    TokenSessionId: TokenInformationClass = ...
+    """"""
+    TokenGroupsAndPrivileges: TokenInformationClass = ...
+    """"""
+    TokenSessionReference: TokenInformationClass = ...
+    """"""
+    TokenSandBoxInert: TokenInformationClass = ...
+    """"""
+    TokenAuditPolicy: TokenInformationClass = ...
+    """"""
+    TokenOrigin: TokenInformationClass = ...
+    """"""
+    TokenElevationType: TokenInformationClass = ...
+    """"""
+    TokenLinkedToken: TokenInformationClass = ...
+    """"""
+    TokenElevation: TokenInformationClass = ...
+    """"""
+    TokenHasRestrictions: TokenInformationClass = ...
+    """"""
+    TokenAccessInformation: TokenInformationClass = ...
+    """"""
+    TokenVirtualizationAllowed: TokenInformationClass = ...
+    """"""
+    TokenVirtualizationEnabled: TokenInformationClass = ...
+    """"""
+    TokenIntegrityLevel: TokenInformationClass = ...
+    """"""
+    TokenUIAccess: TokenInformationClass = ...
+    """"""
+    TokenMandatoryPolicy: TokenInformationClass = ...
+    """"""
+    TokenLogonSid: TokenInformationClass = ...
+    """"""
+    TokenIsAppContainer: TokenInformationClass = ...
+    """"""
+    TokenCapabilities: TokenInformationClass = ...
+    """"""
+    TokenAppContainerSid: TokenInformationClass = ...
+    """"""
+    TokenAppContainerNumber: TokenInformationClass = ...
+    """"""
+    TokenUserClaimAttributes: TokenInformationClass = ...
+    """"""
+    TokenDeviceClaimAttributes: TokenInformationClass = ...
+    """"""
+    TokenRestrictedUserClaimAttributes: TokenInformationClass = ...
+    """"""
+    TokenRestrictedDeviceClaimAttributes: TokenInformationClass = ...
+    """"""
+    TokenDeviceGroups: TokenInformationClass = ...
+    """"""
+    TokenRestrictedDeviceGroups: TokenInformationClass = ...
+    """"""
+    MaxTokenInfoClass: TokenInformationClass = ...
+    """"""
 
 class TokenType(Enum):
-    TokenPrimary = 1
-    TokenImpersonation = 2
+    """"""
+
+    TokenPrimary: TokenType = ...
+    """"""
+    TokenImpersonation: TokenType = ...
+    """"""
 
 class WellKnownSidType(Enum):
-    NullSid = 0
-    WorldSid = 1
-    LocalSid = 2
-    CreatorOwnerSid = 3
-    CreatorGroupSid = 4
-    CreatorOwnerServerSid = 5
-    CreatorGroupServerSid = 6
-    NTAuthoritySid = 7
-    DialupSid = 8
-    NetworkSid = 9
-    BatchSid = 10
-    InteractiveSid = 11
-    ServiceSid = 12
-    AnonymousSid = 13
-    ProxySid = 14
-    EnterpriseControllersSid = 15
-    SelfSid = 16
-    AuthenticatedUserSid = 17
-    RestrictedCodeSid = 18
-    TerminalServerSid = 19
-    RemoteLogonIdSid = 20
-    LogonIdsSid = 21
-    LocalSystemSid = 22
-    LocalServiceSid = 23
-    NetworkServiceSid = 24
-    BuiltinDomainSid = 25
-    BuiltinAdministratorsSid = 26
-    BuiltinUsersSid = 27
-    BuiltinGuestsSid = 28
-    BuiltinPowerUsersSid = 29
-    BuiltinAccountOperatorsSid = 30
-    BuiltinSystemOperatorsSid = 31
-    BuiltinPrintOperatorsSid = 32
-    BuiltinBackupOperatorsSid = 33
-    BuiltinReplicatorSid = 34
-    BuiltinPreWindows2000CompatibleAccessSid = 35
-    BuiltinRemoteDesktopUsersSid = 36
-    BuiltinNetworkConfigurationOperatorsSid = 37
-    AccountAdministratorSid = 38
-    AccountGuestSid = 39
-    AccountKrbtgtSid = 40
-    AccountDomainAdminsSid = 41
-    AccountDomainUsersSid = 42
-    AccountDomainGuestsSid = 43
-    AccountComputersSid = 44
-    AccountControllersSid = 45
-    AccountCertAdminsSid = 46
-    AccountSchemaAdminsSid = 47
-    AccountEnterpriseAdminsSid = 48
-    AccountPolicyAdminsSid = 49
-    AccountRasAndIasServersSid = 50
-    NtlmAuthenticationSid = 51
-    DigestAuthenticationSid = 52
-    SChannelAuthenticationSid = 53
-    ThisOrganizationSid = 54
-    OtherOrganizationSid = 55
-    BuiltinIncomingForestTrustBuildersSid = 56
-    BuiltinPerformanceMonitoringUsersSid = 57
-    BuiltinPerformanceLoggingUsersSid = 58
-    BuiltinAuthorizationAccessSid = 59
-    WinBuiltinTerminalServerLicenseServersSid = 60
-    MaxDefined = 60
+    """"""
+
+    NullSid: WellKnownSidType = ...
+    """"""
+    WorldSid: WellKnownSidType = ...
+    """"""
+    LocalSid: WellKnownSidType = ...
+    """"""
+    CreatorOwnerSid: WellKnownSidType = ...
+    """"""
+    CreatorGroupSid: WellKnownSidType = ...
+    """"""
+    CreatorOwnerServerSid: WellKnownSidType = ...
+    """"""
+    CreatorGroupServerSid: WellKnownSidType = ...
+    """"""
+    NTAuthoritySid: WellKnownSidType = ...
+    """"""
+    DialupSid: WellKnownSidType = ...
+    """"""
+    NetworkSid: WellKnownSidType = ...
+    """"""
+    BatchSid: WellKnownSidType = ...
+    """"""
+    InteractiveSid: WellKnownSidType = ...
+    """"""
+    ServiceSid: WellKnownSidType = ...
+    """"""
+    AnonymousSid: WellKnownSidType = ...
+    """"""
+    ProxySid: WellKnownSidType = ...
+    """"""
+    EnterpriseControllersSid: WellKnownSidType = ...
+    """"""
+    SelfSid: WellKnownSidType = ...
+    """"""
+    AuthenticatedUserSid: WellKnownSidType = ...
+    """"""
+    RestrictedCodeSid: WellKnownSidType = ...
+    """"""
+    TerminalServerSid: WellKnownSidType = ...
+    """"""
+    RemoteLogonIdSid: WellKnownSidType = ...
+    """"""
+    LogonIdsSid: WellKnownSidType = ...
+    """"""
+    LocalSystemSid: WellKnownSidType = ...
+    """"""
+    LocalServiceSid: WellKnownSidType = ...
+    """"""
+    NetworkServiceSid: WellKnownSidType = ...
+    """"""
+    BuiltinDomainSid: WellKnownSidType = ...
+    """"""
+    BuiltinAdministratorsSid: WellKnownSidType = ...
+    """"""
+    BuiltinUsersSid: WellKnownSidType = ...
+    """"""
+    BuiltinGuestsSid: WellKnownSidType = ...
+    """"""
+    BuiltinPowerUsersSid: WellKnownSidType = ...
+    """"""
+    BuiltinAccountOperatorsSid: WellKnownSidType = ...
+    """"""
+    BuiltinSystemOperatorsSid: WellKnownSidType = ...
+    """"""
+    BuiltinPrintOperatorsSid: WellKnownSidType = ...
+    """"""
+    BuiltinBackupOperatorsSid: WellKnownSidType = ...
+    """"""
+    BuiltinReplicatorSid: WellKnownSidType = ...
+    """"""
+    BuiltinPreWindows2000CompatibleAccessSid: WellKnownSidType = ...
+    """"""
+    BuiltinRemoteDesktopUsersSid: WellKnownSidType = ...
+    """"""
+    BuiltinNetworkConfigurationOperatorsSid: WellKnownSidType = ...
+    """"""
+    AccountAdministratorSid: WellKnownSidType = ...
+    """"""
+    AccountGuestSid: WellKnownSidType = ...
+    """"""
+    AccountKrbtgtSid: WellKnownSidType = ...
+    """"""
+    AccountDomainAdminsSid: WellKnownSidType = ...
+    """"""
+    AccountDomainUsersSid: WellKnownSidType = ...
+    """"""
+    AccountDomainGuestsSid: WellKnownSidType = ...
+    """"""
+    AccountComputersSid: WellKnownSidType = ...
+    """"""
+    AccountControllersSid: WellKnownSidType = ...
+    """"""
+    AccountCertAdminsSid: WellKnownSidType = ...
+    """"""
+    AccountSchemaAdminsSid: WellKnownSidType = ...
+    """"""
+    AccountEnterpriseAdminsSid: WellKnownSidType = ...
+    """"""
+    AccountPolicyAdminsSid: WellKnownSidType = ...
+    """"""
+    AccountRasAndIasServersSid: WellKnownSidType = ...
+    """"""
+    NtlmAuthenticationSid: WellKnownSidType = ...
+    """"""
+    DigestAuthenticationSid: WellKnownSidType = ...
+    """"""
+    SChannelAuthenticationSid: WellKnownSidType = ...
+    """"""
+    ThisOrganizationSid: WellKnownSidType = ...
+    """"""
+    OtherOrganizationSid: WellKnownSidType = ...
+    """"""
+    BuiltinIncomingForestTrustBuildersSid: WellKnownSidType = ...
+    """"""
+    BuiltinPerformanceMonitoringUsersSid: WellKnownSidType = ...
+    """"""
+    BuiltinPerformanceLoggingUsersSid: WellKnownSidType = ...
+    """"""
+    BuiltinAuthorizationAccessSid: WellKnownSidType = ...
+    """"""
+    WinBuiltinTerminalServerLicenseServersSid: WellKnownSidType = ...
+    """"""
+    MaxDefined: WellKnownSidType = ...
+    """"""
+
+class Win32(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class WinSecurityContext(Enum):
-    Thread = 1
-    Process = 2
-    Both = 3
+    """"""
+
+    Thread: WinSecurityContext = ...
+    """"""
+    Process: WinSecurityContext = ...
+    """"""
+    Both: WinSecurityContext = ...
+    """"""
 
 class WindowsAccountType(Enum):
-    Normal = 0
-    Guest = 1
-    System = 2
-    Anonymous = 3
+    """"""
+
+    Normal: WindowsAccountType = ...
+    """"""
+    Guest: WindowsAccountType = ...
+    """"""
+    System: WindowsAccountType = ...
+    """"""
+    Anonymous: WindowsAccountType = ...
+    """"""
 
 class WindowsBuiltInRole(Enum):
-    Administrator = 544
-    User = 545
-    Guest = 546
-    PowerUser = 547
-    AccountOperator = 548
-    SystemOperator = 549
-    PrintOperator = 550
-    BackupOperator = 551
-    Replicator = 552
+    """"""
 
-# No Delegates
+    Administrator: WindowsBuiltInRole = ...
+    """"""
+    User: WindowsBuiltInRole = ...
+    """"""
+    Guest: WindowsBuiltInRole = ...
+    """"""
+    PowerUser: WindowsBuiltInRole = ...
+    """"""
+    AccountOperator: WindowsBuiltInRole = ...
+    """"""
+    SystemOperator: WindowsBuiltInRole = ...
+    """"""
+    PrintOperator: WindowsBuiltInRole = ...
+    """"""
+    BackupOperator: WindowsBuiltInRole = ...
+    """"""
+    Replicator: WindowsBuiltInRole = ...
+    """"""
 
-__all__ = [
-    GenericIdentity,
-    GenericPrincipal,
-    IdentityNotMappedException,
-    IdentityReference,
-    IdentityReferenceCollection,
-    IdentityReferenceEnumerator,
-    NTAccount,
-    SecurityIdentifier,
-    Win32,
-    WindowsIdentity,
-    WindowsImpersonationContext,
-    WindowsPrincipal,
-    IIdentity,
-    IPrincipal,
-    IdentifierAuthority,
-    ImpersonationQueryResult,
-    KerbLogonSubmitType,
-    PolicyRights,
-    PrincipalPolicy,
-    SecurityLogonType,
-    SidNameUse,
-    TokenAccessLevels,
-    TokenImpersonationLevel,
-    TokenInformationClass,
-    TokenType,
-    WellKnownSidType,
-    WinSecurityContext,
-    WindowsAccountType,
-    WindowsBuiltInRole,
-]
+class WindowsIdentity(
+    ClaimsIdentity, IDeserializationCallback, ISerializable, IIdentity, IDisposable
+):
+    """"""
+
+    DefaultIssuer: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self, userToken: IntPtr):
+        """
+
+        :param userToken:
+        """
+    @overload
+    def __init__(self, sUserPrincipalName: str):
+        """
+
+        :param sUserPrincipalName:
+        """
+    @overload
+    def __init__(self, info: SerializationInfo, context: StreamingContext):
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def __init__(self, userToken: IntPtr, type: str):
+        """
+
+        :param userToken:
+        :param type:
+        """
+    @overload
+    def __init__(self, sUserPrincipalName: str, type: str):
+        """
+
+        :param sUserPrincipalName:
+        :param type:
+        """
+    @overload
+    def __init__(self, userToken: IntPtr, type: str, acctType: WindowsAccountType):
+        """
+
+        :param userToken:
+        :param type:
+        :param acctType:
+        """
+    @overload
+    def __init__(
+        self, userToken: IntPtr, type: str, acctType: WindowsAccountType, isAuthenticated: bool
+    ):
+        """
+
+        :param userToken:
+        :param type:
+        :param acctType:
+        :param isAuthenticated:
+        """
+    @property
+    def AccessToken(self) -> SafeAccessTokenHandle:
+        """
+
+        :return:
+        """
+    @property
+    def Actor(self) -> ClaimsIdentity:
+        """
+
+        :return:
+        """
+    @Actor.setter
+    def Actor(self, value: ClaimsIdentity) -> None: ...
+    @property
+    def AuthenticationType(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def BootstrapContext(self) -> object:
+        """
+
+        :return:
+        """
+    @BootstrapContext.setter
+    def BootstrapContext(self, value: object) -> None: ...
+    @property
+    def Claims(self) -> IEnumerable[Claim]:
+        """
+
+        :return:
+        """
+    @property
+    def DeviceClaims(self) -> IEnumerable[Claim]:
+        """
+
+        :return:
+        """
+    @property
+    def Groups(self) -> IdentityReferenceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def ImpersonationLevel(self) -> TokenImpersonationLevel:
+        """
+
+        :return:
+        """
+    @property
+    def IsAnonymous(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsAuthenticated(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsGuest(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSystem(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Label(self) -> str:
+        """
+
+        :return:
+        """
+    @Label.setter
+    def Label(self, value: str) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def NameClaimType(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Owner(self) -> SecurityIdentifier:
+        """
+
+        :return:
+        """
+    @property
+    def RoleClaimType(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Token(self) -> IntPtr:
+        """
+
+        :return:
+        """
+    @property
+    def User(self) -> SecurityIdentifier:
+        """
+
+        :return:
+        """
+    @property
+    def UserClaims(self) -> IEnumerable[Claim]:
+        """
+
+        :return:
+        """
+    def AddClaim(self, claim: Claim) -> None:
+        """
+
+        :param claim:
+        """
+    def AddClaims(self, claims: IEnumerable[Claim]) -> None:
+        """
+
+        :param claims:
+        """
+    def Clone(self) -> ClaimsIdentity:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
+        """
+
+        :param match:
+        :return:
+        """
+    @overload
+    def FindAll(self, type: str) -> IEnumerable[Claim]:
+        """
+
+        :param type:
+        :return:
+        """
+    @overload
+    def FindFirst(self, match: Predicate[Claim]) -> Claim:
+        """
+
+        :param match:
+        :return:
+        """
+    @overload
+    def FindFirst(self, type: str) -> Claim:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
+    def GetAnonymous(cls) -> WindowsIdentity:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetCurrent(cls) -> WindowsIdentity:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetCurrent(cls, desiredAccess: TokenAccessLevels) -> WindowsIdentity:
+        """
+
+        :param desiredAccess:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetCurrent(cls, ifImpersonating: bool) -> WindowsIdentity:
+        """
+
+        :param ifImpersonating:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def HasClaim(self, match: Predicate[Claim]) -> bool:
+        """
+
+        :param match:
+        :return:
+        """
+    @overload
+    def HasClaim(self, type: str, value: str) -> bool:
+        """
+
+        :param type:
+        :param value:
+        :return:
+        """
+    @overload
+    def Impersonate(self) -> WindowsImpersonationContext:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def Impersonate(cls, userToken: IntPtr) -> WindowsImpersonationContext:
+        """
+
+        :param userToken:
+        :return:
+        """
+    def OnDeserialization(self, sender: object) -> None:
+        """
+
+        :param sender:
+        """
+    def RemoveClaim(self, claim: Claim) -> None:
+        """
+
+        :param claim:
+        """
+    @classmethod
+    @overload
+    def RunImpersonated(cls, safeAccessTokenHandle: SafeAccessTokenHandle, action: Action) -> None:
+        """
+
+        :param safeAccessTokenHandle:
+        :param action:
+        """
+    @classmethod
+    @overload
+    def RunImpersonated(cls, safeAccessTokenHandle: SafeAccessTokenHandle, func: Func[T]) -> T:
+        """
+
+        :param safeAccessTokenHandle:
+        :param func:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryRemoveClaim(self, claim: Claim) -> bool:
+        """
+
+        :param claim:
+        :return:
+        """
+    def WriteTo(self, writer: BinaryWriter) -> None:
+        """
+
+        :param writer:
+        """
+
+class WindowsImpersonationContext(Object, IDisposable):
+    """"""
+
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Undo(self) -> None:
+        """"""
+
+class WindowsPrincipal(ClaimsPrincipal, IPrincipal):
+    """"""
+
+    def __init__(self, ntIdentity: WindowsIdentity):
+        """
+
+        :param ntIdentity:
+        """
+    @property
+    def Claims(self) -> IEnumerable[Claim]:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def ClaimsPrincipalSelector(cls) -> Func[ClaimsPrincipal]:
+        """
+
+        :return:
+        """
+    @classmethod
+    @ClaimsPrincipalSelector.setter
+    def ClaimsPrincipalSelector(cls, value: Func[ClaimsPrincipal]) -> None: ...
+    @classmethod
+    @property
+    def Current(cls) -> ClaimsPrincipal:
+        """
+
+        :return:
+        """
+    @property
+    def DeviceClaims(self) -> IEnumerable[Claim]:
+        """
+
+        :return:
+        """
+    @property
+    def Identities(self) -> IEnumerable[ClaimsIdentity]:
+        """
+
+        :return:
+        """
+    @property
+    def Identity(self) -> IIdentity:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def PrimaryIdentitySelector(cls) -> Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]:
+        """
+
+        :return:
+        """
+    @classmethod
+    @PrimaryIdentitySelector.setter
+    def PrimaryIdentitySelector(
+        cls, value: Func[IEnumerable[ClaimsIdentity], ClaimsIdentity]
+    ) -> None: ...
+    @property
+    def UserClaims(self) -> IEnumerable[Claim]:
+        """
+
+        :return:
+        """
+    def AddIdentities(self, identities: IEnumerable[ClaimsIdentity]) -> None:
+        """
+
+        :param identities:
+        """
+    def AddIdentity(self, identity: ClaimsIdentity) -> None:
+        """
+
+        :param identity:
+        """
+    def Clone(self) -> ClaimsPrincipal:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def FindAll(self, match: Predicate[Claim]) -> IEnumerable[Claim]:
+        """
+
+        :param match:
+        :return:
+        """
+    @overload
+    def FindAll(self, type: str) -> IEnumerable[Claim]:
+        """
+
+        :param type:
+        :return:
+        """
+    @overload
+    def FindFirst(self, match: Predicate[Claim]) -> Claim:
+        """
+
+        :param match:
+        :return:
+        """
+    @overload
+    def FindFirst(self, type: str) -> Claim:
+        """
+
+        :param type:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def HasClaim(self, match: Predicate[Claim]) -> bool:
+        """
+
+        :param match:
+        :return:
+        """
+    @overload
+    def HasClaim(self, type: str, value: str) -> bool:
+        """
+
+        :param type:
+        :param value:
+        :return:
+        """
+    @overload
+    def IsInRole(self, sid: SecurityIdentifier) -> bool:
+        """
+
+        :param sid:
+        :return:
+        """
+    @overload
+    def IsInRole(self, role: WindowsBuiltInRole) -> bool:
+        """
+
+        :param role:
+        :return:
+        """
+    @overload
+    def IsInRole(self, rid: int) -> bool:
+        """
+
+        :param rid:
+        :return:
+        """
+    @overload
+    def IsInRole(self, role: str) -> bool:
+        """
+
+        :param role:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WriteTo(self, writer: BinaryWriter) -> None:
+        """
+
+        :param writer:
+        """

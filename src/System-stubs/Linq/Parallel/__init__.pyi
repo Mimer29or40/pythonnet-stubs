@@ -1,28 +1,31 @@
 from __future__ import annotations
 
 from abc import ABC
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import List
+from typing import Iterator
 from typing import Optional
-from typing import Protocol
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Array
 from System import Boolean
-from System import Byte
 from System import Decimal
 from System import Double
 from System import Enum
+from System import EventHandler
+from System import Exception
+from System import Func
+from System import Guid
 from System import IDisposable
 from System import Int32
 from System import Int64
-from System import Nullable
 from System import Object
 from System import Single
+from System import TimeSpan
+from System import Type
 from System import ValueType
-from System import Void
 from System.Collections import IEnumerable
 from System.Collections import IEnumerator
 from System.Collections.Generic import ICollection
@@ -32,17 +35,24 @@ from System.Collections.Generic import IEnumerator
 from System.Collections.Generic import IEqualityComparer
 from System.Collections.Generic import IList
 from System.Collections.Generic import Queue
+from System.Diagnostics.Tracing import EventChannel
+from System.Diagnostics.Tracing import EventCommandEventArgs
+from System.Diagnostics.Tracing import EventKeywords
+from System.Diagnostics.Tracing import EventLevel
 from System.Diagnostics.Tracing import EventSource
+from System.Diagnostics.Tracing import EventSourceOptions
+from System.Diagnostics.Tracing import EventSourceSettings
 from System.Diagnostics.Tracing import EventTask
+from System.Diagnostics.Tracing import T
 from System.Linq import IGrouping
 from System.Linq import ILookup
 from System.Linq import IOrderedEnumerable
 from System.Linq import ParallelMergeOptions
 from System.Linq import ParallelQuery
+from System.Threading import CancellationToken
 from System.Threading import ManualResetEventSlim
+from System.Threading import WaitHandle
 from System.Threading.Tasks import TaskScheduler
-
-# ---------- Types ---------- #
 
 T = TypeVar("T")
 TElement = TypeVar("TElement")
@@ -65,849 +75,1630 @@ TSource = TypeVar("TSource")
 TValue = TypeVar("TValue")
 U = TypeVar("U")
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-DecimalType = Union[float, Decimal]
-DoubleType = Union[float, Double]
-FloatType = Union[float, Single]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NullableType = Union[Optional, Nullable]
-ObjectType = Object
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
+class EventType(Generic[T]):
+    def __iadd__(self, other: T): ...
+    def __isub__(self, other: T): ...
 
 class AnyAllSearchOperator(
-    Generic[TInput], UnaryQueryOperator[TInput, BooleanType], IEnumerable, IEnumerable[BooleanType]
+    Generic[TInput], UnaryQueryOperator[TInput, Boolean], IEnumerable[Boolean], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[bool]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[bool]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class ArrayMergeHelper(Generic[TInputOutput], ObjectType, IMergeHelper[TInputOutput]):
-    # No Fields
+class ArrayMergeHelper(Generic[TInputOutput], Object, IMergeHelper[TInputOutput]):
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, settings: QuerySettings, queryResults: QueryResults[TInputOutput]):
+        """
 
-    def __init__(self, settings: QuerySettings, queryResults: QueryResults[TInputOutput]): ...
+        :param settings:
+        :param queryResults:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def Execute(self) -> None:
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def Execute(self) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]: ...
-    def GetResultsAsArray(self) -> ArrayType[TInputOutput]: ...
+        :return:
+        """
+    def GetResultsAsArray(self) -> Array[TInputOutput]:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class AssociativeAggregationOperator(
     Generic[TInput, TIntermediate, TOutput],
     UnaryQueryOperator[TInput, TIntermediate],
-    IEnumerable,
     IEnumerable[TIntermediate],
+    IEnumerable,
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[TIntermediate]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TIntermediate]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class AsynchronousChannel(Generic[T], ObjectType, IDisposable):
-    # No Fields
+class AsynchronousChannel(Generic[T], Object, IDisposable):
+    """"""
 
-    # No Constructors
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def Dispose(self) -> VoidType: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class AsynchronousChannelMergeEnumerator(
-    Generic[T], MergeEnumerator[T], IEnumerator[T], IDisposable, IEnumerator
+    Generic[T], MergeEnumerator[T], IEnumerator[T], IEnumerator, IDisposable
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Current(self) -> T: ...
+    def Current(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    def MoveNext(self) -> BooleanType: ...
-    def get_Current(self) -> T: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class BinaryQueryOperator(
-    Protocol[TLeftInput, TRightInput, TOutput],
+    ABC,
+    Generic[TLeftInput, TRightInput, TOutput],
     QueryOperator[TOutput],
-    IEnumerable,
     IEnumerable[TOutput],
+    IEnumerable,
 ):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
+        """
 
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def WrapPartitionedStream(
         self,
         leftPartitionedStream: PartitionedStream[TLeftInput, TLeftKey],
         rightPartitionedStream: PartitionedStream[TRightInput, TRightKey],
         outputRecipient: IPartitionedStreamRecipient[TOutput],
-        preferStriping: BooleanType,
+        preferStriping: bool,
         settings: QuerySettings,
-    ) -> VoidType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param leftPartitionedStream:
+        :param rightPartitionedStream:
+        :param outputRecipient:
+        :param preferStriping:
+        :param settings:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TOutput]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CancellableEnumerable(ABC, ObjectType):
+class CancellableEnumerable(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CancellationState(ObjectType):
+class CancellationState(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class ConcatKey(Generic[TLeftKey, TRightKey], ValueType):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ConcatQueryOperator(
     Generic[TSource],
     BinaryQueryOperator[TSource, TSource, TSource],
-    IEnumerable,
     IEnumerable[TSource],
-):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WrapPartitionedStream(
-        self,
-        leftStream: PartitionedStream[TSource, TLeftKey],
-        rightStream: PartitionedStream[TSource, TRightKey],
-        outputRecipient: IPartitionedStreamRecipient[TSource],
-        preferStriping: BooleanType,
-        settings: QuerySettings,
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ContainsSearchOperator(
-    Generic[TInput], UnaryQueryOperator[TInput, BooleanType], IEnumerable, IEnumerable[BooleanType]
+    IEnumerable,
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def WrapPartitionedStream(
+        self,
+        leftPartitionedStream: PartitionedStream[TSource, TLeftKey],
+        rightPartitionedStream: PartitionedStream[TSource, TRightKey],
+        outputRecipient: IPartitionedStreamRecipient[TSource],
+        preferStriping: bool,
+        settings: QuerySettings,
+    ) -> None:
+        """
 
-    # No Sub Interfaces
+        :param leftPartitionedStream:
+        :param rightPartitionedStream:
+        :param outputRecipient:
+        :param preferStriping:
+        :param settings:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TSource]:
+        """
+
+        :return:
+        """
+
+class ContainsSearchOperator(
+    Generic[TInput], UnaryQueryOperator[TInput, Boolean], IEnumerable[Boolean], IEnumerable
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[bool]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[bool]:
+        """
+
+        :return:
+        """
 
 class CountAggregationOperator(
     Generic[TSource],
-    InlinedAggregationOperator[TSource, IntType, IntType],
+    InlinedAggregationOperator[TSource, Int32, Int32],
+    IEnumerable[Int32],
     IEnumerable,
-    IEnumerable[IntType],
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class DecimalAverageAggregationOperator(
-    InlinedAggregationOperator[DecimalType, Pair[DecimalType, LongType], DecimalType],
-    IEnumerable,
-    IEnumerable[Pair[DecimalType, LongType]],
+    InlinedAggregationOperator[Decimal, Pair, Int64, Decimal], IEnumerable[Pair, Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Pair, int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class DecimalMinMaxAggregationOperator(
-    InlinedAggregationOperator[DecimalType, DecimalType, DecimalType],
-    IEnumerable,
-    IEnumerable[DecimalType],
+    InlinedAggregationOperator[Decimal, Decimal, Decimal], IEnumerable[Decimal], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Decimal]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Decimal]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class DecimalSumAggregationOperator(
-    InlinedAggregationOperator[DecimalType, DecimalType, DecimalType],
-    IEnumerable,
-    IEnumerable[DecimalType],
+    InlinedAggregationOperator[Decimal, Decimal, Decimal], IEnumerable[Decimal], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Decimal]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Decimal]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class DefaultIfEmptyQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable, IEnumerable[TSource]
+    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TSource]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class DefaultMergeHelper(Generic[TInputOutput, TIgnoreKey], ObjectType, IMergeHelper[TInputOutput]):
-    # No Fields
+class DefaultMergeHelper(Generic[TInputOutput, TIgnoreKey], Object, IMergeHelper[TInputOutput]):
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def Execute(self) -> None:
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def GetResultsAsArray(self) -> ArrayType[TInputOutput]: ...
+        :return:
+        """
+    def GetResultsAsArray(self) -> Array[TInputOutput]:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class DistinctQueryOperator(
     Generic[TInputOutput],
     UnaryQueryOperator[TInputOutput, TInputOutput],
-    IEnumerable,
     IEnumerable[TInputOutput],
+    IEnumerable,
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[TInputOutput]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInputOutput]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class DoubleAverageAggregationOperator(
-    InlinedAggregationOperator[DoubleType, Pair[DoubleType, LongType], DoubleType],
-    IEnumerable,
-    IEnumerable[Pair[DoubleType, LongType]],
+    InlinedAggregationOperator[Double, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Pair, int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class DoubleMinMaxAggregationOperator(
-    InlinedAggregationOperator[DoubleType, DoubleType, DoubleType],
-    IEnumerable,
-    IEnumerable[DoubleType],
+    InlinedAggregationOperator[Double, Double, Double], IEnumerable[Double], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[float]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[float]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class DoubleSumAggregationOperator(
-    InlinedAggregationOperator[DoubleType, DoubleType, DoubleType],
-    IEnumerable,
-    IEnumerable[DoubleType],
+    InlinedAggregationOperator[Double, Double, Double], IEnumerable[Double], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[float]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[float]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class ElementAtQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable, IEnumerable[TSource]
+    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TSource]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class EmptyEnumerable(Generic[T], ParallelQuery[T], IEnumerable, IEnumerable[T]):
-    # No Fields
+class EmptyEnumerable(Generic[T], ParallelQuery[T], IEnumerable[T], IEnumerable):
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def GetEnumerator(self) -> IEnumerator[T]: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class EmptyEnumerator(
-    Generic[T], QueryOperatorEnumerator[T, IntType], IEnumerator[T], IDisposable, IEnumerator
+    Generic[T], QueryOperatorEnumerator[T, Int32], IEnumerator[T], IEnumerator, IDisposable
 ):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Current(self) -> T: ...
+    def Current(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def Dispose(self) -> None:
+        """"""
+    @overload
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def MoveNext(self) -> BooleanType: ...
-    def get_Current(self) -> T: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
+class EnumerableWrapperWeakToStrong(Object, IEnumerable[Object], IEnumerable):
+    """"""
 
-class EnumerableWrapperWeakToStrong(ObjectType, IEnumerable[ObjectType], IEnumerable):
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def GetEnumerator(self) -> IEnumerator[ObjectType]: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ExceptQueryOperator(
     Generic[TInputOutput],
     BinaryQueryOperator[TInputOutput, TInputOutput, TInputOutput],
-    IEnumerable,
     IEnumerable[TInputOutput],
+    IEnumerable,
 ):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[TInputOutput]:
+        """
 
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def WrapPartitionedStream(
         self,
-        leftStream: PartitionedStream[TInputOutput, TLeftKey],
-        rightStream: PartitionedStream[TInputOutput, TRightKey],
+        leftPartitionedStream: PartitionedStream[TInputOutput, TLeftKey],
+        rightPartitionedStream: PartitionedStream[TInputOutput, TRightKey],
         outputRecipient: IPartitionedStreamRecipient[TInputOutput],
-        preferStriping: BooleanType,
+        preferStriping: bool,
         settings: QuerySettings,
-    ) -> VoidType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param leftPartitionedStream:
+        :param rightPartitionedStream:
+        :param outputRecipient:
+        :param preferStriping:
+        :param settings:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInputOutput]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ExceptionAggregator(ABC, ObjectType):
+class ExceptionAggregator(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ExchangeUtilities(ABC, ObjectType):
+class ExchangeUtilities(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class FirstQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable, IEnumerable[TSource]
+    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TSource]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class FixedMaxHeap(Generic[TElement], ObjectType):
+class FixedMaxHeap(Generic[TElement], Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class FloatAverageAggregationOperator(
-    InlinedAggregationOperator[FloatType, Pair[DoubleType, LongType], FloatType],
-    IEnumerable,
-    IEnumerable[Pair[DoubleType, LongType]],
+    InlinedAggregationOperator[Single, Pair, Int64, Single], IEnumerable[Pair, Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Pair, int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class FloatMinMaxAggregationOperator(
-    InlinedAggregationOperator[FloatType, FloatType, FloatType], IEnumerable, IEnumerable[FloatType]
+    InlinedAggregationOperator[Single, Single, Single], IEnumerable[Single], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[float]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[float]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class FloatSumAggregationOperator(
-    InlinedAggregationOperator[FloatType, DoubleType, FloatType],
-    IEnumerable,
-    IEnumerable[DoubleType],
+    InlinedAggregationOperator[Single, Double, Single], IEnumerable[Double], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[float]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[float]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class ForAllOperator(
-    Generic[TInput], UnaryQueryOperator[TInput, TInput], IEnumerable, IEnumerable[TInput]
+    Generic[TInput], UnaryQueryOperator[TInput, TInput], IEnumerable[TInput], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TInput]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInput]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class ForAllSpoolingTask(Generic[TInputOutput, TIgnoreKey], SpoolingTaskBase):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class GroupByElementSelectorQueryOperatorEnumerator(
     Generic[TSource, TGroupKey, TElement, TOrderKey],
@@ -915,50 +1706,83 @@ class GroupByElementSelectorQueryOperatorEnumerator(
 ):
     """"""
 
-    # No Fields
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class GroupByGrouping(
     Generic[TGroupKey, TElement],
-    ObjectType,
-    IGrouping[TGroupKey, TElement],
+    Object,
     IEnumerable[TElement],
     IEnumerable,
+    IGrouping[TGroupKey, TElement],
 ):
     """"""
 
-    # No Fields
+    @property
+    def Key(self) -> TGroupKey:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TElement]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class GroupByIdentityQueryOperatorEnumerator(
     Generic[TSource, TGroupKey, TOrderKey],
@@ -966,127 +1790,213 @@ class GroupByIdentityQueryOperatorEnumerator(
 ):
     """"""
 
-    # No Fields
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class GroupByQueryOperator(
     Generic[TSource, TGroupKey, TElement],
-    UnaryQueryOperator[TSource, IGrouping[TGroupKey, TElement]],
+    UnaryQueryOperator[TSource, IGrouping, TElement],
+    IEnumerable[IGrouping, TElement],
     IEnumerable,
-    IEnumerable[IGrouping[TGroupKey, TElement]],
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[IGrouping, TElement]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[IGrouping, TElement]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class GroupByQueryOperatorEnumerator(
-    Protocol[TSource, TGroupKey, TElement, TOrderKey],
-    QueryOperatorEnumerator[IGrouping[TGroupKey, TElement], TOrderKey],
+    ABC,
+    Generic[TSource, TGroupKey, TElement, TOrderKey],
+    QueryOperatorEnumerator[IGrouping, TElement, TOrderKey],
 ):
     """"""
 
-    # No Fields
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class GroupJoinQueryOperator(
     Generic[TLeftInput, TRightInput, TKey, TOutput],
     BinaryQueryOperator[TLeftInput, TRightInput, TOutput],
-    IEnumerable,
     IEnumerable[TOutput],
+    IEnumerable,
 ):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WrapPartitionedStream(
-        self,
-        leftStream: PartitionedStream[TLeftInput, TLeftKey],
-        rightStream: PartitionedStream[TRightInput, TRightKey],
-        outputRecipient: IPartitionedStreamRecipient[TOutput],
-        preferStriping: BooleanType,
-        settings: QuerySettings,
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class GrowingArray(Generic[T], ObjectType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def WrapPartitionedStream(
+        self,
+        leftPartitionedStream: PartitionedStream[TLeftInput, TLeftKey],
+        rightPartitionedStream: PartitionedStream[TRightInput, TRightKey],
+        outputRecipient: IPartitionedStreamRecipient[TOutput],
+        preferStriping: bool,
+        settings: QuerySettings,
+    ) -> None:
+        """
 
-    # No Sub Interfaces
+        :param leftPartitionedStream:
+        :param rightPartitionedStream:
+        :param outputRecipient:
+        :param preferStriping:
+        :param settings:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TOutput]:
+        """
+
+        :return:
+        """
+
+class GrowingArray(Generic[T], Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class HashJoinQueryOperatorEnumerator(
     Generic[TLeftInput, TLeftKey, TRightInput, THashKey, TOutput],
@@ -1094,1130 +2004,2284 @@ class HashJoinQueryOperatorEnumerator(
 ):
     """"""
 
-    # No Fields
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HashLookup(Generic[TKey, TValue], ObjectType):
+class HashLookup(Generic[TKey, TValue], Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class HashRepartitionEnumerator(
-    Generic[TInputOutput, THashKey, TIgnoreKey],
-    QueryOperatorEnumerator[Pair[TInputOutput, THashKey], IntType],
+    Generic[TInputOutput, THashKey, TIgnoreKey], QueryOperatorEnumerator[Pair, THashKey, Int32]
 ):
     """"""
 
-    # No Fields
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class HashRepartitionStream(
-    Protocol[TInputOutput, THashKey, TOrderKey],
-    PartitionedStream[Pair[TInputOutput, THashKey], TOrderKey],
+    ABC, Generic[TInputOutput, THashKey, TOrderKey], PartitionedStream[Pair, THashKey, TOrderKey]
 ):
     """"""
 
-    # No Fields
+    @property
+    def PartitionCount(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class IMergeHelper(Generic[TInputOutput]):
+    """"""
 
-    # No Sub Interfaces
+    def Execute(self) -> None:
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetResultsAsArray(self) -> Array[TInputOutput]:
+        """
+
+        :return:
+        """
+
+class IParallelPartitionable(Generic[T]):
+    """"""
+
+    def GetPartitions(self, partitionCount: int) -> Array[QueryOperatorEnumerator, int]:
+        """
+
+        :param partitionCount:
+        :return:
+        """
+
+class IPartitionedStreamRecipient(Generic[TElement]):
+    """"""
+
+    def Receive(self, partitionedStream: PartitionedStream[TElement, TKey]) -> None:
+        """
+
+        :param partitionedStream:
+        """
 
 class IndexedSelectQueryOperator(
-    Generic[TInput, TOutput], UnaryQueryOperator[TInput, TOutput], IEnumerable, IEnumerable[TOutput]
+    Generic[TInput, TOutput], UnaryQueryOperator[TInput, TOutput], IEnumerable[TOutput], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TOutput]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class IndexedWhereQueryOperator(
     Generic[TInputOutput],
     UnaryQueryOperator[TInputOutput, TInputOutput],
-    IEnumerable,
     IEnumerable[TInputOutput],
+    IEnumerable,
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[TInputOutput]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInputOutput]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class InlinedAggregationOperator(
-    Protocol[TSource, TIntermediate, TResult],
+    ABC,
+    Generic[TSource, TIntermediate, TResult],
     UnaryQueryOperator[TSource, TIntermediate],
-    IEnumerable,
     IEnumerable[TIntermediate],
+    IEnumerable,
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[TIntermediate]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TIntermediate]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class InlinedAggregationOperatorEnumerator(
-    Protocol[TIntermediate], QueryOperatorEnumerator[TIntermediate, IntType]
+    ABC, Generic[TIntermediate], QueryOperatorEnumerator[TIntermediate, Int32]
 ):
     """"""
 
-    # No Fields
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class IntAverageAggregationOperator(
-    InlinedAggregationOperator[IntType, Pair[LongType, LongType], DoubleType],
-    IEnumerable,
-    IEnumerable[Pair[LongType, LongType]],
+    InlinedAggregationOperator[Int32, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Pair, int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class IntMinMaxAggregationOperator(
-    InlinedAggregationOperator[IntType, IntType, IntType], IEnumerable, IEnumerable[IntType]
+    InlinedAggregationOperator[Int32, Int32, Int32], IEnumerable[Int32], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class IntSumAggregationOperator(
-    InlinedAggregationOperator[IntType, IntType, IntType], IEnumerable, IEnumerable[IntType]
+    InlinedAggregationOperator[Int32, Int32, Int32], IEnumerable[Int32], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class IntValueEvent(ManualResetEventSlim, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsSet(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def SpinCount(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def WaitHandle(self) -> WaitHandle:
+        """
 
-    # No Methods
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Set(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def Wait(self) -> None:
+        """"""
+    @overload
+    def Wait(self, cancellationToken: CancellationToken) -> None:
+        """
 
-    # No Sub Enums
+        :param cancellationToken:
+        """
+    @overload
+    def Wait(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def Wait(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def Wait(self, millisecondsTimeout: int, cancellationToken: CancellationToken) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param cancellationToken:
+        :return:
+        """
+    @overload
+    def Wait(self, timeout: TimeSpan, cancellationToken: CancellationToken) -> bool:
+        """
+
+        :param timeout:
+        :param cancellationToken:
+        :return:
+        """
 
 class IntersectQueryOperator(
     Generic[TInputOutput],
     BinaryQueryOperator[TInputOutput, TInputOutput, TInputOutput],
-    IEnumerable,
     IEnumerable[TInputOutput],
+    IEnumerable,
 ):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[TInputOutput]:
+        """
 
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def WrapPartitionedStream(
         self,
         leftPartitionedStream: PartitionedStream[TInputOutput, TLeftKey],
         rightPartitionedStream: PartitionedStream[TInputOutput, TRightKey],
         outputRecipient: IPartitionedStreamRecipient[TInputOutput],
-        preferStriping: BooleanType,
+        preferStriping: bool,
         settings: QuerySettings,
-    ) -> VoidType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param leftPartitionedStream:
+        :param rightPartitionedStream:
+        :param outputRecipient:
+        :param preferStriping:
+        :param settings:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInputOutput]:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class JoinQueryOperator(
     Generic[TLeftInput, TRightInput, TKey, TOutput],
     BinaryQueryOperator[TLeftInput, TRightInput, TOutput],
-    IEnumerable,
     IEnumerable[TOutput],
+    IEnumerable,
 ):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
+        """
 
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     def WrapPartitionedStream(
         self,
-        leftStream: PartitionedStream[TLeftInput, TLeftKey],
-        rightStream: PartitionedStream[TRightInput, TRightKey],
+        leftPartitionedStream: PartitionedStream[TLeftInput, TLeftKey],
+        rightPartitionedStream: PartitionedStream[TRightInput, TRightKey],
         outputRecipient: IPartitionedStreamRecipient[TOutput],
-        preferStriping: BooleanType,
+        preferStriping: bool,
         settings: QuerySettings,
-    ) -> VoidType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param leftPartitionedStream:
+        :param rightPartitionedStream:
+        :param outputRecipient:
+        :param preferStriping:
+        :param settings:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TOutput]:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class LastQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable, IEnumerable[TSource]
+    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TSource]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class ListChunk(Generic[TInputOutput], ObjectType, IEnumerable[TInputOutput], IEnumerable):
-    # No Fields
+class ListChunk(Generic[TInputOutput], Object, IEnumerable[TInputOutput], IEnumerable):
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInputOutput]:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ListQueryResults(
-    Generic[T], QueryResults[T], IList[T], ICollection[T], IEnumerable[T], IEnumerable
+    Generic[T], QueryResults[T], ICollection[T], IEnumerable[T], IList[T], IEnumerable
 ):
     """"""
 
-    # No Fields
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Item(self) -> T:
+        """
 
-    # No Methods
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: T) -> None: ...
+    def Add(self, item: T) -> None:
+        """
 
-    # No Events
+        :param item:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: T) -> bool:
+        """
 
-    # No Sub Classes
+        :param item:
+        :return:
+        """
+    def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, item: T) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    def Insert(self, index: int, item: T) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    def Remove(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: T) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, index: int, value: T) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class LongAverageAggregationOperator(
-    InlinedAggregationOperator[LongType, Pair[LongType, LongType], DoubleType],
-    IEnumerable,
-    IEnumerable[Pair[LongType, LongType]],
+    InlinedAggregationOperator[Int64, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Pair, int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class LongCountAggregationOperator(
     Generic[TSource],
-    InlinedAggregationOperator[TSource, LongType, LongType],
+    InlinedAggregationOperator[TSource, Int64, Int64],
+    IEnumerable[Int64],
     IEnumerable,
-    IEnumerable[LongType],
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class LongMinMaxAggregationOperator(
-    InlinedAggregationOperator[LongType, LongType, LongType], IEnumerable, IEnumerable[LongType]
+    InlinedAggregationOperator[Int64, Int64, Int64], IEnumerable[Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class LongSumAggregationOperator(
-    InlinedAggregationOperator[LongType, LongType, LongType], IEnumerable, IEnumerable[LongType]
+    InlinedAggregationOperator[Int64, Int64, Int64], IEnumerable[Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class Lookup(
     Generic[TKey, TElement],
-    ObjectType,
-    ILookup[TKey, TElement],
-    IEnumerable[IGrouping[TKey, TElement]],
+    Object,
+    IEnumerable[IGrouping, TElement],
     IEnumerable,
+    ILookup[TKey, TElement],
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
-    def __getitem__(self, key: TKey) -> IEnumerable[TElement]: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Item(self) -> IEnumerable[TElement]:
+        """
 
-    def Contains(self, key: TKey) -> BooleanType: ...
-    def GetEnumerator(self) -> IEnumerator[IGrouping[TKey, TElement]]: ...
-    def get_Count(self) -> IntType: ...
-    def get_Item(self, key: TKey) -> IEnumerable[TElement]: ...
+        :return:
+        """
+    def Contains(self, key: TKey) -> bool:
+        """
 
-    # No Events
+        :param key:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __getitem__(self, key: TKey) -> IEnumerable[TElement]:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[IGrouping, TElement]:
+        """
+
+        :return:
+        """
 
 class MergeEnumerator(
-    Protocol[TInputOutput], ObjectType, IEnumerator[TInputOutput], IDisposable, IEnumerator
+    ABC, Generic[TInputOutput], Object, IEnumerator[TInputOutput], IEnumerator, IDisposable
 ):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Current(self) -> TInputOutput: ...
+    def Current(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> TInputOutput: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
+class MergeExecutor(Generic[TInputOutput], Object, IEnumerable[TInputOutput], IEnumerable):
+    """"""
 
-class MergeExecutor(Generic[TInputOutput], ObjectType, IEnumerable[TInputOutput], IEnumerable):
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInputOutput]:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class NoKeyMemoizationRequired(ValueType):
+    """"""
 
-    # No Sub Enums
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class NullableDecimalAverageAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[DecimalType]],
-        Pair[DecimalType, LongType],
-        NullableType[Nullable[DecimalType]],
-    ],
-    IEnumerable,
-    IEnumerable[Pair[DecimalType, LongType]],
+    InlinedAggregationOperator[Decimal, Pair, Int64, Decimal], IEnumerable[Pair, Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Pair, int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableDecimalMinMaxAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[DecimalType]],
-        NullableType[Nullable[DecimalType]],
-        NullableType[Nullable[DecimalType]],
-    ],
-    IEnumerable,
-    IEnumerable[NullableType[Nullable[DecimalType]]],
+    InlinedAggregationOperator[Decimal, Decimal, Decimal], IEnumerable[Decimal], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[Optional[Decimal]]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Optional[Decimal]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableDecimalSumAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[DecimalType]],
-        NullableType[Nullable[DecimalType]],
-        NullableType[Nullable[DecimalType]],
-    ],
-    IEnumerable,
-    IEnumerable[NullableType[Nullable[DecimalType]]],
+    InlinedAggregationOperator[Decimal, Decimal, Decimal], IEnumerable[Decimal], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[Optional[Decimal]]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Optional[Decimal]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableDoubleAverageAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[DoubleType]],
-        Pair[DoubleType, LongType],
-        NullableType[Nullable[DoubleType]],
-    ],
-    IEnumerable,
-    IEnumerable[Pair[DoubleType, LongType]],
+    InlinedAggregationOperator[Double, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Pair, int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableDoubleMinMaxAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[DoubleType]],
-        NullableType[Nullable[DoubleType]],
-        NullableType[Nullable[DoubleType]],
-    ],
-    IEnumerable,
-    IEnumerable[NullableType[Nullable[DoubleType]]],
+    InlinedAggregationOperator[Double, Double, Double], IEnumerable[Double], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[Optional[float]]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Optional[float]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableDoubleSumAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[DoubleType]],
-        NullableType[Nullable[DoubleType]],
-        NullableType[Nullable[DoubleType]],
-    ],
-    IEnumerable,
-    IEnumerable[NullableType[Nullable[DoubleType]]],
+    InlinedAggregationOperator[Double, Double, Double], IEnumerable[Double], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[Optional[float]]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Optional[float]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableFloatAverageAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[FloatType]],
-        Pair[DoubleType, LongType],
-        NullableType[Nullable[FloatType]],
-    ],
-    IEnumerable,
-    IEnumerable[Pair[DoubleType, LongType]],
+    InlinedAggregationOperator[Single, Pair, Int64, Single], IEnumerable[Pair, Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Pair, int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableFloatMinMaxAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[FloatType]],
-        NullableType[Nullable[FloatType]],
-        NullableType[Nullable[FloatType]],
-    ],
-    IEnumerable,
-    IEnumerable[NullableType[Nullable[FloatType]]],
+    InlinedAggregationOperator[Single, Single, Single], IEnumerable[Single], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[Optional[float]]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Optional[float]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableFloatSumAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[FloatType]],
-        NullableType[Nullable[DoubleType]],
-        NullableType[Nullable[FloatType]],
-    ],
-    IEnumerable,
-    IEnumerable[NullableType[Nullable[DoubleType]]],
+    InlinedAggregationOperator[Single, Double, Single], IEnumerable[Double], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[Optional[float]]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Optional[float]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableIntAverageAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[IntType]],
-        Pair[LongType, LongType],
-        NullableType[Nullable[DoubleType]],
-    ],
-    IEnumerable,
-    IEnumerable[Pair[LongType, LongType]],
+    InlinedAggregationOperator[Int32, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Pair, int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableIntMinMaxAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[IntType]],
-        NullableType[Nullable[IntType]],
-        NullableType[Nullable[IntType]],
-    ],
-    IEnumerable,
-    IEnumerable[NullableType[Nullable[IntType]]],
+    InlinedAggregationOperator[Int32, Int32, Int32], IEnumerable[Int32], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[Optional[int]]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Optional[int]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableIntSumAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[IntType]],
-        NullableType[Nullable[IntType]],
-        NullableType[Nullable[IntType]],
-    ],
-    IEnumerable,
-    IEnumerable[NullableType[Nullable[IntType]]],
+    InlinedAggregationOperator[Int32, Int32, Int32], IEnumerable[Int32], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[Optional[int]]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Optional[int]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableLongAverageAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[LongType]],
-        Pair[LongType, LongType],
-        NullableType[Nullable[DoubleType]],
-    ],
-    IEnumerable,
-    IEnumerable[Pair[LongType, LongType]],
+    InlinedAggregationOperator[Int64, Pair, Int64, Double], IEnumerable[Pair, Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[Pair, int]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Pair, int]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableLongMinMaxAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[LongType]],
-        NullableType[Nullable[LongType]],
-        NullableType[Nullable[LongType]],
-    ],
-    IEnumerable,
-    IEnumerable[NullableType[Nullable[LongType]]],
+    InlinedAggregationOperator[Int64, Int64, Int64], IEnumerable[Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[Optional[int]]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Optional[int]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class NullableLongSumAggregationOperator(
-    InlinedAggregationOperator[
-        NullableType[Nullable[LongType]],
-        NullableType[Nullable[LongType]],
-        NullableType[Nullable[LongType]],
-    ],
-    IEnumerable,
-    IEnumerable[NullableType[Nullable[LongType]]],
+    InlinedAggregationOperator[Int64, Int64, Int64], IEnumerable[Int64], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[Optional[int]]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[Optional[int]]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class OrderPreservingMergeHelper(
-    Generic[TInputOutput, TKey], ObjectType, IMergeHelper[TInputOutput]
-):
-    # No Fields
+class OrderPreservingMergeHelper(Generic[TInputOutput, TKey], Object, IMergeHelper[TInputOutput]):
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def Execute(self) -> None:
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TInputOutput]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def GetResultsAsArray(self) -> ArrayType[TInputOutput]: ...
+        :return:
+        """
+    def GetResultsAsArray(self) -> Array[TInputOutput]:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class OrderPreservingPipeliningMergeHelper(Generic[TOutput, TKey], Object, IMergeHelper[TOutput]):
+    """"""
 
-    # No Sub Enums
+    def Equals(self, obj: object) -> bool:
+        """
 
-class OrderPreservingPipeliningMergeHelper(
-    Generic[TOutput, TKey], ObjectType, IMergeHelper[TOutput]
-):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def Execute(self) -> None:
+        """"""
+    def GetEnumerator(self) -> IEnumerator[TOutput]:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetResultsAsArray(self) -> Array[TOutput]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def GetResultsAsArray(self) -> ArrayType[TOutput]: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class OrderPreservingPipeliningSpoolingTask(Generic[TOutput, TKey], SpoolingTaskBase):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    @staticmethod
+        :return:
+        """
+    @classmethod
     def Spool(
+        cls,
         groupState: QueryTaskGroupState,
         partitions: PartitionedStream[TOutput, TKey],
-        consumerWaiting: ArrayType[BooleanType],
-        producerWaiting: ArrayType[BooleanType],
-        producerDone: ArrayType[BooleanType],
-        buffers: ArrayType[Queue[Pair[TKey, TOutput]]],
-        bufferLocks: ArrayType[ObjectType],
+        consumerWaiting: Array[bool],
+        producerWaiting: Array[bool],
+        producerDone: Array[bool],
+        buffers: Array[Queue, TOutput],
+        bufferLocks: Array[object],
         taskScheduler: TaskScheduler,
-        autoBuffered: BooleanType,
-    ) -> VoidType: ...
+        autoBuffered: bool,
+    ) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class OrderPreservingSpoolingTask(Generic[TInputOutput, TKey], SpoolingTaskBase):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class OrderedGroupByElementSelectorQueryOperatorEnumerator(
     Generic[TSource, TGroupKey, TElement, TOrderKey],
@@ -2225,50 +4289,83 @@ class OrderedGroupByElementSelectorQueryOperatorEnumerator(
 ):
     """"""
 
-    # No Fields
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class OrderedGroupByGrouping(
     Generic[TGroupKey, TOrderKey, TElement],
-    ObjectType,
-    IGrouping[TGroupKey, TElement],
+    Object,
     IEnumerable[TElement],
     IEnumerable,
+    IGrouping[TGroupKey, TElement],
 ):
     """"""
 
-    # No Fields
+    @property
+    def Key(self) -> TGroupKey:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TElement]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class OrderedGroupByIdentityQueryOperatorEnumerator(
     Generic[TSource, TGroupKey, TOrderKey],
@@ -2276,71 +4373,89 @@ class OrderedGroupByIdentityQueryOperatorEnumerator(
 ):
     """"""
 
-    # No Fields
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class OrderedGroupByQueryOperatorEnumerator(
-    Protocol[TSource, TGroupKey, TElement, TOrderKey],
-    QueryOperatorEnumerator[IGrouping[TGroupKey, TElement], TOrderKey],
+    ABC,
+    Generic[TSource, TGroupKey, TElement, TOrderKey],
+    QueryOperatorEnumerator[IGrouping, TElement, TOrderKey],
 ):
     """"""
 
-    # No Fields
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class OrderedHashRepartitionEnumerator(
-    Generic[TInputOutput, THashKey, TOrderKey],
-    QueryOperatorEnumerator[Pair[TInputOutput, THashKey], TOrderKey],
+    Generic[TInputOutput, THashKey, TOrderKey], QueryOperatorEnumerator[Pair, THashKey, TOrderKey]
 ):
     """"""
 
-    # No Fields
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class OrderedHashRepartitionStream(
     Generic[TInputOutput, THashKey, TOrderKey],
@@ -2348,1537 +4463,2454 @@ class OrderedHashRepartitionStream(
 ):
     """"""
 
-    # No Fields
+    @property
+    def PartitionCount(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class OrderingQueryOperator(
-    Generic[TSource], QueryOperator[TSource], IEnumerable, IEnumerable[TSource]
+    Generic[TSource], QueryOperator[TSource], IEnumerable[TSource], IEnumerable
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, child: QueryOperator[TSource], orderOn: BooleanType): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PairComparer(Generic[T, U], ObjectType, IComparer[Pair[T, U]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, comparer1: IComparer[T], comparer2: IComparer[U]): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Compare(self, x: Pair[T, U], y: Pair[T, U]) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ParallelEnumerableWrapper(ParallelQuery[ObjectType], IEnumerable, IEnumerable[ObjectType]):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator[ObjectType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ParallelEnumerableWrapper(Generic[T], ParallelQuery[T], IEnumerable, IEnumerable[T]):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator[T]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PartitionedDataSource(Generic[T], PartitionedStream[T, IntType]):
     """"""
 
-    # No Fields
+    def __init__(self, child: QueryOperator[TSource], orderOn: bool):
+        """
 
-    # No Constructors
+        :param child:
+        :param orderOn:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Methods
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
+        """
 
-    # No Events
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TSource]:
+        """
 
-class PartitionedStream(Generic[TElement, TKey], ObjectType):
-    # No Fields
+        :return:
+        """
 
-    # No Constructors
+class OrdinalIndexState(Enum):
+    """"""
 
-    # ---------- Properties ---------- #
+    Indexible: OrdinalIndexState = ...
+    """"""
+    Correct: OrdinalIndexState = ...
+    """"""
+    Increasing: OrdinalIndexState = ...
+    """"""
+    Shuffled: OrdinalIndexState = ...
+    """"""
+
+class Pair(Generic[T, U], ValueType):
+    """"""
+
+    def __init__(self, first: T, second: U):
+        """
+
+        :param first:
+        :param second:
+        """
+    @property
+    def First(self) -> T:
+        """
+
+        :return:
+        """
+    @First.setter
+    def First(self, value: T) -> None: ...
+    @property
+    def Second(self) -> U:
+        """
+
+        :return:
+        """
+    @Second.setter
+    def Second(self, value: U) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PairComparer(Generic[T, U], Object, IComparer[Pair, U]):
+    """"""
+
+    def __init__(self, comparer1: IComparer[T], comparer2: IComparer[U]):
+        """
+
+        :param comparer1:
+        :param comparer2:
+        """
+    def Compare(self, x: Pair[T, U], y: Pair[T, U]) -> int:
+        """
+
+        :param x:
+        :param y:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ParallelEnumerableWrapper(ParallelQuery[Object], IEnumerable[Object], IEnumerable):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+
+class ParallelEnumerableWrapper(Generic[T], ParallelQuery[T], IEnumerable[T], IEnumerable):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+
+class PartitionedDataSource(Generic[T], PartitionedStream[T, Int32]):
+    """"""
 
     @property
-    def PartitionCount(self) -> IntType: ...
+    def PartitionCount(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_PartitionCount(self) -> IntType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class PartitionedStream(Generic[TElement, TKey], Object):
+    """"""
 
-    # No Sub Enums
+    @property
+    def PartitionCount(self) -> int:
+        """
 
-class PartitionedStreamMerger(Generic[TOutput], ObjectType, IPartitionedStreamRecipient[TOutput]):
-    # No Fields
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    def Receive(self, partitionedStream: PartitionedStream[TOutput, TKey]) -> VoidType: ...
+        :return:
+        """
 
-    # No Events
+class PartitionedStreamMerger(Generic[TOutput], Object, IPartitionedStreamRecipient[TOutput]):
+    """"""
 
-    # No Sub Classes
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Receive(self, partitionedStream: PartitionedStream[TOutput, TKey]) -> None:
+        """
+
+        :param partitionedStream:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class PartitionerQueryOperator(
-    Generic[TElement], QueryOperator[TElement], IEnumerable, IEnumerable[TElement]
+    Generic[TElement], QueryOperator[TElement], IEnumerable[TElement], IEnumerable
 ):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Properties
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TElement]:
+        """
 
-    # No Methods
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TElement]:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class PipelineSpoolingTask(Generic[TInputOutput, TIgnoreKey], SpoolingTaskBase):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class PlinqEtwProvider(EventSource, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # ---------- Sub Classes ---------- #
-
-    class Tasks(ObjectType):
-        # ---------- Fields ---------- #
-
-        @staticmethod
-        @property
-        def ForkJoin() -> EventTask: ...
-        @staticmethod
-        @property
-        def Query() -> EventTask: ...
-
-        # ---------- Constructors ---------- #
-
-        def __init__(self): ...
-
-        # No Properties
-
-        # No Methods
-
-        # No Events
-
-        # No Sub Classes
-
-        # No Sub Structs
-
-        # No Sub Interfaces
-
-        # No Sub Enums
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ProducerComparerInt(ObjectType, IComparer[Producer[IntType]]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Compare(self, x: Producer[IntType], y: Producer[IntType]) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class QueryExecutionOption(
-    Generic[TSource], QueryOperator[TSource], IEnumerable, IEnumerable[TSource]
-):
     """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class QueryLifecycle(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class QueryOpeningEnumerator(
-    Generic[TOutput], ObjectType, IEnumerator[TOutput], IDisposable, IEnumerator
-):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
 
     @property
-    def Current(self) -> TOutput: ...
+    def ConstructionException(self) -> Exception:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    @property
+    def CurrentThreadActivityId(cls) -> Guid:
+        """
 
-    def Dispose(self) -> VoidType: ...
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> TOutput: ...
+        :return:
+        """
+    @property
+    def Guid(self) -> Guid:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Settings(self) -> EventSourceSettings:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetTrait(self, key: str) -> str:
+        """
 
-class QueryOperator(Protocol[TOutput], ParallelQuery[TOutput], IEnumerable, IEnumerable[TOutput]):
-    # No Fields
+        :param key:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     @overload
-    def GetEnumerator(self) -> IEnumerator[TOutput]: ...
+    def IsEnabled(self) -> bool:
+        """
+
+        :return:
+        """
     @overload
-    def GetEnumerator(
-        self, mergeOptions: NullableType[Nullable[ParallelMergeOptions]]
-    ) -> IEnumerator[TOutput]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class QueryOperatorEnumerator(Protocol[TElement, TKey], ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class QueryResults(Protocol[T], ObjectType, IList[T], ICollection[T], IEnumerable[T], IEnumerable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Count(self) -> IntType: ...
-    def __getitem__(self, key: IntType) -> T: ...
-    def __setitem__(self, key: IntType, value: T) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Count(self) -> IntType: ...
-    def get_Item(self, index: IntType) -> T: ...
-    def set_Item(self, index: IntType, value: T) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class QueryTask(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class QueryTaskGroupState(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RangeEnumerable(
-    ParallelQuery[IntType], IEnumerable, IEnumerable[IntType], IParallelPartitionable[IntType]
-):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator[IntType]: ...
-    def GetPartitions(
-        self, partitionCount: IntType
-    ) -> ArrayType[QueryOperatorEnumerator[IntType, IntType]]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RepeatEnumerable(
-    Generic[TResult],
-    ParallelQuery[TResult],
-    IEnumerable,
-    IEnumerable[TResult],
-    IParallelPartitionable[TResult],
-):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> IEnumerator[TResult]: ...
-    def GetPartitions(
-        self, partitionCount: IntType
-    ) -> ArrayType[QueryOperatorEnumerator[TResult, IntType]]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReverseComparer(Generic[T], ObjectType, IComparer[T]):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Compare(self, x: T, y: T) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReverseQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable, IEnumerable[TSource]
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ScanQueryOperator(
-    Generic[TElement], QueryOperator[TElement], IEnumerable, IEnumerable[TElement]
-):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Data(self) -> IEnumerable[TElement]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Data(self) -> IEnumerable[TElement]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Scheduling(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SelectManyQueryOperator(
-    Generic[TLeftInput, TRightInput, TOutput],
-    UnaryQueryOperator[TLeftInput, TOutput],
-    IEnumerable,
-    IEnumerable[TOutput],
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SelectQueryOperator(
-    Generic[TInput, TOutput], UnaryQueryOperator[TInput, TOutput], IEnumerable, IEnumerable[TOutput]
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Shared(Generic[T], ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SingleQueryOperator(
-    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable, IEnumerable[TSource]
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SortHelper(Protocol[TInputOutput], ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SortHelper(Generic[TInputOutput, TKey], SortHelper[TInputOutput], IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SortQueryOperator(
-    Generic[TInputOutput, TSortKey],
-    UnaryQueryOperator[TInputOutput, TInputOutput],
-    IEnumerable,
-    IEnumerable[TInputOutput],
-    IOrderedEnumerable[TInputOutput],
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SortQueryOperatorEnumerator(
-    Generic[TInputOutput, TKey, TSortKey], QueryOperatorEnumerator[TInputOutput, TSortKey]
-):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def KeyComparer(self) -> IComparer[TSortKey]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_KeyComparer(self) -> IComparer[TSortKey]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SortQueryOperatorResults(
-    Generic[TInputOutput, TSortKey],
-    QueryResults[TInputOutput],
-    IList[TInputOutput],
-    ICollection[TInputOutput],
-    IEnumerable[TInputOutput],
-    IEnumerable,
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SpoolingTask(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SpoolingTaskBase(ABC, QueryTask):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StopAndGoSpoolingTask(Generic[TInputOutput, TIgnoreKey], SpoolingTaskBase):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SynchronousChannel(Generic[T], ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SynchronousChannelMergeEnumerator(
-    Generic[T], MergeEnumerator[T], IEnumerator[T], IDisposable, IEnumerator
-):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> T: ...
-
-    # ---------- Methods ---------- #
-
-    def MoveNext(self) -> BooleanType: ...
-    def get_Current(self) -> T: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TakeOrSkipQueryOperator(
-    Generic[TResult], UnaryQueryOperator[TResult, TResult], IEnumerable, IEnumerable[TResult]
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TakeOrSkipWhileQueryOperator(
-    Generic[TResult], UnaryQueryOperator[TResult, TResult], IEnumerable, IEnumerable[TResult]
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceHelpers(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UnaryQueryOperator(
-    Protocol[TInput, TOutput], QueryOperator[TOutput], IEnumerable, IEnumerable[TOutput]
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UnionQueryOperator(
-    Generic[TInputOutput],
-    BinaryQueryOperator[TInputOutput, TInputOutput, TInputOutput],
-    IEnumerable,
-    IEnumerable[TInputOutput],
-):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def WrapPartitionedStream(
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :return:
+        """
+    @overload
+    def IsEnabled(self, level: EventLevel, keywords: EventKeywords, channel: EventChannel) -> bool:
+        """
+
+        :param level:
+        :param keywords:
+        :param channel:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def Write(self, eventName: str) -> None:
+        """
+
+        :param eventName:
+        """
+    @overload
+    def Write(self, eventName: str, data: T) -> None:
+        """
+
+        :param eventName:
+        :param data:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @overload
+    def Write(self, eventName: str, options: EventSourceOptions, data: T) -> None:
+        """
+
+        :param eventName:
+        :param options:
+        :param data:
+        """
+    @overload
+    def Write(
         self,
-        leftStream: PartitionedStream[TInputOutput, TLeftKey],
-        rightStream: PartitionedStream[TInputOutput, TRightKey],
-        outputRecipient: IPartitionedStreamRecipient[TInputOutput],
-        preferStriping: BooleanType,
-        settings: QuerySettings,
-    ) -> VoidType: ...
+        eventName: str,
+        options: EventSourceOptions,
+        activityId: Guid,
+        relatedActivityId: Guid,
+        data: T,
+    ) -> None:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class UnorderedHashRepartitionStream(
-    Generic[TInputOutput, THashKey, TIgnoreKey],
-    HashRepartitionStream[TInputOutput, THashKey, IntType],
-):
+        :param eventName:
+        :param options:
+        :param activityId:
+        :param relatedActivityId:
+        :param data:
+        """
+    EventCommandExecuted: EventType[EventHandler[EventCommandEventArgs]] = ...
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Util(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WhereQueryOperator(
-    Generic[TInputOutput],
-    UnaryQueryOperator[TInputOutput, TInputOutput],
-    IEnumerable,
-    IEnumerable[TInputOutput],
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ZipQueryOperator(
-    Generic[TLeftInput, TRightInput, TOutput],
-    QueryOperator[TOutput],
-    IEnumerable,
-    IEnumerable[TOutput],
-):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
-
-class ConcatKey(Generic[TLeftKey, TRightKey], ValueType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NoKeyMemoizationRequired(ValueType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Pair(Generic[T, U], ValueType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, first: T, second: U): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def First(self) -> T: ...
-    @First.setter
-    def First(self, value: T) -> None: ...
-    @property
-    def Second(self) -> U: ...
-    @Second.setter
-    def Second(self, value: U) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_First(self) -> T: ...
-    def get_Second(self) -> U: ...
-    def set_First(self, value: T) -> VoidType: ...
-    def set_Second(self, value: U) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    class Tasks(Object):
+        """"""
+
+        ForkJoin: Final[ClassVar[EventTask]] = ...
+        """"""
+        Query: Final[ClassVar[EventTask]] = ...
+        """"""
+        def __init__(self):
+            """"""
+        def Equals(self, obj: object) -> bool:
+            """
+
+            :param obj:
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
+
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
+
+            :return:
+            """
+        def ToString(self) -> str:
+            """
+
+            :return:
+            """
 
 class Producer(Generic[TKey], ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class ProducerComparerInt(Object, IComparer[Producer[Int32]]):
+    """"""
 
-    # No Sub Structs
+    def __init__(self):
+        """"""
+    def Compare(self, x: Producer[int], y: Producer[int]) -> int:
+        """
 
-    # No Sub Interfaces
+        :param x:
+        :param y:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class QueryAggregationOptions(Enum):
+    """"""
+
+    _None: QueryAggregationOptions = ...
+    """"""
+    Associative: QueryAggregationOptions = ...
+    """"""
+    Commutative: QueryAggregationOptions = ...
+    """"""
+    AssociativeCommutative: QueryAggregationOptions = ...
+    """"""
+
+class QueryExecutionOption(
+    Generic[TSource], QueryOperator[TSource], IEnumerable[TSource], IEnumerable
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TSource]:
+        """
+
+        :return:
+        """
+
+class QueryLifecycle(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class QueryOpeningEnumerator(
+    Generic[TOutput], Object, IEnumerator[TOutput], IEnumerator, IDisposable
+):
+    """"""
+
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class QueryOperator(
+    ABC, Generic[TOutput], ParallelQuery[TOutput], IEnumerable[TOutput], IEnumerable
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TOutput]:
+        """
+
+        :return:
+        """
+
+class QueryOperatorEnumerator(ABC, Generic[TElement, TKey], Object):
+    """"""
+
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class QueryResults(ABC, Generic[T], Object, ICollection[T], IEnumerable[T], IList[T], IEnumerable):
+    """"""
+
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> T:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: T) -> None: ...
+    def Add(self, item: T) -> None:
+        """
+
+        :param item:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def CopyTo(self, array: Array[T], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, item: T) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    def Insert(self, index: int, item: T) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    def Remove(self, item: T) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: T) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> T:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[T]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, index: int, value: T) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class QuerySettings(ValueType):
-    # No Fields
+    """"""
 
-    # No Constructors
+    def CleanStateAtQueryEnd(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def CleanStateAtQueryEnd(self) -> VoidType: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class QueryTask(ABC, Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class QueryTaskGroupState(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RangeEnumerable(
+    ParallelQuery[Int32], IEnumerable[Int32], IEnumerable, IParallelPartitionable[Int32]
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetPartitions(self, partitionCount: int) -> Array[QueryOperatorEnumerator, int]:
+        """
+
+        :param partitionCount:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[int]:
+        """
+
+        :return:
+        """
+
+class RepeatEnumerable(
+    Generic[TResult],
+    ParallelQuery[TResult],
+    IEnumerable[TResult],
+    IEnumerable,
+    IParallelPartitionable[TResult],
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetPartitions(self, partitionCount: int) -> Array[QueryOperatorEnumerator, int]:
+        """
+
+        :param partitionCount:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TResult]:
+        """
+
+        :return:
+        """
+
+class ReverseComparer(Generic[T], Object, IComparer[T]):
+    """"""
+
+    def Compare(self, x: T, y: T) -> int:
+        """
+
+        :param x:
+        :param y:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReverseQueryOperator(
+    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TSource]:
+        """
+
+        :return:
+        """
+
+class ScanQueryOperator(
+    Generic[TElement], QueryOperator[TElement], IEnumerable[TElement], IEnumerable
+):
+    """"""
+
+    @property
+    def Data(self) -> IEnumerable[TElement]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TElement]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TElement]:
+        """
+
+        :return:
+        """
+
+class Scheduling(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SelectManyQueryOperator(
+    Generic[TLeftInput, TRightInput, TOutput],
+    UnaryQueryOperator[TLeftInput, TOutput],
+    IEnumerable[TOutput],
+    IEnumerable,
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TOutput]:
+        """
+
+        :return:
+        """
+
+class SelectQueryOperator(
+    Generic[TInput, TOutput], UnaryQueryOperator[TInput, TOutput], IEnumerable[TOutput], IEnumerable
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TOutput]:
+        """
+
+        :return:
+        """
+
+class Shared(Generic[T], Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SingleQueryOperator(
+    Generic[TSource], UnaryQueryOperator[TSource, TSource], IEnumerable[TSource], IEnumerable
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TSource]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TSource]:
+        """
+
+        :return:
+        """
+
+class SortHelper(ABC, Generic[TInputOutput], Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SortHelper(Generic[TInputOutput, TKey], SortHelper[TInputOutput], IDisposable):
+    """"""
+
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SortQueryOperator(
+    Generic[TInputOutput, TSortKey],
+    UnaryQueryOperator[TInputOutput, TInputOutput],
+    IEnumerable[TInputOutput],
+    IEnumerable,
+    IOrderedEnumerable[TInputOutput],
+):
+    """"""
+
+    def CreateOrderedEnumerable(
+        self, keySelector: Func[TInputOutput, TKey], comparer: IComparer[TKey], descending: bool
+    ) -> IOrderedEnumerable[TInputOutput]:
+        """
+
+        :param keySelector:
+        :param comparer:
+        :param descending:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[TInputOutput]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInputOutput]:
+        """
+
+        :return:
+        """
+
+class SortQueryOperatorEnumerator(
+    Generic[TInputOutput, TKey, TSortKey], QueryOperatorEnumerator[TInputOutput, TSortKey]
+):
+    """"""
+
+    @property
+    def KeyComparer(self) -> IComparer[TSortKey]:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SortQueryOperatorResults(
+    Generic[TInputOutput, TSortKey],
+    QueryResults[TInputOutput],
+    ICollection[TInputOutput],
+    IEnumerable[TInputOutput],
+    IList[TInputOutput],
+    IEnumerable,
+):
+    """"""
+
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> TInputOutput:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: TInputOutput) -> None: ...
+    def Add(self, item: TInputOutput) -> None:
+        """
+
+        :param item:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, item: TInputOutput) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def CopyTo(self, array: Array[TInputOutput], arrayIndex: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, item: TInputOutput) -> int:
+        """
+
+        :param item:
+        :return:
+        """
+    def Insert(self, index: int, item: TInputOutput) -> None:
+        """
+
+        :param index:
+        :param item:
+        """
+    def Remove(self, item: TInputOutput) -> bool:
+        """
+
+        :param item:
+        :return:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: TInputOutput) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> TInputOutput:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInputOutput]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, index: int, value: TInputOutput) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class SpoolingTask(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SpoolingTaskBase(ABC, QueryTask):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StopAndGoSpoolingTask(Generic[TInputOutput, TIgnoreKey], SpoolingTaskBase):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SynchronousChannel(Generic[T], Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SynchronousChannelMergeEnumerator(
+    Generic[T], MergeEnumerator[T], IEnumerator[T], IEnumerator, IDisposable
+):
+    """"""
+
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TakeOrSkipQueryOperator(
+    Generic[TResult], UnaryQueryOperator[TResult, TResult], IEnumerable[TResult], IEnumerable
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TResult]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TResult]:
+        """
+
+        :return:
+        """
+
+class TakeOrSkipWhileQueryOperator(
+    Generic[TResult], UnaryQueryOperator[TResult, TResult], IEnumerable[TResult], IEnumerable
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TResult]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TResult]:
+        """
+
+        :return:
+        """
+
+class TraceHelpers(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class UnaryQueryOperator(
+    ABC, Generic[TInput, TOutput], QueryOperator[TOutput], IEnumerable[TOutput], IEnumerable
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TOutput]:
+        """
+
+        :return:
+        """
+
+class UnionQueryOperator(
+    Generic[TInputOutput],
+    BinaryQueryOperator[TInputOutput, TInputOutput, TInputOutput],
+    IEnumerable[TInputOutput],
+    IEnumerable,
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[TInputOutput]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def WrapPartitionedStream(
+        self,
+        leftPartitionedStream: PartitionedStream[TInputOutput, TLeftKey],
+        rightPartitionedStream: PartitionedStream[TInputOutput, TRightKey],
+        outputRecipient: IPartitionedStreamRecipient[TInputOutput],
+        preferStriping: bool,
+        settings: QuerySettings,
+    ) -> None:
+        """
+
+        :param leftPartitionedStream:
+        :param rightPartitionedStream:
+        :param outputRecipient:
+        :param preferStriping:
+        :param settings:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInputOutput]:
+        """
+
+        :return:
+        """
+
+class UnorderedHashRepartitionStream(
+    Generic[TInputOutput, THashKey, TIgnoreKey],
+    HashRepartitionStream[TInputOutput, THashKey, Int32],
+):
+    """"""
+
+    @property
+    def PartitionCount(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Util(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class WhereQueryOperator(
+    Generic[TInputOutput],
+    UnaryQueryOperator[TInputOutput, TInputOutput],
+    IEnumerable[TInputOutput],
+    IEnumerable,
+):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    @overload
+    def GetEnumerator(
+        self, mergeOptions: Optional[ParallelMergeOptions]
+    ) -> IEnumerator[TInputOutput]:
+        """
+
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TInputOutput]:
+        """
+
+        :return:
+        """
 
 class Wrapper(Generic[T], ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class WrapperEqualityComparer(Generic[T], ValueType, IEqualityComparer[Wrapper[T]]):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
+    """"""
 
     @overload
-    def Equals(self, x: Wrapper[T], y: Wrapper[T]) -> BooleanType: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def GetHashCode(self, x: Wrapper[T]) -> IntType: ...
+    def Equals(self, x: Wrapper[T], y: Wrapper[T]) -> bool:
+        """
 
-    # No Events
+        :param x:
+        :param y:
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def GetHashCode(self, obj: Wrapper[T]) -> int:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-# ---------- Interfaces ---------- #
+class ZipQueryOperator(
+    Generic[TLeftInput, TRightInput, TOutput],
+    QueryOperator[TOutput],
+    IEnumerable[TOutput],
+    IEnumerable,
+):
+    """"""
 
-class IMergeHelper(Protocol[TInputOutput]):
-    # No Properties
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    def Execute(self) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator[TInputOutput]: ...
-    def GetResultsAsArray(self) -> ArrayType[TInputOutput]: ...
+        :return:
+        """
+    @overload
+    def GetEnumerator(self, mergeOptions: Optional[ParallelMergeOptions]) -> IEnumerator[TOutput]:
+        """
 
-    # No Events
+        :param mergeOptions:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class IParallelPartitionable(Protocol[T]):
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    def GetPartitions(
-        self, partitionCount: IntType
-    ) -> ArrayType[QueryOperatorEnumerator[T, IntType]]: ...
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[TOutput]:
+        """
 
-class IPartitionedStreamRecipient(Protocol[TElement]):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Receive(self, partitionedStream: PartitionedStream[TElement, TKey]) -> VoidType: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class OrdinalIndexState(Enum):
-    Indexible = 0
-    Correct = 1
-    Increasing = 2
-    Shuffled = 3
-
-class QueryAggregationOptions(Enum):
-    # None = 0
-    Associative = 1
-    Commutative = 2
-    AssociativeCommutative = 3
-
-# No Delegates
-
-__all__ = [
-    AnyAllSearchOperator,
-    ArrayMergeHelper,
-    AssociativeAggregationOperator,
-    AsynchronousChannel,
-    AsynchronousChannelMergeEnumerator,
-    BinaryQueryOperator,
-    CancellableEnumerable,
-    CancellationState,
-    ConcatQueryOperator,
-    ContainsSearchOperator,
-    CountAggregationOperator,
-    DecimalAverageAggregationOperator,
-    DecimalMinMaxAggregationOperator,
-    DecimalSumAggregationOperator,
-    DefaultIfEmptyQueryOperator,
-    DefaultMergeHelper,
-    DistinctQueryOperator,
-    DoubleAverageAggregationOperator,
-    DoubleMinMaxAggregationOperator,
-    DoubleSumAggregationOperator,
-    ElementAtQueryOperator,
-    EmptyEnumerable,
-    EmptyEnumerator,
-    EnumerableWrapperWeakToStrong,
-    ExceptQueryOperator,
-    ExceptionAggregator,
-    ExchangeUtilities,
-    FirstQueryOperator,
-    FixedMaxHeap,
-    FloatAverageAggregationOperator,
-    FloatMinMaxAggregationOperator,
-    FloatSumAggregationOperator,
-    ForAllOperator,
-    ForAllSpoolingTask,
-    GroupByElementSelectorQueryOperatorEnumerator,
-    GroupByGrouping,
-    GroupByIdentityQueryOperatorEnumerator,
-    GroupByQueryOperator,
-    GroupByQueryOperatorEnumerator,
-    GroupJoinQueryOperator,
-    GrowingArray,
-    HashJoinQueryOperatorEnumerator,
-    HashLookup,
-    HashRepartitionEnumerator,
-    HashRepartitionStream,
-    IndexedSelectQueryOperator,
-    IndexedWhereQueryOperator,
-    InlinedAggregationOperator,
-    InlinedAggregationOperatorEnumerator,
-    IntAverageAggregationOperator,
-    IntMinMaxAggregationOperator,
-    IntSumAggregationOperator,
-    IntValueEvent,
-    IntersectQueryOperator,
-    JoinQueryOperator,
-    LastQueryOperator,
-    ListChunk,
-    ListQueryResults,
-    LongAverageAggregationOperator,
-    LongCountAggregationOperator,
-    LongMinMaxAggregationOperator,
-    LongSumAggregationOperator,
-    Lookup,
-    MergeEnumerator,
-    MergeExecutor,
-    NullableDecimalAverageAggregationOperator,
-    NullableDecimalMinMaxAggregationOperator,
-    NullableDecimalSumAggregationOperator,
-    NullableDoubleAverageAggregationOperator,
-    NullableDoubleMinMaxAggregationOperator,
-    NullableDoubleSumAggregationOperator,
-    NullableFloatAverageAggregationOperator,
-    NullableFloatMinMaxAggregationOperator,
-    NullableFloatSumAggregationOperator,
-    NullableIntAverageAggregationOperator,
-    NullableIntMinMaxAggregationOperator,
-    NullableIntSumAggregationOperator,
-    NullableLongAverageAggregationOperator,
-    NullableLongMinMaxAggregationOperator,
-    NullableLongSumAggregationOperator,
-    OrderPreservingMergeHelper,
-    OrderPreservingPipeliningMergeHelper,
-    OrderPreservingPipeliningSpoolingTask,
-    OrderPreservingSpoolingTask,
-    OrderedGroupByElementSelectorQueryOperatorEnumerator,
-    OrderedGroupByGrouping,
-    OrderedGroupByIdentityQueryOperatorEnumerator,
-    OrderedGroupByQueryOperatorEnumerator,
-    OrderedHashRepartitionEnumerator,
-    OrderedHashRepartitionStream,
-    OrderingQueryOperator,
-    PairComparer,
-    ParallelEnumerableWrapper,
-    PartitionedDataSource,
-    PartitionedStream,
-    PartitionedStreamMerger,
-    PartitionerQueryOperator,
-    PipelineSpoolingTask,
-    PlinqEtwProvider,
-    ProducerComparerInt,
-    QueryExecutionOption,
-    QueryLifecycle,
-    QueryOpeningEnumerator,
-    QueryOperator,
-    QueryOperatorEnumerator,
-    QueryResults,
-    QueryTask,
-    QueryTaskGroupState,
-    RangeEnumerable,
-    RepeatEnumerable,
-    ReverseComparer,
-    ReverseQueryOperator,
-    ScanQueryOperator,
-    Scheduling,
-    SelectManyQueryOperator,
-    SelectQueryOperator,
-    Shared,
-    SingleQueryOperator,
-    SortHelper,
-    SortQueryOperator,
-    SortQueryOperatorEnumerator,
-    SortQueryOperatorResults,
-    SpoolingTask,
-    SpoolingTaskBase,
-    StopAndGoSpoolingTask,
-    SynchronousChannel,
-    SynchronousChannelMergeEnumerator,
-    TakeOrSkipQueryOperator,
-    TakeOrSkipWhileQueryOperator,
-    TraceHelpers,
-    UnaryQueryOperator,
-    UnionQueryOperator,
-    UnorderedHashRepartitionStream,
-    Util,
-    WhereQueryOperator,
-    ZipQueryOperator,
-    ConcatKey,
-    NoKeyMemoizationRequired,
-    Pair,
-    Producer,
-    QuerySettings,
-    Wrapper,
-    WrapperEqualityComparer,
-    IMergeHelper,
-    IParallelPartitionable,
-    IPartitionedStreamRecipient,
-    OrdinalIndexState,
-    QueryAggregationOptions,
-]
+        :return:
+        """

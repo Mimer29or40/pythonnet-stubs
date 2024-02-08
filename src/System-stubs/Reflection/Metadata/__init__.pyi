@@ -1,796 +1,1365 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
+from typing import ClassVar
+from typing import Final
+from typing import Iterator
 from typing import Tuple
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Char
 from System import DateTime
 from System import Decimal
-from System import Double
 from System import Enum
 from System import Guid
 from System import IDisposable
 from System import IEquatable
-from System import Int16
-from System import Int32
-from System import Int64
 from System import Object
-from System import SByte
-from System import Single
-from System import String
-from System import UInt16
-from System import UInt32
-from System import UInt64
+from System import Type
 from System import ValueType
-from System import Void
 from System.Collections import IEnumerable
+from System.Collections import IEnumerator
 from System.Collections.Generic import IEnumerable
 from System.Collections.Immutable import ImmutableArray
 from System.IO import Stream
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-CharType = Union[str, Char]
-DecimalType = Union[float, Decimal]
-DoubleType = Union[float, Double]
-FloatType = Union[float, Single]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-ObjectType = Object
-SByteType = Union[int, SByte]
-ShortType = Union[int, Int16]
-StringType = Union[str, String]
-UIntType = Union[int, UInt32]
-ULongType = Union[int, UInt64]
-UShortType = Union[int, UInt16]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class DebugMetadataHeader(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def EntryPoint(self) -> MethodDefinitionHandle: ...
-    @property
-    def Id(self) -> ImmutableArray[ByteType]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_EntryPoint(self) -> MethodDefinitionHandle: ...
-    def get_Id(self) -> ImmutableArray[ByteType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HandleKindExtensions(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MetadataReader(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, metadata: ByteType, length: IntType, options: MetadataReaderOptions): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def DebugMetadataHeader(self) -> DebugMetadataHeader: ...
-    @property
-    def MetadataVersion(self) -> StringType: ...
-    @property
-    def Options(self) -> MetadataReaderOptions: ...
-
-    # ---------- Methods ---------- #
-
-    def GetDocument(self, handle: DocumentHandle) -> Document: ...
-    def GetMethodDebugInformation(
-        self, handle: MethodDebugInformationHandle
-    ) -> MethodDebugInformation: ...
-    def GetString(self, handle: DocumentNameBlobHandle) -> StringType: ...
-    def get_DebugMetadataHeader(self) -> DebugMetadataHeader: ...
-    def get_MetadataVersion(self) -> StringType: ...
-    def get_Options(self) -> MetadataReaderOptions: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MetadataReaderProvider(ObjectType, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dispose(self) -> VoidType: ...
-    @staticmethod
-    @overload
-    def FromMetadataImage(start: ByteType, size: IntType) -> MetadataReaderProvider: ...
-    @staticmethod
-    @overload
-    def FromMetadataImage(image: ImmutableArray[ByteType]) -> MetadataReaderProvider: ...
-    @staticmethod
-    def FromMetadataStream(
-        stream: Stream, options: MetadataStreamOptions, size: IntType
-    ) -> MetadataReaderProvider: ...
-    @staticmethod
-    @overload
-    def FromPortablePdbImage(start: ByteType, size: IntType) -> MetadataReaderProvider: ...
-    @staticmethod
-    @overload
-    def FromPortablePdbImage(image: ImmutableArray[ByteType]) -> MetadataReaderProvider: ...
-    @staticmethod
-    def FromPortablePdbStream(
-        stream: Stream, options: MetadataStreamOptions, size: IntType
-    ) -> MetadataReaderProvider: ...
-    def GetMetadataReader(self, options: MetadataReaderOptions = 1) -> MetadataReader: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MetadataStreamOptionsExtensions(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def IsValid(options: MetadataStreamOptions) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PathUtilities(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PortablePdbVersions(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
-
 class BlobContentId(ValueType, IEquatable[BlobContentId]):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, guid: Guid, stamp: UIntType): ...
-    @overload
-    def __init__(self, id: ImmutableArray[ByteType]): ...
-    @overload
-    def __init__(self, id: ArrayType[ByteType]): ...
+    def __init__(self, id: ImmutableArray[int]):
+        """
 
-    # ---------- Properties ---------- #
+        :param id:
+        """
+    @overload
+    def __init__(self, id: Array[int]):
+        """
 
+        :param id:
+        """
+    @overload
+    def __init__(self, guid: Guid, stamp: int):
+        """
+
+        :param guid:
+        :param stamp:
+        """
     @property
-    def Guid(self) -> Guid: ...
+    def Guid(self) -> Guid:
+        """
+
+        :return:
+        """
     @property
-    def IsDefault(self) -> BooleanType: ...
+    def IsDefault(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Stamp(self) -> UIntType: ...
+    def Stamp(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     @overload
-    def Equals(self, other: BlobContentId) -> BooleanType: ...
+    def Equals(self, other: BlobContentId) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
     @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_Guid(self) -> Guid: ...
-    def get_IsDefault(self) -> BooleanType: ...
-    def get_Stamp(self) -> UIntType: ...
-    @staticmethod
-    def op_Equality(left: BlobContentId, right: BlobContentId) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(left: BlobContentId, right: BlobContentId) -> BooleanType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def __eq__(self, other: BlobContentId) -> bool:
+        """
 
-    # No Sub Enums
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: BlobContentId) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: BlobContentId, right: BlobContentId) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: BlobContentId, right: BlobContentId) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
 
 class BlobHandle(ValueType, IEquatable[BlobHandle]):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IsNil(self) -> BooleanType: ...
+    def IsNil(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
+    def Equals(self, other: BlobHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
     @overload
-    def Equals(self, other: BlobHandle) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_IsNil(self) -> BooleanType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class BlobReader(ValueType):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, buffer: int, length: int):
+        """
 
-    def __init__(self, buffer: ByteType, length: IntType): ...
-
-    # ---------- Properties ---------- #
-
+        :param buffer:
+        :param length:
+        """
     @property
-    def CurrentPointer(self) -> ByteType: ...
+    def CurrentPointer(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Length(self) -> IntType: ...
+    def Length(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Offset(self) -> IntType: ...
+    def Offset(self) -> int:
+        """
+
+        :return:
+        """
     @Offset.setter
-    def Offset(self, value: IntType) -> None: ...
+    def Offset(self, value: int) -> None: ...
     @property
-    def RemainingBytes(self) -> IntType: ...
+    def RemainingBytes(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def StartPointer(self) -> ByteType: ...
+    def StartPointer(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Align(self, alignment: int) -> None:
+        """
 
-    def Align(self, alignment: ByteType) -> VoidType: ...
-    def IndexOf(self, value: ByteType) -> IntType: ...
-    def ReadBlobHandle(self) -> BlobHandle: ...
-    def ReadBoolean(self) -> BooleanType: ...
-    def ReadByte(self) -> ByteType: ...
+        :param alignment:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, value: int) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ReadBlobHandle(self) -> BlobHandle:
+        """
+
+        :return:
+        """
+    def ReadBoolean(self) -> bool:
+        """
+
+        :return:
+        """
+    def ReadByte(self) -> int:
+        """
+
+        :return:
+        """
     @overload
-    def ReadBytes(self, byteCount: IntType) -> ArrayType[ByteType]: ...
+    def ReadBytes(self, byteCount: int) -> Array[int]:
+        """
+
+        :param byteCount:
+        :return:
+        """
     @overload
-    def ReadBytes(
-        self, byteCount: IntType, buffer: ArrayType[ByteType], bufferOffset: IntType
-    ) -> VoidType: ...
-    def ReadChar(self) -> CharType: ...
-    def ReadCompressedInteger(self) -> IntType: ...
-    def ReadCompressedSignedInteger(self) -> IntType: ...
-    def ReadDateTime(self) -> DateTime: ...
-    def ReadDecimal(self) -> DecimalType: ...
-    def ReadDouble(self) -> DoubleType: ...
-    def ReadGuid(self) -> Guid: ...
-    def ReadInt16(self) -> ShortType: ...
-    def ReadInt32(self) -> IntType: ...
-    def ReadInt64(self) -> LongType: ...
-    def ReadSByte(self) -> SByteType: ...
-    def ReadSingle(self) -> FloatType: ...
-    def ReadUInt16(self) -> UShortType: ...
-    def ReadUInt32(self) -> UIntType: ...
-    def ReadUInt64(self) -> ULongType: ...
-    def ReadUTF16(self, byteCount: IntType) -> StringType: ...
-    def ReadUTF8(self, byteCount: IntType) -> StringType: ...
-    def Reset(self) -> VoidType: ...
-    def TryReadCompressedInteger(self, value: IntType) -> Tuple[BooleanType, IntType]: ...
-    def TryReadCompressedSignedInteger(self, value: IntType) -> Tuple[BooleanType, IntType]: ...
-    def get_CurrentPointer(self) -> ByteType: ...
-    def get_Length(self) -> IntType: ...
-    def get_Offset(self) -> IntType: ...
-    def get_RemainingBytes(self) -> IntType: ...
-    def get_StartPointer(self) -> ByteType: ...
-    def set_Offset(self, value: IntType) -> VoidType: ...
+    def ReadBytes(self, byteCount: int, buffer: Array[int], bufferOffset: int) -> None:
+        """
 
-    # No Events
+        :param byteCount:
+        :param buffer:
+        :param bufferOffset:
+        """
+    def ReadChar(self) -> Char:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ReadCompressedInteger(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ReadCompressedSignedInteger(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ReadDateTime(self) -> DateTime:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ReadDecimal(self) -> Decimal:
+        """
+
+        :return:
+        """
+    def ReadDouble(self) -> float:
+        """
+
+        :return:
+        """
+    def ReadGuid(self) -> Guid:
+        """
+
+        :return:
+        """
+    def ReadInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadSByte(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadSingle(self) -> float:
+        """
+
+        :return:
+        """
+    def ReadUInt16(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadUInt32(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadUInt64(self) -> int:
+        """
+
+        :return:
+        """
+    def ReadUTF16(self, byteCount: int) -> str:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def ReadUTF8(self, byteCount: int) -> str:
+        """
+
+        :param byteCount:
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def TryReadCompressedInteger(self, value: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :return:
+        """
+    def TryReadCompressedSignedInteger(self, value: int) -> Tuple[bool, int]:
+        """
+
+        :param value:
+        :return:
+        """
+
+class DebugMetadataHeader(Object):
+    """"""
+
+    @property
+    def EntryPoint(self) -> MethodDefinitionHandle:
+        """
+
+        :return:
+        """
+    @property
+    def Id(self) -> ImmutableArray[int]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class Document(ValueType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def Name(self) -> DocumentNameBlobHandle: ...
+    def Name(self) -> DocumentNameBlobHandle:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Name(self) -> DocumentNameBlobHandle: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class DocumentHandle(ValueType, IEquatable[DocumentHandle]):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IsNil(self) -> BooleanType: ...
+    def IsNil(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
+    def Equals(self, other: DocumentHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
     @overload
-    def Equals(self, other: DocumentHandle) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_IsNil(self) -> BooleanType: ...
-    @staticmethod
-    def op_Equality(left: DocumentHandle, right: DocumentHandle) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(left: DocumentHandle, right: DocumentHandle) -> BooleanType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def __eq__(self, other: DocumentHandle) -> bool:
+        """
 
-    # No Sub Enums
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: DocumentHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: DocumentHandle, right: DocumentHandle) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: DocumentHandle, right: DocumentHandle) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
 
 class DocumentNameBlobHandle(ValueType, IEquatable[DocumentNameBlobHandle]):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IsNil(self) -> BooleanType: ...
+    def IsNil(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
+    def Equals(self, other: DocumentNameBlobHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
     @overload
-    def Equals(self, other: DocumentNameBlobHandle) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_IsNil(self) -> BooleanType: ...
-    @staticmethod
-    def op_Equality(left: DocumentNameBlobHandle, right: DocumentNameBlobHandle) -> BooleanType: ...
-    @staticmethod
-    def op_Explicit(handle: BlobHandle) -> DocumentNameBlobHandle: ...
-    @staticmethod
-    def op_Implicit(handle: DocumentNameBlobHandle) -> BlobHandle: ...
-    @staticmethod
-    def op_Inequality(
-        left: DocumentNameBlobHandle, right: DocumentNameBlobHandle
-    ) -> BooleanType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def __eq__(self, other: DocumentNameBlobHandle) -> bool:
+        """
 
-    # No Sub Enums
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: DocumentNameBlobHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: DocumentNameBlobHandle, right: DocumentNameBlobHandle) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Explicit(cls, handle: BlobHandle) -> DocumentNameBlobHandle:
+        """
+
+        :param handle:
+        :return:
+        """
+    @classmethod
+    def op_Implicit(cls, handle: DocumentNameBlobHandle) -> BlobHandle:
+        """
+
+        :param handle:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: DocumentNameBlobHandle, right: DocumentNameBlobHandle) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
 
 class Handle(ValueType, IEquatable[Handle]):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IsNil(self) -> BooleanType: ...
+    def IsNil(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Kind(self) -> HandleKind: ...
+    def Kind(self) -> HandleKind:
+        """
 
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
+    def Equals(self, other: Handle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
     @overload
-    def Equals(self, other: Handle) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_IsNil(self) -> BooleanType: ...
-    def get_Kind(self) -> HandleKind: ...
-    @staticmethod
-    def op_Equality(left: Handle, right: Handle) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(left: Handle, right: Handle) -> BooleanType: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def __eq__(self, other: Handle) -> bool:
+        """
 
-    # No Sub Enums
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: Handle) -> bool:
+        """
 
-class MethodDebugInformation(ValueType):
-    # No Fields
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: Handle, right: Handle) -> bool:
+        """
 
-    # No Constructors
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: Handle, right: Handle) -> bool:
+        """
 
-    # ---------- Properties ---------- #
-
-    @property
-    def Document(self) -> DocumentHandle: ...
-    @property
-    def SequencePointsBlob(self) -> BlobHandle: ...
-
-    # ---------- Methods ---------- #
-
-    def GetSequencePoints(self) -> SequencePointCollection: ...
-    def get_Document(self) -> DocumentHandle: ...
-    def get_SequencePointsBlob(self) -> BlobHandle: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MethodDebugInformationHandle(ValueType, IEquatable[MethodDebugInformationHandle]):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsNil(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    @overload
-    def Equals(self, other: MethodDebugInformationHandle) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_IsNil(self) -> BooleanType: ...
-    @staticmethod
-    def op_Equality(
-        left: MethodDebugInformationHandle, right: MethodDebugInformationHandle
-    ) -> BooleanType: ...
-    @staticmethod
-    def op_Explicit(handle: Handle) -> MethodDebugInformationHandle: ...
-    @staticmethod
-    def op_Implicit(handle: MethodDebugInformationHandle) -> Handle: ...
-    @staticmethod
-    def op_Inequality(
-        left: MethodDebugInformationHandle, right: MethodDebugInformationHandle
-    ) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MethodDefinitionHandle(ValueType, IEquatable[MethodDefinitionHandle]):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsNil(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    @overload
-    def Equals(self, other: MethodDefinitionHandle) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToDebugInformationHandle(self) -> MethodDebugInformationHandle: ...
-    def get_IsNil(self) -> BooleanType: ...
-    @staticmethod
-    def op_Equality(left: MethodDefinitionHandle, right: MethodDefinitionHandle) -> BooleanType: ...
-    @staticmethod
-    def op_Explicit(handle: Handle) -> MethodDefinitionHandle: ...
-    @staticmethod
-    def op_Implicit(handle: MethodDefinitionHandle) -> Handle: ...
-    @staticmethod
-    def op_Inequality(
-        left: MethodDefinitionHandle, right: MethodDefinitionHandle
-    ) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SequencePoint(ValueType, IEquatable[SequencePoint]):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def HiddenLine() -> IntType: ...
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Document(self) -> DocumentHandle: ...
-    @property
-    def EndColumn(self) -> IntType: ...
-    @property
-    def EndLine(self) -> IntType: ...
-    @property
-    def IsHidden(self) -> BooleanType: ...
-    @property
-    def Offset(self) -> IntType: ...
-    @property
-    def StartColumn(self) -> IntType: ...
-    @property
-    def StartLine(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    @overload
-    def Equals(self, other: SequencePoint) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_Document(self) -> DocumentHandle: ...
-    def get_EndColumn(self) -> IntType: ...
-    def get_EndLine(self) -> IntType: ...
-    def get_IsHidden(self) -> BooleanType: ...
-    def get_Offset(self) -> IntType: ...
-    def get_StartColumn(self) -> IntType: ...
-    def get_StartLine(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SequencePointCollection(ValueType, IEnumerable[SequencePoint], IEnumerable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetEnumerator(self) -> Enumerator: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Interfaces
-
-# ---------- Enums ---------- #
+        :param left:
+        :param right:
+        :return:
+        """
 
 class HandleKind(Enum):
-    ModuleDefinition = 0
-    TypeReference = 1
-    TypeDefinition = 2
-    FieldDefinition = 4
-    MethodDefinition = 6
-    Parameter = 8
-    InterfaceImplementation = 9
-    MemberReference = 10
-    Constant = 11
-    CustomAttribute = 12
-    DeclarativeSecurityAttribute = 14
-    StandaloneSignature = 17
-    EventDefinition = 20
-    PropertyDefinition = 23
-    MethodImplementation = 25
-    ModuleReference = 26
-    TypeSpecification = 27
-    AssemblyDefinition = 32
-    AssemblyReference = 35
-    AssemblyFile = 38
-    ExportedType = 39
-    ManifestResource = 40
-    GenericParameter = 42
-    MethodSpecification = 43
-    GenericParameterConstraint = 44
-    Document = 48
-    MethodDebugInformation = 49
-    LocalScope = 50
-    LocalVariable = 51
-    LocalConstant = 52
-    ImportScope = 53
-    CustomDebugInformation = 55
-    UserString = 112
-    Blob = 113
-    Guid = 114
-    String = 120
-    NamespaceDefinition = 124
+    """"""
+
+    ModuleDefinition: HandleKind = ...
+    """"""
+    TypeReference: HandleKind = ...
+    """"""
+    TypeDefinition: HandleKind = ...
+    """"""
+    FieldDefinition: HandleKind = ...
+    """"""
+    MethodDefinition: HandleKind = ...
+    """"""
+    Parameter: HandleKind = ...
+    """"""
+    InterfaceImplementation: HandleKind = ...
+    """"""
+    MemberReference: HandleKind = ...
+    """"""
+    Constant: HandleKind = ...
+    """"""
+    CustomAttribute: HandleKind = ...
+    """"""
+    DeclarativeSecurityAttribute: HandleKind = ...
+    """"""
+    StandaloneSignature: HandleKind = ...
+    """"""
+    EventDefinition: HandleKind = ...
+    """"""
+    PropertyDefinition: HandleKind = ...
+    """"""
+    MethodImplementation: HandleKind = ...
+    """"""
+    ModuleReference: HandleKind = ...
+    """"""
+    TypeSpecification: HandleKind = ...
+    """"""
+    AssemblyDefinition: HandleKind = ...
+    """"""
+    AssemblyReference: HandleKind = ...
+    """"""
+    AssemblyFile: HandleKind = ...
+    """"""
+    ExportedType: HandleKind = ...
+    """"""
+    ManifestResource: HandleKind = ...
+    """"""
+    GenericParameter: HandleKind = ...
+    """"""
+    MethodSpecification: HandleKind = ...
+    """"""
+    GenericParameterConstraint: HandleKind = ...
+    """"""
+    Document: HandleKind = ...
+    """"""
+    MethodDebugInformation: HandleKind = ...
+    """"""
+    LocalScope: HandleKind = ...
+    """"""
+    LocalVariable: HandleKind = ...
+    """"""
+    LocalConstant: HandleKind = ...
+    """"""
+    ImportScope: HandleKind = ...
+    """"""
+    CustomDebugInformation: HandleKind = ...
+    """"""
+    UserString: HandleKind = ...
+    """"""
+    Blob: HandleKind = ...
+    """"""
+    Guid: HandleKind = ...
+    """"""
+    String: HandleKind = ...
+    """"""
+    NamespaceDefinition: HandleKind = ...
+    """"""
+
+class HandleKindExtensions(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class MetadataKind(Enum):
-    Ecma335 = 0
-    WindowsMetadata = 1
-    ManagedWindowsMetadata = 2
+    """"""
+
+    Ecma335: MetadataKind = ...
+    """"""
+    WindowsMetadata: MetadataKind = ...
+    """"""
+    ManagedWindowsMetadata: MetadataKind = ...
+    """"""
+
+class MetadataReader(Object):
+    """"""
+
+    def __init__(self, metadata: int, length: int, options: MetadataReaderOptions):
+        """
+
+        :param metadata:
+        :param length:
+        :param options:
+        """
+    @property
+    def DebugMetadataHeader(self) -> DebugMetadataHeader:
+        """
+
+        :return:
+        """
+    @property
+    def MetadataVersion(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Options(self) -> MetadataReaderOptions:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetDocument(self, handle: DocumentHandle) -> Document:
+        """
+
+        :param handle:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMethodDebugInformation(
+        self, handle: MethodDebugInformationHandle
+    ) -> MethodDebugInformation:
+        """
+
+        :param handle:
+        :return:
+        """
+    def GetString(self, handle: DocumentNameBlobHandle) -> str:
+        """
+
+        :param handle:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class MetadataReaderOptions(Enum):
-    # None = 0
-    Default = 1
-    ApplyWindowsRuntimeProjections = 1
+    """"""
+
+    _None: MetadataReaderOptions = ...
+    """"""
+    Default: MetadataReaderOptions = ...
+    """"""
+    ApplyWindowsRuntimeProjections: MetadataReaderOptions = ...
+    """"""
+
+class MetadataReaderProvider(Object, IDisposable):
+    """"""
+
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def FromMetadataImage(cls, image: ImmutableArray[int]) -> MetadataReaderProvider:
+        """
+
+        :param image:
+        :return:
+        """
+    @classmethod
+    @overload
+    def FromMetadataImage(cls, start: int, size: int) -> MetadataReaderProvider:
+        """
+
+        :param start:
+        :param size:
+        :return:
+        """
+    @classmethod
+    def FromMetadataStream(
+        cls, stream: Stream, options: MetadataStreamOptions = ..., size: int = ...
+    ) -> MetadataReaderProvider:
+        """
+
+        :param stream:
+        :param options:
+        :param size:
+        :return:
+        """
+    @classmethod
+    @overload
+    def FromPortablePdbImage(cls, image: ImmutableArray[int]) -> MetadataReaderProvider:
+        """
+
+        :param image:
+        :return:
+        """
+    @classmethod
+    @overload
+    def FromPortablePdbImage(cls, start: int, size: int) -> MetadataReaderProvider:
+        """
+
+        :param start:
+        :param size:
+        :return:
+        """
+    @classmethod
+    def FromPortablePdbStream(
+        cls, stream: Stream, options: MetadataStreamOptions = ..., size: int = ...
+    ) -> MetadataReaderProvider:
+        """
+
+        :param stream:
+        :param options:
+        :param size:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMetadataReader(self, options: MetadataReaderOptions = ...) -> MetadataReader:
+        """
+
+        :param options:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class MetadataStreamOptions(Enum):
-    Default = 0
-    LeaveOpen = 1
-    PrefetchMetadata = 2
+    """"""
 
-# No Delegates
+    Default: MetadataStreamOptions = ...
+    """"""
+    LeaveOpen: MetadataStreamOptions = ...
+    """"""
+    PrefetchMetadata: MetadataStreamOptions = ...
+    """"""
 
-__all__ = [
-    DebugMetadataHeader,
-    HandleKindExtensions,
-    MetadataReader,
-    MetadataReaderProvider,
-    MetadataStreamOptionsExtensions,
-    PathUtilities,
-    PortablePdbVersions,
-    BlobContentId,
-    BlobHandle,
-    BlobReader,
-    Document,
-    DocumentHandle,
-    DocumentNameBlobHandle,
-    Handle,
-    MethodDebugInformation,
-    MethodDebugInformationHandle,
-    MethodDefinitionHandle,
-    SequencePoint,
-    SequencePointCollection,
-    HandleKind,
-    MetadataKind,
-    MetadataReaderOptions,
-    MetadataStreamOptions,
-]
+class MetadataStreamOptionsExtensions(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsValid(cls, options: MetadataStreamOptions) -> bool:
+        """
+
+        :param options:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MethodDebugInformation(ValueType):
+    """"""
+
+    @property
+    def Document(self) -> DocumentHandle:
+        """
+
+        :return:
+        """
+    @property
+    def SequencePointsBlob(self) -> BlobHandle:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetSequencePoints(self) -> SequencePointCollection:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MethodDebugInformationHandle(ValueType, IEquatable[MethodDebugInformationHandle]):
+    """"""
+
+    @property
+    def IsNil(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, other: MethodDebugInformationHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __eq__(self, other: MethodDebugInformationHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: MethodDebugInformationHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(
+        cls, left: MethodDebugInformationHandle, right: MethodDebugInformationHandle
+    ) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Explicit(cls, handle: Handle) -> MethodDebugInformationHandle:
+        """
+
+        :param handle:
+        :return:
+        """
+    @classmethod
+    def op_Implicit(cls, handle: MethodDebugInformationHandle) -> Handle:
+        """
+
+        :param handle:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(
+        cls, left: MethodDebugInformationHandle, right: MethodDebugInformationHandle
+    ) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+
+class MethodDefinitionHandle(ValueType, IEquatable[MethodDefinitionHandle]):
+    """"""
+
+    @property
+    def IsNil(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, other: MethodDefinitionHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToDebugInformationHandle(self) -> MethodDebugInformationHandle:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __eq__(self, other: MethodDefinitionHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: MethodDefinitionHandle) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, left: MethodDefinitionHandle, right: MethodDefinitionHandle) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+    @classmethod
+    def op_Explicit(cls, handle: Handle) -> MethodDefinitionHandle:
+        """
+
+        :param handle:
+        :return:
+        """
+    @classmethod
+    def op_Implicit(cls, handle: MethodDefinitionHandle) -> Handle:
+        """
+
+        :param handle:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, left: MethodDefinitionHandle, right: MethodDefinitionHandle) -> bool:
+        """
+
+        :param left:
+        :param right:
+        :return:
+        """
+
+class PathUtilities(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PortablePdbVersions(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SequencePoint(ValueType, IEquatable[SequencePoint]):
+    """"""
+
+    HiddenLine: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @property
+    def Document(self) -> DocumentHandle:
+        """
+
+        :return:
+        """
+    @property
+    def EndColumn(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def EndLine(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsHidden(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Offset(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def StartColumn(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def StartLine(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, other: SequencePoint) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SequencePointCollection(ValueType, IEnumerable[SequencePoint], IEnumerable):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def __iter__(self) -> Iterator[SequencePoint]:
+        """
+
+        :return:
+        """

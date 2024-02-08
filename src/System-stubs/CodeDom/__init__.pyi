@@ -1,22 +1,16 @@
 from __future__ import annotations
 
 from typing import Generic
-from typing import List
+from typing import Iterator
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Enum
 from System import EventHandler
 from System import Guid
-from System import Int32
 from System import Object
-from System import String
 from System import Type
-from System import Void
 from System.Collections import CollectionBase
 from System.Collections import ICollection
 from System.Collections import IDictionary
@@ -26,3405 +20,8403 @@ from System.Collections import IList
 from System.Collections.Specialized import StringCollection
 from System.Reflection import TypeAttributes
 
-# ---------- Types ---------- #
-
 T = TypeVar("T")
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
 
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
-
 class CodeArgumentReferenceExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, parameterName: StringType): ...
+    def __init__(self, parameterName: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param parameterName:
+        """
     @property
-    def ParameterName(self) -> StringType: ...
+    def ParameterName(self) -> str:
+        """
+
+        :return:
+        """
     @ParameterName.setter
-    def ParameterName(self, value: StringType) -> None: ...
+    def ParameterName(self, value: str) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_ParameterName(self) -> StringType: ...
-    def set_ParameterName(self, value: StringType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeArrayCreateExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, createType: CodeTypeReference, initializers: ArrayType[CodeExpression]): ...
-    @overload
-    def __init__(self, createType: StringType, initializers: ArrayType[CodeExpression]): ...
-    @overload
-    def __init__(self, createType: TypeType, initializers: ArrayType[CodeExpression]): ...
-    @overload
-    def __init__(self, createType: CodeTypeReference, size: IntType): ...
-    @overload
-    def __init__(self, createType: StringType, size: IntType): ...
-    @overload
-    def __init__(self, createType: TypeType, size: IntType): ...
-    @overload
-    def __init__(self, createType: CodeTypeReference, size: CodeExpression): ...
-    @overload
-    def __init__(self, createType: StringType, size: CodeExpression): ...
-    @overload
-    def __init__(self, createType: TypeType, size: CodeExpression): ...
+    def __init__(self, createType: CodeTypeReference, size: CodeExpression):
+        """
 
-    # ---------- Properties ---------- #
+        :param createType:
+        :param size:
+        """
+    @overload
+    def __init__(self, createType: CodeTypeReference, initializers: Array[CodeExpression]):
+        """
 
+        :param createType:
+        :param initializers:
+        """
+    @overload
+    def __init__(self, createType: CodeTypeReference, size: int):
+        """
+
+        :param createType:
+        :param size:
+        """
+    @overload
+    def __init__(self, createType: str, size: CodeExpression):
+        """
+
+        :param createType:
+        :param size:
+        """
+    @overload
+    def __init__(self, createType: str, initializers: Array[CodeExpression]):
+        """
+
+        :param createType:
+        :param initializers:
+        """
+    @overload
+    def __init__(self, createType: str, size: int):
+        """
+
+        :param createType:
+        :param size:
+        """
+    @overload
+    def __init__(self, createType: Type, size: CodeExpression):
+        """
+
+        :param createType:
+        :param size:
+        """
+    @overload
+    def __init__(self, createType: Type, initializers: Array[CodeExpression]):
+        """
+
+        :param createType:
+        :param initializers:
+        """
+    @overload
+    def __init__(self, createType: Type, size: int):
+        """
+
+        :param createType:
+        :param size:
+        """
     @property
-    def CreateType(self) -> CodeTypeReference: ...
+    def CreateType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
     @CreateType.setter
     def CreateType(self, value: CodeTypeReference) -> None: ...
     @property
-    def Initializers(self) -> CodeExpressionCollection: ...
+    def Initializers(self) -> CodeExpressionCollection:
+        """
+
+        :return:
+        """
     @property
-    def Size(self) -> IntType: ...
+    def Size(self) -> int:
+        """
+
+        :return:
+        """
     @Size.setter
-    def Size(self, value: IntType) -> None: ...
+    def Size(self, value: int) -> None: ...
     @property
-    def SizeExpression(self) -> CodeExpression: ...
+    def SizeExpression(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @SizeExpression.setter
     def SizeExpression(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_CreateType(self) -> CodeTypeReference: ...
-    def get_Initializers(self) -> CodeExpressionCollection: ...
-    def get_Size(self) -> IntType: ...
-    def get_SizeExpression(self) -> CodeExpression: ...
-    def set_CreateType(self, value: CodeTypeReference) -> VoidType: ...
-    def set_Size(self, value: IntType) -> VoidType: ...
-    def set_SizeExpression(self, value: CodeExpression) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeArrayIndexerExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, targetObject: CodeExpression, indices: ArrayType[CodeExpression]): ...
+    def __init__(self, targetObject: CodeExpression, indices: Array[CodeExpression]):
+        """
 
-    # ---------- Properties ---------- #
+        :param targetObject:
+        :param indices:
+        """
+    @property
+    def Indices(self) -> CodeExpressionCollection:
+        """
 
+        :return:
+        """
     @property
-    def Indices(self) -> CodeExpressionCollection: ...
-    @property
-    def TargetObject(self) -> CodeExpression: ...
+    def TargetObject(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Indices(self) -> CodeExpressionCollection: ...
-    def get_TargetObject(self) -> CodeExpression: ...
-    def set_TargetObject(self, value: CodeExpression) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeAssignStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, left: CodeExpression, right: CodeExpression): ...
+    def __init__(self, left: CodeExpression, right: CodeExpression):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param left:
+        :param right:
+        """
     @property
-    def Left(self) -> CodeExpression: ...
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Left(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @Left.setter
     def Left(self, value: CodeExpression) -> None: ...
     @property
-    def Right(self) -> CodeExpression: ...
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Right(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @Right.setter
     def Right(self, value: CodeExpression) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    def get_Left(self) -> CodeExpression: ...
-    def get_Right(self) -> CodeExpression: ...
-    def set_Left(self, value: CodeExpression) -> VoidType: ...
-    def set_Right(self, value: CodeExpression) -> VoidType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeAttachEventStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, eventRef: CodeEventReferenceExpression, listener: CodeExpression): ...
+    def __init__(self, eventRef: CodeEventReferenceExpression, listener: CodeExpression):
+        """
+
+        :param eventRef:
+        :param listener:
+        """
     @overload
-    def __init__(
-        self, targetObject: CodeExpression, eventName: StringType, listener: CodeExpression
-    ): ...
+    def __init__(self, targetObject: CodeExpression, eventName: str, listener: CodeExpression):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param targetObject:
+        :param eventName:
+        :param listener:
+        """
     @property
-    def Event(self) -> CodeEventReferenceExpression: ...
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Event(self) -> CodeEventReferenceExpression:
+        """
+
+        :return:
+        """
     @Event.setter
     def Event(self, value: CodeEventReferenceExpression) -> None: ...
     @property
-    def Listener(self) -> CodeExpression: ...
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Listener(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @Listener.setter
     def Listener(self, value: CodeExpression) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Event(self) -> CodeEventReferenceExpression: ...
-    def get_Listener(self) -> CodeExpression: ...
-    def set_Event(self, value: CodeEventReferenceExpression) -> VoidType: ...
-    def set_Listener(self, value: CodeExpression) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeAttributeArgument(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CodeExpression): ...
-    @overload
-    def __init__(self, name: StringType, value: CodeExpression): ...
-
-    # ---------- Properties ---------- #
-
     @property
-    def Name(self) -> StringType: ...
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeAttributeArgument(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: CodeExpression):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, name: str, value: CodeExpression):
+        """
+
+        :param name:
+        :param value:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
     @property
-    def Value(self) -> CodeExpression: ...
+    def Value(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @Value.setter
     def Value(self, value: CodeExpression) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_Name(self) -> StringType: ...
-    def get_Value(self) -> CodeExpression: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_Value(self, value: CodeExpression) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeAttributeArgumentCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CodeAttributeArgumentCollection): ...
-    @overload
-    def __init__(self, value: ArrayType[CodeAttributeArgument]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> CodeAttributeArgument: ...
-    def __setitem__(self, key: IntType, value: CodeAttributeArgument) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, value: CodeAttributeArgument) -> IntType: ...
-    @overload
-    def AddRange(self, value: ArrayType[CodeAttributeArgument]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: CodeAttributeArgumentCollection) -> VoidType: ...
-    def Contains(self, value: CodeAttributeArgument) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeAttributeArgument], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeAttributeArgument) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeAttributeArgument) -> VoidType: ...
-    def Remove(self, value: CodeAttributeArgument) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeAttributeArgument: ...
-    def set_Item(self, index: IntType, value: CodeAttributeArgument) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeAttributeDeclaration(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class CodeAttributeArgumentCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, name: StringType): ...
-    @overload
-    def __init__(self, name: StringType, arguments: ArrayType[CodeAttributeArgument]): ...
-    @overload
-    def __init__(self, attributeType: CodeTypeReference): ...
-    @overload
-    def __init__(
-        self, attributeType: CodeTypeReference, arguments: ArrayType[CodeAttributeArgument]
-    ): ...
+    def __init__(self, value: CodeAttributeArgumentCollection):
+        """
 
-    # ---------- Properties ---------- #
+        :param value:
+        """
+    @overload
+    def __init__(self, value: Array[CodeAttributeArgument]):
+        """
 
+        :param value:
+        """
     @property
-    def Arguments(self) -> CodeAttributeArgumentCollection: ...
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
     @property
-    def AttributeType(self) -> CodeTypeReference: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CodeAttributeArgument) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeAttributeArgumentCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeAttributeArgument]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeAttributeArgument) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeAttributeArgument], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeAttributeArgument) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeAttributeArgument) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeAttributeArgument) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeAttributeArgument) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CodeAttributeDeclaration(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, attributeType: CodeTypeReference):
+        """
+
+        :param attributeType:
+        """
+    @overload
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
+    @overload
+    def __init__(self, attributeType: CodeTypeReference, arguments: Array[CodeAttributeArgument]):
+        """
+
+        :param attributeType:
+        :param arguments:
+        """
+    @overload
+    def __init__(self, name: str, arguments: Array[CodeAttributeArgument]):
+        """
+
+        :param name:
+        :param arguments:
+        """
+    @property
+    def Arguments(self) -> CodeAttributeArgumentCollection:
+        """
+
+        :return:
+        """
+    @property
+    def AttributeType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_Arguments(self) -> CodeAttributeArgumentCollection: ...
-    def get_AttributeType(self) -> CodeTypeReference: ...
-    def get_Name(self) -> StringType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeAttributeDeclarationCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class CodeAttributeDeclarationCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, value: CodeAttributeDeclarationCollection): ...
+    def __init__(self, value: CodeAttributeDeclarationCollection):
+        """
+
+        :param value:
+        """
     @overload
-    def __init__(self, value: ArrayType[CodeAttributeDeclaration]): ...
+    def __init__(self, value: Array[CodeAttributeDeclaration]):
+        """
 
-    # ---------- Properties ---------- #
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
 
-    def __getitem__(self, key: IntType) -> CodeAttributeDeclaration: ...
-    def __setitem__(self, key: IntType, value: CodeAttributeDeclaration) -> None: ...
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    def Add(self, value: CodeAttributeDeclaration) -> IntType: ...
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
     @overload
-    def AddRange(self, value: ArrayType[CodeAttributeDeclaration]) -> VoidType: ...
+    def Add(self, value: CodeAttributeDeclaration) -> int:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def AddRange(self, value: CodeAttributeDeclarationCollection) -> VoidType: ...
-    def Contains(self, value: CodeAttributeDeclaration) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeAttributeDeclaration], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeAttributeDeclaration) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeAttributeDeclaration) -> VoidType: ...
-    def Remove(self, value: CodeAttributeDeclaration) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeAttributeDeclaration: ...
-    def set_Item(self, index: IntType, value: CodeAttributeDeclaration) -> VoidType: ...
+    def Add(self, value: object) -> int:
+        """
 
-    # No Events
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeAttributeDeclarationCollection) -> None:
+        """
 
-    # No Sub Classes
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeAttributeDeclaration]) -> None:
+        """
 
-    # No Sub Structs
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeAttributeDeclaration) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeAttributeDeclaration], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeAttributeDeclaration) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeAttributeDeclaration) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeAttributeDeclaration) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeAttributeDeclaration) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class CodeBaseReferenceExpression(CodeExpression):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeBinaryOperatorExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, left: CodeExpression, op: CodeBinaryOperatorType, right: CodeExpression): ...
+    def __init__(self, left: CodeExpression, op: CodeBinaryOperatorType, right: CodeExpression):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param left:
+        :param op:
+        :param right:
+        """
     @property
-    def Left(self) -> CodeExpression: ...
+    def Left(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @Left.setter
     def Left(self, value: CodeExpression) -> None: ...
     @property
-    def Operator(self) -> CodeBinaryOperatorType: ...
+    def Operator(self) -> CodeBinaryOperatorType:
+        """
+
+        :return:
+        """
     @Operator.setter
     def Operator(self, value: CodeBinaryOperatorType) -> None: ...
     @property
-    def Right(self) -> CodeExpression: ...
+    def Right(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @Right.setter
     def Right(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Left(self) -> CodeExpression: ...
-    def get_Operator(self) -> CodeBinaryOperatorType: ...
-    def get_Right(self) -> CodeExpression: ...
-    def set_Left(self, value: CodeExpression) -> VoidType: ...
-    def set_Operator(self, value: CodeBinaryOperatorType) -> VoidType: ...
-    def set_Right(self, value: CodeExpression) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class CodeBinaryOperatorType(Enum):
+    """"""
 
-    # No Sub Enums
+    Add: CodeBinaryOperatorType = ...
+    """"""
+    Subtract: CodeBinaryOperatorType = ...
+    """"""
+    Multiply: CodeBinaryOperatorType = ...
+    """"""
+    Divide: CodeBinaryOperatorType = ...
+    """"""
+    Modulus: CodeBinaryOperatorType = ...
+    """"""
+    Assign: CodeBinaryOperatorType = ...
+    """"""
+    IdentityInequality: CodeBinaryOperatorType = ...
+    """"""
+    IdentityEquality: CodeBinaryOperatorType = ...
+    """"""
+    ValueEquality: CodeBinaryOperatorType = ...
+    """"""
+    BitwiseOr: CodeBinaryOperatorType = ...
+    """"""
+    BitwiseAnd: CodeBinaryOperatorType = ...
+    """"""
+    BooleanOr: CodeBinaryOperatorType = ...
+    """"""
+    BooleanAnd: CodeBinaryOperatorType = ...
+    """"""
+    LessThan: CodeBinaryOperatorType = ...
+    """"""
+    LessThanOrEqual: CodeBinaryOperatorType = ...
+    """"""
+    GreaterThan: CodeBinaryOperatorType = ...
+    """"""
+    GreaterThanOrEqual: CodeBinaryOperatorType = ...
+    """"""
 
 class CodeCastExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, targetType: CodeTypeReference, expression: CodeExpression): ...
-    @overload
-    def __init__(self, targetType: StringType, expression: CodeExpression): ...
-    @overload
-    def __init__(self, targetType: TypeType, expression: CodeExpression): ...
+    def __init__(self, targetType: CodeTypeReference, expression: CodeExpression):
+        """
 
-    # ---------- Properties ---------- #
+        :param targetType:
+        :param expression:
+        """
+    @overload
+    def __init__(self, targetType: str, expression: CodeExpression):
+        """
 
+        :param targetType:
+        :param expression:
+        """
+    @overload
+    def __init__(self, targetType: Type, expression: CodeExpression):
+        """
+
+        :param targetType:
+        :param expression:
+        """
     @property
-    def Expression(self) -> CodeExpression: ...
+    def Expression(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @Expression.setter
     def Expression(self, value: CodeExpression) -> None: ...
     @property
-    def TargetType(self) -> CodeTypeReference: ...
+    def TargetType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
     @TargetType.setter
     def TargetType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Expression(self) -> CodeExpression: ...
-    def get_TargetType(self) -> CodeTypeReference: ...
-    def set_Expression(self, value: CodeExpression) -> VoidType: ...
-    def set_TargetType(self, value: CodeTypeReference) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeCatchClause(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class CodeCatchClause(Object):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, localName: StringType): ...
+    def __init__(self, localName: str):
+        """
+
+        :param localName:
+        """
     @overload
-    def __init__(self, localName: StringType, catchExceptionType: CodeTypeReference): ...
+    def __init__(self, localName: str, catchExceptionType: CodeTypeReference):
+        """
+
+        :param localName:
+        :param catchExceptionType:
+        """
     @overload
     def __init__(
         self,
-        localName: StringType,
+        localName: str,
         catchExceptionType: CodeTypeReference,
-        statements: ArrayType[CodeStatement],
-    ): ...
+        statements: Array[CodeStatement],
+    ):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param localName:
+        :param catchExceptionType:
+        :param statements:
+        """
     @property
-    def CatchExceptionType(self) -> CodeTypeReference: ...
+    def CatchExceptionType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
     @CatchExceptionType.setter
     def CatchExceptionType(self, value: CodeTypeReference) -> None: ...
     @property
-    def LocalName(self) -> StringType: ...
+    def LocalName(self) -> str:
+        """
+
+        :return:
+        """
     @LocalName.setter
-    def LocalName(self, value: StringType) -> None: ...
+    def LocalName(self, value: str) -> None: ...
     @property
-    def Statements(self) -> CodeStatementCollection: ...
+    def Statements(self) -> CodeStatementCollection:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_CatchExceptionType(self) -> CodeTypeReference: ...
-    def get_LocalName(self) -> StringType: ...
-    def get_Statements(self) -> CodeStatementCollection: ...
-    def set_CatchExceptionType(self, value: CodeTypeReference) -> VoidType: ...
-    def set_LocalName(self, value: StringType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeCatchClauseCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class CodeCatchClauseCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, value: CodeCatchClauseCollection): ...
+    def __init__(self, value: CodeCatchClauseCollection):
+        """
+
+        :param value:
+        """
     @overload
-    def __init__(self, value: ArrayType[CodeCatchClause]): ...
+    def __init__(self, value: Array[CodeCatchClause]):
+        """
 
-    # ---------- Properties ---------- #
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
 
-    def __getitem__(self, key: IntType) -> CodeCatchClause: ...
-    def __setitem__(self, key: IntType, value: CodeCatchClause) -> None: ...
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    def Add(self, value: CodeCatchClause) -> IntType: ...
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
     @overload
-    def AddRange(self, value: ArrayType[CodeCatchClause]) -> VoidType: ...
+    def Add(self, value: CodeCatchClause) -> int:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def AddRange(self, value: CodeCatchClauseCollection) -> VoidType: ...
-    def Contains(self, value: CodeCatchClause) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeCatchClause], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeCatchClause) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeCatchClause) -> VoidType: ...
-    def Remove(self, value: CodeCatchClause) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeCatchClause: ...
-    def set_Item(self, index: IntType, value: CodeCatchClause) -> VoidType: ...
+    def Add(self, value: object) -> int:
+        """
 
-    # No Events
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeCatchClauseCollection) -> None:
+        """
 
-    # No Sub Classes
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeCatchClause]) -> None:
+        """
 
-    # No Sub Structs
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeCatchClause) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeCatchClause], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeCatchClause) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeCatchClause) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeCatchClause) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeCatchClause) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class CodeChecksumPragma(CodeDirective):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(
-        self, fileName: StringType, checksumAlgorithmId: Guid, checksumData: ArrayType[ByteType]
-    ): ...
+    def __init__(self, fileName: str, checksumAlgorithmId: Guid, checksumData: Array[int]):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param fileName:
+        :param checksumAlgorithmId:
+        :param checksumData:
+        """
     @property
-    def ChecksumAlgorithmId(self) -> Guid: ...
+    def ChecksumAlgorithmId(self) -> Guid:
+        """
+
+        :return:
+        """
     @ChecksumAlgorithmId.setter
     def ChecksumAlgorithmId(self, value: Guid) -> None: ...
     @property
-    def ChecksumData(self) -> ArrayType[ByteType]: ...
+    def ChecksumData(self) -> Array[int]:
+        """
+
+        :return:
+        """
     @ChecksumData.setter
-    def ChecksumData(self, value: ArrayType[ByteType]) -> None: ...
+    def ChecksumData(self, value: Array[int]) -> None: ...
     @property
-    def FileName(self) -> StringType: ...
+    def FileName(self) -> str:
+        """
+
+        :return:
+        """
     @FileName.setter
-    def FileName(self, value: StringType) -> None: ...
+    def FileName(self, value: str) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_ChecksumAlgorithmId(self) -> Guid: ...
-    def get_ChecksumData(self) -> ArrayType[ByteType]: ...
-    def get_FileName(self) -> StringType: ...
-    def set_ChecksumAlgorithmId(self, value: Guid) -> VoidType: ...
-    def set_ChecksumData(self, value: ArrayType[ByteType]) -> VoidType: ...
-    def set_FileName(self, value: StringType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeComment(CodeObject):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, text: StringType): ...
+    def __init__(self, text: str):
+        """
+
+        :param text:
+        """
     @overload
-    def __init__(self, text: StringType, docComment: BooleanType): ...
+    def __init__(self, text: str, docComment: bool):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param text:
+        :param docComment:
+        """
     @property
-    def DocComment(self) -> BooleanType: ...
+    def DocComment(self) -> bool:
+        """
+
+        :return:
+        """
     @DocComment.setter
-    def DocComment(self, value: BooleanType) -> None: ...
+    def DocComment(self, value: bool) -> None: ...
     @property
-    def Text(self) -> StringType: ...
+    def Text(self) -> str:
+        """
+
+        :return:
+        """
     @Text.setter
-    def Text(self, value: StringType) -> None: ...
+    def Text(self, value: str) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_DocComment(self) -> BooleanType: ...
-    def get_Text(self) -> StringType: ...
-    def set_DocComment(self, value: BooleanType) -> VoidType: ...
-    def set_Text(self, value: StringType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeCommentStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, comment: CodeComment): ...
-    @overload
-    def __init__(self, text: StringType): ...
-    @overload
-    def __init__(self, text: StringType, docComment: BooleanType): ...
+    def __init__(self, comment: CodeComment):
+        """
 
-    # ---------- Properties ---------- #
+        :param comment:
+        """
+    @overload
+    def __init__(self, text: str):
+        """
 
+        :param text:
+        """
+    @overload
+    def __init__(self, text: str, docComment: bool):
+        """
+
+        :param text:
+        :param docComment:
+        """
     @property
-    def Comment(self) -> CodeComment: ...
+    def Comment(self) -> CodeComment:
+        """
+
+        :return:
+        """
     @Comment.setter
     def Comment(self, value: CodeComment) -> None: ...
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
 
-    def get_Comment(self) -> CodeComment: ...
-    def set_Comment(self, value: CodeComment) -> VoidType: ...
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-class CodeCommentStatementCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
+        :return:
+        """
 
-    # ---------- Constructors ---------- #
+class CodeCommentStatementCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, value: CodeCommentStatementCollection): ...
+    def __init__(self, value: CodeCommentStatementCollection):
+        """
+
+        :param value:
+        """
     @overload
-    def __init__(self, value: ArrayType[CodeCommentStatement]): ...
+    def __init__(self, value: Array[CodeCommentStatement]):
+        """
 
-    # ---------- Properties ---------- #
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
 
-    def __getitem__(self, key: IntType) -> CodeCommentStatement: ...
-    def __setitem__(self, key: IntType, value: CodeCommentStatement) -> None: ...
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    def Add(self, value: CodeCommentStatement) -> IntType: ...
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
     @overload
-    def AddRange(self, value: ArrayType[CodeCommentStatement]) -> VoidType: ...
+    def Add(self, value: CodeCommentStatement) -> int:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def AddRange(self, value: CodeCommentStatementCollection) -> VoidType: ...
-    def Contains(self, value: CodeCommentStatement) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeCommentStatement], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeCommentStatement) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeCommentStatement) -> VoidType: ...
-    def Remove(self, value: CodeCommentStatement) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeCommentStatement: ...
-    def set_Item(self, index: IntType, value: CodeCommentStatement) -> VoidType: ...
+    def Add(self, value: object) -> int:
+        """
 
-    # No Events
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeCommentStatementCollection) -> None:
+        """
 
-    # No Sub Classes
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeCommentStatement]) -> None:
+        """
 
-    # No Sub Structs
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeCommentStatement) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeCommentStatement], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeCommentStatement) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeCommentStatement) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeCommentStatement) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeCommentStatement) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class CodeCompileUnit(CodeObject):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def AssemblyCustomAttributes(self) -> CodeAttributeDeclarationCollection: ...
+    def AssemblyCustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
     @property
-    def EndDirectives(self) -> CodeDirectiveCollection: ...
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
     @property
-    def Namespaces(self) -> CodeNamespaceCollection: ...
+    def Namespaces(self) -> CodeNamespaceCollection:
+        """
+
+        :return:
+        """
     @property
-    def ReferencedAssemblies(self) -> StringCollection: ...
+    def ReferencedAssemblies(self) -> StringCollection:
+        """
+
+        :return:
+        """
     @property
-    def StartDirectives(self) -> CodeDirectiveCollection: ...
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    def get_AssemblyCustomAttributes(self) -> CodeAttributeDeclarationCollection: ...
-    def get_EndDirectives(self) -> CodeDirectiveCollection: ...
-    def get_Namespaces(self) -> CodeNamespaceCollection: ...
-    def get_ReferencedAssemblies(self) -> StringCollection: ...
-    def get_StartDirectives(self) -> CodeDirectiveCollection: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeConditionStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, condition: CodeExpression, trueStatements: ArrayType[CodeStatement]): ...
+    def __init__(self, condition: CodeExpression, trueStatements: Array[CodeStatement]):
+        """
+
+        :param condition:
+        :param trueStatements:
+        """
     @overload
     def __init__(
         self,
         condition: CodeExpression,
-        trueStatements: ArrayType[CodeStatement],
-        falseStatements: ArrayType[CodeStatement],
-    ): ...
+        trueStatements: Array[CodeStatement],
+        falseStatements: Array[CodeStatement],
+    ):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param condition:
+        :param trueStatements:
+        :param falseStatements:
+        """
     @property
-    def Condition(self) -> CodeExpression: ...
+    def Condition(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @Condition.setter
     def Condition(self, value: CodeExpression) -> None: ...
     @property
-    def FalseStatements(self) -> CodeStatementCollection: ...
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
     @property
-    def TrueStatements(self) -> CodeStatementCollection: ...
+    def FalseStatements(self) -> CodeStatementCollection:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
 
-    def get_Condition(self) -> CodeExpression: ...
-    def get_FalseStatements(self) -> CodeStatementCollection: ...
-    def get_TrueStatements(self) -> CodeStatementCollection: ...
-    def set_Condition(self, value: CodeExpression) -> VoidType: ...
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def TrueStatements(self) -> CodeStatementCollection:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class CodeConstructor(CodeMemberMethod):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def BaseConstructorArgs(self) -> CodeExpressionCollection: ...
+    def Attributes(self) -> MemberAttributes:
+        """
+
+        :return:
+        """
+    @Attributes.setter
+    def Attributes(self, value: MemberAttributes) -> None: ...
     @property
-    def ChainedConstructorArgs(self) -> CodeExpressionCollection: ...
+    def BaseConstructorArgs(self) -> CodeExpressionCollection:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def ChainedConstructorArgs(self) -> CodeExpressionCollection:
+        """
 
-    def get_BaseConstructorArgs(self) -> CodeExpressionCollection: ...
-    def get_ChainedConstructorArgs(self) -> CodeExpressionCollection: ...
+        :return:
+        """
+    @property
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def ImplementationTypes(self) -> CodeTypeReferenceCollection:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
+        """
+
+        :return:
+        """
+    @property
+    def PrivateImplementationType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @PrivateImplementationType.setter
+    def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def ReturnType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @ReturnType.setter
+    def ReturnType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def ReturnTypeCustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Statements(self) -> CodeStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def TypeParameters(self) -> CodeTypeParameterCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    PopulateImplementationTypes: EventType[EventHandler] = ...
+    """"""
+    PopulateParameters: EventType[EventHandler] = ...
+    """"""
+    PopulateStatements: EventType[EventHandler] = ...
+    """"""
 
 class CodeDefaultValueExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, type: CodeTypeReference): ...
+    def __init__(self, type: CodeTypeReference):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param type:
+        """
     @property
-    def Type(self) -> CodeTypeReference: ...
+    def Type(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Type(self) -> CodeTypeReference: ...
-    def set_Type(self, value: CodeTypeReference) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeDelegateCreateExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
     def __init__(
-        self, delegateType: CodeTypeReference, targetObject: CodeExpression, methodName: StringType
-    ): ...
+        self, delegateType: CodeTypeReference, targetObject: CodeExpression, methodName: str
+    ):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param delegateType:
+        :param targetObject:
+        :param methodName:
+        """
     @property
-    def DelegateType(self) -> CodeTypeReference: ...
+    def DelegateType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
     @DelegateType.setter
     def DelegateType(self, value: CodeTypeReference) -> None: ...
     @property
-    def MethodName(self) -> StringType: ...
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
     @MethodName.setter
-    def MethodName(self, value: StringType) -> None: ...
+    def MethodName(self, value: str) -> None: ...
     @property
-    def TargetObject(self) -> CodeExpression: ...
+    def TargetObject(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_DelegateType(self) -> CodeTypeReference: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_TargetObject(self) -> CodeExpression: ...
-    def set_DelegateType(self, value: CodeTypeReference) -> VoidType: ...
-    def set_MethodName(self, value: StringType) -> VoidType: ...
-    def set_TargetObject(self, value: CodeExpression) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeDelegateInvokeExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, targetObject: CodeExpression): ...
+    def __init__(self, targetObject: CodeExpression):
+        """
+
+        :param targetObject:
+        """
     @overload
-    def __init__(self, targetObject: CodeExpression, parameters: ArrayType[CodeExpression]): ...
+    def __init__(self, targetObject: CodeExpression, parameters: Array[CodeExpression]):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param targetObject:
+        :param parameters:
+        """
     @property
-    def Parameters(self) -> CodeExpressionCollection: ...
+    def Parameters(self) -> CodeExpressionCollection:
+        """
+
+        :return:
+        """
     @property
-    def TargetObject(self) -> CodeExpression: ...
+    def TargetObject(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Parameters(self) -> CodeExpressionCollection: ...
-    def get_TargetObject(self) -> CodeExpression: ...
-    def set_TargetObject(self, value: CodeExpression) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeDirectionExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, direction: FieldDirection, expression: CodeExpression): ...
+    def __init__(self, direction: FieldDirection, expression: CodeExpression):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param direction:
+        :param expression:
+        """
     @property
-    def Direction(self) -> FieldDirection: ...
+    def Direction(self) -> FieldDirection:
+        """
+
+        :return:
+        """
     @Direction.setter
     def Direction(self, value: FieldDirection) -> None: ...
     @property
-    def Expression(self) -> CodeExpression: ...
+    def Expression(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @Expression.setter
     def Expression(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Direction(self) -> FieldDirection: ...
-    def get_Expression(self) -> CodeExpression: ...
-    def set_Direction(self, value: FieldDirection) -> VoidType: ...
-    def set_Expression(self, value: CodeExpression) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeDirective(CodeObject):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeDirectiveCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class CodeDirectiveCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, value: CodeDirectiveCollection): ...
+    def __init__(self, value: CodeDirectiveCollection):
+        """
+
+        :param value:
+        """
     @overload
-    def __init__(self, value: ArrayType[CodeDirective]): ...
+    def __init__(self, value: Array[CodeDirective]):
+        """
 
-    # ---------- Properties ---------- #
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
 
-    def __getitem__(self, key: IntType) -> CodeDirective: ...
-    def __setitem__(self, key: IntType, value: CodeDirective) -> None: ...
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    def Add(self, value: CodeDirective) -> IntType: ...
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
     @overload
-    def AddRange(self, value: ArrayType[CodeDirective]) -> VoidType: ...
+    def Add(self, value: CodeDirective) -> int:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def AddRange(self, value: CodeDirectiveCollection) -> VoidType: ...
-    def Contains(self, value: CodeDirective) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeDirective], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeDirective) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeDirective) -> VoidType: ...
-    def Remove(self, value: CodeDirective) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeDirective: ...
-    def set_Item(self, index: IntType, value: CodeDirective) -> VoidType: ...
+    def Add(self, value: object) -> int:
+        """
 
-    # No Events
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeDirectiveCollection) -> None:
+        """
 
-    # No Sub Classes
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeDirective]) -> None:
+        """
 
-    # No Sub Structs
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeDirective) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeDirective], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeDirective) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeDirective) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeDirective) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeDirective) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class CodeEntryPointMethod(CodeMemberMethod):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def Attributes(self) -> MemberAttributes:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @Attributes.setter
+    def Attributes(self, value: MemberAttributes) -> None: ...
+    @property
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
 
-    # No Methods
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def ImplementationTypes(self) -> CodeTypeReferenceCollection:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def PrivateImplementationType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @PrivateImplementationType.setter
+    def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def ReturnType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @ReturnType.setter
+    def ReturnType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def ReturnTypeCustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Statements(self) -> CodeStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def TypeParameters(self) -> CodeTypeParameterCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    PopulateImplementationTypes: EventType[EventHandler] = ...
+    """"""
+    PopulateParameters: EventType[EventHandler] = ...
+    """"""
+    PopulateStatements: EventType[EventHandler] = ...
+    """"""
 
 class CodeEventReferenceExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, targetObject: CodeExpression, eventName: StringType): ...
+    def __init__(self, targetObject: CodeExpression, eventName: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param targetObject:
+        :param eventName:
+        """
     @property
-    def EventName(self) -> StringType: ...
+    def EventName(self) -> str:
+        """
+
+        :return:
+        """
     @EventName.setter
-    def EventName(self, value: StringType) -> None: ...
+    def EventName(self, value: str) -> None: ...
     @property
-    def TargetObject(self) -> CodeExpression: ...
+    def TargetObject(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_EventName(self) -> StringType: ...
-    def get_TargetObject(self) -> CodeExpression: ...
-    def set_EventName(self, value: StringType) -> VoidType: ...
-    def set_TargetObject(self, value: CodeExpression) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeExpression(CodeObject):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeExpressionCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class CodeExpressionCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, value: CodeExpressionCollection): ...
+    def __init__(self, value: CodeExpressionCollection):
+        """
+
+        :param value:
+        """
     @overload
-    def __init__(self, value: ArrayType[CodeExpression]): ...
+    def __init__(self, value: Array[CodeExpression]):
+        """
 
-    # ---------- Properties ---------- #
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
 
-    def __getitem__(self, key: IntType) -> CodeExpression: ...
-    def __setitem__(self, key: IntType, value: CodeExpression) -> None: ...
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    def Add(self, value: CodeExpression) -> IntType: ...
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
     @overload
-    def AddRange(self, value: ArrayType[CodeExpression]) -> VoidType: ...
+    def Add(self, value: CodeExpression) -> int:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def AddRange(self, value: CodeExpressionCollection) -> VoidType: ...
-    def Contains(self, value: CodeExpression) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeExpression], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeExpression) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeExpression) -> VoidType: ...
-    def Remove(self, value: CodeExpression) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeExpression: ...
-    def set_Item(self, index: IntType, value: CodeExpression) -> VoidType: ...
+    def Add(self, value: object) -> int:
+        """
 
-    # No Events
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeExpressionCollection) -> None:
+        """
 
-    # No Sub Classes
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeExpression]) -> None:
+        """
 
-    # No Sub Structs
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeExpression) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeExpression], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeExpression) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeExpression) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeExpression) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeExpression) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class CodeExpressionStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, expression: CodeExpression): ...
+    def __init__(self, expression: CodeExpression):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param expression:
+        """
     @property
-    def Expression(self) -> CodeExpression: ...
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Expression(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @Expression.setter
     def Expression(self, value: CodeExpression) -> None: ...
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
 
-    def get_Expression(self) -> CodeExpression: ...
-    def set_Expression(self, value: CodeExpression) -> VoidType: ...
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class CodeFieldReferenceExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, targetObject: CodeExpression, fieldName: StringType): ...
+    def __init__(self, targetObject: CodeExpression, fieldName: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param targetObject:
+        :param fieldName:
+        """
     @property
-    def FieldName(self) -> StringType: ...
+    def FieldName(self) -> str:
+        """
+
+        :return:
+        """
     @FieldName.setter
-    def FieldName(self, value: StringType) -> None: ...
+    def FieldName(self, value: str) -> None: ...
     @property
-    def TargetObject(self) -> CodeExpression: ...
+    def TargetObject(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_FieldName(self) -> StringType: ...
-    def get_TargetObject(self) -> CodeExpression: ...
-    def set_FieldName(self, value: StringType) -> VoidType: ...
-    def set_TargetObject(self, value: CodeExpression) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeGotoStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, label: StringType): ...
+    def __init__(self, label: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param label:
+        """
     @property
-    def Label(self) -> StringType: ...
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Label(self) -> str:
+        """
+
+        :return:
+        """
     @Label.setter
-    def Label(self, value: StringType) -> None: ...
+    def Label(self, value: str) -> None: ...
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
 
-    def get_Label(self) -> StringType: ...
-    def set_Label(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class CodeIndexerExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, targetObject: CodeExpression, indices: ArrayType[CodeExpression]): ...
+    def __init__(self, targetObject: CodeExpression, indices: Array[CodeExpression]):
+        """
 
-    # ---------- Properties ---------- #
+        :param targetObject:
+        :param indices:
+        """
+    @property
+    def Indices(self) -> CodeExpressionCollection:
+        """
 
+        :return:
+        """
     @property
-    def Indices(self) -> CodeExpressionCollection: ...
-    @property
-    def TargetObject(self) -> CodeExpression: ...
+    def TargetObject(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @TargetObject.setter
     def TargetObject(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Indices(self) -> CodeExpressionCollection: ...
-    def get_TargetObject(self) -> CodeExpression: ...
-    def set_TargetObject(self, value: CodeExpression) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeIterationStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
     def __init__(
         self,
         initStatement: CodeStatement,
         testExpression: CodeExpression,
         incrementStatement: CodeStatement,
-        statements: ArrayType[CodeStatement],
-    ): ...
+        statements: Array[CodeStatement],
+    ):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param initStatement:
+        :param testExpression:
+        :param incrementStatement:
+        :param statements:
+        """
     @property
-    def IncrementStatement(self) -> CodeStatement: ...
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def IncrementStatement(self) -> CodeStatement:
+        """
+
+        :return:
+        """
     @IncrementStatement.setter
     def IncrementStatement(self, value: CodeStatement) -> None: ...
     @property
-    def InitStatement(self) -> CodeStatement: ...
+    def InitStatement(self) -> CodeStatement:
+        """
+
+        :return:
+        """
     @InitStatement.setter
     def InitStatement(self, value: CodeStatement) -> None: ...
     @property
-    def Statements(self) -> CodeStatementCollection: ...
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
-    def TestExpression(self) -> CodeExpression: ...
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Statements(self) -> CodeStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def TestExpression(self) -> CodeExpression:
+        """
+
+        :return:
+        """
     @TestExpression.setter
     def TestExpression(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_IncrementStatement(self) -> CodeStatement: ...
-    def get_InitStatement(self) -> CodeStatement: ...
-    def get_Statements(self) -> CodeStatementCollection: ...
-    def get_TestExpression(self) -> CodeExpression: ...
-    def set_IncrementStatement(self, value: CodeStatement) -> VoidType: ...
-    def set_InitStatement(self, value: CodeStatement) -> VoidType: ...
-    def set_TestExpression(self, value: CodeExpression) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeLabeledStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, label: StringType): ...
+    def __init__(self, label: str):
+        """
+
+        :param label:
+        """
     @overload
-    def __init__(self, label: StringType, statement: CodeStatement): ...
+    def __init__(self, label: str, statement: CodeStatement):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param label:
+        :param statement:
+        """
     @property
-    def Label(self) -> StringType: ...
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Label(self) -> str:
+        """
+
+        :return:
+        """
     @Label.setter
-    def Label(self, value: StringType) -> None: ...
+    def Label(self, value: str) -> None: ...
     @property
-    def Statement(self) -> CodeStatement: ...
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Statement(self) -> CodeStatement:
+        """
+
+        :return:
+        """
     @Statement.setter
     def Statement(self, value: CodeStatement) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Label(self) -> StringType: ...
-    def get_Statement(self) -> CodeStatement: ...
-    def set_Label(self, value: StringType) -> VoidType: ...
-    def set_Statement(self, value: CodeStatement) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeLinePragma(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, fileName: StringType, lineNumber: IntType): ...
-
-    # ---------- Properties ---------- #
-
     @property
-    def FileName(self) -> StringType: ...
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeLinePragma(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, fileName: str, lineNumber: int):
+        """
+
+        :param fileName:
+        :param lineNumber:
+        """
+    @property
+    def FileName(self) -> str:
+        """
+
+        :return:
+        """
     @FileName.setter
-    def FileName(self, value: StringType) -> None: ...
+    def FileName(self, value: str) -> None: ...
     @property
-    def LineNumber(self) -> IntType: ...
+    def LineNumber(self) -> int:
+        """
+
+        :return:
+        """
     @LineNumber.setter
-    def LineNumber(self, value: IntType) -> None: ...
+    def LineNumber(self, value: int) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_FileName(self) -> StringType: ...
-    def get_LineNumber(self) -> IntType: ...
-    def set_FileName(self, value: StringType) -> VoidType: ...
-    def set_LineNumber(self, value: IntType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CodeMemberEvent(CodeTypeMember):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ImplementationTypes(self) -> CodeTypeReferenceCollection: ...
-    @property
-    def PrivateImplementationType(self) -> CodeTypeReference: ...
-    @PrivateImplementationType.setter
-    def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
-    @property
-    def Type(self) -> CodeTypeReference: ...
-    @Type.setter
-    def Type(self, value: CodeTypeReference) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_ImplementationTypes(self) -> CodeTypeReferenceCollection: ...
-    def get_PrivateImplementationType(self) -> CodeTypeReference: ...
-    def get_Type(self) -> CodeTypeReference: ...
-    def set_PrivateImplementationType(self, value: CodeTypeReference) -> VoidType: ...
-    def set_Type(self, value: CodeTypeReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeMemberField(CodeTypeMember):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, type: CodeTypeReference, name: StringType): ...
-    @overload
-    def __init__(self, type: StringType, name: StringType): ...
-    @overload
-    def __init__(self, type: TypeType, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def InitExpression(self) -> CodeExpression: ...
-    @InitExpression.setter
-    def InitExpression(self, value: CodeExpression) -> None: ...
-    @property
-    def Type(self) -> CodeTypeReference: ...
-    @Type.setter
-    def Type(self, value: CodeTypeReference) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_InitExpression(self) -> CodeExpression: ...
-    def get_Type(self) -> CodeTypeReference: ...
-    def set_InitExpression(self, value: CodeExpression) -> VoidType: ...
-    def set_Type(self, value: CodeTypeReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeMemberMethod(CodeTypeMember):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ImplementationTypes(self) -> CodeTypeReferenceCollection: ...
-    @property
-    def Parameters(self) -> CodeParameterDeclarationExpressionCollection: ...
-    @property
-    def PrivateImplementationType(self) -> CodeTypeReference: ...
-    @PrivateImplementationType.setter
-    def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
-    @property
-    def ReturnType(self) -> CodeTypeReference: ...
-    @ReturnType.setter
-    def ReturnType(self, value: CodeTypeReference) -> None: ...
-    @property
-    def ReturnTypeCustomAttributes(self) -> CodeAttributeDeclarationCollection: ...
-    @property
-    def Statements(self) -> CodeStatementCollection: ...
-    @property
-    def TypeParameters(self) -> CodeTypeParameterCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def add_PopulateImplementationTypes(self, value: EventHandler) -> VoidType: ...
-    def add_PopulateParameters(self, value: EventHandler) -> VoidType: ...
-    def add_PopulateStatements(self, value: EventHandler) -> VoidType: ...
-    def get_ImplementationTypes(self) -> CodeTypeReferenceCollection: ...
-    def get_Parameters(self) -> CodeParameterDeclarationExpressionCollection: ...
-    def get_PrivateImplementationType(self) -> CodeTypeReference: ...
-    def get_ReturnType(self) -> CodeTypeReference: ...
-    def get_ReturnTypeCustomAttributes(self) -> CodeAttributeDeclarationCollection: ...
-    def get_Statements(self) -> CodeStatementCollection: ...
-    def get_TypeParameters(self) -> CodeTypeParameterCollection: ...
-    def remove_PopulateImplementationTypes(self, value: EventHandler) -> VoidType: ...
-    def remove_PopulateParameters(self, value: EventHandler) -> VoidType: ...
-    def remove_PopulateStatements(self, value: EventHandler) -> VoidType: ...
-    def set_PrivateImplementationType(self, value: CodeTypeReference) -> VoidType: ...
-    def set_ReturnType(self, value: CodeTypeReference) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    PopulateImplementationTypes: EventType[EventHandler] = ...
-
-    PopulateParameters: EventType[EventHandler] = ...
-
-    PopulateStatements: EventType[EventHandler] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeMemberProperty(CodeTypeMember):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def GetStatements(self) -> CodeStatementCollection: ...
-    @property
-    def HasGet(self) -> BooleanType: ...
-    @HasGet.setter
-    def HasGet(self, value: BooleanType) -> None: ...
-    @property
-    def HasSet(self) -> BooleanType: ...
-    @HasSet.setter
-    def HasSet(self, value: BooleanType) -> None: ...
-    @property
-    def ImplementationTypes(self) -> CodeTypeReferenceCollection: ...
-    @property
-    def Parameters(self) -> CodeParameterDeclarationExpressionCollection: ...
-    @property
-    def PrivateImplementationType(self) -> CodeTypeReference: ...
-    @PrivateImplementationType.setter
-    def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
-    @property
-    def SetStatements(self) -> CodeStatementCollection: ...
-    @property
-    def Type(self) -> CodeTypeReference: ...
-    @Type.setter
-    def Type(self, value: CodeTypeReference) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_GetStatements(self) -> CodeStatementCollection: ...
-    def get_HasGet(self) -> BooleanType: ...
-    def get_HasSet(self) -> BooleanType: ...
-    def get_ImplementationTypes(self) -> CodeTypeReferenceCollection: ...
-    def get_Parameters(self) -> CodeParameterDeclarationExpressionCollection: ...
-    def get_PrivateImplementationType(self) -> CodeTypeReference: ...
-    def get_SetStatements(self) -> CodeStatementCollection: ...
-    def get_Type(self) -> CodeTypeReference: ...
-    def set_HasGet(self, value: BooleanType) -> VoidType: ...
-    def set_HasSet(self, value: BooleanType) -> VoidType: ...
-    def set_PrivateImplementationType(self, value: CodeTypeReference) -> VoidType: ...
-    def set_Type(self, value: CodeTypeReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeMethodInvokeExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(
-        self, method: CodeMethodReferenceExpression, parameters: ArrayType[CodeExpression]
-    ): ...
-    @overload
-    def __init__(
-        self,
-        targetObject: CodeExpression,
-        methodName: StringType,
-        parameters: ArrayType[CodeExpression],
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Method(self) -> CodeMethodReferenceExpression: ...
-    @Method.setter
-    def Method(self, value: CodeMethodReferenceExpression) -> None: ...
-    @property
-    def Parameters(self) -> CodeExpressionCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Method(self) -> CodeMethodReferenceExpression: ...
-    def get_Parameters(self) -> CodeExpressionCollection: ...
-    def set_Method(self, value: CodeMethodReferenceExpression) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeMethodReferenceExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, targetObject: CodeExpression, methodName: StringType): ...
-    @overload
-    def __init__(
-        self,
-        targetObject: CodeExpression,
-        methodName: StringType,
-        typeParameters: ArrayType[CodeTypeReference],
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def MethodName(self) -> StringType: ...
-    @MethodName.setter
-    def MethodName(self, value: StringType) -> None: ...
-    @property
-    def TargetObject(self) -> CodeExpression: ...
-    @TargetObject.setter
-    def TargetObject(self, value: CodeExpression) -> None: ...
-    @property
-    def TypeArguments(self) -> CodeTypeReferenceCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def get_MethodName(self) -> StringType: ...
-    def get_TargetObject(self) -> CodeExpression: ...
-    def get_TypeArguments(self) -> CodeTypeReferenceCollection: ...
-    def set_MethodName(self, value: StringType) -> VoidType: ...
-    def set_TargetObject(self, value: CodeExpression) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeMethodReturnStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, expression: CodeExpression): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Expression(self) -> CodeExpression: ...
-    @Expression.setter
-    def Expression(self, value: CodeExpression) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Expression(self) -> CodeExpression: ...
-    def set_Expression(self, value: CodeExpression) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeNamespace(CodeObject):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Comments(self) -> CodeCommentStatementCollection: ...
-    @property
-    def Imports(self) -> CodeNamespaceImportCollection: ...
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def Types(self) -> CodeTypeDeclarationCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def add_PopulateComments(self, value: EventHandler) -> VoidType: ...
-    def add_PopulateImports(self, value: EventHandler) -> VoidType: ...
-    def add_PopulateTypes(self, value: EventHandler) -> VoidType: ...
-    def get_Comments(self) -> CodeCommentStatementCollection: ...
-    def get_Imports(self) -> CodeNamespaceImportCollection: ...
-    def get_Name(self) -> StringType: ...
-    def get_Types(self) -> CodeTypeDeclarationCollection: ...
-    def remove_PopulateComments(self, value: EventHandler) -> VoidType: ...
-    def remove_PopulateImports(self, value: EventHandler) -> VoidType: ...
-    def remove_PopulateTypes(self, value: EventHandler) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    PopulateComments: EventType[EventHandler] = ...
-
-    PopulateImports: EventType[EventHandler] = ...
-
-    PopulateTypes: EventType[EventHandler] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeNamespaceCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CodeNamespaceCollection): ...
-    @overload
-    def __init__(self, value: ArrayType[CodeNamespace]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> CodeNamespace: ...
-    def __setitem__(self, key: IntType, value: CodeNamespace) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, value: CodeNamespace) -> IntType: ...
-    @overload
-    def AddRange(self, value: ArrayType[CodeNamespace]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: CodeNamespaceCollection) -> VoidType: ...
-    def Contains(self, value: CodeNamespace) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeNamespace], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeNamespace) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeNamespace) -> VoidType: ...
-    def Remove(self, value: CodeNamespace) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeNamespace: ...
-    def set_Item(self, index: IntType, value: CodeNamespace) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeNamespaceImport(CodeObject):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, nameSpace: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def LinePragma(self) -> CodeLinePragma: ...
-    @LinePragma.setter
-    def LinePragma(self, value: CodeLinePragma) -> None: ...
-    @property
-    def Namespace(self) -> StringType: ...
-    @Namespace.setter
-    def Namespace(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_LinePragma(self) -> CodeLinePragma: ...
-    def get_Namespace(self) -> StringType: ...
-    def set_LinePragma(self, value: CodeLinePragma) -> VoidType: ...
-    def set_Namespace(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeNamespaceImportCollection(ObjectType, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Count(self) -> IntType: ...
-    def __getitem__(self, key: IntType) -> CodeNamespaceImport: ...
-    def __setitem__(self, key: IntType, value: CodeNamespaceImport) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, value: CodeNamespaceImport) -> VoidType: ...
-    def AddRange(self, value: ArrayType[CodeNamespaceImport]) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator: ...
-    def get_Count(self) -> IntType: ...
-    def get_Item(self, index: IntType) -> CodeNamespaceImport: ...
-    def set_Item(self, index: IntType, value: CodeNamespaceImport) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeObject(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def UserData(self) -> IDictionary: ...
-
-    # ---------- Methods ---------- #
-
-    def get_UserData(self) -> IDictionary: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeObjectCreateExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, createType: CodeTypeReference, parameters: ArrayType[CodeExpression]): ...
-    @overload
-    def __init__(self, createType: StringType, parameters: ArrayType[CodeExpression]): ...
-    @overload
-    def __init__(self, createType: TypeType, parameters: ArrayType[CodeExpression]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CreateType(self) -> CodeTypeReference: ...
-    @CreateType.setter
-    def CreateType(self, value: CodeTypeReference) -> None: ...
-    @property
-    def Parameters(self) -> CodeExpressionCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CreateType(self) -> CodeTypeReference: ...
-    def get_Parameters(self) -> CodeExpressionCollection: ...
-    def set_CreateType(self, value: CodeTypeReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeParameterDeclarationExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, type: CodeTypeReference, name: StringType): ...
-    @overload
-    def __init__(self, type: StringType, name: StringType): ...
-    @overload
-    def __init__(self, type: TypeType, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CustomAttributes(self) -> CodeAttributeDeclarationCollection: ...
-    @CustomAttributes.setter
-    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
-    @property
-    def Direction(self) -> FieldDirection: ...
-    @Direction.setter
-    def Direction(self, value: FieldDirection) -> None: ...
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def Type(self) -> CodeTypeReference: ...
-    @Type.setter
-    def Type(self, value: CodeTypeReference) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CustomAttributes(self) -> CodeAttributeDeclarationCollection: ...
-    def get_Direction(self) -> FieldDirection: ...
-    def get_Name(self) -> StringType: ...
-    def get_Type(self) -> CodeTypeReference: ...
-    def set_CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> VoidType: ...
-    def set_Direction(self, value: FieldDirection) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_Type(self, value: CodeTypeReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeParameterDeclarationExpressionCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CodeParameterDeclarationExpressionCollection): ...
-    @overload
-    def __init__(self, value: ArrayType[CodeParameterDeclarationExpression]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> CodeParameterDeclarationExpression: ...
-    def __setitem__(self, key: IntType, value: CodeParameterDeclarationExpression) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, value: CodeParameterDeclarationExpression) -> IntType: ...
-    @overload
-    def AddRange(self, value: ArrayType[CodeParameterDeclarationExpression]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: CodeParameterDeclarationExpressionCollection) -> VoidType: ...
-    def Contains(self, value: CodeParameterDeclarationExpression) -> BooleanType: ...
-    def CopyTo(
-        self, array: ArrayType[CodeParameterDeclarationExpression], index: IntType
-    ) -> VoidType: ...
-    def IndexOf(self, value: CodeParameterDeclarationExpression) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeParameterDeclarationExpression) -> VoidType: ...
-    def Remove(self, value: CodeParameterDeclarationExpression) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeParameterDeclarationExpression: ...
-    def set_Item(self, index: IntType, value: CodeParameterDeclarationExpression) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodePrimitiveExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: ObjectType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> ObjectType: ...
-    @Value.setter
-    def Value(self, value: ObjectType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Value(self) -> ObjectType: ...
-    def set_Value(self, value: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodePropertyReferenceExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, targetObject: CodeExpression, propertyName: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def PropertyName(self) -> StringType: ...
-    @PropertyName.setter
-    def PropertyName(self, value: StringType) -> None: ...
-    @property
-    def TargetObject(self) -> CodeExpression: ...
-    @TargetObject.setter
-    def TargetObject(self, value: CodeExpression) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_PropertyName(self) -> StringType: ...
-    def get_TargetObject(self) -> CodeExpression: ...
-    def set_PropertyName(self, value: StringType) -> VoidType: ...
-    def set_TargetObject(self, value: CodeExpression) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodePropertySetValueReferenceExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeRegionDirective(CodeDirective):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, regionMode: CodeRegionMode, regionText: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def RegionMode(self) -> CodeRegionMode: ...
-    @RegionMode.setter
-    def RegionMode(self, value: CodeRegionMode) -> None: ...
-    @property
-    def RegionText(self) -> StringType: ...
-    @RegionText.setter
-    def RegionText(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_RegionMode(self) -> CodeRegionMode: ...
-    def get_RegionText(self) -> StringType: ...
-    def set_RegionMode(self, value: CodeRegionMode) -> VoidType: ...
-    def set_RegionText(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeRemoveEventStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, eventRef: CodeEventReferenceExpression, listener: CodeExpression): ...
-    @overload
-    def __init__(
-        self, targetObject: CodeExpression, eventName: StringType, listener: CodeExpression
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Event(self) -> CodeEventReferenceExpression: ...
-    @Event.setter
-    def Event(self, value: CodeEventReferenceExpression) -> None: ...
-    @property
-    def Listener(self) -> CodeExpression: ...
-    @Listener.setter
-    def Listener(self, value: CodeExpression) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Event(self) -> CodeEventReferenceExpression: ...
-    def get_Listener(self) -> CodeExpression: ...
-    def set_Event(self, value: CodeEventReferenceExpression) -> VoidType: ...
-    def set_Listener(self, value: CodeExpression) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeSnippetCompileUnit(CodeCompileUnit):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def LinePragma(self) -> CodeLinePragma: ...
-    @LinePragma.setter
-    def LinePragma(self, value: CodeLinePragma) -> None: ...
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_LinePragma(self) -> CodeLinePragma: ...
-    def get_Value(self) -> StringType: ...
-    def set_LinePragma(self, value: CodeLinePragma) -> VoidType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeSnippetExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Value(self) -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeSnippetStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Value(self) -> StringType: ...
-    @Value.setter
-    def Value(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Value(self) -> StringType: ...
-    def set_Value(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeSnippetTypeMember(CodeTypeMember):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, text: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Text(self) -> StringType: ...
-    @Text.setter
-    def Text(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Text(self) -> StringType: ...
-    def set_Text(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeStatement(CodeObject):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def EndDirectives(self) -> CodeDirectiveCollection: ...
-    @property
-    def LinePragma(self) -> CodeLinePragma: ...
-    @LinePragma.setter
-    def LinePragma(self, value: CodeLinePragma) -> None: ...
-    @property
-    def StartDirectives(self) -> CodeDirectiveCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def get_EndDirectives(self) -> CodeDirectiveCollection: ...
-    def get_LinePragma(self) -> CodeLinePragma: ...
-    def get_StartDirectives(self) -> CodeDirectiveCollection: ...
-    def set_LinePragma(self, value: CodeLinePragma) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeStatementCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CodeStatementCollection): ...
-    @overload
-    def __init__(self, value: ArrayType[CodeStatement]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> CodeStatement: ...
-    def __setitem__(self, key: IntType, value: CodeStatement) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Add(self, value: CodeStatement) -> IntType: ...
-    @overload
-    def Add(self, value: CodeExpression) -> IntType: ...
-    @overload
-    def AddRange(self, value: ArrayType[CodeStatement]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: CodeStatementCollection) -> VoidType: ...
-    def Contains(self, value: CodeStatement) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeStatement], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeStatement) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeStatement) -> VoidType: ...
-    def Remove(self, value: CodeStatement) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeStatement: ...
-    def set_Item(self, index: IntType, value: CodeStatement) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeThisReferenceExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeThrowExceptionStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, toThrow: CodeExpression): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ToThrow(self) -> CodeExpression: ...
-    @ToThrow.setter
-    def ToThrow(self, value: CodeExpression) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_ToThrow(self) -> CodeExpression: ...
-    def set_ToThrow(self, value: CodeExpression) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTryCatchFinallyStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(
-        self, tryStatements: ArrayType[CodeStatement], catchClauses: ArrayType[CodeCatchClause]
-    ): ...
-    @overload
-    def __init__(
-        self,
-        tryStatements: ArrayType[CodeStatement],
-        catchClauses: ArrayType[CodeCatchClause],
-        finallyStatements: ArrayType[CodeStatement],
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CatchClauses(self) -> CodeCatchClauseCollection: ...
-    @property
-    def FinallyStatements(self) -> CodeStatementCollection: ...
-    @property
-    def TryStatements(self) -> CodeStatementCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CatchClauses(self) -> CodeCatchClauseCollection: ...
-    def get_FinallyStatements(self) -> CodeStatementCollection: ...
-    def get_TryStatements(self) -> CodeStatementCollection: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeConstructor(CodeMemberMethod):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeDeclaration(CodeTypeMember):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def BaseTypes(self) -> CodeTypeReferenceCollection: ...
-    @property
-    def IsClass(self) -> BooleanType: ...
-    @IsClass.setter
-    def IsClass(self, value: BooleanType) -> None: ...
-    @property
-    def IsEnum(self) -> BooleanType: ...
-    @IsEnum.setter
-    def IsEnum(self, value: BooleanType) -> None: ...
-    @property
-    def IsInterface(self) -> BooleanType: ...
-    @IsInterface.setter
-    def IsInterface(self, value: BooleanType) -> None: ...
-    @property
-    def IsPartial(self) -> BooleanType: ...
-    @IsPartial.setter
-    def IsPartial(self, value: BooleanType) -> None: ...
-    @property
-    def IsStruct(self) -> BooleanType: ...
-    @IsStruct.setter
-    def IsStruct(self, value: BooleanType) -> None: ...
-    @property
-    def Members(self) -> CodeTypeMemberCollection: ...
-    @property
-    def TypeAttributes(self) -> TypeAttributes: ...
-    @TypeAttributes.setter
-    def TypeAttributes(self, value: TypeAttributes) -> None: ...
-    @property
-    def TypeParameters(self) -> CodeTypeParameterCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def add_PopulateBaseTypes(self, value: EventHandler) -> VoidType: ...
-    def add_PopulateMembers(self, value: EventHandler) -> VoidType: ...
-    def get_BaseTypes(self) -> CodeTypeReferenceCollection: ...
-    def get_IsClass(self) -> BooleanType: ...
-    def get_IsEnum(self) -> BooleanType: ...
-    def get_IsInterface(self) -> BooleanType: ...
-    def get_IsPartial(self) -> BooleanType: ...
-    def get_IsStruct(self) -> BooleanType: ...
-    def get_Members(self) -> CodeTypeMemberCollection: ...
-    def get_TypeAttributes(self) -> TypeAttributes: ...
-    def get_TypeParameters(self) -> CodeTypeParameterCollection: ...
-    def remove_PopulateBaseTypes(self, value: EventHandler) -> VoidType: ...
-    def remove_PopulateMembers(self, value: EventHandler) -> VoidType: ...
-    def set_IsClass(self, value: BooleanType) -> VoidType: ...
-    def set_IsEnum(self, value: BooleanType) -> VoidType: ...
-    def set_IsInterface(self, value: BooleanType) -> VoidType: ...
-    def set_IsPartial(self, value: BooleanType) -> VoidType: ...
-    def set_IsStruct(self, value: BooleanType) -> VoidType: ...
-    def set_TypeAttributes(self, value: TypeAttributes) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    PopulateBaseTypes: EventType[EventHandler] = ...
-
-    PopulateMembers: EventType[EventHandler] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeDeclarationCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CodeTypeDeclarationCollection): ...
-    @overload
-    def __init__(self, value: ArrayType[CodeTypeDeclaration]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> CodeTypeDeclaration: ...
-    def __setitem__(self, key: IntType, value: CodeTypeDeclaration) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, value: CodeTypeDeclaration) -> IntType: ...
-    @overload
-    def AddRange(self, value: ArrayType[CodeTypeDeclaration]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: CodeTypeDeclarationCollection) -> VoidType: ...
-    def Contains(self, value: CodeTypeDeclaration) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeTypeDeclaration], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeTypeDeclaration) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeTypeDeclaration) -> VoidType: ...
-    def Remove(self, value: CodeTypeDeclaration) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeTypeDeclaration: ...
-    def set_Item(self, index: IntType, value: CodeTypeDeclaration) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeDelegate(CodeTypeDeclaration):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Parameters(self) -> CodeParameterDeclarationExpressionCollection: ...
+    def __init__(self):
+        """"""
     @property
-    def ReturnType(self) -> CodeTypeReference: ...
-    @ReturnType.setter
-    def ReturnType(self, value: CodeTypeReference) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Parameters(self) -> CodeParameterDeclarationExpressionCollection: ...
-    def get_ReturnType(self) -> CodeTypeReference: ...
-    def set_ReturnType(self, value: CodeTypeReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
+    def Attributes(self) -> MemberAttributes:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeMember(CodeObject):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Attributes(self) -> MemberAttributes: ...
+        :return:
+        """
     @Attributes.setter
     def Attributes(self, value: MemberAttributes) -> None: ...
     @property
-    def Comments(self) -> CodeCommentStatementCollection: ...
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
+
+        :return:
+        """
     @property
-    def CustomAttributes(self) -> CodeAttributeDeclarationCollection: ...
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
     @CustomAttributes.setter
     def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
-    def EndDirectives(self) -> CodeDirectiveCollection: ...
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
     @property
-    def LinePragma(self) -> CodeLinePragma: ...
+    def ImplementationTypes(self) -> CodeTypeReferenceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
     @LinePragma.setter
     def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
     @property
-    def StartDirectives(self) -> CodeDirectiveCollection: ...
+    def PrivateImplementationType(self) -> CodeTypeReference:
+        """
 
-    # ---------- Methods ---------- #
-
-    def get_Attributes(self) -> MemberAttributes: ...
-    def get_Comments(self) -> CodeCommentStatementCollection: ...
-    def get_CustomAttributes(self) -> CodeAttributeDeclarationCollection: ...
-    def get_EndDirectives(self) -> CodeDirectiveCollection: ...
-    def get_LinePragma(self) -> CodeLinePragma: ...
-    def get_Name(self) -> StringType: ...
-    def get_StartDirectives(self) -> CodeDirectiveCollection: ...
-    def set_Attributes(self, value: MemberAttributes) -> VoidType: ...
-    def set_CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> VoidType: ...
-    def set_LinePragma(self, value: CodeLinePragma) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeMemberCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CodeTypeMemberCollection): ...
-    @overload
-    def __init__(self, value: ArrayType[CodeTypeMember]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> CodeTypeMember: ...
-    def __setitem__(self, key: IntType, value: CodeTypeMember) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, value: CodeTypeMember) -> IntType: ...
-    @overload
-    def AddRange(self, value: ArrayType[CodeTypeMember]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: CodeTypeMemberCollection) -> VoidType: ...
-    def Contains(self, value: CodeTypeMember) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeTypeMember], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeTypeMember) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeTypeMember) -> VoidType: ...
-    def Remove(self, value: CodeTypeMember) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeTypeMember: ...
-    def set_Item(self, index: IntType, value: CodeTypeMember) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeOfExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, type: CodeTypeReference): ...
-    @overload
-    def __init__(self, type: StringType): ...
-    @overload
-    def __init__(self, type: TypeType): ...
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
+    @PrivateImplementationType.setter
+    def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
     @property
-    def Type(self) -> CodeTypeReference: ...
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Type(self) -> CodeTypeReference: ...
-    def set_Type(self, value: CodeTypeReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeParameter(CodeObject):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
     @property
-    def Constraints(self) -> CodeTypeReferenceCollection: ...
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeMemberField(CodeTypeMember):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, type: CodeTypeReference, name: str):
+        """
+
+        :param type:
+        :param name:
+        """
+    @overload
+    def __init__(self, type: str, name: str):
+        """
+
+        :param type:
+        :param name:
+        """
+    @overload
+    def __init__(self, type: Type, name: str):
+        """
+
+        :param type:
+        :param name:
+        """
     @property
-    def CustomAttributes(self) -> CodeAttributeDeclarationCollection: ...
+    def Attributes(self) -> MemberAttributes:
+        """
+
+        :return:
+        """
+    @Attributes.setter
+    def Attributes(self, value: MemberAttributes) -> None: ...
     @property
-    def HasConstructorConstraint(self) -> BooleanType: ...
-    @HasConstructorConstraint.setter
-    def HasConstructorConstraint(self, value: BooleanType) -> None: ...
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
+
+        :return:
+        """
     @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
 
-    # ---------- Methods ---------- #
-
-    def get_Constraints(self) -> CodeTypeReferenceCollection: ...
-    def get_CustomAttributes(self) -> CodeAttributeDeclarationCollection: ...
-    def get_HasConstructorConstraint(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def set_HasConstructorConstraint(self, value: BooleanType) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeParameterCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CodeTypeParameterCollection): ...
-    @overload
-    def __init__(self, value: ArrayType[CodeTypeParameter]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> CodeTypeParameter: ...
-    def __setitem__(self, key: IntType, value: CodeTypeParameter) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Add(self, value: CodeTypeParameter) -> IntType: ...
-    @overload
-    def Add(self, value: StringType) -> VoidType: ...
-    @overload
-    def AddRange(self, value: ArrayType[CodeTypeParameter]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: CodeTypeParameterCollection) -> VoidType: ...
-    def Contains(self, value: CodeTypeParameter) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeTypeParameter], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeTypeParameter) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeTypeParameter) -> VoidType: ...
-    def Remove(self, value: CodeTypeParameter) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeTypeParameter: ...
-    def set_Item(self, index: IntType, value: CodeTypeParameter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeReference(CodeObject):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, type: TypeType): ...
-    @overload
-    def __init__(self, type: TypeType, codeTypeReferenceOption: CodeTypeReferenceOptions): ...
-    @overload
-    def __init__(self, typeName: StringType, codeTypeReferenceOption: CodeTypeReferenceOptions): ...
-    @overload
-    def __init__(self, typeName: StringType): ...
-    @overload
-    def __init__(self, typeName: StringType, typeArguments: ArrayType[CodeTypeReference]): ...
-    @overload
-    def __init__(self, typeParameter: CodeTypeParameter): ...
-    @overload
-    def __init__(self, baseType: StringType, rank: IntType): ...
-    @overload
-    def __init__(self, arrayType: CodeTypeReference, rank: IntType): ...
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
     @property
-    def ArrayElementType(self) -> CodeTypeReference: ...
-    @ArrayElementType.setter
-    def ArrayElementType(self, value: CodeTypeReference) -> None: ...
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
     @property
-    def ArrayRank(self) -> IntType: ...
-    @ArrayRank.setter
-    def ArrayRank(self, value: IntType) -> None: ...
-    @property
-    def BaseType(self) -> StringType: ...
-    @BaseType.setter
-    def BaseType(self, value: StringType) -> None: ...
-    @property
-    def Options(self) -> CodeTypeReferenceOptions: ...
-    @Options.setter
-    def Options(self, value: CodeTypeReferenceOptions) -> None: ...
-    @property
-    def TypeArguments(self) -> CodeTypeReferenceCollection: ...
+    def InitExpression(self) -> CodeExpression:
+        """
 
-    # ---------- Methods ---------- #
-
-    def get_ArrayElementType(self) -> CodeTypeReference: ...
-    def get_ArrayRank(self) -> IntType: ...
-    def get_BaseType(self) -> StringType: ...
-    def get_Options(self) -> CodeTypeReferenceOptions: ...
-    def get_TypeArguments(self) -> CodeTypeReferenceCollection: ...
-    def set_ArrayElementType(self, value: CodeTypeReference) -> VoidType: ...
-    def set_ArrayRank(self, value: IntType) -> VoidType: ...
-    def set_BaseType(self, value: StringType) -> VoidType: ...
-    def set_Options(self, value: CodeTypeReferenceOptions) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeReferenceCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CodeTypeReferenceCollection): ...
-    @overload
-    def __init__(self, value: ArrayType[CodeTypeReference]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> CodeTypeReference: ...
-    def __setitem__(self, key: IntType, value: CodeTypeReference) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Add(self, value: CodeTypeReference) -> IntType: ...
-    @overload
-    def Add(self, value: StringType) -> VoidType: ...
-    @overload
-    def Add(self, value: TypeType) -> VoidType: ...
-    @overload
-    def AddRange(self, value: ArrayType[CodeTypeReference]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: CodeTypeReferenceCollection) -> VoidType: ...
-    def Contains(self, value: CodeTypeReference) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CodeTypeReference], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CodeTypeReference) -> IntType: ...
-    def Insert(self, index: IntType, value: CodeTypeReference) -> VoidType: ...
-    def Remove(self, value: CodeTypeReference) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CodeTypeReference: ...
-    def set_Item(self, index: IntType, value: CodeTypeReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeTypeReferenceExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, type: CodeTypeReference): ...
-    @overload
-    def __init__(self, type: StringType): ...
-    @overload
-    def __init__(self, type: TypeType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Type(self) -> CodeTypeReference: ...
-    @Type.setter
-    def Type(self, value: CodeTypeReference) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Type(self) -> CodeTypeReference: ...
-    def set_Type(self, value: CodeTypeReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeVariableDeclarationStatement(CodeStatement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, type: CodeTypeReference, name: StringType): ...
-    @overload
-    def __init__(self, type: StringType, name: StringType): ...
-    @overload
-    def __init__(self, type: TypeType, name: StringType): ...
-    @overload
-    def __init__(
-        self, type: CodeTypeReference, name: StringType, initExpression: CodeExpression
-    ): ...
-    @overload
-    def __init__(self, type: StringType, name: StringType, initExpression: CodeExpression): ...
-    @overload
-    def __init__(self, type: TypeType, name: StringType, initExpression: CodeExpression): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def InitExpression(self) -> CodeExpression: ...
+        :return:
+        """
     @InitExpression.setter
     def InitExpression(self, value: CodeExpression) -> None: ...
     @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
     @property
-    def Type(self) -> CodeTypeReference: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
     @Type.setter
     def Type(self, value: CodeTypeReference) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_InitExpression(self) -> CodeExpression: ...
-    def get_Name(self) -> StringType: ...
-    def get_Type(self) -> CodeTypeReference: ...
-    def set_InitExpression(self, value: CodeExpression) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_Type(self, value: CodeTypeReference) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CodeVariableReferenceExpression(CodeExpression):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, variableName: StringType): ...
-
-    # ---------- Properties ---------- #
-
     @property
-    def VariableName(self) -> StringType: ...
-    @VariableName.setter
-    def VariableName(self, value: StringType) -> None: ...
+    def UserData(self) -> IDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_VariableName(self) -> StringType: ...
-    def set_VariableName(self, value: StringType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class CodeMemberMethod(CodeTypeMember):
+    """"""
 
-    # No Sub Enums
+    def __init__(self):
+        """"""
+    @property
+    def Attributes(self) -> MemberAttributes:
+        """
 
-# No Structs
+        :return:
+        """
+    @Attributes.setter
+    def Attributes(self, value: MemberAttributes) -> None: ...
+    @property
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
 
-# No Interfaces
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
 
-# ---------- Enums ---------- #
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
 
-class CodeBinaryOperatorType(Enum):
-    Add = 0
-    Subtract = 1
-    Multiply = 2
-    Divide = 3
-    Modulus = 4
-    Assign = 5
-    IdentityInequality = 6
-    IdentityEquality = 7
-    ValueEquality = 8
-    BitwiseOr = 9
-    BitwiseAnd = 10
-    BooleanOr = 11
-    BooleanAnd = 12
-    LessThan = 13
-    LessThanOrEqual = 14
-    GreaterThan = 15
-    GreaterThanOrEqual = 16
+        :return:
+        """
+    @property
+    def ImplementationTypes(self) -> CodeTypeReferenceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
+        """
+
+        :return:
+        """
+    @property
+    def PrivateImplementationType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @PrivateImplementationType.setter
+    def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def ReturnType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @ReturnType.setter
+    def ReturnType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def ReturnTypeCustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Statements(self) -> CodeStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def TypeParameters(self) -> CodeTypeParameterCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    PopulateImplementationTypes: EventType[EventHandler] = ...
+    """"""
+    PopulateParameters: EventType[EventHandler] = ...
+    """"""
+    PopulateStatements: EventType[EventHandler] = ...
+    """"""
+
+class CodeMemberProperty(CodeTypeMember):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Attributes(self) -> MemberAttributes:
+        """
+
+        :return:
+        """
+    @Attributes.setter
+    def Attributes(self, value: MemberAttributes) -> None: ...
+    @property
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def GetStatements(self) -> CodeStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def HasGet(self) -> bool:
+        """
+
+        :return:
+        """
+    @HasGet.setter
+    def HasGet(self, value: bool) -> None: ...
+    @property
+    def HasSet(self) -> bool:
+        """
+
+        :return:
+        """
+    @HasSet.setter
+    def HasSet(self, value: bool) -> None: ...
+    @property
+    def ImplementationTypes(self) -> CodeTypeReferenceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
+        """
+
+        :return:
+        """
+    @property
+    def PrivateImplementationType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @PrivateImplementationType.setter
+    def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def SetStatements(self) -> CodeStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @Type.setter
+    def Type(self, value: CodeTypeReference) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeMethodInvokeExpression(CodeExpression):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, method: CodeMethodReferenceExpression, parameters: Array[CodeExpression]):
+        """
+
+        :param method:
+        :param parameters:
+        """
+    @overload
+    def __init__(
+        self, targetObject: CodeExpression, methodName: str, parameters: Array[CodeExpression]
+    ):
+        """
+
+        :param targetObject:
+        :param methodName:
+        :param parameters:
+        """
+    @property
+    def Method(self) -> CodeMethodReferenceExpression:
+        """
+
+        :return:
+        """
+    @Method.setter
+    def Method(self, value: CodeMethodReferenceExpression) -> None: ...
+    @property
+    def Parameters(self) -> CodeExpressionCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeMethodReferenceExpression(CodeExpression):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, targetObject: CodeExpression, methodName: str):
+        """
+
+        :param targetObject:
+        :param methodName:
+        """
+    @overload
+    def __init__(
+        self,
+        targetObject: CodeExpression,
+        methodName: str,
+        typeParameters: Array[CodeTypeReference],
+    ):
+        """
+
+        :param targetObject:
+        :param methodName:
+        :param typeParameters:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @MethodName.setter
+    def MethodName(self, value: str) -> None: ...
+    @property
+    def TargetObject(self) -> CodeExpression:
+        """
+
+        :return:
+        """
+    @TargetObject.setter
+    def TargetObject(self, value: CodeExpression) -> None: ...
+    @property
+    def TypeArguments(self) -> CodeTypeReferenceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeMethodReturnStatement(CodeStatement):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, expression: CodeExpression):
+        """
+
+        :param expression:
+        """
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Expression(self) -> CodeExpression:
+        """
+
+        :return:
+        """
+    @Expression.setter
+    def Expression(self, value: CodeExpression) -> None: ...
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeNamespace(CodeObject):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
+    @property
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Imports(self) -> CodeNamespaceImportCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Types(self) -> CodeTypeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    PopulateComments: EventType[EventHandler] = ...
+    """"""
+    PopulateImports: EventType[EventHandler] = ...
+    """"""
+    PopulateTypes: EventType[EventHandler] = ...
+    """"""
+
+class CodeNamespaceCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: CodeNamespaceCollection):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: Array[CodeNamespace]):
+        """
+
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CodeNamespace) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeNamespaceCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeNamespace]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeNamespace) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeNamespace], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeNamespace) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeNamespace) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeNamespace) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeNamespace) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CodeNamespaceImport(CodeObject):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, nameSpace: str):
+        """
+
+        :param nameSpace:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Namespace(self) -> str:
+        """
+
+        :return:
+        """
+    @Namespace.setter
+    def Namespace(self, value: str) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeNamespaceImportCollection(Object, ICollection, IEnumerable, IList):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CodeNamespaceImport) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def AddRange(self, value: Array[CodeNamespaceImport]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeNamespaceImport) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CodeObject(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeObjectCreateExpression(CodeExpression):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, createType: CodeTypeReference, parameters: Array[CodeExpression]):
+        """
+
+        :param createType:
+        :param parameters:
+        """
+    @overload
+    def __init__(self, createType: str, parameters: Array[CodeExpression]):
+        """
+
+        :param createType:
+        :param parameters:
+        """
+    @overload
+    def __init__(self, createType: Type, parameters: Array[CodeExpression]):
+        """
+
+        :param createType:
+        :param parameters:
+        """
+    @property
+    def CreateType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @CreateType.setter
+    def CreateType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def Parameters(self) -> CodeExpressionCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeParameterDeclarationExpression(CodeExpression):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, type: CodeTypeReference, name: str):
+        """
+
+        :param type:
+        :param name:
+        """
+    @overload
+    def __init__(self, type: str, name: str):
+        """
+
+        :param type:
+        :param name:
+        """
+    @overload
+    def __init__(self, type: Type, name: str):
+        """
+
+        :param type:
+        :param name:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
+    @property
+    def Direction(self) -> FieldDirection:
+        """
+
+        :return:
+        """
+    @Direction.setter
+    def Direction(self, value: FieldDirection) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Type(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @Type.setter
+    def Type(self, value: CodeTypeReference) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeParameterDeclarationExpressionCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: CodeParameterDeclarationExpressionCollection):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: Array[CodeParameterDeclarationExpression]):
+        """
+
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CodeParameterDeclarationExpression) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeParameterDeclarationExpressionCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeParameterDeclarationExpression]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeParameterDeclarationExpression) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeParameterDeclarationExpression], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeParameterDeclarationExpression) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeParameterDeclarationExpression) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeParameterDeclarationExpression) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeParameterDeclarationExpression) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CodePrimitiveExpression(CodeExpression):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: object):
+        """
+
+        :param value:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> object:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: object) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodePropertyReferenceExpression(CodeExpression):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, targetObject: CodeExpression, propertyName: str):
+        """
+
+        :param targetObject:
+        :param propertyName:
+        """
+    @property
+    def PropertyName(self) -> str:
+        """
+
+        :return:
+        """
+    @PropertyName.setter
+    def PropertyName(self, value: str) -> None: ...
+    @property
+    def TargetObject(self) -> CodeExpression:
+        """
+
+        :return:
+        """
+    @TargetObject.setter
+    def TargetObject(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodePropertySetValueReferenceExpression(CodeExpression):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeRegionDirective(CodeDirective):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, regionMode: CodeRegionMode, regionText: str):
+        """
+
+        :param regionMode:
+        :param regionText:
+        """
+    @property
+    def RegionMode(self) -> CodeRegionMode:
+        """
+
+        :return:
+        """
+    @RegionMode.setter
+    def RegionMode(self, value: CodeRegionMode) -> None: ...
+    @property
+    def RegionText(self) -> str:
+        """
+
+        :return:
+        """
+    @RegionText.setter
+    def RegionText(self, value: str) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class CodeRegionMode(Enum):
-    # None = 0
-    Start = 1
-    End = 2
+    """"""
+
+    _None: CodeRegionMode = ...
+    """"""
+    Start: CodeRegionMode = ...
+    """"""
+    End: CodeRegionMode = ...
+    """"""
+
+class CodeRemoveEventStatement(CodeStatement):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, eventRef: CodeEventReferenceExpression, listener: CodeExpression):
+        """
+
+        :param eventRef:
+        :param listener:
+        """
+    @overload
+    def __init__(self, targetObject: CodeExpression, eventName: str, listener: CodeExpression):
+        """
+
+        :param targetObject:
+        :param eventName:
+        :param listener:
+        """
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Event(self) -> CodeEventReferenceExpression:
+        """
+
+        :return:
+        """
+    @Event.setter
+    def Event(self, value: CodeEventReferenceExpression) -> None: ...
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Listener(self) -> CodeExpression:
+        """
+
+        :return:
+        """
+    @Listener.setter
+    def Listener(self, value: CodeExpression) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeSnippetCompileUnit(CodeCompileUnit):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def AssemblyCustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Namespaces(self) -> CodeNamespaceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def ReferencedAssemblies(self) -> StringCollection:
+        """
+
+        :return:
+        """
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeSnippetExpression(CodeExpression):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeSnippetStatement(CodeStatement):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    @Value.setter
+    def Value(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeSnippetTypeMember(CodeTypeMember):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, text: str):
+        """
+
+        :param text:
+        """
+    @property
+    def Attributes(self) -> MemberAttributes:
+        """
+
+        :return:
+        """
+    @Attributes.setter
+    def Attributes(self, value: MemberAttributes) -> None: ...
+    @property
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Text(self) -> str:
+        """
+
+        :return:
+        """
+    @Text.setter
+    def Text(self, value: str) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeStatement(CodeObject):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeStatementCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: CodeStatementCollection):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: Array[CodeStatement]):
+        """
+
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CodeExpression) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: CodeStatement) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeStatementCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeStatement]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeStatement) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeStatement], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeStatement) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeStatement) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeStatement) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeStatement) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CodeThisReferenceExpression(CodeExpression):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeThrowExceptionStatement(CodeStatement):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, toThrow: CodeExpression):
+        """
+
+        :param toThrow:
+        """
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def ToThrow(self) -> CodeExpression:
+        """
+
+        :return:
+        """
+    @ToThrow.setter
+    def ToThrow(self, value: CodeExpression) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeTryCatchFinallyStatement(CodeStatement):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, tryStatements: Array[CodeStatement], catchClauses: Array[CodeCatchClause]):
+        """
+
+        :param tryStatements:
+        :param catchClauses:
+        """
+    @overload
+    def __init__(
+        self,
+        tryStatements: Array[CodeStatement],
+        catchClauses: Array[CodeCatchClause],
+        finallyStatements: Array[CodeStatement],
+    ):
+        """
+
+        :param tryStatements:
+        :param catchClauses:
+        :param finallyStatements:
+        """
+    @property
+    def CatchClauses(self) -> CodeCatchClauseCollection:
+        """
+
+        :return:
+        """
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def FinallyStatements(self) -> CodeStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def TryStatements(self) -> CodeStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeTypeConstructor(CodeMemberMethod):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Attributes(self) -> MemberAttributes:
+        """
+
+        :return:
+        """
+    @Attributes.setter
+    def Attributes(self, value: MemberAttributes) -> None: ...
+    @property
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def ImplementationTypes(self) -> CodeTypeReferenceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
+        """
+
+        :return:
+        """
+    @property
+    def PrivateImplementationType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @PrivateImplementationType.setter
+    def PrivateImplementationType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def ReturnType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @ReturnType.setter
+    def ReturnType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def ReturnTypeCustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Statements(self) -> CodeStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def TypeParameters(self) -> CodeTypeParameterCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    PopulateImplementationTypes: EventType[EventHandler] = ...
+    """"""
+    PopulateParameters: EventType[EventHandler] = ...
+    """"""
+    PopulateStatements: EventType[EventHandler] = ...
+    """"""
+
+class CodeTypeDeclaration(CodeTypeMember):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
+    @property
+    def Attributes(self) -> MemberAttributes:
+        """
+
+        :return:
+        """
+    @Attributes.setter
+    def Attributes(self, value: MemberAttributes) -> None: ...
+    @property
+    def BaseTypes(self) -> CodeTypeReferenceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def IsClass(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsClass.setter
+    def IsClass(self, value: bool) -> None: ...
+    @property
+    def IsEnum(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsEnum.setter
+    def IsEnum(self, value: bool) -> None: ...
+    @property
+    def IsInterface(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsInterface.setter
+    def IsInterface(self, value: bool) -> None: ...
+    @property
+    def IsPartial(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsPartial.setter
+    def IsPartial(self, value: bool) -> None: ...
+    @property
+    def IsStruct(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsStruct.setter
+    def IsStruct(self, value: bool) -> None: ...
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Members(self) -> CodeTypeMemberCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def TypeAttributes(self) -> TypeAttributes:
+        """
+
+        :return:
+        """
+    @TypeAttributes.setter
+    def TypeAttributes(self, value: TypeAttributes) -> None: ...
+    @property
+    def TypeParameters(self) -> CodeTypeParameterCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    PopulateBaseTypes: EventType[EventHandler] = ...
+    """"""
+    PopulateMembers: EventType[EventHandler] = ...
+    """"""
+
+class CodeTypeDeclarationCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: CodeTypeDeclarationCollection):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: Array[CodeTypeDeclaration]):
+        """
+
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CodeTypeDeclaration) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeTypeDeclarationCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeTypeDeclaration]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeTypeDeclaration) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeTypeDeclaration], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeTypeDeclaration) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeTypeDeclaration) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeTypeDeclaration) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeTypeDeclaration) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CodeTypeDelegate(CodeTypeDeclaration):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
+    @property
+    def Attributes(self) -> MemberAttributes:
+        """
+
+        :return:
+        """
+    @Attributes.setter
+    def Attributes(self, value: MemberAttributes) -> None: ...
+    @property
+    def BaseTypes(self) -> CodeTypeReferenceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def IsClass(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsClass.setter
+    def IsClass(self, value: bool) -> None: ...
+    @property
+    def IsEnum(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsEnum.setter
+    def IsEnum(self, value: bool) -> None: ...
+    @property
+    def IsInterface(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsInterface.setter
+    def IsInterface(self, value: bool) -> None: ...
+    @property
+    def IsPartial(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsPartial.setter
+    def IsPartial(self, value: bool) -> None: ...
+    @property
+    def IsStruct(self) -> bool:
+        """
+
+        :return:
+        """
+    @IsStruct.setter
+    def IsStruct(self, value: bool) -> None: ...
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Members(self) -> CodeTypeMemberCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Parameters(self) -> CodeParameterDeclarationExpressionCollection:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @ReturnType.setter
+    def ReturnType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def TypeAttributes(self) -> TypeAttributes:
+        """
+
+        :return:
+        """
+    @TypeAttributes.setter
+    def TypeAttributes(self, value: TypeAttributes) -> None: ...
+    @property
+    def TypeParameters(self) -> CodeTypeParameterCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    PopulateBaseTypes: EventType[EventHandler] = ...
+    """"""
+    PopulateMembers: EventType[EventHandler] = ...
+    """"""
+
+class CodeTypeMember(CodeObject):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Attributes(self) -> MemberAttributes:
+        """
+
+        :return:
+        """
+    @Attributes.setter
+    def Attributes(self, value: MemberAttributes) -> None: ...
+    @property
+    def Comments(self) -> CodeCommentStatementCollection:
+        """
+
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @CustomAttributes.setter
+    def CustomAttributes(self, value: CodeAttributeDeclarationCollection) -> None: ...
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeTypeMemberCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: CodeTypeMemberCollection):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: Array[CodeTypeMember]):
+        """
+
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CodeTypeMember) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CodeTypeMemberCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeTypeMember]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeTypeMember) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeTypeMember], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeTypeMember) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeTypeMember) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeTypeMember) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeTypeMember) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CodeTypeOfExpression(CodeExpression):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, type: CodeTypeReference):
+        """
+
+        :param type:
+        """
+    @overload
+    def __init__(self, type: str):
+        """
+
+        :param type:
+        """
+    @overload
+    def __init__(self, type: Type):
+        """
+
+        :param type:
+        """
+    @property
+    def Type(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @Type.setter
+    def Type(self, value: CodeTypeReference) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeTypeParameter(CodeObject):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
+    @property
+    def Constraints(self) -> CodeTypeReferenceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> CodeAttributeDeclarationCollection:
+        """
+
+        :return:
+        """
+    @property
+    def HasConstructorConstraint(self) -> bool:
+        """
+
+        :return:
+        """
+    @HasConstructorConstraint.setter
+    def HasConstructorConstraint(self, value: bool) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeTypeParameterCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: CodeTypeParameterCollection):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: Array[CodeTypeParameter]):
+        """
+
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CodeTypeParameter) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: str) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: CodeTypeParameterCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeTypeParameter]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeTypeParameter) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeTypeParameter], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeTypeParameter) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeTypeParameter) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeTypeParameter) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeTypeParameter) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CodeTypeReference(CodeObject):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, typeParameter: CodeTypeParameter):
+        """
+
+        :param typeParameter:
+        """
+    @overload
+    def __init__(self, typeName: str):
+        """
+
+        :param typeName:
+        """
+    @overload
+    def __init__(self, type: Type):
+        """
+
+        :param type:
+        """
+    @overload
+    def __init__(self, arrayType: CodeTypeReference, rank: int):
+        """
+
+        :param arrayType:
+        :param rank:
+        """
+    @overload
+    def __init__(self, typeName: str, codeTypeReferenceOption: CodeTypeReferenceOptions):
+        """
+
+        :param typeName:
+        :param codeTypeReferenceOption:
+        """
+    @overload
+    def __init__(self, typeName: str, typeArguments: Array[CodeTypeReference]):
+        """
+
+        :param typeName:
+        :param typeArguments:
+        """
+    @overload
+    def __init__(self, baseType: str, rank: int):
+        """
+
+        :param baseType:
+        :param rank:
+        """
+    @overload
+    def __init__(self, type: Type, codeTypeReferenceOption: CodeTypeReferenceOptions):
+        """
+
+        :param type:
+        :param codeTypeReferenceOption:
+        """
+    @property
+    def ArrayElementType(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @ArrayElementType.setter
+    def ArrayElementType(self, value: CodeTypeReference) -> None: ...
+    @property
+    def ArrayRank(self) -> int:
+        """
+
+        :return:
+        """
+    @ArrayRank.setter
+    def ArrayRank(self, value: int) -> None: ...
+    @property
+    def BaseType(self) -> str:
+        """
+
+        :return:
+        """
+    @BaseType.setter
+    def BaseType(self, value: str) -> None: ...
+    @property
+    def Options(self) -> CodeTypeReferenceOptions:
+        """
+
+        :return:
+        """
+    @Options.setter
+    def Options(self, value: CodeTypeReferenceOptions) -> None: ...
+    @property
+    def TypeArguments(self) -> CodeTypeReferenceCollection:
+        """
+
+        :return:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeTypeReferenceCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: CodeTypeReferenceCollection):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: Array[CodeTypeReference]):
+        """
+
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CodeTypeReference) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: str) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Add(self, value: Type) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: CodeTypeReferenceCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CodeTypeReference]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CodeTypeReference) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CodeTypeReference], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CodeTypeReference) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CodeTypeReference) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CodeTypeReference) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CodeTypeReference) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CodeTypeReferenceExpression(CodeExpression):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, type: CodeTypeReference):
+        """
+
+        :param type:
+        """
+    @overload
+    def __init__(self, type: str):
+        """
+
+        :param type:
+        """
+    @overload
+    def __init__(self, type: Type):
+        """
+
+        :param type:
+        """
+    @property
+    def Type(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @Type.setter
+    def Type(self, value: CodeTypeReference) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class CodeTypeReferenceOptions(Enum):
-    GlobalReference = 1
-    GenericTypeParameter = 2
+    """"""
+
+    GlobalReference: CodeTypeReferenceOptions = ...
+    """"""
+    GenericTypeParameter: CodeTypeReferenceOptions = ...
+    """"""
+
+class CodeVariableDeclarationStatement(CodeStatement):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, type: CodeTypeReference, name: str):
+        """
+
+        :param type:
+        :param name:
+        """
+    @overload
+    def __init__(self, type: str, name: str):
+        """
+
+        :param type:
+        :param name:
+        """
+    @overload
+    def __init__(self, type: Type, name: str):
+        """
+
+        :param type:
+        :param name:
+        """
+    @overload
+    def __init__(self, type: CodeTypeReference, name: str, initExpression: CodeExpression):
+        """
+
+        :param type:
+        :param name:
+        :param initExpression:
+        """
+    @overload
+    def __init__(self, type: str, name: str, initExpression: CodeExpression):
+        """
+
+        :param type:
+        :param name:
+        :param initExpression:
+        """
+    @overload
+    def __init__(self, type: Type, name: str, initExpression: CodeExpression):
+        """
+
+        :param type:
+        :param name:
+        :param initExpression:
+        """
+    @property
+    def EndDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def InitExpression(self) -> CodeExpression:
+        """
+
+        :return:
+        """
+    @InitExpression.setter
+    def InitExpression(self, value: CodeExpression) -> None: ...
+    @property
+    def LinePragma(self) -> CodeLinePragma:
+        """
+
+        :return:
+        """
+    @LinePragma.setter
+    def LinePragma(self, value: CodeLinePragma) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def StartDirectives(self) -> CodeDirectiveCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Type(self) -> CodeTypeReference:
+        """
+
+        :return:
+        """
+    @Type.setter
+    def Type(self, value: CodeTypeReference) -> None: ...
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CodeVariableReferenceExpression(CodeExpression):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, variableName: str):
+        """
+
+        :param variableName:
+        """
+    @property
+    def UserData(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def VariableName(self) -> str:
+        """
+
+        :return:
+        """
+    @VariableName.setter
+    def VariableName(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class FieldDirection(Enum):
-    In = 0
-    Out = 1
-    Ref = 2
+    """"""
+
+    In: FieldDirection = ...
+    """"""
+    Out: FieldDirection = ...
+    """"""
+    Ref: FieldDirection = ...
+    """"""
 
 class MemberAttributes(Enum):
-    Abstract = 1
-    Final = 2
-    Static = 3
-    Override = 4
-    Const = 5
-    ScopeMask = 15
-    New = 16
-    VTableMask = 240
-    Overloaded = 256
-    Assembly = 4096
-    FamilyAndAssembly = 8192
-    Family = 12288
-    FamilyOrAssembly = 16384
-    Private = 20480
-    Public = 24576
-    AccessMask = 61440
+    """"""
 
-# No Delegates
-
-__all__ = [
-    CodeArgumentReferenceExpression,
-    CodeArrayCreateExpression,
-    CodeArrayIndexerExpression,
-    CodeAssignStatement,
-    CodeAttachEventStatement,
-    CodeAttributeArgument,
-    CodeAttributeArgumentCollection,
-    CodeAttributeDeclaration,
-    CodeAttributeDeclarationCollection,
-    CodeBaseReferenceExpression,
-    CodeBinaryOperatorExpression,
-    CodeCastExpression,
-    CodeCatchClause,
-    CodeCatchClauseCollection,
-    CodeChecksumPragma,
-    CodeComment,
-    CodeCommentStatement,
-    CodeCommentStatementCollection,
-    CodeCompileUnit,
-    CodeConditionStatement,
-    CodeConstructor,
-    CodeDefaultValueExpression,
-    CodeDelegateCreateExpression,
-    CodeDelegateInvokeExpression,
-    CodeDirectionExpression,
-    CodeDirective,
-    CodeDirectiveCollection,
-    CodeEntryPointMethod,
-    CodeEventReferenceExpression,
-    CodeExpression,
-    CodeExpressionCollection,
-    CodeExpressionStatement,
-    CodeFieldReferenceExpression,
-    CodeGotoStatement,
-    CodeIndexerExpression,
-    CodeIterationStatement,
-    CodeLabeledStatement,
-    CodeLinePragma,
-    CodeMemberEvent,
-    CodeMemberField,
-    CodeMemberMethod,
-    CodeMemberProperty,
-    CodeMethodInvokeExpression,
-    CodeMethodReferenceExpression,
-    CodeMethodReturnStatement,
-    CodeNamespace,
-    CodeNamespaceCollection,
-    CodeNamespaceImport,
-    CodeNamespaceImportCollection,
-    CodeObject,
-    CodeObjectCreateExpression,
-    CodeParameterDeclarationExpression,
-    CodeParameterDeclarationExpressionCollection,
-    CodePrimitiveExpression,
-    CodePropertyReferenceExpression,
-    CodePropertySetValueReferenceExpression,
-    CodeRegionDirective,
-    CodeRemoveEventStatement,
-    CodeSnippetCompileUnit,
-    CodeSnippetExpression,
-    CodeSnippetStatement,
-    CodeSnippetTypeMember,
-    CodeStatement,
-    CodeStatementCollection,
-    CodeThisReferenceExpression,
-    CodeThrowExceptionStatement,
-    CodeTryCatchFinallyStatement,
-    CodeTypeConstructor,
-    CodeTypeDeclaration,
-    CodeTypeDeclarationCollection,
-    CodeTypeDelegate,
-    CodeTypeMember,
-    CodeTypeMemberCollection,
-    CodeTypeOfExpression,
-    CodeTypeParameter,
-    CodeTypeParameterCollection,
-    CodeTypeReference,
-    CodeTypeReferenceCollection,
-    CodeTypeReferenceExpression,
-    CodeVariableDeclarationStatement,
-    CodeVariableReferenceExpression,
-    CodeBinaryOperatorType,
-    CodeRegionMode,
-    CodeTypeReferenceOptions,
-    FieldDirection,
-    MemberAttributes,
-]
+    Abstract: MemberAttributes = ...
+    """"""
+    Final: MemberAttributes = ...
+    """"""
+    Static: MemberAttributes = ...
+    """"""
+    Override: MemberAttributes = ...
+    """"""
+    Const: MemberAttributes = ...
+    """"""
+    ScopeMask: MemberAttributes = ...
+    """"""
+    New: MemberAttributes = ...
+    """"""
+    VTableMask: MemberAttributes = ...
+    """"""
+    Overloaded: MemberAttributes = ...
+    """"""
+    Assembly: MemberAttributes = ...
+    """"""
+    FamilyAndAssembly: MemberAttributes = ...
+    """"""
+    Family: MemberAttributes = ...
+    """"""
+    FamilyOrAssembly: MemberAttributes = ...
+    """"""
+    Private: MemberAttributes = ...
+    """"""
+    Public: MemberAttributes = ...
+    """"""
+    AccessMask: MemberAttributes = ...
+    """"""

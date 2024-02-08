@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from typing import Union
+from typing import Tuple
 from typing import overload
 
-from System import Boolean
 from System import Enum
-from System import Int32
-from System import Void
+from System import Guid
+from System import IntPtr
+from System import Type
 from System.Runtime.InteropServices import _Attribute
 from System.Security import CodeAccessPermission
 from System.Security import IPermission
@@ -18,103 +18,236 @@ from System.Security.Permissions import IUnrestrictedPermission
 from System.Security.Permissions import PermissionState
 from System.Security.Permissions import SecurityAction
 
-# ---------- Types ---------- #
-
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
 class AspNetHostingPermission(
-    CodeAccessPermission, IPermission, ISecurityEncodable, IStackWalk, IUnrestrictedPermission
+    CodeAccessPermission, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, state: PermissionState): ...
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
     @overload
-    def __init__(self, level: AspNetHostingPermissionLevel): ...
+    def __init__(self, level: AspNetHostingPermissionLevel):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param level:
+        """
     @property
-    def Level(self) -> AspNetHostingPermissionLevel: ...
+    def Level(self) -> AspNetHostingPermissionLevel:
+        """
+
+        :return:
+        """
     @Level.setter
     def Level(self, value: AspNetHostingPermissionLevel) -> None: ...
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Copy(self) -> IPermission: ...
-    def FromXml(self, securityElement: SecurityElement) -> VoidType: ...
-    def Intersect(self, target: IPermission) -> IPermission: ...
-    def IsSubsetOf(self, target: IPermission) -> BooleanType: ...
-    def IsUnrestricted(self) -> BooleanType: ...
-    def ToXml(self) -> SecurityElement: ...
-    def Union(self, target: IPermission) -> IPermission: ...
-    def get_Level(self) -> AspNetHostingPermissionLevel: ...
-    def set_Level(self, value: AspNetHostingPermissionLevel) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Events
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
 
-    # No Sub Interfaces
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
 
-    # No Sub Enums
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
 
 class AspNetHostingPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, action: SecurityAction):
+        """
 
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
+        :param action:
+        """
     @property
-    def Level(self) -> AspNetHostingPermissionLevel: ...
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def Level(self) -> AspNetHostingPermissionLevel:
+        """
+
+        :return:
+        """
     @Level.setter
     def Level(self, value: AspNetHostingPermissionLevel) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
 
-    def CreatePermission(self) -> IPermission: ...
-    def get_Level(self) -> AspNetHostingPermissionLevel: ...
-    def set_Level(self, value: AspNetHostingPermissionLevel) -> VoidType: ...
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Interfaces
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-# No Structs
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-# No Interfaces
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-# ---------- Enums ---------- #
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class AspNetHostingPermissionLevel(Enum):
-    # None = 100
-    Minimal = 200
-    Low = 300
-    Medium = 400
-    High = 500
-    Unrestricted = 600
+    """"""
 
-# No Delegates
-
-__all__ = [
-    AspNetHostingPermission,
-    AspNetHostingPermissionAttribute,
-    AspNetHostingPermissionLevel,
-]
+    _None: AspNetHostingPermissionLevel = ...
+    """"""
+    Minimal: AspNetHostingPermissionLevel = ...
+    """"""
+    Low: AspNetHostingPermissionLevel = ...
+    """"""
+    Medium: AspNetHostingPermissionLevel = ...
+    """"""
+    High: AspNetHostingPermissionLevel = ...
+    """"""
+    Unrestricted: AspNetHostingPermissionLevel = ...
+    """"""

@@ -1,82 +1,70 @@
 from __future__ import annotations
 
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import Protocol
 from typing import TypeVar
-from typing import Union
 
-from System import Boolean
 from System import EventHandler
 from System import Object
-from System import String
-from System import Void
-
-# ---------- Types ---------- #
+from System import Type
 
 T = TypeVar("T")
-
-BooleanType = Union[bool, Boolean]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
 
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
+class BuildInfo(Object):
+    """"""
 
-class BuildInfo(ObjectType):
-    # ---------- Fields ---------- #
+    WCP_PUBLIC_KEY_TOKEN: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    WCP_VERSION: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @staticmethod
-    @property
-    def WCP_PUBLIC_KEY_TOKEN() -> StringType: ...
-    @staticmethod
-    @property
-    def WCP_VERSION() -> StringType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Properties
+        :return:
+        """
 
-    # No Methods
+class ICommand:
+    """"""
 
-    # No Events
+    def CanExecute(self, parameter: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param parameter:
+        :return:
+        """
+    def Execute(self, parameter: object) -> None:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class ICommand(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CanExecute(self, parameter: ObjectType) -> BooleanType: ...
-    def Execute(self, parameter: ObjectType) -> VoidType: ...
-    def add_CanExecuteChanged(self, value: EventHandler) -> VoidType: ...
-    def remove_CanExecuteChanged(self, value: EventHandler) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
+        :param parameter:
+        """
     CanExecuteChanged: EventType[EventHandler] = ...
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    BuildInfo,
-    ICommand,
-]
+    """"""

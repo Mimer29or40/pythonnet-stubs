@@ -1,102 +1,235 @@
 from __future__ import annotations
 
-from typing import Union
+from typing import Tuple
 
 from System import Attribute
-from System import String
-from System import Void
+from System import Guid
+from System import IntPtr
+from System import Type
 from System.Runtime.InteropServices import _Attribute
 
-# ---------- Types ---------- #
-
-StringType = Union[str, String]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
 class ExcludeFromCodeCoverageAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Events
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Structs
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Interfaces
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Sub Enums
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SuppressMessageAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, category: str, checkId: str):
+        """
 
-    def __init__(self, category: StringType, checkId: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param category:
+        :param checkId:
+        """
     @property
-    def Category(self) -> StringType: ...
+    def Category(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def CheckId(self) -> StringType: ...
+    def CheckId(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Justification(self) -> StringType: ...
+    def Justification(self) -> str:
+        """
+
+        :return:
+        """
     @Justification.setter
-    def Justification(self, value: StringType) -> None: ...
+    def Justification(self, value: str) -> None: ...
     @property
-    def MessageId(self) -> StringType: ...
+    def MessageId(self) -> str:
+        """
+
+        :return:
+        """
     @MessageId.setter
-    def MessageId(self, value: StringType) -> None: ...
+    def MessageId(self, value: str) -> None: ...
     @property
-    def Scope(self) -> StringType: ...
+    def Scope(self) -> str:
+        """
+
+        :return:
+        """
     @Scope.setter
-    def Scope(self, value: StringType) -> None: ...
+    def Scope(self, value: str) -> None: ...
     @property
-    def Target(self) -> StringType: ...
+    def Target(self) -> str:
+        """
+
+        :return:
+        """
     @Target.setter
-    def Target(self, value: StringType) -> None: ...
+    def Target(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Category(self) -> StringType: ...
-    def get_CheckId(self) -> StringType: ...
-    def get_Justification(self) -> StringType: ...
-    def get_MessageId(self) -> StringType: ...
-    def get_Scope(self) -> StringType: ...
-    def get_Target(self) -> StringType: ...
-    def set_Justification(self, value: StringType) -> VoidType: ...
-    def set_MessageId(self, value: StringType) -> VoidType: ...
-    def set_Scope(self, value: StringType) -> VoidType: ...
-    def set_Target(self, value: StringType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Enums
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-# No Structs
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-# No Interfaces
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-# No Enums
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-# No Delegates
-
-__all__ = [
-    ExcludeFromCodeCoverageAttribute,
-    SuppressMessageAttribute,
-]
+        :return:
+        """

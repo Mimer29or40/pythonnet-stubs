@@ -1,19 +1,12 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
 from System import Enum
-from System import Int32
 from System import Object
-from System import String
 from System import Type
-from System import Void
 from System.Reflection import Assembly
 from System.Reflection import FieldInfo
 from System.Runtime.Remoting.Messaging import Header
@@ -21,351 +14,435 @@ from System.Runtime.Serialization import ISerializable
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class InternalRM(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def InfoSoap(messages: ArrayType[ObjectType]) -> VoidType: ...
-    @staticmethod
-    def SoapCheckEnabled() -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InternalST(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def InfoSoap(messages: ArrayType[ObjectType]) -> VoidType: ...
-    @staticmethod
-    def LoadAssemblyFromString(assemblyString: StringType) -> Assembly: ...
-    @staticmethod
-    def SerializationSetValue(fi: FieldInfo, target: ObjectType, value: ObjectType) -> VoidType: ...
-    @staticmethod
-    def Soap(messages: ArrayType[ObjectType]) -> VoidType: ...
-    @staticmethod
-    def SoapAssert(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    def SoapCheckEnabled() -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerTrace(ABC, ObjectType):
+class FormatterAssemblyStyle(Enum):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ServerFault(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, exceptionType: StringType, message: StringType, stackTrace: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ExceptionMessage(self) -> StringType: ...
-    @ExceptionMessage.setter
-    def ExceptionMessage(self, value: StringType) -> None: ...
-    @property
-    def ExceptionType(self) -> StringType: ...
-    @ExceptionType.setter
-    def ExceptionType(self, value: StringType) -> None: ...
-    @property
-    def StackTrace(self) -> StringType: ...
-    @StackTrace.setter
-    def StackTrace(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_ExceptionMessage(self) -> StringType: ...
-    def get_ExceptionType(self) -> StringType: ...
-    def get_StackTrace(self) -> StringType: ...
-    def set_ExceptionMessage(self, value: StringType) -> VoidType: ...
-    def set_ExceptionType(self, value: StringType) -> VoidType: ...
-    def set_StackTrace(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapFault(ObjectType, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(
-        self,
-        faultCode: StringType,
-        faultString: StringType,
-        faultActor: StringType,
-        serverFault: ServerFault,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Detail(self) -> ObjectType: ...
-    @Detail.setter
-    def Detail(self, value: ObjectType) -> None: ...
-    @property
-    def FaultActor(self) -> StringType: ...
-    @FaultActor.setter
-    def FaultActor(self, value: StringType) -> None: ...
-    @property
-    def FaultCode(self) -> StringType: ...
-    @FaultCode.setter
-    def FaultCode(self, value: StringType) -> None: ...
-    @property
-    def FaultString(self) -> StringType: ...
-    @FaultString.setter
-    def FaultString(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def get_Detail(self) -> ObjectType: ...
-    def get_FaultActor(self) -> StringType: ...
-    def get_FaultCode(self) -> StringType: ...
-    def get_FaultString(self) -> StringType: ...
-    def set_Detail(self, value: ObjectType) -> VoidType: ...
-    def set_FaultActor(self, value: StringType) -> VoidType: ...
-    def set_FaultCode(self, value: StringType) -> VoidType: ...
-    def set_FaultString(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SoapMessage(ObjectType, ISoapMessage):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Headers(self) -> ArrayType[Header]: ...
-    @Headers.setter
-    def Headers(self, value: ArrayType[Header]) -> None: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @MethodName.setter
-    def MethodName(self, value: StringType) -> None: ...
-    @property
-    def ParamNames(self) -> ArrayType[StringType]: ...
-    @ParamNames.setter
-    def ParamNames(self, value: ArrayType[StringType]) -> None: ...
-    @property
-    def ParamTypes(self) -> ArrayType[TypeType]: ...
-    @ParamTypes.setter
-    def ParamTypes(self, value: ArrayType[TypeType]) -> None: ...
-    @property
-    def ParamValues(self) -> ArrayType[ObjectType]: ...
-    @ParamValues.setter
-    def ParamValues(self, value: ArrayType[ObjectType]) -> None: ...
-    @property
-    def XmlNameSpace(self) -> StringType: ...
-    @XmlNameSpace.setter
-    def XmlNameSpace(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Headers(self) -> ArrayType[Header]: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_ParamNames(self) -> ArrayType[StringType]: ...
-    def get_ParamTypes(self) -> ArrayType[TypeType]: ...
-    def get_ParamValues(self) -> ArrayType[ObjectType]: ...
-    def get_XmlNameSpace(self) -> StringType: ...
-    def set_Headers(self, value: ArrayType[Header]) -> VoidType: ...
-    def set_MethodName(self, value: StringType) -> VoidType: ...
-    def set_ParamNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_ParamTypes(self, value: ArrayType[TypeType]) -> VoidType: ...
-    def set_ParamValues(self, value: ArrayType[ObjectType]) -> VoidType: ...
-    def set_XmlNameSpace(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IFieldInfo(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def FieldNames(self) -> ArrayType[StringType]: ...
-    @FieldNames.setter
-    def FieldNames(self, value: ArrayType[StringType]) -> None: ...
-    @property
-    def FieldTypes(self) -> ArrayType[TypeType]: ...
-    @FieldTypes.setter
-    def FieldTypes(self, value: ArrayType[TypeType]) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_FieldNames(self) -> ArrayType[StringType]: ...
-    def get_FieldTypes(self) -> ArrayType[TypeType]: ...
-    def set_FieldNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_FieldTypes(self, value: ArrayType[TypeType]) -> VoidType: ...
-
-    # No Events
-
-class ISoapMessage(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def Headers(self) -> ArrayType[Header]: ...
-    @Headers.setter
-    def Headers(self, value: ArrayType[Header]) -> None: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @MethodName.setter
-    def MethodName(self, value: StringType) -> None: ...
-    @property
-    def ParamNames(self) -> ArrayType[StringType]: ...
-    @ParamNames.setter
-    def ParamNames(self, value: ArrayType[StringType]) -> None: ...
-    @property
-    def ParamTypes(self) -> ArrayType[TypeType]: ...
-    @ParamTypes.setter
-    def ParamTypes(self, value: ArrayType[TypeType]) -> None: ...
-    @property
-    def ParamValues(self) -> ArrayType[ObjectType]: ...
-    @ParamValues.setter
-    def ParamValues(self, value: ArrayType[ObjectType]) -> None: ...
-    @property
-    def XmlNameSpace(self) -> StringType: ...
-    @XmlNameSpace.setter
-    def XmlNameSpace(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Headers(self) -> ArrayType[Header]: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_ParamNames(self) -> ArrayType[StringType]: ...
-    def get_ParamTypes(self) -> ArrayType[TypeType]: ...
-    def get_ParamValues(self) -> ArrayType[ObjectType]: ...
-    def get_XmlNameSpace(self) -> StringType: ...
-    def set_Headers(self, value: ArrayType[Header]) -> VoidType: ...
-    def set_MethodName(self, value: StringType) -> VoidType: ...
-    def set_ParamNames(self, value: ArrayType[StringType]) -> VoidType: ...
-    def set_ParamTypes(self, value: ArrayType[TypeType]) -> VoidType: ...
-    def set_ParamValues(self, value: ArrayType[ObjectType]) -> VoidType: ...
-    def set_XmlNameSpace(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class FormatterAssemblyStyle(Enum):
-    Simple = 0
-    Full = 1
+    Simple: FormatterAssemblyStyle = ...
+    """"""
+    Full: FormatterAssemblyStyle = ...
+    """"""
 
 class FormatterTypeStyle(Enum):
-    TypesWhenNeeded = 0
-    TypesAlways = 1
-    XsdString = 2
+    """"""
+
+    TypesWhenNeeded: FormatterTypeStyle = ...
+    """"""
+    TypesAlways: FormatterTypeStyle = ...
+    """"""
+    XsdString: FormatterTypeStyle = ...
+    """"""
+
+class IFieldInfo:
+    """"""
+
+    @property
+    def FieldNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    @FieldNames.setter
+    def FieldNames(self, value: Array[str]) -> None: ...
+    @property
+    def FieldTypes(self) -> Array[Type]:
+        """
+
+        :return:
+        """
+    @FieldTypes.setter
+    def FieldTypes(self, value: Array[Type]) -> None: ...
+
+class ISoapMessage:
+    """"""
+
+    @property
+    def Headers(self) -> Array[Header]:
+        """
+
+        :return:
+        """
+    @Headers.setter
+    def Headers(self, value: Array[Header]) -> None: ...
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @MethodName.setter
+    def MethodName(self, value: str) -> None: ...
+    @property
+    def ParamNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    @ParamNames.setter
+    def ParamNames(self, value: Array[str]) -> None: ...
+    @property
+    def ParamTypes(self) -> Array[Type]:
+        """
+
+        :return:
+        """
+    @ParamTypes.setter
+    def ParamTypes(self, value: Array[Type]) -> None: ...
+    @property
+    def ParamValues(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @ParamValues.setter
+    def ParamValues(self, value: Array[object]) -> None: ...
+    @property
+    def XmlNameSpace(self) -> str:
+        """
+
+        :return:
+        """
+    @XmlNameSpace.setter
+    def XmlNameSpace(self, value: str) -> None: ...
+
+class InternalRM(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def InfoSoap(cls, messages: Array[object]) -> None:
+        """
+
+        :param messages:
+        """
+    @classmethod
+    def SoapCheckEnabled(cls) -> bool:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class InternalST(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def InfoSoap(cls, messages: Array[object]) -> None:
+        """
+
+        :param messages:
+        """
+    @classmethod
+    def LoadAssemblyFromString(cls, assemblyString: str) -> Assembly:
+        """
+
+        :param assemblyString:
+        :return:
+        """
+    @classmethod
+    def SerializationSetValue(cls, fi: FieldInfo, target: object, value: object) -> None:
+        """
+
+        :param fi:
+        :param target:
+        :param value:
+        """
+    @classmethod
+    def Soap(cls, messages: Array[object]) -> None:
+        """
+
+        :param messages:
+        """
+    @classmethod
+    def SoapAssert(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    def SoapCheckEnabled(cls) -> bool:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerTrace(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ServerFault(Object):
+    """"""
+
+    def __init__(self, exceptionType: str, message: str, stackTrace: str):
+        """
+
+        :param exceptionType:
+        :param message:
+        :param stackTrace:
+        """
+    @property
+    def ExceptionMessage(self) -> str:
+        """
+
+        :return:
+        """
+    @ExceptionMessage.setter
+    def ExceptionMessage(self, value: str) -> None: ...
+    @property
+    def ExceptionType(self) -> str:
+        """
+
+        :return:
+        """
+    @ExceptionType.setter
+    def ExceptionType(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @StackTrace.setter
+    def StackTrace(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapFault(Object, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, faultCode: str, faultString: str, faultActor: str, serverFault: ServerFault):
+        """
+
+        :param faultCode:
+        :param faultString:
+        :param faultActor:
+        :param serverFault:
+        """
+    @property
+    def Detail(self) -> object:
+        """
+
+        :return:
+        """
+    @Detail.setter
+    def Detail(self, value: object) -> None: ...
+    @property
+    def FaultActor(self) -> str:
+        """
+
+        :return:
+        """
+    @FaultActor.setter
+    def FaultActor(self, value: str) -> None: ...
+    @property
+    def FaultCode(self) -> str:
+        """
+
+        :return:
+        """
+    @FaultCode.setter
+    def FaultCode(self, value: str) -> None: ...
+    @property
+    def FaultString(self) -> str:
+        """
+
+        :return:
+        """
+    @FaultString.setter
+    def FaultString(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SoapMessage(Object, ISoapMessage):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Headers(self) -> Array[Header]:
+        """
+
+        :return:
+        """
+    @Headers.setter
+    def Headers(self, value: Array[Header]) -> None: ...
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @MethodName.setter
+    def MethodName(self, value: str) -> None: ...
+    @property
+    def ParamNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    @ParamNames.setter
+    def ParamNames(self, value: Array[str]) -> None: ...
+    @property
+    def ParamTypes(self) -> Array[Type]:
+        """
+
+        :return:
+        """
+    @ParamTypes.setter
+    def ParamTypes(self, value: Array[Type]) -> None: ...
+    @property
+    def ParamValues(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @ParamValues.setter
+    def ParamValues(self, value: Array[object]) -> None: ...
+    @property
+    def XmlNameSpace(self) -> str:
+        """
+
+        :return:
+        """
+    @XmlNameSpace.setter
+    def XmlNameSpace(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class TypeFilterLevel(Enum):
-    Low = 2
-    Full = 3
+    """"""
 
-# No Delegates
-
-__all__ = [
-    InternalRM,
-    InternalST,
-    SerTrace,
-    ServerFault,
-    SoapFault,
-    SoapMessage,
-    IFieldInfo,
-    ISoapMessage,
-    FormatterAssemblyStyle,
-    FormatterTypeStyle,
-    TypeFilterLevel,
-]
+    Low: TypeFilterLevel = ...
+    """"""
+    Full: TypeFilterLevel = ...
+    """"""

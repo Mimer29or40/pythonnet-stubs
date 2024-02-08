@@ -2,45 +2,34 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Callable
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import List
-from typing import Protocol
+from typing import Iterator
 from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
-from Microsoft.Win32 import NativeMethods
+from Microsoft.Win32.NativeMethods import ShellExecuteInfo
 from Microsoft.Win32.SafeHandles import SafeProcessHandle
 from Microsoft.Win32.SafeHandles import SafeThreadHandle
+from Microsoft.Win32.SafeHandles import SafeWaitHandle
 from System import Array
-from System import AsyncCallback
 from System import Attribute
-from System import Boolean
-from System import Byte
 from System import DateTime
 from System import Enum
 from System import EventArgs
 from System import EventHandler
 from System import Exception
 from System import Guid
-from System import IAsyncResult
-from System import ICloneable
 from System import IDisposable
-from System import Int16
-from System import Int32
-from System import Int64
 from System import IntPtr
 from System import MarshalByRefObject
-from System import MulticastDelegate
 from System import Object
 from System import Predicate
-from System import Single
-from System import String
 from System import TimeSpan
 from System import Type
 from System import ValueType
-from System import Void
 from System.Collections import ArrayList
 from System.Collections import CollectionBase
 from System.Collections import DictionaryBase
@@ -59,16 +48,26 @@ from System.ComponentModel import Component
 from System.ComponentModel import DescriptionAttribute
 from System.ComponentModel import EnumConverter
 from System.ComponentModel import IComponent
+from System.ComponentModel import IContainer
+from System.ComponentModel import ISite
 from System.ComponentModel import ISupportInitialize
 from System.ComponentModel import ISynchronizeInvoke
 from System.ComponentModel import ITypeDescriptorContext
-from System.ComponentModel import TypeConverter
+from System.ComponentModel import PropertyDescriptorCollection
+from System.ComponentModel.TypeConverter import StandardValuesCollection
+from System.Configuration import Configuration
 from System.Configuration import ConfigurationElement
 from System.Configuration import ConfigurationElementCollection
 from System.Configuration import ConfigurationElementCollectionType
+from System.Configuration import ConfigurationLockCollection
 from System.Configuration import ConfigurationSection
 from System.Configuration import DictionarySectionHandler
+from System.Configuration import ElementInformation
 from System.Configuration import IConfigurationSectionHandler
+from System.Configuration import SectionInformation
+from System.Diagnostics.DebuggableAttribute import DebuggingModes
+from System.Diagnostics.StackTrace import TraceFormat
+from System.Globalization import CultureInfo
 from System.IO import Stream
 from System.IO import StreamReader
 from System.IO import StreamWriter
@@ -76,11 +75,15 @@ from System.IO import TextWriter
 from System.Reflection import Assembly
 from System.Reflection import MethodBase
 from System.Runtime.InteropServices import _Attribute
+from System.Runtime.Remoting import ObjRef
 from System.Runtime.Serialization import ISerializable
+from System.Runtime.Serialization import SerializationInfo
+from System.Runtime.Serialization import StreamingContext
 from System.Security import IPermission
 from System.Security import ISecurityEncodable
 from System.Security import IStackWalk
 from System.Security import SecureString
+from System.Security import SecurityElement
 from System.Security.Permissions import CodeAccessSecurityAttribute
 from System.Security.Permissions import IUnrestrictedPermission
 from System.Security.Permissions import PermissionState
@@ -91,6496 +94,14711 @@ from System.Threading import Thread
 from System.Threading import WaitHandle
 from System.Xml import XmlNode
 
-# ---------- Types ---------- #
-
 T = TypeVar("T")
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-FloatType = Union[float, Single]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-ShortType = Union[int, Int16]
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
 
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
-
 class AlphabeticalEnumConverter(EnumConverter):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, type: TypeType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def GetStandardValues(self, context: ITypeDescriptorContext) -> StandardValuesCollection: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Assert(ABC, ObjectType):
     """"""
 
-    # No Fields
+    def __init__(self, type: Type):
+        """
 
-    # No Constructors
+        :param type:
+        """
+    @overload
+    def CanConvertFrom(self, sourceType: Type) -> bool:
+        """
 
-    # No Properties
+        :param sourceType:
+        :return:
+        """
+    @overload
+    def CanConvertFrom(self, context: ITypeDescriptorContext, sourceType: Type) -> bool:
+        """
 
-    # No Methods
+        :param context:
+        :param sourceType:
+        :return:
+        """
+    @overload
+    def CanConvertTo(self, destinationType: Type) -> bool:
+        """
 
-    # No Events
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def CanConvertTo(self, context: ITypeDescriptorContext, destinationType: Type) -> bool:
+        """
 
-    # No Sub Classes
+        :param context:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertFrom(self, value: object) -> object:
+        """
 
-    # No Sub Structs
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertFrom(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
+    ) -> object:
+        """
 
-    # No Sub Interfaces
+        :param context:
+        :param culture:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertFromInvariantString(self, text: str) -> object:
+        """
 
-    # No Sub Enums
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromInvariantString(self, context: ITypeDescriptorContext, text: str) -> object:
+        """
 
-class AssertFilter(ABC, ObjectType):
-    # No Fields
+        :param context:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(self, text: str) -> object:
+        """
 
-    # No Constructors
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(self, context: ITypeDescriptorContext, text: str) -> object:
+        """
 
-    # No Properties
+        :param context:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertFromString(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, text: str
+    ) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :param context:
+        :param culture:
+        :param text:
+        :return:
+        """
+    @overload
+    def ConvertTo(self, value: object, destinationType: Type) -> object:
+        """
+
+        :param value:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertTo(
+        self,
+        context: ITypeDescriptorContext,
+        culture: CultureInfo,
+        value: object,
+        destinationType: Type,
+    ) -> object:
+        """
+
+        :param context:
+        :param culture:
+        :param value:
+        :param destinationType:
+        :return:
+        """
+    @overload
+    def ConvertToInvariantString(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToInvariantString(self, context: ITypeDescriptorContext, value: object) -> str:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(self, context: ITypeDescriptorContext, value: object) -> str:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def ConvertToString(
+        self, context: ITypeDescriptorContext, culture: CultureInfo, value: object
+    ) -> str:
+        """
+
+        :param context:
+        :param culture:
+        :param value:
+        :return:
+        """
+    @overload
+    def CreateInstance(self, propertyValues: IDictionary) -> object:
+        """
+
+        :param propertyValues:
+        :return:
+        """
+    @overload
+    def CreateInstance(
+        self, context: ITypeDescriptorContext, propertyValues: IDictionary
+    ) -> object:
+        """
+
+        :param context:
+        :param propertyValues:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def GetCreateInstanceSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetCreateInstanceSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetProperties(self, value: object) -> PropertyDescriptorCollection:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def GetProperties(
+        self, context: ITypeDescriptorContext, value: object
+    ) -> PropertyDescriptorCollection:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    @overload
+    def GetProperties(
+        self, context: ITypeDescriptorContext, value: object, attributes: Array[Attribute]
+    ) -> PropertyDescriptorCollection:
+        """
+
+        :param context:
+        :param value:
+        :param attributes:
+        :return:
+        """
+    @overload
+    def GetPropertiesSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetPropertiesSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValues(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValues(
+        self, context: ITypeDescriptorContext
+    ) -> TypeConverter.StandardValuesCollection:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValuesExclusive(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValuesExclusive(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    @overload
+    def GetStandardValuesSupported(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def GetStandardValuesSupported(self, context: ITypeDescriptorContext) -> bool:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IsValid(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IsValid(self, context: ITypeDescriptorContext, value: object) -> bool:
+        """
+
+        :param context:
+        :param value:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Assert(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class AssertFilter(ABC, Object):
+    """"""
 
     def AssertFailure(
         self,
-        condition: StringType,
-        message: StringType,
+        condition: str,
+        message: str,
         location: StackTrace,
-        stackTraceFormat: TraceFormat,
-        windowTitle: StringType,
-    ) -> AssertFilters: ...
+        stackTraceFormat: StackTrace.TraceFormat,
+        windowTitle: str,
+    ) -> AssertFilters:
+        """
 
-    # No Events
+        :param condition:
+        :param message:
+        :param location:
+        :param stackTraceFormat:
+        :param windowTitle:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+
+class AssertFilters(Enum):
+    """"""
+
+    FailDebug: AssertFilters = ...
+    """"""
+    FailIgnore: AssertFilters = ...
+    """"""
+    FailTerminate: AssertFilters = ...
+    """"""
+    FailContinueFilter: AssertFilters = ...
+    """"""
 
 class AssertSection(ConfigurationElement):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def AssertUIEnabled(self) -> BooleanType: ...
+    def AssertUIEnabled(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def LogFileName(self) -> StringType: ...
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def LogFileName(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_AssertUIEnabled(self) -> BooleanType: ...
-    def get_LogFileName(self) -> StringType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class AssertWrapper(ABC, Object):
+    """"""
 
-    # No Sub Enums
+    def Equals(self, obj: object) -> bool:
+        """
 
-class AssertWrapper(ABC, ObjectType):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
+        :return:
+        """
+    @classmethod
     def ShowAssert(
-        stackTrace: StringType, frame: StackFrame, message: StringType, detailMessage: StringType
-    ) -> VoidType: ...
+        cls, stackTrace: str, frame: StackFrame, message: str, detailMessage: str
+    ) -> None:
+        """
 
-    # No Events
+        :param stackTrace:
+        :param frame:
+        :param message:
+        :param detailMessage:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class AsyncStreamReader(ObjectType, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class AsyncStreamReader(Object, IDisposable):
+    """"""
 
     @property
-    def BaseStream(self) -> Stream: ...
+    def BaseStream(self) -> Stream:
+        """
+
+        :return:
+        """
     @property
-    def CurrentEncoding(self) -> Encoding: ...
+    def CurrentEncoding(self) -> Encoding:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Close(self) -> VoidType: ...
-    def get_BaseStream(self) -> Stream: ...
-    def get_CurrentEncoding(self) -> Encoding: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class BooleanSwitch(Switch):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, displayName: StringType, description: StringType): ...
+    def __init__(self, displayName: str, description: str):
+        """
+
+        :param displayName:
+        :param description:
+        """
     @overload
-    def __init__(
-        self, displayName: StringType, description: StringType, defaultSwitchValue: StringType
-    ): ...
+    def __init__(self, displayName: str, description: str, defaultSwitchValue: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param displayName:
+        :param description:
+        :param defaultSwitchValue:
+        """
     @property
-    def Enabled(self) -> BooleanType: ...
+    def Attributes(self) -> StringDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Description(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def DisplayName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Enabled(self) -> bool:
+        """
+
+        :return:
+        """
     @Enabled.setter
-    def Enabled(self, value: BooleanType) -> None: ...
+    def Enabled(self, value: bool) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_Enabled(self) -> BooleanType: ...
-    def set_Enabled(self, value: BooleanType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CategoryEntry(ObjectType):
+class CategoryEntry(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CategorySample(ObjectType):
+class CategorySample(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ConditionalAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, conditionString: str):
+        """
 
-    def __init__(self, conditionString: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param conditionString:
+        """
     @property
-    def ConditionString(self) -> StringType: ...
+    def ConditionString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
 
-    def get_ConditionString(self) -> StringType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Structs
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Enums
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ConsoleTraceListener(TextWriterTraceListener, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, useErrorStream: BooleanType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CorrelationManager(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ActivityId(self) -> Guid: ...
-    @ActivityId.setter
-    def ActivityId(self, value: Guid) -> None: ...
-    @property
-    def LogicalOperationStack(self) -> Stack: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def StartLogicalOperation(self, operationId: ObjectType) -> VoidType: ...
-    @overload
-    def StartLogicalOperation(self) -> VoidType: ...
-    def StopLogicalOperation(self) -> VoidType: ...
-    def get_ActivityId(self) -> Guid: ...
-    def get_LogicalOperationStack(self) -> Stack: ...
-    def set_ActivityId(self, value: Guid) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CounterCreationData(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(
-        self, counterName: StringType, counterHelp: StringType, counterType: PerformanceCounterType
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CounterHelp(self) -> StringType: ...
-    @CounterHelp.setter
-    def CounterHelp(self, value: StringType) -> None: ...
-    @property
-    def CounterName(self) -> StringType: ...
-    @CounterName.setter
-    def CounterName(self, value: StringType) -> None: ...
-    @property
-    def CounterType(self) -> PerformanceCounterType: ...
-    @CounterType.setter
-    def CounterType(self, value: PerformanceCounterType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CounterHelp(self) -> StringType: ...
-    def get_CounterName(self) -> StringType: ...
-    def get_CounterType(self) -> PerformanceCounterType: ...
-    def set_CounterHelp(self, value: StringType) -> VoidType: ...
-    def set_CounterName(self, value: StringType) -> VoidType: ...
-    def set_CounterType(self, value: PerformanceCounterType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CounterCreationDataCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, value: CounterCreationDataCollection): ...
-    @overload
-    def __init__(self, value: ArrayType[CounterCreationData]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> CounterCreationData: ...
-    def __setitem__(self, key: IntType, value: CounterCreationData) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, value: CounterCreationData) -> IntType: ...
-    @overload
-    def AddRange(self, value: ArrayType[CounterCreationData]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: CounterCreationDataCollection) -> VoidType: ...
-    def Contains(self, value: CounterCreationData) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[CounterCreationData], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: CounterCreationData) -> IntType: ...
-    def Insert(self, index: IntType, value: CounterCreationData) -> VoidType: ...
-    def Remove(self, value: CounterCreationData) -> VoidType: ...
-    def get_Item(self, index: IntType) -> CounterCreationData: ...
-    def set_Item(self, index: IntType, value: CounterCreationData) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CounterDefinitionSample(ObjectType):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CounterSampleCalculator(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
     @overload
-    def ComputeCounterValue(newSample: CounterSample) -> FloatType: ...
-    @staticmethod
+    def __init__(self):
+        """"""
     @overload
-    def ComputeCounterValue(oldSample: CounterSample, newSample: CounterSample) -> FloatType: ...
+    def __init__(self, useErrorStream: bool):
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DataReceivedEventArgs(EventArgs):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
+        :param useErrorStream:
+        """
     @property
-    def Data(self) -> StringType: ...
+    def Attributes(self) -> StringDictionary:
+        """
 
-    # ---------- Methods ---------- #
-
-    def get_Data(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DataReceivedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: DataReceivedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: DataReceivedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Debug(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+        :return:
+        """
     @property
-    def AutoFlush() -> BooleanType: ...
-    @staticmethod
-    @AutoFlush.setter
-    def AutoFlush(value: BooleanType) -> None: ...
-    @staticmethod
+    def Filter(self) -> TraceFilter:
+        """
+
+        :return:
+        """
+    @Filter.setter
+    def Filter(self, value: TraceFilter) -> None: ...
     @property
-    def IndentLevel() -> IntType: ...
-    @staticmethod
+    def IndentLevel(self) -> int:
+        """
+
+        :return:
+        """
     @IndentLevel.setter
-    def IndentLevel(value: IntType) -> None: ...
-    @staticmethod
+    def IndentLevel(self, value: int) -> None: ...
     @property
-    def IndentSize() -> IntType: ...
-    @staticmethod
+    def IndentSize(self) -> int:
+        """
+
+        :return:
+        """
     @IndentSize.setter
-    def IndentSize(value: IntType) -> None: ...
-    @staticmethod
+    def IndentSize(self, value: int) -> None: ...
     @property
-    def Listeners() -> TraceListenerCollection: ...
+    def IsThreadSafe(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def Assert(condition: BooleanType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Assert(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Assert(
-        condition: BooleanType, message: StringType, detailMessage: StringType
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Assert(
-        condition: BooleanType,
-        message: StringType,
-        detailMessageFormat: StringType,
-        args: ArrayType[ObjectType],
-    ) -> VoidType: ...
-    @staticmethod
-    def Close() -> VoidType: ...
-    @staticmethod
-    @overload
-    def Fail(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Fail(message: StringType, detailMessage: StringType) -> VoidType: ...
-    @staticmethod
-    def Flush() -> VoidType: ...
-    @staticmethod
-    def Indent() -> VoidType: ...
-    @staticmethod
-    @overload
-    def Print(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Print(format: StringType, args: ArrayType[ObjectType]) -> VoidType: ...
-    @staticmethod
-    def Unindent() -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(message: StringType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(value: ObjectType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, message: StringType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, value: ObjectType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(message: StringType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(value: ObjectType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(format: StringType, args: ArrayType[ObjectType]) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(condition: BooleanType, value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(
-        condition: BooleanType, message: StringType, category: StringType
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(
-        condition: BooleanType, value: ObjectType, category: StringType
-    ) -> VoidType: ...
-    @staticmethod
-    def get_AutoFlush() -> BooleanType: ...
-    @staticmethod
-    def get_IndentLevel() -> IntType: ...
-    @staticmethod
-    def get_IndentSize() -> IntType: ...
-    @staticmethod
-    def get_Listeners() -> TraceListenerCollection: ...
-    @staticmethod
-    def set_AutoFlush(value: BooleanType) -> VoidType: ...
-    @staticmethod
-    def set_IndentLevel(value: IntType) -> VoidType: ...
-    @staticmethod
-    def set_IndentSize(value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DebuggableAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, isJITTrackingEnabled: BooleanType, isJITOptimizerDisabled: BooleanType): ...
-    @overload
-    def __init__(self, modes: DebuggingModes): ...
-
-    # ---------- Properties ---------- #
-
+        :return:
+        """
     @property
-    def DebuggingFlags(self) -> DebuggingModes: ...
-    @property
-    def IsJITOptimizerDisabled(self) -> BooleanType: ...
-    @property
-    def IsJITTrackingEnabled(self) -> BooleanType: ...
+    def Name(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
-
-    def get_DebuggingFlags(self) -> DebuggingModes: ...
-    def get_IsJITOptimizerDisabled(self) -> BooleanType: ...
-    def get_IsJITTrackingEnabled(self) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # ---------- Sub Enums ---------- #
-
-    class DebuggingModes(Enum):
-        # None = 0
-        Default = 1
-        IgnoreSymbolStoreSequencePoints = 2
-        EnableEditAndContinue = 4
-        DisableOptimizations = 256
-
-class Debugger(ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def DefaultCategory() -> StringType: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def IsAttached() -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Break() -> VoidType: ...
-    @staticmethod
-    def IsLogging() -> BooleanType: ...
-    @staticmethod
-    def Launch() -> BooleanType: ...
-    @staticmethod
-    def Log(level: IntType, category: StringType, message: StringType) -> VoidType: ...
-    @staticmethod
-    def NotifyOfCrossThreadDependency() -> VoidType: ...
-    @staticmethod
-    def get_IsAttached() -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DebuggerBrowsableAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, state: DebuggerBrowsableState): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def State(self) -> DebuggerBrowsableState: ...
-
-    # ---------- Methods ---------- #
-
-    def get_State(self) -> DebuggerBrowsableState: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DebuggerDisplayAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, value: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Name(self) -> StringType: ...
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
     @property
-    def Target(self) -> TypeType: ...
-    @Target.setter
-    def Target(self, value: TypeType) -> None: ...
-    @property
-    def TargetTypeName(self) -> StringType: ...
-    @TargetTypeName.setter
-    def TargetTypeName(self, value: StringType) -> None: ...
-    @property
-    def Type(self) -> StringType: ...
-    @Type.setter
-    def Type(self, value: StringType) -> None: ...
-    @property
-    def Value(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Name(self) -> StringType: ...
-    def get_Target(self) -> TypeType: ...
-    def get_TargetTypeName(self) -> StringType: ...
-    def get_Type(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_Target(self, value: TypeType) -> VoidType: ...
-    def set_TargetTypeName(self, value: StringType) -> VoidType: ...
-    def set_Type(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DebuggerHiddenAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DebuggerNonUserCodeAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DebuggerStepThroughAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DebuggerStepperBoundaryAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DebuggerTypeProxyAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, type: TypeType): ...
-    @overload
-    def __init__(self, typeName: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ProxyTypeName(self) -> StringType: ...
-    @property
-    def Target(self) -> TypeType: ...
-    @Target.setter
-    def Target(self, value: TypeType) -> None: ...
-    @property
-    def TargetTypeName(self) -> StringType: ...
-    @TargetTypeName.setter
-    def TargetTypeName(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_ProxyTypeName(self) -> StringType: ...
-    def get_Target(self) -> TypeType: ...
-    def get_TargetTypeName(self) -> StringType: ...
-    def set_Target(self, value: TypeType) -> VoidType: ...
-    def set_TargetTypeName(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DebuggerVisualizerAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, visualizerTypeName: StringType): ...
-    @overload
-    def __init__(
-        self, visualizerTypeName: StringType, visualizerObjectSourceTypeName: StringType
-    ): ...
-    @overload
-    def __init__(self, visualizerTypeName: StringType, visualizerObjectSource: TypeType): ...
-    @overload
-    def __init__(self, visualizer: TypeType): ...
-    @overload
-    def __init__(self, visualizer: TypeType, visualizerObjectSource: TypeType): ...
-    @overload
-    def __init__(self, visualizer: TypeType, visualizerObjectSourceTypeName: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Description(self) -> StringType: ...
-    @Description.setter
-    def Description(self, value: StringType) -> None: ...
-    @property
-    def Target(self) -> TypeType: ...
-    @Target.setter
-    def Target(self, value: TypeType) -> None: ...
-    @property
-    def TargetTypeName(self) -> StringType: ...
-    @TargetTypeName.setter
-    def TargetTypeName(self, value: StringType) -> None: ...
-    @property
-    def VisualizerObjectSourceTypeName(self) -> StringType: ...
-    @property
-    def VisualizerTypeName(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Description(self) -> StringType: ...
-    def get_Target(self) -> TypeType: ...
-    def get_TargetTypeName(self) -> StringType: ...
-    def get_VisualizerObjectSourceTypeName(self) -> StringType: ...
-    def get_VisualizerTypeName(self) -> StringType: ...
-    def set_Description(self, value: StringType) -> VoidType: ...
-    def set_Target(self, value: TypeType) -> VoidType: ...
-    def set_TargetTypeName(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DefaultFilter(AssertFilter):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def AssertFailure(
-        self,
-        condition: StringType,
-        message: StringType,
-        location: StackTrace,
-        stackTraceFormat: TraceFormat,
-        windowTitle: StringType,
-    ) -> AssertFilters: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DefaultTraceListener(TraceListener, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AssertUiEnabled(self) -> BooleanType: ...
-    @AssertUiEnabled.setter
-    def AssertUiEnabled(self, value: BooleanType) -> None: ...
-    @property
-    def LogFileName(self) -> StringType: ...
-    @LogFileName.setter
-    def LogFileName(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Fail(self, message: StringType) -> VoidType: ...
-    @overload
-    def Fail(self, message: StringType, detailMessage: StringType) -> VoidType: ...
-    @overload
-    def Write(self, message: StringType) -> VoidType: ...
-    @overload
-    def WriteLine(self, message: StringType) -> VoidType: ...
-    def get_AssertUiEnabled(self) -> BooleanType: ...
-    def get_LogFileName(self) -> StringType: ...
-    def set_AssertUiEnabled(self, value: BooleanType) -> VoidType: ...
-    def set_LogFileName(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DelimitedListTraceListener(TextWriterTraceListener, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, stream: Stream): ...
-    @overload
-    def __init__(self, stream: Stream, name: StringType): ...
-    @overload
-    def __init__(self, writer: TextWriter): ...
-    @overload
-    def __init__(self, writer: TextWriter, name: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, name: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Delimiter(self) -> StringType: ...
-    @Delimiter.setter
-    def Delimiter(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def TraceData(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        data: ObjectType,
-    ) -> VoidType: ...
-    @overload
-    def TraceData(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        data: ArrayType[ObjectType],
-    ) -> VoidType: ...
-    @overload
-    def TraceEvent(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        format: StringType,
-        args: ArrayType[ObjectType],
-    ) -> VoidType: ...
-    @overload
-    def TraceEvent(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        message: StringType,
-    ) -> VoidType: ...
-    def get_Delimiter(self) -> StringType: ...
-    def set_Delimiter(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DiagnosticsConfiguration(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DiagnosticsConfigurationHandler(ObjectType, IConfigurationSectionHandler):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Create(
-        self, parent: ObjectType, configContext: ObjectType, section: XmlNode
-    ) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EditAndContinueHelper(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EntryWrittenEventArgs(EventArgs):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, entry: EventLogEntry): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Entry(self) -> EventLogEntry: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Entry(self) -> EventLogEntry: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EntryWrittenEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: EntryWrittenEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: EntryWrittenEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EnvironmentBlock(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def ToByteArray(sd: StringDictionary, unicode: BooleanType) -> ArrayType[ByteType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventInstance(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, instanceId: LongType, categoryId: IntType): ...
-    @overload
-    def __init__(self, instanceId: LongType, categoryId: IntType, entryType: EventLogEntryType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CategoryId(self) -> IntType: ...
-    @CategoryId.setter
-    def CategoryId(self, value: IntType) -> None: ...
-    @property
-    def EntryType(self) -> EventLogEntryType: ...
-    @EntryType.setter
-    def EntryType(self, value: EventLogEntryType) -> None: ...
-    @property
-    def InstanceId(self) -> LongType: ...
-    @InstanceId.setter
-    def InstanceId(self, value: LongType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CategoryId(self) -> IntType: ...
-    def get_EntryType(self) -> EventLogEntryType: ...
-    def get_InstanceId(self) -> LongType: ...
-    def set_CategoryId(self, value: IntType) -> VoidType: ...
-    def set_EntryType(self, value: EventLogEntryType) -> VoidType: ...
-    def set_InstanceId(self, value: LongType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventLog(Component, IComponent, IDisposable, ISupportInitialize):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, logName: StringType): ...
-    @overload
-    def __init__(self, logName: StringType, machineName: StringType): ...
-    @overload
-    def __init__(self, logName: StringType, machineName: StringType, source: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def EnableRaisingEvents(self) -> BooleanType: ...
-    @EnableRaisingEvents.setter
-    def EnableRaisingEvents(self, value: BooleanType) -> None: ...
-    @property
-    def Entries(self) -> EventLogEntryCollection: ...
-    @property
-    def Log(self) -> StringType: ...
-    @Log.setter
-    def Log(self, value: StringType) -> None: ...
-    @property
-    def LogDisplayName(self) -> StringType: ...
-    @property
-    def MachineName(self) -> StringType: ...
-    @MachineName.setter
-    def MachineName(self, value: StringType) -> None: ...
-    @property
-    def MaximumKilobytes(self) -> LongType: ...
-    @MaximumKilobytes.setter
-    def MaximumKilobytes(self, value: LongType) -> None: ...
-    @property
-    def MinimumRetentionDays(self) -> IntType: ...
-    @property
-    def OverflowAction(self) -> OverflowAction: ...
-    @property
-    def Source(self) -> StringType: ...
-    @Source.setter
-    def Source(self, value: StringType) -> None: ...
-    @property
-    def SynchronizingObject(self) -> ISynchronizeInvoke: ...
-    @SynchronizingObject.setter
-    def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def BeginInit(self) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Close(self) -> VoidType: ...
-    @staticmethod
-    @overload
-    def CreateEventSource(
-        source: StringType, logName: StringType, machineName: StringType
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def CreateEventSource(source: StringType, logName: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def CreateEventSource(sourceData: EventSourceCreationData) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Delete(logName: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Delete(logName: StringType, machineName: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def DeleteEventSource(source: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def DeleteEventSource(source: StringType, machineName: StringType) -> VoidType: ...
-    def EndInit(self) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Exists(logName: StringType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def Exists(logName: StringType, machineName: StringType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def GetEventLogs() -> ArrayType[EventLog]: ...
-    @staticmethod
-    @overload
-    def GetEventLogs(machineName: StringType) -> ArrayType[EventLog]: ...
-    @staticmethod
-    def LogNameFromSourceName(source: StringType, machineName: StringType) -> StringType: ...
-    def ModifyOverflowPolicy(self, action: OverflowAction, retentionDays: IntType) -> VoidType: ...
-    def RegisterDisplayName(self, resourceFile: StringType, resourceId: LongType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def SourceExists(source: StringType, machineName: StringType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def SourceExists(source: StringType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def WriteEntry(source: StringType, message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteEntry(
-        source: StringType, message: StringType, type: EventLogEntryType
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteEntry(
-        source: StringType, message: StringType, type: EventLogEntryType, eventID: IntType
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteEntry(
-        source: StringType,
-        message: StringType,
-        type: EventLogEntryType,
-        eventID: IntType,
-        category: ShortType,
-    ) -> VoidType: ...
-    @overload
-    def WriteEntry(self, message: StringType) -> VoidType: ...
-    @overload
-    def WriteEntry(self, message: StringType, type: EventLogEntryType) -> VoidType: ...
-    @overload
-    def WriteEntry(
-        self, message: StringType, type: EventLogEntryType, eventID: IntType
-    ) -> VoidType: ...
-    @overload
-    def WriteEntry(
-        self, message: StringType, type: EventLogEntryType, eventID: IntType, category: ShortType
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteEntry(
-        source: StringType,
-        message: StringType,
-        type: EventLogEntryType,
-        eventID: IntType,
-        category: ShortType,
-        rawData: ArrayType[ByteType],
-    ) -> VoidType: ...
-    @overload
-    def WriteEntry(
-        self,
-        message: StringType,
-        type: EventLogEntryType,
-        eventID: IntType,
-        category: ShortType,
-        rawData: ArrayType[ByteType],
-    ) -> VoidType: ...
-    @overload
-    def WriteEvent(self, instance: EventInstance, values: ArrayType[ObjectType]) -> VoidType: ...
-    @overload
-    def WriteEvent(
-        self, instance: EventInstance, data: ArrayType[ByteType], values: ArrayType[ObjectType]
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteEvent(
-        source: StringType, instance: EventInstance, values: ArrayType[ObjectType]
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteEvent(
-        source: StringType,
-        instance: EventInstance,
-        data: ArrayType[ByteType],
-        values: ArrayType[ObjectType],
-    ) -> VoidType: ...
-    def add_EntryWritten(self, value: EntryWrittenEventHandler) -> VoidType: ...
-    def get_EnableRaisingEvents(self) -> BooleanType: ...
-    def get_Entries(self) -> EventLogEntryCollection: ...
-    def get_Log(self) -> StringType: ...
-    def get_LogDisplayName(self) -> StringType: ...
-    def get_MachineName(self) -> StringType: ...
-    def get_MaximumKilobytes(self) -> LongType: ...
-    def get_MinimumRetentionDays(self) -> IntType: ...
-    def get_OverflowAction(self) -> OverflowAction: ...
-    def get_Source(self) -> StringType: ...
-    def get_SynchronizingObject(self) -> ISynchronizeInvoke: ...
-    def remove_EntryWritten(self, value: EntryWrittenEventHandler) -> VoidType: ...
-    def set_EnableRaisingEvents(self, value: BooleanType) -> VoidType: ...
-    def set_Log(self, value: StringType) -> VoidType: ...
-    def set_MachineName(self, value: StringType) -> VoidType: ...
-    def set_MaximumKilobytes(self, value: LongType) -> VoidType: ...
-    def set_Source(self, value: StringType) -> VoidType: ...
-    def set_SynchronizingObject(self, value: ISynchronizeInvoke) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    EntryWritten: EventType[EntryWrittenEventHandler] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventLogEntry(Component, IComponent, IDisposable, ISerializable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Category(self) -> StringType: ...
-    @property
-    def CategoryNumber(self) -> ShortType: ...
-    @property
-    def Data(self) -> ArrayType[ByteType]: ...
-    @property
-    def EntryType(self) -> EventLogEntryType: ...
-    @property
-    def EventID(self) -> IntType: ...
-    @property
-    def Index(self) -> IntType: ...
-    @property
-    def InstanceId(self) -> LongType: ...
-    @property
-    def MachineName(self) -> StringType: ...
-    @property
-    def Message(self) -> StringType: ...
-    @property
-    def ReplacementStrings(self) -> ArrayType[StringType]: ...
-    @property
-    def Source(self) -> StringType: ...
-    @property
-    def TimeGenerated(self) -> DateTime: ...
-    @property
-    def TimeWritten(self) -> DateTime: ...
-    @property
-    def UserName(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Equals(self, otherEntry: EventLogEntry) -> BooleanType: ...
-    def get_Category(self) -> StringType: ...
-    def get_CategoryNumber(self) -> ShortType: ...
-    def get_Data(self) -> ArrayType[ByteType]: ...
-    def get_EntryType(self) -> EventLogEntryType: ...
-    def get_EventID(self) -> IntType: ...
-    def get_Index(self) -> IntType: ...
-    def get_InstanceId(self) -> LongType: ...
-    def get_MachineName(self) -> StringType: ...
-    def get_Message(self) -> StringType: ...
-    def get_ReplacementStrings(self) -> ArrayType[StringType]: ...
-    def get_Source(self) -> StringType: ...
-    def get_TimeGenerated(self) -> DateTime: ...
-    def get_TimeWritten(self) -> DateTime: ...
-    def get_UserName(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventLogEntryCollection(ObjectType, ICollection, IEnumerable):
-    # No Fields
-
-    # No Constructors
+    def TraceOutputOptions(self) -> TraceOptions:
+        """
 
-    # ---------- Properties ---------- #
-
-    @property
-    def Count(self) -> IntType: ...
-    def __getitem__(self, key: IntType) -> EventLogEntry: ...
-
-    # ---------- Methods ---------- #
-
-    def CopyTo(self, entries: ArrayType[EventLogEntry], index: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator: ...
-    def get_Count(self) -> IntType: ...
-    def get_Item(self, index: IntType) -> EventLogEntry: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventLogInternal(ObjectType, IDisposable, ISupportInitialize):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, logName: StringType): ...
-    @overload
-    def __init__(self, logName: StringType, machineName: StringType): ...
-    @overload
-    def __init__(self, logName: StringType, machineName: StringType, source: StringType): ...
-    @overload
-    def __init__(
-        self, logName: StringType, machineName: StringType, source: StringType, parent: EventLog
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def EnableRaisingEvents(self) -> BooleanType: ...
-    @EnableRaisingEvents.setter
-    def EnableRaisingEvents(self, value: BooleanType) -> None: ...
-    @property
-    def Entries(self) -> EventLogEntryCollection: ...
-    @property
-    def Log(self) -> StringType: ...
-    @property
-    def LogDisplayName(self) -> StringType: ...
-    @property
-    def MachineName(self) -> StringType: ...
-    @property
-    def MaximumKilobytes(self) -> LongType: ...
-    @MaximumKilobytes.setter
-    def MaximumKilobytes(self, value: LongType) -> None: ...
-    @property
-    def MinimumRetentionDays(self) -> IntType: ...
-    @property
-    def OverflowAction(self) -> OverflowAction: ...
-    @property
-    def Source(self) -> StringType: ...
-    @property
-    def SynchronizingObject(self) -> ISynchronizeInvoke: ...
-    @SynchronizingObject.setter
-    def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def BeginInit(self) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Close(self) -> VoidType: ...
-    def Dispose(self) -> VoidType: ...
-    def EndInit(self) -> VoidType: ...
-    def ModifyOverflowPolicy(self, action: OverflowAction, retentionDays: IntType) -> VoidType: ...
-    def RegisterDisplayName(self, resourceFile: StringType, resourceId: LongType) -> VoidType: ...
-    @overload
-    def WriteEntry(self, message: StringType) -> VoidType: ...
-    @overload
-    def WriteEntry(self, message: StringType, type: EventLogEntryType) -> VoidType: ...
-    @overload
-    def WriteEntry(
-        self, message: StringType, type: EventLogEntryType, eventID: IntType
-    ) -> VoidType: ...
-    @overload
-    def WriteEntry(
-        self, message: StringType, type: EventLogEntryType, eventID: IntType, category: ShortType
-    ) -> VoidType: ...
-    @overload
-    def WriteEntry(
-        self,
-        message: StringType,
-        type: EventLogEntryType,
-        eventID: IntType,
-        category: ShortType,
-        rawData: ArrayType[ByteType],
-    ) -> VoidType: ...
-    @overload
-    def WriteEvent(self, instance: EventInstance, values: ArrayType[ObjectType]) -> VoidType: ...
-    @overload
-    def WriteEvent(
-        self, instance: EventInstance, data: ArrayType[ByteType], values: ArrayType[ObjectType]
-    ) -> VoidType: ...
-    def add_EntryWritten(self, value: EntryWrittenEventHandler) -> VoidType: ...
-    def get_EnableRaisingEvents(self) -> BooleanType: ...
-    def get_Entries(self) -> EventLogEntryCollection: ...
-    def get_Log(self) -> StringType: ...
-    def get_LogDisplayName(self) -> StringType: ...
-    def get_MachineName(self) -> StringType: ...
-    def get_MaximumKilobytes(self) -> LongType: ...
-    def get_MinimumRetentionDays(self) -> IntType: ...
-    def get_OverflowAction(self) -> OverflowAction: ...
-    def get_Source(self) -> StringType: ...
-    def get_SynchronizingObject(self) -> ISynchronizeInvoke: ...
-    def remove_EntryWritten(self, value: EntryWrittenEventHandler) -> VoidType: ...
-    def set_EnableRaisingEvents(self, value: BooleanType) -> VoidType: ...
-    def set_MaximumKilobytes(self, value: LongType) -> VoidType: ...
-    def set_SynchronizingObject(self, value: ISynchronizeInvoke) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    EntryWritten: EventType[EntryWrittenEventHandler] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventLogPermission(
-    ResourcePermissionBase, IPermission, ISecurityEncodable, IStackWalk, IUnrestrictedPermission
-):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(self, permissionAccess: EventLogPermissionAccess, machineName: StringType): ...
-    @overload
-    def __init__(self, permissionAccessEntries: ArrayType[EventLogPermissionEntry]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def PermissionEntries(self) -> EventLogPermissionEntryCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def get_PermissionEntries(self) -> EventLogPermissionEntryCollection: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventLogPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def MachineName(self) -> StringType: ...
-    @MachineName.setter
-    def MachineName(self, value: StringType) -> None: ...
-    @property
-    def PermissionAccess(self) -> EventLogPermissionAccess: ...
-    @PermissionAccess.setter
-    def PermissionAccess(self, value: EventLogPermissionAccess) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_MachineName(self) -> StringType: ...
-    def get_PermissionAccess(self) -> EventLogPermissionAccess: ...
-    def set_MachineName(self, value: StringType) -> VoidType: ...
-    def set_PermissionAccess(self, value: EventLogPermissionAccess) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventLogPermissionEntry(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, permissionAccess: EventLogPermissionAccess, machineName: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def MachineName(self) -> StringType: ...
-    @property
-    def PermissionAccess(self) -> EventLogPermissionAccess: ...
-
-    # ---------- Methods ---------- #
-
-    def get_MachineName(self) -> StringType: ...
-    def get_PermissionAccess(self) -> EventLogPermissionAccess: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventLogPermissionEntryCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> EventLogPermissionEntry: ...
-    def __setitem__(self, key: IntType, value: EventLogPermissionEntry) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, value: EventLogPermissionEntry) -> IntType: ...
-    @overload
-    def AddRange(self, value: ArrayType[EventLogPermissionEntry]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: EventLogPermissionEntryCollection) -> VoidType: ...
-    def Contains(self, value: EventLogPermissionEntry) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[EventLogPermissionEntry], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: EventLogPermissionEntry) -> IntType: ...
-    def Insert(self, index: IntType, value: EventLogPermissionEntry) -> VoidType: ...
-    def Remove(self, value: EventLogPermissionEntry) -> VoidType: ...
-    def get_Item(self, index: IntType) -> EventLogPermissionEntry: ...
-    def set_Item(self, index: IntType, value: EventLogPermissionEntry) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventLogTraceListener(TraceListener, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, eventLog: EventLog): ...
-    @overload
-    def __init__(self, source: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def EventLog(self) -> EventLog: ...
-    @EventLog.setter
-    def EventLog(self, value: EventLog) -> None: ...
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-    @overload
-    def TraceData(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        severity: TraceEventType,
-        id: IntType,
-        data: ObjectType,
-    ) -> VoidType: ...
-    @overload
-    def TraceData(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        severity: TraceEventType,
-        id: IntType,
-        data: ArrayType[ObjectType],
-    ) -> VoidType: ...
-    @overload
-    def TraceEvent(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        severity: TraceEventType,
-        id: IntType,
-        format: StringType,
-        args: ArrayType[ObjectType],
-    ) -> VoidType: ...
-    @overload
-    def TraceEvent(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        severity: TraceEventType,
-        id: IntType,
-        message: StringType,
-    ) -> VoidType: ...
-    @overload
-    def Write(self, message: StringType) -> VoidType: ...
-    @overload
-    def WriteLine(self, message: StringType) -> VoidType: ...
-    def get_EventLog(self) -> EventLog: ...
-    def get_Name(self) -> StringType: ...
-    def set_EventLog(self, value: EventLog) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, fileName: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, name: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, name: StringType, bufferSize: IntType): ...
-    @overload
-    def __init__(
-        self,
-        fileName: StringType,
-        name: StringType,
-        bufferSize: IntType,
-        logRetentionOption: TraceLogRetentionOption,
-    ): ...
-    @overload
-    def __init__(
-        self,
-        fileName: StringType,
-        name: StringType,
-        bufferSize: IntType,
-        logRetentionOption: TraceLogRetentionOption,
-        maximumFileSize: LongType,
-    ): ...
-    @overload
-    def __init__(
-        self,
-        fileName: StringType,
-        name: StringType,
-        bufferSize: IntType,
-        logRetentionOption: TraceLogRetentionOption,
-        maximumFileSize: LongType,
-        maximumNumberOfFiles: IntType,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def BufferSize(self) -> IntType: ...
-    @property
-    def IsThreadSafe(self) -> BooleanType: ...
-    @property
-    def MaximumFileSize(self) -> LongType: ...
-    @property
-    def MaximumNumberOfFiles(self) -> IntType: ...
-    @property
-    def TraceLogRetentionOption(self) -> TraceLogRetentionOption: ...
-    @property
-    def Writer(self) -> TextWriter: ...
-    @Writer.setter
-    def Writer(self, value: TextWriter) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-    @overload
-    def Fail(self, message: StringType, detailMessage: StringType) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
-    @overload
-    def TraceData(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        data: ObjectType,
-    ) -> VoidType: ...
-    @overload
-    def TraceData(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        data: ArrayType[ObjectType],
-    ) -> VoidType: ...
-    @overload
-    def TraceEvent(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        format: StringType,
-        args: ArrayType[ObjectType],
-    ) -> VoidType: ...
-    @overload
-    def TraceEvent(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        message: StringType,
-    ) -> VoidType: ...
-    def TraceTransfer(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        id: IntType,
-        message: StringType,
-        relatedActivityId: Guid,
-    ) -> VoidType: ...
-    @overload
-    def Write(self, message: StringType) -> VoidType: ...
-    @overload
-    def WriteLine(self, message: StringType) -> VoidType: ...
-    def get_BufferSize(self) -> IntType: ...
-    def get_IsThreadSafe(self) -> BooleanType: ...
-    def get_MaximumFileSize(self) -> LongType: ...
-    def get_MaximumNumberOfFiles(self) -> IntType: ...
-    def get_TraceLogRetentionOption(self) -> TraceLogRetentionOption: ...
-    @overload
-    def get_Writer(self) -> TextWriter: ...
-    @overload
-    def set_Writer(self, value: TextWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventSourceCreationData(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, source: StringType, logName: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CategoryCount(self) -> IntType: ...
-    @CategoryCount.setter
-    def CategoryCount(self, value: IntType) -> None: ...
-    @property
-    def CategoryResourceFile(self) -> StringType: ...
-    @CategoryResourceFile.setter
-    def CategoryResourceFile(self, value: StringType) -> None: ...
-    @property
-    def LogName(self) -> StringType: ...
-    @LogName.setter
-    def LogName(self, value: StringType) -> None: ...
-    @property
-    def MachineName(self) -> StringType: ...
-    @MachineName.setter
-    def MachineName(self, value: StringType) -> None: ...
-    @property
-    def MessageResourceFile(self) -> StringType: ...
-    @MessageResourceFile.setter
-    def MessageResourceFile(self, value: StringType) -> None: ...
-    @property
-    def ParameterResourceFile(self) -> StringType: ...
-    @ParameterResourceFile.setter
-    def ParameterResourceFile(self, value: StringType) -> None: ...
-    @property
-    def Source(self) -> StringType: ...
-    @Source.setter
-    def Source(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CategoryCount(self) -> IntType: ...
-    def get_CategoryResourceFile(self) -> StringType: ...
-    def get_LogName(self) -> StringType: ...
-    def get_MachineName(self) -> StringType: ...
-    def get_MessageResourceFile(self) -> StringType: ...
-    def get_ParameterResourceFile(self) -> StringType: ...
-    def get_Source(self) -> StringType: ...
-    def set_CategoryCount(self, value: IntType) -> VoidType: ...
-    def set_CategoryResourceFile(self, value: StringType) -> VoidType: ...
-    def set_LogName(self, value: StringType) -> VoidType: ...
-    def set_MachineName(self, value: StringType) -> VoidType: ...
-    def set_MessageResourceFile(self, value: StringType) -> VoidType: ...
-    def set_ParameterResourceFile(self, value: StringType) -> VoidType: ...
-    def set_Source(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class EventTypeFilter(TraceFilter):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, level: SourceLevels): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def EventType(self) -> SourceLevels: ...
-    @EventType.setter
-    def EventType(self, value: SourceLevels) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def ShouldTrace(
-        self,
-        cache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        formatOrMessage: StringType,
-        args: ArrayType[ObjectType],
-        data1: ObjectType,
-        data: ArrayType[ObjectType],
-    ) -> BooleanType: ...
-    def get_EventType(self) -> SourceLevels: ...
-    def set_EventType(self, value: SourceLevels) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FileVersionInfo(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Comments(self) -> StringType: ...
-    @property
-    def CompanyName(self) -> StringType: ...
-    @property
-    def FileBuildPart(self) -> IntType: ...
-    @property
-    def FileDescription(self) -> StringType: ...
-    @property
-    def FileMajorPart(self) -> IntType: ...
-    @property
-    def FileMinorPart(self) -> IntType: ...
-    @property
-    def FileName(self) -> StringType: ...
-    @property
-    def FilePrivatePart(self) -> IntType: ...
-    @property
-    def FileVersion(self) -> StringType: ...
-    @property
-    def InternalName(self) -> StringType: ...
-    @property
-    def IsDebug(self) -> BooleanType: ...
-    @property
-    def IsPatched(self) -> BooleanType: ...
-    @property
-    def IsPreRelease(self) -> BooleanType: ...
-    @property
-    def IsPrivateBuild(self) -> BooleanType: ...
-    @property
-    def IsSpecialBuild(self) -> BooleanType: ...
-    @property
-    def Language(self) -> StringType: ...
-    @property
-    def LegalCopyright(self) -> StringType: ...
-    @property
-    def LegalTrademarks(self) -> StringType: ...
-    @property
-    def OriginalFilename(self) -> StringType: ...
-    @property
-    def PrivateBuild(self) -> StringType: ...
-    @property
-    def ProductBuildPart(self) -> IntType: ...
-    @property
-    def ProductMajorPart(self) -> IntType: ...
-    @property
-    def ProductMinorPart(self) -> IntType: ...
-    @property
-    def ProductName(self) -> StringType: ...
-    @property
-    def ProductPrivatePart(self) -> IntType: ...
-    @property
-    def ProductVersion(self) -> StringType: ...
-    @property
-    def SpecialBuild(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetVersionInfo(fileName: StringType) -> FileVersionInfo: ...
-    def ToString(self) -> StringType: ...
-    def get_Comments(self) -> StringType: ...
-    def get_CompanyName(self) -> StringType: ...
-    def get_FileBuildPart(self) -> IntType: ...
-    def get_FileDescription(self) -> StringType: ...
-    def get_FileMajorPart(self) -> IntType: ...
-    def get_FileMinorPart(self) -> IntType: ...
-    def get_FileName(self) -> StringType: ...
-    def get_FilePrivatePart(self) -> IntType: ...
-    def get_FileVersion(self) -> StringType: ...
-    def get_InternalName(self) -> StringType: ...
-    def get_IsDebug(self) -> BooleanType: ...
-    def get_IsPatched(self) -> BooleanType: ...
-    def get_IsPreRelease(self) -> BooleanType: ...
-    def get_IsPrivateBuild(self) -> BooleanType: ...
-    def get_IsSpecialBuild(self) -> BooleanType: ...
-    def get_Language(self) -> StringType: ...
-    def get_LegalCopyright(self) -> StringType: ...
-    def get_LegalTrademarks(self) -> StringType: ...
-    def get_OriginalFilename(self) -> StringType: ...
-    def get_PrivateBuild(self) -> StringType: ...
-    def get_ProductBuildPart(self) -> IntType: ...
-    def get_ProductMajorPart(self) -> IntType: ...
-    def get_ProductMinorPart(self) -> IntType: ...
-    def get_ProductName(self) -> StringType: ...
-    def get_ProductPrivatePart(self) -> IntType: ...
-    def get_ProductVersion(self) -> StringType: ...
-    def get_SpecialBuild(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FilterElement(TypedElement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetRuntimeObject(self) -> TraceFilter: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InstanceData(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, instanceName: StringType, sample: CounterSample): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def InstanceName(self) -> StringType: ...
-    @property
-    def RawValue(self) -> LongType: ...
-    @property
-    def Sample(self) -> CounterSample: ...
-
-    # ---------- Methods ---------- #
-
-    def get_InstanceName(self) -> StringType: ...
-    def get_RawValue(self) -> LongType: ...
-    def get_Sample(self) -> CounterSample: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InstanceDataCollection(DictionaryBase, IDictionary, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, counterName: StringType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CounterName(self) -> StringType: ...
-    def __getitem__(self, key: StringType) -> InstanceData: ...
-    @property
-    def Keys(self) -> ICollection: ...
-    @property
-    def Values(self) -> ICollection: ...
-
-    # ---------- Methods ---------- #
-
-    def Contains(self, instanceName: StringType) -> BooleanType: ...
-    @overload
-    def CopyTo(self, instances: ArrayType[InstanceData], index: IntType) -> VoidType: ...
-    def get_CounterName(self) -> StringType: ...
-    def get_Item(self, instanceName: StringType) -> InstanceData: ...
-    def get_Keys(self) -> ICollection: ...
-    def get_Values(self) -> ICollection: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InstanceDataCollectionCollection(DictionaryBase, IDictionary, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: StringType) -> InstanceDataCollection: ...
-    @property
-    def Keys(self) -> ICollection: ...
-    @property
-    def Values(self) -> ICollection: ...
-
-    # ---------- Methods ---------- #
-
-    def Contains(self, counterName: StringType) -> BooleanType: ...
-    @overload
-    def CopyTo(self, counters: ArrayType[InstanceDataCollection], index: IntType) -> VoidType: ...
-    def get_Item(self, counterName: StringType) -> InstanceDataCollection: ...
-    def get_Keys(self) -> ICollection: ...
-    def get_Values(self) -> ICollection: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ListenerElement(TypedElement):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, allowReferences: BooleanType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Attributes(self) -> Hashtable: ...
-    @property
-    def Filter(self) -> FilterElement: ...
-    @property
-    def Name(self) -> StringType: ...
-    @Name.setter
-    def Name(self, value: StringType) -> None: ...
-    @property
-    def TraceOutputOptions(self) -> TraceOptions: ...
+        :return:
+        """
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
     @property
-    def TypeName(self) -> StringType: ...
+    def Writer(self) -> TextWriter:
+        """
+
+        :return:
+        """
+    @Writer.setter
+    def Writer(self, value: TextWriter) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Fail(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Fail(self, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: object,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceEvent(
+        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        message: str,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param message:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        format: str,
+        args: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
+    def TraceTransfer(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        id: int,
+        message: str,
+        relatedActivityId: Guid,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param id:
+        :param message:
+        :param relatedActivityId:
+        """
+    @overload
+    def Write(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Write(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Write(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def Write(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def WriteLine(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def WriteLine(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+
+class CorrelationManager(Object):
+    """"""
+
+    @property
+    def ActivityId(self) -> Guid:
+        """
+
+        :return:
+        """
+    @ActivityId.setter
+    def ActivityId(self, value: Guid) -> None: ...
+    @property
+    def LogicalOperationStack(self) -> Stack:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def StartLogicalOperation(self) -> None:
+        """"""
+    @overload
+    def StartLogicalOperation(self, operationId: object) -> None:
+        """
+
+        :param operationId:
+        """
+    def StopLogicalOperation(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CounterCreationData(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, counterName: str, counterHelp: str, counterType: PerformanceCounterType):
+        """
+
+        :param counterName:
+        :param counterHelp:
+        :param counterType:
+        """
+    @property
+    def CounterHelp(self) -> str:
+        """
+
+        :return:
+        """
+    @CounterHelp.setter
+    def CounterHelp(self, value: str) -> None: ...
+    @property
+    def CounterName(self) -> str:
+        """
+
+        :return:
+        """
+    @CounterName.setter
+    def CounterName(self, value: str) -> None: ...
+    @property
+    def CounterType(self) -> PerformanceCounterType:
+        """
+
+        :return:
+        """
+    @CounterType.setter
+    def CounterType(self, value: PerformanceCounterType) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CounterCreationDataCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, value: CounterCreationDataCollection):
+        """
+
+        :param value:
+        """
+    @overload
+    def __init__(self, value: Array[CounterCreationData]):
+        """
+
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: CounterCreationData) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: CounterCreationDataCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[CounterCreationData]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: CounterCreationData) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[CounterCreationData], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: CounterCreationData) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: CounterCreationData) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: CounterCreationData) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: CounterCreationData) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class CounterDefinitionSample(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CounterSample(ValueType):
+    """"""
+
+    Empty: Final[ClassVar[CounterSample]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(
+        self,
+        rawValue: int,
+        baseValue: int,
+        counterFrequency: int,
+        systemFrequency: int,
+        timeStamp: int,
+        timeStamp100nSec: int,
+        counterType: PerformanceCounterType,
+    ):
+        """
+
+        :param rawValue:
+        :param baseValue:
+        :param counterFrequency:
+        :param systemFrequency:
+        :param timeStamp:
+        :param timeStamp100nSec:
+        :param counterType:
+        """
+    @overload
+    def __init__(
+        self,
+        rawValue: int,
+        baseValue: int,
+        counterFrequency: int,
+        systemFrequency: int,
+        timeStamp: int,
+        timeStamp100nSec: int,
+        counterType: PerformanceCounterType,
+        counterTimeStamp: int,
+    ):
+        """
+
+        :param rawValue:
+        :param baseValue:
+        :param counterFrequency:
+        :param systemFrequency:
+        :param timeStamp:
+        :param timeStamp100nSec:
+        :param counterType:
+        :param counterTimeStamp:
+        """
+    @property
+    def BaseValue(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def CounterFrequency(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def CounterTimeStamp(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def CounterType(self) -> PerformanceCounterType:
+        """
+
+        :return:
+        """
+    @property
+    def RawValue(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def SystemFrequency(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def TimeStamp(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def TimeStamp100nSec(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def Calculate(cls, counterSample: CounterSample) -> float:
+        """
+
+        :param counterSample:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Calculate(cls, counterSample: CounterSample, nextCounterSample: CounterSample) -> float:
+        """
+
+        :param counterSample:
+        :param nextCounterSample:
+        :return:
+        """
+    @overload
+    def Equals(self, sample: CounterSample) -> bool:
+        """
+
+        :param sample:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __eq__(self, other: CounterSample) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    def __ne__(self, other: CounterSample) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @classmethod
+    def op_Equality(cls, a: CounterSample, b: CounterSample) -> bool:
+        """
+
+        :param a:
+        :param b:
+        :return:
+        """
+    @classmethod
+    def op_Inequality(cls, a: CounterSample, b: CounterSample) -> bool:
+        """
+
+        :param a:
+        :param b:
+        :return:
+        """
+
+class CounterSampleCalculator(ABC, Object):
+    """"""
+
+    @classmethod
+    @overload
+    def ComputeCounterValue(cls, newSample: CounterSample) -> float:
+        """
+
+        :param newSample:
+        :return:
+        """
+    @classmethod
+    @overload
+    def ComputeCounterValue(cls, oldSample: CounterSample, newSample: CounterSample) -> float:
+        """
+
+        :param oldSample:
+        :param newSample:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DataReceivedEventArgs(EventArgs):
+    """"""
+
+    @property
+    def Data(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+DataReceivedEventHandler: Callable[[object, DataReceivedEventArgs], None] = ...
+"""
+
+:param sender: 
+:param e: 
+"""
+
+class Debug(ABC, Object):
+    """"""
+
+    @classmethod
+    @property
+    def AutoFlush(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @AutoFlush.setter
+    def AutoFlush(cls, value: bool) -> None: ...
+    @classmethod
+    @property
+    def IndentLevel(cls) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @IndentLevel.setter
+    def IndentLevel(cls, value: int) -> None: ...
+    @classmethod
+    @property
+    def IndentSize(cls) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @IndentSize.setter
+    def IndentSize(cls, value: int) -> None: ...
+    @classmethod
+    @property
+    def Listeners(cls) -> TraceListenerCollection:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def Assert(cls, condition: bool) -> None:
+        """
+
+        :param condition:
+        """
+    @classmethod
+    @overload
+    def Assert(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    @overload
+    def Assert(cls, condition: bool, message: str, detailMessage: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        :param detailMessage:
+        """
+    @classmethod
+    @overload
+    def Assert(
+        cls, condition: bool, message: str, detailMessageFormat: str, args: Array[object]
+    ) -> None:
+        """
+
+        :param condition:
+        :param message:
+        :param detailMessageFormat:
+        :param args:
+        """
+    @classmethod
+    def Close(cls) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Fail(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def Fail(cls, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    @classmethod
+    def Flush(cls) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Indent(cls) -> None:
+        """"""
+    @classmethod
+    @overload
+    def Print(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def Print(cls, format: str, args: Array[object]) -> None:
+        """
+
+        :param format:
+        :param args:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Unindent(cls) -> None:
+        """"""
+    @classmethod
+    @overload
+    def Write(cls, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def Write(cls, value: object, category: str) -> None:
+        """
+
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def Write(cls, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, value: object) -> None:
+        """
+
+        :param condition:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, value: object, category: str) -> None:
+        """
+
+        :param condition:
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, message: str, category: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, value: object, category: str) -> None:
+        """
+
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, format: str, args: Array[object]) -> None:
+        """
+
+        :param format:
+        :param args:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, value: object) -> None:
+        """
+
+        :param condition:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, value: object, category: str) -> None:
+        """
+
+        :param condition:
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, message: str, category: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        :param category:
+        """
+
+class DebuggableAttribute(Attribute, _Attribute):
+    """"""
+
+    @overload
+    def __init__(self, modes: DebuggableAttribute.DebuggingModes):
+        """
+
+        :param modes:
+        """
+    @overload
+    def __init__(self, isJITTrackingEnabled: bool, isJITOptimizerDisabled: bool):
+        """
+
+        :param isJITTrackingEnabled:
+        :param isJITOptimizerDisabled:
+        """
+    @property
+    def DebuggingFlags(self) -> DebuggableAttribute.DebuggingModes:
+        """
+
+        :return:
+        """
+    @property
+    def IsJITOptimizerDisabled(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsJITTrackingEnabled(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+    class DebuggingModes(Enum):
+        """"""
+
+        _None: DebuggingModes = ...
+        """"""
+        Default: DebuggingModes = ...
+        """"""
+        IgnoreSymbolStoreSequencePoints: DebuggingModes = ...
+        """"""
+        EnableEditAndContinue: DebuggingModes = ...
+        """"""
+        DisableOptimizations: DebuggingModes = ...
+        """"""
+
+class Debugger(Object):
+    """"""
+
+    DefaultCategory: Final[ClassVar[str]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    @classmethod
+    @property
+    def IsAttached(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Break(cls) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def IsLogging(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Launch(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Log(cls, level: int, category: str, message: str) -> None:
+        """
+
+        :param level:
+        :param category:
+        :param message:
+        """
+    @classmethod
+    def NotifyOfCrossThreadDependency(cls) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DebuggerBrowsableAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self, state: DebuggerBrowsableState):
+        """
+
+        :param state:
+        """
+    @property
+    def State(self) -> DebuggerBrowsableState:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DebuggerBrowsableState(Enum):
+    """"""
+
+    Never: DebuggerBrowsableState = ...
+    """"""
+    Collapsed: DebuggerBrowsableState = ...
+    """"""
+    RootHidden: DebuggerBrowsableState = ...
+    """"""
+
+class DebuggerDisplayAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self, value: str):
+        """
+
+        :param value:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def Target(self) -> Type:
+        """
+
+        :return:
+        """
+    @Target.setter
+    def Target(self, value: Type) -> None: ...
+    @property
+    def TargetTypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @TargetTypeName.setter
+    def TargetTypeName(self, value: str) -> None: ...
+    @property
+    def Type(self) -> str:
+        """
+
+        :return:
+        """
+    @Type.setter
+    def Type(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DebuggerHiddenAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DebuggerNonUserCodeAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DebuggerStepThroughAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DebuggerStepperBoundaryAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DebuggerTypeProxyAttribute(Attribute, _Attribute):
+    """"""
+
+    @overload
+    def __init__(self, typeName: str):
+        """
+
+        :param typeName:
+        """
+    @overload
+    def __init__(self, type: Type):
+        """
+
+        :param type:
+        """
+    @property
+    def ProxyTypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Target(self) -> Type:
+        """
+
+        :return:
+        """
+    @Target.setter
+    def Target(self, value: Type) -> None: ...
+    @property
+    def TargetTypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @TargetTypeName.setter
+    def TargetTypeName(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DebuggerVisualizerAttribute(Attribute, _Attribute):
+    """"""
+
+    @overload
+    def __init__(self, visualizerTypeName: str):
+        """
+
+        :param visualizerTypeName:
+        """
+    @overload
+    def __init__(self, visualizer: Type):
+        """
+
+        :param visualizer:
+        """
+    @overload
+    def __init__(self, visualizerTypeName: str, visualizerObjectSourceTypeName: str):
+        """
+
+        :param visualizerTypeName:
+        :param visualizerObjectSourceTypeName:
+        """
+    @overload
+    def __init__(self, visualizerTypeName: str, visualizerObjectSource: Type):
+        """
+
+        :param visualizerTypeName:
+        :param visualizerObjectSource:
+        """
+    @overload
+    def __init__(self, visualizer: Type, visualizerObjectSourceTypeName: str):
+        """
+
+        :param visualizer:
+        :param visualizerObjectSourceTypeName:
+        """
+    @overload
+    def __init__(self, visualizer: Type, visualizerObjectSource: Type):
+        """
+
+        :param visualizer:
+        :param visualizerObjectSource:
+        """
+    @property
+    def Description(self) -> str:
+        """
+
+        :return:
+        """
+    @Description.setter
+    def Description(self, value: str) -> None: ...
+    @property
+    def Target(self) -> Type:
+        """
+
+        :return:
+        """
+    @Target.setter
+    def Target(self, value: Type) -> None: ...
+    @property
+    def TargetTypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @TargetTypeName.setter
+    def TargetTypeName(self, value: str) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def VisualizerObjectSourceTypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def VisualizerTypeName(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DefaultFilter(AssertFilter):
+    """"""
+
+    def AssertFailure(
+        self,
+        condition: str,
+        message: str,
+        location: StackTrace,
+        stackTraceFormat: StackTrace.TraceFormat,
+        windowTitle: str,
+    ) -> AssertFilters:
+        """
+
+        :param condition:
+        :param message:
+        :param location:
+        :param stackTraceFormat:
+        :param windowTitle:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DefaultTraceListener(TraceListener, IDisposable):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def AssertUiEnabled(self) -> bool:
+        """
+
+        :return:
+        """
+    @AssertUiEnabled.setter
+    def AssertUiEnabled(self, value: bool) -> None: ...
+    @property
+    def Attributes(self) -> StringDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Filter(self) -> TraceFilter:
+        """
+
+        :return:
+        """
+    @Filter.setter
+    def Filter(self, value: TraceFilter) -> None: ...
+    @property
+    def IndentLevel(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentLevel.setter
+    def IndentLevel(self, value: int) -> None: ...
+    @property
+    def IndentSize(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentSize.setter
+    def IndentSize(self, value: int) -> None: ...
+    @property
+    def IsThreadSafe(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def LogFileName(self) -> str:
+        """
+
+        :return:
+        """
+    @LogFileName.setter
+    def LogFileName(self, value: str) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def TraceOutputOptions(self) -> TraceOptions:
+        """
+
+        :return:
+        """
+    @TraceOutputOptions.setter
+    def TraceOutputOptions(self, value: TraceOptions) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Fail(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Fail(self, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: object,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceEvent(
+        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        message: str,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param message:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        format: str,
+        args: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
+    def TraceTransfer(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        id: int,
+        message: str,
+        relatedActivityId: Guid,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param id:
+        :param message:
+        :param relatedActivityId:
+        """
+    @overload
+    def Write(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Write(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Write(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def Write(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def WriteLine(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def WriteLine(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+
+class DelimitedListTraceListener(TextWriterTraceListener, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self, stream: Stream):
+        """
+
+        :param stream:
+        """
+    @overload
+    def __init__(self, writer: TextWriter):
+        """
+
+        :param writer:
+        """
+    @overload
+    def __init__(self, fileName: str):
+        """
+
+        :param fileName:
+        """
+    @overload
+    def __init__(self, stream: Stream, name: str):
+        """
+
+        :param stream:
+        :param name:
+        """
+    @overload
+    def __init__(self, writer: TextWriter, name: str):
+        """
+
+        :param writer:
+        :param name:
+        """
+    @overload
+    def __init__(self, fileName: str, name: str):
+        """
+
+        :param fileName:
+        :param name:
+        """
+    @property
+    def Attributes(self) -> StringDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Delimiter(self) -> str:
+        """
+
+        :return:
+        """
+    @Delimiter.setter
+    def Delimiter(self, value: str) -> None: ...
+    @property
+    def Filter(self) -> TraceFilter:
+        """
+
+        :return:
+        """
+    @Filter.setter
+    def Filter(self, value: TraceFilter) -> None: ...
+    @property
+    def IndentLevel(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentLevel.setter
+    def IndentLevel(self, value: int) -> None: ...
+    @property
+    def IndentSize(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentSize.setter
+    def IndentSize(self, value: int) -> None: ...
+    @property
+    def IsThreadSafe(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def TraceOutputOptions(self) -> TraceOptions:
+        """
+
+        :return:
+        """
+    @TraceOutputOptions.setter
+    def TraceOutputOptions(self, value: TraceOptions) -> None: ...
+    @property
+    def Writer(self) -> TextWriter:
+        """
+
+        :return:
+        """
+    @Writer.setter
+    def Writer(self, value: TextWriter) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Fail(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Fail(self, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: object,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceEvent(
+        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        message: str,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param message:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        format: str,
+        args: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
+    def TraceTransfer(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        id: int,
+        message: str,
+        relatedActivityId: Guid,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param id:
+        :param message:
+        :param relatedActivityId:
+        """
+    @overload
+    def Write(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Write(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Write(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def Write(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def WriteLine(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def WriteLine(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+
+class DiagnosticsConfiguration(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DiagnosticsConfigurationHandler(Object, IConfigurationSectionHandler):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
+        """
+
+        :param parent:
+        :param configContext:
+        :param section:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EditAndContinueHelper(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EntryWrittenEventArgs(EventArgs):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, entry: EventLogEntry):
+        """
+
+        :param entry:
+        """
+    @property
+    def Entry(self) -> EventLogEntry:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+EntryWrittenEventHandler: Callable[[object, EntryWrittenEventArgs], None] = ...
+"""
+
+:param sender: 
+:param e: 
+"""
+
+class EnvironmentBlock(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def ToByteArray(cls, sd: StringDictionary, unicode: bool) -> Array[int]:
+        """
+
+        :param sd:
+        :param unicode:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventInstance(Object):
+    """"""
+
+    @overload
+    def __init__(self, instanceId: int, categoryId: int):
+        """
+
+        :param instanceId:
+        :param categoryId:
+        """
+    @overload
+    def __init__(self, instanceId: int, categoryId: int, entryType: EventLogEntryType):
+        """
+
+        :param instanceId:
+        :param categoryId:
+        :param entryType:
+        """
+    @property
+    def CategoryId(self) -> int:
+        """
+
+        :return:
+        """
+    @CategoryId.setter
+    def CategoryId(self, value: int) -> None: ...
+    @property
+    def EntryType(self) -> EventLogEntryType:
+        """
+
+        :return:
+        """
+    @EntryType.setter
+    def EntryType(self, value: EventLogEntryType) -> None: ...
+    @property
+    def InstanceId(self) -> int:
+        """
+
+        :return:
+        """
+    @InstanceId.setter
+    def InstanceId(self, value: int) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventLog(Component, IComponent, ISupportInitialize, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, logName: str):
+        """
+
+        :param logName:
+        """
+    @overload
+    def __init__(self, logName: str, machineName: str):
+        """
+
+        :param logName:
+        :param machineName:
+        """
+    @overload
+    def __init__(self, logName: str, machineName: str, source: str):
+        """
+
+        :param logName:
+        :param machineName:
+        :param source:
+        """
+    @property
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
+    @property
+    def EnableRaisingEvents(self) -> bool:
+        """
+
+        :return:
+        """
+    @EnableRaisingEvents.setter
+    def EnableRaisingEvents(self, value: bool) -> None: ...
+    @property
+    def Entries(self) -> EventLogEntryCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Log(self) -> str:
+        """
+
+        :return:
+        """
+    @Log.setter
+    def Log(self, value: str) -> None: ...
+    @property
+    def LogDisplayName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MachineName(self) -> str:
+        """
+
+        :return:
+        """
+    @MachineName.setter
+    def MachineName(self, value: str) -> None: ...
+    @property
+    def MaximumKilobytes(self) -> int:
+        """
+
+        :return:
+        """
+    @MaximumKilobytes.setter
+    def MaximumKilobytes(self, value: int) -> None: ...
+    @property
+    def MinimumRetentionDays(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OverflowAction(self) -> OverflowAction:
+        """
+
+        :return:
+        """
+    @property
+    def Site(self) -> ISite:
+        """
+
+        :return:
+        """
+    @Site.setter
+    def Site(self, value: ISite) -> None: ...
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def SynchronizingObject(self) -> ISynchronizeInvoke:
+        """
+
+        :return:
+        """
+    @SynchronizingObject.setter
+    def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
+    def BeginInit(self) -> None:
+        """"""
+    def Clear(self) -> None:
+        """"""
+    def Close(self) -> None:
+        """"""
+    @classmethod
+    @overload
+    def CreateEventSource(cls, sourceData: EventSourceCreationData) -> None:
+        """
+
+        :param sourceData:
+        """
+    @classmethod
+    @overload
+    def CreateEventSource(cls, source: str, logName: str) -> None:
+        """
+
+        :param source:
+        :param logName:
+        """
+    @classmethod
+    @overload
+    def CreateEventSource(cls, source: str, logName: str, machineName: str) -> None:
+        """
+
+        :param source:
+        :param logName:
+        :param machineName:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Delete(cls, logName: str) -> None:
+        """
+
+        :param logName:
+        """
+    @classmethod
+    @overload
+    def Delete(cls, logName: str, machineName: str) -> None:
+        """
+
+        :param logName:
+        :param machineName:
+        """
+    @classmethod
+    @overload
+    def DeleteEventSource(cls, source: str) -> None:
+        """
+
+        :param source:
+        """
+    @classmethod
+    @overload
+    def DeleteEventSource(cls, source: str, machineName: str) -> None:
+        """
+
+        :param source:
+        :param machineName:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndInit(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exists(cls, logName: str) -> bool:
+        """
+
+        :param logName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exists(cls, logName: str, machineName: str) -> bool:
+        """
+
+        :param logName:
+        :param machineName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetEventLogs(cls) -> Array[EventLog]:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetEventLogs(cls, machineName: str) -> Array[EventLog]:
+        """
+
+        :param machineName:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
+    def LogNameFromSourceName(cls, source: str, machineName: str) -> str:
+        """
+
+        :param source:
+        :param machineName:
+        :return:
+        """
+    def ModifyOverflowPolicy(self, action: OverflowAction, retentionDays: int) -> None:
+        """
+
+        :param action:
+        :param retentionDays:
+        """
+    def RegisterDisplayName(self, resourceFile: str, resourceId: int) -> None:
+        """
+
+        :param resourceFile:
+        :param resourceId:
+        """
+    @classmethod
+    @overload
+    def SourceExists(cls, source: str) -> bool:
+        """
+
+        :param source:
+        :return:
+        """
+    @classmethod
+    @overload
+    def SourceExists(cls, source: str, machineName: str) -> bool:
+        """
+
+        :param source:
+        :param machineName:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def WriteEntry(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def WriteEntry(self, message: str, type: EventLogEntryType) -> None:
+        """
+
+        :param message:
+        :param type:
+        """
+    @classmethod
+    @overload
+    def WriteEntry(cls, source: str, message: str) -> None:
+        """
+
+        :param source:
+        :param message:
+        """
+    @overload
+    def WriteEntry(self, message: str, type: EventLogEntryType, eventID: int) -> None:
+        """
+
+        :param message:
+        :param type:
+        :param eventID:
+        """
+    @classmethod
+    @overload
+    def WriteEntry(cls, source: str, message: str, type: EventLogEntryType) -> None:
+        """
+
+        :param source:
+        :param message:
+        :param type:
+        """
+    @overload
+    def WriteEntry(
+        self, message: str, type: EventLogEntryType, eventID: int, category: int
+    ) -> None:
+        """
+
+        :param message:
+        :param type:
+        :param eventID:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteEntry(cls, source: str, message: str, type: EventLogEntryType, eventID: int) -> None:
+        """
+
+        :param source:
+        :param message:
+        :param type:
+        :param eventID:
+        """
+    @overload
+    def WriteEntry(
+        self,
+        message: str,
+        type: EventLogEntryType,
+        eventID: int,
+        category: int,
+        rawData: Array[int],
+    ) -> None:
+        """
+
+        :param message:
+        :param type:
+        :param eventID:
+        :param category:
+        :param rawData:
+        """
+    @classmethod
+    @overload
+    def WriteEntry(
+        cls, source: str, message: str, type: EventLogEntryType, eventID: int, category: int
+    ) -> None:
+        """
+
+        :param source:
+        :param message:
+        :param type:
+        :param eventID:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteEntry(
+        cls,
+        source: str,
+        message: str,
+        type: EventLogEntryType,
+        eventID: int,
+        category: int,
+        rawData: Array[int],
+    ) -> None:
+        """
+
+        :param source:
+        :param message:
+        :param type:
+        :param eventID:
+        :param category:
+        :param rawData:
+        """
+    @overload
+    def WriteEvent(self, instance: EventInstance, values: Array[object]) -> None:
+        """
+
+        :param instance:
+        :param values:
+        """
+    @overload
+    def WriteEvent(self, instance: EventInstance, data: Array[int], values: Array[object]) -> None:
+        """
+
+        :param instance:
+        :param data:
+        :param values:
+        """
+    @classmethod
+    @overload
+    def WriteEvent(cls, source: str, instance: EventInstance, values: Array[object]) -> None:
+        """
+
+        :param source:
+        :param instance:
+        :param values:
+        """
+    @classmethod
+    @overload
+    def WriteEvent(
+        cls, source: str, instance: EventInstance, data: Array[int], values: Array[object]
+    ) -> None:
+        """
+
+        :param source:
+        :param instance:
+        :param data:
+        :param values:
+        """
+    Disposed: EventType[EventHandler] = ...
+    """"""
+    EntryWritten: EventType[EntryWrittenEventHandler] = ...
+    """"""
+
+class EventLogEntry(Component, IComponent, ISerializable, IDisposable):
+    """"""
+
+    @property
+    def Category(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CategoryNumber(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
+    @property
+    def Data(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    @property
+    def EntryType(self) -> EventLogEntryType:
+        """
+
+        :return:
+        """
+    @property
+    def EventID(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Index(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def InstanceId(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MachineName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ReplacementStrings(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    @property
+    def Site(self) -> ISite:
+        """
+
+        :return:
+        """
+    @Site.setter
+    def Site(self, value: ISite) -> None: ...
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TimeGenerated(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def TimeWritten(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def UserName(self) -> str:
+        """
+
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    @overload
+    def Equals(self, otherEntry: EventLogEntry) -> bool:
+        """
+
+        :param otherEntry:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    Disposed: EventType[EventHandler] = ...
+    """"""
+
+class EventLogEntryCollection(Object, ICollection, IEnumerable):
+    """"""
+
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> EventLogEntry:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, entries: Array[EventLogEntry], index: int) -> None:
+        """
+
+        :param entries:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> EventLogEntry:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+
+class EventLogEntryType(Enum):
+    """"""
+
+    Error: EventLogEntryType = ...
+    """"""
+    Warning: EventLogEntryType = ...
+    """"""
+    Information: EventLogEntryType = ...
+    """"""
+    SuccessAudit: EventLogEntryType = ...
+    """"""
+    FailureAudit: EventLogEntryType = ...
+    """"""
+
+class EventLogInternal(Object, ISupportInitialize, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, logName: str):
+        """
+
+        :param logName:
+        """
+    @overload
+    def __init__(self, logName: str, machineName: str):
+        """
+
+        :param logName:
+        :param machineName:
+        """
+    @overload
+    def __init__(self, logName: str, machineName: str, source: str):
+        """
+
+        :param logName:
+        :param machineName:
+        :param source:
+        """
+    @overload
+    def __init__(self, logName: str, machineName: str, source: str, parent: EventLog):
+        """
+
+        :param logName:
+        :param machineName:
+        :param source:
+        :param parent:
+        """
+    @property
+    def EnableRaisingEvents(self) -> bool:
+        """
+
+        :return:
+        """
+    @EnableRaisingEvents.setter
+    def EnableRaisingEvents(self, value: bool) -> None: ...
+    @property
+    def Entries(self) -> EventLogEntryCollection:
+        """
+
+        :return:
+        """
+    @property
+    def Log(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def LogDisplayName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MachineName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MaximumKilobytes(self) -> int:
+        """
+
+        :return:
+        """
+    @MaximumKilobytes.setter
+    def MaximumKilobytes(self, value: int) -> None: ...
+    @property
+    def MinimumRetentionDays(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def OverflowAction(self) -> OverflowAction:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def SynchronizingObject(self) -> ISynchronizeInvoke:
+        """
+
+        :return:
+        """
+    @SynchronizingObject.setter
+    def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
+    def BeginInit(self) -> None:
+        """"""
+    def Clear(self) -> None:
+        """"""
+    def Close(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def EndInit(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ModifyOverflowPolicy(self, action: OverflowAction, retentionDays: int) -> None:
+        """
+
+        :param action:
+        :param retentionDays:
+        """
+    def RegisterDisplayName(self, resourceFile: str, resourceId: int) -> None:
+        """
+
+        :param resourceFile:
+        :param resourceId:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def WriteEntry(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def WriteEntry(self, message: str, type: EventLogEntryType) -> None:
+        """
+
+        :param message:
+        :param type:
+        """
+    @overload
+    def WriteEntry(self, message: str, type: EventLogEntryType, eventID: int) -> None:
+        """
+
+        :param message:
+        :param type:
+        :param eventID:
+        """
+    @overload
+    def WriteEntry(
+        self, message: str, type: EventLogEntryType, eventID: int, category: int
+    ) -> None:
+        """
+
+        :param message:
+        :param type:
+        :param eventID:
+        :param category:
+        """
+    @overload
+    def WriteEntry(
+        self,
+        message: str,
+        type: EventLogEntryType,
+        eventID: int,
+        category: int,
+        rawData: Array[int],
+    ) -> None:
+        """
+
+        :param message:
+        :param type:
+        :param eventID:
+        :param category:
+        :param rawData:
+        """
+    @overload
+    def WriteEvent(self, instance: EventInstance, values: Array[object]) -> None:
+        """
+
+        :param instance:
+        :param values:
+        """
+    @overload
+    def WriteEvent(self, instance: EventInstance, data: Array[int], values: Array[object]) -> None:
+        """
+
+        :param instance:
+        :param data:
+        :param values:
+        """
+    EntryWritten: EventType[EntryWrittenEventHandler] = ...
+    """"""
+
+class EventLogPermission(
+    ResourcePermissionBase, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
+):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, state: PermissionState):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(self, permissionAccessEntries: Array[EventLogPermissionEntry]):
+        """
+
+        :param permissionAccessEntries:
+        """
+    @overload
+    def __init__(self, permissionAccess: EventLogPermissionAccess, machineName: str):
+        """
+
+        :param permissionAccess:
+        :param machineName:
+        """
+    @property
+    def PermissionEntries(self) -> EventLogPermissionEntryCollection:
+        """
+
+        :return:
+        """
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
+
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
+
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class EventLogPermissionAccess(Enum):
+    """"""
+
+    _None: EventLogPermissionAccess = ...
+    """"""
+    Browse: EventLogPermissionAccess = ...
+    """"""
+    Instrument: EventLogPermissionAccess = ...
+    """"""
+    Audit: EventLogPermissionAccess = ...
+    """"""
+    Write: EventLogPermissionAccess = ...
+    """"""
+    Administer: EventLogPermissionAccess = ...
+    """"""
+
+class EventLogPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def MachineName(self) -> str:
+        """
+
+        :return:
+        """
+    @MachineName.setter
+    def MachineName(self, value: str) -> None: ...
+    @property
+    def PermissionAccess(self) -> EventLogPermissionAccess:
+        """
+
+        :return:
+        """
+    @PermissionAccess.setter
+    def PermissionAccess(self, value: EventLogPermissionAccess) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventLogPermissionEntry(Object):
+    """"""
+
+    def __init__(self, permissionAccess: EventLogPermissionAccess, machineName: str):
+        """
+
+        :param permissionAccess:
+        :param machineName:
+        """
+    @property
+    def MachineName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def PermissionAccess(self) -> EventLogPermissionAccess:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventLogPermissionEntryCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: EventLogPermissionEntry) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: EventLogPermissionEntryCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[EventLogPermissionEntry]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: EventLogPermissionEntry) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[EventLogPermissionEntry], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: EventLogPermissionEntry) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: EventLogPermissionEntry) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: EventLogPermissionEntry) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: EventLogPermissionEntry) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class EventLogTraceListener(TraceListener, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, eventLog: EventLog):
+        """
+
+        :param eventLog:
+        """
+    @overload
+    def __init__(self, source: str):
+        """
+
+        :param source:
+        """
+    @property
+    def Attributes(self) -> StringDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def EventLog(self) -> EventLog:
+        """
+
+        :return:
+        """
+    @EventLog.setter
+    def EventLog(self, value: EventLog) -> None: ...
+    @property
+    def Filter(self) -> TraceFilter:
+        """
+
+        :return:
+        """
+    @Filter.setter
+    def Filter(self, value: TraceFilter) -> None: ...
+    @property
+    def IndentLevel(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentLevel.setter
+    def IndentLevel(self, value: int) -> None: ...
+    @property
+    def IndentSize(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentSize.setter
+    def IndentSize(self, value: int) -> None: ...
+    @property
+    def IsThreadSafe(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def TraceOutputOptions(self) -> TraceOptions:
+        """
+
+        :return:
+        """
+    @TraceOutputOptions.setter
+    def TraceOutputOptions(self, value: TraceOptions) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Fail(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Fail(self, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: object,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceEvent(
+        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        message: str,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param message:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        format: str,
+        args: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
+    def TraceTransfer(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        id: int,
+        message: str,
+        relatedActivityId: Guid,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param id:
+        :param message:
+        :param relatedActivityId:
+        """
+    @overload
+    def Write(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Write(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Write(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def Write(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def WriteLine(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def WriteLine(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+
+class EventSchemaTraceListener(TextWriterTraceListener, IDisposable):
+    """"""
+
+    @overload
+    def __init__(self, fileName: str):
+        """
+
+        :param fileName:
+        """
+    @overload
+    def __init__(self, fileName: str, name: str):
+        """
+
+        :param fileName:
+        :param name:
+        """
+    @overload
+    def __init__(self, fileName: str, name: str, bufferSize: int):
+        """
+
+        :param fileName:
+        :param name:
+        :param bufferSize:
+        """
+    @overload
+    def __init__(
+        self, fileName: str, name: str, bufferSize: int, logRetentionOption: TraceLogRetentionOption
+    ):
+        """
+
+        :param fileName:
+        :param name:
+        :param bufferSize:
+        :param logRetentionOption:
+        """
+    @overload
+    def __init__(
+        self,
+        fileName: str,
+        name: str,
+        bufferSize: int,
+        logRetentionOption: TraceLogRetentionOption,
+        maximumFileSize: int,
+    ):
+        """
+
+        :param fileName:
+        :param name:
+        :param bufferSize:
+        :param logRetentionOption:
+        :param maximumFileSize:
+        """
+    @overload
+    def __init__(
+        self,
+        fileName: str,
+        name: str,
+        bufferSize: int,
+        logRetentionOption: TraceLogRetentionOption,
+        maximumFileSize: int,
+        maximumNumberOfFiles: int,
+    ):
+        """
+
+        :param fileName:
+        :param name:
+        :param bufferSize:
+        :param logRetentionOption:
+        :param maximumFileSize:
+        :param maximumNumberOfFiles:
+        """
+    @property
+    def Attributes(self) -> StringDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def BufferSize(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Filter(self) -> TraceFilter:
+        """
+
+        :return:
+        """
+    @Filter.setter
+    def Filter(self, value: TraceFilter) -> None: ...
+    @property
+    def IndentLevel(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentLevel.setter
+    def IndentLevel(self, value: int) -> None: ...
+    @property
+    def IndentSize(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentSize.setter
+    def IndentSize(self, value: int) -> None: ...
+    @property
+    def IsThreadSafe(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MaximumFileSize(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def MaximumNumberOfFiles(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def TraceLogRetentionOption(self) -> TraceLogRetentionOption:
+        """
+
+        :return:
+        """
+    @property
+    def TraceOutputOptions(self) -> TraceOptions:
+        """
+
+        :return:
+        """
+    @TraceOutputOptions.setter
+    def TraceOutputOptions(self, value: TraceOptions) -> None: ...
+    @property
+    def Writer(self) -> TextWriter:
+        """
+
+        :return:
+        """
+    @Writer.setter
+    def Writer(self, value: TextWriter) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Fail(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Fail(self, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: object,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceEvent(
+        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        message: str,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param message:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        format: str,
+        args: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
+    def TraceTransfer(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        id: int,
+        message: str,
+        relatedActivityId: Guid,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param id:
+        :param message:
+        :param relatedActivityId:
+        """
+    @overload
+    def Write(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Write(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Write(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def Write(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def WriteLine(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def WriteLine(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+
+class EventSourceCreationData(Object):
+    """"""
+
+    def __init__(self, source: str, logName: str):
+        """
+
+        :param source:
+        :param logName:
+        """
+    @property
+    def CategoryCount(self) -> int:
+        """
+
+        :return:
+        """
+    @CategoryCount.setter
+    def CategoryCount(self, value: int) -> None: ...
+    @property
+    def CategoryResourceFile(self) -> str:
+        """
+
+        :return:
+        """
+    @CategoryResourceFile.setter
+    def CategoryResourceFile(self, value: str) -> None: ...
+    @property
+    def LogName(self) -> str:
+        """
+
+        :return:
+        """
+    @LogName.setter
+    def LogName(self, value: str) -> None: ...
+    @property
+    def MachineName(self) -> str:
+        """
+
+        :return:
+        """
+    @MachineName.setter
+    def MachineName(self, value: str) -> None: ...
+    @property
+    def MessageResourceFile(self) -> str:
+        """
+
+        :return:
+        """
+    @MessageResourceFile.setter
+    def MessageResourceFile(self, value: str) -> None: ...
+    @property
+    def ParameterResourceFile(self) -> str:
+        """
+
+        :return:
+        """
+    @ParameterResourceFile.setter
+    def ParameterResourceFile(self, value: str) -> None: ...
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class EventTypeFilter(TraceFilter):
+    """"""
+
+    def __init__(self, level: SourceLevels):
+        """
+
+        :param level:
+        """
+    @property
+    def EventType(self) -> SourceLevels:
+        """
+
+        :return:
+        """
+    @EventType.setter
+    def EventType(self, value: SourceLevels) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ShouldTrace(
+        self,
+        cache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        formatOrMessage: str,
+        args: Array[object],
+        data1: object,
+        data: Array[object],
+    ) -> bool:
+        """
+
+        :param cache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param formatOrMessage:
+        :param args:
+        :param data1:
+        :param data:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class FileVersionInfo(Object):
+    """"""
+
+    @property
+    def Comments(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CompanyName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def FileBuildPart(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def FileDescription(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def FileMajorPart(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def FileMinorPart(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def FileName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def FilePrivatePart(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def FileVersion(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def InternalName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsDebug(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsPatched(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsPreRelease(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsPrivateBuild(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSpecialBuild(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Language(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def LegalCopyright(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def LegalTrademarks(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def OriginalFilename(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def PrivateBuild(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ProductBuildPart(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ProductMajorPart(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ProductMinorPart(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ProductName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ProductPrivatePart(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ProductVersion(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def SpecialBuild(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetVersionInfo(cls, fileName: str) -> FileVersionInfo:
+        """
+
+        :param fileName:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class FilterElement(TypedElement):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def InitData(self) -> str:
+        """
+
+        :return:
+        """
+    @InitData.setter
+    def InitData(self, value: str) -> None: ...
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
     @TypeName.setter
-    def TypeName(self, value: StringType) -> None: ...
+    def TypeName(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def Equals(self, compareTo: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def GetRuntimeObject(self) -> TraceListener: ...
-    def get_Attributes(self) -> Hashtable: ...
-    def get_Filter(self) -> FilterElement: ...
-    def get_Name(self) -> StringType: ...
-    def get_TraceOutputOptions(self) -> TraceOptions: ...
-    def get_TypeName(self) -> StringType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_TraceOutputOptions(self, value: TraceOptions) -> VoidType: ...
-    def set_TypeName(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetRuntimeObject(self) -> TraceFilter:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class ICollectData:
+    """"""
 
-    # No Sub Enums
+    def CloseData(self) -> None:
+        """"""
+    def CollectData(
+        self, id: int, valueName: IntPtr, data: IntPtr, totalBytes: int, res: IntPtr
+    ) -> Tuple[None, IntPtr]:
+        """
+
+        :param id:
+        :param valueName:
+        :param data:
+        :param totalBytes:
+        :param res:
+        """
+
+class ICustomDebuggerNotification:
+    """"""
+
+class InitState(Enum):
+    """"""
+
+    NotInitialized: InitState = ...
+    """"""
+    Initializing: InitState = ...
+    """"""
+    Initialized: InitState = ...
+    """"""
+
+class InstanceData(Object):
+    """"""
+
+    def __init__(self, instanceName: str, sample: CounterSample):
+        """
+
+        :param instanceName:
+        :param sample:
+        """
+    @property
+    def InstanceName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def RawValue(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Sample(self) -> CounterSample:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class InstanceDataCollection(DictionaryBase, ICollection, IDictionary, IEnumerable):
+    """"""
+
+    def __init__(self, counterName: str):
+        """
+
+        :param counterName:
+        """
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def CounterName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Keys(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection:
+        """
+
+        :return:
+        """
+    def Add(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, key: object) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def Contains(self, instanceName: str) -> bool:
+        """
+
+        :param instanceName:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, instances: Array[InstanceData], index: int) -> None:
+        """
+
+        :param instances:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Remove(self, key: object) -> None:
+        """
+
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, key: object) -> object:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __getitem__(self, instanceName: str) -> InstanceData:
+        """
+
+        :param instanceName:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+
+class InstanceDataCollectionCollection(DictionaryBase, ICollection, IDictionary, IEnumerable):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Keys(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection:
+        """
+
+        :return:
+        """
+    def Add(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, key: object) -> bool:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def Contains(self, counterName: str) -> bool:
+        """
+
+        :param counterName:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, counters: Array[InstanceDataCollection], index: int) -> None:
+        """
+
+        :param counters:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Remove(self, key: object) -> None:
+        """
+
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, key: object) -> object:
+        """
+
+        :param key:
+        :return:
+        """
+    @overload
+    def __getitem__(self, counterName: str) -> InstanceDataCollection:
+        """
+
+        :param counterName:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    def __setitem__(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+
+class ListenerElement(TypedElement):
+    """"""
+
+    def __init__(self, allowReferences: bool):
+        """
+
+        :param allowReferences:
+        """
+    @property
+    def Attributes(self) -> Hashtable:
+        """
+
+        :return:
+        """
+    @property
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def Filter(self) -> FilterElement:
+        """
+
+        :return:
+        """
+    @property
+    def InitData(self) -> str:
+        """
+
+        :return:
+        """
+    @InitData.setter
+    def InitData(self, value: str) -> None: ...
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def TraceOutputOptions(self) -> TraceOptions:
+        """
+
+        :return:
+        """
+    @TraceOutputOptions.setter
+    def TraceOutputOptions(self, value: TraceOptions) -> None: ...
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @TypeName.setter
+    def TypeName(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetRuntimeObject(self) -> TraceListener:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ListenerElementsCollection(ConfigurationElementCollection, ICollection, IEnumerable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def CollectionType(self) -> ConfigurationElementCollectionType: ...
-    def __getitem__(self, key: StringType) -> ListenerElement: ...
-
-    # ---------- Methods ---------- #
-
-    def GetRuntimeObject(self) -> TraceListenerCollection: ...
-    def get_CollectionType(self) -> ConfigurationElementCollectionType: ...
-    def get_Item(self, name: StringType) -> ListenerElement: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Log(ABC, ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
+    def CollectionType(self) -> ConfigurationElementCollectionType:
+        """"""
     @property
-    def GlobalSwitch() -> LogSwitch: ...
+    def Count(self) -> int:
+        """
 
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+        :return:
+        """
     @property
-    def IsConsoleEnabled() -> BooleanType: ...
-    @staticmethod
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def EmitClear(self) -> bool:
+        """"""
+    @EmitClear.setter
+    def EmitClear(self, value: bool) -> None: ...
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> ListenerElement:
+        """
+
+        :return:
+        """
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetRuntimeObject(self) -> TraceListenerCollection:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, name: str) -> ListenerElement:
+        """
+
+        :param name:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+
+class Log(ABC, Object):
+    """"""
+
+    GlobalSwitch: Final[ClassVar[LogSwitch]] = ...
+    """
+    
+    :return: 
+    """
+    @classmethod
+    @property
+    def IsConsoleEnabled(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
     @IsConsoleEnabled.setter
-    def IsConsoleEnabled(value: BooleanType) -> None: ...
+    def IsConsoleEnabled(cls, value: bool) -> None: ...
+    @classmethod
+    def AddOnLogMessage(cls, handler: LogMessageEventHandler) -> None:
+        """
 
-    # ---------- Methods ---------- #
+        :param handler:
+        """
+    @classmethod
+    def AddOnLogSwitchLevel(cls, handler: LogSwitchLevelHandler) -> None:
+        """
 
-    @staticmethod
-    def AddOnLogMessage(handler: LogMessageEventHandler) -> VoidType: ...
-    @staticmethod
-    def AddOnLogSwitchLevel(handler: LogSwitchLevelHandler) -> VoidType: ...
-    @staticmethod
+        :param handler:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
     @overload
-    def Error(logswitch: LogSwitch, message: StringType) -> VoidType: ...
-    @staticmethod
+    def Error(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
     @overload
-    def Error(switchname: StringType, message: StringType) -> VoidType: ...
-    @staticmethod
+    def Error(cls, logswitch: LogSwitch, message: str) -> None:
+        """
+
+        :param logswitch:
+        :param message:
+        """
+    @classmethod
     @overload
-    def Error(message: StringType) -> VoidType: ...
-    @staticmethod
+    def Error(cls, switchname: str, message: str) -> None:
+        """
+
+        :param switchname:
+        :param message:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def LogMessage(level: LoggingLevels, message: StringType) -> VoidType: ...
-    @staticmethod
+    def LogMessage(cls, level: LoggingLevels, message: str) -> None:
+        """
+
+        :param level:
+        :param message:
+        """
+    @classmethod
     @overload
-    def LogMessage(level: LoggingLevels, logswitch: LogSwitch, message: StringType) -> VoidType: ...
-    @staticmethod
-    def Panic(message: StringType) -> VoidType: ...
-    @staticmethod
-    def RemoveOnLogMessage(handler: LogMessageEventHandler) -> VoidType: ...
-    @staticmethod
-    def RemoveOnLogSwitchLevel(handler: LogSwitchLevelHandler) -> VoidType: ...
-    @staticmethod
+    def LogMessage(cls, level: LoggingLevels, logswitch: LogSwitch, message: str) -> None:
+        """
+
+        :param level:
+        :param logswitch:
+        :param message:
+        """
+    @classmethod
+    def Panic(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    def RemoveOnLogMessage(cls, handler: LogMessageEventHandler) -> None:
+        """
+
+        :param handler:
+        """
+    @classmethod
+    def RemoveOnLogSwitchLevel(cls, handler: LogSwitchLevelHandler) -> None:
+        """
+
+        :param handler:
+        """
+    @classmethod
     @overload
-    def Status(logswitch: LogSwitch, message: StringType) -> VoidType: ...
-    @staticmethod
+    def Status(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
     @overload
-    def Status(switchname: StringType, message: StringType) -> VoidType: ...
-    @staticmethod
+    def Status(cls, logswitch: LogSwitch, message: str) -> None:
+        """
+
+        :param logswitch:
+        :param message:
+        """
+    @classmethod
     @overload
-    def Status(message: StringType) -> VoidType: ...
-    @staticmethod
+    def Status(cls, switchname: str, message: str) -> None:
+        """
+
+        :param switchname:
+        :param message:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def Trace(logswitch: LogSwitch, message: StringType) -> VoidType: ...
-    @staticmethod
+    def Trace(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
     @overload
-    def Trace(switchname: StringType, message: StringType) -> VoidType: ...
-    @staticmethod
+    def Trace(cls, logswitch: LogSwitch, message: str) -> None:
+        """
+
+        :param logswitch:
+        :param message:
+        """
+    @classmethod
     @overload
-    def Trace(message: StringType) -> VoidType: ...
-    @staticmethod
+    def Trace(cls, switchname: str, message: str) -> None:
+        """
+
+        :param switchname:
+        :param message:
+        """
+    @classmethod
     @overload
-    def Warning(logswitch: LogSwitch, message: StringType) -> VoidType: ...
-    @staticmethod
+    def Warning(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
     @overload
-    def Warning(switchname: StringType, message: StringType) -> VoidType: ...
-    @staticmethod
+    def Warning(cls, logswitch: LogSwitch, message: str) -> None:
+        """
+
+        :param logswitch:
+        :param message:
+        """
+    @classmethod
     @overload
-    def Warning(message: StringType) -> VoidType: ...
-    @staticmethod
-    def get_IsConsoleEnabled() -> BooleanType: ...
-    @staticmethod
-    def set_IsConsoleEnabled(value: BooleanType) -> VoidType: ...
+    def Warning(cls, switchname: str, message: str) -> None:
+        """
 
-    # No Events
+        :param switchname:
+        :param message:
+        """
 
-    # No Sub Classes
+LogMessageEventHandler: Callable[[LoggingLevels, LogSwitch, str, StackTrace], None] = ...
+"""
 
-    # No Sub Structs
+:param level: 
+:param category: 
+:param message: 
+:param location: 
+"""
 
-    # No Sub Interfaces
+class LogSwitch(Object):
+    """"""
 
-    # No Sub Enums
+    def __init__(self, name: str, description: str, parent: LogSwitch):
+        """
 
-class LogMessageEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        level: LoggingLevels,
-        category: LogSwitch,
-        message: StringType,
-        location: StackTrace,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(
-        self, level: LoggingLevels, category: LogSwitch, message: StringType, location: StackTrace
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LogSwitch(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, name: StringType, description: StringType, parent: LogSwitch): ...
-
-    # ---------- Properties ---------- #
-
+        :param name:
+        :param description:
+        :param parent:
+        """
     @property
-    def Description(self) -> StringType: ...
+    def Description(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def MinimumLevel(self) -> LoggingLevels: ...
+    def MinimumLevel(self) -> LoggingLevels:
+        """
+
+        :return:
+        """
     @MinimumLevel.setter
     def MinimumLevel(self, value: LoggingLevels) -> None: ...
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Parent(self) -> LogSwitch: ...
+    def Parent(self) -> LogSwitch:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def CheckLevel(self, level: LoggingLevels) -> bool:
+        """
 
-    def CheckLevel(self, level: LoggingLevels) -> BooleanType: ...
-    @staticmethod
-    def GetSwitch(name: StringType) -> LogSwitch: ...
-    def get_Description(self) -> StringType: ...
-    def get_MinimumLevel(self) -> LoggingLevels: ...
-    def get_Name(self) -> StringType: ...
-    def get_Parent(self) -> LogSwitch: ...
-    def set_MinimumLevel(self, value: LoggingLevels) -> VoidType: ...
+        :param level:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @classmethod
+    def GetSwitch(cls, name: str) -> LogSwitch:
+        """
 
-    # No Sub Structs
+        :param name:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class LogSwitchLevelHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+LogSwitchLevelHandler: Callable[[LogSwitch, LoggingLevels], None] = ...
+"""
 
-    # ---------- Constructors ---------- #
+:param ls: 
+:param newLevel: 
+"""
 
-    def __init__(self, object: ObjectType, method: NIntType): ...
+class LoggingLevels(Enum):
+    """"""
 
-    # No Properties
+    TraceLevel0: LoggingLevels = ...
+    """"""
+    TraceLevel1: LoggingLevels = ...
+    """"""
+    TraceLevel2: LoggingLevels = ...
+    """"""
+    TraceLevel3: LoggingLevels = ...
+    """"""
+    TraceLevel4: LoggingLevels = ...
+    """"""
+    StatusLevel0: LoggingLevels = ...
+    """"""
+    StatusLevel1: LoggingLevels = ...
+    """"""
+    StatusLevel2: LoggingLevels = ...
+    """"""
+    StatusLevel3: LoggingLevels = ...
+    """"""
+    StatusLevel4: LoggingLevels = ...
+    """"""
+    WarningLevel: LoggingLevels = ...
+    """"""
+    ErrorLevel: LoggingLevels = ...
+    """"""
+    PanicLevel: LoggingLevels = ...
+    """"""
 
-    # ---------- Methods ---------- #
+class MainWindowFinder(Object):
+    """"""
 
-    def BeginInvoke(
-        self, ls: LogSwitch, newLevel: LoggingLevels, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, ls: LogSwitch, newLevel: LoggingLevels) -> VoidType: ...
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def FindMainWindow(self, processId: int) -> IntPtr:
+        """
 
-    # No Sub Classes
+        :param processId:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class MainWindowFinder(ObjectType):
-    # No Fields
+class MessageBoxPopup(Object):
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, body: str, title: str, flags: int):
+        """
 
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def FindMainWindow(self, processId: IntType) -> NIntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MessageBoxPopup(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, body: StringType, title: StringType, flags: IntType): ...
-
-    # ---------- Properties ---------- #
-
+        :param body:
+        :param title:
+        :param flags:
+        """
     @property
-    def ReturnValue(self) -> IntType: ...
+    def ReturnValue(self) -> int:
+        """
+
+        :return:
+        """
     @ReturnValue.setter
-    def ReturnValue(self, value: IntType) -> None: ...
+    def ReturnValue(self, value: int) -> None: ...
+    def DoPopup(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def DoPopup(self) -> VoidType: ...
-    def ShowMessageBox(self) -> IntType: ...
-    def get_ReturnValue(self) -> IntType: ...
-    def set_ReturnValue(self, value: IntType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ShowMessageBox(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class ModuleInfo(Object):
+    """"""
 
-    # No Sub Enums
+    Id: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    baseName: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    baseOfDll: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    entryPoint: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    fileName: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    sizeOfImage: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-class ModuleInfo(ObjectType):
-    # ---------- Fields ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    @property
-    def Id(self) -> IntType: ...
-    @Id.setter
-    def Id(self, value: IntType) -> None: ...
-    @property
-    def baseName(self) -> StringType: ...
-    @baseName.setter
-    def baseName(self, value: StringType) -> None: ...
-    @property
-    def baseOfDll(self) -> NIntType: ...
-    @baseOfDll.setter
-    def baseOfDll(self, value: NIntType) -> None: ...
-    @property
-    def entryPoint(self) -> NIntType: ...
-    @entryPoint.setter
-    def entryPoint(self, value: NIntType) -> None: ...
-    @property
-    def fileName(self) -> StringType: ...
-    @fileName.setter
-    def fileName(self, value: StringType) -> None: ...
-    @property
-    def sizeOfImage(self) -> IntType: ...
-    @sizeOfImage.setter
-    def sizeOfImage(self, value: IntType) -> None: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class MonitoringDescriptionAttribute(DescriptionAttribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, description: str):
+        """
 
-    def __init__(self, description: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param description:
+        """
     @property
-    def Description(self) -> StringType: ...
+    def Description(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
 
-    def get_Description(self) -> StringType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Structs
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Enums
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-class NtProcessInfoHelper(ABC, ObjectType):
-    # No Fields
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
 
-    # No Constructors
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    @staticmethod
-    def GetProcessInfos(processIdFilter: Predicate[IntType]) -> ArrayType[ProcessInfo]: ...
+        :return:
+        """
 
-    # No Events
+class NtProcessInfoHelper(ABC, Object):
+    """"""
 
-    # No Sub Classes
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @classmethod
+    def GetProcessInfos(cls, processIdFilter: Predicate[int] = ...) -> Array[ProcessInfo]:
+        """
 
-    # No Sub Enums
+        :param processIdFilter:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class NtProcessManager(ABC, ObjectType):
-    # No Fields
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # No Properties
+class NtProcessManager(ABC, Object):
+    """"""
 
-    # ---------- Methods ---------- #
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @staticmethod
-    def GetFirstModuleInfo(processId: IntType) -> ModuleInfo: ...
-    @staticmethod
-    def GetModuleInfos(processId: IntType) -> ArrayType[ModuleInfo]: ...
-    @staticmethod
-    def GetProcessIdFromHandle(processHandle: SafeProcessHandle) -> IntType: ...
-    @staticmethod
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetFirstModuleInfo(cls, processId: int) -> ModuleInfo:
+        """
+
+        :param processId:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetModuleInfos(cls, processId: int) -> Array[ModuleInfo]:
+        """
+
+        :param processId:
+        :return:
+        """
+    @classmethod
+    def GetProcessIdFromHandle(cls, processHandle: SafeProcessHandle) -> int:
+        """
+
+        :param processHandle:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetProcessIds() -> ArrayType[IntType]: ...
-    @staticmethod
+    def GetProcessIds(cls) -> Array[int]:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def GetProcessIds(
-        machineName: StringType, isRemoteMachine: BooleanType
-    ) -> ArrayType[IntType]: ...
-    @staticmethod
-    def GetProcessInfos(
-        machineName: StringType, isRemoteMachine: BooleanType
-    ) -> ArrayType[ProcessInfo]: ...
+    def GetProcessIds(cls, machineName: str, isRemoteMachine: bool) -> Array[int]:
+        """
 
-    # No Events
+        :param machineName:
+        :param isRemoteMachine:
+        :return:
+        """
+    @classmethod
+    def GetProcessInfos(cls, machineName: str, isRemoteMachine: bool) -> Array[ProcessInfo]:
+        """
 
-    # No Sub Classes
+        :param machineName:
+        :param isRemoteMachine:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
+class OrdinalCaseInsensitiveComparer(Object, IComparer):
+    """"""
 
-class OrdinalCaseInsensitiveComparer(ObjectType, IComparer):
-    # No Fields
+    def __init__(self):
+        """"""
+    def Compare(self, x: object, y: object) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :param x:
+        :param y:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def __init__(self): ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    def Compare(self, a: ObjectType, b: ObjectType) -> IntType: ...
+        :return:
+        """
 
-    # No Events
+class OverflowAction(Enum):
+    """"""
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+    OverwriteAsNeeded: OverflowAction = ...
+    """"""
+    OverwriteOlder: OverflowAction = ...
+    """"""
+    DoNotOverwrite: OverflowAction = ...
+    """"""
 
 class PerfCounterSection(ConfigurationElement):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def FileMappingSize(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_FileMappingSize(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PerformanceCounter(Component, IComponent, IDisposable, ISupportInitialize):
-    # ---------- Fields ---------- #
-
-    @staticmethod
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
     @property
-    def DefaultFileMappingSize() -> IntType: ...
-    @staticmethod
-    @DefaultFileMappingSize.setter
-    def DefaultFileMappingSize(value: IntType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(
-        self,
-        categoryName: StringType,
-        counterName: StringType,
-        instanceName: StringType,
-        machineName: StringType,
-    ): ...
-    @overload
-    def __init__(
-        self, categoryName: StringType, counterName: StringType, instanceName: StringType
-    ): ...
-    @overload
-    def __init__(
-        self,
-        categoryName: StringType,
-        counterName: StringType,
-        instanceName: StringType,
-        readOnly: BooleanType,
-    ): ...
-    @overload
-    def __init__(self, categoryName: StringType, counterName: StringType): ...
-    @overload
-    def __init__(
-        self, categoryName: StringType, counterName: StringType, readOnly: BooleanType
-    ): ...
-
-    # ---------- Properties ---------- #
-
+    def ElementInformation(self) -> ElementInformation:
+        """"""
     @property
-    def CategoryName(self) -> StringType: ...
+    def FileMappingSize(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PerformanceCounter(Component, IComponent, ISupportInitialize, IDisposable):
+    """"""
+
+    DefaultFileMappingSize: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, categoryName: str, counterName: str):
+        """
+
+        :param categoryName:
+        :param counterName:
+        """
+    @overload
+    def __init__(self, categoryName: str, counterName: str, readOnly: bool):
+        """
+
+        :param categoryName:
+        :param counterName:
+        :param readOnly:
+        """
+    @overload
+    def __init__(self, categoryName: str, counterName: str, instanceName: str):
+        """
+
+        :param categoryName:
+        :param counterName:
+        :param instanceName:
+        """
+    @overload
+    def __init__(self, categoryName: str, counterName: str, instanceName: str, readOnly: bool):
+        """
+
+        :param categoryName:
+        :param counterName:
+        :param instanceName:
+        :param readOnly:
+        """
+    @overload
+    def __init__(self, categoryName: str, counterName: str, instanceName: str, machineName: str):
+        """
+
+        :param categoryName:
+        :param counterName:
+        :param instanceName:
+        :param machineName:
+        """
+    @property
+    def CategoryName(self) -> str:
+        """
+
+        :return:
+        """
     @CategoryName.setter
-    def CategoryName(self, value: StringType) -> None: ...
+    def CategoryName(self, value: str) -> None: ...
     @property
-    def CounterHelp(self) -> StringType: ...
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
     @property
-    def CounterName(self) -> StringType: ...
+    def CounterHelp(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def CounterName(self) -> str:
+        """
+
+        :return:
+        """
     @CounterName.setter
-    def CounterName(self, value: StringType) -> None: ...
+    def CounterName(self, value: str) -> None: ...
     @property
-    def CounterType(self) -> PerformanceCounterType: ...
+    def CounterType(self) -> PerformanceCounterType:
+        """
+
+        :return:
+        """
     @property
-    def InstanceLifetime(self) -> PerformanceCounterInstanceLifetime: ...
+    def InstanceLifetime(self) -> PerformanceCounterInstanceLifetime:
+        """
+
+        :return:
+        """
     @InstanceLifetime.setter
     def InstanceLifetime(self, value: PerformanceCounterInstanceLifetime) -> None: ...
     @property
-    def InstanceName(self) -> StringType: ...
+    def InstanceName(self) -> str:
+        """
+
+        :return:
+        """
     @InstanceName.setter
-    def InstanceName(self, value: StringType) -> None: ...
+    def InstanceName(self, value: str) -> None: ...
     @property
-    def MachineName(self) -> StringType: ...
+    def MachineName(self) -> str:
+        """
+
+        :return:
+        """
     @MachineName.setter
-    def MachineName(self, value: StringType) -> None: ...
+    def MachineName(self, value: str) -> None: ...
     @property
-    def RawValue(self) -> LongType: ...
+    def RawValue(self) -> int:
+        """
+
+        :return:
+        """
     @RawValue.setter
-    def RawValue(self, value: LongType) -> None: ...
+    def RawValue(self, value: int) -> None: ...
     @property
-    def ReadOnly(self) -> BooleanType: ...
+    def ReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
     @ReadOnly.setter
-    def ReadOnly(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def BeginInit(self) -> VoidType: ...
-    def Close(self) -> VoidType: ...
-    @staticmethod
-    def CloseSharedResources() -> VoidType: ...
-    def Decrement(self) -> LongType: ...
-    def EndInit(self) -> VoidType: ...
-    def Increment(self) -> LongType: ...
-    def IncrementBy(self, value: LongType) -> LongType: ...
-    def NextSample(self) -> CounterSample: ...
-    def NextValue(self) -> FloatType: ...
-    def RemoveInstance(self) -> VoidType: ...
-    def get_CategoryName(self) -> StringType: ...
-    def get_CounterHelp(self) -> StringType: ...
-    def get_CounterName(self) -> StringType: ...
-    def get_CounterType(self) -> PerformanceCounterType: ...
-    def get_InstanceLifetime(self) -> PerformanceCounterInstanceLifetime: ...
-    def get_InstanceName(self) -> StringType: ...
-    def get_MachineName(self) -> StringType: ...
-    def get_RawValue(self) -> LongType: ...
-    def get_ReadOnly(self) -> BooleanType: ...
-    def set_CategoryName(self, value: StringType) -> VoidType: ...
-    def set_CounterName(self, value: StringType) -> VoidType: ...
-    def set_InstanceLifetime(self, value: PerformanceCounterInstanceLifetime) -> VoidType: ...
-    def set_InstanceName(self, value: StringType) -> VoidType: ...
-    def set_MachineName(self, value: StringType) -> VoidType: ...
-    def set_RawValue(self, value: LongType) -> VoidType: ...
-    def set_ReadOnly(self, value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PerformanceCounterCategory(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, categoryName: StringType): ...
-    @overload
-    def __init__(self, categoryName: StringType, machineName: StringType): ...
-
-    # ---------- Properties ---------- #
-
+    def ReadOnly(self, value: bool) -> None: ...
     @property
-    def CategoryHelp(self) -> StringType: ...
-    @property
-    def CategoryName(self) -> StringType: ...
-    @CategoryName.setter
-    def CategoryName(self, value: StringType) -> None: ...
-    @property
-    def CategoryType(self) -> PerformanceCounterCategoryType: ...
-    @property
-    def MachineName(self) -> StringType: ...
-    @MachineName.setter
-    def MachineName(self, value: StringType) -> None: ...
+    def Site(self) -> ISite:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @Site.setter
+    def Site(self, value: ISite) -> None: ...
+    def BeginInit(self) -> None:
+        """"""
+    def Close(self) -> None:
+        """"""
+    @classmethod
+    def CloseSharedResources(cls) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    @overload
-    def CounterExists(self, counterName: StringType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def CounterExists(counterName: StringType, categoryName: StringType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def CounterExists(
-        counterName: StringType, categoryName: StringType, machineName: StringType
-    ) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def Create(
-        categoryName: StringType,
-        categoryHelp: StringType,
-        counterData: CounterCreationDataCollection,
-    ) -> PerformanceCounterCategory: ...
-    @staticmethod
-    @overload
-    def Create(
-        categoryName: StringType,
-        categoryHelp: StringType,
-        counterName: StringType,
-        counterHelp: StringType,
-    ) -> PerformanceCounterCategory: ...
-    @staticmethod
-    @overload
-    def Create(
-        categoryName: StringType,
-        categoryHelp: StringType,
-        categoryType: PerformanceCounterCategoryType,
-        counterName: StringType,
-        counterHelp: StringType,
-    ) -> PerformanceCounterCategory: ...
-    @staticmethod
-    @overload
-    def Create(
-        categoryName: StringType,
-        categoryHelp: StringType,
-        categoryType: PerformanceCounterCategoryType,
-        counterData: CounterCreationDataCollection,
-    ) -> PerformanceCounterCategory: ...
-    @staticmethod
-    def Delete(categoryName: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Exists(categoryName: StringType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def Exists(categoryName: StringType, machineName: StringType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def GetCategories() -> ArrayType[PerformanceCounterCategory]: ...
-    @staticmethod
-    @overload
-    def GetCategories(machineName: StringType) -> ArrayType[PerformanceCounterCategory]: ...
-    @overload
-    def GetCounters(self) -> ArrayType[PerformanceCounter]: ...
-    @overload
-    def GetCounters(self, instanceName: StringType) -> ArrayType[PerformanceCounter]: ...
-    def GetInstanceNames(self) -> ArrayType[StringType]: ...
-    @overload
-    def InstanceExists(self, instanceName: StringType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def InstanceExists(instanceName: StringType, categoryName: StringType) -> BooleanType: ...
-    @staticmethod
-    @overload
-    def InstanceExists(
-        instanceName: StringType, categoryName: StringType, machineName: StringType
-    ) -> BooleanType: ...
-    def ReadCategory(self) -> InstanceDataCollectionCollection: ...
-    def get_CategoryHelp(self) -> StringType: ...
-    def get_CategoryName(self) -> StringType: ...
-    def get_CategoryType(self) -> PerformanceCounterCategoryType: ...
-    def get_MachineName(self) -> StringType: ...
-    def set_CategoryName(self, value: StringType) -> VoidType: ...
-    def set_MachineName(self, value: StringType) -> VoidType: ...
+        :param requestedType:
+        :return:
+        """
+    def Decrement(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def EndInit(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Increment(self) -> int:
+        """
 
-class PerformanceCounterLib(ObjectType):
+        :return:
+        """
+    def IncrementBy(self, value: int) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def NextSample(self) -> CounterSample:
+        """
+
+        :return:
+        """
+    def NextValue(self) -> float:
+        """
+
+        :return:
+        """
+    def RemoveInstance(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    Disposed: EventType[EventHandler] = ...
     """"""
 
-    # No Fields
+class PerformanceCounterCategory(Object):
+    """"""
 
-    # No Constructors
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, categoryName: str):
+        """
 
-    # No Properties
+        :param categoryName:
+        """
+    @overload
+    def __init__(self, categoryName: str, machineName: str):
+        """
 
-    # No Methods
+        :param categoryName:
+        :param machineName:
+        """
+    @property
+    def CategoryHelp(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def CategoryName(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @CategoryName.setter
+    def CategoryName(self, value: str) -> None: ...
+    @property
+    def CategoryType(self) -> PerformanceCounterCategoryType:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def MachineName(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @MachineName.setter
+    def MachineName(self, value: str) -> None: ...
+    @overload
+    def CounterExists(self, counterName: str) -> bool:
+        """
 
-    # No Sub Enums
+        :param counterName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CounterExists(cls, counterName: str, categoryName: str) -> bool:
+        """
 
-class PerformanceCounterManager(ObjectType, ICollectData):
-    # No Fields
+        :param counterName:
+        :param categoryName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def CounterExists(cls, counterName: str, categoryName: str, machineName: str) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :param counterName:
+        :param categoryName:
+        :param machineName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(
+        cls, categoryName: str, categoryHelp: str, counterData: CounterCreationDataCollection
+    ) -> PerformanceCounterCategory:
+        """
 
-    def __init__(self): ...
+        :param categoryName:
+        :param categoryHelp:
+        :param counterData:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(
+        cls,
+        categoryName: str,
+        categoryHelp: str,
+        categoryType: PerformanceCounterCategoryType,
+        counterData: CounterCreationDataCollection,
+    ) -> PerformanceCounterCategory:
+        """
 
-    # No Properties
+        :param categoryName:
+        :param categoryHelp:
+        :param categoryType:
+        :param counterData:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(
+        cls, categoryName: str, categoryHelp: str, counterName: str, counterHelp: str
+    ) -> PerformanceCounterCategory:
+        """
 
-    # No Methods
+        :param categoryName:
+        :param categoryHelp:
+        :param counterName:
+        :param counterHelp:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Create(
+        cls,
+        categoryName: str,
+        categoryHelp: str,
+        categoryType: PerformanceCounterCategoryType,
+        counterName: str,
+        counterHelp: str,
+    ) -> PerformanceCounterCategory:
+        """
 
-    # No Events
+        :param categoryName:
+        :param categoryHelp:
+        :param categoryType:
+        :param counterName:
+        :param counterHelp:
+        :return:
+        """
+    @classmethod
+    def Delete(cls, categoryName: str) -> None:
+        """
 
-    # No Sub Classes
+        :param categoryName:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exists(cls, categoryName: str) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param categoryName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Exists(cls, categoryName: str, machineName: str) -> bool:
+        """
 
-    # No Sub Enums
+        :param categoryName:
+        :param machineName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetCategories(cls) -> Array[PerformanceCounterCategory]:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetCategories(cls, machineName: str) -> Array[PerformanceCounterCategory]:
+        """
+
+        :param machineName:
+        :return:
+        """
+    @overload
+    def GetCounters(self) -> Array[PerformanceCounter]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetCounters(self, instanceName: str) -> Array[PerformanceCounter]:
+        """
+
+        :param instanceName:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInstanceNames(self) -> Array[str]:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def InstanceExists(self, instanceName: str) -> bool:
+        """
+
+        :param instanceName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def InstanceExists(cls, instanceName: str, categoryName: str) -> bool:
+        """
+
+        :param instanceName:
+        :param categoryName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def InstanceExists(cls, instanceName: str, categoryName: str, machineName: str) -> bool:
+        """
+
+        :param instanceName:
+        :param categoryName:
+        :param machineName:
+        :return:
+        """
+    def ReadCategory(self) -> InstanceDataCollectionCollection:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PerformanceCounterCategoryOptions(Enum):
+    """"""
+
+    EnableReuse: PerformanceCounterCategoryOptions = ...
+    """"""
+    UseUniqueSharedMemory: PerformanceCounterCategoryOptions = ...
+    """"""
+
+class PerformanceCounterCategoryType(Enum):
+    """"""
+
+    SingleInstance: PerformanceCounterCategoryType = ...
+    """"""
+    MultiInstance: PerformanceCounterCategoryType = ...
+    """"""
+    Unknown: PerformanceCounterCategoryType = ...
+    """"""
+
+class PerformanceCounterInstanceLifetime(Enum):
+    """"""
+
+    Global: PerformanceCounterInstanceLifetime = ...
+    """"""
+    Process: PerformanceCounterInstanceLifetime = ...
+    """"""
+
+class PerformanceCounterLib(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PerformanceCounterManager(Object, ICollectData):
+    """"""
+
+    def __init__(self):
+        """"""
+    def CloseData(self) -> None:
+        """"""
+    def CollectData(
+        self, id: int, valueName: IntPtr, data: IntPtr, totalBytes: int, res: IntPtr
+    ) -> Tuple[None, IntPtr]:
+        """
+
+        :param id:
+        :param valueName:
+        :param data:
+        :param totalBytes:
+        :param res:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class PerformanceCounterPermission(
-    ResourcePermissionBase, IPermission, ISecurityEncodable, IStackWalk, IUnrestrictedPermission
+    ResourcePermissionBase, IUnrestrictedPermission, IPermission, ISecurityEncodable, IStackWalk
 ):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, state: PermissionState): ...
-    @overload
-    def __init__(
-        self,
-        permissionAccess: PerformanceCounterPermissionAccess,
-        machineName: StringType,
-        categoryName: StringType,
-    ): ...
-    @overload
-    def __init__(self, permissionAccessEntries: ArrayType[PerformanceCounterPermissionEntry]): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def PermissionEntries(self) -> PerformanceCounterPermissionEntryCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def get_PermissionEntries(self) -> PerformanceCounterPermissionEntryCollection: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, action: SecurityAction): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CategoryName(self) -> StringType: ...
-    @CategoryName.setter
-    def CategoryName(self, value: StringType) -> None: ...
-    @property
-    def MachineName(self) -> StringType: ...
-    @MachineName.setter
-    def MachineName(self, value: StringType) -> None: ...
-    @property
-    def PermissionAccess(self) -> PerformanceCounterPermissionAccess: ...
-    @PermissionAccess.setter
-    def PermissionAccess(self, value: PerformanceCounterPermissionAccess) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CreatePermission(self) -> IPermission: ...
-    def get_CategoryName(self) -> StringType: ...
-    def get_MachineName(self) -> StringType: ...
-    def get_PermissionAccess(self) -> PerformanceCounterPermissionAccess: ...
-    def set_CategoryName(self, value: StringType) -> VoidType: ...
-    def set_MachineName(self, value: StringType) -> VoidType: ...
-    def set_PermissionAccess(self, value: PerformanceCounterPermissionAccess) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PerformanceCounterPermissionEntry(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(
-        self,
-        permissionAccess: PerformanceCounterPermissionAccess,
-        machineName: StringType,
-        categoryName: StringType,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CategoryName(self) -> StringType: ...
-    @property
-    def MachineName(self) -> StringType: ...
-    @property
-    def PermissionAccess(self) -> PerformanceCounterPermissionAccess: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CategoryName(self) -> StringType: ...
-    def get_MachineName(self) -> StringType: ...
-    def get_PermissionAccess(self) -> PerformanceCounterPermissionAccess: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PerformanceCounterPermissionEntryCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> PerformanceCounterPermissionEntry: ...
-    def __setitem__(self, key: IntType, value: PerformanceCounterPermissionEntry) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, value: PerformanceCounterPermissionEntry) -> IntType: ...
-    @overload
-    def AddRange(self, value: ArrayType[PerformanceCounterPermissionEntry]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: PerformanceCounterPermissionEntryCollection) -> VoidType: ...
-    def Contains(self, value: PerformanceCounterPermissionEntry) -> BooleanType: ...
-    def CopyTo(
-        self, array: ArrayType[PerformanceCounterPermissionEntry], index: IntType
-    ) -> VoidType: ...
-    def IndexOf(self, value: PerformanceCounterPermissionEntry) -> IntType: ...
-    def Insert(self, index: IntType, value: PerformanceCounterPermissionEntry) -> VoidType: ...
-    def Remove(self, value: PerformanceCounterPermissionEntry) -> VoidType: ...
-    def get_Item(self, index: IntType) -> PerformanceCounterPermissionEntry: ...
-    def set_Item(self, index: IntType, value: PerformanceCounterPermissionEntry) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PerformanceMonitor(ObjectType):
     """"""
 
-    # No Fields
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, state: PermissionState):
+        """
 
-    # No Constructors
+        :param state:
+        """
+    @overload
+    def __init__(self, permissionAccessEntries: Array[PerformanceCounterPermissionEntry]):
+        """
 
-    # No Properties
+        :param permissionAccessEntries:
+        """
+    @overload
+    def __init__(
+        self,
+        permissionAccess: PerformanceCounterPermissionAccess,
+        machineName: str,
+        categoryName: str,
+    ):
+        """
 
-    # No Methods
+        :param permissionAccess:
+        :param machineName:
+        :param categoryName:
+        """
+    @property
+    def PermissionEntries(self) -> PerformanceCounterPermissionEntryCollection:
+        """
 
-    # No Events
+        :return:
+        """
+    def Assert(self) -> None:
+        """"""
+    def Copy(self) -> IPermission:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def Demand(self) -> None:
+        """"""
+    @overload
+    def Demand(self) -> None:
+        """"""
+    def Deny(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def FromXml(self, e: SecurityElement) -> None:
+        """
 
-    # No Sub Interfaces
+        :param e:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Intersect(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsSubsetOf(self, target: IPermission) -> bool:
+        """
+
+        :param target:
+        :return:
+        """
+    def IsUnrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    def PermitOnly(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def ToXml(self) -> SecurityElement:
+        """
+
+        :return:
+        """
+    def Union(self, target: IPermission) -> IPermission:
+        """
+
+        :param target:
+        :return:
+        """
+
+class PerformanceCounterPermissionAccess(Enum):
+    """"""
+
+    _None: PerformanceCounterPermissionAccess = ...
+    """"""
+    Read: PerformanceCounterPermissionAccess = ...
+    """"""
+    Browse: PerformanceCounterPermissionAccess = ...
+    """"""
+    Write: PerformanceCounterPermissionAccess = ...
+    """"""
+    Instrument: PerformanceCounterPermissionAccess = ...
+    """"""
+    Administer: PerformanceCounterPermissionAccess = ...
+    """"""
+
+class PerformanceCounterPermissionAttribute(CodeAccessSecurityAttribute, _Attribute):
+    """"""
+
+    def __init__(self, action: SecurityAction):
+        """
+
+        :param action:
+        """
+    @property
+    def Action(self) -> SecurityAction:
+        """
+
+        :return:
+        """
+    @Action.setter
+    def Action(self, value: SecurityAction) -> None: ...
+    @property
+    def CategoryName(self) -> str:
+        """
+
+        :return:
+        """
+    @CategoryName.setter
+    def CategoryName(self, value: str) -> None: ...
+    @property
+    def MachineName(self) -> str:
+        """
+
+        :return:
+        """
+    @MachineName.setter
+    def MachineName(self, value: str) -> None: ...
+    @property
+    def PermissionAccess(self) -> PerformanceCounterPermissionAccess:
+        """
+
+        :return:
+        """
+    @PermissionAccess.setter
+    def PermissionAccess(self, value: PerformanceCounterPermissionAccess) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Unrestricted(self) -> bool:
+        """
+
+        :return:
+        """
+    @Unrestricted.setter
+    def Unrestricted(self, value: bool) -> None: ...
+    def CreatePermission(self) -> IPermission:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PerformanceCounterPermissionEntry(Object):
+    """"""
+
+    def __init__(
+        self,
+        permissionAccess: PerformanceCounterPermissionAccess,
+        machineName: str,
+        categoryName: str,
+    ):
+        """
+
+        :param permissionAccess:
+        :param machineName:
+        :param categoryName:
+        """
+    @property
+    def CategoryName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MachineName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def PermissionAccess(self) -> PerformanceCounterPermissionAccess:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PerformanceCounterPermissionEntryCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
+
+    @property
+    def Capacity(self) -> int:
+        """
+
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, value: PerformanceCounterPermissionEntry) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: PerformanceCounterPermissionEntryCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[PerformanceCounterPermissionEntry]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: PerformanceCounterPermissionEntry) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[PerformanceCounterPermissionEntry], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: PerformanceCounterPermissionEntry) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: PerformanceCounterPermissionEntry) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: PerformanceCounterPermissionEntry) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: PerformanceCounterPermissionEntry) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class PerformanceCounterType(Enum):
+    """"""
+
+    NumberOfItemsHEX32: PerformanceCounterType = ...
+    """"""
+    NumberOfItemsHEX64: PerformanceCounterType = ...
+    """"""
+    NumberOfItems32: PerformanceCounterType = ...
+    """"""
+    NumberOfItems64: PerformanceCounterType = ...
+    """"""
+    CounterDelta32: PerformanceCounterType = ...
+    """"""
+    CounterDelta64: PerformanceCounterType = ...
+    """"""
+    SampleCounter: PerformanceCounterType = ...
+    """"""
+    CountPerTimeInterval32: PerformanceCounterType = ...
+    """"""
+    CountPerTimeInterval64: PerformanceCounterType = ...
+    """"""
+    RateOfCountsPerSecond32: PerformanceCounterType = ...
+    """"""
+    RateOfCountsPerSecond64: PerformanceCounterType = ...
+    """"""
+    RawFraction: PerformanceCounterType = ...
+    """"""
+    CounterTimer: PerformanceCounterType = ...
+    """"""
+    Timer100Ns: PerformanceCounterType = ...
+    """"""
+    SampleFraction: PerformanceCounterType = ...
+    """"""
+    CounterTimerInverse: PerformanceCounterType = ...
+    """"""
+    Timer100NsInverse: PerformanceCounterType = ...
+    """"""
+    CounterMultiTimer: PerformanceCounterType = ...
+    """"""
+    CounterMultiTimer100Ns: PerformanceCounterType = ...
+    """"""
+    CounterMultiTimerInverse: PerformanceCounterType = ...
+    """"""
+    CounterMultiTimer100NsInverse: PerformanceCounterType = ...
+    """"""
+    AverageTimer32: PerformanceCounterType = ...
+    """"""
+    ElapsedTime: PerformanceCounterType = ...
+    """"""
+    AverageCount64: PerformanceCounterType = ...
+    """"""
+    SampleBase: PerformanceCounterType = ...
+    """"""
+    AverageBase: PerformanceCounterType = ...
+    """"""
+    RawBase: PerformanceCounterType = ...
+    """"""
+    CounterMultiBase: PerformanceCounterType = ...
+    """"""
+
+class PerformanceMonitor(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class Process(Component, IComponent, IDisposable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def BasePriority(self) -> IntType: ...
+    def BasePriority(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def EnableRaisingEvents(self) -> BooleanType: ...
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
+    @property
+    def EnableRaisingEvents(self) -> bool:
+        """
+
+        :return:
+        """
     @EnableRaisingEvents.setter
-    def EnableRaisingEvents(self, value: BooleanType) -> None: ...
+    def EnableRaisingEvents(self, value: bool) -> None: ...
     @property
-    def ExitCode(self) -> IntType: ...
+    def ExitCode(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def ExitTime(self) -> DateTime: ...
+    def ExitTime(self) -> DateTime:
+        """
+
+        :return:
+        """
     @property
-    def Handle(self) -> NIntType: ...
+    def Handle(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @property
-    def HandleCount(self) -> IntType: ...
+    def HandleCount(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def HasExited(self) -> BooleanType: ...
+    def HasExited(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Id(self) -> IntType: ...
+    def Id(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def MachineName(self) -> StringType: ...
+    def MachineName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def MainModule(self) -> ProcessModule: ...
+    def MainModule(self) -> ProcessModule:
+        """
+
+        :return:
+        """
     @property
-    def MainWindowHandle(self) -> NIntType: ...
+    def MainWindowHandle(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @property
-    def MainWindowTitle(self) -> StringType: ...
+    def MainWindowTitle(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def MaxWorkingSet(self) -> NIntType: ...
+    def MaxWorkingSet(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @MaxWorkingSet.setter
-    def MaxWorkingSet(self, value: NIntType) -> None: ...
+    def MaxWorkingSet(self, value: IntPtr) -> None: ...
     @property
-    def MinWorkingSet(self) -> NIntType: ...
+    def MinWorkingSet(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @MinWorkingSet.setter
-    def MinWorkingSet(self, value: NIntType) -> None: ...
+    def MinWorkingSet(self, value: IntPtr) -> None: ...
     @property
-    def Modules(self) -> ProcessModuleCollection: ...
+    def Modules(self) -> ProcessModuleCollection:
+        """
+
+        :return:
+        """
     @property
-    def NonpagedSystemMemorySize(self) -> IntType: ...
+    def NonpagedSystemMemorySize(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def NonpagedSystemMemorySize64(self) -> LongType: ...
+    def NonpagedSystemMemorySize64(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PagedMemorySize(self) -> IntType: ...
+    def PagedMemorySize(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PagedMemorySize64(self) -> LongType: ...
+    def PagedMemorySize64(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PagedSystemMemorySize(self) -> IntType: ...
+    def PagedSystemMemorySize(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PagedSystemMemorySize64(self) -> LongType: ...
+    def PagedSystemMemorySize64(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PeakPagedMemorySize(self) -> IntType: ...
+    def PeakPagedMemorySize(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PeakPagedMemorySize64(self) -> LongType: ...
+    def PeakPagedMemorySize64(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PeakVirtualMemorySize(self) -> IntType: ...
+    def PeakVirtualMemorySize(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PeakVirtualMemorySize64(self) -> LongType: ...
+    def PeakVirtualMemorySize64(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PeakWorkingSet(self) -> IntType: ...
+    def PeakWorkingSet(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PeakWorkingSet64(self) -> LongType: ...
+    def PeakWorkingSet64(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PriorityBoostEnabled(self) -> BooleanType: ...
+    def PriorityBoostEnabled(self) -> bool:
+        """
+
+        :return:
+        """
     @PriorityBoostEnabled.setter
-    def PriorityBoostEnabled(self, value: BooleanType) -> None: ...
+    def PriorityBoostEnabled(self, value: bool) -> None: ...
     @property
-    def PriorityClass(self) -> ProcessPriorityClass: ...
+    def PriorityClass(self) -> ProcessPriorityClass:
+        """
+
+        :return:
+        """
     @PriorityClass.setter
     def PriorityClass(self, value: ProcessPriorityClass) -> None: ...
     @property
-    def PrivateMemorySize(self) -> IntType: ...
+    def PrivateMemorySize(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PrivateMemorySize64(self) -> LongType: ...
+    def PrivateMemorySize64(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PrivilegedProcessorTime(self) -> TimeSpan: ...
+    def PrivilegedProcessorTime(self) -> TimeSpan:
+        """
+
+        :return:
+        """
     @property
-    def ProcessName(self) -> StringType: ...
+    def ProcessName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def ProcessorAffinity(self) -> NIntType: ...
+    def ProcessorAffinity(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @ProcessorAffinity.setter
-    def ProcessorAffinity(self, value: NIntType) -> None: ...
+    def ProcessorAffinity(self, value: IntPtr) -> None: ...
     @property
-    def Responding(self) -> BooleanType: ...
+    def Responding(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def SafeHandle(self) -> SafeProcessHandle: ...
+    def SafeHandle(self) -> SafeProcessHandle:
+        """
+
+        :return:
+        """
     @property
-    def SessionId(self) -> IntType: ...
+    def SessionId(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def StandardError(self) -> StreamReader: ...
+    def Site(self) -> ISite:
+        """
+
+        :return:
+        """
+    @Site.setter
+    def Site(self, value: ISite) -> None: ...
     @property
-    def StandardInput(self) -> StreamWriter: ...
+    def StandardError(self) -> StreamReader:
+        """
+
+        :return:
+        """
     @property
-    def StandardOutput(self) -> StreamReader: ...
+    def StandardInput(self) -> StreamWriter:
+        """
+
+        :return:
+        """
     @property
-    def StartInfo(self) -> ProcessStartInfo: ...
+    def StandardOutput(self) -> StreamReader:
+        """
+
+        :return:
+        """
+    @property
+    def StartInfo(self) -> ProcessStartInfo:
+        """
+
+        :return:
+        """
     @StartInfo.setter
     def StartInfo(self, value: ProcessStartInfo) -> None: ...
     @property
-    def StartTime(self) -> DateTime: ...
+    def StartTime(self) -> DateTime:
+        """
+
+        :return:
+        """
     @property
-    def SynchronizingObject(self) -> ISynchronizeInvoke: ...
+    def SynchronizingObject(self) -> ISynchronizeInvoke:
+        """
+
+        :return:
+        """
     @SynchronizingObject.setter
     def SynchronizingObject(self, value: ISynchronizeInvoke) -> None: ...
     @property
-    def Threads(self) -> ProcessThreadCollection: ...
-    @property
-    def TotalProcessorTime(self) -> TimeSpan: ...
-    @property
-    def UserProcessorTime(self) -> TimeSpan: ...
-    @property
-    def VirtualMemorySize(self) -> IntType: ...
-    @property
-    def VirtualMemorySize64(self) -> LongType: ...
-    @property
-    def WorkingSet(self) -> IntType: ...
-    @property
-    def WorkingSet64(self) -> LongType: ...
+    def Threads(self) -> ProcessThreadCollection:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def TotalProcessorTime(self) -> TimeSpan:
+        """
 
-    def BeginErrorReadLine(self) -> VoidType: ...
-    def BeginOutputReadLine(self) -> VoidType: ...
-    def CancelErrorRead(self) -> VoidType: ...
-    def CancelOutputRead(self) -> VoidType: ...
-    def Close(self) -> VoidType: ...
-    def CloseMainWindow(self) -> BooleanType: ...
-    @staticmethod
-    def EnterDebugMode() -> VoidType: ...
-    @staticmethod
-    def GetCurrentProcess() -> Process: ...
-    @staticmethod
+        :return:
+        """
+    @property
+    def UserProcessorTime(self) -> TimeSpan:
+        """
+
+        :return:
+        """
+    @property
+    def VirtualMemorySize(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def VirtualMemorySize64(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def WorkingSet(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def WorkingSet64(self) -> int:
+        """
+
+        :return:
+        """
+    def BeginErrorReadLine(self) -> None:
+        """"""
+    def BeginOutputReadLine(self) -> None:
+        """"""
+    def CancelErrorRead(self) -> None:
+        """"""
+    def CancelOutputRead(self) -> None:
+        """"""
+    def Close(self) -> None:
+        """"""
+    def CloseMainWindow(self) -> bool:
+        """
+
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    @classmethod
+    def EnterDebugMode(cls) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetCurrentProcess(cls) -> Process:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def GetProcessById(processId: IntType, machineName: StringType) -> Process: ...
-    @staticmethod
+    def GetProcessById(cls, processId: int) -> Process:
+        """
+
+        :param processId:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetProcessById(processId: IntType) -> Process: ...
-    @staticmethod
+    def GetProcessById(cls, processId: int, machineName: str) -> Process:
+        """
+
+        :param processId:
+        :param machineName:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetProcesses() -> ArrayType[Process]: ...
-    @staticmethod
+    def GetProcesses(cls) -> Array[Process]:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def GetProcesses(machineName: StringType) -> ArrayType[Process]: ...
-    @staticmethod
+    def GetProcesses(cls, machineName: str) -> Array[Process]:
+        """
+
+        :param machineName:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetProcessesByName(processName: StringType) -> ArrayType[Process]: ...
-    @staticmethod
+    def GetProcessesByName(cls, processName: str) -> Array[Process]:
+        """
+
+        :param processName:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetProcessesByName(
-        processName: StringType, machineName: StringType
-    ) -> ArrayType[Process]: ...
-    def Kill(self) -> VoidType: ...
-    @staticmethod
-    def LeaveDebugMode() -> VoidType: ...
-    def Refresh(self) -> VoidType: ...
-    @staticmethod
+    def GetProcessesByName(cls, processName: str, machineName: str) -> Array[Process]:
+        """
+
+        :param processName:
+        :param machineName:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Kill(self) -> None:
+        """"""
+    @classmethod
+    def LeaveDebugMode(cls) -> None:
+        """"""
+    def Refresh(self) -> None:
+        """"""
+    @overload
+    def Start(self) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def Start(cls, startInfo: ProcessStartInfo) -> Process:
+        """
+
+        :param startInfo:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Start(cls, fileName: str) -> Process:
+        """
+
+        :param fileName:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Start(cls, fileName: str, arguments: str) -> Process:
+        """
+
+        :param fileName:
+        :param arguments:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Start(cls, fileName: str, userName: str, password: SecureString, domain: str) -> Process:
+        """
+
+        :param fileName:
+        :param userName:
+        :param password:
+        :param domain:
+        :return:
+        """
+    @classmethod
     @overload
     def Start(
-        fileName: StringType, userName: StringType, password: SecureString, domain: StringType
-    ) -> Process: ...
-    @staticmethod
-    @overload
-    def Start(
-        fileName: StringType,
-        arguments: StringType,
-        userName: StringType,
-        password: SecureString,
-        domain: StringType,
-    ) -> Process: ...
-    @staticmethod
-    @overload
-    def Start(fileName: StringType) -> Process: ...
-    @staticmethod
-    @overload
-    def Start(fileName: StringType, arguments: StringType) -> Process: ...
-    @staticmethod
-    @overload
-    def Start(startInfo: ProcessStartInfo) -> Process: ...
-    @overload
-    def Start(self) -> BooleanType: ...
-    def ToString(self) -> StringType: ...
-    @overload
-    def WaitForExit(self, milliseconds: IntType) -> BooleanType: ...
-    @overload
-    def WaitForExit(self) -> VoidType: ...
-    @overload
-    def WaitForInputIdle(self, milliseconds: IntType) -> BooleanType: ...
-    @overload
-    def WaitForInputIdle(self) -> BooleanType: ...
-    def add_ErrorDataReceived(self, value: DataReceivedEventHandler) -> VoidType: ...
-    def add_Exited(self, value: EventHandler) -> VoidType: ...
-    def add_OutputDataReceived(self, value: DataReceivedEventHandler) -> VoidType: ...
-    def get_BasePriority(self) -> IntType: ...
-    def get_EnableRaisingEvents(self) -> BooleanType: ...
-    def get_ExitCode(self) -> IntType: ...
-    def get_ExitTime(self) -> DateTime: ...
-    def get_Handle(self) -> NIntType: ...
-    def get_HandleCount(self) -> IntType: ...
-    def get_HasExited(self) -> BooleanType: ...
-    def get_Id(self) -> IntType: ...
-    def get_MachineName(self) -> StringType: ...
-    def get_MainModule(self) -> ProcessModule: ...
-    def get_MainWindowHandle(self) -> NIntType: ...
-    def get_MainWindowTitle(self) -> StringType: ...
-    def get_MaxWorkingSet(self) -> NIntType: ...
-    def get_MinWorkingSet(self) -> NIntType: ...
-    def get_Modules(self) -> ProcessModuleCollection: ...
-    def get_NonpagedSystemMemorySize(self) -> IntType: ...
-    def get_NonpagedSystemMemorySize64(self) -> LongType: ...
-    def get_PagedMemorySize(self) -> IntType: ...
-    def get_PagedMemorySize64(self) -> LongType: ...
-    def get_PagedSystemMemorySize(self) -> IntType: ...
-    def get_PagedSystemMemorySize64(self) -> LongType: ...
-    def get_PeakPagedMemorySize(self) -> IntType: ...
-    def get_PeakPagedMemorySize64(self) -> LongType: ...
-    def get_PeakVirtualMemorySize(self) -> IntType: ...
-    def get_PeakVirtualMemorySize64(self) -> LongType: ...
-    def get_PeakWorkingSet(self) -> IntType: ...
-    def get_PeakWorkingSet64(self) -> LongType: ...
-    def get_PriorityBoostEnabled(self) -> BooleanType: ...
-    def get_PriorityClass(self) -> ProcessPriorityClass: ...
-    def get_PrivateMemorySize(self) -> IntType: ...
-    def get_PrivateMemorySize64(self) -> LongType: ...
-    def get_PrivilegedProcessorTime(self) -> TimeSpan: ...
-    def get_ProcessName(self) -> StringType: ...
-    def get_ProcessorAffinity(self) -> NIntType: ...
-    def get_Responding(self) -> BooleanType: ...
-    def get_SafeHandle(self) -> SafeProcessHandle: ...
-    def get_SessionId(self) -> IntType: ...
-    def get_StandardError(self) -> StreamReader: ...
-    def get_StandardInput(self) -> StreamWriter: ...
-    def get_StandardOutput(self) -> StreamReader: ...
-    def get_StartInfo(self) -> ProcessStartInfo: ...
-    def get_StartTime(self) -> DateTime: ...
-    def get_SynchronizingObject(self) -> ISynchronizeInvoke: ...
-    def get_Threads(self) -> ProcessThreadCollection: ...
-    def get_TotalProcessorTime(self) -> TimeSpan: ...
-    def get_UserProcessorTime(self) -> TimeSpan: ...
-    def get_VirtualMemorySize(self) -> IntType: ...
-    def get_VirtualMemorySize64(self) -> LongType: ...
-    def get_WorkingSet(self) -> IntType: ...
-    def get_WorkingSet64(self) -> LongType: ...
-    def remove_ErrorDataReceived(self, value: DataReceivedEventHandler) -> VoidType: ...
-    def remove_Exited(self, value: EventHandler) -> VoidType: ...
-    def remove_OutputDataReceived(self, value: DataReceivedEventHandler) -> VoidType: ...
-    def set_EnableRaisingEvents(self, value: BooleanType) -> VoidType: ...
-    def set_MaxWorkingSet(self, value: NIntType) -> VoidType: ...
-    def set_MinWorkingSet(self, value: NIntType) -> VoidType: ...
-    def set_PriorityBoostEnabled(self, value: BooleanType) -> VoidType: ...
-    def set_PriorityClass(self, value: ProcessPriorityClass) -> VoidType: ...
-    def set_ProcessorAffinity(self, value: NIntType) -> VoidType: ...
-    def set_StartInfo(self, value: ProcessStartInfo) -> VoidType: ...
-    def set_SynchronizingObject(self, value: ISynchronizeInvoke) -> VoidType: ...
+        cls, fileName: str, arguments: str, userName: str, password: SecureString, domain: str
+    ) -> Process:
+        """
 
-    # ---------- Events ---------- #
+        :param fileName:
+        :param arguments:
+        :param userName:
+        :param password:
+        :param domain:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
+        :return:
+        """
+    @overload
+    def WaitForExit(self) -> None:
+        """"""
+    @overload
+    def WaitForExit(self, milliseconds: int) -> bool:
+        """
+
+        :param milliseconds:
+        :return:
+        """
+    @overload
+    def WaitForInputIdle(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitForInputIdle(self, milliseconds: int) -> bool:
+        """
+
+        :param milliseconds:
+        :return:
+        """
+    Disposed: EventType[EventHandler] = ...
+    """"""
     ErrorDataReceived: EventType[DataReceivedEventHandler] = ...
-
+    """"""
     Exited: EventType[EventHandler] = ...
-
+    """"""
     OutputDataReceived: EventType[DataReceivedEventHandler] = ...
+    """"""
 
-    # No Sub Classes
+class ProcessData(Object):
+    """"""
 
-    # No Sub Structs
+    ProcessId: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    StartupTime: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self, pid: int, startTime: int):
+        """
 
-    # No Sub Interfaces
+        :param pid:
+        :param startTime:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class ProcessData(ObjectType):
-    # ---------- Fields ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ProcessInfo(Object):
+    """"""
+
+    basePriority: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    handleCount: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    mainModuleId: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    pageFileBytes: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    pageFileBytesPeak: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    poolNonpagedBytes: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    poolPagedBytes: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    privateBytes: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    processId: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    processName: Final[str] = ...
+    """
+    
+    :return: 
+    """
+    sessionId: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    threadInfoList: Final[ArrayList] = ...
+    """
+    
+    :return: 
+    """
+    virtualBytes: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    virtualBytesPeak: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    workingSet: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    workingSetPeak: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ProcessManager(ABC, Object):
+    """"""
+
+    @classmethod
     @property
-    def ProcessId(self) -> IntType: ...
-    @ProcessId.setter
-    def ProcessId(self, value: IntType) -> None: ...
+    def IsNt(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def StartupTime(self) -> LongType: ...
-    @StartupTime.setter
-    def StartupTime(self, value: LongType) -> None: ...
+    def IsOSOlderThanXP(cls) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def __init__(self, pid: IntType, startTime: LongType): ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    @classmethod
+    def GetMainWindowHandle(cls, processId: int) -> IntPtr:
+        """
 
-    # No Methods
+        :param processId:
+        :return:
+        """
+    @classmethod
+    def GetModuleInfos(cls, processId: int) -> Array[ModuleInfo]:
+        """
 
-    # No Events
+        :param processId:
+        :return:
+        """
+    @classmethod
+    def GetProcessIdFromHandle(cls, processHandle: SafeProcessHandle) -> int:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ProcessInfo(ObjectType):
-    # ---------- Fields ---------- #
-
-    @property
-    def basePriority(self) -> IntType: ...
-    @basePriority.setter
-    def basePriority(self, value: IntType) -> None: ...
-    @property
-    def handleCount(self) -> IntType: ...
-    @handleCount.setter
-    def handleCount(self, value: IntType) -> None: ...
-    @property
-    def mainModuleId(self) -> IntType: ...
-    @mainModuleId.setter
-    def mainModuleId(self, value: IntType) -> None: ...
-    @property
-    def pageFileBytes(self) -> LongType: ...
-    @pageFileBytes.setter
-    def pageFileBytes(self, value: LongType) -> None: ...
-    @property
-    def pageFileBytesPeak(self) -> LongType: ...
-    @pageFileBytesPeak.setter
-    def pageFileBytesPeak(self, value: LongType) -> None: ...
-    @property
-    def poolNonpagedBytes(self) -> LongType: ...
-    @poolNonpagedBytes.setter
-    def poolNonpagedBytes(self, value: LongType) -> None: ...
-    @property
-    def poolPagedBytes(self) -> LongType: ...
-    @poolPagedBytes.setter
-    def poolPagedBytes(self, value: LongType) -> None: ...
-    @property
-    def privateBytes(self) -> LongType: ...
-    @privateBytes.setter
-    def privateBytes(self, value: LongType) -> None: ...
-    @property
-    def processId(self) -> IntType: ...
-    @processId.setter
-    def processId(self, value: IntType) -> None: ...
-    @property
-    def processName(self) -> StringType: ...
-    @processName.setter
-    def processName(self, value: StringType) -> None: ...
-    @property
-    def sessionId(self) -> IntType: ...
-    @sessionId.setter
-    def sessionId(self, value: IntType) -> None: ...
-    @property
-    def threadInfoList(self) -> ArrayList: ...
-    @threadInfoList.setter
-    def threadInfoList(self, value: ArrayList) -> None: ...
-    @property
-    def virtualBytes(self) -> LongType: ...
-    @virtualBytes.setter
-    def virtualBytes(self, value: LongType) -> None: ...
-    @property
-    def virtualBytesPeak(self) -> LongType: ...
-    @virtualBytesPeak.setter
-    def virtualBytesPeak(self, value: LongType) -> None: ...
-    @property
-    def workingSet(self) -> LongType: ...
-    @workingSet.setter
-    def workingSet(self, value: LongType) -> None: ...
-    @property
-    def workingSetPeak(self) -> LongType: ...
-    @workingSetPeak.setter
-    def workingSetPeak(self, value: LongType) -> None: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ProcessManager(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def IsNt() -> BooleanType: ...
-    @staticmethod
-    @property
-    def IsOSOlderThanXP() -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetMainWindowHandle(processId: IntType) -> NIntType: ...
-    @staticmethod
-    def GetModuleInfos(processId: IntType) -> ArrayType[ModuleInfo]: ...
-    @staticmethod
-    def GetProcessIdFromHandle(processHandle: SafeProcessHandle) -> IntType: ...
-    @staticmethod
+        :param processHandle:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetProcessIds() -> ArrayType[IntType]: ...
-    @staticmethod
+    def GetProcessIds(cls) -> Array[int]:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def GetProcessIds(machineName: StringType) -> ArrayType[IntType]: ...
-    @staticmethod
-    def GetProcessInfo(processId: IntType, machineName: StringType) -> ProcessInfo: ...
-    @staticmethod
-    def GetProcessInfos(machineName: StringType) -> ArrayType[ProcessInfo]: ...
-    @staticmethod
+    def GetProcessIds(cls, machineName: str) -> Array[int]:
+        """
+
+        :param machineName:
+        :return:
+        """
+    @classmethod
+    def GetProcessInfo(cls, processId: int, machineName: str) -> ProcessInfo:
+        """
+
+        :param processId:
+        :param machineName:
+        :return:
+        """
+    @classmethod
+    def GetProcessInfos(cls, machineName: str) -> Array[ProcessInfo]:
+        """
+
+        :param machineName:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
     @overload
-    def IsProcessRunning(processId: IntType, machineName: StringType) -> BooleanType: ...
-    @staticmethod
+    def IsProcessRunning(cls, processId: int) -> bool:
+        """
+
+        :param processId:
+        :return:
+        """
+    @classmethod
     @overload
-    def IsProcessRunning(processId: IntType) -> BooleanType: ...
-    @staticmethod
-    def IsRemoteMachine(machineName: StringType) -> BooleanType: ...
-    @staticmethod
-    def OpenProcess(
-        processId: IntType, access: IntType, throwIfExited: BooleanType
-    ) -> SafeProcessHandle: ...
-    @staticmethod
-    def OpenThread(threadId: IntType, access: IntType) -> SafeThreadHandle: ...
-    @staticmethod
-    def get_IsNt() -> BooleanType: ...
-    @staticmethod
-    def get_IsOSOlderThanXP() -> BooleanType: ...
+    def IsProcessRunning(cls, processId: int, machineName: str) -> bool:
+        """
 
-    # No Events
+        :param processId:
+        :param machineName:
+        :return:
+        """
+    @classmethod
+    def IsRemoteMachine(cls, machineName: str) -> bool:
+        """
 
-    # No Sub Classes
+        :param machineName:
+        :return:
+        """
+    @classmethod
+    def OpenProcess(cls, processId: int, access: int, throwIfExited: bool) -> SafeProcessHandle:
+        """
 
-    # No Sub Structs
+        :param processId:
+        :param access:
+        :param throwIfExited:
+        :return:
+        """
+    @classmethod
+    def OpenThread(cls, threadId: int, access: int) -> SafeThreadHandle:
+        """
 
-    # No Sub Interfaces
+        :param threadId:
+        :param access:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class ProcessModule(Component, IComponent, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def BaseAddress(self) -> NIntType: ...
+    def BaseAddress(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @property
-    def EntryPointAddress(self) -> NIntType: ...
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
     @property
-    def FileName(self) -> StringType: ...
+    def EntryPointAddress(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @property
-    def FileVersionInfo(self) -> FileVersionInfo: ...
+    def FileName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def ModuleMemorySize(self) -> IntType: ...
+    def FileVersionInfo(self) -> FileVersionInfo:
+        """
+
+        :return:
+        """
     @property
-    def ModuleName(self) -> StringType: ...
+    def ModuleMemorySize(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def ModuleName(self) -> str:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_BaseAddress(self) -> NIntType: ...
-    def get_EntryPointAddress(self) -> NIntType: ...
-    def get_FileName(self) -> StringType: ...
-    def get_FileVersionInfo(self) -> FileVersionInfo: ...
-    def get_ModuleMemorySize(self) -> IntType: ...
-    def get_ModuleName(self) -> StringType: ...
+        :return:
+        """
+    @property
+    def Site(self) -> ISite:
+        """
 
-    # No Events
+        :return:
+        """
+    @Site.setter
+    def Site(self, value: ISite) -> None: ...
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    # No Sub Classes
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    Disposed: EventType[EventHandler] = ...
+    """"""
 
 class ProcessModuleCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, processModules: Array[ProcessModule]):
+        """
 
-    def __init__(self, processModules: ArrayType[ProcessModule]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> ProcessModule: ...
-
-    # ---------- Methods ---------- #
-
-    def Contains(self, module: ProcessModule) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[ProcessModule], index: IntType) -> VoidType: ...
-    def IndexOf(self, module: ProcessModule) -> IntType: ...
-    def get_Item(self, index: IntType) -> ProcessModule: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ProcessStartInfo(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, fileName: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, arguments: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param processModules:
+        """
     @property
-    def Arguments(self) -> StringType: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> ProcessModule:
+        """
+
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    def Contains(self, module: ProcessModule) -> bool:
+        """
+
+        :param module:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[ProcessModule], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, module: ProcessModule) -> int:
+        """
+
+        :param module:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> ProcessModule:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+
+class ProcessPriorityClass(Enum):
+    """"""
+
+    Normal: ProcessPriorityClass = ...
+    """"""
+    Idle: ProcessPriorityClass = ...
+    """"""
+    High: ProcessPriorityClass = ...
+    """"""
+    RealTime: ProcessPriorityClass = ...
+    """"""
+    BelowNormal: ProcessPriorityClass = ...
+    """"""
+    AboveNormal: ProcessPriorityClass = ...
+    """"""
+
+class ProcessStartInfo(Object):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, fileName: str):
+        """
+
+        :param fileName:
+        """
+    @overload
+    def __init__(self, fileName: str, arguments: str):
+        """
+
+        :param fileName:
+        :param arguments:
+        """
+    @property
+    def Arguments(self) -> str:
+        """
+
+        :return:
+        """
     @Arguments.setter
-    def Arguments(self, value: StringType) -> None: ...
+    def Arguments(self, value: str) -> None: ...
     @property
-    def CreateNoWindow(self) -> BooleanType: ...
+    def CreateNoWindow(self) -> bool:
+        """
+
+        :return:
+        """
     @CreateNoWindow.setter
-    def CreateNoWindow(self, value: BooleanType) -> None: ...
+    def CreateNoWindow(self, value: bool) -> None: ...
     @property
-    def Domain(self) -> StringType: ...
+    def Domain(self) -> str:
+        """
+
+        :return:
+        """
     @Domain.setter
-    def Domain(self, value: StringType) -> None: ...
+    def Domain(self, value: str) -> None: ...
     @property
-    def Environment(self) -> IDictionary[StringType, StringType]: ...
+    def Environment(self) -> IDictionary[str, str]:
+        """
+
+        :return:
+        """
     @property
-    def EnvironmentVariables(self) -> StringDictionary: ...
+    def EnvironmentVariables(self) -> StringDictionary:
+        """
+
+        :return:
+        """
     @property
-    def ErrorDialog(self) -> BooleanType: ...
+    def ErrorDialog(self) -> bool:
+        """
+
+        :return:
+        """
     @ErrorDialog.setter
-    def ErrorDialog(self, value: BooleanType) -> None: ...
+    def ErrorDialog(self, value: bool) -> None: ...
     @property
-    def ErrorDialogParentHandle(self) -> NIntType: ...
+    def ErrorDialogParentHandle(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @ErrorDialogParentHandle.setter
-    def ErrorDialogParentHandle(self, value: NIntType) -> None: ...
+    def ErrorDialogParentHandle(self, value: IntPtr) -> None: ...
     @property
-    def FileName(self) -> StringType: ...
+    def FileName(self) -> str:
+        """
+
+        :return:
+        """
     @FileName.setter
-    def FileName(self, value: StringType) -> None: ...
+    def FileName(self, value: str) -> None: ...
     @property
-    def LoadUserProfile(self) -> BooleanType: ...
+    def LoadUserProfile(self) -> bool:
+        """
+
+        :return:
+        """
     @LoadUserProfile.setter
-    def LoadUserProfile(self, value: BooleanType) -> None: ...
+    def LoadUserProfile(self, value: bool) -> None: ...
     @property
-    def Password(self) -> SecureString: ...
+    def Password(self) -> SecureString:
+        """
+
+        :return:
+        """
     @Password.setter
     def Password(self, value: SecureString) -> None: ...
     @property
-    def PasswordInClearText(self) -> StringType: ...
+    def PasswordInClearText(self) -> str:
+        """
+
+        :return:
+        """
     @PasswordInClearText.setter
-    def PasswordInClearText(self, value: StringType) -> None: ...
+    def PasswordInClearText(self, value: str) -> None: ...
     @property
-    def RedirectStandardError(self) -> BooleanType: ...
+    def RedirectStandardError(self) -> bool:
+        """
+
+        :return:
+        """
     @RedirectStandardError.setter
-    def RedirectStandardError(self, value: BooleanType) -> None: ...
+    def RedirectStandardError(self, value: bool) -> None: ...
     @property
-    def RedirectStandardInput(self) -> BooleanType: ...
+    def RedirectStandardInput(self) -> bool:
+        """
+
+        :return:
+        """
     @RedirectStandardInput.setter
-    def RedirectStandardInput(self, value: BooleanType) -> None: ...
+    def RedirectStandardInput(self, value: bool) -> None: ...
     @property
-    def RedirectStandardOutput(self) -> BooleanType: ...
+    def RedirectStandardOutput(self) -> bool:
+        """
+
+        :return:
+        """
     @RedirectStandardOutput.setter
-    def RedirectStandardOutput(self, value: BooleanType) -> None: ...
+    def RedirectStandardOutput(self, value: bool) -> None: ...
     @property
-    def StandardErrorEncoding(self) -> Encoding: ...
+    def StandardErrorEncoding(self) -> Encoding:
+        """
+
+        :return:
+        """
     @StandardErrorEncoding.setter
     def StandardErrorEncoding(self, value: Encoding) -> None: ...
     @property
-    def StandardOutputEncoding(self) -> Encoding: ...
+    def StandardOutputEncoding(self) -> Encoding:
+        """
+
+        :return:
+        """
     @StandardOutputEncoding.setter
     def StandardOutputEncoding(self, value: Encoding) -> None: ...
     @property
-    def UseShellExecute(self) -> BooleanType: ...
+    def UseShellExecute(self) -> bool:
+        """
+
+        :return:
+        """
     @UseShellExecute.setter
-    def UseShellExecute(self, value: BooleanType) -> None: ...
+    def UseShellExecute(self, value: bool) -> None: ...
     @property
-    def UserName(self) -> StringType: ...
+    def UserName(self) -> str:
+        """
+
+        :return:
+        """
     @UserName.setter
-    def UserName(self, value: StringType) -> None: ...
+    def UserName(self, value: str) -> None: ...
     @property
-    def Verb(self) -> StringType: ...
+    def Verb(self) -> str:
+        """
+
+        :return:
+        """
     @Verb.setter
-    def Verb(self, value: StringType) -> None: ...
+    def Verb(self, value: str) -> None: ...
     @property
-    def Verbs(self) -> ArrayType[StringType]: ...
+    def Verbs(self) -> Array[str]:
+        """
+
+        :return:
+        """
     @property
-    def WindowStyle(self) -> ProcessWindowStyle: ...
+    def WindowStyle(self) -> ProcessWindowStyle:
+        """
+
+        :return:
+        """
     @WindowStyle.setter
     def WindowStyle(self, value: ProcessWindowStyle) -> None: ...
     @property
-    def WorkingDirectory(self) -> StringType: ...
+    def WorkingDirectory(self) -> str:
+        """
+
+        :return:
+        """
     @WorkingDirectory.setter
-    def WorkingDirectory(self, value: StringType) -> None: ...
+    def WorkingDirectory(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_Arguments(self) -> StringType: ...
-    def get_CreateNoWindow(self) -> BooleanType: ...
-    def get_Domain(self) -> StringType: ...
-    def get_Environment(self) -> IDictionary[StringType, StringType]: ...
-    def get_EnvironmentVariables(self) -> StringDictionary: ...
-    def get_ErrorDialog(self) -> BooleanType: ...
-    def get_ErrorDialogParentHandle(self) -> NIntType: ...
-    def get_FileName(self) -> StringType: ...
-    def get_LoadUserProfile(self) -> BooleanType: ...
-    def get_Password(self) -> SecureString: ...
-    def get_PasswordInClearText(self) -> StringType: ...
-    def get_RedirectStandardError(self) -> BooleanType: ...
-    def get_RedirectStandardInput(self) -> BooleanType: ...
-    def get_RedirectStandardOutput(self) -> BooleanType: ...
-    def get_StandardErrorEncoding(self) -> Encoding: ...
-    def get_StandardOutputEncoding(self) -> Encoding: ...
-    def get_UseShellExecute(self) -> BooleanType: ...
-    def get_UserName(self) -> StringType: ...
-    def get_Verb(self) -> StringType: ...
-    def get_Verbs(self) -> ArrayType[StringType]: ...
-    def get_WindowStyle(self) -> ProcessWindowStyle: ...
-    def get_WorkingDirectory(self) -> StringType: ...
-    def set_Arguments(self, value: StringType) -> VoidType: ...
-    def set_CreateNoWindow(self, value: BooleanType) -> VoidType: ...
-    def set_Domain(self, value: StringType) -> VoidType: ...
-    def set_ErrorDialog(self, value: BooleanType) -> VoidType: ...
-    def set_ErrorDialogParentHandle(self, value: NIntType) -> VoidType: ...
-    def set_FileName(self, value: StringType) -> VoidType: ...
-    def set_LoadUserProfile(self, value: BooleanType) -> VoidType: ...
-    def set_Password(self, value: SecureString) -> VoidType: ...
-    def set_PasswordInClearText(self, value: StringType) -> VoidType: ...
-    def set_RedirectStandardError(self, value: BooleanType) -> VoidType: ...
-    def set_RedirectStandardInput(self, value: BooleanType) -> VoidType: ...
-    def set_RedirectStandardOutput(self, value: BooleanType) -> VoidType: ...
-    def set_StandardErrorEncoding(self, value: Encoding) -> VoidType: ...
-    def set_StandardOutputEncoding(self, value: Encoding) -> VoidType: ...
-    def set_UseShellExecute(self, value: BooleanType) -> VoidType: ...
-    def set_UserName(self, value: StringType) -> VoidType: ...
-    def set_Verb(self, value: StringType) -> VoidType: ...
-    def set_WindowStyle(self, value: ProcessWindowStyle) -> VoidType: ...
-    def set_WorkingDirectory(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class ProcessThread(Component, IComponent, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def BasePriority(self) -> IntType: ...
+    def BasePriority(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def CurrentPriority(self) -> IntType: ...
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
     @property
-    def Id(self) -> IntType: ...
+    def CurrentPriority(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Id(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IdealProcessor(self) -> int:
+        """
+
+        :return:
+        """
     @IdealProcessor.setter
-    def IdealProcessor(self, value: IntType) -> None: ...
+    def IdealProcessor(self, value: int) -> None: ...
     @property
-    def PriorityBoostEnabled(self) -> BooleanType: ...
+    def PriorityBoostEnabled(self) -> bool:
+        """
+
+        :return:
+        """
     @PriorityBoostEnabled.setter
-    def PriorityBoostEnabled(self, value: BooleanType) -> None: ...
+    def PriorityBoostEnabled(self, value: bool) -> None: ...
     @property
-    def PriorityLevel(self) -> ThreadPriorityLevel: ...
+    def PriorityLevel(self) -> ThreadPriorityLevel:
+        """
+
+        :return:
+        """
     @PriorityLevel.setter
     def PriorityLevel(self, value: ThreadPriorityLevel) -> None: ...
     @property
-    def PrivilegedProcessorTime(self) -> TimeSpan: ...
+    def PrivilegedProcessorTime(self) -> TimeSpan:
+        """
+
+        :return:
+        """
+    @property
+    def ProcessorAffinity(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @ProcessorAffinity.setter
-    def ProcessorAffinity(self, value: NIntType) -> None: ...
+    def ProcessorAffinity(self, value: IntPtr) -> None: ...
     @property
-    def StartAddress(self) -> NIntType: ...
+    def Site(self) -> ISite:
+        """
+
+        :return:
+        """
+    @Site.setter
+    def Site(self, value: ISite) -> None: ...
     @property
-    def StartTime(self) -> DateTime: ...
+    def StartAddress(self) -> IntPtr:
+        """
+
+        :return:
+        """
     @property
-    def ThreadState(self) -> ThreadState: ...
+    def StartTime(self) -> DateTime:
+        """
+
+        :return:
+        """
     @property
-    def TotalProcessorTime(self) -> TimeSpan: ...
+    def ThreadState(self) -> ThreadState:
+        """
+
+        :return:
+        """
     @property
-    def UserProcessorTime(self) -> TimeSpan: ...
+    def TotalProcessorTime(self) -> TimeSpan:
+        """
+
+        :return:
+        """
     @property
-    def WaitReason(self) -> ThreadWaitReason: ...
+    def UserProcessorTime(self) -> TimeSpan:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def WaitReason(self) -> ThreadWaitReason:
+        """
 
-    def ResetIdealProcessor(self) -> VoidType: ...
-    def get_BasePriority(self) -> IntType: ...
-    def get_CurrentPriority(self) -> IntType: ...
-    def get_Id(self) -> IntType: ...
-    def get_PriorityBoostEnabled(self) -> BooleanType: ...
-    def get_PriorityLevel(self) -> ThreadPriorityLevel: ...
-    def get_PrivilegedProcessorTime(self) -> TimeSpan: ...
-    def get_StartAddress(self) -> NIntType: ...
-    def get_StartTime(self) -> DateTime: ...
-    def get_ThreadState(self) -> ThreadState: ...
-    def get_TotalProcessorTime(self) -> TimeSpan: ...
-    def get_UserProcessorTime(self) -> TimeSpan: ...
-    def get_WaitReason(self) -> ThreadWaitReason: ...
-    def set_IdealProcessor(self, value: IntType) -> VoidType: ...
-    def set_PriorityBoostEnabled(self, value: BooleanType) -> VoidType: ...
-    def set_PriorityLevel(self, value: ThreadPriorityLevel) -> VoidType: ...
-    def set_ProcessorAffinity(self, value: NIntType) -> VoidType: ...
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    # No Events
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ResetIdealProcessor(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    Disposed: EventType[EventHandler] = ...
+    """"""
 
 class ProcessThreadCollection(ReadOnlyCollectionBase, ICollection, IEnumerable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, processThreads: Array[ProcessThread]):
+        """
 
-    def __init__(self, processThreads: ArrayType[ProcessThread]): ...
-
-    # ---------- Properties ---------- #
-
-    def __getitem__(self, key: IntType) -> ProcessThread: ...
-
-    # ---------- Methods ---------- #
-
-    def Add(self, thread: ProcessThread) -> IntType: ...
-    def Contains(self, thread: ProcessThread) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[ProcessThread], index: IntType) -> VoidType: ...
-    def IndexOf(self, thread: ProcessThread) -> IntType: ...
-    def Insert(self, index: IntType, thread: ProcessThread) -> VoidType: ...
-    def Remove(self, thread: ProcessThread) -> VoidType: ...
-    def get_Item(self, index: IntType) -> ProcessThread: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ProcessThreadTimes(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+        :param processThreads:
+        """
     @property
-    def ExitTime(self) -> DateTime: ...
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
     @property
-    def PrivilegedProcessorTime(self) -> TimeSpan: ...
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def StartTime(self) -> DateTime: ...
+    def Item(self) -> ProcessThread:
+        """
+
+        :return:
+        """
     @property
-    def TotalProcessorTime(self) -> TimeSpan: ...
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    def Add(self, thread: ProcessThread) -> int:
+        """
+
+        :param thread:
+        :return:
+        """
+    def Contains(self, thread: ProcessThread) -> bool:
+        """
+
+        :param thread:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[ProcessThread], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IndexOf(self, thread: ProcessThread) -> int:
+        """
+
+        :param thread:
+        :return:
+        """
+    def Insert(self, index: int, thread: ProcessThread) -> None:
+        """
+
+        :param index:
+        :param thread:
+        """
+    def Remove(self, thread: ProcessThread) -> None:
+        """
+
+        :param thread:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> ProcessThread:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+
+class ProcessThreadTimes(Object):
+    """"""
+
+    def __init__(self):
+        """"""
     @property
-    def UserProcessorTime(self) -> TimeSpan: ...
+    def ExitTime(self) -> DateTime:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def PrivilegedProcessorTime(self) -> TimeSpan:
+        """
 
-    def get_ExitTime(self) -> DateTime: ...
-    def get_PrivilegedProcessorTime(self) -> TimeSpan: ...
-    def get_StartTime(self) -> DateTime: ...
-    def get_TotalProcessorTime(self) -> TimeSpan: ...
-    def get_UserProcessorTime(self) -> TimeSpan: ...
+        :return:
+        """
+    @property
+    def StartTime(self) -> DateTime:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def TotalProcessorTime(self) -> TimeSpan:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def UserProcessorTime(self) -> TimeSpan:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ProcessWaitHandle(WaitHandle, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def Handle(self) -> IntPtr:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @Handle.setter
+    def Handle(self, value: IntPtr) -> None: ...
+    @property
+    def SafeWaitHandle(self) -> SafeWaitHandle:
+        """
 
-    # No Properties
+        :return:
+        """
+    @SafeWaitHandle.setter
+    def SafeWaitHandle(self, value: SafeWaitHandle) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    # No Methods
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitOne(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan) -> bool:
+        """
+
+        :param timeout:
+        :return:
+        """
+    @overload
+    def WaitOne(self, millisecondsTimeout: int, exitContext: bool) -> bool:
+        """
+
+        :param millisecondsTimeout:
+        :param exitContext:
+        :return:
+        """
+    @overload
+    def WaitOne(self, timeout: TimeSpan, exitContext: bool) -> bool:
+        """
+
+        :param timeout:
+        :param exitContext:
+        :return:
+        """
+
+class ProcessWindowStyle(Enum):
+    """"""
+
+    Normal: ProcessWindowStyle = ...
+    """"""
+    Hidden: ProcessWindowStyle = ...
+    """"""
+    Minimized: ProcessWindowStyle = ...
+    """"""
+    Maximized: ProcessWindowStyle = ...
+    """"""
 
 class SharedListenerElementsCollection(ListenerElementsCollection, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def CollectionType(self) -> ConfigurationElementCollectionType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_CollectionType(self) -> ConfigurationElementCollectionType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SharedPerformanceCounter(ObjectType):
     """"""
 
-    # No Fields
+    def __init__(self):
+        """"""
+    @property
+    def CollectionType(self) -> ConfigurationElementCollectionType:
+        """"""
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def EmitClear(self) -> bool:
+        """"""
+    @EmitClear.setter
+    def EmitClear(self, value: bool) -> None: ...
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def Item(self) -> ListenerElement:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Sub Classes
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetRuntimeObject(self) -> TraceListenerCollection:
+        """
 
-class SharedUtils(ABC, ObjectType):
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, name: str) -> ListenerElement:
+        """
+
+        :param name:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+
+class SharedPerformanceCounter(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class SharedUtils(ABC, Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class ShellExecuteHelper(ObjectType):
-    # No Fields
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
 
-    def __init__(self, executeInfo: ShellExecuteInfo): ...
+class ShellExecuteHelper(Object):
+    """"""
 
-    # ---------- Properties ---------- #
+    def __init__(self, executeInfo: NativeMethods.ShellExecuteInfo):
+        """
 
+        :param executeInfo:
+        """
     @property
-    def ErrorCode(self) -> IntType: ...
+    def ErrorCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def ShellExecuteFunction(self) -> VoidType: ...
-    def ShellExecuteOnSTAThread(self) -> BooleanType: ...
-    def get_ErrorCode(self) -> IntType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ShellExecuteFunction(self) -> None:
+        """"""
+    def ShellExecuteOnSTAThread(self) -> bool:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class SourceElement(ConfigurationElement):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Attributes(self) -> Hashtable: ...
+    def Attributes(self) -> Hashtable:
+        """
+
+        :return:
+        """
     @property
-    def Listeners(self) -> ListenerElementsCollection: ...
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
     @property
-    def Name(self) -> StringType: ...
+    def ElementInformation(self) -> ElementInformation:
+        """"""
     @property
-    def SwitchName(self) -> StringType: ...
+    def Listeners(self) -> ListenerElementsCollection:
+        """
+
+        :return:
+        """
     @property
-    def SwitchType(self) -> StringType: ...
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
     @property
-    def SwitchValue(self) -> StringType: ...
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def SwitchName(self) -> str:
+        """
 
-    def get_Attributes(self) -> Hashtable: ...
-    def get_Listeners(self) -> ListenerElementsCollection: ...
-    def get_Name(self) -> StringType: ...
-    def get_SwitchName(self) -> StringType: ...
-    def get_SwitchType(self) -> StringType: ...
-    def get_SwitchValue(self) -> StringType: ...
+        :return:
+        """
+    @property
+    def SwitchType(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def SwitchValue(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SourceElementsCollection(ConfigurationElementCollection, ICollection, IEnumerable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def CollectionType(self) -> ConfigurationElementCollectionType: ...
-    def __getitem__(self, key: StringType) -> SourceElement: ...
+    def CollectionType(self) -> ConfigurationElementCollectionType:
+        """"""
+    @property
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def EmitClear(self) -> bool:
+        """"""
+    @EmitClear.setter
+    def EmitClear(self, value: bool) -> None: ...
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    def get_CollectionType(self) -> ConfigurationElementCollectionType: ...
-    def get_Item(self, name: StringType) -> SourceElement: ...
+        :return:
+        """
+    @property
+    def Item(self) -> SourceElement:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Sub Structs
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, name: str) -> SourceElement:
+        """
+
+        :param name:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
 
 class SourceFilter(TraceFilter):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, source: str):
+        """
 
-    def __init__(self, source: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param source:
+        """
     @property
-    def Source(self) -> StringType: ...
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
     @Source.setter
-    def Source(self, value: StringType) -> None: ...
+    def Source(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     def ShouldTrace(
         self,
         cache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        formatOrMessage: StringType,
-        args: ArrayType[ObjectType],
-        data1: ObjectType,
-        data: ArrayType[ObjectType],
-    ) -> BooleanType: ...
-    def get_Source(self) -> StringType: ...
-    def set_Source(self, value: StringType) -> VoidType: ...
+        id: int,
+        formatOrMessage: str,
+        args: Array[object],
+        data1: object,
+        data: Array[object],
+    ) -> bool:
+        """
 
-    # No Events
+        :param cache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param formatOrMessage:
+        :param args:
+        :param data1:
+        :param data:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class SourceLevels(Enum):
+    """"""
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+    Off: SourceLevels = ...
+    """"""
+    Critical: SourceLevels = ...
+    """"""
+    Error: SourceLevels = ...
+    """"""
+    Warning: SourceLevels = ...
+    """"""
+    Information: SourceLevels = ...
+    """"""
+    Verbose: SourceLevels = ...
+    """"""
+    ActivityTracing: SourceLevels = ...
+    """"""
+    All: SourceLevels = ...
+    """"""
 
 class SourceSwitch(Switch):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, name: StringType): ...
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
     @overload
-    def __init__(self, displayName: StringType, defaultSwitchValue: StringType): ...
+    def __init__(self, displayName: str, defaultSwitchValue: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param displayName:
+        :param defaultSwitchValue:
+        """
     @property
-    def Level(self) -> SourceLevels: ...
+    def Attributes(self) -> StringDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Description(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def DisplayName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> SourceLevels:
+        """
+
+        :return:
+        """
     @Level.setter
     def Level(self, value: SourceLevels) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def ShouldTrace(self, eventType: TraceEventType) -> BooleanType: ...
-    def get_Level(self) -> SourceLevels: ...
-    def set_Level(self, value: SourceLevels) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ShouldTrace(self, eventType: TraceEventType) -> bool:
+        """
 
-    # No Sub Classes
+        :param eventType:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class StackFrame(Object):
+    """"""
 
-    # No Sub Enums
+    OFFSET_UNKNOWN: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, fNeedFileInfo: bool):
+        """
 
-class StackFrame(ObjectType):
-    # ---------- Fields ---------- #
+        :param fNeedFileInfo:
+        """
+    @overload
+    def __init__(self, skipFrames: int):
+        """
 
-    @staticmethod
+        :param skipFrames:
+        """
+    @overload
+    def __init__(self, skipFrames: int, fNeedFileInfo: bool):
+        """
+
+        :param skipFrames:
+        :param fNeedFileInfo:
+        """
+    @overload
+    def __init__(self, fileName: str, lineNumber: int):
+        """
+
+        :param fileName:
+        :param lineNumber:
+        """
+    @overload
+    def __init__(self, fileName: str, lineNumber: int, colNumber: int):
+        """
+
+        :param fileName:
+        :param lineNumber:
+        :param colNumber:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetFileColumnNumber(self) -> int:
+        """
+
+        :return:
+        """
+    def GetFileLineNumber(self) -> int:
+        """
+
+        :return:
+        """
+    def GetFileName(self) -> str:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetILOffset(self) -> int:
+        """
+
+        :return:
+        """
+    def GetMethod(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    def GetNativeOffset(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StackFrameExtensions(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetNativeIP(cls, stackFrame: StackFrame) -> IntPtr:
+        """
+
+        :param stackFrame:
+        :return:
+        """
+    @classmethod
+    def GetNativeImageBase(cls, stackFrame: StackFrame) -> IntPtr:
+        """
+
+        :param stackFrame:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def HasILOffset(cls, stackFrame: StackFrame) -> bool:
+        """
+
+        :param stackFrame:
+        :return:
+        """
+    @classmethod
+    def HasMethod(cls, stackFrame: StackFrame) -> bool:
+        """
+
+        :param stackFrame:
+        :return:
+        """
+    @classmethod
+    def HasNativeImage(cls, stackFrame: StackFrame) -> bool:
+        """
+
+        :param stackFrame:
+        :return:
+        """
+    @classmethod
+    def HasSource(cls, stackFrame: StackFrame) -> bool:
+        """
+
+        :param stackFrame:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StackFrameHelper(Object, IDisposable):
+    """"""
+
+    def __init__(self, target: Thread):
+        """
+
+        :param target:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetColumnNumber(self, i: int) -> int:
+        """
+
+        :param i:
+        :return:
+        """
+    def GetFilename(self, i: int) -> str:
+        """
+
+        :param i:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetILOffset(self, i: int) -> int:
+        """
+
+        :param i:
+        :return:
+        """
+    def GetLineNumber(self, i: int) -> int:
+        """
+
+        :param i:
+        :return:
+        """
+    def GetMethodBase(self, i: int) -> MethodBase:
+        """
+
+        :param i:
+        :return:
+        """
+    def GetNumberOfFrames(self) -> int:
+        """
+
+        :return:
+        """
+    def GetOffset(self, i: int) -> int:
+        """
+
+        :param i:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsLastFrameFromForeignExceptionStackTrace(self, i: int) -> bool:
+        """
+
+        :param i:
+        :return:
+        """
+    def SetNumberOfFrames(self, i: int) -> None:
+        """
+
+        :param i:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StackTrace(Object):
+    """"""
+
+    METHODS_TO_SKIP: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, frame: StackFrame):
+        """
+
+        :param frame:
+        """
+    @overload
+    def __init__(self, fNeedFileInfo: bool):
+        """
+
+        :param fNeedFileInfo:
+        """
+    @overload
+    def __init__(self, e: Exception):
+        """
+
+        :param e:
+        """
+    @overload
+    def __init__(self, skipFrames: int):
+        """
+
+        :param skipFrames:
+        """
+    @overload
+    def __init__(self, targetThread: Thread, needFileInfo: bool):
+        """
+
+        :param targetThread:
+        :param needFileInfo:
+        """
+    @overload
+    def __init__(self, e: Exception, fNeedFileInfo: bool):
+        """
+
+        :param e:
+        :param fNeedFileInfo:
+        """
+    @overload
+    def __init__(self, e: Exception, skipFrames: int):
+        """
+
+        :param e:
+        :param skipFrames:
+        """
+    @overload
+    def __init__(self, skipFrames: int, fNeedFileInfo: bool):
+        """
+
+        :param skipFrames:
+        :param fNeedFileInfo:
+        """
+    @overload
+    def __init__(self, e: Exception, skipFrames: int, fNeedFileInfo: bool):
+        """
+
+        :param e:
+        :param skipFrames:
+        :param fNeedFileInfo:
+        """
     @property
-    def OFFSET_UNKNOWN() -> IntType: ...
+    def FrameCount(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, fNeedFileInfo: BooleanType): ...
-    @overload
-    def __init__(self, skipFrames: IntType): ...
-    @overload
-    def __init__(self, skipFrames: IntType, fNeedFileInfo: BooleanType): ...
-    @overload
-    def __init__(self, fileName: StringType, lineNumber: IntType): ...
-    @overload
-    def __init__(self, fileName: StringType, lineNumber: IntType, colNumber: IntType): ...
+        :param obj:
+        :return:
+        """
+    def GetFrame(self, index: int) -> StackFrame:
+        """
 
-    # No Properties
+        :param index:
+        :return:
+        """
+    def GetFrames(self) -> Array[StackFrame]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def GetFileColumnNumber(self) -> IntType: ...
-    def GetFileLineNumber(self) -> IntType: ...
-    def GetFileName(self) -> StringType: ...
-    def GetILOffset(self) -> IntType: ...
-    def GetMethod(self) -> MethodBase: ...
-    def GetNativeOffset(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class StackTraceSymbols(Object, IDisposable):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self):
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class StackFrameExtensions(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetNativeIP(stackFrame: StackFrame) -> NIntType: ...
-    @staticmethod
-    def GetNativeImageBase(stackFrame: StackFrame) -> NIntType: ...
-    @staticmethod
-    def HasILOffset(stackFrame: StackFrame) -> BooleanType: ...
-    @staticmethod
-    def HasMethod(stackFrame: StackFrame) -> BooleanType: ...
-    @staticmethod
-    def HasNativeImage(stackFrame: StackFrame) -> BooleanType: ...
-    @staticmethod
-    def HasSource(stackFrame: StackFrame) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StackFrameHelper(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, target: Thread): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetColumnNumber(self, i: IntType) -> IntType: ...
-    def GetFilename(self, i: IntType) -> StringType: ...
-    def GetILOffset(self, i: IntType) -> IntType: ...
-    def GetLineNumber(self, i: IntType) -> IntType: ...
-    def GetMethodBase(self, i: IntType) -> MethodBase: ...
-    def GetNumberOfFrames(self) -> IntType: ...
-    def GetOffset(self, i: IntType) -> IntType: ...
-    def IsLastFrameFromForeignExceptionStackTrace(self, i: IntType) -> BooleanType: ...
-    def SetNumberOfFrames(self, i: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StackTrace(ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def METHODS_TO_SKIP() -> IntType: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, fNeedFileInfo: BooleanType): ...
-    @overload
-    def __init__(self, skipFrames: IntType): ...
-    @overload
-    def __init__(self, skipFrames: IntType, fNeedFileInfo: BooleanType): ...
-    @overload
-    def __init__(self, e: Exception): ...
-    @overload
-    def __init__(self, e: Exception, fNeedFileInfo: BooleanType): ...
-    @overload
-    def __init__(self, e: Exception, skipFrames: IntType): ...
-    @overload
-    def __init__(self, e: Exception, skipFrames: IntType, fNeedFileInfo: BooleanType): ...
-    @overload
-    def __init__(self, frame: StackFrame): ...
-    @overload
-    def __init__(self, targetThread: Thread, needFileInfo: BooleanType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def FrameCount(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetFrame(self, index: IntType) -> StackFrame: ...
-    def GetFrames(self) -> ArrayType[StackFrame]: ...
-    def ToString(self) -> StringType: ...
-    def get_FrameCount(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StackTraceSymbols(ObjectType, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
+        :return:
+        """
     def GetSourceLineInfo(
         self,
-        assemblyPath: StringType,
-        loadedPeAddress: NIntType,
-        loadedPeSize: IntType,
-        inMemoryPdbAddress: NIntType,
-        inMemoryPdbSize: IntType,
-        methodToken: IntType,
-        ilOffset: IntType,
-        sourceFile: StringType,
-        sourceLine: IntType,
-        sourceColumn: IntType,
-    ) -> Tuple[VoidType, StringType, IntType, IntType]: ...
+        assemblyPath: str,
+        loadedPeAddress: IntPtr,
+        loadedPeSize: int,
+        inMemoryPdbAddress: IntPtr,
+        inMemoryPdbSize: int,
+        methodToken: int,
+        ilOffset: int,
+        sourceFile: str,
+        sourceLine: int,
+        sourceColumn: int,
+    ) -> Tuple[None, str, int, int]:
+        """
+
+        :param assemblyPath:
+        :param loadedPeAddress:
+        :param loadedPeSize:
+        :param inMemoryPdbAddress:
+        :param inMemoryPdbSize:
+        :param methodToken:
+        :param ilOffset:
+        :param sourceFile:
+        :param sourceLine:
+        :param sourceColumn:
+        """
     def GetSourceLineInfoWithoutCasAssert(
         self,
-        assemblyPath: StringType,
-        loadedPeAddress: NIntType,
-        loadedPeSize: IntType,
-        inMemoryPdbAddress: NIntType,
-        inMemoryPdbSize: IntType,
-        methodToken: IntType,
-        ilOffset: IntType,
-        sourceFile: StringType,
-        sourceLine: IntType,
-        sourceColumn: IntType,
-    ) -> Tuple[VoidType, StringType, IntType, IntType]: ...
+        assemblyPath: str,
+        loadedPeAddress: IntPtr,
+        loadedPeSize: int,
+        inMemoryPdbAddress: IntPtr,
+        inMemoryPdbSize: int,
+        methodToken: int,
+        ilOffset: int,
+        sourceFile: str,
+        sourceLine: int,
+        sourceColumn: int,
+    ) -> Tuple[None, str, int, int]:
+        """
 
-    # No Events
+        :param assemblyPath:
+        :param loadedPeAddress:
+        :param loadedPeSize:
+        :param inMemoryPdbAddress:
+        :param inMemoryPdbSize:
+        :param methodToken:
+        :param ilOffset:
+        :param sourceFile:
+        :param sourceLine:
+        :param sourceColumn:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+class Stopwatch(Object):
+    """"""
 
-    # No Sub Enums
-
-class Stopwatch(ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
+    Frequency: Final[ClassVar[int]] = ...
+    """
+    
+    :return: 
+    """
+    IsHighResolution: Final[ClassVar[bool]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
     @property
-    def Frequency() -> LongType: ...
-    @staticmethod
+    def Elapsed(self) -> TimeSpan:
+        """
+
+        :return:
+        """
     @property
-    def IsHighResolution() -> BooleanType: ...
+    def ElapsedMilliseconds(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @property
+    def ElapsedTicks(self) -> int:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def IsRunning(self) -> bool:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetTimestamp(cls) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def Restart(self) -> None:
+        """"""
+    def Start(self) -> None:
+        """"""
+    @classmethod
+    def StartNew(cls) -> Stopwatch:
+        """
+
+        :return:
+        """
+    def Stop(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Switch(ABC, Object):
+    """"""
 
     @property
-    def Elapsed(self) -> TimeSpan: ...
+    def Attributes(self) -> StringDictionary:
+        """
+
+        :return:
+        """
     @property
-    def ElapsedMilliseconds(self) -> LongType: ...
+    def Description(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def ElapsedTicks(self) -> LongType: ...
-    @property
-    def IsRunning(self) -> BooleanType: ...
+    def DisplayName(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @staticmethod
-    def GetTimestamp() -> LongType: ...
-    def Reset(self) -> VoidType: ...
-    def Restart(self) -> VoidType: ...
-    def Start(self) -> VoidType: ...
-    @staticmethod
-    def StartNew() -> Stopwatch: ...
-    def Stop(self) -> VoidType: ...
-    def get_Elapsed(self) -> TimeSpan: ...
-    def get_ElapsedMilliseconds(self) -> LongType: ...
-    def get_ElapsedTicks(self) -> LongType: ...
-    def get_IsRunning(self) -> BooleanType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Switch(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Attributes(self) -> StringDictionary: ...
-    @property
-    def Description(self) -> StringType: ...
-    @property
-    def DisplayName(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Attributes(self) -> StringDictionary: ...
-    def get_Description(self) -> StringType: ...
-    def get_DisplayName(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class SwitchAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, switchName: str, switchType: Type):
+        """
 
-    def __init__(self, switchName: StringType, switchType: TypeType): ...
-
-    # ---------- Properties ---------- #
-
+        :param switchName:
+        :param switchType:
+        """
     @property
-    def SwitchDescription(self) -> StringType: ...
+    def SwitchDescription(self) -> str:
+        """
+
+        :return:
+        """
     @SwitchDescription.setter
-    def SwitchDescription(self, value: StringType) -> None: ...
+    def SwitchDescription(self, value: str) -> None: ...
     @property
-    def SwitchName(self) -> StringType: ...
+    def SwitchName(self) -> str:
+        """
+
+        :return:
+        """
     @SwitchName.setter
-    def SwitchName(self, value: StringType) -> None: ...
+    def SwitchName(self, value: str) -> None: ...
     @property
-    def SwitchType(self) -> TypeType: ...
+    def SwitchType(self) -> Type:
+        """
+
+        :return:
+        """
     @SwitchType.setter
-    def SwitchType(self, value: TypeType) -> None: ...
+    def SwitchType(self, value: Type) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @staticmethod
-    def GetAll(assembly: Assembly) -> ArrayType[SwitchAttribute]: ...
-    def get_SwitchDescription(self) -> StringType: ...
-    def get_SwitchName(self) -> StringType: ...
-    def get_SwitchType(self) -> TypeType: ...
-    def set_SwitchDescription(self, value: StringType) -> VoidType: ...
-    def set_SwitchName(self, value: StringType) -> VoidType: ...
-    def set_SwitchType(self, value: TypeType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetAll(cls, assembly: Assembly) -> Array[SwitchAttribute]:
+        """
 
-    # No Events
+        :param assembly:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Structs
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Enums
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SwitchElement(ConfigurationElement):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Attributes(self) -> Hashtable: ...
+    def Attributes(self) -> Hashtable:
+        """
+
+        :return:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
     @property
-    def Value(self) -> StringType: ...
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def Name(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Value(self) -> str:
+        """
 
-    def get_Attributes(self) -> Hashtable: ...
-    def get_Name(self) -> StringType: ...
-    def get_Value(self) -> StringType: ...
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class SwitchElementsCollection(ConfigurationElementCollection, ICollection, IEnumerable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def CollectionType(self) -> ConfigurationElementCollectionType: ...
-    def __getitem__(self, key: StringType) -> SwitchElement: ...
+    def CollectionType(self) -> ConfigurationElementCollectionType:
+        """"""
+    @property
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def EmitClear(self) -> bool:
+        """"""
+    @EmitClear.setter
+    def EmitClear(self, value: bool) -> None: ...
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    def get_CollectionType(self) -> ConfigurationElementCollectionType: ...
-    def get_Item(self, name: StringType) -> SwitchElement: ...
+        :return:
+        """
+    @property
+    def Item(self) -> SwitchElement:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Sub Structs
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[ConfigurationElement], index: int) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, name: str) -> SwitchElement:
+        """
+
+        :param name:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
 
 class SwitchLevelAttribute(Attribute, _Attribute):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, switchLevelType: Type):
+        """
 
-    def __init__(self, switchLevelType: TypeType): ...
-
-    # ---------- Properties ---------- #
-
+        :param switchLevelType:
+        """
     @property
-    def SwitchLevelType(self) -> TypeType: ...
+    def SwitchLevelType(self) -> Type:
+        """
+
+        :return:
+        """
     @SwitchLevelType.setter
-    def SwitchLevelType(self, value: TypeType) -> None: ...
+    def SwitchLevelType(self, value: Type) -> None: ...
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_SwitchLevelType(self) -> TypeType: ...
-    def set_SwitchLevelType(self, value: TypeType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
 
-    # No Sub Classes
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
 
-    # No Sub Interfaces
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
 
-    # No Sub Enums
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SwitchesDictionarySectionHandler(DictionarySectionHandler, IConfigurationSectionHandler):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    def Create(self, parent: object, configContext: object, section: XmlNode) -> object:
+        """
 
-    def __init__(self): ...
+        :param parent:
+        :param configContext:
+        :param section:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Methods
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class SystemDiagnosticsSection(ConfigurationSection):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def Assert(self) -> AssertSection: ...
+    def Assert(self) -> AssertSection:
+        """
+
+        :return:
+        """
     @property
-    def PerfCounters(self) -> PerfCounterSection: ...
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
     @property
-    def SharedListeners(self) -> ListenerElementsCollection: ...
+    def ElementInformation(self) -> ElementInformation:
+        """"""
     @property
-    def Sources(self) -> SourceElementsCollection: ...
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
     @property
-    def Switches(self) -> SwitchElementsCollection: ...
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
     @property
-    def Trace(self) -> TraceSection: ...
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def PerfCounters(self) -> PerfCounterSection:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def SectionInformation(self) -> SectionInformation:
+        """"""
+    @property
+    def SharedListeners(self) -> ListenerElementsCollection:
+        """
 
-    def get_Assert(self) -> AssertSection: ...
-    def get_PerfCounters(self) -> PerfCounterSection: ...
-    def get_SharedListeners(self) -> ListenerElementsCollection: ...
-    def get_Sources(self) -> SourceElementsCollection: ...
-    def get_Switches(self) -> SwitchElementsCollection: ...
-    def get_Trace(self) -> TraceSection: ...
+        :return:
+        """
+    @property
+    def Sources(self) -> SourceElementsCollection:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Switches(self) -> SwitchElementsCollection:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Trace(self) -> TraceSection:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class TextWriterTraceListener(TraceListener, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, stream: Stream): ...
-    @overload
-    def __init__(self, stream: Stream, name: StringType): ...
-    @overload
-    def __init__(self, writer: TextWriter): ...
-    @overload
-    def __init__(self, writer: TextWriter, name: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType): ...
-    @overload
-    def __init__(self, fileName: StringType, name: StringType): ...
+    def __init__(self, stream: Stream):
+        """
 
-    # ---------- Properties ---------- #
+        :param stream:
+        """
+    @overload
+    def __init__(self, writer: TextWriter):
+        """
 
+        :param writer:
+        """
+    @overload
+    def __init__(self, fileName: str):
+        """
+
+        :param fileName:
+        """
+    @overload
+    def __init__(self, stream: Stream, name: str):
+        """
+
+        :param stream:
+        :param name:
+        """
+    @overload
+    def __init__(self, writer: TextWriter, name: str):
+        """
+
+        :param writer:
+        :param name:
+        """
+    @overload
+    def __init__(self, fileName: str, name: str):
+        """
+
+        :param fileName:
+        :param name:
+        """
     @property
-    def Writer(self) -> TextWriter: ...
-    @Writer.setter
-    def Writer(self, value: TextWriter) -> None: ...
+    def Attributes(self) -> StringDictionary:
+        """
 
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
-    @overload
-    def Write(self, message: StringType) -> VoidType: ...
-    @overload
-    def WriteLine(self, message: StringType) -> VoidType: ...
-    def get_Writer(self) -> TextWriter: ...
-    def set_Writer(self, value: TextWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ThreadInfo(ObjectType):
-    # ---------- Fields ---------- #
-
+        :return:
+        """
     @property
-    def basePriority(self) -> IntType: ...
-    @basePriority.setter
-    def basePriority(self, value: IntType) -> None: ...
-    @property
-    def currentPriority(self) -> IntType: ...
-    @currentPriority.setter
-    def currentPriority(self, value: IntType) -> None: ...
-    @property
-    def processId(self) -> IntType: ...
-    @processId.setter
-    def processId(self, value: IntType) -> None: ...
-    @property
-    def startAddress(self) -> NIntType: ...
-    @startAddress.setter
-    def startAddress(self, value: NIntType) -> None: ...
-    @property
-    def threadId(self) -> IntType: ...
-    @threadId.setter
-    def threadId(self, value: IntType) -> None: ...
-    @property
-    def threadState(self) -> ThreadState: ...
-    @threadState.setter
-    def threadState(self, value: ThreadState) -> None: ...
-    @property
-    def threadWaitReason(self) -> ThreadWaitReason: ...
-    @threadWaitReason.setter
-    def threadWaitReason(self, value: ThreadWaitReason) -> None: ...
+    def Filter(self) -> TraceFilter:
+        """
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Trace(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def AutoFlush() -> BooleanType: ...
-    @staticmethod
-    @AutoFlush.setter
-    def AutoFlush(value: BooleanType) -> None: ...
-    @staticmethod
-    @property
-    def CorrelationManager() -> CorrelationManager: ...
-    @staticmethod
-    @property
-    def IndentLevel() -> IntType: ...
-    @staticmethod
-    @IndentLevel.setter
-    def IndentLevel(value: IntType) -> None: ...
-    @staticmethod
-    @property
-    def IndentSize() -> IntType: ...
-    @staticmethod
-    @IndentSize.setter
-    def IndentSize(value: IntType) -> None: ...
-    @staticmethod
-    @property
-    def Listeners() -> TraceListenerCollection: ...
-    @staticmethod
-    @property
-    def UseGlobalLock() -> BooleanType: ...
-    @staticmethod
-    @UseGlobalLock.setter
-    def UseGlobalLock(value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def Assert(condition: BooleanType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Assert(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Assert(
-        condition: BooleanType, message: StringType, detailMessage: StringType
-    ) -> VoidType: ...
-    @staticmethod
-    def Close() -> VoidType: ...
-    @staticmethod
-    @overload
-    def Fail(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Fail(message: StringType, detailMessage: StringType) -> VoidType: ...
-    @staticmethod
-    def Flush() -> VoidType: ...
-    @staticmethod
-    def Indent() -> VoidType: ...
-    @staticmethod
-    def Refresh() -> VoidType: ...
-    @staticmethod
-    @overload
-    def TraceError(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def TraceError(format: StringType, args: ArrayType[ObjectType]) -> VoidType: ...
-    @staticmethod
-    @overload
-    def TraceInformation(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def TraceInformation(format: StringType, args: ArrayType[ObjectType]) -> VoidType: ...
-    @staticmethod
-    @overload
-    def TraceWarning(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def TraceWarning(format: StringType, args: ArrayType[ObjectType]) -> VoidType: ...
-    @staticmethod
-    def Unindent() -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(message: StringType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(value: ObjectType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, message: StringType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, value: ObjectType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(message: StringType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(value: ObjectType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(condition: BooleanType, value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(
-        condition: BooleanType, message: StringType, category: StringType
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(
-        condition: BooleanType, value: ObjectType, category: StringType
-    ) -> VoidType: ...
-    @staticmethod
-    def get_AutoFlush() -> BooleanType: ...
-    @staticmethod
-    def get_CorrelationManager() -> CorrelationManager: ...
-    @staticmethod
-    def get_IndentLevel() -> IntType: ...
-    @staticmethod
-    def get_IndentSize() -> IntType: ...
-    @staticmethod
-    def get_Listeners() -> TraceListenerCollection: ...
-    @staticmethod
-    def get_UseGlobalLock() -> BooleanType: ...
-    @staticmethod
-    def set_AutoFlush(value: BooleanType) -> VoidType: ...
-    @staticmethod
-    def set_IndentLevel(value: IntType) -> VoidType: ...
-    @staticmethod
-    def set_IndentSize(value: IntType) -> VoidType: ...
-    @staticmethod
-    def set_UseGlobalLock(value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceEventCache(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Callstack(self) -> StringType: ...
-    @property
-    def DateTime(self) -> DateTime: ...
-    @property
-    def LogicalOperationStack(self) -> Stack: ...
-    @property
-    def ProcessId(self) -> IntType: ...
-    @property
-    def ThreadId(self) -> StringType: ...
-    @property
-    def Timestamp(self) -> LongType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Callstack(self) -> StringType: ...
-    def get_DateTime(self) -> DateTime: ...
-    def get_LogicalOperationStack(self) -> Stack: ...
-    def get_ProcessId(self) -> IntType: ...
-    def get_ThreadId(self) -> StringType: ...
-    def get_Timestamp(self) -> LongType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceFilter(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def ShouldTrace(
-        self,
-        cache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        formatOrMessage: StringType,
-        args: ArrayType[ObjectType],
-        data1: ObjectType,
-        data: ArrayType[ObjectType],
-    ) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceInternal(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
-    @property
-    def AutoFlush() -> BooleanType: ...
-    @staticmethod
-    @AutoFlush.setter
-    def AutoFlush(value: BooleanType) -> None: ...
-    @staticmethod
-    @property
-    def IndentLevel() -> IntType: ...
-    @staticmethod
-    @IndentLevel.setter
-    def IndentLevel(value: IntType) -> None: ...
-    @staticmethod
-    @property
-    def IndentSize() -> IntType: ...
-    @staticmethod
-    @IndentSize.setter
-    def IndentSize(value: IntType) -> None: ...
-    @staticmethod
-    @property
-    def Listeners() -> TraceListenerCollection: ...
-    @staticmethod
-    @property
-    def UseGlobalLock() -> BooleanType: ...
-    @staticmethod
-    @UseGlobalLock.setter
-    def UseGlobalLock(value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def Assert(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Assert(condition: BooleanType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Assert(
-        condition: BooleanType, message: StringType, detailMessage: StringType
-    ) -> VoidType: ...
-    @staticmethod
-    def Close() -> VoidType: ...
-    @staticmethod
-    @overload
-    def Fail(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Fail(message: StringType, detailMessage: StringType) -> VoidType: ...
-    @staticmethod
-    def Flush() -> VoidType: ...
-    @staticmethod
-    def Indent() -> VoidType: ...
-    @staticmethod
-    def TraceEvent(
-        eventType: TraceEventType, id: IntType, format: StringType, args: ArrayType[ObjectType]
-    ) -> VoidType: ...
-    @staticmethod
-    def Unindent() -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(message: StringType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def Write(value: ObjectType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, message: StringType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteIf(condition: BooleanType, value: ObjectType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(message: StringType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLine(value: ObjectType, category: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(condition: BooleanType, message: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(condition: BooleanType, value: ObjectType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(
-        condition: BooleanType, message: StringType, category: StringType
-    ) -> VoidType: ...
-    @staticmethod
-    @overload
-    def WriteLineIf(
-        condition: BooleanType, value: ObjectType, category: StringType
-    ) -> VoidType: ...
-    @staticmethod
-    def get_AutoFlush() -> BooleanType: ...
-    @staticmethod
-    def get_IndentLevel() -> IntType: ...
-    @staticmethod
-    def get_IndentSize() -> IntType: ...
-    @staticmethod
-    def get_Listeners() -> TraceListenerCollection: ...
-    @staticmethod
-    def get_UseGlobalLock() -> BooleanType: ...
-    @staticmethod
-    def set_AutoFlush(value: BooleanType) -> VoidType: ...
-    @staticmethod
-    def set_IndentLevel(value: IntType) -> VoidType: ...
-    @staticmethod
-    def set_IndentSize(value: IntType) -> VoidType: ...
-    @staticmethod
-    def set_UseGlobalLock(value: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceListener(ABC, MarshalByRefObject, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Attributes(self) -> StringDictionary: ...
-    @property
-    def Filter(self) -> TraceFilter: ...
+        :return:
+        """
     @Filter.setter
     def Filter(self, value: TraceFilter) -> None: ...
     @property
-    def IndentLevel(self) -> IntType: ...
+    def IndentLevel(self) -> int:
+        """
+
+        :return:
+        """
     @IndentLevel.setter
-    def IndentLevel(self, value: IntType) -> None: ...
+    def IndentLevel(self, value: int) -> None: ...
     @property
-    def IndentSize(self) -> IntType: ...
+    def IndentSize(self) -> int:
+        """
+
+        :return:
+        """
     @IndentSize.setter
-    def IndentSize(self, value: IntType) -> None: ...
+    def IndentSize(self, value: int) -> None: ...
     @property
-    def IsThreadSafe(self) -> BooleanType: ...
+    def IsThreadSafe(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @Name.setter
-    def Name(self, value: StringType) -> None: ...
+    def Name(self, value: str) -> None: ...
     @property
-    def TraceOutputOptions(self) -> TraceOptions: ...
+    def TraceOutputOptions(self) -> TraceOptions:
+        """
+
+        :return:
+        """
     @TraceOutputOptions.setter
     def TraceOutputOptions(self, value: TraceOptions) -> None: ...
+    @property
+    def Writer(self) -> TextWriter:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @Writer.setter
+    def Writer(self, value: TextWriter) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    def Close(self) -> VoidType: ...
-    def Dispose(self) -> VoidType: ...
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def Fail(self, message: StringType) -> VoidType: ...
+    def Fail(self, message: str) -> None:
+        """
+
+        :param message:
+        """
     @overload
-    def Fail(self, message: StringType, detailMessage: StringType) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
+    def Fail(self, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
     def TraceData(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        data: ObjectType,
-    ) -> VoidType: ...
+        id: int,
+        data: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
     @overload
     def TraceData(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        data: ArrayType[ObjectType],
-    ) -> VoidType: ...
+        id: int,
+        data: object,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceEvent(
+        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        """
     @overload
     def TraceEvent(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-    ) -> VoidType: ...
+        id: int,
+        message: str,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param message:
+        """
     @overload
     def TraceEvent(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        message: StringType,
-    ) -> VoidType: ...
-    @overload
-    def TraceEvent(
-        self,
-        eventCache: TraceEventCache,
-        source: StringType,
-        eventType: TraceEventType,
-        id: IntType,
-        format: StringType,
-        args: ArrayType[ObjectType],
-    ) -> VoidType: ...
+        id: int,
+        format: str,
+        args: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
     def TraceTransfer(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
-        id: IntType,
-        message: StringType,
+        source: str,
+        id: int,
+        message: str,
         relatedActivityId: Guid,
-    ) -> VoidType: ...
-    @overload
-    def Write(self, o: ObjectType) -> VoidType: ...
-    @overload
-    def Write(self, o: ObjectType, category: StringType) -> VoidType: ...
-    @overload
-    def Write(self, message: StringType) -> VoidType: ...
-    @overload
-    def Write(self, message: StringType, category: StringType) -> VoidType: ...
-    @overload
-    def WriteLine(self, o: ObjectType) -> VoidType: ...
-    @overload
-    def WriteLine(self, o: ObjectType, category: StringType) -> VoidType: ...
-    @overload
-    def WriteLine(self, message: StringType) -> VoidType: ...
-    @overload
-    def WriteLine(self, message: StringType, category: StringType) -> VoidType: ...
-    def get_Attributes(self) -> StringDictionary: ...
-    def get_Filter(self) -> TraceFilter: ...
-    def get_IndentLevel(self) -> IntType: ...
-    def get_IndentSize(self) -> IntType: ...
-    def get_IsThreadSafe(self) -> BooleanType: ...
-    def get_Name(self) -> StringType: ...
-    def get_TraceOutputOptions(self) -> TraceOptions: ...
-    def set_Filter(self, value: TraceFilter) -> VoidType: ...
-    def set_IndentLevel(self, value: IntType) -> VoidType: ...
-    def set_IndentSize(self, value: IntType) -> VoidType: ...
-    def set_Name(self, value: StringType) -> VoidType: ...
-    def set_TraceOutputOptions(self, value: TraceOptions) -> VoidType: ...
+    ) -> None:
+        """
 
-    # No Events
+        :param eventCache:
+        :param source:
+        :param id:
+        :param message:
+        :param relatedActivityId:
+        """
+    @overload
+    def Write(self, o: object) -> None:
+        """
 
-    # No Sub Classes
+        :param o:
+        """
+    @overload
+    def Write(self, message: str) -> None:
+        """
 
-    # No Sub Structs
+        :param message:
+        """
+    @overload
+    def Write(self, o: object, category: str) -> None:
+        """
 
-    # No Sub Interfaces
+        :param o:
+        :param category:
+        """
+    @overload
+    def Write(self, message: str, category: str) -> None:
+        """
 
-    # No Sub Enums
+        :param message:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, o: object) -> None:
+        """
 
-class TraceListenerCollection(ObjectType, IList, ICollection, IEnumerable):
-    # No Fields
+        :param o:
+        """
+    @overload
+    def WriteLine(self, message: str) -> None:
+        """
 
-    # No Constructors
+        :param message:
+        """
+    @overload
+    def WriteLine(self, o: object, category: str) -> None:
+        """
 
-    # ---------- Properties ---------- #
+        :param o:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+
+class ThreadInfo(Object):
+    """"""
+
+    basePriority: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    currentPriority: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    processId: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    startAddress: Final[IntPtr] = ...
+    """
+    
+    :return: 
+    """
+    threadId: Final[int] = ...
+    """
+    
+    :return: 
+    """
+    threadState: Final[ThreadState] = ...
+    """
+    
+    :return: 
+    """
+    threadWaitReason: Final[ThreadWaitReason] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ThreadPriorityLevel(Enum):
+    """"""
+
+    Normal: ThreadPriorityLevel = ...
+    """"""
+    AboveNormal: ThreadPriorityLevel = ...
+    """"""
+    Highest: ThreadPriorityLevel = ...
+    """"""
+    TimeCritical: ThreadPriorityLevel = ...
+    """"""
+    Idle: ThreadPriorityLevel = ...
+    """"""
+    Lowest: ThreadPriorityLevel = ...
+    """"""
+    BelowNormal: ThreadPriorityLevel = ...
+    """"""
+
+class ThreadState(Enum):
+    """"""
+
+    Initialized: ThreadState = ...
+    """"""
+    Ready: ThreadState = ...
+    """"""
+    Running: ThreadState = ...
+    """"""
+    Standby: ThreadState = ...
+    """"""
+    Terminated: ThreadState = ...
+    """"""
+    Wait: ThreadState = ...
+    """"""
+    Transition: ThreadState = ...
+    """"""
+    Unknown: ThreadState = ...
+    """"""
+
+class ThreadWaitReason(Enum):
+    """"""
+
+    Executive: ThreadWaitReason = ...
+    """"""
+    FreePage: ThreadWaitReason = ...
+    """"""
+    PageIn: ThreadWaitReason = ...
+    """"""
+    SystemAllocation: ThreadWaitReason = ...
+    """"""
+    ExecutionDelay: ThreadWaitReason = ...
+    """"""
+    Suspended: ThreadWaitReason = ...
+    """"""
+    UserRequest: ThreadWaitReason = ...
+    """"""
+    EventPairHigh: ThreadWaitReason = ...
+    """"""
+    EventPairLow: ThreadWaitReason = ...
+    """"""
+    LpcReceive: ThreadWaitReason = ...
+    """"""
+    LpcReply: ThreadWaitReason = ...
+    """"""
+    VirtualMemory: ThreadWaitReason = ...
+    """"""
+    PageOut: ThreadWaitReason = ...
+    """"""
+    Unknown: ThreadWaitReason = ...
+    """"""
+
+class Trace(Object):
+    """"""
+
+    @classmethod
+    @property
+    def AutoFlush(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @AutoFlush.setter
+    def AutoFlush(cls, value: bool) -> None: ...
+    @classmethod
+    @property
+    def CorrelationManager(cls) -> CorrelationManager:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def IndentLevel(cls) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @IndentLevel.setter
+    def IndentLevel(cls, value: int) -> None: ...
+    @classmethod
+    @property
+    def IndentSize(cls) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @IndentSize.setter
+    def IndentSize(cls, value: int) -> None: ...
+    @classmethod
+    @property
+    def Listeners(cls) -> TraceListenerCollection:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UseGlobalLock(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @UseGlobalLock.setter
+    def UseGlobalLock(cls, value: bool) -> None: ...
+    @classmethod
+    @overload
+    def Assert(cls, condition: bool) -> None:
+        """
+
+        :param condition:
+        """
+    @classmethod
+    @overload
+    def Assert(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    @overload
+    def Assert(cls, condition: bool, message: str, detailMessage: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        :param detailMessage:
+        """
+    @classmethod
+    def Close(cls) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Fail(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def Fail(cls, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    @classmethod
+    def Flush(cls) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Indent(cls) -> None:
+        """"""
+    @classmethod
+    def Refresh(cls) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def TraceError(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def TraceError(cls, format: str, args: Array[object]) -> None:
+        """
+
+        :param format:
+        :param args:
+        """
+    @classmethod
+    @overload
+    def TraceInformation(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def TraceInformation(cls, format: str, args: Array[object]) -> None:
+        """
+
+        :param format:
+        :param args:
+        """
+    @classmethod
+    @overload
+    def TraceWarning(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def TraceWarning(cls, format: str, args: Array[object]) -> None:
+        """
+
+        :param format:
+        :param args:
+        """
+    @classmethod
+    def Unindent(cls) -> None:
+        """"""
+    @classmethod
+    @overload
+    def Write(cls, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def Write(cls, value: object, category: str) -> None:
+        """
+
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def Write(cls, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, value: object) -> None:
+        """
+
+        :param condition:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, value: object, category: str) -> None:
+        """
+
+        :param condition:
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, message: str, category: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, value: object, category: str) -> None:
+        """
+
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, value: object) -> None:
+        """
+
+        :param condition:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, value: object, category: str) -> None:
+        """
+
+        :param condition:
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, message: str, category: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        :param category:
+        """
+
+class TraceEventCache(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def Callstack(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def DateTime(self) -> DateTime:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalOperationStack(self) -> Stack:
+        """
+
+        :return:
+        """
+    @property
+    def ProcessId(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ThreadId(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Timestamp(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TraceEventType(Enum):
+    """"""
+
+    Critical: TraceEventType = ...
+    """"""
+    Error: TraceEventType = ...
+    """"""
+    Warning: TraceEventType = ...
+    """"""
+    Information: TraceEventType = ...
+    """"""
+    Verbose: TraceEventType = ...
+    """"""
+    Start: TraceEventType = ...
+    """"""
+    Stop: TraceEventType = ...
+    """"""
+    Suspend: TraceEventType = ...
+    """"""
+    Resume: TraceEventType = ...
+    """"""
+    Transfer: TraceEventType = ...
+    """"""
+
+class TraceFilter(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ShouldTrace(
+        self,
+        cache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        formatOrMessage: str,
+        args: Array[object],
+        data1: object,
+        data: Array[object],
+    ) -> bool:
+        """
+
+        :param cache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param formatOrMessage:
+        :param args:
+        :param data1:
+        :param data:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TraceInternal(ABC, Object):
+    """"""
+
+    @classmethod
+    @property
+    def AutoFlush(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @AutoFlush.setter
+    def AutoFlush(cls, value: bool) -> None: ...
+    @classmethod
+    @property
+    def IndentLevel(cls) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @IndentLevel.setter
+    def IndentLevel(cls, value: int) -> None: ...
+    @classmethod
+    @property
+    def IndentSize(cls) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    @IndentSize.setter
+    def IndentSize(cls, value: int) -> None: ...
+    @classmethod
+    @property
+    def Listeners(cls) -> TraceListenerCollection:
+        """
+
+        :return:
+        """
+    @classmethod
+    @property
+    def UseGlobalLock(cls) -> bool:
+        """
+
+        :return:
+        """
+    @classmethod
+    @UseGlobalLock.setter
+    def UseGlobalLock(cls, value: bool) -> None: ...
+    @classmethod
+    @overload
+    def Assert(cls, condition: bool) -> None:
+        """
+
+        :param condition:
+        """
+    @classmethod
+    @overload
+    def Assert(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    @overload
+    def Assert(cls, condition: bool, message: str, detailMessage: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        :param detailMessage:
+        """
+    @classmethod
+    def Close(cls) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @classmethod
+    @overload
+    def Fail(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def Fail(cls, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    @classmethod
+    def Flush(cls) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Indent(cls) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @classmethod
+    def TraceEvent(
+        cls, eventType: TraceEventType, id: int, format: str, args: Array[object]
+    ) -> None:
+        """
+
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
+    @classmethod
+    def Unindent(cls) -> None:
+        """"""
+    @classmethod
+    @overload
+    def Write(cls, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @classmethod
+    @overload
+    def Write(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def Write(cls, value: object, category: str) -> None:
+        """
+
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def Write(cls, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, value: object) -> None:
+        """
+
+        :param condition:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, value: object, category: str) -> None:
+        """
+
+        :param condition:
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteIf(cls, condition: bool, message: str, category: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, value: object, category: str) -> None:
+        """
+
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLine(cls, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, value: object) -> None:
+        """
+
+        :param condition:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, message: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, value: object, category: str) -> None:
+        """
+
+        :param condition:
+        :param value:
+        :param category:
+        """
+    @classmethod
+    @overload
+    def WriteLineIf(cls, condition: bool, message: str, category: str) -> None:
+        """
+
+        :param condition:
+        :param message:
+        :param category:
+        """
+
+class TraceLevel(Enum):
+    """"""
+
+    Off: TraceLevel = ...
+    """"""
+    Error: TraceLevel = ...
+    """"""
+    Warning: TraceLevel = ...
+    """"""
+    Info: TraceLevel = ...
+    """"""
+    Verbose: TraceLevel = ...
+    """"""
+
+class TraceListener(ABC, MarshalByRefObject, IDisposable):
+    """"""
 
     @property
-    def Count(self) -> IntType: ...
-    def __getitem__(self, key: IntType) -> TraceListener: ...
-    def __setitem__(self, key: IntType, value: TraceListener) -> None: ...
-    def __getitem__(self, key: StringType) -> TraceListener: ...
+    def Attributes(self) -> StringDictionary:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Filter(self) -> TraceFilter:
+        """
 
-    def Add(self, listener: TraceListener) -> IntType: ...
+        :return:
+        """
+    @Filter.setter
+    def Filter(self, value: TraceFilter) -> None: ...
+    @property
+    def IndentLevel(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentLevel.setter
+    def IndentLevel(self, value: int) -> None: ...
+    @property
+    def IndentSize(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentSize.setter
+    def IndentSize(self, value: int) -> None: ...
+    @property
+    def IsThreadSafe(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def TraceOutputOptions(self) -> TraceOptions:
+        """
+
+        :return:
+        """
+    @TraceOutputOptions.setter
+    def TraceOutputOptions(self, value: TraceOptions) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
     @overload
-    def AddRange(self, value: ArrayType[TraceListener]) -> VoidType: ...
-    @overload
-    def AddRange(self, value: TraceListenerCollection) -> VoidType: ...
-    def Clear(self) -> VoidType: ...
-    def Contains(self, listener: TraceListener) -> BooleanType: ...
-    def CopyTo(self, listeners: ArrayType[TraceListener], index: IntType) -> VoidType: ...
-    def GetEnumerator(self) -> IEnumerator: ...
-    def IndexOf(self, listener: TraceListener) -> IntType: ...
-    def Insert(self, index: IntType, listener: TraceListener) -> VoidType: ...
-    @overload
-    def Remove(self, listener: TraceListener) -> VoidType: ...
-    @overload
-    def Remove(self, name: StringType) -> VoidType: ...
-    def RemoveAt(self, index: IntType) -> VoidType: ...
-    def get_Count(self) -> IntType: ...
-    @overload
-    def get_Item(self, i: IntType) -> TraceListener: ...
-    @overload
-    def get_Item(self, name: StringType) -> TraceListener: ...
-    def set_Item(self, i: IntType, value: TraceListener) -> VoidType: ...
+    def Fail(self, message: str) -> None:
+        """
 
-    # No Events
+        :param message:
+        """
+    @overload
+    def Fail(self, message: str, detailMessage: str) -> None:
+        """
 
-    # No Sub Classes
+        :param message:
+        :param detailMessage:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceData(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        data: object,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceEvent(
+        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        message: str,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param message:
+        """
+    @overload
+    def TraceEvent(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        eventType: TraceEventType,
+        id: int,
+        format: str,
+        args: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
+    def TraceTransfer(
+        self,
+        eventCache: TraceEventCache,
+        source: str,
+        id: int,
+        message: str,
+        relatedActivityId: Guid,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param id:
+        :param message:
+        :param relatedActivityId:
+        """
+    @overload
+    def Write(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def Write(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Write(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def Write(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, o: object) -> None:
+        """
+
+        :param o:
+        """
+    @overload
+    def WriteLine(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def WriteLine(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
+    @overload
+    def WriteLine(self, message: str, category: str) -> None:
+        """
+
+        :param message:
+        :param category:
+        """
+
+class TraceListenerCollection(Object, ICollection, IEnumerable, IList):
+    """"""
+
+    @property
+    def Count(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
+    @overload
+    def Add(self, listener: TraceListener) -> int:
+        """
+
+        :param listener:
+        :return:
+        """
+    @overload
+    def Add(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: TraceListenerCollection) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[TraceListener]) -> None:
+        """
+
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, listener: TraceListener) -> bool:
+        """
+
+        :param listener:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, listeners: Array[TraceListener], index: int) -> None:
+        """
+
+        :param listeners:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, listener: TraceListener) -> int:
+        """
+
+        :param listener:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, listener: TraceListener) -> None:
+        """
+
+        :param index:
+        :param listener:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, listener: TraceListener) -> None:
+        """
+
+        :param listener:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, name: str) -> None:
+        """
+
+        :param name:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    @overload
+    def __getitem__(self, name: str) -> TraceListener:
+        """
+
+        :param name:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, i: int, value: TraceListener) -> None:
+        """
+
+        :param i:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+
+class TraceLogRetentionOption(Enum):
+    """"""
+
+    UnlimitedSequentialFiles: TraceLogRetentionOption = ...
+    """"""
+    LimitedCircularFiles: TraceLogRetentionOption = ...
+    """"""
+    SingleFileUnboundedSize: TraceLogRetentionOption = ...
+    """"""
+    LimitedSequentialFiles: TraceLogRetentionOption = ...
+    """"""
+    SingleFileBoundedSize: TraceLogRetentionOption = ...
+    """"""
+
+class TraceOptions(Enum):
+    """"""
+
+    _None: TraceOptions = ...
+    """"""
+    LogicalOperationStack: TraceOptions = ...
+    """"""
+    DateTime: TraceOptions = ...
+    """"""
+    Timestamp: TraceOptions = ...
+    """"""
+    ProcessId: TraceOptions = ...
+    """"""
+    ThreadId: TraceOptions = ...
+    """"""
+    Callstack: TraceOptions = ...
+    """"""
 
 class TraceSection(ConfigurationElement):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
+    def __init__(self):
+        """"""
     @property
-    def AutoFlush(self) -> BooleanType: ...
+    def AutoFlush(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def IndentSize(self) -> IntType: ...
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
     @property
-    def Listeners(self) -> ListenerElementsCollection: ...
+    def ElementInformation(self) -> ElementInformation:
+        """"""
     @property
-    def UseGlobalLock(self) -> BooleanType: ...
+    def IndentSize(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def Listeners(self) -> ListenerElementsCollection:
+        """
 
-    def get_AutoFlush(self) -> BooleanType: ...
-    def get_IndentSize(self) -> IntType: ...
-    def get_Listeners(self) -> ListenerElementsCollection: ...
-    def get_UseGlobalLock(self) -> BooleanType: ...
+        :return:
+        """
+    @property
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def UseGlobalLock(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class TraceSource(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class TraceSource(Object):
+    """"""
 
     @overload
-    def __init__(self, name: StringType): ...
+    def __init__(self, name: str):
+        """
+
+        :param name:
+        """
     @overload
-    def __init__(self, name: StringType, defaultLevel: SourceLevels): ...
+    def __init__(self, name: str, defaultLevel: SourceLevels):
+        """
 
-    # ---------- Properties ---------- #
+        :param name:
+        :param defaultLevel:
+        """
+    @property
+    def Attributes(self) -> StringDictionary:
+        """
 
+        :return:
+        """
     @property
-    def Attributes(self) -> StringDictionary: ...
+    def Listeners(self) -> TraceListenerCollection:
+        """
+
+        :return:
+        """
     @property
-    def Listeners(self) -> TraceListenerCollection: ...
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def Name(self) -> StringType: ...
-    @property
-    def Switch(self) -> SourceSwitch: ...
+    def Switch(self) -> SourceSwitch:
+        """
+
+        :return:
+        """
     @Switch.setter
     def Switch(self, value: SourceSwitch) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
 
-    def Close(self) -> VoidType: ...
-    def Flush(self) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
-    def TraceData(self, eventType: TraceEventType, id: IntType, data: ObjectType) -> VoidType: ...
+    def TraceData(self, eventType: TraceEventType, id: int, data: Array[object]) -> None:
+        """
+
+        :param eventType:
+        :param id:
+        :param data:
+        """
     @overload
-    def TraceData(
-        self, eventType: TraceEventType, id: IntType, data: ArrayType[ObjectType]
-    ) -> VoidType: ...
+    def TraceData(self, eventType: TraceEventType, id: int, data: object) -> None:
+        """
+
+        :param eventType:
+        :param id:
+        :param data:
+        """
     @overload
-    def TraceEvent(self, eventType: TraceEventType, id: IntType) -> VoidType: ...
+    def TraceEvent(self, eventType: TraceEventType, id: int) -> None:
+        """
+
+        :param eventType:
+        :param id:
+        """
+    @overload
+    def TraceEvent(self, eventType: TraceEventType, id: int, message: str) -> None:
+        """
+
+        :param eventType:
+        :param id:
+        :param message:
+        """
     @overload
     def TraceEvent(
-        self, eventType: TraceEventType, id: IntType, message: StringType
-    ) -> VoidType: ...
+        self, eventType: TraceEventType, id: int, format: str, args: Array[object]
+    ) -> None:
+        """
+
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
     @overload
-    def TraceEvent(
-        self,
-        eventType: TraceEventType,
-        id: IntType,
-        format: StringType,
-        args: ArrayType[ObjectType],
-    ) -> VoidType: ...
+    def TraceInformation(self, message: str) -> None:
+        """
+
+        :param message:
+        """
     @overload
-    def TraceInformation(self, message: StringType) -> VoidType: ...
-    @overload
-    def TraceInformation(self, format: StringType, args: ArrayType[ObjectType]) -> VoidType: ...
-    def TraceTransfer(
-        self, id: IntType, message: StringType, relatedActivityId: Guid
-    ) -> VoidType: ...
-    def get_Attributes(self) -> StringDictionary: ...
-    def get_Listeners(self) -> TraceListenerCollection: ...
-    def get_Name(self) -> StringType: ...
-    def get_Switch(self) -> SourceSwitch: ...
-    def set_Switch(self, value: SourceSwitch) -> VoidType: ...
+    def TraceInformation(self, format: str, args: Array[object]) -> None:
+        """
 
-    # No Events
+        :param format:
+        :param args:
+        """
+    def TraceTransfer(self, id: int, message: str, relatedActivityId: Guid) -> None:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :param id:
+        :param message:
+        :param relatedActivityId:
+        """
 
 class TraceSwitch(Switch):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, displayName: StringType, description: StringType): ...
+    def __init__(self, displayName: str, description: str):
+        """
+
+        :param displayName:
+        :param description:
+        """
     @overload
-    def __init__(
-        self, displayName: StringType, description: StringType, defaultSwitchValue: StringType
-    ): ...
+    def __init__(self, displayName: str, description: str, defaultSwitchValue: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param displayName:
+        :param description:
+        :param defaultSwitchValue:
+        """
     @property
-    def Level(self) -> TraceLevel: ...
+    def Attributes(self) -> StringDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Description(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def DisplayName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Level(self) -> TraceLevel:
+        """
+
+        :return:
+        """
     @Level.setter
     def Level(self, value: TraceLevel) -> None: ...
     @property
-    def TraceError(self) -> BooleanType: ...
+    def TraceError(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def TraceInfo(self) -> BooleanType: ...
+    def TraceInfo(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def TraceVerbose(self) -> BooleanType: ...
+    def TraceVerbose(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def TraceWarning(self) -> BooleanType: ...
+    def TraceWarning(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Level(self) -> TraceLevel: ...
-    def get_TraceError(self) -> BooleanType: ...
-    def get_TraceInfo(self) -> BooleanType: ...
-    def get_TraceVerbose(self) -> BooleanType: ...
-    def get_TraceWarning(self) -> BooleanType: ...
-    def set_Level(self, value: TraceLevel) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TraceUtils(ABC, ObjectType):
+class TraceUtils(ABC, Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class TypedElement(ConfigurationElement):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, baseType: Type):
+        """
 
-    def __init__(self, baseType: TypeType): ...
-
-    # ---------- Properties ---------- #
-
+        :param baseType:
+        """
     @property
-    def InitData(self) -> StringType: ...
+    def CurrentConfiguration(self) -> Configuration:
+        """"""
+    @property
+    def ElementInformation(self) -> ElementInformation:
+        """"""
+    @property
+    def InitData(self) -> str:
+        """
+
+        :return:
+        """
     @InitData.setter
-    def InitData(self, value: StringType) -> None: ...
+    def InitData(self, value: str) -> None: ...
     @property
-    def TypeName(self) -> StringType: ...
+    def LockAllAttributesExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAllElementsExcept(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockAttributes(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockElements(self) -> ConfigurationLockCollection:
+        """"""
+    @property
+    def LockItem(self) -> bool:
+        """"""
+    @LockItem.setter
+    def LockItem(self, value: bool) -> None: ...
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
     @TypeName.setter
-    def TypeName(self, value: StringType) -> None: ...
+    def TypeName(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def get_InitData(self) -> StringType: ...
-    def get_TypeName(self) -> StringType: ...
-    def set_InitData(self, value: StringType) -> VoidType: ...
-    def set_TypeName(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def IsReadOnly(self) -> bool:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+class UnescapedXmlDiagnosticData(Object):
+    """"""
 
-    # No Sub Interfaces
+    def __init__(self, xmlPayload: str):
+        """
 
-    # No Sub Enums
-
-class UnescapedXmlDiagnosticData(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, xmlPayload: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param xmlPayload:
+        """
     @property
-    def UnescapedXml(self) -> StringType: ...
+    def UnescapedXml(self) -> str:
+        """
+
+        :return:
+        """
     @UnescapedXml.setter
-    def UnescapedXml(self, value: StringType) -> None: ...
+    def UnescapedXml(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_UnescapedXml(self) -> StringType: ...
-    def set_UnescapedXml(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
+UserCallBack: Callable[[str], None] = ...
+"""
 
-    # No Sub Interfaces
+:param data: 
+"""
 
-    # No Sub Enums
+class WinProcessManager(ABC, Object):
+    """"""
 
-class UserCallBack(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # ---------- Constructors ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    def __init__(self, object: ObjectType, method: NIntType): ...
+        :return:
+        """
+    @classmethod
+    def GetModuleInfos(cls, processId: int) -> Array[ModuleInfo]:
+        """
 
-    # No Properties
+        :param processId:
+        :return:
+        """
+    @classmethod
+    def GetProcessIds(cls) -> Array[int]:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    def GetProcessInfos(cls) -> Array[ProcessInfo]:
+        """
 
-    def BeginInvoke(
-        self, data: StringType, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, data: StringType) -> VoidType: ...
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WinProcessManager(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def GetModuleInfos(processId: IntType) -> ArrayType[ModuleInfo]: ...
-    @staticmethod
-    def GetProcessIds() -> ArrayType[IntType]: ...
-    @staticmethod
-    def GetProcessInfos() -> ArrayType[ProcessInfo]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class XmlWriterTraceListener(TextWriterTraceListener, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, stream: Stream): ...
-    @overload
-    def __init__(self, stream: Stream, name: StringType): ...
-    @overload
-    def __init__(self, writer: TextWriter): ...
-    @overload
-    def __init__(self, writer: TextWriter, name: StringType): ...
-    @overload
-    def __init__(self, filename: StringType): ...
-    @overload
-    def __init__(self, filename: StringType, name: StringType): ...
+    def __init__(self, stream: Stream):
+        """
 
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Close(self) -> VoidType: ...
+        :param stream:
+        """
     @overload
-    def Fail(self, message: StringType, detailMessage: StringType) -> VoidType: ...
+    def __init__(self, writer: TextWriter):
+        """
+
+        :param writer:
+        """
+    @overload
+    def __init__(self, filename: str):
+        """
+
+        :param filename:
+        """
+    @overload
+    def __init__(self, stream: Stream, name: str):
+        """
+
+        :param stream:
+        :param name:
+        """
+    @overload
+    def __init__(self, writer: TextWriter, name: str):
+        """
+
+        :param writer:
+        :param name:
+        """
+    @overload
+    def __init__(self, filename: str, name: str):
+        """
+
+        :param filename:
+        :param name:
+        """
+    @property
+    def Attributes(self) -> StringDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Filter(self) -> TraceFilter:
+        """
+
+        :return:
+        """
+    @Filter.setter
+    def Filter(self, value: TraceFilter) -> None: ...
+    @property
+    def IndentLevel(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentLevel.setter
+    def IndentLevel(self, value: int) -> None: ...
+    @property
+    def IndentSize(self) -> int:
+        """
+
+        :return:
+        """
+    @IndentSize.setter
+    def IndentSize(self, value: int) -> None: ...
+    @property
+    def IsThreadSafe(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @Name.setter
+    def Name(self, value: str) -> None: ...
+    @property
+    def TraceOutputOptions(self) -> TraceOptions:
+        """
+
+        :return:
+        """
+    @TraceOutputOptions.setter
+    def TraceOutputOptions(self, value: TraceOptions) -> None: ...
+    @property
+    def Writer(self) -> TextWriter:
+        """
+
+        :return:
+        """
+    @Writer.setter
+    def Writer(self, value: TextWriter) -> None: ...
+    def Close(self) -> None:
+        """"""
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Fail(self, message: str) -> None:
+        """
+
+        :param message:
+        """
+    @overload
+    def Fail(self, message: str, detailMessage: str) -> None:
+        """
+
+        :param message:
+        :param detailMessage:
+        """
+    def Flush(self) -> None:
+        """"""
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
     @overload
     def TraceData(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        data: ObjectType,
-    ) -> VoidType: ...
+        id: int,
+        data: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
     @overload
     def TraceData(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        data: ArrayType[ObjectType],
-    ) -> VoidType: ...
+        id: int,
+        data: object,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param data:
+        """
+    @overload
+    def TraceEvent(
+        self, eventCache: TraceEventCache, source: str, eventType: TraceEventType, id: int
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        """
     @overload
     def TraceEvent(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        format: StringType,
-        args: ArrayType[ObjectType],
-    ) -> VoidType: ...
+        id: int,
+        message: str,
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param message:
+        """
     @overload
     def TraceEvent(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
+        source: str,
         eventType: TraceEventType,
-        id: IntType,
-        message: StringType,
-    ) -> VoidType: ...
+        id: int,
+        format: str,
+        args: Array[object],
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param eventType:
+        :param id:
+        :param format:
+        :param args:
+        """
     def TraceTransfer(
         self,
         eventCache: TraceEventCache,
-        source: StringType,
-        id: IntType,
-        message: StringType,
+        source: str,
+        id: int,
+        message: str,
         relatedActivityId: Guid,
-    ) -> VoidType: ...
+    ) -> None:
+        """
+
+        :param eventCache:
+        :param source:
+        :param id:
+        :param message:
+        :param relatedActivityId:
+        """
     @overload
-    def Write(self, message: StringType) -> VoidType: ...
+    def Write(self, o: object) -> None:
+        """
+
+        :param o:
+        """
     @overload
-    def WriteLine(self, message: StringType) -> VoidType: ...
+    def Write(self, message: str) -> None:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
-
-class CounterSample(ValueType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Empty() -> CounterSample: ...
-    @staticmethod
-    @Empty.setter
-    def Empty(value: CounterSample) -> None: ...
-
-    # ---------- Constructors ---------- #
-
+        :param message:
+        """
     @overload
-    def __init__(
-        self,
-        rawValue: LongType,
-        baseValue: LongType,
-        counterFrequency: LongType,
-        systemFrequency: LongType,
-        timeStamp: LongType,
-        timeStamp100nSec: LongType,
-        counterType: PerformanceCounterType,
-    ): ...
+    def Write(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
     @overload
-    def __init__(
-        self,
-        rawValue: LongType,
-        baseValue: LongType,
-        counterFrequency: LongType,
-        systemFrequency: LongType,
-        timeStamp: LongType,
-        timeStamp100nSec: LongType,
-        counterType: PerformanceCounterType,
-        counterTimeStamp: LongType,
-    ): ...
+    def Write(self, message: str, category: str) -> None:
+        """
 
-    # ---------- Properties ---------- #
-
-    @property
-    def BaseValue(self) -> LongType: ...
-    @property
-    def CounterFrequency(self) -> LongType: ...
-    @property
-    def CounterTimeStamp(self) -> LongType: ...
-    @property
-    def CounterType(self) -> PerformanceCounterType: ...
-    @property
-    def RawValue(self) -> LongType: ...
-    @property
-    def SystemFrequency(self) -> LongType: ...
-    @property
-    def TimeStamp(self) -> LongType: ...
-    @property
-    def TimeStamp100nSec(self) -> LongType: ...
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
+        :param message:
+        :param category:
+        """
     @overload
-    def Calculate(counterSample: CounterSample) -> FloatType: ...
-    @staticmethod
+    def WriteLine(self, o: object) -> None:
+        """
+
+        :param o:
+        """
     @overload
-    def Calculate(counterSample: CounterSample, nextCounterSample: CounterSample) -> FloatType: ...
+    def WriteLine(self, message: str) -> None:
+        """
+
+        :param message:
+        """
     @overload
-    def Equals(self, o: ObjectType) -> BooleanType: ...
+    def WriteLine(self, o: object, category: str) -> None:
+        """
+
+        :param o:
+        :param category:
+        """
     @overload
-    def Equals(self, sample: CounterSample) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_BaseValue(self) -> LongType: ...
-    def get_CounterFrequency(self) -> LongType: ...
-    def get_CounterTimeStamp(self) -> LongType: ...
-    def get_CounterType(self) -> PerformanceCounterType: ...
-    def get_RawValue(self) -> LongType: ...
-    def get_SystemFrequency(self) -> LongType: ...
-    def get_TimeStamp(self) -> LongType: ...
-    def get_TimeStamp100nSec(self) -> LongType: ...
-    @staticmethod
-    def op_Equality(a: CounterSample, b: CounterSample) -> BooleanType: ...
-    @staticmethod
-    def op_Inequality(a: CounterSample, b: CounterSample) -> BooleanType: ...
+    def WriteLine(self, message: str, category: str) -> None:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Interfaces ---------- #
-
-class ICollectData(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CloseData(self) -> VoidType: ...
-    def CollectData(
-        self, id: IntType, valueName: NIntType, data: NIntType, totalBytes: IntType, res: NIntType
-    ) -> Tuple[VoidType, NIntType]: ...
-
-    # No Events
-
-class ICustomDebuggerNotification(Protocol):
-    """"""
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class AssertFilters(Enum):
-    FailDebug = 0
-    FailIgnore = 1
-    FailTerminate = 2
-    FailContinueFilter = 3
-
-class DebuggerBrowsableState(Enum):
-    Never = 0
-    Collapsed = 2
-    RootHidden = 3
-
-class EventLogEntryType(Enum):
-    Error = 1
-    Warning = 2
-    Information = 4
-    SuccessAudit = 8
-    FailureAudit = 16
-
-class EventLogPermissionAccess(Enum):
-    # None = 0
-    Browse = 2
-    Instrument = 6
-    Audit = 10
-    Write = 16
-    Administer = 48
-
-class InitState(Enum):
-    NotInitialized = 0
-    Initializing = 1
-    Initialized = 2
-
-class LoggingLevels(Enum):
-    TraceLevel0 = 0
-    TraceLevel1 = 1
-    TraceLevel2 = 2
-    TraceLevel3 = 3
-    TraceLevel4 = 4
-    StatusLevel0 = 20
-    StatusLevel1 = 21
-    StatusLevel2 = 22
-    StatusLevel3 = 23
-    StatusLevel4 = 24
-    WarningLevel = 40
-    ErrorLevel = 50
-    PanicLevel = 100
-
-class OverflowAction(Enum):
-    DoNotOverwrite = -1
-    OverwriteAsNeeded = 0
-    OverwriteOlder = 1
-
-class PerformanceCounterCategoryOptions(Enum):
-    EnableReuse = 1
-    UseUniqueSharedMemory = 2
-
-class PerformanceCounterCategoryType(Enum):
-    Unknown = -1
-    SingleInstance = 0
-    MultiInstance = 1
-
-class PerformanceCounterInstanceLifetime(Enum):
-    Global = 0
-    Process = 1
-
-class PerformanceCounterPermissionAccess(Enum):
-    # None = 0
-    Read = 1
-    Browse = 1
-    Write = 2
-    Instrument = 3
-    Administer = 7
-
-class PerformanceCounterType(Enum):
-    NumberOfItemsHEX32 = 0
-    NumberOfItemsHEX64 = 256
-    NumberOfItems32 = 65536
-    NumberOfItems64 = 65792
-    CounterDelta32 = 4195328
-    CounterDelta64 = 4195584
-    SampleCounter = 4260864
-    CountPerTimeInterval32 = 4523008
-    CountPerTimeInterval64 = 4523264
-    RateOfCountsPerSecond32 = 272696320
-    RateOfCountsPerSecond64 = 272696576
-    RawFraction = 537003008
-    CounterTimer = 541132032
-    Timer100Ns = 542180608
-    SampleFraction = 549585920
-    CounterTimerInverse = 557909248
-    Timer100NsInverse = 558957824
-    CounterMultiTimer = 574686464
-    CounterMultiTimer100Ns = 575735040
-    CounterMultiTimerInverse = 591463680
-    CounterMultiTimer100NsInverse = 592512256
-    AverageTimer32 = 805438464
-    ElapsedTime = 807666944
-    AverageCount64 = 1073874176
-    SampleBase = 1073939457
-    AverageBase = 1073939458
-    RawBase = 1073939459
-    CounterMultiBase = 1107494144
-
-class ProcessPriorityClass(Enum):
-    Normal = 32
-    Idle = 64
-    High = 128
-    RealTime = 256
-    BelowNormal = 16384
-    AboveNormal = 32768
-
-class ProcessWindowStyle(Enum):
-    Normal = 0
-    Hidden = 1
-    Minimized = 2
-    Maximized = 3
-
-class SourceLevels(Enum):
-    All = -1
-    Off = 0
-    Critical = 1
-    Error = 3
-    Warning = 7
-    Information = 15
-    Verbose = 31
-    ActivityTracing = 65280
-
-class ThreadPriorityLevel(Enum):
-    Idle = -15
-    Lowest = -2
-    BelowNormal = -1
-    Normal = 0
-    AboveNormal = 1
-    Highest = 2
-    TimeCritical = 15
-
-class ThreadState(Enum):
-    Initialized = 0
-    Ready = 1
-    Running = 2
-    Standby = 3
-    Terminated = 4
-    Wait = 5
-    Transition = 6
-    Unknown = 7
-
-class ThreadWaitReason(Enum):
-    Executive = 0
-    FreePage = 1
-    PageIn = 2
-    SystemAllocation = 3
-    ExecutionDelay = 4
-    Suspended = 5
-    UserRequest = 6
-    EventPairHigh = 7
-    EventPairLow = 8
-    LpcReceive = 9
-    LpcReply = 10
-    VirtualMemory = 11
-    PageOut = 12
-    Unknown = 13
-
-class TraceEventType(Enum):
-    Critical = 1
-    Error = 2
-    Warning = 4
-    Information = 8
-    Verbose = 16
-    Start = 256
-    Stop = 512
-    Suspend = 1024
-    Resume = 2048
-    Transfer = 4096
-
-class TraceLevel(Enum):
-    Off = 0
-    Error = 1
-    Warning = 2
-    Info = 3
-    Verbose = 4
-
-class TraceLogRetentionOption(Enum):
-    UnlimitedSequentialFiles = 0
-    LimitedCircularFiles = 1
-    SingleFileUnboundedSize = 2
-    LimitedSequentialFiles = 3
-    SingleFileBoundedSize = 4
-
-class TraceOptions(Enum):
-    # None = 0
-    LogicalOperationStack = 1
-    DateTime = 2
-    Timestamp = 4
-    ProcessId = 8
-    ThreadId = 16
-    Callstack = 32
-
-# ---------- Delegates ---------- #
-
-DataReceivedEventHandler = Callable[[ObjectType, DataReceivedEventArgs], VoidType]
-
-EntryWrittenEventHandler = Callable[[ObjectType, EntryWrittenEventArgs], VoidType]
-
-LogMessageEventHandler = Callable[[LoggingLevels, LogSwitch, StringType, StackTrace], VoidType]
-
-LogSwitchLevelHandler = Callable[[LogSwitch, LoggingLevels], VoidType]
-
-UserCallBack = Callable[[StringType], VoidType]
-
-__all__ = [
-    AlphabeticalEnumConverter,
-    Assert,
-    AssertFilter,
-    AssertSection,
-    AssertWrapper,
-    AsyncStreamReader,
-    BooleanSwitch,
-    CategoryEntry,
-    CategorySample,
-    ConditionalAttribute,
-    ConsoleTraceListener,
-    CorrelationManager,
-    CounterCreationData,
-    CounterCreationDataCollection,
-    CounterDefinitionSample,
-    CounterSampleCalculator,
-    DataReceivedEventArgs,
-    DataReceivedEventHandler,
-    Debug,
-    DebuggableAttribute,
-    Debugger,
-    DebuggerBrowsableAttribute,
-    DebuggerDisplayAttribute,
-    DebuggerHiddenAttribute,
-    DebuggerNonUserCodeAttribute,
-    DebuggerStepThroughAttribute,
-    DebuggerStepperBoundaryAttribute,
-    DebuggerTypeProxyAttribute,
-    DebuggerVisualizerAttribute,
-    DefaultFilter,
-    DefaultTraceListener,
-    DelimitedListTraceListener,
-    DiagnosticsConfiguration,
-    DiagnosticsConfigurationHandler,
-    EditAndContinueHelper,
-    EntryWrittenEventArgs,
-    EntryWrittenEventHandler,
-    EnvironmentBlock,
-    EventInstance,
-    EventLog,
-    EventLogEntry,
-    EventLogEntryCollection,
-    EventLogInternal,
-    EventLogPermission,
-    EventLogPermissionAttribute,
-    EventLogPermissionEntry,
-    EventLogPermissionEntryCollection,
-    EventLogTraceListener,
-    EventSchemaTraceListener,
-    EventSourceCreationData,
-    EventTypeFilter,
-    FileVersionInfo,
-    FilterElement,
-    InstanceData,
-    InstanceDataCollection,
-    InstanceDataCollectionCollection,
-    ListenerElement,
-    ListenerElementsCollection,
-    Log,
-    LogMessageEventHandler,
-    LogSwitch,
-    LogSwitchLevelHandler,
-    MainWindowFinder,
-    MessageBoxPopup,
-    ModuleInfo,
-    MonitoringDescriptionAttribute,
-    NtProcessInfoHelper,
-    NtProcessManager,
-    OrdinalCaseInsensitiveComparer,
-    PerfCounterSection,
-    PerformanceCounter,
-    PerformanceCounterCategory,
-    PerformanceCounterLib,
-    PerformanceCounterManager,
-    PerformanceCounterPermission,
-    PerformanceCounterPermissionAttribute,
-    PerformanceCounterPermissionEntry,
-    PerformanceCounterPermissionEntryCollection,
-    PerformanceMonitor,
-    Process,
-    ProcessData,
-    ProcessInfo,
-    ProcessManager,
-    ProcessModule,
-    ProcessModuleCollection,
-    ProcessStartInfo,
-    ProcessThread,
-    ProcessThreadCollection,
-    ProcessThreadTimes,
-    ProcessWaitHandle,
-    SharedListenerElementsCollection,
-    SharedPerformanceCounter,
-    SharedUtils,
-    ShellExecuteHelper,
-    SourceElement,
-    SourceElementsCollection,
-    SourceFilter,
-    SourceSwitch,
-    StackFrame,
-    StackFrameExtensions,
-    StackFrameHelper,
-    StackTrace,
-    StackTraceSymbols,
-    Stopwatch,
-    Switch,
-    SwitchAttribute,
-    SwitchElement,
-    SwitchElementsCollection,
-    SwitchLevelAttribute,
-    SwitchesDictionarySectionHandler,
-    SystemDiagnosticsSection,
-    TextWriterTraceListener,
-    ThreadInfo,
-    Trace,
-    TraceEventCache,
-    TraceFilter,
-    TraceInternal,
-    TraceListener,
-    TraceListenerCollection,
-    TraceSection,
-    TraceSource,
-    TraceSwitch,
-    TraceUtils,
-    TypedElement,
-    UnescapedXmlDiagnosticData,
-    UserCallBack,
-    WinProcessManager,
-    XmlWriterTraceListener,
-    CounterSample,
-    ICollectData,
-    ICustomDebuggerNotification,
-    AssertFilters,
-    DebuggerBrowsableState,
-    EventLogEntryType,
-    EventLogPermissionAccess,
-    InitState,
-    LoggingLevels,
-    OverflowAction,
-    PerformanceCounterCategoryOptions,
-    PerformanceCounterCategoryType,
-    PerformanceCounterInstanceLifetime,
-    PerformanceCounterPermissionAccess,
-    PerformanceCounterType,
-    ProcessPriorityClass,
-    ProcessWindowStyle,
-    SourceLevels,
-    ThreadPriorityLevel,
-    ThreadState,
-    ThreadWaitReason,
-    TraceEventType,
-    TraceLevel,
-    TraceLogRetentionOption,
-    TraceOptions,
-    DataReceivedEventHandler,
-    EntryWrittenEventHandler,
-    LogMessageEventHandler,
-    LogSwitchLevelHandler,
-    UserCallBack,
-]
+        :param message:
+        :param category:
+        """

@@ -1,65 +1,71 @@
 from __future__ import annotations
 
-from typing import Union
 from typing import overload
 
 from System import Object
-from System import String
 from System import Type
-from System import Void
 from System.Collections.Generic import IEnumerable
 from System.Reflection import Assembly
 
-# ---------- Types ---------- #
+class WindowsRuntimeDesignerContext(Object):
+    """"""
 
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
+    def __init__(self, paths: IEnumerable[str], name: str):
+        """
 
-# ---------- Classes ---------- #
-
-class WindowsRuntimeDesignerContext(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, paths: IEnumerable[StringType], name: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param paths:
+        :param name:
+        """
     @property
-    def Name(self) -> StringType: ...
+    def Name(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def GetAssembly(self, assemblyName: StringType) -> Assembly: ...
+        :param obj:
+        :return:
+        """
+    def GetAssembly(self, assemblyName: str) -> Assembly:
+        """
+
+        :param assemblyName:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
     @overload
-    def GetType(self, typeName: StringType) -> TypeType: ...
-    @staticmethod
-    def InitializeSharedContext(paths: IEnumerable[StringType]) -> VoidType: ...
-    @staticmethod
-    def SetIterationContext(context: WindowsRuntimeDesignerContext) -> VoidType: ...
-    def get_Name(self) -> StringType: ...
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    @overload
+    def GetType(self, typeName: str) -> Type:
+        """
 
-    # No Sub Classes
+        :param typeName:
+        :return:
+        """
+    @classmethod
+    def InitializeSharedContext(cls, paths: IEnumerable[str]) -> None:
+        """
 
-    # No Sub Structs
+        :param paths:
+        """
+    @classmethod
+    def SetIterationContext(cls, context: WindowsRuntimeDesignerContext) -> None:
+        """
 
-    # No Sub Interfaces
+        :param context:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    WindowsRuntimeDesignerContext,
-]
+        :return:
+        """

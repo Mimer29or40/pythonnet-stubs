@@ -18,6 +18,7 @@
       <excludeFolder url="file://$MODULE_DIR$/src/TestLibSrc/bin" />
       <excludeFolder url="file://$MODULE_DIR$/src/TestLibSrc/obj" />
       <excludeFolder url="file://$MODULE_DIR$/test/output" />
+      <excludeFolder url="file://$MODULE_DIR$/src/stubs/raw" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

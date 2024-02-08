@@ -2,58 +2,47 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Callable
-from typing import List
-from typing import Protocol
+from typing import Iterator
 from typing import Tuple
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import AsyncCallback
 from System import Attribute
-from System import Boolean
-from System import Byte
 from System import Char
 from System import DateTime
 from System import Decimal
-from System import Double
 from System import Enum
 from System import EventArgs
 from System import Exception
-from System import IAsyncResult
+from System import Guid
 from System import ICloneable
-from System import Int16
-from System import Int32
-from System import Int64
 from System import IntPtr
-from System import MulticastDelegate
 from System import Object
 from System import RuntimeFieldHandle
-from System import SByte
-from System import Single
-from System import String
 from System import SystemException
 from System import Type
 from System import TypeCode
-from System import UInt16
-from System import UInt32
-from System import UInt64
+from System import TypedReference
 from System import ValueType
-from System import Void
 from System.Collections import Hashtable
 from System.Collections import ICollection
 from System.Collections import IDictionary
 from System.Collections import IEnumerable
 from System.Collections import IEnumerator
+from System.Collections.Generic import IEnumerable
+from System.Collections.Generic import IList
 from System.Globalization import CultureInfo
 from System.IO import Stream
 from System.Reflection import Assembly
 from System.Reflection import Binder
 from System.Reflection import BindingFlags
+from System.Reflection import CustomAttributeData
 from System.Reflection import FieldAttributes
 from System.Reflection import FieldInfo
 from System.Reflection import ICustomAttributeProvider
 from System.Reflection import MemberInfo
+from System.Reflection import MemberTypes
+from System.Reflection import MethodBase
 from System.Reflection import Module
 from System.Runtime.InteropServices import _Attribute
 from System.Runtime.InteropServices import _Exception
@@ -61,1372 +50,3051 @@ from System.Runtime.InteropServices import _FieldInfo
 from System.Runtime.InteropServices import _MemberInfo
 from System.Runtime.Serialization.Formatters import TypeFilterLevel
 
-# ---------- Types ---------- #
+DeserializationEventHandler: Callable[[object], None] = ...
+"""
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-CharType = Union[str, Char]
-DecimalType = Union[float, Decimal]
-DoubleType = Union[float, Double]
-FloatType = Union[float, Single]
-IntType = Union[int, Int32]
-LongType = Union[int, Int64]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-SByteType = Union[int, SByte]
-ShortType = Union[int, Int16]
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-UIntType = Union[int, UInt32]
-ULongType = Union[int, UInt64]
-UShortType = Union[int, UInt16]
-VoidType = Union[None, Void]
+:param sender: 
+"""
 
-# ---------- Classes ---------- #
-
-class DeserializationEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, sender: ObjectType, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FixupHolder(ObjectType):
+class FixupHolder(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FixupHolderList(ObjectType):
+class FixupHolderList(Object):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Formatter(ABC, ObjectType, IFormatter):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+class Formatter(ABC, Object, IFormatter):
+    """"""
 
     @property
-    def Binder(self) -> SerializationBinder: ...
+    def Binder(self) -> SerializationBinder:
+        """
+
+        :return:
+        """
     @Binder.setter
     def Binder(self, value: SerializationBinder) -> None: ...
     @property
-    def Context(self) -> StreamingContext: ...
+    def Context(self) -> StreamingContext:
+        """
+
+        :return:
+        """
     @Context.setter
     def Context(self, value: StreamingContext) -> None: ...
     @property
-    def SurrogateSelector(self) -> ISurrogateSelector: ...
+    def SurrogateSelector(self) -> ISurrogateSelector:
+        """
+
+        :return:
+        """
     @SurrogateSelector.setter
     def SurrogateSelector(self, value: ISurrogateSelector) -> None: ...
+    def Deserialize(self, serializationStream: Stream) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :param serializationStream:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Deserialize(self, serializationStream: Stream) -> ObjectType: ...
-    def Serialize(self, serializationStream: Stream, graph: ObjectType) -> VoidType: ...
-    def get_Binder(self) -> SerializationBinder: ...
-    def get_Context(self) -> StreamingContext: ...
-    def get_SurrogateSelector(self) -> ISurrogateSelector: ...
-    def set_Binder(self, value: SerializationBinder) -> VoidType: ...
-    def set_Context(self, value: StreamingContext) -> VoidType: ...
-    def set_SurrogateSelector(self, value: ISurrogateSelector) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Serialize(self, serializationStream: Stream, graph: object) -> None:
+        """
 
-    # No Sub Structs
+        :param serializationStream:
+        :param graph:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
 
-    # No Sub Enums
+class FormatterConverter(Object, IFormatterConverter):
+    """"""
 
-class FormatterConverter(ObjectType, IFormatterConverter):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
+    def __init__(self):
+        """"""
     @overload
-    def Convert(self, value: ObjectType, type: TypeType) -> ObjectType: ...
+    def Convert(self, value: object, type: Type) -> object:
+        """
+
+        :param value:
+        :param type:
+        :return:
+        """
     @overload
-    def Convert(self, value: ObjectType, typeCode: TypeCode) -> ObjectType: ...
-    def ToBoolean(self, value: ObjectType) -> BooleanType: ...
-    def ToByte(self, value: ObjectType) -> ByteType: ...
-    def ToChar(self, value: ObjectType) -> CharType: ...
-    def ToDateTime(self, value: ObjectType) -> DateTime: ...
-    def ToDecimal(self, value: ObjectType) -> DecimalType: ...
-    def ToDouble(self, value: ObjectType) -> DoubleType: ...
-    def ToInt16(self, value: ObjectType) -> ShortType: ...
-    def ToInt32(self, value: ObjectType) -> IntType: ...
-    def ToInt64(self, value: ObjectType) -> LongType: ...
-    def ToSByte(self, value: ObjectType) -> SByteType: ...
-    def ToSingle(self, value: ObjectType) -> FloatType: ...
+    def Convert(self, value: object, typeCode: TypeCode) -> object:
+        """
+
+        :param value:
+        :param typeCode:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToBoolean(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToByte(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToChar(self, value: object) -> Char:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToDateTime(self, value: object) -> DateTime:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToDecimal(self, value: object) -> Decimal:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToDouble(self, value: object) -> float:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToInt16(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToInt32(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToInt64(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToSByte(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToSingle(self, value: object) -> float:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def ToString(self, value: ObjectType) -> StringType: ...
-    def ToUInt16(self, value: ObjectType) -> UShortType: ...
-    def ToUInt32(self, value: ObjectType) -> UIntType: ...
-    def ToUInt64(self, value: ObjectType) -> ULongType: ...
+    def ToString(self) -> str:
+        """
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class FormatterServices(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def CheckTypeSecurity(t: TypeType, securityLevel: TypeFilterLevel) -> VoidType: ...
-    @staticmethod
-    def GetObjectData(obj: ObjectType, members: ArrayType[MemberInfo]) -> ArrayType[ObjectType]: ...
-    @staticmethod
-    def GetSafeUninitializedObject(type: TypeType) -> ObjectType: ...
-    @staticmethod
+        :return:
+        """
     @overload
-    def GetSerializableMembers(
-        type: TypeType, context: StreamingContext
-    ) -> ArrayType[MemberInfo]: ...
-    @staticmethod
+    def ToString(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToUInt16(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToUInt32(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToUInt64(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+
+class FormatterServices(ABC, Object):
+    """"""
+
+    @classmethod
+    def CheckTypeSecurity(cls, t: Type, securityLevel: TypeFilterLevel) -> None:
+        """
+
+        :param t:
+        :param securityLevel:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetObjectData(cls, obj: object, members: Array[MemberInfo]) -> Array[object]:
+        """
+
+        :param obj:
+        :param members:
+        :return:
+        """
+    @classmethod
+    def GetSafeUninitializedObject(cls, type: Type) -> object:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
     @overload
-    def GetSerializableMembers(type: TypeType) -> ArrayType[MemberInfo]: ...
-    @staticmethod
+    def GetSerializableMembers(cls, type: Type) -> Array[MemberInfo]:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
+    @overload
+    def GetSerializableMembers(cls, type: Type, context: StreamingContext) -> Array[MemberInfo]:
+        """
+
+        :param type:
+        :param context:
+        :return:
+        """
+    @classmethod
     def GetSurrogateForCyclicalReference(
-        innerSurrogate: ISerializationSurrogate,
-    ) -> ISerializationSurrogate: ...
-    @staticmethod
-    def GetTypeFromAssembly(assem: Assembly, name: StringType) -> TypeType: ...
-    @staticmethod
-    def GetUninitializedObject(type: TypeType) -> ObjectType: ...
-    @staticmethod
+        cls, innerSurrogate: ISerializationSurrogate
+    ) -> ISerializationSurrogate:
+        """
+
+        :param innerSurrogate:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetTypeFromAssembly(cls, assem: Assembly, name: str) -> Type:
+        """
+
+        :param assem:
+        :param name:
+        :return:
+        """
+    @classmethod
+    def GetUninitializedObject(cls, type: Type) -> object:
+        """
+
+        :param type:
+        :return:
+        """
+    @classmethod
     def PopulateObjectMembers(
-        obj: ObjectType, members: ArrayType[MemberInfo], data: ArrayType[ObjectType]
-    ) -> ObjectType: ...
+        cls, obj: object, members: Array[MemberInfo], data: Array[object]
+    ) -> object:
+        """
 
-    # No Events
+        :param obj:
+        :param members:
+        :param data:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class LongList(ObjectType):
+class IDeserializationCallback:
     """"""
 
-    # No Fields
+    def OnDeserialization(self, sender: object) -> None:
+        """
 
-    # No Constructors
+        :param sender:
+        """
 
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MemberHolder(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectCloneHelper(ABC, ObjectType):
+class IFormatter:
     """"""
 
-    # No Fields
+    @property
+    def Binder(self) -> SerializationBinder:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @Binder.setter
+    def Binder(self, value: SerializationBinder) -> None: ...
+    @property
+    def Context(self) -> StreamingContext:
+        """
 
-    # No Properties
+        :return:
+        """
+    @Context.setter
+    def Context(self, value: StreamingContext) -> None: ...
+    @property
+    def SurrogateSelector(self) -> ISurrogateSelector:
+        """
 
-    # No Methods
+        :return:
+        """
+    @SurrogateSelector.setter
+    def SurrogateSelector(self, value: ISurrogateSelector) -> None: ...
+    def Deserialize(self, serializationStream: Stream) -> object:
+        """
 
-    # No Events
+        :param serializationStream:
+        :return:
+        """
+    def Serialize(self, serializationStream: Stream, graph: object) -> None:
+        """
 
-    # No Sub Classes
+        :param serializationStream:
+        :param graph:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectHolder(ObjectType):
+class IFormatterConverter:
     """"""
 
-    # No Fields
+    @overload
+    def Convert(self, value: object, type: Type) -> object:
+        """
 
-    # No Constructors
+        :param value:
+        :param type:
+        :return:
+        """
+    @overload
+    def Convert(self, value: object, typeCode: TypeCode) -> object:
+        """
 
-    # No Properties
+        :param value:
+        :param typeCode:
+        :return:
+        """
+    def ToBoolean(self, value: object) -> bool:
+        """
 
-    # No Methods
+        :param value:
+        :return:
+        """
+    def ToByte(self, value: object) -> int:
+        """
 
-    # No Events
+        :param value:
+        :return:
+        """
+    def ToChar(self, value: object) -> Char:
+        """
 
-    # No Sub Classes
+        :param value:
+        :return:
+        """
+    def ToDateTime(self, value: object) -> DateTime:
+        """
 
-    # No Sub Structs
+        :param value:
+        :return:
+        """
+    def ToDecimal(self, value: object) -> Decimal:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        :return:
+        """
+    def ToDouble(self, value: object) -> float:
+        """
 
-    # No Sub Enums
+        :param value:
+        :return:
+        """
+    def ToInt16(self, value: object) -> int:
+        """
 
-class ObjectHolderList(ObjectType):
+        :param value:
+        :return:
+        """
+    def ToInt32(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToInt64(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToSByte(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToSingle(self, value: object) -> float:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToString(self, value: object) -> str:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToUInt16(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToUInt32(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    def ToUInt64(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+
+class IObjectReference:
     """"""
 
-    # No Fields
+    def GetRealObject(self, context: StreamingContext) -> object:
+        """
 
-    # No Constructors
+        :param context:
+        :return:
+        """
 
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectHolderListEnumerator(ObjectType):
+class ISafeSerializationData:
     """"""
 
-    # No Fields
+    def CompleteDeserialization(self, deserialized: object) -> None:
+        """
 
-    # No Constructors
+        :param deserialized:
+        """
 
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectIDGenerator(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetId(self, obj: ObjectType, firstTime: BooleanType) -> Tuple[LongType, BooleanType]: ...
-    def HasId(self, obj: ObjectType, firstTime: BooleanType) -> Tuple[LongType, BooleanType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectManager(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, selector: ISurrogateSelector, context: StreamingContext): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def DoFixups(self) -> VoidType: ...
-    def GetObject(self, objectID: LongType) -> ObjectType: ...
-    def RaiseDeserializationEvent(self) -> VoidType: ...
-    def RaiseOnDeserializingEvent(self, obj: ObjectType) -> VoidType: ...
-    @overload
-    def RecordArrayElementFixup(
-        self, arrayToBeFixed: LongType, indices: ArrayType[IntType], objectRequired: LongType
-    ) -> VoidType: ...
-    @overload
-    def RecordArrayElementFixup(
-        self, arrayToBeFixed: LongType, index: IntType, objectRequired: LongType
-    ) -> VoidType: ...
-    def RecordDelayedFixup(
-        self, objectToBeFixed: LongType, memberName: StringType, objectRequired: LongType
-    ) -> VoidType: ...
-    def RecordFixup(
-        self, objectToBeFixed: LongType, member: MemberInfo, objectRequired: LongType
-    ) -> VoidType: ...
-    @overload
-    def RegisterObject(self, obj: ObjectType, objectID: LongType) -> VoidType: ...
-    @overload
-    def RegisterObject(
-        self, obj: ObjectType, objectID: LongType, info: SerializationInfo
-    ) -> VoidType: ...
-    @overload
-    def RegisterObject(
-        self,
-        obj: ObjectType,
-        objectID: LongType,
-        info: SerializationInfo,
-        idOfContainingObj: LongType,
-        member: MemberInfo,
-    ) -> VoidType: ...
-    @overload
-    def RegisterObject(
-        self,
-        obj: ObjectType,
-        objectID: LongType,
-        info: SerializationInfo,
-        idOfContainingObj: LongType,
-        member: MemberInfo,
-        arrayIndex: ArrayType[IntType],
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class OnDeserializedAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class OnDeserializingAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class OnSerializedAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class OnSerializingAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class OptionalFieldAttribute(Attribute, _Attribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def VersionAdded(self) -> IntType: ...
-    @VersionAdded.setter
-    def VersionAdded(self, value: IntType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_VersionAdded(self) -> IntType: ...
-    def set_VersionAdded(self, value: IntType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SafeSerializationEventArgs(EventArgs):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def StreamingContext(self) -> StreamingContext: ...
-
-    # ---------- Methods ---------- #
-
-    def AddSerializedState(self, serializedState: ISafeSerializationData) -> VoidType: ...
-    def get_StreamingContext(self) -> StreamingContext: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SafeSerializationManager(ObjectType, IObjectReference, ISerializable):
+class ISerializable:
     """"""
 
-    # No Fields
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-    # No Constructors
+        :param info:
+        :param context:
+        """
 
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationBinder(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BindToName(
-        self, serializedType: TypeType, assemblyName: StringType, typeName: StringType
-    ) -> Tuple[VoidType, StringType, StringType]: ...
-    def BindToType(self, assemblyName: StringType, typeName: StringType) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, context: StreamingContext, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, context: StreamingContext) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationEvents(ObjectType):
+class ISerializationSurrogate:
     """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationEventsCache(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationException(SystemException, ISerializable, _Exception):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, message: StringType): ...
-    @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationFieldInfo(FieldInfo, ICustomAttributeProvider, _MemberInfo, _FieldInfo):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Attributes(self) -> FieldAttributes: ...
-    @property
-    def DeclaringType(self) -> TypeType: ...
-    @property
-    def FieldHandle(self) -> RuntimeFieldHandle: ...
-    @property
-    def FieldType(self) -> TypeType: ...
-    @property
-    def MetadataToken(self) -> IntType: ...
-    @property
-    def Module(self) -> Module: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def ReflectedType(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def GetCustomAttributes(self, inherit: BooleanType) -> ArrayType[ObjectType]: ...
-    @overload
-    def GetCustomAttributes(
-        self, attributeType: TypeType, inherit: BooleanType
-    ) -> ArrayType[ObjectType]: ...
-    def GetValue(self, obj: ObjectType) -> ObjectType: ...
-    def IsDefined(self, attributeType: TypeType, inherit: BooleanType) -> BooleanType: ...
-    @overload
-    def SetValue(
-        self,
-        obj: ObjectType,
-        value: ObjectType,
-        invokeAttr: BindingFlags,
-        binder: Binder,
-        culture: CultureInfo,
-    ) -> VoidType: ...
-    def get_Attributes(self) -> FieldAttributes: ...
-    def get_DeclaringType(self) -> TypeType: ...
-    def get_FieldHandle(self) -> RuntimeFieldHandle: ...
-    def get_FieldType(self) -> TypeType: ...
-    def get_MetadataToken(self) -> IntType: ...
-    def get_Module(self) -> Module: ...
-    def get_Name(self) -> StringType: ...
-    def get_ReflectedType(self) -> TypeType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationInfo(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, type: TypeType, converter: IFormatterConverter): ...
-    @overload
-    def __init__(
-        self,
-        type: TypeType,
-        converter: IFormatterConverter,
-        requireSameTokenInPartialTrust: BooleanType,
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def AssemblyName(self) -> StringType: ...
-    @AssemblyName.setter
-    def AssemblyName(self, value: StringType) -> None: ...
-    @property
-    def FullTypeName(self) -> StringType: ...
-    @FullTypeName.setter
-    def FullTypeName(self, value: StringType) -> None: ...
-    @property
-    def IsAssemblyNameSetExplicit(self) -> BooleanType: ...
-    @property
-    def IsFullTypeNameSetExplicit(self) -> BooleanType: ...
-    @property
-    def MemberCount(self) -> IntType: ...
-    @property
-    def ObjectType(self) -> TypeType: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def AddValue(self, name: StringType, value: ObjectType, type: TypeType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: ObjectType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: BooleanType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: CharType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: SByteType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: ByteType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: ShortType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: UShortType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: IntType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: UIntType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: LongType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: ULongType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: FloatType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: DoubleType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: DecimalType) -> VoidType: ...
-    @overload
-    def AddValue(self, name: StringType, value: DateTime) -> VoidType: ...
-    def GetBoolean(self, name: StringType) -> BooleanType: ...
-    def GetByte(self, name: StringType) -> ByteType: ...
-    def GetChar(self, name: StringType) -> CharType: ...
-    def GetDateTime(self, name: StringType) -> DateTime: ...
-    def GetDecimal(self, name: StringType) -> DecimalType: ...
-    def GetDouble(self, name: StringType) -> DoubleType: ...
-    def GetEnumerator(self) -> SerializationInfoEnumerator: ...
-    def GetInt16(self, name: StringType) -> ShortType: ...
-    def GetInt32(self, name: StringType) -> IntType: ...
-    def GetInt64(self, name: StringType) -> LongType: ...
-    def GetSByte(self, name: StringType) -> SByteType: ...
-    def GetSingle(self, name: StringType) -> FloatType: ...
-    def GetString(self, name: StringType) -> StringType: ...
-    def GetUInt16(self, name: StringType) -> UShortType: ...
-    def GetUInt32(self, name: StringType) -> UIntType: ...
-    def GetUInt64(self, name: StringType) -> ULongType: ...
-    def GetValue(self, name: StringType, type: TypeType) -> ObjectType: ...
-    def SetType(self, type: TypeType) -> VoidType: ...
-    def get_AssemblyName(self) -> StringType: ...
-    def get_FullTypeName(self) -> StringType: ...
-    def get_IsAssemblyNameSetExplicit(self) -> BooleanType: ...
-    def get_IsFullTypeNameSetExplicit(self) -> BooleanType: ...
-    def get_MemberCount(self) -> IntType: ...
-    def get_ObjectType(self) -> TypeType: ...
-    def set_AssemblyName(self, value: StringType) -> VoidType: ...
-    def set_FullTypeName(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationInfoEnumerator(ObjectType, IEnumerator):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Current(self) -> SerializationEntry: ...
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def ObjectType(self) -> TypeType: ...
-    @property
-    def Value(self) -> ObjectType: ...
-
-    # ---------- Methods ---------- #
-
-    def MoveNext(self) -> BooleanType: ...
-    def Reset(self) -> VoidType: ...
-    def get_Current(self) -> SerializationEntry: ...
-    def get_Name(self) -> StringType: ...
-    def get_ObjectType(self) -> TypeType: ...
-    def get_Value(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationObjectManager(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, context: StreamingContext): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def RaiseOnSerializedEvent(self) -> VoidType: ...
-    def RegisterObject(self, obj: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SurrogateForCyclicalReference(ObjectType, ISerializationSurrogate):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
 
     def GetObjectData(
-        self, obj: ObjectType, info: SerializationInfo, context: StreamingContext
-    ) -> VoidType: ...
+        self, obj: object, info: SerializationInfo, context: StreamingContext
+    ) -> None:
+        """
+
+        :param obj:
+        :param info:
+        :param context:
+        """
     def SetObjectData(
         self,
-        obj: ObjectType,
+        obj: object,
         info: SerializationInfo,
         context: StreamingContext,
         selector: ISurrogateSelector,
-    ) -> ObjectType: ...
+    ) -> object:
+        """
 
-    # No Events
+        :param obj:
+        :param info:
+        :param context:
+        :param selector:
+        :return:
+        """
 
-    # No Sub Classes
+class ISurrogateSelector:
+    """"""
 
-    # No Sub Structs
+    def ChainSelector(self, selector: ISurrogateSelector) -> None:
+        """
 
-    # No Sub Interfaces
+        :param selector:
+        """
+    def GetNextSelector(self) -> ISurrogateSelector:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetSurrogate(
+        self, type: Type, context: StreamingContext, selector: ISurrogateSelector
+    ) -> Tuple[ISerializationSurrogate, ISurrogateSelector]:
+        """
+
+        :param type:
+        :param context:
+        :param selector:
+        :return:
+        """
+
+class LongList(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class MemberHolder(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectCloneHelper(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectHolder(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectHolderList(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectHolderListEnumerator(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectIDGenerator(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetId(self, obj: object, firstTime: bool) -> Tuple[int, bool]:
+        """
+
+        :param obj:
+        :param firstTime:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def HasId(self, obj: object, firstTime: bool) -> Tuple[int, bool]:
+        """
+
+        :param obj:
+        :param firstTime:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectManager(Object):
+    """"""
+
+    def __init__(self, selector: ISurrogateSelector, context: StreamingContext):
+        """
+
+        :param selector:
+        :param context:
+        """
+    def DoFixups(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObject(self, objectID: int) -> object:
+        """
+
+        :param objectID:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def RaiseDeserializationEvent(self) -> None:
+        """"""
+    def RaiseOnDeserializingEvent(self, obj: object) -> None:
+        """
+
+        :param obj:
+        """
+    @overload
+    def RecordArrayElementFixup(
+        self, arrayToBeFixed: int, indices: Array[int], objectRequired: int
+    ) -> None:
+        """
+
+        :param arrayToBeFixed:
+        :param indices:
+        :param objectRequired:
+        """
+    @overload
+    def RecordArrayElementFixup(self, arrayToBeFixed: int, index: int, objectRequired: int) -> None:
+        """
+
+        :param arrayToBeFixed:
+        :param index:
+        :param objectRequired:
+        """
+    def RecordDelayedFixup(
+        self, objectToBeFixed: int, memberName: str, objectRequired: int
+    ) -> None:
+        """
+
+        :param objectToBeFixed:
+        :param memberName:
+        :param objectRequired:
+        """
+    def RecordFixup(self, objectToBeFixed: int, member: MemberInfo, objectRequired: int) -> None:
+        """
+
+        :param objectToBeFixed:
+        :param member:
+        :param objectRequired:
+        """
+    @overload
+    def RegisterObject(self, obj: object, objectID: int) -> None:
+        """
+
+        :param obj:
+        :param objectID:
+        """
+    @overload
+    def RegisterObject(self, obj: object, objectID: int, info: SerializationInfo) -> None:
+        """
+
+        :param obj:
+        :param objectID:
+        :param info:
+        """
+    @overload
+    def RegisterObject(
+        self,
+        obj: object,
+        objectID: int,
+        info: SerializationInfo,
+        idOfContainingObj: int,
+        member: MemberInfo,
+    ) -> None:
+        """
+
+        :param obj:
+        :param objectID:
+        :param info:
+        :param idOfContainingObj:
+        :param member:
+        """
+    @overload
+    def RegisterObject(
+        self,
+        obj: object,
+        objectID: int,
+        info: SerializationInfo,
+        idOfContainingObj: int,
+        member: MemberInfo,
+        arrayIndex: Array[int],
+    ) -> None:
+        """
+
+        :param obj:
+        :param objectID:
+        :param info:
+        :param idOfContainingObj:
+        :param member:
+        :param arrayIndex:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class OnDeserializedAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class OnDeserializingAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class OnSerializedAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class OnSerializingAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class OptionalFieldAttribute(Attribute, _Attribute):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def VersionAdded(self) -> int:
+        """
+
+        :return:
+        """
+    @VersionAdded.setter
+    def VersionAdded(self, value: int) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SafeSerializationEventArgs(EventArgs):
+    """"""
+
+    @property
+    def StreamingContext(self) -> StreamingContext:
+        """
+
+        :return:
+        """
+    def AddSerializedState(self, serializedState: ISafeSerializationData) -> None:
+        """
+
+        :param serializedState:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SafeSerializationManager(Object, IObjectReference, ISerializable):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetRealObject(self, context: StreamingContext) -> object:
+        """
+
+        :param context:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationBinder(ABC, Object):
+    """"""
+
+    def BindToName(
+        self, serializedType: Type, assemblyName: str, typeName: str
+    ) -> Tuple[None, str, str]:
+        """
+
+        :param serializedType:
+        :param assemblyName:
+        :param typeName:
+        """
+    def BindToType(self, assemblyName: str, typeName: str) -> Type:
+        """
+
+        :param assemblyName:
+        :param typeName:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationEntry(ValueType):
+    """"""
+
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ObjectType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+SerializationEventHandler: Callable[[StreamingContext], None] = ...
+"""
+
+:param context: 
+"""
+
+class SerializationEvents(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationEventsCache(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationException(SystemException, _Exception, ISerializable):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
+    @overload
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
+    @property
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
+
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
+
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationFieldInfo(FieldInfo, ICustomAttributeProvider, _FieldInfo, _MemberInfo):
+    """"""
+
+    @property
+    def Attributes(self) -> FieldAttributes:
+        """
+
+        :return:
+        """
+    @property
+    def CustomAttributes(self) -> IEnumerable[CustomAttributeData]:
+        """
+
+        :return:
+        """
+    @property
+    def DeclaringType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def DeclaringType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def FieldHandle(self) -> RuntimeFieldHandle:
+        """
+
+        :return:
+        """
+    @property
+    def FieldType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def IsAssembly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsFamily(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsFamilyAndAssembly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsFamilyOrAssembly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsInitOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsLiteral(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsNotSerialized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsPinvokeImpl(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsPrivate(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsPublic(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSecurityCritical(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSecuritySafeCritical(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSecurityTransparent(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSpecialName(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsStatic(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MemberType(self) -> MemberTypes:
+        """
+
+        :return:
+        """
+    @property
+    def MemberType(self) -> MemberTypes:
+        """
+
+        :return:
+        """
+    @property
+    def MetadataToken(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Module(self) -> Module:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ReflectedType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def ReflectedType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, other: object) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @overload
+    def Equals(self, other: object) -> bool:
+        """
+
+        :param other:
+        :return:
+        """
+    @overload
+    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """
+
+        :param inherit:
+        :return:
+        """
+    @overload
+    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """
+
+        :param inherit:
+        :return:
+        """
+    @overload
+    def GetCustomAttributes(self, inherit: bool) -> Array[object]:
+        """
+
+        :param inherit:
+        :return:
+        """
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """
+
+        :param attributeType:
+        :param inherit:
+        :return:
+        """
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """
+
+        :param attributeType:
+        :param inherit:
+        :return:
+        """
+    @overload
+    def GetCustomAttributes(self, attributeType: Type, inherit: bool) -> Array[object]:
+        """
+
+        :param attributeType:
+        :param inherit:
+        :return:
+        """
+    def GetCustomAttributesData(self) -> IList[CustomAttributeData]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    @overload
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetOptionalCustomModifiers(self) -> Array[Type]:
+        """
+
+        :return:
+        """
+    def GetRawConstantValue(self) -> object:
+        """
+
+        :return:
+        """
+    def GetRequiredCustomModifiers(self) -> Array[Type]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    @overload
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    @overload
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    @overload
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def GetValue(self, obj: object) -> object:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetValueDirect(self, obj: TypedReference) -> object:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    @overload
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    @overload
+    def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
+        """
+
+        :param attributeType:
+        :param inherit:
+        :return:
+        """
+    @overload
+    def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
+        """
+
+        :param attributeType:
+        :param inherit:
+        :return:
+        """
+    @overload
+    def IsDefined(self, attributeType: Type, inherit: bool) -> bool:
+        """
+
+        :param attributeType:
+        :param inherit:
+        :return:
+        """
+    @overload
+    def SetValue(self, obj: object, value: object) -> None:
+        """
+
+        :param obj:
+        :param value:
+        """
+    @overload
+    def SetValue(
+        self,
+        obj: object,
+        value: object,
+        invokeAttr: BindingFlags,
+        binder: Binder,
+        culture: CultureInfo,
+    ) -> None:
+        """
+
+        :param obj:
+        :param value:
+        :param invokeAttr:
+        :param binder:
+        :param culture:
+        """
+    def SetValueDirect(self, obj: TypedReference, value: object) -> None:
+        """
+
+        :param obj:
+        :param value:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationInfo(Object):
+    """"""
+
+    @overload
+    def __init__(self, type: Type, converter: IFormatterConverter):
+        """
+
+        :param type:
+        :param converter:
+        """
+    @overload
+    def __init__(
+        self, type: Type, converter: IFormatterConverter, requireSameTokenInPartialTrust: bool
+    ):
+        """
+
+        :param type:
+        :param converter:
+        :param requireSameTokenInPartialTrust:
+        """
+    @property
+    def AssemblyName(self) -> str:
+        """
+
+        :return:
+        """
+    @AssemblyName.setter
+    def AssemblyName(self, value: str) -> None: ...
+    @property
+    def FullTypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @FullTypeName.setter
+    def FullTypeName(self, value: str) -> None: ...
+    @property
+    def IsAssemblyNameSetExplicit(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsFullTypeNameSetExplicit(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def MemberCount(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ObjectType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def AddValue(self, name: str, value: bool) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: Char) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: DateTime) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: Decimal) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: float) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: object) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: float) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: int) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @overload
+    def AddValue(self, name: str, value: object, type: Type) -> None:
+        """
+
+        :param name:
+        :param value:
+        :param type:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBoolean(self, name: str) -> bool:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetByte(self, name: str) -> int:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetChar(self, name: str) -> Char:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetDateTime(self, name: str) -> DateTime:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetDecimal(self, name: str) -> Decimal:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetDouble(self, name: str) -> float:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetEnumerator(self) -> SerializationInfoEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetInt16(self, name: str) -> int:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetInt32(self, name: str) -> int:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetInt64(self, name: str) -> int:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetSByte(self, name: str) -> int:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetSingle(self, name: str) -> float:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetString(self, name: str) -> str:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetUInt16(self, name: str) -> int:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetUInt32(self, name: str) -> int:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetUInt64(self, name: str) -> int:
+        """
+
+        :param name:
+        :return:
+        """
+    def GetValue(self, name: str, type: Type) -> object:
+        """
+
+        :param name:
+        :param type:
+        :return:
+        """
+    def SetType(self, type: Type) -> None:
+        """
+
+        :param type:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationInfoEnumerator(Object, IEnumerator):
+    """"""
+
+    @property
+    def Current(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def Name(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def ObjectType(self) -> Type:
+        """
+
+        :return:
+        """
+    @property
+    def Value(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def MoveNext(self) -> bool:
+        """
+
+        :return:
+        """
+    def Reset(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationObjectManager(Object):
+    """"""
+
+    def __init__(self, context: StreamingContext):
+        """
+
+        :param context:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def RaiseOnSerializedEvent(self) -> None:
+        """"""
+    def RegisterObject(self, obj: object) -> None:
+        """
+
+        :param obj:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StreamingContext(ValueType):
+    """"""
+
+    @overload
+    def __init__(self, state: StreamingContextStates):
+        """
+
+        :param state:
+        """
+    @overload
+    def __init__(self, state: StreamingContextStates, additional: object):
+        """
+
+        :param state:
+        :param additional:
+        """
+    @property
+    def Context(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def State(self) -> StreamingContextStates:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StreamingContextStates(Enum):
+    """"""
+
+    CrossProcess: StreamingContextStates = ...
+    """"""
+    CrossMachine: StreamingContextStates = ...
+    """"""
+    File: StreamingContextStates = ...
+    """"""
+    Persistence: StreamingContextStates = ...
+    """"""
+    Remoting: StreamingContextStates = ...
+    """"""
+    Other: StreamingContextStates = ...
+    """"""
+    Clone: StreamingContextStates = ...
+    """"""
+    CrossAppDomain: StreamingContextStates = ...
+    """"""
+    All: StreamingContextStates = ...
+    """"""
+
+class SurrogateForCyclicalReference(Object, ISerializationSurrogate):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(
+        self, obj: object, info: SerializationInfo, context: StreamingContext
+    ) -> None:
+        """
+
+        :param obj:
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SetObjectData(
+        self,
+        obj: object,
+        info: SerializationInfo,
+        context: StreamingContext,
+        selector: ISurrogateSelector,
+    ) -> object:
+        """
+
+        :param obj:
+        :param info:
+        :param context:
+        :param selector:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SurrogateHashtable(
     Hashtable,
-    IDictionary,
     ICollection,
+    IDictionary,
     IEnumerable,
-    ISerializable,
     IDeserializationCallback,
+    ISerializable,
     ICloneable,
 ):
     """"""
 
-    # No Fields
+    @property
+    def Count(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def Keys(self) -> ICollection:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @property
+    def Values(self) -> ICollection:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def Add(self, key: object, value: object) -> None:
+        """
 
-class SurrogateKey(ObjectType):
-    # No Fields
+        :param key:
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    def Clone(self) -> object:
+        """
 
-    # No Constructors
+        :return:
+        """
+    def Contains(self, key: object) -> bool:
+        """
 
-    # No Properties
+        :param key:
+        :return:
+        """
+    def ContainsKey(self, key: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param key:
+        :return:
+        """
+    def ContainsValue(self, value: object) -> bool:
+        """
 
-    def GetHashCode(self) -> IntType: ...
+        :param value:
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Events
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
 
-    # No Sub Enums
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
 
-class SurrogateSelector(ObjectType, ISurrogateSelector):
-    # No Fields
+        :return:
+        """
+    def OnDeserialization(self, sender: object) -> None:
+        """
 
-    # ---------- Constructors ---------- #
+        :param sender:
+        """
+    def Remove(self, key: object) -> None:
+        """
 
-    def __init__(self): ...
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Properties
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :param value:
+        :return:
+        """
+    def __getitem__(self, key: object) -> object:
+        """
 
-    def AddSurrogate(
-        self, type: TypeType, context: StreamingContext, surrogate: ISerializationSurrogate
-    ) -> VoidType: ...
-    def ChainSelector(self, selector: ISurrogateSelector) -> VoidType: ...
-    def GetNextSelector(self) -> ISurrogateSelector: ...
-    def GetSurrogate(
-        self, type: TypeType, context: StreamingContext, selector: ISurrogateSelector
-    ) -> Tuple[ISerializationSurrogate, ISurrogateSelector]: ...
-    def RemoveSurrogate(self, type: TypeType, context: StreamingContext) -> VoidType: ...
+        :param key:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
 
-    # No Events
+        :return:
+        """
+    def __len__(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def __setitem__(self, key: object, value: object) -> None:
+        """
 
-    # No Sub Structs
+        :param key:
+        :param value:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TypeLoadExceptionHolder(ObjectType):
+class SurrogateKey(Object):
     """"""
 
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ValueTypeFixupInfo(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(
-        self, containerID: LongType, member: FieldInfo, parentIndex: ArrayType[IntType]
-    ): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def ContainerID(self) -> LongType: ...
-    @property
-    def ParentField(self) -> FieldInfo: ...
-    @property
-    def ParentIndex(self) -> ArrayType[IntType]: ...
-
-    # ---------- Methods ---------- #
-
-    def get_ContainerID(self) -> LongType: ...
-    def get_ParentField(self) -> FieldInfo: ...
-    def get_ParentIndex(self) -> ArrayType[IntType]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
-
-class SerializationEntry(ValueType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Name(self) -> StringType: ...
-    @property
-    def ObjectType(self) -> TypeType: ...
-    @property
-    def Value(self) -> ObjectType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Name(self) -> StringType: ...
-    def get_ObjectType(self) -> TypeType: ...
-    def get_Value(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StreamingContext(ValueType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self, state: StreamingContextStates): ...
-    @overload
-    def __init__(self, state: StreamingContextStates, additional: ObjectType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Context(self) -> ObjectType: ...
-    @property
-    def State(self) -> StreamingContextStates: ...
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def get_Context(self) -> ObjectType: ...
-    def get_State(self) -> StreamingContextStates: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Interfaces ---------- #
-
-class IDeserializationCallback(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def OnDeserialization(self, sender: ObjectType) -> VoidType: ...
-
-    # No Events
-
-class IFormatter(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def Binder(self) -> SerializationBinder: ...
-    @Binder.setter
-    def Binder(self, value: SerializationBinder) -> None: ...
-    @property
-    def Context(self) -> StreamingContext: ...
-    @Context.setter
-    def Context(self, value: StreamingContext) -> None: ...
-    @property
-    def SurrogateSelector(self) -> ISurrogateSelector: ...
-    @SurrogateSelector.setter
-    def SurrogateSelector(self, value: ISurrogateSelector) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def Deserialize(self, serializationStream: Stream) -> ObjectType: ...
-    def Serialize(self, serializationStream: Stream, graph: ObjectType) -> VoidType: ...
-    def get_Binder(self) -> SerializationBinder: ...
-    def get_Context(self) -> StreamingContext: ...
-    def get_SurrogateSelector(self) -> ISurrogateSelector: ...
-    def set_Binder(self, value: SerializationBinder) -> VoidType: ...
-    def set_Context(self, value: StreamingContext) -> VoidType: ...
-    def set_SurrogateSelector(self, value: ISurrogateSelector) -> VoidType: ...
-
-    # No Events
-
-class IFormatterConverter(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Convert(self, value: ObjectType, type: TypeType) -> ObjectType: ...
-    @overload
-    def Convert(self, value: ObjectType, typeCode: TypeCode) -> ObjectType: ...
-    def ToBoolean(self, value: ObjectType) -> BooleanType: ...
-    def ToByte(self, value: ObjectType) -> ByteType: ...
-    def ToChar(self, value: ObjectType) -> CharType: ...
-    def ToDateTime(self, value: ObjectType) -> DateTime: ...
-    def ToDecimal(self, value: ObjectType) -> DecimalType: ...
-    def ToDouble(self, value: ObjectType) -> DoubleType: ...
-    def ToInt16(self, value: ObjectType) -> ShortType: ...
-    def ToInt32(self, value: ObjectType) -> IntType: ...
-    def ToInt64(self, value: ObjectType) -> LongType: ...
-    def ToSByte(self, value: ObjectType) -> SByteType: ...
-    def ToSingle(self, value: ObjectType) -> FloatType: ...
-    def ToString(self, value: ObjectType) -> StringType: ...
-    def ToUInt16(self, value: ObjectType) -> UShortType: ...
-    def ToUInt32(self, value: ObjectType) -> UIntType: ...
-    def ToUInt64(self, value: ObjectType) -> ULongType: ...
-
-    # No Events
-
-class IObjectReference(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetRealObject(self, context: StreamingContext) -> ObjectType: ...
-
-    # No Events
-
-class ISafeSerializationData(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CompleteDeserialization(self, deserialized: ObjectType) -> VoidType: ...
-
-    # No Events
-
-class ISerializable(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-
-    # No Events
-
-class ISerializationSurrogate(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetObjectData(
-        self, obj: ObjectType, info: SerializationInfo, context: StreamingContext
-    ) -> VoidType: ...
-    def SetObjectData(
-        self,
-        obj: ObjectType,
-        info: SerializationInfo,
-        context: StreamingContext,
-        selector: ISurrogateSelector,
-    ) -> ObjectType: ...
-
-    # No Events
-
-class ISurrogateSelector(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def ChainSelector(self, selector: ISurrogateSelector) -> VoidType: ...
-    def GetNextSelector(self) -> ISurrogateSelector: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SurrogateSelector(Object, ISurrogateSelector):
+    """"""
+
+    def __init__(self):
+        """"""
+    def AddSurrogate(
+        self, type: Type, context: StreamingContext, surrogate: ISerializationSurrogate
+    ) -> None:
+        """
+
+        :param type:
+        :param context:
+        :param surrogate:
+        """
+    def ChainSelector(self, selector: ISurrogateSelector) -> None:
+        """
+
+        :param selector:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetNextSelector(self) -> ISurrogateSelector:
+        """
+
+        :return:
+        """
     def GetSurrogate(
-        self, type: TypeType, context: StreamingContext, selector: ISurrogateSelector
-    ) -> Tuple[ISerializationSurrogate, ISurrogateSelector]: ...
+        self, type: Type, context: StreamingContext, selector: ISurrogateSelector
+    ) -> Tuple[ISerializationSurrogate, ISurrogateSelector]:
+        """
 
-    # No Events
+        :param type:
+        :param context:
+        :param selector:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-# ---------- Enums ---------- #
+        :return:
+        """
+    def RemoveSurrogate(self, type: Type, context: StreamingContext) -> None:
+        """
 
-class StreamingContextStates(Enum):
-    CrossProcess = 1
-    CrossMachine = 2
-    File = 4
-    Persistence = 8
-    Remoting = 16
-    Other = 32
-    Clone = 64
-    CrossAppDomain = 128
-    All = 255
+        :param type:
+        :param context:
+        """
+    def ToString(self) -> str:
+        """
 
-# ---------- Delegates ---------- #
+        :return:
+        """
 
-DeserializationEventHandler = Callable[[ObjectType], VoidType]
+class TypeLoadExceptionHolder(Object):
+    """"""
 
-SerializationEventHandler = Callable[[StreamingContext], VoidType]
+    def Equals(self, obj: object) -> bool:
+        """
 
-__all__ = [
-    DeserializationEventHandler,
-    FixupHolder,
-    FixupHolderList,
-    Formatter,
-    FormatterConverter,
-    FormatterServices,
-    LongList,
-    MemberHolder,
-    ObjectCloneHelper,
-    ObjectHolder,
-    ObjectHolderList,
-    ObjectHolderListEnumerator,
-    ObjectIDGenerator,
-    ObjectManager,
-    OnDeserializedAttribute,
-    OnDeserializingAttribute,
-    OnSerializedAttribute,
-    OnSerializingAttribute,
-    OptionalFieldAttribute,
-    SafeSerializationEventArgs,
-    SafeSerializationManager,
-    SerializationBinder,
-    SerializationEventHandler,
-    SerializationEvents,
-    SerializationEventsCache,
-    SerializationException,
-    SerializationFieldInfo,
-    SerializationInfo,
-    SerializationInfoEnumerator,
-    SerializationObjectManager,
-    SurrogateForCyclicalReference,
-    SurrogateHashtable,
-    SurrogateKey,
-    SurrogateSelector,
-    TypeLoadExceptionHolder,
-    ValueTypeFixupInfo,
-    SerializationEntry,
-    StreamingContext,
-    IDeserializationCallback,
-    IFormatter,
-    IFormatterConverter,
-    IObjectReference,
-    ISafeSerializationData,
-    ISerializable,
-    ISerializationSurrogate,
-    ISurrogateSelector,
-    StreamingContextStates,
-    DeserializationEventHandler,
-    SerializationEventHandler,
-]
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ValueTypeFixupInfo(Object):
+    """"""
+
+    def __init__(self, containerID: int, member: FieldInfo, parentIndex: Array[int]):
+        """
+
+        :param containerID:
+        :param member:
+        :param parentIndex:
+        """
+    @property
+    def ContainerID(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def ParentField(self) -> FieldInfo:
+        """
+
+        :return:
+        """
+    @property
+    def ParentIndex(self) -> Array[int]:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

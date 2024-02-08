@@ -2,33 +2,26 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Callable
+from typing import ClassVar
+from typing import Final
 from typing import Generic
-from typing import List
-from typing import Protocol
+from typing import Iterator
+from typing import Tuple
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import AsyncCallback
 from System import Attribute
-from System import Boolean
 from System import Enum
 from System import EventArgs
 from System import EventHandler
 from System import Exception
 from System import Guid
-from System import IAsyncResult
-from System import ICloneable
 from System import IDisposable
-from System import Int32
 from System import IntPtr
 from System import IServiceProvider
-from System import MulticastDelegate
 from System import Object
-from System import String
 from System import Type
-from System import Void
 from System.Collections import CollectionBase
 from System.Collections import ICollection
 from System.Collections import IDictionary
@@ -47,1826 +40,3020 @@ from System.ComponentModel import MemberDescriptor
 from System.ComponentModel import PropertyDescriptor
 from System.ComponentModel import PropertyDescriptorCollection
 from System.ComponentModel import TypeDescriptionProvider
+from System.ComponentModel.Design.DesignerOptionService import DesignerOptionCollection
 from System.Globalization import CultureInfo
 from System.IO import Stream
 from System.Reflection import Assembly
 from System.Reflection import AssemblyName
+from System.Reflection import MethodBase
 from System.Resources import IResourceReader
 from System.Resources import IResourceWriter
 from System.Runtime.InteropServices import ExternalException
 from System.Runtime.InteropServices import _Attribute
 from System.Runtime.InteropServices import _Exception
 from System.Runtime.Serialization import ISerializable
-
-# ---------- Types ---------- #
+from System.Runtime.Serialization import SerializationInfo
+from System.Runtime.Serialization import StreamingContext
 
 T = TypeVar("T")
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
 
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
-
 class ActiveDesignerEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, oldDesigner: IDesignerHost, newDesigner: IDesignerHost):
+        """
 
-    def __init__(self, oldDesigner: IDesignerHost, newDesigner: IDesignerHost): ...
-
-    # ---------- Properties ---------- #
-
+        :param oldDesigner:
+        :param newDesigner:
+        """
     @property
-    def NewDesigner(self) -> IDesignerHost: ...
+    def NewDesigner(self) -> IDesignerHost:
+        """
+
+        :return:
+        """
     @property
-    def OldDesigner(self) -> IDesignerHost: ...
+    def OldDesigner(self) -> IDesignerHost:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_NewDesigner(self) -> IDesignerHost: ...
-    def get_OldDesigner(self) -> IDesignerHost: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+ActiveDesignerEventHandler: Callable[[object, ActiveDesignerEventArgs], None] = ...
+"""
 
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
-class ActiveDesignerEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
+class CheckoutException(ExternalException, _Exception, ISerializable):
+    """"""
 
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: ActiveDesignerEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: ActiveDesignerEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CheckoutException(ExternalException, ISerializable, _Exception):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Canceled() -> CheckoutException: ...
-
-    # ---------- Constructors ---------- #
-
+    Canceled: Final[ClassVar[CheckoutException]] = ...
+    """
+    
+    :return: 
+    """
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, message: StringType): ...
+    def __init__(self, message: str):
+        """
+
+        :param message:
+        """
     @overload
-    def __init__(self, message: StringType, errorCode: IntType): ...
+    def __init__(self, message: str, innerException: Exception):
+        """
+
+        :param message:
+        :param innerException:
+        """
     @overload
-    def __init__(self, message: StringType, innerException: Exception): ...
+    def __init__(self, message: str, errorCode: int):
+        """
 
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class CommandID(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, menuGroup: Guid, commandID: IntType): ...
-
-    # ---------- Properties ---------- #
-
+        :param message:
+        :param errorCode:
+        """
     @property
-    def Guid(self) -> Guid: ...
+    def Data(self) -> IDictionary:
+        """
+
+        :return:
+        """
     @property
-    def ID(self) -> IntType: ...
+    def ErrorCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def HResult(self) -> int:
+        """
 
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def ToString(self) -> StringType: ...
-    def get_Guid(self) -> Guid: ...
-    def get_ID(self) -> IntType: ...
+        :return:
+        """
+    @property
+    def HelpLink(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
+    @HelpLink.setter
+    def HelpLink(self, value: str) -> None: ...
+    @property
+    def InnerException(self) -> Exception:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @property
+    def Message(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Source(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @Source.setter
+    def Source(self, value: str) -> None: ...
+    @property
+    def StackTrace(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    @property
+    def TargetSite(self) -> MethodBase:
+        """
+
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    @overload
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetBaseException(self) -> Exception:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    @overload
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class CommandID(Object):
+    """"""
+
+    def __init__(self, menuGroup: Guid, commandID: int):
+        """
+
+        :param menuGroup:
+        :param commandID:
+        """
+    @property
+    def Guid(self) -> Guid:
+        """
+
+        :return:
+        """
+    @property
+    def ID(self) -> int:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ComponentChangedEventArgs(EventArgs):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     def __init__(
-        self,
-        component: ObjectType,
-        member: MemberDescriptor,
-        oldValue: ObjectType,
-        newValue: ObjectType,
-    ): ...
+        self, component: object, member: MemberDescriptor, oldValue: object, newValue: object
+    ):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param component:
+        :param member:
+        :param oldValue:
+        :param newValue:
+        """
     @property
-    def Component(self) -> ObjectType: ...
+    def Component(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def Member(self) -> MemberDescriptor: ...
+    def Member(self) -> MemberDescriptor:
+        """
+
+        :return:
+        """
     @property
-    def NewValue(self) -> ObjectType: ...
+    def NewValue(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def OldValue(self) -> ObjectType: ...
+    def OldValue(self) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Component(self) -> ObjectType: ...
-    def get_Member(self) -> MemberDescriptor: ...
-    def get_NewValue(self) -> ObjectType: ...
-    def get_OldValue(self) -> ObjectType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+ComponentChangedEventHandler: Callable[[object, ComponentChangedEventArgs], None] = ...
+"""
 
-    # No Sub Enums
-
-class ComponentChangedEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: ComponentChangedEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: ComponentChangedEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
 class ComponentChangingEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, component: object, member: MemberDescriptor):
+        """
 
-    def __init__(self, component: ObjectType, member: MemberDescriptor): ...
-
-    # ---------- Properties ---------- #
-
+        :param component:
+        :param member:
+        """
     @property
-    def Component(self) -> ObjectType: ...
+    def Component(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def Member(self) -> MemberDescriptor: ...
+    def Member(self) -> MemberDescriptor:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Component(self) -> ObjectType: ...
-    def get_Member(self) -> MemberDescriptor: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+ComponentChangingEventHandler: Callable[[object, ComponentChangingEventArgs], None] = ...
+"""
 
-    # No Sub Enums
-
-class ComponentChangingEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: ComponentChangingEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: ComponentChangingEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
 class ComponentEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, component: IComponent):
+        """
 
-    def __init__(self, component: IComponent): ...
-
-    # ---------- Properties ---------- #
-
+        :param component:
+        """
     @property
-    def Component(self) -> IComponent: ...
+    def Component(self) -> IComponent:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Component(self) -> IComponent: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+ComponentEventHandler: Callable[[object, ComponentEventArgs], None] = ...
+"""
 
-    # No Sub Enums
-
-class ComponentEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, sender: ObjectType, e: ComponentEventArgs, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: ComponentEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
 class ComponentRenameEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, component: object, oldName: str, newName: str):
+        """
 
-    def __init__(self, component: ObjectType, oldName: StringType, newName: StringType): ...
-
-    # ---------- Properties ---------- #
-
+        :param component:
+        :param oldName:
+        :param newName:
+        """
     @property
-    def Component(self) -> ObjectType: ...
+    def Component(self) -> object:
+        """
+
+        :return:
+        """
     @property
-    def NewName(self) -> StringType: ...
+    def NewName(self) -> str:
+        """
+
+        :return:
+        """
     @property
-    def OldName(self) -> StringType: ...
+    def OldName(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Component(self) -> ObjectType: ...
-    def get_NewName(self) -> StringType: ...
-    def get_OldName(self) -> StringType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+ComponentRenameEventHandler: Callable[[object, ComponentRenameEventArgs], None] = ...
+"""
 
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
-class ComponentRenameEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: ComponentRenameEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: ComponentRenameEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DesignerCollection(ObjectType, ICollection, IEnumerable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class DesignerCollection(Object, ICollection, IEnumerable):
+    """"""
 
     @overload
-    def __init__(self, designers: ArrayType[IDesignerHost]): ...
+    def __init__(self, designers: IList):
+        """
+
+        :param designers:
+        """
     @overload
-    def __init__(self, designers: IList): ...
+    def __init__(self, designers: Array[IDesignerHost]):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param designers:
+        """
     @property
-    def Count(self) -> IntType: ...
-    def __getitem__(self, key: IntType) -> IDesignerHost: ...
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
 
-    def GetEnumerator(self) -> IEnumerator: ...
-    def get_Count(self) -> IntType: ...
-    def get_Item(self, index: IntType) -> IDesignerHost: ...
+        :return:
+        """
+    @property
+    def Item(self) -> IDesignerHost:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def SyncRoot(self) -> object:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
 
-    # No Sub Structs
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> IDesignerHost:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
 
 class DesignerEventArgs(EventArgs):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, host: IDesignerHost):
+        """
 
-    def __init__(self, host: IDesignerHost): ...
+        :param host:
+        """
+    @property
+    def Designer(self) -> IDesignerHost:
+        """
 
-    # ---------- Properties ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+DesignerEventHandler: Callable[[object, DesignerEventArgs], None] = ...
+"""
+
+:param sender: 
+:param e: 
+"""
+
+class DesignerOptionService(ABC, Object, IDesignerOptionService):
+    """"""
 
     @property
-    def Designer(self) -> IDesignerHost: ...
+    def Options(self) -> DesignerOptionService.DesignerOptionCollection:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_Designer(self) -> IDesignerHost: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetOptionValue(self, pageName: str, valueName: str) -> object:
+        """
 
-    # No Sub Classes
+        :param pageName:
+        :param valueName:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def SetOptionValue(self, pageName: str, valueName: str, value: object) -> None:
+        """
 
-    # No Sub Interfaces
+        :param pageName:
+        :param valueName:
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class DesignerEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self, sender: ObjectType, e: DesignerEventArgs, callback: AsyncCallback, object: ObjectType
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: DesignerEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DesignerOptionService(ABC, ObjectType, IDesignerOptionService):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Options(self) -> DesignerOptionCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Options(self) -> DesignerOptionCollection: ...
-
-    # No Events
-
-    # ---------- Sub Classes ---------- #
-
-    class DesignerOptionCollection(ObjectType, IList, ICollection, IEnumerable):
-        # No Fields
-
-        # No Constructors
-
-        # ---------- Properties ---------- #
+    class DesignerOptionCollection(Object, ICollection, IEnumerable, IList):
+        """"""
 
         @property
-        def Count(self) -> IntType: ...
-        def __getitem__(self, key: IntType) -> DesignerOptionCollection: ...
-        def __getitem__(self, key: StringType) -> DesignerOptionCollection: ...
-        @property
-        def Name(self) -> StringType: ...
-        @property
-        def Parent(self) -> DesignerOptionCollection: ...
-        @property
-        def Properties(self) -> PropertyDescriptorCollection: ...
+        def Count(self) -> int:
+            """
 
-        # ---------- Methods ---------- #
+            :return:
+            """
+        @property
+        def IsFixedSize(self) -> bool:
+            """
 
-        def CopyTo(self, array: Array, index: IntType) -> VoidType: ...
-        def GetEnumerator(self) -> IEnumerator: ...
-        def IndexOf(self, value: DesignerOptionCollection) -> IntType: ...
-        def ShowDialog(self) -> BooleanType: ...
-        def get_Count(self) -> IntType: ...
+            :return:
+            """
+        @property
+        def IsReadOnly(self) -> bool:
+            """
+
+            :return:
+            """
+        @property
+        def IsSynchronized(self) -> bool:
+            """
+
+            :return:
+            """
+        @property
+        def Item(self) -> object:
+            """
+
+            :return:
+            """
+        @Item.setter
+        def Item(self, value: object) -> None: ...
+        @property
+        def Name(self) -> str:
+            """"""
+        @property
+        def Parent(self) -> DesignerOptionService.DesignerOptionCollection:
+            """"""
+        @property
+        def Properties(self) -> PropertyDescriptorCollection:
+            """"""
+        @property
+        def SyncRoot(self) -> object:
+            """
+
+            :return:
+            """
+        def Add(self, value: object) -> int:
+            """
+
+            :param value:
+            :return:
+            """
+        def Clear(self) -> None:
+            """"""
+        def Contains(self, value: object) -> bool:
+            """
+
+            :param value:
+            :return:
+            """
+        def CopyTo(self, array: Array, index: int) -> None:
+            """
+
+            :param array:
+            :param index:
+            """
+        def Equals(self, obj: object) -> bool:
+            """
+
+            :param obj:
+            :return:
+            """
+        def GetEnumerator(self) -> IEnumerator:
+            """
+
+            :return:
+            """
+        def GetHashCode(self) -> int:
+            """
+
+            :return:
+            """
+        def GetType(self) -> Type:
+            """
+
+            :return:
+            """
         @overload
-        def get_Item(self, index: IntType) -> DesignerOptionCollection: ...
+        def IndexOf(self, value: DesignerOptionService.DesignerOptionCollection) -> int:
+            """"""
         @overload
-        def get_Item(self, name: StringType) -> DesignerOptionCollection: ...
-        def get_Name(self) -> StringType: ...
-        def get_Parent(self) -> DesignerOptionCollection: ...
-        def get_Properties(self) -> PropertyDescriptorCollection: ...
+        def IndexOf(self, value: object) -> int:
+            """
 
-        # No Events
+            :param value:
+            :return:
+            """
+        def Insert(self, index: int, value: object) -> None:
+            """
 
-        # No Sub Classes
+            :param index:
+            :param value:
+            """
+        def Remove(self, value: object) -> None:
+            """
 
-        # No Sub Structs
+            :param value:
+            """
+        def RemoveAt(self, index: int) -> None:
+            """
 
-        # No Sub Interfaces
+            :param index:
+            """
+        def ShowDialog(self) -> bool:
+            """"""
+        def ToString(self) -> str:
+            """
 
-        # No Sub Enums
-    # No Sub Structs
+            :return:
+            """
+        def __contains__(self, value: object) -> bool:
+            """
 
-    # No Sub Interfaces
+            :param value:
+            :return:
+            """
+        @overload
+        def __getitem__(self, index: int) -> object:
+            """
 
-    # No Sub Enums
+            :param index:
+            :return:
+            """
+        @overload
+        def __getitem__(self, name: str) -> DesignerOptionService.DesignerOptionCollection:
+            """"""
+        def __iter__(self) -> Iterator[object]:
+            """
 
-class DesignerTransaction(ABC, ObjectType, IDisposable):
-    # No Fields
+            :return:
+            """
+        def __len__(self) -> int:
+            """
 
-    # No Constructors
+            :return:
+            """
+        def __setitem__(self, index: int, value: object) -> None:
+            """
 
-    # ---------- Properties ---------- #
+            :param index:
+            :param value:
+            """
+
+class DesignerTransaction(ABC, Object, IDisposable):
+    """"""
 
     @property
-    def Canceled(self) -> BooleanType: ...
+    def Canceled(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Committed(self) -> BooleanType: ...
+    def Committed(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def Description(self) -> StringType: ...
+    def Description(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Cancel(self) -> None:
+        """"""
+    def Commit(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Cancel(self) -> VoidType: ...
-    def Commit(self) -> VoidType: ...
-    def get_Canceled(self) -> BooleanType: ...
-    def get_Committed(self) -> BooleanType: ...
-    def get_Description(self) -> StringType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class DesignerTransactionCloseEventArgs(EventArgs):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, commit: BooleanType): ...
+    def __init__(self, commit: bool):
+        """
+
+        :param commit:
+        """
     @overload
-    def __init__(self, commit: BooleanType, lastTransaction: BooleanType): ...
+    def __init__(self, commit: bool, lastTransaction: bool):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param commit:
+        :param lastTransaction:
+        """
     @property
-    def LastTransaction(self) -> BooleanType: ...
+    def LastTransaction(self) -> bool:
+        """
+
+        :return:
+        """
     @property
-    def TransactionCommitted(self) -> BooleanType: ...
+    def TransactionCommitted(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def get_LastTransaction(self) -> BooleanType: ...
-    def get_TransactionCommitted(self) -> BooleanType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
 
-    # No Sub Interfaces
+DesignerTransactionCloseEventHandler: Callable[
+    [object, DesignerTransactionCloseEventArgs], None
+] = ...
+"""
 
-    # No Sub Enums
-
-class DesignerTransactionCloseEventHandler(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        sender: ObjectType,
-        e: DesignerTransactionCloseEventArgs,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> VoidType: ...
-    def Invoke(self, sender: ObjectType, e: DesignerTransactionCloseEventArgs) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
+:param sender: 
+:param e: 
+"""
 
 class DesignerVerb(MenuCommand):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self, text: StringType, handler: EventHandler): ...
+    def __init__(self, text: str, handler: EventHandler):
+        """
+
+        :param text:
+        :param handler:
+        """
     @overload
-    def __init__(self, text: StringType, handler: EventHandler, startCommandID: CommandID): ...
+    def __init__(self, text: str, handler: EventHandler, startCommandID: CommandID):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param text:
+        :param handler:
+        :param startCommandID:
+        """
     @property
-    def Description(self) -> StringType: ...
+    def Checked(self) -> bool:
+        """
+
+        :return:
+        """
+    @Checked.setter
+    def Checked(self, value: bool) -> None: ...
+    @property
+    def CommandID(self) -> CommandID:
+        """
+
+        :return:
+        """
+    @property
+    def Description(self) -> str:
+        """
+
+        :return:
+        """
     @Description.setter
-    def Description(self, value: StringType) -> None: ...
+    def Description(self, value: str) -> None: ...
     @property
-    def Text(self) -> StringType: ...
+    def Enabled(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @Enabled.setter
+    def Enabled(self, value: bool) -> None: ...
+    @property
+    def OleStatus(self) -> int:
+        """
 
-    def ToString(self) -> StringType: ...
-    def get_Description(self) -> StringType: ...
-    def get_Text(self) -> StringType: ...
-    def set_Description(self, value: StringType) -> VoidType: ...
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
 
-    # No Events
+        :return:
+        """
+    @property
+    def Supported(self) -> bool:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @Supported.setter
+    def Supported(self, value: bool) -> None: ...
+    @property
+    def Text(self) -> str:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    @property
+    def Visible(self) -> bool:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    @Visible.setter
+    def Visible(self, value: bool) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class DesignerVerbCollection(CollectionBase, IList, ICollection, IEnumerable):
-    # No Fields
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    @overload
+    def Invoke(self) -> None:
+        """"""
+    @overload
+    def Invoke(self, arg: object) -> None:
+        """
+
+        :param arg:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    CommandChanged: EventType[EventHandler] = ...
+    """"""
+
+class DesignerVerbCollection(CollectionBase, ICollection, IEnumerable, IList):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, value: ArrayType[DesignerVerb]): ...
+    def __init__(self, value: Array[DesignerVerb]):
+        """
 
-    # ---------- Properties ---------- #
+        :param value:
+        """
+    @property
+    def Capacity(self) -> int:
+        """
 
-    def __getitem__(self, key: IntType) -> DesignerVerb: ...
-    def __setitem__(self, key: IntType, value: DesignerVerb) -> None: ...
+        :return:
+        """
+    @Capacity.setter
+    def Capacity(self, value: int) -> None: ...
+    @property
+    def Count(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsFixedSize(self) -> bool:
+        """
 
-    def Add(self, value: DesignerVerb) -> IntType: ...
+        :return:
+        """
+    @property
+    def IsReadOnly(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def IsSynchronized(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Item(self) -> object:
+        """
+
+        :return:
+        """
+    @Item.setter
+    def Item(self, value: object) -> None: ...
+    @property
+    def SyncRoot(self) -> object:
+        """
+
+        :return:
+        """
     @overload
-    def AddRange(self, value: ArrayType[DesignerVerb]) -> VoidType: ...
+    def Add(self, value: DesignerVerb) -> int:
+        """
+
+        :param value:
+        :return:
+        """
     @overload
-    def AddRange(self, value: DesignerVerbCollection) -> VoidType: ...
-    def Contains(self, value: DesignerVerb) -> BooleanType: ...
-    def CopyTo(self, array: ArrayType[DesignerVerb], index: IntType) -> VoidType: ...
-    def IndexOf(self, value: DesignerVerb) -> IntType: ...
-    def Insert(self, index: IntType, value: DesignerVerb) -> VoidType: ...
-    def Remove(self, value: DesignerVerb) -> VoidType: ...
-    def get_Item(self, index: IntType) -> DesignerVerb: ...
-    def set_Item(self, index: IntType, value: DesignerVerb) -> VoidType: ...
+    def Add(self, value: object) -> int:
+        """
 
-    # No Events
+        :param value:
+        :return:
+        """
+    @overload
+    def AddRange(self, value: DesignerVerbCollection) -> None:
+        """
 
-    # No Sub Classes
+        :param value:
+        """
+    @overload
+    def AddRange(self, value: Array[DesignerVerb]) -> None:
+        """
 
-    # No Sub Structs
+        :param value:
+        """
+    def Clear(self) -> None:
+        """"""
+    @overload
+    def Contains(self, value: DesignerVerb) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param value:
+        :return:
+        """
+    @overload
+    def Contains(self, value: object) -> bool:
+        """
 
-    # No Sub Enums
+        :param value:
+        :return:
+        """
+    @overload
+    def CopyTo(self, array: Array, index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    @overload
+    def CopyTo(self, array: Array[DesignerVerb], index: int) -> None:
+        """
+
+        :param array:
+        :param index:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetEnumerator(self) -> IEnumerator:
+        """
+
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: DesignerVerb) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def IndexOf(self, value: object) -> int:
+        """
+
+        :param value:
+        :return:
+        """
+    @overload
+    def Insert(self, index: int, value: DesignerVerb) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Insert(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def Remove(self, value: DesignerVerb) -> None:
+        """
+
+        :param value:
+        """
+    @overload
+    def Remove(self, value: object) -> None:
+        """
+
+        :param value:
+        """
+    def RemoveAt(self, index: int) -> None:
+        """
+
+        :param index:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def __contains__(self, value: object) -> bool:
+        """
+
+        :param value:
+        :return:
+        """
+    def __getitem__(self, index: int) -> object:
+        """
+
+        :param index:
+        :return:
+        """
+    def __iter__(self) -> Iterator[object]:
+        """
+
+        :return:
+        """
+    def __len__(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def __setitem__(self, index: int, value: DesignerVerb) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
+    @overload
+    def __setitem__(self, index: int, value: object) -> None:
+        """
+
+        :param index:
+        :param value:
+        """
 
 class DesigntimeLicenseContext(LicenseContext, IServiceProvider):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def UsageMode(self) -> LicenseUsageMode: ...
-
-    # ---------- Methods ---------- #
-
-    def GetSavedLicenseKey(self, type: TypeType, resourceAssembly: Assembly) -> StringType: ...
-    def SetSavedLicenseKey(self, type: TypeType, key: StringType) -> VoidType: ...
-    def get_UsageMode(self) -> LicenseUsageMode: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class DesigntimeLicenseContextSerializer(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    def Serialize(
-        o: Stream, cryptoKey: StringType, context: DesigntimeLicenseContext
-    ) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class HelpKeywordAttribute(Attribute, _Attribute):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def Default() -> HelpKeywordAttribute: ...
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, keyword: StringType): ...
-    @overload
-    def __init__(self, t: TypeType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def HelpKeyword(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Equals(self, obj: ObjectType) -> BooleanType: ...
-    def GetHashCode(self) -> IntType: ...
-    def IsDefaultAttribute(self) -> BooleanType: ...
-    def get_HelpKeyword(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MenuCommand(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, handler: EventHandler, command: CommandID): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Checked(self) -> BooleanType: ...
-    @Checked.setter
-    def Checked(self, value: BooleanType) -> None: ...
-    @property
-    def CommandID(self) -> CommandID: ...
-    @property
-    def Enabled(self) -> BooleanType: ...
-    @Enabled.setter
-    def Enabled(self, value: BooleanType) -> None: ...
-    @property
-    def OleStatus(self) -> IntType: ...
-    @property
-    def Properties(self) -> IDictionary: ...
-    @property
-    def Supported(self) -> BooleanType: ...
-    @Supported.setter
-    def Supported(self, value: BooleanType) -> None: ...
-    @property
-    def Visible(self) -> BooleanType: ...
-    @Visible.setter
-    def Visible(self, value: BooleanType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Invoke(self) -> VoidType: ...
-    @overload
-    def Invoke(self, arg: ObjectType) -> VoidType: ...
-    def ToString(self) -> StringType: ...
-    def add_CommandChanged(self, value: EventHandler) -> VoidType: ...
-    def get_Checked(self) -> BooleanType: ...
-    def get_CommandID(self) -> CommandID: ...
-    def get_Enabled(self) -> BooleanType: ...
-    def get_OleStatus(self) -> IntType: ...
-    def get_Properties(self) -> IDictionary: ...
-    def get_Supported(self) -> BooleanType: ...
-    def get_Visible(self) -> BooleanType: ...
-    def remove_CommandChanged(self, value: EventHandler) -> VoidType: ...
-    def set_Checked(self, value: BooleanType) -> VoidType: ...
-    def set_Enabled(self, value: BooleanType) -> VoidType: ...
-    def set_Supported(self, value: BooleanType) -> VoidType: ...
-    def set_Visible(self, value: BooleanType) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    CommandChanged: EventType[EventHandler] = ...
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RuntimeLicenseContext(LicenseContext, IServiceProvider):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetSavedLicenseKey(self, type: TypeType, resourceAssembly: Assembly) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ServiceContainer(ObjectType, IServiceContainer, IServiceProvider, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    @overload
-    def __init__(self): ...
-    @overload
-    def __init__(self, parentProvider: IServiceProvider): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def AddService(self, serviceType: TypeType, serviceInstance: ObjectType) -> VoidType: ...
-    @overload
-    def AddService(self, serviceType: TypeType, callback: ServiceCreatorCallback) -> VoidType: ...
-    @overload
-    def AddService(
-        self, serviceType: TypeType, serviceInstance: ObjectType, promote: BooleanType
-    ) -> VoidType: ...
-    @overload
-    def AddService(
-        self, serviceType: TypeType, callback: ServiceCreatorCallback, promote: BooleanType
-    ) -> VoidType: ...
-    def Dispose(self) -> VoidType: ...
-    def GetService(self, serviceType: TypeType) -> ObjectType: ...
-    @overload
-    def RemoveService(self, serviceType: TypeType) -> VoidType: ...
-    @overload
-    def RemoveService(self, serviceType: TypeType, promote: BooleanType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ServiceCreatorCallback(MulticastDelegate, ICloneable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, object: ObjectType, method: NIntType): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def BeginInvoke(
-        self,
-        container: IServiceContainer,
-        serviceType: TypeType,
-        callback: AsyncCallback,
-        object: ObjectType,
-    ) -> IAsyncResult: ...
-    def EndInvoke(self, result: IAsyncResult) -> ObjectType: ...
-    def Invoke(self, container: IServiceContainer, serviceType: TypeType) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StandardCommands(ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def AlignBottom() -> CommandID: ...
-    @staticmethod
-    @property
-    def AlignHorizontalCenters() -> CommandID: ...
-    @staticmethod
-    @property
-    def AlignLeft() -> CommandID: ...
-    @staticmethod
-    @property
-    def AlignRight() -> CommandID: ...
-    @staticmethod
-    @property
-    def AlignToGrid() -> CommandID: ...
-    @staticmethod
-    @property
-    def AlignTop() -> CommandID: ...
-    @staticmethod
-    @property
-    def AlignVerticalCenters() -> CommandID: ...
-    @staticmethod
-    @property
-    def ArrangeBottom() -> CommandID: ...
-    @staticmethod
-    @property
-    def ArrangeIcons() -> CommandID: ...
-    @staticmethod
-    @property
-    def ArrangeRight() -> CommandID: ...
-    @staticmethod
-    @property
-    def BringForward() -> CommandID: ...
-    @staticmethod
-    @property
-    def BringToFront() -> CommandID: ...
-    @staticmethod
-    @property
-    def CenterHorizontally() -> CommandID: ...
-    @staticmethod
-    @property
-    def CenterVertically() -> CommandID: ...
-    @staticmethod
-    @property
-    def Copy() -> CommandID: ...
-    @staticmethod
-    @property
-    def Cut() -> CommandID: ...
-    @staticmethod
-    @property
-    def Delete() -> CommandID: ...
-    @staticmethod
-    @property
-    def DocumentOutline() -> CommandID: ...
-    @staticmethod
-    @property
-    def F1Help() -> CommandID: ...
-    @staticmethod
-    @property
-    def Group() -> CommandID: ...
-    @staticmethod
-    @property
-    def HorizSpaceConcatenate() -> CommandID: ...
-    @staticmethod
-    @property
-    def HorizSpaceDecrease() -> CommandID: ...
-    @staticmethod
-    @property
-    def HorizSpaceIncrease() -> CommandID: ...
-    @staticmethod
-    @property
-    def HorizSpaceMakeEqual() -> CommandID: ...
-    @staticmethod
-    @property
-    def LineupIcons() -> CommandID: ...
-    @staticmethod
-    @property
-    def LockControls() -> CommandID: ...
-    @staticmethod
-    @property
-    def MultiLevelRedo() -> CommandID: ...
-    @staticmethod
-    @property
-    def MultiLevelUndo() -> CommandID: ...
-    @staticmethod
-    @property
-    def Paste() -> CommandID: ...
-    @staticmethod
-    @property
-    def Properties() -> CommandID: ...
-    @staticmethod
-    @property
-    def PropertiesWindow() -> CommandID: ...
-    @staticmethod
-    @property
-    def Redo() -> CommandID: ...
-    @staticmethod
-    @property
-    def Replace() -> CommandID: ...
-    @staticmethod
-    @property
-    def SelectAll() -> CommandID: ...
-    @staticmethod
-    @property
-    def SendBackward() -> CommandID: ...
-    @staticmethod
-    @property
-    def SendToBack() -> CommandID: ...
-    @staticmethod
-    @property
-    def ShowGrid() -> CommandID: ...
-    @staticmethod
-    @property
-    def ShowLargeIcons() -> CommandID: ...
-    @staticmethod
-    @property
-    def SizeToControl() -> CommandID: ...
-    @staticmethod
-    @property
-    def SizeToControlHeight() -> CommandID: ...
-    @staticmethod
-    @property
-    def SizeToControlWidth() -> CommandID: ...
-    @staticmethod
-    @property
-    def SizeToFit() -> CommandID: ...
-    @staticmethod
-    @property
-    def SizeToGrid() -> CommandID: ...
-    @staticmethod
-    @property
-    def SnapToGrid() -> CommandID: ...
-    @staticmethod
-    @property
-    def TabOrder() -> CommandID: ...
-    @staticmethod
-    @property
-    def Undo() -> CommandID: ...
-    @staticmethod
-    @property
-    def Ungroup() -> CommandID: ...
-    @staticmethod
-    @property
-    def VerbFirst() -> CommandID: ...
-    @staticmethod
-    @property
-    def VerbLast() -> CommandID: ...
-    @staticmethod
-    @property
-    def VertSpaceConcatenate() -> CommandID: ...
-    @staticmethod
-    @property
-    def VertSpaceDecrease() -> CommandID: ...
-    @staticmethod
-    @property
-    def VertSpaceIncrease() -> CommandID: ...
-    @staticmethod
-    @property
-    def VertSpaceMakeEqual() -> CommandID: ...
-    @staticmethod
-    @property
-    def ViewCode() -> CommandID: ...
-    @staticmethod
-    @property
-    def ViewGrid() -> CommandID: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class StandardToolWindows(ObjectType):
-    # ---------- Fields ---------- #
-
-    @staticmethod
-    @property
-    def ObjectBrowser() -> Guid: ...
-    @staticmethod
-    @property
-    def OutputWindow() -> Guid: ...
-    @staticmethod
-    @property
-    def ProjectExplorer() -> Guid: ...
-    @staticmethod
-    @property
-    def PropertyBrowser() -> Guid: ...
-    @staticmethod
-    @property
-    def RelatedLinks() -> Guid: ...
-    @staticmethod
-    @property
-    def ServerExplorer() -> Guid: ...
-    @staticmethod
-    @property
-    def TaskList() -> Guid: ...
-    @staticmethod
-    @property
-    def Toolbox() -> Guid: ...
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TypeDescriptionProviderService(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def GetProvider(self, instance: ObjectType) -> TypeDescriptionProvider: ...
-    @overload
-    def GetProvider(self, type: TypeType) -> TypeDescriptionProvider: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IComponentChangeService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def OnComponentChanged(
-        self,
-        component: ObjectType,
-        member: MemberDescriptor,
-        oldValue: ObjectType,
-        newValue: ObjectType,
-    ) -> VoidType: ...
-    def OnComponentChanging(self, component: ObjectType, member: MemberDescriptor) -> VoidType: ...
-    def add_ComponentAdded(self, value: ComponentEventHandler) -> VoidType: ...
-    def add_ComponentAdding(self, value: ComponentEventHandler) -> VoidType: ...
-    def add_ComponentChanged(self, value: ComponentChangedEventHandler) -> VoidType: ...
-    def add_ComponentChanging(self, value: ComponentChangingEventHandler) -> VoidType: ...
-    def add_ComponentRemoved(self, value: ComponentEventHandler) -> VoidType: ...
-    def add_ComponentRemoving(self, value: ComponentEventHandler) -> VoidType: ...
-    def add_ComponentRename(self, value: ComponentRenameEventHandler) -> VoidType: ...
-    def remove_ComponentAdded(self, value: ComponentEventHandler) -> VoidType: ...
-    def remove_ComponentAdding(self, value: ComponentEventHandler) -> VoidType: ...
-    def remove_ComponentChanged(self, value: ComponentChangedEventHandler) -> VoidType: ...
-    def remove_ComponentChanging(self, value: ComponentChangingEventHandler) -> VoidType: ...
-    def remove_ComponentRemoved(self, value: ComponentEventHandler) -> VoidType: ...
-    def remove_ComponentRemoving(self, value: ComponentEventHandler) -> VoidType: ...
-    def remove_ComponentRename(self, value: ComponentRenameEventHandler) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    ComponentAdded: EventType[ComponentEventHandler] = ...
-
-    ComponentAdding: EventType[ComponentEventHandler] = ...
-
-    ComponentChanged: EventType[ComponentChangedEventHandler] = ...
-
-    ComponentChanging: EventType[ComponentChangingEventHandler] = ...
-
-    ComponentRemoved: EventType[ComponentEventHandler] = ...
-
-    ComponentRemoving: EventType[ComponentEventHandler] = ...
-
-    ComponentRename: EventType[ComponentRenameEventHandler] = ...
-
-class IComponentDiscoveryService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetComponentTypes(self, designerHost: IDesignerHost, baseType: TypeType) -> ICollection: ...
-
-    # No Events
-
-class IComponentInitializer(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def InitializeExistingComponent(self, defaultValues: IDictionary) -> VoidType: ...
-    def InitializeNewComponent(self, defaultValues: IDictionary) -> VoidType: ...
-
-    # No Events
-
-class IDesigner(Protocol, IDisposable):
-    # ---------- Properties ---------- #
-
-    @property
-    def Component(self) -> IComponent: ...
-    @property
-    def Verbs(self) -> DesignerVerbCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def DoDefaultAction(self) -> VoidType: ...
-    def Initialize(self, component: IComponent) -> VoidType: ...
-    def get_Component(self) -> IComponent: ...
-    def get_Verbs(self) -> DesignerVerbCollection: ...
-
-    # No Events
-
-class IDesignerEventService(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def ActiveDesigner(self) -> IDesignerHost: ...
-    @property
-    def Designers(self) -> DesignerCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def add_ActiveDesignerChanged(self, value: ActiveDesignerEventHandler) -> VoidType: ...
-    def add_DesignerCreated(self, value: DesignerEventHandler) -> VoidType: ...
-    def add_DesignerDisposed(self, value: DesignerEventHandler) -> VoidType: ...
-    def add_SelectionChanged(self, value: EventHandler) -> VoidType: ...
-    def get_ActiveDesigner(self) -> IDesignerHost: ...
-    def get_Designers(self) -> DesignerCollection: ...
-    def remove_ActiveDesignerChanged(self, value: ActiveDesignerEventHandler) -> VoidType: ...
-    def remove_DesignerCreated(self, value: DesignerEventHandler) -> VoidType: ...
-    def remove_DesignerDisposed(self, value: DesignerEventHandler) -> VoidType: ...
-    def remove_SelectionChanged(self, value: EventHandler) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    ActiveDesignerChanged: EventType[ActiveDesignerEventHandler] = ...
-
-    DesignerCreated: EventType[DesignerEventHandler] = ...
-
-    DesignerDisposed: EventType[DesignerEventHandler] = ...
-
-    SelectionChanged: EventType[EventHandler] = ...
-
-class IDesignerFilter(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def PostFilterAttributes(self, attributes: IDictionary) -> VoidType: ...
-    def PostFilterEvents(self, events: IDictionary) -> VoidType: ...
-    def PostFilterProperties(self, properties: IDictionary) -> VoidType: ...
-    def PreFilterAttributes(self, attributes: IDictionary) -> VoidType: ...
-    def PreFilterEvents(self, events: IDictionary) -> VoidType: ...
-    def PreFilterProperties(self, properties: IDictionary) -> VoidType: ...
-
-    # No Events
-
-class IDesignerHost(Protocol, IServiceContainer, IServiceProvider):
-    # ---------- Properties ---------- #
-
-    @property
-    def Container(self) -> IContainer: ...
-    @property
-    def InTransaction(self) -> BooleanType: ...
-    @property
-    def Loading(self) -> BooleanType: ...
-    @property
-    def RootComponent(self) -> IComponent: ...
-    @property
-    def RootComponentClassName(self) -> StringType: ...
-    @property
-    def TransactionDescription(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def Activate(self) -> VoidType: ...
-    @overload
-    def CreateComponent(self, componentClass: TypeType) -> IComponent: ...
-    @overload
-    def CreateComponent(self, componentClass: TypeType, name: StringType) -> IComponent: ...
-    @overload
-    def CreateTransaction(self) -> DesignerTransaction: ...
-    @overload
-    def CreateTransaction(self, description: StringType) -> DesignerTransaction: ...
-    def DestroyComponent(self, component: IComponent) -> VoidType: ...
-    def GetDesigner(self, component: IComponent) -> IDesigner: ...
-    def GetType(self, typeName: StringType) -> TypeType: ...
-    def add_Activated(self, value: EventHandler) -> VoidType: ...
-    def add_Deactivated(self, value: EventHandler) -> VoidType: ...
-    def add_LoadComplete(self, value: EventHandler) -> VoidType: ...
-    def add_TransactionClosed(self, value: DesignerTransactionCloseEventHandler) -> VoidType: ...
-    def add_TransactionClosing(self, value: DesignerTransactionCloseEventHandler) -> VoidType: ...
-    def add_TransactionOpened(self, value: EventHandler) -> VoidType: ...
-    def add_TransactionOpening(self, value: EventHandler) -> VoidType: ...
-    def get_Container(self) -> IContainer: ...
-    def get_InTransaction(self) -> BooleanType: ...
-    def get_Loading(self) -> BooleanType: ...
-    def get_RootComponent(self) -> IComponent: ...
-    def get_RootComponentClassName(self) -> StringType: ...
-    def get_TransactionDescription(self) -> StringType: ...
-    def remove_Activated(self, value: EventHandler) -> VoidType: ...
-    def remove_Deactivated(self, value: EventHandler) -> VoidType: ...
-    def remove_LoadComplete(self, value: EventHandler) -> VoidType: ...
-    def remove_TransactionClosed(self, value: DesignerTransactionCloseEventHandler) -> VoidType: ...
-    def remove_TransactionClosing(
-        self, value: DesignerTransactionCloseEventHandler
-    ) -> VoidType: ...
-    def remove_TransactionOpened(self, value: EventHandler) -> VoidType: ...
-    def remove_TransactionOpening(self, value: EventHandler) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    Activated: EventType[EventHandler] = ...
-
-    Deactivated: EventType[EventHandler] = ...
-
-    LoadComplete: EventType[EventHandler] = ...
-
-    TransactionClosed: EventType[DesignerTransactionCloseEventHandler] = ...
-
-    TransactionClosing: EventType[DesignerTransactionCloseEventHandler] = ...
-
-    TransactionOpened: EventType[EventHandler] = ...
-
-    TransactionOpening: EventType[EventHandler] = ...
-
-class IDesignerHostTransactionState(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def IsClosingTransaction(self) -> BooleanType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_IsClosingTransaction(self) -> BooleanType: ...
-
-    # No Events
-
-class IDesignerOptionService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetOptionValue(self, pageName: StringType, valueName: StringType) -> ObjectType: ...
-    def SetOptionValue(
-        self, pageName: StringType, valueName: StringType, value: ObjectType
-    ) -> VoidType: ...
-
-    # No Events
-
-class IDictionaryService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetKey(self, value: ObjectType) -> ObjectType: ...
-    def GetValue(self, key: ObjectType) -> ObjectType: ...
-    def SetValue(self, key: ObjectType, value: ObjectType) -> VoidType: ...
-
-    # No Events
-
-class IEventBindingService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CreateUniqueMethodName(self, component: IComponent, e: EventDescriptor) -> StringType: ...
-    def GetCompatibleMethods(self, e: EventDescriptor) -> ICollection: ...
-    def GetEvent(self, property: PropertyDescriptor) -> EventDescriptor: ...
-    def GetEventProperties(
-        self, events: EventDescriptorCollection
-    ) -> PropertyDescriptorCollection: ...
-    def GetEventProperty(self, e: EventDescriptor) -> PropertyDescriptor: ...
-    @overload
-    def ShowCode(self) -> BooleanType: ...
-    @overload
-    def ShowCode(self, lineNumber: IntType) -> BooleanType: ...
-    @overload
-    def ShowCode(self, component: IComponent, e: EventDescriptor) -> BooleanType: ...
-
-    # No Events
-
-class IExtenderListService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetExtenderProviders(self) -> ArrayType[IExtenderProvider]: ...
-
-    # No Events
-
-class IExtenderProviderService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def AddExtenderProvider(self, provider: IExtenderProvider) -> VoidType: ...
-    def RemoveExtenderProvider(self, provider: IExtenderProvider) -> VoidType: ...
-
-    # No Events
-
-class IHelpService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def AddContextAttribute(
-        self, name: StringType, value: StringType, keywordType: HelpKeywordType
-    ) -> VoidType: ...
-    def ClearContextAttributes(self) -> VoidType: ...
-    def CreateLocalContext(self, contextType: HelpContextType) -> IHelpService: ...
-    def RemoveContextAttribute(self, name: StringType, value: StringType) -> VoidType: ...
-    def RemoveLocalContext(self, localContext: IHelpService) -> VoidType: ...
-    def ShowHelpFromKeyword(self, helpKeyword: StringType) -> VoidType: ...
-    def ShowHelpFromUrl(self, helpUrl: StringType) -> VoidType: ...
-
-    # No Events
-
-class IInheritanceService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def AddInheritedComponents(self, component: IComponent, container: IContainer) -> VoidType: ...
-    def GetInheritanceAttribute(self, component: IComponent) -> InheritanceAttribute: ...
-
-    # No Events
-
-class IMenuCommandService(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def Verbs(self) -> DesignerVerbCollection: ...
-
-    # ---------- Methods ---------- #
-
-    def AddCommand(self, command: MenuCommand) -> VoidType: ...
-    def AddVerb(self, verb: DesignerVerb) -> VoidType: ...
-    def FindCommand(self, commandID: CommandID) -> MenuCommand: ...
-    def GlobalInvoke(self, commandID: CommandID) -> BooleanType: ...
-    def RemoveCommand(self, command: MenuCommand) -> VoidType: ...
-    def RemoveVerb(self, verb: DesignerVerb) -> VoidType: ...
-    def ShowContextMenu(self, menuID: CommandID, x: IntType, y: IntType) -> VoidType: ...
-    def get_Verbs(self) -> DesignerVerbCollection: ...
-
-    # No Events
-
-class IReferenceService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetComponent(self, reference: ObjectType) -> IComponent: ...
-    def GetName(self, reference: ObjectType) -> StringType: ...
-    def GetReference(self, name: StringType) -> ObjectType: ...
-    @overload
-    def GetReferences(self) -> ArrayType[ObjectType]: ...
-    @overload
-    def GetReferences(self, baseType: TypeType) -> ArrayType[ObjectType]: ...
-
-    # No Events
-
-class IResourceService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetResourceReader(self, info: CultureInfo) -> IResourceReader: ...
-    def GetResourceWriter(self, info: CultureInfo) -> IResourceWriter: ...
-
-    # No Events
-
-class IRootDesigner(Protocol, IDesigner, IDisposable):
-    # ---------- Properties ---------- #
-
-    @property
-    def SupportedTechnologies(self) -> ArrayType[ViewTechnology]: ...
-
-    # ---------- Methods ---------- #
-
-    def GetView(self, technology: ViewTechnology) -> ObjectType: ...
-    def get_SupportedTechnologies(self) -> ArrayType[ViewTechnology]: ...
-
-    # No Events
-
-class ISelectionService(Protocol):
-    # ---------- Properties ---------- #
-
-    @property
-    def PrimarySelection(self) -> ObjectType: ...
-    @property
-    def SelectionCount(self) -> IntType: ...
-
-    # ---------- Methods ---------- #
-
-    def GetComponentSelected(self, component: ObjectType) -> BooleanType: ...
-    def GetSelectedComponents(self) -> ICollection: ...
-    @overload
-    def SetSelectedComponents(self, components: ICollection) -> VoidType: ...
-    @overload
-    def SetSelectedComponents(
-        self, components: ICollection, selectionType: SelectionTypes
-    ) -> VoidType: ...
-    def add_SelectionChanged(self, value: EventHandler) -> VoidType: ...
-    def add_SelectionChanging(self, value: EventHandler) -> VoidType: ...
-    def get_PrimarySelection(self) -> ObjectType: ...
-    def get_SelectionCount(self) -> IntType: ...
-    def remove_SelectionChanged(self, value: EventHandler) -> VoidType: ...
-    def remove_SelectionChanging(self, value: EventHandler) -> VoidType: ...
-
-    # ---------- Events ---------- #
-
-    SelectionChanged: EventType[EventHandler] = ...
-
-    SelectionChanging: EventType[EventHandler] = ...
-
-class IServiceContainer(Protocol, IServiceProvider):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def AddService(self, serviceType: TypeType, serviceInstance: ObjectType) -> VoidType: ...
-    @overload
-    def AddService(
-        self, serviceType: TypeType, serviceInstance: ObjectType, promote: BooleanType
-    ) -> VoidType: ...
-    @overload
-    def AddService(self, serviceType: TypeType, callback: ServiceCreatorCallback) -> VoidType: ...
-    @overload
-    def AddService(
-        self, serviceType: TypeType, callback: ServiceCreatorCallback, promote: BooleanType
-    ) -> VoidType: ...
-    @overload
-    def RemoveService(self, serviceType: TypeType) -> VoidType: ...
-    @overload
-    def RemoveService(self, serviceType: TypeType, promote: BooleanType) -> VoidType: ...
-
-    # No Events
-
-class ITreeDesigner(Protocol, IDesigner, IDisposable):
-    # ---------- Properties ---------- #
-
-    @property
-    def Children(self) -> ICollection: ...
-    @property
-    def Parent(self) -> IDesigner: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Children(self) -> ICollection: ...
-    def get_Parent(self) -> IDesigner: ...
-
-    # No Events
-
-class ITypeDescriptorFilterService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def FilterAttributes(self, component: IComponent, attributes: IDictionary) -> BooleanType: ...
-    def FilterEvents(self, component: IComponent, events: IDictionary) -> BooleanType: ...
-    def FilterProperties(self, component: IComponent, properties: IDictionary) -> BooleanType: ...
-
-    # No Events
-
-class ITypeDiscoveryService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def GetTypes(self, baseType: TypeType, excludeGlobalTypes: BooleanType) -> ICollection: ...
-
-    # No Events
-
-class ITypeResolutionService(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def GetAssembly(self, name: AssemblyName) -> Assembly: ...
-    @overload
-    def GetAssembly(self, name: AssemblyName, throwOnError: BooleanType) -> Assembly: ...
-    def GetPathOfAssembly(self, name: AssemblyName) -> StringType: ...
-    @overload
-    def GetType(self, name: StringType) -> TypeType: ...
-    @overload
-    def GetType(self, name: StringType, throwOnError: BooleanType) -> TypeType: ...
-    @overload
-    def GetType(
-        self, name: StringType, throwOnError: BooleanType, ignoreCase: BooleanType
-    ) -> TypeType: ...
-    def ReferenceAssembly(self, name: AssemblyName) -> VoidType: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def UsageMode(self) -> LicenseUsageMode:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetSavedLicenseKey(self, type: Type, resourceAssembly: Assembly) -> str:
+        """
+
+        :param type:
+        :param resourceAssembly:
+        :return:
+        """
+    def GetService(self, serviceType: Type) -> object:
+        """
+
+        :param serviceType:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SetSavedLicenseKey(self, type: Type, key: str) -> None:
+        """
+
+        :param type:
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class DesigntimeLicenseContextSerializer(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def Serialize(cls, o: Stream, cryptoKey: str, context: DesigntimeLicenseContext) -> None:
+        """
+
+        :param o:
+        :param cryptoKey:
+        :param context:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class HelpContextType(Enum):
-    Ambient = 0
-    Window = 1
-    Selection = 2
-    ToolWindowSelection = 3
+    """"""
+
+    Ambient: HelpContextType = ...
+    """"""
+    Window: HelpContextType = ...
+    """"""
+    Selection: HelpContextType = ...
+    """"""
+    ToolWindowSelection: HelpContextType = ...
+    """"""
+
+class HelpKeywordAttribute(Attribute, _Attribute):
+    """"""
+
+    Default: Final[ClassVar[HelpKeywordAttribute]] = ...
+    """
+    
+    :return: 
+    """
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, keyword: str):
+        """
+
+        :param keyword:
+        """
+    @overload
+    def __init__(self, t: Type):
+        """
+
+        :param t:
+        """
+    @property
+    def HelpKeyword(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TypeId(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class HelpKeywordType(Enum):
-    F1Keyword = 0
-    GeneralKeyword = 1
-    FilterKeyword = 2
+    """"""
+
+    F1Keyword: HelpKeywordType = ...
+    """"""
+    GeneralKeyword: HelpKeywordType = ...
+    """"""
+    FilterKeyword: HelpKeywordType = ...
+    """"""
+
+class IComponentChangeService:
+    """"""
+
+    def OnComponentChanged(
+        self, component: object, member: MemberDescriptor, oldValue: object, newValue: object
+    ) -> None:
+        """
+
+        :param component:
+        :param member:
+        :param oldValue:
+        :param newValue:
+        """
+    def OnComponentChanging(self, component: object, member: MemberDescriptor) -> None:
+        """
+
+        :param component:
+        :param member:
+        """
+    ComponentAdded: EventType[ComponentEventHandler] = ...
+    """"""
+    ComponentAdding: EventType[ComponentEventHandler] = ...
+    """"""
+    ComponentChanged: EventType[ComponentChangedEventHandler] = ...
+    """"""
+    ComponentChanging: EventType[ComponentChangingEventHandler] = ...
+    """"""
+    ComponentRemoved: EventType[ComponentEventHandler] = ...
+    """"""
+    ComponentRemoving: EventType[ComponentEventHandler] = ...
+    """"""
+    ComponentRename: EventType[ComponentRenameEventHandler] = ...
+    """"""
+
+class IComponentDiscoveryService:
+    """"""
+
+    def GetComponentTypes(self, designerHost: IDesignerHost, baseType: Type) -> ICollection:
+        """
+
+        :param designerHost:
+        :param baseType:
+        :return:
+        """
+
+class IComponentInitializer:
+    """"""
+
+    def InitializeExistingComponent(self, defaultValues: IDictionary) -> None:
+        """
+
+        :param defaultValues:
+        """
+    def InitializeNewComponent(self, defaultValues: IDictionary) -> None:
+        """
+
+        :param defaultValues:
+        """
+
+class IDesigner(IDisposable):
+    """"""
+
+    @property
+    def Component(self) -> IComponent:
+        """
+
+        :return:
+        """
+    @property
+    def Verbs(self) -> DesignerVerbCollection:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def DoDefaultAction(self) -> None:
+        """"""
+    def Initialize(self, component: IComponent) -> None:
+        """
+
+        :param component:
+        """
+
+class IDesignerEventService:
+    """"""
+
+    @property
+    def ActiveDesigner(self) -> IDesignerHost:
+        """
+
+        :return:
+        """
+    @property
+    def Designers(self) -> DesignerCollection:
+        """
+
+        :return:
+        """
+    ActiveDesignerChanged: EventType[ActiveDesignerEventHandler] = ...
+    """"""
+    DesignerCreated: EventType[DesignerEventHandler] = ...
+    """"""
+    DesignerDisposed: EventType[DesignerEventHandler] = ...
+    """"""
+    SelectionChanged: EventType[EventHandler] = ...
+    """"""
+
+class IDesignerFilter:
+    """"""
+
+    def PostFilterAttributes(self, attributes: IDictionary) -> None:
+        """
+
+        :param attributes:
+        """
+    def PostFilterEvents(self, events: IDictionary) -> None:
+        """
+
+        :param events:
+        """
+    def PostFilterProperties(self, properties: IDictionary) -> None:
+        """
+
+        :param properties:
+        """
+    def PreFilterAttributes(self, attributes: IDictionary) -> None:
+        """
+
+        :param attributes:
+        """
+    def PreFilterEvents(self, events: IDictionary) -> None:
+        """
+
+        :param events:
+        """
+    def PreFilterProperties(self, properties: IDictionary) -> None:
+        """
+
+        :param properties:
+        """
+
+class IDesignerHost(IServiceContainer, IServiceProvider):
+    """"""
+
+    @property
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
+    @property
+    def InTransaction(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def Loading(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def RootComponent(self) -> IComponent:
+        """
+
+        :return:
+        """
+    @property
+    def RootComponentClassName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def TransactionDescription(self) -> str:
+        """
+
+        :return:
+        """
+    def Activate(self) -> None:
+        """"""
+    @overload
+    def AddService(self, serviceType: Type, callback: ServiceCreatorCallback) -> None:
+        """
+
+        :param serviceType:
+        :param callback:
+        """
+    @overload
+    def AddService(self, serviceType: Type, serviceInstance: object) -> None:
+        """
+
+        :param serviceType:
+        :param serviceInstance:
+        """
+    @overload
+    def AddService(
+        self, serviceType: Type, callback: ServiceCreatorCallback, promote: bool
+    ) -> None:
+        """
+
+        :param serviceType:
+        :param callback:
+        :param promote:
+        """
+    @overload
+    def AddService(self, serviceType: Type, serviceInstance: object, promote: bool) -> None:
+        """
+
+        :param serviceType:
+        :param serviceInstance:
+        :param promote:
+        """
+    @overload
+    def CreateComponent(self, componentClass: Type) -> IComponent:
+        """
+
+        :param componentClass:
+        :return:
+        """
+    @overload
+    def CreateComponent(self, componentClass: Type, name: str) -> IComponent:
+        """
+
+        :param componentClass:
+        :param name:
+        :return:
+        """
+    @overload
+    def CreateTransaction(self) -> DesignerTransaction:
+        """
+
+        :return:
+        """
+    @overload
+    def CreateTransaction(self, description: str) -> DesignerTransaction:
+        """
+
+        :param description:
+        :return:
+        """
+    def DestroyComponent(self, component: IComponent) -> None:
+        """
+
+        :param component:
+        """
+    def GetDesigner(self, component: IComponent) -> IDesigner:
+        """
+
+        :param component:
+        :return:
+        """
+    def GetService(self, serviceType: Type) -> object:
+        """
+
+        :param serviceType:
+        :return:
+        """
+    def GetType(self, typeName: str) -> Type:
+        """
+
+        :param typeName:
+        :return:
+        """
+    @overload
+    def RemoveService(self, serviceType: Type) -> None:
+        """
+
+        :param serviceType:
+        """
+    @overload
+    def RemoveService(self, serviceType: Type, promote: bool) -> None:
+        """
+
+        :param serviceType:
+        :param promote:
+        """
+    Activated: EventType[EventHandler] = ...
+    """"""
+    Deactivated: EventType[EventHandler] = ...
+    """"""
+    LoadComplete: EventType[EventHandler] = ...
+    """"""
+    TransactionClosed: EventType[DesignerTransactionCloseEventHandler] = ...
+    """"""
+    TransactionClosing: EventType[DesignerTransactionCloseEventHandler] = ...
+    """"""
+    TransactionOpened: EventType[EventHandler] = ...
+    """"""
+    TransactionOpening: EventType[EventHandler] = ...
+    """"""
+
+class IDesignerHostTransactionState:
+    """"""
+
+    @property
+    def IsClosingTransaction(self) -> bool:
+        """
+
+        :return:
+        """
+
+class IDesignerOptionService:
+    """"""
+
+    def GetOptionValue(self, pageName: str, valueName: str) -> object:
+        """
+
+        :param pageName:
+        :param valueName:
+        :return:
+        """
+    def SetOptionValue(self, pageName: str, valueName: str, value: object) -> None:
+        """
+
+        :param pageName:
+        :param valueName:
+        :param value:
+        """
+
+class IDictionaryService:
+    """"""
+
+    def GetKey(self, value: object) -> object:
+        """
+
+        :param value:
+        :return:
+        """
+    def GetValue(self, key: object) -> object:
+        """
+
+        :param key:
+        :return:
+        """
+    def SetValue(self, key: object, value: object) -> None:
+        """
+
+        :param key:
+        :param value:
+        """
+
+class IEventBindingService:
+    """"""
+
+    def CreateUniqueMethodName(self, component: IComponent, e: EventDescriptor) -> str:
+        """
+
+        :param component:
+        :param e:
+        :return:
+        """
+    def GetCompatibleMethods(self, e: EventDescriptor) -> ICollection:
+        """
+
+        :param e:
+        :return:
+        """
+    def GetEvent(self, property: PropertyDescriptor) -> EventDescriptor:
+        """
+
+        :param property:
+        :return:
+        """
+    def GetEventProperties(self, events: EventDescriptorCollection) -> PropertyDescriptorCollection:
+        """
+
+        :param events:
+        :return:
+        """
+    def GetEventProperty(self, e: EventDescriptor) -> PropertyDescriptor:
+        """
+
+        :param e:
+        :return:
+        """
+    @overload
+    def ShowCode(self) -> bool:
+        """
+
+        :return:
+        """
+    @overload
+    def ShowCode(self, lineNumber: int) -> bool:
+        """
+
+        :param lineNumber:
+        :return:
+        """
+    @overload
+    def ShowCode(self, component: IComponent, e: EventDescriptor) -> bool:
+        """
+
+        :param component:
+        :param e:
+        :return:
+        """
+
+class IExtenderListService:
+    """"""
+
+    def GetExtenderProviders(self) -> Array[IExtenderProvider]:
+        """
+
+        :return:
+        """
+
+class IExtenderProviderService:
+    """"""
+
+    def AddExtenderProvider(self, provider: IExtenderProvider) -> None:
+        """
+
+        :param provider:
+        """
+    def RemoveExtenderProvider(self, provider: IExtenderProvider) -> None:
+        """
+
+        :param provider:
+        """
+
+class IHelpService:
+    """"""
+
+    def AddContextAttribute(self, name: str, value: str, keywordType: HelpKeywordType) -> None:
+        """
+
+        :param name:
+        :param value:
+        :param keywordType:
+        """
+    def ClearContextAttributes(self) -> None:
+        """"""
+    def CreateLocalContext(self, contextType: HelpContextType) -> IHelpService:
+        """
+
+        :param contextType:
+        :return:
+        """
+    def RemoveContextAttribute(self, name: str, value: str) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    def RemoveLocalContext(self, localContext: IHelpService) -> None:
+        """
+
+        :param localContext:
+        """
+    def ShowHelpFromKeyword(self, helpKeyword: str) -> None:
+        """
+
+        :param helpKeyword:
+        """
+    def ShowHelpFromUrl(self, helpUrl: str) -> None:
+        """
+
+        :param helpUrl:
+        """
+
+class IInheritanceService:
+    """"""
+
+    def AddInheritedComponents(self, component: IComponent, container: IContainer) -> None:
+        """
+
+        :param component:
+        :param container:
+        """
+    def GetInheritanceAttribute(self, component: IComponent) -> InheritanceAttribute:
+        """
+
+        :param component:
+        :return:
+        """
+
+class IMenuCommandService:
+    """"""
+
+    @property
+    def Verbs(self) -> DesignerVerbCollection:
+        """
+
+        :return:
+        """
+    def AddCommand(self, command: MenuCommand) -> None:
+        """
+
+        :param command:
+        """
+    def AddVerb(self, verb: DesignerVerb) -> None:
+        """
+
+        :param verb:
+        """
+    def FindCommand(self, commandID: CommandID) -> MenuCommand:
+        """
+
+        :param commandID:
+        :return:
+        """
+    def GlobalInvoke(self, commandID: CommandID) -> bool:
+        """
+
+        :param commandID:
+        :return:
+        """
+    def RemoveCommand(self, command: MenuCommand) -> None:
+        """
+
+        :param command:
+        """
+    def RemoveVerb(self, verb: DesignerVerb) -> None:
+        """
+
+        :param verb:
+        """
+    def ShowContextMenu(self, menuID: CommandID, x: int, y: int) -> None:
+        """
+
+        :param menuID:
+        :param x:
+        :param y:
+        """
+
+class IReferenceService:
+    """"""
+
+    def GetComponent(self, reference: object) -> IComponent:
+        """
+
+        :param reference:
+        :return:
+        """
+    def GetName(self, reference: object) -> str:
+        """
+
+        :param reference:
+        :return:
+        """
+    def GetReference(self, name: str) -> object:
+        """
+
+        :param name:
+        :return:
+        """
+    @overload
+    def GetReferences(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @overload
+    def GetReferences(self, baseType: Type) -> Array[object]:
+        """
+
+        :param baseType:
+        :return:
+        """
+
+class IResourceService:
+    """"""
+
+    def GetResourceReader(self, info: CultureInfo) -> IResourceReader:
+        """
+
+        :param info:
+        :return:
+        """
+    def GetResourceWriter(self, info: CultureInfo) -> IResourceWriter:
+        """
+
+        :param info:
+        :return:
+        """
+
+class IRootDesigner(IDesigner, IDisposable):
+    """"""
+
+    @property
+    def Component(self) -> IComponent:
+        """
+
+        :return:
+        """
+    @property
+    def SupportedTechnologies(self) -> Array[ViewTechnology]:
+        """
+
+        :return:
+        """
+    @property
+    def Verbs(self) -> DesignerVerbCollection:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def DoDefaultAction(self) -> None:
+        """"""
+    def GetView(self, technology: ViewTechnology) -> object:
+        """
+
+        :param technology:
+        :return:
+        """
+    def Initialize(self, component: IComponent) -> None:
+        """
+
+        :param component:
+        """
+
+class ISelectionService:
+    """"""
+
+    @property
+    def PrimarySelection(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def SelectionCount(self) -> int:
+        """
+
+        :return:
+        """
+    def GetComponentSelected(self, component: object) -> bool:
+        """
+
+        :param component:
+        :return:
+        """
+    def GetSelectedComponents(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @overload
+    def SetSelectedComponents(self, components: ICollection) -> None:
+        """
+
+        :param components:
+        """
+    @overload
+    def SetSelectedComponents(self, components: ICollection, selectionType: SelectionTypes) -> None:
+        """
+
+        :param components:
+        :param selectionType:
+        """
+    SelectionChanged: EventType[EventHandler] = ...
+    """"""
+    SelectionChanging: EventType[EventHandler] = ...
+    """"""
+
+class IServiceContainer(IServiceProvider):
+    """"""
+
+    @overload
+    def AddService(self, serviceType: Type, callback: ServiceCreatorCallback) -> None:
+        """
+
+        :param serviceType:
+        :param callback:
+        """
+    @overload
+    def AddService(self, serviceType: Type, serviceInstance: object) -> None:
+        """
+
+        :param serviceType:
+        :param serviceInstance:
+        """
+    @overload
+    def AddService(
+        self, serviceType: Type, callback: ServiceCreatorCallback, promote: bool
+    ) -> None:
+        """
+
+        :param serviceType:
+        :param callback:
+        :param promote:
+        """
+    @overload
+    def AddService(self, serviceType: Type, serviceInstance: object, promote: bool) -> None:
+        """
+
+        :param serviceType:
+        :param serviceInstance:
+        :param promote:
+        """
+    def GetService(self, serviceType: Type) -> object:
+        """
+
+        :param serviceType:
+        :return:
+        """
+    @overload
+    def RemoveService(self, serviceType: Type) -> None:
+        """
+
+        :param serviceType:
+        """
+    @overload
+    def RemoveService(self, serviceType: Type, promote: bool) -> None:
+        """
+
+        :param serviceType:
+        :param promote:
+        """
+
+class ITreeDesigner(IDesigner, IDisposable):
+    """"""
+
+    @property
+    def Children(self) -> ICollection:
+        """
+
+        :return:
+        """
+    @property
+    def Component(self) -> IComponent:
+        """
+
+        :return:
+        """
+    @property
+    def Parent(self) -> IDesigner:
+        """
+
+        :return:
+        """
+    @property
+    def Verbs(self) -> DesignerVerbCollection:
+        """
+
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def DoDefaultAction(self) -> None:
+        """"""
+    def Initialize(self, component: IComponent) -> None:
+        """
+
+        :param component:
+        """
+
+class ITypeDescriptorFilterService:
+    """"""
+
+    def FilterAttributes(self, component: IComponent, attributes: IDictionary) -> bool:
+        """
+
+        :param component:
+        :param attributes:
+        :return:
+        """
+    def FilterEvents(self, component: IComponent, events: IDictionary) -> bool:
+        """
+
+        :param component:
+        :param events:
+        :return:
+        """
+    def FilterProperties(self, component: IComponent, properties: IDictionary) -> bool:
+        """
+
+        :param component:
+        :param properties:
+        :return:
+        """
+
+class ITypeDiscoveryService:
+    """"""
+
+    def GetTypes(self, baseType: Type, excludeGlobalTypes: bool) -> ICollection:
+        """
+
+        :param baseType:
+        :param excludeGlobalTypes:
+        :return:
+        """
+
+class ITypeResolutionService:
+    """"""
+
+    @overload
+    def GetAssembly(self, name: AssemblyName) -> Assembly:
+        """
+
+        :param name:
+        :return:
+        """
+    @overload
+    def GetAssembly(self, name: AssemblyName, throwOnError: bool) -> Assembly:
+        """
+
+        :param name:
+        :param throwOnError:
+        :return:
+        """
+    def GetPathOfAssembly(self, name: AssemblyName) -> str:
+        """
+
+        :param name:
+        :return:
+        """
+    @overload
+    def GetType(self, name: str) -> Type:
+        """
+
+        :param name:
+        :return:
+        """
+    @overload
+    def GetType(self, name: str, throwOnError: bool) -> Type:
+        """
+
+        :param name:
+        :param throwOnError:
+        :return:
+        """
+    @overload
+    def GetType(self, name: str, throwOnError: bool, ignoreCase: bool) -> Type:
+        """
+
+        :param name:
+        :param throwOnError:
+        :param ignoreCase:
+        :return:
+        """
+    def ReferenceAssembly(self, name: AssemblyName) -> None:
+        """
+
+        :param name:
+        """
+
+class MenuCommand(Object):
+    """"""
+
+    def __init__(self, handler: EventHandler, command: CommandID):
+        """
+
+        :param handler:
+        :param command:
+        """
+    @property
+    def Checked(self) -> bool:
+        """
+
+        :return:
+        """
+    @Checked.setter
+    def Checked(self, value: bool) -> None: ...
+    @property
+    def CommandID(self) -> CommandID:
+        """
+
+        :return:
+        """
+    @property
+    def Enabled(self) -> bool:
+        """
+
+        :return:
+        """
+    @Enabled.setter
+    def Enabled(self, value: bool) -> None: ...
+    @property
+    def OleStatus(self) -> int:
+        """
+
+        :return:
+        """
+    @property
+    def Properties(self) -> IDictionary:
+        """
+
+        :return:
+        """
+    @property
+    def Supported(self) -> bool:
+        """
+
+        :return:
+        """
+    @Supported.setter
+    def Supported(self, value: bool) -> None: ...
+    @property
+    def Visible(self) -> bool:
+        """
+
+        :return:
+        """
+    @Visible.setter
+    def Visible(self, value: bool) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Invoke(self) -> None:
+        """"""
+    @overload
+    def Invoke(self, arg: object) -> None:
+        """
+
+        :param arg:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    CommandChanged: EventType[EventHandler] = ...
+    """"""
+
+class RuntimeLicenseContext(LicenseContext, IServiceProvider):
+    """"""
+
+    def __init__(self):
+        """"""
+    @property
+    def UsageMode(self) -> LicenseUsageMode:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetSavedLicenseKey(self, type: Type, resourceAssembly: Assembly) -> str:
+        """
+
+        :param type:
+        :param resourceAssembly:
+        :return:
+        """
+    def GetService(self, serviceType: Type) -> object:
+        """
+
+        :param serviceType:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SetSavedLicenseKey(self, type: Type, key: str) -> None:
+        """
+
+        :param type:
+        :param key:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SelectionTypes(Enum):
-    Auto = 1
-    Normal = 1
-    Replace = 2
-    MouseDown = 4
-    MouseUp = 8
-    Click = 16
-    Primary = 16
-    Valid = 31
-    Toggle = 32
-    Add = 64
-    Remove = 128
+    """"""
+
+    Auto: SelectionTypes = ...
+    """"""
+    Normal: SelectionTypes = ...
+    """"""
+    Replace: SelectionTypes = ...
+    """"""
+    MouseDown: SelectionTypes = ...
+    """"""
+    MouseUp: SelectionTypes = ...
+    """"""
+    Click: SelectionTypes = ...
+    """"""
+    Primary: SelectionTypes = ...
+    """"""
+    Valid: SelectionTypes = ...
+    """"""
+    Toggle: SelectionTypes = ...
+    """"""
+    Add: SelectionTypes = ...
+    """"""
+    Remove: SelectionTypes = ...
+    """"""
+
+class ServiceContainer(Object, IServiceContainer, IDisposable, IServiceProvider):
+    """"""
+
+    @overload
+    def __init__(self):
+        """"""
+    @overload
+    def __init__(self, parentProvider: IServiceProvider):
+        """
+
+        :param parentProvider:
+        """
+    @overload
+    def AddService(self, serviceType: Type, callback: ServiceCreatorCallback) -> None:
+        """
+
+        :param serviceType:
+        :param callback:
+        """
+    @overload
+    def AddService(self, serviceType: Type, serviceInstance: object) -> None:
+        """
+
+        :param serviceType:
+        :param serviceInstance:
+        """
+    @overload
+    def AddService(
+        self, serviceType: Type, callback: ServiceCreatorCallback, promote: bool
+    ) -> None:
+        """
+
+        :param serviceType:
+        :param callback:
+        :param promote:
+        """
+    @overload
+    def AddService(self, serviceType: Type, serviceInstance: object, promote: bool) -> None:
+        """
+
+        :param serviceType:
+        :param serviceInstance:
+        :param promote:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetService(self, serviceType: Type) -> object:
+        """
+
+        :param serviceType:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def RemoveService(self, serviceType: Type) -> None:
+        """
+
+        :param serviceType:
+        """
+    @overload
+    def RemoveService(self, serviceType: Type, promote: bool) -> None:
+        """
+
+        :param serviceType:
+        :param promote:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+ServiceCreatorCallback: Callable[[IServiceContainer, Type], object] = ...
+"""
+
+:param container: 
+:param serviceType: 
+:return: 
+"""
+
+class StandardCommands(Object):
+    """"""
+
+    AlignBottom: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    AlignHorizontalCenters: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    AlignLeft: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    AlignRight: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    AlignToGrid: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    AlignTop: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    AlignVerticalCenters: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    ArrangeBottom: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    ArrangeIcons: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    ArrangeRight: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    BringForward: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    BringToFront: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    CenterHorizontally: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    CenterVertically: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    Copy: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    Cut: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    Delete: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    DocumentOutline: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    F1Help: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    Group: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    HorizSpaceConcatenate: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    HorizSpaceDecrease: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    HorizSpaceIncrease: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    HorizSpaceMakeEqual: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    LineupIcons: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    LockControls: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    MultiLevelRedo: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    MultiLevelUndo: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    Paste: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    Properties: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    PropertiesWindow: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    Redo: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    Replace: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    SelectAll: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    SendBackward: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    SendToBack: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    ShowGrid: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    ShowLargeIcons: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    SizeToControl: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    SizeToControlHeight: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    SizeToControlWidth: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    SizeToFit: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    SizeToGrid: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    SnapToGrid: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    TabOrder: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    Undo: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    Ungroup: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    VerbFirst: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    VerbLast: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    VertSpaceConcatenate: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    VertSpaceDecrease: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    VertSpaceIncrease: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    VertSpaceMakeEqual: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    ViewCode: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    ViewGrid: Final[ClassVar[CommandID]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class StandardToolWindows(Object):
+    """"""
+
+    ObjectBrowser: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    OutputWindow: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    ProjectExplorer: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    PropertyBrowser: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    RelatedLinks: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    ServerExplorer: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    TaskList: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    Toolbox: Final[ClassVar[Guid]] = ...
+    """
+    
+    :return: 
+    """
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class TypeDescriptionProviderService(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    @overload
+    def GetProvider(self, instance: object) -> TypeDescriptionProvider:
+        """
+
+        :param instance:
+        :return:
+        """
+    @overload
+    def GetProvider(self, type: Type) -> TypeDescriptionProvider:
+        """
+
+        :param type:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ViewTechnology(Enum):
-    Passthrough = 0
-    WindowsForms = 1
-    Default = 2
+    """"""
 
-# ---------- Delegates ---------- #
-
-ActiveDesignerEventHandler = Callable[[ObjectType, ActiveDesignerEventArgs], VoidType]
-
-ComponentChangedEventHandler = Callable[[ObjectType, ComponentChangedEventArgs], VoidType]
-
-ComponentChangingEventHandler = Callable[[ObjectType, ComponentChangingEventArgs], VoidType]
-
-ComponentEventHandler = Callable[[ObjectType, ComponentEventArgs], VoidType]
-
-ComponentRenameEventHandler = Callable[[ObjectType, ComponentRenameEventArgs], VoidType]
-
-DesignerEventHandler = Callable[[ObjectType, DesignerEventArgs], VoidType]
-
-DesignerTransactionCloseEventHandler = Callable[
-    [ObjectType, DesignerTransactionCloseEventArgs], VoidType
-]
-
-ServiceCreatorCallback = Callable[[IServiceContainer, TypeType], ObjectType]
-
-__all__ = [
-    ActiveDesignerEventArgs,
-    ActiveDesignerEventHandler,
-    CheckoutException,
-    CommandID,
-    ComponentChangedEventArgs,
-    ComponentChangedEventHandler,
-    ComponentChangingEventArgs,
-    ComponentChangingEventHandler,
-    ComponentEventArgs,
-    ComponentEventHandler,
-    ComponentRenameEventArgs,
-    ComponentRenameEventHandler,
-    DesignerCollection,
-    DesignerEventArgs,
-    DesignerEventHandler,
-    DesignerOptionService,
-    DesignerTransaction,
-    DesignerTransactionCloseEventArgs,
-    DesignerTransactionCloseEventHandler,
-    DesignerVerb,
-    DesignerVerbCollection,
-    DesigntimeLicenseContext,
-    DesigntimeLicenseContextSerializer,
-    HelpKeywordAttribute,
-    MenuCommand,
-    RuntimeLicenseContext,
-    ServiceContainer,
-    ServiceCreatorCallback,
-    StandardCommands,
-    StandardToolWindows,
-    TypeDescriptionProviderService,
-    IComponentChangeService,
-    IComponentDiscoveryService,
-    IComponentInitializer,
-    IDesigner,
-    IDesignerEventService,
-    IDesignerFilter,
-    IDesignerHost,
-    IDesignerHostTransactionState,
-    IDesignerOptionService,
-    IDictionaryService,
-    IEventBindingService,
-    IExtenderListService,
-    IExtenderProviderService,
-    IHelpService,
-    IInheritanceService,
-    IMenuCommandService,
-    IReferenceService,
-    IResourceService,
-    IRootDesigner,
-    ISelectionService,
-    IServiceContainer,
-    ITreeDesigner,
-    ITypeDescriptorFilterService,
-    ITypeDiscoveryService,
-    ITypeResolutionService,
-    HelpContextType,
-    HelpKeywordType,
-    SelectionTypes,
-    ViewTechnology,
-    ActiveDesignerEventHandler,
-    ComponentChangedEventHandler,
-    ComponentChangingEventHandler,
-    ComponentEventHandler,
-    ComponentRenameEventHandler,
-    DesignerEventHandler,
-    DesignerTransactionCloseEventHandler,
-    ServiceCreatorCallback,
-]
+    Passthrough: ViewTechnology = ...
+    """"""
+    WindowsForms: ViewTechnology = ...
+    """"""
+    Default: ViewTechnology = ...
+    """"""

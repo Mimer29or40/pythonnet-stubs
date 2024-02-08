@@ -1,92 +1,114 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Union
 
 from System import ActivationContext
 from System import ApplicationIdentity
 from System import Array
-from System import Boolean
-from System import Byte
 from System import Object
-from System import Void
+from System import Type
 
-# ---------- Types ---------- #
+class InternalActivationContextHelper(ABC, Object):
+    """"""
 
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-ByteType = Union[int, Byte]
-ObjectType = Object
-VoidType = Union[None, Void]
+    def Equals(self, obj: object) -> bool:
+        """
 
-# ---------- Classes ---------- #
+        :param obj:
+        :return:
+        """
+    @classmethod
+    def GetActivationContextData(cls, appInfo: ActivationContext) -> object:
+        """
 
-class InternalActivationContextHelper(ABC, ObjectType):
-    # No Fields
+        :param appInfo:
+        :return:
+        """
+    @classmethod
+    def GetApplicationComponentManifest(cls, appInfo: ActivationContext) -> object:
+        """
 
-    # No Constructors
+        :param appInfo:
+        :return:
+        """
+    @classmethod
+    def GetApplicationManifestBytes(cls, appInfo: ActivationContext) -> Array[int]:
+        """
 
-    # No Properties
+        :param appInfo:
+        :return:
+        """
+    @classmethod
+    def GetDeploymentComponentManifest(cls, appInfo: ActivationContext) -> object:
+        """
 
-    # ---------- Methods ---------- #
+        :param appInfo:
+        :return:
+        """
+    @classmethod
+    def GetDeploymentManifestBytes(cls, appInfo: ActivationContext) -> Array[int]:
+        """
 
-    @staticmethod
-    def GetActivationContextData(appInfo: ActivationContext) -> ObjectType: ...
-    @staticmethod
-    def GetApplicationComponentManifest(appInfo: ActivationContext) -> ObjectType: ...
-    @staticmethod
-    def GetApplicationManifestBytes(appInfo: ActivationContext) -> ArrayType[ByteType]: ...
-    @staticmethod
-    def GetDeploymentComponentManifest(appInfo: ActivationContext) -> ObjectType: ...
-    @staticmethod
-    def GetDeploymentManifestBytes(appInfo: ActivationContext) -> ArrayType[ByteType]: ...
-    @staticmethod
-    def IsFirstRun(appInfo: ActivationContext) -> BooleanType: ...
-    @staticmethod
-    def PrepareForExecution(appInfo: ActivationContext) -> VoidType: ...
+        :param appInfo:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    @classmethod
+    def IsFirstRun(cls, appInfo: ActivationContext) -> bool:
+        """
 
-    # No Sub Structs
+        :param appInfo:
+        :return:
+        """
+    @classmethod
+    def PrepareForExecution(cls, appInfo: ActivationContext) -> None:
+        """
 
-    # No Sub Interfaces
+        :param appInfo:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
-class InternalApplicationIdentityHelper(ABC, ObjectType):
-    # No Fields
+class InternalApplicationIdentityHelper(ABC, Object):
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @classmethod
+    def GetInternalAppId(cls, id: ApplicationIdentity) -> object:
+        """
 
-    @staticmethod
-    def GetInternalAppId(id: ApplicationIdentity) -> ObjectType: ...
+        :param id:
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Events
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    InternalActivationContextHelper,
-    InternalApplicationIdentityHelper,
-]
+        :return:
+        """

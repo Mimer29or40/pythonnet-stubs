@@ -1,21 +1,14 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List
-from typing import Protocol
-from typing import Union
 from typing import overload
 
 from System import Array
-from System import Boolean
 from System import Enum
 from System import Exception
 from System import ICloneable
-from System import Int32
 from System import Object
-from System import String
 from System import Type
-from System import Void
 from System.IO import Stream
 from System.Runtime.Remoting.Messaging import Header
 from System.Runtime.Remoting.Messaging import HeaderHandler
@@ -30,1386 +23,1946 @@ from System.Runtime.Serialization.Formatters import FormatterAssemblyStyle
 from System.Runtime.Serialization.Formatters import FormatterTypeStyle
 from System.Runtime.Serialization.Formatters import TypeFilterLevel
 
-# ---------- Types ---------- #
-
-ArrayType = Union[List, Array]
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
-
-# ---------- Classes ---------- #
-
-class BinaryArray(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryAssembly(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryAssemblyInfo(ObjectType):
+class BinaryArray(Object, IStreamable):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
 
-    # No Events
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
 
-    # No Sub Structs
+        :param sout:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryConverter(ABC, ObjectType):
+class BinaryArrayTypeEnum(Enum):
     """"""
 
-    # No Fields
+    Single: BinaryArrayTypeEnum = ...
+    """"""
+    Jagged: BinaryArrayTypeEnum = ...
+    """"""
+    Rectangular: BinaryArrayTypeEnum = ...
+    """"""
+    SingleOffset: BinaryArrayTypeEnum = ...
+    """"""
+    JaggedOffset: BinaryArrayTypeEnum = ...
+    """"""
+    RectangularOffset: BinaryArrayTypeEnum = ...
+    """"""
 
-    # No Constructors
+class BinaryAssembly(Object, IStreamable):
+    """"""
 
-    # No Properties
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Methods
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
 
-    # No Sub Structs
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
 
-    # No Sub Enums
+        :param sout:
+        """
 
-class BinaryCrossAppDomainAssembly(ObjectType, IStreamable):
-    # No Fields
+class BinaryAssemblyInfo(Object):
+    """"""
 
-    # No Constructors
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class BinaryConverter(ABC, Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class BinaryCrossAppDomainMap(ObjectType, IStreamable):
-    # No Fields
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # No Properties
+class BinaryCrossAppDomainAssembly(Object, IStreamable):
+    """"""
 
-    # ---------- Methods ---------- #
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
 
-    # No Sub Structs
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
 
-    # No Sub Enums
+        :param sout:
+        """
 
-class BinaryCrossAppDomainString(ObjectType, IStreamable):
-    # No Fields
+class BinaryCrossAppDomainMap(Object, IStreamable):
+    """"""
 
-    # No Constructors
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Properties
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
 
-    # No Events
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
 
-    # No Sub Structs
+        :param sout:
+        """
 
-    # No Sub Interfaces
+class BinaryCrossAppDomainString(Object, IStreamable):
+    """"""
 
-    # No Sub Enums
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-class BinaryFormatter(ObjectType, IRemotingFormatter, IFormatter):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class BinaryFormatter(Object, IRemotingFormatter, IFormatter):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, selector: ISurrogateSelector, context: StreamingContext): ...
+    def __init__(self, selector: ISurrogateSelector, context: StreamingContext):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param selector:
+        :param context:
+        """
     @property
-    def AssemblyFormat(self) -> FormatterAssemblyStyle: ...
+    def AssemblyFormat(self) -> FormatterAssemblyStyle:
+        """
+
+        :return:
+        """
     @AssemblyFormat.setter
     def AssemblyFormat(self, value: FormatterAssemblyStyle) -> None: ...
     @property
-    def Binder(self) -> SerializationBinder: ...
+    def Binder(self) -> SerializationBinder:
+        """
+
+        :return:
+        """
     @Binder.setter
     def Binder(self, value: SerializationBinder) -> None: ...
     @property
-    def Context(self) -> StreamingContext: ...
+    def Context(self) -> StreamingContext:
+        """
+
+        :return:
+        """
     @Context.setter
     def Context(self, value: StreamingContext) -> None: ...
     @property
-    def FilterLevel(self) -> TypeFilterLevel: ...
+    def FilterLevel(self) -> TypeFilterLevel:
+        """
+
+        :return:
+        """
     @FilterLevel.setter
     def FilterLevel(self, value: TypeFilterLevel) -> None: ...
     @property
-    def SurrogateSelector(self) -> ISurrogateSelector: ...
+    def SurrogateSelector(self) -> ISurrogateSelector:
+        """
+
+        :return:
+        """
     @SurrogateSelector.setter
     def SurrogateSelector(self, value: ISurrogateSelector) -> None: ...
     @property
-    def TypeFormat(self) -> FormatterTypeStyle: ...
+    def TypeFormat(self) -> FormatterTypeStyle:
+        """
+
+        :return:
+        """
     @TypeFormat.setter
     def TypeFormat(self, value: FormatterTypeStyle) -> None: ...
-
-    # ---------- Methods ---------- #
-
     @overload
-    def Deserialize(self, serializationStream: Stream) -> ObjectType: ...
+    def Deserialize(self, serializationStream: Stream) -> object:
+        """
+
+        :param serializationStream:
+        :return:
+        """
     @overload
-    def Deserialize(self, serializationStream: Stream, handler: HeaderHandler) -> ObjectType: ...
+    def Deserialize(self, serializationStream: Stream, handler: HeaderHandler) -> object:
+        """
+
+        :param serializationStream:
+        :param handler:
+        :return:
+        """
     def DeserializeMethodResponse(
         self,
         serializationStream: Stream,
         handler: HeaderHandler,
         methodCallMessage: IMethodCallMessage,
-    ) -> ObjectType: ...
+    ) -> object:
+        """
+
+        :param serializationStream:
+        :param handler:
+        :param methodCallMessage:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
     @overload
-    def Serialize(self, serializationStream: Stream, graph: ObjectType) -> VoidType: ...
+    def Serialize(self, serializationStream: Stream, graph: object) -> None:
+        """
+
+        :param serializationStream:
+        :param graph:
+        """
     @overload
-    def Serialize(
-        self, serializationStream: Stream, graph: ObjectType, headers: ArrayType[Header]
-    ) -> VoidType: ...
-    def UnsafeDeserialize(
-        self, serializationStream: Stream, handler: HeaderHandler
-    ) -> ObjectType: ...
+    def Serialize(self, serializationStream: Stream, graph: object, headers: Array[Header]) -> None:
+        """
+
+        :param serializationStream:
+        :param graph:
+        :param headers:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def UnsafeDeserialize(self, serializationStream: Stream, handler: HeaderHandler) -> object:
+        """
+
+        :param serializationStream:
+        :param handler:
+        :return:
+        """
     def UnsafeDeserializeMethodResponse(
         self,
         serializationStream: Stream,
         handler: HeaderHandler,
         methodCallMessage: IMethodCallMessage,
-    ) -> ObjectType: ...
-    def get_AssemblyFormat(self) -> FormatterAssemblyStyle: ...
-    def get_Binder(self) -> SerializationBinder: ...
-    def get_Context(self) -> StreamingContext: ...
-    def get_FilterLevel(self) -> TypeFilterLevel: ...
-    def get_SurrogateSelector(self) -> ISurrogateSelector: ...
-    def get_TypeFormat(self) -> FormatterTypeStyle: ...
-    def set_AssemblyFormat(self, value: FormatterAssemblyStyle) -> VoidType: ...
-    def set_Binder(self, value: SerializationBinder) -> VoidType: ...
-    def set_Context(self, value: StreamingContext) -> VoidType: ...
-    def set_FilterLevel(self, value: TypeFilterLevel) -> VoidType: ...
-    def set_SurrogateSelector(self, value: ISurrogateSelector) -> VoidType: ...
-    def set_TypeFormat(self, value: FormatterTypeStyle) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryMethodCall(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryMethodCallMessage(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @property
-    def HasProperties(self) -> BooleanType: ...
-    @property
-    def InstantiationArgs(self) -> ArrayType[TypeType]: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def MethodName(self) -> StringType: ...
-    @property
-    def MethodSignature(self) -> ObjectType: ...
-    @property
-    def TypeName(self) -> StringType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_HasProperties(self) -> BooleanType: ...
-    def get_InstantiationArgs(self) -> ArrayType[TypeType]: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_MethodName(self) -> StringType: ...
-    def get_MethodSignature(self) -> ObjectType: ...
-    def get_TypeName(self) -> StringType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryMethodReturn(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryMethodReturnMessage(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def Args(self) -> ArrayType[ObjectType]: ...
-    @property
-    def Exception(self) -> Exception: ...
-    @property
-    def HasProperties(self) -> BooleanType: ...
-    @property
-    def LogicalCallContext(self) -> LogicalCallContext: ...
-    @property
-    def ReturnValue(self) -> ObjectType: ...
-
-    # ---------- Methods ---------- #
-
-    def get_Args(self) -> ArrayType[ObjectType]: ...
-    def get_Exception(self) -> Exception: ...
-    def get_HasProperties(self) -> BooleanType: ...
-    def get_LogicalCallContext(self) -> LogicalCallContext: ...
-    def get_ReturnValue(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryObject(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryObjectString(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryObjectWithMap(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryObjectWithMapTyped(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class BinaryUtil(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @staticmethod
-    @overload
-    def NVTraceI(name: StringType, value: StringType) -> VoidType: ...
-    @staticmethod
-    @overload
-    def NVTraceI(name: StringType, value: ObjectType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class Converter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IOUtil(ABC, ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class IntSizedArray(ObjectType, ICloneable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Clone(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class InternalFE(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MemberPrimitiveTyped(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MemberPrimitiveUnTyped(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MemberReference(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class MessageEnd(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    @overload
-    def Dump(self) -> VoidType: ...
-    @overload
-    def Dump(self, sout: Stream) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NameCache(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class NameInfo(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @property
-    def IsSealed(self) -> BooleanType: ...
-    @property
-    def NIname(self) -> StringType: ...
-    @NIname.setter
-    def NIname(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def get_IsSealed(self) -> BooleanType: ...
-    def get_NIname(self) -> StringType: ...
-    def set_NIname(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectMap(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectMapInfo(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectNull(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dump(self) -> VoidType: ...
-    @overload
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    @overload
-    def Read(self, input: __BinaryParser, binaryHeaderEnum: BinaryHeaderEnum) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectProgress(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectReader(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ObjectWriter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ParseRecord(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class PrimitiveArray(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ReadObjectInfo(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerObjectInfoCache(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerObjectInfoInit(ObjectType):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerStack(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SerializationHeaderRecord(ObjectType, IStreamable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Dump(self) -> VoidType: ...
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SizedArray(ObjectType, ICloneable):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Clone(self) -> ObjectType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class TypeInformation(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ValueFixup(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class WriteObjectInfo(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class __BinaryParser(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class __BinaryWriter(ObjectType):
-    """"""
-
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # No Methods
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# ---------- Interfaces ---------- #
-
-class IStreamable(Protocol):
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def Read(self, input: __BinaryParser) -> VoidType: ...
-    def Write(self, sout: __BinaryWriter) -> VoidType: ...
-
-    # No Events
-
-# ---------- Enums ---------- #
-
-class BinaryArrayTypeEnum(Enum):
-    Single = 0
-    Jagged = 1
-    Rectangular = 2
-    SingleOffset = 3
-    JaggedOffset = 4
-    RectangularOffset = 5
+    ) -> object:
+        """
+
+        :param serializationStream:
+        :param handler:
+        :param methodCallMessage:
+        :return:
+        """
 
 class BinaryHeaderEnum(Enum):
-    SerializedStreamHeader = 0
-    Object = 1
-    ObjectWithMap = 2
-    ObjectWithMapAssemId = 3
-    ObjectWithMapTyped = 4
-    ObjectWithMapTypedAssemId = 5
-    ObjectString = 6
-    Array = 7
-    MemberPrimitiveTyped = 8
-    MemberReference = 9
-    ObjectNull = 10
-    MessageEnd = 11
-    Assembly = 12
-    ObjectNullMultiple256 = 13
-    ObjectNullMultiple = 14
-    ArraySinglePrimitive = 15
-    ArraySingleObject = 16
-    ArraySingleString = 17
-    CrossAppDomainMap = 18
-    CrossAppDomainString = 19
-    CrossAppDomainAssembly = 20
-    MethodCall = 21
-    MethodReturn = 22
+    """"""
+
+    SerializedStreamHeader: BinaryHeaderEnum = ...
+    """"""
+    Object: BinaryHeaderEnum = ...
+    """"""
+    ObjectWithMap: BinaryHeaderEnum = ...
+    """"""
+    ObjectWithMapAssemId: BinaryHeaderEnum = ...
+    """"""
+    ObjectWithMapTyped: BinaryHeaderEnum = ...
+    """"""
+    ObjectWithMapTypedAssemId: BinaryHeaderEnum = ...
+    """"""
+    ObjectString: BinaryHeaderEnum = ...
+    """"""
+    Array: BinaryHeaderEnum = ...
+    """"""
+    MemberPrimitiveTyped: BinaryHeaderEnum = ...
+    """"""
+    MemberReference: BinaryHeaderEnum = ...
+    """"""
+    ObjectNull: BinaryHeaderEnum = ...
+    """"""
+    MessageEnd: BinaryHeaderEnum = ...
+    """"""
+    Assembly: BinaryHeaderEnum = ...
+    """"""
+    ObjectNullMultiple256: BinaryHeaderEnum = ...
+    """"""
+    ObjectNullMultiple: BinaryHeaderEnum = ...
+    """"""
+    ArraySinglePrimitive: BinaryHeaderEnum = ...
+    """"""
+    ArraySingleObject: BinaryHeaderEnum = ...
+    """"""
+    ArraySingleString: BinaryHeaderEnum = ...
+    """"""
+    CrossAppDomainMap: BinaryHeaderEnum = ...
+    """"""
+    CrossAppDomainString: BinaryHeaderEnum = ...
+    """"""
+    CrossAppDomainAssembly: BinaryHeaderEnum = ...
+    """"""
+    MethodCall: BinaryHeaderEnum = ...
+    """"""
+    MethodReturn: BinaryHeaderEnum = ...
+    """"""
+
+class BinaryMethodCall(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class BinaryMethodCallMessage(Object):
+    """"""
+
+    @property
+    def Args(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def HasProperties(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def InstantiationArgs(self) -> Array[Type]:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def MethodName(self) -> str:
+        """
+
+        :return:
+        """
+    @property
+    def MethodSignature(self) -> object:
+        """
+
+        :return:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class BinaryMethodReturn(Object, IStreamable):
+    """"""
+
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class BinaryMethodReturnMessage(Object):
+    """"""
+
+    @property
+    def Args(self) -> Array[object]:
+        """
+
+        :return:
+        """
+    @property
+    def Exception(self) -> Exception:
+        """
+
+        :return:
+        """
+    @property
+    def HasProperties(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def LogicalCallContext(self) -> LogicalCallContext:
+        """
+
+        :return:
+        """
+    @property
+    def ReturnValue(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class BinaryObject(Object, IStreamable):
+    """"""
+
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class BinaryObjectString(Object, IStreamable):
+    """"""
+
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class BinaryObjectWithMap(Object, IStreamable):
+    """"""
+
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class BinaryObjectWithMapTyped(Object, IStreamable):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
 
 class BinaryTypeEnum(Enum):
-    Primitive = 0
-    String = 1
-    Object = 2
-    ObjectUrt = 3
-    ObjectUser = 4
-    ObjectArray = 5
-    StringArray = 6
-    PrimitiveArray = 7
+    """"""
+
+    Primitive: BinaryTypeEnum = ...
+    """"""
+    String: BinaryTypeEnum = ...
+    """"""
+    Object: BinaryTypeEnum = ...
+    """"""
+    ObjectUrt: BinaryTypeEnum = ...
+    """"""
+    ObjectUser: BinaryTypeEnum = ...
+    """"""
+    ObjectArray: BinaryTypeEnum = ...
+    """"""
+    StringArray: BinaryTypeEnum = ...
+    """"""
+    PrimitiveArray: BinaryTypeEnum = ...
+    """"""
+
+class BinaryUtil(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    @overload
+    def NVTraceI(cls, name: str, value: object) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    @classmethod
+    @overload
+    def NVTraceI(cls, name: str, value: str) -> None:
+        """
+
+        :param name:
+        :param value:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class Converter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IOUtil(ABC, Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class IStreamable:
+    """"""
+
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class IntSizedArray(Object, ICloneable):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class InternalArrayTypeE(Enum):
-    Empty = 0
-    Single = 1
-    Jagged = 2
-    Rectangular = 3
-    Base64 = 4
+    """"""
+
+    Empty: InternalArrayTypeE = ...
+    """"""
+    Single: InternalArrayTypeE = ...
+    """"""
+    Jagged: InternalArrayTypeE = ...
+    """"""
+    Rectangular: InternalArrayTypeE = ...
+    """"""
+    Base64: InternalArrayTypeE = ...
+    """"""
 
 class InternalElementTypeE(Enum):
-    ObjectBegin = 0
-    ObjectEnd = 1
-    Member = 2
+    """"""
+
+    ObjectBegin: InternalElementTypeE = ...
+    """"""
+    ObjectEnd: InternalElementTypeE = ...
+    """"""
+    Member: InternalElementTypeE = ...
+    """"""
+
+class InternalFE(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class InternalMemberTypeE(Enum):
-    Empty = 0
-    Header = 1
-    Field = 2
-    Item = 3
+    """"""
+
+    Empty: InternalMemberTypeE = ...
+    """"""
+    Header: InternalMemberTypeE = ...
+    """"""
+    Field: InternalMemberTypeE = ...
+    """"""
+    Item: InternalMemberTypeE = ...
+    """"""
 
 class InternalMemberValueE(Enum):
-    Empty = 0
-    InlineValue = 1
-    Nested = 2
-    Reference = 3
-    Null = 4
+    """"""
+
+    Empty: InternalMemberValueE = ...
+    """"""
+    InlineValue: InternalMemberValueE = ...
+    """"""
+    Nested: InternalMemberValueE = ...
+    """"""
+    Reference: InternalMemberValueE = ...
+    """"""
+    Null: InternalMemberValueE = ...
+    """"""
 
 class InternalNameSpaceE(Enum):
-    # None = 0
-    Soap = 1
-    XdrPrimitive = 2
-    XdrString = 3
-    UrtSystem = 4
-    UrtUser = 5
-    UserNameSpace = 6
-    MemberName = 7
-    Interop = 8
-    CallElement = 9
+    """"""
+
+    _None: InternalNameSpaceE = ...
+    """"""
+    Soap: InternalNameSpaceE = ...
+    """"""
+    XdrPrimitive: InternalNameSpaceE = ...
+    """"""
+    XdrString: InternalNameSpaceE = ...
+    """"""
+    UrtSystem: InternalNameSpaceE = ...
+    """"""
+    UrtUser: InternalNameSpaceE = ...
+    """"""
+    UserNameSpace: InternalNameSpaceE = ...
+    """"""
+    MemberName: InternalNameSpaceE = ...
+    """"""
+    Interop: InternalNameSpaceE = ...
+    """"""
+    CallElement: InternalNameSpaceE = ...
+    """"""
 
 class InternalObjectPositionE(Enum):
-    Empty = 0
-    Top = 1
-    Child = 2
-    Headers = 3
+    """"""
+
+    Empty: InternalObjectPositionE = ...
+    """"""
+    Top: InternalObjectPositionE = ...
+    """"""
+    Child: InternalObjectPositionE = ...
+    """"""
+    Headers: InternalObjectPositionE = ...
+    """"""
 
 class InternalObjectTypeE(Enum):
-    Empty = 0
-    Object = 1
-    Array = 2
+    """"""
+
+    Empty: InternalObjectTypeE = ...
+    """"""
+    Object: InternalObjectTypeE = ...
+    """"""
+    Array: InternalObjectTypeE = ...
+    """"""
 
 class InternalParseStateE(Enum):
-    Initial = 0
-    Object = 1
-    Member = 2
-    MemberChild = 3
+    """"""
+
+    Initial: InternalParseStateE = ...
+    """"""
+    Object: InternalParseStateE = ...
+    """"""
+    Member: InternalParseStateE = ...
+    """"""
+    MemberChild: InternalParseStateE = ...
+    """"""
 
 class InternalParseTypeE(Enum):
-    Empty = 0
-    SerializedStreamHeader = 1
-    Object = 2
-    Member = 3
-    ObjectEnd = 4
-    MemberEnd = 5
-    Headers = 6
-    HeadersEnd = 7
-    SerializedStreamHeaderEnd = 8
-    Envelope = 9
-    EnvelopeEnd = 10
-    Body = 11
-    BodyEnd = 12
+    """"""
+
+    Empty: InternalParseTypeE = ...
+    """"""
+    SerializedStreamHeader: InternalParseTypeE = ...
+    """"""
+    Object: InternalParseTypeE = ...
+    """"""
+    Member: InternalParseTypeE = ...
+    """"""
+    ObjectEnd: InternalParseTypeE = ...
+    """"""
+    MemberEnd: InternalParseTypeE = ...
+    """"""
+    Headers: InternalParseTypeE = ...
+    """"""
+    HeadersEnd: InternalParseTypeE = ...
+    """"""
+    SerializedStreamHeaderEnd: InternalParseTypeE = ...
+    """"""
+    Envelope: InternalParseTypeE = ...
+    """"""
+    EnvelopeEnd: InternalParseTypeE = ...
+    """"""
+    Body: InternalParseTypeE = ...
+    """"""
+    BodyEnd: InternalParseTypeE = ...
+    """"""
 
 class InternalPrimitiveTypeE(Enum):
-    Invalid = 0
-    Boolean = 1
-    Byte = 2
-    Char = 3
-    Currency = 4
-    Decimal = 5
-    Double = 6
-    Int16 = 7
-    Int32 = 8
-    Int64 = 9
-    SByte = 10
-    Single = 11
-    TimeSpan = 12
-    DateTime = 13
-    UInt16 = 14
-    UInt32 = 15
-    UInt64 = 16
-    Null = 17
-    String = 18
+    """"""
+
+    Invalid: InternalPrimitiveTypeE = ...
+    """"""
+    Boolean: InternalPrimitiveTypeE = ...
+    """"""
+    Byte: InternalPrimitiveTypeE = ...
+    """"""
+    Char: InternalPrimitiveTypeE = ...
+    """"""
+    Currency: InternalPrimitiveTypeE = ...
+    """"""
+    Decimal: InternalPrimitiveTypeE = ...
+    """"""
+    Double: InternalPrimitiveTypeE = ...
+    """"""
+    Int16: InternalPrimitiveTypeE = ...
+    """"""
+    Int32: InternalPrimitiveTypeE = ...
+    """"""
+    Int64: InternalPrimitiveTypeE = ...
+    """"""
+    SByte: InternalPrimitiveTypeE = ...
+    """"""
+    Single: InternalPrimitiveTypeE = ...
+    """"""
+    TimeSpan: InternalPrimitiveTypeE = ...
+    """"""
+    DateTime: InternalPrimitiveTypeE = ...
+    """"""
+    UInt16: InternalPrimitiveTypeE = ...
+    """"""
+    UInt32: InternalPrimitiveTypeE = ...
+    """"""
+    UInt64: InternalPrimitiveTypeE = ...
+    """"""
+    Null: InternalPrimitiveTypeE = ...
+    """"""
+    String: InternalPrimitiveTypeE = ...
+    """"""
 
 class InternalSerializerTypeE(Enum):
-    Soap = 1
-    Binary = 2
+    """"""
+
+    Soap: InternalSerializerTypeE = ...
+    """"""
+    Binary: InternalSerializerTypeE = ...
+    """"""
+
+class MemberPrimitiveTyped(Object, IStreamable):
+    """"""
+
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class MemberPrimitiveUnTyped(Object, IStreamable):
+    """"""
+
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class MemberReference(Object, IStreamable):
+    """"""
+
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class MessageEnd(Object, IStreamable):
+    """"""
+
+    @overload
+    def Dump(self) -> None:
+        """"""
+    @overload
+    def Dump(self, sout: Stream) -> None:
+        """
+
+        :param sout:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
 
 class MessageEnum(Enum):
-    NoArgs = 1
-    ArgsInline = 2
-    ArgsIsArray = 4
-    ArgsInArray = 8
-    NoContext = 16
-    ContextInline = 32
-    ContextInArray = 64
-    MethodSignatureInArray = 128
-    PropertyInArray = 256
-    NoReturnValue = 512
-    ReturnValueVoid = 1024
-    ReturnValueInline = 2048
-    ReturnValueInArray = 4096
-    ExceptionInArray = 8192
-    GenericMethod = 32768
+    """"""
+
+    NoArgs: MessageEnum = ...
+    """"""
+    ArgsInline: MessageEnum = ...
+    """"""
+    ArgsIsArray: MessageEnum = ...
+    """"""
+    ArgsInArray: MessageEnum = ...
+    """"""
+    NoContext: MessageEnum = ...
+    """"""
+    ContextInline: MessageEnum = ...
+    """"""
+    ContextInArray: MessageEnum = ...
+    """"""
+    MethodSignatureInArray: MessageEnum = ...
+    """"""
+    PropertyInArray: MessageEnum = ...
+    """"""
+    NoReturnValue: MessageEnum = ...
+    """"""
+    ReturnValueVoid: MessageEnum = ...
+    """"""
+    ReturnValueInline: MessageEnum = ...
+    """"""
+    ReturnValueInArray: MessageEnum = ...
+    """"""
+    ExceptionInArray: MessageEnum = ...
+    """"""
+    GenericMethod: MessageEnum = ...
+    """"""
+
+class NameCache(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class NameInfo(Object):
+    """"""
+
+    @property
+    def IsSealed(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def NIname(self) -> str:
+        """
+
+        :return:
+        """
+    @NIname.setter
+    def NIname(self, value: str) -> None: ...
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectMap(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectMapInfo(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectNull(Object, IStreamable):
+    """"""
+
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    @overload
+    def Read(self, input: __BinaryParser, binaryHeaderEnum: BinaryHeaderEnum) -> None:
+        """
+
+        :param input:
+        :param binaryHeaderEnum:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class ObjectProgress(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectReader(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ObjectWriter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ParseRecord(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class PrimitiveArray(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ReadObjectInfo(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerObjectInfoCache(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerObjectInfoInit(Object):
+    """"""
+
+    def __init__(self):
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerStack(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class SerializationHeaderRecord(Object, IStreamable):
+    """"""
+
+    def Dump(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def Read(self, input: __BinaryParser) -> None:
+        """
+
+        :param input:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, sout: __BinaryWriter) -> None:
+        """
+
+        :param sout:
+        """
+
+class SizedArray(Object, ICloneable):
+    """"""
+
+    def Clone(self) -> object:
+        """
+
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SoapAttributeType(Enum):
-    # None = 0
-    SchemaType = 1
-    Embedded = 2
-    XmlElement = 4
-    XmlAttribute = 8
+    """"""
+
+    _None: SoapAttributeType = ...
+    """"""
+    SchemaType: SoapAttributeType = ...
+    """"""
+    Embedded: SoapAttributeType = ...
+    """"""
+    XmlElement: SoapAttributeType = ...
+    """"""
+    XmlAttribute: SoapAttributeType = ...
+    """"""
+
+class TypeInformation(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class ValueFixup(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class ValueFixupEnum(Enum):
-    Empty = 0
-    Array = 1
-    Header = 2
-    Member = 3
+    """"""
 
-# No Delegates
+    Empty: ValueFixupEnum = ...
+    """"""
+    Array: ValueFixupEnum = ...
+    """"""
+    Header: ValueFixupEnum = ...
+    """"""
+    Member: ValueFixupEnum = ...
+    """"""
 
-__all__ = [
-    BinaryArray,
-    BinaryAssembly,
-    BinaryAssemblyInfo,
-    BinaryConverter,
-    BinaryCrossAppDomainAssembly,
-    BinaryCrossAppDomainMap,
-    BinaryCrossAppDomainString,
-    BinaryFormatter,
-    BinaryMethodCall,
-    BinaryMethodCallMessage,
-    BinaryMethodReturn,
-    BinaryMethodReturnMessage,
-    BinaryObject,
-    BinaryObjectString,
-    BinaryObjectWithMap,
-    BinaryObjectWithMapTyped,
-    BinaryUtil,
-    Converter,
-    IOUtil,
-    IntSizedArray,
-    InternalFE,
-    MemberPrimitiveTyped,
-    MemberPrimitiveUnTyped,
-    MemberReference,
-    MessageEnd,
-    NameCache,
-    NameInfo,
-    ObjectMap,
-    ObjectMapInfo,
-    ObjectNull,
-    ObjectProgress,
-    ObjectReader,
-    ObjectWriter,
-    ParseRecord,
-    PrimitiveArray,
-    ReadObjectInfo,
-    SerObjectInfoCache,
-    SerObjectInfoInit,
-    SerStack,
-    SerializationHeaderRecord,
-    SizedArray,
-    TypeInformation,
-    ValueFixup,
-    WriteObjectInfo,
-    __BinaryParser,
-    __BinaryWriter,
-    IStreamable,
-    BinaryArrayTypeEnum,
-    BinaryHeaderEnum,
-    BinaryTypeEnum,
-    InternalArrayTypeE,
-    InternalElementTypeE,
-    InternalMemberTypeE,
-    InternalMemberValueE,
-    InternalNameSpaceE,
-    InternalObjectPositionE,
-    InternalObjectTypeE,
-    InternalParseStateE,
-    InternalParseTypeE,
-    InternalPrimitiveTypeE,
-    InternalSerializerTypeE,
-    MessageEnum,
-    SoapAttributeType,
-    ValueFixupEnum,
-]
+class WriteObjectInfo(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class __BinaryParser(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class __BinaryWriter(Object):
+    """"""
+
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

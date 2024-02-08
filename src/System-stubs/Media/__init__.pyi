@@ -2,188 +2,248 @@ from __future__ import annotations
 
 from typing import Generic
 from typing import TypeVar
-from typing import Union
 from typing import overload
 
-from System import Boolean
 from System import EventHandler
 from System import IDisposable
-from System import Int32
 from System import Object
-from System import String
-from System import Void
+from System import Type
 from System.ComponentModel import AsyncCompletedEventHandler
 from System.ComponentModel import Component
 from System.ComponentModel import IComponent
+from System.ComponentModel import IContainer
+from System.ComponentModel import ISite
 from System.IO import Stream
+from System.Runtime.Remoting import ObjRef
 from System.Runtime.Serialization import ISerializable
-
-# ---------- Types ---------- #
+from System.Runtime.Serialization import SerializationInfo
+from System.Runtime.Serialization import StreamingContext
 
 T = TypeVar("T")
-
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-ObjectType = Object
-StringType = Union[str, String]
-VoidType = Union[None, Void]
 
 class EventType(Generic[T]):
     def __iadd__(self, other: T): ...
     def __isub__(self, other: T): ...
 
-# ---------- Classes ---------- #
-
-class SoundPlayer(Component, IComponent, IDisposable, ISerializable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+class SoundPlayer(Component, IComponent, ISerializable, IDisposable):
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, soundLocation: StringType): ...
+    def __init__(self, stream: Stream):
+        """
+
+        :param stream:
+        """
     @overload
-    def __init__(self, stream: Stream): ...
+    def __init__(self, soundLocation: str):
+        """
 
-    # ---------- Properties ---------- #
-
+        :param soundLocation:
+        """
     @property
-    def IsLoadCompleted(self) -> BooleanType: ...
+    def Container(self) -> IContainer:
+        """
+
+        :return:
+        """
     @property
-    def LoadTimeout(self) -> IntType: ...
+    def IsLoadCompleted(self) -> bool:
+        """
+
+        :return:
+        """
+    @property
+    def LoadTimeout(self) -> int:
+        """
+
+        :return:
+        """
     @LoadTimeout.setter
-    def LoadTimeout(self, value: IntType) -> None: ...
+    def LoadTimeout(self, value: int) -> None: ...
     @property
-    def SoundLocation(self) -> StringType: ...
+    def Site(self) -> ISite:
+        """
+
+        :return:
+        """
+    @Site.setter
+    def Site(self, value: ISite) -> None: ...
+    @property
+    def SoundLocation(self) -> str:
+        """
+
+        :return:
+        """
     @SoundLocation.setter
-    def SoundLocation(self, value: StringType) -> None: ...
+    def SoundLocation(self, value: str) -> None: ...
     @property
-    def Stream(self) -> Stream: ...
+    def Stream(self) -> Stream:
+        """
+
+        :return:
+        """
     @Stream.setter
     def Stream(self, value: Stream) -> None: ...
     @property
-    def Tag(self) -> ObjectType: ...
+    def Tag(self) -> object:
+        """
+
+        :return:
+        """
     @Tag.setter
-    def Tag(self, value: ObjectType) -> None: ...
+    def Tag(self, value: object) -> None: ...
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
 
-    # ---------- Methods ---------- #
+        :param requestedType:
+        :return:
+        """
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    def Load(self) -> VoidType: ...
-    def LoadAsync(self) -> VoidType: ...
-    def Play(self) -> VoidType: ...
-    def PlayLooping(self) -> VoidType: ...
-    def PlaySync(self) -> VoidType: ...
-    def Stop(self) -> VoidType: ...
-    def add_LoadCompleted(self, value: AsyncCompletedEventHandler) -> VoidType: ...
-    def add_SoundLocationChanged(self, value: EventHandler) -> VoidType: ...
-    def add_StreamChanged(self, value: EventHandler) -> VoidType: ...
-    def get_IsLoadCompleted(self) -> BooleanType: ...
-    def get_LoadTimeout(self) -> IntType: ...
-    def get_SoundLocation(self) -> StringType: ...
-    def get_Stream(self) -> Stream: ...
-    def get_Tag(self) -> ObjectType: ...
-    def remove_LoadCompleted(self, value: AsyncCompletedEventHandler) -> VoidType: ...
-    def remove_SoundLocationChanged(self, value: EventHandler) -> VoidType: ...
-    def remove_StreamChanged(self, value: EventHandler) -> VoidType: ...
-    def set_LoadTimeout(self, value: IntType) -> VoidType: ...
-    def set_SoundLocation(self, value: StringType) -> VoidType: ...
-    def set_Stream(self, value: Stream) -> VoidType: ...
-    def set_Tag(self, value: ObjectType) -> VoidType: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Events ---------- #
+        :return:
+        """
+    def GetLifetimeService(self) -> object:
+        """
 
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeLifetimeService(self) -> object:
+        """
+
+        :return:
+        """
+    def Load(self) -> None:
+        """"""
+    def LoadAsync(self) -> None:
+        """"""
+    def Play(self) -> None:
+        """"""
+    def PlayLooping(self) -> None:
+        """"""
+    def PlaySync(self) -> None:
+        """"""
+    def Stop(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    Disposed: EventType[EventHandler] = ...
+    """"""
     LoadCompleted: EventType[AsyncCompletedEventHandler] = ...
-
+    """"""
     SoundLocationChanged: EventType[EventHandler] = ...
-
+    """"""
     StreamChanged: EventType[EventHandler] = ...
+    """"""
 
-    # No Sub Classes
+class SystemSound(Object):
+    """"""
 
-    # No Sub Structs
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-class SystemSound(ObjectType):
-    # No Fields
+        :return:
+        """
+    def Play(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Constructors
+        :return:
+        """
 
-    # No Properties
+class SystemSounds(Object):
+    """"""
 
-    # ---------- Methods ---------- #
-
-    def Play(self) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class SystemSounds(ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+    @classmethod
     @property
-    def Asterisk() -> SystemSound: ...
-    @staticmethod
+    def Asterisk(cls) -> SystemSound:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def Beep() -> SystemSound: ...
-    @staticmethod
+    def Beep(cls) -> SystemSound:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def Exclamation() -> SystemSound: ...
-    @staticmethod
+    def Exclamation(cls) -> SystemSound:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def Hand() -> SystemSound: ...
-    @staticmethod
+    def Hand(cls) -> SystemSound:
+        """
+
+        :return:
+        """
+    @classmethod
     @property
-    def Question() -> SystemSound: ...
+    def Question(cls) -> SystemSound:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    @staticmethod
-    def get_Asterisk() -> SystemSound: ...
-    @staticmethod
-    def get_Beep() -> SystemSound: ...
-    @staticmethod
-    def get_Exclamation() -> SystemSound: ...
-    @staticmethod
-    def get_Hand() -> SystemSound: ...
-    @staticmethod
-    def get_Question() -> SystemSound: ...
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Events
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    SoundPlayer,
-    SystemSound,
-    SystemSounds,
-]
+        :return:
+        """

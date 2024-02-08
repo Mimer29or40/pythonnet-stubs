@@ -2,20 +2,15 @@ from __future__ import annotations
 
 from abc import ABC
 from typing import Tuple
-from typing import Union
 
 from System import Attribute
-from System import Boolean
 from System import Enum
 from System import Guid
-from System import Int32
 from System import IntPtr
 from System import MarshalByRefObject
 from System import Object
-from System import String
 from System import Type
 from System import ValueType
-from System import Void
 from System.Runtime.InteropServices import _Attribute
 from System.Runtime.Remoting import IRemotingTypeInfo
 from System.Runtime.Remoting import ObjRef
@@ -29,184 +24,395 @@ from System.Runtime.Remoting.Messaging import IMethodCallMessage
 from System.Runtime.Serialization import SerializationInfo
 from System.Runtime.Serialization import StreamingContext
 
-# ---------- Types ---------- #
+class AgileAsyncWorkerItem(Object):
+    """"""
 
-BooleanType = Union[bool, Boolean]
-IntType = Union[int, Int32]
-NIntType = Union[int, IntPtr]
-ObjectType = Object
-StringType = Union[str, String]
-TypeType = Union[type, Type]
-VoidType = Union[None, Void]
+    def __init__(self, message: IMethodCallMessage, ar: AsyncResult, target: object):
+        """
 
-# ---------- Classes ---------- #
+        :param message:
+        :param ar:
+        :param target:
+        """
+    def DoAsyncCall(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-class AgileAsyncWorkerItem(ObjectType):
-    # No Fields
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # ---------- Constructors ---------- #
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    def __init__(self, message: IMethodCallMessage, ar: AsyncResult, target: ObjectType): ...
+        :return:
+        """
+    @classmethod
+    def ThreadPoolCallBack(cls, o: object) -> None:
+        """
 
-    # No Properties
+        :param o:
+        """
+    def ToString(self) -> str:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
 
-    def DoAsyncCall(self) -> VoidType: ...
-    @staticmethod
-    def ThreadPoolCallBack(o: ObjectType) -> VoidType: ...
+class CallType(Enum):
+    """"""
 
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class ProxyAttribute(Attribute, _Attribute, IContextAttribute):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self): ...
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CreateInstance(self, serverType: TypeType) -> MarshalByRefObject: ...
-    def CreateProxy(
-        self, objRef: ObjRef, serverType: TypeType, serverObject: ObjectType, serverContext: Context
-    ) -> RealProxy: ...
-    def GetPropertiesForNewContext(self, msg: IConstructionCallMessage) -> VoidType: ...
-    def IsContextOK(self, ctx: Context, msg: IConstructionCallMessage) -> BooleanType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RealProxy(ABC, ObjectType):
-    # No Fields
-
-    # No Constructors
-
-    # No Properties
-
-    # ---------- Methods ---------- #
-
-    def CreateObjRef(self, requestedType: TypeType) -> ObjRef: ...
-    def GetCOMIUnknown(self, fIsMarshalled: BooleanType) -> NIntType: ...
-    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> VoidType: ...
-    def GetProxiedType(self) -> TypeType: ...
-    @staticmethod
-    def GetStubData(rp: RealProxy) -> ObjectType: ...
-    def GetTransparentProxy(self) -> ObjectType: ...
-    def InitializeServerObject(
-        self, ctorMsg: IConstructionCallMessage
-    ) -> IConstructionReturnMessage: ...
-    def Invoke(self, msg: IMessage) -> IMessage: ...
-    def SetCOMIUnknown(self, i: NIntType) -> VoidType: ...
-    @staticmethod
-    def SetStubData(rp: RealProxy, stubData: ObjectType) -> VoidType: ...
-    def SupportsInterface(self, iid: Guid) -> Tuple[NIntType, Guid]: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-class RemotingProxy(RealProxy, IRemotingTypeInfo):
-    # No Fields
-
-    # ---------- Constructors ---------- #
-
-    def __init__(self, serverType: TypeType): ...
-
-    # ---------- Properties ---------- #
-
-    @property
-    def TypeName(self) -> StringType: ...
-    @TypeName.setter
-    def TypeName(self, value: StringType) -> None: ...
-
-    # ---------- Methods ---------- #
-
-    def CanCastTo(self, castType: TypeType, o: ObjectType) -> BooleanType: ...
-    def GetCOMIUnknown(self, fIsBeingMarshalled: BooleanType) -> NIntType: ...
-    def Invoke(self, reqMsg: IMessage) -> IMessage: ...
-    def SetCOMIUnknown(self, i: NIntType) -> VoidType: ...
-    def get_TypeName(self) -> StringType: ...
-    def set_TypeName(self, value: StringType) -> VoidType: ...
-
-    # No Events
-
-    # No Sub Classes
-
-    # No Sub Structs
-
-    # No Sub Interfaces
-
-    # No Sub Enums
-
-# ---------- Structs ---------- #
+    InvalidCall: CallType = ...
+    """"""
+    MethodCall: CallType = ...
+    """"""
+    ConstructorCall: CallType = ...
+    """"""
 
 class MessageData(ValueType):
     """"""
 
-    # No Fields
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Constructors
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Properties
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Methods
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Events
+        :return:
+        """
 
-    # No Sub Classes
+class ProxyAttribute(Attribute, _Attribute, IContextAttribute):
+    """"""
 
-    # No Sub Structs
+    def __init__(self):
+        """"""
+    @property
+    def TypeId(self) -> object:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def CreateInstance(self, serverType: Type) -> MarshalByRefObject:
+        """
 
-    # No Sub Enums
+        :param serverType:
+        :return:
+        """
+    def CreateProxy(
+        self, objRef: ObjRef, serverType: Type, serverObject: object, serverContext: Context
+    ) -> RealProxy:
+        """
 
-# No Interfaces
+        :param objRef:
+        :param serverType:
+        :param serverObject:
+        :param serverContext:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-# ---------- Enums ---------- #
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-class CallType(Enum):
-    InvalidCall = 0
-    MethodCall = 1
-    ConstructorCall = 2
+        :return:
+        """
+    def GetIDsOfNames(
+        self, riid: Guid, rgszNames: IntPtr, cNames: int, lcid: int, rgDispId: IntPtr
+    ) -> None:
+        """
+
+        :param riid:
+        :param rgszNames:
+        :param cNames:
+        :param lcid:
+        :param rgDispId:
+        """
+    def GetPropertiesForNewContext(self, msg: IConstructionCallMessage) -> None:
+        """
+
+        :param msg:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTypeInfo(self, iTInfo: int, lcid: int, ppTInfo: IntPtr) -> None:
+        """
+
+        :param iTInfo:
+        :param lcid:
+        :param ppTInfo:
+        """
+    def GetTypeInfoCount(self, pcTInfo: int) -> Tuple[None, int]:
+        """
+
+        :param pcTInfo:
+        """
+    def Invoke(
+        self,
+        dispIdMember: int,
+        riid: Guid,
+        lcid: int,
+        wFlags: int,
+        pDispParams: IntPtr,
+        pVarResult: IntPtr,
+        pExcepInfo: IntPtr,
+        puArgErr: IntPtr,
+    ) -> None:
+        """
+
+        :param dispIdMember:
+        :param riid:
+        :param lcid:
+        :param wFlags:
+        :param pDispParams:
+        :param pVarResult:
+        :param pExcepInfo:
+        :param puArgErr:
+        """
+    def IsContextOK(self, ctx: Context, msg: IConstructionCallMessage) -> bool:
+        """
+
+        :param ctx:
+        :param msg:
+        :return:
+        """
+    def IsDefaultAttribute(self) -> bool:
+        """
+
+        :return:
+        """
+    def Match(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+
+class RealProxy(ABC, Object):
+    """"""
+
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetCOMIUnknown(self, fIsMarshalled: bool) -> IntPtr:
+        """
+
+        :param fIsMarshalled:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetProxiedType(self) -> Type:
+        """
+
+        :return:
+        """
+    @classmethod
+    def GetStubData(cls, rp: RealProxy) -> object:
+        """
+
+        :param rp:
+        :return:
+        """
+    def GetTransparentProxy(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeServerObject(
+        self, ctorMsg: IConstructionCallMessage
+    ) -> IConstructionReturnMessage:
+        """
+
+        :param ctorMsg:
+        :return:
+        """
+    def Invoke(self, msg: IMessage) -> IMessage:
+        """
+
+        :param msg:
+        :return:
+        """
+    def SetCOMIUnknown(self, i: IntPtr) -> None:
+        """
+
+        :param i:
+        """
+    @classmethod
+    def SetStubData(cls, rp: RealProxy, stubData: object) -> None:
+        """
+
+        :param rp:
+        :param stubData:
+        """
+    def SupportsInterface(self, iid: Guid) -> IntPtr:
+        """
+
+        :param iid:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class RealProxyFlags(Enum):
-    # None = 0
-    RemotingProxy = 1
-    Initialized = 2
+    """"""
 
-# No Delegates
+    _None: RealProxyFlags = ...
+    """"""
+    RemotingProxy: RealProxyFlags = ...
+    """"""
+    Initialized: RealProxyFlags = ...
+    """"""
 
-__all__ = [
-    AgileAsyncWorkerItem,
-    ProxyAttribute,
-    RealProxy,
-    RemotingProxy,
-    MessageData,
-    CallType,
-    RealProxyFlags,
-]
+class RemotingProxy(RealProxy, IRemotingTypeInfo):
+    """"""
+
+    def __init__(self, serverType: Type):
+        """
+
+        :param serverType:
+        """
+    @property
+    def TypeName(self) -> str:
+        """
+
+        :return:
+        """
+    @TypeName.setter
+    def TypeName(self, value: str) -> None: ...
+    def CanCastTo(self, fromType: Type, o: object) -> bool:
+        """
+
+        :param fromType:
+        :param o:
+        :return:
+        """
+    def CreateObjRef(self, requestedType: Type) -> ObjRef:
+        """
+
+        :param requestedType:
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
+
+        :param obj:
+        :return:
+        """
+    def GetCOMIUnknown(self, fIsMarshalled: bool) -> IntPtr:
+        """
+
+        :param fIsMarshalled:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
+
+        :return:
+        """
+    def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+        """
+
+        :param info:
+        :param context:
+        """
+    def GetProxiedType(self) -> Type:
+        """
+
+        :return:
+        """
+    def GetTransparentProxy(self) -> object:
+        """
+
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def InitializeServerObject(
+        self, ctorMsg: IConstructionCallMessage
+    ) -> IConstructionReturnMessage:
+        """
+
+        :param ctorMsg:
+        :return:
+        """
+    def Invoke(self, msg: IMessage) -> IMessage:
+        """
+
+        :param msg:
+        :return:
+        """
+    def SetCOMIUnknown(self, i: IntPtr) -> None:
+        """
+
+        :param i:
+        """
+    def SupportsInterface(self, iid: Guid) -> IntPtr:
+        """
+
+        :param iid:
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """

@@ -1,1006 +1,2665 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Union
+from typing import TypeVar
 from typing import overload
 
-from System import Boolean
+from System import Array
 from System import IDisposable
 from System import IntPtr
+from System import Type
 from System.Runtime.InteropServices import CriticalHandle
 from System.Runtime.InteropServices import SafeBuffer
 from System.Runtime.InteropServices import SafeHandle
+from System.Runtime.InteropServices import T
 
-# ---------- Types ---------- #
-
-BooleanType = Union[bool, Boolean]
-NIntType = Union[int, IntPtr]
-
-# ---------- Classes ---------- #
+T = TypeVar("T")
 
 class CriticalHandleMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IsInvalid(self) -> BooleanType: ...
+    def IsClosed(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    def get_IsInvalid(self) -> BooleanType: ...
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class CriticalHandleZeroOrMinusOneIsInvalid(ABC, CriticalHandle, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IsInvalid(self) -> BooleanType: ...
+    def IsClosed(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    def get_IsInvalid(self) -> BooleanType: ...
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Events
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Interfaces
-
-    # No Sub Enums
+        :return:
+        """
 
 class SafeAccessTokenHandle(SafeHandle, IDisposable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, handle: IntPtr):
+        """
 
-    def __init__(self, handle: NIntType): ...
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+        :param handle:
+        """
+    @classmethod
     @property
-    def InvalidHandle() -> SafeAccessTokenHandle: ...
+    def InvalidHandle(cls) -> SafeAccessTokenHandle:
+        """
+
+        :return:
+        """
     @property
-    def IsInvalid(self) -> BooleanType: ...
+    def IsClosed(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    @staticmethod
-    def get_InvalidHandle() -> SafeAccessTokenHandle: ...
-    def get_IsInvalid(self) -> BooleanType: ...
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Events
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeAxlBufferHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeBCryptAlgorithmHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeBCryptHashHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeBCryptKeyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeCapiHandleBase(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeCapiHashHandle(SafeCapiHandleBase, IDisposable):
-    # No Fields
+    """"""
 
-    # No Constructors
-
-    # ---------- Properties ---------- #
-
-    @staticmethod
+    @classmethod
     @property
-    def InvalidHandle() -> SafeCapiHashHandle: ...
+    def InvalidHandle(cls) -> SafeCapiHashHandle:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    @staticmethod
-    def get_InvalidHandle() -> SafeCapiHashHandle: ...
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Sub Classes
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeCapiKeyHandle(SafeCapiHandleBase, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeCspHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
-    # No Fields
+    """"""
 
-    # No Constructors
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    def Duplicate(self) -> SafeCspHandle: ...
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Duplicate(self) -> SafeCspHandle:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeEventLogReadHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeEventLogWriteHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, preexistingHandle: IntPtr, ownsHandle: bool):
+        """
 
-    def __init__(self, preexistingHandle: NIntType, ownsHandle: BooleanType): ...
+        :param preexistingHandle:
+        :param ownsHandle:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Events
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeFileMapViewHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeFileMappingHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeFindHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeHandleMinusOneIsInvalid(ABC, SafeHandle, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IsInvalid(self) -> BooleanType: ...
+    def IsClosed(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    def get_IsInvalid(self) -> BooleanType: ...
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Events
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeHandleZeroOrMinusOneIsInvalid(ABC, SafeHandle, IDisposable):
-    # No Fields
-
-    # No Constructors
-
-    # ---------- Properties ---------- #
+    """"""
 
     @property
-    def IsInvalid(self) -> BooleanType: ...
+    def IsClosed(self) -> bool:
+        """
 
-    # ---------- Methods ---------- #
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    def get_IsInvalid(self) -> BooleanType: ...
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Events
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeLibraryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeLocalAllocHandle(SafeBuffer, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def ByteLength(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    def AcquirePointer(self, pointer: int) -> None:
+        """
 
-    # No Events
+        :param pointer:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Sub Classes
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Initialize(self, numElements: int) -> None:
+        """
+
+        :param numElements:
+        """
+    @overload
+    def Initialize(self, numBytes: int) -> None:
+        """
+
+        :param numBytes:
+        """
+    @overload
+    def Initialize(self, numElements: int, sizeOfEachElement: int) -> None:
+        """
+
+        :param numElements:
+        :param sizeOfEachElement:
+        """
+    def Read(self, byteOffset: int) -> T:
+        """
+
+        :param byteOffset:
+        :return:
+        """
+    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+        """
+
+        :param byteOffset:
+        :param array:
+        :param index:
+        :param count:
+        """
+    def ReleasePointer(self) -> None:
+        """"""
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, byteOffset: int, value: T) -> None:
+        """
+
+        :param byteOffset:
+        :param value:
+        """
+    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+        """
+
+        :param byteOffset:
+        :param array:
+        :param index:
+        :param count:
+        """
 
 class SafeLocalMemHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeLsaLogonProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeLsaMemoryHandle(SafeBuffer, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def ByteLength(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    def AcquirePointer(self, pointer: int) -> None:
+        """
 
-    # No Events
+        :param pointer:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Sub Classes
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Initialize(self, numElements: int) -> None:
+        """
+
+        :param numElements:
+        """
+    @overload
+    def Initialize(self, numBytes: int) -> None:
+        """
+
+        :param numBytes:
+        """
+    @overload
+    def Initialize(self, numElements: int, sizeOfEachElement: int) -> None:
+        """
+
+        :param numElements:
+        :param sizeOfEachElement:
+        """
+    def Read(self, byteOffset: int) -> T:
+        """
+
+        :param byteOffset:
+        :return:
+        """
+    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+        """
+
+        :param byteOffset:
+        :param array:
+        :param index:
+        :param count:
+        """
+    def ReleasePointer(self) -> None:
+        """"""
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, byteOffset: int, value: T) -> None:
+        """
+
+        :param byteOffset:
+        :param value:
+        """
+    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+        """
+
+        :param byteOffset:
+        :param array:
+        :param index:
+        :param count:
+        """
 
 class SafeLsaPolicyHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeLsaReturnBufferHandle(SafeBuffer, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def ByteLength(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    def AcquirePointer(self, pointer: int) -> None:
+        """
 
-    # No Events
+        :param pointer:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Sub Classes
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Initialize(self, numElements: int) -> None:
+        """
+
+        :param numElements:
+        """
+    @overload
+    def Initialize(self, numBytes: int) -> None:
+        """
+
+        :param numBytes:
+        """
+    @overload
+    def Initialize(self, numElements: int, sizeOfEachElement: int) -> None:
+        """
+
+        :param numElements:
+        :param sizeOfEachElement:
+        """
+    def Read(self, byteOffset: int) -> T:
+        """
+
+        :param byteOffset:
+        :return:
+        """
+    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+        """
+
+        :param byteOffset:
+        :param array:
+        :param index:
+        :param count:
+        """
+    def ReleasePointer(self) -> None:
+        """"""
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, byteOffset: int, value: T) -> None:
+        """
+
+        :param byteOffset:
+        :param value:
+        """
+    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+        """
+
+        :param byteOffset:
+        :param array:
+        :param index:
+        :param count:
+        """
 
 class SafeMemoryMappedFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeMemoryMappedViewHandle(SafeBuffer, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def ByteLength(self) -> int:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    def AcquirePointer(self, pointer: int) -> None:
+        """
 
-    # No Events
+        :param pointer:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Sub Classes
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    @overload
+    def Initialize(self, numElements: int) -> None:
+        """
+
+        :param numElements:
+        """
+    @overload
+    def Initialize(self, numBytes: int) -> None:
+        """
+
+        :param numBytes:
+        """
+    @overload
+    def Initialize(self, numElements: int, sizeOfEachElement: int) -> None:
+        """
+
+        :param numElements:
+        :param sizeOfEachElement:
+        """
+    def Read(self, byteOffset: int) -> T:
+        """
+
+        :param byteOffset:
+        :return:
+        """
+    def ReadArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+        """
+
+        :param byteOffset:
+        :param array:
+        :param index:
+        :param count:
+        """
+    def ReleasePointer(self) -> None:
+        """"""
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
+    def Write(self, byteOffset: int, value: T) -> None:
+        """
+
+        :param byteOffset:
+        :param value:
+        """
+    def WriteArray(self, byteOffset: int, array: Array[T], index: int, count: int) -> None:
+        """
+
+        :param byteOffset:
+        :param array:
+        :param index:
+        :param count:
+        """
 
 class SafeNCryptHandle(ABC, SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeNCryptKeyHandle(SafeNCryptHandle, IDisposable):
-    # No Fields
-
-    # ---------- Constructors ---------- #
+    """"""
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        """"""
     @overload
-    def __init__(self, handle: NIntType, parentHandle: SafeHandle): ...
+    def __init__(self, handle: IntPtr, parentHandle: SafeHandle):
+        """
 
-    # No Properties
+        :param handle:
+        :param parentHandle:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Events
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Sub Classes
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Interfaces
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
+
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeNCryptProviderHandle(SafeNCryptHandle, IDisposable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeNCryptSecretHandle(SafeNCryptHandle, IDisposable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self):
+        """"""
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    def __init__(self): ...
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafePEFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafePerfProviderHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafePipeHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, preexistingHandle: IntPtr, ownsHandle: bool):
+        """
 
-    def __init__(self, preexistingHandle: NIntType, ownsHandle: BooleanType): ...
+        :param preexistingHandle:
+        :param ownsHandle:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Events
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeProcessHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    def __init__(self, existingHandle: IntPtr, ownsHandle: bool):
+        """
 
-    # No Constructors
+        :param existingHandle:
+        :param ownsHandle:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Events
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeRegistryHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, preexistingHandle: IntPtr, ownsHandle: bool):
+        """
 
-    def __init__(self, preexistingHandle: NIntType, ownsHandle: BooleanType): ...
+        :param preexistingHandle:
+        :param ownsHandle:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Events
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeThreadHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeTimerHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeUserTokenHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeViewOfFileHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
+        :return:
+        """
 
 class SafeWaitHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
-    # No Fields
+    """"""
 
-    # ---------- Constructors ---------- #
+    def __init__(self, existingHandle: IntPtr, ownsHandle: bool):
+        """
 
-    def __init__(self, existingHandle: NIntType, ownsHandle: BooleanType): ...
+        :param existingHandle:
+        :param ownsHandle:
+        """
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Methods
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Events
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Sub Classes
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Structs
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Enums
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
+
+        :return:
+        """
 
 class SafeX509ChainHandle(SafeHandleZeroOrMinusOneIsInvalid, IDisposable):
     """"""
 
-    # No Fields
+    @property
+    def IsClosed(self) -> bool:
+        """
 
-    # No Constructors
+        :return:
+        """
+    @property
+    def IsInvalid(self) -> bool:
+        """
 
-    # No Properties
+        :return:
+        """
+    def Close(self) -> None:
+        """"""
+    def DangerousAddRef(self, success: bool) -> None:
+        """
 
-    # No Methods
+        :param success:
+        """
+    def DangerousGetHandle(self) -> IntPtr:
+        """
 
-    # No Events
+        :return:
+        """
+    def DangerousRelease(self) -> None:
+        """"""
+    def Dispose(self) -> None:
+        """"""
+    def Equals(self, obj: object) -> bool:
+        """
 
-    # No Sub Classes
+        :param obj:
+        :return:
+        """
+    def GetHashCode(self) -> int:
+        """
 
-    # No Sub Structs
+        :return:
+        """
+    def GetType(self) -> Type:
+        """
 
-    # No Sub Interfaces
+        :return:
+        """
+    def SetHandleAsInvalid(self) -> None:
+        """"""
+    def ToString(self) -> str:
+        """
 
-    # No Sub Enums
-
-# No Structs
-
-# No Interfaces
-
-# No Enums
-
-# No Delegates
-
-__all__ = [
-    CriticalHandleMinusOneIsInvalid,
-    CriticalHandleZeroOrMinusOneIsInvalid,
-    SafeAccessTokenHandle,
-    SafeAxlBufferHandle,
-    SafeBCryptAlgorithmHandle,
-    SafeBCryptHashHandle,
-    SafeBCryptKeyHandle,
-    SafeCapiHandleBase,
-    SafeCapiHashHandle,
-    SafeCapiKeyHandle,
-    SafeCspHandle,
-    SafeEventLogReadHandle,
-    SafeEventLogWriteHandle,
-    SafeFileHandle,
-    SafeFileMapViewHandle,
-    SafeFileMappingHandle,
-    SafeFindHandle,
-    SafeHandleMinusOneIsInvalid,
-    SafeHandleZeroOrMinusOneIsInvalid,
-    SafeLibraryHandle,
-    SafeLocalAllocHandle,
-    SafeLocalMemHandle,
-    SafeLsaLogonProcessHandle,
-    SafeLsaMemoryHandle,
-    SafeLsaPolicyHandle,
-    SafeLsaReturnBufferHandle,
-    SafeMemoryMappedFileHandle,
-    SafeMemoryMappedViewHandle,
-    SafeNCryptHandle,
-    SafeNCryptKeyHandle,
-    SafeNCryptProviderHandle,
-    SafeNCryptSecretHandle,
-    SafePEFileHandle,
-    SafePerfProviderHandle,
-    SafePipeHandle,
-    SafeProcessHandle,
-    SafeRegistryHandle,
-    SafeThreadHandle,
-    SafeTimerHandle,
-    SafeUserTokenHandle,
-    SafeViewOfFileHandle,
-    SafeWaitHandle,
-    SafeX509ChainHandle,
-]
+        :return:
+        """
