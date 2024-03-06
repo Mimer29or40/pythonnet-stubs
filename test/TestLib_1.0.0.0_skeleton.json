@@ -2,6 +2,784 @@
   "name": "TestLib",
   "version": "1.0.0.0",
   "namespaces": {
+    "Microsoft.CodeAnalysis": {
+      "name": "Microsoft.CodeAnalysis",
+      "types": {
+        "Microsoft.CodeAnalysis.EmbeddedAttribute": {
+          "type": "class",
+          "name": "EmbeddedAttribute",
+          "namespace": "Microsoft.CodeAnalysis",
+          "nested": null,
+          "abstract": false,
+          "generic_args": [],
+          "super_class": "System:Attribute",
+          "interfaces": [
+            "System.Runtime.InteropServices:_Attribute"
+          ],
+          "fields": {},
+          "constructors": {
+            "Microsoft.CodeAnalysis:EmbeddedAttribute.__init__()": {
+              "declaring_type": "Microsoft.CodeAnalysis:EmbeddedAttribute",
+              "parameters": []
+            }
+          },
+          "properties": {
+            "System:Attribute.TypeId": {
+              "name": "TypeId",
+              "declaring_type": "System:Attribute",
+              "type": "System:Object",
+              "setter": false,
+              "static": false
+            }
+          },
+          "methods": {
+            "System:Object.Equals(System:Object)": {
+              "name": "Equals",
+              "declaring_type": "System:Object",
+              "parameters": [
+                {
+                  "name": "obj",
+                  "type": "System:Object",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System:Object.GetHashCode()": {
+              "name": "GetHashCode",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:Int32"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.GetIDsOfNames(System:*Guid, System:IntPtr, System:UInt32, System:UInt32, System:IntPtr)": {
+              "name": "GetIDsOfNames",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "riid",
+                  "type": "System:*Guid",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "rgszNames",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "cNames",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "lcid",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "rgDispId",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "System:Object.GetType()": {
+              "name": "GetType",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:Type"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.GetTypeInfo(System:UInt32, System:UInt32, System:IntPtr)": {
+              "name": "GetTypeInfo",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "iTInfo",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "lcid",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "ppTInfo",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.GetTypeInfoCount(System:*UInt32)": {
+              "name": "GetTypeInfoCount",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "pcTInfo",
+                  "type": "System:*UInt32",
+                  "default": false,
+                  "out": true
+                }
+              ],
+              "return_types": [
+                "System:Void",
+                "System:*UInt32"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.Invoke(System:UInt32, System:*Guid, System:UInt32, System:Int16, System:IntPtr, System:IntPtr, System:IntPtr, System:IntPtr)": {
+              "name": "Invoke",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "dispIdMember",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "riid",
+                  "type": "System:*Guid",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "lcid",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "wFlags",
+                  "type": "System:Int16",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "pDispParams",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "pVarResult",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "pExcepInfo",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "puArgErr",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "System:Attribute.IsDefaultAttribute()": {
+              "name": "IsDefaultAttribute",
+              "declaring_type": "System:Attribute",
+              "parameters": [],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System:Attribute.Match(System:Object)": {
+              "name": "Match",
+              "declaring_type": "System:Attribute",
+              "parameters": [
+                {
+                  "name": "obj",
+                  "type": "System:Object",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System:Object.ToString()": {
+              "name": "ToString",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:String"
+              ],
+              "static": false
+            }
+          },
+          "events": {},
+          "nested_types": {}
+        }
+      }
+    },
+    "System.Runtime.CompilerServices": {
+      "name": "System.Runtime.CompilerServices",
+      "types": {
+        "System.Runtime.CompilerServices.NullableAttribute": {
+          "type": "class",
+          "name": "NullableAttribute",
+          "namespace": "System.Runtime.CompilerServices",
+          "nested": null,
+          "abstract": false,
+          "generic_args": [],
+          "super_class": "System:Attribute",
+          "interfaces": [
+            "System.Runtime.InteropServices:_Attribute"
+          ],
+          "fields": {
+            "System.Runtime.CompilerServices:NullableAttribute.NullableFlags": {
+              "name": "NullableFlags",
+              "declaring_type": "System.Runtime.CompilerServices:NullableAttribute",
+              "return_type": "System:Array[System:Byte]",
+              "static": false
+            }
+          },
+          "constructors": {
+            "System.Runtime.CompilerServices:NullableAttribute.__init__(System:Array[System:Byte])": {
+              "declaring_type": "System.Runtime.CompilerServices:NullableAttribute",
+              "parameters": [
+                {
+                  "name": "param",
+                  "type": "System:Array[System:Byte]",
+                  "default": true,
+                  "out": false
+                }
+              ]
+            },
+            "System.Runtime.CompilerServices:NullableAttribute.__init__(System:Byte)": {
+              "declaring_type": "System.Runtime.CompilerServices:NullableAttribute",
+              "parameters": [
+                {
+                  "name": "param",
+                  "type": "System:Byte",
+                  "default": true,
+                  "out": false
+                }
+              ]
+            }
+          },
+          "properties": {
+            "System:Attribute.TypeId": {
+              "name": "TypeId",
+              "declaring_type": "System:Attribute",
+              "type": "System:Object",
+              "setter": false,
+              "static": false
+            }
+          },
+          "methods": {
+            "System:Object.Equals(System:Object)": {
+              "name": "Equals",
+              "declaring_type": "System:Object",
+              "parameters": [
+                {
+                  "name": "obj",
+                  "type": "System:Object",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System:Object.GetHashCode()": {
+              "name": "GetHashCode",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:Int32"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.GetIDsOfNames(System:*Guid, System:IntPtr, System:UInt32, System:UInt32, System:IntPtr)": {
+              "name": "GetIDsOfNames",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "riid",
+                  "type": "System:*Guid",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "rgszNames",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "cNames",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "lcid",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "rgDispId",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "System:Object.GetType()": {
+              "name": "GetType",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:Type"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.GetTypeInfo(System:UInt32, System:UInt32, System:IntPtr)": {
+              "name": "GetTypeInfo",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "iTInfo",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "lcid",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "ppTInfo",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.GetTypeInfoCount(System:*UInt32)": {
+              "name": "GetTypeInfoCount",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "pcTInfo",
+                  "type": "System:*UInt32",
+                  "default": false,
+                  "out": true
+                }
+              ],
+              "return_types": [
+                "System:Void",
+                "System:*UInt32"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.Invoke(System:UInt32, System:*Guid, System:UInt32, System:Int16, System:IntPtr, System:IntPtr, System:IntPtr, System:IntPtr)": {
+              "name": "Invoke",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "dispIdMember",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "riid",
+                  "type": "System:*Guid",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "lcid",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "wFlags",
+                  "type": "System:Int16",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "pDispParams",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "pVarResult",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "pExcepInfo",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "puArgErr",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "System:Attribute.IsDefaultAttribute()": {
+              "name": "IsDefaultAttribute",
+              "declaring_type": "System:Attribute",
+              "parameters": [],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System:Attribute.Match(System:Object)": {
+              "name": "Match",
+              "declaring_type": "System:Attribute",
+              "parameters": [
+                {
+                  "name": "obj",
+                  "type": "System:Object",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System:Object.ToString()": {
+              "name": "ToString",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:String"
+              ],
+              "static": false
+            }
+          },
+          "events": {},
+          "nested_types": {}
+        },
+        "System.Runtime.CompilerServices.NullableContextAttribute": {
+          "type": "class",
+          "name": "NullableContextAttribute",
+          "namespace": "System.Runtime.CompilerServices",
+          "nested": null,
+          "abstract": false,
+          "generic_args": [],
+          "super_class": "System:Attribute",
+          "interfaces": [
+            "System.Runtime.InteropServices:_Attribute"
+          ],
+          "fields": {
+            "System.Runtime.CompilerServices:NullableContextAttribute.Flag": {
+              "name": "Flag",
+              "declaring_type": "System.Runtime.CompilerServices:NullableContextAttribute",
+              "return_type": "System:Byte",
+              "static": false
+            }
+          },
+          "constructors": {
+            "System.Runtime.CompilerServices:NullableContextAttribute.__init__(System:Byte)": {
+              "declaring_type": "System.Runtime.CompilerServices:NullableContextAttribute",
+              "parameters": [
+                {
+                  "name": "param",
+                  "type": "System:Byte",
+                  "default": true,
+                  "out": false
+                }
+              ]
+            }
+          },
+          "properties": {
+            "System:Attribute.TypeId": {
+              "name": "TypeId",
+              "declaring_type": "System:Attribute",
+              "type": "System:Object",
+              "setter": false,
+              "static": false
+            }
+          },
+          "methods": {
+            "System:Object.Equals(System:Object)": {
+              "name": "Equals",
+              "declaring_type": "System:Object",
+              "parameters": [
+                {
+                  "name": "obj",
+                  "type": "System:Object",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System:Object.GetHashCode()": {
+              "name": "GetHashCode",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:Int32"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.GetIDsOfNames(System:*Guid, System:IntPtr, System:UInt32, System:UInt32, System:IntPtr)": {
+              "name": "GetIDsOfNames",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "riid",
+                  "type": "System:*Guid",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "rgszNames",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "cNames",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "lcid",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "rgDispId",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "System:Object.GetType()": {
+              "name": "GetType",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:Type"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.GetTypeInfo(System:UInt32, System:UInt32, System:IntPtr)": {
+              "name": "GetTypeInfo",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "iTInfo",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "lcid",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "ppTInfo",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.GetTypeInfoCount(System:*UInt32)": {
+              "name": "GetTypeInfoCount",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "pcTInfo",
+                  "type": "System:*UInt32",
+                  "default": false,
+                  "out": true
+                }
+              ],
+              "return_types": [
+                "System:Void",
+                "System:*UInt32"
+              ],
+              "static": false
+            },
+            "System.Runtime.InteropServices:_Attribute.Invoke(System:UInt32, System:*Guid, System:UInt32, System:Int16, System:IntPtr, System:IntPtr, System:IntPtr, System:IntPtr)": {
+              "name": "Invoke",
+              "declaring_type": "System.Runtime.InteropServices:_Attribute",
+              "parameters": [
+                {
+                  "name": "dispIdMember",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "riid",
+                  "type": "System:*Guid",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "lcid",
+                  "type": "System:UInt32",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "wFlags",
+                  "type": "System:Int16",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "pDispParams",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "pVarResult",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "pExcepInfo",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                },
+                {
+                  "name": "puArgErr",
+                  "type": "System:IntPtr",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Void"
+              ],
+              "static": false
+            },
+            "System:Attribute.IsDefaultAttribute()": {
+              "name": "IsDefaultAttribute",
+              "declaring_type": "System:Attribute",
+              "parameters": [],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System:Attribute.Match(System:Object)": {
+              "name": "Match",
+              "declaring_type": "System:Attribute",
+              "parameters": [
+                {
+                  "name": "obj",
+                  "type": "System:Object",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System:Object.ToString()": {
+              "name": "ToString",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:String"
+              ],
+              "static": false
+            }
+          },
+          "events": {},
+          "nested_types": {}
+        }
+      }
+    },
     "TestLib": {
       "name": "TestLib",
       "types": {
@@ -1373,7 +2151,7 @@
               "events": {},
               "nested_types": {}
             },
-            "TestLib:ClassWithNested.NestedDelegate": {
+            "TestLib:ClassWithNested.NestedDelegate()": {
               "type": "delegate",
               "name": "NestedDelegate",
               "namespace": "TestLib",
@@ -2612,7 +3390,7 @@
           "events": {},
           "nested_types": {}
         },
-        "TestLib.DelegateWithNoParametersNoReturn": {
+        "TestLib.DelegateWithNoParametersNoReturn()": {
           "type": "delegate",
           "name": "DelegateWithNoParametersNoReturn",
           "namespace": "TestLib",
@@ -2620,7 +3398,7 @@
           "parameters": [],
           "return_type": "System:Void"
         },
-        "TestLib.DelegateWithNoParametersReturn": {
+        "TestLib.DelegateWithNoParametersReturn()": {
           "type": "delegate",
           "name": "DelegateWithNoParametersReturn",
           "namespace": "TestLib",
@@ -2628,7 +3406,7 @@
           "parameters": [],
           "return_type": "System:Int32"
         },
-        "TestLib.DelegateWithParametersNoReturn": {
+        "TestLib.DelegateWithParametersNoReturn(System:Int32, System:Int32)": {
           "type": "delegate",
           "name": "DelegateWithParametersNoReturn",
           "namespace": "TestLib",
@@ -2649,7 +3427,7 @@
           ],
           "return_type": "System:Void"
         },
-        "TestLib.DelegateWithParametersReturn": {
+        "TestLib.DelegateWithParametersReturn(System:Int32, System:Int32)": {
           "type": "delegate",
           "name": "DelegateWithParametersReturn",
           "namespace": "TestLib",
@@ -3322,7 +4100,7 @@
               "events": {},
               "nested_types": {}
             },
-            "TestLib:IInterfaceWithNested.NestedDelegate": {
+            "TestLib:IInterfaceWithNested.NestedDelegate()": {
               "type": "delegate",
               "name": "NestedDelegate",
               "namespace": "TestLib",
@@ -4119,6 +4897,156 @@
             }
           },
           "methods": {},
+          "events": {},
+          "nested_types": {}
+        },
+        "TestLib.OverriddenProperty": {
+          "type": "class",
+          "name": "OverriddenProperty",
+          "namespace": "TestLib",
+          "nested": null,
+          "abstract": false,
+          "generic_args": [],
+          "super_class": "TestLib:ClassWithProperties",
+          "interfaces": [],
+          "fields": {},
+          "constructors": {
+            "TestLib:OverriddenProperty.__init__()": {
+              "declaring_type": "TestLib:OverriddenProperty",
+              "parameters": []
+            }
+          },
+          "properties": {
+            "TestLib:ClassWithProperties.InstanceProperty0": {
+              "name": "InstanceProperty0",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": true,
+              "static": false
+            },
+            "TestLib:ClassWithProperties.InstanceProperty1": {
+              "name": "InstanceProperty1",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": true,
+              "static": false
+            },
+            "TestLib:ClassWithProperties.InstanceProperty2": {
+              "name": "InstanceProperty2",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": true,
+              "static": false
+            },
+            "TestLib:ClassWithProperties.InstanceReadOnlyProperty0": {
+              "name": "InstanceReadOnlyProperty0",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": false,
+              "static": false
+            },
+            "TestLib:ClassWithProperties.InstanceReadOnlyProperty1": {
+              "name": "InstanceReadOnlyProperty1",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": false,
+              "static": false
+            },
+            "TestLib:ClassWithProperties.InstanceReadOnlyProperty2": {
+              "name": "InstanceReadOnlyProperty2",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": false,
+              "static": false
+            },
+            "TestLib:ClassWithProperties.StaticProperty0": {
+              "name": "StaticProperty0",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": true,
+              "static": true
+            },
+            "TestLib:ClassWithProperties.StaticProperty1": {
+              "name": "StaticProperty1",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": true,
+              "static": true
+            },
+            "TestLib:ClassWithProperties.StaticProperty2": {
+              "name": "StaticProperty2",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": true,
+              "static": true
+            },
+            "TestLib:ClassWithProperties.StaticReadOnlyProperty0": {
+              "name": "StaticReadOnlyProperty0",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": false,
+              "static": true
+            },
+            "TestLib:ClassWithProperties.StaticReadOnlyProperty1": {
+              "name": "StaticReadOnlyProperty1",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": false,
+              "static": true
+            },
+            "TestLib:ClassWithProperties.StaticReadOnlyProperty2": {
+              "name": "StaticReadOnlyProperty2",
+              "declaring_type": "TestLib:ClassWithProperties",
+              "type": "System:Int32",
+              "setter": false,
+              "static": true
+            }
+          },
+          "methods": {
+            "System:Object.Equals(System:Object)": {
+              "name": "Equals",
+              "declaring_type": "System:Object",
+              "parameters": [
+                {
+                  "name": "obj",
+                  "type": "System:Object",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System:Object.GetHashCode()": {
+              "name": "GetHashCode",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:Int32"
+              ],
+              "static": false
+            },
+            "System:Object.GetType()": {
+              "name": "GetType",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:Type"
+              ],
+              "static": false
+            },
+            "System:Object.ToString()": {
+              "name": "ToString",
+              "declaring_type": "System:Object",
+              "parameters": [],
+              "return_types": [
+                "System:String"
+              ],
+              "static": false
+            }
+          },
           "events": {},
           "nested_types": {}
         },
@@ -5487,7 +6415,7 @@
               "events": {},
               "nested_types": {}
             },
-            "TestLib:StructWithNested.NestedDelegate": {
+            "TestLib:StructWithNested.NestedDelegate()": {
               "type": "delegate",
               "name": "NestedDelegate",
               "namespace": "TestLib",

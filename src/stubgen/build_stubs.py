@@ -52,6 +52,9 @@ T = TypeVar("T")
 
 logger = get_logger(__name__)
 
+# TODO - Need to handle method that override methods in parent classes better
+# Example Object.Equals(Object) -> AFObject.Equals(AFObject)
+
 
 def verify_attribute(obj1, obj2, type: str, attribute: str, should_raise: bool = True) -> None:
     attr1 = getattr(obj1, attribute)
@@ -1135,17 +1138,26 @@ def build_property(
 ) -> Sequence[str]:
     indent_str: str = "    " * indent
 
-    lines: List[str] = []
-
-    self_cls: str = "self"
     if property.static:
-        self_cls = "cls"
-        lines.append(f"{indent_str}@classmethod")
+        imports.add_type(CType(name="ClassVar", namespace="typing"))
+        type_str: str = f"ClassVar[{build_type(property.type, imports, convert=True)}]"
+        if not property.setter:
+            imports.add_type(CType(name="Final", namespace="typing"))
+            type_str = f"Final[{type_str}]"
 
-    lines.append(f"{indent_str}@property")
+        doc_str: Sequence[str]
+        doc_node: Doc = doc.get(str(property))
+        if doc_node is not None:
+            doc_str = doc_node.doc_string(indent=indent, line_length=line_length)
+        else:
+            doc_str = [f'{indent_str}""""""']
+
+        return f"{indent_str}{property.name}: {type_str} = ...", *doc_str
+
+    lines: List[str] = [f"{indent_str}@property"]
 
     property_type: str = build_type(property.type, imports, convert=True)
-    lines.append(f"{indent_str}def {property.name}({self_cls}) -> {property_type}:")
+    lines.append(f"{indent_str}def {property.name}(self) -> {property_type}:")
 
     doc_str: Sequence[str]
     doc_node: Doc = doc.get(str(property))
@@ -1156,11 +1168,9 @@ def build_property(
     lines.extend(doc_str)
 
     if property.setter:
-        if property.static:
-            lines.append(f"{indent_str}@classmethod")
         lines.append(f"{indent_str}@{property.name}.setter")
         lines.append(
-            f"{indent_str}def {property.name}({self_cls}, " f"value: {property_type}) -> None: ..."
+            f"{indent_str}def {property.name}(self, " f"value: {property_type}) -> None: ..."
         )
 
     return tuple(lines)

@@ -22,6 +22,7 @@ from System import MulticastDelegate
 from System import Nullable
 from System.Reflection import Assembly
 from System.Reflection import AssemblyName
+from System.Reflection import BindingFlags
 from System.Reflection import ConstructorInfo
 from System.Reflection import EventInfo
 from System.Reflection import FieldInfo
@@ -225,9 +226,13 @@ def extract_property(info: PropertyInfo) -> CProperty:
     get_method: MethodInfo = info.GetGetMethod()
     set_method: MethodInfo = info.GetSetMethod()
 
+    declaring_type: TypeInfo = info.DeclaringType
+    if get_method is not None:
+        declaring_type = get_method.GetBaseDefinition().DeclaringType
+
     return CProperty(
         name=make_python_name(info.Name),
-        declaring_type=extract_type(info.DeclaringType, use_generic=True),
+        declaring_type=extract_type(declaring_type, use_generic=True),
         type=extract_type(info.PropertyType),
         setter=set_method is not None,
         static=get_method is not None and get_method.IsStatic,
@@ -246,7 +251,7 @@ def extract_method(info: MethodInfo) -> CMethod:
 
     return CMethod(
         name=make_python_name(info.Name),
-        declaring_type=extract_type(info.DeclaringType, use_generic=True),
+        declaring_type=extract_type(info.GetBaseDefinition().DeclaringType, use_generic=True),
         parameters=tuple(parameters),
         return_types=tuple(return_types),
         static=info.IsStatic,
@@ -261,21 +266,22 @@ def extract_event(info: EventInfo) -> CEvent:
     )
 
 
-def _extract_fields(info: TypeInfo, exclude_static: bool = False) -> Sequence[FieldInfo]:
+def _extract_fields(info: TypeInfo, binding_flags: BindingFlags = None) -> Sequence[FieldInfo]:
     def check(obj: FieldInfo) -> str:
         return obj.Name
 
     found: Set[FieldInfo] = set()
+    base_binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
     if info.BaseType is not None:
-        found.update(_extract_fields(info.BaseType, exclude_static=True))
+        found.update(_extract_fields(info.BaseType, binding_flags=base_binding_flags))
     for interface in info.GetInterfaces():
-        found.update(_extract_fields(interface, exclude_static=True))
+        found.update(_extract_fields(interface, binding_flags=base_binding_flags))
 
     check_list: Sequence[str] = tuple(map(check, found))
     info: MethodInfo
-    for info in info.GetFields():
-        if info.IsStatic and exclude_static:
-            continue
+    if binding_flags is None:
+        binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+    for info in info.GetFields(binding_flags):
         if check(info) not in check_list:
             found.add(info)
     return tuple(found)
@@ -289,43 +295,74 @@ def extract_constructors(info: TypeInfo) -> Mapping[str, CConstructor]:
     return {str(c): c for c in sorted(map(extract_constructor, info.GetConstructors()))}
 
 
-def _extract_properties(type: TypeInfo) -> Sequence[PropertyInfo]:
+def _extract_properties(
+    type: TypeInfo, binding_flags: BindingFlags = None
+) -> Sequence[PropertyInfo]:
     def check(obj: PropertyInfo) -> str:
         return obj.Name
 
     found: Set[PropertyInfo] = set()
+    base_binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
     if type.BaseType is not None:
-        found.update(_extract_properties(type.BaseType))
+        found.update(_extract_properties(type.BaseType, binding_flags=base_binding_flags))
     for interface in type.GetInterfaces():
-        found.update(_extract_properties(interface))
+        found.update(_extract_properties(interface, binding_flags=base_binding_flags))
 
     check_list: Sequence[str] = tuple(map(check, found))
     info: PropertyInfo
-    for info in type.GetProperties():
+    if binding_flags is None:
+        binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+    for info in type.GetProperties(binding_flags):
         if check(info) not in check_list:
             found.add(info)
     return tuple(found)
+
+    # def convert(obj: PropertyInfo) -> str:
+    #     return obj.Name
+    #
+    # binding_flags: BindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public
+
+    # found: Set[PropertyInfo] = set(type.GetProperties(binding_flags))
+    # converted: List[str] = list(map(convert, found))
+    #
+    # if type.BaseType is not None:
+    #     info: PropertyInfo
+    #     for info in _extract_properties(type.BaseType):
+    #         converted_value: str = convert(info)
+    #         if converted_value not in converted:
+    #             found.add(info)
+    #             converted.append(converted_value)
+    # for interface in type.GetInterfaces():
+    #     info: PropertyInfo
+    #     for info in _extract_properties(interface):
+    #         converted_value: str = convert(info)
+    #         if converted_value not in converted:
+    #             found.add(info)
+    #             converted.append(converted_value)
+    #
+    # return tuple(found)
 
 
 def extract_properties(info: TypeInfo) -> Mapping[str, CProperty]:
     return {str(p): p for p in sorted(map(extract_property, _extract_properties(info)))}
 
 
-def _extract_methods(type: TypeInfo, exclude_static: bool = False) -> Sequence[MethodInfo]:
+def _extract_methods(type: TypeInfo, binding_flags: BindingFlags = None) -> Sequence[MethodInfo]:
     def check(obj: MethodInfo) -> Tuple[str, Sequence[str]]:
         return obj.Name, tuple(map(lambda p: p.ParameterType.FullName, obj.GetParameters()))
 
     found: List[MethodInfo] = []
+    base_binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
     if type.BaseType is not None:
-        found.extend(_extract_methods(type.BaseType, exclude_static=True))
+        found.extend(_extract_methods(type.BaseType, binding_flags=base_binding_flags))
     for interface in type.GetInterfaces():
-        found.extend(_extract_methods(interface, exclude_static=True))
+        found.extend(_extract_methods(interface, binding_flags=base_binding_flags))
 
     check_list: Sequence[Tuple[str, Sequence[str]]] = tuple(map(check, found))
     info: MethodInfo
-    for info in type.GetMethods():
-        if info.IsStatic and exclude_static:
-            continue
+    if binding_flags is None:
+        binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+    for info in type.GetMethods(binding_flags):
         if check(info) not in check_list:
             found.append(info)
     return tuple(found)

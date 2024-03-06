@@ -5889,6 +5889,7 @@ class TestExtractAssembly(TestBase):
             "TestLib.IInterfaceWithNested",
             "TestLib.IInterfaceWithOperatorMethods",
             "TestLib.IInterfaceWithProperties",
+            "TestLib.OverriddenProperty",
             "TestLib.StructWithConstructors",
             "TestLib.StructWithEvents",
             "TestLib.StructWithFields",

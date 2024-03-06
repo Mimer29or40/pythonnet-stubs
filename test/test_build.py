@@ -8215,10 +8215,8 @@ class TestBuildProperty(TestBase):
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
         expected: Sequence[str] = (
-            "@classmethod",
-            "@property",
-            "def Property(cls) -> PropertyType:",
-            '    """"""',
+            "Property: Final[ClassVar[PropertyType]] = ...",
+            '""""""',
         )
 
         self.assertEqual(expected, lines)
@@ -8236,13 +8234,8 @@ class TestBuildProperty(TestBase):
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
         expected: Sequence[str] = (
-            "@classmethod",
-            "@property",
-            "def Property(cls) -> PropertyType:",
-            '    """"""',
-            "@classmethod",
-            "@Property.setter",
-            "def Property(cls, value: PropertyType) -> None: ...",
+            "Property: ClassVar[PropertyType] = ...",
+            '""""""',
         )
 
         self.assertEqual(expected, lines)
@@ -8287,7 +8280,7 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         build_property(property=property, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.PropertyType"}
+        expected: Set[str] = {"Namespace.PropertyType", "typing.ClassVar", "typing.Final"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8303,7 +8296,7 @@ class TestBuildProperty(TestBase):
         doc: Doc = Doc({})
 
         build_property(property=property, imports=imports, doc=doc)
-        expected: Set[str] = {"Namespace.PropertyType"}
+        expected: Set[str] = {"Namespace.PropertyType", "typing.ClassVar"}
 
         self.assertEqual(expected, imports.types)
 
@@ -8397,13 +8390,11 @@ class TestBuildProperty(TestBase):
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
         expected: Sequence[str] = (
-            "@classmethod",
-            "@property",
-            "def Property(cls) -> PropertyType:",
-            '    """Property doc string.',
-            "    ",
-            "    :return: Property return string.",
-            '    """',
+            "Property: Final[ClassVar[PropertyType]] = ...",
+            '"""Property doc string.',
+            "",
+            ":return: Property return string.",
+            '"""',
         )
 
         self.assertEqual(expected, lines)
@@ -8432,16 +8423,11 @@ class TestBuildProperty(TestBase):
 
         lines: Sequence[str] = build_property(property=property, imports=imports, doc=doc)
         expected: Sequence[str] = (
-            "@classmethod",
-            "@property",
-            "def Property(cls) -> PropertyType:",
-            '    """Property doc string.',
-            "    ",
-            "    :return: Property return string.",
-            '    """',
-            "@classmethod",
-            "@Property.setter",
-            "def Property(cls, value: PropertyType) -> None: ...",
+            "Property: ClassVar[PropertyType] = ...",
+            '"""Property doc string.',
+            "",
+            ":return: Property return string.",
+            '"""',
         )
 
         self.assertEqual(expected, lines)
@@ -9824,6 +9810,8 @@ class TestBuildStubs(TestBase):
             doc_files=(Path(doc_name),),
             output_dir=self.output_dir,
             line_length=100,
+            multi_threaded=False,
+            format_files=True,
         )
 
         self.assertEqual(0, result)
