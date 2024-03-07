@@ -1424,16 +1424,6 @@ class TestCClass(TestExtractBase):
                     ),
                     type=CType(name="Boolean", namespace="System"),
                 ),
-                "System.Collections.Generic:IList[$T].Item": CProperty(
-                    name="Item",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
             },
             methods={
                 "System.Collections.Generic:ICollection[$T].Add(System:Int32)": CMethod(
@@ -1502,7 +1492,13 @@ class TestCClass(TestExtractBase):
                     name="GetEnumerator",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
                     parameters=(),
-                    return_types=(CType(name="IEnumerator", namespace="System.Collections"),),
+                    return_types=(
+                        CType(
+                            name="IEnumerator",
+                            namespace="System.Collections.Generic",
+                            inner=(CType(name="Int32", namespace="System"),),
+                        ),
+                    ),
                 ),
                 "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
@@ -1579,7 +1575,19 @@ class TestCClass(TestExtractBase):
                         inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
-                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    return_types=(CType(name="Boolean", namespace="System"),),
+                ),
+                "System.Collections.Generic:ICollection[$T].__delitem__(System:Int32)": CMethod(
+                    name="__delitem__",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="T", generic=True),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
@@ -1598,22 +1606,6 @@ class TestCClass(TestExtractBase):
                 "System.Collections:IEnumerable.__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
-                    parameters=(),
-                    return_types=(
-                        CType(
-                            name="Iterator",
-                            namespace="typing",
-                            inner=(CType(name="Object", namespace="System"),),
-                        ),
-                    ),
-                ),
-                "System.Collections.Generic:IEnumerable[$T].__iter__()": CMethod(
-                    name="__iter__",
-                    declaring_type=CType(
-                        name="IEnumerable",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
                     parameters=(),
                     return_types=(
                         CType(
@@ -3268,16 +3260,6 @@ class TestCStruct(TestExtractBase):
                     ),
                     type=CType(name="Boolean", namespace="System"),
                 ),
-                "System.Collections.Generic:IList[$T].Item": CProperty(
-                    name="Item",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
             },
             methods={
                 "System.Collections.Generic:ICollection[$T].Add(System:Int32)": CMethod(
@@ -3346,7 +3328,13 @@ class TestCStruct(TestExtractBase):
                     name="GetEnumerator",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
                     parameters=(),
-                    return_types=(CType(name="IEnumerator", namespace="System.Collections"),),
+                    return_types=(
+                        CType(
+                            name="IEnumerator",
+                            namespace="System.Collections.Generic",
+                            inner=(CType(name="Int32", namespace="System"),),
+                        ),
+                    ),
                 ),
                 "System:Object.GetHashCode()": CMethod(
                     name="GetHashCode",
@@ -3423,7 +3411,19 @@ class TestCStruct(TestExtractBase):
                         inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
-                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    return_types=(CType(name="Boolean", namespace="System"),),
+                ),
+                "System.Collections.Generic:ICollection[$T].__delitem__(System:Int32)": CMethod(
+                    name="__delitem__",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="T", generic=True),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
@@ -3442,22 +3442,6 @@ class TestCStruct(TestExtractBase):
                 "System.Collections:IEnumerable.__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
-                    parameters=(),
-                    return_types=(
-                        CType(
-                            name="Iterator",
-                            namespace="typing",
-                            inner=(CType(name="Object", namespace="System"),),
-                        ),
-                    ),
-                ),
-                "System.Collections.Generic:IEnumerable[$T].__iter__()": CMethod(
-                    name="__iter__",
-                    declaring_type=CType(
-                        name="IEnumerable",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
                     parameters=(),
                     return_types=(
                         CType(
@@ -4626,16 +4610,6 @@ class TestCInterface(TestExtractBase):
                     ),
                     type=CType(name="Boolean", namespace="System"),
                 ),
-                "System.Collections.Generic:IList[$T].Item": CProperty(
-                    name="Item",
-                    declaring_type=CType(
-                        name="IList",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
-                    type=CType(name="Int32", namespace="System"),
-                    setter=True,
-                ),
             },
             methods={
                 "System.Collections.Generic:ICollection[$T].Add(System:Int32)": CMethod(
@@ -4696,7 +4670,13 @@ class TestCInterface(TestExtractBase):
                     name="GetEnumerator",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
                     parameters=(),
-                    return_types=(CType(name="IEnumerator", namespace="System.Collections"),),
+                    return_types=(
+                        CType(
+                            name="IEnumerator",
+                            namespace="System.Collections.Generic",
+                            inner=(CType(name="Int32", namespace="System"),),
+                        ),
+                    ),
                 ),
                 "System.Collections.Generic:IList[$T].IndexOf(System:Int32)": CMethod(
                     name="IndexOf",
@@ -4755,7 +4735,19 @@ class TestCInterface(TestExtractBase):
                         inner=(CType(name="T", generic=True),),
                     ),
                     parameters=(
-                        CParameter(name="value", type=CType(name="Int32", namespace="System")),
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
+                    ),
+                    return_types=(CType(name="Boolean", namespace="System"),),
+                ),
+                "System.Collections.Generic:ICollection[$T].__delitem__(System:Int32)": CMethod(
+                    name="__delitem__",
+                    declaring_type=CType(
+                        name="ICollection",
+                        namespace="System.Collections.Generic",
+                        inner=(CType(name="T", generic=True),),
+                    ),
+                    parameters=(
+                        CParameter(name="item", type=CType(name="Int32", namespace="System")),
                     ),
                     return_types=(CType(name="Boolean", namespace="System"),),
                 ),
@@ -4774,22 +4766,6 @@ class TestCInterface(TestExtractBase):
                 "System.Collections:IEnumerable.__iter__()": CMethod(
                     name="__iter__",
                     declaring_type=CType(name="IEnumerable", namespace="System.Collections"),
-                    parameters=(),
-                    return_types=(
-                        CType(
-                            name="Iterator",
-                            namespace="typing",
-                            inner=(CType(name="Object", namespace="System"),),
-                        ),
-                    ),
-                ),
-                "System.Collections.Generic:IEnumerable[$T].__iter__()": CMethod(
-                    name="__iter__",
-                    declaring_type=CType(
-                        name="IEnumerable",
-                        namespace="System.Collections.Generic",
-                        inner=(CType(name="T", generic=True),),
-                    ),
                     parameters=(),
                     return_types=(
                         CType(

@@ -1338,13 +1338,6 @@
               "type": "System:Boolean",
               "setter": false,
               "static": false
-            },
-            "System.Collections.Generic:IList[$T].Item": {
-              "name": "Item",
-              "declaring_type": "System.Collections.Generic:IList[$T]",
-              "type": "System:Int32",
-              "setter": true,
-              "static": false
             }
           },
           "methods": {
@@ -1432,7 +1425,7 @@
               "declaring_type": "System.Collections:IEnumerable",
               "parameters": [],
               "return_types": [
-                "System.Collections:IEnumerator"
+                "System.Collections.Generic:IEnumerator[System:Int32]"
               ],
               "static": false
             },
@@ -1538,7 +1531,23 @@
               "declaring_type": "System.Collections.Generic:ICollection[$T]",
               "parameters": [
                 {
-                  "name": "value",
+                  "name": "item",
+                  "type": "System:Int32",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System.Collections.Generic:ICollection[$T].__delitem__(System:Int32)": {
+              "name": "__delitem__",
+              "declaring_type": "System.Collections.Generic:ICollection[$T]",
+              "parameters": [
+                {
+                  "name": "item",
                   "type": "System:Int32",
                   "default": false,
                   "out": false
@@ -1568,15 +1577,6 @@
             "System.Collections:IEnumerable.__iter__()": {
               "name": "__iter__",
               "declaring_type": "System.Collections:IEnumerable",
-              "parameters": [],
-              "return_types": [
-                "typing:Iterator[System:Object]"
-              ],
-              "static": false
-            },
-            "System.Collections.Generic:IEnumerable[$T].__iter__()": {
-              "name": "__iter__",
-              "declaring_type": "System.Collections.Generic:IEnumerable[$T]",
               "parameters": [],
               "return_types": [
                 "typing:Iterator[System:Int32]"
@@ -3614,13 +3614,6 @@
               "type": "System:Boolean",
               "setter": false,
               "static": false
-            },
-            "System.Collections.Generic:IList[$T].Item": {
-              "name": "Item",
-              "declaring_type": "System.Collections.Generic:IList[$T]",
-              "type": "System:Int32",
-              "setter": true,
-              "static": false
             }
           },
           "methods": {
@@ -3692,7 +3685,7 @@
               "declaring_type": "System.Collections:IEnumerable",
               "parameters": [],
               "return_types": [
-                "System.Collections:IEnumerator"
+                "System.Collections.Generic:IEnumerator[System:Int32]"
               ],
               "static": false
             },
@@ -3771,7 +3764,23 @@
               "declaring_type": "System.Collections.Generic:ICollection[$T]",
               "parameters": [
                 {
-                  "name": "value",
+                  "name": "item",
+                  "type": "System:Int32",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System.Collections.Generic:ICollection[$T].__delitem__(System:Int32)": {
+              "name": "__delitem__",
+              "declaring_type": "System.Collections.Generic:ICollection[$T]",
+              "parameters": [
+                {
+                  "name": "item",
                   "type": "System:Int32",
                   "default": false,
                   "out": false
@@ -3801,15 +3810,6 @@
             "System.Collections:IEnumerable.__iter__()": {
               "name": "__iter__",
               "declaring_type": "System.Collections:IEnumerable",
-              "parameters": [],
-              "return_types": [
-                "typing:Iterator[System:Object]"
-              ],
-              "static": false
-            },
-            "System.Collections.Generic:IEnumerable[$T].__iter__()": {
-              "name": "__iter__",
-              "declaring_type": "System.Collections.Generic:IEnumerable[$T]",
               "parameters": [],
               "return_types": [
                 "typing:Iterator[System:Int32]"
@@ -4942,64 +4942,22 @@
               "name": "InstanceReadOnlyProperty0",
               "declaring_type": "TestLib:ClassWithProperties",
               "type": "System:Int32",
-              "setter": false,
+              "setter": true,
               "static": false
             },
             "TestLib:ClassWithProperties.InstanceReadOnlyProperty1": {
               "name": "InstanceReadOnlyProperty1",
               "declaring_type": "TestLib:ClassWithProperties",
               "type": "System:Int32",
-              "setter": false,
+              "setter": true,
               "static": false
             },
             "TestLib:ClassWithProperties.InstanceReadOnlyProperty2": {
               "name": "InstanceReadOnlyProperty2",
               "declaring_type": "TestLib:ClassWithProperties",
               "type": "System:Int32",
-              "setter": false,
+              "setter": true,
               "static": false
-            },
-            "TestLib:ClassWithProperties.StaticProperty0": {
-              "name": "StaticProperty0",
-              "declaring_type": "TestLib:ClassWithProperties",
-              "type": "System:Int32",
-              "setter": true,
-              "static": true
-            },
-            "TestLib:ClassWithProperties.StaticProperty1": {
-              "name": "StaticProperty1",
-              "declaring_type": "TestLib:ClassWithProperties",
-              "type": "System:Int32",
-              "setter": true,
-              "static": true
-            },
-            "TestLib:ClassWithProperties.StaticProperty2": {
-              "name": "StaticProperty2",
-              "declaring_type": "TestLib:ClassWithProperties",
-              "type": "System:Int32",
-              "setter": true,
-              "static": true
-            },
-            "TestLib:ClassWithProperties.StaticReadOnlyProperty0": {
-              "name": "StaticReadOnlyProperty0",
-              "declaring_type": "TestLib:ClassWithProperties",
-              "type": "System:Int32",
-              "setter": false,
-              "static": true
-            },
-            "TestLib:ClassWithProperties.StaticReadOnlyProperty1": {
-              "name": "StaticReadOnlyProperty1",
-              "declaring_type": "TestLib:ClassWithProperties",
-              "type": "System:Int32",
-              "setter": false,
-              "static": true
-            },
-            "TestLib:ClassWithProperties.StaticReadOnlyProperty2": {
-              "name": "StaticReadOnlyProperty2",
-              "declaring_type": "TestLib:ClassWithProperties",
-              "type": "System:Int32",
-              "setter": false,
-              "static": true
             }
           },
           "methods": {
@@ -5617,13 +5575,6 @@
               "type": "System:Boolean",
               "setter": false,
               "static": false
-            },
-            "System.Collections.Generic:IList[$T].Item": {
-              "name": "Item",
-              "declaring_type": "System.Collections.Generic:IList[$T]",
-              "type": "System:Int32",
-              "setter": true,
-              "static": false
             }
           },
           "methods": {
@@ -5711,7 +5662,7 @@
               "declaring_type": "System.Collections:IEnumerable",
               "parameters": [],
               "return_types": [
-                "System.Collections:IEnumerator"
+                "System.Collections.Generic:IEnumerator[System:Int32]"
               ],
               "static": false
             },
@@ -5817,7 +5768,23 @@
               "declaring_type": "System.Collections.Generic:ICollection[$T]",
               "parameters": [
                 {
-                  "name": "value",
+                  "name": "item",
+                  "type": "System:Int32",
+                  "default": false,
+                  "out": false
+                }
+              ],
+              "return_types": [
+                "System:Boolean"
+              ],
+              "static": false
+            },
+            "System.Collections.Generic:ICollection[$T].__delitem__(System:Int32)": {
+              "name": "__delitem__",
+              "declaring_type": "System.Collections.Generic:ICollection[$T]",
+              "parameters": [
+                {
+                  "name": "item",
                   "type": "System:Int32",
                   "default": false,
                   "out": false
@@ -5847,15 +5814,6 @@
             "System.Collections:IEnumerable.__iter__()": {
               "name": "__iter__",
               "declaring_type": "System.Collections:IEnumerable",
-              "parameters": [],
-              "return_types": [
-                "typing:Iterator[System:Object]"
-              ],
-              "static": false
-            },
-            "System.Collections.Generic:IEnumerable[$T].__iter__()": {
-              "name": "__iter__",
-              "declaring_type": "System.Collections.Generic:IEnumerable[$T]",
               "parameters": [],
               "return_types": [
                 "typing:Iterator[System:Int32]"

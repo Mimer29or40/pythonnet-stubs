@@ -7,13 +7,15 @@ from collections import defaultdict
 from concurrent.futures import Executor
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from typing import Callable
+from typing import Collection
 from typing import Dict
 from typing import List
 from typing import Mapping
 from typing import Optional
 from typing import Sequence
-from typing import Set
 from typing import Tuple
+from typing import TypeVar
 from typing import Union
 
 import clr
@@ -51,11 +53,14 @@ from stubgen.util import make_python_name
 
 logger = get_logger(__name__)
 
+T = TypeVar("T")
+
 
 def extract_type_def(info: TypeInfo) -> Optional[CTypeDefinition]:
     def is_delegate() -> bool:
         if info in (Delegate, MulticastDelegate):
             return False
+        # noinspection PyTypeChecker
         return info.IsSubclassOf(Delegate) or info.IsSubclassOf(MulticastDelegate)
 
     if not is_name_valid(info.Namespace):
@@ -222,7 +227,6 @@ def extract_constructor(info: ConstructorInfo) -> CConstructor:
 
 
 def extract_property(info: PropertyInfo) -> CProperty:
-    # TODO - Item property should actually be a method
     get_method: MethodInfo = info.GetGetMethod()
     set_method: MethodInfo = info.GetSetMethod()
 
@@ -266,110 +270,124 @@ def extract_event(info: EventInfo) -> CEvent:
     )
 
 
-def _extract_fields(info: TypeInfo, binding_flags: BindingFlags = None) -> Sequence[FieldInfo]:
-    def check(obj: FieldInfo) -> str:
-        return obj.Name
-
-    found: Set[FieldInfo] = set()
+def extract_base_members(
+    type_info: TypeInfo,
+    found: Dict[str, T],
+    extract: Callable[[TypeInfo, BindingFlags], Collection[T]],
+) -> None:
+    bases: List[T] = []
     base_binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
-    if info.BaseType is not None:
-        found.update(_extract_fields(info.BaseType, binding_flags=base_binding_flags))
-    for interface in info.GetInterfaces():
-        found.update(_extract_fields(interface, binding_flags=base_binding_flags))
+    if type_info.BaseType is not None:
+        bases.extend(extract(type_info.BaseType, base_binding_flags))
+    interface: TypeInfo
+    for interface in type_info.GetInterfaces():
+        bases.extend(extract(interface, base_binding_flags))
 
-    check_list: Sequence[str] = tuple(map(check, found))
-    info: MethodInfo
-    if binding_flags is None:
-        binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
-    for info in info.GetFields(binding_flags):
-        if check(info) not in check_list:
-            found.add(info)
-    return tuple(found)
-
-
-def extract_fields(info: TypeInfo) -> Mapping[str, CField]:
-    return {str(f): f for f in sorted(map(extract_field, _extract_fields(info)))}
+    base: T
+    for base in bases:
+        key: str = base.to_doc_json()[0]
+        new: T
+        if key in found:
+            new = dataclasses.replace(found[key], declaring_type=base.declaring_type)
+        else:
+            new = base
+        found[key] = new
 
 
-def extract_constructors(info: TypeInfo) -> Mapping[str, CConstructor]:
-    return {str(c): c for c in sorted(map(extract_constructor, info.GetConstructors()))}
+def extract_fields(type_info: TypeInfo) -> Mapping[str, CField]:
+    def extract_raw(type_info: TypeInfo, binding_flags: BindingFlags = None) -> Collection[CField]:
+        found: Dict[str, CField] = {}
+
+        info: FieldInfo
+        if binding_flags is None:
+            binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+        for info in type_info.GetFields(binding_flags):
+            obj: CField = extract_field(info)
+            key: str = obj.to_doc_json()[0]
+            found[key] = obj
+
+        extract_base_members(type_info, found, extract_raw)
+
+        return found.values()
+
+    raw_members: Collection[CField] = extract_raw(type_info)
+
+    sorted_members: Sequence[CField] = sorted(raw_members)
+
+    return {str(member): member for member in sorted_members}
 
 
-def _extract_properties(
-    type: TypeInfo, binding_flags: BindingFlags = None
-) -> Sequence[PropertyInfo]:
-    def check(obj: PropertyInfo) -> str:
-        return obj.Name
+def extract_constructors(type_info: TypeInfo) -> Mapping[str, CConstructor]:
+    def extract_raw(
+        type_info: TypeInfo, binding_flags: BindingFlags = None
+    ) -> Collection[CConstructor]:
+        found: Dict[str, CConstructor] = {}
 
-    found: Set[PropertyInfo] = set()
-    base_binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
-    if type.BaseType is not None:
-        found.update(_extract_properties(type.BaseType, binding_flags=base_binding_flags))
-    for interface in type.GetInterfaces():
-        found.update(_extract_properties(interface, binding_flags=base_binding_flags))
+        info: ConstructorInfo
+        if binding_flags is None:
+            binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+        for info in type_info.GetConstructors(binding_flags):
+            obj: CConstructor = extract_constructor(info)
+            key: str = obj.to_doc_json()[0]
+            found[key] = obj
 
-    check_list: Sequence[str] = tuple(map(check, found))
-    info: PropertyInfo
-    if binding_flags is None:
-        binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
-    for info in type.GetProperties(binding_flags):
-        if check(info) not in check_list:
-            found.add(info)
-    return tuple(found)
+        return found.values()
 
-    # def convert(obj: PropertyInfo) -> str:
-    #     return obj.Name
-    #
-    # binding_flags: BindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public
+    raw_members: Collection[CConstructor] = extract_raw(type_info)
 
-    # found: Set[PropertyInfo] = set(type.GetProperties(binding_flags))
-    # converted: List[str] = list(map(convert, found))
-    #
-    # if type.BaseType is not None:
-    #     info: PropertyInfo
-    #     for info in _extract_properties(type.BaseType):
-    #         converted_value: str = convert(info)
-    #         if converted_value not in converted:
-    #             found.add(info)
-    #             converted.append(converted_value)
-    # for interface in type.GetInterfaces():
-    #     info: PropertyInfo
-    #     for info in _extract_properties(interface):
-    #         converted_value: str = convert(info)
-    #         if converted_value not in converted:
-    #             found.add(info)
-    #             converted.append(converted_value)
-    #
-    # return tuple(found)
+    sorted_members: Sequence[CConstructor] = sorted(raw_members)
+
+    return {str(member): member for member in sorted_members}
 
 
-def extract_properties(info: TypeInfo) -> Mapping[str, CProperty]:
-    return {str(p): p for p in sorted(map(extract_property, _extract_properties(info)))}
+def extract_properties(type_info: TypeInfo) -> Mapping[str, CProperty]:
+    def extract_raw(
+        type_info: TypeInfo, binding_flags: BindingFlags = None
+    ) -> Collection[CProperty]:
+        found: Dict[str, CProperty] = {}
+
+        info: PropertyInfo
+        if binding_flags is None:
+            binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+        for info in type_info.GetProperties(binding_flags):
+            obj: CProperty = extract_property(info)
+            key: str = obj.to_doc_json()[0]
+            found[key] = obj
+
+        extract_base_members(type_info, found, extract_raw)
+
+        return found.values()
+
+    raw_members: Collection[CProperty] = extract_raw(type_info)
+
+    sorted_members: Sequence[CProperty] = sorted(raw_members)
+
+    # TODO - Item property will need a special type to handle get/set of different types
+    excluded: Collection[str] = ("Item",)
+
+    def filter_func(member: CProperty) -> bool:
+        return member.name not in excluded
+
+    return {str(member): member for member in sorted_members if filter_func(member)}
 
 
-def _extract_methods(type: TypeInfo, binding_flags: BindingFlags = None) -> Sequence[MethodInfo]:
-    def check(obj: MethodInfo) -> Tuple[str, Sequence[str]]:
-        return obj.Name, tuple(map(lambda p: p.ParameterType.FullName, obj.GetParameters()))
+def extract_methods(type_info: TypeInfo) -> Mapping[str, CMethod]:
+    def extract_raw(type_info: TypeInfo, binding_flags: BindingFlags = None) -> Collection[CMethod]:
+        found: Dict[str, CMethod] = {}
 
-    found: List[MethodInfo] = []
-    base_binding_flags: BindingFlags = BindingFlags.Public | BindingFlags.Instance
-    if type.BaseType is not None:
-        found.extend(_extract_methods(type.BaseType, binding_flags=base_binding_flags))
-    for interface in type.GetInterfaces():
-        found.extend(_extract_methods(interface, binding_flags=base_binding_flags))
+        info: MethodInfo
+        if binding_flags is None:
+            binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+        for info in type_info.GetMethods(binding_flags):
+            obj: CMethod = extract_method(info)
+            key: str = obj.to_doc_json()[0]
+            found[key] = obj
 
-    check_list: Sequence[Tuple[str, Sequence[str]]] = tuple(map(check, found))
-    info: MethodInfo
-    if binding_flags is None:
-        binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
-    for info in type.GetMethods(binding_flags):
-        if check(info) not in check_list:
-            found.append(info)
-    return tuple(found)
+        extract_base_members(type_info, found, extract_raw)
 
+        return found.values()
 
-def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
-    methods: List[CMethod] = list(map(extract_method, _extract_methods(info)))
+    raw_members: List[CMethod] = list(extract_raw(type_info))
 
     supported_methods: Mapping[str, Tuple[str, bool]] = {
         "op_Addition": ("__add__", True),
@@ -397,109 +415,101 @@ def extract_methods(info: TypeInfo) -> Mapping[str, CMethod]:
         # "op_UnsignedRightShift": "",
         "get_Item": ("__getitem__", False),
         "set_Item": ("__setitem__", False),
+        "Remove": ("__delitem__", False),
+        "get_Count": ("__len__", False),
+        "Contains": ("__contains__", False),
+        "ContainsKey": ("__contains__", False),
     }
-    # Remove -> __delitem__
 
     method: CMethod
-    for method in tuple(filter(lambda m: m.name in supported_methods, methods)):
-        new_name, remove_param = supported_methods[method.name]
-        parameters: Sequence[CParameter] = method.parameters
-        if remove_param:
-            parameters = tuple(
-                map(lambda p: dataclasses.replace(p, name="other"), method.parameters[1:])
+    for method in tuple(raw_members):
+        if method.name in supported_methods:
+            new_name, remove_param = supported_methods[method.name]
+            parameters: Sequence[CParameter] = method.parameters
+            if remove_param:
+                parameters = tuple(
+                    map(lambda p: dataclasses.replace(p, name="other"), method.parameters[1:])
+                )
+
+            method: CMethod = dataclasses.replace(
+                method,
+                name=new_name,
+                parameters=parameters,
+                static=False,
             )
-
-        method: CMethod = dataclasses.replace(
-            method,
-            name=new_name,
-            parameters=parameters,
-            static=False,
-        )
-        methods.append(method)
-
-    def get_base_types(_info: TypeInfo) -> Sequence[TypeInfo]:
-        found: List[CType] = []
-        if _info.BaseType is not None:
-            found.extend(get_base_types(_info.BaseType))
-        for interface in _info.GetInterfaces():
-            found.extend(get_base_types(interface))
-        found.append(_info)
-        return tuple(dict.fromkeys(found).keys())
-
-    interface: TypeInfo
-    for interface in get_base_types(info):
-        declaring_type: CType = extract_type(interface, use_generic=True)
-        inner_types: Sequence[CType] = tuple(map(extract_type, interface.GetGenericArguments()))
-        if interface.Name in ("IEnumerable", "IEnumerable`1"):
-            return_types: Sequence[CType]
-            if len(inner_types) > 0:
-                return_types = inner_types
-            else:
-                return_types = (CType(name="Object", namespace="System"),)
-            method = CMethod(
+            raw_members.append(method)
+        if method.name == "GetEnumerator":
+            return_types: Sequence[CType] = (
+                dataclasses.replace(
+                    method.return_types[0],
+                    name="Iterator",
+                    namespace="typing",
+                ),
+            )
+            method: CMethod = dataclasses.replace(
+                method,
                 name="__iter__",
-                declaring_type=declaring_type,
-                parameters=tuple(),
-                return_types=(CType(name="Iterator", namespace="typing", inner=return_types),),
+                return_types=return_types,
             )
-            methods.append(method)
-        elif interface.Name in ("ICollection", "ICollection`1"):
-            method = CMethod(
-                name="__len__",
-                declaring_type=declaring_type,
-                parameters=tuple(),
-                return_types=(CType(name="Int32", namespace="System"),),
-            )
-            methods.append(method)
+            raw_members.append(method)
 
-            return_type: CType
-            if len(inner_types) > 0:
-                return_type = inner_types[0]
-            else:
-                return_type = CType(name="Object", namespace="System")
-            method = CMethod(
-                name="__contains__",
-                declaring_type=declaring_type,
-                parameters=(CParameter(name="value", type=return_type),),
-                return_types=(CType(name="Boolean", namespace="System"),),
-            )
-            methods.append(method)
+    sorted_members: Sequence[CMethod] = sorted(raw_members)
 
-    def func(method: CMethod) -> bool:
+    def filter_func(member: CMethod) -> bool:
         return not (
-            method.name.startswith("get_")
-            or method.name.startswith("set_")
-            or method.name.startswith("add_")
-            or method.name.startswith("remove_")
+            member.name.startswith("get_")
+            or member.name.startswith("set_")
+            or member.name.startswith("add_")
+            or member.name.startswith("remove_")
         )
 
-    return {str(m): m for m in sorted(filter(func, methods))}
+    return {str(member): member for member in sorted_members if filter_func(member)}
 
 
-def _extract_events(info: TypeInfo) -> Sequence[EventInfo]:
-    def check(obj: EventInfo) -> str:
-        return obj.Name
+def extract_events(type_info: TypeInfo) -> Mapping[str, CEvent]:
+    def extract_raw(type_info: TypeInfo, binding_flags: BindingFlags = None) -> Collection[CEvent]:
+        found: Dict[str, CEvent] = {}
 
-    found: Set[EventInfo] = set()
-    if info.BaseType is not None:
-        found.update(_extract_events(info.BaseType))
-    for interface in info.GetInterfaces():
-        found.update(_extract_events(interface))
+        info: EventInfo
+        if binding_flags is None:
+            binding_flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+        for info in type_info.GetEvents(binding_flags):
+            obj: CEvent = extract_event(info)
+            key: str = obj.to_doc_json()[0]
+            found[key] = obj
 
-    check_list: Sequence[str] = tuple(map(check, found))
-    info: EventInfo
-    for info in info.GetEvents():
-        if check(info) not in check_list:
-            found.add(info)
-    return tuple(found)
+        extract_base_members(type_info, found, extract_raw)
+
+        return found.values()
+
+    raw_members: Collection[CEvent] = extract_raw(type_info)
+
+    sorted_members: Sequence[CEvent] = sorted(raw_members)
+
+    return {str(member): member for member in sorted_members}
 
 
-def extract_events(info: TypeInfo) -> Mapping[str, CEvent]:
-    return {str(e): e for e in sorted(map(extract_event, _extract_events(info)))}
+def extract_nested_types(type_info: TypeInfo) -> Mapping[str, CTypeDefinition]:
+    def extract_raw(
+        type_info: TypeInfo, binding_flags: BindingFlags = None
+    ) -> Collection[CTypeDefinition]:
+        found: Dict[str, CTypeDefinition] = {}
 
+        info: TypeInfo
+        if binding_flags is None:
+            binding_flags = BindingFlags.Public
+        for info in type_info.GetNestedTypes(binding_flags):
+            obj: CTypeDefinition = extract_type_def(info)
+            key: str = obj.to_doc_json()[0]
+            found[key] = obj
 
-def extract_nested_types(info: TypeInfo) -> Mapping[str, CTypeDefinition]:
-    return {str(n): n for n in sorted(map(extract_type_def, info.GetNestedTypes()))}
+        return found.values()
+
+    raw_members: Collection[CTypeDefinition] = extract_raw(type_info)
+
+    sorted_members: Sequence[CTypeDefinition] = sorted(raw_members)
+
+    return {str(member): member for member in sorted_members}
 
 
 def extract_assembly(assembly_name: str, output_dir: Path, overwrite: bool) -> Union[int, str]:
